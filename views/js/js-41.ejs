@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>WEB・スマホ・アプリ開発科</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="js/google-code-prettify/prettify.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+ 
+    <nav class="navbar navbar-default">
+      <div class="navbar-header">
+        <button class="navbar-toggle" data-toggle="collapse" data-target=".target">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">WEB・スマホ・アプリ開発科</a>
+      </div>
+ 
+      <div class="collapse navbar-collapse target">
+        <ul class="nav navbar-nav">
+          <li><a href="js-39">文法</a></li>
+          <li><a href="js-1">リファレンス</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+
+        <div class="list-group">
+          <a href="js-1" class="list-group-item">
+          <i class="badge badge-info"></i> コアリファレンス
+          </a>
+          <a href="js-17" class="list-group-item">
+          <i class="badge badge-info"></i> クライアントリファレンス
+          </a>
+        </div>
+
+
+
+        </div>
+        <div class="col-sm-9">
+          <div class="panel panel-primary">
+          <div class="panel-heading">JavaScript資料</div>
+          <div class="panel-body">
+
+<pre>
+
+
+JavaScriptで扱われる主な値
+
+数の値
+     整数 //=> 123
+     実数 //=> 123.0
+
+テキスト
+     'テキスト'
+     "テキスト"
+
+真偽値
+     true
+     false
+
+配列、オブジェクト
+     関連する値をひとまとめにしたもの //=> 後述
+
+関数
+     機能や処理などを実行するためのもの //=> 後述
+
+値のない状態を示す値
+     null //=> 空の値を示す
+     undefined //=> 値が用意されていない状態を示す
+     NaN（Not a Number）//=> 数字の計算をするときに、数字以外が含まれている状態を示す
+
+
+
+
+リテラル
+
+if(条件式A){
+     if(条件式B){
+          条件式Bを満たしたときに実行する処理
+     }
+     条件式Aを満たしたときに実行する処理
+}
+
+
+var a = 12;
+if(a > 10){
+     if(a % 2 == 0){
+          document.writeln('でっかい偶数');
+     }
+     else{
+          document.writeln('でっかい奇数');
+     }
+}
+
+
+var a = 7;
+if(a>=5 && a <= 10){
+     document.writeln('ほどほど');
+}
+
+var a = 1;
+if(a <= 5 || a >= 10){
+     document.writeln('両極端');
+}
+
+
+var a = 7;
+if(!(a <= 5)){
+     document.writeln('ちっちゃくない');
+}
+
+
+論理演算子
+
+演算子名前式名例と結果!論理否定演算子単項式（UnaryExpression）!false; //=>true&&&&演算子論理積式（LogicalANDExpression）true && true; //=>true||||演算子論理和式（LogicalORExpression）true || false; //=>true?:条件演算子（三項演算子）条件式（ConditionalExpression）true ? 1 : 2; //=>1
+
+
+
+
+繰り返し
+
+
+
+for(初期化の式;繰り返し条件の式;加算の式){
+     繰り返す処理
+}
+
+
+var a = 0;
+for(var i = 1; i <= 10; i++){
+     a = a + i;
+}
+document.writeln(a);
+
+
+while(繰り返し条件の式){
+     繰り返す処理
+}
+
+var a = 3;
+while(a < 10){
+     a = a + 3;
+}
+
+
+do{
+     繰り返す処理
+}while(繰り返し条件の式);
+
+
+var a = 10;
+do{
+     a = a + 3;
+}while(a < 10);
+document.writeln(a);
+
+
+
+var a = 0;
+for(var i = 0; i , 10; i++){
+     if(a >= 10) break;
+     if(i % 2 == 0) continue;
+     a = a + i;
+}
+document.writeln(a);
+
+
+
+
+配列
+
+var 配列名 = [初期値, 初期値, 初期値, ….];
+
+配列名[添え字]
+
+
+var a = [10, 20, 30];
+for(var i = 0; i < 3; i++){
+     document.writeln(a[i]);
+}
+
+
+
+var 配列名 = new Array(要素の数);
+
+
+var a = new Array(3);
+a[0] = 10;
+a[1] = 20;
+a[2] = 30;
+for(var i = 0; i < 3; i++){
+     document.writeln(a[i]);
+}
+
+
+
+
+連想配列
+
+
+
+var 連想配列名 = {添え字:初期値, 添え字:初期値, 添え字:初期値, …};
+
+
+
+var a = {"dragon":"りゅう", "sword":"つるぎ", "egg":"たまご"}
+document.writeln(a["dragon"]);
+document.writeln(a["sword"]);
+document.writeln(a["egg"]);
+
+
+var 連想配列名  = new Object();
+
+
+var a = new Object(3);
+a["dragon"] = "りゅう";
+a["sword"] = "つるぎ";
+a["egg"] = "たまご";
+document.writeln(a["dragon"]);
+document.writeln(a["sword"]);
+document.writeln(a["egg"]);
+
+
+
+
+関数
+
+
+
+function 関数名(引数1, ….) {
+     関数内で実行したい処理
+     return 返り値;
+}
+
+
+返り値を返さない関数
+
+function writeStar(num){
+     for(var i = 0; i < num; i++){
+          document.writeln('☆');
+     }
+}
+document.writeln('星が1個');
+writeStar(1);
+document.writeln('星が3個');
+writeStar(3);
+
+
+返り値を返す関数
+
+function writeStar(num){
+     var str = '';
+     for(var i = 0; i < num; i++) str += '☆');
+     return str;
+}
+document.writeln('星が1個' + writeStar(1));
+document.writeln('星が3個' + writeStar(3));
+
+
+変数とスコープ
+
+
+リテラル = 変化しない数
+プログラムに直接書き込んだデータ、数字や文字のこと
+
+
+document.writeln('こんにちは')
+document.writeln(123)
+document.writeln(3.14)
+
+
+種類書式例数値リテラル（NumericLiteral）数字を指定する1234文字列リテラル（StringLiteral）ダブルクォーテーション（"）で囲む"hello, World"論理値リテラル（BooleanLiteral）trueまたはfalseを指定するtrueNullリテラル（NullLiteral）nullを指定するnull正規表現リテラル（RegularExpressionLiteral）スラッシュ（/）で囲む/I love Java.*/
+
+
+配列リテラル //=> 後述
+オブジェクトリテラル //=> 後述
+関数リテラル //=> 後述
+
+
+
+
+演算子
+
+
+四則演算
+
+document.writeln(3 + 2); ←3＋2＝5
+document.writeln(3 - 1); ←3－2＝1
+document.writeln(3 * 2); ←3×2＝6
+document.writeln(3 / 2); ←3÷2＝1.5
+document.writeln(3 % 2); ←3÷2のあまり＝1
+
+
+
+演算子名前色名例と結果+加算演算子（Addition Operator）加減式（AdditiveExpression）1 + 2; //=>3-減算演算子（Substraction Operator）
+同上1 - 2; //=>-1**演算子（* Operator）剰余式（MultiplicativeExpression）2 * 3; //=> 6//演算子（/ Operator）同上5 / 2; //=> 2%%演算子（% Operator）同上5 5 2; //=> 1
+
+
+
+
+
+変数
+
+
+var a; //変数の宣言
+a = 1; //変数への代入
+a = a + 2; //変数を使った計算
+document.writeln('答えは' + a + 'です'); //結果の表示
+
+
+//変数を代入したあと値を代入
+var a;
+a = 1;
+
+//変数を宣言するときに初期値をセット
+var a = 1;
+
+
+var a; //変数aを宣言
+var b, c; //変数bとcを宣言
+var aa = 1; //変数aaを宣言して1で初期化
+var bb = 22, cc = 33; //変数bbとccを宣言し、それぞれ22と33で初期化
+var bbb, ccc = 333; //変数bbbとcccを宣言し、後者のみ333で初期化
+
+
+
+
+変数の名前
+
+
+変数名につかえる文字
+
+半角アルファベット（a～zとA～Z）
+数字（0～9）
+_（アンダーバー）
+$（ドルマーク）
+
+
+以下の変数名は不可
+
+数字で始まる名前
+「-」「$」だけの名前
+予約語は不可
+
+
+
+予約語
+
+breakcasecatchcontinuedebuggerdefaultdeletedoelsefinallyforfunctionifininstanceofnewreturnswitchthisthrowtrytypeofvarvoidwhilewith
+
+
+
+
+※undefined、null、NaNは予約語ではないが変数名にするべきではない
+
+避けたほうがよいキーワード
+abstract
+boolean
+byte
+char
+class
+const
+debugger
+double
+enum
+export
+extends
+final
+float
+goto
+implements
+import
+int
+interface
+long
+native
+package
+private
+protected
+public
+short
+static
+super
+synchronied
+throws
+transient
+volatile
+
+
+
+
+
+
+
+
+
+代入演算
+
+数式例省略例説明a = a + 10a += 10変数の値に10を足すa = a - 10a -= 10変数の値から10を引くa = a * 10a *= 10変数の値に10を掛けるa = a / 10a /= 10変数の値を10で割るa = a + 1a++変数の値に1を足すa = a - 1a--変数の値から1を引く
+
+
+
+
+
+単項演算子
+演算子名前式名例と結果++増分演算子（Increment Operator）単項式（UnaryExpression）++1; //=> 2--減分演算子（Decrement Operator）同上--1; //=> 0+単項+演算子（Unary + Operator）同上+ 1; //1-単項-演算子（Unary - Operator）同上- 1; // -1
+
+
+インクリメント・デクリメント
+
+
+
+【JavaScript】単項 + 演算子で数値にする
+http://www.softel.co.jp/blogs/tech/archives/4396
+
+
+
+
+
+
+条件分岐
+
+
+if(条件式){
+
+}
+
+
+var a = 12;
+if(a > 10){
+     document.writeln('でっかいぞ');
+}
+
+
+var a = 8;
+if(a > 10){
+     document.writeln('でっかいぞ');
+}else{
+     document.writeln('ちっちゃいぞ');
+}
+
+
+比較（関係）演算子
+演算子名前式名例と結果<小なり演算子（Less-than Operator）関係式（RelationExpression）1 < 2; //=>true>大なり演算子（Greater-than Operator）同上1 > 2;
+//=>false<=小なりイコール演算子（Less-than-or-equal Operator）同上1 <= 1;
+//=>true>=大なりイコール演算子（Greater-than-or-equal Operator）同上1 >= 1;
+//=>true==等価演算子（Equals Operator）等価式1 == 1;
+//=>true===厳密等価演算子（Strict Equals Operator）同上1 === "1";
+//=>false!=不等価演算子（Does-not-equals Operator）同上1 != 2; //=>true!==厳密不等価演算子（Strict Does-not-equals Operator）同上1 !== "1";
+//=>true
+
+
+
+
+
+
+</pre>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div id="footer" style="background:rgb(66, 139, 202);text-align:center;padding:0.6em;box-sizing:border-box;color:white;">WEB・スマホ・アプリ開発科</div>
+ 
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/google-code-prettify/prettify.js"></script>
+    <script>prettyPrint();</script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/list-counter.js"></script>
+  </body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>WEB・スマホ・アプリ開発科</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="js/google-code-prettify/prettify.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+ 
+    <nav class="navbar navbar-default">
+      <div class="navbar-header">
+        <button class="navbar-toggle" data-toggle="collapse" data-target=".target">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">WEB・スマホ・アプリ開発科</a>
+      </div>
+ 
+      <div class="collapse navbar-collapse target">
+        <ul class="nav navbar-nav">
+          <li><a href="js-39">文法</a></li>
+          <li><a href="js-1">リファレンス</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+
+        <div class="list-group">
+          <a href="js-1" class="list-group-item">
+          <i class="badge badge-info"></i> コアリファレンス
+          </a>
+          <a href="js-17" class="list-group-item">
+          <i class="badge badge-info"></i> クライアントリファレンス
+          </a>
+        </div>
+
+
+
+        </div>
+        <div class="col-sm-9">
+          <div class="panel panel-primary">
+          <div class="panel-heading">JavaScript資料</div>
+          <div class="panel-body">
+
+<pre>
+
+
+
+if(条件式A){
+     if(条件式B){
+          条件式Bを満たしたときに実行する処理
+     }
+     条件式Aを満たしたときに実行する処理
+}
+
+
+var a = 12;
+if(a > 10){
+     if(a % 2 == 0){
+          document.writeln('でっかい偶数');
+     }
+     else{
+          document.writeln('でっかい奇数');
+     }
+}
+
+
+var a = 7;
+if(a>=5 && a <= 10){
+     document.writeln('ほどほど');
+}
+
+var a = 1;
+if(a <= 5 || a >= 10){
+     document.writeln('両極端');
+}
+
+
+var a = 7;
+if(!(a <= 5)){
+     document.writeln('ちっちゃくない');
+}
+
+
+論理演算子
+
+演算子名前式名例と結果!論理否定演算子単項式（UnaryExpression）!false; //=>true&&&&演算子論理積式（LogicalANDExpression）true && true; //=>true||||演算子論理和式（LogicalORExpression）true || false; //=>true?:条件演算子（三項演算子）条件式（ConditionalExpression）true ? 1 : 2; //=>1
+
+
+switch文
+
+
+
+
+
+
+
+
+
+繰り返し
+
+
+
+for(初期化の式;繰り返し条件の式;加算の式){
+     繰り返す処理
+}
+
+
+var a = 0;
+for(var i = 1; i <= 10; i++){
+     a = a + i;
+}
+document.writeln(a);
+
+
+while(繰り返し条件の式){
+     繰り返す処理
+}
+
+var a = 3;
+while(a < 10){
+     a = a + 3;
+}
+
+
+do{
+     繰り返す処理
+}while(繰り返し条件の式);
+
+
+var a = 10;
+do{
+     a = a + 3;
+}while(a < 10);
+document.writeln(a);
+
+
+
+var a = 0;
+for(var i = 0; i , 10; i++){
+     if(a >= 10) break;
+     if(i % 2 == 0) continue;
+     a = a + i;
+}
+document.writeln(a);
+
+
+
+for in文
+
+
+
+breakとcontinue
+ラベル
+
+
+
+配列
+
+var 配列名 = [初期値, 初期値, 初期値, ….];
+
+配列名[添え字]
+
+
+var a = [10, 20, 30];
+for(var i = 0; i < 3; i++){
+     document.writeln(a[i]);
+}
+
+
+
+var 配列名 = new Array(要素の数);
+
+
+var a = new Array(3);
+a[0] = 10;
+a[1] = 20;
+a[2] = 30;
+for(var i = 0; i < 3; i++){
+     document.writeln(a[i]);
+}
+
+
+
+
+連想配列
+
+
+
+var 連想配列名 = {添え字:初期値, 添え字:初期値, 添え字:初期値, …};
+
+
+
+var a = {"dragon":"りゅう", "sword":"つるぎ", "egg":"たまご"}
+document.writeln(a["dragon"]);
+document.writeln(a["sword"]);
+document.writeln(a["egg"]);
+
+
+var 連想配列名  = new Object();
+
+
+var a = new Object(3);
+a["dragon"] = "りゅう";
+a["sword"] = "つるぎ";
+a["egg"] = "たまご";
+document.writeln(a["dragon"]);
+document.writeln(a["sword"]);
+document.writeln(a["egg"]);
+
+
+
+
+関数
+
+
+
+function 関数名(引数1, ….) {
+     関数内で実行したい処理
+     return 返り値;
+}
+
+
+返り値を返さない関数
+
+function writeStar(num){
+     for(var i = 0; i < num; i++){
+          document.writeln('☆');
+     }
+}
+document.writeln('星が1個');
+writeStar(1);
+document.writeln('星が3個');
+writeStar(3);
+
+
+返り値を返す関数
+
+function writeStar(num){
+     var str = '';
+     for(var i = 0; i < num; i++) str += '☆');
+     return str;
+}
+document.writeln('星が1個' + writeStar(1));
+document.writeln('星が3個' + writeStar(3));
+
+
+変数とスコープ
+
+
+
+
+</pre>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div id="footer" style="background:rgb(66, 139, 202);text-align:center;padding:0.6em;box-sizing:border-box;color:white;">WEB・スマホ・アプリ開発科</div>
+ 
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/google-code-prettify/prettify.js"></script>
+    <script>prettyPrint();</script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/list-counter.js"></script>
+  </body>
+</html>

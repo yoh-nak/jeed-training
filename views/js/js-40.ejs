@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>WEB・スマホ・アプリ開発科</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="js/google-code-prettify/prettify.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+ 
+    <nav class="navbar navbar-default">
+      <div class="navbar-header">
+        <button class="navbar-toggle" data-toggle="collapse" data-target=".target">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">WEB・スマホ・アプリ開発科</a>
+      </div>
+ 
+      <div class="collapse navbar-collapse target">
+        <ul class="nav navbar-nav">
+          <li><a href="js-39">文法</a></li>
+          <li><a href="js-1">リファレンス</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+
+        <div class="list-group">
+          <a href="js-1" class="list-group-item">
+          <i class="badge badge-info"></i> コアリファレンス
+          </a>
+          <a href="js-17" class="list-group-item">
+          <i class="badge badge-info"></i> クライアントリファレンス
+          </a>
+        </div>
+
+
+
+        </div>
+        <div class="col-sm-9">
+          <div class="panel panel-primary">
+          <div class="panel-heading">JavaScript資料</div>
+          <div class="panel-body">
+
+<pre>
+
+クライアントサイドJavaScript = ブラウザで実行できる
+
+window.alert('hello, world'); //=> alert('hello, world');
+window.document.write('hello, world'); //=> document.write('hello, world');
+window.document.clear(); //document.clear();
+window.document.title = 'タイトル'; //=> document.title = 'タイトル';
+window.document.bgColor = '#ff0000'; //=> document.bgColor = '#ff0000';
+
+※windowsオブジェクトのみ省略できる
+
+コアJavaScript = コンソール、クライアント、サーバーサイドで実行できる
+console.log('hello, world');
+Math.round('3.141516');
+
+DOM（Document Object Model）
+XHR（XMLHttpRequest）オブジェクト
+Web API
+HTML5 API
+JavaScriptライブラリ
+JavaScriptフレームワーク
+
+</pre>
+
+
+<pre>
+
+オブジェクトのプロパティ
+
+
+
+
+オブジェクト.プロパティ名
+
+
+
+
+
+document.bgColor = '#ff0000';
+
+
+オブジェクト
+document
+
+
+
+プロパティ
+bgColor
+
+
+代入演算子
+=
+
+
+値
+'#ff0000'
+
+
+行の終わり
+;
+
+
+</pre>
+
+
+<pre>
+
+オブジェクトのメソッド
+
+
+オブジェクト.メソッド名
+
+document.writeln('こんにちは');
+
+
+
+オブジェクト
+document
+
+
+メソッド
+writeln
+
+引数
+('こんにちは')
+
+行の終わり
+;
+</pre>
+
+
+<pre>
+
+トークン
+
+alert('hello, world');
+
+
+識別子 = Identifier //=> 関数名や変数名
+予約語 = ReservedWord //=>後述
+識別子、予約語 = Token //=> それ以上分割できない単位
+
+
+
+</pre>
+
+<table class="table">
+    <tr>
+      <th>字句（Token）</th><th>種類</th>
+    </tr>
+    <tr>
+      <td>alert</td><td>識別子（Identifier）</td>
+    </tr>
+    <tr>
+      <td>(</td><td>(区切り子（Punctuator）</td>
+    </tr>
+    <tr>
+      <td>"hello, world"</td><td>文字列リテラル（StringLiteral）</td>
+    </tr>
+    <tr>
+      <td>)</td><td>区切り子（Punctuator）</td>
+    </tr>
+    <tr>
+      <td>;</td><td>区切り子（Punctuator）</td>
+    </tr>
+</table>
+
+
+
+<h4>コメントアウト</h4>
+
+<pre class="prettyprint">
+// これはコメントです
+// 改行までコメントとなります // よってここもコメントです
+/* 複数行コメントは閉じるまでがコメントです */
+/********************************
+ * よって、このように改行して
+ * コメントを記述できます
+********************************/
+/* /* 複数行コメントをネストすることはできません */ ←ここまでがコメントとみなされます */
+</pre>
+
+<h4>ブラウザに組み込む</h4>
+index.html
+<pre class="prettyprint">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;title&gt;&lt;/title&gt;
+&lt;style&gt;
+h1 {
+     font-size:14pt;
+     background-color:#ccccff;
+     padding: 5px;
+}
+p {
+     font-size:12pt;
+     color: #666699;
+}
+&lt;/style&gt;
+<mark>&lt;script&gt;
+alert('JavaScriptですよ。');
+&lt;/script&gt;</mark>
+&lt;/head&gt;
+&lt;body&gt;
+     &lt;h1&gt;Sample Page&lt;/h1&gt;
+     &lt;p&gt;サンプルのページ     &lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<h4>外部jsファイルから読み込む</h4>
+
+index.html
+<pre class="prettyprint">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;title&gt;&lt;/title&gt;
+<mark>&lt;script src="script.js"&gt;&lt;/script&gt;</mark>
+&lt;style&gt;
+h1 {
+     font-size:14pt;
+     background-color:#ccccff;
+     padding: 5px;
+}
+p {
+     font-size:12pt;
+     color: #666699;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+     &lt;h1&gt;Sample Page&lt;/h1&gt;
+     &lt;p&gt;サンプルのページ     &lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+
+
+script.js
+<pre class="prettyprint">
+alert('JavaScriptですよ。'); 
+</pre>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div id="footer" style="background:rgb(66, 139, 202);text-align:center;padding:0.6em;box-sizing:border-box;color:white;">WEB・スマホ・アプリ開発科</div>
+ 
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/google-code-prettify/prettify.js"></script>
+    <script>prettyPrint();</script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/list-counter.js"></script>
+  </body>
+</html>

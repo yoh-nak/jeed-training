@@ -9,6 +9,7 @@ var express = require('express')
   , html5 = require('./routes/html5')
   , css3 = require('./routes/css3')
   , js = require('./routes/js')
+  , material = require('./routes/material')
   , http = require('http')
   , path = require('path');
 
@@ -40,6 +41,7 @@ app.get('/users', user.list);
 app.get('/html5-:id', html5.html5);
 app.get('/css3-:id', css3.css3);
 app.get('/js-:id', js.js);
+app.get('/material-:id', material.material);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

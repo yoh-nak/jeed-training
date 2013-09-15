@@ -10,6 +10,7 @@ var express = require('express')
   , css3 = require('./routes/css3')
   , js = require('./routes/js')
   , material = require('./routes/material')
+  , diary = require('./routes/diary')
   , http = require('http')
   , path = require('path');
 
@@ -42,6 +43,7 @@ app.get('/users', user.list);
 app.get('/html5-:id', html5.html5);
 app.get('/css3-:id', css3.css3);
 app.get('/js-:id', js.js);
+app.get('/diary-:id', diary.diary);
 
 //資料
 app.get('/material-:id', material.material);

@@ -36,15 +36,20 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+//ルーティング
 app.get('/', routes.index);
 app.get('/users', user.list);
 app.get('/html5-:id', html5.html5);
 app.get('/css3-:id', css3.css3);
 app.get('/js-:id', js.js);
+
 //資料
 app.get('/material-:id', material.material);
 app.get('/material/phonegap-:id', material.phonegap);
+app.get('/material/vagrant-:id', material.vagrant);
 
+
+//サーバー起動
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });

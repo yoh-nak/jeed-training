@@ -6,3 +6,11 @@ exports.material = function(req, res){
 	  	instructor: config.instructor
 	});
 };
+
+
+exports.phonegap = function(req, res){
+	res.render('material/phonegap/phonegap-' + req.params.id, {
+	  	title: config.title,
+	  	instructor: config.instructor
+	});
+};

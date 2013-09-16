@@ -52,6 +52,7 @@ app.get('/diary-:id', diary.diary);
 //資料
 app.get('/material-:id', material.material);
 app.get('/material/phonegap-:id', material.phonegap);
+app.get('/material/git-:id', material.git);
 app.get('/material/vagrant-:id', material.vagrant);
 
 

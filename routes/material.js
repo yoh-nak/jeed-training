@@ -16,6 +16,14 @@ exports.phonegap = function(req, res){
 	});
 };
 
+//gitの使い方
+exports.git = function(req, res){
+	res.render('material/git/git-' + req.params.id, {
+	  	title: config.title,
+	  	instructor: config.instructor
+	});
+};
+
 //vagrantの使い方
 exports.vagrant = function(req, res){
 	res.render('material/vagrant/vagrant-' + req.params.id, {

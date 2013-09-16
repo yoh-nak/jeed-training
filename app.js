@@ -44,12 +44,15 @@ app.get('/', routes.index);
 app.get('/users', user.list);
 app.get('/html5-:id', html5.html5);
 app.get('/css3-:id', css3.css3);
-app.get('/js-:id', js.js);
 app.get('/jqm-:id', jqm.jqm);
 app.get('/nodejs-:id', nodejs.nodejs);
 app.get('/diary-:id', diary.diary);
 
-//資料
+//JavaScript系
+app.get('/js-:id', js.js);
+app.get('/js/enchant-:id', js.enchant);
+
+//資料系
 app.get('/material-:id', material.material);
 app.get('/material/phonegap-:id', material.phonegap);
 app.get('/material/git-:id', material.git);

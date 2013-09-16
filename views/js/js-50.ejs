@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="ja">
-  <head>
-    <meta charset="utf-8">
-    <title>WEB・スマホ・アプリ開発科</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="css/common.css" rel="stylesheet" media="screen">
-    <link href="js/google-code-prettify/prettify.css" rel="stylesheet" media="screen">
-  </head>
+<%- include ../head %>
   <body>
  
     <%- include navbar %>
@@ -24,28 +15,18 @@
           <div class="panel-heading">
             <i class="glyphicon glyphicon-book"></i> 変数と数値計算</div>
           <div class="panel-body">
-<pre>
 
-
-
-演算子
-
-
-
-
-四則演算
-
-
+<h4>四則演算</h4>
+<p>以下の計算をコンソールで実行してみましょう。</p>
+<pre class="prettyprint">
 document.writeln(3 + 2); ←3＋2＝5
 document.writeln(3 - 1); ←3－2＝1
 document.writeln(3 * 2); ←3×2＝6
 document.writeln(3 / 2); ←3÷2＝1.5
 document.writeln(3 % 2); ←3÷2のあまり＝1
-
-
 </pre>
-
-
+<hr>
+<h4>算術（代数）演算子</h4>
 <table class="table">
   <tr>
     <td>演算子</td><td>名前</td><td>式名</td><td>例と結果</td>
@@ -66,53 +47,81 @@ document.writeln(3 % 2); ←3÷2のあまり＝1
     <td>%</td><td>%演算子</td><td>同上</td><td>5 % 2; //=> 1</td>
   </tr>
 </table>
- 
-<pre>
-
+<hr>
+<h4>変数の使い方</h4>
+<pre class="prettyprint">
 var a; //変数の宣言
 a = 1; //変数への代入
 a = a + 2; //変数を使った計算
 document.writeln('答えは' + a + 'です'); //結果の表示
-
-
-//変数を代入したあと値を代入
+</pre>
+<p>参考：JavaScriptではvarで変数を宣言しなくても、代入できますが、グローバル変数という特別な扱いになります（後述）。特別な理由がなければvarで変数宣言して値を代入するようにしましょう。
+<hr>
+<h4>変数を宣言したあと値を代入</h4>
+<pre class="prettyprint">
 var a;
 a = 1;
-
-//変数を宣言するときに初期値をセット
+</pre>
+<hr>
+<h4>変数を宣言するときに初期値をセット</h4>
+<pre class="prettyprint">
 var a = 1;
-
-
+</pre>
+<hr>
+<h4>変数をまとめてセットする</h4>
+<pre class="prettyprint">
 var a; //変数aを宣言
 var b, c; //変数bとcを宣言
 var aa = 1; //変数aaを宣言して1で初期化
 var bb = 22, cc = 33; //変数bbとccを宣言し、それぞれ22と33で初期化
 var bbb, ccc = 333; //変数bbbとcccを宣言し、後者のみ333で初期化
-
-
 </pre>
 
+<hr>
 
-<h4>変数の名前</h4>
+<h4>演算子</h4>
+<p>演算子（オペレータ）とは、与えられた変数／リテラルに対して、あらかじめ決められたなんらかの処理を行う記号のことです。また、演算子によって処理される変数／リテラルのことを被演算子（オペランド）と呼びます。
+<pre>
+x = a + b;
+</pre>
+<table class="table">
+  <tr>
+      <td>x</td><td>オペランド（演算対象の変数／リテラル）</td>
+  </tr>
+  <tr>
+      <td>=</td><td>オペレータ（演算子）</td>
+  </tr>
+  <tr>
+      <td>a</td><td>オペランド（演算対象の変数／リテラル）</td>
+  </tr>
+  <tr>
+      <td>+</td><td>オペレータ（演算子）</td>
+  </tr>
+  <tr>
+      <td>b</td><td>オペランド（演算対象の変数／リテラル）</td>
+  </tr>
+</table>
+
+<hr>
+
+<h4>変数名につかえる文字</h4>
 
 <pre>
-変数名につかえる文字
-
 半角アルファベット（a～zとA～Z）
 数字（0～9）
 _（アンダーバー）
 $（ドルマーク）
 
-
 以下の変数名は不可
-
 数字で始まる名前
 「-」「$」だけの名前
 予約語は不可
-
 </pre>
 
-予約語
+<hr>
+
+<h4>予約語</h4>
+<p>予約語とは、プログラミング言語において字句的には識別子（変数名、関数名、クラス名など）としてのルールを満たしているにもかかわらず、識別子にならない字句要素のことです。 </p>
 <table class="table">
   <tr>
       <td>break</td><td>case</td><td>catch</td><td>continue</td>
@@ -138,8 +147,10 @@ $（ドルマーク）
 </table>
 <p>参考：※undefined、null、NaNは予約語ではないが変数名にするべきではない。</p>
 
+<hr>
 
-避けたほうがよいキーワード
+<h4>変数名に使うべきではないキーワード</h4>
+<p>以下のキーワードを変数名にしてもエラーになりませんが、予期しないバグが発生する可能性が高いので避けたほうがよいでしょう。</p>
 <table class="table">
   <tr>
       <td>abstract</td><td>boolean</td><td>byte</td><td>char</td>
@@ -167,11 +178,13 @@ $（ドルマーク）
   </tr>
 </table>
 
+<hr>
 
-代入演算
+<h4>代入演算子</h4>
+<p>あらかじめ用意された変数に、追加計算させる場合は、複合演算子によって省略して記述できます。</p>
 <table class="table">
   <tr>
-    <td>数式例</td><td>省略例</td><td>説明</td>
+    <td>代入演算子</td><td>複合代入演算子</td><td>説明</td>
   </tr>
   <tr>
     <td>a = a + 10</td><td> a += 10</td><td>変数の値に10を足す</td>

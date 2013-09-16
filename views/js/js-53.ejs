@@ -1,0 +1,87 @@
+<%- include ../head %>
+  <body>
+ 
+    <%- include navbar %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+
+        <%- include left %>
+
+        </div>
+        <div class="col-sm-9">
+          <div class="panel panel-primary">
+          <div class="panel-heading">
+            <i class="glyphicon glyphicon-book"></i> インクリメント／デクリメント</div>
+          <div class="panel-body">
+
+<h4>インクリメント演算子／デクリメント演算子</h4>
+
+<p>インクリメント、デクリメント演算子は値の前か、後に置くことで挙動が違います。
+<table class="table">
+  <tr>
+    <th>演算子</th><th>概要</th><th>例</th>
+  </tr>
+  <tr>
+    <td>++</td><td>前置加算</td><td>x = 3; a = x++;</td>
+  </tr>
+  <tr>
+    <td>++</td><td>後置加算</td><td>x = 3; a = ++x;</td>
+  </tr>
+  <tr>
+    <td>--</td><td>前置減算</td><td>x = 3; a = --x;</td>
+  </tr>
+  <tr>
+    <td>--</td><td>後置減算</td><td>x = 3; a = x--;</td>
+  </tr>
+</table>
+<p>コンソールで実行してみましょう。</p>
+<h4>前置インクリメント演算子</h4>
+<p>先に加算処理してから変数が使われます。</p>
+<pre class="prettyprint">
+var x = 3;
+var a = ++x; //=> xが繰り上がってから代入されるので、4がaに代入される
+a //=> 4が出力される
+x //=> 4が出力される
+</pre>
+<h4>後置インクリメント演算子</h4>
+<p>次に変数を使うときに加算処理が行われます。</p>
+<pre class="prettyprint">
+var x = 3;
+var a = x++; //=> xをaに代入してからxを繰り上げるので、3がaに代入される
+a //=> 3が出力される
+x //=> 次にxを使用するときは繰り上がっているので、4が出力される
+</pre>
+<h4>前置デクリメント演算子</h4>
+<p>先に減算処理してから変数が使われます。</p>
+<pre class="prettyprint">
+var x = 3;
+var a = --x; //=> xが繰り下がってから代入されるので、2がaに代入される
+a //=> 2が出力される
+x //=> 2が出力される
+</pre>
+<h4>後置デクリメント演算子</h4>
+<p>次に変数を使うときに減算処理が行われます。</p>
+<pre class="prettyprint">
+var x = 3;
+var a = x--; //=> xをaに代入してからxを繰り下げるので、3がaに代入される
+a //=> 3が出力される
+x //=> 次に使用するときは繰り下がっているので、2が出力される
+</pre>   
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div id="footer">WEB・スマホ・アプリ開発科</div>
+ 
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/google-code-prettify/prettify.js"></script>
+    <script>prettyPrint();</script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/list-counter.js"></script>
+  </body>
+</html>

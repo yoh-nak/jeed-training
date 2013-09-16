@@ -24,9 +24,17 @@
           <div class="panel-heading">
             <i class="glyphicon glyphicon-bookmark"></i> 課題</div>
           <div class="panel-body">
-            <p>jQuery Mobileのボタンをタップして、カウントバブルを繰り上げてみましょう。早く終わったらPhonegapでアプリに変換してみましょう。</p>
+            <p>円錐の体積を計算してみましょう。公式は以下の通りです。早く終わったらPhonegapでアプリに変換してみましょう。</p>
             <p>
-              <a href="demo/js/excercise10/index.html" target="_blank" class="btn btn-default">
+            <figure>
+            <figcaption>円錐の体積の公式</figcaption>
+            <img src="http://w3e.kanazawa-it.ac.jp/math/cgi-bin/mimetex1/mimetex.cgi?3$%5cdisplaystyle{V=%5cfrac{%5chspace{2}1%5chspace{2}}{%5chspace{2}3%5chspace{2}}{%5cpi}{r}^{2}h}" alt="">
+            </figure>
+          </p>
+            <p>
+            円錐率は「Math.PI」プロパティ、べき乗は「Math.pow(基数, 指数)」メソッドで取得できます。
+            <p>
+              <a href="demo/js/excercise11/index.html" target="_blank" class="btn btn-default">
               <i class="glyphicon glyphicon-play"></i> デモ
               </a>
 
@@ -48,9 +56,11 @@
 &lt;script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"&gt;&lt;/script&gt;
 &lt;script&gt;
 $(document).on('pageshow','#index',function(){
-  var cnt = 0;
   $('a').on('vclick',function(){
-    $('.ui-li-count').text(++cnt);
+    var r = $('#r').val();
+    var h = $('#h').val();
+    var result = (Math.PI * Math.pow(r, 2) * h) / 3;
+    $('#result').text(result);
   });
 });
 &lt;/script&gt;
@@ -58,12 +68,17 @@ $(document).on('pageshow','#index',function(){
 &lt;body&gt;
   &lt;div data-role="page" id="index"&gt;
     &lt;header data-role="header"&gt;
-      &lt;h1&gt;加算子の練習&lt;/h1&gt;
+      &lt;h1&gt;円錐の体積&lt;/h1&gt;
     &lt;/header&gt;
     &lt;div data-role="content"&gt;
-      &lt;ul data-role="listview" data-count-theme="c" data-inset="true"&gt;
-        &lt;li&gt;&lt;a href="#"&gt;追加 &lt;span class="ui-li-count"&gt;0&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-      &lt;/ul&gt;
+      &lt;label for="text-basic"&gt;円の半径r:&lt;/label&gt;
+      &lt;input type="number" name="text-basic" id="r" value=""&gt;
+
+      &lt;label for="text-basic"&gt;円錐の高さh:&lt;/label&gt;
+      &lt;input type="number" name="text-basic" id="h" value=""&gt;
+
+      &lt;a data-role="button"&gt;計算&lt;/a&gt;
+      &lt;p id="result"&gt;&lt;/p&gt;
     &lt;/div&gt;
     &lt;footer data-role="footer" data-position="fixed"&gt;
       &lt;h4&gt;2013 &copy; なかのようすけ&lt;/h4&gt;

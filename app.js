@@ -9,6 +9,8 @@ var express = require('express')
   , html5 = require('./routes/html5')
   , css3 = require('./routes/css3')
   , js = require('./routes/js')
+  , jqm = require('./routes/jqm')
+  , nodejs = require('./routes/nodejs')
   , material = require('./routes/material')
   , diary = require('./routes/diary')
   , http = require('http')
@@ -43,6 +45,8 @@ app.get('/users', user.list);
 app.get('/html5-:id', html5.html5);
 app.get('/css3-:id', css3.css3);
 app.get('/js-:id', js.js);
+app.get('/jqm-:id', jqm.jqm);
+app.get('/nodejs-:id', nodejs.nodejs);
 app.get('/diary-:id', diary.diary);
 
 //資料

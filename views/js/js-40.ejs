@@ -20,25 +20,66 @@
         </div>
         <div class="col-sm-9">
           <div class="panel panel-primary">
-          <div class="panel-heading">基本的なブラウザオブジェクト</div>
+          <div class="panel-heading">基本的な定義済みオブジェクト</div>
           <div class="panel-body">
 
-<h4>ブラウザオブジェクトの階層</h4>
+<h4>定義済みオブジェクトの階層</h4>
+<p>JavaScriptには多くの定義済みオブエジェクトがあり、コアオブジェクトとブラウザオブジェクトに分けられます。ブラウザオブジェクトはwindowオブジェクトを筆頭に、オブジェクトの階層があります。ピリオド（.）で連結されて、最後にオブジェクトの持つプロパティかメソッドが割り当てられます。
+<figure>
+  <img src="" alt="">
+</figure>
 
-<h4>windowオブジェクト</h4>
+<h4>ブラウザオブジェクトの例</h4>
+<h5>windowオブジェクト</h5>
 
-<h4>documentオブジェクト</h4>
+<p>windowオブジェクトのプロパティをコンソールで実行してみましょう。</p>
+<pre class="prettyprint">
+window.innerHeight
+window.innerWidth
+window.outerHeight
+window.outerWidth
+window.scrollX
+window.scrollY
+window.screenX
+window.screenY
+</pre>
 
-<h4>locationオブジェクト</h4>
+<p>windowオブジェクトのメソッドをコンソールで実行してみましょう。</p>
+<pre  class="prettyprint">
+window.alert('予期せぬエラー');
+window.confirm('よろしいですか');
+window.close();
+window.find('キーワード');
+</pre>
+  <p>
+  <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window" target="_blank" class="btn btn-default">
+  <i class="glyphicon glyphicon-info-sign"></i> 参考
+  </a>
+  </p>
 
-<h4>Mathオブジェクト</h4>
-<pre>
+<hr>
 
-クライアントサイドJavaScript = ブラウザで実行できる
+<h5>documentオブジェクト</h5>
 
-window.alert('hello, world'); //=> alert('hello, world');
-window.location.href = 'http://www.yahoo.co.jp/';
+window.document.write('hello, world'); //=> document.write('hello, world');
+window.document.clear(); //document.clear();
+window.document.title = 'タイトル'; //=> document.title = 'タイトル';
+window.document.bgColor = '#ff0000'; //=> document.bgColor = '#ff0000';
 
+
+
+  <p>
+  <a href="https://developer.mozilla.org/en-US/docs/Web/API/document" target="_blank" class="btn btn-default">
+  <i class="glyphicon glyphicon-info-sign"></i> 参考
+  </a>
+  </p>
+
+<hr>
+
+<h5>locationオブジェクト</h5>
+
+<p>locationオブジェクトのプロパティをコンソールで実行してみましょう。</p>
+<pre  class="prettyprint">
 window.location.protocol
 window.location.host
 window.location.hostname
@@ -47,17 +88,25 @@ window.location.pathname
 window.location.search
 window.location.hash
 window.location.href
+</pre>
+<p>locationオブジェクトのメソッドをコンソールで実行してみましょう。</p>
+<pre  class="prettyprint">
+window.location.assign('http://www.yahoo.co.jp');
+window.location.reload();
+window.location.replace('http://www.yahoo.co.jp');
+window.location.toString();
+</pre>
+<p>
+  <a href="https://developer.mozilla.org/ja/docs/Web/API/window.location" target="_blank" class="btn btn-default">
+  <i class="glyphicon glyphicon-info-sign"></i> 参考
+  </a>
+  </p>
 
+<hr>
 
-window.document.write('hello, world'); //=> document.write('hello, world');
-window.document.clear(); //document.clear();
-window.document.title = 'タイトル'; //=> document.title = 'タイトル';
-window.document.bgColor = '#ff0000'; //=> document.bgColor = '#ff0000';
-
-※windowsオブジェクトのみ省略できる
-
-コアJavaScript = コンソール、クライアント、サーバーサイドで実行できる
-console.log('hello, world');
+<h4>コアオブジェクトの例</h4>
+<h5>Mathオブジェクト</h5>
+<pre>
 Math.round('3.141516');
 Math.random();
 Math.PI;

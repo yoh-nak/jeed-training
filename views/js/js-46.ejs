@@ -20,50 +20,12 @@
         </div>
         <div class="col-sm-9">
           <div class="panel panel-primary">
-          <div class="panel-heading">基本的なブラウザオブジェクト</div>
+          <div class="panel-heading">ブラウザに組み込む</div>
           <div class="panel-body">
-
-<h4>ブラウザオブジェクトの階層</h4>
-
-<h4>windowオブジェクト</h4>
-
-  <p>
-  <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window" target="_blank" class="btn btn-default">
-  <i class="glyphicon glyphicon-info-sign"></i> 参考
-  </a>
-  </p>
-
-<h4>documentオブジェクト</h4>
-
-  <p>
-  <a href="https://developer.mozilla.org/en-US/docs/Web/API/document" target="_blank" class="btn btn-default">
-  <i class="glyphicon glyphicon-info-sign"></i> 参考
-  </a>
-  </p>
-
-<pre>
-
-クライアントサイドJavaScript = ブラウザで実行できる
-
-window.alert('hello, world'); //=> alert('hello, world');
-window.document.write('hello, world'); //=> document.write('hello, world');
-window.document.clear(); //document.clear();
-window.document.title = 'タイトル'; //=> document.title = 'タイトル';
-window.document.bgColor = '#ff0000'; //=> document.bgColor = '#ff0000';
-
-※windowsオブジェクトのみ省略できる
-
-コアJavaScript = コンソール、クライアント、サーバーサイドで実行できる
-console.log('hello, world');
-Math.round('3.141516');
-
-</pre>
-
-
-
 
 
 <h4>ブラウザに組み込む</h4>
+<p>head要素内のscript要素に記述すると、alertメソッドを実行してから、HTMLをレンダリングします。</p>
 index.html
 <pre class="prettyprint">
 &lt;!DOCTYPE html&gt;
@@ -83,18 +45,57 @@ p {
 }
 &lt;/style&gt;
 <mark>&lt;script&gt;
-alert('JavaScriptですよ。');
+alert('Hello, World!');
 &lt;/script&gt;</mark>
 &lt;/head&gt;
 &lt;body&gt;
      &lt;h1&gt;Sample Page&lt;/h1&gt;
-     &lt;p&gt;サンプルのページ     &lt;/p&gt;
+     &lt;p&gt;サンプルのページ&lt;/p&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 </pre>
+              <p>
+              <a href="demo/js/excercise7/index.html" target="_blank" class="btn btn-default">
+              <i class="glyphicon glyphicon-play"></i> デモ
+              </a>
+<hr>
 
+<p>body要素の終了タグの直前にscript要素に記述すると、HTMLをレンダリングしてから、alertメソッドを実行します。</p>
+index.html
+<pre class="prettyprint">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;title&gt;&lt;/title&gt;
+&lt;style&gt;
+h1 {
+     font-size:14pt;
+     background-color:#ccccff;
+     padding: 5px;
+}
+p {
+     font-size:12pt;
+     color: #666699;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+     &lt;h1&gt;Sample Page&lt;/h1&gt;
+     &lt;p&gt;サンプルのページ&lt;/p&gt;
+<mark>&lt;script&gt;
+alert('Hello, World!');
+&lt;/script&gt;</mark>
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+              <p>
+              <a href="demo/js/excercise8/index.html" target="_blank" class="btn btn-default">
+              <i class="glyphicon glyphicon-play"></i> デモ
+              </a>
+<hr>
 <h4>外部jsファイルから読み込む</h4>
-
+<p>script要素内のsrc属性で外部jsファイルを読み込めます。実行順はhead要素内に記述した場合と、body要素の終了タグ直前に記述した場合で異なります。</p>
 index.html
 <pre class="prettyprint">
 &lt;!DOCTYPE html&gt;
@@ -117,17 +118,24 @@ p {
 &lt;/head&gt;
 &lt;body&gt;
      &lt;h1&gt;Sample Page&lt;/h1&gt;
-     &lt;p&gt;サンプルのページ     &lt;/p&gt;
+     &lt;p&gt;サンプルのページ&lt;/p&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 </pre>
 
-
-
 script.js
 <pre class="prettyprint">
-alert('JavaScriptですよ。'); 
+alert('Hello, World!'); 
 </pre>
+
+              <p>
+              <a href="demo/js/excercise9/index.html" target="_blank" class="btn btn-default">
+              <i class="glyphicon glyphicon-play"></i> デモ
+              </a>
+<hr>
+
+<h4>document.writeメソッドの使い方</h4>
+
           </div>
           </div>
         </div>
@@ -135,7 +143,7 @@ alert('JavaScriptですよ。');
     </div>
     </div>
 
-    <div id="footer" style="background:rgb(66, 139, 202);text-align:center;padding:0.6em;box-sizing:border-box;color:white;"><%= title %></div>
+    <div id="footer"><%= title %></div>
  
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/google-code-prettify/prettify.js"></script>

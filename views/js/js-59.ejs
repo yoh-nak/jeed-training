@@ -106,7 +106,7 @@ $.cookie("キー","値",{expires:-1});
 <hr>
 <h4>UNIX標準時とは</h4>
 <p>
-UNIX時間（ユニックスじかん）またはUNIX時刻（ユニックスじこく、UNIX time、POSIX time）とはコンピューターシステム上で日時を表す単位。UTCでの1970年1月1日真夜中（0時0分0秒）からの経過秒数（閏秒を加味しない）で表される。
+UNIX時間（ユニックスじかん）またはUNIX時刻（ユニックスじこく、UNIX time、POSIX time）とはコンピューターシステム上で日時を表す単位。UTCでの1970年1月1日真夜中（0時0分0秒）からの経過秒数（閏秒を加味しない）で表される。UNIX標準時から現在までの秒数をタイムスタンプと呼びます。
 </p>
 <table class="table">
   <tr>
@@ -132,7 +132,35 @@ UNIX時間（ユニックスじかん）またはUNIX時刻（ユニックスじ
 <hr>
 <h4>dataオブジェクトのgetTimeメソッド</h4>
 <p>
+getTimeメソッドは、現在のタイムスタンプを取得できます。コンソールで実行してみましょう。現在までのUNIX標準時からの秒数が表示されます。
 </p>
+<pre class="prettyprint">
+var timestamp = new Date();
+timestamp.getTime();
+</pre>
+
+<p>Cookieの保存期間はタイムスタンプで格納されるため、getTimeメソッドでCookie保存開始時のタイムスタンプを取得し、その時からの秒数がCookieの保存期間となります。
+</p>
+<pre class="prettyprint">
+&lt;script src="jquery.cookie.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+var date = new Date();
+<mark>date.setTime(date.getTime()+(3 * 24 * 60 * 60 * 1000));</mark> //3日×24時間×60分×60秒×1000ミリ秒
+$.cookie("キー","値",{expires:date});
+&lt;/script&gt;
+</pre>
+<p>ハイライト部分が保存期間の秒数で指定されているのがわかります。</p>
+<p>
+<a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime" target="_blank" class="btn btn-default">
+<i class="glyphicon glyphicon-info-sign"></i> 参考：getTimeメソッド
+</a>
+</p>
+<hr>
+<p>参考：typeof演算子で、変数timestampを確認するとobject型のデータ型であることが確認できます。しかしながら変数timestampはDateオブジェクトが格納されているかどうか確認することはできません。その場合は、instanceof演算子を使い、「timestamp instanceof Date」の結果、trueが取得されると、Dateオブジェクトが格納されていることが分かります。
+<pre class="prettyprint">
+typeof timestamp //=> "object"
+timestamp inscanceof Date //=> true
+</pre>
           </div>
           </div>
         </div>

@@ -15,92 +15,124 @@
           <div class="panel-heading">
             <i class="glyphicon glyphicon-book"></i> ブラウザでCookieを扱う</div>
           <div class="panel-body">
-
-            <h4>JavaScriptでユーザーエージェントを表示する</h4>
-<p>ユーザーエージェントの取得はwindow.navigatorオブジェクトのuserAgentプロパティで取得することができます。</p>
+            <h4>cookieを確認する</h4>
+            <p>Cookieとは、Webサイトの提供者が、Webブラウザを通じて訪問者のコンピュータに一時的にデータを書き込んで保存させるしくみのこと。Cookieにはユーザに関する情報や最後にサイトを訪れた日時、そのサイトの訪問回数などを記録しておくことができます。</p>
+            <p>JavaScrpiptでは「document.cookieプ」ロパティでWebサイト提供者が残したCookieを確認することができます。</p>
+<pre class="prettyprint">
+document.cookie;
+</pre>
 <p>
-<a href="https://developer.mozilla.org/ja/docs/Web/API/window.navigator" target="_blank" class="btn btn-default">
-<i class="glyphicon glyphicon-info-sign"></i> 参考：userAgentプロパティ
+<a href="https://developer.mozilla.org/ja/docs/DOM/document.cookie" target="_blank" class="btn btn-default">
+<i class="glyphicon glyphicon-info-sign"></i> 参考：cookieプロパティ
 </a>
 </p>
+            <p>以下の例は「Yahoo! Japan」にアクセスした後に、コンソールで「document.cookie」を実行しCookieに記録されたデータを確認した例です。</p>
 <pre class="prettyprint">
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;title&gt;ユーザーエージェントを表示してみる&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;script type="text/javascript"&gt;
-document.write(navigator.userAgent);
+B=8vt1li993h6uo&b=3&s=ka; YABW=v=1&b=363&c=1&i4=MYWoUQ--&t4=1379441608&i6=&t6=&e=1380072948"
+</pre>
+<p>
+Cookieは「キー=値; キー=値; キー=値; ...」のように、キーと値がセットに成って格納されますが、「; 」のように、1つのセットがセミコロンと半角スペースで区切られているだけで 、データは1つの文字列として記録されています。したがってJavaScriptでCookieを処理するためには「; 」で切り離した後「=」でキーと値をさらに切り離して、データを処理しなければなりません。以下、CookieをJavaScriptの文法でセットする方法と、Cookieからデータを取得する方法を紹介します。
+</p>
+<hr>
+<h4>Cookieをセットする</h4>
+<pre class="prettyprint">
+var key = "キー";
+var value = "値";
+var date = new Date();
+date.setTime(date.getTime() + (3 * 24 * 60 * 60 * 1000));   //3日×24時間×60分×60秒×1000ミリ秒
+var expires = 'expires=' + date.toGMTString();
+document.cookie = encodeURIComponent(key) + "=" + encodeURIComponent(value) + "; " + expires + "; path=/";
+</pre>
+<h4>Cookieを取得する</h4>
+<pre class="prettyprint">
+var key = "キー";
+var pattern = /([^*]+)=([^*]+)/;
+var cookies = document.cookie.split('; ');
+for(var i = 0; i < cookies.length; i++){
+    var match = cookies[i].match(pattern);
+    if(match && key == decodeURIComponent(match[1])){
+        document.write(decodeURIComponent(match[2]));
+    }
+}
+</pre>
+<h4>Cookieを破棄する</h4>
+<pre class="prettyprint">
+var key = "キー";
+document.cookie = encodeURIComponent(key) + "=;" + "expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/";
+</pre>
+<hr>
+<h4>jQueryプラグイン「jquery.cookie.js」を利用する</h4>
+<p>CookieをJavaScriptで扱う場合、処理が面倒なため、PHPなどのサーバーサイド技術でCookieを処理することが多いのですが、JavaScriptでCookieを扱うには、jQueryプラグインの「jquery.cookie.js」を使うと便利です。</p>
+
+<p>
+<a href="https://github.com/carhartl/jquery-cookie" target="_blank" class="btn btn-default">
+<i class="glyphicon glyphicon-info-sign"></i> 参考：jquery.cookie.js
+</a>
+</p>
+<hr>
+<h4>日にちでクッキーをセットする</h4>
+<pre class="prettyprint">
+&lt;script src="jquery.cookie.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+$.cookie("キー","値",{expires:3}); //3日
 &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
 </pre>
-<hr>
-<h4>jQueryでユーザーエージェントを表示する</h4>
+
+<h4>時間でクッキーをセットする</h4>
 <pre class="prettyprint">
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;title&gt;ユーザーエージェントを表示してみる&lt;/title&gt;
-&lt;script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"&gt;&lt;/script&gt;
-&lt;script type="text/javascript"&gt;
-$(function(){
-    $("body").text(navigator.userAgent);
-});
+&lt;script src="jquery.cookie.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+var date = new Date();
+date.setTime(date.getTime()+(3 * 24 * 60 * 60 * 1000)); //3日×24時間×60分×60秒×1000ミリ秒
+$.cookie("キー","値",{expires:date});
 &lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+</pre>
+
+<h4>クッキーを取得する</h4>
+<pre class="prettyprint">
+&lt;script src="jquery.cookie.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+$.cookie("キー");
+&lt;/script&gt;
+</pre>
+
+<h4>クッキーを破棄する</h4>
+<pre class="prettyprint">
+&lt;script src="jquery.cookie.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+$.cookie("キー","値",{expires:-1});
+&lt;/script&gt;
 </pre>
 <hr>
-
-<h4>ユーザーエージェントに記録された文字列の有無を調べる</h4>
-<p>一般的にはモバイル向け端末にはユーザーエージェントに「Mobile」というキーワードが入っていることが多いですが、iPadには「Mobile」の文字列が記録されているため、iPhoneとiPadを区別することはできません。アップル社製品は、iPhoneには「iPhone」、iPodタッチには「iPot」、iPadには「iPad」の文字列がユーザーエージェントに記録されています。
-</p>
-<p>Androidには「Android」の文字列が記録されていますが、スマートフォンとタブレットを識別することはできません。 ただしAndroidのタブレットには、「Mobile」の文字列が記録されていないことが多いです。</p>
-
+<h4>UNIX標準時とは</h4>
 <p>
-<a href="http://www.openspc2.org/userAgent/" target="_blank" class="btn btn-default">
-<i class="glyphicon glyphicon-info-sign"></i> 参考：ユーザーエージェント一覧
-</a>
+UNIX時間（ユニックスじかん）またはUNIX時刻（ユニックスじこく、UNIX time、POSIX time）とはコンピューターシステム上で日時を表す単位。UTCでの1970年1月1日真夜中（0時0分0秒）からの経過秒数（閏秒を加味しない）で表される。
 </p>
-
+<table class="table">
+  <tr>
+    <th>UNIX時間</th><th>UTC（協定世界時館）</th><th>JST（日本標準時）</th>
+  </tr>
+  <tr>
+    <td>0</td><td>1970-01-01T00:00:00</td><td>1970-01-01T09:00:00</td>
+  </tr>
+  <tr>
+    <td>100000000</td><td>1973-03-03T09:46:40</td><td>1973-03-03T18:46:40</td>
+  </tr>
+  <tr>
+    <td>1000000000</td><td>2001-09-09T01:46:40</td><td>2001-09-09T10:46:40</td>
+  </tr>
+  <tr>
+    <td>1234567890</td><td>2009-02-13T23:31:30</td><td>2009-02-14T08:31:30</td>
+  </tr>
+  <tr>
+    <td>2147483647</td><td>2038-01-19T03:14:07</td><td>2038-01-19T12:14:07</td>
+  </tr>
+</table>
+   
 <hr>
-<h4>StringオブジェクトのindexOfメソッド</h4>
-<p>StringオブジェクトはJavaScriptのコアオブジェクトの一つで、文字列型のデータに対して、プロパティおよびメソッドを指定することができます。</p>
+<h4>dataオブジェクトのgetTimeメソッド</h4>
 <p>
-<a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/String" target="_blank" class="btn btn-default">
-<i class="glyphicon glyphicon-info-sign"></i> 参考：Stringオブジェクト
-</a>
 </p>
-<p>今回は取得したユーザーエージェントの文字列に、特定の文字列が何個含まれているをカウントするindexOfメソッドを使うことで、「iPhone」などの特定の文字がユーザーエージェントの文字列に含まれているかどうか判定してみます。含まれていなければ「-1」が取得でき、含まれていればユーザーエージェントに含まれる「iPhone」の文字列の数が取得できます。含まれている場合は取得できる数値が曖昧なため「-1」が取得できるか、できないかで「iPhone」かとうかを判定できます。
-</p>
-<p>
-<a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf" target="_blank" class="btn btn-default">
-<i class="glyphicon glyphicon-info-sign"></i> 参考：indexOfメソッド
-</a>
-</p>
-<pre class="prettyprint">
-var ua = navigator.userAgent;
-var iphone = ua.indexOf('iPhone');
-if(iphone != -1){
-  console.log('iPhoneです');
-}
-else{
-  console.log('iPhoneではありません');
-}
-</pre>
-<p>以下のようにまとめて記述することもできます。</p>
-<pre class="prettyprint">
-if(navigator.userAgent.indexOf('iPhone') != -1){
-  console.log('iPhoneです');
-}
-else{
-  console.log('iPhoneではありません');
-}
-</pre>
           </div>
           </div>
         </div>

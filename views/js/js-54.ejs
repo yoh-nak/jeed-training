@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="ja">
-  <head>
-    <meta charset="utf-8">
-    <title>WEB・スマホ・アプリ開発科</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="css/common.css" rel="stylesheet" media="screen">
-    <link href="js/google-code-prettify/prettify.css" rel="stylesheet" media="screen">
-  </head>
+<%- include ../head %>
   <body>
  
     <%- include navbar %>
@@ -22,19 +13,76 @@
         <div class="col-sm-9">
           <div class="panel panel-primary">
           <div class="panel-heading">
-            <i class="glyphicon glyphicon-book"></i> JavaScript資料</div>
+            <i class="glyphicon glyphicon-book"></i> 条件分岐</div>
           <div class="panel-body">
+<h4>条件分岐</h4>
 
 <pre>
+if(条件式){
+  条件を満たしたときに実行する処理
+}
+</pre>
 
+<pre class="prettyprint">
+var a = 12;
+if(a > 10){
+  document.writeln('でっかいぞ');
+}
+</pre>
+
+<pre class="prettyprint">
+var a = 8;
+if(a > 10){
+  document.writeln('でっかいぞ');
+}
+else {
+  document.writeln('ちっちゃいぞ');
+}
+</pre>
+
+<pre class="prettyprint">
 if(条件式A){
      if(条件式B){
           条件式Bを満たしたときに実行する処理
      }
      条件式Aを満たしたときに実行する処理
 }
+</pre>
 
 
+比較（関係）演算子
+<table class="table">
+  <tr>
+    <th>演算子</th><th>名前</th><th>式名</th><th>例と結果</th>
+  </tr>
+  <tr>
+    <td>&lt;</td><td>小なり演算子</td><td>関係式</td><td>1 < 2; //=>true</td>
+  </tr>
+  <tr>
+    <td>&gt;</td><td>大なり演算子</td><td>同上</td><td>1 > 2; //=>false</td>
+  </tr>
+  <tr>
+    <td>&lt;=</td><td>小なりイコール演算子</td><td>同上</td><td>1 >= 1; //=> true</td>
+  </tr>
+  <tr>
+    <td>&gt;=</td><td>大なりイコール演算子</td><td>同上</td><td>1 <= //=> true</td>
+  </tr>
+  <tr>
+    <td>==</td><td>等価演算子</td><td>等価式</td><td>1 == 1; //=> true</td>
+  </tr>
+  <tr>
+    <td>===</td><td>厳密等価演算子</td><td>同上</td><td>1 === "1"; //=> false</td>
+  </tr>
+  <tr>
+    <td>!=</td><td>不等価演算子</td><td>同上</td><td>1 != 2; //=>true</td>
+  </tr>
+  <tr>
+    <td>!==</td><td>厳密不等価演算子</td><td>同上</td><td>1 !== "1"; //=>true</td>
+  </tr>
+</table>
+
+
+<pre class="prettyprint">
 var a = 12;
 if(a > 10){
      if(a % 2 == 0){
@@ -44,62 +92,30 @@ if(a > 10){
           document.writeln('でっかい奇数');
      }
 }
+</pre>
 
-
+<pre class="prettyprint">
 var a = 7;
 if(a>=5 && a <= 10){
      document.writeln('ほどほど');
 }
+</pre>
 
+<pre class="prettyprint">
 var a = 1;
 if(a <= 5 || a >= 10){
      document.writeln('両極端');
 }
+</pre>
 
-
+<pre class="prettyprint">
 var a = 7;
 if(!(a <= 5)){
      document.writeln('ちっちゃくない');
 }
-
-
-条件分岐
-
-
-if(条件式){
-
-}
-
-
-var a = 12;
-if(a > 10){
-     document.writeln('でっかいぞ');
-}
-
-
-var a = 8;
-if(a > 10){
-     document.writeln('でっかいぞ');
-}else{
-     document.writeln('ちっちゃいぞ');
-}
-
-
-比較（関係）演算子
-演算子名前式名例と結果<小なり演算子（Less-than Operator）関係式（RelationExpression）1 < 2; //=>true>大なり演算子（Greater-than Operator）同上1 > 2;
-//=>false<=小なりイコール演算子（Less-than-or-equal Operator）同上1 <= 1;
-//=>true>=大なりイコール演算子（Greater-than-or-equal Operator）同上1 >= 1;
-//=>true==等価演算子（Equals Operator）等価式1 == 1;
-//=>true===厳密等価演算子（Strict Equals Operator）同上1 === "1";
-//=>false!=不等価演算子（Does-not-equals Operator）同上1 != 2; //=>true!==厳密不等価演算子（Strict Does-not-equals Operator）同上1 !== "1";
-//=>true
-
-
-
-
-
-
 </pre>
+
+
           </div>
           </div>
         </div>
@@ -107,7 +123,7 @@ if(a > 10){
     </div>
     </div>
 
-    <div id="footer">WEB・スマホ・アプリ開発科</div>
+    <div id="footer"><%= title %></div>
  
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/google-code-prettify/prettify.js"></script>

@@ -14,7 +14,6 @@ var CHARA_IMAGE = 'http://enchantjs.com/assets/images/chara1.gif';
 
 window.onload = function() {
     var core = new Core(SCREEN_WIDTH, SCREEN_HEIGHT);
-
     core.preload(CHARA_IMAGE);
 
     core.onload = function() {
@@ -22,18 +21,15 @@ window.onload = function() {
 
    		scene.backgroundColor = 'black';
 
-   		var sprite00 = new Sprite(32, 32);
-      sprite00.image = core.assets[CHARA_IMAGE];
-      sprite00.moveTo(50, 50);
-      sprite00.rotate(45);
-      scene.addChild(sprite00);
+   		var sprite = new Sprite(32, 32);
+      sprite.image = core.assets[CHARA_IMAGE];
+      sprite.moveTo(50, 50);
 
-      var sprite01 = new Sprite(32, 32);
-      sprite01.image = core.assets[CHARA_IMAGE];
-      sprite01.moveTo(50, 150);
-      sprite01.rotation = 180;
-      scene.addChild(sprite01);
-    }
+      sprite.ontouchstart = function(){
+        this.parentNode.removeChild(this);
+      };
+      scene.addChild(sprite);
+    };
     core.start();
 };
 </script>

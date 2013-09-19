@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes" /> 
+<script src='enchant.min.js'></script>
+<script>
+enchant();
+
+var SCREEN_WIDTH = 320;
+var SCREEN_HEIGHT = 320;
+var ICON_IMAGE = 'http://enchantjs.com/assets/images/space1.gif';
+
+window.onload = function() {
+    var core = new Core(SCREEN_WIDTH, SCREEN_HEIGHT);
+
+    core.preload(ICON_IMAGE);
+
+    core.onload = function() {
+   		var scene = core.rootScene;
+
+   		scene.backgroundColor = '#000';
+
+      var sprite = new Sprite(100, 100);
+      sprite.moveTo(50, 50);
+      scene.addChild(sprite);
+
+      var surface = new Surface(100, 100);
+      
+      surface.context.fillStyle = 'white';
+      surface.context.fillRect(0, 0, 100, 100);
+
+      surface.draw(core.assets[ICON_IMAGE], 0, 0, 50, 100);
+      surface.draw(core.assets[ICON_IMAGE], 50, 0, 50, 100);
+
+      sprite.image = surface;
+    };
+    core.start();
+};
+</script>
+<style type="text/css">
+body {
+    margin: 0;
+}
+</style>
+</head>
+<body>
+</body>
+</html>

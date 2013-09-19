@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes" /> 
+<script src='enchant.min.js'></script>
+<script>
+enchant();
+
+var SCREEN_WIDTH = 320;
+var SCREEN_HEIGHT = 320;
+
+window.onload = function() {
+    var core = new Core(SCREEN_WIDTH, SCREEN_HEIGHT);
+
+    core.onload = function() {
+   		var scene = core.rootScene;
+
+   		scene.backgroundColor = '#aaa';
+
+      var label = new Label('0 touch!!');
+      label.moveTo(10, 10);
+
+      label.font = "32px 'Consolas', 'Monaco', 'MS　ゴシック";
+      scene.addChild(label);
+
+      var touchNum = 0;
+      scene.ontouchstart = function(){
+        touchNum += 1;
+        label.text = touchNum + " touch!!";
+      };
+    };
+    core.start();
+};
+</script>
+<style type="text/css">
+body {
+    margin: 0;
+}
+</style>
+</head>
+<body>
+</body>
+</html>

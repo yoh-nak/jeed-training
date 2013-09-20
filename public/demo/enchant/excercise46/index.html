@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang='ja'>
+  <head>
+    <meta charset='UTF-8'>
+    <meta content='width=device-width, user-scalable=no' name='viewport'>
+    <meta content='yes' name='apple-mobile-web-app-capable'>
+    <script src='enchant.min.js'></script>
+    <script>
+      enchant();
+      
+      var SCREEN_WIDTH = 320;
+      var SCREEN_HEIGHT = 320;
+      var CHAR_IMAGE = 'http://enchantjs.com/assets/images/chara1.gif';
+      
+      window.onload = function() {
+          var core = new Core(SCREEN_WIDTH, SCREEN_HEIGHT);
+      
+          core.preload(CHAR_IMAGE);
+      
+          core.keybind('Z'.charCodeAt(0), 'a');
+      
+          core.onload = function() {
+         		var scene = core.rootScene;
+      
+            scene.backgroundColor = 'black';
+      
+            var sprite = new Sprite(32, 32);
+            sprite.image = core.assets[CHAR_IMAGE];
+            sprite.moveTo(50, 200);
+            sprite.vy = 0;
+            scene.addChild(sprite);
+      
+            sprite.onenterframe = function(){;
+              var input = core.input;
+      
+              if(input.left === true){ this.x -= 4; }
+              if(input.right === true){ this.x += 4; }
+      
+              if(input.a === true && this.y === 200){
+              	this.vy = -5;
+              }
+      
+              this.y += this.vy;
+              this.vy += 0.25;
+      		
+      		if(this.y > 200){
+      			this.y = 200;
+      			this.vy = 0;
+      		}
+              
+              if((this.x + this.width) < 0){
+      			this.x = SCREEN_WIDTH;
+              }
+              else if(this.x > SCREEN_WIDTH){
+      			this.x = -this.width;
+              }
+            };
+            scene.addChild(sprite);
+          };
+          core.start();
+      };
+    </script>
+    <style>
+      body {
+        margin: 0; }
+    </style>
+  </head>
+  <body></body>
+</html>

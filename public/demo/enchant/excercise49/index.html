@@ -38,13 +38,13 @@
       
             window.addEventListener('devicemotion',function(e){
       		var gravity = e.accelerationIncludingGravity;
-      		if(navigator.userAgent.indexOf("iPhone") != -1 || navigator.userAgent.indexOf("iPad") != -1){
-      			sprite.dx += gravity.x*0.02;
-      			sprite.dy += gravity.y*0.02;
+      		if(navigator.userAgent.indexOf("Android") != -1){
+      			sprite.dx -= -1 * gravity.x*0.02;
+      			sprite.dy -= -1 * gravity.y*0.02;
       		}
       		else{
-      			sprite.dx -= gravity.x*0.02;
-      			sprite.dy -= gravity.y*0.02;
+      			sprite.dx += gravity.x*0.02;
+      			sprite.dy += gravity.y*0.02;
       		}
             });
           };

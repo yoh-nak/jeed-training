@@ -37,6 +37,9 @@ WEB・スマホ・アプリ開発科
 
 コマンドで、モジュールを追加してから、
 
+	node app.js
+
+	#拡張子を省略可
 	node app
 
 コマンドで、サーバーを起動し、
@@ -50,6 +53,13 @@ WEB・スマホ・アプリ開発科
 
 	#mac
 	$ sudo npm install -g hotnode
+
+hotnodeを使用してサーバーを起動すると、ソースの修正後、サーバーの再起動を自動的に行なってくれます。サーバーの起動コマンドは以下のようになります。
+
+	hotnode app.js
+
+	#拡張子を省略可
+	hotnode app
 
 
 無視するファイル（.gitignore）

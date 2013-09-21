@@ -19,7 +19,7 @@ WEB・スマホ・アプリ開発科
 	#npmモジュール
 	Express
 	Ejs
-	Haml
+	Jade
 
 1つの講座が終了すると、次の講座に受け継がれますので、
 授業終了時点とは内容が変わっている可能性があります。
@@ -61,40 +61,4 @@ hotnodeを使用してサーバーを起動すると、ソースの修正後、�
 	#拡張子を省略可
 	hotnode app
 
-
-無視するファイル（.gitignore）
-----------------------------------
-無視するファイルは以下のようになっています。
-
-	node_modules
-	.DS_Store
-	common.css
-	*.haml
-	*.scss
-	*.sass
-	.sass-cache
-	*.coffee
-	*.bak
-
-パッケージ管理ファイル（package.json）
-----------------------------------
-追加したNodeモジュールは以下のようになっています。
-
-	{
-	  "name": "application-name",
-	  "version": "0.0.1",
-	  "private": true,
-	  "scripts": {
-	    "start": "node app.js"
-	  },
-	  "engine": {
-	    "node": "v0.10.x",
-	    "npm": "1.3.x"
-	  },
-	  "dependencies": {
-	    "express": "3.3.4",
-	    "ejs": "0.8.4",
-	    "haml": "0.4.3"
-	  }
-	}
 

@@ -14,3 +14,45 @@ WEB・スマホ・アプリ開発科
 
 講師業を撤退する時がきたら、このソースは
 更新されないかもしれませんのでご了承ください。
+
+
+サイト構築時には、Haml、Sass、CoffeeScriptをコンパイルして生成した箇所がありますが、herokuのサーバーで動いているもののみpushしてあります。
+
+	http://jeed-training.herokuapp.com/
+
+また、node_moduleのディレクトリは、pushしてありませんので、設置後、
+
+	npm install
+
+コマンドで、モジュールを追加してから、
+
+	node app
+
+コマンドで、サーバーを起動し、
+
+	http://localhost:3000
+
+で、ブラウザからアクセスしてください。npmのhotnodeをローカルのグローバルモジュールに組み込んでおくと便利です。
+
+	#windows
+	npm install -g hotnode
+
+	#mac
+	$ sudo npm install -g hotnode
+
+
+無視するファイル（.gitignore）
+----------------------------------
+無視するファイルは以下のようになっています。
+
+	node_modules
+	.DS_Store
+	common.css
+	*.haml
+	*.scss
+	*.sass
+	.sass-cache
+	*.coffee
+	*.bak
+
+

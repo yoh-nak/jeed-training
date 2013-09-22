@@ -10,29 +10,33 @@
       
       var SCREEN_WIDTH = 320;
       var SCREEN_HEIGHT = 320;
-      var CHARA_IMAGE = 'http://enchantjs.com/images/materials/chara1.png';
+      var SAMPLE_SE = 'http://enchantjs.com/assets/sounds/se1.wav';
       
       window.onload = function() {
           var core = new Core(SCREEN_WIDTH, SCREEN_HEIGHT);
       
-          core.preload(CHARA_IMAGE);
-      
-          core.keybind('Z'.charCodeAt(0), 'a');
-      
+          core.preload(SAMPLE_SE);
+      	
           core.onload = function() {
-         		var scene = core.rootScene;
+          	
+      		var scene = core.rootScene;
       
-            scene.backgroundColor = 'black';
+      		scene.backgroundColor = 'black';
       
-            var sprite = new Sprite(32, 32);
-            sprite.image = core.assets[CHARA_IMAGE];
-            sprite.moveTo(50, 50);
-            scene.addChild(sprite);
+      		var entity = new Entity();
+      		entity.width = 50;
+      		entity.height = 50;
       
-            scene.ontouchstart = function(e){
-            	sprite.x = e.x - (sprite.width/2);
-            	sprite.y = e.y - (sprite.height/2);
-            };
+      		entity.moveTo(160-25, 160-25);
+      		entity.backgroundColor = 'red';
+      
+      		entity.ontouchstart = function(){
+      			var se = core.assets[SAMPLE_SE];
+      			se.play();
+      		};
+      		
+      		scene.addChild(entity);	
+      		
           };
           core.start();
       };

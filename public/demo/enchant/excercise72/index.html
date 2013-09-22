@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang='ja'>
+  <head>
+    <meta charset='UTF-8'>
+    <meta content='width=device-width, user-scalable=no' name='viewport'>
+    <meta content='yes' name='apple-mobile-web-app-capable'>
+    <script src='enchant.min.js'></script>
+    <script src='plugins/tl.enchant.js'></script>
+    <script>
+      enchant();
+      
+      var SCREEN_WIDTH = 320;
+      var SCREEN_HEIGHT = 320;
+      var CHARA_IMAGE = 'http://enchantjs.com/images/materials/chara1.png';
+      
+      window.onload = function() {
+      	
+          var core = new Core(SCREEN_WIDTH, SCREEN_HEIGHT);
+      	
+      	core.preload(CHARA_IMAGE);
+      
+          core.onload = function() {
+          	
+      		var scene = core.rootScene;
+      
+      		scene.backgroundColor = 'black';
+      
+      		var sprite = new Sprite(32, 32);
+      		sprite.image = core.assets[CHARA_IMAGE];
+      		scene.addChild(sprite);
+      
+      		sprite.tl.moveTo(50, 50, 30).moveBy(100, 50, 60).moveBy(50, 0, 60).moveBy(-100, 40, 60);
+          };
+      
+          core.start();
+      };
+    </script>
+    <style>
+      body {
+        margin: 0; }
+    </style>
+  </head>
+  <body></body>
+</html>

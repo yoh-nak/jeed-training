@@ -5,85 +5,102 @@
     <meta content='width=device-width, user-scalable=no' name='viewport'>
     <meta content='yes' name='apple-mobile-web-app-capable'>
     <script src='enchant.min.js'></script>
+    <script src='plugins/gl-matrix-min.js'></script>
+    <script src='plugins/gl.enchant.js'></script>
+    <script src='plugins/primitive.gl.enchant.js'></script>
+    <script src='plugins/collada.gl.enchant.js'></script>
     <script>
+      /*
+      * おまじない
+      */
       enchant();
       
-      var SCREEN_WIDTH = 320;
-      var SCREEN_HEIGHT = 320;
-      var CHARA_IMAGE = 'http://enchantjs.com/images/materials/chara1.png';
-      var SPRITE_MAX_NUM = 64;
       
-      var randint = function(min, max){
-        return window.Math.floor(Math.random()*(max-min+1)) + min;
+      /*
+      * 定数
+      */
+      var SCREEN_WIDTH    = 640;
+      var SCREEN_HEIGHT   = 640;
+      
+      
+      /*
+      * メイン処理
+      */
+      window.onload = function() {
+      // ゲームオブジェクトを生成
+      var core = new Core(SCREEN_WIDTH, SCREEN_HEIGHT);
+      // モデル読み込み
+      core.preload("images/droid.dae");
+      // キーを割り当てる(キーバインド)
+      core.keybind('Z'.charCodeAt(0), 'a');   // 'Z' Key を 'a' ボタンとして割り当てる
+      core.keybind('X'.charCodeAt(0), 'b');   // 'X' Key を 'b' ボタンとして割り当てる
+      
+      // ロード完了時の処理
+      core.onload = function() {
+      // 3D 用シーン生成
+      var scene3d = new Scene3D();
+      
+      // ライト生成
+      var light = new DirectionalLight(); // 平行光源生成
+      light.directionZ = 1;               // 向き
+      light.color = [1.0, 1.0, 1.0];      // 色
+      scene3d.setDirectionalLight(light); // scene3d にセット
+      
+      // カメラ生成
+      var camera = new Camera3D();                                // カメラ生生
+      camera.x = 0; camera.y = 2; camera.z = 10;                  // カメラ位置をセット
+      camera.centerX = 0; camera.centerY = 0; camera.centerZ = 0; // 注視点をセット
+      scene3d.setCamera(camera);                                  // scene3d にセット
+      
+      // プリミティブ生成, 表示(トーラス)
+      var prim = new Sprite3D();      // 生成
+      prim.set(core.assets["images/droid.dae"]);  // モデルをセット
+      prim.x = prim.y = prim.z = 0;   // 位置をセット
+      scene3d.addChild(prim);         // scene3d にセット
+      
+      // タッチ移動値
+      var offsetX = 0;
+      var offsetY = 0;
+      var dx      = 0;
+      var dy      = 0;
+      var mat     = mat4.create();
+      
+      // 画面タッチ開始時処理
+      core.rootScene.ontouchstart = function(e) {
+      offsetX = e.x;
+      offsetY = e.y;
       };
       
-      window.onload = function() {
-          var core = new Core(SCREEN_WIDTH, SCREEN_HEIGHT);
+      // 画面タッチ移動時処理
+      core.rootScene.ontouchmove = function(e) {
+      // 移動値をプラスする
+      dx += (e.x-offsetX)/100.0;
+      offsetX = e.x;
+      dy += (e.y-offsetY)/100.0;
+      offsetY = e.y;
       
-          core.fps = 60;
+      // 回転行列を作成
+      mat4.identity(mat);         // 単位行列化
+      mat4.rotateY(mat, dx);      // X 軸回転
+      mat4.rotateX(mat, dy);      // Y 軸回転
+      // 回転行列をセット
+      prim.rotation = mat;
+      };
       
-          core.preload(CHARA_IMAGE);
+      // シーン更新時処理
+      core.rootScene.onenterframe = function() {
+      // 入力に応じて拡縮
+      if (core.input.a) {
+      prim.scale(1.1, 1.1, 1.1);
+      }
+      if (core.input.b) {
+      prim.scale(0.9, 0.9, 0.9);
+      }
+      };
+      };
       
-          core.onload = function() {
-         		var scene = core.rootScene;
-      
-         		scene.backgroundColor = 'black';
-      
-         		for(var i = 0; i < SPRITE_MAX_NUM; ++i){
-              var sprite = new Sprite(32, 32);
-              sprite.image = core.assets[CHARA_IMAGE];
-              sprite.x = randint(0, SCREEN_WIDTH-32);
-              sprite.y = randint(0, SCREEN_HEIGHT-32);
-              sprite.frame = 1;
-      
-              sprite.vx = randint(-4, 4);
-              sprite.vy = randint(-4, 4);
-      
-              if(sprite.vx < 0){
-                sprite.scaleX *= -1;
-              }
-      
-              sprite.onenterframe = function(){
-                this.x += this.vx;
-                this.y += this.vy;
-      
-                if(core.frame % 4 == 0){
-                  this.frame = 3 - this.frame;
-                }
-      
-                var left = 0;
-                var right = SCREEN_WIDTH-32;
-                var top = 0;
-                var bottom = SCREEN_HEIGHT-32;
-      
-                if(this.x < left){
-                  this.x = left;
-                  this.vx *= -1;
-                  this.scaleX *= -1;
-                }
-                else if(this.x > right){
-                  this.x = right;
-                  this.vx *= -1;
-                  this.scaleX *= -1;
-                }
-      
-                if(this.y < top){
-                  this.y = top;
-                  this.vy *= -1;
-                }
-                else if(this.y > bottom){
-                  this.y = bottom;
-                  this.vy *= -1;
-                }
-              };
-      
-              sprite.ontouchstart = function(){
-                this.parentNode.removeChild(this);
-              };
-              scene.addChild(sprite);
-            }
-          };
-          core.start();
+      // ゲーム開始
+      core.start();
       };
     </script>
     <style>

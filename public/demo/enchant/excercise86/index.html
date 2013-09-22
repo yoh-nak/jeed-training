@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang='ja'>
+  <head>
+    <meta charset='UTF-8'>
+    <meta content='width=device-width, user-scalable=no' name='viewport'>
+    <meta content='yes' name='apple-mobile-web-app-capable'>
+    <script src='enchant.min.js'></script>
+    <script src='plugins/gl-matrix-min.js'></script>
+    <script src='plugins/gl.enchant.js'></script>
+    <script src='plugins/primitive.gl.enchant.js'></script>
+    <script>
+      enchant();
+      
+      var SCREEN_WIDTH = 640;
+      var SCREEN_HEIGHT = 640;
+      
+      window.onload = function() {
+      	
+          var core = new Core(SCREEN_WIDTH, SCREEN_HEIGHT);
+      
+          core.keybind('Z'.charCodeAt(0), 'a');
+          core.keybind('X'.charCodeAt(0), 'b');
+      	
+          core.onload = function() {
+          	
+          	var scene3d = new Scene3D();
+      		
+          	var light = new DirectionalLight();
+          	light.directionZ = 1;
+          	light.color = [1.0, 1.0, 1.0];
+          	scene3d.setDirectionalLight(light);
+      
+          	var camera = new Camera3D();
+          	camera.x = 0;
+          	camera.y = 2;
+          	camera.z = 10;
+      
+          	camera.centerX = 0;
+          	camera.centerY = 0;
+          	camera.centerZ = 0;
+      
+          	scene3d.setCamera(camera);
+      
+          	var cube = new Cube();
+          	cube.x = cube.y = cube.z = 0;
+          	cube.mesh.texture = new Texture('images/enchant.png');
+          	scene3d.addChild(cube);
+      
+          	var infoLabel = new Label('');
+          	infoLabel.moveTo(20, 20);
+          	infoLabel.color = 'white';
+          	infoLabel.font = '20px "Consolas", "Monaco", "MS　ゴシック"';
+          	core.rootScene.addChild(infoLabel);
+      
+          	core.rootScene.onenterframe = function(){
+      			var input = core.input;
+      
+      			if(input.left){
+      				camera.x -= 0.1;
+      				camera.centerX -= 0.1;
+      			}
+      			if(input.right){
+      				camera.x += 0.1;
+      				camera.centerX += 0.1;
+      			}
+      			if(input.up){
+      				camera.y += 0.1;
+      				camera.centerY += 0.1;
+      			}
+      			if(input.down){
+      				camera.y -= 0.1;
+      				camera.centerY -= 0.1;
+      			}
+      			if(input.a){
+      				camera.z -= 0.1;
+      				camera.centerZ -= 0.1;
+      			}
+      			if(input.b){
+      				camera.z += 0.1;
+      				camera.centerZ += 0.1;
+      			}
+      
+      			infoLabel.text = 'Camera(' +
+      				camera.x.toFixed(1) + ',' + 
+      				camera.y.toFixed(1) + ',' + 
+      				camera.z.toFixed(1) + ')';
+          	};
+          	
+          };
+      
+          core.start();
+      };
+    </script>
+    <style>
+      body {
+        margin: 0; }
+    </style>
+  </head>
+  <body></body>
+</html>

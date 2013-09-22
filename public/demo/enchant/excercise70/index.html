@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang='ja'>
+  <head>
+    <meta charset='UTF-8'>
+    <meta content='width=device-width, user-scalable=no' name='viewport'>
+    <meta content='yes' name='apple-mobile-web-app-capable'>
+    <script src='enchant.min.js'></script>
+    <script src='plugins/avatar.enchant.js'></script>
+    <script>
+      enchant();
+      
+      var SCREEN_WIDTH = 320;
+      var SCREEN_HEIGHT = 320;
+      var MONSTER_IMAGE = 'http://apps.lolipop.jp/images/monster/bigmonster1.gif';
+      
+      window.onload = function() {
+      	
+          var core = new Core(SCREEN_WIDTH, SCREEN_HEIGHT);
+      	
+      	core.preload(MONSTER_IMAGE);
+      
+          core.onload = function() {
+          	
+      		var scene = core.rootScene;
+      
+      		scene.backgroundColor = 'black';
+      
+      		var monster = new AvatarMonster(core.assets[MONSTER_IMAGE]);
+      
+      		monster.moveTo(50, 50);
+      		monster.action = 'walk';
+      		scene.addChild(monster);
+      
+      		scene.ontouchstart = function(){
+      			monster.action = 'attack';
+      		};
+          };
+      
+          core.start();
+      };
+    </script>
+    <style>
+      body {
+        margin: 0; }
+    </style>
+  </head>
+  <body></body>
+</html>

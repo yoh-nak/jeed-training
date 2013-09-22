@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang='ja'>
+  <head>
+    <meta charset='UTF-8'>
+    <meta content='width=device-width, user-scalable=no' name='viewport'>
+    <meta content='yes' name='apple-mobile-web-app-capable'>
+    <script src='enchant.min.js'></script>
+    <script src='plugins/avatar.enchant.js'></script>
+    <script>
+      enchant();
+      
+      var SCREEN_WIDTH = 320;
+      var SCREEN_HEIGHT = 320;
+      var BG01_IMAGE = 'avatarBg1.png';
+      var BG02_IMAGE = 'avatarBg2.png';
+      var BG03_IMAGE = 'avatarBg3.png';
+      
+      var game = null;
+      
+      window.onload = function() {
+      	
+          var core = new Core(SCREEN_WIDTH, SCREEN_HEIGHT);
+      	
+      	core.preload(BG01_IMAGE, BG02_IMAGE, BG03_IMAGE);
+      
+          core.onload = function() {
+          	
+      		var scene = core.rootScene;
+      
+      		scene.backgroundColor = 'black';
+      
+      		var bg = new AvatarBG(1);
+      		bg.y = 50;
+      		scene.addChild(bg);
+      
+      		scene.onenterframe = function(){
+      			bg.scroll(core.frame*2);
+      		};
+          };
+      
+          core.start();
+      };
+    </script>
+    <style>
+      body {
+        margin: 0; }
+    </style>
+  </head>
+  <body></body>
+</html>

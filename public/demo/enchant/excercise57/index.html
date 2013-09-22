@@ -33,7 +33,7 @@
       		playEntity.width = 50;
       		playEntity.height = 50;
       
-      		playEntity.moveTo(160-25-60, 160-25);
+      		playEntity.moveTo(160-25-80, 160-25);
       		playEntity.backgroundColor = 'red';
       		
       		playEntity.ontouchstart = function(){
@@ -44,11 +44,26 @@
       		
       		scene.addChild(playEntity);
       
+      		var pauseEntity = new Entity();
+      		pauseEntity.width = 50;
+      		pauseEntity.height = 50;
+      
+      		pauseEntity.moveTo(160-25, 160-25);
+      		pauseEntity.backgroundColor = 'green';
+      		
+      		pauseEntity.ontouchstart = function(){
+      			var bgm = core.assets[SAMPLE_BGM];
+      			bgm.pause();
+      			stateLabel.text = '中断！';
+      		};
+      
+      		scene.addChild(pauseEntity);
+      			
       		var stopEntity = new Entity();
       		stopEntity.width = 50;
       		stopEntity.height = 50;
       
-      		stopEntity.moveTo(160-25+60, 160-25);
+      		stopEntity.moveTo(160-25+80, 160-25);
       		stopEntity.backgroundColor = 'blue';
       		
       		stopEntity.ontouchstart = function(){

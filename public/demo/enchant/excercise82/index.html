@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang='ja'>
+  <head>
+    <meta charset='UTF-8'>
+    <meta content='width=device-width, user-scalable=no' name='viewport'>
+    <meta content='yes' name='apple-mobile-web-app-capable'>
+    <script src='enchant.min.js'></script>
+    <script src='plugins/tl.enchant.js'></script>
+    <script>
+      enchant();
+      
+      var SCREEN_WIDTH = 320;
+      var SCREEN_HEIGHT = 320;
+      var CHARA_IMAGE  = 'http://enchantjs.com/images/materials/chara1.png';
+      
+      window.onload = function() {
+      	
+          var core = new Core(SCREEN_WIDTH, SCREEN_HEIGHT);
+      	
+      	core.preload(CHARA_IMAGE);
+      
+          core.onload = function() {
+          	
+      		var scene = core.rootScene;
+      
+      		scene.backgroundColor = 'black';
+      		
+      		var spriteList = [];
+      		
+      		for(var i = 0; i < 6; ++i){
+      			var x = 20;
+      			var y = 20 + i*50;
+      			var sprite = new Sprite(32, 32);
+      			sprite.image = core.assets[CHARA_IMAGE];
+      			sprite.moveTo(x, y);
+      			scene.addChild(sprite);
+      			spriteList.push(sprite);
+      		}
+      		
+      		spriteList[0].tl
+      			.moveBy(250, 0, 60, enchant.Easing.QUAD_EASEIN)
+      			.rotateBy(360, 30, enchant.Easing.QUAD_EASEOUT)
+      			.moveBy(-250, 0, 60, enchant.Easing.QUAD_EASEOUT)
+      			.loop();
+      
+      		spriteList[1].tl
+      			.moveBy(250, 0, 60, enchant.Easing.QUBIC_EASEIN)
+      			.rotateBy(360, 30, enchant.Easing.QUBIC_EASEOUT)
+      			.moveBy(-250, 0, 60, enchant.Easing.QUBIC_EASEOUT)
+      			.loop();
+      
+      		spriteList[2].tl
+      			.moveBy(250, 0, 60, enchant.Easing.CIRC_EASEIN)
+      			.rotateBy(360, 30, enchant.Easing.CIRC_EASEOUT)
+      			.moveBy(-250, 0, 60, enchant.Easing.CIRC_EASEOUT)
+      			.loop();
+      		spriteList[3].tl
+      			.moveBy(250, 0, 60, enchant.Easing.ELASTIC_EASEIN)
+      			.rotateBy(360, 30, enchant.Easing.ELASTIC_EASEOUT)
+      			.moveBy(-250, 0, 60, enchant.Easing.ELASTIC_EASEOUT)
+      			.loop();
+      		spriteList[4].tl
+      			.moveBy(250, 0, 60, enchant.Easing.BOUNCE_EASEIN)
+      			.rotateBy(360, 30, enchant.Easing.BOUNCE_EASEOUT)
+      			.moveBy(-250, 0, 60, enchant.Easing.BOUNCE_EASEOUT)
+      			.loop();
+      		spriteList[5].tl
+      			.moveBy(250, 0, 60, enchant.Easing.EXPO_EASEIN)
+      			.rotateBy(360, 30, enchant.Easing.EXPO_EASEOUT)
+      			.moveBy(-250, 0, 60, enchant.Easing.EXPO_EASEOUT)
+      			.loop();
+      
+          };
+      
+          core.start();
+      };
+    </script>
+    <style>
+      body {
+        margin: 0; }
+    </style>
+  </head>
+  <body></body>
+</html>

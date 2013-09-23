@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang='ja'>
+  <head>
+    <meta charset='UTF-8'>
+    <meta content='width=device-width, user-scalable=no' name='viewport'>
+    <title>
+      PCサイト
+    </title>
+    <script src='http://code.jquery.com/jquery-1.10.2.min.js'></script>
+    <script>
+      //DOMが構築される前
+      
+      //Storageがないとき
+      if(!localStorage.access){
+      
+      	//ユーザーエージェントがスマートフォンならスマートフォンサイトを表示
+      	if(navigator.userAgent.indexOf("Android") != -1 || navigator.userAgent.indexOf("iPhone") != -1 || navigator.userAgent.indexOf("iPod") != -1){
+      		window.location.href = "mobile.html";
+      	}
+      	//それ以外はStorageにpcを記録
+      	else{
+      		localStorage.access = 'pc';
+      	}
+      }
+      
+      //Storageがmobileのときスマートフォンサイトサイトを表示
+      else if(localStorage.access == "mobile"){
+      	window.location.href = "mobile.html";
+      }
+      
+      //DOMが構築された後
+      $(function(){
+      	//ボタンが押されたとき
+      	$("a").click(function(){
+      		localStorage.access = "mobile"
+      		window.location.href = "mobile.html";
+      	});
+      });
+    </script>
+    <style>
+      
+    </style>
+  </head>
+  <body>
+    <h1>
+      PCサイト
+    </h1>
+    <P>
+      <a href='#'>
+        スマートフォンサイトへ
+      </a>
+    </P>
+  </body>
+</html>

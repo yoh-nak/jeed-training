@@ -32,26 +32,28 @@ pc.html
 &lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
 &lt;script src="jquery.cookie.js"&gt;&lt;/script&gt;
 &lt;script&gt;
-$(function(){
-     
-    //クッキーないとき
-    if(!$.cookie("access")){
- 
-        //ユーザーエージェントがスマートフォンならスマートフォンサイトを表示
-        if(navigator.userAgent.indexOf("Android") != -1 || navigator.userAgent.indexOf("iPhone") != -1 || navigator.userAgent.indexOf("iPod") != -1){
-            window.location.href="mobile.html";
-        }
-        //それ以外はクッキーにpcを記録
-        else{
-            $.cookie("access","pc",{expires:30});
-        }
-    }
-     
-    //クッキーがmobileのときスマートフォンサイトサイトを表示
-    else if($.cookie("access") == "mobile"){
+//DOMが構築される前
+
+//クッキーないとき
+if(!$.cookie("access")){
+
+    //ユーザーエージェントがスマートフォンならスマートフォンサイトを表示
+    if(navigator.userAgent.indexOf("Android") != -1 || navigator.userAgent.indexOf("iPhone") != -1 || navigator.userAgent.indexOf("iPod") != -1){
         window.location.href="mobile.html";
     }
-     
+    //それ以外はクッキーにpcを記録
+    else{
+        $.cookie("access","pc",{expires:30});
+    }
+}
+ 
+//クッキーがmobileのときスマートフォンサイトサイトを表示
+else if($.cookie("access") == "mobile"){
+    window.location.href="mobile.html";
+}
+
+//DOMが構築された後
+$(function(){
     //ボタンが押されたとき
     $("a").click(function(){
         $.cookie("access","mobile",{expires:30});
@@ -80,26 +82,28 @@ mobile.html
 &lt;script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"&gt;&lt;/script&gt;
 &lt;script src="jquery.cookie.js"&gt;&lt;/script&gt;
 &lt;script&gt;
-$(document).on('pageshow','#index',function(){
-     
-    //クッキーがないときPCサイトを表示
-    if(!$.cookie("access")){
- 
-        //ユーザーエージェントがスマートフォンでなければPCサイトを表示
-        if(navigator.userAgent.indexOf("Android") == -1 && navigator.userAgent.indexOf("iPhone") == -1 && navigator.userAgent.indexOf("iPod") == -1){
-            window.location.href="pc.html";
-        }
-        //それ以外はクッキーにmobileを記録
-        else{
-            $.cookie("access","mobile",{expires:30});
-        }
-    }
-     
-    //クッキーがpcのときPCサイトを表示
-    else if($.cookie("access") == "pc"){
+//jQuery Mobileのウィジェットが表示される前
+
+//クッキーがないときPCサイトを表示
+if(!$.cookie("access")){
+
+    //ユーザーエージェントがスマートフォンでなければPCサイトを表示
+    if(navigator.userAgent.indexOf("Android") == -1 && navigator.userAgent.indexOf("iPhone") == -1 && navigator.userAgent.indexOf("iPod") == -1){
         window.location.href="pc.html";
     }
-     
+    //それ以外はクッキーにmobileを記録
+    else{
+        $.cookie("access","mobile",{expires:30});
+    }
+}
+ 
+//クッキーがpcのときPCサイトを表示
+else if($.cookie("access") == "pc"){
+    window.location.href="pc.html";
+}
+
+//jQuery Mobileのウィジェットが表示された後
+$(document).on('pageshow','#index',function(){
     //ボタンが押されたとき
     $("a").click(function(){
         $.cookie("access","pc",{expires:30});

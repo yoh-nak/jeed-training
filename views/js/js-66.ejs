@@ -1,0 +1,107 @@
+<%- include ../head %>
+  <body>
+  
+    <%- include navbar %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+        
+        <%- include left %>
+
+        </div>
+        <div class="col-sm-9">
+          <div class="panel panel-primary">
+          <div class="panel-heading">
+            <i class="glyphicon glyphicon-bookmark"></i> 課題</div>
+          <div class="panel-body">
+            <p>国語、算数、理科、社会、英語の点数を配列に格納し、グリッドに表示してみましょう。また、5課目の平均を最後の行に表示してみましょう。早く終わったらPhonegapでアプリに変換してみましょう。</p>
+            <p>
+              <a href="demo/js/excercise19/index.html" target="_blank" class="btn btn-default">
+              <i class="glyphicon glyphicon-play"></i> デモ
+              </a>
+
+              <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#demo">
+              <i class="glyphicon glyphicon-question-sign"></i> 解答例
+              </button>
+            </p>
+
+<div id="demo" class="collapse out">
+
+<pre class="prettyprint linenums">
+&lt;!DOCTYPE html&gt;
+&lt;html lang='ja'&gt;
+  &lt;head&gt;
+    &lt;meta charset='UTF-8'&gt;
+    &lt;meta content='width=device-width, user-scalable=no' name='viewport'&gt;
+    &lt;link href='http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css' rel='stylesheet'&gt;
+    &lt;script src='http://code.jquery.com/jquery-1.9.1.min.js'&gt;&lt;/script&gt;
+    &lt;script src='http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js'&gt;&lt;/script&gt;
+    &lt;title&gt;
+      配列の取得
+    &lt;/title&gt;
+    &lt;script&gt;
+      var test = [90,80,70,60,50];
+      var subject = ['国語','算数','理科','社会','英語'];
+      
+      $(document).on('pagebeforecreate','#index',function(){
+      
+        var sum = 0;
+      
+        for(var i = 0; i &lt; test.length; i++){
+          $('.ui-grid-a').append('&lt;div class="ui-block-a"&gt;&lt;div class="ui-bar ui-bar-c"&gt;' + subject[i] + '&lt;/div&gt;&lt;/div&gt;');
+          $('.ui-grid-a').append('&lt;div class="ui-block-b"&gt;&lt;div class="ui-bar ui-bar-c"&gt;' + test[i] + '点&lt;/div&gt;&lt;/div&gt;');
+      
+          sum += test[i];
+        }
+      
+        average = sum / test.length;
+      
+        $('.ui-grid-a').append('&lt;div class="ui-block-a"&gt;&lt;div class="ui-bar ui-bar-b"&gt;平均&lt;/div&gt;&lt;/div&gt;');
+        $('.ui-grid-a').append('&lt;div class="ui-block-b"&gt;&lt;div class="ui-bar ui-bar-b"&gt;' + average + '点&lt;/div&gt;&lt;/div&gt;');
+        
+      });
+    &lt;/script&gt;
+    &lt;style&gt;
+      /**/
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div data-role='page' id='index'&gt;
+      &lt;div data-role='header'&gt;
+        &lt;h1&gt;
+          配列の取得
+        &lt;/h1&gt;
+      &lt;/div&gt;
+      &lt;div data-role='content'&gt;
+        &lt;h2&gt;
+          テスト結果
+        &lt;/h2&gt;
+        &lt;div class='ui-grid-a'&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div data-position='fixed' data-role='footer'&gt;
+        &lt;h4&gt;
+          Copyright &copy; ナカノヨウスケ
+        &lt;/h4&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div id="footer"><%= title %></div>
+ 
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/google-code-prettify/prettify.js"></script>
+    <script>prettyPrint();</script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/list-counter.js"></script>
+  </body>
+</html>

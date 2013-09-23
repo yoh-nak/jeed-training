@@ -5,26 +5,28 @@
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="jquery.cookie.js"></script>
 <script>
-$(function(){
-     
-    //クッキーないとき
-    if(!$.cookie("access")){
- 
-        //ユーザーエージェントがスマートフォンならスマートフォンサイトを表示
-        if(navigator.userAgent.indexOf("Android") != -1 || navigator.userAgent.indexOf("iPhone") != -1 || navigator.userAgent.indexOf("iPod") != -1){
-            window.location.href="mobile.html";
-        }
-        //それ以外はクッキーにpcを記録
-        else{
-            $.cookie("access","pc",{expires:30});
-        }
-    }
-     
-    //クッキーがmobileのときスマートフォンサイトサイトを表示
-    else if($.cookie("access") == "mobile"){
+//DOMが構築される前
+
+//クッキーないとき
+if(!$.cookie("access")){
+
+    //ユーザーエージェントがスマートフォンならスマートフォンサイトを表示
+    if(navigator.userAgent.indexOf("Android") != -1 || navigator.userAgent.indexOf("iPhone") != -1 || navigator.userAgent.indexOf("iPod") != -1){
         window.location.href="mobile.html";
     }
-     
+    //それ以外はクッキーにpcを記録
+    else{
+        $.cookie("access","pc",{expires:30});
+    }
+}
+ 
+//クッキーがmobileのときスマートフォンサイトサイトを表示
+else if($.cookie("access") == "mobile"){
+    window.location.href="mobile.html";
+}
+
+//DOMが構築された後
+$(function(){
     //ボタンが押されたとき
     $("a").click(function(){
         $.cookie("access","mobile",{expires:30});

@@ -1,0 +1,144 @@
+<%- include ../head %>
+  <body>
+ 
+    <%- include navbar %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+
+        <%- include left %>
+
+        </div>
+        <div class="col-sm-9">
+          <div class="panel panel-primary">
+          <div class="panel-heading">
+            <i class="glyphicon glyphicon-book"></i> 三項演算子でEJSの出力を切り替える</div>
+          <div class="panel-body">
+            <p>
+            EJSのテンプレートファイル内に三項演算子を使用し、セッションに格納した変数の値によって出力を切り替えています。
+            </p>
+          <p>
+          <a href="https://github.com/yoh-nak/ejs-ternary-operator" target="_blank" type="button" class="btn btn-default btn-warning">
+          <span class="glyphicon glyphicon-cloud-download"></span>
+          GitHub
+          </a>
+          </p>
+<p class="dtree">
+    <script src="js/dtree/dtree.js"></script>
+    <p>
+      <a href="javascript: treeObj.openAll();">全て開く</a> | 
+      <a href="javascript: treeObj.closeAll();">全て閉じる</a>
+      <!--<a href="javascript: treeObj.openTo(4, true);">open to: Node 4</a>-->
+    </p>
+    <script type="text/javascript">
+      var treeObj = new dTree('treeObj');
+      treeObj.add(0,-1,'TOP');
+      treeObj.add(1,0,'node_modules','#');
+      treeObj.add(2,1,'ejs','javascript:void(0)');
+      treeObj.add(3,2,'..','javascript:void(0)');
+      treeObj.add(4,1,'express','javascript:void(0)');
+      treeObj.add(5,4,'..','javascript:void(0)');
+      treeObj.add(6,0,'public','javascript:void(0)');
+      treeObj.add(7,6,'..','javascript:void(0)');
+      treeObj.add(8,0,'routes','javascript:void(0)');
+      treeObj.add(9,8,'index.js','javascript:void(0)');
+      treeObj.add(10,0,'views','#');
+      treeObj.add(11,10,'index.ejs','javascript:void(0)');
+      treeObj.add(12,0,'app.js','#');
+      treeObj.add(13,0,'package.json','#');
+      document.write(treeObj); 
+    </script>
+</p>
+
+app.js
+<pre class="prettyprint linenums">
+
+/**
+ * Module dependencies.
+ */
+
+var express = require('express')
+  , routes = require('./routes')
+  , user = require('./routes/user')
+  , http = require('http')
+  , path = require('path');
+
+var app = express();
+
+// all environments
+app.set('port', process.env.PORT || 3000);
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+app.use(express.favicon());
+app.use(express.logger('dev'));
+app.use(express.bodyParser());
+app.use(express.methodOverride());
+app.use(express.cookieParser('your secret here'));
+<mark>app.use(express.session({
+  expires : new Date(Date.now() + 1000 *  60 * 60) //=> 1時間（1000ms × 60sec × 60min）
+}));</mark>
+app.use(app.router);
+app.use(express.static(path.join(__dirname, 'public')));
+
+// development only
+if ('development' == app.get('env')) {
+  app.use(express.errorHandler());
+}
+
+<mark>app.get('/', routes.index);</mark>
+app.get('/users', user.list);
+
+http.createServer(app).listen(app.get('port'), function(){
+  console.log('Express server listening on port ' + app.get('port'));
+});
+</pre>
+
+routes/index.js
+<pre class="prettyprint linenums">
+
+/*
+ * GET home page.
+ */
+
+exports.index = function(req, res){
+  //セッション
+  <mark>req.session.login = true;</mark>
+
+  res.render('index', {
+    title: 'Express',
+    <mark>login: req.session.login</mark>
+  });
+};
+</pre>
+
+views/index.ejs
+<pre class="prettyprint linenums">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;&lt;%= title %&gt; : <mark>&lt;%= login ? 'ログイン中 ': 'ログアウト中' %&gt;</mark>&lt;/title&gt;
+    &lt;link rel='stylesheet' href='/stylesheets/style.css' /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;<mark>&lt;%= login ? 'ログイン中 ': 'ログアウト中' %&gt;</mark>&lt;/h1&gt;
+    &lt;p&gt;<mark>&lt;%= login ? 'いらっしゃませ': 'ありがとうございました' %&gt;</mark>&lt;p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div id="footer"><%= title %></div>
+ 
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/google-code-prettify/prettify.js"></script>
+    <script>prettyPrint();</script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/list-counter.js"></script>
+  </body>
+</html>

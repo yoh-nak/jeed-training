@@ -1,0 +1,130 @@
+<%- include ../head %>
+  <body>
+ 
+    <%- include navbar %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+
+        <%- include left %>
+
+        </div>
+        <div class="col-sm-9">
+          <div class="panel panel-primary">
+          <div class="panel-heading">
+            <i class="glyphicon glyphicon-book"></i> JavaScript資料</div>
+          <div class="panel-body">
+
+<h4>switch文</h4>
+<pre>
+switch(チェックする値){
+  case 値1:
+    実行する処理
+    break;
+  case 値2:
+    実行する処理
+    break;
+  必要な数だけcaseを用意
+  default:
+    caseがないときの処理
+}
+</pre>
+<p>以下の例では、変数aに値1がセットされているので、case 1:が処理され、「case1が処理されました」が出力されます。</p>
+<pre>
+var a = 1;
+
+switch(a){
+  case 1:
+    document.write('case 1が処理されました');
+    break;
+  case 2:
+    document.write('case 2が処理されました');
+    break;
+  case 3:
+    document.write('case 3が処理されました');
+    break;
+}
+</pre>
+<p>それぞれのcaseの最後に、breakを忘れないようにしましょう。breakを忘れると、case 1の処理が終わったら、次のcase 2の処理も処理されてしまいます。以下の例では「case 1が処理されましたcase 2が処理されました」というように2つのcaseが処理されてしまいます。</p>
+<pre>
+var a = 1;
+
+switch(a){
+  case 1:
+    document.write('case 1:が処理されました');
+  case 2:
+    document.write('case 2:が処理されました');
+    break;
+  case 3:
+    document.write('case 3:が処理されました');
+    breal;
+}
+</pre>
+
+
+<p>caseの次にくるリテラルに注意しましょう。変数aの値は数値リテラルなので、caseのあとに続く値は数値リテラルでなければなりません。以下のようにcaseのあとに続く値を文字列リテラルにすると、該当するcaseがないのでなにも処理されません。</p>
+<pre>
+var a = 1;
+
+switch(a){
+  case '1':
+    document.write('case 1:が処理されました');
+    break;
+  case '2':
+    document.write('case 2:が処理されました');
+    break;
+  case '3':
+    document.write('case 3:が処理されました');
+    break;
+}
+</pre>
+<p>当てはまるcaseがない場合の処理は、default:というcaseで処理することができます。case default:ではないので注意しましょう。</p>
+<pre>
+var a = 4;
+
+switch(a){
+  case '1':
+    document.write('case 1:が処理されました');
+    break;
+  case '2':
+    document.write('case 2:が処理されました');
+    break;
+  case '3':
+    document.write('case 3:が処理されました');
+    break;
+  default:
+    document.write('該当するケースがありません');
+}
+</pre>
+<p>複数のcaseに共通する処理をしたい場合は、case 値:を並べて記述します。これはbreakがなければ、そのまま次のcaseの処理が実行されることを利用した方法です。
+<pre>
+var season = 'autumn';
+
+switch(season){
+  case 'spring':
+  case 'summer':
+    document.write('夏服を着ましょう');
+    break;
+  case 'autumn':
+  case 'winter':
+    document.write('冬服を着ましょう');
+    break;
+}
+</pre>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div id="footer"><%= title %></div>
+ 
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/google-code-prettify/prettify.js"></script>
+    <script>prettyPrint();</script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/list-counter.js"></script>
+  </body>
+</html>

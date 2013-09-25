@@ -1,0 +1,90 @@
+!!!
+%html(lang="ja")
+	%head
+		%meta(charset="UTF-8")
+		%meta(name="viewport" content="width=device-width, user-scalable=no")
+		%meta(name="apple-mobile-web-app-capable" content="yes")
+		%script(src="enchant.min.js")
+		%script(src="plugins/gl-matrix-min.js")
+		%script(src="plugins/gl.enchant.js")
+		%script(src="plugins/primitive.gl.enchant.js")
+		:javascript
+			enchant();
+
+			var SCREEN_WIDTH = 640;
+			var SCREEN_HEIGHT = 640;
+
+			window.onload = function() {
+				
+			    var core = new Core(SCREEN_WIDTH, SCREEN_HEIGHT);
+
+			    core.keybind('Z'.charCodeAt(0), 'a');
+			    core.keybind('X'.charCodeAt(0), 'b');
+				
+			    core.onload = function() {
+			    	
+			    	var scene3d = new Scene3D();
+					
+			    	var light = new DirectionalLight();
+			    	light.directionZ = 1;
+			    	light.color = [1.0, 1.0, 1.0];
+			    	scene3d.setDirectionalLight(light);
+
+			    	var camera = new Camera3D();
+			    	camera.x = 0;
+			    	camera.y = 2;
+			    	camera.z = 10;
+
+			    	camera.centerX = 0;
+			    	camera.centerY = 0;
+			    	camera.centerZ = 0;
+
+			    	scene3d.setCamera(camera);
+
+			    	var prim = new Sphere();
+			    	prim.x = prim.y = prim.z = 0;
+			    	scene3d.addChild(prim);
+					
+					var offsetX = 0;
+					var offsetY = 0;
+					var dx = 0;
+					var dy = 0;
+					var mat = mat4.create();
+					
+					core.rootScene.ontouchstart = function(e){
+						offsetX = e.x;
+						offsetY = e.y;
+					};
+
+					core.rootScene.ontouchmove = function(e){
+						dx += (e.x-offsetX)/100.0;
+						offsetX = e.x;
+						dy += (e.y-offsetY)/100.0;
+						offsetY = e.y;
+						
+						mat4.identity(mat);
+						mat4.rotateY(mat, dx);
+						mat4.rotateX(mat, dy);
+
+						prim.rotation = mat;
+					};
+
+					core.rootScene.onenterframe = function(){
+						if(core.input.a){
+							prim.scale(1.1, 1.1, 1.1);
+						}
+						if(core.input.b){
+							prim.scale(0.9, 0.9, 0.9);
+						}
+					};
+			    	
+			    };
+
+			    core.start();
+			};
+		:scss
+			body {
+				margin: 0;
+			}
+	%body
+

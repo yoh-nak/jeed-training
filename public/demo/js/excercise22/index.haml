@@ -1,0 +1,50 @@
+!!!
+%html(lang="ja")
+	%head
+		%meta(charset="UTF-8")
+		%meta(name="viewport" content="width=device-width, user-scalable=no")
+		%link(rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css")
+		%script(src="http://code.jquery.com/jquery-1.9.1.min.js")
+		%script(src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js")
+		%title
+			おみくじ
+		:javascript
+			$(document).on('pageshow','#index',function(){
+
+				$('a').on('vclick',function(){
+					switch(Math.floor(Math.random()*7)){
+					case 0:
+						$('p').text('大吉');
+						break;
+					case 1:
+					case 2:
+						$('p').text('中吉');
+						break;
+					case 3:
+					case 4:
+					case 5:
+						$('p').text('吉');
+						break;
+					case 6:
+						$('p').text('凶');
+					break;
+					default:
+						$('p').text('エラー');
+					}
+				});
+
+			});
+		:scss
+			/**/
+	%body
+		%div(data-role="page" id="index")
+			%div(data-role="header")
+				%h1
+					おみくじ
+			%div(data-role="content")
+				%a(href="#" data-role="button")
+					おみくじをふる
+				%p
+			%div(data-role="footer" data-position="fixed")
+				%h4
+					Copyright &copy; ナカノヨウスケ

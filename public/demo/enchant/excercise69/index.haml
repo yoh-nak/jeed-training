@@ -1,0 +1,43 @@
+!!!
+%html(lang="ja")
+	%head
+		%meta(charset="UTF-8")
+		%meta(name="viewport" content="width=device-width, user-scalable=no")
+		%meta(name="apple-mobile-web-app-capable" content="yes")
+		%script(src="enchant.min.js")
+		%script(src="plugins/avatar.enchant.js")
+		:javascript
+			enchant();
+
+			var SCREEN_WIDTH = 320;
+			var SCREEN_HEIGHT = 320;
+			var AVATAR_CODE = '2:2:1:2004:21230:22480';
+
+			window.onload = function() {
+				
+			    var core = new Core(SCREEN_WIDTH, SCREEN_HEIGHT);
+					
+			    core.onload = function() {
+			    	
+					var scene = core.rootScene;
+
+					scene.backgroundColor = 'black';
+
+					var avatar = new Avatar(AVATAR_CODE);
+					avatar.moveTo(50, 50);
+					avatar.action = 'run';
+					scene.addChild(avatar);
+
+					scene.ontouchstart = function(){
+						avatar.action = 'attack';
+					};
+			    };
+
+			    core.start();
+			};
+		:scss
+			body {
+				margin: 0;
+			}
+	%body
+

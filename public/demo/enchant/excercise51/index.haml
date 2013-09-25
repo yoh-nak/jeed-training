@@ -1,0 +1,70 @@
+!!!
+%html(lang="ja")
+	%head
+		%meta(charset="UTF-8")
+		%meta(name="viewport" content="width=device-width, user-scalable=no")
+		%meta(name="apple-mobile-web-app-capable" content="yes")
+		%script(src="enchant.min.js")
+		:javascript
+			enchant();
+
+			var SCREEN_WIDTH = 320;
+			var SCREEN_HEIGHT = 320;
+			var CHARA_IMAGE = 'http://enchantjs.com/images/materials/chara1.png';
+
+			window.onload = function() {
+			    var core = new Core(SCREEN_WIDTH, SCREEN_HEIGHT);
+
+			    core.preload(CHARA_IMAGE);
+
+			    core.onload = function() {
+			    	
+					var scene = core.rootScene;
+
+					scene.backgroundColor = 'black';
+						
+					var sprite1 = new Sprite(100, 100);
+					scene.addChild(sprite1);
+					
+					var surface = new Surface(100, 100);
+					var context = surface.context;
+					
+					context.fillStyle = 'blue';
+					context.beginPath();
+					context.arc(50,50, 50, 0, Math.PI*2, false);
+					context.fill();
+					
+					sprite1.image = surface;
+					sprite1.moveTo(110, 110);
+					
+					var sprite2 = new Sprite(32, 32);
+					sprite2.image = core.assets[CHARA_IMAGE];
+					scene.addChild(sprite2);
+
+					sprite2.ontouchmove = function(e){
+						sprite2.x = e.x - (sprite2.width/2);
+						sprite2.y = e.y - (sprite2.height/2);
+					};
+					
+					scene.onenterframe = function(){
+						var distance = (sprite2.width + sprite1.width)/2;
+
+						if(sprite2.within(sprite1, distance) === true){
+							context.fillStyle = 'red';
+							context.fill();
+						}
+						else{
+							context.fillStyle = 'blue';
+							context.fill();
+						}
+					};
+					
+			    };
+			    core.start();
+			};
+		:scss
+			body {
+				margin: 0;
+			}
+	%body
+

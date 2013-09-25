@@ -1,0 +1,47 @@
+!!!
+%html(lang="ja")
+	%head
+		%meta(charset="UTF-8")
+		%meta(name="viewport" content="width=device-width, user-scalable=no")
+		%meta(name="apple-mobile-web-app-capable" content="yes")
+		%script(src="enchant.min.js")
+		%script(src="plugins/ui.enchant.js")
+		:javascript
+			enchant();
+
+			var SCREEN_WIDTH = 320;
+			var SCREEN_HEIGHT = 320;
+
+			window.onload = function() {
+				
+			    var core = new Core(SCREEN_WIDTH, SCREEN_HEIGHT);
+				
+			    core.onload = function() {
+			    	
+					var scene = core.rootScene;
+
+					scene.backgroundColor = 'white';
+							
+					var bar = new Bar(10, 10);
+					bar.moveTo(50, 10);
+					bar.value = 100;
+					bar.maxvalue = 100;
+					scene.addChild(bar);
+
+					scene.ontouchstart = function(){
+						bar.value -= 10;
+
+						if(bar.value <= 0){
+							alert('Game Over!!');
+						}
+					};
+			    };
+
+			    core.start();
+			};
+		:scss
+			body {
+				margin: 0;
+			}
+	%body
+

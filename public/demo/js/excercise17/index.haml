@@ -1,0 +1,54 @@
+!!!
+%html(lang="ja")
+	%head
+		%meta(charset="UTF-8")
+		%meta(name="viewport" content="width=device-width, user-scalable=no")
+		%link(rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css")
+		%script(src="http://code.jquery.com/jquery-1.9.1.min.js")
+		%script(src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js")
+		%title
+			switch文
+		:javascript
+			$(document).on('pageshow','#index',function(){
+				$('input[type="radio"]').change(function(){
+					switch($(this).val()){
+						case 'r':
+							$('p').html('止まれ');
+							break;
+						case 'y':
+							$('p').html('注意');
+							break;
+						case 'b':
+							$('p').html('進め');
+							break;
+						default:
+							$('p').html('エラー');
+							break;
+					}
+				});
+			});
+		:scss
+			/**/
+	%body
+		%div(data-role="page" id="index")
+			%div(data-role="header")
+				%h1
+					switch文
+			%div(data-role="content")
+				%form
+					%fieldset(data-role="controlgroup" data-type="horizontal")
+						%legend
+							信号：
+						%input(type="radio" name="signal" id="signal-red" value="r" checked="checked")
+						%label(for="signal-red")
+							赤
+						%input(type="radio" name="signal" id="signal-yellow" value="y")
+						%label(for="signal-yellow")
+							黃
+						%input(type="radio" name="signal" id="signal-blue" value="b")
+						%label(for="signal-blue")
+							青
+				%p
+			%div(data-role="footer" data-position="fixed")
+				%h4
+					Copyright &copy; ナカノヨウスケ

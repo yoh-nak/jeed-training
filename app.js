@@ -6,21 +6,22 @@ var express = require('express')
   , css3 = require('./routes/css3')
   , rwd = require('./routes/rwd')
   , js = require('./routes/js')
+  , jquery = require('./routes/jquery')
   , jqm = require('./routes/jqm')
   , nodejs = require('./routes/nodejs')
   , material = require('./routes/material')
   , diary = require('./routes/diary')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , haml = require('hamljs');
 
 var app = express();
-
 
 //ミドルウェア
 app.use(express.basicAuth('nakano', 'nakano'));　// ベーシック認証
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs'); //デフォルトテンプレート
+app.set('view engine', 'ejs');　//テンプレート設定
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
@@ -43,6 +44,7 @@ app.get('/users', user.list);
 app.get('/html5-:id', html5.html5);
 app.get('/css3-:id', css3.css3);
 app.get('/rwd-:id', rwd.rwd);
+app.get('/jquery-:id', jquery.jquery);
 app.get('/jqm-:id', jqm.jqm);
 app.get('/nodejs-:id', nodejs.nodejs);
 app.get('/diary-:id', diary.diary);

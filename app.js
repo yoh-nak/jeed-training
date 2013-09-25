@@ -12,8 +12,7 @@ var express = require('express')
   , material = require('./routes/material')
   , diary = require('./routes/diary')
   , http = require('http')
-  , path = require('path')
-  , haml = require('hamljs');
+  , path = require('path');
 
 var app = express();
 

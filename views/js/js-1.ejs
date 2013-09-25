@@ -125,6 +125,13 @@ document.writeln(a["egg"]);
 </pre>
 
 <pre class="prettyprint">
+var a = {"dragon":"りゅう", "sword":"つるぎ", "egg":"たまご"}
+document.writeln(a.dragon);
+document.writeln(a.sword);
+document.writeln(a.egg);
+</pre>
+
+<pre class="prettyprint">
 var a = new Object(3);
 a["dragon"] = "りゅう";
 a["sword"] = "つるぎ";
@@ -134,12 +141,22 @@ document.writeln(a["sword"]);
 document.writeln(a["egg"]);
 </pre>
 
+<pre class="prettyprint">
+var a = new Object(3);
+a.dragon = "りゅう";
+a.sword = "つるぎ";
+a.egg = "たまご";
+document.writeln(a.dragon);
+document.writeln(a.sword);
+document.writeln(a.egg);
+</pre>
+
 <hr>
 
 <h4>for in文</h4>
 <pre>
-for(var 変数 in　配列){
-  配列[変数]で値を取り出す
+for(var 変数 in オブジェクト){
+  オブジェクト[変数]で値を取り出す
 }
 </pre>
 
@@ -154,6 +171,13 @@ for(var key in obj){
 msg + '合計: ' + total + '\n';
 msg = '平均: ' + (total/5);
 alert(msg);
+</pre>
+<p>for in文はオブジェクト.変数のようにピリオド（.）で連結して扱えないので注意しましょう。</p>
+<pre class="prettyprint">
+for(var key in obj){
+  msg += key + <mark>obj.key</mark> + '\n';
+  total += <mark>obj.key</mark>;
+}
 </pre>
 
           </div>

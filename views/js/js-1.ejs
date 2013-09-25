@@ -78,12 +78,16 @@ alert('合計: ' + total);
 </pre>
 
 <hr>
+<h4>二次元配列</h4>
+
+<hr>
 
 <h4>空の連想配列（オブジェクト）の作成</h4>
 
 <pre>
 var 変数 = {}; //=>　オブジェクトリテラル
 var 変数  = new Object(); //=> オブジェクト
+var 変数 = new Object(要素の数); //=> オブジェクト
 </pre>
 
 <h4>連想配列（オブジェクト）に初期値を設定</h4>
@@ -106,13 +110,12 @@ var 変数 = {
 </pre>
 
 
-<h4>想配列（オブジェクト）に値を代入</h4>
+<h4>連想配列（オブジェクト）に値を代入</h4>
 
 <pre>
 配列[キー] = 値;
 配列.キー = 値;
 </pre>
-
 
 <pre class="prettyprint">
 var a = {"dragon":"りゅう", "sword":"つるぎ", "egg":"たまご"}
@@ -131,12 +134,28 @@ document.writeln(a["sword"]);
 document.writeln(a["egg"]);
 </pre>
 
+<hr>
+
+<h4>for in文</h4>
 <pre>
-for in文
 for(var 変数 in　配列){
   配列[変数]で値を取り出す
 }
 </pre>
+
+<pre class="prettyprint">
+var obj = {'国語': 98, '算数': 82, '理科': 70, '社会': 86, '英語': 53};
+var total = 0;
+var msg = '';
+for(var key in obj){
+  msg += key + obj[key] + '\n';
+  total += obj[key];
+}
+msg + '合計: ' + total + '\n';
+msg = '平均: ' + (total/5);
+alert(msg);
+</pre>
+
           </div>
           </div>
         </div>

@@ -20,6 +20,8 @@ WEB・スマホ・アプリ開発科
 	Express
 	Ejs
 	Jade
+	coffee-script
+	less
 
 1つの講座が終了すると、次の講座に受け継がれますので、
 授業終了時点とは内容が変わっている可能性があります。
@@ -27,26 +29,28 @@ WEB・スマホ・アプリ開発科
 講師業を撤退する時がきたら、このソースは
 更新されないかもしれませんのでご了承ください。
 
-サイト構築時には、Haml、Sass、CoffeeScriptをコンパイルして生成した箇所がありますが、herokuのサーバーで動いているもののみpushしてあります。
+サイトのURL:
 
 	http://jeed-training.herokuapp.com/
 
-また、node_moduleのディレクトリは、pushしてありませんので、設置後、
+また、node_moduleのディレクトリは、pushしてありませんので、ソースをcloneしたら後、app.jsのディレクトリで以下のコマンドを実行しnode_moduleをダウンロードして下さい。
 
 	npm install
 
-コマンドで、モジュールを追加してから、
+モジュールが組み込まれたら、以下のコマンドでサーバーを起動します。
 
 	node app.js
 
 	#拡張子を省略可
 	node app
 
-コマンドで、サーバーを起動し、
+サーバーが起動したら、ブラウザで以下のアドレスにアクセスします。
 
 	http://localhost:3000
 
-で、ブラウザからアクセスしてください。npmのhotnodeをローカルのグローバルモジュールに組み込んでおくと便利です。
+Tips:
+
+npmのhotnodeをローカルのグローバルモジュールに組み込んでおくと便利です。
 
 	#windows
 	npm install -g hotnode

@@ -7,11 +7,14 @@ var express = require('express')
   , rwd = require('./routes/rwd')
   , js = require('./routes/js')
   , jquery = require('./routes/jquery')
+  , mobile = require('./routes/mobile')
   , jqm = require('./routes/jqm')
   , nodejs = require('./routes/nodejs')
   , material = require('./routes/material')
   , diary = require('./routes/diary')
   , http = require('http')
+  , fs = require('fs')
+  , less = require('less')
   , path = require('path');
 
 var app = express();
@@ -45,6 +48,7 @@ app.get('/css3-:id', css3.css3);
 app.get('/rwd-:id', rwd.rwd);
 app.get('/jquery-:id', jquery.jquery);
 app.get('/jqm-:id', jqm.jqm);
+app.get('/mobile-:id', mobile.mobile);
 app.get('/nodejs-:id', nodejs.nodejs);
 app.get('/diary-:id', diary.diary);
 
@@ -57,6 +61,45 @@ app.get('/material-:id', material.material);
 app.get('/material/phonegap-:id', material.phonegap);
 app.get('/material/git-:id', material.git);
 app.get('/material/vagrant-:id', material.vagrant);
+
+//less
+app.get(/^\/less\/.+/, function(req, res) {
+  var fileRoot = __dirname + '/views/less/',
+      extname = path.extname(req.url),
+      basename = path.basename(req.url),
+      filePath = undefined;
+
+  if ( extname !== '.less' ) {
+    console.log('that is not less file');
+  }
+
+  filePath = fileRoot + basename;
+
+  fs.readFile(filePath, 'utf8', function(err, str) {
+    var parser = undefined;
+
+    if ( err ) {
+      console.log('file doesn\'t exist: ' + basename);
+    }
+
+    parser = new(less.Parser);
+
+    parser.parse(str, function(err, tree) {
+      var css = undefined;
+
+      if ( err ) {
+        console.log('parse error: ' + err.message);
+      }
+
+      css = tree.toCSS({ compress: true });
+
+      res.writeHead(200, {
+        'Content-Type': 'text/css'
+      });
+      res.end(css, 'utf-8');
+    });
+  });
+});
 
 
 //サーバー起動

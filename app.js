@@ -8,6 +8,7 @@ var express = require('express')
   , js = require('./routes/js')
   , jquery = require('./routes/jquery')
   , mobile = require('./routes/mobile')
+  , linux = require('./routes/linux')
   , jqm = require('./routes/jqm')
   , nodejs = require('./routes/nodejs')
   , material = require('./routes/material')
@@ -15,6 +16,7 @@ var express = require('express')
   , http = require('http')
   , fs = require('fs')
   , less = require('less')
+  , coffee = require('coffee-script')
   , path = require('path');
 
 var app = express();
@@ -38,6 +40,7 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+
 //ルーティング
 
 //単独
@@ -50,6 +53,7 @@ app.get('/jquery-:id', jquery.jquery);
 app.get('/jqm-:id', jqm.jqm);
 app.get('/mobile-:id', mobile.mobile);
 app.get('/nodejs-:id', nodejs.nodejs);
+app.get('/linux-:id', linux.linux);
 app.get('/diary-:id', diary.diary);
 
 //JavaScript系
@@ -62,7 +66,7 @@ app.get('/material/phonegap-:id', material.phonegap);
 app.get('/material/git-:id', material.git);
 app.get('/material/vagrant-:id', material.vagrant);
 
-//less
+//less動的コンパイル
 app.get(/^\/less\/.+/, function(req, res) {
   var fileRoot = __dirname + '/views/less/',
       extname = path.extname(req.url),

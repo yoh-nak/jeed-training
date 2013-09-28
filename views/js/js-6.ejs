@@ -18,7 +18,109 @@
 <h4>自作関数</h4>
 
 <pre>
+function 関数名(引数の指定){
+  ...実行する処理...
+}
 
+関数名(引数);
+</pre>
+<pre>
+function sayHello(){
+  alert('Hello');
+}
+
+sayHello();
+sayHello();
+sayHello();
+</pre>
+<pre>
+function sayHello(name){
+  alert('Hello, ' + name + '. How are you?');
+}
+
+sayHello('Taro');
+sayHello('Hanako');
+</pre>
+
+<pre>
+function taxPrice(val){
+  return val * 0.05;
+}
+
+var price = 15000;
+var tax = taxPrice(price);
+alert('金額：' + price + '　税額：' + tax);
+</pre>
+
+<pre>
+var 変数 = function(引数){ ... }
+
+var 変数 = 関数;
+</pre>
+
+<pre>
+var getTax = function(val){
+  return val * 0.05;
+}
+
+var price = 15000;
+var tax = getTax(price);
+alert('金額：' + price + '　税額：' + tax);
+</pre>
+
+<h4>変数のスコープ</h4>
+<pre>
+var getTax = function(val){
+  var ritsu = 0.05;
+  return val * ritsu;
+}
+
+var price = 15000;
+ritsu = 0.1;
+var tax = getTax(price);
+alert('金額：' + price + '　税額：' + tax);
+</pre>
+
+<pre>
+var ritsu = 0.05;
+
+var getTax = function(val){
+
+  return val * ritsu;
+}
+
+var price = 15000;
+ritsu = 0.1;
+var tax = getTax(price);
+alert('金額：' + price + '　税額：' + tax);
+</pre>
+<h4>無名関数（関数リテラル）</h4>
+<pre>
+
+var getTax = <mark>function(val){
+  return val * 0.05;
+}</mark>
+
+var price = 15000;
+var tax = getTax(price);
+alert('金額：' + price + '　税額：' + tax);
+</pre>
+<h4>即時関数</h4>
+<p>(無名関数)(引数の指定)</p>
+<pre>
+(function(val){
+  var price = val;
+  var tax = val * 0.05;
+  alert('金額：' + price + '　税額：' + tax);
+})(15000);
+</pre>
+<p>参考：(コンストラクタ).プロパティ、(コンストラクタ).メソッド</p>
+<pre>
+var date = new Date();
+date.getTime();
+</pre>
+<pre>
+(new Date()).getTime();
 </pre>
           </div>
           </div>

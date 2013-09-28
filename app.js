@@ -62,7 +62,7 @@ app.get('/enchant-:id', js.enchant);
 
 //資料系
 app.get('/material-:id', material.material);
-app.get('/material/phonegap-:id', material.phonegap);
+app.get('/phonegap-:id', material.phonegap);
 app.get('/material/git-:id', material.git);
 app.get('/material/vagrant-:id', material.vagrant);
 

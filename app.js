@@ -60,6 +60,7 @@ app.get('/diary-:id', diary.diary);
 app.get('/js-:id', js.js);
 app.get('/webapi-:id', js.webapi);
 app.get('/enchant-:id', js.enchant);
+app.get('/library-:id', js.library);
 
 //資料系
 app.get('/material-:id', material.material);

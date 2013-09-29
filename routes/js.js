@@ -22,3 +22,11 @@ exports.webapi = function(req, res){
 	  	instructor: config.instructor
 	});
 };
+
+//Library
+exports.library = function(req, res){
+	res.render('js/library/library-' + req.params.id, {
+	  	title: config.title,
+	  	instructor: config.instructor
+	});
+};

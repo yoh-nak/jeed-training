@@ -9,21 +9,32 @@
 		%title
 			ランダムイメージ
 		:javascript
-			$(document).on('pageshow','#index',function(){
-				for(var i = 0; i < 20; i++){
-					$('[data-role="content"]').append('<img src="kumamon.gif" alt="">');
-					$('img:nth(' + i + ')').css({
-						top: Math.floor(Math.random() * (480-64)),
-						left: Math.floor(Math.random() * (innerWidth-64)),
+			(function(){
+				$(document).on('pageshow','#index',function(){
+					
+					$('a').on('vclick',function(){
+						randomImage();
+						$(this).remove();
 					});
-
-				}
-			});
+					
+					function randomImage(){
+						for(var i = 0; i < 20; i++){
+							$('#canvas').append('<img src="kumamon.gif" alt="">');
+							$('img:nth(' + i + ')').css({
+								top: Math.floor(Math.random() * (480-64)),
+								left: Math.floor(Math.random() * (innerWidth-64)),
+							});
+						}
+					}
+				});
+			})();
 		:scss
 			$size:64px;
 			[data-role="content"]{
-				position:relative;
-				height:480px;
+				#canvas{
+					position:relative;
+					height:480px;
+				}
 				img{
 					width:$size;
 					height:$size;
@@ -36,6 +47,9 @@
 				%h1
 					ランダムイメージ
 			%div(data-role="content")
+				%a(data-role="button")
+					スタート
+				%div#canvas
 			%div(data-role="footer" data-position="fixed")
 				%h4
 					Copyright &copy; ナカノヨウスケ

@@ -58,6 +58,7 @@ app.get('/diary-:id', diary.diary);
 
 //JavaScript系
 app.get('/js-:id', js.js);
+app.get('/webapi-:id', js.webapi);
 app.get('/enchant-:id', js.enchant);
 
 //資料系

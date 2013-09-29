@@ -7,9 +7,17 @@ exports.js = function(req, res){
 	});
 };
 
-//enchant.jsの設定
+//enchant.js
 exports.enchant = function(req, res){
 	res.render('js/enchant/enchant-' + req.params.id, {
+	  	title: config.title,
+	  	instructor: config.instructor
+	});
+};
+
+//Web API
+exports.webapi = function(req, res){
+	res.render('js/webapi/webapi-' + req.params.id, {
 	  	title: config.title,
 	  	instructor: config.instructor
 	});

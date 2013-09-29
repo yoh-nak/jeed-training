@@ -93,11 +93,11 @@ document.writeln(a.egg);
 
 <h4>for in文</h4>
 <pre>
-for(var 変数 in オブジェクト){
+for(var 変数 in 配列／オブジェクト){
   オブジェクト[変数]で値を取り出す
 }
 </pre>
-
+<p>オブエクとをfor in文で取得すると以下のようになります。</p>
 <pre class="prettyprint">
 var obj = {'国語': 98, '算数': 82, '理科': 70, '社会': 86, '英語': 53};
 var total = 0;
@@ -110,13 +110,28 @@ msg + '合計: ' + total + '\n';
 msg = '平均: ' + (total/5);
 alert(msg);
 </pre>
-<p>for in文はオブジェクト.変数のようにピリオド（.）で連結して扱えないので注意しましょう。</p>
+<p>for in文はオブジェクトとキーをピリオド（.）で連結して表現できないので注意しましょう。</p>
 <pre class="prettyprint">
 for(var key in obj){
   msg += key + <mark>obj.key</mark> + '\n';
   total += <mark>obj.key</mark>;
 }
 </pre>
+<p>配列はfor文で取得することができますが、for in文を使うと以下のようになります。</p>
+<pre class="prettyprint">
+var test = [98, 82, 70, 86, 53];
+var subject = ['国語', '算数', '理科', '社会', '英語'];
+var total = 0;
+var msg = '';
+for(var i in test){
+  msg += subject[i] +  ': ' + test[i] + '\n';
+  total += test[i];
+}
+msg += '合計: ' + total + '\n';
+msg += '平均: ' + (total/5);
+alert(msg);
+</pre>
+
 <hr>
 
 <h4>オブジェクトに値を代入</h4>
@@ -147,9 +162,76 @@ obj['国語'] = 98;
 
 <hr>
 
-<h4>オブジェクトの入れ子（二次元オブジェクト）</h4>
+<h4>オブジェクトのネスト（二次元オブジェクト）</h4>
 <pre>
+var grade = {
+  '数学': {
+    '数学Ⅰ': 'B',
+    '数学Ⅱ': 'A',
+    '数学Ⅲ': 'C'
+  },
+  '物理': {
+    '物理ⅠB': 'A',
+    '物理Ⅱ': 'B'
+  }
+}
+</pre>
+<p>外側のオブジェクトと内側のオブジェクトをすべて取得する</p>
+<pre class="prettyprint">
+var grade = {
+  '数学': {
+    '数学Ⅰ': 'B',
+    '数学Ⅱ': 'A',
+    '数学Ⅲ': 'C'
+  },
+  '物理': {
+    '物理ⅠB': 'A',
+    '物理Ⅱ': 'B'
+  }
+}
 
+for(var a in grade){
+  console.log(a); //外側のキーを取得
+  console.log(grade[a]); //外側の値を取得
+  for(var b in grade[a]){
+    console.log(b); //内側のキーを取得
+    console.log(grade[a][b]); //内側の値を取得
+  }
+}
+</pre>
+<p>内側のオブジェクトを限定して取得する</p>
+<pre class="prettyprint">
+var grade = {
+  '数学': {
+    '数学Ⅰ': 'B',
+    '数学Ⅱ': 'A',
+    '数学Ⅲ': 'C'
+  },
+  '物理': {
+    '物理ⅠB': 'A',
+    '物理Ⅱ': 'B'
+  }
+}
+
+for(var key in grade['数学']){
+  console.log(key); //キーのみ取得
+  console.log(grade['数学'][key]); //値のみ取得
+}
+</pre>
+
+<p>以下のように配列と、オブジェクトを入れ子にすることもできます。</p>
+<pre>
+var grade = [
+  {
+    '数学Ⅰ': 'B',
+    '数学Ⅱ': 'A',
+    '数学Ⅲ': 'C'
+  },
+  {
+    '物理ⅠB': 'A',
+    '物理Ⅱ': 'B'
+  }
+];
 </pre>
           </div>
           </div>

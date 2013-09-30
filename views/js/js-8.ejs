@@ -49,12 +49,17 @@ var timer = window.setInterval(function(){
 </pre>
 </pre>
 <h4>setTimeoutメソッド</h4>
+  <p>setTimeoutメソッドは第1引数で指定した関数の処理を、第2引数で指定したミリ秒後に実行します。ただし、setIntervalメソッドと異なり、そのままでは一定時間後に1度実行されるだけになります。</p>
   <p>
   <a href="https://developer.mozilla.org/ja/docs/Web/API/window.setTimeout" target="_blank" class="btn btn-default">
   <i class="glyphicon glyphicon-info-sign"></i> 参考: setTimeout
   </a>
   </p>
-<pre>
+<pre class="prettyprint">
+window.setTimeout(function(){
+    var date = new Date();
+    console.log(date.getTime());
+},1000);
 </pre>
 <h4>clearTimeoutメソッド</h4>
 <p>
@@ -65,7 +70,7 @@ var timer = window.setInterval(function(){
 <pre>
 </pre>
 
-<p>参考：タイマー系メソッドは、windowsオブジェクトのメソッドとして定義されているため、Node.jsのメソッドではありません。ただし、Node.jsは独自のTimers APIでタイマー系メソッドを実装しています。</p>
+<p>参考：タイマー系メソッドは、windowオブジェクトのメソッドとして定義されているため、Node.jsのメソッドではありません。ただし、Node.jsは、独自のTimers APIでタイマー系メソッドを実装しています。</p>
   <p>
 <a href="http://nodejs.org/api/timers.html" target="_blank" class="btn btn-default">
   <i class="glyphicon glyphicon-info-sign"></i> 参考: Timers

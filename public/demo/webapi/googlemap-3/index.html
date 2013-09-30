@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>大量のマーカー表示（Fluster2）</title>
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="Fluster2.packed.js"></script>
+    <script>
+      var map;
+      window.addEventListener('load',function(){
+       map = new google.maps.Map(document.getElementById('gmap'));
+       map.setOptions({
+        zoom: 5,
+        center: new google.maps.LatLng(36.681382, 138.766084),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+       });
+       var fluster = new Fluster2(map);
+       
+       document.getElementById('setMarker').addEventListener('click',function(){
+        $.getJSON('./data.txt',function(data){
+         $.each(data, function(key, val){
+          var marker = new google.maps.Marker({
+           position: new google.maps.LatLng(val.lat, val.lon)
+          });
+          fluster.addMarker(marker);
+         });
+         fluster.initialize();
+        });
+       },false);
+      },false);
+    </script><style type="text/css"></style>
+  </head>
+  <body>
+    <div id="gmap" style="width:500px;height:400px"></div>
+    <form>
+      <input id="setMarker" type="button" value="マーカーデータ読み込み">
+    </form>
+  </body>
+</html>

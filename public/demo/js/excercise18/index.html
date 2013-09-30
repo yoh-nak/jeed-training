@@ -6,69 +6,62 @@
     <link href='http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css' rel='stylesheet'>
     <script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
     <script src='http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js'></script>
+    <script>
+    $(document).on('pagebeforecreate','#index',function(){
+      var planet = {
+          planeId0: {
+            en : "sun", ja: "太陽", img: "sun.png"
+          },
+          planeId1: {
+            en : "mercury", ja: "水星", img: "mercury.png"
+          },
+          planeId2: {
+            en : "venus", ja: "金星", img: "venus.png"
+          },
+          planeId3: {
+            en : "earth", ja: "地球", img: "earth.png"
+          },
+          planeId4: {
+            en : "moon", ja: "月", img: "moon.png"
+          },
+          planeId5: {
+            en : "mars", ja: "火星", img: "mars.png"
+          },
+          planeId6: {
+            en : "jupiter", ja: "木星", img: "jupiter.png"
+          },
+          planeId7: {
+            en : "saturn", ja: "土星", img: "saturn.png"
+          },
+          planeId8: {
+            en : "uranus", ja: "天王星", img: "uranus.png"
+          },
+          planeId9: {
+            en : "neptune", ja: "海王星", img: "neptune.png"
+          },
+          planeId10: {
+            en : "pluto", ja: "冥王星", img: "pluto.png"
+          },
+          planeId11: {
+            en : "eris", ja: "エリス", img: "eris.png"
+          }
+        };
+
+        var html = '';
+
+        for(var key in planet){      
+          html += '<li><a href="#">\
+          <img src="' + planet[key].img + '"><h2>\
+          ' + planet[key].ja + '</h2>\
+          <p>' + planet[key].en + '</p></a></li>';
+        }
+
+        $('[data-role="listview"]').append(html);
+    });
+    </script>
     <title>
       オブジェクトの取得
     </title>
-    <script>
-      $(document).on('pagebeforecreate','#index',function(){
-      	var planet = {
-      		planeId0: {
-      			en : "sun", ja: "太陽", img: "sun.png"
-      		},
-      		planeId1: {
-      			en : "mercury", ja: "水星", img: "mercury.png"
-      		},
-      		planeId2: {
-      			en : "venus", ja: "金星", img: "venus.png"
-      		},
-      		planeId3: {
-      			en : "earth", ja: "地球", img: "earth.png"
-      		},
-      		planeId4: {
-      			en : "moon", ja: "月", img: "moon.png"
-      		},
-      		planeId5: {
-      			en : "mars", ja: "火星", img: "mars.png"
-      		},
-      		planeId6: {
-      			en : "jupiter", ja: "木星", img: "jupiter.png"
-      		},
-      		planeId7: {
-      			en : "saturn", ja: "土星", img: "saturn.png"
-      		},
-      		planeId8: {
-      			en : "uranus", ja: "天王星", img: "uranus.png"
-      		},
-      		planeId9: {
-      			en : "neptune", ja: "海王星", img: "neptune.png"
-      		},
-      		planeId10: {
-      			en : "pluto", ja: "冥王星", img: "pluto.png"
-      		},
-      		planeId11: {
-      			en : "eris", ja: "エリス", img: "eris.png"
-      		}
-      	};
-      	
-      	for(var key in planet){
-      		for(var data in planet[key]){
-      			if(data == 'en') var en = planet[key][data];
-      			if(data == 'ja') var ja = planet[key][data];
-      			if(data == 'img') var img = planet[key][data];
-      		}
-      
-      		var html = '<li><a href="#">\
-      			<img src="' + img + '">\
-      			<h2>' + ja + '</h2>\
-      			<p>' + en + '</p>\
-      			</a></li>';
-      		$('[data-role="listview"]').append(html);
-      	}
-      });
-    </script>
-    <style>
-      /**/
-    </style>
   </head>
   <body>
     <div data-role='page' id='index'>
@@ -82,7 +75,7 @@
       </div>
       <div data-position='fixed' data-role='footer'>
         <h4>
-          Copyright &copy; ナカノヨウスケ
+          Copyright © ナカノヨウスケ
         </h4>
       </div>
     </div>

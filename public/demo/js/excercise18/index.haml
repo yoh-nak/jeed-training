@@ -48,21 +48,13 @@
 						en : "eris", ja: "エリス", img: "eris.png"
 					}
 				};
-				
-				for(var key in planet){
-					for(var data in planet[key]){
-						if(data == 'en') var en = planet[key][data];
-						if(data == 'ja') var ja = planet[key][data];
-						if(data == 'img') var img = planet[key][data];
-					}
 
-					var html = '<li><a href="#">\
-						<img src="' + img + '">\
-						<h2>' + ja + '</h2>\
-						<p>' + en + '</p>\
-						</a></li>';
-					$('[data-role="listview"]').append(html);
+				var html = '';
+
+				for(var key in planet){      
+					html += '<li><a href="#"><img src="' + planet[key].img + '"><h2>' + planet[key].ja + '</h2><p>' + planet[key].en + '</p></a></li>';
 				}
+				$('[data-role="listview"]').append(html);
 			});
 		:scss
 			/**/

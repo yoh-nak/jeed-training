@@ -23,6 +23,9 @@
               <a href="demo/js/excercise27/index.html" target="_blank" class="btn btn-default">
               <i class="glyphicon glyphicon-play"></i> デモ②
               </a>
+              <a href="#"" target="_blank" class="btn btn-default">
+              <i class="glyphicon glyphicon-play"></i> デモ③
+              </a>
               <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#demo">
               <i class="glyphicon glyphicon-question-sign"></i> 解答例
               </button>
@@ -142,8 +145,8 @@
       オブジェクトの取得
     &lt;/title&gt;
     &lt;script&gt;
-      $(document).on('pagebeforecreate','#index',function(){
-        var obj = {
+    $(document).on('pagebeforecreate','#index',function(){
+      var obj = {
           planet: [
             { en : "sun", ja: "太陽", img: "sun.png" },
             { en : "mercury", ja: "水星", img: "mercury.png" },
@@ -159,23 +162,20 @@
             { en : "eris", ja: "エリス", img: "eris.png"}
           ]
         };
-        
+
+        var html = '';
+
         for(var i = 0; i &lt; obj.planet.length; i++){
-          for(var key in obj.planet[i]){
-            var data = obj.planet[i][key];
-            if(key == 'en') var en = data;
-            if(key == 'ja') var ja = data;
-            if(key == 'img') var img = data;
-          }
-      
-          var html = '&lt;li&gt;&lt;a href="#"&gt;\
-          &lt;img src="' + img + '"&gt;\
-          &lt;h2&gt;' + ja + '&lt;/h2&gt;\
-          &lt;p&gt;' + en + '&lt;/p&gt;\
-          &lt;/a&gt;&lt;/li&gt;';
-          $('[data-role="listview"]').append(html);
+             
+          html += '&lt;li&gt;&lt;a href="#"&gt;\
+          &lt;img src="' + obj.planet[i].img + '"&gt;&lt;h2&gt;\
+          ' + obj.planet[i].ja + '&lt;/h2&gt;\
+          &lt;p&gt;' + obj.planet[i].en + '&lt;/p&gt;&lt;/a&gt;&lt;/li&gt;';
+          
         }
-      });
+
+        $('[data-role="listview"]').append(html);
+    });
     &lt;/script&gt;
     &lt;style&gt;
       /**/
@@ -199,6 +199,12 @@
     &lt;/div&gt;
   &lt;/body&gt;
 &lt;/html&gt;
+</pre>
+
+<hr>
+デモ③
+<pre class="prettyprint linenums">
+
 </pre>
             </div>
           </div>

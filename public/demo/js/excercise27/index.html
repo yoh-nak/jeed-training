@@ -10,40 +10,37 @@
       オブジェクトの取得
     </title>
     <script>
-      $(document).on('pagebeforecreate','#index',function(){
-      	var obj = {
-      		planet: [
-      			{ en : "sun", ja: "太陽", img: "sun.png" },
-      			{ en : "mercury", ja: "水星", img: "mercury.png" },
-      			{ en : "venus", ja: "金星", img: "venus.png" },
-      			{ en : "earth", ja: "地球", img: "earth.png" },
-      			{ en : "moon", ja: "月", img: "moon.png" },
-      			{ en : "mars", ja: "火星", img: "mars.png" },
-      			{ en : "jupiter", ja: "木星", img: "jupiter.png" },
-      			{ en : "saturn", ja: "土星", img: "saturn.png" },
-      			{ en : "uranus", ja: "天王星", img: "uranus.png" },
-      			{ en : "neptune", ja: "海王星", img: "neptune.png" },
-      			{ en : "pluto", ja: "冥王星", img: "pluto.png" },
-      			{ en : "eris", ja: "エリス", img: "eris.png"}
-      		]
-      	};
-      	
-      	for(var i = 0; i < obj.planet.length; i++){
-      		for(var key in obj.planet[i]){
-      			var data = obj.planet[i][key];
-      			if(key == 'en') var en = data;
-      			if(key == 'ja') var ja = data;
-      			if(key == 'img') var img = data;
-      		}
-      
-      		var html = '<li><a href="#">\
-      		<img src="' + img + '">\
-      		<h2>' + ja + '</h2>\
-      		<p>' + en + '</p>\
-      		</a></li>';
-      		$('[data-role="listview"]').append(html);
-      	}
-      });
+    $(document).on('pagebeforecreate','#index',function(){
+      var obj = {
+          planet: [
+            { en : "sun", ja: "太陽", img: "sun.png" },
+            { en : "mercury", ja: "水星", img: "mercury.png" },
+            { en : "venus", ja: "金星", img: "venus.png" },
+            { en : "earth", ja: "地球", img: "earth.png" },
+            { en : "moon", ja: "月", img: "moon.png" },
+            { en : "mars", ja: "火星", img: "mars.png" },
+            { en : "jupiter", ja: "木星", img: "jupiter.png" },
+            { en : "saturn", ja: "土星", img: "saturn.png" },
+            { en : "uranus", ja: "天王星", img: "uranus.png" },
+            { en : "neptune", ja: "海王星", img: "neptune.png" },
+            { en : "pluto", ja: "冥王星", img: "pluto.png" },
+            { en : "eris", ja: "エリス", img: "eris.png"}
+          ]
+        };
+
+        var html = '';
+
+        for(var i = 0; i < obj.planet.length; i++){
+             
+          html += '<li><a href="#">\
+          <img src="' + obj.planet[i].img + '"><h2>\
+          ' + obj.planet[i].ja + '</h2>\
+          <p>' + obj.planet[i].en + '</p></a></li>';
+          
+        }
+
+        $('[data-role="listview"]').append(html);
+    });
     </script>
     <style>
       /**/

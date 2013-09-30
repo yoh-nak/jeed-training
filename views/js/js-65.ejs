@@ -23,7 +23,7 @@
               <a href="demo/js/excercise27/index.html" target="_blank" class="btn btn-default">
               <i class="glyphicon glyphicon-play"></i> デモ②
               </a>
-              <a href="#"" target="_blank" class="btn btn-default">
+              <a href="demo/js/excercise27/index.html" target="_blank" class="btn btn-default">
               <i class="glyphicon glyphicon-play"></i> デモ③
               </a>
               <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#demo">
@@ -204,7 +204,70 @@
 <hr>
 デモ③
 <pre class="prettyprint linenums">
+&lt;!DOCTYPE html&gt;
+&lt;html lang='ja'&gt;
+  &lt;head&gt;
+    &lt;meta charset='UTF-8'&gt;
+    &lt;meta content='width=device-width, user-scalable=no' name='viewport'&gt;
+    &lt;link href='http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css' rel='stylesheet'&gt;
+    &lt;script src='http://code.jquery.com/jquery-1.9.1.min.js'&gt;&lt;/script&gt;
+    &lt;script src='http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js'&gt;&lt;/script&gt;
+    &lt;title&gt;
+      オブジェクトの取得
+    &lt;/title&gt;
+    &lt;script&gt;
+    $(document).on('pagebeforecreate','#index',function(){
+      var ary = [
+            { en : "sun", ja: "太陽", img: "sun.png" },
+            { en : "mercury", ja: "水星", img: "mercury.png" },
+            { en : "venus", ja: "金星", img: "venus.png" },
+            { en : "earth", ja: "地球", img: "earth.png" },
+            { en : "moon", ja: "月", img: "moon.png" },
+            { en : "mars", ja: "火星", img: "mars.png" },
+            { en : "jupiter", ja: "木星", img: "jupiter.png" },
+            { en : "saturn", ja: "土星", img: "saturn.png" },
+            { en : "uranus", ja: "天王星", img: "uranus.png" },
+            { en : "neptune", ja: "海王星", img: "neptune.png" },
+            { en : "pluto", ja: "冥王星", img: "pluto.png" },
+            { en : "eris", ja: "エリス", img: "eris.png"}
+          ];
 
+        var html = '';
+
+        for(var i = 0; i &lt; ary.length; i++){
+             
+          html += '&lt;li&gt;&lt;a href="#"&gt;\
+          &lt;img src="' + ary[i].img + '"&gt;&lt;h2&gt;\
+          ' + ary[i].ja + '&lt;/h2&gt;\
+          &lt;p&gt;' + ary[i].en + '&lt;/p&gt;&lt;/a&gt;&lt;/li&gt;';
+          
+        }
+
+        $('[data-role="listview"]').append(html);
+    });
+    &lt;/script&gt;
+    &lt;style&gt;
+      /**/
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div data-role='page' id='index'&gt;
+      &lt;div data-role='header'&gt;
+        &lt;h1&gt;
+          オブジェクトの取得
+        &lt;/h1&gt;
+      &lt;/div&gt;
+      &lt;div data-role='content'&gt;
+        &lt;ul data-inset='true' data-role='listview'&gt;&lt;/ul&gt;
+      &lt;/div&gt;
+      &lt;div data-position='fixed' data-role='footer'&gt;
+        &lt;h4&gt;
+          Copyright &copy; ナカノヨウスケ
+        &lt;/h4&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
 </pre>
             </div>
           </div>

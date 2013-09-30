@@ -61,6 +61,39 @@ window.setTimeout(function(){
     console.log(date.getTime());
 },1000);
 </pre>
+<h4>setTimeoutメソッドをループする</h4>
+<p>setIntervalメソッドは負荷がかかるため、一般的にはsetTimeoutメソッドをループして使うことが多いです。以下のように、関数内でsetIntervalメソッドを処理して、初回の関数を実行すると、setTimeoutメソッドがループします。</p>
+
+<pre class="prettyprint">
+//初回の実行
+getTimestamp();
+
+function getTimestamp(){
+    var date = new Date();
+    console.log(date.getTime());
+
+    //2回目移行の実行
+    window.setTimeout(function(){
+        getTimestamp();
+    },1000);
+}
+</pre>
+
+<h4>即時関数でsetTimeoutメソッドを初回実行する</h4>
+
+<pre class="prettyprint">
+//初回の実行
+(function getTimestamp(){
+  var date = new Date();
+  console.log(date.getTime());
+
+  //2回目移行の実行
+  window.setTimeout(function(){
+      getTimestamp();
+  },1000);
+})();
+</pre>
+
 <h4>clearTimeoutメソッド</h4>
 <p>
   <a href="https://developer.mozilla.org/ja/docs/Web/API/window.clearTimeout" target="_blank" class="btn btn-default">

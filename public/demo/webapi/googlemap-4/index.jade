@@ -1,0 +1,32 @@
+!!!
+html(lang='ja')
+	head
+		meta(charset='utf-8')
+		title 大量のマーカー表示
+		script(src='http://maps.googleapis.com/maps/api/js?sensor=false')
+		script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+		script.
+			var map;
+			window.addEventListener('load',function(){
+				map = new google.maps.Map(document.getElementById('gmap'));
+				map.setOptions({
+					zoom: 5,
+					center: new google.maps.LatLng(36.681382, 138.766084),
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				});
+				document.getElementById('setMarker').addEventListener('click',function(){
+					$.getJSON('./data.txt', function(data){
+						$.each(data, function(key, val){
+							var marker = new google.maps.Marker({
+								position: new google.maps.LatLng(val.lat, val.lon),
+								map: map
+							});
+						});
+					});
+				}, false);
+			}, false);
+		:less
+	body
+		div#gmap(style='width:500px;height:400px')
+		form
+			input#setMarker(type='button',value='マーカーデータ読み込み')

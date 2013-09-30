@@ -17,21 +17,38 @@
           <div class="panel-body">
 
 <h4>setInterval</h4>
+<p>setIntervalメソッドは、第1引数で指定した関数内の処理を、第2引数で指定したミリ秒ごとに実行します。</p>
   <p>
   <a href="https://developer.mozilla.org/ja/docs/Web/API/window.setInterval" target="_blank" class="btn btn-default">
   <i class="glyphicon glyphicon-info-sign"></i> 参考: setInterval
   </a>
   </p>
 <pre>
-
+window.setInterval(function(){
+    var date = new Date();
+    console.log(date.getTime());
+},1000);
 </pre>
 <h4>clearInterval</h4>
+  <p>clearIntervalメソッドは、setIntervalメソッドの戻り値を格納した変数を引数にとり、setIntervalメソッドを中断することができます。</p>
   <p>
   <a href="https://developer.mozilla.org/ja/docs/Web/API/window.clearInterval" target="_blank" class="btn btn-default">
   <i class="glyphicon glyphicon-info-sign"></i> 参考: setInterval
   </a>
   </p>
 <pre>
+<pre>
+var counter = 0
+var timer = window.setInterval(function(){
+    counter++;
+    var date = new Date();
+    console.log(date.getTime());
+
+    if(counter >= 10){
+      clearInterval(timer);
+    }
+},1000);
+</pre>
 </pre>
 <h4>setTimeout</h4>
   <p>

@@ -9,6 +9,19 @@ html(lang='ja')
 		title ランダムイメージ
 		script.
 			(function(){
+
+				var imgAry = [
+					'kumamon.gif',
+					'funassy.png',
+					'ossan.png'
+				];
+
+				var imgCacheAry = [];
+				for(var i = 0; i < imgAry.length; i++){
+					imgCacheAry[i] = new Image();
+					imgCacheAry[i].src = imgAry[i];
+				}
+						
 				$(document).on('pageshow','#index',function(){
 					
 					var num, time, timerId;
@@ -17,11 +30,15 @@ html(lang='ja')
 					$('a').on('vclick',function(){
 						//画像の数
 						num = parseInt($('input[name="level"]:checked').val());
-						randomImage(num);
+
+						//選んだ画像
+						imgId = parseInt($('input[name="chara"]:checked').val());
+						var game = new GameClass(imgId);
+						game.randomImage(num);
 						
 						//タイマーのカウント
 						time = parseInt($('input[name="time"]:checked').val());
-						start(time);
+						game.start(time);
 
 						$('form').remove();
 						$(this).remove();
@@ -51,51 +68,56 @@ html(lang='ja')
 							
 						}
 					});
-					
-					//ランダム画像表示
-					function randomImage(num){
-						for(var i = 0; i < num; i++){
-							$('#canvas').append('<img src="kumamon.gif" alt="">');
-							$('img:nth(' + i + ')').css({
-								top: Math.floor(Math.random() * (480-64)),
-								left: Math.floor(Math.random() * (innerWidth-64)),
-							});
-						}
-					}
 
-					//ゲームスタート
-					function start(time){
-						var time = time;
-						
-						//タイマースタート
-						(function countDown(){
-							time--;
-							timerId = setTimeout(function(){
-								//タイム表示
-								$('#timer').text(time);
+					function GameClass(imgId){
 
-								//10秒切ったら色を変える
-								if(time < 10){
-									$('#timer').css('color','red');
-								}
+						this.randomImage = function(num){
 
-								//関数再実行
-								countDown();
-							},1000);
-							
-							//タイマー解除
-							if(time < 0){
-								clearInterval(timerId);
-								//$('#index').off('vclick');
-								$('#index').removeClass('ui-body-c').addClass('ui-body-a');
-								alert('ゲームオーバー');
+							document.images[imgCacheAry[imgId]] = imgAry[imgId];
+							var image = document.images[imgCacheAry[imgId]];
 
-								$.mobile.changePage('#index',{
-									reloadPage:true,
-									transition:'slideup'
+							for(var i = 0; i < num; i++){
+								$('#canvas').append('<img src="' + image + '" alt="">');
+								$('img:nth(' + i + ')').css({
+									top: Math.floor(Math.random() * (480-64)),
+									left: Math.floor(Math.random() * (innerWidth-64)),
 								});
 							}
-						})();
+						};
+
+						this.start = function(time){
+							var time = time;
+							
+							//タイマースタート
+							(function countDown(){
+								time--;
+								timerId = setTimeout(function(){
+									//タイム表示
+									$('#timer').text(time);
+
+									//10秒切ったら色を変える
+									if(time < 10){
+										$('#timer').css('color','red');
+									}
+
+									//関数再実行
+									countDown();
+								},1000);
+								
+								//タイマー解除
+								if(time < 0){
+									clearInterval(timerId);
+									//$('#index').off('vclick');
+									$('#index').removeClass('ui-body-c').addClass('ui-body-a');
+									alert('ゲームオーバー');
+
+									$.mobile.changePage('#index',{
+										reloadPage:true,
+										transition:'slideup'
+									});
+								}
+							})();
+						};
 					}
 				});
 			})();
@@ -143,6 +165,14 @@ html(lang='ja')
 						label(for='t2') 50秒
 						input(type='radio', name='time', id='t3', value='40')
 						label(for='t3') 40秒
+					fieldset(data-role='controlgroup')
+						legend キャラ:
+						input(type='radio', name='chara', id='c1', value='0', checked='checked')
+						label(for='c1') くまモン
+						input(type='radio', name='chara', id='c2', value='1')
+						label(for='c2') ふなっしー
+						input(type='radio', name='chara', id='c3', value='2')
+						label(for='c3') ちっちゃいおっさん
 				a(data-role='button') スタート
 				div#canvas
 			div(data-role='footer', data-position='fixed')

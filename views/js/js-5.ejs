@@ -16,7 +16,10 @@
             <i class="glyphicon glyphicon-book"></i> コンストラクタ</div>
           <div class="panel-body">
 <h4>コンストラクタ</h4>
-
+<p>一般的に、クラスベースのオブジェクト指向言語ではクラスと呼ばれる、プロパティ、メソッドのグループがオブジェクトの単位になっていますが、JavaScriptではクラスという概念は存在しません。その代わりに、関数がオブジェクトの単位になっています。</p>
+<p>オブジェクトリテラル（{...}）は、Objectオブジェクトのプロパティ、メソッドを生成するリテラルとして存在します。その場で作成するには便利ですが、プログラムが大規模になってくると、管理が大変です。後述するコンストラクタ「new Object()」に引数を渡すことができません。</p>
+<p>JavaScriptでは、独自のオブジェクト（クラス）を生成するのに関数を使用します。自作関数の定義しているようですが、実は自作関数そのものがJavaScriptではオブジェクト（クラス）の単位として動作します。</p>
+<p>関数の中に変数を用意することがオブジェクトのプロパティとなり、関数の中に関数を定義することがオブジェクトのメソッドとなります。thisは自分自身のオブジェクトを指します。</p>
 <pre>
 function オブジェクトの名前(引数){
   this.プロパティ = 値;
@@ -31,8 +34,11 @@ var 変数  = function(引数){
   ...以下略...
 }
 </pre>
+<p>実際にオブジェクトを定義すると、以下のようになります。JavaScriptでは慣例的に関数名は、「myFunction」のように小文字で始めますが、オブジェクトとして関数を定義する場合は、「MyClass」のように大文字で始めます。</p>
+<p>自作のオブジェクトには引数を渡すことができます。その場合、そのオブジェクトを使用（インスタンス化）するときに、「new オブジェクト名(引数)」のように記述できます。</p>
+<p>
 <pre class="prettyprint">
-function Seiseki(name){
+function SeisekiClass(name){
   this.name = name;
 
   this.setTensu = function(a, b, c, d, e){
@@ -65,12 +71,14 @@ function Seiseki(name){
     alert(msg);
   }
 }
-
-var taro = new Seiseki('太郎');
+</pre>
+<p>オブジェクトを作成した後は、既存のオブジェクトと同様に使用することができます。</p>
+<pre class="prettyprint">
+var taro = new SeisekiClass('太郎');
 taro.setTensu(75, 58, 69, 81, 47);
 taro.showMsg();
 
-var hanako = new Seiseki('花子');
+var hanako = new SeisekiClass('花子');
 hanako.setTensu(98, 79, 81, 93, 85);
 hanako.showMsg();
 </pre>

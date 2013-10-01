@@ -89,16 +89,17 @@ alert(msg);
 </pre>
 <p>「new オブジェクト名()」この構文のことをコンストラクタ（後述）と呼びますが、コンストラクタを使用すると、よりオブジェクト指向の構文に近い記述になってきます。変数objにObjectオブジェクトを格納し、後からキーに対する値を設定することができます。<p>
 <p>JavaScriptのオブジェクト指向では、オブジェクトに指定されたキーに関数以外の値が格納されている場合、そのキーのことをプロパティと呼び、キーに関数が格納されている場合、そのキーのことをメソッドと呼びます。</p>
+<p>ただしこの場合、JavaScriptの既存のObjectオブジェクトを拡張したことになり、独自のオブジェクトを作成したことにはなりません。</p>
 <pre class="prettyprint">
 var obj = new Object();
 
-obj.kokugo = 98; //=> kokugoプロパティ
-obj.sansu = 82; //=> sansuプロパティ
-obj.rika = 70; //=> rikaプロパティ
-obj.syakai = 86; //=> syakaiプロパティ
-obj.eigo = 53; //=> eigoプロパティ
+obj.kokugo = 98; //=> Objectオブジェクトのkokugoプロパティ
+obj.sansu = 82; //=> Objectオブジェクトのsansuプロパティ
+obj.rika = 70; //=> Objectオブジェクトのrikaプロパティ
+obj.syakai = 86; //=> Objectオブジェクトのsyakaiプロパティ
+obj.eigo = 53; //=> Objectオブジェクトのeigoプロパティ
 
-obj.goukei = function(){ //=> goukeiメソッド
+obj.goukei = function(){ //=> Objectオブジェクトのgoukeiメソッド
   var total = 0;
   total += this.kokugo;
   total += this.sansu;
@@ -108,7 +109,7 @@ obj.goukei = function(){ //=> goukeiメソッド
   return total;
 };
 
-obj.heikin = function(){ //=> heikinメソッド
+obj.heikin = function(){ //=> Objectオブジェクトのheikinメソッド
   var total = this.goukei();
   return total/5;
 };

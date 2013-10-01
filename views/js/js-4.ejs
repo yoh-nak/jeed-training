@@ -16,15 +16,16 @@
             <i class="glyphicon glyphicon-book"></i> オブジェクトで定義される関数</div>
           <div class="panel-body">
 <p>オブジェクトには、以下のように関数リテラルを格納し、実行することができます。実行する際は、オブジェクトのキーに引数を指定する小括弧「()」が続くので注意しましょう。</p>
+<p>thisは自分自身のオブジェクを指し、ここではobjオブジェクトのことを指します。</p>
 <pre class="prettyprint">
 var obj = {'国語':98, '算数':82, '理科':70, '社会':86, '英語':53,
   <mark>'合計':function(){
   var total = 0;
-  total += this['国語'];
-  total += this['算数'];
-  total += this['理科'];
-  total += this['社会'];
-  total += this['英語'];
+  total += this['国語']; //=> obj['国語']、obj.国語、this.国語
+  total += this['算数']; //=> obj['算数']、obj.算数、this.算数
+  total += this['理科']; //=> obj['理科']、obj.理科、this.理科
+  total += this['社会']; //=> obj['社会']、obj.社会、this.社会
+  total += this['英語']; //=> obj['英語']、obj.英語、this.英語
   return total; 
   }</mark>,
   <mark>'平均':function(){

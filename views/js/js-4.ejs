@@ -15,9 +15,10 @@
           <div class="panel-heading">
             <i class="glyphicon glyphicon-book"></i> オブジェクトと関数</div>
           <div class="panel-body">
-<p>オブジェクトには、以下のように関数リテラルを格納し、実行することができます。</p>
+<p>オブジェクトには、以下のように関数リテラルを格納し、実行することができます。実行する際は、オブジェクトのキーに引数を指定する小括弧「()」が続くので注意しましょう。</p>
 <pre class="prettyprint">
-var obj = {'国語':98, '算数':82, '理科':70, '社会':86, '英語':53, <mark>'合計':function(){
+var obj = {'国語':98, '算数':82, '理科':70, '社会':86, '英語':53,
+  <mark>'合計':function(){
   var total = 0;
   total += this['国語'];
   total += this['算数'];
@@ -25,10 +26,12 @@ var obj = {'国語':98, '算数':82, '理科':70, '社会':86, '英語':53, <mar
   total += this['社会'];
   total += this['英語'];
   return total; 
-}</mark>, <mark>function(){
+  }</mark>,
+  <mark>function(){
   var total = this['合計']() + '\n';
   return total/5; 
-}</mark>};
+  }</mark>
+};
 
 var total = 0;
 var msg += '合計' + <mark>obj['合計']()</mark> + '\n';

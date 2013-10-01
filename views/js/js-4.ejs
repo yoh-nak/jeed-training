@@ -17,7 +17,7 @@
           <div class="panel-body">
 
 <pre class="prettyprint">
-var arr = {'国語':98, '算数':82, '理科':70, '社会':86, '英語':53, <mark>'合計':function(){
+var obj = {'国語':98, '算数':82, '理科':70, '社会':86, '英語':53, <mark>'合計':function(){
   var total = 0;
   total += this['国語'];
   total += this['算数'];
@@ -31,14 +31,14 @@ var arr = {'国語':98, '算数':82, '理科':70, '社会':86, '英語':53, <mar
 }</mark>};
 
 var total = 0;
-var msg += '合計' + <mark>arr['合計']()</mark> + '\n';
-msg += '平均' + <mark>arr['平均']()</mark>;
+var msg += '合計' + <mark>obj['合計']()</mark> + '\n';
+msg += '平均' + <mark>obj['平均']()</mark>;
 alert(msg);
 </pre>
 
 <pre class="prettyprint">
-var arr = {'国語':98, '算数':82, '理科':70, '社会':86, '英語':53};
-arr['合計'] = function(){
+var obj = {'国語':98, '算数':82, '理科':70, '社会':86, '英語':53};
+obj['合計'] = function(){
   var total = 0;
   total += this['国語'];
   total += this['算数'];
@@ -47,20 +47,20 @@ arr['合計'] = function(){
   total += this['英語'];
   return total;
 }
-arr['平均'] = function(){
+obj['平均'] = function(){
   var total = this['合計']() + '\n';
   return total/5;
 }
 
 var total = 0;
-var msg = '合計' + arr['合計']() + '\n';
-msg += '平均' + arr['平均']();
+var msg = '合計' + obj['合計']() + '\n';
+msg += '平均' + obj['平均']();
 alert(msg);
 </pre>
 
 <pre class="prettyprint">
-var arr = {'国語':98, '算数':82, '理科':70, '社会':86, '英語':53};
-arr.goukei = function(){
+var obj = {'国語':98, '算数':82, '理科':70, '社会':86, '英語':53};
+obj.goukei = function(){
   var total = 0;
   total += this['国語'];
   total += this['算数'];
@@ -69,14 +69,14 @@ arr.goukei = function(){
   total += this['英語'];
   return total;
 }
-arr.heikin = function(){
+obj.heikin = function(){
   var total = this.goukei() + '\n';
   return total/5;
 }
 
 var total = 0;
-var msg = '合計' + arr.goukei() + '\n';
-msg += '平均' + arr.heikin();
+var msg = '合計' + obj.goukei() + '\n';
+msg += '平均' + obj.heikin();
 alert(msg);
 </pre>
 

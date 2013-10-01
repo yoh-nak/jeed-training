@@ -89,9 +89,52 @@ hanako.showMsg();
 </pre>
 
 <h4>プライベートとパブリック</h4>
-
+<p>以下のようなソースの場合、太郎さんの成績を表示するつもりがイチローさんの成績が表示されてしまいます。
+<pre class="prettyprint">
+var taro = new SeisekiClass('太郎');
+taro.setTensu(75, 58, 69, 81, 47);
+<mark>taro.name = 'イチロー';</mark>
+taro.showMsg();
+</pre>
+<p>このような場合、オブジェクトの中だけで使える値にしなければ、外部からプロパティを取得して変更できてしまいます。このような場合、varを付けてオブジェクト内で使える変数として定義することで、外部から取り出すことができなくなります。</p>
 <pre>
+function SeisekiClass(name){
+  <mark>var name = name;</mark> // SeisekiClassの中で使用する変数
 
+  // SeisekiClassのsetTensuメソッド
+  this.setTensu = function(a, b, c, d, e){
+    this.kokugo = a;
+    this.sansu = b;
+    this.rika = c;
+    this.syakai = d;
+    this.eigo = e;
+  }
+
+  // SeisekiClassのgoukeiメソッド
+  this.goukei = function(){
+    var total = 0;
+    total += this.kokugo;
+    total += this.sansu;
+    total += this.rika;
+    total += this.syakai;
+    total += this.eigo;
+    return total;
+  }
+
+  // SeisekiClassのheikinメソッド
+  this.heikin = function(){
+    var total = this.goukei();
+    return total / 5;
+  }
+
+  // SeisekiClassのshowMsgメソッド
+  this.showMsg = function(){
+    var msg = this.name + 'さんの成績\n';
+    msg += '合計：' + this.goukei() + '\n';
+    msg += '平均：' + this.heikin();
+    alert(msg);
+  }
+}
 </pre>
 
 <h4>callメソッド</h4>

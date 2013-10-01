@@ -67,11 +67,10 @@
           clearInterval(timerId);
           
           alert('クリア');
-          
-          <mark>$.mobile.changePage('#index',{
+          $.mobile.changePage('#index',{
            reloadPage:true,
            transition:'slideup'
-          });</mark>
+          });
          }
         });
         //ランダム画像表示
@@ -106,14 +105,14 @@
           //タイマー解除
           if(time &lt; 0){
            clearInterval(timerId);
-           $('#index').off('vclick');
+           //$('#index').off('vclick');
            $('#index').removeClass('ui-body-c').addClass('ui-body-a');
            alert('ゲームオーバー');
            
-           <mark>$.mobile.changePage('#index',{
+           $.mobile.changePage('#index',{
             reloadPage:true,
             transition:'slideup'
-           });</mark>
+           });
           }
          })();
         }
@@ -142,7 +141,7 @@
 &lt;/style&gt;
   &lt;/head&gt;
   &lt;body&gt;
-    &lt;div data-role="page" id="index" <mark>data-dom-cache="false"</mark>&gt;
+    &lt;div data-role="page" id="index"&gt;
       &lt;div data-role="header"&gt;
         &lt;h1&gt;ランダムイメージ&lt;/h1&gt;
       &lt;/div&gt;

@@ -39,8 +39,9 @@ var 変数  = function(引数){
 <p>
 <pre class="prettyprint">
 function SeisekiClass(name){
-  this.name = name;
+  this.name = name; // SeisekiClassのnameプロパティ
 
+  // SeisekiClassのsetTensuメソッド
   this.setTensu = function(a, b, c, d, e){
     this.kokugo = a;
     this.sansu = b;
@@ -49,6 +50,7 @@ function SeisekiClass(name){
     this.eigo = e;
   }
 
+  // SeisekiClassのgoukeiメソッド
   this.goukei = function(){
     var total = 0;
     total += this.kokugo;
@@ -59,11 +61,13 @@ function SeisekiClass(name){
     return total;
   }
 
+  // SeisekiClassのheikinメソッド
   this.heikin = function(){
     var total = this.goukei();
     return total / 5;
   }
 
+  // SeisekiClassのshowMsgメソッド
   this.showMsg = function(){
     var msg = this.name + 'さんの成績\n';
     msg += '合計：' + this.goukei() + '\n';
@@ -74,7 +78,7 @@ function SeisekiClass(name){
 </pre>
 <p>オブジェクトを作成した後は、既存のオブジェクトと同様に使用することができます。「new SeisekiClass('引数')」のことをコンストラクタと呼びます。コンストラクタを変数に格納することを、オブジェクトのインスタンス（実体）化と呼びます。</p>
 <pre class="prettyprint">
-var taro = new SeisekiClass('太郎');
+var taro = new SeisekiClass('太郎'); //=> インスタンス化
 taro.setTensu(75, 58, 69, 81, 47);
 taro.showMsg();
 

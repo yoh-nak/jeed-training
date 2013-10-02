@@ -1,20 +1,63 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no"> 
-    <meta name="apple-mobile-web-app-capable" content="yes"> 
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>enchant</title>
-    <script type="text/javascript" src="enchant.js"></script>
-    <script type="text/javascript">
+<%- include ../../head %>
+  <body>
+ 
+    <%- include navbar %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+
+        <%- include recipe2 %>
+        
+        </div>
+        <div class="col-sm-9">
+          <div class="panel panel-primary">
+          <div class="panel-heading">画面を切り替える</div>
+          <div class="panel-body">
+          <p>
+            <a href="demo/enchant/recipe2-11/index.html" target="_blank" class="btn btn-default">
+            <i class="glyphicon glyphicon-play"></i> デモ
+            </a>
+          </p>
+<h4>素材</h4>
+<p>
+<img src="demo/enchant/recipe2-11/betty.png" alt="">
+</p>
+<p>
+<img src="demo/enchant/recipe2-11/flowers.png" alt="">
+</p>
+<p>
+<img src="demo/enchant/recipe2-11/map1.png" alt="">
+</p>
+<p>
+<audio controls autobuffer>
+<source src="demo/enchant/recipe2-11/Ready.wav" />
+</audio>
+</p>
+<p>
+<audio controls autobuffer>
+<source src="demo/enchant/recipe2-11/one_0.mp3" />
+</audio>
+</p>
+<h4>ソース</h4>
+<pre class="prettyprint">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, user-scalable=no"&gt; 
+    &lt;meta name="apple-mobile-web-app-capable" content="yes"&gt; 
+    &lt;meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"&gt;
+    &lt;title&gt;enchant&lt;/title&gt;
+    &lt;script type="text/javascript" src="enchant.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript"&gt;
       // enchant.js本体やクラスをエクスポートする
       enchant();
 
       // プレイヤーキャラクターを作成するクラス
       // 「Sprite」クラスを継承
       var Player = enchant.Class.create(enchant.Sprite, {
-        initialize: function(x, y , map) {
+        initialize: function(x, y, map) {
           // 「Sprite」クラスのコンストラクタをコール
           enchant.Sprite.call(this, 48, 48);
           
@@ -110,7 +153,7 @@
           core.se.play();
        
           // マップを作成する
-          map = new Map(16, 16); // グローバル変数にする
+          var map = new Map(16, 16);
           // マップで使用するタイルセット画像を設定する
           map.image = core.assets['map1.png'];
           
@@ -186,7 +229,7 @@
           // rootSceneにマップを追加する
           core.rootScene.addChild(map);
        
-       /* サーフィスの部分はコメントアウトまたは削除してください。
+       /*   
           // サーフィスを作成する
           var image = new Surface(320, 320);
           // 「flowers.png」の(0, 96)の位置から幅「126」ピクセル、高さ「64」ピクセルの領域を
@@ -202,6 +245,7 @@
       */   
 
           // プレイヤーのスプライトを作成する
+          // 引数は、x座標、y座標、マップオブジェクト
           var player = new Player(120, 50, map);
           // rootSceneにプレイヤーのスプライトを追加する
           core.rootScene.addChild(player);
@@ -220,16 +264,115 @@
           // rootSceneにラベルを追加する
           core.rootScene.addChild(infoLabel);
 
+          // rootSceneの「enterframe」イベントが発生したときに実行するリスナ
+          core.rootScene.addEventListener('enterframe', function(e) {
+            // プレイヤーキャラのx座標が「300」以上なら、シーンを切り替える
+            if (player.x &gt; 300) {
+              core.pushScene(core.field(player.x, player.y));
+              // pop時のためにx座標を少し戻しておく
+              player.x = 280;
+            }
+          });
+        
+        }
+        
+        //新しいシーンを作成する関数
+        core.field = function(px, py){
+          
+          // 新しいシーンを作成する
+          var scene = new Scene();
+          
+          // マップを作成する
+          var map = new Map(16, 16);
+          map.image = core.assets['map1.png'];
+          map.loadData([
+            [37,37,37,37,37,37,37,37,37,19,19,19,32,33,33,33,33,33,33,33],
+            [37,37,37,37,37,37,37,37,37,20,20,20,48,49,49,49,49,49,49,49],
+            [37,37,23,23,23,23,23,23,23,23,7,37,37,37,37,37,37,37,37,37],
+            [84,84,84,84,84,84,84,84,84,84,7,37,37,37,37,37,37,37,37,37],
+            [116,116,116,116,116,116,116,116,100,100,7,37,37,20,37,37,37,37,37,37],
+            [37,37,23,23,23,23,23,7,100,100,7,37,37,37,37,37,37,37,37,37],
+            [37,37,37,37,37,37,37,7,100,100,7,37,37,37,37,37,37,37,37,37],
+            [37,37,37,37,37,37,37,7,100,100,7,37,37,37,37,37,37,37,37,37],
+            [37,37,37,37,37,37,37,7,100,100,7,37,37,37,37,37,37,37,37,37],
+            [37,37,37,37,37,37,37,7,100,100,23,23,23,23,23,23,23,23,37,37],
+            [37,37,37,37,37,37,37,7,100,100,84,84,84,84,84,84,84,84,84,84],
+            [37,37,37,23,23,23,23,23,100,100,116,116,116,116,116,116,116,116,116,116],
+            [37,37,37,37,37,37,37,37,100,100,37,37,37,37,37,37,37,37,37,37],
+            [37,37,37,37,37,37,37,37,100,100,37,37,37,37,37,37,37,37,37,37],
+            [37,37,23,23,23,23,23,7,100,100,37,37,37,37,37,37,37,37,37,37],
+            [37,37,37,37,37,37,37,7,100,100,37,37,37,37,37,37,37,37,37,37],
+            [37,37,37,37,37,37,37,7,100,100,37,37,37,37,37,37,37,37,37,37],
+            [37,37,37,37,37,37,37,7,100,100,37,37,37,37,37,37,37,37,37,37],
+            [37,37,37,37,37,37,37,23,100,100,37,37,37,37,37,37,37,37,37,37],
+            [37,37,37,37,37,37,37,37,100,100,37,37,37,37,37,37,37,37,37,37]
+          ]);
+          
+          map.collisionData = [
+            [0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1],
+            [0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1],
+            [0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0],
+            [0,0,1,1,1,1,1,1,0,0,1,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,1,0,0,1,1,1,1,1,1,1,1,0,0],
+            [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+          ];
+          
+          // シーンにマップを追加する
+          scene.addChild(map);
+          
+          // プレイヤーキャラを作成する
+          var player = new Player(0, py, map);
+          // シーンにプレイヤーのスプライトを追加する
+          scene.addChild(player);
 
+          // シーンの「enterframe」イベントが発生したときに実行するリスナ
+          scene.addEventListener('enterframe', function(e) {
+            // プレイヤーキャラのx座標が「-20」以下なら、前のシーンに切り替える
+            if (player.x &lt; -20) core.popScene();
+            
+          });
+          
+          return scene; // シーンを返す
         }
         // ゲームスタート
         core.start();
       }
-    </script>
-    <style type="text/css">
+    &lt;/script&gt;
+    &lt;style type="text/css"&gt;
       body {margin: 0;}
-    </style>
-  </head>
-  <body>
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div id="footer"><%= title %></div>
+ 
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/google-code-prettify/prettify.js"></script>
+    <script>prettyPrint();</script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/list-counter.js"></script>
   </body>
 </html>

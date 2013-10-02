@@ -49,9 +49,18 @@ var mem2 = new MemberClass('弘','藤岡');
 document.writeln(<mark>mem2.getName()</mark>);
 </pre>
 
+<hr>
+<h4>別のオブジェクトのメソッドを利用する</h4>
+<p>メソッドはオブジェクト固有のものですが、callメソッドやapplyメソッドを使ってメソッドの貸し借りができます。</p>
 <h4>callメソッド</h4>
-<pre>
+<p>
+<a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Function/call" target="_blank" class="btn btn-default">
+<i class="glyphicon glyphicon-info-sign"></i> 参考: call
+</a>
+</p>
 
+<p>借りたメソッドに引数がない場合は以下のようになります。</p>
+</p>
 <pre class="prettyprint">
 var obj1 = {
   name: 'よしお',
@@ -64,13 +73,13 @@ var obj2 = {
   name: 'ユリ子'
 };
 
-obj.greet.call(obj2);
+obj.greet.call(obj2); //=> obj2がobjのgreetメソッド借りて実行しています。
 </pre>
-
+<p>借りたメソッドに引数がある場合は、callメソッドの2つ目移行の引数に順番に指定します。</p>
 <pre class="prettyprint">
 var obj1 = {
   name: 'よしお',
-  greet: function(age, from){
+  greet: function(<mark>age, from</mark>){
     console.log(this.name + 'です、はじめまして');
     console.log('年齢は' + age + 'です');
     console.log('出身地は' + from + 'です');
@@ -81,8 +90,37 @@ var obj2 = {
   name: 'ユリ子'
 };
 
-obj1.greet.call(obj2, 6, 'アメリカ');
+obj1.greet.call(obj2, <mark>6, 'アメリカ'</mark>);
 </pre>
+
+<h4>apllyメソッド</h4>
+<p>applyメソッドはcallメソッドと使い方はほとんど同じですが、借りたメソッドに引数がある場合、引数を配列にまとめて渡します。</p>
+<p>
+<a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Function/apply" target="_blank" class="btn btn-default">
+<i class="glyphicon glyphicon-info-sign"></i> 参考: apply
+</a>
+</p>
+
+<pre class="prettyprint">
+var obj1 = {
+  name: 'よしお',
+  greet: function(<mark>age, from</mark>){
+    console.log(this.name + 'です、はじめまして');
+    console.log('年齢は' + age + 'です');
+    console.log('出身地は' + from + 'です');
+  }
+};
+
+var obj2 = {
+  name: 'ユリ子'
+};
+
+<mark>var param = [6, 'アメリカ']</mark>;
+obj1.greet.apply(obj2, <mark>param</mark>);
+</pre>
+<hr>
+
+<h4>callメソッドで継承<h4>
 
 <pre>
 function コンストラクタ(引数){
@@ -117,25 +155,8 @@ taro.setTensu(75, 58, 69, 81, 47);
 taro.showMsg();
 </pre>
 
-<h4>apllyメソッド</h4>
 
-<pre class="prettyprint">
-var obj1 = {
-  name: 'よしお',
-  greet: function(age, from){
-    console.log(this.name + 'です、はじめまして');
-    console.log('年齢は' + age + 'です');
-    console.log('出身地は' + from + 'です');
-  }
-};
-
-var obj2 = {
-  name: 'ユリ子'
-};
-
-var param = [6, 'アメリカ'];
-obj1.greet.apply(obj2, param);
-</pre>
+<hr>
 <h4>オーバーライド</h4>
 <pre>
 

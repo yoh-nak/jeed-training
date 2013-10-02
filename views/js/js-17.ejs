@@ -16,9 +16,39 @@
             <i class="glyphicon glyphicon-book"></i> オブジェクトの拡張とオーバーライド</div>
           <div class="panel-body">
 <h4>動的にメソッドを追加する</h4>
-<pre>
+<p>いったん定義したコンストラクタをnew演算子でインスタンス化した後、後からメソッドを追加することもできます。</p>
+<pre class="prettyprint">
+var MemberClass = function(firstName, lastName){
+  this.firstName = firstName;
+  this.lastName = lastName;
+};
 
+var men = new MemberClass('洋介','中野');
+mem.getName = function(){
+  return this.lastName + ' ' + this.firstName;
+};
+
+document.writeln(mem.getName());
 </pre>
+
+<p>しかしながら、memインスタンスに対してメソッドが追加されていることに注意しましょう。以下の例ではmem2に対してはgetNameメソッドは追加されていないのでエラーになります。プロトタイプベースのオブジェクト指向言語では同じオブジェクト（クラス）をインスタンス化しても常に同じメンバを持つとは限りません。</p>
+<pre>
+var MemberClass = function(firstName, lastName){
+  this.firstName = firstName;
+  this.lastName = lastName;
+};
+
+var men = new MemberClass('洋介','中野');
+<mark>mem.getName</mark> = function(){
+  return this.lastName + ' ' + this.firstName;
+};
+
+document.writeln(mem.getName());
+
+var mem2 = new MemberClass('弘','藤岡');
+document.writeln(<mark>mem2.getName()</mark>);
+</pre>
+
 <h4>callメソッド</h4>
 <pre>
 

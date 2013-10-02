@@ -87,7 +87,34 @@ var hanako = new SeisekiClass('花子'); //=> インスタンス化
 hanako.setTensu(98, 79, 81, 93, 85);
 hanako.showMsg();
 </pre>
+<h4>関数内の「this.変数」はオブジェクトのキーにあたります。オブジェクトリテラルで定義されたプロパティやメソッドは、Objectオブジェクトのプロパティ、メソッドとなりますが、関数オブジェクトによって定義されたプロパティやメソッドは自作オブジェクトとしてインスタンス化できます。</h4>
+<p>
+var オブジェクト名 = {
+  <mark>キー</mark>: プロパティ,
+  <mark>キー</mark>: プロパティ,
+  ...
+  <mark>キー</mark>: メソッド,
+  <mark>キー</mark>: メソッド
+}
 
+function オブジェクト名(){
+  <mark>this.変数</mark> = プロパティ;
+  <mark>this.変数</mark> = プロパティ;
+  ...
+  <mark>this.変数</mark> = メソッド;
+  <mark>this.変数</mark> = メソッド;
+  ...
+}
+
+var オブジェクト名 =  function(){
+  <mark>this.変数</mark> = プロパティ;
+  <mark>this.変数</mark> = プロパティ;
+  ...
+  <mark>this.変数</mark> = メソッド;
+  <mark>this.変数</mark> = メソッド;
+  ...
+}
+</pre>
 <h4>プライベートとパブリック</h4>
 <p>以下のようなソースの場合、太郎さんの成績を表示するつもりがイチローさんの成績が表示されてしまいます。
 <pre class="prettyprint">

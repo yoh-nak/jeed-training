@@ -21,8 +21,38 @@
 </pre>
 <h4>callメソッド</h4>
 <pre>
-
+function コンストラクタ(引数){
+  継承するコンストラクタ.call(this, 引数);
+  ...処理を記述...
+}
 </pre>
+
+<pre class="prettyprint">
+function SeisekiClass(name){
+  ...
+}
+
+function PowerSeisekiClass(name){
+  SeisekiClass.call(this, name);
+  
+  this.showMsg = function(){
+    var msg = name + 'さんの成績\n';
+    msg += '国語: ' + this.kokugo + '\n';
+    msg += '算数: ' + this.sansu + '\n';
+    msg += '理科: ' + this.rika + '\n';
+    msg += '社会: ' + this.syakai + '\n';
+    msg += '英語: ' + this.eigo + '\n';
+    msg += '合計: ' + this.goukei() + '\n';
+    msg += '平均: ' + this.heikin() + '\n';
+    alert(msg)
+  };
+}
+
+var taro = new PowerSeisekiClass('太郎');
+taro.setTensu(75, 58, 69, 81, 47);
+taro.showMsg();
+</pre>
+
 <h4>apllyメソッド</h4>
 <pre>
 

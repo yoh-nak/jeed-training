@@ -121,7 +121,7 @@ obj1.greet.apply(obj2, <mark>param</mark>);
 <hr>
 
 <h4>callメソッドで継承<h4>
-
+<p>JavaScriptではクラスベースのオブジェクト指向言語の継承の仕組みはありませんが、callメソッドを使って継承に近い働きをさせることができます。これは継承元のオブジェクト（スーパークラス）の機能をそのままコピーしているわけではなく、prototypeという仕組みによって実現されてます。</p>
 <pre>
 function コンストラクタ(引数){
   継承するコンストラクタ.call(this, 引数);
@@ -130,12 +130,44 @@ function コンストラクタ(引数){
 </pre>
 
 <pre class="prettyprint">
+//スーパークラス
 function SeisekiClass(name){
-  ...
+  this.name = name;
+
+  this.setTensu = function(a, b, c, d, e){
+    this.kokugo = a;
+    this.sansu = b;
+    this.rika = c;
+    this.syakai = d;
+    this.eigo = e;
+  }
+
+  this.goukei = function(){
+    var total = 0;
+    total += this.kokugo;
+    total += this.sansu;
+    total += this.rika;
+    total += this.syakai;
+    total += this.eigo;
+    return total;
+  }
+
+  this.heikin = function(){
+    var total = this.goukei();
+    return total / 5;
+  }
+
+  this.showMsg = function(){
+    var msg = this.name + 'さんの成績\n';
+    msg += '合計：' + this.goukei() + '\n';
+    msg += '平均：' + this.heikin();
+    alert(msg);
+  }
 }
 
+//サブクラス
 function PowerSeisekiClass(name){
-  SeisekiClass.call(this, name);
+  <mark>SeisekiClass</mark>.call(this, <mark>name</mark>);
   
   this.showMsg = function(){
     var msg = name + 'さんの成績\n';
@@ -158,9 +190,89 @@ taro.showMsg();
 
 <hr>
 <h4>オーバーライド</h4>
-<pre>
+<p>JavaScriptでは、callメソッドを使うことで、オブエジェクト指向言語でいうオーバーライドに似た働きをすることができます。継承元のオブジェクト（スーパークラス）に含まれるメソッドと全く同じメソッドを、利用するオブジェクト（サブクラス）でも定義すると、新たに定義したメソッドに上書きされます。</p>
+<pre class="prettyprint">
+//スーパークラス
+function SeisekiClass(name){
+  this.name = name;
 
+  this.setTensu = function(a, b, c, d, e){
+    this.kokugo = a;
+    this.sansu = b;
+    this.rika = c;
+    this.syakai = d;
+    this.eigo = e;
+  }
+
+  this.goukei = function(){
+    var total = 0;
+    total += this.kokugo;
+    total += this.sansu;
+    total += this.rika;
+    total += this.syakai;
+    total += this.eigo;
+    return total;
+  }
+
+  this.heikin = function(){
+    var total = this.goukei();
+    return total / 5;
+  }
+
+  <mark>this.showMsg = function(){
+    var msg = this.name + 'さんの成績\n';
+    msg += '合計：' + this.goukei() + '\n';
+    msg += '平均：' + this.heikin();
+    alert(msg);
+  }</mark>
+}
+
+//サブクラス
+function PowerSeisekiClass(name){
+  SeisekiClass.call(this, name);
+  
+  <mark>this.showMsg = function(){
+    var msg = name + 'さんの成績\n';
+    msg += '国語: ' + this.kokugo + '\n';
+    msg += '算数: ' + this.sansu + '\n';
+    msg += '理科: ' + this.rika + '\n';
+    msg += '社会: ' + this.syakai + '\n';
+    msg += '英語: ' + this.eigo + '\n';
+    msg += '合計: ' + this.goukei() + '\n';
+    msg += '平均: ' + this.heikin() + '\n';
+    alert(msg)
+  };</mark>
+}
+
+var taro = new PowerSeisekiClass('太郎');
+taro.setTensu(75, 58, 69, 81, 47);
+taro.showMsg();
 </pre>
+<p>以下のようにshowMsgメソッドを定義した後でcallメソッドを記述すると、再度スーパークラスのshowMsgメソッドに上書きされるので意味がありません。</p>
+</pre>
+//サブクラス
+function PowerSeisekiClass(name){
+
+  this.showMsg = function(){
+    var msg = name + 'さんの成績\n';
+    msg += '国語: ' + this.kokugo + '\n';
+    msg += '算数: ' + this.sansu + '\n';
+    msg += '理科: ' + this.rika + '\n';
+    msg += '社会: ' + this.syakai + '\n';
+    msg += '英語: ' + this.eigo + '\n';
+    msg += '合計: ' + this.goukei() + '\n';
+    msg += '平均: ' + this.heikin() + '\n';
+    alert(msg)
+  };
+
+  <mark>SeisekiClass.call(this, name);</mark>
+}
+
+var taro = new PowerSeisekiClass('太郎');
+taro.setTensu(75, 58, 69, 81, 47);
+taro.showMsg();
+</pre>
+
 <h4>オブジェクトの改変</h4>
 <pre>
 

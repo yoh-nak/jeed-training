@@ -15,14 +15,128 @@
           <div class="panel-heading">
             <i class="glyphicon glyphicon-book"></i> プロトタイプ</div>
           <div class="panel-body">
+<h4>オブジェクトの改変</h4>
+<p>JavaScriptではオブジェクトを作成後に、インスタンスごとにオブジェクトに不足した機能を追加して実行することができます。</p>
+<pre class="prettyprint">
+function SeisekiClass(name){
+  this.name = name;
+
+  this.setTensu = function(a, b, c, d, e){
+    this.kokugo = a;
+    this.sansu = b;
+    this.rika = c;
+    this.syakai = d;
+    this.eigo = e;
+  };
+
+  this.showMsg = function(){
+    alert(this.name + 'さんの成績オブジェクトです。');
+  };
+}
+
+var taro = new SeisekiClass('太郎');
+taro.setTensu(75, 58, 69, 81, 47);
+var hanako = new SeisekiClass('花子');
+hanako.setTensu(98, 79, 81, 93, 85);
+
+taro.showMsg();
+hanako.showMsg();
+
+taro.goukei = function(){
+  var total = 0;
+  total += this.kokugo;
+  total += this.sansu;
+  total += this.rika;
+  total += this.syakai;
+  total += this.eigo;
+  return total;
+};
+
+taro.showMsg = function(){
+  var msg = this.name + 'さんの成績合計: ' + this.goukei();
+  alert(msg);
+};
+
+hanako.heikin = function(){
+  var total = 0;
+  total += this.kokugo;
+  total += this.sansu;
+  total += this.rika;
+  total += this.syakai;
+  total += this.eigo;
+  return total/5;
+};
+
+hanko.showMsg = function(){
+  var msg = this.name + 'さんの成績平均: ' + this.heikin();
+  alert(msg);
+};
+
+taro.showMsg();
+hanako.showMsg();
+</pre>
+
+<hr>
 
 <h4>プロトタイプ</h4>
-<pre>
+<p>オブエクトを作成した後に変更することは容易に出来ましたが、作ったオブジェクトの内容がバラバラになってしまっては使いやすいとはいえません。すべてのオブジェクトで同じように機能が変わるほうが重要性が高いでしょう。一つのオブジェクトから作成した複数のインスタンスに対して、後から機能が追加されると、全てのインスタンスが共通して機能が追加される方が便利です。またメモリの節約にもつながります。</p>
+<p>一般的なオブジェクト指向言語では、スーパークラスを継承して新たなサブクラスを生成して利用するしかありません。後から機能追加して利用するということはできませんが、JavaScriptではプロトタイプを使用して実現できます。</p>
+<p>JavaScriptではfunctionオブジェクトは全て、prototypeオブジェクトを持っており、functionオブジェクトから生成されたインスタンスは全て、そのprototypeオブジェクトを参照できます。そのため、functionオブジェクトが持つprototypeオブジェクトの持つメソッドとして、後から追加したメソッドは、functionオブジェクトのインスタンスから参照できるようになります。</p>
+
+<pre class="prettyprint">
+function SeisekiClass(name){
+  this.name = name;
+
+  this.setTensu = function(a, b, c, d, e){
+    this.kokugo = a;
+    this.sansu = b;
+    this.rika = c;
+    this.syakai = d;
+    this.eigo = e;
+  };
+}
+
+var taro = new SeisekiClass('太郎');
+taro.setTensu(75, 58, 69, 81, 47);
+
+var hanako = new SeisekiClass('花子');
+hanako.setTensu(98, 79, 81, 93, 85);
+
+SeisekiClass.prototype.getDataToStr = function(){
+  var data = this.name = 'さんの点数\n' + '国語: ' + this.kokugo + ' 算数: ' + this.sansu + ' 理科: ' + this.rika + ' 社会: ' + this.syakai + ' 英語: ' + this.eigo;
+  return data;
+};
+
+alert(taro.getDataToStr());
+alert(hanako.getDataToStr());
+</pre>
+
+<hr>
+
+<h4>プロトタイプでのプロパティ</h4>
+<p>では以下の例はどうでしょう。prototypeオブジェクトのプロパティとして、mem2インスタンスがsexプロパティを上書きしています。mem1インスタンスのsexプロパティも上書きされそうですが、結果は上書きされません。これはmem2インスタンスののsexプロパティとして新たに定義されたことになり、prototypeオブジェクトのsexプロパティは影響を受けません。この状態を、インスタンスのsexプロパティがprototypeのsexプロパティを隠蔽しているといいます。</p>
+<pre class="prettyprint">
+var MemberClass = function(){};
+Member.prototype.sex = '男';
+
+var mem1 = new MemberClass();
+var mem2 = new MemberClass();
+document.writeln(mem1.sex + ' | ' + mem2.sex); //=> 男 | 男
+<mark>mem2.sex = '女';
+document.writeln(mem1.sex + ' | ' + mem2.sex);</mark> //=> 男 | 女
+</pre>
+<hr>
+
+<h4>静的プロパティ／静的メソッド</h4>
+
+<pre class="prettyprint">
 
 </pre>
 
+<hr>
+
 <h4>プロトタイプ継承</h4>
-<pre>
+<pre class="prettyprint">
 
 </pre>
 

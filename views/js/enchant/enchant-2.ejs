@@ -12,189 +12,173 @@
         </div>
         <div class="col-sm-9">
           <div class="panel panel-primary">
-          <div class="panel-heading">encant.js資料</div>
+          <div class="panel-heading">音を鳴らす</div>
           <div class="panel-body">
-<pre>
-公式サイト
-http://enchantjs.com/ja/
-
-公式ドキュメント
-http://enchantjs.com/ja/tutorial/lets-start-enchant-js/
-
-旧バージョン
-https://github.com/wise9/enchant.js/tags
-
-enchant.js公式プラグインドキュメント
-enchant.js/doc/plugins/ja/index.html 
-
-enchant.js投稿型ゲームサイト
-9leap
-http://9leap.net/
-
-ドットインストール
-enchant.js入門
-http://dotinstall.com/lessons/basic_enchant_js_v2
-</pre>
+          <p>
+            <a href="demo/enchant/recipe2-8/index.html" target="_blank" class="btn btn-default">
+            <i class="glyphicon glyphicon-play"></i> デモ
+            </a>
+          </p>
 <h4>素材</h4>
-<pre>
-パッド
-==========================
-アナログパッド
-http://enchantjs.com/images/materials/apad.png
-十字キー
-http://enchantjs.com/images/materials/pad.png
+<p>
+<img src="demo/enchant/recipe2-8/betty.png" alt="">
+</p>
+<p>
+<img src="demo/enchant/recipe2-8/flowers.png" alt="">
+</p>
+<p>
+<audio src="emo/enchant/recipe2-8/Ready.wav" controls>
+<p>音声を再生するには、audioタグをサポートしたブラウザが必要です。</p>
+</audio> 
+</p>
+<p>
+<audio src="emo/enchant/recipe2-8/one_0.mp3" controls>
+<p>音声を再生するには、audioタグをサポートしたブラウザが必要です。</p>
+</audio> 
+</p>
+<h4>ソース</h4>
+<pre class="prettyprint">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, user-scalable=no"&gt; 
+    &lt;meta name="apple-mobile-web-app-capable" content="yes"&gt; 
+    &lt;meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"&gt;
+    &lt;title&gt;enchant&lt;/title&gt;
+    &lt;script type="text/javascript" src="enchant.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript"&gt;
+      // enchant.js本体やクラスをエクスポートする
+      enchant();
 
-アバター
-==========================
-http://enchantjs.com/images/materials/avatarBg1.png
-http://enchantjs.com/images/materials/avatarBg2.png
-http://enchantjs.com/images/materials/avatarBg3.png
+      // ページが読み込まれたときに実行される関数
+      window.onload = function() {
 
-バー
-==========================
-http://enchantjs.com/images/materials/bar.png
+        // コアオブジェクトを作成する
+        core = new Core(320, 320);
+        
+        // 1秒あたりの画面の描画回数を設定する(省略時は「30」)
+        core.fps = 16;
+        
+        // ゲームで使用する画像ファイル、サウンドファイルを読み込む
+        // mp3形式のサウンドファイルはプリロードする(FireFox,Safari対応)
+        core.preload('betty.png', 'flowers.png', 'one_0.mp3');
 
-キャラ
-==========================
+        // BGM用のサウンドファイルを読み込む
+        core.bgm = Sound.load('one_0.mp3');
+        // SE用のサウンドファイルを読み込む
+        core.se = Sound.load('Ready.wav');
+        
+       
+        // ファイルのプリロードが完了したときに実行される関数
+        core.onload = function() {
+       
+          // BGMのボリュームを設定する(0~1)
+          core.bgm.volume = 0.5;
+          // BGMを再生する
+          core.bgm.play();
+          // SEを再生する
+          core.se.play();
 
-子供
-http://enchantjs.com/images/materials/chara0.png
-クマ
-http://enchantjs.com/images/materials/chara1.png
-ブタ
-http://enchantjs.com/images/materials/chara2.png
-戦車
-http://enchantjs.com/images/materials/chara3.png
-車
-http://enchantjs.com/images/materials/chara4.png
-ナイト
-http://enchantjs.com/images/materials/chara5.png
-モンスター
-http://enchantjs.com/images/materials/chara6.png
-ダークナイト
-http://enchantjs.com/images/materials/chara7.png
+          // サーフィスを作成する
+          var image = new Surface(320, 320);
+          // 「flowers.png」の(0, 96)の位置から幅「126」ピクセル、高さ「64」ピクセルの領域を
+          // サーフィスの(64, 64)の位置に幅「126」ピクセル、高さ「64」ピクセルで描画する
+          image.draw(core.assets['flowers.png'], 0, 96, 126, 64, 64, 64, 126, 64);
+          
+          // サーフィスを表示するためのスプライトを作成する
+          var bg = new Sprite(320, 320);
+          // スプライトにサーフィスを設定する
+          bg.image = image;
+          
+          core.rootScene.addChild(bg);
+         
+          // スプライトを作成する
+          var player = new Sprite(48, 48);
+          // スプライトで表示する画像を設定する
+          player.image = core.assets['betty.png'];
+          // 表示するフレームの番号を設定する
+          player.frame = 3;
+          // 表示位置のx座標を設定する
+          player.x = 120;
+          // 表示位置のy座標を設定する
+          player.y = 50;
+          
+          // フレーム数をカウントするプロパティを追加する
+          player.tick = 0;
 
-http://enchantjs.com/images/materials/droid.dae
+          // rootSceneにスプライトを追加する
+          core.rootScene.addChild(player);
 
-効果
-http://enchantjs.com/images/materials/effect0.png
+          // 「enterframe」イベントが発生したときに実行するリスナを登録する
+          player.addEventListener('enterframe', function(e) {
 
-表面
-http://enchantjs.com/images/materials/enchant-sphere.png
-http://enchantjs.com/images/materials/enchant.png
+            // 左ボタンが押されたら、スプライトをx方向に「-4」ピクセル移動する
+            if (core.input.left) {
+              this.x -= 4;
+              // スプライトのフレーム番号を切り替えてアニメーション表示する
+              this.frame = this.tick % 4 * 4 + 1;
+              // フレーム数をインクリメントする
+              this.tick ++;
+            }
 
-フォント
-http://enchantjs.com/images/materials/font0.png
-http://enchantjs.com/images/materials/font1.png
-http://enchantjs.com/images/materials/font2.png
+            // 右ボタンが押されたら、スプライトをx方向に「4」ピクセル移動する
+            if (core.input.right) {
+              this.x += 4;
+              this.frame = this.tick % 4 * 4 + 3;
+              this.tick ++;
+            }
 
-開始・終了
-http://enchantjs.com/images/materials/start.png
-http://enchantjs.com/images/materials/end.png
-http://enchantjs.com/images/materials/gameover.png
+            // 上ボタンが押されたら、スプライトをy方向に「-4」ピクセル移動する
+            if (core.input.up) {
+              this.y -= 4;
+              this.frame = this.tick % 4 * 4 + 2;
+              this.tick ++;
+            }
 
-アイコン
-==========================
+            // 下ボタンが押されたら、スプライトをy方向に「4」ピクセル移動する 
+            if (core.input.down) {
+              this.y += 4;
+              this.frame = this.tick % 4 * 4;
+              this.tick ++;
+            }
+            
+          });
 
-http://enchantjs.com/images/materials/icon0.png
-http://enchantjs.com/images/materials/icon1.png
+          // 「touchmove」イベントが発生したときに実行するリスナを登録する
+          player.addEventListener('touchmove', function(e) {
+            // スプライトをタッチして移動した場所、またはドラッグした場所に移動する
+            this.x = e.x - this.width / 2;
+            this.y = e.y - this.height / 2;
+          });
 
-インジケーター
-==========================
-http://enchantjs.com/images/materials/indicator.png
-
-マップ
-==========================
-http://enchantjs.com/images/materials/map0.png
-http://enchantjs.com/images/materials/map1.png
-http://enchantjs.com/images/materials/map2.png
-
-宇宙
-==========================
-http://enchantjs.com/images/materials/space0.png
-http://enchantjs.com/images/materials/space1.png
-http://enchantjs.com/images/materials/space2.png
-http://enchantjs.com/images/materials/space3.png
-
-モンスター
-==========================
-http://apps.lolipop.jp/images/monster/bigmonster0.gif
-http://apps.lolipop.jp/images/monster/bigmonster1.gif
-http://apps.lolipop.jp/images/monster/bigmonster2.gif
-http://apps.lolipop.jp/images/monster/monster0.gif
-http://apps.lolipop.jp/images/monster/monster1.gif
-http://apps.lolipop.jp/images/monster/monster2.gif
-http://apps.lolipop.jp/images/monster/monster3.gif
-http://apps.lolipop.jp/images/monster/monster4.gif
-http://apps.lolipop.jp/images/monster/monster5.gif
-http://apps.lolipop.jp/images/monster/monster6.gif
-http://apps.lolipop.jp/images/monster/monster7.gif
-
-効果音
-==========================
-http://enchantjs.com/assets/sounds/se1.wav
-http://enchantjs.com/assets/sounds/se2.wav
-http://enchantjs.com/assets/sounds/se3.wav
-http://enchantjs.com/assets/sounds/se4.wav
-http://enchantjs.com/assets/sounds/se5.wav
-http://enchantjs.com/assets/sounds/se6.wav
-http://enchantjs.com/assets/sounds/se7.wav
-http://enchantjs.com/assets/sounds/se8.wav
-http://enchantjs.com/assets/sounds/se9.wav
-
-音素材
-==========================
-http://www.hmix.net/music_gallery/image/game.htm
-http://www.senses-circuit.com/material/se_game.html
-
-サンプル
-==========================
-http://tsuyobi.heteml.jp/html/javascript/enchantjs/samples/01/
-http://tsuyobi.heteml.jp/html/javascript/enchantjs/samples/02/
-http://tsuyobi.heteml.jp/html/javascript/enchantjs/samples/03/
-http://tsuyobi.heteml.jp/html/javascript/enchantjs/samples/04/
-http://tsuyobi.heteml.jp/html/javascript/enchantjs/samples/05/
-http://tsuyobi.heteml.jp/html/javascript/enchantjs/samples/06/
-http://tsuyobi.heteml.jp/html/javascript/enchantjs/samples/07/
-http://tsuyobi.heteml.jp/html/javascript/enchantjs/samples/08/
-http://tsuyobi.heteml.jp/html/javascript/enchantjs/samples/09/
-http://tsuyobi.heteml.jp/html/javascript/enchantjs/samples/10/
-http://tsuyobi.heteml.jp/html/javascript/enchantjs/samples/11/
-http://tsuyobi.heteml.jp/html/javascript/enchantjs/samples/12/
-http://tsuyobi.heteml.jp/html/javascript/enchantjs/samples/13/
-http://tsuyobi.heteml.jp/html/javascript/enchantjs/samples/14/
-http://tsuyobi.heteml.jp/html/javascript/enchantjs/samples/15/
-http://tsuyobi.heteml.jp/html/javascript/enchantjs/samples/16/
-http://tsuyobi.heteml.jp/html/javascript/enchantjs/samples/17/
-http://tsuyobi.heteml.jp/html/javascript/enchantjs/samples/18/
-
-プラグイン
-
-
-オブジェクト
-Label
-
-Sprite
-
-Map
-
-Entity
-
-Scene
-
-Group
-
-Surface
-
-Node
-
-Core
-
-EventTarget
-
-Sound
+          // ラベルを作成する
+          var infoLabel = new Label('enchant.js サンプル');
+          // 表示位置のx座標を設定する
+          infoLabel.x = 16;
+          // 表示位置のy座標を設定する
+          infoLabel.y = 0;
+          // 文字色を設定する
+          infoLabel.color = '#0000FF';
+          // フォントサイズとフォントの種類を指定する
+          infoLabel.font ='14px sens-serif';
+          
+          // rootSceneにラベルを追加する
+          core.rootScene.addChild(infoLabel);
 
 
+        }
+        // ゲームスタート
+        core.start();
+      }
+    &lt;/script&gt;
+    &lt;style type="text/css"&gt;
+      body {margin: 0;}
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
 </pre>
           </div>
           </div>
@@ -206,7 +190,9 @@ Sound
     <div id="footer"><%= title %></div>
  
     <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/google-code-prettify/prettify.js"></script>
+    <script>prettyPrint();</script>
     <script src="js/bootstrap.min.js"></script>
-
+    <script src="js/list-counter.js"></script>
   </body>
 </html>

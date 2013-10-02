@@ -140,7 +140,7 @@ function SeisekiClass(name){
     this.rika = c;
     this.syakai = d;
     this.eigo = e;
-  }
+  };
 
   this.goukei = function(){
     var total = 0;
@@ -150,19 +150,19 @@ function SeisekiClass(name){
     total += this.syakai;
     total += this.eigo;
     return total;
-  }
+  };
 
   this.heikin = function(){
     var total = this.goukei();
     return total / 5;
-  }
+  };
 
   this.showMsg = function(){
     var msg = this.name + 'さんの成績\n';
     msg += '合計：' + this.goukei() + '\n';
     msg += '平均：' + this.heikin();
     alert(msg);
-  }
+  };
 }
 
 //サブクラス
@@ -202,7 +202,7 @@ function SeisekiClass(name){
     this.rika = c;
     this.syakai = d;
     this.eigo = e;
-  }
+  };
 
   this.goukei = function(){
     var total = 0;
@@ -212,19 +212,19 @@ function SeisekiClass(name){
     total += this.syakai;
     total += this.eigo;
     return total;
-  }
+  };
 
   this.heikin = function(){
     var total = this.goukei();
     return total / 5;
-  }
+  };
 
   <mark>this.showMsg = function(){
     var msg = this.name + 'さんの成績\n';
     msg += '合計：' + this.goukei() + '\n';
     msg += '平均：' + this.heikin();
     alert(msg);
-  }</mark>
+  };</mark>
 }
 
 //サブクラス
@@ -274,8 +274,64 @@ taro.showMsg();
 </pre>
 
 <h4>オブジェクトの改変</h4>
-<pre>
+<p>JavaScriptではオブジェクトを作成後に、インスタンスごとにオブジェクトに不足した機能を追加して実行することができます。</p>
+<pre class="prettyprint">
+function SeisekiClass(name){
+  this.name = name;
 
+  this.setTensu = function(a, b, c, d, e){
+    this.kokugo = a;
+    this.sansu = b;
+    this.rika = c;
+    this.syakai = d;
+    this.eigo = e;
+  };
+
+  this.showMsg = function(){
+    alert(this.name + 'さんの成績オブジェクトです。');
+  };
+}
+
+var taro = new SeisekiClass('太郎');
+taro.setTensu(75, 58, 69, 81, 47);
+var hanako = new SeisekiClass('花子');
+hanako.setTensu(98, 79, 81, 93, 85);
+
+taro.showMsg();
+hanako.showMsg();
+
+taro.goukei = function(){
+  var total = 0;
+  total += this.kokugo;
+  total += this.sansu;
+  total += this.rika;
+  total += this.syakai;
+  total += this.eigo;
+  return total;
+};
+
+taro.showMsg = function(){
+  var msg = this.name + 'さんの成績合計: ' + this.goukei();
+  alert(msg);
+};
+
+hanako.heikin = function(){
+  var total = 0;
+  total += this.kokugo;
+  total += this.sansu;
+  total += this.rika;
+  total += this.syakai;
+  total += this.eigo;
+  return total/5;
+};
+
+hanko.showMsg = function(){
+  var msg = this.name + 'さんの成績平均: ' + this.heikin();
+  alert(msg);
+};
+
+taro.showMsg();
+hanako.showMsg();
 </pre>
 
           </div>

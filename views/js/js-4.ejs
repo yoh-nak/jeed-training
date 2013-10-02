@@ -13,7 +13,7 @@
         <div class="col-sm-9">
           <div class="panel panel-primary">
           <div class="panel-heading">
-            <i class="glyphicon glyphicon-book"></i> オブジェクトで定義される関数</div>
+            <i class="glyphicon glyphicon-book"></i> 無名（匿名）オブジェクト</div>
           <div class="panel-body">
 <p>オブジェクトには、以下のように関数リテラルを格納し、実行することができます。実行する際は、オブジェクトのキーに引数を指定する小括弧「()」が続くので注意しましょう。</p>
 <p>thisは自分自身のオブジェクを指し、ここではobjオブジェクトのことを指します。</p>
@@ -87,9 +87,10 @@ var msg = '合計' + obj.goukei() + '\n';
 msg += '平均' + obj.heikin();
 alert(msg);
 </pre>
+<h4>無名（匿名）オブジェクト</h4>
 <p>「new オブジェクト名()」この構文のことをコンストラクタ（後述）と呼びますが、コンストラクタを使用すると、よりオブジェクト指向の構文に近い記述になってきます。変数objにObjectオブジェクトを格納し、後からキーに対する値を設定することができます。<p>
 <p>JavaScriptのオブジェクト指向では、オブジェクトに指定されたキーに関数以外の値が格納されている場合、そのキーのことをプロパティと呼び、キーに関数が格納されている場合、そのキーのことをメソッドと呼びます。</p>
-<p>ただしこの場合、JavaScriptの既存のObjectオブジェクトを拡張したことになり、独自のオブジェクトを作成したことにはなりません。</p>
+<p>ただしこの場合、JavaScriptの既存のObjectオブジェクトを拡張したことになり、独自のオブジェクトを作成したことにはなりません。このように独自のオブジェクト名をもたないオブジェクトのことを無名（匿名）オブジェクトと呼びます。</p>
 <pre class="prettyprint">
 var obj = new Object();
 
@@ -117,6 +118,10 @@ obj.heikin = function(){ //=> Objectオブジェクトのheikinメソッド
 var msg = '合計：' + obj.goukei() + '\n';
 msg += '平均：' + obj.heikin();
 alert(msg);
+</pre>
+<p>以下のようにオブジェクトリテラルでオブジェクトを生成することは無名オブジェクトを定義しているといえます。</p>
+<pre>
+var obj = {a:'abc', b:123, c:true, c:function(){...}}
 </pre>
 
           </div>

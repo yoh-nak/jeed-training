@@ -278,8 +278,58 @@ MemberClass.prototype = {
 <hr>
 
 <h4>プロトタイプ継承（プロトタイプチェーン）</h4>
-<pre class="prettyprint">
 
+<pre class="prettyprint">
+var AnimalClass = function(){};
+
+AnimalClass.prototype = {
+  walk: function(){
+    document.writeln('トコトコ...');
+  }
+};
+
+var DogClass = function(){};
+
+DogClass.prototype = new AnimalClass();
+
+Dog.prototype.bark = function(){
+  document.writeln('ワンワン！');
+};
+
+var d = new DogClass();
+d.walk(); //=> トコトコ...
+d.bark(); //=> ワンワン！
+</pre>
+
+<p>JavaScriptのプロトタイプチェーンはインスタンスが生成された時点で固定され、その後の変更に関わらず固定されるので注意しましょう。</p>
+<pre class="prettyprint">
+var AnimalClass = function(){};
+
+AnimalClass.prototype = {
+  walk: function(){
+    document.writeln('トコトコ...');
+  }
+};
+
+var SuperAnimalClass = function(){};
+
+SuperAnimalClass.prototype = {
+  walk: function(){
+    document.writeln('ダダダダダ！');
+  }
+}
+
+var DogClass = function(){};
+
+DogClass.prototype = new AnimalClass();
+<mark>var d1 = new DogClass();</mark>
+d1.walk(); //=> トコトコ
+
+DogClass.prototype = new SuperAnimalClass();
+var d2= new SuperAnimalClass();
+d2.walk(); //=> ダダダダダ！;
+
+<mark>d1.walk(); //=> トコトコ</mark>
 </pre>
 
           </div>

@@ -7,447 +7,50 @@
       <div class="row">
         <div class="col-sm-3">
 
-        <div class="list-group">
-          <a href="js-1" class="list-group-item">
-          コアリファレンス[A]
-          </a>
-          <a href="js-2" class="list-group-item">
-          コアリファレンス[B]
-          </a>
-          <a href="js-3" class="list-group-item">
-          コアリファレンス[D]
-          </a>
-          <a href="js-4" class="list-group-item">
-          コアリファレンス[E]
-          </a>
-          <a href="js-5" class="list-group-item">
-          コアリファレンス[F]
-          </a>
-          <a href="js-6" class="list-group-item">
-          コアリファレンス[G]
-          </a>
-          <a href="js-7" class="list-group-item">
-          コアリファレンス[I]
-          </a>
-          <a href="js-8" class="list-group-item">
-          コアリファレンス[J]
-          </a>
-          <a href="js-9" class="list-group-item">
-          コアリファレンス[M]
-          </a>
-          <a href="js-10" class="list-group-item">
-          コアリファレンス[N]
-          </a>
-          <a href="js-11" class="list-group-item">
-          コアリファレンス[O]
-          </a>
-          <a href="js-12" class="list-group-item">
-          コアリファレンス[P]
-          </a>
-          <a href="js-13" class="list-group-item">
-          コアリファレンス[R]
-          </a>
-          <a href="js-14" class="list-group-item">
-          コアリファレンス[S]
-          </a>
-          <a href="js-15" class="list-group-item">
-          コアリファレンス[T]
-          </a>
-          <a href="js-16" class="list-group-item">
-          コアリファレンス[U]
-          </a>
-        </div>
-        <div class="list-group">
-        <a href="js-17" class="list-group-item">
-        クライアントリファレンス[A]
-        </a>
-        <a href="js-18" class="list-group-item">
-        クライアントリファレンス[B]
-        </a>
-        <a href="js-19" class="list-group-item">
-        クライアントリファレンス[C]
-        </a>
-        <a href="js-20" class="list-group-item active">
-        クライアントリファレンス[D]
-        </a>
-        <a href="js-21" class="list-group-item">
-        クライアントリファレンス[E]
-        </a>
-        <a href="js-22" class="list-group-item">
-        クライアントリファレンス[F]
-        </a>
-        <a href="js-23" class="list-group-item">
-        クライアントリファレンス[G]
-        </a>
-        <a href="js-24" class="list-group-item">
-        クライアントリファレンス[H]
-        </a>
-        <a href="js-25" class="list-group-item">
-        クライアントリファレンス[I]
-        </a>
-        <a href="js-26" class="list-group-item">
-        クライアントリファレンス[J]
-        </a>
-        <a href="js-27" class="list-group-item">
-        クライアントリファレンス[K]
-        </a>
-        <a href="js-28" class="list-group-item">
-        クライアントリファレンス[L]
-        </a>
-        <a href="js-29" class="list-group-item">
-        クライアントリファレンス[M]
-        </a>
-        <a href="js-30" class="list-group-item">
-        クライアントリファレンス[N]
-        </a>
-        <a href="js-31" class="list-group-item">
-        クライアントリファレンス[O]
-        </a>
-        <a href="js-32" class="list-group-item">
-        クライアントリファレンス[P]
-        </a>
-        <a href="js-33" class="list-group-item">
-        クライアントリファレンス[S]
-        </a>
-        <a href="js-34" class="list-group-item">
-        クライアントリファレンス[T]
-        </a>
-        <a href="js-35" class="list-group-item">
-        クライアントリファレンス[U]
-        </a>
-        <a href="js-36" class="list-group-item">
-        クライアントリファレンス[V]
-        </a>
-        <a href="js-37" class="list-group-item">
-        クライアントリファレンス[W]
-        </a>
-        <a href="js-38" class="list-group-item">
-        クライアントリファレンス[X]
-        </a>
-        </div>
-
+        <%- include left %>
 
         </div>
         <div class="col-sm-9">
           <div class="panel panel-primary">
-          <div class="panel-heading">JavaScriptクライアントリファレンス[D]</div>
+          <div class="panel-heading">
+            <i class="glyphicon glyphicon-book"></i> 例外処理</div>
           <div class="panel-body">
+<h4>例外が発生するかもしれない処理</h4>
 <pre>
-DataTransfer
-
-
-
-
+try {
+  例外が発生するかもしれない命令（群）
+} catch(例外情報を受け取る変数) {
+  例外が発生した時の命令（群）
+} [finally {
+  例外の有無にかかわらず、最終的に実行される命令（群】
+}]
 </pre>
+
+<pre class="prettyprint">
+var i = 1;
+try {
+  i = i * j;
+} catch(e) {
+  document.writeln('e.message');
+} finally {
+  document.writeln('処理は完了しました。');
+}
+</pre>
+<h4>例外を意図的に発生させる</h4>
 <pre>
-
-
-
-
-DataView
-
-
+throw new Error(エラーメッセージ)
 </pre>
-<pre>
-
-
-
-
-
-
-Document
-HTMLまたはXMLドキュメント
-
-     Documentオブジェクトは、ドキュメントツリーのルートとして働くNodeです。documentElementプロパティはドキュメントのルートElementです。Documentノードはその他の子（CommentノードやDocumentTypeノードなど）を持てますが、ドキュメントのすべての内容を保持する子Elementを1つだけ持ちます。
-     また、Documentオブジェクト、Windowのdocumentプロパティで取得するのが最も一般的です。ownerDocumentプロパティからも入手できます。
-     Documentオブジェクトのほとんどのプロパティは、ドキュメントの要素やドキュメントに関連する他の重要なオブジェクトへのアクセスを提供します。Documentの多くのメソッドは同じ処理を実行します。ドキュメントツリー内の要素を探す手段を提供するのです。Documentのその他の多くのメソッドは、要素の関連するオブジェクトを作成する「ファクトリメソッド」です。
-     Documentは、Documentが含むElementと同様にイベント対象です。EventTargetで定義されるメソッドを実装し、多数のイベントハンドラプロパティもサポートします。
-     新しいDocumentオブジェクトは、DOMImplementationのcreateDocument()メソッドやcreateHTMLDocument()メソッドを使って生成できます。
-     document.implementation.createHTMLDocument('New Doc');
-     また、ネットワークからHTMLファイルやXMLファイルをロードし、それを解析してDocumentオブジェクトを生成することもできます。XMLHttpRequestオブジェクトのresponseXMLプロパティを参照してください。
-     本書の以前の版に登場していたHTMLDocumentの項目は、この項目に統合しています。ここで示すプロパティ、メソッド、イベントハンドラの一部はHTML固有であり、XMLドキュメントでは機能しません。
-
-プロパティ
-
-     以下に列挙するプロパティに加え、&lt;iframe&gt;、&lt;form&gt;、&lt;img&gt;要素のname属性の値もドキュメントプロパティとして使えます。これらのプロパティの値は、名前付きElementや各要素のNodeListです。ただし、名前付き&lt;iframe&gt;要素では、プロパティは&lt;iframe&gt;のWindowオブジェクトを参照します。
-
-
-
-     readonly Element activeElement
-
-          現在キーボードフォーカスを持つドキュメント要素。
-
-     Element body
-
-          HTMLドキュメントでは、この要素は&lt;body&gt;要素を参照します（フレームセットを定義しているドキュメントでは、このプロパティは代わりに最も外側の&lt;frameset&gt;を参照します）。
-
-     Element string characterSet
-
-          このドキュメントの文字エンコーディング。
-
-
-     Element charset
-
-          このドキュメントの文字エンコーディング。これはcharacterSetに似ていますが、これを設定するとエンコーディングを変更することができます。
-  
-     readonly string computeMode
-
-          このプロパティは、ドキュメントが非常に古いブラウザとの下位互換性のためにCSSの「互換（Quirks）モード」でレンダリングされている場合には文字列「BackCompat」になります。それ以外の場合には、このプロパティは「CSS1Compat」になります。
-
-
-     string cookie
-
-          このプロパティは、現在のドキュメントに適用するcookieの読み取り、作成、変更、削除を可能にします。cookieとは、Webブラウザに格納される名前付きの小さなデータです。これにより、Webブラウザは「記憶機構」を与えられ、あるページの入力データを別のページに使ったり、別々のWebブラウジングセッションでユーザの嗜好を活用したりすることができます。cookieデータは必要に応じてWebブラウザとWebサーバー側で自動的に転送されるため、サーバーサイドスクリプトはcookie値を読み書きできます。なお、これは読み書き可能なプロパティですが、一般にこのプロパティから読み取る値は書き込んだ値と同じではありません『JavaScript第6版』（オライリー）の20章「20.2クッキー」を参照してください。
-
-     readonly string defaultCharset
-
-          ブラウザのデフォルトの文字セット。
-
-     readonly Window defaultView
-
-          このドキュメントを表示するWebブラウザのwindowオブジェクト。
-
-
-     string designMode
-
-          このプロパティが「on」の場合、ドキュメント全体が編集可能です。「off」の場合は、ドキュメント全体が編集不可です（しかし、contenteditableプロパティが設定されている要素はもちろん引き続き編集可能です）。『JavaScript第6版』（オライリー）の15章「15.10.4　編集可能なコンテンツ」を参照してください。
-
-
-     string dir
-
-              HTMLドキュメントでは、このプロパティは&lt;html&gt;要素のdir属性を反映します。したがって、これはdocumentElement.dirと同じです。
-
-     readonly DocuentType doctype
-
-               ドキュメントの&lt;!DOCTYPE&gt;を表すDocumentTypeノード。
-
-     readonly Element documentElement
-
-               ドキュメントのルート要素。HTMLドキュメントでは、このプロパティは常に&lt;html&gt;タグを表すElementオブジェクトになります。このルート要素は、Nodeから継承するchildNodes[]配列からも入手できますが、通常はchildNodes[]配列の最初の要素ではありません。bodyプロパティも参照してください。
-
-
-     string domain
-
-          ドキュメントのロード元サーバのホスト名。存在しない場合はnull。同一生成元ポリシーを緩和し、関連するドメインから提供されたドキュメントにアクセスできるようにするために、このプロパティをドメインの接尾辞に設定できます。
-
-
-     readonly HTMLCollection embeds
-
-          ドキュメント内の&lt;embed&gt;要素の配列に似たオブジェクト。
-
-     readonly HTMLCollection forms
-
-          HTMLドキュメントでは、このプロパティは&lt;head&gt;要素を参照します。
-
-     readonly Element head
-
-          HTMLドキュメントでは、このプロパティは&lt;head&gt;要素を参照します。
-
-     readonly HTMLCollection images
-
-          ドキュメント内のすべてのImage要素の配列に似たオブジェクト。
-
-     readonly DOMImplementation implementation
-
-          このドキュメントのDOMImplementationオブジェクト。
-
-     readonly string lastModified
-
-          ドキュメントに対する最新の変更日時を示します。この値は、Webサーバーからオプションで送信されるHTTPヘッダーのLast-Modifiedから来ています。
-
-
-     readonly HTMLCollection links
-
-          ドキュメント内のすべてのハイパーリンクの配列に似たオブジェクト。この&lt;link&gt;要素は含まれていません。Linkを参照してください。
-
-     readonly location location
-
-          Window.locationと同じ。
-
-     readonly HTMLCollection plugins
-
-          embedsプロパティと同じ。
-
-     readonly string readyState
-
-          このプロパティは、ドキュメントをまだロード中の場合は文字列「loading」になり、完全にロードしたら「complete」になります。ブラウザは、このプロパティが「complete」に変わったら、Documentでreadystatechangeイベントを発行します。
-
-     readonly string referrer
-
-          このドキュメントへリンクしているドキュメントのURL。このドキュメントがハイパーリンクでアクセスされていない場合や、Webサーバーが参照ドキュメントを提示していない場合はnull。このプロパティにより、クライアントサイドJavaScriptはHTTPのreferrerヘッダにアクセスできます。しかし、スペルが異なることに注意してください。HTTPヘッダではrが3つで、JavaScriptプロパティではrが4つです。
-
-
-     readonly HTMLCollection scripts
-
-          ドキュメント内すべての&lt;script&gt;要素の配列に似たオブジェクト。
-
-     readonly CSSStyleSheet[] stylesheets
-
-          ドキュメント内に埋め込まれたリンクされたりしているすべてのスタイルシートを表すオブジェクトの集合。HTMLドキュメントでは、&lt;link&gt;タグと&lt;style&gt;タグで定義されたスタイルシートが含まれます。
-     
-     string title
-
-          このドキュメントの&lt;title&gt;タグのプレーンテキストでの内容。
-
-
-     readonly string URL
-
-          ドキュメントのロード元のURL。この値はlocation.hrefプロパティと同じ場合が多いですが、スクリプトでフラグメント識別子（location.hashプロパティ）を変更した場合は、locationプロパティとURLプロパティは同じURLを参照しなくなります。Document.URLをWindow.URLと混同しないでください。
-
-
-メソッド
-
-     Node adoptMode(Node node)
-
-          このメソッドは、nodeが現在含まれているドキュメントからnodeを削除し、ownerDocumentプロパティをこのドキュメントに設定してこのドキュメントに挿入できる状態にします。implementNode()と対比してみてください。importNode()は別のドキュメントからノードをコピーし、そのノードは削除しません。
-
-     void close()
-
-          open()メソッドで開かれたドキュメントストリームを閉じ、バッファリングされた出力をすべて表示させます。
-
-     Comment createComment(string data)
-
-          設定された内容で新たなCommentノードを作成して返します。
-
-     DocumentFragment createDocumentFragment()
-
-          新しい空のDocumentFragmentノードを作成して返します。
-
-     Element createElement(string localName)
-
-          指定されたタグ名を持つ新しい空のElementノードを作成して返します。HTMLドキュメントでは、タグ名は大文字に変換されます。
-
-     Element createElementNS(string namespace, string qualifiedName)
-
-          新しい空のElementノードを作成して返します。最初の引数には要素の名前空間URIを指定し、2番目の引数には名前空間接頭辞、コロン、要素のタグ名を指定します。
-
-     Element createEvent(string eventInterface)
-
-          初期化されていない人工的なEventオブジェクトを生成して返します。引数にはイベントの種類を指定する必要があり、この引数には「Event」、「UIEvent」、「MouseEvent」「MessageEvent」などの文字列にすべきです。Eventオブジェクトの生成後、initEvent()、initUIEvent()、initMouseEvent()などの適切なイベント初期化メソッドを呼び出して、読み取り専用のプロパティを初期化できます。これらのイベント固有の初期化メソッドのほとんどは本書では扱っていませんが、最も簡単なメソッドとしてEvent.initEvent()を参照してください。人工的なイベントオブジェクトを生成して初期化したら、EventTargetのdispatchEvent()メソッドを使ってのイベントを発行できます。人工的なイベントでは、常にisTrustedプロパティがfalseになります。
-
-     ProcessingInstruction createProcessingInstruction(string target, string data)
-
-          指定されたターゲットとデータ文字列で新しいProcessingInstructionノードを作成して返します。
-
-     Text createTextNode(string data)
-
-          指定されたテキストを表す新しいTextノードを作成して返します。
-
-     Element elementFromPoint(float x, float y)
-
-          ウィンドウ座標(x, y)にある最も深くネストされたElementを返します。
-
-     boolean execCommand(string commanded, [boolean showUI, [string value]])
-
-          commandId引数で指定された名前の編集コマンドを、挿入カーソルを持つ編集可能な要素で実行します。HTML5では以下のコマンドが定義されています。
-
-boldcreateLinkdeleteformatBlockforwardDeleteinsertImageinsertHTMLinsertLinkBreakinsertOrderedListinsertUnorderedListinsertParagraphinsertTextitalicredoselectAllsubscriptsuperscriptundounlinkunselect
-
-
-          上記のコマンドの一部（createLinkなど）には引数値が必要です。execCommand()への2番目の引数がfalseの場合、3番目の引数でコマンドが使う引数を指定します。falseではない場合は、ブラウザはユーザーに必要な値の入力を促します。exeCommand()に関する詳細は、『JavaScript第6版』（オライリー）の15章「15.10.4　編集可能なコンテンツ」を参照してください。
-
-     Element getElementById(string elementId)
-
-          このメソッドはid属性の値がelementIdであるElementノードをドキュメントから検索し、そのElementを返します。そのようなElementが見つからない場合にはnullを返します。id属性の値にはドキュメント内で一位になるようになっていますが、このメソッドが指定されたelementIdを持つElementを複数見つけた場合には、最初のElementを返します。このメソッドは特定のドキュメント要素を表すElementオブジェクトを取得するための簡単な手段を提供するため、よく使われる重要なメソッドです。なお、このメソッドの名前の最後は「ID」ではなく「Id」ですので注意してください。
-
-     NodeList getElementsByClasName(string classNames)
-
-
-     NodeList getElementByName(string elementName)
-
-
-
-     NodeList getElementsByTagName(string qualifiedName)
-
-
-     NodeList getElementsByTagNameNS(string namespace, string localName)
-
-
-
-     boolean hasFocus()
-
-
-     Node importNode(Node node, boolean deep)
-
-
-
-     Window open(string url, string name, string features, [boolean replace])
-
-
-     Document open([string type], [string replace])
-
-
-
-     boolean queryCommandEnabled(string commandId)
-
-
-
-     boolean queryCommandIndeterm(string commandId)
-
-
-     boolean queryCommandState(string commandId)
-
-
-
-     boolean queryCommandSupported(string commandId)
-
-
-
-     string queryCommandValue(string commandId)
-
-
-     string querySelector(string selectors)
-
-
-
-     string querySelectorAll(string selectors)
-
-
-     void write(string text…)
-
-
-     void writeln(string text…)
-
-
-
-
-
-イベント
-
-     ブラウザがDocumentオブジェクトで直接発行するイベントは多くありませんが、Elementイベントはそれを含むDocumentに伝播されます。そのため、DocumentオブジェクトはElementで列挙したすべてのイベントハンドラプロパティをサポートしています。Elementと同様に、DocumentオブジェクトはEventTargetのメソッドを実装しています。
-     ブラウザは、Documentオブジェクトで2つのドキュメント準備完了イベントを発行します。readyStateプロパティが変わると、ブラウザはreadystatechangeイベントを発行します。このイベントハンドラは、onreadystagechangeプロパティで登録できます。また、ブラウザはドキュメントツリーができると（ただし、外部リソースがローディングを完了する前）、DOMContendLoadイベントを発行します（『JavaScript第6版』（オライリー）の17章「17.4　ドキュメントのloadイベント」を参照）。しかし、onCOMContentLoadedプロパティがあるので、EventTargetメソッドを使ってこのイベントのハンドラを登録する必要があります。
-
+<pre class="prettyprint">
+var x = 1;
+var y = 0;
+try{
+  if(y == 0){ throw new Error('0で除算しようとしました。');}
+  var z = x / y;
+}catch(e){
+  document.writeln(e.message);
+}
 </pre>
-<pre>
 
-
-DocumentFragment
-
-
-
-DocumentType
-
-
-
-DOMException
-
-
-
-DOMImplementation
-
-
-
-DOMSettableTokenList
-
-
-DOMTokenList
-
-
-
-
-
-
-</pre>
           </div>
           </div>
         </div>
@@ -458,7 +61,9 @@ DOMTokenList
     <div id="footer"><%= title %></div>
  
     <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/google-code-prettify/prettify.js"></script>
+    <script>prettyPrint();</script>
     <script src="js/bootstrap.min.js"></script>
-
+    <script src="js/list-counter.js"></script>
   </body>
 </html>

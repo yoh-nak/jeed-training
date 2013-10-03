@@ -187,9 +187,55 @@ document.writeln(' 菱型の面積: ' + a.diamond(10, 2)); //=> 静的メソッ�
 <hr>
 
 <h4>オブジェクトリテラルでプロトタイプの定義</h4>
+<p>プロトタイプでメソッドを定義するとき、定義が独立した文で読みにくく、オブジェクト名に変更があった場合、コードをすべて修正する必要があります。</p>
+<pre>
+var MemberClass = function(){ ... };
+MemberClass.prototype.xxxx = function(){ ... } 〜 ;
+MemberClass.prototype.yyyy = function(){ ... } 〜 ;
+MemberClass.prototype.zzzz = function(){ ... } 〜 ;
+</pre>
+
+<p>このような場合、以下のようにオブジェクトリテラルでまとめて定義するとコードが読みやすくなります。
 
 <pre class="prettyprint">
+var MemberClass = function(firstName, lastName){
+  this.firstName = firstName;
+  this.lastName = lastName;
+};
 
+MemberClass.prototype.getName = function(){
+  return this.lastName + ' ' + this.firstName;
+};
+
+MemberClass.prototype.toString = function(){
+  return this.lastName + this.lastName;
+};
+</pre>
+
+<p>このような場合、以下のようにオブジェクトリテラルでまとめて定義するとコードが読みやすくなります。
+
+<pre>
+var MemberClass = function(){ ... };
+MemberClass.prototype = {
+  xxxx: function() { .... },
+  yyyy: function() { .... },
+  zzzz: function() { .... }
+};
+</pre>
+<pre class="prettyprint">
+var MemberClass = function(firstName, lastName){
+  this.firstName = firstName;
+  this.lastName = lastName;
+};
+
+MemberClass.prototype = {
+  getNeme: function(){
+    return this.lastName + ' ' + this.firstName;
+  },
+  toString: function(){
+    return this.lastName + this.lastName;
+  }
+};
 </pre>
 
 <hr>

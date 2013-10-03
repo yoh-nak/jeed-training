@@ -132,8 +132,8 @@ document.writeln(mem1.sex + ' | ' + mem2.sex);</mark> //=> 男 | 女
 </pre>
 <hr>
 
-<h4>静的プロパティ／静的メソッドの利用</h4>
-<p>プロパティやメソッドによっては、インスタンスを生成せずに利用できるものがあります。このようなプロパティ／メソッドは、静的プロパティ／静的メソッド、またはクラスプロパティ、クラスメソッドと呼ばれます。静的メソッド／静的プロパティの呼び出しは以下のようになります。</p>
+<h4>静的（static）プロパティ／静的（static）メソッド</h4>
+<p>プロパティやメソッドによっては、インスタンスを生成せずに利用できるものがあります。このようなプロパティ／メソッドは、静的プロパティ／静的メソッド、またはスタティックプロパティ、スタティックメソッドと呼ばれます。静的メソッド／静的プロパティの呼び出しは以下のようになります。</p>
 <pre>
 オブジェクト名.プロパティ名 [= 設定値];
 オブジェクト名.メソッド名([引数 [, ...]]);
@@ -153,8 +153,43 @@ var オブジェクト名 = function(){
   オブジェクト名.プロパティ名 = 値;
   オブジェクト名.メソッド名 = function(){メソッドの定義}
 };
+
+
+//後から追加
+var オブジェクト名 = function(){};
+
+オブジェクト名.プロパティ名 = 値;
+
+オブジェクト名.メソッド名 = function(){
+  メソッドの定義
+};
 </pre>
 
+<pre class="prettyprint">
+var AreaClass = function(){
+  AreaClass.version = 1.0;
+
+  AreaClass.triangle = function(){
+    return base * height / 2;
+  }
+
+  AreaClass.diamond = function(){
+    return width * height / 2;
+  }
+};
+
+//静的プロパティの利用
+document.writeln('Areaクラスのバージョン: ' + AreaClass.version);
+//静的メソッドの利用
+document.writeln(' 三角形の面積: ' + AreaClass.triangle(5, 3));
+
+//インスタンス化
+var a = new AreaClass();
+document.writeln(' 菱型の面積: ' + a.diamond(10, 2)); //=> 静的メソッドをインスタンス化して利用するとエラー
+</pre>
+
+
+<p>後から追加したら以下のようになります。</p>
 <pre class="prettyprint">
 var AreaClass = function(){};
 
@@ -168,11 +203,14 @@ AreaClass.diamond = function(){
   return width * height / 2;
 }
 
+//静的プロパティの利用
 document.writeln('Areaクラスのバージョン: ' + AreaClass.version);
+//静的メソッドの利用
 document.writeln(' 三角形の面積: ' + AreaClass.triangle(5, 3));
 
+//インスタンス化
 var a = new AreaClass();
-document.writeln(' 菱型の面積: ' + a.diamond(10, 2)); //=> エラー
+document.writeln(' 菱型の面積: ' + a.diamond(10, 2)); //=> 静的メソッドをインスタンス化して利用するとエラー
 </pre>
 
 <hr>

@@ -181,8 +181,45 @@ document.writeln(' 菱型の面積: ' + a.diamond(10, 2)); //=> 静的メソッ�
 <h4>プロパティの削除</h4>
 
 <pre class="prettyprint">
+var MemberClass = function(){};
 
+MemberClass.prototype.sex = '男';
+
+var mem1 = new MemberClass();
+var mem2 = new MemberClass();
+
+document.writeln(mem1.sex + ' | ' + mem2.sex); //=> 男 | 男
+
+mwm2.sex = ' 女';
+document.writeln(mem1.sex + ' | ' + mem2.sex); //=> 男 | 女
+
+//インスタンスmem1のsexプロパティを削除しようとしていますが、mem1はsexプロパティを持っていないのでなにもおきません
+delete mem1.sex;
+
+//mem2が自分自身のsexプロパティを持つので、delete演算子はmem2のsexプロパティを削除します。
+dleete mem2.sex;
+
+//mem1は暗黙の参照をたどってプロトタイプオブジェクトのsexを返します。mem2は、独自のプロパティsexが削除されたので、暗黙の参照をたどって、プロトタイプオブジェクトのプロパティを返します。
+document.writeln(mem1.sex + ' | ' + mem2.sex); //=> 男 | 男
 </pre>
+<p>プロトタイプオブジェクトのメンバを削除するには、以下のようにします。ただし、このプロトタイプオブジェクトを参照しているすべてのインスタンスに影響がでるので注意しましょう。</p>
+<pre class="prettyprint">
+delete MemberClass.prototype.sex;
+</pre>
+<p>プロトタイプで定義されたメンバをインスタンス単位で削除するにはundefinedを使います。ただし、この場合、値を未定義にしているだけでメンバを削除しているわけではないので、for...inループで列挙するとsexプロパティは存在しているものとして表示されます。</p>
+
+<pre class="prettyprint">
+var MemberClass = function(){};
+
+MemberClass.prototype.sex = '男';
+
+var mem1 = new MemberClass();
+var mem2 = new MemberClass();
+document.writeln(mem1.sex ' | ' + mem2.sex); //=> 男 | 男
+mem2.sex = undefined;
+document.writeln(mem1.sex ' | ' + mem2.sex); //=> 男 | undefined
+</pre>
+
 
 <hr>
 

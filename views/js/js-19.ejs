@@ -70,9 +70,39 @@ arrayWalk(ary, <mark>function(key, value)</mark>{
 <hr>
 
 <h4>クロージャー</h4>
+<p>クロージャーとは関数内のローカル変数を参照している関数内の関数のことです。関数の中で使われたローカル変数は、関数が終了した時点で破棄されるはずですが、closure関数から返された無名関数がローカル変数counterを参照し続けているので、closure関数終了後もローカル変数counterの値が保持され続けます。</p>
 
-<pre>
+<pre class="prettyprint">
+function closure(init){
+  var counter = init;
 
+  return function(){
+    return ++counter;
+  }
+}
+
+var myClosure = closure(1);
+document.writeln(myClosure()); //=> 2
+document.writeln(myClosure()); //=> 3
+document.writeln(myClosure()); //=> 4
+</pre>
+<p>クロージャーは処理を1つしかもたないシンプルなオブジェクトとして動作します。簡単な処理であれば、オブジェクトよりもクロージャーのほうがシンプルに記述できるため、変数に伴う処理がひとつしかない場合はクロージャーが便利です。それに対して、複数の処理を必要とする場合はオブジェクトを使うとよいでしょう。</p>
+<pre class="prettyprint">
+function closure(init){
+  var counter = init;
+
+  return function(){
+    return ++counter;
+  }
+}
+
+var myClosure1 = closure(1);
+var myClosure2 = closure(100);
+document.writeln(myClosure1()); //=> 2
+document.writeln(myClosure2()); //=> 101
+document.writeln(myClosure1()); //=> 3
+document.writeln(myClosure2()); //=> 102
+<pre class="prettyprint">
 </pre>
 
 

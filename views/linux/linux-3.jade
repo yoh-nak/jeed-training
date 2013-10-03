@@ -1,0 +1,366 @@
+!!!
+html(lang='ja')
+	head
+		meta(name='viewport',content='width=device-width,initial-scale=1.0')
+		link(href='css/bootstrap.min.css',rel='stylesheet',media='screen')
+		link(href='js/dtree/dtree.css', rel='stylesheet', media='screen')
+		link(href='less/common.less',rel='stylesheet',media='screen')
+		link(href='js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+		title=title
+		:coffeescript
+		:less
+	body
+		include navbar.jade
+		div.container
+			div.row
+				div.col-sm-3
+					include left.jade
+				div.col-sm-9
+					div.panel.panel-primary
+						div.panel-heading
+							i.glyphicon.glyphicon-book
+							&nbsp;Mongoシェル
+						div.panel-body
+							pre
+| MongoDBのCRUD（Create, Read, Update, Delete）
+| 
+| 
+| 
+| MongoDBの開始
+| $ mongo
+| $ mongo データベース名
+| 
+| 
+| MongoDBの終了
+| >exit
+| >quit()
+| Ctrl+「C」
+| 
+| 
+| ヘルプの表示
+| >help
+| >db.help()
+| >db.stats()
+| 
+| 
+| 
+| 
+| DB「tutorial」に切り替え（ない場合は新規作成）
+| >use tutorial
+| 
+| 
+| コレクションの作成
+| >db.createCollection('user')；
+| 
+| 
+| コレクションのリネーム
+| >db.user.renameCollection('users');
+| 
+| 
+| usersコレクションに挿入
+| >db.users.insert({username: 'smith'})
+| 
+| 
+| usersコレクションの検索
+| >db.users.find()
+| 
+| 
+| 第一引数にidの指定がなければusersコレクションにinsert（idの指定があればupdate）
+| >db.users.save({username: 'jones'})
+| 
+| 
+| usersコレクションの全削除
+| >db.users.remove()
+| 
+| 
+| usersコレクションのドキュメント数
+| >db.users.count()
+| 
+| 
+| 
+| 
+| >db.users.find();
+| >db.users.find({username:'jones'});
+| >db.users.find({_id:ObjectId('518869be37d5684f207935ae')})
+| 
+| 
+| usernameがjonesではないデータを表示（ne = not equal）
+| >db.users.find({username: {$ne: 'jones'}});
+| 
+| 
+| usersコレクションを更新
+| >db.users.update({username: 'smith'}, {$set: {country: 'Canada'}})
+| 
+| 
+| usersコレクションのusernameがjonesのものからcountryだけ表示
+| >db.users.find({username:'jones'}, {country: true});
+| 
+| 
+| usersコレクションのドキュメントを削除
+| >db.users.update({username: 'smith'},{$unset: {country: 1}}) 
+| 
+| 
+| 
+| 
+| 
+| 
+| >db.users.update({username: 'smith'},
+| {$set: {favorites: 
+|      {
+|      cities: ['Chicago', 'Cheyenne'],
+|      movies: ['Casablanca', 'The Sting']
+|      }
+| }
+| })
+| 
+| 
+| db.users.update({username: 'jones'},
+| {$set: {favorites:
+|      {
+|      movies: ['Casablanca', 'Rocky']
+|      }
+| }
+| })
+| 
+| 
+| 
+| 
+| 
+| 
+| >db.users.find()
+| 
+| 
+| 絞り込み検索
+| >db.users.find({'favorites.movies': 'Casablanca'}) 
+|  
+| 複数行update（4つ目の引数がtrueで複数行更新）
+| >db.users.update({'favorites.movies': 'Casablanca'},
+|      {$addToSet: {'favorites.movies': 'The Maltese Falcon'}},
+|           false,
+|           true)
+| 
+| 
+| コレクションのドキュメントの削除
+| >db.users.remove({'favorites.cities': 'Cheyenne'})
+| 
+| 
+| コレクションの削除
+| >db.users.drop()
+| 
+| 
+| データベースの一覧表示
+| >show dbs
+| 
+| 
+| コレクションの一覧表示
+| >show collections
+| 
+| 
+| データベースの削除
+| >use tutorial
+| 
+| >db.dropDatabase()
+| 
+| 
+| 
+| 
+| 
+| 
+| >use tutorial
+| 
+| 
+| >for(var i=0; i<200000; i++){
+|      db.numbers.save({num: i});
+| }
+| 
+| 
+| >db.numbers.find()
+| 
+| 
+| >db.numbers.find({num: 500})
+| 
+| 
+| 199995件目より後を表示（gt = greater than）
+| >db.numbers.find({num: {'$gt': 199995}})
+| 
+| 
+| 20件目以降25件目より前を表示（lt = less than）
+| >db.numbers.find({num: {'$gt': 20, '$lt': 25}})
+| 
+| 
+| $gte（greater than or equal to 以上）
+| $lte（less than or equal to 以下）
+| 
+| 
+| $regex（正規表現）
+| >db.numbers.find({num: {$regex: /[0-2][0-9]/i}})
+| 
+| 
+| 昇順にソートする
+| >db.numbers.find().sort({num: 1);
+| 
+| 
+| 降順にソートする
+| >db.numbers.find().sort({num: -1);
+| 
+| 
+| 1件だけ表示
+| >db.numbers.findOne();
+| 
+| 
+| 3件だけ表示
+| >db.numbers.find().limit(3);
+| 
+| 
+| 
+| 
+| 2件目（0件目あり）のドキュメントから3件表示
+| >db.numbers.find().slip(2).limit(3);
+| 
+| 
+| 絞り込んだドキュメントの件数を表示
+| >db.numbers.fine().count();
+| 
+| 
+| 一意の値を表示
+| >db.numbers.distinct('num');
+| 
+| 
+| 
+| 100件目、200件目、300件目を抽出
+| >db.numbers.find({'num': {$in: [100, 200, 300]});
+| 
+| 
+| 100件目、200件目、300件目以外を抽出（nin = not in）
+| >db.numbers.find({'num': {$nin: [100, 200, 300]});
+| 
+| 
+| numbersコレクションにemailがあるドキュメントを抽出
+| >db.numbers.find({'email': {$exits: true});
+| 
+| 
+| numbersコレクションにemailがないドキュメントを抽出
+| >db.numbers.find({'email': {$exits: false});
+| 
+| 
+| 数値を5繰り上げる（inc = increment）
+| >db.numbers.update({'num': 100}, {$inc: {'num': 5}})
+| 
+| 
+| 数値を20繰り下げる
+| >db.numbers.update({'num': 100}, {$inc: {'num': -20}})
+| 
+| 
+| リネームする
+| >db.numbers.update({'num': 100}, {$rename: {'num': 'number'}})
+| 
+| 
+| 
+| 
+| データがあったら更新、なかったらインサート（3つ目の引数upsert）
+| >db.numbers.update({'num': 100}, {$inc: {'num': 5}}, true);
+| 
+| 
+| １件しか更新されない
+| >db.numbers.update({}, {$inc: {'num': 5}});
+| 
+| 
+| 全件更新される（4つ目の引数multi）
+| >db.numbers.update({}, {$inc: {'num': 5}}, false, true);
+| 
+| 
+| 
+| 
+| 
+| 
+| 構造の確認
+| >db.numbers.find({num: {'$gt': 199995}}).explain()
+| 
+| 
+| インデックスをつける（昇順のインデックスをnumキーにつける）
+| >db.numbers.ensureIndex({num: 1})
+| 
+| 
+| インデックスをつける（降順のインデックスをnumキーにつける）
+| >db.numbers.ensureIndex({num: -1})
+| 
+| 
+| インデックスの確認
+| >db.numbers.getIndexes() 
+| 
+| 
+| クエリのレスポンスが上がっている
+| >db.numbers.find({num: {'$gt': 199995}}).explain() 
+| 
+| 
+| インデックスの削除
+| >db.numbers.dropIndex({num: 1})
+| 
+| 
+| ユニークキーをつける
+| >db.numbers.ensureIndex({num: 1}, {'uniquie': true})
+| 
+| 
+| 
+| 
+| 
+| 
+| command.jsで保存
+| db.numbers.remove({'num': 100);
+| 
+| 
+| 外部ファイルを実行
+| mongo tutorial command.js
+| 
+| 
+| load('commands.js');
+| 
+| 
+| 
+| 
+| バックアップをとる
+| mongodump --db tutorial
+| 
+| 
+| バックアップの復元
+| mongorestore
+| 
+| 
+| もとのデータベースを削除して復元
+| mongorestore --drop
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| >db.stats()
+| >db.runCommand({dbstats: 1})
+| >db.runCommand({collstats: 'numbers'})
+| >db.runCommand()
+| >db.runCommand
+| >db.$cmd.findOne({collstats: 'numbers'})
+| 
+| 
+|  
+| 
+| 
+| ドットインストール
+| ================
+| 
+| 
+| MongoDB入門
+| http://dotinstall.com/lessons/basic_mongodb
+| 
+| 
+|  
+		div#footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='js/bootstrap.min.js')
+		script(src='js/list-counter.js')

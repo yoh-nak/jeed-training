@@ -1,14 +1,57 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no"> 
-    <meta name="apple-mobile-web-app-capable" content="yes"> 
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>enchant</title>
-    <script type="text/javascript" src="enchant.js"></script>
-    <script type="text/javascript" src="ui.enchant.js"></script>
-    <script type="text/javascript">
+<%- include ../../head %>
+  <body>
+ 
+    <%- include navbar %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+
+        <%- include recipe2 %>
+        
+        </div>
+        <div class="col-sm-9">
+          <div class="panel panel-primary">
+          <div class="panel-heading">スコアをグラフィカルなフォントで表示する</div>
+          <div class="panel-body">
+          <p>
+            <a href="demo/enchant/recipe2-12/index.html" target="_blank" class="btn btn-default">
+            <i class="glyphicon glyphicon-play"></i> デモ
+            </a>
+          </p>
+<h4>素材</h4>
+<p>
+<img src="demo/enchant/recipe2-12/betty.png" alt="">
+</p>
+<p>
+<img src="demo/enchant/recipe2-12/flowers.png" alt="">
+</p>
+<p>
+<img src="demo/enchant/recipe2-12/map1.png" alt="">
+</p>
+<p>
+<audio controls autobuffer>
+<source src="demo/enchant/recipe2-12/Ready.wav" />
+</audio>
+</p>
+<p>
+<audio controls autobuffer>
+<source src="demo/enchant/recipe2-12/one_0.mp3" />
+</audio>
+</p>
+<h4>ソース</h4>
+<pre class="prettyprint">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, user-scalable=no"&gt; 
+    &lt;meta name="apple-mobile-web-app-capable" content="yes"&gt; 
+    &lt;meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"&gt;
+    &lt;title&gt;enchant&lt;/title&gt;
+    &lt;script type="text/javascript" src="enchant.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" src="ui.enchant.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript"&gt;
       // enchant.js本体やクラスをエクスポートする
       enchant();
 
@@ -24,7 +67,7 @@
           this.anime = [8, 9, 10, 11];
           // アニメーション表示する処理
           this.addEventListener('enterframe', function() {
-            if (this.tick <= 8) {
+            if (this.tick &lt;= 8) {
               this.frame = this.tick;
             } else {
               this.frame = this.anime[this.tick % 4];
@@ -236,7 +279,7 @@
           // rootSceneの「enterframe」イベントが発生したときに実行するリスナ
           core.rootScene.addEventListener('enterframe', function(e) {
             // プレイヤーキャラのx座標が「300」以上なら、シーンを切り替える
-            if (player.x > 300) {
+            if (player.x &gt; 300) {
               core.pushScene(core.field(player.x, player.y));
               // pop時のためにx座標を少し戻しておく
               player.x = 280;
@@ -319,7 +362,7 @@
 
           // コイン生成処理
           var coins = [];
-          for (var i = 0; i < 10; i++) {
+          for (var i = 0; i &lt; 10; i++) {
             var coin = new Coin(128, 80 + 16 *i);
             scene.addChild(coin);
             coins[i] = coin;
@@ -333,7 +376,7 @@
           // シーンの「enterframe」イベントが発生したときに実行するリスナ
           scene.addEventListener('enterframe', function(e) {
             // プレイヤーキャラのx座標が「-20」以下なら、前のシーンに切り替える
-            if (player.x < -20) core.popScene();
+            if (player.x &lt; -20) core.popScene();
             // プレイヤーキャラとコインの当たり判定
             for (var i in coins) {
               if (player.within(coins[i], 16)) {
@@ -359,11 +402,28 @@
         // ゲームスタート
         core.start();
       }
-    </script>
-    <style type="text/css">
+    &lt;/script&gt;
+    &lt;style type="text/css"&gt;
       body {margin: 0;}
-    </style>
-  </head>
-  <body>
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div id="footer"><%= title %></div>
+ 
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/google-code-prettify/prettify.js"></script>
+    <script>prettyPrint();</script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/list-counter.js"></script>
   </body>
 </html>

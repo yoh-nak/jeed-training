@@ -132,7 +132,14 @@ document.writeln(mem1.sex + ' | ' + mem2.sex);</mark> //=> 男 | 女
 </pre>
 <hr>
 
-<h4>静的プロパティ／静的メソッド</h4>
+<h4>静的プロパティ／静的メソッドの利用</h4>
+<p>プロパティやメソッドによっては、インスタンスを生成せずに利用できるものがあります。このようなプロパティ／メソッドは、静的プロパティ／静的メソッド、またはクラスプロパティ、クラスメソッドと呼ばれます。静的メソッド／静的プロパティの呼び出しは以下のようになります。</p>
+<pre>
+オブジェクト名.プロパティ名 [= 設定値];
+オブジェクト名.メソッド名([引数 [, ...]]);
+</pre>
+
+<h4>静的プロパティ／静的メソッドのの定義</h4>
 
 <pre>
 function オブジェクト名(){
@@ -149,7 +156,23 @@ var オブジェクト名 = function(){
 </pre>
 
 <pre class="prettyprint">
+var AreaClass = function(){};
 
+AreaClass.version = 1.0;
+
+AreaClass.triangle = function(){
+  return base * height / 2;
+}
+
+AreaClass.diamond = function(){
+  return width * height / 2;
+}
+
+document.writeln('Areaクラスのバージョン: ' + AreaClass.version);
+document.writeln(' 三角形の面積: ' + AreaClass.triangle(5, 3));
+
+var a = new AreaClass();
+document.writeln(' 菱型の面積: ' + a.diamond(10, 2)); //=> エラー
 </pre>
 
 <hr>

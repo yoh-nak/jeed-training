@@ -61,6 +61,7 @@ app.get('/js-:id', js.js);
 app.get('/webapi-:id', js.webapi);
 app.get('/enchant-:id', js.enchant);
 app.get('/library-:id', js.library);
+app.get('/jsrecipe-:id', js.recipe);
 
 //資料系
 app.get('/material-:id', material.material);

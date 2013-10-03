@@ -30,3 +30,12 @@ exports.library = function(req, res){
 	  	instructor: config.instructor
 	});
 };
+
+
+//Library
+exports.recipe = function(req, res){
+	res.render('js/recipe/recipe1-' + req.params.id, {
+	  	title: config.title,
+	  	instructor: config.instructor
+	});
+};

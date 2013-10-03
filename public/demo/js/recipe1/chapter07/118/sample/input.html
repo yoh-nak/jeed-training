@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Dialog</title>
+</head>
+<body>
+<form>
+名前：<input type="text" name="uName" id="uName">
+<input type="button" value="設定" id="setBtn">
+</form>
+<output id="result"></output>
+<script>
+	// ボタンにイベントを設定
+	var btn = document.getElementById("setBtn");
+	btn.addEventListener("click", function(){
+		// 入力された内容を返す
+		var text = document.getElementById("uName").value
+		// 呼び出し元に返すデータ
+		winObject.returnValue = text;
+		// ダイアログを閉じる
+		window.close();
+	}, false);
+	// 呼び出し元から渡されたパラメータを表示
+	var winObject = window.dialogArguments;
+	document.getElementById("result").innerHTML = winObject;
+</script>
+</body>
+</html>

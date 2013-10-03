@@ -50,6 +50,21 @@ var ary = {1, 2, 4, 8, 16};
 arrayWalk(ary, <mark>showElement</mark>);
 </pre>
 
+<p>無名関数でシンプルに記述すると以下のようになります。</p>
+
+<pre class="prettyprint">
+function arrayWalk(data, <mark>f</mark>){
+  for(var key in data){
+    <mark>f(key, data[key])</mark>;
+  }
+}
+
+var ary = {1, 2, 4, 8, 16};
+arrayWalk(ary, <mark>function(key, value)</mark>{
+  document.writeln('key + ': ' + value);
+});
+</pre>
+
 <h4>クロージャー</h4>
 
 <pre>

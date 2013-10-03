@@ -18,14 +18,36 @@
 
 <h4>名前付き引数</h4>
 
-<pre>
+<p>名前付き引数とは、呼び出し時に名前を明示的に指定できる引数のことです。引数が多くなっても、コートの意味がわかりやすく、省略可能な引数を表現しやすくなります。また引数の順番を自由に変更できます。</p>
+<p>引数の数の多い関数や、省略可能な引数が多く、いろいろなパターンがある場合に有効です。</p>
 
+<pre class="prettyprint">
+function triangle(<mark>args</mark>){
+  if(<mark>args.base</mark> == undefined) {<mark>args.base</mark> = 1;}
+  if(<mark>args.height</mark> == undefined) {<mark>args.height</mark> = 1;}
+
+  return args.base * args.height / 2;
+}
+
+document.writeln(triangle(<mark>{base:5, height:4}</mark>));
 </pre>
 
 <h4>高階関数<h4>
+<p>JavaScriptの関数はデータ型の一種であり、数値型や文字列型の値と同様、関数の引数として渡したり、戻り値として返したりすることができます。関数を引数、戻り値として扱う関数のことを高階関数と呼びます。</p>
 
-<pre>
+<pre class="prettyprint">
+function arrayWalk(data, <mark>f</mark>){
+  for(var key in data){
+    <mark>f(key, data[key])</mark>;
+  }
+}
 
+function <mark>showElement(key, value)</mark>{
+  document.writeln(key + ': ' + value);
+}
+
+var ary = {1, 2, 4, 8, 16};
+arrayWalk(ary, <mark>showElement</mark>);
 </pre>
 
 <h4>クロージャー</h4>

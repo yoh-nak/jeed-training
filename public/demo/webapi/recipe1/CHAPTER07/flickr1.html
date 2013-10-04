@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>写真を検索してみよう</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        $('#search').click(function() {
+          var url = "http://api.flickr.com/services/rest/?jsoncallback=?";
+          var flickr_api_key = "<取得したAPIキーを指定してください>";
+          var keyword = $('#keyword').val();
+          $.getJSON(url, {
+            format:  'json',
+            api_key: flickr_api_key,
+            method:  'flickr.photos.search',
+            text:    keyword
+          },function(json) {
+              jQuery.each(json.photos.photo, function(i, obj) {
+                var result = '';
+                image_url = "http://farm" + obj.farm + "." + "static.flickr.com/" + obj.server + "/" + obj.id + "_" + obj.secret + "_m.jpg";
+                result = "<img src=\"" + image_url + "\">";
+                $("div#result").append(result);
+            });
+          });
+        });
+      });
+    </script>
+    <style text="text/css">
+      table { border: 1px solid gray; border-collapse: collapse; margin: 15px; float: left; }
+      table th, table td { border: 1px solid gray; text-align: center; padding: 5px; }
+      .result { width: 250px; }
+    </style>
+  </head>
+
+  <body style="text-align: center;">
+    <p>写真を検索してみよう</p>
+    <p>キーワードを入力して、ボタンをクリックしてください</p>
+    <form name="search" action="#" class="search">
+      <input type="text" name="keyword" id="keyword" value="" size="60">
+      <br>
+      <input type="button" id="search" value="検索する">
+    </form>
+    <div id="result">
+    </div>
+  </body>
+</html>

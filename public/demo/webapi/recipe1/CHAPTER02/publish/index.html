@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Facebook - Publish to wall</title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+<script type="text/javascript" src="http://connect.facebook.net/ja_JP/all.js"></script>
+<script type="text/javascript">
+$(function(){
+	FB.init({
+		appId:'＜取得した「アプリID」を指定して下さい＞'
+	});
+	
+	$('input[name="run"]').click(function(){
+		FB.ui(
+			{
+				method: 'feed',
+				name: 'Facebook Publish Test',
+				link: '＜共有するURL＞',
+				caption: 'Publish from test App.',
+				description: 'FB.uiメソッドを用いると簡単にウォールへの投稿が可能です。',
+				message: 'メッセージをどうぞ！'
+			},
+			function(response) {
+				if (response && response.post_id) {
+					$('#Result').text('投稿が完了しました。投稿IDは' + response.post_id + 'です。');
+				} else {
+					$('#Result').text('投稿はキャンセルされました。');
+				}
+			}
+		);
+	});
+});
+</script>
+</head>
+<body>
+<div id="fb-root"></div>
+<p>
+	<input type="button" name="run" value="ウォールへ投稿">
+</p>
+<div id="Result"></div>
+</body>
+</html>

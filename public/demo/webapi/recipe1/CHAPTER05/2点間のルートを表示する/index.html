@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<script type="text/javascript">
+$(function() {
+	var geocoder = new google.maps.Geocoder();
+	var latlng = new google.maps.LatLng(35.658706,139.74541);
+	var myOptions = {
+		zoom: 18,
+		center: latlng,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	};
+	var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+	
+	$('#search').click(function(){
+
+		var origin = $('#origin').val();
+		var destination = $('#destination').val();
+		
+		geocoder.geocode({
+			'address' : origin
+		},
+		function(results, status){
+			if(status == google.maps.GeocoderStatus.OK)
+			{
+				var location = results[0].geometry.location;
+				
+				geocoder.geocode({
+					'address' : destination
+				},
+				function(results, status){
+					if(status == google.maps.GeocoderStatus.OK)
+					{
+						var location = results[0].geometry.location;
+						var directions = new google.maps.DirectionsService();
+						
+						directions.route({
+							'origin'      : origin,
+							'destination' : destination,
+							'travelMode'  : google.maps.DirectionsTravelMode.DRIVING
+						},
+						function(results, status){
+							if(status == google.maps.DirectionsStatus.OK)
+							{
+								new google.maps.DirectionsRenderer({
+									'directions' : results,
+									'map' : map,
+									'panel' : document.getElementById('result')
+								});
+							}
+							else
+							{
+								alert('ルートが見つかりませんでした。');
+							}
+						});
+					}
+					else
+					{
+						alert('到着地点を検索できませんでした。');
+					}
+				});
+			}
+			else
+			{
+				alert('出発地点を検索できませんでした。');
+			}
+		});
+	});
+});
+</script>
+<style type="text/css">
+html,body,#map_canvas {
+    width:100%;height:100%;margin:0;padding:0;border:0;
+}
+#control {
+	background-color:#ffffff;
+    position:absolute;
+    bottom:10px;
+    left:10px;
+    z-index:100;
+    margin:0;
+    padding:10px;
+}
+#result {
+    background-color:#ffffff;
+	position:absolute;
+    top:10%;
+    right:10px;
+    z-index:100;
+    width:25%;
+    height:80%;
+    margin:0;
+    padding:0;
+    overflow:auto;
+}
+</style>
+<title>Google Maps API - Route</title>
+</head>
+<body>
+	<div id="map_canvas"></div>
+	<p id="control">
+		<input type="text" name="origin" id="origin">から<input type="text" name="destination" id="destination">へ<input type="button" value="ルート表示" id="search">
+	</p>
+	<div id="result">ここにルートが表示されます</div>
+</body>
+</html>

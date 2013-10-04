@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html lang="ja-JP">
+<head>
+<meta charset="UTF-8">
+<title>Search API Geocode Option (STEP 3)</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* ツイッターモジュール */
+#twitterModule {
+	width: 240px;
+	height: 300px; /* STEP 3 */
+	overflow: hidden;
+	border: 4px solid #E6D343;
+	/* STEP 3 */
+	position: absolute;
+	right: 0;
+	top: 40px;
+}
+#twitterModule .title {
+	position: relative; /* 追加 */
+	padding: 0 4px 4px;
+	background: #E6D343;
+	color: #F2F2F2;
+	font-size: 16px;
+}
+
+/* ツイートブロック */
+#area-tweets p {
+	padding: 1em;
+	font-size: 12px;
+	line-height: 1.2em;
+}
+#area-tweets p a {
+	/* STEP 2 */
+	color: #6699FF;
+	text-decoration: none;
+}
+#area-tweets p a.reply {
+	/* STEP 2 */
+	color: #999;
+}
+#area-tweets .user, 
+#area-tweets .date {
+	padding-right: 1em;
+	font-style: normal;
+	font-weight: normal;
+	color: #999;
+	/* STEP 2 */
+	text-decoration: none;
+}
+
+/* STEP 3 */
+/* 住所入力エリア */
+#twitterModule .area-input {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	padding-top: 4px;
+	background: #E6D343;
+}
+#twitterModule .area-input input {
+	padding: 5px 12px 2px;
+	width: 216px;
+	height: 16px;
+	font-size: 12px;
+	border: 0;
+	border-radius: 12px;
+	-moz-border-radius: 12px;
+	-webkit-border-radius: 12px;
+}
+
+#area-tweets .address {
+	padding: 1em 0 0;
+	color: #E6D343;
+	font-weight: bold;
+}
+
+/* ダミーテキスト */
+section h1 {
+	padding-bottom: 0.5em;
+	font: bold 24px/2em monospace;
+	color: black;
+}
+
+section h2 {
+	padding: 1em 0 0.5em;
+	font: bold 18px/1.5em monospace;
+	color: #009;
+}
+
+section p {
+	padding-bottom: 1em;
+	line-height: 1.5em;
+}
+
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script src="js/modernizr.js"></script>
+<script src="js/geo.js"></script>
+</head>
+<body>
+<div id="wrapper">
+	<header>
+		<h1>Twitter x Geocode</h1>
+	</header>
+	<div id="container">
+		<section>
+			<h1>特定の位置周辺のつぶやきを取得して表示</h1>
+			<p>Twitter Search APIのgeocodeオプションを利用し、位置情報からツイートを取得して自動スライド表示します。<br>
+			STEP1の基本で取得と単純な表示についてを、STEP2の応用でユーザビリティの向上方法についてを説明します。</p>
+			<p><em>◇対応ブラウザ</em><br>
+			IE6～、Firefox2～、Safari3～、Chrome、Opera</p>
+
+			<h2>01. はじめに</h2>
+			<p>Search APIは認証は不要ですが、IPベースでのリクエスト回数制限があります。<br>
+			REST APIと違い制限回数については非公表ですが、REST APIの制限回数(1時間当たり150回)よりは多めに設定されています。</p>
+			<p>そのため、今回は30秒ごとにリクエストを行うようにしています。</p>
+			
+			<h2>02. 準備</h2>
+			<p>HTMLに表示用のモジュールを作成します。<br>
+			#area-tweets内に取得したツイートを表示していきます。</p>
+			<p>該当するCSS部分のうち重要なところは[code-2]です。<br>
+			大枠となるモジュールと表示エリアに、overflow: hiddenをしていすることで、<br>
+			ツイートがはみ出さず下から上へ流れていく様子を表現することができるようになります。</p>
+		</section>
+		<div id="twitterModule">
+			<p class="title">Twitter Module</p>
+			<div id="area-tweets"></div>
+			<form class="area-input"><input type="text" value="渋谷駅"></form>
+		</div>
+	</div>
+	<footer></footer>
+</div>
+</body>
+</html>
+

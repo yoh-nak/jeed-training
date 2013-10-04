@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>その地域で流行っているトピックを取得してみよう!</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        var url = "http://api.twitter.com/1/trends/available.json?callback=?";
+        $.getJSON(url, function(json) {
+          jQuery.each(json, function(i, obj) {
+            var result = '';
+            result += "<option value=\"" + obj.woeid + "\">";
+            result += obj.country + ": ";
+            result += obj.name;
+            result += "</option>";
+            $("select#location").append(result);
+          });
+        });
+
+        $('#search').click(function() {
+          var url = "http://api.twitter.com/1/trends/" + $('select[id=location]').children(':selected').val() + ".json?callback=?";
+          $.getJSON(url, function(json) {
+            var result = '';
+            result += "<p>ロケーション名: " + json[0].locations[0].name + "</p>";
+            jQuery.each(json[0].trends, function(i, obj) {
+              result += "<p>";
+              result += "<a href=\"" + obj.url + "\">";
+              result += obj.name;
+              result += "</a></p>";
+            });
+            $("div#result").append(result);
+          });
+        });
+      });
+    </script>
+
+    <style text="text/css">
+      table { border: 1px solid gray; border-collapse: collapse; margin: 15px; float: left; }
+      table th, table td { border: 1px solid gray; text-align: center; padding: 5px; }
+      .result { width: 250px; }
+    </style>
+  </head>
+
+  <body style="text-align: center;">
+    <p>検索したロケーションを選択して、「検索」ボタンをクリックしてください</p>
+    <form name="search" action="#" class="search">
+      ロケーション：
+      <select id="location">
+      </select>
+      <input type="button" id="search" value="検索する">
+    </form>
+
+    <div id="result">
+    </div>
+  </body>
+</html>

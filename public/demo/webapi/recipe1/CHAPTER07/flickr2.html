@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>写真の詳細情報を取得してみよう</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        $('#search').click(function() {
+          var url = "http://api.flickr.com/services/rest/?jsoncallback=?";
+          var flickr_api_key = "<取得したAPIキーを指定してください>";
+          var photo_id = $('#photo_id').val();
+          $.getJSON(url, {
+            format:   'json',
+            api_key:  flickr_api_key,
+            method:   'flickr.photos.getInfo',
+            photo_id: photo_id
+          },function(json) {
+            var result = '';
+            if (json.stat == "ok") {
+              result += "タイトル: " + json.photo.title._content;
+              result += "<br/>";
+              result += "撮影日: " + json.photo.dates.taken;
+              result += "<br/>";
+              result += "by <a href=\"http://www.flickr.com/people/" + json.photo.owner.nsid + "/\">" + json.photo.owner.username + "</a>";
+              result += "<br/>";
+              image_url = "http://farm" + json.photo.farm + "." + "static.flickr.com/" + json.photo.server + "/" + json.photo.id + "_" + json.photo.secret + "_m.jpg";
+              result += "<a href=\"" + json.photo.urls.url[0]._content + "\">" + "<img src=\"" + image_url + "\"></a>";
+            }
+            else {
+              result = "写真情報が取得できませんでした";
+            }
+            $("div#result").html(result);
+          });
+        });
+      });
+    </script>
+    <style text="text/css">
+      table { border: 1px solid gray; border-collapse: collapse; margin: 15px; float: left; }
+      table th, table td { border: 1px solid gray; text-align: center; padding: 5px; }
+      .result { width: 250px; }
+    </style>
+  </head>
+
+  <body style="text-align: center;">
+    <p>写真の詳細情報を取得してみよう</p>
+    <p>写真IDを入力して、ボタンをクリックしてください</p>
+    <form name="search" action="#" class="search">
+      <input type="text" name="photo_id" id="photo_id" value="" size="60">
+      <br>
+      <input type="button" id="search" value="取得する">
+    </form>
+    <br/>
+    <div id="result">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Facebook - Public Data Search Sample</title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+<script type="text/javascript" src="http://connect.facebook.net/ja_JP/all.js"></script>
+<script type="text/javascript">
+var runSearch = function(e)
+{
+	var query = $('input[name="query"]').val();
+
+	var getPageData = function(response){
+			
+		var pages = response.data;
+		var pagesLength = pages.length;
+		
+		for(i = 0; i < pagesLength; i++)
+		{
+			FB.api('/' + pages[i].id,
+				function(result){
+					$('#Result').append('<li><img src="' + result.picture + '" alt="">' + result.name + '</li>');
+				});
+		}
+	}
+
+			
+	FB.api('/search',
+		{
+			q    : query,
+			type : 'page'
+		},
+		getPageData
+	);
+}
+$(function(){
+	$('input[name="run"]').click(runSearch);
+});
+</script>
+</head>
+<body>
+<div id="fb-root"></div>
+<p>
+	<input type="text" name="query" value="Facebook"><input type="button" name="run" value="ページを検索">
+</p>
+<ul id="Result"></ul>
+</body>
+</html>

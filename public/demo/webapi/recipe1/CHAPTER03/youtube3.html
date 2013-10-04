@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>動画プレイヤーを制御してみよう</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script src="http://www.google.com/jsapi"></script>
+    <script>
+      google.load("swfobject", "2.1");
+    </script>
+    <script type="text/javascript">
+      $(function() {
+         var params = { allowScriptAccess: "always" };
+         var atts = { id: "myytplayer" };
+         swfobject.embedSWF("http://www.youtube.com/v/u1zgFlCw8Aw?enablejsapi=1&playerapiid=ytplayer",
+                            "ytplayer", "640", "390", "8", null, null, params, atts);
+
+      });
+      function onYouTubePlayerReady(playerId) {
+        player = $("#myytplayer")[0];
+        player.addEventListener('onStateChange', 'playerState');
+      }
+      function onStateChange(newState) {
+        alert("Player's new state: " + newState);
+      }
+      function play() {
+        if (player) {
+          player.playVideo();
+        }
+      }
+      function pause() {
+        if (player) {
+          player.pauseVideo();
+        }
+      }
+      function stop() {
+        if (player) {
+          player.stopVideo();
+        }
+      }
+    </script>
+    <style text="text/css">
+      table { border: 1px solid gray; border-collapse: collapse; margin: 15px; float: left; }
+      table th, table td { border: 1px solid gray; text-align: center; padding: 5px; }
+      .result { width: 250px; }
+    </style>
+  </head>
+
+  <body style="text-align: center;">
+    <p>動画プレイヤーを制御してみよう</p>
+
+    <div id="ytplayer">
+      You need Flash player 8+ and JavaScript enabled to view this video.
+    </div>
+
+    <div>
+      <a href="javascript:void(0);" onclick="play();">再生</a>
+      |
+      <a href="javascript:void(0);" onclick="pause();">一時停止</a>
+      |
+      <a href="javascript:void(0);" onclick="stop();">停止</a>
+    </div>
+
+  </body>
+</html>

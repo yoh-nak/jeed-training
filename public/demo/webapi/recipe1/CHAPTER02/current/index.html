@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Facebook - Current User Data</title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+<script type="text/javascript" src="http://connect.facebook.net/ja_JP/all.js"></script>
+<script type="text/javascript">
+$(function(){
+	FB.init({
+		appId:'＜取得した「アプリID」を指定して下さい＞'
+	});
+
+	FB.getLoginStatus(function(response) {
+		if (response.session)
+		{
+			getBirthday();
+		}
+		else
+		{
+			$('input[name="run"]').click(function(){
+	
+				FB.login(function(rresponse){
+						if (rresponse.session) {
+							getBirthday();
+						}
+						else
+						{
+							console.debug('login-f');
+						}
+					},{ perms : 'user_birthday' });
+			});
+	
+		}
+	});
+	
+	var getBirthday = function()
+	{
+		FB.api('/me',function(response){
+			$('#Result').text('あなたの生年月日：' + response.birthday);
+		});
+	};
+	
+});
+</script>
+</head>
+<body>
+<div id="fb-root"></div>
+<p>
+	<input type="button" name="run" value="このアプリケーションにログイン">
+</p>
+<div id="Result"></div>
+</body>
+</html>

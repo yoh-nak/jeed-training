@@ -54,16 +54,34 @@ JavaScriptには、URLエンコードを行うための組み込み関数が３�
               <th>エンコードを行う関数</th><th>デコードを行う関数</th><th>特徴</th>
             </tr>
             <tr>
-              <td>escape()</td><td></td><td></td>
+              <td>escape()</td><td>unescape()</td>
+              <td>
+              <ul>
+                <li>「*+./@_」をエンコードしない</li>
+                <li>マルチバイト文字はUSC-2準拠でエンコードする（*）</li>
+              </ul>
+              </td>
             </tr>
             <tr>
-              <td>encodeURI()</td><td></td><td></td>
+              <td>encodeURI()</td><td>decodeURI</td>
+              <td>
+                <ul>
+                  <li>「!#$'+,-./:;~?@_~」をエンコードしない</li>
+                  <li>マルチバイト文字はUTF-8準拠でエンコードする</li>
+                </ul>
+              </td>
             </tr>
             <tr>
-              <td>encodeURIComponent()</td><td></td><td></td>
+              <td>encodeURIComponent()</td><td>decodeURIComponent</td>
+              <td>
+                <ul>
+                  <li>「!'()-._~」をエンコードしない</li>
+                  <li>マルチバイト文字はUTF-8準拠でエンコードする</li>
+                </ul>
+              </td>
             </tr>
           </table>
-
+          *ブラウザごとに動作が異なる場合があるため非推奨
 
           </div>
           </div>

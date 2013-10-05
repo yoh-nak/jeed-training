@@ -192,6 +192,32 @@ document.getElementById('disp1').fireEvent('onclick');
 </pre>
 
 
+<pre class="prettyprint">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;
+&lt;input type="button" id="disp1" value="表示" onclick="alert('テスト1');return true;"&gt;
+&lt;script&gt;
+var disp1 = document.getElementById('disp1');
+if(disp1.fireEvent){
+  disp1.fireEvent('onclick');
+}
+else{
+  var e = document.createEvent('MouseEvents');
+  e.initEvent('click',false,true);
+  disp1.dispatchEvent(e);
+}
+&lt;/script&gt;
+&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
           </div>
           </div>
         </div>

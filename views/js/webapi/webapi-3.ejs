@@ -12,36 +12,57 @@
         </div>
         <div class="col-sm-9">
           <div class="panel panel-primary">
-          <div class="panel-heading">Ajaxとは</div>
+          <div class="panel-heading">XMLHttpRequestとは</div>
           <div class="panel-body">
-          <h4>Ajaxとは</h4>
+          <h4>XMLHttpRequestとは</h4>
 <pre>
-近年、JavaScritが再び注目されるようになった理由には、Ajax（Asynchronous JavaScript + XML: 非同期なJavaScriptとXML）の流行があります。AjaxはJavaScriptによる非同期通信を利用して、Webページの一部を動的に書き換えることを可能とする技術です。
+Ajaxの特徴は、非同期通信を利用してWebページの動的な更新を行うことにあります。これを可能にしているのは、XMLHttpRequest（XHR）というJavaScriptの組み込みオブジェクト（API）です。
 
-JavaScriptによる非同期通信自体は以前から存在する技術でしたが、これらの技術を利用したGoogle MapなどのWebサービスが公開されたことと、2005年にこれらの技術に対して「Ajax」という名称が与えられたことをきっかけに、高機能なWebアプリケーションの開発を可能にする言語として、JavaScriptに注目が集まるようになりました。この頃にXMLやDOMなどのWeb関連技術の標準化が進んだことも、Ajaxの普及とJavaScriptの再評価の一因となっています。
+XMLHttpRequestオブジェクトは、元々はMicrosoft社によってActiveXオブジェクトとして開発され、Internet Explorer 5に実装された独自拡張です。その後、他のブラウザでもXMLHttpRequestオブジェクトが実装されるようになり、Internet Explorer 7で改めてMozillaの実装に合わせた再実装が行われました。こうしてXMLHttpRequestオブジェクトは事実上の標準機能となったため、W3Cでも正式に標準化が進められています。
 
-Ajaxを利用したWebアプリケーションとして有名なものには、前述のGoogle MapやGoogle Calendar、Gmailなど、Google社が提供する一連のサービスがあります。非同期通信により、ページの遷移を行わずにコンテンツの更新が可能となったことで、デスクトップアプリケーションのような操作性が実現されています。
+XMLHttpRequestオブジェクトを利用すると、すでに読み込んだWebページからさらにHTTPリクエストを送信して、ページ遷移を行うことなくコンテンツを更新できます。
+
+XMLHttpRequestという名称ではあるものの、XML以外のデータ形式にも対応しており、またHTTP以外のプロトコルで利用することもできます。
 </pre>
 
-<h4>非同期通信とは</h4>
+<h4>XMLHttpRequestオブジェクトの生成</h4>
 
 <pre>
-Ajaxで行われる非同期通信とは、どのようなものでしょうか？ここでは、非同期通信と反対の仕組みを持つ同期通信との違いを見てみましょう。
+var req = new XMLHttpRequest();
 </pre>
-
-<h4>同期通信</h4>
 
 <pre>
-データの通信を行う際、リクエスト（要求）に対するレスポンス（応答）を受け取るまで受信側が他の操作を行わない通信方法です。このため、大量のデータを同期通信で受信すると、ユーザーは受信が完了するまで長時間待たされることになり、その間は他の作業ができなくなります。
+Internet Explorer 6の場合
+var req = new ActiveXObject('Msxml12.XMLHTTP');
 </pre>
-
-<h4>非同期通信</h4>
 
 <pre>
-データの受信側はリクエストを送った後、送信側からレスポンスが返るまでの間に他の処理を行うことができ、レスポンスが返ると受信処理を実行します。このため、大量のデータを非同期通信で受信すると、ユーザーは受信完了するまでに長時間を待つことなく、受信したところからデータを利用することも可能となります。
-
-たとえば、Google Mapでは、最初に読み込んだ地図をマウスカーソルで動かして周辺の地図を表示できます。その際、先に読み込んだWebページからさらにリクエストを送信し、Webページを再読み込みすることなく追加のデータを受信する非同期通信が行われているのです。
+Internet Explorer 5/5.5の場合
+var req = new ActiveXObject('Microsoft.XMLHTTP');
 </pre>
+
+<pre>
+var req;
+
+if(XMLHttpRequest){
+  req = new XMLHttpRequest();
+}
+else{
+  try{
+    req = new ActiveXObject('Msxml12.XMLHTTP');
+  }
+  catch(e){
+    try{
+      req = new ActiveXObject('Microsoft.XMLHTTP');
+    }
+    catch(e){
+      alert('ActiveXを有効にしてください');
+    }
+  }
+}
+
+</pre>
+
           </div>
           </div>
         </div>

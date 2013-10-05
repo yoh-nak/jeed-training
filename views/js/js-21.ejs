@@ -58,6 +58,13 @@ document.getElementById('disp2').onclick = function(){
 &lt;/html&gt;
 </pre>
 
+<h4>イベントリスナ</h4>
+
+<p>
+<a href="https://developer.mozilla.org/ja/docs/Web/API/EventTarget.addEventListener" target="_blank" class="btn btn-default">
+<i class="glyphicon glyphicon-info-sign"></i> 参考: EventTarget.addEventListener
+</a>
+</p>
 
 <pre class="prettyprint">
 &lt;!DOCTYPE html&gt;
@@ -80,13 +87,7 @@ document.getElementById('disp3').addEventListener('click',function(){
 &lt;/html&gt;
 </pre>
 
-<h4>イベントリスナ</h4>
 
-<p>
-<a href="https://developer.mozilla.org/ja/docs/Web/API/EventTarget.addEventListener" target="_blank" class="btn btn-default">
-<i class="glyphicon glyphicon-info-sign"></i> 参考: EventTarget.addEventListener
-</a>
-</p>
 
 <p>IE8以前は、addEventListenerに対応していないため、IE独自拡張のattachEventメソッドで別処理します。</p>
 
@@ -110,6 +111,37 @@ document.getElementById('disp3').attachEvent('onclick',function(){
 &lt;/body&gt;
 &lt;/html&gt;
 </pre>
+
+<pre class="prettyprint">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;
+&lt;input type="button" id="disp3" value="表示3"&gt;
+&lt;script&gt;
+var disp3 = document.getElementById('disp3');
+if(disp3.attachEvent){
+  disp3.attachEvent('onclick',function(){
+    alert('テスト3');
+    return true;
+  });
+}
+else{
+  disp3.addEventListener('click',function(){
+    alert('テスト3');
+    return true;
+  },false);
+}
+&lt;/script&gt;
+&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
 
 <h4>イベントを擬似的に発生させる</h4>
 

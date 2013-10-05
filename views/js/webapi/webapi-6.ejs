@@ -1,0 +1,84 @@
+<%- include ../../head %>
+  <body>
+ 
+    <%- include navbar %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+
+        <%- include left %>
+        
+        </div>
+        <div class="col-sm-9">
+          <div class="panel panel-primary">
+          <div class="panel-heading">HTTP通信の概要</div>
+          <div class="panel-body">
+          <h4>Webシステムの通信</h4>
+
+<pre>
+Webページを閲覧する際に、WebサーバーとクライアントであるWebブラウザの間でかわされる通信は、HTTP（Hyper Text Transfer Protocol）というルールに基づいて行われています。URLの先頭の「http://」という部分は、「httpを使って通信を行う」ということを示しています。
+</pre>
+
+<h4>HTTP通信の仕組み</h4>
+
+<h4>エンコード</h4>
+
+<pre>
+HTTPリクエストのGETメソッドは、Webサーバー上のファイルなどのリソースを要求する場合だけでなく、データベースなどにキーワードを送って検索結果を受け取る場合に利用されます。このとき、キーワードはURLの一部として送信されます。
+
+たとえば、CGIプログラムを使って、「keyword」という項目名の値が「Ajax」であるデータを検索するには、以下のようなリクエストを送信します。
+
+GET cgi-bin/search.cgi?keyword=Ajax HTTP/1.1
+
+検索対象とする項目が複数ある場合には、次のように&でつなぎます。
+
+GET cgi-bin/search.cgi?keywordAjax&update=2011 HTTP/1.1
+
+なお、検索可能なURLの長さはサーバーによって異なります。このため、長いデータを送信する場合には、GETメソッドではなくPOSTメソッドを利用したほうがよいでしょう。
+</pre>
+
+<h4>URLエンコード</h4>
+<pre>
+GETメソッドで送信するキーワードには、プログラムが処理する上で特殊な意味を持つ&や「"」などのメタ文字や、日本語などのマルチバイト文字が含まれることがあります。しかし、これらの文字をそのままURLに使用すると、サーバーによってはHTTPリクエストが正しく理解されないこともあり得ます。
+
+そこで、URLにメタ文字やマルチバイト文字が含まれる場合には、Webサーバーなどが正しく理解できる文字列に置き換えるURLエンコードという処理が必要になります。URLエンコードでは基本的に、半角英数文字や記号などで構成されるASCII文字以外の文字は、すべて「%xx」という文字列に変換されます。「xx」の部分には2桁の16進数で、使用する文字コードに準拠します。
+
+JavaScriptには、URLエンコードを行うための組み込み関数が３種類用意されています。それぞれ、エンコードの方法やエンコードの対象とする文字列が異なり、Webブラウザによって対応状況も異なるため、利用の際には注意が必要です。
+
+また、URLエンコードを行った文字列は、同様に組込み関数を利用して通常の文字列に再変換することができます。この元の文字列を戻す処理はURLデコードと呼ばれ、こちらも3種類用意されています。
+</pre>
+
+          <table class="table">
+            <tr>
+              <th>エンコードを行う関数</th><th>デコードを行う関数</th><th>特徴</th>
+            </tr>
+            <tr>
+              <td>escape()</td><td></td><td></td>
+            </tr>
+            <tr>
+              <td>encodeURI()</td><td></td><td></td>
+            </tr>
+            <tr>
+              <td>encodeURIComponent()</td><td></td><td></td>
+            </tr>
+          </table>
+
+
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div id="footer"><%= title %></div>
+ 
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/google-code-prettify/prettify.js"></script>
+    <script>prettyPrint();</script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/list-counter.js"></script>
+
+  </body>
+</html>

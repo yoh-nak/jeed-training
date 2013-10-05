@@ -21,6 +21,11 @@ Webページを閲覧する際に、Webサーバーとクライアントであ�
 </pre>
 
 <h4>HTTP通信の仕組み</h4>
+<pre>
+HTTP通信では、まずWebブラウザからWebサーバーにTCP（Transmission Control Protocol）というプロトコルを用いて接続を行います。接続が確立すると、WebブラウザはWebページなどのデータ提供の要求（リクエスト）を送ります。Webサーバーはリクエストに該当するデータを検索し、応答（レスポンス）として返します。このように、HTTP通信の基本的な仕組みは、リクエストとレスポンスが常に一対一で対応するシンプルな通信方式です。
+</pre>
+
+<a href="https://chrome.google.com/webstore/detail/http-headers/mhbpoeinkhpajikalhfpjjafpfgjnmgk?utm_source=chrome-ntp-icon">HTTP Headers</a>
 
 <h4>エンコード</h4>
 
@@ -82,6 +87,35 @@ JavaScriptには、URLエンコードを行うための組み込み関数が３�
             </tr>
           </table>
           *ブラウザごとに動作が異なる場合があるため非推奨
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;
+&lt;script&gt;
+var str = "かんたんJavaScript";
+
+var e1 = escape(str);
+document.write(e1 + "&lt;br&gt;");
+
+var e2 = encodeURI(str);
+document.write(e2 + "&lt;br&gt;");
+
+var e3 = encodeURIComponent(str);
+document.write(e3 + "&lt;br&gt;");
+&lt;/script&gt;
+&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+          <h4>文字コードによる違い</h4>
+          <pre>
+
+          </pre>
 
           </div>
           </div>

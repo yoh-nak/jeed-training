@@ -1,0 +1,156 @@
+<%- include ../../head %>
+  <body>
+ 
+    <%- include navbar %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+
+        <%- include left %>
+        
+        </div>
+        <div class="col-sm-9">
+          <div class="panel panel-primary">
+          <div class="panel-heading">HTTP通信の概要</div>
+          <div class="panel-body">
+          <h4>Webシステムの通信</h4>
+
+<pre>
+jQueryのAjax関数
+
+HTMLコンテンツを受信する
+$.load(URL[,データ][,コールバック関数])
+
+GETメソッドでデータを受信する
+$.get(URL[,データ][,コールバック関数][,データタイプ])
+
+JSON形式のデータをGETメソッドで受信する
+$.getJSON(URL[,データ][,コールバック関数])
+
+スクリプトをGETメソッドで受信する
+$.getScript(URL[,データ][,コールバック関数])
+
+POSTメソッドでデータを送受信する
+$.post(URL[,データ][,コールバック関数][,データタイプ])
+
+サーバとデータを送受信する
+$.ajax([{オプション1:値1,...}])
+
+デフォルトのオプションを変更する
+$.ajaxSetup([{オプション1:値1,...}])
+
+フィールドのデータを配列として取得
+$(セレクタ).serializeArray()
+
+フィールドのデータをURLパラメータ形式で取得
+$(セレクタ).serialize()
+</pre>
+
+<h4>$.ajaxSetup()および$.ajax()で記述可能なオプション</h4>
+
+<table class="table">
+<tr>
+  <th>オプション</th><th>意味</th><th>デフォルト値</th>
+</tr>
+<tr>
+<td>url</td><td>アクセス先URL</td><td></td>
+</tr>
+<tr>
+<td>data</td><td>送信するパラメータ。文字列もしくはオブジェクト</td><td></td>
+</tr>
+<tr>
+<td>type</td><td>GET/POSTなどのHTTPメソッド</td><td>GET</td>
+</tr>
+<tr>
+<td>dataType</td><td>サーバからのレスポンスのデータ形式<br>※'html'、'xml'、'text'、'jsonp'、'json'、'script'を指定可能</td><td></td>
+</tr>
+<tr>
+<td>cache</td><td>受信した内容をキャッシュするか</td><td>※dataTypeが'script'のとき、デフォルトでfalse</td>
+</tr>
+<tr>
+<td>timeout</td><td>データ送信後、応答がなければ通信を終了する制限時間（ミリ秒）</td><td>0（制限時間なし）</td>
+</tr>
+<tr>
+<td>username</td><td>URLへのアクセスに必要なユーザ名</td><td></td>
+</tr>
+<tr>
+<td>password</td><td>URLへのアクセスに必要なパスワード</td><td></td>
+</tr>
+<tr>
+<td>jsonp</td><td>JSONPでコールバック関数を示すパラメータの名称</td><td></td>
+</tr>
+<tr>
+<td>ifModified</td><td>前回アクセス以降に更新した時のみ受信する</td><td></td>
+</tr>
+<tr>
+<td>beforeSend</td><td>サーバにデータを送信する前に実行される内容（コールバック関数）</td><td></td>
+</tr>
+<tr>
+<td>success</td><td>サーバからの正常にデータを受信できたときに実行される内容（コールバック関数）</td><td></td>
+</tr>
+<tr> 
+<td>error</td><td>エラーが発生したときに実行される内容（コールバック関数）</td><td></td>
+</tr>
+<tr>
+<td>complete</td><td>サーバからデータを受信したあとに実行される内容（コールバック関数）</td><td></td>
+</tr>
+<tr> 
+<td>async</td><td>サーバーと非同期で通信する</td><td>true</td>
+</tr>
+<tr>
+<td>global</td><td>イベント処理を下記の方法でも行う</td><td>true</td>
+</tr>
+<tr>
+<td>accepts</td><td>dataTypeに対応したMIMEタイプの一覧</td><td>*/*</td>
+</tr>
+<tr>
+<td>processData</td><td>dataが文字列でないとき、送信するデータをURLパラメータ形式にする</td><td>true</td>
+</tr>
+<tr>
+<td>contentType</td><td>送信するデータのMIMEタイプ</td><td>application/x-www-form-urlencoded</td>
+</tr>
+<tr>
+<td>scriptCharset</td><td>スクリプトの文字コード</td><td></td>
+</tr>
+</table>
+
+<h4>イベント処理 (global:trueの場合のみ有効)</h4>
+
+<pre>
+初めてサーバとの通信を開始する直前
+$(セレクタ).ajaxStart(コールバック関数);
+
+サーバにデータの送信を開始する直前
+$(セレクタ).ajaxSend(コールバック関数);
+
+サーバからデータを受信した直後
+$(セレクタ).ajaxSuccess(コールバック関数);
+
+サーバとの通信でエラーが起きた直後
+$(セレクタ).ajaxError(コールバック関数);
+
+サーバとの一連の通信処理が完了した直後
+$(セレクタ).ajaxComplete(コールバック関数);
+
+サーバとのすべての通信が終了した直後
+$(セレクタ).ajaxStop(コールバック関数);
+</pre>
+
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div id="footer"><%= title %></div>
+ 
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/google-code-prettify/prettify.js"></script>
+    <script>prettyPrint();</script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/list-counter.js"></script>
+
+  </body>
+</html>

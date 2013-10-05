@@ -62,6 +62,30 @@ else{
 }
 
 </pre>
+<h4>XMLHttpRequestオブジェクトのプロパティとメソッド</h4>
+
+    <p>
+    <a href="https://developer.mozilla.org/ja/docs/Web/API/XMLHttpRequest" target="_blank" class="btn btn-default">
+    <i class="glyphicon glyphicon-info-sign"></i> 参考
+    </a>
+    </p>
+
+<pre class="prettyprint">
+var req = new XMLHttpRequest();
+
+req.open('GET', 'cgi-bin/search.cgi?keyword=Ajax', true);
+
+req.setRequestHeader('If-Modified-Since', 'Sat, 1 Oct 2011 00:00:00 GMT');
+req.sned(null);
+
+req.onreadystatechange = function(){
+  if(req.readyState == 4 && req.status == 200){
+    var str = req.responseText;
+    alert(str);
+  }
+};
+</pre>
+
 
           </div>
           </div>

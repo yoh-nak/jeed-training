@@ -40,6 +40,59 @@ null（小文字で記述）
 Ajaxでは、主にXML形式のデータを利用して送受信が行われますが、それ以外のデータ形式を利用することもできます。JSON形式は記述がシンプルで軽量なデータを作成できることから、XML形式に代わって利用される場面が増えてきています。
 </pre>
 
+<h4>JSONPの仕組み</h4>
+
+<pre>
+JavaScriptでは、sript要素にsrc属性を指定して外部ファイルを読み込みますが、このsrc属性には、別のドメインのURLを指定できます。つまり、script要素のsrc属性として外部のドメインのURLを指定できます。つまり、script要素のsrc属性として外部ドメインのWebサーバーと通信を行えば、クロスドメインの制約を受けずにデータ受信が可能です。
+
+ただし、このときWebサーバーから送られてくるのは単なるJSON形式のデータであり、スクリプトではありません。そｋでこのデータを引数として受け取ることができる関数を定義しておき、src属性に指定するURLに「callback」パラメーターを追加して受け取る関数を定義しておき、値といてこの関数名を指定します。たとえば、関数名を「foo」とすると次のような記述になります。
+</pre>
+
+
+<pre class="prettyprint">
+&lt;script src="http://sample/lib.cgi?id=12&callback=foo" type="text/javascript"&gt;&lt;/script&gt;
+</pre>
+
+<pre>
+このリクエストに対して、Webサーバーからは、JSON形式に関数名を追加したデータが返されます。そこで、データ受信と同時にfoo関数に引数が渡されて処理が行われます。ここでは、foo関数に引数として連想配列が渡されてます。
+</pre>
+
+<pre class="prettyprint">
+foo({"category":"history", "code":200});
+</pre>
+
+<pre>
+XMLHttpRequestと同様の機能を実現するには、JavaScriptによって動的に、上記のようなscriptタグを作成できるようにすればよいことになります。
+</pre>
+
+
+<pre class="prettyprint">
+&lt;script type="text/javascript"&gt;
+function getJSONP(){
+  var elem = document.createElement('script');
+  elem.src = 'http://sample/lib.cgi?id=12&callback=foo';
+  elem.type = 'text/javascript';
+
+  //ヘッダにscript要素を追加する
+  document.getElementByTagName('head')[0].appendChild(elem);
+}
+
+function foo(json){
+  //JSON形式を利用した処理
+  ...
+}
+&lt;/script&gt;
+</pre>
+
+<h4>JSONPの問題点</h4>
+
+<pre>
+XMLHttpRequestと違い、JSONPではPOSTメソッドを利用できません。このため、クライアントから外部ドメインのサーバーにデータを送信するには、別の方法を使う必要があります。
+
+JSONPはクロスドメインをあえて回避する手法であるため、セキュリティメインの脆弱性を抱えています。これを悪用されると、ユーザーが知らない間に悪意のあるWebサイトと通信が行われる可能性があります。また、Webサーバーのデータを別のドメインから勝手に利用される危険もあるため、機密情報などのデータを扱うには適していません。
+</pre>
+
+
 
 
           </div>

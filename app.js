@@ -41,7 +41,7 @@ if ('development' == app.get('env')) {
 }
 
 
-//ルーティング
+//ルーティングGET送信
 
 //単独
 app.get('/', routes.index);
@@ -107,6 +107,10 @@ app.get(/^\/less\/.+/, function(req, res) {
     });
   });
 });
+
+
+//ルーティングPOST送信
+app.post('/xml-:id', js.webapiXML);
 
 
 //サーバー起動

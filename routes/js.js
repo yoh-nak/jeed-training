@@ -23,6 +23,14 @@ exports.webapi = function(req, res){
 	});
 };
 
+//Web API XMLデータ
+exports.webapiXML = function(req, res){
+	res.header('Content-Type', 'text/xml');
+	res.render('js/webapi/xml-' + req.params.id, {
+		//
+	});
+};
+
 //Library
 exports.library = function(req, res){
 	res.render('js/library/library-' + req.params.id, {
@@ -32,7 +40,7 @@ exports.library = function(req, res){
 };
 
 
-//Library
+//JavaScriptレシピ
 exports.recipe = function(req, res){
 	res.render('js/recipe/recipe1-' + req.params.id, {
 	  	title: config.title,

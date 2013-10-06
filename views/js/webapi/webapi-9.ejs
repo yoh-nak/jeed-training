@@ -18,7 +18,7 @@
 <h4>XMLHttpRequest</h4>
 
 <p>
-<a href="demo/webapi/exercise1/index5.html" target="_blank" class="btn btn-default">
+<a href="demo/webapi/exercise2/index5.html" target="_blank" class="btn btn-default">
 <i class="glyphicon glyphicon-play"></i> デモ
 </a>
 </p>
@@ -52,17 +52,17 @@ window.onload = function(){
     }
   }
 
-  req.open('GET', 'sample.txt', true);
+  req.open('GET', 'sample.html', true);
 
   req.setRequestHeader('If-Modified-Since', 'Sun, 6 Oct 2013 00:00:00 GMT');
   req.send(null);
 
   req.onreadystatechange = function(){
     if(req.readyState == 4 && req.status == 200){
-      document.getElementsByTagName('p')[0].innerText = req.responseText;
+      document.getElementsByTagName('p')[0].innerHTML = req.responseText;
       
       //HTML5 Query Selector API
-      //document.querySelectorAll("p")[0].innerText = req.responseText;
+      //document.querySelectorAll("p")[0].innerHTML = req.responseText;
     }
   };
 };
@@ -75,15 +75,15 @@ window.onload = function(){
 &lt;/html&gt;
 </pre>
 
-sample.txt
+sample.html
 <pre>
-変更後
+&lt;div&gt;変更後&lt;/div&gt;
 </pre>
 
 <h4>$.load</h4>
 
 <p>
-<a href="demo/webapi/exercise1/index.html" target="_blank" class="btn btn-default">
+<a href="demo/webapi/exercise2/index.html" target="_blank" class="btn btn-default">
 <i class="glyphicon glyphicon-play"></i> デモ
 </a>
 </p>
@@ -98,7 +98,7 @@ sample.txt
 &lt;script&gt;
 $(function(){
     $("input").click(function(){
-        $("p").load("sample.txt");
+        $("p").load("sample.html");
     });
 });
 &lt;/script&gt;
@@ -115,7 +115,7 @@ $(function(){
 <h4>$.get</h4>
 
 <p>
-<a href="demo/webapi/exercise1/index2.html" target="_blank" class="btn btn-default">
+<a href="demo/webapi/exercise2/index2.html" target="_blank" class="btn btn-default">
 <i class="glyphicon glyphicon-play"></i> デモ
 </a>
 </p>
@@ -130,8 +130,8 @@ $(function(){
 &lt;script&gt;
 $(function(){
     $("input").click(function(){
-        $.get("sample.txt",function(data){
-            $("p").text(data);
+        $.get("sample.html",function(data){
+            $("p").html(data);
         });
     });
 });
@@ -149,7 +149,7 @@ $(function(){
 <h4>$.post</h4>
 
 <p>
-<a href="demo/webapi/exercise1/index3.html" target="_blank" class="btn btn-default">
+<a href="demo/webapi/exercise2/index3.html" target="_blank" class="btn btn-default">
 <i class="glyphicon glyphicon-play"></i> デモ
 </a>
 </p>
@@ -164,8 +164,8 @@ $(function(){
 &lt;script&gt;
 $(function(){
     $("input").click(function(){
-        $.post("sample.txt",function(data){
-            $("p").text(data);
+        $.post("sample.html",function(data){
+            $("p").html(data);
         });
     });
 });
@@ -183,7 +183,7 @@ $(function(){
 <h4>$.ajax</h4>
 
 <p>
-<a href="demo/webapi/exercise1/index4.html" target="_blank" class="btn btn-default">
+<a href="demo/webapi/exercise2/index4.html" target="_blank" class="btn btn-default">
 <i class="glyphicon glyphicon-play"></i> デモ
 </a>
 </p>
@@ -200,9 +200,9 @@ $(function(){
     $("input").click(function(){
         $.ajax({
         type:"GET",
-        url:"sample.txt",
+        url:"sample.html",
             success:function(data){
-                $("p").text(data);
+                $("p").html(data);
             }
         });
     });

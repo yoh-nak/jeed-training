@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script>
+$(function(){
+    $("input").click(function(){
+        $.get("sample.xml",function(data){
+            $("div").html("<ul></ul>");
+            $(data).find("data1").each(function(){
+                $("div ul")
+                    .append("<li>" + $("text1",this).text() + "</li>")
+                    .append("<li>" + $("text2",this).text() + "</li>")
+                    .append("<li>" + $("text3",this).text() + "</li>");
+            });
+        },"xml");
+         
+    });
+});
+</script>
+</head>
+<body>
+<input type="button" value="変更">
+<div>
+変更前
+</div>
+</body>
+</html>

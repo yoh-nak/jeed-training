@@ -1,0 +1,190 @@
+<%- include ../../head %>
+  <body>
+ 
+    <%- include navbar %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+
+        <%- include left %>
+        
+        </div>
+        <div class="col-sm-9">
+          <div class="panel panel-primary">
+          <div class="panel-heading">XMLの読み込み</div>
+          <div class="panel-body">
+
+<h4>$.get</h4>
+
+<p>
+<a href="demo/webapi/exercise4/index.html" target="_blank" class="btn btn-default">
+<i class="glyphicon glyphicon-play"></i> デモ
+</a>
+</p>
+
+<pre class="prettyprint">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;title&gt;&lt;/title&gt;
+&lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+$(function(){
+    $("input").click(function(){
+        $.get("sample.xml",function(data){
+            $("div").html("&lt;ul&gt;&lt;/ul&gt;");
+            $(data).find("data1").each(function(){
+                $("div ul")
+                    .append("&lt;li&gt;" + $("text1",this).text() + "&lt;/li&gt;")
+                    .append("&lt;li&gt;" + $("text2",this).text() + "&lt;/li&gt;")
+                    .append("&lt;li&gt;" + $("text3",this).text() + "&lt;/li&gt;");
+            });
+        },"xml");
+         
+    });
+});
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;input type="button" value="変更"&gt;
+&lt;div&gt;
+変更前
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<hr>
+
+<h4>$.post</h4>
+<p>
+<a href="demo/webapi/exercise4/index2.html" target="_blank" class="btn btn-default">
+<i class="glyphicon glyphicon-play"></i> デモ
+</a>
+</p>
+
+<pre class="prettyprint">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;title&gt;&lt;/title&gt;
+&lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+$(function(){
+    $("input").click(function(){
+        $.post("sample.xml",function(data){
+            $("div").html("&lt;ul&gt;&lt;/ul&gt;");
+            $(data).find("data1").each(function(){
+                $("div ul")
+                    .append("&lt;li&gt;" + $("text1",this).text() + "&lt;/li&gt;")
+                    .append("&lt;li&gt;" + $("text2",this).text() + "&lt;/li&gt;")
+                    .append("&lt;li&gt;" + $("text3",this).text() + "&lt;/li&gt;");
+            });
+        },"xml");
+         
+    });
+});
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;input type="button" value="変更"&gt;
+&lt;div&gt;
+変更前
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<hr>
+
+<h4>$.ajax</h4>
+
+<p>
+<a href="demo/webapi/exercise4/index3.html" target="_blank" class="btn btn-default">
+<i class="glyphicon glyphicon-play"></i> デモ
+</a>
+</p>
+
+<pre class="prettyprint">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;title&gt;&lt;/title&gt;
+&lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+$(function(){
+    $("input").click(function(){
+        $.ajax({
+            url: 'sample.xml',
+            type: 'GET',
+            data: '',
+            dataType: 'xml',
+            success: function(data){
+                $("div").html("&lt;ul&gt;&lt;/ul&gt;");
+                $(data).find("data1").each(function(){
+                    $("div ul")
+                        .append("&lt;li&gt;" + $("text1",this).text() + "&lt;/li&gt;")
+                        .append("&lt;li&gt;" + $("text2",this).text() + "&lt;/li&gt;")
+                        .append("&lt;li&gt;" + $("text3",this).text() + "&lt;/li&gt;");
+                });
+                 
+            }
+        });
+    });
+});
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;input type="button" value="変更"&gt;
+&lt;div&gt;
+変更前
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<hr>
+
+sample.xml
+<pre class="prettyprint">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;root&gt;
+    &lt;data1&gt;
+        &lt;text1&gt;テキスト1&lt;/text1&gt;
+        &lt;text2&gt;テキスト2&lt;/text2&gt;
+        &lt;text3&gt;テキスト3&lt;/text3&gt;
+    &lt;/data1&gt;
+    &lt;data2&gt;
+        &lt;text1&gt;テキスト1&lt;/text1&gt;
+        &lt;text2&gt;テキスト2&lt;/text2&gt;
+        &lt;text3&gt;テキスト3&lt;/text3&gt;
+    &lt;/data2&gt;
+    &lt;data3&gt;
+        &lt;text1&gt;テキスト1&lt;/text1&gt;
+        &lt;text2&gt;テキスト2&lt;/text2&gt;
+        &lt;text3&gt;テキスト3&lt;/text3&gt;
+    &lt;/data3&gt;
+&lt;/root&gt;
+</pre>
+
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div id="footer"><%= title %></div>
+ 
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/google-code-prettify/prettify.js"></script>
+    <script>prettyPrint();</script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/list-counter.js"></script>
+
+  </body>
+</html>

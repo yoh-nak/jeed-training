@@ -43,10 +43,10 @@ window.onload = function(){
       if(req.readyState == 4 && req.status == 200){
         //document.getElementsByTagName('p')[0].innerHTML = req.responseText;
 
-        var htmldoc = req.responseXML;
+        var htmldoc = req.responseText.match(/<p>(.*)<\/p>/);
+        var str = RegExp.$1;
 
-        alert(htmldoc);
-  		console.log(htmldoc);
+        alert(str);
 
         /*
 		var nodes=xmldoc.childNodes;

@@ -24,7 +24,55 @@
 </p>
 
 <pre class="prettyprint">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;title&gt;&lt;/title&gt;
+&lt;script&gt;
+window.onload = function(){
+  var req;
 
+  if(XMLHttpRequest){
+    req = new XMLHttpRequest();
+  }
+  else{
+    //IE6
+    try{
+      req = new ActiveXObject('Msxml12.XMLHTTP');
+    }
+    catch(e){
+      //IE5.5
+      try{
+        req = new ActiveXObject('Microsoft.XMLHTTP');
+      }
+      catch(e){
+        alert('ActiveXを有効にしてください');
+      }
+    }
+  }
+
+  req.open('GET', 'sample.txt', true);
+
+  req.setRequestHeader('If-Modified-Since', 'Sun, 6 Oct 2013 00:00:00 GMT');
+  req.send(null);
+
+  req.onreadystatechange = function(){
+    if(req.readyState == 4 && req.status == 200){
+      document.getElementsByTagName('p')[0].innerText = req.responseText;
+      
+      //HTML5 Query Selector API
+      //document.querySelectorAll("p")[0].innerText = httpObj.responseText;
+    }
+  };
+};
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;input type="button" value="変更"&gt;
+&lt;p&gt;変更前&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
 </pre>
 
 <h4>$.load</h4>

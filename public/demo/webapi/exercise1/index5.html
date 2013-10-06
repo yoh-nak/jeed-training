@@ -8,20 +8,22 @@ window.onload = function(){
 	var req;
 
 	if(XMLHttpRequest){
-	  req = new XMLHttpRequest();
+		req = new XMLHttpRequest();
 	}
 	else{
-	  try{
-	    req = new ActiveXObject('Msxml12.XMLHTTP');
-	  }
-	  catch(e){
-	    try{
-	      req = new ActiveXObject('Microsoft.XMLHTTP');
-	    }
-	    catch(e){
-	      alert('ActiveXを有効にしてください');
-	    }
-	  }
+		//IE6
+		try{
+			req = new ActiveXObject('Msxml12.XMLHTTP');
+		}
+		catch(e){
+			//IE5.5
+			try{
+				req = new ActiveXObject('Microsoft.XMLHTTP');
+			}
+			catch(e){
+				alert('ActiveXを有効にしてください');
+			}
+		}
 	}
 
 	req.open('GET', 'sample.txt', true);
@@ -30,9 +32,11 @@ window.onload = function(){
 	req.send(null);
 
 	req.onreadystatechange = function(){
-	if(req.readyState == 4 && req.status == 200){
-		var str = req.responseText;
-			alert(str);
+		if(req.readyState == 4 && req.status == 200){
+			document.getElementsByTagName('p')[0].innerText = req.responseText;
+			
+			//HTML5 Query Selector API
+			//document.querySelectorAll("p")[0].innerText = httpObj.responseText;
 		}
 	};
 };

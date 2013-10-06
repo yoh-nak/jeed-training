@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<script>
+window.onload = function(){
+	var req;
+
+	if(XMLHttpRequest){
+	  req = new XMLHttpRequest();
+	}
+	else{
+	  try{
+	    req = new ActiveXObject('Msxml12.XMLHTTP');
+	  }
+	  catch(e){
+	    try{
+	      req = new ActiveXObject('Microsoft.XMLHTTP');
+	    }
+	    catch(e){
+	      alert('ActiveXを有効にしてください');
+	    }
+	  }
+	}
+
+	req.open('GET', 'sample.txt', true);
+
+	req.setRequestHeader('If-Modified-Since', 'Sun, 6 Oct 2013 00:00:00 GMT');
+	req.sned(null);
+
+	req.onreadystatechange = function(){
+	if(req.readyState == 4 && req.status == 200){
+		var str = req.responseText;
+			alert(str);
+		}
+	};
+};
+</script>
+</head>
+<body>
+<input type="button" value="変更">
+<p>変更前</p>
+</body>
+</html>

@@ -51,7 +51,7 @@ RamenClass.prototype = {
         $.getJSON("ramen.json",
             function(data){
                 $.each(data["ラーメン"]["地域"], function(key,val){
-                    $("fieldset:first").append("<input type=\"radio\" name=\"ramen\" value=\""+ key +"\">" + key);
+                    $("fieldset:first").append("&lt;input type=\"radio\" name=\"ramen\" value=\""+ key +"\"&gt;" + key);
                 });
         });
     },
@@ -61,22 +61,22 @@ RamenClass.prototype = {
             var html = "";
              
             $.each(data["ラーメン"]["地域"][area],function(key,val){
-                html += "<tr>";
-                html += "<td>店名</td>";
-                html += "<td>" + key + "</td>";
-                html += "</tr>";
-                html += "<tr>";
-                html += "<td>住所</td>";
-                html += "<td>" + val["住所"] + "</td>";
-                html += "</tr>";
-                html += "<tr>";
-                html += "<td>電話番号</td>";
-                html += "<td>" + val["電話"] + "</td>";
-                html += "</tr>";
-                html += "<tr>";
-                html += "<td>画像</td>";
-                html += "<td><img src=\"" + val["画像"] + "\"></td>";
-                html += "</tr>";
+                html += "&lt;tr&gt;";
+                html += "&lt;td&gt;店名&lt;/td&gt;";
+                html += "&lt;td&gt;" + key + "&lt;/td&gt;";
+                html += "&lt;/tr&gt;";
+                html += "&lt;tr&gt;";
+                html += "&lt;td&gt;住所&lt;/td&gt;";
+                html += "&lt;td&gt;" + val["住所"] + "&lt;/td&gt;";
+                html += "&lt;/tr&gt;";
+                html += "&lt;tr&gt;";
+                html += "&lt;td&gt;電話番号&lt;/td&gt;";
+                html += "&lt;td&gt;" + val["電話"] + "&lt;/td&gt;";
+                html += "&lt;/tr&gt;";
+                html += "&lt;tr&gt;";
+                html += "&lt;td&gt;画像&lt;/td&gt;";
+                html += "&lt;td&gt;&lt;img src=\"" + val["画像"] + "\"&gt;&lt;/td&gt;";
+                html += "&lt;/tr&gt;";
             });
             $("tbody").html(html);
         });

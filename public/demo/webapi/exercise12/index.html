@@ -6,28 +6,31 @@
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script>
 $(function(){
+    
+    var ramen = new RamenClass();
+
     //ラジオボタンの生成
-    $(this).initialize();
+    ramen.init();
     //東淀川区で初期表示
-    $(this).ramen("東淀川区");
+    ramen.show("東淀川区");
      
     $("form").on("change","input:radio",function(){
-        $(document).ramen($(this).val());
+        ramen.show($(this).val());
     });
 });
 
-//ラジオボタンの生成
-$.fn.initialize = function(){
-    $.getJSON("ramen.json",
-        function(data){
-            $.each(data["ラーメン"]["地域"], function(key,val){
-                $("fieldset:first").append("<input type=\"radio\" name=\"ramen\" value=\""+ key +"\">" + key);
-            });
-    });
-}
+var RamenClass = function(){};
 
-//地域ごとのラーメン屋表示（初期表示：東淀川区）
-$.fn.ramen = function(area){
+RamenClass.prototype = {
+    init: function(){
+        $.getJSON("ramen.json",
+            function(data){
+                $.each(data["ラーメン"]["地域"], function(key,val){
+                    $("fieldset:first").append("<input type=\"radio\" name=\"ramen\" value=\""+ key +"\">" + key);
+                });
+        });
+    },
+    show: function(area){
     $.getJSON("ramen.json",
         function(data){
             var html = "";
@@ -56,7 +59,8 @@ $.fn.ramen = function(area){
             });
             $("tbody").html(html);
         });
-}
+    }
+};
 </script>
 <style>
 form{

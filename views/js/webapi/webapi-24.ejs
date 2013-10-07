@@ -29,183 +29,72 @@
 
 <pre class="prettyprint linenums">
 &lt;!DOCTYPE html&gt;
-&lt;html lang="ja"&gt;
-  &lt;head&gt;
-    &lt;meta charset="utf-8"&gt;
-    &lt;meta name="viewport" content="width=device-width,initial-scale=1.0"&gt;
-    &lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css"&gt;
-    &lt;script src="http://code.jquery.com/jquery-1.9.1.min.js"&gt;&lt;/script&gt;
-    &lt;script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"&gt;&lt;/script&gt;
-    &lt;title&gt;ランダムイメージ&lt;/title&gt;
-    &lt;script&gt;
-      (function(){
-      
-       var imgAry = [
-        'kumamon.gif',
-        'funassy.png',
-        'ossan.png'
-       ];
-       
-       var imgCacheAry = [];
-       for(var i = 0; i &lt; imgAry.length; i++){
-        imgCacheAry[i] = new Image();
-        imgCacheAry[i].src = imgAry[i];
-       }
-       $(document).on('pageshow','#index',function(){
-        var num, time, timerId;
-        
-        //スタートボタン
-        $('a').on('vclick',function(){
-         //画像の数
-         num = parseInt($('input[name="level"]:checked').val());
-         
-         //選んだ画像
-         imgId = parseInt($('input[name="chara"]:checked').val());
-         var game = new GameClass(imgId);
-         game.randomImage(num);
-         //タイマーのカウント
-         time = parseInt($('input[name="time"]:checked').val());
-         game.start(time);
-         
-         $('form').remove();
-         $(this).remove();
-         $('#timer').show();
-        });
-        //画像削除
-        $('[data-role="content"]').on('vclick','img',function(){
-         $(this).remove();
-         var total = 0;
-         $('#index').find('img').each(function(){
-          total++;
-         });
-         if(total == 0){
-          $('#index').removeClass('ui-body-c').addClass('ui-body-e');
-          clearInterval(timerId);
-          
-          alert('クリア');
-          $.mobile.changePage('#index',{
-           reloadPage:true,
-           transition:'slideup'
-          });
-         }
-        });
-        
-        function GameClass(imgId){
-        
-         this.randomImage = function(num){
-         
-          document.images[imgCacheAry[imgId]] = imgAry[imgId];
-          var image = document.images[imgCacheAry[imgId]];
-          
-          for(var i = 0; i &lt; num; i++){
-           $('#canvas').append('&lt;img src="' + image + '" alt=""&gt;');
-           $('img:nth(' + i + ')').css({
-            top: Math.floor(Math.random() * (480-64)),
-            left: Math.floor(Math.random() * (innerWidth-64)),
-           });
-          }
-         };
-         
-         this.start = function(time){
-          var time = time;
-          //タイマースタート
-          (function countDown(){
-           time--;
-           timerId = setTimeout(function(){
-            //タイム表示
-            $('#timer').text(time);
-            
-            //10秒切ったら色を変える
-            if(time &lt; 10){
-             $('#timer').css('color','red');
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;title&gt;&lt;/title&gt;
+&lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+$(function(){
+    $("input").click(function(){
+        $.ajax({
+            url: 'color.xml',
+            dataType: 'xml',
+            success: function(data){
+                var i = 0;
+                $("colors &gt; color",data).each(function(){
+                    $("div:eq(" + i + ")")
+                        .text($("colorName",this).text())
+                        .css("background-color",$("colorCode",this).text())
+                    i++
+                });
             }
-            
-            //関数再実行
-            countDown();
-           },1000);
-           //タイマー解除
-           if(time &lt; 0){
-            clearInterval(timerId);
-            //$('#index').off('vclick');
-            $('#index').removeClass('ui-body-c').addClass('ui-body-a');
-            alert('ゲームオーバー');
-            
-            $.mobile.changePage('#index',{
-             reloadPage:true,
-             transition:'slideup'
-            });
-           }
-          })();
-         };
-        }
-       });
-      })();
-    &lt;/script&gt;&lt;style type="text/css"&gt;[data-role='content'] {
-  position: relative;
-}
-[data-role='content'] #timer {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  font-weight: bold;
-  font-size: 32px;
-  display: none;
-}
-[data-role='content'] #canvas {
-  position: relative;
-  height: 480px;
-}
-[data-role='content'] img {
-  width: 64px;
-  height: 64px;
-  position: absolute;
+        });
+    });
+});
+&lt;/script&gt;
+&lt;style&gt;
+div{
+    width:200px;
+    height:200px;
+    background-color:#808080;
+    text-align:center;
+    line-height:200px;
+    margin:10px;
 }
 &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;div data-role="page" id="index"&gt;
-      &lt;div data-role="header"&gt;
-        &lt;h1&gt;ランダムイメージ&lt;/h1&gt;
-      &lt;/div&gt;
-      &lt;div data-role="content"&gt;
-        &lt;div id="timer"&gt;&lt;/div&gt;
-        &lt;form&gt;
-          &lt;fieldset data-role="controlgroup"&gt;
-            &lt;legend&gt;レベル:&lt;/legend&gt;
-            &lt;input type="radio" name="level" id="l1" value="10" checked="checked"&gt;
-            &lt;label for="l1"&gt;10体&lt;/label&gt;
-            &lt;input type="radio" name="level" id="l2" value="20"&gt;
-            &lt;label for="l2"&gt;20体&lt;/label&gt;
-            &lt;input type="radio" name="level" id="l3" value="30"&gt;
-            &lt;label for="l3"&gt;30体&lt;/label&gt;
-          &lt;/fieldset&gt;
-          &lt;fieldset data-role="controlgroup"&gt;
-            &lt;legend&gt;タイム:&lt;/legend&gt;
-            &lt;input type="radio" name="time" id="t1" value="60" checked="checked"&gt;
-            &lt;label for="t1"&gt;60秒&lt;/label&gt;
-            &lt;input type="radio" name="time" id="t2" value="50"&gt;
-            &lt;label for="t2"&gt;50秒&lt;/label&gt;
-            &lt;input type="radio" name="time" id="t3" value="40"&gt;
-            &lt;label for="t3"&gt;40秒&lt;/label&gt;
-          &lt;/fieldset&gt;
-          &lt;fieldset data-role="controlgroup"&gt;
-            &lt;legend&gt;キャラ:&lt;/legend&gt;
-            &lt;input type="radio" name="chara" id="c1" value="0" checked="checked"&gt;
-            &lt;label for="c1"&gt;くまモン&lt;/label&gt;
-            &lt;input type="radio" name="chara" id="c2" value="1"&gt;
-            &lt;label for="c2"&gt;ふなっしー&lt;/label&gt;
-            &lt;input type="radio" name="chara" id="c3" value="2"&gt;
-            &lt;label for="c3"&gt;ちっちゃいおっさん&lt;/label&gt;
-          &lt;/fieldset&gt;
-        &lt;/form&gt;&lt;a data-role="button"&gt;スタート&lt;/a&gt;
-        &lt;div id="canvas"&gt;&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div data-role="footer" data-position="fixed"&gt;
-        &lt;h4&gt;Copyright &copy; ナカノヨウスケ&lt;/h4&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/body&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;input type="button" value="click"&gt;
+&lt;div&gt;grey&lt;/div&gt;
+&lt;div&gt;grey&lt;/div&gt;
+&lt;div&gt;grey&lt;/div&gt;
+&lt;/body&gt;
 &lt;/html&gt;
+</pre>
+
+<hr>
+
+color.xml
+<pre class="prettyprint linenums">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;colors&gt;
+    &lt;color&gt;
+        &lt;name&gt;赤色&lt;/name&gt;
+        &lt;colorName&gt;red&lt;/colorName&gt;
+        &lt;colorCode&gt;#ff0000&lt;/colorCode&gt;
+    &lt;/color&gt;
+    &lt;color&gt;
+        &lt;name&gt;青色&lt;/name&gt;
+        &lt;colorName&gt;blue&lt;/colorName&gt;
+        &lt;colorCode&gt;#0000FF&lt;/colorCode&gt;
+    &lt;/color&gt;
+    &lt;color&gt;
+        &lt;name&gt;緑色&lt;/name&gt;
+        &lt;colorName&gt;green&lt;/colorName&gt;
+        &lt;colorCode&gt;#008000&lt;/colorCode&gt;
+    &lt;/color&gt;
+&lt;/colors&gt;
 </pre>
             </div>
           </div>

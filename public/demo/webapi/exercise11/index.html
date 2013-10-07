@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script>
+$(function(){
+        $.getJSON("color.json",
+        function(data){
+            var i = 0;
+            $.each(data.colors, function(key,val){
+                $("select").append("<option value=\"" + i + "\">" + val.jp + "</option>");
+                i++;
+            });
+             
+        });
+         
+        $("select").live("change",function(){
+            $.getJSON("color.json",
+            function(data){
+                var i = 0;
+                $.each(data.colors, function(key,val){
+                    switch($("select").val()){
+                        case "0":
+                            if(i == 0){
+                                $("div").html(val.en).css("background-color", val.code);
+                            }
+                            break;
+                        case "1":
+                            if(i == 1){
+                                $("div").html(val.en).css("background-color", val.code);
+                            }
+                            break;
+                        case "2":
+                            if(i == 2){
+                                $("div").html(val.en).css("background-color", val.code);
+                            }
+                            break;
+                    }
+                    i++;
+                });
+            });
+        });
+});
+</script>
+<style type="text/css">
+div{
+    width:200px;
+    height:200px;
+    background-color:#808080;
+    text-align:center;
+    line-height:200px;
+    margin:10px;
+}
+</style>
+</head>
+<body>
+<select>
+    <option value="">---</option>
+</select>
+<div>grey</div>
+</body>

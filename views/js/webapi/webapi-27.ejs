@@ -36,93 +36,89 @@
 &lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
 &lt;script&gt;
 $(function(){
-    $("input").click(function(){
-        $.ajax({
-            url: 'data.xml',
-            dataType: 'xml',
-            success: function(data){
-                 
-                var cnt = 0;
-                var ary = new Array();
-                $("datalist &gt; dataset &gt; data_value",data).each(function(){
-                    ary.push(parseInt($(this).text()));
-                    cnt += parseInt($(this).text());
-                });
-                 
-                var i = 0;
-                var rate = new Array();
-                $("datalist &gt; dataset &gt; data_value",data).each(function(){
-                    rate[i] = Math.floor((ary[i] / cnt) * 100);
-                    i++;
-                });
-                 
-                var i = 0;
-                $("datalist &gt; dataset",data).each(function(){
-                    $("div:eq(" + i + ")")
-                        .css("width",(rate[i] * 2) + "px")
-                        .css("background-color",$("data_color",this).text())
-                        .text($("data_label",this).text());
-                    i++;
-                });
-            }
+        $.getJSON("color.json",
+        function(data){
+            var i = 0;
+            $.each(data.colors, function(key,val){
+                $("select").append("&lt;option value=\"" + i + "\"&gt;" + val.jp + "&lt;/option&gt;");
+                i++;
+            });
+             
         });
-    });
+         
+        $("form").on("change","select",function(){
+            $.getJSON("color.json",
+            function(data){
+                var i = 0;
+                $.each(data.colors, function(key,val){
+                    switch($("select").val()){
+                        case "0":
+                            if(i == 0){
+                                $("div").html(val.en).css("background-color", val.code);
+                            }
+                            break;
+                        case "1":
+                            if(i == 1){
+                                $("div").html(val.en).css("background-color", val.code);
+                            }
+                            break;
+                        case "2":
+                            if(i == 2){
+                                $("div").html(val.en).css("background-color", val.code);
+                            }
+                            break;
+                    }
+                    i++;
+                });
+            });
+        });
 });
 &lt;/script&gt;
 &lt;style type="text/css"&gt;
 div{
-    float:left;
-    width:40px;
-    height:25px;
+    width:200px;
+    height:200px;
     background-color:#808080;
     text-align:center;
-    line-height:25px;
+    line-height:200px;
+    margin:10px;
 }
 &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
-&lt;input type="button" value="click"&gt;
-&lt;div&gt;&lt;/div&gt;
-&lt;div&gt;&lt;/div&gt;
-&lt;div&gt;&lt;/div&gt;
-&lt;div&gt;&lt;/div&gt;
-&lt;div&gt;&lt;/div&gt;
+    &lt;form&gt;
+        &lt;select&gt;
+            &lt;option value=""&gt;---&lt;/option&gt;
+        &lt;/select&gt;
+    &lt;/form&gt;
+    &lt;div&gt;grey&lt;/div&gt;
 &lt;/body&gt;
-&lt;/html&gt;
+
 </pre>
 
 <hr>
 
-data.xml
+color.json
 <pre class="prettyprint linenums">
-&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;datalist&gt;
-    &lt;dataset&gt;
-        &lt;data_label&gt;A&lt;/data_label&gt;
-        &lt;data_value&gt;100&lt;/data_value&gt;
-        &lt;data_color&gt;red&lt;/data_color&gt;
-    &lt;/dataset&gt;
-    &lt;dataset&gt;
-        &lt;data_label&gt;B&lt;/data_label&gt;
-        &lt;data_value&gt;50&lt;/data_value&gt;
-        &lt;data_color&gt;blue&lt;/data_color&gt;
-    &lt;/dataset&gt;
-    &lt;dataset&gt;
-        &lt;data_label&gt;C&lt;/data_label&gt;
-        &lt;data_value&gt;120&lt;/data_value&gt;
-        &lt;data_color&gt;yellow&lt;/data_color&gt;
-    &lt;/dataset&gt;
-    &lt;dataset&gt;
-        &lt;data_label&gt;D&lt;/data_label&gt;
-        &lt;data_value&gt;80&lt;/data_value&gt;
-        &lt;data_color&gt;green&lt;/data_color&gt;
-    &lt;/dataset&gt;
-    &lt;dataset&gt;
-        &lt;data_label&gt;E&lt;/data_label&gt;
-        &lt;data_value&gt;150&lt;/data_value&gt;
-        &lt;data_color&gt;orange&lt;/data_color&gt;
-    &lt;/dataset&gt;
-&lt;/datalist&gt;
+{
+    "colors": {
+        "data1": {
+            "jp": "赤",
+            "en": "red",
+            "code": "#FF0000"
+        },
+        "data2": {
+            "jp": "青",
+            "en": "blue",
+            "code": "#0000FF"
+        },
+        "data3": {
+            "jp": "緑",
+            "en": "green",
+            "code": "#00FF00"
+        }
+    }
+}
 </pre>
             </div>
           </div>

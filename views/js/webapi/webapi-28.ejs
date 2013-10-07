@@ -30,13 +30,6 @@
 <div id="demo" class="collapse out">
 
 <pre class="prettyprint linenums">
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset="UTF-8"&gt;
-&lt;title&gt;&lt;/title&gt;
-&lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
-&lt;script&gt;
 $(function(){
     
     var ramen = new RamenClass();
@@ -67,27 +60,23 @@ RamenClass.prototype = {
         function(data){
             var html = "";
              
-            $.each(data["ラーメン"]["地域"],function(key,val){
-                if(key == area){
-                    $.each(val,function(key,val){
-                        html += "<tr>";
-                        html += "<td>店名</td>";
-                        html += "<td>" + key + "</td>";
-                        html += "</tr>";
-                        html += "<tr>";
-                        html += "<td>住所</td>";
-                        html += "<td>" + val["住所"] + "</td>";
-                        html += "</tr>";
-                        html += "<tr>";
-                        html += "<td>電話番号</td>";
-                        html += "<td>" + val["電話"] + "</td>";
-                        html += "</tr>";
-                        html += "<tr>";
-                        html += "<td>画像</td>";
-                        html += "<td><img src=\"" + val["画像"] + "\"></td>";
-                        html += "</tr>";
-                    });
-                }
+            $.each(data["ラーメン"]["地域"][area],function(key,val){
+                html += "<tr>";
+                html += "<td>店名</td>";
+                html += "<td>" + key + "</td>";
+                html += "</tr>";
+                html += "<tr>";
+                html += "<td>住所</td>";
+                html += "<td>" + val["住所"] + "</td>";
+                html += "</tr>";
+                html += "<tr>";
+                html += "<td>電話番号</td>";
+                html += "<td>" + val["電話"] + "</td>";
+                html += "</tr>";
+                html += "<tr>";
+                html += "<td>画像</td>";
+                html += "<td><img src=\"" + val["画像"] + "\"></td>";
+                html += "</tr>";
             });
             $("tbody").html(html);
         });

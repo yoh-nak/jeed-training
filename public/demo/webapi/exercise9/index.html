@@ -6,38 +6,65 @@
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script>
 $(function(){
-    $("input").click(function(){
-        $.ajax({
-            url: 'color.xml',
-            dataType: 'xml',
-            success: function(data){
-                var i = 0;
-                $("colors > color",data).each(function(){
-                    $("div:eq(" + i + ")")
-                        .text($("colorName",this).text())
-                        .css("background-color",$("colorCode",this).text())
-                    i++
-                });
-            }
-        });
+    $.ajax({
+        url: 'rss.xml',
+        dataType: 'xml',
+        success: function(data){
+            $("item",data).each(function(){
+                $("dl").append("<dt><a href='" + $("link",this).text() + "'>" + $("title",this).text() + "</a></dt><dd>" + $("description",this).text() + "</dd>");
+            });
+        }
     });
 });
 </script>
-<style>
-div{
-    width:200px;
-    height:200px;
-    background-color:#808080;
-    text-align:center;
-    line-height:200px;
+<style type="text/css">
+*{
+    margin:0;
+    padding:0;
+}
+p{
     margin:10px;
+}
+.list-l{
+    float:left;
+    width:148px;
+    height:90px;
+    border:1px solid #000000;
+}
+.list-l a{
+    display:block;
+    width:120px;
+    margin:0 auto;
+}
+.list-r{
+    float:right;
+    width:645px;
+    border:1px solid #000000;
+    border-left:none;
+    height:86px;
+    padding:2px;
+    line-height:20px;
+}
+dl{
+    margin:10px;
+    width:800px;
+}
+dt{
+    display:list-item;
+    margin:10px;
+    margin-left:20px;
+}
+dd:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    font-size:0;    
+    clear: both; 
+    visibility:hidden;
 }
 </style>
 </head>
 <body>
-<input type="button" value="click">
-<div>grey</div>
-<div>grey</div>
-<div>grey</div>
+<dl></dl>
 </body>
 </html>

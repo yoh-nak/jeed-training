@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script>
+$(function(){
+    $("input").click(function(){
+        $.ajax({
+            url: 'data.xml',
+            dataType: 'xml',
+            success: function(data){
+                 
+                var cnt = 0;
+                var ary = new Array();
+                $("datalist > dataset > data_value",data).each(function(){
+                    ary.push(parseInt($(this).text()));
+                    cnt += parseInt($(this).text());
+                });
+                 
+                var i = 0;
+                var rate = new Array();
+                $("datalist > dataset > data_value",data).each(function(){
+                    rate[i] = Math.floor((ary[i] / cnt) * 100);
+                    i++;
+                });
+                 
+                var i = 0;
+                $("datalist > dataset",data).each(function(){
+                    $("div:eq(" + i + ")")
+                        .css("width",(rate[i] * 2) + "px")
+                        .css("background-color",$("data_color",this).text())
+                        .text($("data_label",this).text());
+                    i++;
+                });
+            }
+        });
+    });
+});
+</script>
+<style type="text/css">
+div{
+    float:left;
+    width:40px;
+    height:25px;
+    background-color:#808080;
+    text-align:center;
+    line-height:25px;
+}
+</style>
+</head>
+<body>
+<input type="button" value="click">
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+</body>
+</html>

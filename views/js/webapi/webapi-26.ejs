@@ -26,6 +26,70 @@
               <i class="glyphicon glyphicon-question-sign"></i> 解答例
               </button>
             </p>
+
+<div id="demo" class="collapse out">
+
+<pre class="prettyprint linenums">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;title&gt;&lt;/title&gt;
+&lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" /&gt;
+&lt;script src="http://code.jquery.com/jquery-1.9.1.min.js"&gt;&lt;/script&gt;
+&lt;script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+$(function(){
+    $.ajax({
+        url: 'rss.xml',
+        dataType: 'xml',
+        success: function(data){
+            var html = '';
+            $("item",data).each(function(){
+
+                html += '&lt;li&gt;';
+                html += '&lt;a href="' + $("link",this).text() + '"&gt;';
+                html += '&lt;img src="#" alt=""&gt;';
+                html += '&lt;h2&gt;' + $("title",this).text() + '&lt;/h2&gt;';
+                html += '&lt;p&gt;' + $("description",this).text() + '&lt;/p&gt;';
+                html += '&lt;/a&gt;';
+                html += '&lt;/li&gt;';
+
+            });
+
+            //listviewリフレッシュ
+            $('[data-role="listview"]').append(html).listview('refresh');
+
+            //本文の画像をサムネイルの画像に置換
+            $('.ui-btn-text').each(function(){
+                $('.ui-li-thumb',this).attr('src',$('.mr10',this).attr('src'));
+            });
+
+            //本文の画像除去
+            $('.mr10').remove();
+        }
+    });
+});
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div data-role="page" id="index"&gt;
+    &lt;div data-role="header"&gt;
+        &lt;h1&gt;RSSの取得&lt;/h1&gt;
+    &lt;/div&gt;
+    &lt;div data-role="content"&gt;
+        &lt;ul data-role="listview" data-inset="true"&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;div data-role="footer"&gt;
+        &lt;h4&gt;Copyright &copy; ナカノヨウスケ&lt;/h4&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+            </div>
+
 <p>
 RSS.xml
 <pre class="prettyprint linenums">
@@ -189,68 +253,6 @@ RSS.xml
 </p>
 
 
-<div id="demo" class="collapse out">
-
-<pre class="prettyprint linenums">
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset="UTF-8"&gt;
-&lt;title&gt;&lt;/title&gt;
-&lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" /&gt;
-&lt;script src="http://code.jquery.com/jquery-1.9.1.min.js"&gt;&lt;/script&gt;
-&lt;script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"&gt;&lt;/script&gt;
-&lt;script&gt;
-$(function(){
-    $.ajax({
-        url: 'rss.xml',
-        dataType: 'xml',
-        success: function(data){
-            var html = '';
-            $("item",data).each(function(){
-
-                html += '&lt;li&gt;';
-                html += '&lt;a href="' + $("link",this).text() + '"&gt;';
-                html += '&lt;img src="#" alt=""&gt;';
-                html += '&lt;h2&gt;' + $("title",this).text() + '&lt;/h2&gt;';
-                html += '&lt;p&gt;' + $("description",this).text() + '&lt;/p&gt;';
-                html += '&lt;/a&gt;';
-                html += '&lt;/li&gt;';
-
-            });
-
-            //listviewリフレッシュ
-            $('[data-role="listview"]').append(html).listview('refresh');
-
-            //本文の画像をサムネイルの画像に置換
-            $('.ui-btn-text').each(function(){
-                $('.ui-li-thumb',this).attr('src',$('.mr10',this).attr('src'));
-            });
-
-            //本文の画像除去
-            $('.mr10').remove();
-        }
-    });
-});
-&lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div data-role="page" id="index"&gt;
-    &lt;div data-role="header"&gt;
-        &lt;h1&gt;RSSの取得&lt;/h1&gt;
-    &lt;/div&gt;
-    &lt;div data-role="content"&gt;
-        &lt;ul data-role="listview" data-inset="true"&gt;
-        &lt;/ul&gt;
-    &lt;/div&gt;
-    &lt;div data-role="footer"&gt;
-        &lt;h4&gt;Copyright &copy; ナカノヨウスケ&lt;/h4&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</pre>
-            </div>
           </div>
           </div>
         </div>

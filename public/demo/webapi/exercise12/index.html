@@ -6,14 +6,17 @@
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script>
 $(function(){
+    //ラジオボタンの生成
     $(document).initialize();
+    //東淀川区で初期表示
     $(document).ramen("東淀川区");
      
-    $("input:radio").live("change",function(){
+    $("form").on("change","input:radio",function(){
         $(document).ramen($(this).val());
     });
 });
- 
+
+//ラジオボタンの生成
 $.fn.initialize = function(){
     $.getJSON("ramen.json",
         function(data){
@@ -22,7 +25,8 @@ $.fn.initialize = function(){
             });
     });
 }
- 
+
+//地域ごとのラーメン屋表示（初期表示：東淀川区）
 $.fn.ramen = function(area){
     $.getJSON("ramen.json",
         function(data){
@@ -37,15 +41,15 @@ $.fn.ramen = function(area){
                         html += "</tr>";
                         html += "<tr>";
                         html += "<td>住所</td>";
-                        html += "<td>" + val.住所 + "</td>";
+                        html += "<td>" + val["住所"] + "</td>";
                         html += "</tr>";
                         html += "<tr>";
                         html += "<td>電話番号</td>";
-                        html += "<td>" + val.電話 + "</td>";
+                        html += "<td>" + val["電話"] + "</td>";
                         html += "</tr>";
                         html += "<tr>";
                         html += "<td>画像</td>";
-                        html += "<td><img src=\"" + val.画像 + "\"></td>";
+                        html += "<td><img src=\"" + val["画像"] + "\"></td>";
                         html += "</tr>";
                     });
                 }

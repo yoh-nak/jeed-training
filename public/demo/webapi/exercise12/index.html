@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script>
+$(function(){
+    $(document).initialize();
+    $(document).ramen("東淀川区");
+     
+    $("input:radio").live("change",function(){
+        $(document).ramen($(this).val());
+    });
+});
+ 
+$.fn.initialize = function(){
+    $.getJSON("ramen.json",
+        function(data){
+            $.each(data["ラーメン"]["地域"], function(key,val){
+                $("fieldset:first").append("<input type=\"radio\" name=\"ramen\" value=\""+ key +"\">" + key);
+            });
+    });
+}
+ 
+$.fn.ramen = function(area){
+    $.getJSON("ramen.json",
+        function(data){
+            var html = "";
+             
+            $.each(data["ラーメン"]["地域"],function(key,val){
+                if(key == area){
+                    $.each(val,function(key,val){
+                        html += "<tr>";
+                        html += "<td>店名</td>";
+                        html += "<td>" + key + "</td>";
+                        html += "</tr>";
+                        html += "<tr>";
+                        html += "<td>住所</td>";
+                        html += "<td>" + val.住所 + "</td>";
+                        html += "</tr>";
+                        html += "<tr>";
+                        html += "<td>電話番号</td>";
+                        html += "<td>" + val.電話 + "</td>";
+                        html += "</tr>";
+                        html += "<tr>";
+                        html += "<td>画像</td>";
+                        html += "<td><img src=\"" + val.画像 + "\"></td>";
+                        html += "</tr>";
+                    });
+                }
+            });
+            $("tbody").html(html);
+        });
+}
+</script>
+<style>
+fieldset{
+    width:800px;
+    margin:10px;
+}
+</style>
+</head>
+<body>
+    <form>
+        <fieldset>
+        </fieldset>
+        <fieldset>
+            <table border="1">
+            <tbody>
+            </tbody>
+            </table>
+        </fieldset>
+    </form>
+</body>
+</html>

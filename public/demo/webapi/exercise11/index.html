@@ -6,45 +6,30 @@
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script>
 $(function(){
-        $.getJSON("color.json",
+
+  var colors = [];
+  var strs = [];
+
+   $.getJSON('color.json',
         function(data){
-            var i = 0;
-            $.each(data.colors, function(key,val){
-                $("select").append("<option value=\"" + i + "\">" + val.jp + "</option>");
-                i++;
-            });
-             
-        });
-         
-        $("form").on("change","select",function(){
-            $.getJSON("color.json",
-            function(data){
-                var i = 0;
-                $.each(data.colors, function(key,val){
-                    switch($("select").val()){
-                        case "0":
-                            if(i == 0){
-                                $("div").html(val.en).css("background-color", val.code);
-                            }
-                            break;
-                        case "1":
-                            if(i == 1){
-                                $("div").html(val.en).css("background-color", val.code);
-                            }
-                            break;
-                        case "2":
-                            if(i == 2){
-                                $("div").html(val.en).css("background-color", val.code);
-                            }
-                            break;
-                    }
-                    i++;
-                });
-            });
-        });
+          var i = 0;
+          $.each(data.colors, function(key,val){
+            $("select").append('<option value="' + i + '">' + val.jp + '</option>');
+              colors.push(val.code);
+              strs.push(val.en);
+              i++;
+          });
+        }
+    );
+
+    $('form').on('change','select',function(){
+      $('div')
+        .text(strs[parseInt($(this).val())])
+        .css('background-color', colors[parseInt($(this).val())]);
+    });
 });
 </script>
-<style type="text/css">
+<style>
 div{
     width:200px;
     height:200px;

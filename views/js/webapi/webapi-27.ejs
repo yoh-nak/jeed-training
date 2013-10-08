@@ -36,45 +36,30 @@
 &lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
 &lt;script&gt;
 $(function(){
-        $.getJSON("color.json",
+
+  var colors = [];
+  var strs = [];
+
+   $.getJSON('color.json',
         function(data){
-            var i = 0;
-            $.each(data.colors, function(key,val){
-                $("select").append("&lt;option value=\"" + i + "\"&gt;" + val.jp + "&lt;/option&gt;");
-                i++;
-            });
-             
-        });
-         
-        $("form").on("change","select",function(){
-            $.getJSON("color.json",
-            function(data){
-                var i = 0;
-                $.each(data.colors, function(key,val){
-                    switch($("select").val()){
-                        case "0":
-                            if(i == 0){
-                                $("div").html(val.en).css("background-color", val.code);
-                            }
-                            break;
-                        case "1":
-                            if(i == 1){
-                                $("div").html(val.en).css("background-color", val.code);
-                            }
-                            break;
-                        case "2":
-                            if(i == 2){
-                                $("div").html(val.en).css("background-color", val.code);
-                            }
-                            break;
-                    }
-                    i++;
-                });
-            });
-        });
+          var i = 0;
+          $.each(data.colors, function(key,val){
+            $("select").append('&lt;option value="' + i + '"&gt;' + val.jp + '&lt;/option&gt;');
+              colors.push(val.code);
+              strs.push(val.en);
+              i++;
+          });
+        }
+    );
+
+    $('form').on('change','select',function(){
+      $('div')
+        .text(strs[parseInt($(this).val())])
+        .css('background-color', colors[parseInt($(this).val())]);
+    });
 });
 &lt;/script&gt;
-&lt;style type="text/css"&gt;
+&lt;style&gt;
 div{
     width:200px;
     height:200px;
@@ -93,7 +78,6 @@ div{
     &lt;/form&gt;
     &lt;div&gt;grey&lt;/div&gt;
 &lt;/body&gt;
-
 </pre>
 
 <hr>

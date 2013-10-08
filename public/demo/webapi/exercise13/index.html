@@ -7,66 +7,80 @@
 <link rel="stylesheet" href="grid-listview.css" />
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<script>
+$(document).on('pageshow','#index',function(){
+
+        var thumb = [
+            {
+                title:'Yahoo!',
+                url:'http://www.yahoo.co.jp/',
+                description:'日本最大級のポータルサイト'
+            },
+            {
+                title:'Google',
+                url:'http://www.google.co.jp/',
+                description:'世界中のあらゆる情報を検索するためのツールを提供しています。'
+            },
+            {
+                title:'FC2',
+                url:'http://web.fc2.com/',
+                description:'FC2ホームページは無料で1GB使えて広告がありません。'
+            },
+            {
+                title:'Youtube',
+                url:'http://www.youtube.com/?gl=JP&hl=ja',
+                description:'動画を作成し、友だちや家族、世界中の人たちと共有'
+            },
+            {
+                title:'Google（英語版）',
+                url:'http://www.google.com/',
+                description:'世界中のあらゆる情報を検索するためのツールを提供しています。'
+            },
+            {
+                title:'facebook',
+                url:'http://www.facebook.com/',
+                description:'Facebookを使うと、友達や同僚、同級生、仲間たちとつながりを深められます。'
+            },
+            {
+                title:'Ameba Blog',
+                url:'http://ameblo.jp/',
+                description:'アメーバブログ（アメブロ）とスマホ対応のコミュニティ&ゲーム SNS はアメーバ。'
+            },
+            {
+                title:'楽天',
+                url:'http://www.rakuten.co.jp/',
+                description:'インターネット最大級の通信販売、通販オンラインショッピングコミュニティ'
+            }
+        ];
+
+        var image = 'http://capture.heartrails.com/300x300/cool/bg=000000?http://www.yahoo.co.jp/';
+        var html = '';
+
+        for(var i = 0; i < thumb.length; i++){
+          html += '<li><a href="' + thumb[i].url + '">';
+          html += '<img src="http://capture.heartrails.com/300x300/cool/bg=000000?' + thumb[i].url + '">';
+          html += '<h2>' + thumb[i].title + '</h2>';
+          html += '<p>' + thumb[i].description + '</p>';
+          html += '<p class="ui-li-aside">#' + i + '</p>';
+          html += '</a></li>';
+        }
+
+        $('[data-role="listview"]').append(html).listview('refresh');
+
+});
+</script>
 </head>
 <body>
-<div data-role="page" data-theme="a" id="demo-page" class="my-page" data-url="demo-page">
+<div data-role="page" data-theme="a" id="index" class="my-page">
     <div data-role="header">
-        <h1>News</h1>
-        <a href="grid-listview.html" data-shadow="false" data-iconshadow="false" data-icon="arrow-l" data-iconpos="notext" data-rel="back" data-ajax="false">Back</a>
-    </div><!-- /header -->
+        <h1>アクセスランキング</h1>
+    </div>
     <div data-role="content">
         <ul data-role="listview" data-inset="true">
-            <li><a href="#">
-                <img src="../../_assets/img/apple.png">
-                <h2>iOS 6.1</h2>
-                <p>Apple released iOS 6.1</p>
-                <p class="ui-li-aside">iOS</p>
-            </a></li>
-            <li><a href="#">
-                <img src="../../_assets/img/blackberry_10.png">
-                <h2>BlackBerry 10</h2>
-                <p>BlackBerry launched the Z10 and Q10 with the new BB10 OS</p>
-                <p class="ui-li-aside">BlackBerry</p>
-            </a></li>
-            <li><a href="#">
-                <img src="../../_assets/img/lumia_800.png">
-                <h2>WP 7.8</h2>
-                <p>Nokia rolls out WP 7.8 to Lumia 800</p>
-                <p class="ui-li-aside">Windows Phone</p>
-            </a></li>
-            <li><a href="#">
-                <img src="../../_assets/img/galaxy_express.png">
-                <h2>Galaxy</h2>
-                <p>New Samsung Galaxy Express</p>
-                <p class="ui-li-aside">Samsung</p>
-            </a></li>
-            <li><a href="#">
-                <img src="../../_assets/img/nexus_7.png">
-                <h2>Nexus 7</h2>
-                <p>Rumours about new full HD Nexus 7</p>
-                <p class="ui-li-aside">Android</p>
-            </a></li>
-            <li><a href="#">
-                <img src="../../_assets/img/firefox_os.png">
-                <h2>Firefox OS</h2>
-                <p>ZTE to launch Firefox OS smartphone at MWC</p>
-                <p class="ui-li-aside">Firefox</p>
-            </a></li>
-            <li><a href="#">
-                <img src="../../_assets/img/tizen.png">
-                <h2>Tizen</h2>
-                <p>First Samsung phones with Tizen can be expected in 2013</p>
-                <p class="ui-li-aside">Tizen</p>
-            </a></li>
-            <li><a href="#">
-                <h2>Symbian</h2>
-                <p>Nokia confirms the end of Symbian</p>
-                <p class="ui-li-aside">Symbian</p>
-            </a></li>
         </ul>
-    </div><!-- /content -->
-    <div data-role="footer" data-theme="none">
-        <h3>Responsive Grid Listview</h3>
-    </div><!-- /footer -->
+    </div>
+    <div data-role="footer" data-theme="none" data-position="fixed">
+        <h4>Copyright &copy; ナカノヨウスケ</h4>
+    </div>
 </div>
 </body>

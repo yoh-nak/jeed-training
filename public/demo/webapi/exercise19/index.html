@@ -1,68 +1,56 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML>
+<html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title></title>
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 <script src="https://www.google.com/jsapi"></script>
 <script>
-google.load('visualization', '1.0', {'packages':['corechart']});
+google.load("visualization", "1",{packages:["corechart"]});
 
-$(document).on('pageshow','#index',function(){
+$(document).on('pagecreate','#index',function(){
+
+    var ary = new Array();
+    ary.push(['地域', '件数']);
     
-    var innerAry = [];
-    innerAry.push(['地域', '件数']);
-
-    $.getJSON('ramen.json',
+    $.getJSON("ramen.json",
         function(data){
-            $.each(data['ラーメン']['地域'], function(key,val){
-                var i = 0;
-                $.each(val,function(key,val){
-                    i++;
-                });
-                 
-                var buff = [];
-                buff.push(key);
-                buff.push(i);
-                innerAry.push(buff);
+            $.each(data.ラーメン.地域, function(key,val){
+                    var i = 0;
+                    $.each(val,function(key,val){
+                        i++;
+                    });
+                    
+                    var buff = new Array();
+                    buff.push(key);
+                    buff.push(i);
+                    ary.push(buff);
             });
-
-            google.setOnLoadCallback(drawChart);
-        }
-    );
-     
-    //google.setOnLoadCallback(drawChart);
-     
+    });
+    
+    google.setOnLoadCallback(drawChart);
+    
     function drawChart(){
         
-        var outerAry = [];
-        for(var i = 0; i < innerAry.length; i++){
-            outerAry.push(innerAry[i]);
+        var ary2d = new Array();
+        for(var i = 0; i < ary.length; i++){
+            ary2d.push(ary[i]);
         }
-
-        console.log(outerAry);
-         
-        var data = google.visualization.arrayToDataTable(outerAry);
-         
+        
+        var data = google.visualization.arrayToDataTable(ary2d);
+        
         var options = {
             title:'ラーメン屋件数',
             vAxis:{title:'地域',titleTextStyle:{color:'#0000FF'}},
-            chartArea:{height:"70%"}
+            chartArea:{height:"80%"}
         };
-
-        var chart = new google.visualization.BarChart(document.getElementById('chart'));
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
         chart.draw(data, options);
     }
 });
 </script>
-<style>
-/*#chart{
-    width:100%;
-    height:480px;
-}*/
-</style>
+<title></title>
 </head>
 <body>
 <div data-role="page" id="index">
@@ -70,10 +58,11 @@ $(document).on('pageshow','#index',function(){
         <h1>ラーメン屋件数</h1>
     </div>
     <div data-role="content">
-         <div id="chart"></div>
+        <div id="chart_div" style="width: 900px; height: 500px;"></div>
     </div>
-    <div data-role="footer" data-position="fixed">
-        <h4>Copyright &copy; ナカノヨウスケ</h4>
+    <div data-role="footer">
+        <h4>Yohsuke Nakano</h4>
     </div>
 </div>
 </body>
+</html>

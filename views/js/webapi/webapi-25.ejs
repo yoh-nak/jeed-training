@@ -36,34 +36,39 @@
 &lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
 &lt;script&gt;
 $(function(){
-    $("input").click(function(){
+    $('input').click(function(){
         $.ajax({
             url: 'data.xml',
             dataType: 'xml',
             success: function(data){
-                 
-                var cnt = 0;
-                var ary = new Array();
-                $("datalist &gt; dataset &gt; data_value",data).each(function(){
-                    ary.push(parseInt($(this).text()));
-                    cnt += parseInt($(this).text());
+                //全体の合計を格納
+                var total = 0;
+                //個別の値を格納
+                var kobetsu = [];
+                var label = [];
+                var color = [];
+
+                $("dataset",data).each(function(){
+                    label.push($('data_label',this).text());
+                    kobetsu.push($('data_value',this).text());
+                    color.push($('data_color',this).text());
+
+                    total += parseInt($(this).text());
                 });
-                 
-                var i = 0;
-                var rate = new Array();
-                $("datalist &gt; dataset &gt; data_value",data).each(function(){
-                    rate[i] = Math.floor((ary[i] / cnt) * 100);
-                    i++;
-                });
-                 
-                var i = 0;
-                $("datalist &gt; dataset",data).each(function(){
-                    $("div:eq(" + i + ")")
-                        .css("width",(rate[i] * 2) + "px")
-                        .css("background-color",$("data_color",this).text())
-                        .text($("data_label",this).text());
-                    i++;
-                });
+
+                //個別の割合
+                var rate = [];
+                for(var i = 0; i &lt; kobetsu.length; i++){
+                    rate.push( Math.floor((kobetsu[i] / total) * 100));
+
+                    $('div:nth(' + i + ')').css({
+                        backgroundColor: color[i],
+                        width: rate[i]*2
+                    }).text(label[i]);
+                }
+            },
+            error:function(e){
+                console.log(e.message);
             }
         });
     });

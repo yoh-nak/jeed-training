@@ -9,7 +9,7 @@
 <script>
 google.load("visualization", "1",{packages:["corechart"]});
 
-$(document).on('pagecreate','#index',function(){
+$(document).on('pageshow','#index',function(){
 
     var ary = new Array();
     ary.push(['地域', '件数']);
@@ -26,14 +26,16 @@ $(document).on('pagecreate','#index',function(){
                     buff.push(key);
                     buff.push(i);
                     ary.push(buff);
-
-                    console.log(ary);
             });
 
-            //google.setOnLoadCallback(drawChart);
-    });
+            console.log(ary);
+            google.setOnLoadCallback(drawChart);
+        }
+
+       //google.setOnLoadCallback(drawChart);
+    );
     
-    google.setOnLoadCallback(drawChart);
+    //google.setOnLoadCallback(drawChart);
     
     function drawChart(){
         

@@ -24,9 +24,7 @@
 &lt;script src="http://sample-api.com/api.php?id=xxx&<mark>callback=foo</mark>"&gt;&lt;/script&gt;
 </pre>
 
-<pre>
-このリクエストに対して、Webサーバーからは、JSON形式に関数名「foo」を追加したデータが返されます。データ受信と同時にfoo関数に引数が渡されて処理が行われます。ここでは、foo関数に引数として連想配列が渡されてます。
-</pre>
+<p>このリクエストに対して、Webサーバーからは、JSON形式に関数名「foo」を追加したデータが返されます。データ受信と同時にfoo関数に引数が渡されて処理が行われます。ここでは、foo関数に引数として連想配列が渡されてます。</p>
 
 <pre class="prettyprint">
 <mark>foo(</mark>{"category":"history", "code":200}<mark>);</mark>
@@ -57,16 +55,36 @@ function foo(json){
 &lt;/script&gt;
 </pre>
 
-<h4>JSONPの問題点</h4>
+<p>分かりにくければ以下のようなソースを見てみましょう。1つ目のscript要素内で定義されたcallback関数が、2つ目のscript要素ないで実行されています。2つ目のscript要素の処理を外部jsファイルで読み込む行為がJSONPというわけです。</p>
 
-<pre>
-XMLHttpRequestと違い、JSONPではPOSTメソッドを利用できません。このため、クライアントから外部ドメインのサーバーにデータを送信するには、別の方法を使う必要があります。
-
-JSONPはクロスドメインをあえて回避する手法であるため、セキュリティメインの脆弱性を抱えています。これを悪用されると、ユーザーが知らない間に悪意のあるWebサイトと通信が行われる可能性があります。また、Webサーバーのデータを別のドメインから勝手に利用される危険もあるため、機密情報などのデータを扱うには適していません。
+<pre class="prettyprint">
+&lt;!DOCTYPE HTML&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;title&gt;&lt;/title&gt;
+&lt;script&gt;
+function callback(data){
+    document.write(data.category);
+    document.write(data.code);
+}
+&lt;/script&gt;
+&lt;script&gt;
+callback({"category":"history", "code":200})
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;
 </pre>
 
+<hr>
 
+<h4>JSONPの問題点</h4>
 
+<p>XMLHttpRequestと違い、JSONPではPOSTメソッドを利用できません。このため、クライアントから外部ドメインのサーバーにデータを送信するには、別の方法を使う必要があります。</p>
+
+<p>JSONPはクロスドメインをあえて回避する手法であるため、セキュリティメインの脆弱性を抱えています。これを悪用されると、ユーザーが知らない間に悪意のあるWebサイトと通信が行われる可能性があります。また、Webサーバーのデータを別のドメインから勝手に利用される危険もあるため、機密情報などのデータを扱うには適していません。</p>
 
           </div>
           </div>

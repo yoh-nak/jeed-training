@@ -42,41 +42,39 @@ Ajaxでは、主にXML形式のデータを利用して送受信が行われま�
 
 <h4>JSONPの仕組み</h4>
 
-<pre>
-JavaScriptでは、sript要素にsrc属性を指定して外部ファイルを読み込みますが、このsrc属性には、別のドメインのURLを指定できます。つまり、script要素のsrc属性として外部のドメインのURLを指定できます。つまり、script要素のsrc属性として外部ドメインのWebサーバーと通信を行えば、クロスドメインの制約を受けずにデータ受信が可能です。
-
-ただし、このときWebサーバーから送られてくるのは単なるJSON形式のデータであり、スクリプトではありません。そｋでこのデータを引数として受け取ることができる関数を定義しておき、src属性に指定するURLに「callback」パラメーターを追加して受け取る関数を定義しておき、値といてこの関数名を指定します。たとえば、関数名を「foo」とすると次のような記述になります。
-</pre>
-
+<p>JavaScriptでは、sript要素にsrc属性を指定して外部ファイルを読み込みますが、このsrc属性には、別のドメインのURLを指定できます。つまり、script要素のsrc属性として外部のドメインのURLを指定できます。script要素のsrc属性として外部ドメインのWebサーバーと通信を行えば、クロスドメインの制約を受けずにデータ受信が可能です。</p>
+<p>そこで、JSON形式のデータを引数として受け取ることができる関数を定義しておき、src属性に指定するURLに「callback」パラメーターを追加して受け取る関数を定義しておき、値としてこの関数名を指定します。たとえば、関数名を「foo」とすると次のような記述になります。</p>
 
 <pre class="prettyprint">
-&lt;script src="http://sample/lib.cgi?id=12&callback=foo" type="text/javascript"&gt;&lt;/script&gt;
+&lt;script src="http://sample-api.com/api.php?id=xxx&<mark>callback=foo</mark>"&gt;&lt;/script&gt;
 </pre>
 
 <pre>
-このリクエストに対して、Webサーバーからは、JSON形式に関数名を追加したデータが返されます。そこで、データ受信と同時にfoo関数に引数が渡されて処理が行われます。ここでは、foo関数に引数として連想配列が渡されてます。
+このリクエストに対して、Webサーバーからは、JSON形式に関数名「foo」を追加したデータが返されます。データ受信と同時にfoo関数に引数が渡されて処理が行われます。ここでは、foo関数に引数として連想配列が渡されてます。
 </pre>
 
 <pre class="prettyprint">
-foo({"category":"history", "code":200});
+<mark>foo(</mark>{"category":"history", "code":200}<mark>);</mark>
 </pre>
 
-<pre>
-XMLHttpRequestと同様の機能を実現するには、JavaScriptによって動的に、上記のようなscriptタグを作成できるようにすればよいことになります。
-</pre>
-
+<p>XMLHttpRequestで同様の機能を実現するには、JavaScriptによって動的に、上記のようなscriptタグを作成できるようにすればよいことになります。</p>
 
 <pre class="prettyprint">
-&lt;script type="text/javascript"&gt;
+&lt;script&gt;
+//データを受信したいときに実行する関数
 function getJSONP(){
+  //script要素のキャシュを生成
   var elem = document.createElement('script');
-  elem.src = 'http://sample/lib.cgi?id=12&callback=foo';
+  //script要素にsrc属性を付加
+  elem.src = 'http://sample-api.com/api.php?id=xxx&<mark>callback=foo</mark>';
+  //script要素にtype属性を付加
   elem.type = 'text/javascript';
 
-  //ヘッダにscript要素を追加する
+  //head要素内にscript要素を適用する
   document.getElementByTagName('head')[0].appendChild(elem);
 }
 
+//jsonpデータを受信したときに実行される関数の定義
 function foo(json){
   //JSON形式を利用した処理
   ...

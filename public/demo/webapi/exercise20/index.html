@@ -53,7 +53,12 @@ var twitter = new Twitter();
  
 function update(data){
     for( var i = 0; i < data.length; i++ ) {
-        $('[data-role="content"]').append("<p>"+data[i].user.name + ' : ' + data[i].text+"</p>");
+        $('[data-role="listview"]').append(
+            '<li><a href="#">\
+            <h2>' + data[i].user.name + '</h2>\
+            <p>' + data[i].text + '</p>\
+            </a></li>'
+        ).listview('refresh');
     }
 }
 
@@ -71,6 +76,8 @@ $(document).on('pageshow','#index',function(){
         <h1>Twitter API（home_timeline）</h1>
     </div>
     <div data-role="content">
+        <ul data-role="listview" data-inset="true">
+        </ul>
     </div>
     <div data-role="footer" data-position="fixed">
         <h4>Copyright &copy; ナカノヨウスケ</h4>

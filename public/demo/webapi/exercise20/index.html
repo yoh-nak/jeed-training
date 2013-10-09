@@ -9,13 +9,16 @@
 <script src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
 <script src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
 <script>
+//Twitterクラス定義
 function Twitter() {}
+//プロパティ
 Twitter.prototype = {
         consumerKey:    "UpTXY5eoXBMqdh2hkPYscg",
         consumerSecret: "X3F83WWzR2j05TKpqsV7zR3Ut9jlZgI5mt0szMVNijU",
         accessToken:    "164538873-oY7G7JazQXMO0D8UEizKdZTBY9znwggkbRje8Q0c",
         tokenSecret:    "5j0TRWUl3QqgCo9mEBCNXHSwpaFrUE8n7jaAQhpQ"
 };
+//メソッド
 Twitter.prototype.get = function(api, content) {
     var accessor = {
         consumerSecret: this.consumerSecret,
@@ -49,8 +52,10 @@ Twitter.prototype.get = function(api, content) {
     $.ajax(options);
 }
  
+//Twiterクラスインスタンス化
 var twitter = new Twitter();
  
+//コールバック関数
 function update(data){
     for( var i = 0; i < data.length; i++ ) {
         $('[data-role="listview"]').append(
@@ -64,7 +69,10 @@ function update(data){
 
 $(document).on('pageshow','#index',function(){
     //オプションとコールバック関数の指定
-    var content = {count: "50", callback: "update"};
+    var content = {
+        count: "50",        //表示件数
+        callback: "update"  //コールバック関数
+    };
     //Twitter APIの呼び出し
     twitter.get("https://api.twitter.com/1.1/statuses/home_timeline.json", content);
 });

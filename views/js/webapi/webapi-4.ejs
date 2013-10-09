@@ -15,7 +15,7 @@
           <div class="panel-heading">JSONPの概要</div>
           <div class="panel-body">
 
-<h4>JSONPの仕組み</h4>
+<h4>JSONP（JSON with padding）の仕組み</h4>
 
 <p>JavaScriptでは、sript要素にsrc属性を指定して外部ファイルを読み込みますが、このsrc属性には、別のドメインのURLを指定できます。つまり、script要素のsrc属性として外部のドメインのURLを指定できます。script要素のsrc属性として外部ドメインのWebサーバーと通信を行えば、クロスドメインの制約を受けずにデータ受信が可能です。</p>
 <p>そこで、JSON形式のデータを引数として受け取ることができる関数を定義しておき、src属性に指定するURLに「callback」パラメーターを追加して受け取る関数を定義しておき、値としてこの関数名を指定します。たとえば、関数名を「foo」とすると次のような記述になります。</p>
@@ -55,7 +55,9 @@ function foo(json){
 &lt;/script&gt;
 </pre>
 
-<p>分かりにくければ以下のようなソースを見てみましょう。1つ目のscript要素内で定義されたcallback関数が、2つ目のscript要素ないで実行されています。2つ目のscript要素の処理を外部jsファイルで読み込む行為がJSONPというわけです。</p>
+<p>Webサービスによっては最初からjsonpでデータを受信できる仕組みを持ったサービスがあります。jsonpでデータを受信できるサービスは、サーバーサイド技術を使うことなく、クライアントJavaScriptで受信したJSONデータを処理できることになります。</p>
+
+<p>JSONPの仕組みが分かりにくければ以下のようなソースを見てみましょう。1つ目のscript要素内で定義されたcallback関数が、2つ目のscript要素ないで実行されています。2つ目のscript要素の処理を外部jsファイルで読み込む行為がJSONP（JSON with padding）というわけです。</p>
 
 <pre class="prettyprint">
 &lt;!DOCTYPE HTML&gt;

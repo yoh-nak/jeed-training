@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<script src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
+<script src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
+<script>
+function Twitter() {}
+Twitter.prototype = {
+        consumerKey:    "UpTXY5eoXBMqdh2hkPYscg",
+        consumerSecret: "X3F83WWzR2j05TKpqsV7zR3Ut9jlZgI5mt0szMVNijU",
+        accessToken:    "164538873-oY7G7JazQXMO0D8UEizKdZTBY9znwggkbRje8Q0c",
+        tokenSecret:    "5j0TRWUl3QqgCo9mEBCNXHSwpaFrUE8n7jaAQhpQ"
+};
+Twitter.prototype.get = function(api, content) {
+    var accessor = {
+        consumerSecret: this.consumerSecret,
+        tokenSecret: this.tokenSecret
+    };
+ 
+    var message = {
+        method: "GET",
+        action: api,
+        parameters: {
+            oauth_version: "1.0",
+            oauth_signature_method: "HMAC-SHA1",
+            oauth_consumer_key: this.consumerKey,
+            oauth_token: this.accessToken
+        }
+    };
+    for (var key in content) {
+        message.parameters[key] = content[key];
+    }
+    OAuth.setTimestampAndNonce(message);
+    OAuth.SignatureMethod.sign(message, accessor);
+    var target = OAuth.addToURL(message.action, message.parameters);
+ 
+    var options = {
+        type: message.method,
+        url: target,
+        dataType: "jsonp",  //ここでjsonpを指定する
+        jsonp: false,       //jQueryによるcallback関数名の埋め込みはしない
+        cache: true         //リクエストパラメータに時刻を埋め込まない
+    };
+    $.ajax(options);
+}
+ 
+var twitter = new Twitter();
+ 
+function update(data){
+    for( var i = 0; i < data.length; i++ ) {
+        $('[data-role="content"]').append("<p>"+data[i].user.name + ' : ' + data[i].text+"</p>");
+    }
+}
+
+$(document).on('pageshow','#index',function(){
+    //オプションとコールバック関数の指定
+    var content = {count: "50", callback: "update"};
+    //Twitter APIの呼び出し
+    twitter.get("https://api.twitter.com/1.1/statuses/home_timeline.json", content);
+});
+</script>
+</head>
+<body>
+<div data-role="page" id="index">
+    <div data-role="header">
+        <h1>Twitter API（home_timeline）</h1>
+    </div>
+    <div data-role="content">
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <h4>Copyright &copy; ナカノヨウスケ</h4>
+    </div>
+</div>
+</body>
+</html>

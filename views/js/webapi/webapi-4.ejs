@@ -88,6 +88,25 @@ callback({"category":"history", "code":200})
 
 <p>また、JSONPはクロスドメインをあえて回避する手法であり、セキュリティに脆弱性があります。悪用されると、ユーザーが知らない間に悪意のあるWebサイトと通信が行われる可能性があります。また、Webサーバーのデータを別のドメインから勝手に利用される危険もあるため、機密情報などのデータを扱うには適していません。あくまでも外部サービスから利用されても構わない一般公開目的のデータに限定して活用する仕組みと言えます。</p>
 
+<hr>
+
+<h4>jQueryでJSONPを取得</h4>
+<p>jQueryでJSONPを取得するには、$.getJSONや$.ajaxメソッドを使ことができます。callback関数名は「?」と指定することにより、$.getJSONや$.ajaxのコールバック関数で取得したデータの処理を記述することができます。</p>
+
+<p>APIに指定するGETのクエリ文字列に日本語を使う場合はエンコードする必要があります。</p>
+<pre class="prettyprint">
+$(function(){
+  //日本語をエンコード
+  var q = encodeURIComponent('キーワード');
+  $.getJSON('http://sample-api.com/api.json?callback=<mark>?</mark>&query=' + q),
+    function(data){
+      //取得したJSONPデータをJSON形式で表示
+      console.log(data);
+    }
+  );
+});
+</pre>
+
           </div>
           </div>
         </div>

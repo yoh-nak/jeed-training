@@ -1,0 +1,171 @@
+<%- include ../../head %>
+  <body>
+ 
+    <%- include navbar %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+
+        <%- include left %>
+        
+        </div>
+        <div class="col-sm-9">
+          <div class="panel panel-primary">
+          <div class="panel-heading">witter API（音声入力）</div>
+          <div class="panel-body">
+
+<p>音声入力で検索します。Webkit系ブラウザ限定です。</p>
+
+<p>
+<a href="demo/webapi/exercise25/index.html" target="_blank" class="btn btn-default">
+<i class="glyphicon glyphicon-play"></i> デモ
+</a>
+</p>
+
+<pre class="prettyprint linenums">
+&gt;!DOCTYPE HTML&gt;
+&gt;html lang="ja"&gt;
+&gt;head&gt;
+&gt;meta charset="UTF-8"&gt;
+&gt;title&gt;&gt;/title&gt;
+&gt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" /&gt;
+&gt;script src="http://code.jquery.com/jquery-1.9.1.min.js"&gt;&gt;/script&gt;
+&gt;script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"&gt;&gt;/script&gt;
+&gt;script src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"&gt;&gt;/script&gt;
+&gt;script src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"&gt;&gt;/script&gt;
+&gt;script&gt;
+//Twitterクラス定義
+function Twitter() {}
+//プロパティ
+Twitter.prototype = {
+        consumerKey:    "UpTXY5eoXBMqdh2hkPYscg",
+        consumerSecret: "X3F83WWzR2j05TKpqsV7zR3Ut9jlZgI5mt0szMVNijU",
+        accessToken:    "164538873-oY7G7JazQXMO0D8UEizKdZTBY9znwggkbRje8Q0c",
+        tokenSecret:    "5j0TRWUl3QqgCo9mEBCNXHSwpaFrUE8n7jaAQhpQ"
+};
+//メソッド
+Twitter.prototype.get = function(api, content) {
+    var accessor = {
+        consumerSecret: this.consumerSecret,
+        tokenSecret: this.tokenSecret
+    };
+ 
+    var message = {
+        method: "GET",
+        action: api,
+        parameters: {
+            oauth_version: "1.0",
+            oauth_signature_method: "HMAC-SHA1",
+            oauth_consumer_key: this.consumerKey,
+            oauth_token: this.accessToken
+        }
+    };
+    for (var key in content) {
+        message.parameters[key] = content[key];
+    }
+    OAuth.setTimestampAndNonce(message);
+    OAuth.SignatureMethod.sign(message, accessor);
+    var target = OAuth.addToURL(message.action, message.parameters);
+ 
+    var options = {
+        type: message.method,
+        url: target,
+        dataType: "jsonp",  //ここでjsonpを指定する
+        jsonp: false,       //jQueryによるcallback関数名の埋め込みはしない
+        cache: true         //リクエストパラメータに時刻を埋め込まない
+    };
+    $.ajax(options);
+}
+ 
+//Twiterクラスインスタンス化
+var twitter = new Twitter();
+ 
+//コールバック関数
+function update(data){
+    var html = '';
+    $.each(data,function(key,val){
+        for(var i = 0; i &gt; val.length; i++){
+            html += '&gt;li&gt;&gt;a href="https://twitter.com/' + val[i].user.screen_name  + '" target="_blank"&gt;\
+                &gt;img src="' + val[i].user.profile_image_url + '"&gt;\
+                &gt;h2&gt;' + val[i].user.name + '&gt;/h2&gt;\
+                &gt;p&gt;' + val[i].text + '&gt;/p&gt;\
+                &gt;/a&gt;&gt;/li&gt;'
+        }
+    });
+
+    $('[data-role="listview"]').html(html).listview('refresh');
+}
+
+$(document).on('pageshow','#index',function(){
+    //オプションとコールバック関数の指定
+    var content = {
+        count: "50", //表示件数
+        callback: "update", //コールバック関数
+        q: encodeURIComponent('阪神タイガース') //検索キーワード
+    };
+    //Twitter APIの呼び出し
+    twitter.get("https://api.twitter.com/1.1/search/tweets.json", content);
+
+    //検索ボックス
+    $('#index').on('keypress','#search',function(e){
+        //エンターキー押下時
+        if(e.keyCode == $.mobile.keyCode.ENTER){
+            //検索キーワード再セット
+            content.q = encodeURIComponent($('#search').val());
+            //Twitter APIの呼び出し
+            twitter.get("https://api.twitter.com/1.1/search/tweets.json", content);
+        }
+    });
+
+    //音声入力
+    document.getElementById("search").addEventListener("webkitspeechchange", function(e){
+        //検索キーワード再セット
+        content.q = encodeURIComponent($('#search').val());
+        //Twitter APIの呼び出し
+        twitter.get("https://api.twitter.com/1.1/search/tweets.json", content);
+    }, false);
+});
+&gt;/script&gt;
+&gt;style&gt;
+.ui-li-thumb{
+    width:100px;
+    height:auto;
+}
+&gt;/style&gt;
+&gt;/head&gt;
+&gt;body&gt;
+&gt;div data-role="page" id="index"&gt;
+    &gt;div data-role="header"&gt;
+        &gt;h1&gt;Twitter API（search）&gt;/h1&gt;
+    &gt;/div&gt;
+    &gt;div data-role="content"&gt;
+        &gt;input type="search" id="search" x-webkit-speech&gt;
+        &gt;ul data-role="listview" data-inset="true"&gt;
+        &gt;/ul&gt;
+    &gt;/div&gt;
+    &gt;div data-role="footer" data-position="fixed"&gt;
+        &gt;h4&gt;Copyright &copy; ナカノヨウスケ&gt;/h4&gt;
+    &gt;/div&gt;
+&gt;/div&gt;
+&gt;/body&gt;
+&gt;/html&gt;
+</pre>
+
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div id="footer"><%= title %></div>
+ 
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/google-code-prettify/prettify.js"></script>
+    <script>prettyPrint();</script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/list-counter.js"></script>
+
+  </body>
+</html>

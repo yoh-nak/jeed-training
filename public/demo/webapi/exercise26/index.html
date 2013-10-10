@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<script>
+$(document).on('pageshow','#index',function(){
+    //アップロードユーザー
+    var user = 'dotinstall';
+    $.ajax({
+    dataType: "jsonp",
+    url: 'http://gdata.youtube.com/feeds/api/users/dotinstall/uploads',
+    data:'format=6&alt=json-in-script',
+    success: function(data){
+        //console.log(data.feed.entry);
+        for(var i = 0; i < data.feed.entry.length; i++){
+            console.log(data.feed.entry[i].id.$t.replace(/^http:\/\/.*\/(.*)$/, '$1'));
+            console.log(data.feed.entry[i].media$group.media$content[0].url);
+        }
+    }
+    });
+});
+</script>
+<style>
+body {
+  -webkit-text-size-adjust: 100%;
+}
+</style>
+</head>
+<body>
+<div data-role="page" id="index">
+    <div data-role="header">
+        <h1>Youtube Player API</h1>
+    </div>
+    <div data-role="content">
+<div id="player"></div>
+<script> 
+    //Load player api asynchronously.
+    var tag = document.createElement('script'); 
+    tag.src = "http://www.youtube.com/player_api"; 
+    var firstScriptTag = document.getElementsByTagName('script')[0]; 
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag); 
+    var done = false; 
+    var player;
+    function onYouTubePlayerAPIReady() { 
+        player = new YT.Player('player', {
+          height: '390',
+          width: '640', 
+          videoId: 'zsK0E5r7ivk', 
+          events: { 
+            'onReady': onPlayerReady, 
+            'onStateChange': onPlayerStateChange 
+          } 
+        });
+    }
+    function onPlayerReady(evt) {
+        evt.target.playVideo();
+    }
+    function onPlayerStateChange(evt) { 
+        if (evt.data == YT.PlayerState.PLAYING && !done) {
+            setTimeout(stopVideo, 6000); 
+            done = true;
+        }
+    }
+    function stopVideo() {
+        player.stopVideo();
+    }
+</script>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <h4>Copyright &copy; ナカノヨウスケ</h4>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>設置サンプル：YouTube IFrame API：音量の制御</title>
+        <link rel="stylesheet" type="text/css" href="lib/global.css" />
+        <style>
+            #playerbox { width:640px; height:390px; margin-bottom:10px; }
+            img { vertical-align:middle; }
+        </style>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script>
+            $(function(){
+                var player;
+                var videoID="GigoGTLerfQ";
+                /* IFrame Player APIのコードをロード */
+                function fGetScript(){
+                    $.ajax({
+                        url:"http://www.youtube.com/player_api/",
+                        dataType:"script",
+                        success:function(data){
+                            //dbg("done");
+                        },
+                        error:function(xhr, status, thrown) {
+                            dbg(xhr);
+                            fGetScript();
+                        }
+                    }); 
+                }
+                fGetScript();
+                /* プレーヤーの準備完了時 */
+                window.onYouTubeIframeAPIReady=function() {
+                    //dbg("onYouTubeIframeAPIReady");
+                    loadPlayer(videoID);
+                }
+                /* プレーヤー生成 */
+                function loadPlayer(videoID) {
+                    //dbg("loadPlayer("+videoID+")");
+                    if(!player){
+                        player = new YT.Player(
+                            'player',{
+                                width: '640',    /* 動画プレーヤーの幅 */
+                                height: '390',    /* 動画プレーヤーの高さ */
+                                videoId: videoID,    /* YouTube動画ID */
+                                events: { /* イベント */
+                                    "onReady": onPlayerReady    /* プレーヤの準備完了時 */
+                                },
+                                playerVars: {
+                                    "rel":0,            // 関連動画の有無(default:1)
+                                    "showinfo":0,        // 動画情報表示(default:1)
+                                    "controls":1        // コントロール有無(default:1)
+                                }
+                            }
+                        );
+                    }else{
+                        player.loadVideoById(videoID);
+                    }
+                }
+                function onPlayerReady(event){
+                    /* プレーヤの準備完了時 */
+                    player.playVideo(); /* 再生開始 */
+                    dbg("[onPlayerReady]現在の音量："+player.getVolume());
+                    $("#volume option").filter(function(){
+                        //dbg($(this).text()+"=="+player.getVolume());
+                        return $(this).text()==player.getVolume();
+                    }).attr("selected","selected");
+                    if(player.getVolume()==0){
+                        btn_muteON();
+                    }else{
+                        btn_muteOFF();
+                    }
+                }
+                /* ミュート設定 */
+                $("#btn_mute").click(function(e){
+                    /* プレーヤーのミュート状態 */
+                    dbg("ミュート状態:"+player.isMuted());
+                    if(player.isMuted()){
+                        player.unMute(); /* ミュート解除 */
+                        btn_muteOFF();
+                    }else{
+                        player.mute(); /* ミュート */
+                        btn_muteON();
+                    }
+                    return false;
+                 });
+                /* 音量プルダウン */
+                for(var i=0; i<=100; i+=10){
+                    $("#volume").append("<option value='"+i+"'>"+i+"</option>");
+                }
+                /* 音量変更 */
+                $("#volume").change(function(){
+                    var num=($(this).val()) ? $(this).val() : 0;
+                    player.setVolume(num);
+                    dbg("現在の音量："+num);
+                    if(num==0){
+                        btn_muteON();
+                    }else{
+                        btn_muteOFF();
+                    }
+                });
+                function dbg(str){
+                    $("#debuglog").val(str+"\n"+$("#debuglog").val());
+                       if(window.console && window.console.log){
+                          console.log(str);
+                       }
+                }
+                function btn_muteOFF(){
+                    $("#btn_mute > img").attr("src","img/strm/key_unmute.png");
+                    $("#mutestatus").html("ミュートOFF");
+                }
+                function btn_muteON(){
+                    $("#btn_mute > img").attr("src","img/strm/key_mute.png");
+                    $("#mutestatus").html("ミュートON");
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <div id="wrap">
+            <h1>設置サンプル</h1>
+            <h2>YouTube IFrame API：音量の制御</h2>
+            <p>YouTube IFrame APIを使用して、プレーヤーの音量を制御するサンプル。</p>
+            <div id="playerbox"><div id='player'><!-- 動画プレーヤーの埋め込み --></div></div>
+            <p>
+                <a href="#" id="btn_mute"><img /></a>
+                <span id="mutestatus">ミュートOFF</span>　
+                音量変更：<select id="volume"></select>　
+                <span id="volumestatus"></span>
+            </p>
+            <textarea id="debuglog" style="width:630px;height:300px;"></textarea>
+        </div>
+    </body>
+</html>

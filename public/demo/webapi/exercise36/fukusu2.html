@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>YouTube IFrame API：複数の動画を切り替えて再生</title>
+        <link rel="stylesheet" type="text/css" href="lib/global.css" />
+        <style>
+            #playerbox { width:640px; height:390px; margin-bottom:10px; }
+        </style>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script>
+            $(function(){
+                var player;
+                /* IFrame Player APIのコードをロード */
+                function fGetScript(){
+                        $.ajax({
+                        url:"http://www.youtube.com/player_api/",
+                        dataType:"script",
+                        success:function(data){
+                            dbg("done");
+                            /* プレーヤーの準備完了時 */
+                            window.onYouTubeIframeAPIReady=function() {
+                                dbg("onYouTubeIframeAPIReady");
+                                /* 3番目の動画を再生 */
+                                var first=$("#playlist li a").eq(2);
+                                first.css("font-weight","bold");
+                                loadPlayer(first.attr("rel"));
+                            }
+                        },
+                        error:function(xhr, status, thrown) {
+                            dbg(xhr);
+                            fGetScript();
+                        }
+                    }); 
+                }
+                fGetScript();
+                /* プレーヤー生成 */
+                function loadPlayer(videoID) {
+                    dbg("loadPlayer("+videoID+")");
+                    /* 埋め込むオブジェクトを生成（すでにある場合は削除）*/
+                    if(!player){
+                        player = new YT.Player(
+                            'player',{
+                                width: '640',    /* 動画プレーヤーの幅 */
+                                height: '390',    /* 動画プレーヤーの高さ */
+                                videoId: videoID,    /* YouTube動画ID */
+                                events: { /* イベント */
+                                    "onReady": onPlayerReady    /* プレーヤの準備完了時 */
+                                }
+                            }
+                        );
+                    }else{
+                        player.cueVideoById(videoID); /* 指定した動画のサムネイルを読み込む（自動再生しない） */
+                    }
+                }
+                function onPlayerReady(event){
+                    dbg("onPlayerReady");
+                    event.target.setVolume(50);    /* 音量調整 */
+                }
+                /* 指定した動画を再生 */
+                $("#playlist > li > a").click(function(){
+                    loadPlayer($(this).attr("rel"));
+                    $(this).parent().parent().find("a").css("font-weight","normal");
+                    $(this).css("font-weight","bold");
+                });
+                function dbg(str){
+                       if(window.console && window.console.log){
+                          console.log(str);
+                       }
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <div id="wrap">
+            <h1>設置サンプル</h1>
+            <h2>YouTube IFrame API：複数の動画を切り替えて再生</h2>
+            <p>切り替えた時に動画は自動再生させずに、再生ボタンを押して再生させるサンプル。</p>
+            <div id="playerbox"><div id='player'><!-- 動画プレーヤーの埋め込み --></div></div>
+            <ul id="playlist">
+                <li><a href="#" rel="9YEEl52u8XE">Sleeping Dog</a></li>
+                <li><a href="#" rel="GigoGTLerfQ">Hiyoko of Tea</a></li>
+                <li><a href="#" rel="4KMs8cR9P5U">The fireworks of Tokyo Disney land</a></li>
+            </ul>
+        </div>
+    </body>

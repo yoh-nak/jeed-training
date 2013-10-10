@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>設置サンプル：YouTube IFrame API：画質の制御</title>
+        <link rel="stylesheet" type="text/css" href="lib/global.css" />
+        <style>
+            #playerbox { width:640px; height:390px; margin-bottom:10px; }
+        </style>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script>
+            $(function(){
+                var player;
+                var videoID="GigoGTLerfQ";
+                /* IFrame Player APIのコードをロード */
+                function fGetScript(){
+                    $.ajax({
+                        url:"http://www.youtube.com/player_api/",
+                        dataType:"script",
+                        success:function(data){
+                            //dbg("done");
+                        },
+                        error:function(xhr, status, thrown) {
+                            dbg(xhr);
+                            fGetScript();
+                        }
+                    }); 
+                }
+                fGetScript();
+                /* プレーヤーの準備完了時 */
+                window.onYouTubeIframeAPIReady=function() {
+                    //dbg("onYouTubeIframeAPIReady");
+                    loadPlayer(videoID);
+                }
+                /* プレーヤー生成 */
+                function loadPlayer(videoID) {
+                    //dbg("loadPlayer("+videoID+")");
+                    if(!player){
+                        player = new YT.Player(
+                            'player',{
+                                width: '640',    /* 動画プレーヤーの幅 */
+                                height: '390',    /* 動画プレーヤーの高さ */
+                                videoId: videoID,    /* YouTube動画ID */
+                                events: { /* イベント */
+                                    "onReady": onPlayerReady,    /* プレーヤの準備完了時 */
+                                    "onStateChange": onPlayerStateChange,    /* 動画プレーヤーのステータス変更 */
+                                },
+                                playerVars: {
+                                    "rel":0,            // 関連動画の有無(default:1)
+                                    "showinfo":0,        // 動画情報表示(default:1)
+                                    "controls":1        // コントロール有無(default:1)
+                                }
+                            }
+                        );
+                    }else{
+                        player.loadVideoById(videoID);
+                    }
+                }
+                function onPlayerReady(event){
+                    /* プレーヤの準備完了時 */
+                    player.playVideo(); /* 再生開始 */
+                }
+                function onPlayerStateChange(event) {
+                    /* プレーヤーのステータスが変更される度に発生 */
+                    //dbg("PlayerState:"+event.data);
+                    if(event.data==YT.PlayerState.PLAYING){
+                        dbg(player.getAvailableQualityLevels());
+                        /* 画質プルダウン */
+                        var tmp=player.getAvailableQualityLevels();
+                        $("#volume option").remove();
+                        for(var i in tmp){
+                            $("#volume").append("<option value='"+tmp[i]+"'>"+tmp[i]+"</option>");
+                        }
+                        $("#volume option").filter(function(){
+                            //dbg($(this).text()+"=="+player.getVolume());
+                            return $(this).text()==player.getPlaybackQuality();
+                        }).attr("selected","selected");
+                    }
+                }
+                /* 音量変更 */
+                $("#volume").change(function(){
+                    var num=($(this).val()) ? $(this).val() : null;
+                    player.setPlaybackQuality(num);
+                    dbg("現在の画質："+num);
+                });
+                function dbg(str){
+                    $("#debuglog").val(str+"\n"+$("#debuglog").val());
+                       if(window.console && window.console.log){
+                          console.log(str);
+                       }
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <div id="wrap">
+            <h1>設置サンプル</h1>
+            <h2>YouTube IFrame API：画質の制御</h2>
+            <p>YouTube IFrame APIを使用して、プレーヤーの画質を制御するサンプル。</p>
+            <div id="playerbox"><div id='player'><!-- 動画プレーヤーの埋め込み --></div></div>
+            <p>
+                画質変更：<select id="volume"></select>
+            </p>
+            <textarea id="debuglog" style="width:630px;height:300px;"></textarea>
+        </div>
+    </body>
+</html>

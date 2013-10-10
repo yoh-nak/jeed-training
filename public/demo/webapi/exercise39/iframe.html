@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>設置サンプル：YouTube IFrame API：iframeの取得と削除</title>
+        <link rel="stylesheet" type="text/css" href="lib/global.css" />
+        <style>
+            #playerbox { width:640px; height:390px; margin-bottom:10px; }
+            #status { width:640px; height:3em; margin-bottom:10px; }
+        </style>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script>
+            $(function(){
+                var player,timer;
+                var videoID="GigoGTLerfQ";
+                /* IFrame Player APIのコードをロード */
+                function fGetScript(){
+                    $.ajax({
+                        url:"http://www.youtube.com/player_api/",
+                        dataType:"script",
+                        success:function(data){
+                            //dbg("done");
+                        },
+                        error:function(xhr, status, thrown) {
+                            dbg(xhr);
+                            fGetScript();
+                        }
+                    }); 
+                }
+                fGetScript();
+                /* プレーヤーの準備完了時 */
+                window.onYouTubeIframeAPIReady=function() {
+                    dbg("onYouTubeIframeAPIReady");
+                    loadPlayer(videoID);
+                }
+                /* プレーヤー生成 */
+                function loadPlayer(videoID) {
+                    dbg("loadPlayer("+videoID+")");
+                    player = new YT.Player(
+                        'player',{
+                            width: '640',    /* 動画プレーヤーの幅 */
+                            height: '390',    /* 動画プレーヤーの高さ */
+                            videoId: videoID,    /* YouTube動画ID */
+                            events: { /* イベント */
+                                "onStateChange": onPlayerStateChange    /* 動画プレーヤーのステータス変更 */
+                            },
+                            playerVars: {
+                                "rel":1,            // 関連動画の有無(default:1)
+                                "showinfo":0,        // 動画情報表示(default:1)
+                                "controls":1        // コントロール有無(default:1)
+                            }
+                        }
+                    );
+                    $("#playerbox").html(player.getIframe());
+                    dbg(player.getIframe());
+                }
+                function onPlayerStateChange(event) {
+                    dbg(event.data);
+                }
+                $("#btn_destroy").click(function(e){
+                    player.destroy();
+                    return false;
+                });
+                function dbg(str){
+                    $("#debuglog").val(str+"\n"+$("#debuglog").val());
+                       if(window.console && window.console.log){
+                          console.log(str);
+                       }
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <div id="wrap">
+            <h1>設置サンプル</h1>
+            <h2>YouTube IFrame API：iframeの取得と削除</h2>
+            <div id="playerbox"><div id='player'><!-- 動画プレーヤーの埋め込み --></div></div>
+            <p><a href="#" id="btn_destroy">iframeを削除する</a></p>
+            <textarea id="debuglog" style="width:630px;height:300px;"></textarea>
+        </div>
+    </body>
+</html>

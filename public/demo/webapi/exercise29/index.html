@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>設置サンプル：YouTube IFrame API：動画プレーヤ―の制御（再生・一時停止・停止・シーク位置）</title>
+<link rel="stylesheet" type="text/css" href="lib/global.css" />
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<script>
+//$(function(){
+$(document).on('pageshow','#index',function(){
+    var player;
+    var videoID="NrrEov1aN-k";
+    /* IFrame Player APIのコードをロード */
+    function fGetScript(){
+        $.ajax({
+            url:"http://www.youtube.com/player_api/",
+            dataType:"script",
+            success:function(data){
+                dbg("done");
+            },
+            error:function(xhr, status, thrown) {
+                dbg(xhr);
+                fGetScript();
+            }
+        }); 
+    }
+    fGetScript();
+    /* プレーヤーの準備完了時 */
+    window.onYouTubeIframeAPIReady=function() {
+        dbg("onYouTubeIframeAPIReady");
+        loadPlayer(videoID);
+    }
+    /* プレーヤー生成 */
+    function loadPlayer(videoID) {
+        dbg("loadPlayer("+videoID+")");
+        if(!player){
+            player = new YT.Player(
+                'player',{
+                    width: '640',    /* 動画プレーヤーの幅 */
+                    height: '390',    /* 動画プレーヤーの高さ */
+                    videoId: videoID,    /* YouTube動画ID */
+                    events: { /* イベント */
+                        "onReady": onPlayerReady,    /* プレーヤの準備完了時 */
+                        "onStateChange": onPlayerStateChange,    /* 動画プレーヤーのステータス変更 */
+                    },
+                    playerVars: {
+                        "rel":0,            // 関連動画の有無(default:1)
+                        "showinfo":0,        // 動画情報表示(default:1)
+                        "controls":0        // コントロール有無(default:1)
+                    }
+                }
+            );
+        }else{
+            player.loadVideoById(videoID);
+        }
+    }
+    function onPlayerReady(event){
+        dbg("onPlayerReady");
+        /* プレーヤの準備完了時 */
+    }
+    function onPlayerStateChange(event) {
+        /* プレーヤーのステータスが変更される度に発生 */
+        dbg("PlayerState:"+event.data);
+        switch(event.data){
+            case YT.PlayerState.ENDED:
+            case YT.PlayerState.PAUSED:
+            case YT.PlayerState.CUED:
+                $("#play").html("再生");
+                break;
+            case YT.PlayerState.PLAYING:
+            case YT.PlayerState.BUFFERING:
+                $("#play").html("一時停止");
+                break;
+            default:
+                $("#play").html("再生");
+                break;
+        }
+    }
+    function play(){
+        dbg("play");
+        player.playVideo(); /* 再生 */
+        $(this).html("一時停止");
+    }
+    function pause(){
+        dbg("pause");
+        player.pauseVideo(); /* 一時停止 */
+        $(this).html("再生");
+    }
+    function stop(){
+        dbg("stop");
+        player.stopVideo(); /* 停止 */
+        player.cueVideoById(videoID);
+        $(this).html("一時停止");
+    }
+    $("#play").click(function(){
+        var label=$(this).html();
+        dbg("play");
+        if(label=="再生"){
+            play();
+        }else{
+            pause();
+        }
+    });
+    $("#stop").click(function(){
+        stop();
+    });
+    $("#seek").click(function(){
+        player.seekTo(30,true);
+        play();
+    });
+    function dbg(str){
+        $("#debuglog").val(str+"\n"+$("#debuglog").val());
+           if(window.console && window.console.log){
+              console.log(str);
+           }
+    }
+});
+</script>
+<style>
+#playerbox { width:640px; height:390px; margin-bottom:10px; }
+#controls  { width:640px; text-align:center; }
+#controls a { display:inline-block; margin:0; padding:5px 10px; text-decoration:none; width:6em; color:#fff; background:#000; text-align:center; }
+#controls a:hover { background:#333; }
+#controls a#seek { width:10em; }
+</style>
+</head>
+<body>
+    <div data-role="page" id="index">
+    <div data-role="header">
+        <h1>YouTube IFrame API：動画プレーヤーの制御（再生・一時停止・停止・シーク位置）</h1>
+    </div>
+    <div data-role="content">
+        <div id="playerbox"><div id='player'><!-- 動画プレーヤーの埋め込み --></div></div>
+        <p id="controls">
+            <a href="#" id="play">再生</a>
+            <a href="#" id="stop">停止</a>　｜　
+            <a href="#" id="seek">00:30から再生</a>
+        </p>
+        <textarea id="debuglog" style="width:630px;height:300px;"></textarea>
+    <div data-role="footer" data-position="fixed">
+        <h4>Copyright &copy; ナカノヨウスケ</h4>
+    </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>設置サンプル：YouTube IFrame API：動画の再生ステータスの取得</title>
+        <link rel="stylesheet" type="text/css" href="lib/global.css" />
+        <style>
+            #playerbox { width:640px; height:390px; margin-bottom:10px; }
+            #status { width:640px; height:3em; margin-bottom:10px; }
+        </style>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script>
+            $(function(){
+                var player,timer;
+                var videoID="GigoGTLerfQ";
+                /* IFrame Player APIのコードをロード */
+                function fGetScript(){
+                    $.ajax({
+                        url:"http://www.youtube.com/player_api/",
+                        dataType:"script",
+                        success:function(data){
+                            //dbg("done");
+                        },
+                        error:function(xhr, status, thrown) {
+                            dbg(xhr);
+                            fGetScript();
+                        }
+                    }); 
+                }
+                fGetScript();
+                /* プレーヤーの準備完了時 */
+                window.onYouTubeIframeAPIReady=function() {
+                    //dbg("onYouTubeIframeAPIReady");
+                    loadPlayer(videoID);
+                }
+                /* プレーヤー生成 */
+                function loadPlayer(videoID) {
+                    //dbg("loadPlayer("+videoID+")");
+                    if(!player){
+                        player = new YT.Player(
+                            'player',{
+                                width: '640',    /* 動画プレーヤーの幅 */
+                                height: '390',    /* 動画プレーヤーの高さ */
+                                videoId: videoID,    /* YouTube動画ID */
+                                events: { /* イベント */
+                                    "onReady": onPlayerReady,    /* プレーヤの準備完了時 */
+                                    "onStateChange": onPlayerStateChange,    /* 動画プレーヤーのステータス変更 */
+                                },
+                                playerVars: {
+                                    "rel":1,            // 関連動画の有無(default:1)
+                                    "showinfo":1,        // 動画情報表示(default:1)
+                                    "controls":1        // コントロール有無(default:1)
+                                }
+                            }
+                        );
+                    }else{
+                        player.loadVideoById(videoID);
+                    }
+                }
+                function onPlayerReady(event){
+                    /* プレーヤの準備完了時 */
+                    //player.playVideo(); /* 再生開始 */
+                    timer = setInterval(getStatus, 100);
+                }
+                var getStatus=function(){
+                    var loadedbytes="バッファリングしてビデオの割合（getVideoLoadedFraction）:"+player.getVideoLoadedFraction()+"bytes<br />";
+                     var curtime="動画の再生を開始してからの経過時間（getCurrentTime）:"+player.getCurrentTime()+"秒";
+                   $("#status").html(loadedbytes+curtime);
+                }
+                function onPlayerStateChange(event) {
+                    var s="";
+                    /* プレーヤーのステータスが変更される度に発生 */
+                    /* 整数値, 定数 */
+                    s+="PlayerState:"+event.data;
+                    /* 定数 */
+                    switch(event.data){
+                        case YT.PlayerState.ENDED:
+                            /* 0 (再生終了（＝最後まで再生した）) */
+                            s+=" / YT.PlayerState.ENDED";
+                            break;
+                        case YT.PlayerState.PLAYING:
+                            /* 1 (再生中) */
+                            s+=" / YT.PlayerState.PLAYING";
+                            break;
+                        case YT.PlayerState.PAUSED:
+                            /* 2 (一時停止された) */
+                            s+=" / YT.PlayerState.PAUSED";
+                            break;
+                        case YT.PlayerState.BUFFERING:
+                            /* 3 (バッファリング中) */
+                            s+=" / YT.PlayerState.BUFFERING";
+                            break;
+                        case YT.PlayerState.CUED:
+                            /* 5 (頭出しされた) */
+                            s+=" / YT.PlayerState.CUED";
+                            break;
+                        case -1:
+                            /* -1 (未スタート、他の動画に切り替えた時など) */
+                            player.playVideo(); /* 再生開始 */
+                        break;
+                    }
+                    dbg(s);
+                }
+                $("#btn_seek").click(function(){
+                     player.seekTo(30,true);
+                   return false;
+                });
+                function dbg(str){
+                    $("#debuglog").val(str+"\n"+$("#debuglog").val());
+                       if(window.console && window.console.log){
+                          console.log(str);
+                       }
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <div id="wrap">
+            <h1>設置サンプル</h1>
+            <h2>YouTube IFrame API：動画の再生ステータスの取得</h2>
+            <p>IFrame APIを使用して、動画の再生状況を取得するサンプル。</p>
+            <div id="playerbox"><div id='player'><!-- 動画プレーヤーの埋め込み --></div></div>
+            <p><a href="#" id="btn_seek">00:30から再生</a></p>
+            <div id="status"></div>
+            <p>動画のステイタス（getPlayerState）：<br /><textarea id="debuglog" style="width:630px;height:300px;"></textarea></p>
+        </div>
+    </body>
+</html>

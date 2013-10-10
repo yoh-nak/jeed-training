@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>設置サンプル：YouTube IFrame API：プレーヤーのサイズを設定</title>
+        <link rel="stylesheet" type="text/css" href="lib/global.css" />
+        <style>
+            #playerbox { width:640px; height:390px; margin-bottom:10px; }
+        </style>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script>
+            $(function(){
+                var player;
+                var videoID="GigoGTLerfQ";
+                /* IFrame Player APIのコードをロード */
+                function fGetScript(){
+                    $.ajax({
+                        url:"http://www.youtube.com/player_api/",
+                        dataType:"script",
+                        success:function(data){
+                            //dbg("done");
+                        },
+                        error:function(xhr, status, thrown) {
+                            dbg(xhr);
+                            fGetScript();
+                        }
+                    }); 
+                }
+                fGetScript();
+                /* プレーヤーの準備完了時 */
+                window.onYouTubeIframeAPIReady=function() {
+                    //dbg("onYouTubeIframeAPIReady");
+                    loadPlayer(videoID);
+                }
+                /* プレーヤー生成 */
+                function loadPlayer(videoID) {
+                    //dbg("loadPlayer("+videoID+")");
+                    if(!player){
+                        player = new YT.Player(
+                            'player',{
+                                width: '2640',    /* 動画プレーヤーの幅 */
+                                height: '390',    /* 動画プレーヤーの高さ */
+                                videoId: videoID,    /* YouTube動画ID */
+                                events: { /* イベント */
+                                    "onReady": onPlayerReady    /* プレーヤの準備完了時 */
+                                },
+                                playerVars: {
+                                    "rel":0,            // 関連動画の有無(default:1)
+                                    "showinfo":0,        // 動画情報表示(default:1)
+                                    "controls":1        // コントロール有無(default:1)
+                                }
+                            }
+                        );
+                    }else{
+                        player.cueVideoById(videoID);
+                    }
+                    onPlayerSizechange();
+                }
+                function onPlayerReady(event){
+                    /* プレーヤの準備完了時 */
+                    //player.playVideo(); /* 再生開始 */
+                }
+                /* 音量変更 */
+                $("#size").change(function(){
+                    onPlayerSizechange();
+                });
+                function onPlayerSizechange(){
+                    var tmp=$("#size option:selected").val();
+                    var tmp_ary=tmp.split("x");
+                    var width=tmp_ary[0];
+                    var height=eval(tmp_ary[1])+30; /* contolsの高さ30px */
+                    player.setSize(width, height);
+                    dbg("現在のプレーヤーサイズ:width:"+width+"px / height:"+height+"px");
+                }
+                function dbg(str){
+                    $("#debuglog").val(str+"\n"+$("#debuglog").val());
+                       if(window.console && window.console.log){
+                          console.log(str);
+                       }
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <div id="wrap">
+            <h1>設置サンプル</h1>
+            <h2>YouTube IFrame API：プレーヤーのサイズを設定</h2>
+            <p>setSize()関数を使用して、プレーヤーのサイズをを制御するサンプル。</p>
+            <div id="playerbox"><div id='player'><!-- 動画プレーヤーの埋め込み --></div></div>
+            <p>
+                画質変更：
+                <select id="size">
+                    <option value="240x135">240x135</option>
+                    <option value="320x180">320x180</option>
+                    <option value="560x315">560x315</option>
+                    <option value="640x360" selected="selected">640x360</option>
+                </select>
+            </p>
+            <textarea id="debuglog" style="width:630px;height:300px;"></textarea>
+        </div>
+    </body>
+</html>

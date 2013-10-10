@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>YouTube IFrame API：設置サンプル（イベント）</title>
+        <link rel="stylesheet" type="text/css" href="lib/global.css" />
+        <style>
+            #playerbox { width:640px; height:390px; margin-bottom:10px; }
+        </style>
+    </head>
+    <body>
+        <div id="wrap">
+            <h1>設置サンプル</h1>
+            <h2>YouTube IFrame API：イベント</h2>
+            <div id="playerbox"><div id='player'><!-- 動画プレーヤーの埋め込み --></div></div>
+            <textarea id="tarea" style="width:640px;height:300px;"></textarea>
+            <script>
+                /* IFrame Player APIのコードを非同期にダウンロード */
+                var tag = document.createElement('script');
+                tag.src = "//www.youtube.com/iframe_api";
+                var firstScriptTag = document.getElementsByTagName('script')[0];
+                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                /* APIコードがダウンロードされた後で、ifraemとYouTubeプレーヤー要素を生成 */
+                var player;
+                function onYouTubeIframeAPIReady() {
+                    player = new YT.Player(
+                        'player', /* 動画プレーヤーを埋め込む要素ID */
+                        {
+                            width: '640',    /* 動画プレーヤーの幅 */
+                            height: '390',    /* 動画プレーヤーの高さ */
+                            videoId: 'GigoGTLerfQ',    /* YouTube動画ID */
+                            events: {    /* イベント */
+                                "onReady": onPlayerReady,    /* プレーヤの準備完了時 */
+                                "onPlaybackQualityChange": onPlayerPlaybackQualityChange, /* 画質変更 */
+                                "onStateChange": onPlayerStateChange,    /* 動画プレーヤーのステータス変更 */
+                                "onError": onPlayerError,    /* エラー発生時　※HTML5プレーヤーのみ */
+                                "onPlaybackRateChange": onPlayerPlaybackRateChange,    /* 再生レート(速度)変更　※HTML5プレーヤーのみ */
+                                "onApiChange": onPlayerApiChange /* モジュールが読み込まれた時 */
+                            },
+                            playerVars :{ /* プレーヤーに渡すパラメータ */
+                                showinfo:1
+                            }
+                        }
+                    );
+                }
+                function onPlayerApiChange(event){
+                    /* APIメソッドを使用してモジュールが読み込まれた時に発生 */
+                    //プレイヤーのオプションに設定可能なモジュール名を配列で取得
+                    dbg("player.getOptions():"+player.getOptions());    //["cc", "endscreen"]
+                    dbg("player.getOptions(\"cc\"):"+player.getOptions("cc"));    //["reload", "fontSize", "track", "tracklist"] 
+                }
+                function onPlayerReady(event) {
+                    /* プレーヤーの準備が完了した時に発生 */
+                    var embedcode=event.target.getVideoEmbedCode(); //<iframe frameborder="0" allowfullscreen="" id="player" title="YouTube video player" height="390" width="640" src="http://www.youtube.com/embed/9YEEl52u8XE"></iframe>
+                    event.target.setVolume(50);    /* 音量調整 */
+                    event.target.playVideo();    /* 動画再生 */
+                }
+                function onPlayerPlaybackQualityChange(event) {
+                    /* プレーヤーの画質が変更される度に発生 */
+                    dbg("PlayerPlaybackQuality:"+event.data);
+                    /*
+                        small
+                        medium        360p
+                        large        480p
+                        hd720        720p HD
+                        hd1080        1080p HD
+                        highres
+                    */
+                }
+                function onPlayerStateChange(event) {
+                    var s="";
+                    /* プレーヤーのステータスが変更される度に発生 */
+                    /* 整数値 */
+                    s+="PlayerState:"+event.data;
+                    /*
+                        -1 (未スタート、他の動画に切り替えた時など)
+                        0 (再生終了（＝最後まで再生した）)
+                        1 (再生中)
+                        2 (一時停止された)
+                        3 (バッファリング中)
+                        5 (頭出しされた)
+                    */
+                    /* 定数 */
+                    switch(event.data){
+                        case YT.PlayerState.ENDED:
+                            s+=" / YT.PlayerState.ENDED";
+                            break;
+                        case YT.PlayerState.PLAYING:
+                            s+=" / YT.PlayerState.PLAYING";
+                            break;
+                        case YT.PlayerState.PAUSED:
+                            s+=" / YT.PlayerState.PAUSED";
+                            break;
+                        case YT.PlayerState.BUFFERING:
+                            s+=" / YT.PlayerState.BUFFERING";
+                            break;
+                        case YT.PlayerState.CUED:
+                            s+=" / YT.PlayerState.CUED";
+                            break;
+                    }
+                    dbg(s);
+                }
+                function onPlayerPlaybackRateChange(event){
+                    /* 動画の再生レート(速度)が変更される度に発生 */
+                    dbg("RateChange:"+event.data);    /* 速度を返す */
+                    /*
+                        2:        2.0x
+                        1.5:    1,5x
+                        1:        標準
+                        0.5:    0.5x
+                        0.25:    0.25x
+                    */
+                }
+                function onPlayerError(event) {
+                    /* HTML5プレーヤーでエラーが発生した時に呼び出される（Flashプレーヤーの場合は何もかえらない） */
+                    dbg("PlayerError:"+event.data);    /* エラーの種類を整数で返す */
+                    /* 
+                        2:        無効なパラメータが含まれている（動画IDが間違っている場合など）
+                        5:        再生できません
+                        100:    動画が見つかりません（動画が削除されている、プライベート動画など）
+                        101:    所有者により埋め込みが禁止されている動画
+                        150:    101と同じ
+                    */
+                }
+                function dbg(str){
+                    document.getElementById("tarea").value=str+"\n"+document.getElementById("tarea").value;
+                       if(window.console && window.console.log){
+                          console.log(str);
+                       }
+                }
+            </script>
+        </div>
+    </body>
+</html>

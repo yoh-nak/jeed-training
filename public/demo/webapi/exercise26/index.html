@@ -7,21 +7,22 @@
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<script src="http://www.youtube.com/apiplayer?enablejsapi=1&version=3&playerapiid=ytplayer"></script>
 <script>
 $(document).on('pageshow','#index',function(){
     //アップロードユーザー
     var user = 'dotinstall';
     $.ajax({
-    dataType: "jsonp",
-    url: 'http://gdata.youtube.com/feeds/api/users/dotinstall/uploads',
-    data:'format=6&alt=json-in-script',
-    success: function(data){
-        //console.log(data.feed.entry);
-        for(var i = 0; i < data.feed.entry.length; i++){
-            console.log(data.feed.entry[i].id.$t.replace(/^http:\/\/.*\/(.*)$/, '$1'));
-            console.log(data.feed.entry[i].media$group.media$content[0].url);
+        dataType: "jsonp",
+        url: 'http://gdata.youtube.com/feeds/api/users/dotinstall/uploads',
+        data:'format=6&alt=json-in-script',
+        success: function(data){
+            //console.log(data.feed.entry);
+            for(var i = 0; i < data.feed.entry.length; i++){
+                console.log(data.feed.entry[i].id.$t.replace(/^http:\/\/.*\/(.*)$/, '$1'));
+                console.log(data.feed.entry[i].media$group.media$content[0].url);
+            }
         }
-    }
     });
 });
 </script>
@@ -52,14 +53,15 @@ iframe {
     </div>
     <div data-role="content">
         <div class="movie">
-        <div id="player"></div>
+            <div id="player"></div>
+        </div>
+        <div data-role="controlgroup" data-type="horizontal">
+        <a href="#" id="play" data-role="button">PLAY</a>
+        <a href="#" id="pause" data-role="button">PAUSE</a>
+        <a href="#" id="stop" data-role="button">STOP</a>
         </div>
 <script> 
-    //Load player api asynchronously.
-    var tag = document.createElement('script'); 
-    tag.src = "http://www.youtube.com/player_api"; 
-    var firstScriptTag = document.getElementsByTagName('script')[0]; 
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag); 
+
     var done = false; 
     var player;
     function onYouTubePlayerAPIReady() { 
@@ -73,7 +75,7 @@ iframe {
           },
           playerVars: {
             autoplay: 0,
-            controls: 0
+            controls: 1
           }
         });
     }
@@ -91,6 +93,18 @@ iframe {
     function stopVideo() {
         player.stopVideo();
     }
+
+    $('#play').on('vclick',function(){
+        alert('play');
+        ytplayer.playVideo();
+    });
+    $('#pause').on('vclick',function(){
+        alert('pause');
+    });
+    $('#stop').on('vclick',function(){
+        alert('stop');
+         player.stopVideo();
+    });
 </script>
     </div>
     <div data-role="footer" data-position="fixed">

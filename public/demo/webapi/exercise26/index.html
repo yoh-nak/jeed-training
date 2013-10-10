@@ -29,6 +29,20 @@ $(document).on('pageshow','#index',function(){
 body {
   -webkit-text-size-adjust: 100%;
 }
+
+.movie {
+    position: relative;
+    height: 0;
+    padding-top: 56.25%; /* 16:9 */
+}
+ 
+iframe {
+    height: 100%;
+    position: absolute;
+    left:0;
+    top:0;
+    width:100%;
+}
 </style>
 </head>
 <body>
@@ -37,7 +51,9 @@ body {
         <h1>Youtube Player API</h1>
     </div>
     <div data-role="content">
-<div id="player"></div>
+        <div class="movie">
+        <div id="player"></div>
+        </div>
 <script> 
     //Load player api asynchronously.
     var tag = document.createElement('script'); 
@@ -54,11 +70,15 @@ body {
           events: { 
             'onReady': onPlayerReady, 
             'onStateChange': onPlayerStateChange 
-          } 
+          },
+          playerVars: {
+            autoplay: 0,
+            controls: 0
+          }
         });
     }
     function onPlayerReady(evt) {
-        evt.target.playVideo();
+        //evt.target.playVideo();
     }
     function onPlayerStateChange(evt) { 
         if (evt.data == YT.PlayerState.PLAYING && !done) {

@@ -17,12 +17,15 @@
 
 <p>Youtubeの動画を検索します。</p>
 
-<p>まずGoogle apisからAPI Keyを取得する必要があります。Servicesメニューから「YouTube Data API v3」を「ON」にします。</p>
+<p>まず<a href="https://code.google.com/apis/console/">Google apis</a>からAPI Keyを取得する必要があります。Servicesメニューから「YouTube Data API v3」を「ON」にします。</p>
 
 <p>
 <a href="demo/webapi/exercise27/index.html" target="_blank" class="btn btn-default">
 <i class="glyphicon glyphicon-play"></i> デモ
 </a>
+<a href="https://developers.google.com/youtube/v3/" target="_blank" class="btn btn-default">
+  <i class="glyphicon glyphicon-info-sign"></i> 参考：YouTube Data API v3
+  </a>
 </p>
 
 <pre class="prettyprint linenums">
@@ -47,10 +50,10 @@ $(document).on('pageshow','#index',function(){
 
 function show(keyword){
     $.ajax({
-        url: 'https://www.googleapis.com/youtube/v3/search',
-        dataType: 'jsonp',
+        <mark>url: 'https://www.googleapis.com/youtube/v3/search',</mark>
+        <mark>dataType: 'jsonp',</mark>
         type: 'GET',
-        data: 'part=snippet&maxResults=50&q=' + keyword + '&max-result=50&key=AIzaSyCLpk_z1gbA423gb9CtUVAW3NmXO65Si2Q',
+        <mark>data: 'part=snippet&maxResults=50&q=' + keyword + '&max-result=50&key=AIzaSyCLpk_z1gbA423gb9CtUVAW3NmXO65Si2Q',</mark>
         success:function(data){
             console.log(data);
 

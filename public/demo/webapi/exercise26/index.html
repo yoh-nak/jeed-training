@@ -1,115 +1,36 @@
-<!DOCTYPE HTML>
-<html lang="ja">
-<head>
-<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<meta charset="UTF-8">
-<title></title>
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
-<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
-<script src="http://www.youtube.com/apiplayer?enablejsapi=1&version=3&playerapiid=ytplayer"></script>
-<script>
-$(document).on('pageshow','#index',function(){
-    //アップロードユーザー
-    var user = 'dotinstall';
-    $.ajax({
-        dataType: "jsonp",
-        url: 'http://gdata.youtube.com/feeds/api/users/dotinstall/uploads',
-        data:'format=6&alt=json-in-script',
-        success: function(data){
-            //console.log(data.feed.entry);
-            for(var i = 0; i < data.feed.entry.length; i++){
-                console.log(data.feed.entry[i].id.$t.replace(/^http:\/\/.*\/(.*)$/, '$1'));
-                console.log(data.feed.entry[i].media$group.media$content[0].url);
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>YouTube IFrame API：動画プレーヤ―の基本的な埋め込み</title>
+    </head>
+    <body>
+        <div id="player"><!-- 動画プレーヤーの埋め込み --></div>
+        <script>
+            /* IFrame Player APIのコードを非同期にロード */
+            var tag = document.createElement('script');
+            tag.src = "//www.youtube.com/iframe_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+            /* APIコードがダウンロードされた後で、ifraemとYouTubeプレーヤー要素を生成 */
+            var player;
+            function onYouTubeIframeAPIReady() {
+                player = new YT.Player(
+                    'player', /* 動画プレーヤーを埋め込む要素ID */
+                    {
+                        width: '640',    /* 動画プレーヤーの幅 */
+                        height: '390',    /* 動画プレーヤーの高さ */
+                        videoId: '9YEEl52u8XE',    /* YouTube動画ID */
+                        events: {    /* イベント */
+                            "onReady": onPlayerReady    /* プレーヤの準備完了時 */
+                        }
+                    }
+                );
             }
-        }
-    });
-});
-</script>
-<style>
-body {
-  -webkit-text-size-adjust: 100%;
-}
-
-.movie {
-    position: relative;
-    height: 0;
-    padding-top: 56.25%; /* 16:9 */
-}
- 
-iframe {
-    height: 100%;
-    position: absolute;
-    left:0;
-    top:0;
-    width:100%;
-}
-</style>
-</head>
-<body>
-<div data-role="page" id="index">
-    <div data-role="header">
-        <h1>Youtube Player API</h1>
-    </div>
-    <div data-role="content">
-        <div class="movie">
-            <div id="player"></div>
-        </div>
-        <div data-role="controlgroup" data-type="horizontal">
-        <a href="#" id="play" data-role="button">PLAY</a>
-        <a href="#" id="pause" data-role="button">PAUSE</a>
-        <a href="#" id="stop" data-role="button">STOP</a>
-        </div>
-<script> 
-
-    var done = false; 
-    var player;
-    function onYouTubePlayerAPIReady() { 
-        player = new YT.Player('player', {
-          height: '390',
-          width: '640', 
-          videoId: 'zsK0E5r7ivk', 
-          events: { 
-            'onReady': onPlayerReady, 
-            'onStateChange': onPlayerStateChange 
-          },
-          playerVars: {
-            autoplay: 0,
-            controls: 1
-          }
-        });
-    }
-    function onPlayerReady(evt) {
-        //evt.target.playVideo();
-    }
-    function onPlayerStateChange(evt) { 
-        /*
-        if (evt.data == YT.PlayerState.PLAYING && !done) {
-            setTimeout(stopVideo, 6000); 
-            done = true;
-        }
-        */
-    }
-    function stopVideo() {
-        player.stopVideo();
-    }
-
-    $('#play').on('vclick',function(){
-        alert('play');
-        ytplayer.playVideo();
-    });
-    $('#pause').on('vclick',function(){
-        alert('pause');
-    });
-    $('#stop').on('vclick',function(){
-        alert('stop');
-         player.stopVideo();
-    });
-</script>
-    </div>
-    <div data-role="footer" data-position="fixed">
-        <h4>Copyright &copy; ナカノヨウスケ</h4>
-    </div>
-</div>
-</body>
+            function onPlayerReady(event){
+                /* プレーヤの準備完了時に自動再生 */
+                event.target.playVideo();
+            }
+        </script>
+    </body>
 </html>

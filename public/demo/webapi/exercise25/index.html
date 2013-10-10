@@ -81,7 +81,18 @@ $(document).on('pageshow','#index',function(){
     //Twitter APIの呼び出し
     twitter.get("https://api.twitter.com/1.1/search/tweets.json", content);
 
-    // イベントを割り当て
+    //検索ボックス
+    $('#index').on('keypress','#search',function(e){
+        //エンターキー押下時
+        if(e.keyCode == $.mobile.keyCode.ENTER){
+            //検索キーワード再セット
+            content.q = encodeURIComponent($('#search').val());
+            //Twitter APIの呼び出し
+            twitter.get("https://api.twitter.com/1.1/search/tweets.json", content);
+        }
+    });
+
+    //音声入力
     document.getElementById("search").addEventListener("webkitspeechchange", function(e){
         //検索キーワード再セット
         content.q = encodeURIComponent($('#search').val());

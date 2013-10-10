@@ -24,17 +24,18 @@
 </p>
 
 <pre class="prettyprint linenums">
-&gt;!DOCTYPE HTML&gt;
-&gt;html lang="ja"&gt;
-&gt;head&gt;
-&gt;meta charset="UTF-8"&gt;
-&gt;title&gt;&gt;/title&gt;
-&gt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" /&gt;
-&gt;script src="http://code.jquery.com/jquery-1.9.1.min.js"&gt;&gt;/script&gt;
-&gt;script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"&gt;&gt;/script&gt;
-&gt;script src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"&gt;&gt;/script&gt;
-&gt;script src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"&gt;&gt;/script&gt;
-&gt;script&gt;
+&lt;!DOCTYPE HTML&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+&lt;meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;title&gt;&lt;/title&gt;
+&lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" /&gt;
+&lt;script src="http://code.jquery.com/jquery-1.9.1.min.js"&gt;&lt;/script&gt;
+&lt;script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"&gt;&lt;/script&gt;
+&lt;script src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"&gt;&lt;/script&gt;
+&lt;script src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"&gt;&lt;/script&gt;
+&lt;script&gt;
 //Twitterクラス定義
 function Twitter() {}
 //プロパティ
@@ -85,12 +86,12 @@ var twitter = new Twitter();
 function update(data){
     var html = '';
     $.each(data,function(key,val){
-        for(var i = 0; i &gt; val.length; i++){
-            html += '&gt;li&gt;&gt;a href="https://twitter.com/' + val[i].user.screen_name  + '" target="_blank"&gt;\
-                &gt;img src="' + val[i].user.profile_image_url + '"&gt;\
-                &gt;h2&gt;' + val[i].user.name + '&gt;/h2&gt;\
-                &gt;p&gt;' + val[i].text + '&gt;/p&gt;\
-                &gt;/a&gt;&gt;/li&gt;'
+        for(var i = 0; i &lt; val.length; i++){
+            html += '&lt;li&gt;&lt;a href="https://twitter.com/' + val[i].user.screen_name  + '" target="_blank"&gt;\
+                &lt;img src="' + val[i].user.profile_image_url + '"&gt;\
+                &lt;h2&gt;' + val[i].user.name + '&lt;/h2&gt;\
+                &lt;p&gt;' + val[i].text + '&lt;/p&gt;\
+                &lt;/a&gt;&lt;/li&gt;'
         }
     });
 
@@ -126,30 +127,33 @@ $(document).on('pageshow','#index',function(){
         twitter.get("https://api.twitter.com/1.1/search/tweets.json", content);
     }, false);
 });
-&gt;/script&gt;
-&gt;style&gt;
+&lt;/script&gt;
+&lt;style&gt;
+body {
+  -webkit-text-size-adjust: 100%;
+}
 .ui-li-thumb{
     width:100px;
     height:auto;
 }
-&gt;/style&gt;
-&gt;/head&gt;
-&gt;body&gt;
-&gt;div data-role="page" id="index"&gt;
-    &gt;div data-role="header"&gt;
-        &gt;h1&gt;Twitter API（search）&gt;/h1&gt;
-    &gt;/div&gt;
-    &gt;div data-role="content"&gt;
-        &gt;input type="search" id="search" x-webkit-speech&gt;
-        &gt;ul data-role="listview" data-inset="true"&gt;
-        &gt;/ul&gt;
-    &gt;/div&gt;
-    &gt;div data-role="footer" data-position="fixed"&gt;
-        &gt;h4&gt;Copyright &copy; ナカノヨウスケ&gt;/h4&gt;
-    &gt;/div&gt;
-&gt;/div&gt;
-&gt;/body&gt;
-&gt;/html&gt;
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div data-role="page" id="index"&gt;
+    &lt;div data-role="header"&gt;
+        &lt;h1&gt;Twitter API（search）&lt;/h1&gt;
+    &lt;/div&gt;
+    &lt;div data-role="content"&gt;
+        &lt;input type="search" id="search" x-webkit-speech&gt;
+        &lt;ul data-role="listview" data-inset="true"&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;div data-role="footer" data-position="fixed"&gt;
+        &lt;h4&gt;Copyright &copy; ナカノヨウスケ&lt;/h4&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
 </pre>
 
           </div>

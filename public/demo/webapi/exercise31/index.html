@@ -4,15 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title></title>
-<link rel="stylesheet" type="text/css" href="lib/global.css" />
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 <script>
-$(function(){
+$(document).on('pageshow','#index',function(){
     var player,timer;
-    var videoID="GigoGTLerfQ";
-    /* IFrame Player APIのコードをロード */
+    var videoID="NrrEov1aN-k";
+    /* YouTube Player APIのコードをロード */
     function fGetScript(){
         $.ajax({
             url:"http://www.youtube.com/player_api/",
@@ -112,10 +111,6 @@ $(function(){
     }
 });
 </script>
-<style>
-#playerbox { width:640px; height:390px; margin-bottom:10px; }
-#status { width:640px; height:3em; margin-bottom:10px; }
-</style>
 </head>
 <body>
 <div data-role="page" id="index">
@@ -124,10 +119,13 @@ $(function(){
     </div>
     <div data-role="content">
     <div id="wrap">
-        <div id="playerbox"><div id='player'><!-- 動画プレーヤーの埋め込み --></div></div>
+        <div id='player'><!-- 動画プレーヤーの埋め込み --></div>
         <p><a data-role="button" href="#" id="btn_seek">00:30から再生</a></p>
-        <div id="status"></div>
-        <p>動画のステータス（getPlayerState）：<br /><textarea id="debuglog" style="width:630px;height:300px;"></textarea></p>
+        <p id="status"></p>
+        <fieldset data-role="fieldcontain">
+        <legend>動画のステータス（getPlayerState）:</legend>
+        <textarea id="debuglog" style="width:630px;height:300px;"></textarea>
+        </fieldset>
     </div>
     </div>
     <div data-role="footer" data-position="fixed">

@@ -50,13 +50,12 @@ $(function(){
                 }
             );
         }else{
-            player.loadVideoById(videoID); /* 指定した動画を読み込んで再生（自動再生扱い） */
+            player.cueVideoById(videoID); /* 指定した動画のサムネイルを読み込む（自動再生しない） */
         }
     }
     function onPlayerReady(event){
         dbg("onPlayerReady");
         event.target.setVolume(50);    /* 音量調整 */
-        event.target.playVideo();    /* 動画再生 */
     }
     /* 指定した動画を再生 */
     $("#playlist li a").click(function(){
@@ -78,17 +77,17 @@ $(function(){
 <body>
 <div data-role="page" id="index">
     <div data-role="header">
-        <h1>YouTube Player API: API：複数の動画を切り替えて自動再生</h1>
+        <h1>YouTube Player API: API：複数の動画を切り替えて手動再生</h1>
     </div>
     <div data-role="content">
-    <div id="wrap">
-        <div id="playerbox"><div id='player'><!-- 動画プレーヤーの埋め込み --></div></div>
-        <ul data-role="listview" data-inset="true" id="playlist">
-            <li><a href="#" rel="9YEEl52u8XE">Sleeping Dog</a></li>
-            <li><a href="#" rel="GigoGTLerfQ">Hiyoko of Tea</a></li>
-            <li><a href="#" rel="4KMs8cR9P5U">The fireworks of Tokyo Disney land</a></li>
-        </ul>
-    </div>
+        <div id="wrap">
+            <div id="playerbox"><div id='player'><!-- 動画プレーヤーの埋め込み --></div></div>
+            <ul data-role="listview" data-inset="true" id="playlist">
+                <li><a href="#" rel="9YEEl52u8XE">Sleeping Dog</a></li>
+                <li><a href="#" rel="GigoGTLerfQ">Hiyoko of Tea</a></li>
+                <li><a href="#" rel="4KMs8cR9P5U">The fireworks of Tokyo Disney land</a></li>
+            </ul>
+        </div>
     </div>
     <div data-role="footer" data-position="fixed">
         <h4>Copyright &copy; ナカノヨウスケ</h4>

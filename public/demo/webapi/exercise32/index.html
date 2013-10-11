@@ -4,14 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title></title>
-<link rel="stylesheet" type="text/css" href="lib/global.css" />
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 <script>
-$(function(){
+$(document).on('pageshow','#index',function(){
     var player;
-    var videoID="GigoGTLerfQ";
+    var videoID="NrrEov1aN-k";
     /* IFrame Player APIのコードをロード */
     function fGetScript(){
         $.ajax({
@@ -67,18 +66,18 @@ $(function(){
             dbg(player.getAvailableQualityLevels());
             /* 画質プルダウン */
             var tmp=player.getAvailableQualityLevels();
-            $("#volume option").remove();
+            $("#quality option").remove();
             for(var i in tmp){
-                $("#volume").append("<option value='"+tmp[i]+"'>"+tmp[i]+"</option>");
+                $("#quality").append("<option value='"+tmp[i]+"'>"+tmp[i]+"</option>");
             }
-            $("#volume option").filter(function(){
+            $("#quality option").filter(function(){
                 //dbg($(this).text()+"=="+player.getVolume());
                 return $(this).text()==player.getPlaybackQuality();
             }).attr("selected","selected");
         }
     }
     /* 画質変更 */
-    $("#volume").change(function(){
+    $("#quality").change(function(){
         var num=($(this).val()) ? $(this).val() : null;
         player.setPlaybackQuality(num);
         dbg("現在の画質："+num);
@@ -91,9 +90,6 @@ $(function(){
     }
 });
 </script>
-<style>
-#playerbox { width:640px; height:390px; margin-bottom:10px; }
-</style>
 </head>
 <body>
 <div data-role="page" id="index">
@@ -101,13 +97,14 @@ $(function(){
         <h1>YouTube Player API: API：画質の制御</h1>
     </div>
     <div data-role="content">
-    <div id="wrap">
-        <div id="playerbox"><div id='player'><!-- 動画プレーヤーの埋め込み --></div></div>
-        <p>
-            画質変更：<select id="volume"></select>
-        </p>
+        <div id='player'><!-- 動画プレーヤーの埋め込み --></div>
+        <fieldset data-role="fieldcontain">
+        <legend>画質変更：</legend>
+        <select id="quality"></select>
+        </fieldset>
+        <fieldset>
         <textarea id="debuglog" style="width:630px;height:300px;"></textarea>
-    </div>
+        </fieldset>
     </div>
     <div data-role="footer" data-position="fixed">
         <h4>Copyright &copy; ナカノヨウスケ</h4>

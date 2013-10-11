@@ -1,63 +1,139 @@
-<!DOCTYPE HTML>
-<html lang="ja">
+<!DOCTYPE html>
+<html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title></title>
+<link rel="stylesheet" type="text/css" href="lib/global.css" />
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 <script>
-$(document).on('pageshow','#index',function(){
-
-    show('阪神タイガース');
-
-    //検索ボックス
-    $('#index').on('keypress','#search',function(e){
-        show($('#search').val());
-    });
-});
-
-function show(keyword){
-    $.ajax({
-        url: 'https://www.googleapis.com/youtube/v3/search',
-        dataType: 'jsonp',
-        type: 'GET',
-        data: 'part=snippet&maxResults=50&q=' + keyword + '&max-result=50&key=AIzaSyCLpk_z1gbA423gb9CtUVAW3NmXO65Si2Q',
-        success:function(data){
-            console.log(data);
-
-            var html = '';
-            for(var i = 0; i < data.items.length; i++){
-                console.log(data.items[i].id.videoId);
-                html += '<li><a href="http://www.youtube.com/watch?v=' + data.items[i].id.videoId  + '" target="_blank">\
-                <img src="' + data.items[i].snippet.thumbnails.high.url + '">\
-                <h2>' + data.items[i].snippet.title + '</h2>\
-                <p>' + data.items[i].snippet.description + '</p>\
-                <p class="ui-li-aside">' + data.items[i].snippet.publishedAt + '</p>\
-                </a></li>'
+$(function(){
+    var player;
+    var videoID="GigoGTLerfQ";
+    /* IFrame Player APIのコードをロード */
+    function fGetScript(){
+        $.ajax({
+            url:"http://www.youtube.com/player_api/",
+            dataType:"script",
+            success:function(data){
+                //dbg("done");
+            },
+            error:function(xhr, status, thrown) {
+                dbg(xhr);
+                fGetScript();
             }
-
-            $('[data-role="listview"]').html(html).listview('refresh');
+        }); 
+    }
+    fGetScript();
+    /* プレーヤーの準備完了時 */
+    window.onYouTubeIframeAPIReady=function() {
+        //dbg("onYouTubeIframeAPIReady");
+        loadPlayer(videoID);
+    }
+    /* プレーヤー生成 */
+    function loadPlayer(videoID) {
+        //dbg("loadPlayer("+videoID+")");
+        if(!player){
+            player = new YT.Player(
+                'player',{
+                    width: '640',    /* 動画プレーヤーの幅 */
+                    height: '390',    /* 動画プレーヤーの高さ */
+                    videoId: videoID,    /* YouTube動画ID */
+                    events: { /* イベント */
+                        "onReady": onPlayerReady    /* プレーヤの準備完了時 */
+                    },
+                    playerVars: {
+                        "rel":0,            // 関連動画の有無(default:1)
+                        "showinfo":0,        // 動画情報表示(default:1)
+                        "controls":1        // コントロール有無(default:1)
+                    }
+                }
+            );
+        }else{
+            player.loadVideoById(videoID);
+        }
+    }
+    function onPlayerReady(event){
+        /* プレーヤの準備完了時 */
+        player.playVideo(); /* 再生開始 */
+        dbg("[onPlayerReady]現在の音量："+player.getVolume());
+        $("#volume option").filter(function(){
+            //dbg($(this).text()+"=="+player.getVolume());
+            return $(this).text()==player.getVolume();
+        }).attr("selected","selected");
+        if(player.getVolume()==0){
+            btn_muteON();
+        }else{
+            btn_muteOFF();
+        }
+    }
+    /* ミュート設定 */
+    $("#btn_mute").click(function(e){
+        /* プレーヤーのミュート状態 */
+        dbg("ミュート状態:"+player.isMuted());
+        if(player.isMuted()){
+            player.unMute(); /* ミュート解除 */
+            btn_muteOFF();
+        }else{
+            player.mute(); /* ミュート */
+            btn_muteON();
+        }
+        return false;
+     });
+    /* 音量プルダウン */
+    for(var i=0; i<=100; i+=10){
+        $("#volume").append("<option value='"+i+"'>"+i+"</option>");
+    }
+    /* 音量変更 */
+    $("#volume").change(function(){
+        var num=($(this).val()) ? $(this).val() : 0;
+        player.setVolume(num);
+        dbg("現在の音量："+num);
+        if(num==0){
+            btn_muteON();
+        }else{
+            btn_muteOFF();
         }
     });
-}
+    function dbg(str){
+        $("#debuglog").val(str+"\n"+$("#debuglog").val());
+           if(window.console && window.console.log){
+              console.log(str);
+           }
+    }
+    function btn_muteOFF(){
+        $("#btn_mute > img").attr("src","key_unmute.png");
+        $("#mutestatus").html("ミュートOFF");
+    }
+    function btn_muteON(){
+        $("#btn_mute > img").attr("src","key_mute.png");
+        $("#mutestatus").html("ミュートON");
+    }
+});
 </script>
 <style>
-.ui-li-thumb{
-    width:300px;
-    height:300px;
-}
+    #playerbox { width:640px; height:390px; margin-bottom:10px; }
+    img { vertical-align:middle; }
 </style>
-</head>
-<body>
+    </head>
+    <body>
 <div data-role="page" id="index">
     <div data-role="header">
-        <h1>Youtube Data API v3</h1>
+        <h1>YouTube Player API: 音量の制御</h1>
     </div>
     <div data-role="content">
-        <input type="search" id="search">
-        <ul data-role="listview" data-inset="true">
-        </ul>
+    <div id="wrap">
+        <div id="playerbox"><div id='player'><!-- 動画プレーヤーの埋め込み --></div></div>
+        <p>
+            <a href="#" id="btn_mute"><img /></a>
+            <span id="mutestatus">ミュートOFF</span>　
+            音量変更：<select id="volume"></select>　
+            <span id="volumestatus"></span>
+        </p>
+        <textarea id="debuglog" style="width:630px;height:300px;"></textarea>
+    </div>
     </div>
     <div data-role="footer" data-position="fixed">
         <h4>Copyright &copy; ナカノヨウスケ</h4>

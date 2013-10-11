@@ -1,67 +1,80 @@
-<!DOCTYPE HTML>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
-<title></title>
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
-<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
-<script>
-$(document).on('pageshow','#index',function(){
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>YouTube IFrame API：動画プレーヤ―の基本的な埋め込み（jQuery使用）</title>
+        <link rel="stylesheet" type="text/css" href="lib/global.css" />
+        <style>
+            #playerbox { width:640px; height:390px; margin-bottom:10px; }
+        </style>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script>
+            $(function(){
+                var player;
+                var playerFLG=0;
+                //YouTube iFrame Player API
+                var tag=document.createElement('script');
+                tag.src="//www.youtube.com/iframe_api";
+                var firstScriptTag=document.getElementsByTagName('script')[0];
+                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-    show('阪神タイガース');
-
-    //検索ボックス
-    $('#index').on('keypress','#search',function(e){
-        show($('#search').val());
-    });
-});
-
-function show(keyword){
-    $.ajax({
-        url: 'https://www.googleapis.com/youtube/v3/search',
-        dataType: 'jsonp',
-        type: 'GET',
-        data: 'part=snippet&maxResults=50&q=' + keyword + '&max-result=50&key=AIzaSyCLpk_z1gbA423gb9CtUVAW3NmXO65Si2Q',
-        success:function(data){
-            console.log(data);
-
-            var html = '';
-            for(var i = 0; i < data.items.length; i++){
-                console.log(data.items[i].id.videoId);
-                html += '<li><a href="http://www.youtube.com/watch?v=' + data.items[i].id.videoId  + '" target="_blank">\
-                <img src="' + data.items[i].snippet.thumbnails.high.url + '">\
-                <h2>' + data.items[i].snippet.title + '</h2>\
-                <p>' + data.items[i].snippet.description + '</p>\
-                <p class="ui-li-aside">' + data.items[i].snippet.publishedAt + '</p>\
-                </a></li>'
-            }
-
-            $('[data-role="listview"]').html(html).listview('refresh');
-        }
-    });
-}
-</script>
-<style>
-.ui-li-thumb{
-    width:300px;
-    height:300px;
-}
-</style>
-</head>
-<body>
-<div data-role="page" id="index">
-    <div data-role="header">
-        <h1>Youtube Data API v3</h1>
-    </div>
-    <div data-role="content">
-        <input type="search" id="search">
-        <ul data-role="listview" data-inset="true">
-        </ul>
-    </div>
-    <div data-role="footer" data-position="fixed">
-        <h4>Copyright &copy; ナカノヨウスケ</h4>
-    </div>
-</div>
-</body>
+                /* プレーヤーの準備完了時 */
+                window.onYouTubeIframeAPIReady=function() {
+                    dbg("onYouTubeIframeAPIReady");
+                    /* 3番目の動画を再生 */
+                    var first=$("#playlist li a").eq(2);
+                    first.css("font-weight","bold");
+                    loadPlayer(first.attr("rel"));
+                }
+                /* プレーヤー生成 */
+                function loadPlayer(videoID) {
+                    dbg("loadPlayer("+videoID+")");
+                    /* 埋め込むオブジェクトを生成 */
+                    if(!playerFLG){
+                        player = new YT.Player(
+                            'player',{
+                                width: '640',    /* 動画プレーヤーの幅 */
+                                height: '390',    /* 動画プレーヤーの高さ */
+                                videoId: videoID,    /* YouTube動画ID */
+                                events: { /* イベント */
+                                    "onReady": onPlayerReady    /* プレーヤの準備完了時 */
+                                }
+                            }
+                        );
+                    }else{
+                        /* プレーヤー内の動画差替 */
+                        player.loadVideoById(videoID,0);
+                    }
+                    playerFLG++;
+                }
+                function onPlayerReady(event){
+                    event.target.setVolume(50);    /* 音量調整 */
+                    event.target.playVideo();    /* 動画再生 */
+                }
+                /* 指定した動画を再生 */
+                $("#playlist > li > a").click(function(){
+                    loadPlayer($(this).attr("rel"));
+                    $(this).parent().parent().find("a").css("font-weight","normal");
+                    $(this).css("font-weight","bold");
+                });
+                function dbg(str){
+                       if(window.console && window.console.log){
+                          console.log(str);
+                       }
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <div id="wrap">
+            <h1>設置サンプル</h1>
+            <h2>YouTube IFrame API：動画プレーヤ―の基本的な埋め込み（jQuery使用）</h2>
+            <div id="playerbox"><div id='player'><!-- 動画プレーヤーの埋め込み --></div></div>
+            <ul id="playlist">
+                <li><a href="#" rel="9YEEl52u8XE">Sleeping Dog</a></li>
+                <li><a href="#" rel="GigoGTLerfQ">Hiyoko of Tea</a></li>
+                <li><a href="#" rel="4KMs8cR9P5U">The fireworks of Tokyo Disney land</a></li>
+            </ul>
+        </div>
+    </body>
 </html>

@@ -8,78 +8,75 @@
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<script>
+$(document).on('pageshow','#index',function(){
+    var player;
+    var playerFLG=0;
+    //YouTube Player API
+    var tag=document.createElement('script');
+    tag.src="//www.youtube.com/iframe_api";
+    var firstScriptTag=document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-        <script>
-            $(function(){
-                var player;
-                var playerFLG=0;
-                //YouTube iFrame Player API
-                var tag=document.createElement('script');
-                tag.src="//www.youtube.com/iframe_api";
-                var firstScriptTag=document.getElementsByTagName('script')[0];
-                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-                /* プレーヤーの準備完了時 */
-                window.onYouTubeIframeAPIReady=function() {
-                    dbg("onYouTubeIframeAPIReady");
-                    /* 3番目の動画を再生 */
-                    var first=$("#playlist li a").eq(2);
-                    first.css("font-weight","bold");
-                    loadPlayer(first.attr("rel"));
-                }
-                /* プレーヤー生成 */
-                function loadPlayer(videoID) {
-                    dbg("loadPlayer("+videoID+")");
-                    /* 埋め込むオブジェクトを生成 */
-                    if(!playerFLG){
-                        player = new YT.Player(
-                            'player',{
-                                width: '640',    /* 動画プレーヤーの幅 */
-                                height: '390',    /* 動画プレーヤーの高さ */
-                                videoId: videoID,    /* YouTube動画ID */
-                                events: { /* イベント */
-                                    "onReady": onPlayerReady    /* プレーヤの準備完了時 */
-                                }
-                            }
-                        );
-                    }else{
-                        /* プレーヤー内の動画差替 */
-                        player.loadVideoById(videoID,0);
+    /* プレーヤーの準備完了時 */
+    window.onYouTubeIframeAPIReady=function() {
+        dbg("onYouTubeIframeAPIReady");
+        /* 3番目の動画を再生 */
+        var first=$("#playlist li a").eq(2);
+        first.css("font-weight","bold");
+        loadPlayer(first.attr("rel"));
+    }
+    /* プレーヤー生成 */
+    function loadPlayer(videoID) {
+        dbg("loadPlayer("+videoID+")");
+        /* 埋め込むオブジェクトを生成 */
+        if(!playerFLG){
+            player = new YT.Player(
+                'player',{
+                    width: '640',    /* 動画プレーヤーの幅 */
+                    height: '390',    /* 動画プレーヤーの高さ */
+                    videoId: videoID,    /* YouTube動画ID */
+                    events: { /* イベント */
+                        "onReady": onPlayerReady    /* プレーヤの準備完了時 */
                     }
-                    playerFLG++;
                 }
-                function onPlayerReady(event){
-                    event.target.setVolume(50);    /* 音量調整 */
-                    event.target.playVideo();    /* 動画再生 */
-                }
-                /* 指定した動画を再生 */
-                $("#playlist li a").click(function(){
-                    loadPlayer($(this).attr("rel"));
-                    $(this).parent().parent().find("a").css("font-weight","normal");
-                    $(this).css("font-weight","bold");
-                });
-                function dbg(str){
-                       if(window.console && window.console.log){
-                          console.log(str);
-                       }
-                }
-            });
-        </script>
-    </head>
+            );
+        }else{
+            /* プレーヤー内の動画差替 */
+            player.loadVideoById(videoID,0);
+        }
+        playerFLG++;
+    }
+    function onPlayerReady(event){
+        event.target.setVolume(50);    /* 音量調整 */
+        event.target.playVideo();    /* 動画再生 */
+    }
+    /* 指定した動画を再生 */
+    $("#playlist li a").click(function(){
+        loadPlayer($(this).attr("rel"));
+        $(this).parent().parent().find("a").css("font-weight","normal");
+        $(this).css("font-weight","bold");
+    });
+    function dbg(str){
+           if(window.console && window.console.log){
+              console.log(str);
+           }
+    }
+});
+</script>
+</head>
 <body>
 <div data-role="page" id="index">
     <div data-role="header">
         <h1>YouTube Player API: 動画プレーヤ―の基本的な埋め込み（jQuery使用）</h1>
     </div>
     <div data-role="content">
-    <div id="wrap">
-        <div id="playerbox"><div id='player'><!-- 動画プレーヤーの埋め込み --></div></div>
+        <div id='player'><!-- 動画プレーヤーの埋め込み --></div>
         <ul data-role="listview" data-inset="true" id="playlist">
-            <li><a href="#" rel="9YEEl52u8XE">Sleeping Dog</a></li>
-            <li><a href="#" rel="GigoGTLerfQ">Hiyoko of Tea</a></li>
-            <li><a href="#" rel="4KMs8cR9P5U">The fireworks of Tokyo Disney land</a></li>
+            <li><a href="#" rel="nyn7luJgymM">#01 開発環境を準備する</a></li>
+            <li><a href="#" rel="MppKcxmGPMg">#02 HTMLを用意する</a></li>
+            <li><a href="#" rel="BtPEXFnTmUM">#03 初めてのJavaScript</a></li>
         </ul>
-    </div>
     </div>
     <div data-role="footer" data-position="fixed">
         <h4>Copyright &copy; ナカノヨウスケ</h4>

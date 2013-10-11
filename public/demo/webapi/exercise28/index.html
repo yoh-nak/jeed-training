@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <title>YouTube IFrame API：動画プレーヤ―の基本的な埋め込み（jQuery使用）</title>
-        <link rel="stylesheet" type="text/css" href="lib/global.css" />
-        <style>
-            #playerbox { width:640px; height:390px; margin-bottom:10px; }
-        </style>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title></title>
+<link rel="stylesheet" type="text/css" href="lib/global.css" />
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+
         <script>
             $(function(){
                 var player;
@@ -52,7 +53,7 @@
                     event.target.playVideo();    /* 動画再生 */
                 }
                 /* 指定した動画を再生 */
-                $("#playlist > li > a").click(function(){
+                $("#playlist li a").click(function(){
                     loadPlayer($(this).attr("rel"));
                     $(this).parent().parent().find("a").css("font-weight","normal");
                     $(this).css("font-weight","bold");
@@ -65,16 +66,24 @@
             });
         </script>
     </head>
-    <body>
-        <div id="wrap">
-            <h1>設置サンプル</h1>
-            <h2>YouTube IFrame API：動画プレーヤ―の基本的な埋め込み（jQuery使用）</h2>
-            <div id="playerbox"><div id='player'><!-- 動画プレーヤーの埋め込み --></div></div>
-            <ul id="playlist">
-                <li><a href="#" rel="9YEEl52u8XE">Sleeping Dog</a></li>
-                <li><a href="#" rel="GigoGTLerfQ">Hiyoko of Tea</a></li>
-                <li><a href="#" rel="4KMs8cR9P5U">The fireworks of Tokyo Disney land</a></li>
-            </ul>
-        </div>
-    </body>
+<body>
+<div data-role="page" id="index">
+    <div data-role="header">
+        <h1>YouTube Player API: 動画プレーヤ―の基本的な埋め込み（jQuery使用）</h1>
+    </div>
+    <div data-role="content">
+    <div id="wrap">
+        <div id="playerbox"><div id='player'><!-- 動画プレーヤーの埋め込み --></div></div>
+        <ul data-role="listview" data-inset="true" id="playlist">
+            <li><a href="#" rel="9YEEl52u8XE">Sleeping Dog</a></li>
+            <li><a href="#" rel="GigoGTLerfQ">Hiyoko of Tea</a></li>
+            <li><a href="#" rel="4KMs8cR9P5U">The fireworks of Tokyo Disney land</a></li>
+        </ul>
+    </div>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <h4>Copyright &copy; ナカノヨウスケ</h4>
+    </div>
+</div>
+</body>
 </html>

@@ -1,63 +1,152 @@
-<!DOCTYPE HTML>
-<html lang="ja">
+<!DOCTYPE html>
+<html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title></title>
+<link rel="stylesheet" type="text/css" href="lib/global.css" />
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 <script>
-$(document).on('pageshow','#index',function(){
-
-    show('阪神タイガース');
-
-    //検索ボックス
-    $('#index').on('keypress','#search',function(e){
-        show($('#search').val());
-    });
-});
-
-function show(keyword){
-    $.ajax({
-        url: 'https://www.googleapis.com/youtube/v3/search',
-        dataType: 'jsonp',
-        type: 'GET',
-        data: 'part=snippet&maxResults=50&q=' + keyword + '&max-result=50&key=AIzaSyCLpk_z1gbA423gb9CtUVAW3NmXO65Si2Q',
-        success:function(data){
-            console.log(data);
-
-            var html = '';
-            for(var i = 0; i < data.items.length; i++){
-                console.log(data.items[i].id.videoId);
-                html += '<li><a href="http://www.youtube.com/watch?v=' + data.items[i].id.videoId  + '" target="_blank">\
-                <img src="' + data.items[i].snippet.thumbnails.high.url + '">\
-                <h2>' + data.items[i].snippet.title + '</h2>\
-                <p>' + data.items[i].snippet.description + '</p>\
-                <p class="ui-li-aside">' + data.items[i].snippet.publishedAt + '</p>\
-                </a></li>'
+$(function(){
+    var player;
+    /* IFrame Player APIのコードをロード */
+    function fGetScript(){
+        $.ajax({
+            url:"http://www.youtube.com/player_api/",
+            dataType:"script",
+            success:function(data){
+                dbg("done");
+                /* プレーヤーの準備完了時 */
+                window.onYouTubeIframeAPIReady=function() {
+                    dbg("onYouTubeIframeAPIReady");
+                    getPL();
+                }
+            },
+            error:function(xhr, status, thrown) {
+                dbg(xhr);
+                fGetScript();
             }
+        }); 
+    }
+    fGetScript();
+    function getPL(){
+        /* how to make cooking」が含まれている字幕付き動画を評価が高い順に取得 */
+        $.ajax({
+            "url":"http://gdata.youtube.com/feeds/api/videos",
+            "data":{"q":"how+to+make+cooking","orderby":"rating","caption":true,"v":2,"alt":"json-in-script"},
+            "type":"get",
+            "dataType":"jsonp"
+        })
+        .success(function(xml){
+            dbg("success");
+            getList(xml);
+        })
+        .error(function(xhr, status, thrown){
+            dbg("error:"+status+"/"+thrown);
+            getPL();
+        });
+    }
+    function getList(xml){
+        var feed=xml.feed;
+        var s="";
+        $.each(feed.entry, function(i,item){
+             var tmp=item.link;
+             $.each(tmp, function(j, lnk){
+                 if(lnk.href.indexOf("watch?v=")!=-1){
+                    var tmp2=lnk.href.split("watch?v=");
+                    tmp2=tmp2[1].split("&");
+                    var vid=tmp2[0];
+                    var title=(item.title)?item.title.$t:"no title";
+                    if(vid){
+                        $('<li><a href="#" rel="'+vid+'">'+title+'</a></li>').appendTo($("#videos"));
+                        $('#videos').listview('refresh');
+                    }
+                   }
+            });
+       });
+       loadPlayer($("#videos li:first a").attr("rel"),0);
+    }
 
-            $('[data-role="listview"]').html(html).listview('refresh');
-        }
+    $(document).on('vclick','#videos li a',function(event){
+        loadPlayer($(this).attr("rel"),$(this).parent().index());
     });
-}
+    /* プレーヤー生成 */
+    function loadPlayer(videoID,idx) {
+        dbg("loadPlayer("+videoID+")");
+        $("#videos li").css("font-weight","normal");
+        $("#videos li").eq(idx).css("font-weight","bold");
+        if(!player){
+            player = new YT.Player(
+                'player',{
+                    width: '640',    /* 動画プレーヤーの幅 */
+                    height: '390',    /* 動画プレーヤーの高さ */
+                    videoId: videoID,    /* YouTube動画ID */
+                    events: { /* イベント */
+                        "onReady": onPlayerReady,    /* プレーヤの準備完了時 */
+                        "onApiChange": onPlayerApiChange
+                    },
+                    playerVars: {
+                        "rel":0,            // 関連動画の有無(default:1)
+                        "iv_load_policy":3,    // アノテーション有無(default:1, 3で無効)
+                        "cc_load_policy":1,    // 字幕有無(1:ON、defaultはユーザー設定)
+                        "controls":1        // コントロール有無(default:1)
+                    }
+                }
+            );
+        }else{
+            player.loadVideoById(videoID);
+        }
+    }
+    function onPlayerReady(event){
+        event.target.playVideo();    /* 動画再生 */
+    }
+    function onPlayerApiChange(event){
+        ccFontsizeChange();
+    }
+    $("input:radio[name=r]").click(function(){
+        ccFontsizeChange();
+    });
+    function ccFontsizeChange(){
+        var size=$('input:radio[name=r]:checked').val();
+        dbg("size:"+size);
+        player.setOption("cc","fontSize",size);
+    }
+    function dbg(str){
+           if(window.console && window.console.log){
+              console.log(str);
+           }
+    }
+});
 </script>
-<style>
-.ui-li-thumb{
-    width:300px;
-    height:300px;
-}
-</style>
 </head>
 <body>
 <div data-role="page" id="index">
     <div data-role="header">
-        <h1>Youtube Data API v3</h1>
+        <h1>YouTube Player API: API：字幕付き動画一覧表示＋字幕のフォントサイズ変更</h1>
     </div>
     <div data-role="content">
-        <input type="search" id="search">
-        <ul data-role="listview" data-inset="true">
-        </ul>
+    <div id="wrap">
+        <form>
+         <fieldset data-role="controlgroup" data-type="horizontal">
+        <legend>字幕のフォントサイズ：</legend>
+            <input type="radio" id="r1" name="r" value="-1">
+            <label for="r1">-1</label>
+            <input type="radio" id="r2" name="r" value="0" checked>
+            <label for="r2">0 (default)</label>
+            <input type="radio" id="r3" name="r" value="1">
+            <label for="r3">1</label>
+            <input type="radio" id="r4" name="r" value="2">
+            <label for="r4">2</label>
+            <input type="radio" id="r5" name="r" value="3">
+            <label for="r5">3</label>
+          </fieldset>
+        </form>
+        <div id="playerbox"><div id='player'><!-- 動画プレーヤーの埋め込み --></div></div>
+        <p>字幕が付いている動画（クッキング）</p>
+        <ul data-role="listview" data-inset="true" id="videos"></ul>
+    </div>
     </div>
     <div data-role="footer" data-position="fixed">
         <h4>Copyright &copy; ナカノヨウスケ</h4>

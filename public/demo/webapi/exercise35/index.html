@@ -4,16 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title></title>
-<link rel="stylesheet" type="text/css" href="lib/global.css" />
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script>
-$(function(){
+$(document).on('pageshow','#index',function(){
     var player;
-    var videoID="GigoGTLerfQ";
-    /* IFrame Player APIのコードをロード */
+    var videoID="NrrEov1aN-k";
+    /* YouTube Player APIのコードをロード */
     function fGetScript(){
         $.ajax({
             url:"http://www.youtube.com/player_api/",
@@ -27,6 +25,7 @@ $(function(){
             }
         }); 
     }
+    
     fGetScript();
     /* プレーヤーの準備完了時 */
     window.onYouTubeIframeAPIReady=function() {
@@ -81,9 +80,6 @@ $(function(){
     }
 });
 </script>
-<style>
-#playerbox { width:640px; height:390px; margin-bottom:10px; }
-</style>
 </head>
 <body>
 <div data-role="page" id="index">
@@ -91,19 +87,19 @@ $(function(){
         <h1>YouTube Player API: プレーヤーのサイズを設定</h1>
     </div>
     <div data-role="content">
-    <div id="wrap">
-        <div id="playerbox"><div id='player'><!-- 動画プレーヤーの埋め込み --></div></div>
-        <p>
-            サイズ変更：
+        <div id='player'><!-- 動画プレーヤーの埋め込み --></div>
+        <fieldset data-role="fieldcontain">
+            <legend>サイズ変更：</legend>
             <select id="size">
                 <option value="240x135">240x135</option>
                 <option value="320x180">320x180</option>
                 <option value="560x315">560x315</option>
                 <option value="640x360" selected="selected">640x360</option>
             </select>
-        </p>
+        </fieldset>
+        <fieldset data-role="fieldcontain">
         <textarea id="debuglog" style="width:630px;height:300px;"></textarea>
-    </div>
+        </fieldset>
     </div>
     <div data-role="footer" data-position="fixed">
         <h4>Copyright &copy; ナカノヨウスケ</h4>

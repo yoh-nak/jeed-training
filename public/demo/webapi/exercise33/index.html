@@ -4,15 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title></title>
-<link rel="stylesheet" type="text/css" href="lib/global.css" />
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 <script>
-$(function(){
+$(document).on('pageshow','#index',function(){
     var player;
-    var videoID="GigoGTLerfQ";
-    /* IFrame Player APIのコードをロード */
+    var videoID="NrrEov1aN-k";
+    /* YouTube Player APIのコードをロード */
     function fGetScript(){
         $.ajax({
             url:"http://www.youtube.com/player_api/",
@@ -77,15 +76,6 @@ $(function(){
     }
 });
 </script>
-<style>
-#playerbox { width:640px; height:390px; margin-bottom:10px; }
-#controls  { width:640px; text-align:center; }
-#controls a { display:inline-block; margin:0; padding:5px 10px; text-decoration:none; width:6em; color:#fff; background:#000; text-align:center; }
-#controls a:hover { background:#333; }
-#duration { color:red; }
-#videoURL { width:630px; display:block; }
-#videoEmbedCode { width:630px; height:4em; display:block; }
-</style>
 </head>
 <body>
 <div data-role="page" id="index">
@@ -93,12 +83,10 @@ $(function(){
         <h1>YouTube Player API: API：動画情報の取得</h1>
     </div>
     <div data-role="content">
-    <div id="wrap">
-        <div id="playerbox"><div id='player'><!-- 動画プレーヤーの埋め込み --></div></div>
+        <div id='player'><!-- 動画プレーヤーの埋め込み --></div>
         <p>再生中の動画の長さ：<span id="duration">0</span></p>
-        <p>動画のURL：<input type="text" id="videoURL" readonly /></p>
+        <p>動画のURL：<input type="text" id="videoURL" readonly></p>
         <p>動画の埋め込みコード：<textarea id="videoEmbedCode" readonly></textarea></p>
-    </div>
     </div>
     <div data-role="footer" data-position="fixed">
         <h4>Copyright &copy; ナカノヨウスケ</h4>

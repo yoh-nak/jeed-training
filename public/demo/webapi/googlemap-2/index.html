@@ -2,61 +2,68 @@
 <html lang='ja'>
   <head>
     <meta charset='UTF-8'>
-    <meta content='initial-scale=1.0, user-scalable=no' name='viewport'>
-    <script src='http://maps.googleapis.com/maps/api/js?sensor=false&amp;v=3'></script>
+    <meta name='viewport' content='initial-scale=1.0, user-scalable=no'>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="http://maps.google.com/maps/api/js?sensor=true&language=ja"></script>
+    <script>
+      $(function(){
+        //地図を表示
+        var latlng = new google.maps.LatLng(34.71904,135.499779);
+        var mapOpts = {
+          zoom: 14, //拡大率
+          center: latlng, //中心座標
+          mapTypeId: google.maps.MapTypeId.ROADMAP //ロードマップ
+        };
+
+        var mapCanvas = new google.maps.Map(document.getElementById('map_canvas'), mapOpts);
+      
+        //大阪駅にマーカーを生成
+        var mOsakaSt = createMarker(
+          mapCanvas,
+          new google.maps.LatLng(34.7026,135.494936),
+          '<strong>大阪駅</strong>'
+        );
+
+        //新大阪駅にマーカーを生成
+        var mShinOsakaSt = createMarker(
+          mapCanvas,
+          new google.maps.LatLng(34.733501,135.500172),
+          '<strong>新大阪駅</strong>'
+        );
+      
+        //クリックして情報ウィンドウが表示されるマーカーを生成
+        function createMarker(map, latlng, msg){
+          //マーカーを作成
+          var marker = new google.maps.Marker();
+          marker.setPosition(latlng);
+          marker.setMap(map);
+      
+          //情報ウィンドウを作成
+          var infoWnd = new google.maps.InfoWindow();
+          infoWnd.setContent(msg);
+      
+          //マーカーをクリックして情報ウィンドウを表示
+          google.maps.event.addListener(marker, 'click', function(){
+            infoWnd.open(map, marker);
+          });
+
+          return marker;
+        }
+    });
+    </script>
     <style>
       html, body {
         width: 100%;
         height: 100%;
-        margin: 0; }
+        margin: 0;
+      }
+      #map_canvas{
+        width: 100%;
+        height: 100%;
+      }
     </style>
   </head>
   <body>
-    <div id='map_canvas' style='width:100%;height:100%;'></div>
-    <script>
-      function initialize(){
-      	//地図を表示
-      	var latlng = new google.maps.LatLng(35.681382, 139.766084);
-      	var mapOpts = {
-      		zoom: 13,
-      		center: latlng,
-      		mapTypeId: google.maps.MapTypeId.ROADMAP
-      	};
-      	var mapDiv = document.getElementById('map_canvas');
-      	var mapCanvas = new google.maps.Map(mapDiv, mapOpts);
-      
-      	//マーカーを作成
-      	var mTokyoSt = createMarker(
-      		mapCanvas,
-      		new google.maps.LatLng(35.681382, 139.766084),
-      		'<strong>東京駅</strong>'
-      	);
-      
-      	var mShinagawaSt = createMarker(
-      		mapCanvas,
-      		new google.maps.LatLng(35.630152, 139.74044),
-      		'<strong>品川駅</strong>'
-      	);
-      
-      	function createMarker(map, latlng, msg){
-      		//マーカーを作成
-      		var marker = new google.maps.Marker();
-      		marker.setPosition(latlng);
-      		marker.setMap(map);
-      
-      		//情報ウィンドウを作成
-      		var infoWnd = new google.maps.InfoWindow();
-      		infoWnd.setContent(msg);
-      
-      		//マーカーがクリックされたら、情報ウィンドウを表示
-      		google.maps.event.addListener(marker, 'click', function(){
-      			infoWnd.open(map, marker);
-      		});
-      
-      		return marker;
-      	}
-      }
-      window.onload = initialize();
-    </script>
+    <div id="map_canvas"></div>
   </body>
 </html>

@@ -1,0 +1,88 @@
+<%- include ../../head %>
+  <body>
+ 
+    <%- include navbar %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+
+        <%- include googlemap %>
+        
+        </div>
+        <div class="col-sm-9">
+          <div class="panel panel-primary">
+          <div class="panel-heading">マーカーにオプションを指定</div>
+          <div class="panel-body">
+
+<p>
+<a href="demo/webapi/googlemap-12/index.html" target="_blank" class="btn btn-default">
+<i class="glyphicon glyphicon-play"></i> デモ
+</a>
+</p>
+
+<pre class="prettyprint linenums">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;&lt;/title&gt;
+    &lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
+    &lt;script src="http://maps.google.com/maps/api/js?sensor=true&language=ja"&gt;&lt;/script&gt;
+    &lt;script&gt;
+      $(function(){
+       var latlng = new google.maps.LatLng(34.701912,135.494961);
+       var options = {
+        zoom: 15,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+       };
+       var map = new google.maps.Map(document.getElementById('map'), options);
+       google.maps.event.addListener(map, 'click', function(e) {
+        var marker = new google.maps.Marker({
+         position: e.latLng,
+         draggable: true, //ドラッグ可能にする
+         title: 'くまモン出没！', //title属性を付加
+         icon: new google.maps.MarkerImage('kumamon.gif'), //マーカーを画像にする
+         animation: google.maps.Animation.BOUNCE, //BOUNCE, DROP //アニメーションを付加
+         map: map
+        });
+       });
+      })
+    &lt;/script&gt;
+    &lt;style&gt;
+      html,body{
+       width:100%;
+       height:100%;
+       margin:0;
+      }
+      #map{
+       width:100%;
+       height:100%;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="map"&gt;&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div id="footer"><%= title %></div>
+ 
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/google-code-prettify/prettify.js"></script>
+    <script>prettyPrint();</script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/list-counter.js"></script>
+
+  </body>
+</html>

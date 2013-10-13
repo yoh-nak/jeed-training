@@ -1,0 +1,122 @@
+<%- include ../../head %>
+  <body>
+ 
+    <%- include navbar %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+
+        <%- include googlemap %>
+        
+        </div>
+        <div class="col-sm-9">
+          <div class="panel panel-primary">
+          <div class="panel-heading">クリックした位置の住所を情報ウィンドウに表示</div>
+          <div class="panel-body">
+
+<p>
+<a href="demo/webapi/googlemap-16/index.html" target="_blank" class="btn btn-default">
+<i class="glyphicon glyphicon-play"></i> デモ
+</a>
+</p>
+
+<pre class="prettyprint linenums">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;&lt;/title&gt;
+    &lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
+    &lt;script src="http://maps.google.com/maps/api/js?sensor=true&language=ja"&gt;&lt;/script&gt;
+    &lt;script&gt;
+      $(function(){
+       //ジオコーディング（住所から緯度経度を算出）
+       var geocoder = new google.maps.Geocoder();
+       //住所をから緯度経度を算出し結果をコールバック関数で取得
+       geocoder.geocode({
+        'address': '大阪府大阪市淀川区西中島五丁目'
+       }, function(result, status) {
+        //住所取得成功
+        if (status == google.maps.GeocoderStatus.OK) {
+         //中心位置
+         var latlng = result[0].geometry.location;
+         //地図オプション
+         var options = {
+          zoom: 15,
+          center: latlng,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+         };
+         //地図表示
+         var map = new google.maps.Map(document.getElementById('map'), options);
+         
+         //地図上をクリック
+         google.maps.event.addListener(map, 'click', function(e) {
+          //マーカーオプション
+          var marker = new google.maps.Marker({
+           position: e.latLng, //クリックした緯度経度
+           map: map
+          });
+          //リバースジオコーディング（緯度経度から住所の取得）
+          geocoder.geocode({
+           'latLng': e.latLng //クリックした緯度経度
+          }, function(result, status) {
+           //住所の取得に成功したとき
+           if (status == google.maps.GeocoderStatus.OK) {
+            //alert(result[0].formatted_address);
+            
+            //情報ウィンドウ設定
+            var infoWindow = new google.maps.InfoWindow({
+             content: result[0].formatted_address //情報ウィンドウに住所を表示
+            });
+            //情報ウィンドウの表示
+            infoWindow.open(map, marker);
+           //住所の取得に失敗したとき
+           } else {
+            alert("エラー！");
+           }
+          });
+         });
+        //住所取得失敗
+        } else {
+         alert('エラーです！');
+        }
+       });
+      });
+    &lt;/script&gt;
+    &lt;style&gt;
+      html,body{
+       width:100%;
+       height:100%;
+       margin:0;
+      }
+      #map{
+       width:100%;
+       height:100%;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="map"&gt;&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div id="footer"><%= title %></div>
+ 
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/google-code-prettify/prettify.js"></script>
+    <script>prettyPrint();</script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/list-counter.js"></script>
+
+  </body>
+</html>

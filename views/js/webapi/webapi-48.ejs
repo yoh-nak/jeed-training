@@ -1,0 +1,93 @@
+<%- include ../../head %>
+  <body>
+ 
+    <%- include navbar %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+
+        <%- include googlemap %>
+        
+        </div>
+        <div class="col-sm-9">
+          <div class="panel panel-primary">
+          <div class="panel-heading">マーカーをクリックして情報ウィンドウの表示</div>
+          <div class="panel-body">
+
+<p>
+<a href="demo/webapi/googlemap-14/index.html" target="_blank" class="btn btn-default">
+<i class="glyphicon glyphicon-play"></i> デモ
+</a>
+</p>
+
+<pre class="prettyprint linenums">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;&lt;/title&gt;
+    &lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
+    &lt;script src="http://maps.google.com/maps/api/js?sensor=true&language=ja"&gt;&lt;/script&gt;
+    &lt;script&gt;
+      $(function(){
+       var latlng = new google.maps.LatLng(34.701912,135.494961);
+       var options = {
+        zoom: 15,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+       };
+       var map = new google.maps.Map(document.getElementById('map'), options);
+       var infoWindow = new google.maps.InfoWindow({
+        content: '&lt;strong style="color:red"&gt;くまモン&lt;/strong&gt;&lt;br&gt;頻出エリア！&lt;br&gt;&lt;img src="kumamon.gif"&gt;',
+       });
+       
+       //マーカーの表示
+       var marker = new google.maps.Marker({
+        //position: map.getCenter(), //地図中心にマーカー
+        position: new google.maps.LatLng(34.705546,135.498287), //緯度経度を指定
+        map: map
+       });
+       
+       //マーカークリック
+       google.maps.event.addListener(marker, 'click', function() {
+        infoWindow.open(map, marker); //情報ウィンドウオープン
+       })
+      })
+    &lt;/script&gt;
+    &lt;style&gt;
+      html,body{
+       width:100%;
+       height:100%;
+       margin:0;
+      }
+      #map{
+       width:100%;
+       height:100%;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="map"&gt;&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div id="footer"><%= title %></div>
+ 
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/google-code-prettify/prettify.js"></script>
+    <script>prettyPrint();</script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/list-counter.js"></script>
+
+  </body>
+</html>

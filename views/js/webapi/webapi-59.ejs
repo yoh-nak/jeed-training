@@ -1,0 +1,116 @@
+<%- include ../../head %>
+  <body>
+ 
+    <%- include navbar %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+
+        <%- include googlemap %>
+        
+        </div>
+        <div class="col-sm-9">
+          <div class="panel panel-primary">
+          <div class="panel-heading">位置情報の取得に失敗したとき</div>
+          <div class="panel-body">
+
+<p>
+<a href="demo/webapi/googlemap-22/index.html" target="_blank" class="btn btn-default">
+<i class="glyphicon glyphicon-play"></i> デモ
+</a>
+</p>
+
+<pre class="prettyprint linenums">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;&lt;/title&gt;
+    &lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css"&gt;
+    &lt;script src="http://code.jquery.com/jquery-1.9.1.min.js"&gt;&lt;/script&gt;
+    &lt;script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"&gt;&lt;/script&gt;
+    &lt;script src="http://maps.google.com/maps/api/js?sensor=true&language=ja"&gt;&lt;/script&gt;
+    &lt;script&gt;
+      $(document).on('pagebeforecreate','#index',function(){
+       navigator.geolocation.getCurrentPosition(
+        //位置情報の取得に成功した時の処理
+        function(position){
+         $('[data-role="listview"] li:nth(0)').text("緯度：" + position.coords.latitude);
+         $('[data-role="listview"] li:nth(1)').text("経度：" + position.coords.longitude);
+         $('[data-role="listview"] li:nth(2)').text("高度：" + position.coords.altitude);
+         $('[data-role="listview"] li:nth(3)').text("緯度、経度の誤差：" + position.coords.accuracy);
+         $('[data-role="listview"] li:nth(4)').text("高度の誤差：" + position.coords.altitudeAccuracy);
+         $('[data-role="listview"] li:nth(5)').text("方角：" + position.coords.heading);
+         $('[data-role="listview"] li:nth(6)').text("速度：" + position.coords.speed);
+        },
+        //位置情報の取得に失敗した時の処理
+        function(error){
+         switch(error.code){
+          case error.TIMEOUT:
+           alert('タイムアウトが発生しました');
+           break;
+          case error.POSITION_UNAVAILABLE:
+           alert('位置情報が利用できませんでした');
+           break;
+          case error.PERMISSION_DENIED:
+           alert('Geolocation APIの利用権限がありません');
+           break;
+          case error.UNKNOWN_ERROR:
+           alert('UNKNOWN_ERROR:' + error.message);
+           break;
+          default:
+           alert('エラーが発生しました');
+         }
+        },
+        //オプション
+        {
+         enableHighAccuracy:true,
+         timeout:1000
+        }
+       );
+      });
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="index" data-role="page"&gt;
+      &lt;div data-role="header"&gt;
+        &lt;h1&gt;位置情報の取得に失敗したとき&lt;/h1&gt;
+      &lt;/div&gt;
+      &lt;div data-role="content"&gt;
+        &lt;div data-role="listview"&gt;
+          &lt;li&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;/li&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div data-role="footer" data-position="fixed"&gt;
+        &lt;h4&gt;Copyright &copy; ナカノヨウスケ&lt;/h4&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div id="footer"><%= title %></div>
+ 
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/google-code-prettify/prettify.js"></script>
+    <script>prettyPrint();</script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/list-counter.js"></script>
+
+  </body>
+</html>

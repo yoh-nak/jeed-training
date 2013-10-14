@@ -1,0 +1,125 @@
+<%- include ../../head %>
+  <body>
+ 
+    <%- include navbar %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+
+        <%- include googlemap %>
+        
+        </div>
+        <div class="col-sm-9">
+          <div class="panel panel-primary">
+          <div class="panel-heading">円を表示する</div>
+          <div class="panel-body">
+
+<p>
+<a href="demo/webapi/googlemap-23/index.html" target="_blank" class="btn btn-default">
+<i class="glyphicon glyphicon-play"></i> デモ
+</a>
+</p>
+
+<pre class="prettyprint linenums">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;&lt;/title&gt;
+    &lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css"&gt;
+    &lt;script src="http://code.jquery.com/jquery-1.9.1.min.js"&gt;&lt;/script&gt;
+    &lt;script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"&gt;&lt;/script&gt;
+    &lt;script src="http://maps.google.com/maps/api/js?sensor=true&language=ja"&gt;&lt;/script&gt;
+    &lt;script&gt;
+      $(document).on('pageshow','#index',function(){
+      
+       //地図の初期表示
+       var latlng = new google.maps.LatLng(34.701912,135.494961);
+       var options = {
+        zoom: 13,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+       }
+       var map = new google.maps.Map(document.getElementById('map'), options);
+       
+       //円の表示
+       showCircle($('#circle').val());
+       
+       //検索ボックス
+       $('#index').on('keypress','#circle',function(e){
+        //エンターキー押下時
+        if(e.keyCode == $.mobile.keyCode.ENTER){
+         //円の表示
+         showCircle($(this).val());
+        }
+       });
+       
+       var circle;
+       
+       //円を表示する
+       function showCircle(r){
+        //円が表示されていたら消す
+        if(circle){
+         circle.setMap(null);
+        }
+        
+        //円の表示設定
+        circle = new google.maps.Circle({
+         map: map, //マップオブジェクト
+         center: latlng, //中心の緯度経度
+         radius: parseInt(r), //半径
+         strokeWeight: 1, //線の太さ
+         strokeColor: '#ff0000', //線の色
+         fillColor: 'ffff00', //塗りの色
+         strokeOpacity: 0.5, //線の不透明度
+         fillOpacity: 0.3, //塗りの不透明度
+         clickable: false //クリックできるかどうか
+        });
+       };
+      });
+    &lt;/script&gt;
+    &lt;style&gt;
+      #map{
+       width:100%;
+       height:400px;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="index" data-role="page"&gt;
+      &lt;div data-role="header"&gt;
+        &lt;h1&gt;フォームで入力した場所を表示&lt;/h1&gt;
+      &lt;/div&gt;
+      &lt;div data-role="content"&gt;
+        &lt;fieldset data-role="fieldcontain"&gt;
+          &lt;input id="circle" type="search" placeholder="半径○○m以内を表示" value="3000"&gt;
+        &lt;/fieldset&gt;
+        &lt;div id="map"&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div data-role="footer" data-position="fixed"&gt;
+        &lt;h4&gt;Copyright &copy; ナカノヨウスケ&lt;/h4&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div id="footer"><%= title %></div>
+ 
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/google-code-prettify/prettify.js"></script>
+    <script>prettyPrint();</script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/list-counter.js"></script>
+
+  </body>
+</html>

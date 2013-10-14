@@ -2,22 +2,27 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0,user-scalable=no">
     <title>大量のマーカー表示（Fluster2）</title>
-    <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+    <script src="http://maps.google.com/maps/api/js?sensor=true&language=ja"></script>
     <script src="Fluster2.packed.js"></script>
     <script>
-      var map;
-      window.addEventListener('load',function(){
-       map = new google.maps.Map(document.getElementById('gmap'));
+      $(document).on('pageshow','#index',function(){
+       //地図の初期表示
+       var map = new google.maps.Map(document.getElementById('map'));
        map.setOptions({
         zoom: 5,
         center: new google.maps.LatLng(36.681382, 138.766084),
         mapTypeId: google.maps.MapTypeId.ROADMAP
        });
+       
+       //Fluster2の機能のインスタンス化
        var fluster = new Fluster2(map);
        
-       document.getElementById('setMarker').addEventListener('click',function(){
+       $('#setMarker').on('vclick',function(){
         $.getJSON('./data.txt',function(data){
          $.each(data, function(key, val){
           var marker = new google.maps.Marker({
@@ -25,16 +30,33 @@
           });
           fluster.addMarker(marker);
          });
+         //Fluster2の機能を使う
          fluster.initialize();
         });
-       },false);
-      },false);
-    </script><style type="text/css"></style>
+       });
+      });
+    </script>
+    <style>
+      #map{
+       width:100%;
+       height:400px;
+      }
+    </style>
   </head>
   <body>
-    <div id="gmap" style="width:500px;height:400px"></div>
-    <form>
-      <input id="setMarker" type="button" value="マーカーデータ読み込み">
-    </form>
+    <div id="index" data-role="page">
+      <div data-role="header">
+        <h1>大量のマーカーをまとめる（Fluster2）</h1>
+      </div>
+      <div data-role="content">
+        <form>
+          <input id="setMarker" type="button" value="マーカーデータ読み込み">
+        </form>
+        <div id="map"></div>
+      </div>
+      <div data-role="footer" data-position="fixed">
+        <h4>Copyright &copy; ナカノヨウスケ</h4>
+      </div>
+    </div>
   </body>
 </html>

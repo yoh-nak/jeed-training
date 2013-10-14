@@ -1,0 +1,47 @@
+!!!
+html(lang='ja')
+	head
+		meta(charset='utf-8')
+		title
+		script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+		script(src!='http://maps.google.com/maps/api/js?sensor=true&language=ja')
+		script.
+			$(function(){
+				var latlng = new google.maps.LatLng(34.705776,135.499138);
+				var options = {
+					zoom: 14,
+					center: latlng,
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+				var map = new google.maps.Map(document.getElementById('map'), options);
+
+				var boundsRect = new google.maps.LatLngBounds(
+					new google.maps.LatLng(34.687146,135.482315), //矩形左下の緯度経度
+					new google.maps.LatLng(34.721015,135.521652) //矩形右上の緯度経度
+				);
+
+				var rectangle = new google.maps.Rectangle({
+					bounds: boundsRect,
+					map: map, //マップオブジェクト
+					center: latlng, //中心の緯度経度
+					strokeWeight: 1, //線の太さ
+					strokeColor: '#ff0000', //線の色
+					fillColor: 'ffff00', //塗りの色
+					strokeOpacity: 0.5, //線の不透明度
+					fillOpacity: 0.3, //塗りの不透明度
+					clickable: false //クリックできるかどうか
+				});
+			});
+		style.
+			html,body{
+				width:100%;
+				height:100%;
+				margin:0;
+			}
+			#map{
+				width:100%;
+				height:100%;
+			}
+	body
+		div#map
+

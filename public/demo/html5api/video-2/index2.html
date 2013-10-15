@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<script>
+$(document).on('pageshow','#index',function(){
+	var videoObj = document.getElementById("myVideo");
+	//映像を再生する
+	$('#vPlay').on('vclick',function(){
+		videoObj.play();
+	});
+	//映像を停止する
+	$('#vStop').on('vclick',function(){
+		videoObj.pause();
+	});
+	//映像を巻き戻す
+	$('#vRewind').on('vclick',function(){
+		videoObj.currentTime = 0;
+		videoObj.pause();
+	});
+	//2秒前から再生する
+	$('#vLast2').on('vclick',function(){
+		videoObj.currentTime = videoObj.duration - 2;
+		videoObj.play();
+	});
+});
+</script>
+</head>
+<body>
+<div id="index" data-role="page">
+	<div data-role="header">
+	<h1>映像を制御</h1>
+	</div>
+	<div data-role="content">
+		<video id="myVideo" width="192" height="108">
+			<source src="../video-1/sample.ogv">
+			<source src="../video-1/sample.mov">
+			<source src="../video-1/sample.webm">
+			<p>お使いのブラウザでは映像を再生できません。</p>
+		</video>
+		<form>
+			<input type="button" id="vPlay" value="再生">
+			<input type="button" id="vStop" value="停止">
+			<input type="button" id="vRewind" value="巻き戻し">
+			<input type="button" id="vLast2" value="終わりの2秒前から再生">
+		</form>
+	</div>
+	<div data-role="footer" data-position="fixed">
+	<h4>Copyright &copy; ナカノヨウスケ</h4>
+	</div>
+</div>
+</body>
+</html>

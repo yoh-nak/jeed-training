@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<script>
+//映像を繰り返し再生する
+$(document).on('pageshow','#index',function(){
+	var videoObj = document.getElementById("myVideo");
+	var loopFlag = false;
+	videoObj.addEventListener("ended", function(){
+		if(loopFlag == true){
+			videoObj.play();
+		}
+	}, true);
+	$('#vPlay').on('vclick',function(){
+		videoObj.play();
+	});
+	$('#vLoopON').on('vclick',function(){
+		loopFlag = true;
+		document.getElementById("stat").innerHTML = "ループON";
+	});
+	$('#vLoopOFF').on('vclick',function(){
+		loopFlag = false;
+		document.getElementById("stat").innerHTML = "ループOFF";
+	});
+});
+</script>
+</head>
+<body>
+<div id="index" data-role="page">
+	<div data-role="header">
+	<h1>映像を繰り返し再生</h1>
+	</div>
+	<div data-role="content">
+		<video id="myVideo" width="192" height="108" controls>
+			<source src="../video-1/sample.3gp">
+			<source src="../video-1/sample.ogv">
+			<source src="../video-1/sample.mov">
+			<source src="../video-1/sample.webm">
+			<p>お使いのブラウザでは映像を再生できません。</p>
+		</video>
+		<form>
+			<input type="button" id="vPlay" value="再生">
+			<input type="button" id="vLoopON" value="繰り返しON">
+			<input type="button" id="vLoopOFF" value="繰り返しOFF">
+		</form>
+		<div id="stat"></div>
+	</div>
+	<div data-role="footer" data-position="fixed">
+	<h4>Copyright &copy; ナカノヨウスケ</h4>
+	</div>
+</div>
+</body>
+</html>

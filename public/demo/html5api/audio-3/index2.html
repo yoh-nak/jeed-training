@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<script>
+//ボタンクリックでオーディオを停止する
+$(document).on('pageshow','#index',function(){
+	var audioObj = document.getElementById("myAudio");
+	$('#aPlay').on('vclick',function(){
+		audioObj.play();
+	});
+	$('#aStop').on('vclick',function(){
+		audioObj.pause();
+	});
+	$('#aRewind').on('vclick',function(){
+		audioObj.currentTime = 0;
+		audioObj.pause();
+	});
+	$('#aLast2').on('vclick',function(){
+		audioObj.currentTime = audioObj.duration - 2;
+		audioObj.play();
+	});
+});
+</script>
+</head>
+<body>
+<div id="index" data-role="page">
+  <div data-role="header">
+    <h1>オーディオを再生(Galaxy S)</h1>
+  </div>
+  <div data-role="content">
+	<video id="myAudio" width="192" height="48" controls>
+		<source src="../audio-1/sample.mp3">
+		<source src="../audio-1/sample.ogg">
+		<p>お使いのブラウザではオーディオを再生できません。</p>
+	</video>
+	<form>
+		<input type="button" id="aPlay" value="再生">
+		<input type="button" id="aStop" value="停止">
+		<input type="button" id="aRewind" value="巻き戻し">
+		<input type="button" id="aLast2" value="終わりの2秒前から再生">
+	</form>
+	<div>*GALAXY S (Android 2.2)で動作します。</div>
+  </div>
+  <div data-role="footer" data-position="fixed">
+    <h4>Copyright &copy; ナカノヨウスケ</h4>
+  </div>
+</div>
+</body>
+</html>

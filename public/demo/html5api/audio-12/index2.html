@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<script>
+//音量を調整する
+$(document).on('pageshow','#index',function(){
+	var audioObj = document.getElementById("myAudio");
+	$('#setVolume').on('click',function(){
+		var n = parseFloat($('#vol').val());
+		audioObj.volume = n;
+	});
+	$('#setMute').on('click',function(){
+		audioObj.muted = !audioObj.muted;
+	});
+	$('#playAudio').on('click',function(){s
+		audioObj.muted = audioObj.play();
+	});
+});
+</script>
+</head>
+<body>
+<div id="index" data-role="page">
+	<div data-role="header">
+	<h1>音量を調整する(Galaxy S)</h1>
+	</div>
+	<div data-role="content">
+		<video id="myAudio" width="192" height="48" controls>
+			<source src="../audio-1/sample.mp3">
+			<source src="../audio-1/sample.ogg">
+			<p>お使いのブラウザではオーディオを再生できません。</p>
+		</video>
+		<form>
+			<input type="text" id="vol" value="0.5">
+			<input type="button" id="setVolume" value="音量を設定">
+			<input type="button" id="setMute" value="ミュート">
+			<input type="button" id="playAudio" value="再生">
+		</form>
+	</div>
+	<div data-role="footer" data-position="fixed">
+	<h4>Copyright &copy; ナカノヨウスケ</h4>
+	</div>
+</div>
+</body>
+</html>

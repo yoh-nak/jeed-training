@@ -1,0 +1,66 @@
+!!!
+html(lang='ja')
+	head
+		meta(charset='utf-8')
+		title
+		link(rel='stylesheet',href='http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css')
+		script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+		script(src='http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js')
+		script.
+			var factory; //IDBFactory
+			var db; //IDBDatabase
+
+			function initial(){
+				factory = window.indexedDB || window.mozINdexedDB || window.webkitIndexedDB;
+
+				if(factory == null){
+					alert('対応していません');
+					return;
+				}
+
+				var request = factory.open('SampleDB','1.0');
+				request.addEventListener('success',function(e){
+					db = e.target.result;
+					alert('準備が整いました');
+
+					/*
+					var request = db.setVersion('1.0');
+					request.addEventListener('success',function(e){
+						try{
+							store = db.createObjectStore('sample_db',{keyPath:'name'});
+							store.createIndex('name','name',{unique:true});
+							alert('オブジェクトストアの準備が整いました');
+						}
+						catch(e){}
+					});
+					request.addEventListener('error',function(e){
+						alert('バージョンの設定に失敗しました');
+					});
+					*/
+				});
+				request.addEventListener('upgradeneeded',function(e){
+					alert();
+					try{
+						store = db.createObjectStore('sample_db',{keyPath:'name'});
+						store.createIndex('name','name',{unique:true});
+						alert('オブジェクトストアの準備が整いました');
+					}
+					catch(e){
+						//alert();
+					}
+				});
+				request.addEventListener('error',function(e){
+					alert('データベースが開けません');
+				});
+			}
+
+			$(document).on('pageshow','#index',function(){
+				initial();		
+			});
+	body
+		div#index(data-role='page')
+			div(data-role='header')
+				h1 Indexed Database
+			div(data-role="content")
+			div(data-role='footer',data-position='fixed')
+				h4 Copyright &copy; ナカノヨウスケ

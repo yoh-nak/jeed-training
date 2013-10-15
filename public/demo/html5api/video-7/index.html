@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<script>
+//特定の形式のビデオが再生できるか調べる
+$(document).on('pageshow','#index',function(){
+	$('#check').on('vclick',function(){
+		var videoObj = document.getElementById("myVideo");
+		var videoMimeType = $('#mimetype').val();
+		var stat = videoObj.canPlayType(videoMimeType);
+		if(!stat){
+			stat = "再生できない形式です";
+		}
+		$('#result').html(stat);
+	});
+});
+</script>
+</head>
+<body>
+<div id="index" data-role="page">
+	<div data-role="header">
+	<h1>特定の形式のビデオが再生できるか調べる</h1>
+	</div>
+	<div data-role="content">
+		<video id="myVideo" width="192" height="108" controls>
+			<source src="../video-1/sample.ogv">
+			<source src="../video-1/sample.mov">
+			<source src="../video-1/sample.webm">
+			<p>お使いのブラウザでは映像を再生できません。</p>
+		</video>
+		<form>
+			MIME Type : <input type="text" id="mimetype" value="video/webm"><br>
+			<input type="button" id="check" value="データチェック">
+		</form>
+		<div id="result"></div>
+	</div>
+	<div data-role="footer" data-position="fixed">
+	<h4>Copyright &copy; ナカノヨウスケ</h4>
+	</div>
+</div>
+</body>
+</html>

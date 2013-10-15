@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<script>
+//コントロールバーを表示／非表示にする
+$(document).on('pageshow','#index',function(){
+	var videoObj = document.getElementById("myVideo");
+	$('#ctrlON').on('vclick',function(){
+		videoObj.controls = true;
+		document.getElementById("stat").innerHTML = "コントロール表示ON";
+	});
+	$('#ctrlOFF').on('vclick',function(){
+		videoObj.controls = false;
+		document.getElementById("stat").innerHTML = "コントロール表示OFF";
+	});
+});
+</script>
+</head>
+<body>
+<div id="index" data-role="page">
+	<div data-role="header">
+	<h1>コントロールバーを表示／非表示する</h1>
+	</div>
+	<div data-role="content">
+		<video id="myVideo" width="192" height="108" controls>
+			<source src="../video-1/sample.mp4">
+			<source src="../video-1/sample.ogv">
+			<source src="../video-1/sample.mov">
+			<source src="../video-1/sample.webm">
+			<p>お使いのブラウザでは映像を再生できません。</p>
+		</video>
+		<form>
+			<input type="button" id="ctrlON" value="コントロールバーを表示する">
+			<input type="button" id="ctrlOFF" value="コントロールバーを表示しない">
+		</form>
+		<div id="stat"></div>
+	</div>
+	<div data-role="footer" data-position="fixed">
+	<h4>Copyright &copy; ナカノヨウスケ</h4>
+	</div>
+</div>
+</body>
+</html>

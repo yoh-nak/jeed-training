@@ -1,0 +1,40 @@
+!!!
+html(lang='ja')
+	head
+		meta(charset='utf-8')
+		title
+		link(rel='stylesheet',href='http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css')
+		script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+		script(src='http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js')
+		script.
+			var factory; //IDBFactory
+			var db; //IDBDatabase
+
+			function initial(){
+				factory = window.indexedDB || window.mozINdexedDB || window.webkitIndexedDB;
+
+				if(factory == null){
+					alert('対応していません');
+					return;
+				}
+
+				var request = factory.open('SampleDB');
+				request.addEventListener('success',function(e){
+					db = request.result;
+					alert('準備が整いました');
+				});
+				request.addEventListener('error',function(e){
+					alert('エラーが発生しました');
+				});
+			}
+
+			$(document).on('pageshow','#index',function(){
+				initial();		
+			});
+	body
+		div#index(data-role='page')
+			div(data-role='header')
+				h1 Indexed Database
+			div(data-role="content")
+			div(data-role='footer',data-position='fixed')
+				h4 Copyright &copy; ナカノヨウスケ

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<script>
+//オーディオを繰り返し再生する
+$(document).on('pageshow','#index',function(){
+	var audioObj = document.getElementById("myAudio");
+	var loopFlag = false;
+	audioObj.addEventListener("ended", function(){
+		if(loopFlag == true){
+			audioObj.play();
+		}
+	}, true);
+	$('#aPlay').on('vclick',function(){
+		audioObj.play();
+	});
+	$('#aLoopON').on('vclick',function(){
+		loopFlag = true;
+		$('stat').html('ループON');
+	});
+	$('#aLoopOFF').on('vclick',function(){
+		loopFlag = false;
+		$('stat').html('ループOFF');
+	});
+});
+</script>
+</head>
+<body>
+<div id="index" data-role="page">
+  <div data-role="header">
+    <h1>オーディオを繰り返し再生</h1>
+  </div>
+  <div data-role="content">
+	<audio id="myAudio" width="192" height="48" controls>
+		<source src="../audio-1/sample.mp3">
+		<source src="../audio-1/sample.ogg">
+		<p>お使いのブラウザではオーディオを再生できません。</p>
+	</audio>
+	<form>
+		<input type="button" id="aPlay" value="再生">
+		<input type="button" id="aLoopON" value="繰り返しON">
+		<input type="button" id="aLoopOFF" value="繰り返しOFF">
+	</form>
+	<div id="stat"></div>
+  </div>
+  <div data-role="footer" data-position="fixed">
+    <h4>Copyright &copy; ナカノヨウスケ</h4>
+  </div>
+</div>
+</body>
+</html>

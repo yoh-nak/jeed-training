@@ -1,0 +1,88 @@
+<%- include ../../head %>
+  <body>
+ 
+    <%- include navbar %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+
+        <%- include left %>
+        
+        </div>
+        <div class="col-sm-9">
+          <div class="panel panel-primary">
+          <div class="panel-heading">コントロールバーを表示／非表示にする</div>
+          <div class="panel-body">
+
+<p>
+<a href="demo/html5api/audio-5/index.html" target="_blank" class="btn btn-default">
+<i class="glyphicon glyphicon-play"></i> デモ
+</a>
+</p>
+
+<pre class="prettyprint linenums">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;title&gt;&lt;/title&gt;
+&lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css"&gt;
+&lt;script src="http://code.jquery.com/jquery-1.9.1.min.js"&gt;&lt;/script&gt;
+&lt;script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+//コントロールバーを表示／非表示にする
+$(document).on('pageshow','#index',function(){
+  var audioObj = document.getElementById("myAudio");
+  $('#ctrlON').on('vclick',function(){
+    audioObj.controls = true;
+    $('#stat').html('コントロール表示ON');
+  });
+  $('#ctrlOFF').on('vclick',function(){
+    audioObj.controls = false;
+    $('#stat').html('コントロール表示OFF');
+  });
+});
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id="index" data-role="page"&gt;
+&lt;div data-role="header"&gt;
+&lt;h1&gt;コントロールバーを表示／非表示にする&lt;/h1&gt;
+&lt;/div&gt;
+&lt;div data-role="content"&gt;
+  &lt;audio id="myAudio" width="192" height="48" controls&gt;
+    &lt;source src="../audio-1/sample.mp3"&gt;
+    &lt;source src="../audio-1/sample.ogg"&gt;
+    &lt;p&gt;お使いのブラウザではオーディオを再生できません。&lt;/p&gt;
+  &lt;/audio&gt;
+  &lt;form&gt;
+    &lt;input type="button" id="ctrlON" value="コントロールバーを表示する"&gt;
+    &lt;input type="button" id="ctrlOFF" value="コントロールバーを表示しない"&gt;
+  &lt;/form&gt;
+  &lt;div id="stat"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div data-role="footer" data-position="fixed"&gt;
+&lt;h4&gt;Copyright &copy; ナカノヨウスケ&lt;/h4&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div id="footer"><%= title %></div>
+ 
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/google-code-prettify/prettify.js"></script>
+    <script>prettyPrint();</script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/list-counter.js"></script>
+
+  </body>
+</html>

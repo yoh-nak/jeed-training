@@ -12,26 +12,11 @@
         </div>
         <div class="col-sm-9">
           <div class="panel panel-primary">
-          <div class="panel-heading">HTML5 Videoが使えるか調べる</div>
+          <div class="panel-heading">映像を再生／停止、制御する</div>
           <div class="panel-body">
 
 <p>
-<a href="demo/html5api/video-1/sample.3gp" download="sample.3gp" class="btn btn-default">
-<i class="glyphicon glyphicon-cloud-download"></i> sample.3gp
-</a>
-<a href="demo/html5api/video-1/sample.mov" download="sample.mov" class="btn btn-default">
-<i class="glyphicon glyphicon-cloud-download"></i> sample.mov
-</a>
-<a href="demo/html5api/video-1/sample.ogv" download="sample.ogv" class="btn btn-default">
-<i class="glyphicon glyphicon-cloud-download"></i> sample.ogv
-</a>
-<a href="demo/html5api/video-1/sample.webm" download="sample.webm" class="btn btn-default">
-<i class="glyphicon glyphicon-cloud-download"></i> sample.webm
-</a>
-</p>
-
-<p>
-<a href="demo/html5api/video-1/index.html" target="_blank" class="btn btn-default">
+<a href="demo/html5api/video-2/index.html" target="_blank" class="btn btn-default">
 <i class="glyphicon glyphicon-play"></i> デモ
 </a>
 </p>
@@ -45,26 +30,48 @@
 &lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css"&gt;
 &lt;script src="http://code.jquery.com/jquery-1.9.1.min.js"&gt;&lt;/script&gt;
 &lt;script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"&gt;&lt;/script&gt;
-&lt;title&gt;HTML5 Videoが使えるかどうか調べる&lt;/title&gt;
 &lt;script&gt;
-//HTML5 Videoが使えるか調べる
 $(document).on('pageshow','#index',function(){
-  var ele = document.getElementById("result");
-  if(window.HTMLVideoElement){
-    $('#result').html('HTML5 Videoは使用できます');
-  }else{
-    $('#result').html('HTML5 Videoは使用できません');
-  }
+  var videoObj = document.getElementById("myVideo");
+  //映像を再生する
+  $('#vPlay').on('vclick',function(){
+    videoObj.play();
+  });
+  //映像を停止する
+  $('#vStop').on('vclick',function(){
+    videoObj.pause();
+  });
+  //映像を巻き戻す
+  $('#vRewind').on('vclick',function(){
+    videoObj.currentTime = 0;
+    videoObj.pause();
+  });
+  //2秒前から再生する
+  $('#vLast2').on('vclick',function(){
+    videoObj.currentTime = videoObj.duration - 2;
+    videoObj.play();
+  });
 });
 &lt;/script&gt;
 &lt;/head&gt;
 &lt;body&gt;
 &lt;div id="index" data-role="page"&gt;
   &lt;div data-role="header"&gt;
-  &lt;h1&gt;HTML5 Videoが使えるかどうか調べる&lt;/h1&gt;
+  &lt;h1&gt;映像を制御&lt;/h1&gt;
   &lt;/div&gt;
   &lt;div data-role="content"&gt;
-    &lt;div id="result"&gt;&lt;/div&gt;
+    &lt;video id="myVideo" width="192" height="108" controls&gt;
+      &lt;source src="../video-1/sample.ogv"&gt;
+      &lt;source src="../video-1/sample.mov"&gt;
+      &lt;source src="../video-1/sample.webm"&gt;
+      &lt;p&gt;お使いのブラウザでは映像を再生できません。&lt;/p&gt;
+    &lt;/video&gt;
+    &lt;form&gt;
+      &lt;input type="button" id="vPlay" value="再生"&gt;
+      &lt;input type="button" id="vStop" value="停止"&gt;
+      &lt;input type="button" id="vRewind" value="巻き戻し"&gt;
+      &lt;input type="button" id="vLast2" value="終わりの2秒前から再生"&gt;
+    &lt;/form&gt;
   &lt;/div&gt;
   &lt;div data-role="footer" data-position="fixed"&gt;
   &lt;h4&gt;Copyright &copy; ナカノヨウスケ&lt;/h4&gt;

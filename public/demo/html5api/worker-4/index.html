@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<script>
+// ワーカーを作成／処理を終了する
+$(document).on('pageshow','#index',function(){
+	var myWorker;
+	$('#startButton').on('vclick',function(){
+		myWorker = new Worker('calc.js');
+		myWorker.addEventListener('message', function(event){
+			$('#stat').html(event.data);
+		}, true);
+		myWorker.onerror = function(error){
+			$('[data-role="listview"] li:nth(0)').html('エラーメッセージ：' + error.message);
+			$('[data-role="listview"] li:nth(1)').html('エラー発生行：' + error.lineno);
+			$('[data-role="listview"] li:nth(2)').html('エラーファイル名：' + error.filename);
+		}
+		myWorker.postMessage(0);	// ワーカーの処理を開始
+	});
+});
+</script>
+</head>
+<body>
+<div id="index" data-role="page">
+  <div data-role="header">
+    <h1>ワーカーのエラーを捕捉する</h1>
+  </div>
+  <div data-role="content">
+		<form>
+			<input type="button" value="ワーカーの処理を開始" id="startButton">
+		</form>
+		<div id="stat"></div>
+		<br>
+		<ul data-role="listview">
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+  </div>
+  <div data-role="footer" data-position="fixed">
+    <h4>Copyright &copy; ナカノヨウスケ</h4>
+  </div>
+</div>
+</body>
+</html>

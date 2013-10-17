@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<script>
+// ファイルの読み込みの進捗状況を表示する
+$(document).on('pageshow','#index',function(){
+	$('#readButton').on('vclick',function(){
+		//var ele = document.getElementById('stat');
+		var file = document.getElementById('selectFiles').files[0];
+		var reader = new FileReader();
+		reader.onload = function(evt){
+			$('#stat').html('読み込みが完了しました<br>');
+     	}
+       	reader.readAsBinaryString(file);
+		$('#stat').html('読み込みを開始しました<br>');
+		// ファイルの読み込み状況を表示
+		reader.onprogress = function(event){
+			$('#stat').html((event.loaded / event.total) * 100 + '%<br>');
+		}
+	});
+});
+</script>
+</head>
+<body>
+<div id="index" data-role="page">
+  <div data-role="header">
+	<h1>ファイルの読み込みの進捗状況を表示する</h1>
+  </div>
+  <div data-role="content">
+	<form>
+		<input type="file" id="selectFiles" multiple>
+		<input type="button" value="ファイルの内容を読み込む" id="readButton">
+	</form>
+	<div id="stat"></div>
+  </div>
+  <div data-role="footer" data-position="fixed">
+    <h4>Copyright &copy; ナカノヨウスケ</h4>
+  </div>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<%- include ../../head %>
+  <body>
+ 
+    <%- include navbar %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+
+        <%- include left %>
+        
+        </div>
+        <div class="col-sm-9">
+          <div class="panel panel-primary">
+          <div class="panel-heading">ワーカーとのデータのやりとりを行う</div>
+          <div class="panel-body">
+
+<p>
+<a href="demo/html5api/worker-5/index.html" target="_blank" class="btn btn-default">
+<i class="glyphicon glyphicon-play"></i> デモ
+</a>
+</p>
+
+<pre class="prettyprint linenums">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;title&gt;&lt;/title&gt;
+&lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css"&gt;
+&lt;script src="http://code.jquery.com/jquery-1.9.1.min.js"&gt;&lt;/script&gt;
+&lt;script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+// ワーカーとのデータのやりとりを行う
+$(document).on('pageshow','#index',function(){
+  var myWorker;
+  $('#checkButton').on('vclick',function(){
+    var checkValue = document.getElementById('pNumber').value;
+    myWorker = new Worker('primenumber.js');
+    myWorker.addEventListener('message', function(event){
+      var txt = '素数ではありません';
+      if (event.data){
+        txt = '素数です';
+      }
+      $('#stat').html(checkValue + 'は' + txt);
+    }, true);
+    myWorker.postMessage(checkValue); // ワーカーの処理を開始
+  });
+});
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id="index" data-role="page"&gt;
+  &lt;div data-role="header"&gt;
+    &lt;h1&gt;ワーカーとのデータのやりとりを行う&lt;/h1&gt;
+  &lt;/div&gt;
+  &lt;div data-role="content"&gt;
+    &lt;form&gt;
+      &lt;input type="text" value="4" id="pNumber"&gt;
+      &lt;input type="button" value="素数かどうか調べる" id="checkButton"&gt;
+    &lt;/form&gt;
+    &lt;div id="stat"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div data-role="footer" data-position="fixed"&gt;
+    &lt;h4&gt;Copyright &copy; ナカノヨウスケ&lt;/h4&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+primenumber.js
+<pre class="prettyprint linenums">
+// Workerを使って素数かどうか調べる
+addEventListener('message', function(event){
+  var checkNumber = event.data;
+  if (checkNumber < 4){
+    postMessage(true);
+    return;
+  }
+  var flag = true;
+  for(var i=2; i<checkNumber; i++){ // 都合により高コストで処理
+    if ((checkNumber % i) == 0){
+      flag = false;
+      break;
+    }
+  }
+  postMessage(flag);
+}, false);
+</pre>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div id="footer"><%= title %></div>
+ 
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/google-code-prettify/prettify.js"></script>
+    <script>prettyPrint();</script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/list-counter.js"></script>
+
+  </body>
+</html>

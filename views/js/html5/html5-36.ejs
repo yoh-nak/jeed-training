@@ -1,0 +1,100 @@
+<%- include ../../head %>
+  <body>
+ 
+    <%- include navbar %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+
+        <%- include left %>
+        
+        </div>
+        <div class="col-sm-9">
+          <div class="panel panel-primary">
+          <div class="panel-heading">ドラッグ可能にする</div>
+          <div class="panel-body">
+
+<p>
+<a href="demo/html5api/dragdrop1/index.html" target="_blank" class="btn btn-default">
+<i class="glyphicon glyphicon-play"></i> デモ
+</a>
+</p>
+
+<pre class="prettyprint linenums">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"&gt; 
+&lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" /&gt;
+&lt;style&gt;
+#myArea{
+  width: 320px;
+  font-size: 10pt;
+  background-color: yellow;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id="index" data-role="page"&gt;
+  &lt;div data-role="header"&gt;
+    &lt;h1&gt;ドラッグ可能にする&lt;/h1&gt;
+  &lt;/div&gt;
+    &lt;div data-role="content"&gt;
+      &lt;img src="sample1.jpg" id="myImage" draggable&gt;
+      &lt;img src="sample2.jpg" id="myImage2"&gt;&lt;br&gt;
+      &lt;div id="myArea" draggable="true"&gt;ここもドラッグすることができます。&lt;/div&gt;
+      &lt;div id="stat"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;div data-role="footer" data-position="fixed"&gt;
+  &lt;h4&gt;Copyright &copy; ナカノヨウスケ&lt;/h4&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;script src="http://code.jquery.com/jquery-1.9.1.min.js"&gt;&lt;/script&gt;
+&lt;script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+// ドラッグ可能にする
+$(document).on('pageshow','#index',function(){
+  //var ele = document.getElementById("stat");
+  // 画像をドラッグ
+  var dragImage = document.getElementById('myImage');
+  dragImage.addEventListener('dragstart', function(e){
+    e.stopPropagation();
+    $('#stat').html('Drag Start');
+  }, true);
+  dragImage.addEventListener('dragend', function(e){
+    $('#stat').html('Drag End');
+  }, true);
+  // div要素をドラッグ
+  var yellowBox = document.getElementById('myArea');
+  yellowBox.addEventListener('dragstart', function(e){
+    e.stopPropagation();
+    $('#stat').html('Drag Start (div)');
+  }, true);
+  yellowBox.addEventListener('dragend', function(e){
+    e.stopPropagation();
+    $('#stat').html('Drag End (div)');
+  }, true);
+});
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div id="footer"><%= title %></div>
+ 
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/google-code-prettify/prettify.js"></script>
+    <script>prettyPrint();</script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/list-counter.js"></script>
+
+  </body>
+</html>

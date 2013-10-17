@@ -1,0 +1,99 @@
+<%- include ../../head %>
+  <body>
+ 
+    <%- include navbar %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+
+        <%- include left %>
+        
+        </div>
+        <div class="col-sm-9">
+          <div class="panel panel-primary">
+          <div class="panel-heading">ワーカー側で処理を終了する</div>
+          <div class="panel-body">
+
+<p>
+<a href="demo/html5api/worker-3/index.html" target="_blank" class="btn btn-default">
+<i class="glyphicon glyphicon-play"></i> デモ
+</a>
+</p>
+
+<pre class="prettyprint linenums">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;title&gt;&lt;/title&gt;
+&lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css"&gt;
+&lt;script src="http://code.jquery.com/jquery-1.9.1.min.js"&gt;&lt;/script&gt;
+&lt;script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+// ワーカー側で処理を終了する
+$(document).on('pageshow','#index',function(){
+  var myWorker;
+  $('#countButton').on('vclick',function(){
+    var time = (new Date()).getTime();
+    myWorker = new Worker('count.js?t='+time);
+    myWorker.addEventListener('message', function(event){
+      $('#workerStatus').html(event.data);
+    }, true);
+    $('#workerStatus').html('ワーカーを作成しました');
+    myWorker.postMessage(null); // ワーカーの処理を開始
+  });
+});
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id="index" data-role="page"&gt;
+  &lt;div data-role="header"&gt;
+    &lt;h1&gt;ワーカー側で処理を終了する&lt;/h1&gt;
+  &lt;/div&gt;
+  &lt;div data-role="content"&gt;
+  &lt;form&gt;
+    &lt;input type="button" value="ワーカーでカウント" id="countButton"&gt;
+  &lt;/form&gt;
+  &lt;div id="workerStatus"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div data-role="footer" data-position="fixed"&gt;
+    &lt;h4&gt;Copyright &copy; ナカノヨウスケ&lt;/h4&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+count.js
+<pre class="prettyprint linenums">
+// Workerでカウント
+var count = 0;  // カウンタ
+addEventListener("message", function(event){
+  var timerID = setInterval(function(){
+    count++;
+    postMessage(count);
+    if (count == 5){  // 5回で終了
+      postMessage(count+"回なので終了します");
+      clearInterval(timerID);
+      self.close(); // 処理をワーカー側で終了させる
+    }
+  }, 1000); // 1秒ごとにカウント
+}, false);
+</pre>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div id="footer"><%= title %></div>
+ 
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/google-code-prettify/prettify.js"></script>
+    <script>prettyPrint();</script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/list-counter.js"></script>
+
+  </body>
+</html>

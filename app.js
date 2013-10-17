@@ -66,7 +66,7 @@ app.get('/jsrecipe-:id', js.recipe);
 
 //資料系
 app.get('/material-:id', material.material);
-app.get('/phonegap-:id', material.phonegap);
+app.get('/cordova:id', material.cordova);
 app.get('/material/git-:id', material.git);
 app.get('/material/vagrant-:id', material.vagrant);
 

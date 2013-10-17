@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title><%= title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="../css/common.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+ 
+    <nav class="navbar navbar-default">
+      <div class="navbar-header">
+        <button class="navbar-toggle" data-toggle="collapse" data-target=".target">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/"><%= title %></a>
+      </div>
+ 
+      <div class="collapse navbar-collapse target">
+        <ul class="nav navbar-nav">
+          <li><a href="">文法</a></li>
+          <li><a href="">リファレンス</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+
+        <div class="list-group">
+          <a href="phonegap-1" class="list-group-item">
+          環境構築
+          </a>
+        </div>
+
+
+        </div>
+        <div class="col-sm-9">
+          <div class="panel panel-primary">
+          <div class="panel-heading">phonegapのインストール</div>
+          <div class="panel-body">
+<pre>
+
+公式サイト
+http://phonegap.com/
+
+APIドキュメント
+http://docs.phonegap.com/en/3.0.0/index.html
+
+
+コマンドラインドキュメント
+http://docs.phonegap.com/en/3.0.0/guide_cli_index.md.html#The%20Command-line%20Interface
+
+
+
+Phonegap Build
+
+公式サイト
+https://build.phonegap.com/
+
+
+Monaca
+
+公式サイト
+http://monaca.mobi/?lang=ja
+
+</pre>
+
+
+<h4>phonegapバージョンの分類</h4>
+
+<pre>
+1.4.0まで
+もともとのphonegap
+プラットフォームごとに環境構築は別々
+
+
+1.5.0〜2.0.0
+・Adobeに買収され、もともとのphonegapはapache cordovaに
+・phonegapという名前はAdobeの権利に
+・Adobe Phonegap Buildのサービス開始
+・Adobe Dreamweaverにphonegapが組み込まれる（CS5.5/CS6）
+
+
+2.1.0〜2.9.0
+createコマンドからeclipseやxcodeなどのプロジェクトを生成できるように
+
+
+3.0.0
+Node.jsを使った共通のコマンドでプラットフォームごとのビルド、エミュレーターへのインストール等が可能に
+Adobeとの連携で、ローカルのビルドはphonegapの機能で、リモートのビルドはphoneap buildで可能に
+phonegap buildの有料化、アプリ1個は無料、またGithub上のソースのビルドは無料
+phonegap buildがgithubと連携
+
+
+</pre>
+
+<h4>eclipseの日本語化</h4>
+
+<pre>
+Pleiades（プレアデス）
+http://mergedoc.sourceforge.jp/
+
+
+安定板をダウンロードして解凍
+
+
+解凍して得られる「plugins」「features」フォルダを
+それぞれeclipseの「plugins」「features」フォルダに上書き
+
+※eclipseに元からあったフォルダの中身をつぶさないように注意
+
+
+pleiades.jarの場所をeclipse.iniに追記
+plugins\jp.sourceforge.mergedoc.pleiades\pleiades.jar
+
+
+
+
+eclipse.iniを書き換え
+-startup
+plugins/org.eclipse.equinox.launcher_1.3.0.v20120522-1813.jar
+--launcher.library
+plugins/org.eclipse.equinox.launcher.win32.win32.x86_64_1.1.200.v20120913-144807
+-product
+com.android.ide.eclipse.adt.package.product
+--launcher.XXMaxPermSize
+256M
+-showsplash
+com.android.ide.eclipse.adt.package.product
+--launcher.XXMaxPermSize
+256m
+--launcher.defaultAction
+openFile
+-vmargs
+-Dosgi.requiredJavaVersion=1.6
+-Xms40m
+-Xmx768m
+-Declipse.buildId=v22.0.5-757759
+
+-javaagent:C:\adt-bundle-windows-x86_64\eclipse\plugins\jp.sourceforge.mergedoc.pleiades\pleiades.jar
+
+
+Aptanaの場合
+aptana.iniを書き換え
+
+Titaniumの場合
+titanium.iniを書き換え
+
+
+eclipseを再起動
+
+</pre>
+
+<h4>phonegap 2系</h4>
+
+<pre>
+１）パスを通す
+
+
+環境変数のJAVA_HOMEにJDKのロケーションを追加
+
+C:\Program Files\Java\jdk1.7.0_25\bin
+
+
+環境変数のPathに以下のロケーションを追加
+（Windowsのみ）
+
+JDKのパスを追加
+%JAVA_HOME%
+
+Android SDKの「platform-tools」のパス
+C:\adt-bundle-windows-x86_64\sdk\platform-tools
+
+
+Android SDKの「tools」のパス
+C:\adt-bundle-windows-x86_64\sdk\tools
+
+
+Apache Antのダウンロード
+http://ant.apache.org/
+
+※Javaのソースコードを自動生成するツール
+
+
+環境変数のPathに以下のロケーションを追加
+（Windowsのみ）
+C:\apache-ant-1.9.2\bin
+
+
+
+動作確認コマンド
+
+JDKがインストールされているかどうか
+java -version
+
+Antが動作しているかどうか
+ant -version
+
+platform-toolsのパスが通っているかどうか
+adb version
+
+
+
+２）phonegapのプロジェクトを生成する
+
+
+ダウンロード
+http://phonegap.com/install/
+
+
+下の階層にcdする
+.../phonegap-2.9.0/lib/プラットフォーム/bin
+
+
+Windowsの場合
+create フォルダ名 パッケージ名 プロジェクト名
+
+例
+create hello com.example.hello HelloWorld
+
+Mac
+
+./create  フォルダ名 パッケージ名 プロジェクト名
+
+./create hello com.example.hello HelloWorld
+
+
+生成されたプロジェクトをeclipseやxcodeに読み込み
+
+
+</pre>
+
+<h4>phonegap 3系</h4>
+
+<pre>
+phonegapのインストール
+http://phonegap.com/install/
+
+npm install -g phonegap
+
+sudo npm install -g phonegap
+
+
+
+npm install -g phonegap@2.9.0-rc1-0.12.2
+
+sudo npm install -g phonegap@2.9.0-rc1-0.12.2
+
+
+
+
+
+apache antをダウンロード
+
+http://ant.apache.org/
+
+https://code.google.com/p/winant/downloads/list
+
+
+
+c://直下に設置
+
+
+
+
+Antのパスを通す
+
+PATH – %ANT_HOME%\bin;
+ANT_HOME – C:\Program Files (x86)\WinAnt
+
+
+
+
+
+Javaのパスを通す
+
+
+JAVA_HOME – C:\Program Files\Java\jdk1.7.0_15
+PATH - %JAVA_HOME%\bin;
+
+
+
+
+C:\Development\sdk\tools;
+C:\Development\sdk\platform-tools;
+
+
+
+
+
+エミュレーターの確認
+
+adb devices
+
+
+
+
+phonegap create hello com.example.hello HelloWorld
+
+
+
+
+
+
+phonegap build --emulator=-emulator-5554 android
+
+phonegap install --emulator=-emulator-5554 android
+
+phonegap run --emulator=-emulator-5554 android
+
+
+--device
+
+--target
+
+
+--debug
+--release
+--nobuild
+
+</pre>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div id="footer"><%= title %></div>
+ 
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+  </body>
+</html>

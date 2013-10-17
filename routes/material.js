@@ -8,9 +8,9 @@ exports.material = function(req, res){
 	});
 };
 
-//phonegapの設定
-exports.phonegap = function(req, res){
-	res.render('material/phonegap/phonegap-' + req.params.id, {
+//cordovaの設定
+exports.cordova = function(req, res){
+	res.render('material/cordova/cordova' + req.params.id, {
 	  	title: config.title,
 	  	instructor: config.instructor
 	});

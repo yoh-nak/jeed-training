@@ -41,288 +41,141 @@
         </div>
         <div class="col-sm-9">
           <div class="panel panel-primary">
-          <div class="panel-heading">phonegapのインストール</div>
+          <div class="panel-heading">Apache Cordovaについて</div>
           <div class="panel-body">
-<pre>
 
+<h4>Apache Cordova</h4>
+<pre>
+公式サイト
+http://cordova.apache.org/
+
+APIドキュメント
+http://cordova.apache.org/docs/ja/edge/index.html
+
+コマンドラインインターフェース
+</pre>
+
+<h4>Adobe Phonegap</h4>
+<pre>
 公式サイト
 http://phonegap.com/
 
 APIドキュメント
 http://docs.phonegap.com/en/3.0.0/index.html
+</pre>
 
+<h4>PAdobe honegap Build</h4>
 
-コマンドラインドキュメント
-http://docs.phonegap.com/en/3.0.0/guide_cli_index.md.html#The%20Command-line%20Interface
-
-
-
-Phonegap Build
-
+<pre>
 公式サイト
 https://build.phonegap.com/
+</pre>
 
-
-Monaca
-
+<h4>Monaca</h4>
+<pre>
 公式サイト
 http://monaca.mobi/?lang=ja
-
 </pre>
 
-
-<h4>phonegapバージョンの分類</h4>
-
+<h4>Android Studio & Phonegap3の設定</h4>
 <pre>
-1.4.0まで
-もともとのphonegap
-プラットフォームごとに環境構築は別々
+/**********************************/
+//JDKのインストール
+//Androidの開発に必須
+/**********************************/
 
+Java SEのダウンロードしてインストール
+http://www.oracle.com/technetwork/jp/java/javase/downloads/index.html
 
-1.5.0〜2.0.0
-・Adobeに買収され、もともとのphonegapはapache cordovaに
-・phonegapという名前はAdobeの権利に
-・Adobe Phonegap Buildのサービス開始
-・Adobe Dreamweaverにphonegapが組み込まれる（CS5.5/CS6）
+コマンドプロンプトで「java -version」と入力してバージョンが表示されればOK
+JDKがパソコンにインストールされ、実行できていることが確認できます。
 
 
-2.1.0〜2.9.0
-createコマンドからeclipseやxcodeなどのプロジェクトを生成できるように
+javaのコンパイラーのパスを環境変数に登録します。
+javaのコンパイラを使うアプリケーションが、コンパイラーの場所を認識するために必須の設定です。
 
+環境変数にJAVA_HOMEを追加して
+C:\Program Files\Java\jdk1.7.0_45\binのパスを指定
 
-3.0.0
-Node.jsを使った共通のコマンドでプラットフォームごとのビルド、エミュレーターへのインストール等が可能に
-Adobeとの連携で、ローカルのビルドはphonegapの機能で、リモートのビルドはphoneap buildで可能に
-phonegap buildの有料化、アプリ1個は無料、またGithub上のソースのビルドは無料
-phonegap buildがgithubと連携
+環境変数pathの先頭にC:\Program Files\Java\jdk1.7.0_45\binのパスを追記
+※パスがsystem32のパスより後に書かれているとAndroid Studioがインストールできないので要注意
 
 
-</pre>
-
-<h4>eclipseの日本語化</h4>
-
-<pre>
-Pleiades（プレアデス）
-http://mergedoc.sourceforge.jp/
-
-
-安定板をダウンロードして解凍
-
-
-解凍して得られる「plugins」「features」フォルダを
-それぞれeclipseの「plugins」「features」フォルダに上書き
-
-※eclipseに元からあったフォルダの中身をつぶさないように注意
-
-
-pleiades.jarの場所をeclipse.iniに追記
-plugins\jp.sourceforge.mergedoc.pleiades\pleiades.jar
-
-
-
-
-eclipse.iniを書き換え
--startup
-plugins/org.eclipse.equinox.launcher_1.3.0.v20120522-1813.jar
---launcher.library
-plugins/org.eclipse.equinox.launcher.win32.win32.x86_64_1.1.200.v20120913-144807
--product
-com.android.ide.eclipse.adt.package.product
---launcher.XXMaxPermSize
-256M
--showsplash
-com.android.ide.eclipse.adt.package.product
---launcher.XXMaxPermSize
-256m
---launcher.defaultAction
-openFile
--vmargs
--Dosgi.requiredJavaVersion=1.6
--Xms40m
--Xmx768m
--Declipse.buildId=v22.0.5-757759
-
--javaagent:C:\adt-bundle-windows-x86_64\eclipse\plugins\jp.sourceforge.mergedoc.pleiades\pleiades.jar
-
-
-Aptanaの場合
-aptana.iniを書き換え
-
-Titaniumの場合
-titanium.iniを書き換え
-
-
-eclipseを再起動
-
-</pre>
-
-<h4>phonegap 2系</h4>
-
-<pre>
-１）パスを通す
-
-
-環境変数のJAVA_HOMEにJDKのロケーションを追加
-
-C:\Program Files\Java\jdk1.7.0_25\bin
-
-
-環境変数のPathに以下のロケーションを追加
-（Windowsのみ）
-
-JDKのパスを追加
-%JAVA_HOME%
-
-Android SDKの「platform-tools」のパス
-C:\adt-bundle-windows-x86_64\sdk\platform-tools
-
-
-Android SDKの「tools」のパス
-C:\adt-bundle-windows-x86_64\sdk\tools
-
-
-Apache Antのダウンロード
-http://ant.apache.org/
-
-※Javaのソースコードを自動生成するツール
-
-
-環境変数のPathに以下のロケーションを追加
-（Windowsのみ）
-C:\apache-ant-1.9.2\bin
-
-
-
-動作確認コマンド
-
-JDKがインストールされているかどうか
-java -version
-
-Antが動作しているかどうか
-ant -version
-
-platform-toolsのパスが通っているかどうか
-adb version
-
-
-
-２）phonegapのプロジェクトを生成する
-
-
-ダウンロード
-http://phonegap.com/install/
-
-
-下の階層にcdする
-.../phonegap-2.9.0/lib/プラットフォーム/bin
-
-
-Windowsの場合
-create フォルダ名 パッケージ名 プロジェクト名
-
-例
-create hello com.example.hello HelloWorld
-
-Mac
-
-./create  フォルダ名 パッケージ名 プロジェクト名
-
-./create hello com.example.hello HelloWorld
-
-
-生成されたプロジェクトをeclipseやxcodeに読み込み
-
-
-</pre>
-
-<h4>phonegap 3系</h4>
-
-<pre>
-phonegapのインストール
-http://phonegap.com/install/
-
-npm install -g phonegap
-
-sudo npm install -g phonegap
-
-
-
-npm install -g phonegap@2.9.0-rc1-0.12.2
-
-sudo npm install -g phonegap@2.9.0-rc1-0.12.2
-
-
-
-
-
-apache antをダウンロード
+/**********************************/
+//Apache Antのインストール
+//phonegapでAndroidのプロジェクトを生成するため
+/**********************************/
 
 http://ant.apache.org/
 
-https://code.google.com/p/winant/downloads/list
+.zip archiveをダウンロードしてC直下に解凍し、
+C:\apache-ant-1.9.2\binのパスを環境変数pathに追記
 
 
 
-c://直下に設置
+/**********************************/
+//Android Studioのインストール
+/**********************************/
+
+Androidアプリの開発をするために必須の開発ツールです。
+ネイティブアプリのプログラムを記述したり、Androidアプリの本体であるapkファイルを生成するために使います。
+
+Phonegapではウェブビューのソースコードをネイティブアプリに組み込むために使います。
+
+http://developer.android.com/sdk/installing/studio.html
 
 
+/**********************************/
+//Android SDKのインストール
+/**********************************/
+
+Android Studioを使用する場合は、Android Studioをインストールする際に一緒にAndroid SDKもインストールされています。
 
 
-Antのパスを通す
+Android SDKを環境変数に設定
+Androidの開発用に使われるコマンドを実行するための設定です。
 
-PATH – %ANT_HOME%\bin;
-ANT_HOME – C:\Program Files (x86)\WinAnt
-
-
-
-
-
-Javaのパスを通す
+Android Studio付属のAndroid SDKのの中にあるtoolsとplatform-toolsのディレクトリを環境変数pathに追記
+C:\Users\e4300\AppData\Local\Android\android-studio\sdk\tools
+C:\Users\e4300\AppData\Local\Android\android-studio\sdk\platform-tools
 
 
-JAVA_HOME – C:\Program Files\Java\jdk1.7.0_15
-PATH - %JAVA_HOME%\bin;
+/**********************************/
+//Phonegap 3.0.xのインストール
+/**********************************/
+
+さきにnode.jsをインストールしておく必要があります。
+http://nodejs.org/
+
+インストールしたらnode -vコマンドを実行しバージョンが表示されたらインストールできています。
+
+node.jsをインストールしたらnode package manager（npm）コマンドからcordovaをインストールします。
+npm install -g cordova
+
+cordovaがインストールできているかどうかはnpm cordova -vで確認できます。
 
 
+/**********************************/
+//Cordovaの組み込まれたAndroidプロジェクトを生成
+/**********************************/
 
+各プラットフォーム共通の設定ファイルを生成します。
+cordova c:\helloworld com.example.helloworld HelloWorld
 
-C:\Development\sdk\tools;
-C:\Development\sdk\platform-tools;
+ディレクトリを移動します。
+cd c:\helloworld
 
+Androidプロジェクトを生成します。
+cordova platform add android
 
+Androidプロジェクトを削除するときに実行します。
+cordova platform remove android
 
+Cordovaのプラグインを追加します。
+cordova plugin add ＜git-url＞
 
-
-エミュレーターの確認
-
-adb devices
-
-
-
-
-phonegap create hello com.example.hello HelloWorld
-
-
-
-
-
-
-phonegap build --emulator=-emulator-5554 android
-
-phonegap install --emulator=-emulator-5554 android
-
-phonegap run --emulator=-emulator-5554 android
-
-
---device
-
---target
-
-
---debug
---release
---nobuild
-
+Cordovaのプラグインを削除するときに実行します。
+cordova plugin remove ＜git-url＞
 </pre>
           </div>
           </div>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"> 
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+</head>
+<body>
+<div id="index" data-role="page">
+	<div data-role="header">
+		<h1>セッションストレージを利用し異なるウィンドウでデータをやりとりする</h1>
+	</div>
+	<div data-role="content">
+		<form>
+			<textarea cols="20" rows="5" id="userComment">感想をお願いします</textarea><br>
+			<input type="button" value="保存" id="saveButton"><br>
+			<input type="button" value="読み出し" id="readButton"><br>
+			<input type="button" value="新規にウィンドウを開く" id="openButton"><br>
+		</form>
+	</div>
+	<div data-role="footer" data-position="fixed">
+		<h4>Copyright &copy; ナカノヨウスケ</h4>
+	</div>
+</div>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<script>
+// セッションストレージを利用し異なるウィンドウでデータをやりとりする
+$(document).on('pageshow','#index',function(){
+	$('#saveButton').on('vclick',function(){
+		var txt = $('#userComment').val();
+		window.sessionStorage.setItem('textData', txt);
+	});
+	$('#readButton').on('vclick',function(){
+		var txt = window.sessionStorage.getItem('textData');
+		$('#userComment').val(txt);
+	});
+	$('#openButton').on('vclick',function(){
+		window.open('index.html', 'Storage');
+	});
+});
+</script>
+</body>

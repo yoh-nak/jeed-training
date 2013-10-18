@@ -1,0 +1,83 @@
+<%- include ../../head %>
+  <body>
+ 
+    <%- include navbar %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+
+        <%- include left %>
+        
+        </div>
+        <div class="col-sm-9">
+          <div class="panel panel-primary">
+          <div class="panel-heading">複数のデータをローカルストレージに保存</div>
+          <div class="panel-body">
+
+<p>
+<a href="demo/html5api/storage3/index.html" target="_blank" class="btn btn-default">
+<i class="glyphicon glyphicon-play"></i> デモ
+</a>
+</p>
+
+<pre class="prettyprint linenums">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"&gt; 
+&lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id="index" data-role="page"&gt;
+  &lt;div data-role="header"&gt;
+    &lt;h1&gt;複数のデータをローカルストレージに保存&lt;/h1&gt;
+  &lt;/div&gt;
+  &lt;div data-role="content"&gt;
+    &lt;form&gt;
+      &lt;input type="text" name="userName" id="userName" value="桜井"&gt;&lt;br&gt;
+      &lt;textarea cols="20" rows="5" id="userComment"&gt;意見をお願いします&lt;/textarea&gt;&lt;br&gt;
+      &lt;input type="button" value="保存" id="saveButton"&gt;
+    &lt;/form&gt;
+  &lt;/div&gt;
+  &lt;div data-role="footer" data-position="fixed"&gt;
+    &lt;h4&gt;Copyright &copy; ナカノヨウスケ&lt;/h4&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;script src="http://code.jquery.com/jquery-1.9.1.min.js"&gt;&lt;/script&gt;
+&lt;script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+// 複数のデータをローカルストレージに保存する
+$(document).on('pageshow','#index',function(){
+  $('#saveButton').on('vclick',function(){
+    var name = $('#userName').val();
+    var txt = $('#userComment').val();
+    var saveData = {
+      user : name,
+      comment : txt
+    };
+    window.localStorage.setItem('textData2', JSON.stringify(saveData));
+  });
+});
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div id="footer"><%= title %></div>
+ 
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/google-code-prettify/prettify.js"></script>
+    <script>prettyPrint();</script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/list-counter.js"></script>
+
+  </body>
+</html>

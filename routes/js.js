@@ -39,6 +39,14 @@ exports.html5 = function(req, res){
 	});
 };
 
+//Canvas
+exports.canvas = function(req, res){
+	res.render('js/canvas/canvas' + req.params.id + req.params.format, {
+	  	title: config.title,
+	  	instructor: config.instructor
+	});
+};
+
 //Library
 exports.library = function(req, res){
 	res.render('js/library/library-' + req.params.id, {

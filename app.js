@@ -40,7 +40,6 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-
 //ルーティングGET送信
 
 //単独
@@ -60,6 +59,7 @@ app.get('/diary-:id', diary.diary);
 app.get('/js-:id', js.js);
 app.get('/webapi-:id', js.webapi);
 app.get('/html5api-:id', js.html5);
+app.get('/canvas:id:format', js.canvas);
 app.get('/enchant-:id', js.enchant);
 app.get('/library-:id', js.library);
 app.get('/jsrecipe-:id', js.recipe);

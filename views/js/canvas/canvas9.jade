@@ -19,14 +19,14 @@ html(lang='ja')
 					div.panel.panel-primary
 						div.panel-heading
 							i.glyphicon.glyphicon-book
-							&nbsp;図形の合成
+							&nbsp;シャドウ
 						div.panel-body
 							p
-								a.btn.btn-default(href='demo/canvas/exercise2/index15.html',target='_blank')
+								a.btn.btn-default(href='demo/canvas/exercise2/index27.html',target='_blank')
 									i.glyphicon.glyphicon-play
 									| デモ
 							pre.prettyprint.linenums
-								| &lt;!DOCTYPE html&gt;
+								| lt;!DOCTYPE html&gt;
 								| &lt;html lang="ja"&gt;
 								|   &lt;head&gt;
 								|     &lt;meta charset="utf-8"&gt;
@@ -41,17 +41,15 @@ html(lang='ja')
 								|        var canvas = $('#myCanvas');
 								|        var context = canvas.get(0).getContext('2d');
 								|        
-								|        context.fillStyle = 'rgb(63, 169, 245)';
+								|        context.shadowBlur = 20;
+								|        context.shadowColor = 'rgb(0, 0, 0)';
 								|        context.fillRect(50, 50, 100, 100);
-								|        context.globalAlpha = 0.5;
-								|        context.fillStyle = 'rgb(255, 123, 172)';
-								|        context.fillRect(100, 100, 100, 100);
 								|       });
 								|     &lt;/script&gt;
 								|   &lt;/body&gt;
 								| &lt;/html&gt;
 							p
-								a.btn.btn-default(href='demo/canvas/exercise2/index16.html',target='_blank')
+								a.btn.btn-default(href='demo/canvas/exercise2/index28.html',target='_blank')
 									i.glyphicon.glyphicon-play
 									| デモ
 							pre.prettyprint.linenums
@@ -70,17 +68,17 @@ html(lang='ja')
 								|        var canvas = $('#myCanvas');
 								|        var context = canvas.get(0).getContext('2d');
 								|        
-								|        context.fillStyle = 'rgb(63, 169, 245)';
-								|        context.fillRect(50, 50, 100, 100);
-								|        context.globalCompositeOperation = 'source-over';
-								|        context.fillStyle = 'rgb(255, 123, 172)';
-								|        context.fillRect(100, 100, 100, 100);
+								|        context.shadowBlur = 0;
+								|        context.shadowOffsetX = 10;
+								|        context.shadowOffsetY = 10;
+								|        context.shadowColor = 'rgba(100, 100, 100, 0.5)';
+								|        context.fillRect(200, 50, 100, 100);
 								|       });
 								|     &lt;/script&gt;
 								|   &lt;/body&gt;
 								| &lt;/html&gt;
 							p
-								a.btn.btn-default(href='demo/canvas/exercise2/index17.html',target='_blank')
+								a.btn.btn-default(href='demo/canvas/exercise2/index29.html',target='_blank')
 									i.glyphicon.glyphicon-play
 									| デモ
 							pre.prettyprint.linenums
@@ -99,17 +97,20 @@ html(lang='ja')
 								|        var canvas = $('#myCanvas');
 								|        var context = canvas.get(0).getContext('2d');
 								|        
-								|        context.fillStyle = 'rgb(63, 169, 245)';
-								|        context.fillRect(50, 50, 100, 100);
-								|        context.globalCompositeOperation = 'destination-over';
-								|        context.fillStyle = 'rgb(255, 123, 172)';
-								|        context.fillRect(100, 100, 100, 100);
+								|        context.shadowColor = 'rgb(255, 0, 0)';
+								|        context.shadowBlur = 50;
+								|        context.shadowOffsetX = 0;
+								|        context.shadowOffsetY = 0;
+								|        context.beginPath();
+								|        context.arc(400, 100, 50, 0, Math.PI*2, false);
+								|        context.closePath();
+								|        context.fill();
 								|       });
 								|     &lt;/script&gt;
 								|   &lt;/body&gt;
 								| &lt;/html&gt;
 							p
-								a.btn.btn-default(href='demo/canvas/exercise2/index18.html',target='_blank')
+								a.btn.btn-default(href='demo/canvas/exercise2/index30.html',target='_blank')
 									i.glyphicon.glyphicon-play
 									| デモ
 							pre.prettyprint.linenums
@@ -128,17 +129,18 @@ html(lang='ja')
 								|        var canvas = $('#myCanvas');
 								|        var context = canvas.get(0).getContext('2d');
 								|        
-								|        context.fillStyle = 'rgb(63, 169, 245)';
-								|        context.fillRect(50, 50, 100, 100);
-								|        context.globalCompositeOperation = 'source-atop';
-								|        context.fillStyle = 'rgb(255, 123, 172)';
-								|        context.fillRect(100, 100, 100, 100);
+								|        var gradient = context.createLinearGradient(0, 0, 0, canvas.height());
+								|        gradient.addColorStop(0, 'rgb(0, 0, 0');
+								|        gradient.addColorStop(1, 'rgb(255, 255, 255');
+								|        
+								|        context.fillStyle = gradient;
+								|        context.fillRect(0, 0, canvas.width(), canvas.height());
 								|       });
 								|     &lt;/script&gt;
 								|   &lt;/body&gt;
 								| &lt;/html&gt;
 							p
-								a.btn.btn-default(href='demo/canvas/exercise2/index19.html',target='_blank')
+								a.btn.btn-default(href='demo/canvas/exercise2/index31.html',target='_blank')
 									i.glyphicon.glyphicon-play
 									| デモ
 							pre.prettyprint.linenums
@@ -157,17 +159,19 @@ html(lang='ja')
 								|        var canvas = $('#myCanvas');
 								|        var context = canvas.get(0).getContext('2d');
 								|        
-								|        context.fillStyle = 'rgb(63, 169, 245)';
-								|        context.fillRect(50, 50, 100, 100);
-								|        context.globalCompositeOperation = 'destination-atop';
-								|        context.fillStyle = 'rgb(255, 123, 172)';
-								|        context.fillRect(100, 100, 100, 100);
+								|        //createRadialGradient(x0, y0, r0, x1, y1, r0)
+								|        var gradient = context.createRadialGradient(300, 300, 10, 100, 100, 50);
+								|        gradient.addColorStop(0, 'rgb(0, 0, 0)');
+								|        gradient.addColorStop(1, 'rgb(150, 150, 150)');
+								|        
+								|        context.fillStyle = gradient;
+								|        context.fillRect(0, 0, canvas.width(), canvas.height());
 								|       });
 								|     &lt;/script&gt;
 								|   &lt;/body&gt;
 								| &lt;/html&gt;
 							p
-								a.btn.btn-default(href='demo/canvas/exercise2/index20.html',target='_blank')
+								a.btn.btn-default(href='demo/canvas/exercise2/index32.html',target='_blank')
 									i.glyphicon.glyphicon-play
 									| デモ
 							pre.prettyprint.linenums
@@ -186,17 +190,21 @@ html(lang='ja')
 								|        var canvas = $('#myCanvas');
 								|        var context = canvas.get(0).getContext('2d');
 								|        
-								|        context.fillStyle = 'rgb(63, 169, 245)';
-								|        context.fillRect(50, 50, 100, 100);
-								|        context.globalCompositeOperation = 'source-in';
-								|        context.fillStyle = 'rgb(255, 123, 172)';
-								|        context.fillRect(100, 100, 100, 100);
+								|        var canvasCenterX = canvas.width()/2;
+								|        var canvasCenterY = canvas.height()/2;
+								|        
+								|        var gradient = context.createRadialGradient(canvasCenterX, canvasCenterY, 0, canvasCenterX, canvasCenterY, 250);
+								|        gradient.addColorStop(0, 'rgb(0, 0, 0)');
+								|        gradient.addColorStop(1, 'rgb(150, 150, 150)');
+								|        
+								|        context.fillStyle = gradient;
+								|        context.fillRect(0, 0, canvas.width(), canvas.height());
 								|       });
 								|     &lt;/script&gt;
 								|   &lt;/body&gt;
 								| &lt;/html&gt;
 							p
-								a.btn.btn-default(href='demo/canvas/exercise2/index21.html',target='_blank')
+								a.btn.btn-default(href='demo/canvas/exercise2/index33.html',target='_blank')
 									i.glyphicon.glyphicon-play
 									| デモ
 							pre.prettyprint.linenums
@@ -215,17 +223,19 @@ html(lang='ja')
 								|        var canvas = $('#myCanvas');
 								|        var context = canvas.get(0).getContext('2d');
 								|        
-								|        context.fillStyle = 'rgb(63, 169, 245)';
-								|        context.fillRect(50, 50, 100, 100);
-								|        context.globalCompositeOperation = 'destination-in';
-								|        context.fillStyle = 'rgb(255, 123, 172)';
-								|        context.fillRect(100, 100, 100, 100);
+								|        context.beginPath();
+								|        context.moveTo(100, 50);
+								|        context.lineTo(150, 150);
+								|        context.lineTo(50, 150);
+								|        context.closePath();
+								|        context.stroke();
+								|        context.fill();
 								|       });
 								|     &lt;/script&gt;
 								|   &lt;/body&gt;
 								| &lt;/html&gt;
 							p
-								a.btn.btn-default(href='demo/canvas/exercise2/index22.html',target='_blank')
+								a.btn.btn-default(href='demo/canvas/exercise2/index34.html',target='_blank')
 									i.glyphicon.glyphicon-play
 									| デモ
 							pre.prettyprint.linenums
@@ -244,17 +254,17 @@ html(lang='ja')
 								|        var canvas = $('#myCanvas');
 								|        var context = canvas.get(0).getContext('2d');
 								|        
-								|        context.fillStyle = 'rgb(63, 169, 245)';
-								|        context.fillRect(50, 50, 100, 100);
-								|        context.globalCompositeOperation = 'source-out';
-								|        context.fillStyle = 'rgb(255, 123, 172)';
-								|        context.fillRect(100, 100, 100, 100);
+								|        context.lineWidth = 5;
+								|        context.beginPath();
+								|        context.moveTo(50, 250);
+								|        context.quadraticCurveTo(250, 100, 450, 250);
+								|        context.stroke();
 								|       });
 								|     &lt;/script&gt;
 								|   &lt;/body&gt;
 								| &lt;/html&gt;
 							p
-								a.btn.btn-default(href='demo/canvas/exercise2/index23.html',target='_blank')
+								a.btn.btn-default(href='demo/canvas/exercise2/index35.html',target='_blank')
 									i.glyphicon.glyphicon-play
 									| デモ
 							pre.prettyprint.linenums
@@ -273,17 +283,17 @@ html(lang='ja')
 								|        var canvas = $('#myCanvas');
 								|        var context = canvas.get(0).getContext('2d');
 								|        
-								|        context.fillStyle = 'rgb(63, 169, 245)';
-								|        context.fillRect(50, 50, 100, 100);
-								|        context.globalCompositeOperation = 'destination-out';
-								|        context.fillStyle = 'rgb(255, 123, 172)';
-								|        context.fillRect(100, 100, 100, 100);
+								|        context.lineWidth = 5;
+								|        context.beginPath();
+								|        context.moveTo(50, 250);
+								|        context.bezierCurveTo(150, 50, 350, 450, 450, 250);
+								|        context.stroke();
 								|       });
 								|     &lt;/script&gt;
 								|   &lt;/body&gt;
 								| &lt;/html&gt;
 							p
-								a.btn.btn-default(href='demo/canvas/exercise2/index24.html',target='_blank')
+								a.btn.btn-default(href='demo/canvas/exercise2/index36.html',target='_blank')
 									i.glyphicon.glyphicon-play
 									| デモ
 							pre.prettyprint.linenums
@@ -302,17 +312,22 @@ html(lang='ja')
 								|        var canvas = $('#myCanvas');
 								|        var context = canvas.get(0).getContext('2d');
 								|        
-								|        context.fillStyle = 'rgb(63, 169, 245)';
+								|        context.save();
 								|        context.fillRect(50, 50, 100, 100);
-								|        context.globalCompositeOperation = 'lighter';
-								|        context.fillStyle = 'rgb(255, 123, 172)';
+								|        
+								|        context.fillStyle = 'rgb(255, 0, 0)';
 								|        context.fillRect(100, 100, 100, 100);
+								|        
+								|        context.restore();
+								|        context.fillRect(150, 150, 100, 100);
+								|        
+								|        var dataURL = canvas.get(0).toDataURL();
 								|       });
 								|     &lt;/script&gt;
 								|   &lt;/body&gt;
 								| &lt;/html&gt;
 							p
-								a.btn.btn-default(href='demo/canvas/exercise2/index25.html',target='_blank')
+								a.btn.btn-default(href='demo/canvas/exercise2/index37.html',target='_blank')
 									i.glyphicon.glyphicon-play
 									| デモ
 							pre.prettyprint.linenums
@@ -331,40 +346,20 @@ html(lang='ja')
 								|        var canvas = $('#myCanvas');
 								|        var context = canvas.get(0).getContext('2d');
 								|        
-								|        context.fillStyle = 'rgb(63, 169, 245)';
+								|        context.save();
 								|        context.fillRect(50, 50, 100, 100);
-								|        context.globalCompositeOperation = 'copy';
-								|        context.fillStyle = 'rgb(255, 123, 172)';
-								|        context.fillRect(100, 100, 100, 100);
-								|       });
-								|     &lt;/script&gt;
-								|   &lt;/body&gt;
-								| &lt;/html&gt;
-							p
-								a.btn.btn-default(href='demo/canvas/exercise2/index26.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre.prettyprint.linenums
-								| &lt;!DOCTYPE html&gt;
-								| &lt;html lang="ja"&gt;
-								|   &lt;head&gt;
-								|     &lt;meta charset="utf-8"&gt;
-								|     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-								|     &lt;title&gt;&lt;/title&gt;
-								|   &lt;/head&gt;
-								|   &lt;body&gt;
-								|     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
-								|     &lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
-								|     &lt;script&gt;
-								|       $(function(){
-								|        var canvas = $('#myCanvas');
-								|        var context = canvas.get(0).getContext('2d');
 								|        
-								|        context.fillStyle = 'rgb(63, 169, 245)';
-								|        context.fillRect(50, 50, 100, 100);
-								|        context.globalCompositeOperation = 'xor';
-								|        context.fillStyle = 'rgb(255, 123, 172)';
+								|        context.fillStyle = 'rgb(255, 0, 0)';
 								|        context.fillRect(100, 100, 100, 100);
+								|        
+								|        context.restore();
+								|        context.fillRect(150, 150, 100, 100);
+								|        
+								|        var dataURL = canvas.get(0).toDataURL();
+								|        var img = $('&lt;img&gt;');
+								|        img.attr('src', dataURL);
+								|        
+								|        canvas.replaceWith(img);
 								|       });
 								|     &lt;/script&gt;
 								|   &lt;/body&gt;

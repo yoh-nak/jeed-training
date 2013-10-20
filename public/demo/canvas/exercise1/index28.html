@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+      *{
+       margin:0;
+       padding:0;
+      }
+      html,body{
+       height:100%;
+       width:100%;
+      }
+      canvas{
+       display:block;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="500" height="500"></canvas>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script>
+      $(function(){
+       var canvas = $('#myCanvas');
+       var context = canvas.get(0).getContext('2d');
+       
+       $(window).resize(resizeCanvas);
+       function resizeCanvas(){
+        canvas.attr('width', $(window).get(0).innerWidth);
+        canvas.attr('height', $(window).get(0).innerHeight);
+        context.fillRect(0, 0, canvas.width(), canvas.height());
+        
+       context.fillStyle = 'rgb(255, 0, 0)';
+       //context.fillRect(x, y, width, height);
+       context.fillRect(40, 40, 100, 100);
+       
+       }
+       resizeCanvas();
+      });
+    </script>
+  </body>
+</html>

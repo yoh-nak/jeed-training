@@ -1,0 +1,28 @@
+!!!
+html(lang='ja')
+	head
+		meta(charset='utf-8')
+		meta(name='viewport',content='width=device-width, initial-scale=1.0')
+		title
+	body
+		canvas#myCanvas(width='500',height='500')
+		script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+		script.
+			$(function(){
+				var canvas = $('#myCanvas');
+				var context = canvas.get(0).getContext('2d');
+				context.strokeStyle = 'rgb(255, 0, 0)';
+				context.beginPath();
+				context.moveTo(40, 180);
+				context.lineTo(420, 180); //赤い線
+				context.closePath();
+				context.stroke();
+
+				context.strokeStyle = 'rgb(0, 0, 0)';
+				context.beginPath();
+				context.moveTo(40, 220);
+				context.lineTo(420, 220); //黒い線
+				context.closePath();
+				context.stroke();
+			});
+

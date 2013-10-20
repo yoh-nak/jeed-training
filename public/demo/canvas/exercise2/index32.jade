@@ -1,0 +1,24 @@
+!!!
+html(lang='ja')
+	head
+		meta(charset='utf-8')
+		meta(name='viewport',content='width=device-width, initial-scale=1.0')
+		title
+	body
+		canvas#myCanvas(width='500',height='500')
+		script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+		script.
+			$(function(){
+				var canvas = $('#myCanvas');
+				var context = canvas.get(0).getContext('2d');
+
+				var canvasCenterX = canvas.width()/2;
+				var canvasCenterY = canvas.height()/2;
+
+				var gradient = context.createRadialGradient(canvasCenterX, canvasCenterY, 0, canvasCenterX, canvasCenterY, 250);
+				gradient.addColorStop(0, 'rgb(0, 0, 0)');
+				gradient.addColorStop(1, 'rgb(150, 150, 150)');
+
+				context.fillStyle = gradient;
+				context.fillRect(0, 0, canvas.width(), canvas.height());
+			});

@@ -1,0 +1,20 @@
+!!!
+html(lang='ja')
+	head
+		meta(charset='utf-8')
+		meta(name='viewport',content='width=device-width, initial-scale=1.0')
+		title
+	body
+		canvas#myCanvas(width='500',height='500')
+		script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+		script.
+			$(function(){
+				var canvas = $('#myCanvas');
+				var context = canvas.get(0).getContext('2d');
+
+				context.shadowBlur = 0;
+				context.shadowOffsetX = 10;
+				context.shadowOffsetY = 10;
+				context.shadowColor = 'rgba(100, 100, 100, 0.5)';
+				context.fillRect(200, 50, 100, 100);
+			});

@@ -358,6 +358,28 @@ html(lang='ja')
 									i.glyphicon.glyphicon-play
 									| デモ
 							pre.prettyprint.linenums
+								| &lt;!DOCTYPE html&gt;
+								| &lt;html lang="ja"&gt;
+								|   &lt;head&gt;
+								|     &lt;meta charset="utf-8"&gt;
+								|     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+								|     &lt;title&gt;&lt;/title&gt;
+								|   &lt;/head&gt;
+								|   &lt;body&gt;
+								|     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
+								|     &lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
+								|     &lt;script&gt;
+								|       $(function(){
+								|        var canvas = $('#myCanvas');
+								|        var context = canvas.get(0).getContext('2d');
+								|        
+								|        context.translate(200, 200); //正方形の中心に平行移動
+								|        context.rotate(0.7854); //45度（Math.PI/4）回転
+								|        context.fillRect(-50, -50, 100, 100); //回転の中心を中心とする正方形を描画
+								|       });
+								|     &lt;/script&gt;
+								|   &lt;/body&gt;
+								| &lt;/html&gt;
 							p
 								a.btn.btn-default(href='demo/canvas/exercise2/index13.html',target='_blank')
 									i.glyphicon.glyphicon-play

@@ -7,8 +7,6 @@ html(lang='ja')
 		link(href='less/common.less',rel='stylesheet',media='screen')
 		link(href='js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
 		title=title
-		:coffeescript
-		:less
 	body
 		include navbar.jade
 		div.container
@@ -22,9 +20,8 @@ html(lang='ja')
 							&nbsp;アニメーションの更新／クリア／描画
 						div.panel-body
 							h4 アニメーションループを作る
-							h4 更新／クリア／削除
 							p
-								a.btn.btn-default(href='demo/canvas/exercise2/index36.html',target='_blank')
+								a.btn.btn-default(href='demo/canvas/exercise4/index1.html',target='_blank')
 									i.glyphicon.glyphicon-play
 									| デモ
 							pre.prettyprint.linenums
@@ -34,63 +31,62 @@ html(lang='ja')
 								|     &lt;meta charset="utf-8"&gt;
 								|     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
 								|     &lt;title&gt;&lt;/title&gt;
+								|     &lt;style&gt;
+								|       #myCanvas{
+								|        display:block;
+								|       }
+								|     &lt;/style&gt;
 								|   &lt;/head&gt;
 								|   &lt;body&gt;
 								|     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
+								|     &lt;button id="startAnimation"&gt;Start&lt;/button&gt;
+								|     &lt;button id="stopAnimation"&gt;Stop&lt;/button&gt;
 								|     &lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
 								|     &lt;script&gt;
 								|       $(function(){
+								|        //キャンバス要素　jQueryオブジェクト
 								|        var canvas = $('#myCanvas');
+								|        
+								|        //2Dレンダリングコンテキスト
 								|        var context = canvas.get(0).getContext('2d');
 								|        
-								|        context.save();
-								|        context.fillRect(50, 50, 100, 100);
+								|        var canvasWidth = canvas.width(); //キャンバス要素　幅
+								|        var canvasHeight = canvas.height(); //キャンバス要素　高さ
 								|        
-								|        context.fillStyle = 'rgb(255, 0, 0)';
-								|        context.fillRect(100, 100, 100, 100);
+								|        var playAnimation = true; //アニメーションフラグ　開始
 								|        
-								|        context.restore();
-								|        context.fillRect(150, 150, 100, 100);
+								|        //スタート／ストップボタン　jQueryオブジェクト
+								|        var startButton = $('#startAnimation');
+								|        var stopButton = $('#stopAnimation');
 								|        
-								|        var dataURL = canvas.get(0).toDataURL();
-								|       });
-								|     &lt;/script&gt;
-								|   &lt;/body&gt;
-								| &lt;/html&gt;
-							p
-								a.btn.btn-default(href='demo/canvas/exercise2/index37.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre.prettyprint.linenums
-								| &lt;!DOCTYPE html&gt;
-								| &lt;html lang="ja"&gt;
-								|   &lt;head&gt;
-								|     &lt;meta charset="utf-8"&gt;
-								|     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-								|     &lt;title&gt;&lt;/title&gt;
-								|   &lt;/head&gt;
-								|   &lt;body&gt;
-								|     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
-								|     &lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
-								|     &lt;script&gt;
-								|       $(function(){
-								|        var canvas = $('#myCanvas');
-								|        var context = canvas.get(0).getContext('2d');
+								|        //スタートボタン初期表示削除
+								|        startButton.hide();
 								|        
-								|        context.save();
-								|        context.fillRect(50, 50, 100, 100);
+								|        //スタートボタンクリック
+								|        startButton.click(function(){
+								|         $(this).hide(); //スタートボタン非表示
+								|         stopButton.show(); //ストップボタン表示
+								|         
+								|         playAnimation = true; //アニメーションフラグ　開始
+								|         animate(); //アニメーション開始
+								|        });
 								|        
-								|        context.fillStyle = 'rgb(255, 0, 0)';
-								|        context.fillRect(100, 100, 100, 100);
-								|        
-								|        context.restore();
-								|        context.fillRect(150, 150, 100, 100);
-								|        
-								|        var dataURL = canvas.get(0).toDataURL();
-								|        var img = $('&lt;img&gt;');
-								|        img.attr('src', dataURL);
-								|        
-								|        canvas.replaceWith(img);
+								|        //ストップボタンクリック
+								|        stopButton.click(function(){
+								|         $(this).hide(); //ストップボタン非表示
+								|         startButton.show(); //スタートボタン表示
+								|         
+								|         playAnimation = false; //アニメーションフラグ　停止
+								|        });
+								|        //アニメーションループ
+								|        function animate(){
+								|         //アニメーションフラグが開始のとき
+								|         if(playAnimation){
+								|          setTimeout(animate, 33);
+								|         }
+								|        }
+								|        //アニメーション初回スタート
+								|        animate();
 								|       });
 								|     &lt;/script&gt;
 								|   &lt;/body&gt;

@@ -1,0 +1,78 @@
+!!!
+html(lang='ja')
+	head
+		meta(name='viewport',content='width=device-width,initial-scale=1.0')
+		link(href='css/bootstrap.min.css',rel='stylesheet',media='screen')
+		link(href='js/dtree/dtree.css', rel='stylesheet', media='screen')
+		link(href='less/common.less',rel='stylesheet',media='screen')
+		link(href='js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+		title=title
+	body
+		include navbar.jade
+		div.container
+			div.row
+				div.col-sm-3
+					include left.jade
+				div.col-sm-9
+					div.panel.panel-primary
+						div.panel-heading
+							i.glyphicon.glyphicon-book
+							&nbsp;円周に沿ったアニメーション
+						div.panel-body
+							canvas#fig1(width='400',height='300')	
+		div#footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script.
+			var canvas = $('#fig1');
+			var context = canvas.get(0).getContext("2d");
+			context.lineWidth = 3;
+			context.strokeStyle = 'rgba(0, 0, 255, 0.8)';
+			context.arc(150, 150, 100, 0, Math.PI*2, false);
+			context.stroke();
+
+			context.font = 'bold 12px sans-serif';
+
+			context.fillStyle = 'rgba(255, 0, 0, 0.3)';
+			context.fillRect(150+100*Math.cos(Math.PI*0)-10, 150+100*Math.sin(Math.PI*0)-10, 20, 20); //0PI
+
+			context.fillStyle = 'rgb(0, 0, 0)';
+			context.fillText('0 & 360度', 150+70*Math.cos(Math.PI*0)-40, 150+70*Math.sin(Math.PI*0));
+			context.fillText('0 & 2PI', 150+120*Math.cos(Math.PI*0)-10, 150+120*Math.sin(Math.PI*0));
+
+			context.fillStyle = 'rgba(255, 0, 0, 0.4)';
+			context.fillRect(150+100*Math.cos(Math.PI/4)-10, 150+100*Math.sin(Math.PI/4)-10, 20, 20); //1/4PI
+
+			context.fillStyle = 'rgba(255, 0, 0, 0.5)';
+			context.fillRect(150+100*Math.cos(Math.PI/2)-10, 150+100*Math.sin(Math.PI/2)-10, 20, 20); //1/2PI
+
+			context.fillStyle = 'rgb(0, 0, 0)';
+			context.fillText('90度', 150+70*Math.cos(Math.PI/2)-10, 150+70*Math.sin(Math.PI/2));
+			context.fillText('1/2PI', 150+130*Math.cos(Math.PI/2)-10, 150+130*Math.sin(Math.PI/2));
+
+			context.fillStyle = 'rgba(255, 0, 0, 0.6)';
+			context.fillRect(150+100*Math.cos(3*Math.PI/4)-10, 150+100*Math.sin(3*Math.PI/4)-10, 20, 20); //3/4PI
+
+			context.fillStyle = 'rgba(255, 0, 0, 0.7)';
+			context.fillRect(150+100*Math.cos(Math.PI)-10, 150+100*Math.sin(Math.PI)-10, 20, 20); //1PI
+
+			context.fillStyle = 'rgb(0, 0, 0)';
+			context.fillText('180度', 150+70*Math.cos(Math.PI)-10, 150+70*Math.sin(Math.PI));
+			context.fillText('PI', 150+130*Math.cos(Math.PI)-10, 150+130*Math.sin(Math.PI));
+
+			context.fillStyle = 'rgba(255, 0, 0, 0.8)';
+			context.fillRect(150+100*Math.cos(5*Math.PI/4)-10, 150+100*Math.sin(5*Math.PI/4)-10, 20, 20); //5/4PI
+
+			context.fillStyle = 'rgba(255, 0, 0, 0.9)';
+			context.fillRect(150+100*Math.cos(3*Math.PI/2)-10, 150+100*Math.sin(3*Math.PI/2)-10, 20, 20); //3/2PI
+
+			context.fillStyle = 'rgb(0, 0, 0)';
+			context.fillText('270度', 150+70*Math.cos(3*Math.PI/2)-10, 150+70*Math.sin(3*Math.PI/2));
+			context.fillText('3/2PI', 150+130*Math.cos(3*Math.PI/2)-10, 150+130*Math.sin(3*Math.PI/2));
+
+			context.fillStyle = 'rgba(255, 0, 0, 1.0)';
+			context.fillRect(150+100*Math.cos(7*Math.PI/4)-10, 150+100*Math.sin(7*Math.PI/4)-10, 20, 20); //7/4PI
+		script(src='js/bootstrap.min.js')
+		script(src='js/list-counter.js')

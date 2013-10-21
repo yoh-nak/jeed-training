@@ -43,7 +43,8 @@ exports.html5 = function(req, res){
 exports.canvas = function(req, res){
 	res.render('js/canvas/canvas' + req.params.id + req.params.format, {
 	  	title: config.title,
-	  	instructor: config.instructor
+	  	instructor: config.instructor,
+	  	pretty: true
 	});
 };
 

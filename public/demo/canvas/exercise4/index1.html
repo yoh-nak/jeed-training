@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+      #myCanvas{
+       display:block;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="500" height="500"></canvas>
+    <button id="startAnimation">Start</button>
+    <button id="stopAnimation">Stop</button>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script>
+      $(function(){
+       var canvas = $('#myCanvas');
+       var context = canvas.get(0).getContext('2d');
+       
+       var canvasWidth = canvas.width();
+       var canvasHeight = canvas.height();
+       
+       var playAnimation = true;
+       function animate(){
+        if(playAnimation){
+         setTimeout(animate, 33);
+        }
+       }
+       animate();
+       
+       var startButton = $('#startAnimation');
+       var stopButton = $('#stopAnimation');
+       
+       startButton.hide();
+       startButton.click(function(){
+        $(this).hide();
+        stopButton.show();
+        
+        playAnimation = true;
+        animate();
+       });
+       
+       stopButton.click(function(){
+        $(this).hide();
+        startButton.show();
+        
+        playAnimation = false;
+       });
+      });
+    </script>
+  </body>
+</html>

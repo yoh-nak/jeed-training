@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+      #myCanvas{
+       display:block;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="500" height="500"></canvas>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script>
+      $(function(){
+       var canvas = $('#myCanvas');
+       var context = canvas.get(0).getContext('2d');
+       
+       var canvasWidth = canvas.width();
+       var canvasHeight = canvas.height();
+       
+       var playAnimation = true;
+       
+       var Shape = function(x, y){
+        this.x = x;
+        this.y = y;
+       };
+       var shapes = new Array();
+       //var shapes = [];
+       
+       shapes.push(new Shape(50, 50));
+       shapes.push(new Shape(100, 100));
+       shapes.push(new Shape(150, 150));
+       
+       //shapes[0] = new Shape(50, 50); 
+       //shapes[1] = new Shape(100, 100); 
+       //shapes[2] = new Shape(150, 150); 
+       
+       function animate(){
+        context.clearRect(0, 0, canvasWidth, canvasHeight);
+        
+        var shapesLength = shapes.length;
+        for(var i = 0; i < shapesLength; i++){
+         var tmpShape = shapes[i];
+         tmpShape.x++;
+         context.fillRect(tmpShape.x, tmpShape.y, 10, 10);
+        }
+        
+        if(playAnimation){
+         setTimeout(animate, 33);
+        }
+       }
+       animate();
+      });
+    </script>
+  </body>
+</html>

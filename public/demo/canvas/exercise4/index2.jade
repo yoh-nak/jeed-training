@@ -1,0 +1,57 @@
+!!!
+html(lang='ja')
+	head
+		meta(charset='utf-8')
+		meta(name='viewport',content='width=device-width, initial-scale=1.0')
+		title
+		style.
+			#myCanvas{
+				display:block;
+			}
+	body
+		canvas#myCanvas(width='500',height='500')
+		button#startAnimation Start
+		button#stopAnimation Stop
+		script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+		script.
+			$(function(){
+				var canvas = $('#myCanvas');
+				var context = canvas.get(0).getContext('2d');
+
+				var canvasWidth = canvas.width();
+				var canvasHeight = canvas.height();
+
+				var playAnimation = true;
+
+				var x = 0;
+				
+				function animate(){
+					x++;
+					context.clearRect(0, 0, canvasWidth, canvasHeight);
+					context.fillRect(x, 250, 10, 10);
+
+					if(playAnimation){
+						setTimeout(animate, 33);
+					}
+				}
+				animate();
+
+				var startButton = $('#startAnimation');
+				var stopButton = $('#stopAnimation');
+
+				startButton.hide();
+				startButton.click(function(){
+					$(this).hide();
+					stopButton.show();
+
+					playAnimation = true;
+					animate();
+				});
+
+				stopButton.click(function(){
+					$(this).hide();
+					startButton.show();
+
+					playAnimation = false;
+				});
+			});

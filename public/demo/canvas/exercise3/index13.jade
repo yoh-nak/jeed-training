@@ -1,0 +1,28 @@
+!!!
+html(lang='ja')
+	head
+		meta(charset='utf-8')
+		meta(name='viewport',content='width=device-width, initial-scale=1.0')
+		title
+	body
+		canvas#myCanvas(width='500',height='500')
+		script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+		script.
+			$(function(){
+				var canvas = $('#myCanvas');
+				var context = canvas.get(0).getContext('2d');
+
+				var imageData = context.createImageData(200, 200);
+				var pixels = imageData.data;
+
+				var numPixels = imageData.width * imageData.height;
+
+				for(var i = 0; i < numPixels; i++){
+					pixels[i*4] = 255; //赤
+					pixels[i*4+1] = 0; //緑
+					pixels[i*4+2] = 0; //青
+					pixels[i*4+3] = 255; //アルファ
+				}
+
+				context.putImageData(imageData, 0, 0);
+			});

@@ -1,0 +1,23 @@
+!!!
+html(lang='ja')
+	head
+		meta(charset='utf-8')
+		meta(name='viewport',content='width=device-width, initial-scale=1.0')
+		title
+	body
+		canvas#myCanvas(width='500',height='500')
+		script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+		script.
+			$(function(){
+				var canvas = $('#myCanvas');
+				var context = canvas.get(0).getContext('2d');
+
+				context.shadowBlur = 20;
+				context.shadowColor = 'rgb(0, 0, 0)';
+
+				var image = new Image();
+				image.src = 'example.jpg';
+				$(image).load(function(){
+					context.drawImage(image, 0, 0, 250, 250, 50, 50, 250, 250);
+				})
+			});

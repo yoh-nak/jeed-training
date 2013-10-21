@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="500" height="500"></canvas>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script>
+      $(function(){
+       var canvas = $('#myCanvas');
+       var context = canvas.get(0).getContext('2d');
+       
+       var image = new Image();
+       image.src = 'example.jpg';
+       $(image).load(function(){
+        //context.drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh);
+        context.drawImage(image, 0, 0, 250, 250, 0, 0, 250, 250);
+       })
+      });
+    </script>
+  </body>
+</html>

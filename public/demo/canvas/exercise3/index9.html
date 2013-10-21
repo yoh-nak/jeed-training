@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="500" height="500"></canvas>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script>
+      $(function(){
+       var canvas = $('#myCanvas');
+       var context = canvas.get(0).getContext('2d');
+       
+       var image = new Image();
+       image.src = 'example.jpg';
+       $(image).load(function(){
+        //左上
+        context.translate(50, 50);
+        context.drawImage(image, 0, 0, 500, 500, 0, 0, 200, 200);
+        
+        //左下
+        context.setTransform(1, 0, 0, 1, 0, 0); //変換行列をリセットする
+        context.translate(50, 450);
+        context.scale(1, -1);
+        
+        context.drawImage(image, 0, 0, 500, 500, 0, 0, 200, 200);
+        
+        //右下
+        context.setTransform(1, 0, 0, 1, 0, 0); //変換行列をリセットする
+        context.translate(450, 450);
+        context.scale(-1, -1);
+        
+        context.drawImage(image, 0, 0, 500, 500, 0, 0, 200, 200);
+        
+        //右上
+        context.setTransform(1, 0, 0, 1, 0, 0); //変換行列をリセットする
+        context.translate(450, 50);
+        context.scale(-1, 1);
+        
+        context.drawImage(image, 0, 0, 500, 500, 0, 0, 200, 200);
+       })
+      });
+    </script>
+  </body>
+</html>

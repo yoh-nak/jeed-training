@@ -1,0 +1,24 @@
+!!!
+html(lang='ja')
+	head
+		meta(charset='utf-8')
+		meta(name='viewport',content='width=device-width, initial-scale=1.0')
+		title
+	body
+		video#myVideo(width='500',height='281',controls)
+			source(src='example.mp4',type='video/mp4')
+			source(src='example.ogg',type='video/ogg')
+		div
+			button#play Play
+			button#stop Stop
+		script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+		script.
+			var video = $('#myVideo');
+
+			$('#play').click(function(){
+				video.get(0).play();
+			});
+
+			$('#stop').click(function(){
+				video.get(0).pause();
+			});

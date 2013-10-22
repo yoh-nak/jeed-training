@@ -15,34 +15,40 @@
     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script>
       $(function(){
+       //キャンバス要素　jQueryオブジェクト
        var canvas = $('#myCanvas');
+       
+       //2Dレンダリングコンテキスト
        var context = canvas.get(0).getContext('2d');
        
-       var canvasWidth = canvas.width();
-       var canvasHeight = canvas.height();
+       var canvasWidth = canvas.width(); //キャンバス要素　幅
+       var canvasHeight = canvas.height(); //キャンバス要素　高さ
        
-       var playAnimation = true;
+       var playAnimation = true; //アニメーションフラグ　開始
        
-       var firstX = 0;
-       var secondX = 50;
-       var thirdX = 100;
+       var firstX = 0; //矩形1のx座標初期値
+       var secondX = 50; //矩形2のx座標初期値
+       var thirdX = 100; //矩形3のx座標初期値
        
+       //アニメーションループ
        function animate(){
-        firstX++;
-        secondX++;
-        thirdX++;
-        
+        //矩形クリア
         context.clearRect(0, 0, canvasWidth, canvasHeight);
         
-        context.fillRect(firstX, 50, 10, 10);
-        context.fillRect(secondX, 100, 10, 10);
-        context.fillRect(thirdX, 150, 10, 10);
+        firstX++; //矩形1のx座標更新
+        secondX++; //矩形2のx座標更新
+        thirdX++; //矩形3のx座標更新
         
+        context.fillRect(firstX, 50, 10, 10); //矩形1の描画
+        context.fillRect(secondX, 100, 10, 10); //矩形2の描画
+        context.fillRect(thirdX, 150, 10, 10); //矩形3の描画
+        
+        //アニメーションフラグが開始のとき
         if(playAnimation){
          setTimeout(animate, 33);
         }
-        
        }
+       //アニメーション初回スタート
        animate();
       });
     </script>

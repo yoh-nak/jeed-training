@@ -19,6 +19,7 @@ html(lang='ja')
 							i.glyphicon.glyphicon-book
 							&nbsp;イメージのロード
 						div.panel-body
+							h4 キャンバスにイメージをロードする
 							p
 								a.btn.btn-default(href='demo/canvas/exercise3/index1.html',target='_blank')
 									i.glyphicon.glyphicon-play
@@ -44,6 +45,37 @@ html(lang='ja')
 								|        $(image).load(function(){
 								|         //drawImage(image, x, y)
 								|         context.drawImage(image, 0, 0);
+								|        })
+								|       });
+								|     &lt;/script&gt;
+								|   &lt;/body&gt;
+								| &lt;/html&gt;
+							h4 イメージのサイズを変え、イメージを切り取る
+							p
+								a.btn.btn-default(href='demo/canvas/exercise3/index2.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre.prettyprint.linenums
+								| &lt;!DOCTYPE html&gt;
+								| &lt;html lang="ja"&gt;
+								|   &lt;head&gt;
+								|     &lt;meta charset="utf-8"&gt;
+								|     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+								|     &lt;title&gt;&lt;/title&gt;
+								|   &lt;/head&gt;
+								|   &lt;body&gt;
+								|     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
+								|     &lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
+								|     &lt;script&gt;
+								|       $(function(){
+								|        var canvas = $('#myCanvas');
+								|        var context = canvas.get(0).getContext('2d');
+								|        
+								|        var image = new Image();
+								|        image.src = 'example.jpg';
+								|        $(image).load(function(){
+								|         //context.drawImage(image, x, y, width, height);
+								|         context.drawImage(image, 0, 0, 500, 333);
 								|        })
 								|       });
 								|     &lt;/script&gt;

@@ -12,17 +12,24 @@ html(lang='ja')
 				var canvas = $('#myCanvas');
 				var context = canvas.get(0).getContext('2d');
 
+				//ピクセルを生成する
+				//createImageData(width, height);
 				var imageData = context.createImageData(200, 200);
+				//ピクセルデータを取得して配列に格納
 				var pixels = imageData.data;
 
+				//生成したピクセルの幅×高さで全てのピクセル数を取得
 				var numPixels = imageData.width * imageData.height;
 
+				//全てのピクセルに対して乱数を指定（半透明度のみ固定）
 				for(var i = 0; i < numPixels; i++){
 					pixels[i*4] = Math.floor(Math.random()*255); //赤
 					pixels[i*4+1] = Math.floor(Math.random()*255); //緑
 					pixels[i*4+2] = Math.floor(Math.random()*255); //青
 					pixels[i*4+3] = 255; //アルファ
 				}
-
+				
+				//ピクセルを描画する
+				//putImageData(image, x, y);
 				context.putImageData(imageData, 0, 0);
 			});

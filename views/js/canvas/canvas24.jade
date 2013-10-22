@@ -67,6 +67,45 @@ html(lang='ja')
 									i.glyphicon.glyphicon-play
 									| デモ
 							pre.prettyprint.linenums
+								| &lt;!DOCTYPE html&gt;
+								| &lt;html lang="ja"&gt;
+								|   &lt;head&gt;
+								|     &lt;meta charset="utf-8"&gt;
+								|     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+								|     &lt;title&gt;&lt;/title&gt;
+								|   &lt;/head&gt;
+								|   &lt;body&gt;
+								|     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
+								|     &lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
+								|     &lt;script&gt;
+								|       $(function(){
+								|        var canvas = $('#myCanvas');
+								|        var context = canvas.get(0).getContext('2d');
+								|        
+								|        var image = new Image();
+								|        image.src = 'example.jpg';
+								|        $(image).load(function(){
+								|         context.drawImage(image, 0, 0, 1024, 683, 0, 0, 500, 500);
+								|         
+								|         var imageData = context.getImageData(0, 0, canvas.width(), canvas.height());
+								|         var pixels = imageData.data;
+								|         var numPixels = pixels.length;
+								|         
+								|         context.clearRect(0, 0, canvas.width(), canvas.height());
+								|         
+								|         for(var i = 0; i &lt; numPixels; i++){
+								|          var average = (pixels[i*4]+pixels[i*4+1]+pixels[i*4+2])/3
+								|          pixels[i*4] = average;
+								|          pixels[i*4+1] = average;
+								|          pixels[i*4+2] = average;
+								|         }
+								|         
+								|         context.putImageData(imageData, 0, 0);
+								|        });
+								|       });
+								|     &lt;/script&gt;
+								|   &lt;/body&gt;
+								| &lt;/html&gt;
 							h4 ピクセル化
 							p
 								a.btn.btn-default(href='demo/canvas/exercise3/index18.html',target='_blank')

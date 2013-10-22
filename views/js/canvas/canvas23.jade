@@ -25,6 +25,45 @@ html(lang='ja')
 									i.glyphicon.glyphicon-play
 									| デモ
 							pre.prettyprint.linenums
+								| &lt;!DOCTYPE html&gt;
+								| &lt;html lang="ja"&gt;
+								|   &lt;head&gt;
+								|     &lt;meta charset="utf-8"&gt;
+								|     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+								|     &lt;title&gt;&lt;/title&gt;
+								|   &lt;/head&gt;
+								|   &lt;body&gt;
+								|     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
+								|     &lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
+								|     &lt;script&gt;
+								|       $(function(){
+								|        var canvas = $('#myCanvas');
+								|        var context = canvas.get(0).getContext('2d');
+								|        
+								|        //ピクセルを生成する
+								|        //createImageData(width, height);
+								|        var imageData = context.createImageData(200, 200);
+								|        //ピクセルデータを取得して配列に格納
+								|        var pixels = imageData.data;
+								|        
+								|        //生成したピクセルの幅×高さで全てのピクセル数を取得
+								|        var numPixels = imageData.width * imageData.height;
+								|        
+								|        //全てのピクセルに対して赤を指定
+								|        for(var i = 0; i &lt; numPixels; i++){
+								|         pixels[i*4] = 255; //赤
+								|         pixels[i*4+1] = 0; //緑
+								|         pixels[i*4+2] = 0; //青
+								|         pixels[i*4+3] = 255; //アルファ
+								|        }
+								|        
+								|        //ピクセルを描画する
+								|        //putImageData(image, x, y);
+								|        context.putImageData(imageData, 0, 0);
+								|       });
+								|     &lt;/script&gt;
+								|   &lt;/body&gt;
+								| &lt;/html&gt;
 							h4 ピクセルをランダマイズする
 							p
 								a.btn.btn-default(href='demo/canvas/exercise3/index14.html',target='_blank')

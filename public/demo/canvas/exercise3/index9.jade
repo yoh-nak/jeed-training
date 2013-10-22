@@ -16,27 +16,28 @@ html(lang='ja')
 				image.src = 'example.jpg';
 				$(image).load(function(){
 					//左上
-					context.translate(50, 50);
+					context.translate(50, 50); //平行移動
+					
 					context.drawImage(image, 0, 0, 500, 500, 0, 0, 200, 200);
 
 					//左下
-					context.setTransform(1, 0, 0, 1, 0, 0); //変換行列をリセットする
-					context.translate(50, 450);
-					context.scale(1, -1);
+					context.setTransform(1, 0, 0, 1, 0, 0); //変換行列で変形をリセットする
+					context.translate(50, 450); //平行移動
+					context.scale(1, -1); //反転
 
 					context.drawImage(image, 0, 0, 500, 500, 0, 0, 200, 200);
 
 					//右下
-					context.setTransform(1, 0, 0, 1, 0, 0); //変換行列をリセットする
-					context.translate(450, 450);
-					context.scale(-1, -1);
+					context.setTransform(1, 0, 0, 1, 0, 0); //変換行列で変形をリセットする
+					context.translate(450, 450); //平行移動
+					context.scale(-1, -1); //反転
 
 					context.drawImage(image, 0, 0, 500, 500, 0, 0, 200, 200);
 
 					//右上
-					context.setTransform(1, 0, 0, 1, 0, 0); //変換行列をリセットする
-					context.translate(450, 50);
-					context.scale(-1, 1);
+					context.setTransform(1, 0, 0, 1, 0, 0); //変換行列で変形をリセットする
+					context.translate(450, 50); //平行移動
+					context.scale(-1, 1); //反転
 
 					context.drawImage(image, 0, 0, 500, 500, 0, 0, 200, 200);
 				})

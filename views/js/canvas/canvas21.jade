@@ -92,6 +92,53 @@ html(lang='ja')
 									i.glyphicon.glyphicon-play
 									| デモ
 							pre.prettyprint.linenums
+								| &lt;!DOCTYPE html&gt;
+								| &lt;html lang="ja"&gt;
+								|   &lt;head&gt;
+								|     &lt;meta charset="utf-8"&gt;
+								|     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+								|     &lt;title&gt;&lt;/title&gt;
+								|   &lt;/head&gt;
+								|   &lt;body&gt;
+								|     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
+								|     &lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
+								|     &lt;script&gt;
+								|       $(function(){
+								|        var canvas = $('#myCanvas');
+								|        var context = canvas.get(0).getContext('2d');
+								|        
+								|        var image = new Image();
+								|        image.src = 'example.jpg';
+								|        $(image).load(function(){
+								|         //左上
+								|         context.translate(50, 50); //平行移動
+								|         context.drawImage(image, 0, 0, 500, 500, 0, 0, 200, 200);
+								|         
+								|         //左下
+								|         context.setTransform(1, 0, 0, 1, 0, 0); //変換行列で変形をリセットする
+								|         context.translate(50, 450); //平行移動
+								|         context.scale(1, -1); //反転
+								|         
+								|         context.drawImage(image, 0, 0, 500, 500, 0, 0, 200, 200);
+								|         
+								|         //右下
+								|         context.setTransform(1, 0, 0, 1, 0, 0); //変換行列で変形をリセットする
+								|         context.translate(450, 450); //平行移動
+								|         context.scale(-1, -1); //反転
+								|         
+								|         context.drawImage(image, 0, 0, 500, 500, 0, 0, 200, 200);
+								|         
+								|         //右上
+								|         context.setTransform(1, 0, 0, 1, 0, 0); //変換行列で変形をリセットする
+								|         context.translate(450, 50); //平行移動
+								|         context.scale(-1, 1); //反転
+								|         
+								|         context.drawImage(image, 0, 0, 500, 500, 0, 0, 200, 200);
+								|        })
+								|       });
+								|     &lt;/script&gt;
+								|   &lt;/body&gt;
+								| &lt;/html&gt;
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

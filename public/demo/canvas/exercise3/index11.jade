@@ -17,23 +17,20 @@ html(lang='ja')
 				$(image).load(function(){
 					context.drawImage(image, 0, 0);
 
-					//context.getImageData(x, y, width, height);
+					//3x3ピクセルの範囲のピクセルデータを取得
+					//getImageData(x, y, width, height)
 					var imageData = context.getImageData(0, 0, 3, 3); //3x3の領域
 					
+					//取得した3x3のピクセルデータの幅
 					var width = imageData.width;
-					var x = 2;
-					var y = 2;
 
-					console.log(width);
+					//取得した3x3のピクセルデータの配列の中から、x=2, y=2の座標のピクセルのインデックスを取得
+					var x = 2; var y = 2;
 
-					var pixelRed = ((y-1)*(width*4))+((x-1)*4);
-					var pixelGreen = pixelRed+1;
-					var pixelBlue = pixelRed+2;
-					var pixelAlpha = pixelRed+3;
-
-					console.log(pixelRed);
-					console.log(pixelGreen);
-					console.log(pixelBlue);
-					console.log(pixelAlpha);
-				})
+					//公式からインデックスを取得
+					var pixelRed = ((y-1)*(width*4))+((x-1)*4); //RGBA値のRed値のインデックス
+					var pixelGreen = pixelRed+1; //RGBA値のGreen値のインデックス
+					var pixelBlue = pixelRed+2; //RGBA値のBlue値のインデックス
+					var pixelAlpha = pixelRed+3; //RGBA値のAlpha値のインデックス
+				});
 			});

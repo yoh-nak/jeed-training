@@ -61,7 +61,7 @@ app.get('/webapi-:id', js.webapi);
 app.get('/html5api-:id', js.html5);
 app.get('/canvas:id:format', js.canvas);
 app.get('/enchant-:id', js.enchant);
-app.get('/library-:id', js.library);
+app.get('/library:id:format', js.library);
 app.get('/jsrecipe-:id', js.recipe);
 
 //資料系

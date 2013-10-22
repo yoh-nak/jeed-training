@@ -50,9 +50,10 @@ exports.canvas = function(req, res){
 
 //Library
 exports.library = function(req, res){
-	res.render('js/library/library-' + req.params.id, {
+	res.render('js/library/library' + req.params.id + req.params.format, {
 	  	title: config.title,
-	  	instructor: config.instructor
+	  	instructor: config.instructor,
+	  	pretty: true
 	});
 };
 

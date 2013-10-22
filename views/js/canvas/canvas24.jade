@@ -112,11 +112,153 @@ html(lang='ja')
 									i.glyphicon.glyphicon-play
 									| デモ
 							pre.prettyprint.linenums
+								| &lt;!DOCTYPE html&gt;
+								| &lt;html lang="ja"&gt;
+								|   &lt;head&gt;
+								|     &lt;meta charset="utf-8"&gt;
+								|     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+								|     &lt;title&gt;&lt;/title&gt;
+								|   &lt;/head&gt;
+								|   &lt;body&gt;
+								|     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
+								|     &lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
+								|     &lt;script&gt;
+								|       $(function(){
+								|        var canvas = $('#myCanvas');
+								|        var context = canvas.get(0).getContext('2d');
+								|        
+								|        var image = new Image();
+								|        image.src = 'example.jpg';
+								|        $(image).load(function(){
+								|         //読み込んだイメージの描画
+								|         context.drawImage(image, 0, 0, 1024, 683, 0, 0, 500, 500);
+								|         
+								|         //Canvasに描画されているピクセルデータを取得
+								|         var imageData = context.getImageData(0, 0, canvas.width(), canvas.height());
+								|         
+								|         //取得したピクセルデータを配列に格納
+								|         var pixels = imageData.data;
+								|         
+								|         //Canvasをクリア
+								|         context.clearRect(0, 0, canvas.width(), canvas.height());
+								|         
+								|         var numTileRows = 20; //タイル一行20個
+								|         var numTileCols = 20; //タイル一列20個
+								|         
+								|         //1つのタイルの幅
+								|         //=&gt;Canvas要素の幅をx方向のタイルの数で割る
+								|         var tileWidth = imageData.width/numTileCols;
+								|         
+								|         //1つのタイルの高さ
+								|         //=&gt;Canvas要素の高さをy方向のタイルの数で割る
+								|         var tileHeight = imageData.height/numTileRows;
+								|         
+								|         //行方向にタイルの数だけループ
+								|         for(var r = 0; r &lt; numTileRows; r++){
+								|          //列方向にタイルの数だけループ
+								|          for(var c = 0; c &lt; numTileCols; c++){
+								|           //それぞれのタイルの中央のx座標取得
+								|           var x = (c*tileWidth)+(tileWidth/2);
+								|           //それぞれのタイルの中央のy座標取得
+								|           var y = (r*tileHeight)+(tileHeight/2);
+								|           
+								|           //タイルのx座標、y座標のピクセルデータのインデックスを取得
+								|           var pos = (Math.floor(y)*(imageData.width*4))+(Math.floor(x)*4);
+								|           
+								|           //取得したインデクスのピクセルデータのRGB値を格納
+								|           var red = pixels[pos];
+								|           var green = pixels[pos+1];
+								|           var blue = pixels[pos+2];
+								|           
+								|           //RGB値をスタイルにセット
+								|           context.fillStyle = 'rgb(' + red + ', ' + green + ', ' + blue + ')';
+								|           
+								|           //それぞれのタイルとなる矩形を描画
+								|           context.fillRect(x-(tileWidth/2), y-(tileHeight/2), tileWidth, tileHeight);
+								|          }
+								|         }
+								|        });
+								|       });
+								|     &lt;/script&gt;
+								|   &lt;/body&gt;
+								| &lt;/html&gt;
 							p
 								a.btn.btn-default(href='demo/canvas/exercise3/index19.html',target='_blank')
 									i.glyphicon.glyphicon-play
 									| デモ
 							pre.prettyprint.linenums
+								| &lt;!DOCTYPE html&gt;
+								| &lt;html lang="ja"&gt;
+								|   &lt;head&gt;
+								|     &lt;meta charset="utf-8"&gt;
+								|     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+								|     &lt;title&gt;&lt;/title&gt;
+								|   &lt;/head&gt;
+								|   &lt;body&gt;
+								|     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
+								|     &lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
+								|     &lt;script&gt;
+								|       $(function(){
+								|        var canvas = $('#myCanvas');
+								|        var context = canvas.get(0).getContext('2d');
+								|        
+								|        var image = new Image();
+								|        image.src = 'example.jpg';
+								|        $(image).load(function(){
+								|         //読み込んだイメージの描画
+								|         context.drawImage(image, 0, 0, 1024, 683, 0, 0, 500, 500);
+								|         
+								|         //Canvasに描画されているピクセルデータを取得
+								|         var imageData = context.getImageData(0, 0, canvas.width(), canvas.height());
+								|         
+								|         //取得したピクセルデータを配列に格納
+								|         var pixels = imageData.data;
+								|         
+								|         //Canvasをクリア
+								|         context.clearRect(0, 0, canvas.width(), canvas.height());
+								|         
+								|         var numTileRows = 20; //タイル一行20個
+								|         var numTileCols = 20; //タイル一列20個
+								|         
+								|         //1つのタイルの幅
+								|         //=&gt;Canvas要素の幅をx方向のタイルの数で割る
+								|         var tileWidth = imageData.width/numTileCols;
+								|         
+								|         //1つのタイルの高さ
+								|         //=&gt;Canvas要素の高さをy方向のタイルの数で割る
+								|         var tileHeight = imageData.height/numTileRows;
+								|         
+								|         //行方向にタイルの数だけループ
+								|         for(var r = 0; r &lt; numTileRows; r++){
+								|          //列方向にタイルの数だけループ
+								|          for(var c = 0; c &lt; numTileCols; c++){
+								|           //それぞれのタイルの中央のx座標取得
+								|           var x = (c*tileWidth)+(tileWidth/2);
+								|           //それぞれのタイルの中央のy座標取得
+								|           var y = (r*tileHeight)+(tileHeight/2);
+								|           
+								|           //タイルのx座標、y座標のピクセルデータのインデックスを取得
+								|           var pos = (Math.floor(y)*(imageData.width*4))+(Math.floor(x)*4);
+								|           
+								|           //取得したインデクスのピクセルデータのRGB値を格納
+								|           var red = pixels[pos];
+								|           var green = pixels[pos+1];
+								|           var blue = pixels[pos+2];
+								|           
+								|           //RGB値をスタイルにセット
+								|           context.fillStyle = 'rgb(' + red + ', ' + green + ', ' + blue + ')';
+								|           
+								|           //それぞれのタイルとなる円を描画
+								|           context.beginPath();
+								|           context.arc(x, y, tileWidth/2, 0, Math.PI*2, false);
+								|           context.fill();
+								|          }
+								|         }
+								|        });
+								|       });
+								|     &lt;/script&gt;
+								|   &lt;/body&gt;
+								| &lt;/html&gt;
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

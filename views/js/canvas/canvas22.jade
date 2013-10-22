@@ -1,0 +1,70 @@
+!!!
+html(lang='ja')
+	head
+		meta(name='viewport',content='width=device-width,initial-scale=1.0')
+		link(href='css/bootstrap.min.css',rel='stylesheet',media='screen')
+		link(href='js/dtree/dtree.css', rel='stylesheet', media='screen')
+		link(href='less/common.less',rel='stylesheet',media='screen')
+		link(href='js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+		title=title
+	body
+		include navbar.jade
+		div.container
+			div.row
+				div.col-sm-3
+					include left.jade
+				div.col-sm-9
+					div.panel.panel-primary
+						div.panel-heading
+							i.glyphicon.glyphicon-book
+							&nbsp;ピクセル値にアクセス
+						div.panel-body
+							h4 ピクセル値にアクセスする
+							p
+								a.btn.btn-default(href='demo/canvas/exercise3/index10.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre.prettyprint.linenums
+								| &lt;!DOCTYPE html&gt;
+								| &lt;html lang="ja"&gt;
+								|   &lt;head&gt;
+								|     &lt;meta charset="utf-8"&gt;
+								|     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+								|     &lt;title&gt;&lt;/title&gt;
+								|   &lt;/head&gt;
+								|   &lt;body&gt;
+								|     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
+								|     &lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
+								|     &lt;script&gt;
+								|       $(function(){
+								|        var canvas = $('#myCanvas');
+								|        var context = canvas.get(0).getContext('2d');
+								|        
+								|        var image = new Image();
+								|        image.src = 'example.jpg';
+								|        $(image).load(function(){
+								|         context.drawImage(image, 0, 0, 500, 333);
+								|         
+								|         //3x3ピクセルの範囲のピクセルデータを取得
+								|         //getImageData(x, y, width, height)
+								|         var imageData = context.getImageData(0, 0, 3, 3);
+								|         
+								|         //Canvasのピクセルデータを格納した配列
+								|         var pixel = imageData.data;
+								|         //取得したピクセルの最初のピクセルのRGBA値
+								|         var red = pixel[0]; //Redの値（0-255）
+								|         var green = pixel[1]; //Greenの値（0-255）
+								|         var blue = pixel[2]; //Blueの値（0-255）
+								|         var alpha = pixel[3]; //Alphaの値（0-255）
+								|        });
+								|       });
+								|     &lt;/script&gt;
+								|   &lt;/body&gt;
+								| &lt;/html&gt;
+		div#footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='js/bootstrap.min.js')
+		script(src='js/list-counter.js')

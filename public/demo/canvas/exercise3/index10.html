@@ -18,16 +18,18 @@
        $(image).load(function(){
         context.drawImage(image, 0, 0, 500, 333);
         
-        //context.getImageData(x, y, width, height);
+        //3x3ピクセルの範囲のピクセルデータを取得
+        //getImageData(x, y, width, height)
         var imageData = context.getImageData(0, 0, 3, 3);
-        var pixel = imageData.data;
-        console.log(pixel);
         
-        var red = pixel[0]; console.log(red);
-        var green = pixel[1]; console.log(green);
-        var blue = pixel[2]; console.log(blue);
-        var alpha = pixel[3]; console.log(alpha);
-       })
+        //Canvasのピクセルデータを格納した配列
+        var pixel = imageData.data;
+        //取得したピクセルの最初のピクセルのRGBA値
+        var red = pixel[0]; //Redの値（0-255）
+        var green = pixel[1]; //Greenの値（0-255）
+        var blue = pixel[2]; //Blueの値（0-255）
+        var alpha = pixel[3]; //Alphaの値（0-255）
+       });
       });
     </script>
   </body>

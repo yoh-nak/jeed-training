@@ -15,103 +15,111 @@ html(lang='ja')
 		script(src='http://code.jquery.com/jquery-1.10.2.min.js')
 		script.
 			$(function(){	
-			var canvas = $('#myCanvas');
-			var context = canvas.get(0).getContext('2d');
+				//キャンバス要素　jQueryオブジェクト
+				var canvas = $('#myCanvas');
 
-			var canvasWidth = canvas.width();
-			var canvasHeight = canvas.height();
+				//2Dレンダリングコンテキスト
+				var context = canvas.get(0).getContext('2d');
 
-			var playAnimation = true;
+				var canvasWidth = canvas.width(); //キャンバス要素　幅
+				var canvasHeight = canvas.height(); //キャンバス要素　高さ
 
-			var startButton = $('#startAnimation');
-			var stopButton = $('#stopAnimation');
+				var playAnimation = true; //アニメーションフラグ　開始
 
-			startButton.hide();
-			startButton.click(function() {
-			$(this).hide();
-			stopButton.show();
+				//スタート／ストップボタン　jQueryオブジェクト
+				var startButton = $('#startAnimation');
+				var stopButton = $('#stopAnimation');
+				
+				//スタートボタン初期表示削除
+				startButton.hide();
 
-			playAnimation = true;
-			animate();
-			});
+				//スタートボタンクリック
+				startButton.click(function(){
+					$(this).hide(); //スタートボタン非表示
+					stopButton.show(); //ストップボタン表示
 
-			stopButton.click(function() {
-			$(this).hide();
-			startButton.show();
+					playAnimation = true; //アニメーションフラグ　開始
+					animate(); //アニメーション開始
+				});
 
-			playAnimation = false;
-			});
+				//ストップボタンクリック
+				stopButton.click(function(){
+					$(this).hide(); //ストップボタン非表示
+					startButton.show(); //スタートボタン表示
 
-			// Class that defines new shapes to draw
-			var Shape = function(x, y, width, height) {
-			this.x = x;
-			this.y = y;
-			this.width = width;
-			this.height = height;
+					playAnimation = false; //アニメーションフラグ　停止
+				});
 
-			this.reverseX = true;
-			this.reverseY = false;
-			};
+				// Class that defines new shapes to draw
+				var Shape = function(x, y, width, height) {
+				this.x = x;
+				this.y = y;
+				this.width = width;
+				this.height = height;
 
-			// Array that holds all the shapes to draw
-			var shapes = new Array();
+				this.reverseX = true;
+				this.reverseY = false;
+				};
 
-			// Setting up some shapes
-			for (var i = 0; i < 10; i++) {
-			var x = Math.random()*250;
-			var y = Math.random()*250;
-			var width = height = Math.random()*30;
-			shapes.push(new Shape(x, y, width, height));
-			};
+				// Array that holds all the shapes to draw
+				var shapes = new Array();
 
-			// Animation loop that does all the fun stuff
-			function animate() {
-			// Clear
-			context.clearRect(0, 0, canvasWidth, canvasHeight);
+				// Setting up some shapes
+				for (var i = 0; i < 10; i++) {
+				var x = Math.random()*250;
+				var y = Math.random()*250;
+				var width = height = Math.random()*30;
+				shapes.push(new Shape(x, y, width, height));
+				};
 
-			// Loop through every object
-			var shapesLength = shapes.length;
-			for (var i = 0; i < shapesLength; i++) {
-			var tmpShape = shapes[i];
+				//アニメーションループ
+				function animate(){
+					// Clear
+					context.clearRect(0, 0, canvasWidth, canvasHeight);
 
-			// Update
-			// Check direction to move shape
-			if (!tmpShape.reverseX) {
-			tmpShape.x += 2;
-			} else {
-			tmpShape.x -= 2;
-			};
+					// Loop through every object
+					var shapesLength = shapes.length;
+					for (var i = 0; i < shapesLength; i++) {
+					var tmpShape = shapes[i];
 
-			if (!tmpShape.reverseY) {
-			tmpShape.y += 2;
-			} else {
-			tmpShape.y -= 2;
-			};
+					// Update
+					// Check direction to move shape
+					if (!tmpShape.reverseX) {
+					tmpShape.x += 2;
+					} else {
+					tmpShape.x -= 2;
+					};
 
-			// Draw shape
-			context.fillRect(tmpShape.x, tmpShape.y, tmpShape.width, tmpShape.height);
+					if (!tmpShape.reverseY) {
+					tmpShape.y += 2;
+					} else {
+					tmpShape.y -= 2;
+					};
 
-			// Check the boundaries
-			if (tmpShape.x < 0) {
-			tmpShape.reverseX = false;
-			} else if (tmpShape.x + tmpShape.width > canvasWidth) {
-			tmpShape.reverseX = true;
-			};
+					// Draw shape
+					context.fillRect(tmpShape.x, tmpShape.y, tmpShape.width, tmpShape.height);
 
-			if (tmpShape.y < 0) {
-			tmpShape.reverseY = false;
-			} else if (tmpShape.y + tmpShape.height > canvasHeight) {
-			tmpShape.reverseY = true;
-			};
+					// Check the boundaries
+					if (tmpShape.x < 0) {
+					tmpShape.reverseX = false;
+					} else if (tmpShape.x + tmpShape.width > canvasWidth) {
+					tmpShape.reverseX = true;
+					};
 
-			};
+					if (tmpShape.y < 0) {
+					tmpShape.reverseY = false;
+					} else if (tmpShape.y + tmpShape.height > canvasHeight) {
+					tmpShape.reverseY = true;
+					};
 
-			if (playAnimation) {
-			// Run the animation loop again in 33 milliseconds
-			setTimeout(animate, 33);
-			};
-			};
+					};
 
-			// Start the animation loop
-			animate();
+					if (playAnimation) {
+					// Run the animation loop again in 33 milliseconds
+					setTimeout(animate, 33);
+					};
+				};
+
+				//アニメーション初回スタート
+				animate();
 			});

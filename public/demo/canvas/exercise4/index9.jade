@@ -14,104 +14,98 @@ html(lang='ja')
 		button#stopAnimation Stop
 		script(src='http://code.jquery.com/jquery-1.10.2.min.js')
 		script.
-			$(document).ready(function() {	
-				var canvas = $("#myCanvas");
-				var context = canvas.get(0).getContext("2d");
-					
-				var canvasWidth = canvas.width();
-				var canvasHeight = canvas.height();
+			$(function(){
+				//キャンバス要素　jQueryオブジェクト
+				var canvas = $('#myCanvas');
+
+				//2Dレンダリングコンテキスト
+				var context = canvas.get(0).getContext('2d');
+
+				var canvasWidth = canvas.width(); //キャンバス要素　幅
+				var canvasHeight = canvas.height(); //キャンバス要素　高さ
+
+				var playAnimation = true; //アニメーションフラグ　開始
+
+				//スタート／ストップボタン　jQueryオブジェクト
+				var startButton = $('#startAnimation');
+				var stopButton = $('#stopAnimation');
 				
-				var playAnimation = true;
-				
-				var startButton = $("#startAnimation");
-				var stopButton = $("#stopAnimation");
-				
+				//スタートボタン初期表示削除
 				startButton.hide();
-				startButton.click(function() {
-					$(this).hide();
-					stopButton.show();
-					
-					playAnimation = true;
-					animate();
+
+				//スタートボタンクリック
+				startButton.click(function(){
+					$(this).hide(); //スタートボタン非表示
+					stopButton.show(); //ストップボタン表示
+
+					playAnimation = true; //アニメーションフラグ　開始
+					animate(); //アニメーション開始
+				});
+
+				//ストップボタンクリック
+				stopButton.click(function(){
+					$(this).hide(); //ストップボタン非表示
+					startButton.show(); //スタートボタン表示
+
+					playAnimation = false; //アニメーションフラグ　停止
 				});
 				
-				stopButton.click(function() {
-					$(this).hide();
-					startButton.show();
-					
-					playAnimation = false;
-				});
-				
-				// Class that defines new shapes to draw
+				//矩形（x座標, y座標, 幅, 高さ, 回転時の半径, 回転時の角度）をまとめて管理するクラス
 				var Shape = function(x, y, width, height) {
 					this.x = x;
 					this.y = y;
 					this.width = width;
 					this.height = height;
 					
-					this.radius = Math.random()*30;
+					this.radius = Math.random()*30; //半径0-30の乱数
 					this.angle = 0;
 				};
 				
-				// Array that holds all the shapes to draw
+				//複数の矩形を格納する配列
 				var shapes = new Array();
 				
-				// Setting up some shapes
+				//矩形の設定を10個準備
 				for (var i = 0; i < 10; i++) {
 					var x = Math.random()*250;
 					var y = Math.random()*250;
 					var width = height = Math.random()*30;
+					//矩形（x座標, y座標, 幅, 高さ）を管理するクラスを矩形ごとに配列に格納
 					shapes.push(new Shape(x, y, width, height));
 				};
 				
-				// Animation loop that does all the fun stuff
+				//アニメーションループ
 				function animate() {
-					// Clear
+					//矩形クリア
 					context.clearRect(0, 0, canvasWidth, canvasHeight);
 					
-					// Loop through every object
-					var shapesLength = shapes.length;
-					for (var i = 0; i < shapesLength; i++) {
+					var shapesLength = shapes.length; //矩形の個数
+
+					//矩形の個数だけ描画
+					for(var i = 0; i < shapesLength; i++) {
 						var tmpShape = shapes[i];
 						
-						/*
-						// Update					
-						// Move each object 1 pixel to the right
-						//tmpShape.x++;
-						
-						// Move each object 2 pixels to the right, and 1 pixel down
-						//tmpShape.x += 2;
-						//tmpShape.y++;
-						
-						// Move each object by a random amount
-						//tmpShape.x += Math.random()*2-1;
-						//tmpShape.y += Math.random()*2-1;						
-						
-						// Draw
-						context.fillRect(tmpShape.x, tmpShape.y, tmpShape.width, tmpShape.height);
-						*/
-						
-						// Update
-						// Circular orbit
+						//それぞれの矩形のx座標を算出
 						var x = tmpShape.x+(tmpShape.radius*Math.cos(tmpShape.angle*(Math.PI/180)));
+						//それぞれの矩形のy座標を算出
 						var y = tmpShape.y+(tmpShape.radius*Math.sin(tmpShape.angle*(Math.PI/180)));
 						
-						// Increase the angle on the circular orbit
+						//角度を5度ずつ増加
 						tmpShape.angle += 5;
+
+						//角度が360度を超えたら0度に戻す
 						if (tmpShape.angle > 360) {
 							tmpShape.angle = 0;	
 						};					
 						
-						// Draw
+						//矩形描画
 						context.fillRect(x, y, tmpShape.width, tmpShape.height);
 					};
 					
-					if (playAnimation) {
-						// Run the animation loop again in 33 milliseconds
+					//アニメーションフラグが開始のとき
+					if(playAnimation) {
 						setTimeout(animate, 33);
 					};
 				};
-				
-				// Start the animation loop
+				//アニメーション初回スタート
 				animate();
 			});

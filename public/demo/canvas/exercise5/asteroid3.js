@@ -53,7 +53,7 @@ $(function(){
 
 		var vX = Math.random()*4-2;
 		var vY = Math.random()*4-2;
-		
+
 		asteroids.push(new Asteroid(x, y, radius, vX, vY));
 	}
 
@@ -68,6 +68,23 @@ $(function(){
 
 			tmpAsteroid.x += tmpAsteroid.vX;
 			tmpAsteroid.y += tmpAsteroid.vY;
+
+			if(tmpAsteroid.x - tmpAsteroid.radius < 0){
+				tmpAsteroid.x = tmpAsteroid.radius;
+				tmpAsteroid.vX *= -1;
+			}
+			else if(tmpAsteroid.x + tmpAsteroid.radius > canvasWidth){
+				tmpAsteroid.x = canvasWidth - tmpAsteroid.radius;
+				tmpAsteroid.vX *= -1;
+			}
+			if(tmpAsteroid.y - tmpAsteroid.radius < 0){
+				tmpAsteroid.y = tmpAsteroid.radius;
+				tmpAsteroid.vY *= -1;
+			}
+			else if(tmpAsteroid.y + tmpAsteroid.radius > canvasHeight){
+				tmpAsteroid.y = canvasHeight - tmpAsteroid.radius;
+				tmpAsteroid.vY *= -1;
+			}
 
 			context.beginPath();
 			context.arc(tmpAsteroid.x, tmpAsteroid.y, tmpAsteroid.radius, 0, Math.PI*2, false);

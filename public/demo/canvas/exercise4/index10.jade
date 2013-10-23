@@ -14,32 +14,40 @@ html(lang='ja')
 		button#stopAnimation Stop
 		script(src='http://code.jquery.com/jquery-1.10.2.min.js')
 		script.
-			$(document).ready(function() {	
-				var canvas = $("#myCanvas");
-				var context = canvas.get(0).getContext("2d");
-					
-				var canvasWidth = canvas.width();
-				var canvasHeight = canvas.height();
+			$(function() {	
+				//キャンバス要素　jQueryオブジェクト
+				var canvas = $('#myCanvas');
+
+				//2Dレンダリングコンテキスト
+				var context = canvas.get(0).getContext('2d');
+
+				var canvasWidth = canvas.width(); //キャンバス要素　幅
+				var canvasHeight = canvas.height(); //キャンバス要素　高さ
+
+				var playAnimation = true; //アニメーションフラグ　開始
+
+				//スタート／ストップボタン　jQueryオブジェクト
+				var startButton = $('#startAnimation');
+				var stopButton = $('#stopAnimation');
 				
-				var playAnimation = true;
-				
-				var startButton = $("#startAnimation");
-				var stopButton = $("#stopAnimation");
-				
+				//スタートボタン初期表示削除
 				startButton.hide();
-				startButton.click(function() {
-					$(this).hide();
-					stopButton.show();
-					
-					playAnimation = true;
-					animate();
+
+				//スタートボタンクリック
+				startButton.click(function(){
+					$(this).hide(); //スタートボタン非表示
+					stopButton.show(); //ストップボタン表示
+
+					playAnimation = true; //アニメーションフラグ　開始
+					animate(); //アニメーション開始
 				});
-				
-				stopButton.click(function() {
-					$(this).hide();
-					startButton.show();
-					
-					playAnimation = false;
+
+				//ストップボタンクリック
+				stopButton.click(function(){
+					$(this).hide(); //ストップボタン非表示
+					startButton.show(); //スタートボタン表示
+
+					playAnimation = false; //アニメーションフラグ　停止
 				});
 				
 				// Class that defines new shapes to draw

@@ -50,76 +50,88 @@ html(lang='ja')
 					playAnimation = false; //アニメーションフラグ　停止
 				});
 
-				// Class that defines new shapes to draw
+				//矩形（x座標, y座標, 幅, 高さ, x軸反転, y軸反転）をまとめて管理するクラス
 				var Shape = function(x, y, width, height) {
-				this.x = x;
-				this.y = y;
-				this.width = width;
-				this.height = height;
+					this.x = x;
+					this.y = y;
+					this.width = width;
+					this.height = height;
 
-				this.reverseX = true;
-				this.reverseY = false;
+					this.reverseX = true;
+					this.reverseY = false;
 				};
 
-				// Array that holds all the shapes to draw
+				//複数の矩形を格納する配列
 				var shapes = new Array();
 
-				// Setting up some shapes
+				//矩形の設定を10個準備
 				for (var i = 0; i < 10; i++) {
-				var x = Math.random()*250;
-				var y = Math.random()*250;
-				var width = height = Math.random()*30;
-				shapes.push(new Shape(x, y, width, height));
+					var x = Math.random()*250;
+					var y = Math.random()*250;
+					var width = height = Math.random()*30;
+					//矩形（x座標, y座標, 幅, 高さ）を管理するクラスを矩形ごとに配列に格納
+					shapes.push(new Shape(x, y, width, height));
 				};
 
 				//アニメーションループ
 				function animate(){
-					// Clear
+					//矩形クリア
 					context.clearRect(0, 0, canvasWidth, canvasHeight);
 
-					// Loop through every object
-					var shapesLength = shapes.length;
-					for (var i = 0; i < shapesLength; i++) {
-					var tmpShape = shapes[i];
+					var shapesLength = shapes.length; //矩形の個数
 
-					// Update
-					// Check direction to move shape
-					if (!tmpShape.reverseX) {
-					tmpShape.x += 2;
-					} else {
-					tmpShape.x -= 2;
-					};
+					for(var i = 0; i < shapesLength; i++){
+						var tmpShape = shapes[i];
 
-					if (!tmpShape.reverseY) {
-					tmpShape.y += 2;
-					} else {
-					tmpShape.y -= 2;
-					};
+						//reverseXがfalseのとき右方向へ
+						if(!tmpShape.reverseX){
+							tmpShape.x += 2;
+						}
+						//reverseXがtrueのとき左方向へ
+						else{
+							tmpShape.x -= 2;
+						};
 
-					// Draw shape
-					context.fillRect(tmpShape.x, tmpShape.y, tmpShape.width, tmpShape.height);
+						//reverseYがfalseのとき下方向へ
+						if(!tmpShape.reverseY){
+							tmpShape.y += 2;
+						}
+						//reverseYがtrueのとき上方向へ
+						else{
+							tmpShape.y -= 2;
+						};
 
-					// Check the boundaries
-					if (tmpShape.x < 0) {
-					tmpShape.reverseX = false;
-					} else if (tmpShape.x + tmpShape.width > canvasWidth) {
-					tmpShape.reverseX = true;
-					};
+						//矩形描画
+						context.fillRect(tmpShape.x, tmpShape.y, tmpShape.width, tmpShape.height);
 
-					if (tmpShape.y < 0) {
-					tmpShape.reverseY = false;
-					} else if (tmpShape.y + tmpShape.height > canvasHeight) {
-					tmpShape.reverseY = true;
-					};
+						//矩形のx座標が0より小さいとき
+						if (tmpShape.x < 0) {
+							//reverseXにfalseを代入
+							tmpShape.reverseX = false;
+						}
+						//矩形のx座標がCanvasの幅より大きいとき
+						else if(tmpShape.x + tmpShape.width > canvasWidth){
+							//reverseXにtrueを代入
+							tmpShape.reverseX = true;
+						}
 
-					};
+						//矩形のy座標が0より小さいとき
+						if(tmpShape.y < 0){
+							//reverseYにfalseを代入
+							tmpShape.reverseY = false;
+						}
+						//矩形のy座標がCanvasの高さより大きいとき
+						else if(tmpShape.y + tmpShape.height > canvasHeight){
+							//reverseYにtrueを代入
+							tmpShape.reverseY = true;
+						}
+					}
 
-					if (playAnimation) {
-					// Run the animation loop again in 33 milliseconds
-					setTimeout(animate, 33);
-					};
+					//アニメーションフラグが開始のとき
+					if(playAnimation){
+						setTimeout(animate, 33);
+					}
 				};
-
 				//アニメーション初回スタート
 				animate();
 			});

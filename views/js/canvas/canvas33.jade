@@ -50,23 +50,232 @@ include ../../head.jade
                             p JavaScriptには逆正接関数がありますが、この関数は偽陽性の結果を導き出すことがあるので使いません。それよりも少し堅牢にできているMath.atan2関数なら、求めていることをしてくれます。
                             p では、説明と同時にコードを書いていきましょう。先ほど作った円が衝突しているかどうかをチェックしている空の条件分のなかに、次のコードを追加します。
                             pre.prettyprint.linenums
+                              | var angel = Math.atan2(dY, dX);
+                              | var sine = Math.sin(angle);
+                              | var cosine = Math.cos(angle);
                             p 先行行は2つの円の角度を計算し、その後の2行は、対辺の長さとdX、dYの長さの比を求めます。これらの値はすぐあとで何度も使うので、先に計算しておくと便利です。
                             p 2つの円の角度がわかったら、次は個々の円の速度を回転して、先ほど触れた完全なぶつかり方をした非常に珍しい円のようにします（図2参照）。こうすると、図4の速度は図5のように変わります。こうなると、円は単純に速度を反転させたような形で跳ね返ります。言葉では簡単ですが、これをコードで表現しましょう。
                             canvas#fig5(width='400',height='300')
                             p 次の一連の式は、少し頭を使わないと理解できないものですが、個々の円の位置と速度を回転するために必要なすべてのことを行います。しかし、式を説明しようとするとかなりの時間を使った挙句、あまり大きな成果がえられないだろうと思われるので、みなだんは私の言葉を信じてついてきてください。コードがどのような仕組みになっているのかをどうしても知りたいなら、後日もと詳しく調べてみるといいでしょう。しかし、何も注意してくれなかったとは言わないでください。
                             p 先ほど宣言したcosine変数の下に次のコードを挿入してください。
                             pre.prettyprint.linenums
+                              | var x = 0;
+                              | var y = 0;
+                              | 
+                              | var xB = dX * cosine + dY * sine;
+                              | var yB = dY * cosine - dX * sine;
+                              | 
+                              | var vX = tmpAsteroid.vX * cosine + tmpAsteroid.vY * sine;
+                              | var vY = tmpAsteroid.vY * cosine - tmpAsteroid.vX * sine;
+                              | 
+                              | var vXb = tmpAsteroidB.vX * cosine + tmpAsteroidB.vY * sine;
+                              | var vYb = tmpAsteroidB.vY * cosine - tmpAsteroidB.vX * sine;
                             p 得られた値は、2つの円の角度がなくなるように回転したあとのそれぞれ円の位置と速度です。と言われてもなかなかぴんと来ないのはわかりますが、あと少しで完成なので、もう少しがんばってください。
                             p 個々のアステロイドの速度を反転するのは簡単な処理です。vYb変数の宣言の下に次のコードを挿入してください。
                             pre.prettyprint.linenums
+                              | vX *= -1;
+                              | vXb *= -1;
                             P 次に、アステロイドがくっつかず跳ね返るようにしたいので、速度反転のコードの下に次のコードを挿入します。
                             pre.prettyprint.linenums
+                              | xB = x + (tmpAsteroid.radius + tmpAsteroidB.radius);
                             p 最後に、新しい速度を与えた2つのアステロイドを元の位置に戻るように回転します。基本的に、最初にアステロイドを回転するために使ったコードの逆を行います。
                             p 位置と速度の反転コードの後ろに、次のコードを挿入してください。
                             pre.prettyprint.linenums
+                              | tmpAsteroid.x = tmpAsteroid.x + (x * cosine - y * sine);
+                              | tmpAsteroid.y = tmpAsteroid.y + (y * cosine + x * sine);
+                              | 
+                              | tmpAsteroidB.x = tmpAsteroid.x + (xB * cosine - yB * sine);
+                              | tmpAsteroidB.y = tmpAsteroid.y + (yB * cosine + xB * sine);
+                              | 
+                              | tmpAsteroid.vX = vX * cosine - vY * sine;
+                              | tmpAsteroid.vY = vY * cosine + vX * sine;
+                              | 
+                              | tmpAsteroidB.vX = vXb * cosine - vYb * sine;
+                              | tmpAsteroidB.vY = vYb * cosine + vXb * sine;
                             p これで完成です。ページをリフレッシュし、ダイナミックなアステロイドの世界を見てください。私がみなさんの立場だったら、自分を大いに誇りに思うはずです。この項だけでこれだけのことができたのですから。
                             p しかし、当たったアステロイドのサイズとは無関係に、やたらと速く跳ね返っていくアステロイドがあることに気づくかもしれません。これは、ビリヤードの2個のボールが互いに跳ね返るのと同じような効果をえるために速度を反転させているからです。ここでさらに一歩先に進み、個々のアステロイドの運動量を保存する方法を簡単に取り入れ、今よりもはるかにリアルなスピードで跳ね返るようにしましょう。
                             pre.prettyprint.linenums
+                              | $(function() {  
+                              |   var canvas = $('#myCanvas');
+                              |   var context = canvas.get(0).getContext('2d');
+                              |   
+                              |   var canvasWidth = canvas.width();
+                              |   var canvasHeight = canvas.height();
+                              |   
+                              |   $(window).resize(resizeCanvas);
+                              |   
+                              |   function resizeCanvas() {
+                              |     canvas.attr('width', $(window).get(0).innerWidth);
+                              |     canvas.attr('height', $(window).get(0).innerHeight);
+                              |     
+                              |     canvasWidth = canvas.width();
+                              |     canvasHeight = canvas.height();
+                              |   };
+                              |   
+                              |   resizeCanvas();
+                              |   
+                              |   var playAnimation = true;
+                              |   
+                              |   var startButton = $('#startAnimation');
+                              |   var stopButton = $('#stopAnimation');
+                              |   
+                              |   startButton.hide();
+                              |   startButton.click(function() {
+                              |     $(this).hide();
+                              |     stopButton.show();
+                              |     
+                              |     playAnimation = true;
+                              |     animate();
+                              |   });
+                              |   
+                              |   stopButton.click(function() {
+                              |     $(this).hide();
+                              |     startButton.show();
+                              |     
+                              |     playAnimation = false;
+                              |   });
+                              |   
+                              |   var Asteroid = function(x, y, radius, vX, vY, ax, ay) {
+                              |     this.x = x;
+                              |     this.y = y;
+                              |     this.radius = radius;
+                              | 
+                              |     this.vX = vX;
+                              |     this.vY = vY;
+                              |     this.aX = aX;
+                              |     this.aY = aY;
+                              |   }
+                              |   
+                              |   var asteroids = new Array();
+                              |   
+                              |   for (var i = 0; i &lt; 10; i++) {
+                              |     var x = 20+(Math.random()*(canvasWidth-40));
+                              |     var y = 20+(Math.random()*(canvasHeight-40));
+                              |     
+                              |     var radius = 5+Math.random()*10;
+                              | 
+                              |     var vX = Math.random()*4-2;
+                              |     var vY = Math.random()*4-2;
+                              | 
+                              |     var aX = Math.random()*0.2-0.1;
+                              |     var aY = Math.random()*0.2-0.1;
+                              |     
+                              |     asteroids.push(new Asteroid(x, y, radius, vX, vY, aX, aY));
+                              |   }
+                              | 
+                              |   function animate() {          
+                              | 
+                              |     context.clearRect(0, 0, canvasWidth, canvasHeight);
+                              |     
+                              |     context.fillStyle = 'rgb(255, 255, 255)';
+                              |     
+                              |     var asteroidsLength = asteroids.length;
+                              |     for (var i = 0; i &lt; asteroidsLength; i++) {
+                              |       var tmpAsteroid = asteroids[i];
+                              | 
+                              |       for (var j = i+1; j &lt; asteroidsLength; j++) {
+                              |         var tmpAsteroidB = asteroids[j];
+                              |         
+                              |         var dX = tmpAsteroidB.x - tmpAsteroid.x;
+                              |         var dY = tmpAsteroidB.y - tmpAsteroid.y;
+                              |         var distance = Math.sqrt((dX*dX)+(dY*dY));
+                              |         
+                              |         
+                              |         if(distance &lt; tmpAsteroid.radius + tmpAsteroidB.radius){ 
+                              |                     
+                              |           var angle = Math.atan2(dY, dX);
+                              |           var sine = Math.sin(angle);
+                              |           var cosine = Math.cos(angle);
+                              |           
+                              |           var x = 0;
+                              |           var y = 0;
+                              |           
+                              |           var xB = dX * cosine + dY * sine;
+                              |           var yB = dY * cosine - dX * sine;
+                              |           
+                              |           var vX = tmpAsteroid.vX * cosine + tmpAsteroid.vY * sine;
+                              |           var vY = tmpAsteroid.vY * cosine - tmpAsteroid.vX * sine;
+                              |           
+                              |           var vXb = tmpAsteroidB.vX * cosine + tmpAsteroidB.vY * sine;
+                              |           var vYb = tmpAsteroidB.vY * cosine - tmpAsteroidB.vX * sine;
+                              |           
+                              |           vX *= -1;
+                              |           vXb *= -1;
+                              | 
+                              |           xB = x + (tmpAsteroid.radius + tmpAsteroidB.radius);
+                              |         
+                              |           tmpAsteroid.x = tmpAsteroid.x + (x * cosine - y * sine);
+                              |           tmpAsteroid.y = tmpAsteroid.y + (y * cosine + x * sine);
+                              |           
+                              |           tmpAsteroidB.x = tmpAsteroid.x + (xB * cosine - yB * sine);
+                              |           tmpAsteroidB.y = tmpAsteroid.y + (yB * cosine + xB * sine);
+                              |           
+                              |           tmpAsteroid.vX = vX * cosine - vY * sine;
+                              |           tmpAsteroid.vY = vY * cosine + vX * sine;
+                              |           
+                              |           tmpAsteroidB.vX = vXb * cosine - vYb * sine;
+                              |           tmpAsteroidB.vY = vYb * cosine + vXb * sine;
+                              |           
+                              |         }
+                              |       }
+                              | 
+                              |       tmpAsteroid.x += tmpAsteroid.vX;
+                              |       tmpAsteroid.y += tmpAsteroid.vY;
+                              | 
+                              |       if (Math.abs(tmpAsteroid.vX) &lt; 10) {
+                              |         tmpAsteroid.vX += tmpAsteroid.aX;
+                              |       };
+                              |       
+                              |       if (Math.abs(tmpAsteroid.vY) &lt; 10) {
+                              |         tmpAsteroid.vY += tmpAsteroid.aY;
+                              |       };
+                              | 
+                              |       if (tmpAsteroid.x-tmpAsteroid.radius &lt; 0) {
+                              |         tmpAsteroid.x = tmpAsteroid.radius;
+                              |         tmpAsteroid.vX *= -1;
+                              |         tmpAsteroid.aX *= -1;
+                              |       } else if (tmpAsteroid.x+tmpAsteroid.radius &gt; canvasWidth) {
+                              |         tmpAsteroid.x = canvasWidth-tmpAsteroid.radius;
+                              |         tmpAsteroid.vX *= -1;
+                              |         tmpAsteroid.aX *= -1;
+                              |       }
+                              |       
+                              |       if (tmpAsteroid.y-tmpAsteroid.radius &lt; 0) {
+                              |         tmpAsteroid.y = tmpAsteroid.radius;
+                              |         tmpAsteroid.vY *= -1;
+                              |         tmpAsteroid.aY *= -1;
+                              |       } else if (tmpAsteroid.y+tmpAsteroid.radius &gt; canvasHeight) {
+                              |         tmpAsteroid.y = canvasHeight-tmpAsteroid.radius;
+                              |         tmpAsteroid.vY *= -1;
+                              |         tmpAsteroid.aY *= -1;
+                              |       }
+                              | 
+                              |       /*
+                              |       if (Math.abs(tmpAsteroid.vX) &gt; 0.1) {
+                              |         tmpAsteroid.vX *= 0.9;
+                              |       } else {
+                              |         tmpAsteroid.vX = 0;
+                              |       };
+                              |       
+                              |       if (Math.abs(tmpAsteroid.vY) &gt; 0.1) {
+                              |         tmpAsteroid.vY *= 0.9;
+                              |       } else {
+                              |         tmpAsteroid.vY = 0;
+                              |       };
+                              |       */
+                              |       
+                              |       context.beginPath();
+                              |       context.arc(tmpAsteroid.x, tmpAsteroid.y, tmpAsteroid.radius, 0, Math.PI*2);
+                              |       context.closePath();
+                              |       context.fill();
+                              |     }
+                              |     
+                              |     if (playAnimation) {
+                              |       setTimeout(animate, 33);
+                              |     }
+                              |   }
+                              |   animate();
+                              | });
         div#footer=title
         script(src='http://code.jquery.com/jquery.js')
         script(src='js/google-code-prettify/prettify.js')

@@ -1,4 +1,4 @@
-$(function() {	
+$(function(){	
 	var canvas = $('#myCanvas');
 	var context = canvas.get(0).getContext('2d');
 	
@@ -7,13 +7,13 @@ $(function() {
 	
 	$(window).resize(resizeCanvas);
 	
-	function resizeCanvas() {
+	function resizeCanvas(){
 		canvas.attr('width', $(window).get(0).innerWidth);
 		canvas.attr('height', $(window).get(0).innerHeight);
 		
 		canvasWidth = canvas.width();
 		canvasHeight = canvas.height();
-	};
+	}
 	
 	resizeCanvas();
 	
@@ -23,7 +23,7 @@ $(function() {
 	var stopButton = $('#stopAnimation');
 	
 	startButton.hide();
-	startButton.click(function() {
+	startButton.click(function(){
 		$(this).hide();
 		stopButton.show();
 		
@@ -31,14 +31,14 @@ $(function() {
 		animate();
 	});
 	
-	stopButton.click(function() {
+	stopButton.click(function(){
 		$(this).hide();
 		startButton.show();
 		
 		playAnimation = false;
 	});
 	
-	var Asteroid = function(x, y, radius, vX, vY) {
+	var Asteroid = function(x, y, radius, vX, vY){
 		this.x = x;
 		this.y = y;
 		this.radius = radius;
@@ -49,7 +49,7 @@ $(function() {
 	
 	var asteroids = new Array();
 	
-	for (var i = 0; i < 10; i++) {
+	for(var i = 0; i < 10; i++){
 		var x = 20+(Math.random()*(canvasWidth-40));
 		var y = 20+(Math.random()*(canvasHeight-40));
 		
@@ -61,7 +61,7 @@ $(function() {
 		asteroids.push(new Asteroid(x, y, radius, vX, vY));
 	}
 
-	function animate() {					
+	function animate(){					
 
 		context.clearRect(0, 0, canvasWidth, canvasHeight);
 		
@@ -75,23 +75,19 @@ $(function() {
 			tmpAsteroid.y += tmpAsteroid.vY;
 
 			if (tmpAsteroid.x-tmpAsteroid.radius < 0) {
-				tmpAsteroid.x = tmpAsteroid.radius; // Move away from the edge
+				tmpAsteroid.x = tmpAsteroid.radius;
 				tmpAsteroid.vX *= -1;
-				//tmpAsteroid.aX *= -1;
 			} else if (tmpAsteroid.x+tmpAsteroid.radius > canvasWidth) {
-				tmpAsteroid.x = canvasWidth-tmpAsteroid.radius; // Move away from the edge
+				tmpAsteroid.x = canvasWidth-tmpAsteroid.radius;
 				tmpAsteroid.vX *= -1;
-				//tmpAsteroid.aX *= -1;
 			}
 			
 			if (tmpAsteroid.y-tmpAsteroid.radius < 0) {
-				tmpAsteroid.y = tmpAsteroid.radius; // Move away from the edge
+				tmpAsteroid.y = tmpAsteroid.radius;
 				tmpAsteroid.vY *= -1;
-				//tmpAsteroid.aY *= -1;
 			} else if (tmpAsteroid.y+tmpAsteroid.radius > canvasHeight) {
-				tmpAsteroid.y = canvasHeight-tmpAsteroid.radius; // Move away from the edge
+				tmpAsteroid.y = canvasHeight-tmpAsteroid.radius;
 				tmpAsteroid.vY *= -1;
-				//tmpAsteroid.aY *= -1;
 			}
 			
 			context.beginPath();

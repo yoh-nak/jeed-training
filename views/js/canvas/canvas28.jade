@@ -38,6 +38,26 @@ include ../../head.jade
                                 a.btn.btn-default(href='demo/canvas/exercise5/index2.html',target='_blank')
                                     i.glyphicon.glyphicon-play
                                     | デモ
+                            p 第6章では、x、y座標を増減させて図形を動かしていました。単純なやり方ですが、個々の図形に実質的に速度を与えていたわけで、うまくできていました。速度は、速さと向きだということを思い出してください。速さは、移動するピクセルの数、向きは左右（x）と上下（y）です。ですから、物理のことを知らないうちから、物理をすでに使っていたのです。
+                            p しかし、前章の速度は、完全にランダムか、どの図形でもまったく同じになっていたところが欠点でした。そこで、両極端から離れて個々のアステロイドに独自の速度を与えるようにしてみましょう（この章では、図形ではなくアステロイドと呼ぶことになっていることを思い出してください）。そのためには、Asteroidクラスに次のように2つの新プロパティを定義する必要があります。
+                            pre.prettyprint.linenums
+                                | var Asteroid = function(x, y, radius, vX, vY){
+                                |   this.x = x;
+                                |   this.y = y;
+                                |   this.radius = radius;
+                                | 
+                                |   this.vX = vX;
+                                |   this.vY = vY;
+                                | }
+                            p vX、vYプロパティを追加したため、個々のアステロイドに独自の速度を与えられるようになりました。クラス関数にvXとvYのための引数が追加されていることに注意してください。そのため、新しいアステロイドを作るときに速度を設定することができます。次のステップは、アステロイドの作成時に速度を設定することです。具体的には、あイメーションループを1度実行するたびに、アステロイドを何ピクセルずつ動かすか定義します。
+                            p すべてのアステロイドを作成するループのなかで、radius設定行の下に次のコードを挿入してください。
+                            pre.prettyprint.linenums
+                                | var Vx = Math.random()*4-2;
+                                | var Vy = Math.random()*4-2;
+                            p そして、Asteroidクラスに引数として新しい速度を渡すために、その後ろの行を次のコードに置き換えます。
+                            pre.prettyprint.linenums
+                                | asteroids.push(new Asteroid(x, y, radius, xV, vY));
+                            p このサンプルでは、
                             pre.prettyprint.linenums
                                 | $(function(){
                                 |   var canvas = $('#myCanvas');

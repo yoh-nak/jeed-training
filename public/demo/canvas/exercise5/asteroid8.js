@@ -52,7 +52,7 @@ $(function() {
 
 	var asteroids = new Array();
 
-	for (var i = 0; i < 100; i++) {
+	for (var i = 0; i < 10; i++) {
 		var x = 20+(Math.random()*(canvasWidth-40));
 		var y = 20+(Math.random()*(canvasHeight-40));
 
@@ -183,6 +183,6 @@ $(function() {
 			setTimeout(animate, 33);
 		}
 	}
-	
+
 	animate();
 });

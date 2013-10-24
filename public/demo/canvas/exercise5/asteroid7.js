@@ -76,6 +76,65 @@ $(function() {
 		for (var i = 0; i < asteroidsLength; i++) {
 			var tmpAsteroid = asteroids[i];
 
+			for (var j = i+1; j < asteroidsLength; j++) {
+				var tmpAsteroidB = asteroids[j];
+				
+				var dX = tmpAsteroidB.x - tmpAsteroid.x;
+				var dY = tmpAsteroidB.y - tmpAsteroid.y;
+				var distance = Math.sqrt((dX*dX)+(dY*dY));
+				
+				
+				if(distance < tmpAsteroid.radius + tmpAsteroidB.radius){	
+					
+										
+					var angle = Math.atan2(dY, dX);
+					var sine = Math.sin(angle);
+					var cosine = Math.cos(angle);
+				
+					// Rotate asteroid position
+					var x = 0;
+					var y = 0;
+					
+					// Rotate asteroidB position
+					var xB = dX * cosine + dY * sine;
+					var yB = dY * cosine - dX * sine;
+						
+					// Rotate asteroid velocity
+					var vX = tmpAsteroid.vX * cosine + tmpAsteroid.vY * sine;
+					var vY = tmpAsteroid.vY * cosine - tmpAsteroid.vX * sine;
+					
+					// Rotate asteroidB velocity
+					var vXb = tmpAsteroidB.vX * cosine + tmpAsteroidB.vY * sine;
+					var vYb = tmpAsteroidB.vY * cosine - tmpAsteroidB.vX * sine;
+				
+					// Reverse the velocities
+					vX *= -1;
+					vXb *= -1;
+				/*
+					var vTotal = vX - vXb;
+					vX = ((tmpAsteroid.mass - tmpAsteroidB.mass) * vX + 2 * tmpAsteroidB.mass * vXb) / (tmpAsteroid.mass + tmpAsteroidB.mass);
+					vXb = vTotal + vX;
+				*/
+					// Move asteroids apart
+					xB = x + (tmpAsteroid.radius + tmpAsteroidB.radius);
+				
+					// Rotate asteroid positions back
+					tmpAsteroid.x = tmpAsteroid.x + (x * cosine - y * sine);
+					tmpAsteroid.y = tmpAsteroid.y + (y * cosine + x * sine);
+					
+					tmpAsteroidB.x = tmpAsteroid.x + (xB * cosine - yB * sine);
+					tmpAsteroidB.y = tmpAsteroid.y + (yB * cosine + xB * sine);
+					
+					// Rotate asteroid velocities back
+					tmpAsteroid.vX = vX * cosine - vY * sine;
+					tmpAsteroid.vY = vY * cosine + vX * sine;
+					
+					tmpAsteroidB.vX = vXb * cosine - vYb * sine;
+					tmpAsteroidB.vY = vYb * cosine + vXb * sine;
+					
+				}
+			}
+
 			tmpAsteroid.x += tmpAsteroid.vX;
 			tmpAsteroid.y += tmpAsteroid.vY;
 
@@ -106,6 +165,20 @@ $(function() {
 				tmpAsteroid.vY *= -1;
 				tmpAsteroid.aY *= -1;
 			}
+
+			/*
+			if (Math.abs(tmpAsteroid.vX) > 0.1) {
+				tmpAsteroid.vX *= 0.9;
+			} else {
+				tmpAsteroid.vX = 0;
+			};
+			
+			if (Math.abs(tmpAsteroid.vY) > 0.1) {
+				tmpAsteroid.vY *= 0.9;
+			} else {
+				tmpAsteroid.vY = 0;
+			};
+			*/
 			
 			context.beginPath();
 			context.arc(tmpAsteroid.x, tmpAsteroid.y, tmpAsteroid.radius, 0, Math.PI*2);

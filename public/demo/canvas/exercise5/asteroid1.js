@@ -7,13 +7,13 @@ $(function() {
 	
 	$(window).resize(resizeCanvas);
 	
-	function resizeCanvas() {
+	function resizeCanvas(){
 		canvas.attr('width', $(window).get(0).innerWidth);
 		canvas.attr('height', $(window).get(0).innerHeight);
 		
 		canvasWidth = canvas.width();
 		canvasHeight = canvas.height();
-	};
+	}
 	
 	resizeCanvas();
 	
@@ -46,7 +46,7 @@ $(function() {
 	
 	var asteroids = new Array();
 	
-	for (var i = 0; i < 10; i++) {
+	for (var i = 0; i < 10; i++){
 		var x = 20+(Math.random()*(canvasWidth-40));
 		var y = 20+(Math.random()*(canvasHeight-40));
 		
@@ -55,14 +55,14 @@ $(function() {
 		asteroids.push(new Asteroid(x, y, radius));
 	}
 
-	function animate() {					
+	function animate(){					
 
 		context.clearRect(0, 0, canvasWidth, canvasHeight);
 		
 		context.fillStyle = 'rgb(255, 255, 255)';
 		
 		var asteroidsLength = asteroids.length;
-		for (var i = 0; i < asteroidsLength; i++) {
+		for(var i = 0; i < asteroidsLength; i++){
 			var tmpAsteroid = asteroids[i];
 			
 			context.beginPath();
@@ -71,7 +71,7 @@ $(function() {
 			context.fill();
 		}
 		
-		if (playAnimation) {
+		if(playAnimation){
 			setTimeout(animate, 33);
 		}
 	}

@@ -47,7 +47,7 @@ $(function(){
 		this.vY = vY;
 		this.aX = aX;
 		this.aY = aY;
-	}
+	};
 	
 	var asteroids = new Array();
 	
@@ -87,7 +87,7 @@ $(function(){
 				tmpAsteroid.vY += tmpAsteroid.aY;
 			}
 
-			if (tmpAsteroid.x-tmpAsteroid.radius < 0) {
+			if(tmpAsteroid.x-tmpAsteroid.radius < 0){
 				tmpAsteroid.x = tmpAsteroid.radius;
 				tmpAsteroid.vX *= -1;
 				tmpAsteroid.aX *= -1;
@@ -98,12 +98,12 @@ $(function(){
 				tmpAsteroid.aX *= -1;
 			}
 			
-			if (tmpAsteroid.y-tmpAsteroid.radius < 0) {
+			if(tmpAsteroid.y-tmpAsteroid.radius < 0) {
 				tmpAsteroid.y = tmpAsteroid.radius;
 				tmpAsteroid.vY *= -1;
 				tmpAsteroid.aY *= -1;
 			}
-			else if(tmpAsteroid.y+tmpAsteroid.radius > canvasHeight) {
+			else if(tmpAsteroid.y+tmpAsteroid.radius > canvasHeight){
 				tmpAsteroid.y = canvasHeight-tmpAsteroid.radius;
 				tmpAsteroid.vY *= -1;
 				tmpAsteroid.aY *= -1;

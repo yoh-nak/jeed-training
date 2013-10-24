@@ -31,130 +31,164 @@ include ../../head.jade
                               | 運動量保存
                 div.col-sm-9
                     div.panel.panel-primary
-                        div.panel-heading 速度
+                        div.panel-heading 加速度
                         div.panel-body
-                            h4 速度
+                            h4 加速度
                             p
                                 a.btn.btn-default(href='demo/canvas/exercise5/index4.html',target='_blank')
                                     i.glyphicon.glyphicon-play
                                     | デモ
+                            p 物理入門のところで学んだように、加速度とは、時間の経過にともなう速度の変化のことであり、速さの増加のことです。アステロイドのアニメーションに加速度の効果を追加するのは非常に簡単なことです。実際、加速度にも大きさと向きがあるため、速度に値を加えていくのと同じです。大きさはアステロイドの速度に追加するピクセル数、向きは、加速度のx、y成分です。
+                            p ここでは、個々のアステロイドに独自の加速度を持たせようとしているので、まずしなければならないことは、Asteroidクラス内で必要なプロパティをセットアップし、そららのプロパティを使ってアステロイドをセットアップすることです。Asteroidクラスに次のプロパティを追加しましょう。
                             pre.prettyprint.linenums
-                                | $(function(){
+
+                            p 速度のときと同様に、クラス関数にaX、aY引数を追加するのを忘れないようにしましょう。最終的なクラスは、次のようになります。
+                            pre.prettyprint.linenums
+
+                            p 次はアステロイドを作るときにこららの新プロパティを使います。そこで、アステロイド作成グループに飛び込み、速度変数の後ろに次のコードを追加します。
+                            pre.prettyprint.linenums
+
+                            p こうすると、1つ1つのアステロイドに-0.1から0.1までの加速度が与えられます。加速度がこのように小さな値になっている理由は、すぐにわかるでしょう。
+                            p ループ内で最後にしなければならないのは、new Asteroid呼び出しの最後の引数として、新しいaX、aY変数を追加することです。
+                            pre.prettyprint.linenums
+
+                            p しかし、まだ個々のアステロイドに加速度を適用していませんので、このままでは何も起きません。加速度の適用とは、オブジェクトの現在の速度に加速度の値を加算するだけのことです。要するに、加速度とは、オブジェクトの速度の変化のことです。つまり、前の速度と現在の速度の差ということです。
+                            p アニメーションループ内に次のコードを追加して、個々のアステロイドに加速度を適用します。アステロイドのx、y座標に速度を加えるコードの後ろに、次のコードを追加してください。
+                            pre.prettyprint.linenums
+
+                            p このコードは、加速度の分（ピクセルの数）、個々のアステロイドの速度を上げているだけです。このコードは、アニメーションの現在のループではアステロイドに影響を及ぼしませんが、次のループでは、アステロイドの加速度が少し上がります。
+                            p 加速度のついたアステロイドを動かしてみる前に、境界チェックに数行のコードを追加しなければなりません。現在のコードでは、境界チェックはアステロイドがウィンドウの縁に当たると、加速度を反転させています。これにより、オブジェクトは弾んで反対側に向かいます。このときに加速度には変更が加えられていないので、アステロイドが向きを変えた時には、加速度はオブジェクトがもともと向かっていた方向にオブジェクトを引き戻そうとします。この時点でブラウザをリフレッシュすれば、私が言っていることがわかるでしょう。面白い動きですが、私たちが望んでいた動きとは似ても似つかないものです。
+                            p 幸い、この問題は、速度を反転させるのと同時に加速度も反転すれば解決できます。これにより境界チェックは次のように変わります。
+                            pre.prettyprint.linenums
+
+                            p ここでページを再びリフレッシュすると、加速度のコードが夢のように動作しているのが分かるでしょう。実際、このコードはうまく動きすぎ、アステロイドは無限に速度を上げ、ほとんど高速に近い速さで画面を飛び交うようになります。これではよいと言えません。アステロイドの最高速度に制限を加えて、アステロイドが永遠にスピートを上げ続けるのをやめさせます。一種の宇宙速度の限界です。
+                            p そこで、速度に最高速度を加えるコードを次のコードに置き換えます。
+                            pre.prettyprint.linenums
+
+                            p このコードは、アステロイドの速度がループあたり10ピクセル以下のときに限り、加速度の適用を認めます。このような単純なチェックにより、アステロイドの速さには正弦が設けられるので、少しおかしなアニメーションになってしまいます。なお、Math.absは数値を絶対値に変換します。つまり、負数の前に置かれている符号を取り除くということです。絶対値を使えば、整数だけを相手にしていることが確実になるので、条件分のなかのチェックを減らせます。
+                            p 最後にページをリフレッシュすると、最終的に飼い慣らすことに成功したアステロイドが表示されます。アステロイドは、最高速度までゆっくり加速していきます。これで物理マスターに1歩近づきました。
+                            pre.prettyprint.linenums
+                                | $(function(){   
                                 |   var canvas = $('#myCanvas');
                                 |   var context = canvas.get(0).getContext('2d');
-                                | 
+                                |   
                                 |   var canvasWidth = canvas.width();
                                 |   var canvasHeight = canvas.height();
-                                | 
+                                |   
                                 |   $(window).resize(resizeCanvas);
-                                | 
+                                |   
                                 |   function resizeCanvas(){
-                                |     canvas.attr('width',$(window).get(0).innerWidth);
-                                |     canvas.attr('height',$(window).get(0).innerHeight);
-                                |     canvasWidth = canvas.width();
-                                |     canvasHeight = canvas.height();
+                                |       canvas.attr('width', $(window).get(0).innerWidth);
+                                |       canvas.attr('height', $(window).get(0).innerHeight);
+                                |       
+                                |       canvasWidth = canvas.width();
+                                |       canvasHeight = canvas.height();
                                 |   }
-                                | 
+                                |   
                                 |   resizeCanvas();
-                                | 
+                                |   
                                 |   var playAnimation = true;
-                                | 
+                                |   
                                 |   var startButton = $('#startAnimation');
                                 |   var stopButton = $('#stopAnimation');
-                                | 
+                                |   
                                 |   startButton.hide();
-                                |   startButton.click(function(){
-                                |     $(this).hide();
-                                |     stopButton.show();
-                                |     playAniamtion = true;
-                                |     animate();
+                                |   startButton.click(function() {
+                                |       $(this).hide();
+                                |       stopButton.show();
+                                |       
+                                |       playAnimation = true;
+                                |       animate();
                                 |   });
-                                | 
+                                |   
                                 |   stopButton.click(function(){
-                                |     $(this).hide();
-                                |     startButton.show();
-                                |     playAnimation = false;
+                                |       $(this).hide();
+                                |       startButton.show();
+                                |       
+                                |       playAnimation = false;
                                 |   });
+                                |   
+                                |   var Asteroid = function(x, y, radius, vX, vY, ax, ay){
+                                |       this.x = x;
+                                |       this.y = y;
+                                |       this.radius = radius;
                                 | 
-                                |   var Asteroid = function(x, y, radius, vX, vY, aX, aY){
-                                |     this.x = x;
-                                |     this.y = y;
-                                |     this.radius = radius;
-                                | 
-                                |     this.vX = vX;
-                                |     this.vY = vY;
-                                | 
-                                |     this.aX = aX;
-                                |     this.aY = aY;
+                                |       this.vX = vX;
+                                |       this.vY = vY;
+                                |       this.aX = aX;
+                                |       this.aY = aY;
                                 |   }
-                                | 
+                                |   
                                 |   var asteroids = new Array();
+                                |   
+                                |   for (var i = 0; i &lt; 10; i++) {
+                                |       var x = 20+(Math.random()*(canvasWidth-40));
+                                |       var y = 20+(Math.random()*(canvasHeight-40));
+                                |       
+                                |       var radius = 5+Math.random()*10;
                                 | 
-                                |   for(var i = 0; i < 10; i++){
-                                |     var x = 20+(Math.random()*(canvasWidth-40));
-                                |     var y = 20+(Math.random()*(canvasHeight)-40);
-                                |     var radius = 5+Math.random()*10;
+                                |       var vX = Math.random()*4-2;
+                                |       var vY = Math.random()*4-2;
                                 | 
-                                |     var vX = Math.random()*4-2;
-                                |     var vY = Math.random()*4-2;
-                                | 
-                                |     var aX = Math.random()*0.2-0.1;
-                                |     var aY = Math.random()*0.2-0.1;
-                                | 
-                                |     asteroids.push(new Asteroid(x, y, radius, vX, vY, aX, aY));
+                                |       var aX = Math.random()*0.2-0.1;
+                                |       var aY = Math.random()*0.2-0.1;
+                                |       
+                                |       asteroids.push(new Asteroid(x, y, radius, vX, vY, aX, aY));
                                 |   }
                                 | 
-                                |   function animate(){
-                                |     context.clearRect(0, 0, canvasWidth, canvasHeight);
-                                |     context.fillStyle = 'rgb(255,255,255)';
+                                |   function animate(){                 
                                 | 
-                                |     var asteroidsLength = asteroids.length;
+                                |       context.clearRect(0, 0, canvasWidth, canvasHeight);
+                                |       
+                                |       context.fillStyle = 'rgb(255, 255, 255)';
+                                |       
+                                |       var asteroidsLength = asteroids.length;
+                                |       for (var i = 0; i &lt; asteroidsLength; i++) {
+                                |           var tmpAsteroid = asteroids[i];
                                 | 
-                                |     for(var i = 0; i < asteroidsLength; i++){
-                                |       var tmpAsteroid = asteroids[i];
+                                |           tmpAsteroid.x += tmpAsteroid.vX;
+                                |           tmpAsteroid.y += tmpAsteroid.vY;
                                 | 
-                                |       tmpAsteroid.x += tmpAsteroid.vX;
-                                |       tmpAsteroid.y += tmpAsteroid.vY;
+                                |           if (Math.abs(tmpAsteroid.vX) &lt; 10) {
+                                |               tmpAsteroid.vX += tmpAsteroid.aX;
+                                |           }
+                                |           
+                                |           if (Math.abs(tmpAsteroid.vY) &lt; 10) {
+                                |               tmpAsteroid.vY += tmpAsteroid.aY;
+                                |           }
                                 | 
-                                |       if(Math.abs(tmpAsteroid.vX) < 10){
-                                |         tmpAsteroid.vX += tmpAsteroid.aX;
+                                |           if (tmpAsteroid.x-tmpAsteroid.radius &lt; 0) {
+                                |               tmpAsteroid.x = tmpAsteroid.radius;
+                                |               tmpAsteroid.vX *= -1;
+                                |               tmpAsteroid.aX *= -1;
+                                |           }
+                                |           else if(tmpAsteroid.x+tmpAsteroid.radius &gt; canvasWidth){
+                                |               tmpAsteroid.x = canvasWidth-tmpAsteroid.radius;
+                                |               tmpAsteroid.vX *= -1;
+                                |               tmpAsteroid.aX *= -1;
+                                |           }
+                                |           
+                                |           if (tmpAsteroid.y-tmpAsteroid.radius &lt; 0) {
+                                |               tmpAsteroid.y = tmpAsteroid.radius;
+                                |               tmpAsteroid.vY *= -1;
+                                |               tmpAsteroid.aY *= -1;
+                                |           }
+                                |           else if(tmpAsteroid.y+tmpAsteroid.radius &gt; canvasHeight) {
+                                |               tmpAsteroid.y = canvasHeight-tmpAsteroid.radius;
+                                |               tmpAsteroid.vY *= -1;
+                                |               tmpAsteroid.aY *= -1;
+                                |           }
+                                |           
+                                |           context.beginPath();
+                                |           context.arc(tmpAsteroid.x, tmpAsteroid.y, tmpAsteroid.radius, 0, Math.PI*2);
+                                |           context.closePath();
+                                |           context.fill();
                                 |       }
-                                |       if(Math.abs(tmpAsteroid.vY < 10)){
-                                |         tmpAsteroid.vY += tmpAsteroid.aY;
+                                |       
+                                |       if (playAnimation) {
+                                |           setTimeout(animate, 33);
                                 |       }
-                                | 
-                                |       if(tmpAsteroid.x - tmpAsteroid.radius < 0){
-                                |         tmpAsteroid.x = tmpAsteroid.radius;
-                                |         tmpAsteroid.vX *= -1;
-                                |         tmpAsteroid.aX += -1;
-                                |       }
-                                |       else if(tmpAsteroid.x + tmpAsteroid.radius > canvasWidth){
-                                |         tmpAsteroid.x = canvasWidth - tmpAsteroid.radius;
-                                |         tmpAsteroid.vX *= -1;
-                                |         tmpAsteroid.aX += -1;
-                                |       }
-                                |       if(tmpAsteroid.y - tmpAsteroid.radius < 0){
-                                |         tmpAsteroid.y = tmpAsteroid.radius;
-                                |         tmpAsteroid.vY *= -1;
-                                |         tmpAsteroid.aY += -1;
-                                |       }
-                                |       else if(tmpAsteroid.y + tmpAsteroid.radius > canvasHeight){
-                                |         tmpAsteroid.y = canvasHeight - tmpAsteroid.radius;
-                                |         tmpAsteroid.vY *= -1;
-                                |         tmpAsteroid.aY += -1;
-                                |       }
-                                | 
-                                |       context.beginPath();
-                                |       context.arc(tmpAsteroid.x, tmpAsteroid.y, tmpAsteroid.radius, 0, Math.PI*2, false);
-                                |       context.closePath();
-                                |       context.fill();
-                                |     }
-                                | 
-                                |     if(playAnimation){
-                                |       setTimeout(animate, 33);
-                                |     }
                                 |   }
-                                | 
                                 |   animate();
                                 | });
         div#footer=title

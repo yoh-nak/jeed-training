@@ -64,15 +64,23 @@ include ../../head.jade
                             canvas#fig6(width='400',height='300')
                             p このあたりで、これをJavaScriptで表現する方法を考えてみましょう。以前のアステロイドコードを開き、アニメーションループのところを見てください。tmpAsteroid変数の宣言の下に、以下のコードを追記します。
                             pre.prettyprint.linenums
-
+                              | for(var j = i+1; j &lt; asteroidsLength; j++){
+                              |   var tmpAsteroidB = asteroids[j];
+                              |   
+                              |   var dX = tmpAsteroidB.x - tmpAsteroid.x;
+                              |   var dY = tmpAsteroidB.y - tmpAsteroid.y;
+                              |   var distance = Math.sqrt((dX*dX)+(dY*dY));
+                              | }
                             p この第2のループは、すべてのアステロイドがほかのすべてのアステロイドとの間で重なりあいのチェックをするために必要なものです。ループ内のj変数がi+1と初期設定されていることに注意してください。これはループの実行回数を減らすためのちょっとした工夫です。jの初期を0にすると、以前のループですでにチェックしたアステロイドの組み合わせを再びチェックすることになってしまい、少し整理されていない雑な処理になってしまいます。
                             p 距離の計算は、dX、dY変数のなかで行われ、これらをピタゴラスの方程式に当てはめてdistance変数の中心間の距離を代入しています。方程式の平方根の部分は、Math.sqrtメソッドで実行していることに注意してください。distance変数に代入された値は、2つのアステロイドの中心と中心の間の本当の距離（単位ピクセル）です。
                             p 中心間の距離が得られれば、アステロイドが触れ合っているかどうかを調べるのは簡単なことです。2つのアステロイドの半径を足し合わせ、距離がその値よりも小さいかどうかをチェックします。第2のループのdistance変数の宣言の後ろに次のコードを追加します。
                             pre.prettyprint.linenums
-
-                            p 2つの円が重なり合っているかどうかのチェックは、この程度に複雑な処理です。そして、面白いのは、2つの円が触れ合っているときに円をどのように動かすかです。次項では、この問題に取組ます。
+                              | if(distance &lt; tmpAsteroid.radius + tmpAsteroidB.radius){ 
+                              |   
+                              | }
+                            p 2つの円が重なり合っているかどうかのチェックは、この程度に複雑な処理です。そして、面白いのは、2つの円が触れ合っているときに円をどのように動かすかです。次項では、この問題に取り組みます。
                             pre.prettyprint.linenums
-                            
+
         div#footer=title
         script(src='http://code.jquery.com/jquery.js')
         script(src='js/google-code-prettify/prettify.js')

@@ -1,4 +1,4 @@
-$(function() {	
+$(function(){	
 	var canvas = $('#myCanvas');
 	var context = canvas.get(0).getContext('2d');
 	
@@ -7,13 +7,13 @@ $(function() {
 	
 	$(window).resize(resizeCanvas);
 	
-	function resizeCanvas() {
+	function resizeCanvas(){
 		canvas.attr('width', $(window).get(0).innerWidth);
 		canvas.attr('height', $(window).get(0).innerHeight);
 		
 		canvasWidth = canvas.width();
 		canvasHeight = canvas.height();
-	};
+	}
 	
 	resizeCanvas();
 	
@@ -38,18 +38,18 @@ $(function() {
 		playAnimation = false;
 	});
 	
-	var Asteroid = function(x, y, radius, vX, vY) {
+	var Asteroid = function(x, y, radius, vX, vY){
 		this.x = x;
 		this.y = y;
 		this.radius = radius;
 
 		this.vX = vX;
 		this.vY = vY;
-	}
+	};
 	
 	var asteroids = new Array();
 	
-	for (var i = 0; i < 10; i++) {
+	for(var i = 0; i < 10; i++){
 		var x = 20+(Math.random()*(canvasWidth-40));
 		var y = 20+(Math.random()*(canvasHeight-40));
 		
@@ -61,14 +61,14 @@ $(function() {
 		asteroids.push(new Asteroid(x, y, radius, vX, vY));
 	}
 
-	function animate() {					
+	function animate(){					
 
 		context.clearRect(0, 0, canvasWidth, canvasHeight);
 		
 		context.fillStyle = 'rgb(255, 255, 255)';
 		
 		var asteroidsLength = asteroids.length;
-		for (var i = 0; i < asteroidsLength; i++) {
+		for(var i = 0; i < asteroidsLength; i++){
 			var tmpAsteroid = asteroids[i];
 
 			tmpAsteroid.x += tmpAsteroid.vX;
@@ -80,7 +80,7 @@ $(function() {
 			context.fill();
 		}
 		
-		if (playAnimation) {
+		if(playAnimation){
 			setTimeout(animate, 33);
 		}
 	}

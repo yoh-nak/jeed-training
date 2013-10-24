@@ -34,45 +34,11 @@ include ../../head.jade
                         div.panel-heading 準備
                         div.panel-body
                             h4 準備
+                            p ここからは、HTMLページからJavaScriptコードを切り離し、別個のJavaScriptファイルに保存することにしましょう。JavaScriptを別ファイルに保存すると、システムの整理に役立ち、一般にグッドプラクティスになるということは第2章で説明しました。この説のスタート地点で使うJavaScriptコードは、新しいものではありません。前章で使ったものと実質的には同じです。最大の違いは、前章では図形を動かしていたのに対し、この章では、アステロイドを動かしていることです。次のコードをJavaScriptファイルに保存し、asteroid.jsといった適切な名前を付けてください。
                             p
                                 a.btn.btn-default(href='demo/canvas/exercise5/index1.html',target='_blank')
                                     i.glyphicon.glyphicon-play
                                     | デモ
-                            pre.prettyprint.linenums
-                                &lt;!DOCTYPE html&gt;
-                                | &lt;html lang="ja"&gt;
-                                |   &lt;head&gt;
-                                |     &lt;meta charset="utf-8"&gt;
-                                |     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-                                |     &lt;title&gt;&lt;/title&gt;
-                                |     &lt;link rel="stylesheet" href="style.css"&gt;
-                                |   &lt;/head&gt;
-                                |   &lt;body&gt;
-                                |     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
-                                |     &lt;div id="startAnimation"&gt;Start&lt;/div&gt;
-                                |     &lt;div id="stopAnimation"&gt;Stop&lt;/div&gt;
-                                |     &lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
-                                |     &lt;script src="asteroid1.js"&gt;&lt;/script&gt;
-                                |   &lt;/body&gt;
-                                | &lt;/html&gt;
-                            pre.prettyprint.linenums
-                                | html,
-                                | body {
-                                |   height: 100%;
-                                |   width: 100%;
-                                |   margin: 0;
-                                | }
-                                | #myCanvas {
-                                |   display: block;
-                                | }
-                                | #myButtons {
-                                |   bottom: 20px;
-                                |   left: 20px;
-                                |   position: absolute;
-                                | }
-                                | #myButtons button {
-                                |   padding: 5px;
-                                | }
                             pre.prettyprint.linenums
                                 | $(function(){
                                 |   var canvas = $('#myCanvas');
@@ -149,6 +115,45 @@ include ../../head.jade
                                 | 
                                 |   animate();
                                 | });
+                            p 次はCSSファイルです。CSSファイルは、キャンバスがブラウザウィンドウ全体を使えるようにするための準備をします。また、start、stopボタンの移動にもCSSを使います。キャンバスがウィンドウ全体を覆ってしまいますので、移動しなければこれらのボタンはブラウザの外に飛び出してしまいます。
+                            p JavaScriptファイルと同じディレクトリに次の内容で外部CSSファイルを作り、canvas.cssなどの意味のある名前を付けてください。
+                            pre.prettyprint.linenums
+                                | html,
+                                | body {
+                                |   height: 100%;
+                                |   width: 100%;
+                                |   margin: 0;
+                                | }
+                                | #myCanvas {
+                                |   display: block;
+                                | }
+                                | #myButtons {
+                                |   bottom: 20px;
+                                |   left: 20px;
+                                |   position: absolute;
+                                | }
+                                | #myButtons button {
+                                |   padding: 5px;
+                                | }
+                            p 最後にすべてのものを結びつけるHTMLファイルが必要です。これは前章のHTMLファイルとまったく同じですが、JavaScriptを外部ファイルに出した分、小さくなっています。JavaScriptファイルを呼び出しているscript要素が追加されていることに注意してください。asteroid.js以外のファイル名を選んだ場合には、ファイル名の部分を書き換える必要があります。
+                            p ほかのファイルと同じディレクトリに次の内容のHTMLファイルを作り、index.htmlという名前を付けてください。
+                            pre.prettyprint.linenums
+                                &lt;!DOCTYPE html&gt;
+                                | &lt;html lang="ja"&gt;
+                                |   &lt;head&gt;
+                                |     &lt;meta charset="utf-8"&gt;
+                                |     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+                                |     &lt;title&gt;&lt;/title&gt;
+                                |     &lt;link rel="stylesheet" href="canvas.css"&gt;
+                                |   &lt;/head&gt;
+                                |   &lt;body&gt;
+                                |     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
+                                |     &lt;div id="startAnimation"&gt;Start&lt;/div&gt;
+                                |     &lt;div id="stopAnimation"&gt;Stop&lt;/div&gt;
+                                |     &lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
+                                |     &lt;script src="asteroid1.js"&gt;&lt;/script&gt;
+                                |   &lt;/body&gt;
+                                | &lt;/html&gt;
         div#footer=title
         script(src='http://code.jquery.com/jquery.js')
         script(src='js/google-code-prettify/prettify.js')

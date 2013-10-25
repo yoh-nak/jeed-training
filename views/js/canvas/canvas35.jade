@@ -23,6 +23,42 @@ include ../../head.jade
                             p 早く作ってみたくてうずうずしているでしょう。早速始めます。
                             h4 コア機能を準備する
                             p 面白い部分を作るためには、しっかりとした基礎を作っておく必要があります。スペースボウリングゲームの場合、基礎とはみなさんがあとで高度な機能を支える基本的なHTML、CSS、JavaScriptのコードのことです。
+                            h4 HTMLをマークアップする
+                            p ブラウザで動くゲームがいいのは、ウェブサイト構築のために一般的に使われているテクノロジーを使えるところです。ゲームのユーザーインタフェースは、HTMLでつくることができます。スタイルを指定するCSSがまだないので見栄えはぱっとしませんが、今大事なのはコンテンツの構造自体です。
+                            p ゲームのために新しいディレクトリを作り、index.htmlという名前のフィールドに次のコードを入力しましょう。
+                            pre.prettyprint.linenums
+                              | &lt;!DOCTYPE html&gt;
+                              | &lt;html&gt;
+                              | &lt;head&gt;
+                              | &lt;title&gt;Space Bowling&lt;/title&gt;
+                              | &lt;meta charset="utf-8"&gt;
+                              | &lt;link rel="stylesheet" href="game.css"&gt;
+                              | &lt;/head&gt;
+                              | &lt;body&gt;
+                              |   &lt;div id="game"&gt;
+                              |     &lt;div id="gameUI"&gt;
+                              |       &lt;div id="gameIntro"&gt;
+                              |         &lt;h1&gt;Space bowling&lt;/h1&gt;
+                              |         &lt;p&gt;This is an awesome game.&lt;/p&gt;
+                              |         &lt;p&gt;&lt;a id="gamePlay" class="button" href=""&gt;Play&lt;/a&gt;&lt;/p&gt;
+                              |       &lt;/div&gt;
+                              |       &lt;div id="gameStats"&gt;
+                              |         &lt;p&gt;Asteroids: &lt;span id="gameRemaining"&gt;&lt;/span&gt;&lt;/p&gt;
+                              |         &lt;p&gt;Clicks: &lt;span class="gameScore"&gt;&lt;/span&gt;&lt;/p&gt;
+                              |         &lt;p&gt;&lt;a class="gameReset" href=""&gt;Reset&lt;/a&gt;&lt;/p&gt;
+                              |       &lt;/div&gt;
+                              |       &lt;div id="gameComplete"&gt;
+                              |         &lt;h1&gt;You win!&lt;/h1&gt;
+                              |         &lt;p&gt;Congratulations, you completed the game in &lt;span class="gameScore"&gt;&lt;/span&gt; clicks.&lt;/p&gt;
+                              |         &lt;p&gt;&lt;a class="gameReset button" href=""&gt;Play again&lt;/a&gt;&lt;/p&gt;
+                              |       &lt;/div&gt;
+                              |     &lt;/div&gt;
+                              |     &lt;canvas id="gameCanvas" width="350" height="600"&gt;&lt;/canvas&gt;
+                              |   &lt;/div&gt;
+                              |   &lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
+                              |   &lt;script src="index1.js"&gt;&lt;/script&gt;
+                              | &lt;/body&gt;
+                              | &lt;/html&gt;
         div#footer=title
         script(src='http://code.jquery.com/jquery.js')
         script(src='js/google-code-prettify/prettify.js')

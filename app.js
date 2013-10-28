@@ -34,10 +34,33 @@ app.use(express.cookieParser('your secret here'));
 app.use(express.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public'))); //静的ページパス
+
+//Style動的コンパイル
 app.use(require('stylus').middleware({
     src: __dirname + '/views',
     dest: __dirname + '/public'
 }));
+
+/*
+var coffeescript = require('connect-coffee-script');
+var connect = require('connect');
+app.use(coffeescript({
+  src: __dirname + '/views',
+  dest: __dirname + '/public',
+  bare: true
+}));
+*/
+
+//var coffeescript = require('connect-coffee-script');
+//var connect = require('connect');
+
+//CoffeeScript動的コンパイル
+app.use(require('connect-coffee-script')({
+  src: __dirname + '/views',
+  dest: __dirname + '/public',
+  bare: true
+}));
+
 
 //developmentモードのみ
 if ('development' == app.get('env')) {

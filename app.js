@@ -15,7 +15,6 @@ var express = require('express')
   , diary = require('./routes/diary')
   , http = require('http')
   , fs = require('fs')
-  //, less = require('less')
   , coffee = require('coffee-script')
   , path = require('path');
 
@@ -40,19 +39,6 @@ app.use(require('stylus').middleware({
     src: __dirname + '/views',
     dest: __dirname + '/public'
 }));
-
-/*
-var coffeescript = require('connect-coffee-script');
-var connect = require('connect');
-app.use(coffeescript({
-  src: __dirname + '/views',
-  dest: __dirname + '/public',
-  bare: true
-}));
-*/
-
-//var coffeescript = require('connect-coffee-script');
-//var connect = require('connect');
 
 //CoffeeScript動的コンパイル
 app.use(require('connect-coffee-script')({

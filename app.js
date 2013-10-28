@@ -3,7 +3,7 @@ var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , html = require('./routes/html')
-  , css3 = require('./routes/css3')
+  , css = require('./routes/css')
   , rwd = require('./routes/rwd')
   , js = require('./routes/js')
   , jquery = require('./routes/jquery')
@@ -59,7 +59,7 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/users', user.list);
 app.get('/htmltag:id:format', html.html);
-app.get('/css3:id', css3.css3);
+app.get('/css:id:format', css.css);
 app.get('/rwd-id', rwd.rwd);
 app.get('/jquery:id', jquery.jquery);
 app.get('/jqm:id', jqm.jqm);

@@ -1,0 +1,233 @@
+include ../../head.jade
+    body
+        include navbar.jade
+        div.container
+            div.row
+                div.col-sm-3
+                    include bowling.jade
+                div.col-sm-9
+                    div.panel.panel-primary
+                        div.panel-heading アステロイドをセットアップする
+                        div.panel-body
+                            h4 アステロイドをセットアップする
+                            p 次に行うべきことは、アステロイドのコードをセットアップし、アニメーションの動きを与えられるようにすることです。必要なコードの大部分は今までの章で説明してきたものと同じなので、あまり時間をかけないで先に進む予定です。
+                            p アニメーション、衝突検出のためにすべてのアステロイドについての情報を覚えていられるようにしなければならないので、JavaScriptの冒頭近く、フィールド関連の変数が宣言されている下のところでasteroids変数を宣言します。
+                            pre(class='prettyprint linenums:15')
+                                | var asteroids;
+                            p この変数には、ゲームの環境に含まれるすべてのアステロイドの配列を格納します。
+                            p アステロイドもないのにアステロイドの配列を持っていても意味がないので、次はAsteroidクラスを宣言します。このクラスは、前章と同じクラスに基いて作られています。startGame関数の上に次のコードを追加してください。
+                            pre(class='prettyprint linenums:28')
+                                | var Asteroid = function(x, y, radius, mass, friction) {
+                                |   this.x = x;
+                                |   this.y = y;
+                                |   this.radius = radius;
+                                |   this.mass = mass;
+                                |   this.friction = friction;
+                                |   
+                                |   this.vX = 0;
+                                |   this.vY = 0;
+                                |   
+                                |   this.player = false;
+                                | };
+                            p このクラスと前章のクラスにはいくつかの違いがあることに注意しましょう。もっとも目立つ違いは、friction、playerプロパティが追加されていることです。frictionは個々のアステロイドが受ける摩擦力を表し、playerはアステロイドがプレイヤー用の大きなものかどうかを示します。大多数のアステロイドは大きくないものなので、playerのデフォルト値はfalseになっています。加速度関連のプロパティがなくなっているのも大きな違いです。ゲーム内では非常に単純な動きを使うだけなので、アステロイドに加速を与える必要がないのです。その意味はすぐにはっきりわかるでしょう。
+                            p すべてのアステロイドを作り、フィールドに並べる前に、空のasteroids変数のセットアップが必要です。stargGame関数内のフィールド変数初期化コードの後ろに次のコードを追加しましょう。
+                            pre(class='prettyprint linenums:53')
+                                | asteroids = new Array();
+                            p これらの変数に値を代入するためにstartGame関数を使っているのは、プレーヤーがゲームを再スタートする（ゲームに勝ってPlay againを押すか、resetリンクをクリックして）たびに、変数を上書きしてフレッシュな状態にするためです。環状にきちんと並べた形でアステロイドを作る方法は、少し考える必要があります。startGame関数のasteroids変数の初期化コードの後ろに、次のコードを追加してください。
+                            pre(class='prettyprint linenums:56')
+                                | var outerRing = 8; //外周のアステロイド
+                                | var ringCount = 3; //環の数
+                                | var ringSpacing = (platformInnerRadius/(ringCount-1)); //環と環の間の距離
+                                | 
+                                | for (var r = 0; r &lt; ringCount; r++) {
+                                |   var currentRing = 0; //現在の環に並べるアステロイドの数
+                                |   var angle = 0; //アステロイドとアステロイドの間の角度
+                                |   var ringRadius = 0;
+                                |   
+                                |   //最も内側の環か?
+                                |   if(r == ringCount-1){
+                                |       currentRing = 1;
+                                |   }
+                                |   else{
+                                |       currentRing = outerRing-(r*3);
+                                |       angle = 360/currentRing;
+                                |       ringRadius = platformInnerRadius-(ringSpacing*r);
+                                |   }
+                                | }
+                            p コメントを付けてありますが、何が行われるかを説明しておきます。
+                            p 最初の3つの変数は、もっとも外側の環に並べたいアステロイドの数、作りたい環の数、個々の環の間の距離を宣言します。個々の環にいくつのアステロイドを描くかを計算するときに、これらの変数を使います。
+                            p 変数宣言の後ろには、最初のループが続きます。このループは、フィールドを描こうとしているアステロイドの環の数だけ実行されます。ループを実行するたびに、currentRing変数にはデフォルトの0がセットされます。この変数は、次の条件文で現在の環に配置するアステロイドの数を計算するために使われます。angle、ringRadius変数にも、デフォルトの値の0をセットします。
+                            p 条件文は、まず最後の環（中央の1個）にいるかどうかチェックし、そうであればアステロイドの数を1とします。そうでなければ、外側の環のアステロイドの数から、3にループ回数を表すrを掛けた値を引いて、現在の環に配置するアステロイドの数を計算します。かなり適当なやり方ですが、うまく動いているようです。もっとよい方法を考えついたら、この部分は自由に書き換えてください。一般的な考え方は、中央に近づくたびに環に配置するアステロイドの数を減らすということです。そうしなければ、すべてのアステロイドを置くスペースがなくなってしまいます。
+                            p 現在の環のアステロイド数がわかったら、アステロイドを環に沿って等距離に配置するために、アステロイドとアステロイドの間の角度を計算します。これは、円の角度全体（360度）を環に並べるアステロイドの数で割ればわかります。ここではわかりやすくするために度数法を使っていますが、簡単にラジアンに直すこともできます（おそらくそうすべきでしょう）。
+                            p 環を等間隔で並べるために、個々の環の半径を計算するのも大切なことです。半径は、以前定義したplatformInnerRadius変数から、環の間の距離に現在のループ回数を掛けた値を引けば計算できます。こうすると、環は等間隔を保ちながら少しずつ小さくなります。
+                            p これですべてのアステロイドを作るために必要な情報が揃ったので、次は個々のアステロイドのために第2ループを実行します。環ループの条件分の後ろに次のコードを追加してください。
+                            pre(class='prettyprint linenums:75')
+                                | for(var a = 0; a &lt; currentRing; a++){
+                                |   var x = 0;
+                                |   var y = 0;
+                                |   
+                                |   //最も内側の環か?
+                                |   if (r == ringCount-1) {
+                                |       x = platformX;
+                                |       y = platformY;
+                                |   } else {
+                                |       x = platformX+(ringRadius*Math.cos((angle*a)*(Math.PI/180)));
+                                |       y = platformY+(ringRadius*Math.sin((angle*a)*(Math.PI/180)));
+                                |   }
+                                | 
+                                |   var radius = 10;
+                                |   var mass = 5;
+                                |   var friction = 0.95;
+                                |   
+                                |   asteroids.push(new Asteroid(x, y, radius, mass, friction));
+                                | }
+                            p ループは、簡単な条件文を使って、現在の環に並べられる1つ1つのアステロイドの位置を計算します。もっとも内側の環にいる場合、アステロイドはフィールド中央になければならないので、その原点（円の中心）の(x, y)座標はフィールドの原点の(x, y)座標と同じになります。そうでなければ、アステロイドの位置は、現在の環の周上の適切な位置として計算されます。難しそうな感じがするかもしれませんが、このコードは第6章で図形を炎上に動かしたときにすでに使ったものです。第6章では5度ずつ増やしていったのに対し、ここでは少し前で計算した角度を使っていることを除けば、違いはありません。
+                            p 最後に、アステロイドの半径、質量、摩擦が宣言され、先ほど作ったasteroids配列に作ったばかりのアステロイドを追加していきます。これでフィールドは完成です。次節では、アニメーションのなかでアステロイドをどのように表示するか考えていきます。
+                            p
+                                a.btn.btn-default(href='demo/canvas/exercise6/index5.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | $(function() {
+                                |   var canvas = $('#gameCanvas');
+                                |   var context = canvas.get(0).getContext('2d');
+                                |   
+                                |   //キャンバスのサイズ
+                                |   var canvasWidth = canvas.width();
+                                |   var canvasHeight = canvas.height();
+                                |   
+                                |   //ゲームの設定
+                                |   var playGame;
+                                |   var platformX;
+                                |   var platformY;
+                                |   var platformOuterRadius;
+                                |   var platformInnerRadius;
+                                |   var asteroids; //アステロイドを格納する配列
+                                | 
+                                |   //ゲームのUI
+                                |   var ui = $('#gameUI');
+                                |   var uiIntro = $('#gameIntro');
+                                |   var uiStats = $('#gameStats');
+                                |   var uiComplete = $('#gameComplete');
+                                |   var uiPlay = $('#gamePlay');
+                                |   var uiReset = $('.gameReset');
+                                |   var uiRemaining = $('#gameRemaining');
+                                |   var uiScore = $('.gameScore');
+                                |   
+                                |   //アステロイドの描画を定義するクラス
+                                |   var Asteroid = function(x, y, radius, mass, friction) {
+                                |       this.x = x;
+                                |       this.y = y;
+                                |       this.radius = radius;
+                                |       this.mass = mass;
+                                |       this.friction = friction;
+                                |       
+                                |       this.vX = 0;
+                                |       this.vY = 0;
+                                |       
+                                |       this.player = false;
+                                |   };
+                                | 
+                                |   //ゲームをリセット、開始する
+                                |   function startGame() {
+                                |       //ゲームのリセット
+                                |       uiScore.html('0');
+                                |       uiStats.show();
+                                | 
+                                |       //ゲームの初期設定をする
+                                |       playGame = false;
+                                |       platformX = canvasWidth/2;
+                                |       platformY = 150;
+                                |       platformOuterRadius = 100;
+                                |       platformInnerRadius = 75;
+                                |       asteroids = new Array();
+                                |               
+                                |       //外周のアステロイドの設定
+                                |       var outerRing = 8; //外周のアステロイド
+                                |       var ringCount = 3; //環の数
+                                |       var ringSpacing = (platformInnerRadius/(ringCount-1)); //環と環の間の距離
+                                | 
+                                |       for (var r = 0; r &lt; ringCount; r++) {
+                                |           var currentRing = 0; //現在の環に並べるアステロイドの数
+                                |           var angle = 0; //アステロイドとアステロイドの間の角度
+                                |           var ringRadius = 0;
+                                |           
+                                |           //最も内側の環か?
+                                |           if(r == ringCount-1){
+                                |               currentRing = 1;
+                                |           }
+                                |           else{
+                                |               currentRing = outerRing-(r*3);
+                                |               angle = 360/currentRing;
+                                |               ringRadius = platformInnerRadius-(ringSpacing*r);
+                                |           }
+                                | 
+                                |           for(var a = 0; a &lt; currentRing; a++){
+                                |               var x = 0;
+                                |               var y = 0;
+                                |               
+                                |               //最も内側の環か?
+                                |               if (r == ringCount-1) {
+                                |                   x = platformX;
+                                |                   y = platformY;
+                                |               } else {
+                                |                   x = platformX+(ringRadius*Math.cos((angle*a)*(Math.PI/180)));
+                                |                   y = platformY+(ringRadius*Math.sin((angle*a)*(Math.PI/180)));
+                                |               }
+                                |           
+                                |               var radius = 10;
+                                |               var mass = 5;
+                                |               var friction = 0.95;
+                                |               
+                                |               asteroids.push(new Asteroid(x, y, radius, mass, friction));
+                                |           }
+                                |       }
+                                | 
+                                |       //アニメーションループを開始する
+                                |       animate();
+                                |   }
+                                |   
+                                |   //ゲームの初期化をする
+                                |   function init(){
+                                |       uiStats.hide();
+                                |       uiComplete.hide();
+                                |       
+                                |       uiPlay.click(function(e) {
+                                |           e.preventDefault();
+                                |           uiIntro.hide();
+                                |           startGame();
+                                |       });
+                                |       
+                                |       uiReset.click(function(e) {
+                                |           e.preventDefault();
+                                |           uiComplete.hide();
+                                |           startGame();
+                                |       });
+                                |   };
+                                |   
+                                |   //アニメーションループ
+                                |   function animate() {        
+                                |       //クリア
+                                |       context.clearRect(0, 0, canvasWidth, canvasHeight);
+                                | 
+                                |       //フィールドの描画
+                                |       context.fillStyle = 'rgb(100, 100, 100)';
+                                |       context.beginPath();
+                                |       context.arc(platformX, platformY, platformOuterRadius, 0, Math.PI*2, true);
+                                |       context.closePath();
+                                |       context.fill();
+                                |       
+                                |       if (playGame) {
+                                |           //33ミリ秒後に再びアニメーションを実行する
+                                |           setTimeout(animate, 33);
+                                |       }
+                                |   }
+                                |   init();
+                                | });
+        div#footer=title
+        script(src='http://code.jquery.com/jquery.js')
+        script(src='js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='js/bootstrap.min.js')
+        script(src='coffee/list-counter.js')

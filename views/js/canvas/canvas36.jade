@@ -23,7 +23,83 @@ include ../../head.jade
                                     i.glyphicon.glyphicon-play
                                     | デモ
                             pre.prettyprint.linenums
-                            p CSSの最初の3行はスタイルをリセットし、
+                                | html, body {
+                                |   height: 100%;
+                                |   width: 100%;
+                                |   margin:0;
+                                | }
+                                | canvas {
+                                |   display: block;
+                                | }
+                                | body {
+                                |   background: #000;
+                                |   color: #fff;
+                                |   font-family: Verdana, Arial, sans-serif;
+                                |   font-size: 18px;    
+                                | }
+                                | h1 {
+                                |   font-size: 30px;
+                                | }
+                                | p {
+                                |   margin: 0 20px;
+                                | }
+                                | a {
+                                |   color: #fff;
+                                |   text-decoration: none;
+                                | }
+                                | a:hover {
+                                |   text-decoration: underline;
+                                | }
+                                | a.button {
+                                |   background: #185da8;
+                                |   border-radius: 5px;
+                                |   display: block;
+                                |   font-size: 30px;
+                                |   margin: 40px 0 0 45px;
+                                |   padding: 10px;
+                                |   width: 200px;
+                                | }
+                                | a.button:hover {
+                                |   background: #2488f5;
+                                |   color: #fff;
+                                |   text-decoration: none;
+                                | }
+                                | #game {
+                                |   height: 600px;
+                                |   left: 50%;
+                                |   margin: -300px 0 0 -175px;
+                                |   position: relative;
+                                |   top: 50%;
+                                |   width: 350px;
+                                | }
+                                | #gameCanvas {
+                                |   background: #001022;
+                                | }
+                                | #gameUI {
+                                |   height: 600px;
+                                |   position: absolute;
+                                |   width: 350px;
+                                | }
+                                | #gameIntro, #gameComplete {
+                                |   background: rgba(0, 0, 0, 0.5);
+                                |   margin-top: 100px;
+                                |   padding: 40px 0;
+                                |   text-align: center;
+                                | }
+                                | #gameStats {
+                                |   font-size: 14px;
+                                |   margin: 20px 0;
+                                | }
+                                | #gameStats .gameReset {
+                                |   margin: 20px 20px 0 0;
+                                |   position: absolute;
+                                |   right: 0;
+                                |   top: 0;
+                                | }
+                            p CSSの最初の3行はスタイルをリセットし、HTMLドキュメントがブラウザウィンドウ全体を覆うようにセットアップします。その後ろには、ドキュメントの背景色、ゲーム内のテキストやリンクのデフォルトスタイルを定義する5つのルール（body、h1、p、a、a:hover）が続きます。その次の2つのルール（a.button、a.button:hover）は、ゲーム内のボタンのスタイルを定義します（すぐあとで示します）。HTMLドキュメントからわかるように、ボタンのリンクの定義ではクラスを使っていますが、それはすべてのボタンで同じスタイルを使った方が効率的だからです。
+                            p ゲームのHTMLコードは、1個のdiv要素を定義し、CSSの位置設定のために使われています。マージンをうまく使ってゲーム全体をブラウザウィンドウの中央に配置しています。canvas要素のスタイル設定は#gameCanvasルールによって行われていますが、このルールは背景色を群青に変えているだけです。
+                            p UIのスタイルは、#gameUI、#gameIntro、#gameComplete、#gameStats、ルールは、どれもHTML内のUI要素のスタイルに影響を与えています。たとえば、#gameUIは絶対位置を使ってUIをcanvas要素の上に移動しています。ほかのルールは、テキストのスタイルを変えたり、小さな位置変更をしたりしています。
+                            p このCSSは、まだ完璧ではないものの、全体としてゲームがもっときれいに見えるようにしています。それ以外のことは、すべてJavaScriptコードのなかでしょりされます。
         div#footer=title
         script(src='http://code.jquery.com/jquery.js')
         script(src='js/google-code-prettify/prettify.js')

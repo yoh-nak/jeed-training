@@ -2,7 +2,7 @@
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
-  , html5 = require('./routes/html5')
+  , html = require('./routes/html')
   , css3 = require('./routes/css3')
   , rwd = require('./routes/rwd')
   , js = require('./routes/js')
@@ -45,7 +45,7 @@ if ('development' == app.get('env')) {
 //単独
 app.get('/', routes.index);
 app.get('/users', user.list);
-app.get('/html5-:id', html5.html5);
+app.get('/html:id:format', html.html);
 app.get('/css3:id', css3.css3);
 app.get('/rwd-id', rwd.rwd);
 app.get('/jquery:id', jquery.jquery);

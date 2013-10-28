@@ -34,7 +34,7 @@ app.use(express.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public'))); //静的ページパス
 
-//Style動的コンパイル
+//Stylus動的コンパイル
 app.use(require('stylus').middleware({
     src: __dirname + '/views',
     dest: __dirname + '/public'

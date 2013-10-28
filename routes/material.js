@@ -10,9 +10,10 @@ exports.material = function(req, res){
 
 //cordovaの設定
 exports.cordova = function(req, res){
-	res.render('material/cordova/cordova' + req.params.id, {
+	res.render('material/cordova/cordova' + req.params.id + req.params.format, {
 	  	title: config.title,
-	  	instructor: config.instructor
+	  	instructor: config.instructor,
+	  	pretty: true
 	});
 };
 

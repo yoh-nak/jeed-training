@@ -13,7 +13,7 @@ include ../../head.jade
                             p ゲームの核となる機能はすべてセットアップしましたが、まだアステロイドは表示されていませんし、アニメーションも起きません。これではゲームとはとても言えないでしょう。いよいよこの部分を作っていきます。ありがたいことに、この節でしていくことはすでに知っている処理ばかりです。
                             p まず、前章でアステロイドのアニメーションと衝突検出のために使った2つのループをセットアップします。これらのループを追加すると、アステロイドは動き、互いに跳ね返るようになります。フィールドからアステロイドをはじき出す（プレイヤーアステロイドをぶつけて）のためにはこの動作が必要です。
                             p animate関数のフィールド描画コードの下に次のコードを追加してください。
-                            pre(class='prettyprint linenums:146')
+                            pre(class='prettyprint linenums:147')
                                 | context.fillStyle = 'rgb(255, 255, 255)';
                                 | 
                                 | var asteroidsLength = asteroids.length;
@@ -31,7 +31,7 @@ include ../../head.jade
                                 | }
                             p fillStyleプロパティに白をセットしていることを除けば、新しいことはありません。以前は、フィールドのためにfillStyleをグレイにしていました。ブラウザでゲームを表示し、Playをクリックすると、アステロイドが表示されることがわかります。
                             p 現状では、まだ動きやアニメーションはありません。これらを追加するためには、まず前章の衝突検出コードを追加します。tmpAsteroidB変数の宣言の後ろに次のコードを追加してください。
-                            pre(class='prettyprint linenums:155')
+                            pre(class='prettyprint linenums:156')
                                 | var dX = tmpAsteroidB.x - tmpAsteroid.x;
                                 | var dY = tmpAsteroidB.y - tmpAsteroid.y;
                                 | var distance = Math.sqrt((dX*dX)+(dY*dY));
@@ -81,7 +81,7 @@ include ../../head.jade
                                 | }
                             p 見ているとくらくらしてくるかもしれませんが、前章のコードとまったく同じです。簡単に復習しておきましょう。このコードは、アステロイドがほかのアステロイドと重なり合っている（衝突している）かどうかチェックし、重なり合っている場合には2つのアステロイドの速度を変更して、リアルに跳ね返るようにします。
                             p たとえアニメーションループを動かしても（まだ動いていませんが）、アステロイドの位置を更新していないので、まだ何も動きません。動かすためには、キャンバスに個々のアステロイドを描画するコードの前に、位置、摩擦コードを追加する必要があります。
-                            pre(class='prettyprint linenums:204')
+                            pre(class='prettyprint linenums:205')
                                 | //新しい位置を計算する
                                 | tmpAsteroid.x += tmpAsteroid.vX;
                                 | tmpAsteroid.y += tmpAsteroid.vY;
@@ -156,7 +156,7 @@ include ../../head.jade
                                 |       uiStats.show();
                                 | 
                                 |       //ゲームの初期設定をする
-                                |       playGame = false;
+                                |       playGame = false; //動作検証 playGame = true;
                                 |       platformX = canvasWidth/2;
                                 |       platformY = 150;
                                 |       platformOuterRadius = 100;
@@ -171,6 +171,7 @@ include ../../head.jade
                                 |       playerOriginalY = canvasHeight-150;
                                 |       player = new Asteroid(playerOriginalX, playerOriginalY, pRadius, pMass, pFriction);
                                 |       player.player = true;
+                                |       //player.vY = -25; //動作検証
                                 |       asteroids.push(player);
                                 |               
                                 |       //外周のアステロイドの設定
@@ -215,7 +216,7 @@ include ../../head.jade
                                 |       }
                                 | 
                                 |       uiRemaining.html(asteroids.length-1);
-                                |       
+                                | 
                                 |       //アニメーションループを開始する
                                 |       animate();
                                 |   }
@@ -280,7 +281,7 @@ include ../../head.jade
                                 |                   //アステロイドの速度を回転する
                                 |                   var vX = tmpAsteroid.vX * cosine + tmpAsteroid.vY * sine;
                                 |                   var vY = tmpAsteroid.vY * cosine - tmpAsteroid.vX * sine;
-                                |                   
+                                |                                                           
                                 |                   //アステロイドBの速度を回転する
                                 |                   var vXb = tmpAsteroidB.vX * cosine + tmpAsteroidB.vY * sine;
                                 |                   var vYb = tmpAsteroidB.vY * cosine - tmpAsteroidB.vX * sine;
@@ -312,7 +313,7 @@ include ../../head.jade
                                 |           //新しい位置を計算する
                                 |           tmpAsteroid.x += tmpAsteroid.vX;
                                 |           tmpAsteroid.y += tmpAsteroid.vY;
-                                |           
+                                |                       
                                 |           //摩擦
                                 |           if (Math.abs(tmpAsteroid.vX) &gt; 0.1) {
                                 |               tmpAsteroid.vX *= tmpAsteroid.friction;

@@ -48,7 +48,7 @@ $(function() {
 		uiStats.show();
 
 		//ゲームの初期設定をする
-		playGame = false;
+		playGame = false; //動作検証 playGame = true;
 		platformX = canvasWidth/2;
 		platformY = 150;
 		platformOuterRadius = 100;
@@ -63,6 +63,7 @@ $(function() {
 		playerOriginalY = canvasHeight-150;
 		player = new Asteroid(playerOriginalX, playerOriginalY, pRadius, pMass, pFriction);
 		player.player = true;
+		//player.vY = -25; //動作検証
 		asteroids.push(player);
 				
 		//外周のアステロイドの設定
@@ -107,7 +108,7 @@ $(function() {
 		}
 
 		uiRemaining.html(asteroids.length-1);
-		
+
 		//アニメーションループを開始する
 		animate();
 	}
@@ -172,7 +173,7 @@ $(function() {
 					//アステロイドの速度を回転する
 					var vX = tmpAsteroid.vX * cosine + tmpAsteroid.vY * sine;
 					var vY = tmpAsteroid.vY * cosine - tmpAsteroid.vX * sine;
-					
+															
 					//アステロイドBの速度を回転する
 					var vXb = tmpAsteroidB.vX * cosine + tmpAsteroidB.vY * sine;
 					var vYb = tmpAsteroidB.vY * cosine - tmpAsteroidB.vX * sine;
@@ -204,7 +205,7 @@ $(function() {
 			//新しい位置を計算する
 			tmpAsteroid.x += tmpAsteroid.vX;
 			tmpAsteroid.y += tmpAsteroid.vY;
-			
+						
 			//摩擦
 			if (Math.abs(tmpAsteroid.vX) > 0.1) {
 				tmpAsteroid.vX *= tmpAsteroid.friction;

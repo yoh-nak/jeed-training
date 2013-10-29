@@ -59,6 +59,8 @@ $(function() {
 		var pRadius = 15;
 		var pMass = 10;
 		var pFriction = 0.97;
+		playerOriginalX = canvasWidth/2;
+		playerOriginalY = canvasHeight-150;
 		player = new Asteroid(playerOriginalX, playerOriginalY, pRadius, pMass, pFriction);
 		player.player = true;
 		asteroids.push(player);
@@ -105,7 +107,7 @@ $(function() {
 		}
 
 		uiRemaining.html(asteroids.length-1);
-
+		
 		//アニメーションループを開始する
 		animate();
 	}
@@ -141,7 +143,7 @@ $(function() {
 		context.fill();
 		
 
-		context.fillStyle = "rgb(255, 255, 255)";
+		context.fillStyle = 'rgb(255, 255, 255)';
 
 		var asteroidsLength = asteroids.length;
 		for (var i = 0; i < asteroidsLength; i++) {
@@ -149,6 +151,71 @@ $(function() {
 
 			for(var j = i+1; j < asteroidsLength; j++){
 				var tmpAsteroidB = asteroids[j];
+
+				var dX = tmpAsteroidB.x - tmpAsteroid.x;
+				var dY = tmpAsteroidB.y - tmpAsteroid.y;
+				var distance = Math.sqrt((dX*dX)+(dY*dY));
+				
+				if (distance < tmpAsteroid.radius + tmpAsteroidB.radius) {								
+					var angle = Math.atan2(dY, dX);
+					var sine = Math.sin(angle);
+					var cosine = Math.cos(angle);
+					
+					//アステロイドの位置を回転する
+					var x = 0;
+					var y = 0;
+					
+					//tmpAsteroidBの位置を回転する
+					var xB = dX * cosine + dY * sine;
+					var yB = dY * cosine - dX * sine;
+						
+					//アステロイドの速度を回転する
+					var vX = tmpAsteroid.vX * cosine + tmpAsteroid.vY * sine;
+					var vY = tmpAsteroid.vY * cosine - tmpAsteroid.vX * sine;
+					
+					//アステロイドBの速度を回転する
+					var vXb = tmpAsteroidB.vX * cosine + tmpAsteroidB.vY * sine;
+					var vYb = tmpAsteroidB.vY * cosine - tmpAsteroidB.vX * sine;
+					
+					//運動量を保存する
+					var vTotal = vX - vXb;
+					vX = ((tmpAsteroid.mass - tmpAsteroidB.mass) * vX + 2 * tmpAsteroidB.mass * vXb) / (tmpAsteroid.mass + tmpAsteroidB.mass);
+					vXb = vTotal + vX;
+					
+					//2つのアステロイドを跳ね返えらせる
+					xB = x + (tmpAsteroid.radius + tmpAsteroidB.radius);
+					
+					//アステロイドの位置を回転にてもとに戻す
+					tmpAsteroid.x = tmpAsteroid.x + (x * cosine - y * sine);
+					tmpAsteroid.y = tmpAsteroid.y + (y * cosine + x * sine);
+					
+					tmpAsteroidB.x = tmpAsteroid.x + (xB * cosine - yB * sine);
+					tmpAsteroidB.y = tmpAsteroid.y + (yB * cosine + xB * sine);
+					
+					//アステロイドの速度を回転してもとに戻す
+					tmpAsteroid.vX = vX * cosine - vY * sine;
+					tmpAsteroid.vY = vY * cosine + vX * sine;
+					
+					tmpAsteroidB.vX = vXb * cosine - vYb * sine;
+					tmpAsteroidB.vY = vYb * cosine + vXb * sine;
+				}
+			}
+
+			//新しい位置を計算する
+			tmpAsteroid.x += tmpAsteroid.vX;
+			tmpAsteroid.y += tmpAsteroid.vY;
+			
+			//摩擦
+			if (Math.abs(tmpAsteroid.vX) > 0.1) {
+				tmpAsteroid.vX *= tmpAsteroid.friction;
+			} else {
+				tmpAsteroid.vX = 0;
+			}
+			
+			if (Math.abs(tmpAsteroid.vY) > 0.1) {
+				tmpAsteroid.vY *= tmpAsteroid.friction;
+			} else {
+				tmpAsteroid.vY = 0;
 			}
 
 			context.beginPath();

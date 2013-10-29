@@ -59,6 +59,8 @@ $(function() {
 		var pRadius = 15;
 		var pMass = 10;
 		var pFriction = 0.97;
+		playerOriginalX = canvasWidth/2;
+		playerOriginalY = canvasHeight-150;
 		player = new Asteroid(playerOriginalX, playerOriginalY, pRadius, pMass, pFriction);
 		player.player = true;
 		asteroids.push(player);

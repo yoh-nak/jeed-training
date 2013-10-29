@@ -1,0 +1,191 @@
+include ../../head.jade
+    body
+        include navbar.jade
+        div.container
+            div.row
+                div.col-sm-3
+                    include bowling.jade
+                div.col-sm-9
+                    div.panel.panel-primary
+                        div.panel-heading プレーヤーアステロイドをセットアップする
+                        div.panel-body
+                            h4 プレーヤーアステロイドをセットアップする
+                            p 現在のところ、作らなければならないオブジェクトがあと1つ残っています。それは、ほかのアステロイド群に投げ込まれるプレーヤーアステロイドです。実際には、プレーヤーアステロイドもほかのアステロイドとよく似ていますが、扱いを少し変えなければならないため、別個に作る必要があります。まず、JavaScriptファイルの冒頭で変数を準備します。asteroids変数の宣言の後ろに次のコードを追加してください。
+                            pre(class='prettyprint linenums:16')
+                                | var player;
+                                | var playerOriginalX;
+                                | var playerOriginalY;
+                            p player変数は、ゲーム内でほかのアステロイドとは別個にプレーヤーアステロイドにアクセスするために使います。playerOriginXとplayerOriginYの目的はすぐ明らかになりますが、今のところは、これらの変数にプレーヤーアステロイドの初期値が格納されることを知っておくと役に立つでしょう。
+                            p 次は、実際にプレーヤーアステロイドを作ります。startGame関数のasteroids変数初期化コードの後ろに次のコードを追加してください。
+                            pre(class='prettyprint linenums:59')
+                                | var pRadius = 15;
+                                | var pMass = 10;
+                                | var pFriction = 0.97;
+                                | playerOriginalX = canvasWidth/2;
+                                | playerOriginalY = canvasHeight-150;
+                                | player = new Asteroid(playerOriginalX, playerOriginalY, pRadius, pMass, pFriction);
+                                | player.player = true;
+                                | asteroids.push(player);
+                            p このコードはごく単純なものです。半径（ほかのアステロイドよりも大きい値になっています）、質量（これもほかのアステロイドよりも大きい値です）、摩擦、初期位置（画面下部）を宣言し、それを使って新しいアステロイドオブジェクトを作ります。ほかのアステロイドと大きく異るのは、新しいアステロイドをplayer変数に代入し、あとで再びアステロイドにアクセスできるようにしていることです。さらに、それまでのアクセスではまるで不十分だと言うかのようにplayer変数に直接アクセスして、playerプロパティを書き換えます。最後に、asteroids配列にプレーヤーアステロイドを追加します。
+                            p すぐあとで説明するように、プレーヤーアステロイドは、animate関数でほかのアステロイドと同じように描画されます。
+                            p
+                                a.btn.btn-default(href='demo/canvas/exercise6/index6.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | $(function() {
+                                |   var canvas = $('#gameCanvas');
+                                |   var context = canvas.get(0).getContext('2d');
+                                |   
+                                |   //キャンバスのサイズ
+                                |   var canvasWidth = canvas.width();
+                                |   var canvasHeight = canvas.height();
+                                |   
+                                |   //ゲームの設定
+                                |   var playGame;
+                                |   var platformX;
+                                |   var platformY;
+                                |   var platformOuterRadius;
+                                |   var platformInnerRadius;
+                                |   var asteroids; //アステロイドを格納する配列
+                                |   var player;
+                                |   var playerOriginalX;
+                                |   var playerOriginalY;
+                                | 
+                                |   //ゲームのUI
+                                |   var ui = $('#gameUI');
+                                |   var uiIntro = $('#gameIntro');
+                                |   var uiStats = $('#gameStats');
+                                |   var uiComplete = $('#gameComplete');
+                                |   var uiPlay = $('#gamePlay');
+                                |   var uiReset = $('.gameReset');
+                                |   var uiRemaining = $('#gameRemaining');
+                                |   var uiScore = $('.gameScore');
+                                |   
+                                |   //アステロイドの描画を定義するクラス
+                                |   var Asteroid = function(x, y, radius, mass, friction) {
+                                |       this.x = x;
+                                |       this.y = y;
+                                |       this.radius = radius;
+                                |       this.mass = mass;
+                                |       this.friction = friction;
+                                |       
+                                |       this.vX = 0;
+                                |       this.vY = 0;
+                                |       
+                                |       this.player = false;
+                                |   };
+                                | 
+                                |   //ゲームをリセット、開始する
+                                |   function startGame() {
+                                |       //ゲームのリセット
+                                |       uiScore.html('0');
+                                |       uiStats.show();
+                                | 
+                                |       //ゲームの初期設定をする
+                                |       playGame = false;
+                                |       platformX = canvasWidth/2;
+                                |       platformY = 150;
+                                |       platformOuterRadius = 100;
+                                |       platformInnerRadius = 75;
+                                |       asteroids = new Array();
+                                | 
+                                |       //プレーヤーアステロイドの設定
+                                |       var pRadius = 15;
+                                |       var pMass = 10;
+                                |       var pFriction = 0.97;
+                                |       playerOriginalX = canvasWidth/2;
+                                |       playerOriginalY = canvasHeight-150;
+                                |       player = new Asteroid(playerOriginalX, playerOriginalY, pRadius, pMass, pFriction);
+                                |       player.player = true;
+                                |       asteroids.push(player);
+                                |               
+                                |       //外周のアステロイドの設定
+                                |       var outerRing = 8; //外周のアステロイド
+                                |       var ringCount = 3; //環の数
+                                |       var ringSpacing = (platformInnerRadius/(ringCount-1)); //環と環の間の距離
+                                | 
+                                |       for (var r = 0; r &lt; ringCount; r++) {
+                                |           var currentRing = 0; //現在の環に並べるアステロイドの数
+                                |           var angle = 0; //アステロイドとアステロイドの間の角度
+                                |           var ringRadius = 0;
+                                |           
+                                |           //最も内側の環か?
+                                |           if(r == ringCount-1){
+                                |               currentRing = 1;
+                                |           }
+                                |           else{
+                                |               currentRing = outerRing-(r*3);
+                                |               angle = 360/currentRing;
+                                |               ringRadius = platformInnerRadius-(ringSpacing*r);
+                                |           }
+                                | 
+                                |           for(var a = 0; a &lt; currentRing; a++){
+                                |               var x = 0;
+                                |               var y = 0;
+                                |               
+                                |               //最も内側の環か?
+                                |               if (r == ringCount-1) {
+                                |                   x = platformX;
+                                |                   y = platformY;
+                                |               } else {
+                                |                   x = platformX+(ringRadius*Math.cos((angle*a)*(Math.PI/180)));
+                                |                   y = platformY+(ringRadius*Math.sin((angle*a)*(Math.PI/180)));
+                                |               }
+                                |           
+                                |               var radius = 10;
+                                |               var mass = 5;
+                                |               var friction = 0.95;
+                                |               
+                                |               asteroids.push(new Asteroid(x, y, radius, mass, friction));
+                                |           }
+                                |       }
+                                | 
+                                |       //アニメーションループを開始する
+                                |       animate();
+                                |   }
+                                |   
+                                |   //ゲームの初期化をする
+                                |   function init(){
+                                |       uiStats.hide();
+                                |       uiComplete.hide();
+                                |       
+                                |       uiPlay.click(function(e) {
+                                |           e.preventDefault();
+                                |           uiIntro.hide();
+                                |           startGame();
+                                |       });
+                                |       
+                                |       uiReset.click(function(e) {
+                                |           e.preventDefault();
+                                |           uiComplete.hide();
+                                |           startGame();
+                                |       });
+                                |   };
+                                |   
+                                |   //アニメーションループ
+                                |   function animate() {        
+                                |       //クリア
+                                |       context.clearRect(0, 0, canvasWidth, canvasHeight);
+                                | 
+                                |       //フィールドの描画
+                                |       context.fillStyle = 'rgb(100, 100, 100)';
+                                |       context.beginPath();
+                                |       context.arc(platformX, platformY, platformOuterRadius, 0, Math.PI*2, true);
+                                |       context.closePath();
+                                |       context.fill();
+                                |       
+                                |       if (playGame) {
+                                |           //33ミリ秒後に再びアニメーションを実行する
+                                |           setTimeout(animate, 33);
+                                |       }
+                                |   }
+                                |   init();
+                                | });
+        div#footer=title
+        script(src='http://code.jquery.com/jquery.js')
+        script(src='js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='js/bootstrap.min.js')
+        script(src='coffee/list-counter.js')

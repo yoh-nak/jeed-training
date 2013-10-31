@@ -165,6 +165,10 @@ include ../head.jade
 									|     ● ACCESS RANKING
 									|     ● RECENT POSTS
 								figcaption 見出しを持つセクションで構成したアウトライン。
+							div.alert.alert-info  セクション内に複数の見出しを記述した場合
+							p セクション内に複数の見出しを記述した場合、1つ目の見出しはセクションのmぢ足として扱われます。一方、残りの見出しはそれぞれが暗黙のセクションを構成し、構成したセクションの見出しとして扱われます。暗黙のセクションは通常のセクションと同じように階層構造を示し、アウトラインに抽出されます。
+							p たとえば、サンプルの記事では小見出しをつけたセクションを&lt;section&gt;で明示しなかった場合、&lt;article&gt;の中には複数の見出しを記述した状態になります。このとき、1つ目の見出しとなる記事のタイトルを&lt;h1&gt;で、小見出しを&lt;h2&gt;でマークアップしておくと、&lt;h2&gt;によって&lt;article&gt;を使用したとき同じ構造を示したことになります。
+							p 子階層に暗黙のセクションが構成されるのは、1つ目の見出しをマークアップした&lt;h1&gt;より、小見出しをマークアップした&lt;h2&gt;が下位ランクの見出しを示すためです。見出しのランクは&lt;h1&gt;が最も高く、&lt;h6&gt;が最も低いことを示します。
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

@@ -64,7 +64,7 @@ app.get('/rwd-id', rwd.rwd);
 app.get('/jquery:id', jquery.jquery);
 app.get('/jqm:id', jqm.jqm);
 app.get('/mobile:id', mobile.mobile);
-app.get('/nodejs-:id', nodejs.nodejs);
+app.get('/nodejs:id:format', nodejs.nodejs);
 app.get('/linux-:id', linux.linux);
 app.get('/diary-:id', diary.diary);
 

@@ -1,0 +1,62 @@
+include ../head.jade
+	body
+		include navbar.jade
+		div.container
+			div.row
+				div.col-sm-3
+					include left.jade
+				div.col-sm-9
+					div.panel.panel-primary
+						div.panel-heading
+							i.glyphicon.glyphicon-book
+							| Node.jsでメールフォーム
+						div.panel-body
+							h4 Node.jsでメールフォーム
+							p Node.js、Express、nodemailerでメールフォームを作成してみましょう。
+							p
+								a.btn.btn-default(href='http://node-mail.herokuapp.com/',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+								| &nbsp;
+								a.btn.btn-default.btn-warning(href='https://github.com/yoh-nak/node-mail',target='_blank',type='button')
+									span.glyphicon.glyphicon-cloud-download
+									| GitHub
+							p.dtree
+								script(src='js/dtree/dtree.js')
+								p
+									a(href='javascript: treeObj.openAll();') 全て開く | 
+									a(href='javascript: treeObj.closeAll();') 全て閉じる
+									//a(href='javascript: treeObj.openTo(4, true);') Open to: Node 4
+								script.
+									var treeObj = new dTree('treeObj');
+									treeObj.add(0,-1,'TOP');
+									treeObj.add(1,0,'node_modules','#');
+									treeObj.add(2,1,'ejs','javascript:void(0)');
+									treeObj.add(3,2,'..','javascript:void(0)');
+									treeObj.add(4,1,'express','javascript:void(0)');
+									treeObj.add(5,4,'..','javascript:void(0)');
+									treeObj.add(6,0,'public','javascript:void(0)');
+									treeObj.add(7,6,'..','javascript:void(0)');
+									treeObj.add(8,0,'routes','javascript:void(0)');
+									treeObj.add(9,8,'index.js','javascript:void(0)');
+									treeObj.add(10,0,'views','#');
+									treeObj.add(11,10,'index.ejs','javascript:void(0)');
+									treeObj.add(12,0,'app.js','#');
+									treeObj.add(13,0,'package.json','#');
+									document.write(treeObj); 
+							| app.js
+							pre.prettyprint.linenums
+								| 
+							| routes/index.js
+							pre.prettyprint.linenums
+								| 
+							| views/index.ejs
+							pre.prettyprint.linenums
+								| 
+		div#footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='js/bootstrap.min.js')
+		script(src='coffee/list-counter.js')

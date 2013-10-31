@@ -1,0 +1,31 @@
+include ../head.jade
+	body
+		include navbar.jade
+		div.container
+			div.row
+				div.col-sm-3
+					include left.jade
+				div.col-sm-9
+					div.panel.panel-primary
+						div.panel-heading
+							i.glyphicon.glyphicon-book
+							| Expressでパーシャルを使う
+						div.panel-body
+							h4 EJSでパーシャルを使う
+							p デフォルトのテンプレートエンジンがEJSのときは、外部ejsファイルの拡張子は不要です。
+							pre.prettyprint
+								| &lt;p&gt;
+								| &lt;%- include ファイル名 %&gt;
+								| &lt;/p&gt;
+							p デフォルトのテンプレートエンジンがEJSではないとき、外部ejsファイルに拡張子が必要です。
+							pre.prettyprint
+								| &lt;p&gt;
+								| &lt;%- include ファイル名.フォーマット名 %&gt;
+								| &lt;/p&gt;
+		div#footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='js/bootstrap.min.js')
+		script(src='coffee/list-counter.js')

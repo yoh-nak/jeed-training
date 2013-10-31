@@ -352,23 +352,34 @@ include ../head.jade
 								| 
 								| &lt;/article&gt;
 							div.alert.alert-warning  NOTES: [A]と[B]のどちらの形式で記述するか
-							p [A]と[B]のどちらの形式で記述するかは、製作者の選択によります。[A]の場合は見出しのランクを気にせずに記述することができますし、[B]の場合はソース全体をシンプルに記述できるというメリットがあります。両方の形式を混合して記述することも可能です。
-							p ただし、ページの構造が複雑になってくると、セクションを明示しない[B]の形式では暗黙のセクションによってアウトラインが崩れるといった問題が生じやすくなりますので注意が必要です。
-							div.alert.alert-info  見出しに適用されるデフォルトスタイルシート
-							p 見出しに対しては下のようなデフォルトスタイルシートが適用されることになっており、階層構造に応じて見出しの文字サイズや上下マージンの大きさが変わります。「x」にはarticle、aside、nav、section、のいずれかが当てはまる場合に適用させます。
+								p [A]と[B]のどちらの形式で記述するかは、製作者の選択によります。[A]の場合は見出しのランクを気にせずに記述することができますし、[B]の場合はソース全体をシンプルに記述できるというメリットがあります。両方の形式を混合して記述することも可能です。
+								p ただし、ページの構造が複雑になってくると、セクションを明示しない[B]の形式では暗黙のセクションによってアウトラインが崩れるといった問題が生じやすくなりますので注意が必要です。
+								div.alert.alert-info  見出しに適用されるデフォルトスタイルシート
+								p 見出しに対しては下のようなデフォルトスタイルシートが適用されることになっており、階層構造に応じて見出しの文字サイズや上下マージンの大きさが変わります。「x」にはarticle、aside、nav、section、のいずれかが当てはまる場合に適用させます。
 							pre
 							p たとえば、以下の2つのサンプルは同じ階層構造を明示したものです。上はセクションを明示していない形式で記述していますが、デフォルトスタイルシートによって同じデザインで表示されます。
 							figure
 								pre
-								| ● 見出し1
-								|     ● 見出し2
-								|         ● 見出し3
-								|             ● 見出し4
-								|                 ● 見出し5
-								|                     ● 見出し6
+									| ● 見出し1
+									|     ● 見出し2
+									|         ● 見出し3
+									|             ● 見出し4
+									|                 ● 見出し5
+									|                     ● 見出し6
 								figcaption 以下のサンプルで構成されるアウトライン
 							pre(class='prettyprint linenums:1')
-
+								| h1 {margin-top: 0.67em; margin-bottom: 0.67em; font-size:2.00em; font-weight: bold;}
+								| h2 {margin-top: 0.83em; margin-bottom: 0.83em; font-size:1.50em; font-weight: bold;}
+								| h3 {margin-top: 1.00em; margin-bottom: 1.00em; font-size:1.17em; font-weight: bold;}
+								| h4 {margin-top: 1.33em; margin-bottom: 1.33em; font-size:1.00em; font-weight: bold;}
+								| h5 {margin-top: 1.67em; margin-bottom: 1.67em; font-size:0.83em; font-weight: bold;}
+								| h6 {margin-top: 2.33em; margin-bottom: 2.33em; font-size:0.67em; font-weight: bold;}
+								| 
+								| x h1 {margin-top: 0.83em; margin-bottom: 0.83em; font-size: 1.50em;}
+								| x x h1 {margin-top: 1.00em; margin-bottom: 1.00em; font-size: 1.17em;}
+								| x x x h1 {margin-top: 1.33em; margin-bottom: 1.33em; font-size: 1.00em;}
+								| x x x x h1 {margin-top: 1.67em; margin-bottom: 1.67em; font-size: 0.83em;}
+								| x x x x x h1 {margin-top: 2.33em; margin-bottom: 2.33em; font-size: 0.67em;}
 							pre(class='prettyprint linenums:1')
 
 							pre(class='prettyprint linenums:1')

@@ -372,6 +372,11 @@ include ../head.jade
 							pre(class='prettyprint linenums:1')
 
 							pre(class='prettyprint linenums:1')
+
+							div.alert.alert-warning  NOTES: 下位互換
+								p HTML4.01やXHTML1.0にはセクションを示すという概念ははく、&lt;h1&gt;〜&lt;h6&gt;を利用してコンテンtの階層構造を示していました。そのため、セクションに未対応の古いブラウザでは、すべての見出しを&lt;h1&gt;で明示すると階層構造の違いを判別できなくなってしまいます。
+								p また、iOS4.xやAndroid2.x／3.xの場合、セクションには対応しているものの、適切なデフォルトスタイルシートが適用されず、&lt;h1&gt;で示した見出しがすべて同じ文字サイズで表示されてしまいます。
+								p そこで、こうした古いブラウザに対応する必要がある場合には、階層構造に合わせて見出しを&lt;h1&gt;〜&lt;h6&gt;でマークアップします。
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

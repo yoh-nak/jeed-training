@@ -165,14 +165,201 @@ include ../head.jade
 									|     ● ACCESS RANKING
 									|     ● RECENT POSTS
 								figcaption 見出しを持つセクションで構成したアウトライン。
+							div.alert.alert-warning  NOTES:
+							p サンプルではすべての見出しを&lt;h1&gt;でマークアップしましたが、&lt;h2&gt;〜&lt;h6&gt;を使用することもできます。たとえば、以下のどのパターンで記述しても、このサンプルにおいてはセマンティクス上での違いはなく、アウトラインも同じものが作成されます。
+							figure
+								pre
+									| &lt;body&gt;
+									| &lt;h1&gt;SUN DIARY&lt;/h1&gt;
+									| 
+									| &lt;article&gt;
+									| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+									| &lt;section&gt;&lt;h1&gt;紅茶&lt;/h1&gt;&lt;/section&gt;
+									| &lt;section&gt;&lt;h1&gt;ウーロン茶&lt;/h1&gt;&lt;/section&gt;
+									| &lt;section&gt;&lt;h1&gt;緑茶&lt;/h1&gt;&lt;/section&gt;
+									| &lt;/article&gt;
+									| 
+									| &lt;aside&gt;&lt;h1&gt;SUBSCRIBE & FOLLOW&lt;/h1&gt;&lt;/aside&gt;
+									| &lt;aside&gt;&lt;h1&gt;ACCESS RANKING&lt;/h1&gt;&lt;/aside&gt;
+									| &lt;aside&gt;&lt;h1&gt;RECENT POSTS&lt;/h1&gt;&lt;/aside&gt;
+									| &lt;/body&gt;
+								figcaption すべての見出しを&lt;h1&gt;でマークアップしたもの。
+							figure
+								pre
+									| &lt;body&gt;
+									| &lt;h2&gt;SUN DIARY&lt;/h2&gt;
+									| 
+									| &lt;article&gt;
+									| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+									| &lt;section&gt;&lt;h3&gt;紅茶&lt;/h3&gt;&lt;/section&gt;
+									| &lt;section&gt;&lt;h1&gt;ウーロン茶&lt;/h1&gt;&lt;/section&gt;
+									| &lt;section&gt;&lt;h2&gt;緑茶&lt;/h2&gt;&lt;/section&gt;
+									| &lt;/article&gt;
+									| 
+									| &lt;aside&gt;&lt;h6&gt;SUBSCRIBE & FOLLOW&lt;/h6&gt;&lt;/aside&gt;
+									| &lt;aside&gt;&lt;h5&gt;ACCESS RANKING&lt;/h5&gt;&lt;/aside&gt;
+									| &lt;aside&gt;&lt;h5&gt;RECENT POSTS&lt;/h5&gt;&lt;/aside&gt;
+									| &lt;/body&gt;
+								figcaption すべての見出しを&lt;h1&gt;〜&lt;h6&gt;でバラバラにマークアップしたもの。
+							figure
+								pre
+									| &lt;body&gt;
+									| &lt;h1&gt;SUN DIARY&lt;/h1&gt;
+									| 
+									| &lt;article&gt;
+									| &lt;h2&gt;Short Tea Breaks&lt;/h2&gt;
+									| &lt;section&gt;&lt;h3&gt;紅茶&lt;/h3&gt;&lt;/section&gt;
+									| &lt;section&gt;&lt;h3&gt;ウーロン茶&lt;/h3&gt;&lt;/section&gt;
+									| &lt;section&gt;&lt;h3&gt;緑茶&lt;/h3&gt;&lt;/section&gt;
+									| &lt;/article&gt;
+									| 
+									| &lt;aside&gt;&lt;h2&gt;SUBSCRIBE & FOLLOW&lt;/h2&gt;&lt;/aside&gt;
+									| &lt;aside&gt;&lt;h2&gt;ACCESS RANKING&lt;/h2&gt;&lt;/aside&gt;
+									| &lt;aside&gt;&lt;h2&gt;RECENT POSTS&lt;/h2&gt;&lt;/aside&gt;
+									| &lt;/body&gt;
+								figcaption セクションを示した階層構造に合わせて各見出しを&lt;h1&gt;、&lt;h2&gt;、&lt;h3&gt;でマークアップしたもの。
 							div.alert.alert-info  セクション内に複数の見出しを記述した場合
 							p セクション内に複数の見出しを記述した場合、1つ目の見出しはセクションのmぢ足として扱われます。一方、残りの見出しはそれぞれが暗黙のセクションを構成し、構成したセクションの見出しとして扱われます。暗黙のセクションは通常のセクションと同じように階層構造を示し、アウトラインに抽出されます。
 							p たとえば、サンプルの記事では小見出しをつけたセクションを&lt;section&gt;で明示しなかった場合、&lt;article&gt;の中には複数の見出しを記述した状態になります。このとき、1つ目の見出しとなる記事のタイトルを&lt;h1&gt;で、小見出しを&lt;h2&gt;でマークアップしておくと、&lt;h2&gt;によって&lt;article&gt;を使用したとき同じ構造を示したことになります。
 							p 子階層に暗黙のセクションが構成されるのは、1つ目の見出しをマークアップした&lt;h1&gt;より、小見出しをマークアップした&lt;h2&gt;が下位ランクの見出しを示すためです。見出しのランクは&lt;h1&gt;が最も高く、&lt;h6&gt;が最も低いことを示します。
 							hr
-							h4 [A] 記事内のセクションを&lt;section&gt;で明示したもの（セクション内に見出しを1つだけ記述した状態）：
-							h4 [B] 記事内のセクションを明示していないもの（セクション内に複数の見出しを記述した状態）：
-							h4 [C] 記事内のセクションを明示せず、小見出しを&lt;h1&gt;でマークアップしたもの：
+							h5 [A] 記事内のセクションを&lt;section&gt;で明示したもの（セクション内に見出しを1つだけ記述した状態）：
+							figure
+								pre
+									| ● Short Tea Breaks
+									|     ● 紅茶
+									|     ● ウーロン茶
+									|     ● 緑茶
+								figcaption アウトライン。
+							p
+								a.btn.btn-default(href='demo/html/sample1/03/082-A.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;article&gt;
+								| &lt;header&gt;
+								| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+								| &lt;time datetime="2013-01-15"&gt;January 15, 2013&lt;/time&gt;
+								| &lt;/header&gt;
+								| 
+								| &lt;img src="img/tea.jpg" alt=""&gt;
+								| 
+								| &lt;p&gt;世界中にはたくさんのお茶があります。緑茶に紅茶、ウーロン茶など、その製法や味わいもさまざまですが、リラックスしたり、ちょっと休憩したいときなどには欠かすことができません。お茶のお供に、おいしいお菓子もあると幸せな気分になってしまいます。&lt;/p&gt;
+								| 
+								| &lt;section&gt;
+								| &lt;h1&gt;紅茶&lt;/h1&gt;
+								| &lt;p&gt;紅茶は、茶の葉を全発酵させて製造したお茶です。ダージリンやアッサム、ジャワ、ウバ、ニルギリなど、たくさんの銘柄があります。アールグレイといったフレーバーティーも有名です。&lt;/p&gt;
+								| 
+								| &lt;p&gt;基本的に熱湯で入れ、茶葉に合わせて抽出時間を十分に取ります。そのため、保温性の高いポットや温めた茶器を使って入れるのがポイントとなります。ティーコジーでポットをカバーし、温度が下がるのを防ぐのもおすすめです。&lt;/p&gt;
+								| &lt;/section&gt;
+								| 
+								| &lt;section&gt;
+								| &lt;h1&gt;ウーロン茶&lt;/h1&gt;
+								| &lt;p&gt;ウーロン茶は、茶の葉を半発酵させて製造したお茶です。中国茶では「青茶」に分類されるもので、凍頂烏龍茶、東方美人、鉄観音、武夷岩茶、水仙など、さまざまな銘柄があります。&lt;/p&gt;
+								| &lt;/section&gt;
+								| 
+								| &lt;section&gt;
+								| &lt;h1&gt;緑茶&lt;/h1&gt;
+								| &lt;p&gt;緑茶は、茶の葉を発酵させずに製造したお茶で、不発酵茶とも呼ばれます。煎茶やほうじ茶、玄米茶、玉露、抹茶など、日本茶の多くは緑茶に分類されるお茶となっています。&lt;/p&gt;
+								| &lt;/section&gt;
+								| 
+								| &lt;/article&gt;
+							h5 [B] 記事内のセクションを明示していないもの（セクション内に複数の見出しを記述した状態）：
+							figure
+								pre
+									| ● Short Tea Breaks
+									|     ○ 紅茶
+									|     ○ ウーロン茶
+									|     ○ 緑茶
+								figcaption アウトライン。
+							p
+								a.btn.btn-default(href='demo/html/sample1/03/082-B.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;article&gt;
+								| &lt;header&gt;
+								| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+								| &lt;time datetime="2013-01-15"&gt;January 15, 2013&lt;/time&gt;
+								| &lt;/header&gt;
+								| 
+								| &lt;img src="img/tea.jpg" alt=""&gt;
+								| 
+								| &lt;p&gt;世界中にはたくさんのお茶があります。緑茶に紅茶、ウーロン茶など、その製法や味わいもさまざまですが、リラックスしたり、ちょっと休憩したいときなどには欠かすことができません。お茶のお供に、おいしいお菓子もあると幸せな気分になってしまいます。&lt;/p&gt;
+								| 
+								| &lt;h2&gt;紅茶&lt;/h2&gt;
+								| &lt;p&gt;紅茶は、茶の葉を全発酵させて製造したお茶です。ダージリンやアッサム、ジャワ、ウバ、ニルギリなど、たくさんの銘柄があります。アールグレイといったフレーバーティーも有名です。&lt;/p&gt;
+								| 
+								| &lt;p&gt;基本的に熱湯で入れ、茶葉に合わせて抽出時間を十分に取ります。そのため、保温性の高いポットや温めた茶器を使って入れるのがポイントとなります。ティーコジーでポットをカバーし、温度が下がるのを防ぐのもおすすめです。&lt;/p&gt;
+								| 
+								| &lt;h2&gt;ウーロン茶&lt;/h2&gt;
+								| &lt;p&gt;ウーロン茶は、茶の葉を半発酵させて製造したお茶です。中国茶では「青茶」に分類されるもので、凍頂烏龍茶、東方美人、鉄観音、武夷岩茶、水仙など、さまざまな銘柄があります。&lt;/p&gt;
+								| 
+								| &lt;h2&gt;緑茶&lt;/h2&gt;
+								| &lt;p&gt;緑茶は、茶の葉を発酵させずに製造したお茶で、不発酵茶とも呼ばれます。煎茶やほうじ茶、玄米茶、玉露、抹茶など、日本茶の多くは緑茶に分類されるお茶となっています。&lt;/p&gt;
+								| 
+								| &lt;/article&gt;
+							p 小見出しを1つ目の見出しと同じ&lt;h1&gt;でマークアップした場合、下のように&lt;article&gt;と同じ階層に暗黙にセクションが構成されます。この場合、&lt;section&gt;を使用したときとは異なる構造を示したことになります。
+							p なお、暗黙のセクションを構成するアルゴリズムは以下のようになっており、&lt;body&gt;や&lt;article&gt;などで明示したセクションごとにこの処理が実行されます。
+							pre
+								| 暗黙のセクションを構成するアルゴリズム
+								| 
+								| [1] 明示したセクション内に初めて出現した見出しをセクションの見出しとします。
+								| 
+								| [2] 次に出現した見出しが
+								| 
+								| 	> 前の見出しと同じまたは上位ランクの場合：
+								| 		新しいセクションを構成します。
+								| 
+								| 	> 前の見出しより下位ランクの場合：
+								| 		子階層のセクションを構成します。
+								| 
+								| [3] 後続の見出しに対し、[2]の処理を順に適用します。
+								| 
+							h5 [C] 記事内のセクションを明示せず、小見出しを&lt;h1&gt;でマークアップしたもの：
+							figure
+								pre
+									| ● Short Tea Breaks
+									| ○ 紅茶
+									| ○ ウーロン茶
+									| ○ 緑茶
+								figcaption アウトライン。
+							p
+								a.btn.btn-default(href='demo/html/sample1/03/082-C.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;article&gt;
+								| &lt;header&gt;
+								| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+								| &lt;time datetime="2013-01-15"&gt;January 15, 2013&lt;/time&gt;
+								| &lt;/header&gt;
+								| 
+								| &lt;img src="img/tea.jpg" alt=""&gt;
+								| 
+								| &lt;p&gt;世界中にはたくさんのお茶があります。緑茶に紅茶、ウーロン茶など、その製法や味わいもさまざまですが、リラックスしたり、ちょっと休憩したいときなどには欠かすことができません。お茶のお供に、おいしいお菓子もあると幸せな気分になってしまいます。&lt;/p&gt;
+								| 
+								| &lt;h1&gt;紅茶&lt;/h1&gt;
+								| &lt;p&gt;紅茶は、茶の葉を全発酵させて製造したお茶です。ダージリンやアッサム、ジャワ、ウバ、ニルギリなど、たくさんの銘柄があります。アールグレイといったフレーバーティーも有名です。&lt;/p&gt;
+								| 
+								| &lt;p&gt;基本的に熱湯で入れ、茶葉に合わせて抽出時間を十分に取ります。そのため、保温性の高いポットや温めた茶器を使って入れるのがポイントとなります。ティーコジーでポットをカバーし、温度が下がるのを防ぐのもおすすめです。&lt;/p&gt;
+								| 
+								| &lt;h1&gt;ウーロン茶&lt;/h1&gt;
+								| &lt;p&gt;ウーロン茶は、茶の葉を半発酵させて製造したお茶です。中国茶では「青茶」に分類されるもので、凍頂烏龍茶、東方美人、鉄観音、武夷岩茶、水仙など、さまざまな銘柄があります。&lt;/p&gt;
+								| 
+								| &lt;h1&gt;緑茶&lt;/h1&gt;
+								| &lt;p&gt;緑茶は、茶の葉を発酵させずに製造したお茶で、不発酵茶とも呼ばれます。煎茶やほうじ茶、玄米茶、玉露、抹茶など、日本茶の多くは緑茶に分類されるお茶となっています。&lt;/p&gt;
+								| 
+								| &lt;/article&gt;
+							div.alert.alert-warning  NOTES: [A]と[B]のどちらの形式で記述するか
+							p [A]と[B]のどちらの形式で記述するかは、製作者の選択によります。[A]の場合は見出しのランクを気にせずに記述することができますし、[B]の場合はソース全体をシンプルに記述できるというメリットがあります。両方の形式を混合して記述することも可能です。
+							p ただし、ページの構造が複雑になってくると、セクションを明示しない[B]の形式では暗黙のセクションによってアウトラインが崩れるといった問題が生じやすくなりますので注意が必要です。
+							div.alert.alert-info  見出しに適用されるデフォルトスタイルシート
+							p 見出しに対しては下のようなデフォルトスタイルシートが適用されることになっており、階層構造に応じて見出しの文字サイズや上下マージンの大きさが変わります。「x」にはarticle、aside、nav、section、のいずれかが当てはまる場合に適用させます。
+							pre
+							p たとえば、以下の2つのサンプルは同じ階層構造を明示したものです。上はセクションを明示していない形式で記述していますが、デフォルトスタイルシートによって同じデザインで表示されます。
+							pre
+							pre
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

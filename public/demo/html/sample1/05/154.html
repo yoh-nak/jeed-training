@@ -1,0 +1,105 @@
+<!DOCTYPE html> 
+<html lang="ja">
+<head> 
+<meta charset="UTF-8"> 
+<title>SAMPLE</title>
+<meta name="viewport" content="width=1024">
+<link rel="stylesheet" href="img/style01.css">
+<style>
+article img	{margin-top: 10px;
+	border: none;}
+
+aside h1	{display: inline;
+	margin-right: 10px;}
+</style>
+
+<script>
+window.onload = function() {
+
+var canvas = document.getElementById('mycanvas');  
+if (canvas.getContext){
+	var ctx = canvas.getContext('2d'); 
+
+	var img = new Image(); 
+	img.src = "img/tea.jpg";
+	img.onload = function() {
+        	ctx.drawImage(img, 0,0);
+
+		setTimeout(circle01,1000);
+		setTimeout(circle02,2000);
+		setTimeout(circle03,3000);
+	}
+
+	function circle01() {
+		ctx.beginPath();
+		ctx.arc(560,125,160,0,Math.PI*2,true);
+		ctx.fillStyle = "rgba(241,130,121,0.5)";
+		ctx.fill();
+	}
+
+	function circle02() {
+		ctx.beginPath();
+		ctx.arc(363,363,220,0,Math.PI*2,true);
+		ctx.fillStyle = "rgba(239,177,81,0.5)";
+		ctx.fill();
+	}
+
+	function circle03() {
+		ctx.beginPath();
+		ctx.arc(784,399,150,0,Math.PI*2,true);
+		ctx.fillStyle = "rgba(236,243,36,0.5)";
+		ctx.fill();
+	}
+}
+
+}
+</script>
+</head>
+<body>
+
+<header>
+<div id="header_inner">
+<h1><img src="img/logo.png" alt="SUN DIARY"></h1>
+<nav>
+<ul>
+<li><a href="news.html">NEWS</a></li>
+<li><a href="column.html">COLUMN</a></li>
+<li><a href="gift.html">GIFT</a></li>
+<li><a href="contact.html">CONTACT</a></li>
+</ul>
+</nav>
+</div>
+</header>
+
+
+<div id="main">
+
+<article>
+<hgroup>
+<h1>Short Tea Breaks</h1>
+<h2>ちょっとしたお茶の時間</h2>
+</hgroup>
+
+<canvas id="mycanvas" width="960" height="490"></canvas>
+
+</article>
+
+<aside>
+FOLLOW & SUBSCRIBE:
+<ul id="iconmenu">
+<li><a href="url"><img src="img/twitter.png" alt="Twitter"></a></li>
+<li><a href="url"><img src="img/facebook.png" alt="Facebook"></a></li>
+<li><a href="url"><img src="img/googleplus.png" alt="Google Plus"></a></li>
+<li><a href="url"><img src="img/rss.png" alt="RSS Feed"></a></li>
+</ul>
+</aside>
+
+</div>
+
+
+<footer>
+<small>Copyright &copy; SUN DIARY, all rights reserved.</small>
+</footer>
+
+</body>
+</html>

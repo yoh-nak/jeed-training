@@ -356,8 +356,6 @@ include ../head.jade
 							p ただし、ページの構造が複雑になってくると、セクションを明示しない[B]の形式では暗黙のセクションによってアウトラインが崩れるといった問題が生じやすくなりますので注意が必要です。
 							div.alert.alert-info 見出しに適用されるデフォルトスタイルシート
 							p 見出しに対しては下のようなデフォルトスタイルシートが適用されることになっており、階層構造に応じて見出しの文字サイズや上下マージンの大きさが変わります。「x」にはarticle、aside、nav、section、のいずれかが当てはまる場合に適用させます。
-							pre
-								| 
 							p たとえば、以下の2つのサンプルは同じ階層構造を明示したものです。上はセクションを明示していない形式で記述していますが、デフォルトスタイルシートによって同じデザインで表示されます。
 							figure
 								pre
@@ -419,6 +417,42 @@ include ../head.jade
 							p HTML4.01やXHTML1.0にはセクションを示すという概念ははく、&lt;h1&gt;〜&lt;h6&gt;を利用してコンテンtの階層構造を示していました。そのため、セクションに未対応の古いブラウザでは、すべての見出しを&lt;h1&gt;で明示すると階層構造の違いを判別できなくなってしまいます。
 							p また、iOS4.xやAndroid2.x／3.xの場合、セクションには対応しているものの、適切なデフォルトスタイルシートが適用されず、&lt;h1&gt;で示した見出しがすべて同じ文字サイズで表示されてしまいます。
 							p そこで、こうした古いブラウザに対応する必要がある場合には、階層構造に合わせて見出しを&lt;h1&gt;〜&lt;h6&gt;でマークアップします。
+							pre(class='prettyprint linenums:1')
+								| &lt;body&gt;
+								| 	&lt;h1&gt;見出し1&lt;/h1&gt;
+								| 	&lt;section&gt;&lt;h1&gt;見出し2&lt;/h1&gt;
+								| 		&lt;section&gt;&lt;h1&gt;見出し3&lt;/h1&gt;
+								| 			&lt;section&gt;&lt;h1&gt;見出し4&lt;/h1&gt;
+								| 				&lt;section&gt;&lt;h1&gt;見出し5&lt;/h1&gt;
+								| 					&lt;section&gt;&lt;h1&gt;見出し6&lt;/h1&gt;
+								| 					&lt;/section&gt;
+								| 				&lt;/section&gt;
+								| 			&lt;/section&gt;
+								| 		&lt;/section&gt;
+								| 	&lt;/section&gt;
+								| &lt;/body&gt;
+							p
+								| すべての見出しを&lt;h1&gt;明示したもの。
+								br
+								| iOS4.xのデフォルトスタイルシートではすべて同じ文字サイズで表示されます。
+							pre(class='prettyprint linenums:1')
+								| &lt;body&gt;
+								| 	&lt;h1&gt;見出し1&lt;/h1&gt;
+								| 	&lt;section&gt;&lt;h2&gt;見出し2&lt;/h2&gt;
+								| 		&lt;section&gt;&lt;h3&gt;見出し3&lt;/h3&gt;
+								| 			&lt;section&gt;&lt;h4&gt;見出し4&lt;/h4&gt;
+								| 				&lt;section&gt;&lt;h5&gt;見出し5&lt;/h5&gt;
+								| 					&lt;section&gt;&lt;h6&gt;見出し6&lt;/h6&gt;
+								| 					&lt;/section&gt;
+								| 				&lt;/section&gt;
+								| 			&lt;/section&gt;
+								| 		&lt;/section&gt;
+								| 	&lt;/section&gt;
+								| &lt;/body&gt;
+							p
+								| 階層構造に合わせて見出しを&lt;h1&gt;〜&lt;h6&gt;で明示したもの。
+								br
+								| iOS4.xのデフォルトスタイルシートでも階層構造に合わせた文字サイズで表示されます。
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

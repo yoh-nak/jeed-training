@@ -1,0 +1,139 @@
+include ../head.jade
+	body
+		include navbar.jade
+		div.container
+			div.row
+				div.col-sm-3
+					include left.jade
+				div.col-sm-9
+					div.panel.panel-primary
+						div.panel-heading
+							i.glyphicon.glyphicon-book
+							| リスト
+						div.panel-body
+							table.browser-support
+								tr
+									td
+										img(src='images/ic-apple.png')
+									td
+										| （
+										img(src='images/ic-android.png')
+										| ）
+									td
+										| （
+										img(src='images/ic-firefox.png')
+										| ）
+									td
+										img(src='images/ic-safari.png')
+									td
+										img(src='images/ic-chrome.png')
+									td
+										| （
+										img(src='images/ic-opera.png')
+										| ）
+									td
+										| （
+										img(src='images/ic-ie.png')
+										| ）
+							div.alert.alert-info リスト（順序あり）
+							pre
+								| &lt;ol&gt;
+								| &lt;li&gt;...&lt;/li&gt;
+								| &lt;/ol&gt;
+							table.table
+								tr
+									td カテゴリー
+									td フローコンテンツ／パルパブルコンテンツ（子要素に&lt;li&gt;を含む場合）
+								tr
+									td 記述可能な場所
+									td
+										| フローコンテンツが記述できる場所
+								tr
+									td コンテンツモデル
+									td ゼロまたは1つ以上の&lt;li&gt;
+								tr
+									td 構成するボックス
+									td block
+								tr
+									td 属性
+									td reversed／start／type／グローバル 
+								tr
+									td 標準的なスタイル
+									td
+										pre
+											| ol {
+											| 	display: block;
+											| 	unicode-bidi: isolate;
+											| 	margin-top: 1em;
+											| 	margin-bottom: 1em;
+											| 	padding-left: 40px;
+											| 	list-style-type: decimal;
+											| }
+							div.alert.alert-info リスト（順不同）
+							pre
+								| &lt;ul&gt;
+								| &lt;li&gt;...&lt;/li&gt;
+								| &lt;/ul&gt;
+							table.table
+								tr
+									td カテゴリー
+									td フローコンテンツ／パルパブルコンテンツ（子要素に&lt;li&gt;を含む場合）
+								tr
+									td 記述可能な場所
+									td
+										| フローコンテンツが記述できる場所
+								tr
+									td コンテンツモデル
+									td ゼロまたは1つ以上の&lt;li&gt;
+								tr
+									td 構成するボックス
+									td block
+								tr
+									td 属性
+									td グローバル 
+								tr
+									td 標準的なスタイル
+									td
+										pre
+											| ul {
+											| 	display: block;
+											| 	unicode-bidi: isolate;
+											| 	margin-top: 1em;
+											| 	margin-bottom: 1em;
+											| 	padding-left: 40px;
+											| 	list-style-type: disk;
+											| }
+							pre
+								| &lt;li&gt;...&lt;/li&gt;
+							table.table
+								tr
+									td カテゴリー
+									td なし
+								tr
+									td 記述可能な場所
+									td
+										| &lt;ul&gt;、&lt;ol&gt;、&lt;menu&gt;の中
+								tr
+									td コンテンツモデル
+									td フローコンテンツ
+								tr
+									td 構成するボックス
+									td list-item
+								tr
+									td 属性
+									td value（&lt;ol&gt;の子要素の場合のみ）／グローバル  
+								tr
+									td 標準的なスタイル
+									td
+										pre
+											| li {
+											| 	display: list-item;
+											|  	unicode-bidi: isolate;
+											| }
+		div#footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='js/bootstrap.min.js')
+		script(src='coffee/list-counter.js')

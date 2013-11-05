@@ -9,78 +9,91 @@ include ../head.jade
 					div.panel.panel-primary
 						div.panel-heading
 							i.glyphicon.glyphicon-book
-							| 付加的な情報
+							| コマンドリスト
 						div.panel-body
-							div.alert.alert-info 付加的な情報
+							div.alert.alert-info コマンドリスト
 							table.browser-support
 								tr
 									td
 										img(src='images/ic-apple.png')
+										| （※）
 									td
 										img(src='images/ic-android.png')
-									td.not-support
+										| （※）
+									td
 										img(src='images/ic-firefox.png')
+										| （※）
 									td
 										img(src='images/ic-safari.png')
+										| （※）
 									td
 										img(src='images/ic-chrome.png')
-									td.not-support
+										| （※）
+									td
 										img(src='images/ic-opera.png')
-									td.not-support
+										| （※）
+									td
 										img(src='images/ic-ie.png')
-							p ※ iOS5.x以前／Android3.x以前は未対応。
+										| （※）
+							p ※ 一部非対応
 							pre
-								| &lt;details&gt;
-								| 	&lt;summary&gt;…&lt;/summary&gt;
-								| 	...
-								| &lt;/details&gt;
+								| &lt;menu&gt;…&lt;/menu&gt;
 							table.table
 								tr
 									td カテゴリー
-									td フローコンテンツ／セクショニングルート／インタラクティブコンテンツ／パルパブルコンテンツ
+									td フローコンテンツ／インタラクティブコンテンツ（type属性の値がtoolbarの場合）／パルパブルコンテンツ（type属性の値がtoolbarまたはtype属性を省略した場合）
 								tr
 									td 記述可能な場所
 									td
 										| フローコンテンツが記述できる場所
 								tr
 									td コンテンツモデル
-									td 1つの&lt;summary&gt;とそれに続くフローコンテンツ
+									td 0個以上の&lt;li&gt;、またはフローコンテンツ
 								tr
 									td 構成するボックス
 									td -（ブロックボックスを構成することが期待される）
 								tr
 									td 属性
-									td open／グローバル
+									td type／label／グローバル
 								tr
 									td 標準的なスタイル
 									td
 										pre
-											| -
+											| menu {
+											| 	display: block;
+											| 	margin-top: 1em;
+											| 	margin-bottom: 1em;
+											| 	padding-left: 40em;
+											| 	list-style-type: disc
+											| }
+											| menu[type=context]{
+											| 	display: none;
+											| }
 							pre
-								| &lt;summary&gt;…&lt;/summary&gt;
+								| &lt;command&gt;
 							table.table
 								tr
 									td カテゴリー
-									td なし
+									td メタデータコンテンツ／フローコンテンツ／フレージングコンテンツ
 								tr
 									td 記述可能な場所
 									td
-										| &lt;details&gt;内の1つ目の子要素として記述可能
+										| メタデータコンテンツまたはフレージングコンテンツが記述できる場所
 								tr
 									td コンテンツモデル
-									td フレージングコンテンツ
+									td 空
 								tr
 									td 構成するボックス
-									td block
+									td none
 								tr
 									td 属性
-									td グローバル
+									td type／label／icon／disabled／checked／radiogroup／command／グローバル
 								tr
 									td 標準的なスタイル
 									td
 										pre
-											| summary {
-											| 	display: block;
+											| command {
+											| 	display: none;
 											| }
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')

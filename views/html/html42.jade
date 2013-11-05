@@ -1,0 +1,91 @@
+include ../head.jade
+	body
+		include navbar.jade
+		div.container
+			div.row
+				div.col-sm-3
+					include left.jade
+				div.col-sm-9
+					div.panel.panel-primary
+						div.panel-heading
+							i.glyphicon.glyphicon-book
+							| 付加的な情報
+						div.panel-body
+							div.alert.alert-info 付加的な情報
+							table.browser-support
+								tr
+									td
+										img(src='images/ic-apple.png')
+									td
+										img(src='images/ic-android.png')
+									td.not-support
+										img(src='images/ic-firefox.png')
+									td
+										img(src='images/ic-safari.png')
+									td
+										img(src='images/ic-chrome.png')
+									td.not-support
+										img(src='images/ic-opera.png')
+									td.not-support
+										img(src='images/ic-ie.png')
+							p ※ iOS5.x以前／Android3.x以前は未対応。
+							pre
+								| &lt;details&gt;
+								| 	&lt;summary&gt;…&lt;/summary&gt;
+								| 	...
+								| &lt;/details&gt;
+							table.table
+								tr
+									td カテゴリー
+									td フローコンテンツ／セクショニングルート／インタラクティブコンテンツ／パルパブルコンテンツ
+								tr
+									td 記述可能な場所
+									td
+										| フローコンテンツが記述できる場所
+								tr
+									td コンテンツモデル
+									td 1つの<summary>とそれに続くフローコンテンツ
+								tr
+									td 構成するボックス
+									td -（ブロックボックスを構成することが期待される）
+								tr
+									td 属性
+									td open／グローバル
+								tr
+									td 標準的なスタイル
+									td
+										pre
+											| -
+							pre
+								| &lt;summary&gt;…&lt;/summary&gt;
+							table.table
+								tr
+									td カテゴリー
+									td なし
+								tr
+									td 記述可能な場所
+									td
+										| <details>内の1つ目の子要素として記述可能
+								tr
+									td コンテンツモデル
+									td フレージングコンテンツ
+								tr
+									td 構成するボックス
+									td block
+								tr
+									td 属性
+									td グローバル
+								tr
+									td 標準的なスタイル
+									td
+										pre
+											| summary {
+											| 	display: block;
+											| }
+		div#footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='js/bootstrap.min.js')
+		script(src='coffee/list-counter.js')

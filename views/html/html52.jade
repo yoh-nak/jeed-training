@@ -9,9 +9,9 @@ include ../head.jade
 					div.panel.panel-primary
 						div.panel-heading
 							i.glyphicon.glyphicon-book
-							| インラインフレーム
+							| 外部コンテンツ
 						div.panel-body
-							div.alert.alert-info インラインフレーム
+							div.alert.alert-info 外部コンテンツ
 							table.browser-support
 								tr
 									td
@@ -25,8 +25,10 @@ include ../head.jade
 										| （※）
 									td
 										img(src='images/ic-safari.png')
+										| （※）
 									td
 										img(src='images/ic-chrome.png')
+										| （※）
 									td
 										img(src='images/ic-opera.png')
 										| （※）
@@ -35,30 +37,54 @@ include ../head.jade
 										| （※）
 							p ※ 一部非対応
 							pre
-								| &lt;iframe&gt;...&lt;/iframe&gt;
+								| &lt;object&gt;...&lt;/object&gt;
 							table.table
 								tr
 									td カテゴリー
-									td フローコンテンツ／フレージングコンテンツ／エンベッディッドコンテンツ／インタラクティブコンテンツ／パルパブルコンテンツ
+									td フローコンテンツ／フレージングコンテンツ／エンベッディッドコンテンツ／インタラクティブコンテンツ（usemap属性を指定した場合）／リスティッド要素／送信できる要素／フォーム関連の要素／パルパブルコンテンツ
 								tr
 									td 記述可能な場所
 									td
 										| エンベッディッドコンテンツが記述できる場所
 								tr
 									td コンテンツモデル
-									td テキスト
+									td ゼロまたは1つ以上の&lt;param&gt;とそれに続くトランスペアレント
 								tr
 									td 構成するボックス
 									td - （置換要素として扱われることが期待される）
 								tr
 									td 属性
-									td src／srcdoc／name／sandbox／seamless／width／height／グローバル 
+									td data／type／typemustmatch／name／usemap／form／width／height／グローバル
 								tr
 									td 標準的なスタイル
 									td
 										pre
-											| iframe {
-											| 	border: 2px inset;
+											| -
+							pre
+								| &lt;param&gt;
+							table.table
+								tr
+									td カテゴリー
+									td なし
+								tr
+									td 記述可能な場所
+									td
+										| &lt;object&gt;の子要素としてフローコンテンツの前に記述可能
+								tr
+									td コンテンツモデル
+									td 空
+								tr
+									td 構成するボックス
+									td none
+								tr
+									td 属性
+									td name／value／グローバル
+								tr
+									td 標準的なスタイル
+									td
+										pre
+											| param {
+											| 	display: none;
 											| }
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')

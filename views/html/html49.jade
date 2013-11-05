@@ -1,0 +1,128 @@
+include ../head.jade
+	body
+		include navbar.jade
+		div.container
+			div.row
+				div.col-sm-3
+					include left.jade
+				div.col-sm-9
+					div.panel.panel-primary
+						div.panel-heading
+							i.glyphicon.glyphicon-book
+							| ルビ（ふりがな）
+						div.panel-body
+							div.alert.alert-info ルビ（ふりがな）
+							table.browser-support
+								tr
+									td
+										img(src='images/ic-apple.png')
+									td
+										img(src='images/ic-android.png')
+									td.not-support
+										img(src='images/ic-firefox.png')
+									td
+										img(src='images/ic-safari.png')
+									td
+										img(src='images/ic-chrome.png')
+									td.not-support
+										img(src='images/ic-opera.png')
+									td
+										img(src='images/ic-ie.png')
+							pre
+								| &lt;ruby&gt;
+								| ベース
+								| &lt;rt&gt;ルビ&lt;/rt&gt;
+								| &lt;/ruby&gt;
+							pre
+								| &lt;ruby&gt;
+								| ベース
+								| &lt;rp&gt;左括弧&lt;/rp&gt;
+								| &lt;rt&gt;ルビ&lt;/rt&gt;
+								| &lt;rp&gt;右括弧&lt;/rp&gt;
+								| &lt;/ruby&gt;
+							table.table
+								tr
+									td カテゴリー
+									td フローコンテンツ／フレージングコンテンツ／パルパブルコンテンツ
+								tr
+									td 記述可能な場所
+									td
+										| フレージングコンテンツが記述できる場所
+								tr
+									td コンテンツモデル
+									td
+										| ・ルビ関連以外のフレージングコンテンツに続く1つ以上の&lt;rt>または&lt;rp&gt;&lt;rt&gt;&lt;/rp&gt;
+										br
+										| ・&lt;ruby&gt;を子要素に持たない<ruby&gt;
+								tr
+									td 構成するボックス
+									td ruby
+								tr
+									td 属性
+									td グローバル
+								tr
+									td 標準的なスタイル
+									td
+										pre
+											| ruby {
+											| 	display: ruby;
+											| }
+							pre
+								| &lt;rt&gt;...&lt;/rt&gt;
+							table.table
+								tr
+									td カテゴリー
+									td なし
+								tr
+									td 記述可能な場所
+									td
+										| &lt;ruby&gt;内
+								tr
+									td コンテンツモデル
+									td フレージングコンテンツ
+								tr
+									td 構成するボックス
+									td ruby-text;
+								tr
+									td 属性
+									td グローバル
+								tr
+									td 標準的なスタイル
+									td
+										pre
+											| rt {
+											| 	display: ruby-text;
+											| }
+							pre
+								| &lt;rp&gt;...&lt;/rp&gt;
+							table.table
+								tr
+									td カテゴリー
+									td なし
+								tr
+									td 記述可能な場所
+									td
+										| &lt;ruby&gt;内の&lt;rt&gt;前後
+								tr
+									td コンテンツモデル
+									td フレージングコンテンツ
+								tr
+									td 構成するボックス
+									td inline
+								tr
+									td 属性
+									td グローバル
+								tr
+									td 標準的なスタイル
+									td
+										pre
+											| rp {
+											|     display: none;
+											| }
+		div#footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='js/bootstrap.min.js')
+		script(src='coffee/list-counter.js')

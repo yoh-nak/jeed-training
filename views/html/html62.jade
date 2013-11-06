@@ -9,8 +9,9 @@ include ../head.jade
 					div.panel.panel-primary
 						div.panel-heading
 							i.glyphicon.glyphicon-book
-							| 行のグループ
+							| フォーム
 						div.panel-body
+							div.alert.alert-info フォーム
 							table.browser-support
 								tr
 									td
@@ -27,37 +28,35 @@ include ../head.jade
 										img(src='images/ic-opera.png')
 									td
 										img(src='images/ic-ie.png')
-							div.alert.alert-info 行のグループ
+										| （※）
+							p ※ 一部非対応
 							pre
-								| &lt;thead&gt;...&lt;/thead&gt;
+								| &lt;form&gt;...&lt;/form&gt;
 							table.table
 								tr
 									td カテゴリー
-									td なし
+									td フローコンテンツ／パルパブルコンテンツ
 								tr
 									td 記述可能な場所
 									td
-										| &lt;table&gt;内の子要素として&lt;caption&gt;、&lt;colgroup&gt;の後、&lt;tbody&gt;、&lt;tfoot&gt;、&lt;tr&gt;の前に記述可能
-										| ※ &lt;thead&gt;は&lt;table&gt;内に1つのみ記述可
+										| フローコンテンツが記述できる場所
 								tr
 									td コンテンツモデル
 									td
-										| ゼロまたはそれ以上の&lt;tr&gt;
+										| フローコンテンツ（&lt;form&gt;を除く）
 								tr
 									td 構成するボックス
-									td table-header-group
+									td block
 								tr
 									td 属性
-									td グローバル 
+									td accept-charset／action／autocomplete／enctype／method／name／novalidate／target／グローバル 
 								tr
 									td 標準的なスタイル
 									td
 										pre
-											| thead {
-											| 	display: table-header-group;
-											| 	unicode-bidi: isolate;
-											| 	vertical-align: middle;
-											| 	border-color: inherit;
+											| form {
+											| 	display: block;
+											| 	unicode-bide: isolate;
 											| }
 							div.alert.alert-info メインデータ
 							pre
@@ -87,42 +86,6 @@ include ../head.jade
 										pre
 											| tbody {
 											| 	display: table-row-group;
-											| 	unicode-bidi: isolate;
-											| 	vertical-align: middle;
-											| 	border-color: inherit;
-											| }
-							div.alert.alert-info フッター
-							pre
-								| &lt;tfoot&gt;...&lt;/tfoot&gt;
-							table.table
-								tr
-									td カテゴリー
-									td なし
-								tr
-									td 記述可能な場所
-									td
-										| 以下のいずれか
-										br
-										| ・&lt;table&gt;内の子要素として&lt;caption&gt;、&lt;colgroup&gt;、&lt;thead&gt;の後、&lt;tbody&gt;、&lt;tr&gt;の前に記述可能
-										br
-										| ・&lt;table&gt;内の子要素として&lt;caption&gt;、&lt;colgroup&gt;、&lt;thead&gt;、&lt;tbody&gt;、&lt;tr&gt;の後に記述可能
-										br
-										| ※ いずれの場合も&lt;tfoot&gt;は&lt;table&gt;内に1つのみ記述可
-								tr
-									td コンテンツモデル
-									td ゼロまたはそれ以上の&lt;tr&gt;
-								tr
-									td 構成するボックス
-									td table-footer-group
-								tr
-									td 属性
-									td グローバル 
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| tfoot {
-											| 	display: table-footer-group;
 											| 	unicode-bidi: isolate;
 											| 	vertical-align: middle;
 											| 	border-color: inherit;

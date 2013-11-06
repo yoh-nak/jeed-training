@@ -58,6 +58,30 @@ include ../head.jade
 											| 	display: block;
 											| 	font-style: italic;
 											| }
+							p DOCTYPE宣言に続けて、HTML文書の最上位階層（ルート）を構成する&lt;html&gt;を記述します。
+							pre
+								| &lt;!DOCTYPE html&gt;
+								| &lt;html lang="ja"&gt;
+								| 
+								| &lt;/html&gt;
+							p &lt;html&gt;はすべての要素の親要素となりますので、「日本語」や「英語」といったコンテンツの記述に使用する主要言語をlang属性で明示しておくことが推奨されています。lang属性の情報は音声ツールや翻訳ツールで利用され、コンテンツを正確に扱えるようになることが期待されています。
+							div.alert.alert-warning Notes: 
+							p lang属性はグローバル属性の1つで、すべての要素で利用することができます。コンテンツ内で部分的に異なる言語を使用する場合には、その都度lang属性で使用言語を明示することが可能です。
+							pre
+								| &lt;!DOCTYPE html&gt;
+								| &lt;html lang="ja"&gt;
+								| ...
+								| &lt;p&gt;ヨーロッパにおけるフットボール（&lt;span lang="en"&gt;Football&lt;/span&gt;）はサッカー（&lt;span lang="en"&gt;Soccer&lt;/span&gt;）のことです。&lt;/p&gt;
+								| ...
+								| &lt;/html&gt;
+							div.alert.alert-success DIFFERENCES: 
+							p XHTML1.0ではlang属性とxml:lang属性で使用言語を示すことが求められていました。HTML5ではxml:lang属性を記述する必要はなくなっていますが、XHTML1.0からの移行を容易にしたり、XMLパーサでもデータを処理できるようにしておくといった場合には、xml:lang属性を併記することが認められています。
+							figure
+								pre
+									| &lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;
+									| &lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja"&gt;
+									| ...
+								figcaption XHTML1.0における使用言語の記述。
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

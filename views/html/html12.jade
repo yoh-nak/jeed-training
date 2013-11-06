@@ -102,7 +102,27 @@ include ../head.jade
 									| &lt;/html&gt;
 								figcaption 赤色の要素はHTML名前空間に、青色の要素はSVG名前空間に属するものとして処理されます。
 							div.alert.alert-success DIFFERENCES: 
-							p 
+							p XHTML1.0では&lt;html&gt;要素がHTML名前空間に属していることを示すため、xmlns属性でHTML名前空間を明示しておく必要がありました。また、名前空間を明示しても&lt;svg&gt;や&lt;math&gt;を記述すると文法違反となっていました。
+							figure
+								pre
+									| &lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;
+									| &lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+									| ...
+								figcaption XHTML1.0における&lt;html&gt;の記述。xmlns属性を省略すると文法違反となります。
+							p HTML5ではxmlns属性を記述する必要はなくなっていますが、XHTML1.0からの移行を容易にしたり、XMLパーサーでもデータを処理できるようにしておくといった場合には、xmlns属性を記述しておくことも可能です。その場合、以下のURIを値として指定します。
+							table.table
+								tr
+									th 名前空間
+									th 名前空間を表すURI
+								tr
+									td HTML名前空間
+									td http://www.w3.org/1999/xhtml
+								tr
+									td SVG名前空間
+									td http://www.w3.org/2000/svg
+								tr
+									td MathML名前空間
+									td http://www.w3.org/1998/MathML
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

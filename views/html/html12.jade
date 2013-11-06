@@ -123,6 +123,21 @@ include ../head.jade
 								tr
 									td MathML名前空間
 									td http://www.w3.org/1998/MathML
+							div.alert.alert-warning Notes: アプリケーションキャッシュの機能
+							p &lt;html&gt;のmanifest属性はアプリケーションキャッシュの機能で使用します。この機能はWebアプリケーションやドキュメントをオフラインでも利用できるようにするため、表示に必要となるファイルを閲覧環境にキャッシュします。
+							p たとえば、下のWebページ（sample.html）をオフラインでも閲覧できるようにするためには、sample.htmlと、ページに読み込んでいるstyle.css、script.jsをキャッシュする必要があります。そこで、キャッシュしたいファイルの情報を記述したマニフェストファイル（sample.appcache）を用意し、&lt;html&gt;のmanifest属性で指定します。
+							figure
+								pre
+								figcaption sample.htmlの記述。&lt;html&gt;でマニフェストファイルを指定しています。
+							p これで、Webページを読み込むとマニフェストファイルで指定したファイルがキャッシュされ、次からはキャッシュデータを使って表示が行われるようになります。Firefoxの場合、最初にページを読み込んだときに、オフライン作業用のデータの保存を許可するかどうかメッセージが表示されます。
+							p 簡単なマニフェストファイルを作成するには、下のように1行目に「CACHE MANIFEST」と記述し、2行目以降にキャッシュしたいファイルを記述していきます。ファイル名には「〜.appcache」のMIMEタイプ「text/cache-manifest」がサーバー側で設定されている必要があります。
+							figure
+								pre
+								figcaption マニフェストファイル（sample.appcache）。
+							p アプリケーションキャッシュの機能やマニフェストファイルについての詳細は、下記のサイトなどを参照してください。
+							p
+							div.alert.alert-success IE Notes: 
+							p IE9以前のバージョンはアプリケーションキャッシュの機能に未対応です。
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

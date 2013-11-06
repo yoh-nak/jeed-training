@@ -1,0 +1,186 @@
+include ../head.jade
+	body
+		include navbar.jade
+		div.container
+			div.row
+				div.col-sm-3
+					include left.jade
+				div.col-sm-9
+					div.panel.panel-primary
+						div.panel-heading
+							i.glyphicon.glyphicon-book
+							| テーブル
+						div.panel-body
+							table.browser-support
+								tr
+									td
+										img(src='images/ic-apple.png')
+									td
+										img(src='images/ic-android.png')
+									td
+										img(src='images/ic-firefox.png')
+									td
+										img(src='images/ic-safari.png')
+									td
+										img(src='images/ic-chrome.png')
+									td
+										img(src='images/ic-opera.png')
+									td
+										img(src='images/ic-ie.png')
+							div.alert.alert-info テーブル
+							pre
+								| &lt;table&gt;...&lt;/table&gt;
+							table.table
+								tr
+									td カテゴリー
+									td フローコンテンツ／パルパブルコンテンツ
+								tr
+									td 記述可能な場所
+									td
+										| フローコンテンツが記述できる場所
+								tr
+									td コンテンツモデル
+									td
+										| 以下の順に記述（オプションは必要に応じて記述）：
+										br
+										| ・&lt;caption&gt;（オプション／複数記述不可）
+										br
+										| ・&lt;colgroup&gt;（オプション／複数記述可）
+										br
+										| ・&lt;thead&gt;（オプション／複数記述不可）
+										br
+										| ・&lt;tfoot&gt;（オプション／複数記述不可）
+										br
+										| ・&lt;tbody&gt;（オプション／複数記述可能）
+										br
+										| ・&lt;tr&gt;（複数記述可能）
+										br
+										| ・&lt;tfoot&gt;（オプション／複数記述不可）
+										br
+										| 	※&lt;tfoot&gt;は&lt;table&gt;内に1つのみ記述可
+								tr
+									td 構成するボックス
+									td table
+								tr
+									td 属性
+									td グローバル 
+								tr
+									td 標準的なスタイル
+									td
+										pre
+											| table {
+											| 	display: table;
+											| 	unicode-bidi: isolate;
+											| 	border-spacing: 2px;
+											| 	border-colla-se: separate;
+											| 	border-color: gray;
+											| 	border-style: outset;
+											| }
+							div.alert.alert-info テーブルの行
+							pre
+								| &lt;tr&gt;...&lt;/tr&gt;
+							table.table
+								tr
+									td カテゴリー
+									td なし
+								tr
+									td 記述可能な場所
+									td
+										| 記述可能な場所 以下のいずれか
+										br
+										| ・&lt;thead&gt;、&lt;tbody&gt;、&lt;tfoot&gt;の子要素として記述
+										br
+										| ・&lt;table&gt;の子要素として記述
+										br
+										| 	※&lt;table&gt;の子要素に&lt;tbody&gt;がないこと。
+										br
+										| 	※&lt;caption&gt;、&lt;colgroup&gt;、&lt;thead&gt;がある場合はこれらに続けて記述すること。 
+								tr
+									td コンテンツモデル
+									td ゼロまたは1つ以上の&lt;th&gt;、&lt;td&gt;
+								tr
+									td 構成するボックス
+									td table-row
+								tr
+									td 属性
+									td alt／cords／shape／href／target／rel／media／hreflang／type／グローバル
+								tr
+									td 標準的なスタイル
+									td
+										pre
+											| tr {
+											| 	display: table-row;
+											| 	unicode-bidi: isolate;
+											| 	vertical-align: inherit;
+											| 	border-color: inherit;
+											| }
+							div.alert.alert-info 見出しのセル
+							pre
+								| &lt;th&gt;...&lt;/th&gt;
+							table.table
+								tr
+									td カテゴリー
+									td なし
+								tr
+									td 記述可能な場所
+									td
+										| &lt;tr&gt;の子要素として記述可能 
+								tr
+									td コンテンツモデル
+									td フローコンテンツ（&lt;header&gt;、&lt;footer&gt;、セクショニングコンテンツ、ヘッダーコンテンツを除く）
+								tr
+									td 構成するボックス
+									td table-cell
+								tr
+									td 属性
+									td colspan／rowspan／headers／scope／abbr／グローバル
+								tr
+									td 標準的なスタイル
+									td
+										pre
+											| th {
+											| 	display: table-cell;
+											| 	unicode-bidi: isolate;
+											| 	padding: 1px;
+											| 	vertical-align: inherit;
+											| 	font-weight: bold;
+											| 	border-color: gray;
+											| }
+							div.alert.alert-info データのセル
+							pre
+								| &lt;td&gt;...&lt;/td&gt;
+							table.table
+								tr
+									td カテゴリー
+									td セクショニングルート
+								tr
+									td 記述可能な場所
+									td
+										| &lt;tr&gt;の子要素として記述可能 
+								tr
+									td コンテンツモデル
+									td フローコンテンツ
+								tr
+									td 構成するボックス
+									td table-cell
+								tr
+									td 属性
+									td colspan／rowspan／headers／グローバル
+								tr
+									td 標準的なスタイル
+									td
+										pre
+											| td {
+											| 	display: table-cell;
+											| 	unicode-bidi: isolate;
+											| 	padding: 1px;
+											| 	vertical-align: inherit;
+											| 	border-color: gray;
+											| }
+		div#footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='js/bootstrap.min.js')
+		script(src='coffee/list-counter.js')

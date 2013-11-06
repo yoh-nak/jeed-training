@@ -82,6 +82,26 @@ include ../head.jade
 									| &lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja"&gt;
 									| ...
 								figcaption XHTML1.0における使用言語の記述。
+							div.alert.alert-info HTMLの名前空間
+							p HTML5では自動的にすべてのHTML要素がHTML名前空間に属するものとして扱われます。
+							p 「名前空間（ネームスペース）」は異なる規格に従ったソースを混在させるために必要となるものです。たとえば、HTML5ではHTMLソース内にSVGとMathMLのソースを記述することが可能ですが、これは&lt;html&gt;以下の要素がHTML名前空間に、&lt;svg&gt;以下の要素がSVG名前空間に、&lt;math&gt;以下の要素がMathML名前空間に属するものとして処理されることになっているためです。
+							figure
+								pre
+									| &lt;!DOCTYPE html&gt;
+									span(style='color:red;')
+										| &lt;html&gt;
+										| ...
+										| &lt;body&gt;
+										| &lt;h1&gt;STAR&lt;/h1&gt;
+										span(style='color:blue;')
+											| &lt;svg&gt;
+											| &lt;polygon fill="#FFDB43" points="..."/&gt;
+											| &lt;/svg&gt;
+										| &lt;/body&gt;
+										| &lt;/html&gt;
+								figcaption 赤色の要素はHTML名前空間に、青色の要素はSVG名前空間に属するものとして処理されます。
+							div.alert.alert-success DIFFERENCES: 
+							p 
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

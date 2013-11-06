@@ -30,6 +30,18 @@ include ../head.jade
 										img(src='images/ic-ie.png')
 							pre
 								| &lt;DOCTYPE html&gt;
+							p HTML5でWebページを作成するためには、1行目に&lt;DOCTYPE html&gt;とDOCTYPE宣言を記述し、HTML5で記述したページであることを示します。
+							p DOCTYPE宣言の記述は必須となっていますが、これは標準に準拠した処理でWebページを表示するための規格です。主要ブラウザは古いWebページのデザインを崩さずに表示するため、DOCTYPE宣言が記述されていない場合は下位互換モード（Quirks mode）で表示を行うという機能を持っています。このきのうは「DOCTYPEスイッチ」と呼ばれ、下位互換モードではスタイルシートが標準規格とは異なる古い解釈で適用されてしまいます。そこで、HTML5ではDOCTYPE宣言の記述を必須とし、標準準拠モード（Standard mode）でページが表示されるようにしています。
+							div.alert.alert-success DEFFERENCES: 
+							p HTML4.01やXHTML1.0ではDTD（文書型定義）を示す必要があったため、下のような形でDOCTYPE宣言を記述する必要がありました。
+							p HTML5ではDTDを示す必要はなくなっており、DOCTYPE宣言もシンプルな形で記述することができます。
+							figure
+								pre &lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd"&gt;
+								figcaption HTML4.01（Strict版）のDOCTYPE宣言の記述。
+							figure
+								pre &lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;
+								figcaption XHTML1.0（Strict版）のDOCTYPE宣言の記述。
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

@@ -128,14 +128,45 @@ include ../head.jade
 							p たとえば、下のWebページ（sample.html）をオフラインでも閲覧できるようにするためには、sample.htmlと、ページに読み込んでいるstyle.css、script.jsをキャッシュする必要があります。そこで、キャッシュしたいファイルの情報を記述したマニフェストファイル（sample.appcache）を用意し、&lt;html&gt;のmanifest属性で指定します。
 							figure
 								pre
+									| &lt;!DOCTYPE html&gt;
+									| &lt;html lang="ja" manifest="sample.appcache"&gt;
+									| &lt;head&gt;
+									| …
+									| &lt;link rel="stylesheet" href="style.css"&gt;
+									| &lt;script src="script.js"&gt;&lt;/script&gt;
+									| &lt;/head&gt;
+									| &lt;body&gt;
+									| …
+									| &lt;/body&gt;
+									| &lt;/html&gt;
 								figcaption sample.htmlの記述。&lt;html&gt;でマニフェストファイルを指定しています。
 							p これで、Webページを読み込むとマニフェストファイルで指定したファイルがキャッシュされ、次からはキャッシュデータを使って表示が行われるようになります。Firefoxの場合、最初にページを読み込んだときに、オフライン作業用のデータの保存を許可するかどうかメッセージが表示されます。
 							p 簡単なマニフェストファイルを作成するには、下のように1行目に「CACHE MANIFEST」と記述し、2行目以降にキャッシュしたいファイルを記述していきます。ファイル名には「〜.appcache」のMIMEタイプ「text/cache-manifest」がサーバー側で設定されている必要があります。
 							figure
 								pre
+									| CACHE MANIFEST
+									| sample.html
+									| style.css
+									| script.js
+									| 
 								figcaption マニフェストファイル（sample.appcache）。
 							p アプリケーションキャッシュの機能やマニフェストファイルについての詳細は、下記のサイトなどを参照してください。
 							p
+								| Offline Web Applications (W3C)
+								br
+								| http://www.w3.org/TR/offline-webapps/
+							p
+								| HTML Living Standard - 6.7 Offline Web applications (WHATWG)
+								br
+								| http://www.whatwg.org/specs/web-apps/current-work/multipage/offline.html
+							p
+								 | アプリケーションキャッシュを始めて使う (HTML5 Rocks)
+								 br
+								 | http://www.html5rocks.com/ja/tutorials/appcache/beginner/
+							p
+								| Node.js/ExpressでHTML5オフライン・キャッシュを使う
+								br
+								| http://qiita.com/weed/items/2318a2c6871c6c5d5fef
 							div.alert.alert-success IE Notes: 
 							p IE9以前のバージョンはアプリケーションキャッシュの機能に未対応です。
 		div#footer=title

@@ -171,6 +171,197 @@ include ../head.jade
 							p iOSやSafariのリーダー機能を使うと、&lt;article&gt;でマークアップしたコンテンツを抽出して閲覧することができます。
 							div.alert.alert-success IE Notes:
 							p IE8以前のバージョンは&lt;article&gt;に未対応です。
+							div.alert.alert-warning NOTES: メインコンテンツを明示する
+							p &lt;article&gt;は独立したコンテンツを示す要素であり、ページのメインコンテンツを示す要素ではありません。HTML5にはメインコンテンツを示すための要素は用意されていませんが、次のように記述することにより、どこがメインコンテンツであるかを示す方法が提示されています。
+							p HTML5 Nightlyでは、メインコンテンツを示す&lt;main&gt;という要素が提案されています。
+							h5 ①メインコンテンツ以外のセマンティクスを明示する
+							p
+								a.btn.btn-default(href='demo/html/sample1/03/068-1.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;body&gt;
+								| 
+								| &lt;header&gt;
+								| &lt;div id="header_inner"&gt;
+								| &lt;h1&gt;&lt;img src="img/logo.png" alt="SUN DIARY"&gt;&lt;/h1&gt;
+								| &lt;nav&gt;
+								| &lt;ul&gt;
+								| &lt;li&gt;&lt;a href="news.html"&gt;NEWS&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="column.html"&gt;COLUMN&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="gift.html"&gt;GIFT&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="contact.html"&gt;CONTACT&lt;/a&gt;&lt;/li&gt;
+								| &lt;/ul&gt;
+								| &lt;/nav&gt;
+								| &lt;/div&gt;
+								| &lt;/header&gt;
+								| 
+								| &lt;div&gt;
+								| &lt;img src="img/tea.jpg" alt=""&gt;
+								| 
+								| &lt;p&gt;世界中にはたくさんのお茶があります。緑茶に紅茶、ウーロン茶など、その製法や味わいもさまざまですが、リラックスしたり、ちょっと休憩したいときなどには欠かすことができません。お茶のお供に、おいしいお菓子もあると幸せな気分になってしまいます。&lt;/p&gt;
+								| &lt;/div&gt;
+								| 
+								| &lt;aside&gt;
+								| &lt;ul id="iconmenu"&gt;
+								| &lt;li&gt;&lt;a href="url"&gt;&lt;img src="img/twitter.png" alt="Twitter"&gt;&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="url"&gt;&lt;img src="img/facebook.png" alt="Facebook"&gt;&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="url"&gt;&lt;img src="img/googleplus.png" alt="Google Plus"&gt;&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="url"&gt;&lt;img src="img/rss.png" alt="RSS Feed"&gt;&lt;/a&gt;&lt;/li&gt;
+								| &lt;/ul&gt;
+								| &lt;/aside&gt;
+								| 
+								| &lt;footer&gt;
+								| &lt;small&gt;Copyright &copy; SUN DIARY, all rights reserved.&lt;/small&gt;
+								| &lt;/footer&gt;
+								| 
+								| &lt;/body&gt;
+							p メインコンテンツはページのヘッダーやフッター、ナビゲーションメニューや広告などを取り除いた部分であると考えることができます。そのため、メインコンテンツ以外の部分を&lt;header&gt;や&lt;nav&gt;などでマークアップすることにより、残った部分がメインコンテンツであると示すことができます。
+							p たとえば、サンプルではページのヘッダーおよびフッターを&lt;header&gt;と&lt;footer&gt;で、補足情報を&lt;aside&gt;で明示することにより、残った部分をメインコンテンツとして示しています。
+							h5 ②メインコンテンツを&lt;article&gt;で明示する
+							p
+								a.btn.btn-default(href='demo/html/sample1/03/068-2.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;body&gt;
+								| 
+								| &lt;header&gt;
+								| &lt;div id="header_inner"&gt;
+								| &lt;h1&gt;&lt;img src="img/logo.png" alt="SUN DIARY"&gt;&lt;/h1&gt;
+								| &lt;nav&gt;
+								| &lt;ul&gt;
+								| &lt;li&gt;&lt;a href="news.html"&gt;NEWS&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="column.html"&gt;COLUMN&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="gift.html"&gt;GIFT&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="contact.html"&gt;CONTACT&lt;/a&gt;&lt;/li&gt;
+								| &lt;/ul&gt;
+								| &lt;/nav&gt;
+								| &lt;/div&gt;
+								| &lt;/header&gt;
+								| 
+								| &lt;article&gt;
+								| &lt;img src="img/tea.jpg" alt=""&gt;
+								| 
+								| &lt;p&gt;世界中にはたくさんのお茶があります。緑茶に紅茶、ウーロン茶など、その製法や味わいもさまざまですが、リラックスしたり、ちょっと休憩したいときなどには欠かすことができません。お茶のお供に、おいしいお菓子もあると幸せな気分になってしまいます。&lt;/p&gt;
+								| &lt;/article&gt;
+								| 
+								| &lt;aside&gt;
+								| &lt;ul id="iconmenu"&gt;
+								| &lt;li&gt;&lt;a href="url"&gt;&lt;img src="img/twitter.png" alt="Twitter"&gt;&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="url"&gt;&lt;img src="img/facebook.png" alt="Facebook"&gt;&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="url"&gt;&lt;img src="img/googleplus.png" alt="Google Plus"&gt;&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="url"&gt;&lt;img src="img/rss.png" alt="RSS Feed"&gt;&lt;/a&gt;&lt;/li&gt;
+								| &lt;/ul&gt;
+								| &lt;/aside&gt;
+								| 
+								| &lt;footer&gt;
+								| &lt;small&gt;Copyright &copy; SUN DIARY, all rights reserved.&lt;/small&gt;
+								| &lt;/footer&gt;
+								| 
+								| &lt;/body&gt;
+							p ①のようにメインコンテンツ以外のセマンティクスを明示した上で、メインコンテンツを&lt;article&gt;でマークアップすると、どこがメインコンテンツであるかをより明確に示すことができます。また、メインコンテンツは「独立したコンテンツ」であることも明示したことになります。
+							h5 ③メインコンテンツを&lt;section&gt;で明示する
+							p
+								a.btn.btn-default(href='demo/html/sample1/03/068-3.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;body&gt;
+								| 
+								| &lt;header&gt;
+								| &lt;div id="header_inner"&gt;
+								| &lt;h1&gt;&lt;img src="img/logo.png" alt="SUN DIARY"&gt;&lt;/h1&gt;
+								| &lt;nav&gt;
+								| &lt;ul&gt;
+								| &lt;li&gt;&lt;a href="news.html"&gt;NEWS&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="column.html"&gt;COLUMN&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="gift.html"&gt;GIFT&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="contact.html"&gt;CONTACT&lt;/a&gt;&lt;/li&gt;
+								| &lt;/ul&gt;
+								| &lt;/nav&gt;
+								| &lt;/div&gt;
+								| &lt;/header&gt;
+								| 
+								| &lt;section&gt;
+								| &lt;img src="img/tea.jpg" alt=""&gt;
+								| 
+								| &lt;p&gt;世界中にはたくさんのお茶があります。緑茶に紅茶、ウーロン茶など、その製法や味わいもさまざまですが、リラックスしたり、ちょっと休憩したいときなどには欠かすことができません。お茶のお供に、おいしいお菓子もあると幸せな気分になってしまいます。&lt;/p&gt;
+								| &lt;/section&gt;
+								| 
+								| &lt;aside&gt;
+								| &lt;ul id="iconmenu"&gt;
+								| &lt;li&gt;&lt;a href="url"&gt;&lt;img src="img/twitter.png" alt="Twitter"&gt;&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="url"&gt;&lt;img src="img/facebook.png" alt="Facebook"&gt;&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="url"&gt;&lt;img src="img/googleplus.png" alt="Google Plus"&gt;&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="url"&gt;&lt;img src="img/rss.png" alt="RSS Feed"&gt;&lt;/a&gt;&lt;/li&gt;
+								| &lt;/ul&gt;
+								| &lt;/aside&gt;
+								| 
+								| &lt;footer&gt;
+								| &lt;small&gt;Copyright &copy; SUN DIARY, all rights reserved.&lt;/small&gt;
+								| &lt;/footer&gt;
+								| 
+								| &lt;/body&gt;
+							p 「独立したコンテンツ」と示す必要がない場合には、&lt;article&gt;ではなく、&lt;section&gt;でマークアップしてメインコンテンツを明示することもできます。
+							div.alert.alert-warning NOTES: トップページにリストアップした記事
+							p トップページにリストアップした個々の記事をどのようにマークアップするかは製作者の考え方次第ですが、「独立したコンテンツ」であると明示したい場合には&lt;article&gt;でマークアップすることができます。
+							p
+								a.btn.btn-default(href='demo/html/sample1/03/070.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;section id="content"&gt;
+								| &lt;h1&gt;COLUMNS&lt;/h1&gt;
+								| 
+								| &lt;article&gt;
+								| &lt;a href="teatime.html"&gt;
+								| &lt;img src="img/teapot.jpg" alt=""&gt;
+								| &lt;h1&gt;ちょっとしたお茶の時間&lt;/h1&gt;
+								| &lt;time datetime="2013-01-15"&gt;January 15, 2013&lt;/time&gt;
+								| &lt;p&gt;世界中にはたくさんのお茶があります。緑茶に紅茶、ウーロン茶など、その製法や味わいもさまざまですが、リラックスしたり、ちょっと休憩したいときなどには欠かすことができません。…&lt;/p&gt;
+								| &lt;/a&gt;
+								| &lt;/article&gt;
+								| 
+								| &lt;article&gt;
+								| &lt;a href="secret.html"&gt;
+								| &lt;img src="img/teacup.jpg" alt=""&gt;
+								| &lt;h1&gt;紅茶の秘密&lt;/h1&gt;
+								| &lt;time datetime="2013-01-10"&gt;January 10, 2013&lt;/time&gt;
+								| &lt;p&gt;紅茶は、茶の葉を全発酵させて製造したお茶です。ダージリンやアッサム、ジャワ、ウバ、ニルギリなど、たくさんの銘柄があります。アールグレイといったフレーバーティーも有名で…&lt;/p&gt;
+								| &lt;/a&gt;
+								| &lt;/article&gt;
+								| 
+								| &lt;article&gt;
+								| &lt;a href="sweet.html"&gt;
+								| &lt;img src="img/cake.jpg" alt=""&gt;
+								| &lt;h1&gt;ほんのり甘い…&lt;/h1&gt;
+								| &lt;time datetime="2013-01-06"&gt;January 06, 2013&lt;/time&gt;
+								| &lt;p&gt;基本的に熱湯で入れ、茶葉に合わせて抽出時間を十分に取ります。そのため、保温性の高いポットや温めた茶器を使って入れるのがポイントとなります。ティーコジーでポットをカバーし…&lt;/p&gt;
+								| &lt;/a&gt;
+								| &lt;/article&gt;
+								| 
+								| &lt;/section&gt;
+							p また、ブログツールやCMSを利用している場合、すべてのページが共通のテンプレートで生成されているケースが多くなっています。そのため、個々の記事は常に&lt;article&gt;でマークアップして出力する形にしたほうが制作効率が高くなるという側面もあります。たとえば、WordPressの標準テーマ「TwentyTwelve」ではcontent.phpテンプレートを使用し、トップページや個別ページに&lt;article&gt;でマークアップした記事のデータを出力する設定になっています。
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;article id="post-&lt;?php the_ID(); ?&gt;"&gt;
+									| &lt;?php post_class(); ?&gt;
+									| ...
+									| &lt;?php if ( is_search() ) :
+									|   // Only display Excerpts for Search ?&gt;
+									| &lt;div class="entry-summary"&gt;
+									| &lt;?php the_excerpts(); ?&gt;
+									| &lt;/div&gt;&lt;!-- .entry-summary --&gt;
+									| &lt;?php else : ?&gt;
+									| &lt;div class="entry-content"&gt;
+									| &lt;?php the_content( __( 'Continue reading &lt;span class="meta-nav"&gt;&rarr;&lt;/span&gt;', 'twentytwelve' ) ); ?&gt;
+									| &lt;?php wp_link_pages( array( 'before' =&gt; '&lt;div class="page-links"&gt;' . __( 'Pages:', 'twentytwelve' ), 'after' =&gt; '&lt;/div&gt;' ) ); ?&gt;
+									| &lt;/div&gt;&lt;!-- .entry-content --&gt;
+									| &lt;?php endif; ?&gt;
+									| ...
+									| &lt;/article&gt;&lt;!-- #post --&gt;
+								figcaption WordPressの標準テーマ「TwentyTwelve」のcontent.php
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

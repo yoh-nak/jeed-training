@@ -8,7 +8,7 @@ var express = require('express')
   , js = require('./routes/js')
   , jquery = require('./routes/jquery')
   , mobile = require('./routes/mobile')
-  , linux = require('./routes/linux')
+  , others = require('./routes/others')
   , jqm = require('./routes/jqm')
   , nodejs = require('./routes/nodejs')
   , material = require('./routes/material')
@@ -65,7 +65,7 @@ app.get('/jquery:id', jquery.jquery);
 app.get('/jqm:id', jqm.jqm);
 app.get('/mobile:id', mobile.mobile);
 app.get('/nodejs:id:format', nodejs.nodejs);
-app.get('/linux:id:format', linux.linux);
+app.get('/others:id:format', others.others);
 app.get('/diary:id:format', diary.diary);
 
 //JavaScript系

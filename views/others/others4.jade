@@ -21,6 +21,48 @@ html(lang='ja')
 							i.glyphicon.glyphicon-book
 							&nbsp;Sublime Textの使い方
 						div.panel-body
+							h4 公式サイト
+							p
+								a(href='http://www.sublimetext.com/',target='_blank') http://www.sublimetext.com/
+							hr
+							h4 ダウンロード
+							p
+								a(href='http://www.sublimetext.com/3',target='_blank') http://www.sublimetext.com/3
+							hr
+							h4 ドットインストール
+							p
+								a(href='http://dotinstall.com/lessons/basic_sublimetext', target='_blank') Sublime Text 2入門
+							hr
+							h4 パッケージコントロール機能を組み込む
+							h5 インストール手順
+							ol(start='1')
+								li まずは、以下のURLにアクセスします。
+							p https://sublime.wbond.net/installation#Manual_Instructions
+							ol(start='2')
+								li SUBLIME TEXT3とSUBLIME TEXT2が並んでいるので、3をクリックします。 
+							ol(start='3')
+								li 出てきたコードをコピーします。
+							p Sublime Text3の場合
+							pre
+								| import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())
+							p （Sublime Text2の場合）
+							pre
+								| import urllib2,os; pf='Package Control.sublime-package'; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler( ))); open( os.path.join( ipp, pf), 'wb' ).write( urllib2.urlopen( 'http://sublime.wbond.net/' +pf.replace( ' ','%20' )).read()); print( 'Please restart Sublime Text to finish installation') 
+							ol(start='4')
+								li Sublime Text 3を開き、Ctrl + ‘（バッククォート） を押し、コンソールを開きます。 
+							ol(start='5')
+								li 先ほどコピーしたコードをペーストし、Enterします。 
+							p これで、インストール完了。 
+							h5 使い方
+							p Ctrl + Shift + P でPackage Controlが開きます。
+							hr
+							h4 Windows版で日本語のインライン入力に対応する
+							p Ctrl+Shift+P → 「Package Control:Install Package」 → 「IME Suport」
+							hr
+							h4 Markdown記法のプレビュー機能を組み込む
+							p 
+							hr
+							h4 Emmetの機能を組み込む
 							p 
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')

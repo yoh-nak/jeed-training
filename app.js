@@ -66,7 +66,8 @@ app.get('/jqm:id', jqm.jqm);
 app.get('/mobile:id', mobile.mobile);
 app.get('/nodejs:id:format', nodejs.nodejs);
 app.get('/linux-:id', linux.linux);
-app.get('/diary-:id', diary.diary);
+//app.get('/diary-:id', diary.diary);
+app.get('/diary:id:format', diary.diary);
 
 //JavaScript系
 app.get('/js-:id', js.js);

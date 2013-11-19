@@ -139,6 +139,13 @@ include ../head.jade
 									td.not-support
 										img(src='images/ic-ie.png')
 							p 要素を右クリックしたときに表示されるコンテキストメニューに項目を追加したい場合、contextmenu属性で&lt;menu&gt;のIDを指定します。&lt;menu&gt;にはコンテキストメニューに追加する項目についての設定を記述しておきます。
+							pre(class='prettyprint linenums:1')
+								| &lt;img id="photo" contextmenu="mymenu" src="img/tea.jpg" alt="…"&gt;
+								| 
+								| &lt;menu type="context" id="mymenu"&gt;
+								|     &lt;menuitem label="水平方向へ回転" onclick="fliph()" icon="img/fliph.png"&gt;&lt;/menuitem&gt;
+								|     &lt;menuitem label="垂直方向へ回転" onclick="flipv()" icon="img/flipv.png"&gt;&lt;/menuitem&gt;
+								| &lt;/menu&gt;
 							pre draggable
 							table.browser-support
 								tr
@@ -158,6 +165,26 @@ include ../head.jade
 										img(src='images/ic-ie.png')
 							p draggable属性では、要素のドラッグの可否を示します。値を「true」と指定すると、要素をドラッグすることが可能になります。ただし、ドラッグ後の処理についてはJavaScriptで設定する必要があります。
 							p なお、&lt;a&gt;で設定したリンクや&lt;img&gt;で表示した画像は標準でドラッグできるようになっています。
+							pre(class='prettyprint linenums:1')
+								| &lt;aside draggable="true"&gt;
+								| &lt;h1&gt;SUBSCRIBE & FOLLOW&lt;/h1&gt;
+								| &lt;ul id="iconmenu"&gt;
+								| &lt;li&gt;&lt;a href="url"&gt;&lt;img src="img/twitter.png" alt="Twitter"&gt;&lt;/a&gt;&lt;/li&gt;
+								| ...
+								| &lt;/ul&gt;
+								| &lt;/aside&gt;
+							table.table
+								tr
+									th draggable属性の値
+									th 機能
+								tr
+									td true
+									td ドラッグできるようにする
+								tr
+									td false
+									td ドラッグできないようにする
+							div.alert.alert-success IE NOTES:
+							p IE9以前のバージョンはdraggable属性に未対応です。
 							pre dropzone
 							table.browser-support
 								tr

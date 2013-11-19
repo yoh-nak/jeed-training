@@ -339,7 +339,16 @@ include ../head.jade
 									td
 										img(src='images/ic-ie.png')
 							p lang属性を利用すると、マークアップしたコンテンツや属性値として示したテキストの言語の種類を示すことができます。たとえば、下のサンプルでは&lt;h1&gt;でマークアップした見出しが英語（en）で記述したものであることを示しています。
+							pre(class='prettyprint linenums:1')
+								| &lt;header&gt;
+								| &lt;h1 lang="en"&gt;Short Tea Breaks&lt;/h1&gt;
+								| &lt;time datetime="2013-01-15"&gt;January 15, 2013&lt;/time&gt;
+								| &lt;/header&gt;
 							p 言語の種類はBCP47で標準化されたタグで示します。なお、指定できるのは自然言語のみで、スクリプト言語などを指定することはできません。たとえば、日本語は「ja」、フランス語は「fr」、ドイツ語は「de」と指定します。
+							p
+								| BCP47: Tags for Identifying Languages
+								br
+								a(href='http://www.ietf.org/rfc/bcp/bcp47.txt',target='_blank') http://www.ietf.org/rfc/bcp/bcp47.txt
 							pre dir
 							table.browser-support
 								tr
@@ -358,6 +367,24 @@ include ../head.jade
 									td
 										img(src='images/ic-ie.png')
 							p dir属性では、以下の値で書字方向を示すことができます。「auto」では自動判別となるため、書字方向がわからない場合にのみ指定することが推奨されています。
+							pre(class='prettyprint linenums:1')
+								| &lt;header&gt;
+								| &lt;h1 lang="en" dir="ltr"&gt;Short Tea Breaks&lt;/h1&gt;
+								| &lt;time datetime="2013--1-15"&gt;January 15, 2013&lt;/time&gt;
+								| &lt;/header&gt;
+							table.table
+								tr
+									th dir属性の値
+									th 書字方向
+								tr
+									td ltr
+									td 左から右
+								tr
+									td rtl
+									td 右から左
+								tr
+									td auto
+									td 自動判別
 							pre style
 							table.browser-support
 								tr
@@ -376,6 +403,17 @@ include ../head.jade
 									td
 										img(src='images/ic-ie.png')
 							p style属性を利用すると、スタイルシートの設定を記述することができます。この設定は「インラインスタイルシート」と呼ばれ、style属性を指定した要素に適用されます。
+							pre(class='prettyprint linenums:1')
+								| &lt;header&gt;
+								| &lt;h1&gt;&lt;span style="background:#8e702f;color:white;padding:0 15px;"&gt;Short Tea Breaks&lt;/span&gt;,&lt;/h1&gt;
+								| &lt;time datetime="2013-01-15"&gt;January 15, 2013&lt;/time&gt;
+								| &lt;/header&gt;
+							p
+								| CSS Style Attirbutes
+								br
+								a(href='http://www.w3.org/TR/css-style-attr/',target='_blank') http://www.w3.org/TR/css-style-attr/
+								br
+								a(href='http://dev.w3.org/csswg/css-style-attr/',target='_blank') http://dev.w3.org/csswg/css-style-attr/
 							p なお、style属性の値として記述するスタイルシートの構文規則については、下の「CSS Style Attributes」で策定作業が行われています。
 							pre spellcheck
 							table.browser-support
@@ -400,6 +438,39 @@ include ../head.jade
 							p ブラウザは、&lt;input&gt;や&lt;textarea&gt;で構成した入力欄や、contenteditable属性で指定した編集可能なコンテンツに対してスペルチェックを行います。これに対し、spellcheck属性を利用するとスペルチェックの機能を無効化することができます。
 							p たとえば、下のサンプルの場合、「名前」や「メールアドレス」の欄ではスペルチェックを行う必要がありません。そこで、&lt;form&gt;にspellcheck="false"を追加し、スペルチェックの機能をフォーム全体でまとめて無効化しています。ただし、コメントの欄ではスペルチェックを行うため、&lt;textarea&gt;にはspellcheck="true"と指定するようにしています。
 							p なお、ブラウザの設定ではユーザがスペルチェックの機能を無効にしている場合、spellcheck属性の指定は無視されます。また、FirefoxとSafariは編集可能なコンテンツ、IE10は&lt;input&gt;と編集可能なコンテンツのスペルチェックに未対応です。
+							pre(class='prettyprint linenums:1')
+								| &lt;form action="query.php" method="post" spellcheck="true"&gt;
+								| &lt;p&gt;
+								| &lt;label&gt;名前：
+								| &lt;input type="text" name="name" size="40"&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+								| 
+								| &lt;p&gt;
+								| &lt;label&gt;メールアドレス：
+								| &lt;input type="email" name="email" size="40"&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+								| 
+								| &lt;p&gt;
+								| &lt;label&gt;コメント：
+								| &lt;textarea name="comment" row="8" lang="en" spellcheck="true"&gt;&lt;/textarea&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+								| ...
+								| &lt;/form&gt;
+							table.table
+								tr
+									th spellcheck属性の値
+									th 機能
+								tr
+									td true
+									td スペルチェックを行う
+								tr
+									td false
+									td スペルチェックを行わない
+							div.alert.alert-success IE NOTES:
+							p IE9以前のバージョンはスペルチェック機能に未対応です。
 							pre translate
 							table.browser-support
 								tr
@@ -436,8 +507,38 @@ include ../head.jade
 										img(src='images/ic-opera.png')
 									td
 										img(src='images/ic-ie.png')
+							pre(class='prettyprint linenums:1')
+								| &lt;h1 translate="no"&gt;&lt;img src="img/logo-sun.png" alt=""&gt;SUN DIARY&lt;/h1&gt;
+								| …
+								| &lt;small translate="no"&gt;Copyright &copy; SUN DIARY. all rights reserved.&lt;/small&gt;
+							table.table
+								tr
+									th translateの値
+									th 機能
+								tr
+									td yes
+									td 翻訳を許可する
+								tr
+									td no
+									td 翻訳を許可しない
 							p 「data-*」はカスタムデータ属性と呼ばれるもので、情報を付加するのに適切な要素や属性がない場合に利用することができます。属性名も、「*」に1文字以上の語句を入れて独自に設定します。1つの要素に複数のカスタムデータ属性を指定することも可能です。
 							p たとえば、jQuery MobileではWebページをスマートフォンに合わせて最適化するため、data-role属性やdata-position属性で設定を記述し、それに応じてカスタマイズの処理を適用する仕組みとなっています。この他にも、カスタムデータ属性を利用して処理に必要な設定を記述するライブラリが増えてきています。
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;div id="container" data-role="page"&gt;
+									| &lt;header data-role="header" data-position="fixed"&gt;
+									| …
+									| &lt;/header&gt;
+									| &lt;div id="main" data-role="content"&gt;
+									| …
+									| &lt;/div&gt;
+									| &lt;footer data-role="footer"&gt;
+									| …
+									| &lt;/footer&gt;
+									| &lt;/div&gt;
+								figcaption カスタムデータ属性を利用してjQuery Mobile向けの設定を記述したもの。
+							div.alert.alert-warning NOTES: inert属性
+							p HTML Living StandardとHTML5.1 Nightlyでは、グローバル属性に「inert」という属性が追加されています。inert属性はブーリアン属性の1つで、指定された要素はinert（不活性）であるとされ、ページ内検索やマウスイベントにおいて処理の対象外とされることになっています。
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

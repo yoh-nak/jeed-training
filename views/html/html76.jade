@@ -30,7 +30,38 @@ include ../head.jade
 										img(src='images/ic-opera.png')
 									td
 										img(src='images/ic-ie.png')
-							p accesskey属性を利用すると、要素を選択・実行するためのキーボードショートカットの値を示すことができます。
+							p accesskey属性を利用すると、要素を選択・実行するためのキーボードショートカットの値を示すことができます。たとえば、下のように指定した場合、Chromeでは「Alt ＋ 1」で「NEWS」のリンク先にアクセスすることができます。
+							p なお、ショートカットキーの組み合わせはブラウザごとに以下のようになっています。
+							table.table
+								tr
+									th ブラウザ
+									th ショートカットキー
+								tr
+									td Firefox
+									td Shift + Alt + accesskeyの値
+								tr
+									td Safari
+									td Ctrl + Alt + accesskeyの値
+								tr
+									td Chrome
+									td Alt + accesskeyの値
+								tr
+									td Opera
+									td Shift + Esc + accesskeyの値
+								tr
+									td Internet Explorer
+									td Alt + accesskeyの値
+							pre(class='prettyprint linenums:1')
+								| &lt;ul&gt;
+								| &lt;li&gt;&lt;a href="news.html" accesskey="1"&gt;NEWS&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="column.html" accesskey="2"&gt;COLUMN&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="gift.html" accesskey="3"&gt;GIFT&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="contact.html" accesskey="4"&gt;CONTACT&lt;/a&gt;&lt;/li&gt;
+								| &lt;/ul&gt;
+							div.alert.alert-warning NOTES: 
+							p accesskeyの値には数字だけでなく、アルファベットを指定することもできます。このとき、大文字と小文字が区別されますので注意が必要です。
+							pre(class='prettyprint linenums:1')
+								| &lt;li&gt;&lt;a href="news.html" accesskey="N"&gt;NEWS&lt;/a&gt;&lt;/li&gt;
 							pre tabindex
 							table.browser-support
 								tr
@@ -50,6 +81,13 @@ include ../head.jade
 										img(src='images/ic-ie.png')
 							p tabindex属性を利用すると、Tabキーを使って要素を選択していくときの順番を指定することができます。たとえば、下のように指定した場合、Tabキーで「CONTACT」、「GIFT」、「COLUMN」、「NEWS」の順にリンクを選択できるようになります。
 							p なお、tabindexで指定できるのは整数値のみとなっています。
+							pre(class='prettyprint linenums:1')
+								| &lt;ul&gt;
+								| &lt;li&gt;&lt;a href="news.html" tabindex="4"&gt;NEWS&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="column.html" tabindex="3"&gt;COLUMN&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="gift.html" tabindex="2"&gt;GIFT&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="contact.html" tabindex="1"&gt;CONTACT&lt;/a&gt;&lt;/li&gt;
+								| &lt;/ul&gt;
 							pre contenteditable
 							table.browser-support
 								tr
@@ -68,6 +106,21 @@ include ../head.jade
 									td
 										img(src='images/ic-ie.png')
 							p contenteditable属性はコンテンツの編集の可否を示します。値を「true」と指定すると、ブラウザ画面上でコンテンツを編集できるようになります。ただし、編集後の処理についてはJavaScriptで設定する必要があります。
+							pre(class='prettyprint linenums:1')
+								| &lt;header&gt;
+								| &lt;h1 contenteditable="true"&gt;Short Tea Breaks&lt;/h1&gt;
+								| &lt;time datetime="2013-01-15"&gt;January 15, 2013&lt;/time&gt;
+								| &lt;/header&gt;
+							table.table
+								tr
+									th contenteditable属性の値
+									th 機能
+								tr
+									td true
+									td 編集できるようにする
+								tr
+									td false
+									td 編集できないようにする
 							pre contextmenu
 							table.browser-support
 								tr

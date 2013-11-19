@@ -30,6 +30,7 @@ include ../head.jade
 										img(src='images/ic-opera.png')
 									td
 										img(src='images/ic-ie.png')
+							p accesskey属性を利用すると、要素を選択・実行するためのキーボードショートカットの値を示すことができます。
 							pre tabindex
 							table.browser-support
 								tr
@@ -47,6 +48,8 @@ include ../head.jade
 										img(src='images/ic-opera.png')
 									td
 										img(src='images/ic-ie.png')
+							p tabindex属性を利用すると、Tabキーを使って要素を選択していくときの順番を指定することができます。たとえば、下のように指定した場合、Tabキーで「CONTACT」、「GIFT」、「COLUMN」、「NEWS」の順にリンクを選択できるようになります。
+							p なお、tabindexで指定できるのは整数値のみとなっています。
 							pre contenteditable
 							table.browser-support
 								tr
@@ -64,6 +67,7 @@ include ../head.jade
 										img(src='images/ic-opera.png')
 									td
 										img(src='images/ic-ie.png')
+							p contenteditable属性はコンテンツの編集の可否を示します。値を「true」と指定すると、ブラウザ画面上でコンテンツを編集できるようになります。ただし、編集後の処理についてはJavaScriptで設定する必要があります。
 							pre contextmenu
 							table.browser-support
 								tr
@@ -81,6 +85,7 @@ include ../head.jade
 										img(src='images/ic-opera.png')
 									td.not-support
 										img(src='images/ic-ie.png')
+							p 要素を右クリックしたときに表示されるコンテキストメニューに項目を追加したい場合、contextmenu属性で<menu>のIDを指定します。<menu>にはコンテキストメニューに追加する項目についての設定を記述しておきます。
 							pre draggable
 							table.browser-support
 								tr
@@ -98,6 +103,8 @@ include ../head.jade
 										img(src='images/ic-opera.png')
 									td
 										img(src='images/ic-ie.png')
+							p draggable属性では、要素のドラッグの可否を示します。値を「true」と指定すると、要素をドラッグすることが可能になります。ただし、ドラッグ後の処理についてはJavaScriptで設定する必要があります。
+							p なお、<a>で設定したリンクや<img>で表示した画像は標準でドラッグできるようになっています。
 							pre dropzone
 							table.browser-support
 								tr
@@ -115,6 +122,8 @@ include ../head.jade
 										img(src='images/ic-opera.png')
 									td.not-support
 										img(src='images/ic-ie.png')
+							p ドラッグ＆ドロップでドロップ先の要素にdropzone属性を指定すると、ドロップ時の処理を指定することができます。たとえば、「copy」と指定すると、ドラッグしてきたデータのコピーが行われることになっています。
+							p また、下のように半角スペースで区切り、ドロップを許可するデータの種類を指定することも可能です。
 							pre hidden
 							table.browser-support
 								tr
@@ -132,6 +141,8 @@ include ../head.jade
 										img(src='images/ic-opera.png')
 									td.not-support
 										img(src='images/ic-ie.png')
+							p hidden属性を指定すると、現在の状態のページとは関連がないことを示すことができます。また、ブラウザ画面にも表示されなくなります。
+							p たとえば、ユーザーがログインしていない状態の場合、会員向けの情報にはhidden属性を指定しておくといった使い方が可能です。
 							pre class
 							table.browser-support
 								tr
@@ -149,6 +160,7 @@ include ../head.jade
 										img(src='images/ic-opera.png')
 									td
 										img(src='images/ic-ie.png')
+							p class属性は要素が属するクラスを示します。半角スペースで区切ることで、複数のクラスを示すことが可能です。たとえば、下のサンプルでは2つの画像の両方が「illustration」というクラスに属し、個別には「graph」および「map」というクラスに属していることを示します。
 							pre id
 							table.browser-support
 								tr
@@ -166,6 +178,7 @@ include ../head.jade
 										img(src='images/ic-opera.png')
 									td
 										img(src='images/ic-ie.png')
+							p id属性は要素を個別に区別するのにIDを示します。そのため、ページ内で同じIDを複数の要素に指定することはできません。IDは特定の参照先を明示したり、JavaScriptの処理対象を示すのに利用することができます。たとえば、下のサンプルでは<figure>で示した図版に「sample01」というIDを指定し、本文からIDで参照できるようにしています。
 							pre title
 							table.browser-support
 								tr
@@ -183,6 +196,7 @@ include ../head.jade
 										img(src='images/ic-opera.png')
 									td
 										img(src='images/ic-ie.png')
+							p title属性では補助的な情報を示すことができ、カーソルを重ねるとツールチップとして表示されるようになっています。ただし、マウスを使用しないキーボードブラウジングやスマートフォンなどでは表示することができないため、現状ではtitle属性を積極的に利用することは推奨されていません。なお、<link>や<abbr>など、title属性が特別な背マンティクスを持つ要素もあります。たとえば、略語を示す<abbr>では、title属性で元の語句を示すように定義されています。
 							pre lang
 							table.browser-support
 								tr
@@ -200,6 +214,8 @@ include ../head.jade
 										img(src='images/ic-opera.png')
 									td
 										img(src='images/ic-ie.png')
+							p lang属性を利用すると、マークアップしたコンテンツや属性値として示したテキストの言語の種類を示すことができます。たとえば、下のサンプルでは<h1>でマークアップした見出しが英語（en）で記述したものであることを示しています。
+							p 言語の種類はBCP47で標準化されたタグで示します。なお、指定できるのは自然言語のみで、スクリプト言語などを指定することはできません。たとえば、日本語は「ja」、フランス語は「fr」、ドイツ語は「de」と指定します。
 							pre dir
 							table.browser-support
 								tr
@@ -217,6 +233,7 @@ include ../head.jade
 										img(src='images/ic-opera.png')
 									td
 										img(src='images/ic-ie.png')
+							p dir属性では、以下の値で書字方向を示すことができます。「auto」では自動判別となるため、書字方向がわからない場合にのみ指定することが推奨されています。
 							pre style
 							table.browser-support
 								tr
@@ -234,6 +251,8 @@ include ../head.jade
 										img(src='images/ic-opera.png')
 									td
 										img(src='images/ic-ie.png')
+							p style属性を利用すると、スタイルシートの設定を記述することができます。この設定は「インラインスタイルシート」と呼ばれ、style属性を指定した要素に適用されます。
+							p なお、style属性の値として記述するスタイルシートの構文規則については、下の「CSS Style Attributes」で策定作業が行われています。
 							pre spellcheck
 							table.browser-support
 								tr
@@ -254,6 +273,9 @@ include ../head.jade
 									td
 										img(src='images/ic-ie.png')
 										| （※）
+							p ブラウザは、<input>や<textarea>で構成した入力欄や、contenteditable属性で指定した編集可能なコンテンツに対してスペルチェックを行います。これに対し、spellcheck属性を利用するとスペルチェックの機能を無効化することができます。
+							p たとえば、下のサンプルの場合、「名前」や「メールアドレス」の欄ではスペルチェックを行う必要がありません。そこで、<form>にspellcheck="false"を追加し、スペルチェックの機能をフォーム全体でまとめて無効化しています。ただし、コメントの欄ではスペルチェックを行うため、<textarea>にはspellcheck="true"と指定するようにしています。
+							p なお、ブラウザの設定ではユーザがスペルチェックの機能を無効にしている場合、spellcheck属性の指定は無視されます。また、FirefoxとSafariは編集可能なコンテンツ、IE10は<input>と編集可能なコンテンツのスペルチェックに未対応です。
 							pre translate
 							table.browser-support
 								tr
@@ -271,6 +293,8 @@ include ../head.jade
 										img(src='images/ic-opera.png')
 									td.not-support
 										img(src='images/ic-ie.png')
+							p translate属性では翻訳の可否を指定することができます。たとえば、翻訳すると内容が分からなくなってしまうサイト名やコピーライトなどには、translate属性を「no」と指定しておくことにより、翻訳されるのを回避することができます。
+							p 現在のところ、Google翻訳やMicrosoft Translator（Bing Translator）が対応していますが、Chromeに内蔵された翻訳機能では未対応となっています。
 							pre data-*（カスタムデータ属性）
 							table.browser-support
 								tr
@@ -288,6 +312,8 @@ include ../head.jade
 										img(src='images/ic-opera.png')
 									td
 										img(src='images/ic-ie.png')
+							p 「data-*」はカスタムデータ属性と呼ばれるもので、情報を付加するのに適切な要素や属性がない場合に利用することができます。属性名も、「*」に1文字以上の語句を入れて独自に設定します。1つの要素に複数のカスタムデータ属性を指定することも可能です。
+							p たとえば、jQuery MobileではWebページをスマートフォンに合わせて最適化するため、data-role属性やdata-position属性で設定を記述し、それに応じてカスタマイズの処理を適用する仕組みとなっています。この他にも、カスタムデータ属性を利用して処理に必要な設定を記述するライブラリが増えてきています。
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

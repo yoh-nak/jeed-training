@@ -204,6 +204,23 @@ include ../head.jade
 										img(src='images/ic-ie.png')
 							p ドラッグ＆ドロップでドロップ先の要素にdropzone属性を指定すると、ドロップ時の処理を指定することができます。たとえば、「copy」と指定すると、ドラッグしてきたデータのコピーが行われることになっています。
 							p また、下のように半角スペースで区切り、ドロップを許可するデータの種類を指定することも可能です。
+							pre(class='prettyprint linenums:1')
+								| &lt;div dropzone="copy file:image/png file:image/gif file:image/jpeg"&gt;
+								| …
+								| &lt;/div&gt;
+							table.table
+								tr
+									th dropzone属性の値
+									th 処理
+								tr
+									td copy
+									td ドラッグ元のデータをコピーする
+								tr
+									td move
+									td ドラッグ元のデータを移動する
+								tr
+									td link
+									td ドラッグ元のデータへリンクする
 							pre hidden
 							table.browser-support
 								tr
@@ -221,8 +238,14 @@ include ../head.jade
 										img(src='images/ic-opera.png')
 									td.not-support
 										img(src='images/ic-ie.png')
+							p ※ iOS4.x/Android3.x以前は未対応
 							p hidden属性を指定すると、現在の状態のページとは関連がないことを示すことができます。また、ブラウザ画面にも表示されなくなります。
 							p たとえば、ユーザーがログインしていない状態の場合、会員向けの情報にはhidden属性を指定しておくといった使い方が可能です。
+							pre(class='prettyprint linenums:1')
+								| &lt;section id="member" hidden&gt;
+								| &lt;h1&gt;会員の皆様へ&lt;/h1&gt;
+								| ...
+								| &lt;/section&gt;
 							pre class
 							table.browser-support
 								tr
@@ -241,6 +264,9 @@ include ../head.jade
 									td
 										img(src='images/ic-ie.png')
 							p class属性は要素が属するクラスを示します。半角スペースで区切ることで、複数のクラスを示すことが可能です。たとえば、下のサンプルでは2つの画像の両方が「illustration」というクラスに属し、個別には「graph」および「map」というクラスに属していることを示します。
+							pre(class='prettyprint linenums:1')
+								| &lt;img src="figure01.jpg" alt="…" class="illustration graph"&gt;
+								| &lt;img src="figure02.jpg" alt="…" class="illustration map"&gt;
 							pre id
 							table.browser-support
 								tr
@@ -259,6 +285,13 @@ include ../head.jade
 									td
 										img(src='images/ic-ie.png')
 							p id属性は要素を個別に区別するのにIDを示します。そのため、ページ内で同じIDを複数の要素に指定することはできません。IDは特定の参照先を明示したり、JavaScriptの処理対象を示すのに利用することができます。たとえば、下のサンプルでは&lt;figure&gt;で示した図版に「sample01」というIDを指定し、本文からIDで参照できるようにしています。
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;&lt;a href="#sample01"&gt;サンプル01&lt;/a&gt;の設定ではjQueryを利用しています。&lt;/p&gt;
+								| 
+								| &lt;figure id="sample01"&gt;
+								| &lt;figcaption&gt;サンプル01&lt;/figcaption&gt;
+								| &lt;pre&gt;&lt;code&gt;…&lt;/code&gt;&lt;/pre&gt;
+								| &lt;/figure&gt;
 							pre title
 							table.browser-support
 								tr
@@ -277,6 +310,17 @@ include ../head.jade
 									td
 										img(src='images/ic-ie.png')
 							p title属性では補助的な情報を示すことができ、カーソルを重ねるとツールチップとして表示されるようになっています。ただし、マウスを使用しないキーボードブラウジングやスマートフォンなどでは表示することができないため、現状ではtitle属性を積極的に利用することは推奨されていません。なお、&lt;link&gt;や&lt;abbr&gt;など、title属性が特別な背マンティクスを持つ要素もあります。たとえば、略語を示す&lt;abbr&gt;では、title属性で元の語句を示すように定義されています。
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;header&gt;
+									| &lt;h1 title="ちょっとしたお茶の時間"&gt;Short Tea Breaks&lt;/h1&gt;
+									| &lt;time datetime="2013-01-15"&gt;January 15, 2013&lt;/time&gt;
+									| &lt;/header&gt;
+								figcaption 補助的な情報を示したもの。
+							figure
+								pre(class='prettyprint linenums:1')
+									&lt;abbr title="World Wide Web Consortium"&gt;W3C&lt;/abbr&gt;ではさまざまな標準規格の策定が行われています。
+								figcaption 略語の元の語句を示したもの。
 							pre lang
 							table.browser-support
 								tr

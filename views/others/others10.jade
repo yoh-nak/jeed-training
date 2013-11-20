@@ -1,0 +1,42 @@
+!!!
+html(lang='ja')
+	head
+		meta(name='viewport',content='width=device-width,initial-scale=1.0')
+		link(href='css/bootstrap.min.css',rel='stylesheet',media='screen')
+		link(href='js/dtree/dtree.css', rel='stylesheet', media='screen')
+		link(href='less/common.less',rel='stylesheet',media='screen')
+		link(href='js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+		title=title
+		:coffeescript
+		:stylus
+	body
+		include navbar.jade
+		div.container
+			div.row
+				div.col-sm-3
+					include left.jade
+				div.col-sm-9
+					div.panel.panel-primary
+						div.panel-heading
+							i.glyphicon.glyphicon-book
+							&nbsp;Bower
+						div.panel-body
+							h4 公式サイト
+							p
+								a(href='http://bower.io/',target='_blank') http://bower.io/
+							hr
+							h4 インストール
+							p Windows
+							pre
+								| npm install -g bower
+							p Linux / Mac
+							pre
+								| sudo npm install -g bower
+							hr
+							h4 jQuery
+							pre bower install jquery
+							pre bower install jquery#1.9.2
+		div#footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='js/bootstrap.min.js')
+		script(src='coffee/list-counter.js')

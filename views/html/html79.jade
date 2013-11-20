@@ -16,35 +16,62 @@ include ../head.jade
 							p='たとえば、<p>は「フロー・コンテンツに属し、フレージング・コンテンツを内包できる」と定義されていますので、このルールに従ってマークアップを行う必要があります。'
 							p 一見、複雑なルールに思えるかもしれませんが、こうしたルールの形成に影響を与えているのがセマンティクスで、さまざまなコンテンツを柔軟にマークアップできる仕組みとなっています。
 							figure
-								img(src='http://blog-imgs-33-origin.fc2.com/h/o/n/honttoni/120208model_1.gif',alt='')
+								img(src='images/120208model_1.gif',alt='')
 								br
-								img(src='http://blog-imgs-33-origin.fc2.com/h/o/n/honttoni/120208model_2.gif',alt='')
+								img(src='images/120208model_2.gif',alt='')
 								br
-								img(src='http://blog-imgs-33-origin.fc2.com/h/o/n/honttoni/120208model_3.gif',alt='')
+								img(src='images/120208model_3.gif',alt='')
 								br
-								img(src='http://blog-imgs-33-origin.fc2.com/h/o/n/honttoni/120208model_4.gif',alt='')
-							h4 フロー・コンテンツ（Flow content）
+								img(src='images/120208model_4.gif',alt='')
+							pre フロー・コンテンツ（Flow content）
 							p='「フロー・コンテンツ」には<body>内でコンテンツのマークアップに使用できる	要素が属しています。'
-							h4 ヘディング・コンテンツ（Heading content）
+							pre ヘディング・コンテンツ（Heading content）
 							p 「ヘディング・コンテンツ」には、見出しを示す要素が属しています。
-							h4 セクショニング・コンテンツ（Sectioning content）
+							pre セクショニング・コンテンツ（Sectioning content）
 							p 「セクショニング・コンテンツ」には、アウトライン（コンテンツの階層構造）を構成する役割を持つ要素が属しています。
-							h4 フレージング・コンテンツ（Phrasing content）
+							pre フレージング・コンテンツ（Phrasing content）
 							p 「フレージング・コンテンツ」には短いフレーズのセマンティクスを示す要素が属しています。
-							h4 エンベデッド・コンテンツ（Embeded content）
+							pre エンベデッド・コンテンツ（Embeded content）
 							p 「エンベデッド・コンテンツ」には画像や動画など、外部リソースを利用する要素が属しています。
-							h4 インタラクティブ・コンテンツ
+							pre インタラクティブ・コンテンツ
 							p 「インタラクティブ・コンテンツ」には、ユーザーの操作を必要とするリンクやフォームなどを構成する要素が属しています。
-							h4 メタデータ・コンテンツ（Metadata content）
+							pre メタデータ・コンテンツ（Metadata content）
 							p='「メタデータ・コンテンツ」には、付加情報（メタデータ）を示すための要素が属しています。基本的に<head>内に記述しますが、条件によっては<body>ないに記述できるものもあります。'
 							div.alert.alert-info 特別なカテゴリー
 							p HTML5には7つのカテゴリーとは異なる分類も用意されており、基本的な分類のみでは規定するのが難しい相互関係や記述ルールが定義されています。各要素は必要に応じてこうしたカテゴリーにも分類され、空の記述を防止したり、リンクを自由に設定したりすることができるようになっています。
-							h4 パルパブルコンテンツ（Palpable content）
-							h4 トランスペアレント（Transparent）
-							h4 セクショニング・ルート（Sectioning root）
-							h4 フォーム関連
-							h4 カテゴリーに属していない要素（None）
+							pre パルパブルコンテンツ（Palpable content）
+							p 「パルパブル・コンテンツ」にはコンテツを構成する要素が属しています。
+							p='「<p></p>」にのようにコンテンツのない、空の記述を防ぐため、フロー・コンテンツまたはフレージング・コンテンツを内包できる要素は、hidden属性を持たない少なくとも1つのパルパブル・コンテンツを内包することが推奨されています。パルパブル・コンテンツには「テキスト」も含まれていますので、「<p>こんにちは</p>」のように記述すれば要件を満たしていることになります。なお、スクリプトなどで後からコンテンツを挿入するために空の状態で記述してくことは認められています。'
+							h4 パルパブルコンテンツに属している要素
+							p='a, abbr, address ,article, aside, audio（controls属性がある場合）, b, bdi, bdo, blockquote, button, canvas, cite, code, data, details, dfn, div, dl（子要素に<dt><dd>を含む場合）, em, embed, fieldset, figure, footer, form, h1, h2, h3, h4, h5, h6, header, i, iframe, img, input（type属性がhidden以外の場合）, ins, kbd, keygen, label, map, mark, math, menu（type属性がtoolbarまたはtype属性を省略した場合）, meter, nav, object, ol（少なくとも1つの子要素<li>を持つ場合）, output, p, pre, pregress, q, ruby, s, samp, section, select, small, span, strong, sub, sup, svg, table, textarea, time, u, ul（少なくとも1つの子要素<li>を持つ場合）, var, video, テキスト'
+							h4 パルパブル・コンテンツに属していない要素
+							p area, br, datalist, del, dialog, hr, wbr, 半角スペース, メタデータ・コンテンツに属するすべての要素（metaなど）
+							pre トランスペアレント（Transparent）
+							p 内包できるコンテンツの種類が「Transparent」と定義された要素では、臨機応変ににリンクを設定したり、コンテンツの編集結果を示すことができるようになっています。
+							h4 コンテンツ・モデルが「トランスペアレント」な要素
+							p a, ins, del, map, object
+							pre セクショニング・ルート（Sectioning root）
+							p 「セクショニング・ルート」にはアウトラインのルート階層を構成する要素が属しています。セクショニング・ルートの中に記述されたコンテンツはそれぞれ個別にアウトラインを構成し、他のセクショニング・ルートが構成したアウトラインには影響を与えないようになっています。
+							p='たとえば、Appleのページの場合、<figure>でマークアップされたスライダー内の見出しは<body>の構成するアウトラインには出力されないことがわかります。'
+							h4 セクショニング・ルートに属している要素
+							p blockquote, body, details, dialog, fieldset, figure, td
+							pre フォーム関連
+							p フォーム関連の要素はフォームの記述ルールを詳細に定義するため、次のように細かなカテゴリーに分類されています。
+							dl
+								dt フォーム関連の要素（Form-associated elements）
+								dd='<form>と関連付けて利用することが出来る要素です。'
+								dt リスティッド要素（Listed elements）
+								dd form.elementsとfieldset.elementsでリストされる要素です。
+								dt 送信できる要素（Submittable elements）
+								dd 入力・設定内容が送信される要素です。
+								dt リセットできる要素（Resettable elements）
+								dd フォームをリセットしたときに影響を受ける要素です。
+								dt ラベル付けできる要素（Labbelable elements）
+								dd='<label>によってラベル付けできる要素です。'
+							pre カテゴリーに属していない要素（None）
+							p どのカテゴリーにも属していない要素もあります。
 							div.alert.alert-info HTML5の文法とセマンティクス
+							p 
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

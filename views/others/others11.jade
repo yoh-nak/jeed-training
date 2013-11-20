@@ -1,0 +1,62 @@
+!!!
+html(lang='ja')
+	head
+		meta(name='viewport',content='width=device-width,initial-scale=1.0')
+		link(href='css/bootstrap.min.css',rel='stylesheet',media='screen')
+		link(href='js/dtree/dtree.css', rel='stylesheet', media='screen')
+		link(href='less/common.less',rel='stylesheet',media='screen')
+		link(href='js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+		title=title
+		:coffeescript
+		:stylus
+	body
+		include navbar.jade
+		div.container
+			div.row
+				div.col-sm-3
+					include left.jade
+				div.col-sm-9
+					div.panel.panel-primary
+						div.panel-heading
+							i.glyphicon.glyphicon-book
+							&nbsp;Grunt
+						div.panel-body
+							h4 公式サイト
+							p
+								a(href='http://gruntjs.com/',target='_blank') http://gruntjs.com/
+							hr
+							h4 インストール
+							p Windows
+							pre
+								| npm install -g grunt-cli
+							p Linux / Mac
+							pre
+								| sudo npm install -g grunt-cli
+							h4 プロジェクトにインストール
+							pre npm install grunt
+							h4 Gruntfile.js
+							pre(class='prettyprint linenums:1')
+								module.exports = function(grunt){
+
+								    // `loadnpmTasks`で使用したいタスクを読み込んでおく
+								    grunt.loadNpmTasks("grunt-contrib-uglify");
+
+								    // `initConfig` で基本設定
+								    grunt.initConfig({
+								        uglify : {
+								            dist : {
+								                src : ["assets/js/script.js"],
+								                dest : "assets/js/script.min.js"
+								            }
+								        }
+								    });
+
+								    // `registerTask` でタスクに名前をつける
+								    // "default" でデフォルトのタスクを設定
+								    grunt.registerTask("default", ["uglify"]);
+
+								};
+		div#footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='js/bootstrap.min.js')
+		script(src='coffee/list-counter.js')

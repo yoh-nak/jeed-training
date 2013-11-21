@@ -29,9 +29,20 @@ include ../head.jade
 								| 	"name": "jade-de-mock",
 								| 	"version": "0.1.0"
 								| }
-							h4 プロジェクトにインストール
+							h4 プロジェクトにgruntをインストール
 							pre npm install grunt --save-dev
-							h4 Gruntfile.js
+							h4 タスクのインストール
+							pre npm install grunt-contrib-jade --save-dev
+							h4 jadeの記述
+							pre
+								| !!!
+								| html
+								|   head
+								|     meta(charset='UTF-8')
+								|     title HelloWorld
+								|   body
+								|     h1 HelloWorld
+							h4 Gruntfile.jsをにタスクを記述する
 							pre(class='prettyprint lang-js linenums:1')
 								| module.exports = function(grunt) {
 								|   grunt.initConfig({
@@ -52,11 +63,10 @@ include ../head.jade
 								|   grunt.registerTask('default', ['jade']);
 								| 
 								| };
-							h4 タスクのインストール
+							
 							//h4 JavaScriptの圧縮を行う（ugrify）
 							//pre npm install grunt-contrib-uglify --save-dev
 							//h4 jadeのコンパイル
-							pre npm install grunt-contrib-jade --save-dev
 							//h4 lessのコンパイル
 							//pre npm install grunt-contrib-less --save-dev
 							//h4 coffeescriptのコンパイル

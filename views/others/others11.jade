@@ -32,24 +32,23 @@ include ../head.jade
 							pre npm install grunt --save-dev
 							h4 Gruntfile.js
 							pre(class='prettyprint lang-js linenums:1')
-								| module.exports = function(grunt){
-								| 
-								|     // `loadnpmTasks`で使用したいタスクを読み込んでおく
-								|     grunt.loadNpmTasks("grunt-contrib-uglify");
-								| 
-								|     // `initConfig` で基本設定
-								|     grunt.initConfig({
-								|     uglify : {
-								|         dist : {
-								|             src : ["assets/js/script.js"],
-								|             dest : "assets/js/script.min.js"
+								| module.exports = function(grunt) {
+								|   grunt.initConfig({
+								|     pkg: grunt.file.readJSON('package.json'),
+								|     jade: {
+								|       compile: {
+								|         options: {
+								|          pretty: true
+								|         },
+								|         files: {
+								|           "index.html": ["index.jade"]
 								|         }
-								|         }
-								|     });
+								|       }
+								|     }
+								|   });
 								| 
-								|     // `registerTask` でタスクに名前をつける
-								|     // "default" でデフォルトのタスクを設定
-								|     grunt.registerTask("default", ["uglify"]);
+								|   grunt.loadNpmTasks('grunt-contrib-jade');
+								|   grunt.registerTask('default', ['jade']);
 								| 
 								| };
 							div.alert.alert-info タスクのインストール

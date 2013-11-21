@@ -59,6 +59,83 @@ include ../head.jade
 											| 	font-family: monospace;
 											| 	white-space: pre;
 											| }
+							p='<pre>は半角スペースやタブ、改行で整形済みのテキストコンテンツを示す要素で、<pre>内に記述した半角スペースなどはそのままブラウザ画面の表示に反映されます。'
+							p='たとえば、メールの文面やコンピュータ・コード、アスキーアートなどのマークアップに利用することができます。サンプルではメールの文面をマークアップし、罫線で囲んで表示しています。'
+							p='なお、各ブラウザは<pre>でマークアップしたテキストを等幅フォントで表示します。ただし、Internet Explorerでは半角スペースやアルファベットが欧文フォントで表示され、レイアウトが崩れてしまいます。これを防ぎ、他のブラウザと同じ形で表示するため、サンプルではスタイルシートのfont-family'プロパティで日本語の等幅フォントを指定するようにしています。
+							p
+								a.btn.btn-default(href='demo/html/sample1/06/166.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;h1&gt;Mail Sample&lt;/h1&gt;
+								| 
+								| &lt;p&gt;ご注文確認メールのサンプルです。&lt;/p&gt;
+								| 
+								| &lt;pre&gt;
+								| 商品をお買い上げいただきまして誠にありがとうございます。
+								| 下記内容でのご注文を受付いたしましたのでご確認ください。
+								|                                                                   1月15日
+								| 
+								| ─────────────────────────────────────
+								| 商品                                          　数量              金額
+								| ─────────────────────────────────────
+								| X005 ティーバッグセット 800円                    １              800円
+								| J010 玄米茶 400円                                １              400円
+								| ─────────────────────────────────────
+								|                                                          合計   1200円
+								| &lt;/pre&gt;
+							pre(class='prettyprint linenums:1')
+								| pre	{font-size: 16px;
+								| 	font-family: 'ＭＳ ゴシック','Osaka-mono',monospace;
+								| 	border: solid 2px #d2bc8c;
+								| 	padding: 20px;
+							div.alert.alert-warning NOTES:
+							p='<pre>の直後に挿入した改行は表示に反映されません。'
+							div.alert.alert-info コンピュータ・コードの記述
+							p='整形済みテキストとしてコンピュータ・コードを記述する場合、<pre>でマークアップするとともに、<code>でもマークアップします。これにより、セマンティクスの上でもコンピュータ・コードを記述していることを明確に示すことができます。'
+							p='また、<code>ではclass属性の値でコンピュータ・コードの種類を明示する方法が提案されており、「language-〜」という形で指定します。サンプルではHTMLソースを記述していますので、「language-html」と指定しています。'
+							p
+								a.btn.btn-default(href='demo/html/sample1/06/167-1.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;h1&gåt;Tips and Tricks&lt;/h1&gåt;
+								| 
+								| &lt;p&gåt;サンプルでは次のように設定を行っています。&lt;/p&gåt;
+								| 
+								| &lt;pre&gåt;&lt;code class="language-html"&gåt;&amp;lt;script&amp;gt;
+								| $(function(){
+								|     $('h1').click(function() {
+								| 		$(this).next().slideToggle();
+								| 	}).next().hide();
+								| });
+								| &amp;lt;/script&amp;gt;
+								| …
+								| &amp;lt;!-- コンテンツ --&amp;gt;
+								| &amp;lt;h1&amp;gt;Short Tea Breaks&amp;lt;/h1&amp;gt;
+								| &amp;lt;img src="tea.jpg" alt=""&amp;gt;
+								| &lt;/code&gåt;&lt;/pre&gåt;
+							div.alert.alert-warning NOTES:
+							p='<pre>と異なり、<code>の直後に挿入した改行は表示に反映されますので注意が必要です。'
+							div.alert.alert-info コンピュータの入出力の内容
+							p='<pre>を利用してコンピュータの入出力内容を記述することもできます。その場合、<pre>の場合は<dode>ではなく<kbd>や<samp>でマークアップします。'
+							p='たとえば、コマンドラインでの処理を<pre><samp>〜</samp></pre>でマークアップすると、コンピュータからの出力内容であることを明示することができます。このうち、「php-v」は<kbd>でマークアップし、コンピュータへの入力内容であることを示しています。なお、コマンドプロンプトを示す要素は存在しないため、<span class="prompt">でマークアップしています。'
+							p
+								a.btn.btn-default(href='demo/html/sample1/06/167-2.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								|  &lt;h1&gt;Tips and Tricks&lt;/h1&gt;
+								| 
+								| &lt;p&gt;PHPのバージョンを調べると次のようになります。&lt;/p&gt;
+								| 
+								| &lt;pre&gt;&lt;samp&gt;&lt;span class="prompt"&gt;[hanako@localhost ~]$&lt;/span&gt; &lt;kbd&gt;php -v&lt;/kbd&gt;
+								| PHP 5.3.6 (built: Apr 10 2011 02:09:55)
+								| Copyright (c) 1997-2011 The PHP Group
+								| Zend Engine v2.3.0, Copyright (c) 1998-2011 Zend Technologies
+								| &lt;/samp&gt;&lt;/pre&gt;
+							div.alert.alert-success DIFFERENCES:
+							p HTML4.01やXHTML1.0では、コンピュータ・コードや入出力内容を記述する場合でも<code>などでマークアップすることは求められておらず、<pre>のみでマークアップするのが一般的でした。
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

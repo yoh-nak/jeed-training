@@ -169,6 +169,37 @@ include ../head.jade
 							.alert.alert-success DIFFERENCES:
 							p='HTML4.01やXHTML1.0では、リンク先のコンテンツを<a name="〜">でマークアップし、name属性の値に対してリンクを指定できるようになっていましたが、HTML5ではname属性は廃止されていますので注意が必要です。'
 							.alert.alert-info ブラウジング・コンテキストを指定する
+							p target属性を利用すると、ブラウジング・コンテキストを指定することができます。ブラウジング・コンテキストはブラウザによって解釈され、それに応じてリンク先を表示する際の処理が変わります。
+							p たとえば、サンプルのようにtarget='_blank'と指定したリンクをくりくすると、新しいウィンドウやタブが開いてリンク先のページが表示されます。
+							p なお、target属性で指定できる値は下のようになっています。
+							table.table
+								tr
+									th target属性の値
+									th ブラウジング・コンテキスト
+								tr
+									td _blank
+									td 新しいウィンドウ（タブ）
+								tr
+									td _self
+									td 現在のウィンドウ（タブまたはフレーム）
+								tr
+									td _parent
+									td 親のウィンドウ（タブまたはフレーム）
+								tr
+									td _top
+									td 最上位階層のウィンドウ（タブ）
+								tr
+									td 名前
+									td
+										| 指定したブラウジング・コンテキスト名のウィンドウ（タブまたはフレーム）
+										br
+										| ※存在しない場合は指定した名前のウィンドウ（タブ）を新規に作成。
+							p
+								a.btn.btn-default(href='demo/html/sample1/07/179-2.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+							
 							.alert.alert-info リンク先に関する補助的な情報を記述する
 							.alert.alert-info リンクタイプを明示する
 		div#footer=title

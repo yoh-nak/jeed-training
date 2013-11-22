@@ -195,13 +195,63 @@ include ../head.jade
 										br
 										| ※存在しない場合は指定した名前のウィンドウ（タブ）を新規に作成。
 							p
-								a.btn.btn-default(href='demo/html/sample1/07/179-2.html',target='_blank')
+								a.btn.btn-default(href='demo/html/sample1/07/180.html',target='_blank')
 									i.glyphicon.glyphicon-play
 									| デモ
 							pre(class='prettyprint linenums:1')
-							
+								| &lt;article&gt;
+								| &lt;a href="tea.html" target="_blank"&gt;
+								| &lt;img src="img/teapot.jpg" alt=""&gt;
+								| &lt;h1&gt;ちょっとしたお茶の時間&lt;/h1&gt;
+								| &lt;time datetime="2013-01-15"&gt;January 15, 2013&lt;/time&gt;
+								| &lt;p&gt;世界中にはたくさんのお茶があります。緑茶に紅茶、ウーロン茶など、その製法や味わいもさまざまですが、リラックスしたり、ちょっと休憩したいときなどには欠かすことができません。…&lt;/p&gt;
+								| &lt;/a&gt;
+								| &lt;/article&gt;
 							.alert.alert-info リンク先に関する補助的な情報を記述する
+							p media, hreflang, type属性を利用するとリンク先に関する情報を記述することができます。ただし、これらの属性で示した情報は補助的なものであり、ソフトウェアにはリンク先のページから得られる情報を利用することが求められています。
+							p たとえば、下のように指定すると、リンク先がスクリーン（PCやスマートフォンなど）での表示に合わせてデザインされた、日本語のHTMLページであることを示すことができます。なお、これらの属性を指定しても、画面表示には影響しません。
+							table.table
+								tr
+									th 属性
+									th 明示できる情報
+									th 指定できる値
+								tr
+									td media
+									td リンク先を表示するのに最適なメディア
+									td メディアクエリ
+								tr
+									td hreflang
+									td リンク先の言語の種類
+									td ja, en, fr, deなど
+								tr
+									td type
+									td リンク先のMIMEタイプ
+									td text/htmlなど
+							pre(class='prettyprint linenums:1')
+								| &lt;a href="〜.html" media="screen" hreflang="ja" type="text/html"&gt;...&lt;/a&gt;
+							.alert.alert-warning NOTES:
+							p グローバル属性のlangはマークアップした中身の言語を示すもので、リンク先の言語を示すためにはhreflangを利用する必要があります。
+							.alert.alert-success DIFFERENCES:
+							p HTML4.01やXHTML1.0では、charset属性でリンク先のエンコードの種類を指定することができましたが、HTML5では廃止されています。
 							.alert.alert-info リンクタイプを明示する
+							p rel属性を利用すると、リンクタイプを明示することができます。現在のところ、指定できる値は以下のようになっています。
+							div.row
+								div.col-sm-6
+									table.table
+										tr
+											th rel属性の値
+											th リンクタイプ
+										tr
+											td alternate
+											td フィードまたはだいたい文章
+								div.col-sm-6
+									table.table
+										tr
+											th rel属性の値
+											th リンクタイプ
+										tr
+											td nofollow
+											td 非推奨
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

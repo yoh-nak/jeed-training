@@ -55,6 +55,122 @@ include ../head.jade
 									td
 										pre
 											| -
+							p='<a>はリンクを設定する要素です。リンク先のURLはhrefo属性で指定します。<a>のコンテンツ・モデルは「トランスペアレント」なため、親要素の間にある要素を自由にマークアップすることができます。そこで、サンプルではナビゲーション・メニューや各記事の概要を<a>でマークアップし、リンクを設定しています。'
+							p
+								a.btn.btn-default(href='demo/html/sample1/07/178.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;nav&gt;
+								| &lt;ul&gt;
+								| &lt;li&gt;&lt;a href="news.html"&gt;NEWS&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="column.html"&gt;COLUMNS&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="gift.html"&gt;GIFT&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="contact.html"&gt;CONTACT&lt;/a&gt;&lt;/li&gt;
+								| &lt;/ul&gt;
+								| &lt;/nav&gt;
+								| &lt;/div&gt;
+								| &lt;/header&gt;
+								| 
+								| &lt;div id="main"&gt;
+								| 
+								| &lt;section id="content"&gt;
+								| &lt;h1&gt;COLUMNS&lt;/h1&gt;
+								| 
+								| &lt;article&gt;
+								| &lt;a href="teatime.html"&gt;
+								| &lt;img src="img/teapot.jpg" alt=""&gt;
+								| &lt;h1&gt;ちょっとしたお茶の時間&lt;/h1&gt;
+								| &lt;time datetime="2013-01-15"&gt;January 15, 2013&lt;/time&gt;
+								| &lt;p&gt;世界中にはたくさんのお茶があります。緑茶に紅茶、ウーロン茶など、その製法や味わいもさまざまですが、リラックスしたり、ちょっと休憩したいときなどには欠かすことができません。…&lt;/p&gt;
+								| &lt;/a&gt;
+								| &lt;/article&gt;
+								| 
+								| &lt;article&gt;
+								| &lt;a href="secret.html"&gt;
+								| &lt;img src="img/teacup.jpg" alt=""&gt;
+								| &lt;h1&gt;紅茶の秘密&lt;/h1&gt;
+								| &lt;time datetime="2013-01-10"&gt;January 10, 2013&lt;/time&gt;
+								| &lt;p&gt;紅茶は、茶の葉を全発酵させて製造したお茶です。ダージリンやアッサム、ジャワ、ウバ、ニルギリなど、たくさんの銘柄があります。アールグレイといったフレーバーティーも有名で…&lt;/p&gt;
+								| &lt;/a&gt;
+								| &lt;/article&gt;
+								| 
+								| &lt;article&gt;
+								| &lt;a href="sweet.html"&gt;
+								| &lt;img src="img/cake.jpg" alt=""&gt;
+								| &lt;h1&gt;ほんのり甘い…&lt;/h1&gt;
+								| &lt;time datetime="2013-01-06"&gt;January 06, 2013&lt;/time&gt;
+								| &lt;p&gt;基本的に熱湯で入れ、茶葉に合わせて抽出時間を十分に取ります。そのため、保温性の高いポットや温めた茶器を使って入れるのがポイントとなります。ティーコジーでポットをカバーし…&lt;/p&gt;
+								| &lt;/a&gt;
+								| &lt;/article&gt;
+							.alert.alert-info 表示中のページヘのリンクを無効にする
+							p ナビゲーションメニューのように複数ページで共用しているメニューの場合、表示中のページヘのリンクはhref属性を削除して無効にすることができます。これにより、ユーザーが表示中のページヘのリンクをクリックし、同じページが表示されるのを防ぐ事が可能です。
+							p サンプルの場合、表示中の「COLUMNS」ページヘのリンクを無効化し、わかりやすいようにオレンジ色の下線をつけて表示しています。
+							p
+								a.btn.btn-default(href='demo/html/sample1/07/179-1.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;nav&gt;
+								| &lt;ul&gt;
+								| &lt;li&gt;&lt;a href="news.html"&gt;NEWS&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a&gt;COLUMNS&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="gift.html"&gt;GIFT&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="contact.html"&gt;CONTACT&lt;/a&gt;&lt;/li&gt;
+								| &lt;/ul&gt;
+								| &lt;/nav&gt;
+							pre(class='prettyprint linenums:1')
+								| body > header li a
+								| 	{border-bottom: solid 4px #ffaa00;}
+								| 
+								| body > header li a[href]
+								| 	{border-bottom-color: transparent;}
+								| 
+								| body > header li a:hover
+								| 	{border-bottom: solid 4px red;}
+							div.alert.alert-warning NOTES:
+							p='表示中のページヘのリンクを無効にするケース以外にも、JavaScriptなどでリンクを設定するようなケースではhref属性を省略し、<a>のみでマークアップすることが認められています。'
+							p='なお、href属性を省略した場合、target / rel / media / hreflang / type属性を指定できなくなります。また、itemprop属性を指定した場合はhref属性を省略することはできませんので注意が必要です。'
+							.alert.alert-info ページ内リンクを設定する
+							p ページ内へのコンテンツへのリンクを設定する場合、href属性ではリンク先のIDを指定します。たとえば、<section id="tea">でマークアップした「紅茶」のセクションへのリンクを設定するには、href属性を「#tea」と指定します。
+							p
+								a.btn.btn-default(href='demo/html/sample1/07/179-2.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+								| 
+								| &lt;ul id="jump"&gt;
+								| &lt;li&gt;&lt;a href="#tea"&gt;紅茶&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="#oolong"&gt;ウーロン茶&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="#green"&gt;緑茶&lt;/a&gt;&lt;/li&gt;
+								| &lt;/ul&gt;
+								| 
+								| &lt;img src="img/tea.jpg" alt=""&gt;
+								| 
+								| &lt;p&gt;世界中にはたくさんのお茶があります。緑茶に紅茶、ウーロン茶など、その製法や味わいもさまざまですが、リラックスしたり、ちょっと休憩したいときなどには欠かすことができません。お茶のお供に、おいしいお菓子もあると幸せな気分になってしまいます。&lt;/p&gt;
+								| 
+								| &lt;section id="tea"&gt;
+								| &lt;h1&gt;紅茶&lt;/h1&gt;
+								| &lt;p&gt;紅茶は、茶の葉を全発酵させて製造したお茶です。ダージリンやアッサム、ジャワ、ウバ、ニルギリなど、たくさんの銘柄があります。アールグレイといったフレーバーティーも有名です。&lt;/p&gt;
+								| 
+								| &lt;p&gt;基本的に熱湯で入れ、茶葉に合わせて抽出時間を十分に取ります。そのため、保温性の高いポットや温めた茶器を使って入れるのがポイントとなります。ティーコジーでポットをカバーし、温度が下がるのを防ぐのもおすすめです。&lt;/p&gt;
+								| &lt;/section&gt;
+								| 
+								| &lt;section id="oolong"&gt;
+								| &lt;h1&gt;ウーロン茶&lt;/h1&gt;
+								| &lt;p&gt;ウーロン茶は、茶の葉を半発酵させて製造したお茶です。中国茶では「青茶」に分類されるもので、凍頂烏龍茶、東方美人、鉄観音、武夷岩茶、水仙など、さまざまな銘柄があります。&lt;/p&gt;
+								| &lt;/section&gt;
+								| 
+								| &lt;section id="green"&gt;
+								| &lt;h1&gt;緑茶&lt;/h1&gt;
+								| &lt;p&gt;緑茶は、茶の葉を発酵させずに製造したお茶で、不発酵茶とも呼ばれます。煎茶やほうじ茶、玄米茶、玉露、抹茶など、日本茶の多くは緑茶に分類されるお茶となっています。&lt;/p&gt;
+								| &lt;/section&gt;
+							.alert.alert-success DIFFERENCES:
+							p='HTML4.01やXHTML1.0では、リンク先のコンテンツを<a name="〜">でマークアップし、name属性の値に対してリンクを指定できるようになっていましたが、HTML5ではname属性は廃止されていますので注意が必要です。'
+							.alert.alert-info ブラウジング・コンテキストを指定する
+							.alert.alert-info リンク先に関する補助的な情報を記述する
+							.alert.alert-info リンクタイプを明示する
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

@@ -282,19 +282,90 @@ include ../head.jade
 										tr
 											td tag
 											td ページに付加したタグ
-								.alert.alert-success DIFFERENCES:
-								p HTML4.01やXHTML1.0ではrelとrevの2つの属性が用意され、rel属性は現在のページから見たリンク先のページとの関係を、rev属性はリンク先から見た現在のページとの関係を示すものと定義されていました。しかし、rev属性が実際に活用されることはほとんどなく、HTML5では廃止されています。
-								h4 フィードまたは代替文書へのリンク
-								h4 著作情報へのリンク
-								h4 コンテンツのパーマリンク
-								h4 ヘルプ情報へのリンク
-								h4 ライセンス情報へのリンク
-								h4 前後のページヘのリンク
-								h4 推奨していないリンク
-								h4 リファラー情報の送信を禁止したリンク
-								h4 先読みキャッシュを指定したリンク
-								h4 検索関連の情報へのリンク
-								h4 ページに付加したタグへのリンク
+							.alert.alert-success DIFFERENCES:
+							p HTML4.01やXHTML1.0ではrelとrevの2つの属性が用意され、rel属性は現在のページから見たリンク先のページとの関係を、rev属性はリンク先から見た現在のページとの関係を示すものと定義されていました。しかし、rev属性が実際に活用されることはほとんどなく、HTML5では廃止されています。
+							h4 フィードまたは代替文書へのリンク
+							p rel属性を「alternate」と指定した場合、他の属性によって示す内容が変わります。
+							p まず、type属性を「application/rss+xml」または「application/atom+xml」と指定した場合、RSSまたはAtomフィードへのリンクであることを示すことができます。
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;a href="feed.xml" rel="alternate" type="application/rss+xml"&gt;&lt;img src="img/rss.png" alt="RSS Feed"&gt;&lt;/a&gt;
+								figcaption フィードへのリンクであることを明示したもの。
+							p フィード以外で、media、hreflang、type属性を指定すると、現在のページの代替文書であることを示すことができます。たとえば、下のようにhreflang属性を「en」と指定した場合、現在のページの英語版ページヘのリンクであることを示します。
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;a href="tea-en.html" rel="alternate" hreflang="en"&gt;English Version&lt;/a&gt;
+								figcaption 現在のページの英語版ページヘのリンク。
+							p また、type属性を「application/pdf」と指定した場合には、PDF版へのリンクであることを示すことができます。
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;a href="tea.pdf" rel="alternate" type="application/pdf"&gt;PDF版はこちら&lt;/a&gt;
+								figcaption 現在のページのPDF版ページへのリンク。
+							h4 著作情報へのリンク
+							p rel属性を「author」と指定した場合、著者情報へのリンクであることを示します。この情報は、Googleの構造化データテストツールでは「作成者」情報として取得されます。
+							p
+								| 構造化データテストツール
+								br
+								a(href='https://www.google.com/webmasters/tools/richsnippets',target='_blank') https://www.google.com/webmasters/tools/richsnippets
+							p
+								a.btn.btn-default(href='demo/html/sample1/07/182-author.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| Posted by &lt;a href="hanako.html" rel="author"&gt;Hanako&lt;/a&gt;
+								figcaption 著作情報へのリンクであることを明示したもの。
+							h4 コンテンツのパーマリンク
+							p='rel属性を「bookmark」と指定してパーマリンクを指定したリンクは、<a>でマークアップしたキーワードだけでなく、<a>を含む<article>ないしはセクション全体（親要素）が示すリンクと解釈されます。'
+							p パーマリンクとは、各記事に割り振られる固有のURLのことです。もともとWebページは固有のURLを持つものですが、ブログやCMSのようにデータベースからデータを読み込んでページを生成するシステムでは、更新作業の繰り返しなどによって記事のURLが変わり、デッドリンクが増えていくという問題が発生していました。そこで、記事ごとに変わることのない恒久的なURLとして「パーマリンク（permalink／permanent link）」を設定する仕組みが生まれ、リンクやブクマークするときにはパーマリンクを使うことが推奨されるようになっています。
+							p そして、ソフトウェアにパーマリンクを認識させるために導入されたのがrel="bookmark"です。ブログ専用の検索エンジンなどに効率よくデータを取得してもらうためには欠かすことのできない設定とされ、WordPressなど、多くのブログで利用されています。
+							p
+								a.btn.btn-default(href='demo/html/sample1/07/182-bookmark.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;article&gt;
+								| &lt;img src="img/teapot.jpg" alt=""&gt;
+								| &lt;h1&gt;&lt;a href="http://sun.web/teatime.html" rel="bookmark"&gt;ちょっとしたお茶の時間&lt;/a&gt;&lt;/h1&gt;
+								| &lt;time datetime="2013-01-15"&gt;January 15, 2013&lt;/time&gt;
+								| &lt;p&gt;世界中にはたくさんのお茶があります。緑茶に紅茶、ウーロン茶など、その製法や味わいもさまざまですが、リラックスしたり、ちょっと休憩したいときなどには欠かすことができません。…&lt;/p&gt;
+								| &lt;/article&gt;
+								| 
+								| &lt;article&gt;
+								| &lt;img src="img/teacup.jpg" alt=""&gt;
+								| &lt;h1&gt;&lt;a href="http://sun.web/secret.html" rel="bookmark"&gt;紅茶の秘密&lt;/a&gt;&lt;/h1&gt;
+								| &lt;time datetime="2013-01-10"&gt;January 10, 2013&lt;/time&gt;
+								| &lt;p&gt;紅茶は、茶の葉を全発酵させて製造したお茶です。ダージリンやアッサム、ジャワ、ウバ、ニルギリなど、たくさんの銘柄があります。アールグレイといったフレーバーティーも有名で…&lt;/p&gt;
+								| &lt;/article&gt;
+								| 
+								| &lt;article&gt;
+								| &lt;img src="img/cake.jpg" alt=""&gt;
+								| &lt;h1&gt;&lt;a href="http://sun.web/sweet.html" rel="bookmark"&gt;ほんのり甘い…&lt;/a&gt;&lt;/h1&gt;
+								| &lt;time datetime="2013-01-06"&gt;January 06, 2013&lt;/time&gt;
+								| &lt;p&gt;基本的に熱湯で入れ、茶葉に合わせて抽出時間を十分に取ります。そのため、保温性の高いポットや温めた茶器を使って入れるのがポイントとなります。ティーコジーでポットをカバーし…&lt;/p&gt;
+								| &lt;/article&gt;
+							.alert.alert-warning NOTES:
+							p ブログツールであるWordPressでは、「設定&lt;パーマリンク設定」でパーマリンクの設定を行うことができます。これにより、標準では「http://www.www.www/?p=123」といったURLで生成される記事のページに、「http://www.www.www/tea/」のようにわかりやすいURLでアクセスできるようになります。
+							.alert.alert-success DIFFERENCES:
+							p HTML4.01やXHTML1.0では、rel="bookmark"は「ドキュメントのキーとなる入り口へのリンクを示す」と定義されていました。
+							h4 ヘルプ情報へのリンク
+							p 親要素に関するヘルプ情報へのリンクであることを示す場合、rel属性を「help」と指定します。
+							p='たとえば、下のフォームの場合、ユーザーIDの入力項目の部分に、ユーザーIDについての説明へのリンクを用意しています。このとき、リンクにrel="help"と指定することにより、親要素<label>でブックマークした入力項目に関するヘルプであることを明示しています。'
+							p
+								a.btn.btn-default(href='demo/html/sample1/07/183-help.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;&lt;label&gt;ユーザーID： &lt;a href="help.html#userid" rel="help"&gt;ユーザーIDとは&lt;/a&gt;
+								| &lt;input type="text" name="uid" size="40"&gt;
+								| &lt;/label&gt;&lt;/p&gt;
+							h4 ライセンス情報へのリンク
+							h4 前後のページヘのリンク
+							h4 推奨していないリンク
+							h4 リファラー情報の送信を禁止したリンク
+							h4 先読みキャッシュを指定したリンク
+							h4 検索関連の情報へのリンク
+							h4 ページに付加したタグへのリンク
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

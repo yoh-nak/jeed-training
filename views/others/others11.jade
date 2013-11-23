@@ -26,7 +26,7 @@ include ../head.jade
 							h4 package.jsonを記述
 							pre
 								| {
-								| 	"name": "jade-de-mock",
+								| 	"name": "jade-compile",
 								| 	"version": "0.1.0"
 								| }
 							h4 プロジェクトにgruntをインストール
@@ -39,9 +39,9 @@ include ../head.jade
 								| html
 								|   head
 								|     meta(charset='UTF-8')
-								|     title HelloWorld
+								|     title Hello World!
 								|   body
-								|     h1 HelloWorld
+								|     h1 Hello World!
 							h4 Gruntfile.jsをにタスクを記述する
 							pre(class='prettyprint lang-js linenums:1')
 								| module.exports = function(grunt) {
@@ -63,17 +63,130 @@ include ../head.jade
 								|   grunt.registerTask('default', ['jade']);
 								| 
 								| };
-							
-							//h4 JavaScriptの圧縮を行う（ugrify）
-							//pre npm install grunt-contrib-uglify --save-dev
-							//h4 jadeのコンパイル
-							//h4 lessのコンパイル
-							//pre npm install grunt-contrib-less --save-dev
-							//h4 coffeescriptのコンパイル
-							//pre npm install grunt-contrib-coffee --save-dev
 							h4 ビルドする
 							pre grunt
-							div.alert.alert-info jadeとstylusの同時コンパイル
+							div.alert.alert-info jadeファイルの更新を検知してコンパイル
+							h4 タスクのインストール
+							pre npm install grunt-contrib-watch --save-dev
+							h4 Gruntfile.jsをにタスクを記述する
+							pre(class='prettyprint lang-js linenums:1')
+								| module.exports = function(grunt) {
+								|   grunt.initConfig({
+								|     pkg: grunt.file.readJSON('package.json'),
+								|     jade: {
+								|       compile: {
+								|         options: {
+								|          pretty: true
+								|         },
+								|         files: {
+								|           "index.html": ["index.jade"]
+								|         }
+								|       }
+								|     },
+								|     watch : {
+								|       // ラベルは"jade"にしてみます
+								|       jade : {
+								|         // "files"セクションで監視するファイルの条件を指定
+								|         files : [
+								|           "*.jade"
+								|         ],
+								|         // "tasks"セクションで実行するタスクを指定
+								|         tasks : [
+								|           "jade:compile"
+								|         ]
+								|       }
+								|     }
+								|   });
+								|  
+								|   grunt.loadNpmTasks('grunt-contrib-jade');
+								|   grunt.loadNpmTasks("grunt-contrib-watch");
+								|   grunt.registerTask('default', ['jade']);
+								|  
+								| };
+							h4 ウォッチ
+							pre grunt watch:jade
+							div.alert.alert-info jade、stylus、CoffeeSriptの更新を同時に検知してコンパイル
+							h4 タスクのインストール
+							pre
+							pre npm install grunt-contrib-jade grunt-contrib-stylus grunt-contrib-coffee --save-dev
+							h4 Gruntfile.jsをにタスクを記述する
+							h4 jadeの記述
+							pre
+								| !!!
+								| html
+								|   head
+								|     meta(charset='UTF-8')
+								|     title Hello World!
+								|     link(href='index.css',rel='stylesheet')
+								|     script(src='index.js')
+								|   body
+								|     h1 Hello Japan!
+							h4 Stylusの記述
+							pre
+								| body
+								| 	background-color aqua
+							h4 CoffeeScriptの記述
+							pre
+								| alert 'Hello World!'
+							pre(class='prettyprint lang-js linenums:1')
+								| module.exports = function(grunt) {
+								|   grunt.initConfig({
+								|     pkg: grunt.file.readJSON('package.json'),
+								|     jade: {
+								|       compile: {
+								|         options: {
+								|          pretty: true
+								|         },
+								|         files: {
+								|           "index.html": ["index.jade"]
+								|         }
+								|       }
+								|     },
+								|     stylus: {
+								|       app: {
+								|         src : ['*.styl'],
+								|         dest: 'index.css'
+								|       }
+								|     },
+								|     coffee: {
+								|       compile: {
+								|         expand: true,
+								|         flatten: true,
+								|         src: ['*.coffee'],
+								|         dest: './',
+								|         ext: '.js'
+								|       }
+								|     },
+								|     watch : {
+								|       jade: {
+								|         files: ['*.jade'],
+								|         tasks: ['jade']
+								|       },
+								|       stylus: {
+								|         files: ['*.styl'],
+								|         tasks: ['stylus']
+								|       },
+								|       coffee: {
+								|         files: ['*.coffee'],
+								|         tasks: ['coffee']
+								|       }
+								|     }
+								|   });
+								|  
+								|   grunt.loadNpmTasks('grunt-contrib-jade');
+								|   grunt.loadNpmTasks('grunt-contrib-coffee');
+								|   grunt.loadNpmTasks('grunt-contrib-stylus');
+								|   grunt.loadNpmTasks("grunt-contrib-watch");
+								| };
+							div.alert.alert-info JavaScriptの圧縮を行う
+							h4 タスクのインストール
+							pre npm install grunt-contrib-uglify --save-dev
+							div.alert.alert-info CSSの圧縮を行う
+							h4 タスクのインストール
+							pre npm install grunt-contrib-cssmin --save-dev
+							div.alert.alert-info  画像の最適化を行う
+							h4 タスクのインストール
+							npm install grunt-contrib-imagemin --save-dev
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

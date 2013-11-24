@@ -390,10 +390,46 @@ include ../head.jade
 								| &lt;a href="movie.html" rel="next"&gt;NEXT: 映画に出てくるお茶 &raquo;&lt;/a&gt;
 								| &lt;/nav&gt;
 							h4 推奨していないリンク
+							p rel属性を「nofollow」と指定すると、現在のページの著者が推奨したリンクではないことを示します。現在のところ、検索エンジンのクローラーは「nofollow」と指定したリンク先をクロールしないことになっており、コメントに含まれるリンクのようにリンク先の確認が困難な場合には「nofollow」をつけるサイトが多くなっています。
+							pre(class='prettyprint linenums:1')
+								| Commented by
+								| &lt;a href="http://www.www.www/xxx.html" rel="nofollow"&gt;匿名希望&lt;/a&gt;
 							h4 リファラー情報の送信を禁止したリンク
+							pre(class='prettyprint linenums:1')
+								| Commented by
+								| &lt;a href="http://www.www.www/xxx.html" rel="noreferrer"&gt;匿名希望&lt;/a&gt;
+							p ユーザーがリンクをクリックしてリンク先のページにアクセスすると、リンク先のサーバーにはHTTPヘッダーとしてアクセス元のURL（リファラー情報）が送信されます。これにより、リンク先のサーバー管理者はユーザーがどこのリンクからアクセスしてきたのかを知ることができます。
+							p しかし、rel属性を「noreferrer」と指定した場合、リファラーの送信情報の送信を禁止することが可能です。現在のところ、このきのうにはiOS4以上、Android2.3.x以上、Safari、Chromeが対応しています。
+							.alert.alert-warning NOTES: 複数の値を指定する
+							p rel属性では複数の値を半角スペースで区切って指定することもできます。たとえば、「nofollow」と「noreferrer」を指定する場合には、下のように記述します。
+							pre(class='prettyprint linenums:1')
+								| Commented by
+								| &lt;a href="http://www.www.www/xxx.html" rel=""nofollow noreferrer&gt;匿名希望&lt;/a&gt;
 							h4 先読みキャッシュを指定したリンク
+							p rel属性を「prefetch」と指定すると、リンク先のデータを先読みしてキャッシュします。ただし、現在のところ各ブラウザでは未対応となっています。
+							.alert.alert-warning NOTES:
+							p Firefoxは&lt;link rel="prefetch"&gt;の指定には対応しています。
 							h4 検索関連の情報へのリンク
+							p リンク先がページ内で使用している検索エンジンやそのWebインターフェースについての情報であることを示す場合には、rel属性を「search」と指定します。
+							.alert.alert-warning NOTES:
+							p &lt;link ref="search"&gt;を利用するとOpenSearch description documentを指定することができます。
 							h4 ページに付加したタグへのリンク
+							p rel属性を「tag」と指定すると、ページに付加したタグのリンクであることを示します。たとえば、付加したタグの一覧を表示する場合、下のように記述することができます。
+							p また、「tag」で示したタグを表示した形で複数の記事をリストアップした場合、すべてのタグがそのページに付加されたものとして扱われます。
+							p
+								a.btn.btn-default(href='demo/html/sample1/07/185-tag.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;ul id="tag"&gt;
+								| &lt;li&gt;&lt;a href="tag/tea/" rel="tag"&gt;お茶&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="tag/cake/" rel="tag"&gt;ケーキ&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="tag/cafe/" rel="tag"&gt;カフェ&gt;/a&gt;&gt;/li&gt;
+								| &gt;/ul&gt;
+							.alert.alert-warning NOTES:
+							.alert.alert-success DIFFERENCES:
+							.alert.alert-warning NOTES:
+							.alert.alert-warning NOTES:
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

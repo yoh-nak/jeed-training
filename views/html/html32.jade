@@ -53,9 +53,120 @@ include ../head.jade
 										pre
 											| -
 							p='<time>は日時の情報をマークアップし、datetime属性を利用してソフトウェアが認識できる形式で日時を明示するための要素です。たとえば「January 15, 2013」や「2013年1月15日」をマークアップした場合、datetime属性の値は「2013-01-15」と指定します。'
+							p
+								a.btn.btn-default(href='demo/html/sample1/07/190.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;article&gt;
+								| &lt;header&gt;
+								| &lt;hgroup&gt;
+								| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+								| &lt;h2&gt;ちょっとしたお茶の時間&lt;/h2&gt;
+								| &lt;/hgroup&gt;
+								| &lt;time datetime="2013-01-15"&gt;January 15, 2013&lt;/time&gt;
+								| &lt;/header&gt;
+								| 
+								| &lt;img src="img/tea.jpg" alt=""&gt;
+								| 
+								| &lt;p&gt;世界中にはたくさんのお茶があります。緑茶に紅茶、ウーロン茶など、その製法や味わいもさまざまですが、リラックスしたり、ちょっと休憩したいときなどには欠かすことができません。お茶のお供に、おいしいお菓子もあると幸せな気分になってしまいます。&lt;/p&gt;
+								| ...
+								| &lt;/article&gt;	
 							p='datetime属性を省略することも可能ですが、その場合は<time>の中身をソフトウェアが認識できる形式で記述する必要があります。'
+							pre(class='prettyprint linenums:1')
+								| &lt;time&gt;2013-01-15&lt;/time&gt;
 							p='なお、microdataを利用すると<time>でマークアップしたのが何の日時なのかを示すことができます。たとえば、下のサンプルではブログ記事の投稿日であることを明示しています。'
+							pre(class='prettyprint linenums:1')
+								| &lt; article itemscope itemtype="http://schema.org/BlogPosting"&gt; 
+								| &lt; header&gt; 
+								| &lt; hgroup&gt; 
+								| &lt; h1 itemprop="headline"&gt; Short Tea Breaks&lt; /h1&gt; 
+								| &lt; h2 itemprop="alternativeHead"&gt; ちょっとしたお茶の時間&lt; /h2&gt; 
+								| &lt; /hgroup&gt; 
+								| &lt; time itemprop="datePublished" datetime="2013-01-15"&gt; January 15, 2013&lt; /time&gt; 
+								| &lt; /header&gt; 
+								| ...
+								| &lt; /article&gt;
+							.alert.alert-warning NOTES:
+							p='<time>とdatetime属性を利用すると、「2日前」や「来週の火曜日」といった情報も、ソフトウェアが認識できる日時の情報として示すことができます。'
+							pre(class='prettyprint linenums:1')
+								| &lt;time datetime="2013-01-13"&gt;２日前&lt;/time&gt;
+							pre(class='prettyprint linenums:1')
+								| &lt;time datetime="2013-01-22"&gt;来週の火曜日&lt;/time&gt;
+							.alert.alert-warning NOTES:
+							p HTML5の策定過程では発行日時であることを示すpubdate属性が採用されていましたが、現在は未採用となっています。
+							.alert.alert-success IE NOTES: 
+							p='IE8以前は<time>に未対応です。'
 							.alert.alert-info 日時に記述形式
+							p 日時の記述形式はISO8601をベースとし、HTML5においては以下のように規定されています。日付、時間、タイムゾーンの情報は順に組み合わせて記述することが可能です。日付と時間は「T」または半角スペースを入れて記述します。なお、時間は24時間表記で記述します。
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;time datetime="2013-01-15T15:52"&gt;
+									| 2013年1月15日　午後2時52分
+									| &lt;/time&gt;
+								figcaption 日付と時間をTで区切って記述したもの。
+							figure
+								pre(class='prettyprint linenums:1')
+									| &gt;time datetime="2013-01-15 15:52"&gt;
+									| 2013年1月15日　午後2時52分
+									| &gt;/time&gt;
+								figcaption 日付と時間を半角スペースで区切って記述したもの。
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;time datatime="2013-01 15T14:52+0900"&gt;
+									| 2013年1月15日　午後2時52分　-0900(JST)
+									| &lt;/time&gt;
+								figcaption タイムゾーンを明示したもの。
+							table.table
+								tr
+									th(colspan='2') 情報の種類
+									th 記述形式
+								tr
+									th(rowspan='5') 日付
+									td 年
+									td 2013
+								tr
+									td 年月
+									td 2013-01
+								tr
+									td 年月日
+									td 2013-01-15
+								tr
+									td 月日
+									td 01-15
+								tr
+									td 週
+									td 2013-W24
+								tr
+									th(rowspan='2') 時間
+									td 時分
+									td 15:52
+								tr
+									td 時分秒
+									td 15:52:30
+								tr
+									th(rowspan='5') タイムゾーン
+									td UTC（協定世界時）
+									td Z
+								tr
+									td(rowspan='2') 大西洋標準時（AST）
+									td -0400
+								tr
+									td-04:00
+								tr
+									td(rowspan='2') 日本標準時（JST）
+									td +0900
+								tr
+									td +09:00
+								tr
+									th 継続日数
+									td 4日間
+									td P4D
+								tr
+									th 継続時間
+									td 2時間48分30秒
+									td PT2H48M30S
+							.alert.alert-warning NOTES:
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

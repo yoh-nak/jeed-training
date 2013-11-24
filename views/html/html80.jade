@@ -1,0 +1,82 @@
+include ../head.jade
+	body
+		include navbar.jade
+		div.container
+			div.row
+				div.col-sm-3
+					include left.jade
+				div.col-sm-9
+					div.panel.panel-primary
+						div.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;絶対パス/相対パス
+						div.panel-body
+							div.alert.alert-info ファイルシステム
+							p ハードディスクのどこに何のファイルがあるのか、その情報を記録するのがファイルシステムです。。Windows、Unix系OSとではハードディスク内のデータの管理方法が異なっています。
+							h4 ファイルシステムの種類
+							p
+								| NTFS（NT File System）
+								br
+								| WindowsNT系OSのファイルシステム
+							p
+								| AT（File Allocation Table）／VFAT
+								br
+								| SDカードなどで使われるファイルシステム
+							p
+								| ext3
+								br
+								| ex4の前に使われていたファイルシステム
+							p
+								| ext4
+								br
+								| Linuxの標準的なファイルシステム
+							p
+								| UFS（Unix File System）
+								br
+								| Unix系OSのファイルシステム（Linux 、BSDではUFS互換のFSを実装）
+							p
+								| ZFS（Zettabyte File System）
+								br
+								| Oracle Solarisのファイルシステム
+							p
+								| ISO9600
+								br
+								| CD-ROMに使われるファイルシステム
+							p
+								| UDF
+								br
+								| DVDに使われるファイルシステム
+							//
+							//
+								pre
+									| &lt;開始タグ&gt;...&lt;/終了タグ&gt;
+									| 
+									| &lt;開始タグ 属性名="属性値"&gt;...&lt;/終了タグ&gt;
+									| 
+									| &lt;開始タグ 属性名1="属性値1" 属性名2="属性値2"&gt;...&lt;/終了タグ&gt;
+								hr
+								div.alert.alert-info 親子・兄弟・子孫関係
+								p 親子関係
+								pre='<p>夏季は<strong>取扱いを中止</strong>しております。</p>'
+								p 親要素：p<br>子要素：strong
+								p 祖先、子孫関係
+								pre
+									| &lt;div&gt;
+									|      &lt;p&gt;焼きチョコレートケーキは気温に敏感です。&lt;/p&gt;
+									|      &lt;p&gt;夏季は&lt;strong&gt;取扱いを中止&lt;/strong&gt;しております。&lt;/p&gt;
+									| &lt;/div&gt;
+								p 祖先要素：div<br>子孫要素：strong
+								p 兄弟関係
+								pre
+									| &lt;div&gt;
+									|      &lt;h1&gt;ラテ・アートとは&lt;/h1&gt;
+									|      &lt;p&gt;バリスタがコーヒーのミルクで作る図柄のことです。&lt;/p&gt;
+									| &lt;/div&gt;
+								p 兄要素：h1<br>弟要素：p
+		div#footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='js/bootstrap.min.js')
+		script(src='coffee/list-counter.js')

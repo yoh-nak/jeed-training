@@ -427,9 +427,45 @@ include ../head.jade
 								| &lt;li&gt;&lt;a href="tag/cafe/" rel="tag"&gt;カフェ&gt;/a&gt;&gt;/li&gt;
 								| &gt;/ul&gt;
 							.alert.alert-warning NOTES:
+							p 「tag」はページに付加したタグを示すものなため、サイトで使用したタグの一覧であるタグクラウドで使用することはできません。
 							.alert.alert-success DIFFERENCES:
-							.alert.alert-warning NOTES:
-							.alert.alert-warning NOTES:
+							p 「tag」は「bookmark」と同じようにブログシステムで利用されるようになった設定です。HTML4.01やXHTML1.0では未定義で、HTML5で採用されるようになりました。
+							.alert.alert-warning NOTES: download属性によるダウンロードリンクの設定
+							p WHATWGのHTML Living Standardで追加されたdownload属性を指定すると、ファイルの種類に関係なく、リンク先のファイルをダウンロードするように指定することができます。
+							p たとえば、ChromeではPDFファイルへのリンクをクリックすると、標準では内蔵ビューワを利用してPDFファイルが表示されます。しかし、下のようにdownload属性を指定した場合、PDFファイルは表示されず、ダウンロードが求められます。
+							p
+								a.btn.btn-default(href='demo/html/sample1/07/186-download-1.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								&lt;a href="tea.pdf" download&gt;PDF版をダウンロードする&lt;/a&gt;
+							p また、download属性ではダウンロードするときのファイル名を指定することもできます。たとえば、下のように指定すると「お茶.pdf」というファイル名でダウンロードを求められます。現在のところ、download属性に対応しているのはChromeのみとなっています。
+							p
+								a.btn.btn-default(href='demo/html/sample1/07/186-download-2.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								&lt;a href="tea.pdf" download="お茶.pdf"&gt;PDF版をダウンロードする&lt;/a&gt;
+							.alert.alert-warning NOTES: ping属性によるリンク先へのアクセス状況の把握
+							p WHATWGのHTML Living Standardで追加されたping属性を利用すると、ユーザーがリンクをクリックしたときにping属性で指定したURLにもアクセスが発生します。そのため、この機能を利用するとリンクのクリック数やリンク先へのアクセス状況を把握できるようになります。
+							p たとえば、下のサンプルの場合、リンクをクリックするとping属性で指定した「check.jpg」にもアクセスが発生し、サーバーのアクセスログに記録が残ります。このとき、ブラウザ画面にはhref属性で指定したページが表示され、check.jpgが画面に表示されることはありません。なお、半角スペースで区切ることにより、複数のアクセス先を指定することも可能です。
+							p
+								a.btn.btn-default(href='demo/html/sample1/07/186-ping.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;a href="http://www.www.www/" ping="check.jpg"&gt;
+									| 詳しくはこちらのサイトを参照してください。
+									| &lt;/a&gt;
+								figcaption リンクをクリックするとcheck.jpgにもアクセスが発生島s。
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;a href="http://www.www.www/" ping="check.jpg check2.jpg"&gt;
+									| 詳しくはこちらのサイトを参照してください。
+									| &lt;/a&gt;
+								figcaption リンクをクリックするとcheck.jpgとcheck2.jpgにアクセスが発生します。
+							p 現在のところping属性にはiOS5以上、Safari 6以上、Chromeが対応しています。
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

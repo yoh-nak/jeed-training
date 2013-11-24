@@ -166,7 +166,31 @@ include ../head.jade
 									th 継続時間
 									td 2時間48分30秒
 									td PT2H48M30S
-							.alert.alert-warning NOTES:
+							.alert.alert-warning NOTES: &lt;data&gt;でソフトウェアが認識できる形式で情報を示す
+							p='<data>はマークアップした情報をソフトウェアが認識できる形式で明示する要素です。microdataで情報を付加する場合や、JavaScriptでデータを処理する場合などに利用することが考えられており、HTML Living Standardで採用されています。なお、ソフトウェアが認識できる形式で日付や時間を記述する必要がある場合には、<time>を利用します。'
+							h4 microdataでの利用
+							p='microdataでソフトウェアが認識できる形式で情報を記述する必要がある場合、現在は<meta>を利用することが可能ですが、<data>を利用するとよりわかりやすく記述できるようになります。ソフトウェアが認識できる形式の情報は、value属性を利用して示します。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;meta itemprop="cost" content="99USD"&gt;
+									| $99
+								figcaption='<meta>は終了タグ</meta>を記述する必要はないため、コンテンツの前後に付加する形で記述することになります。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;data itemprop="cost" value="99USD"&gt;
+									| $99
+									| &lt;/data&gt;
+								figcaption='<data>であればコンテンツをマークアップできるため、よりわかりやすく記述できるようになると考えられています。'
+							h4 JavaScriptでの利用
+							p='JavaScriptでデータを処理するときに、処理しやすい形式で情報を記述しておくと、<li>内のコンテンツから情報を抽出しなくても、<data>のvalue属性の値を利用して項目の表示順を入れ替えるといった処理ができるようになります。'
+							p='なお、JavaScriptの処理に必要な情報は、グローバル属性の1つであるdata-*属性を利用して記述することもできます。'
+							pre(class='prettyprint linenums:1')
+								| &lt;ul&gt;
+								| &lt;li&gt;薄力粉（&lt;data value="300"&gt;300g&lt;/data&gt;）&lt;/li&gt;
+								| &lt;li&gt;強力粉（&lt;data value="500"&gt;500g&lt;/data&gt;）&lt;/li&gt;
+								| &lt;li&gt;水（&lt;data value="200"&gt;200cc&lt;/data&gt;）&lt;/li&gt;
+								| &lt;li&gt;バター（&lt;data value="20"&gt;20g&lt;/data&gt;）&lt;/li&gt;
+								| &lt;/ul&gt;
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

@@ -81,6 +81,51 @@ include ../head.jade
 											| ins {
 											| 	text-decoration: line-through;
 											| }
+							p='<ins>は追加したコンテンツ、<del>は削除したコンテンツを示す要素です。<ins>と<del>のコンテンツ・モデルは「トランスペアレント」なため、親要素の間にある要素を自由にマークアップすることができます。'
+							p='たとえば、サンプルでは「半発酵」という語句を削除し、「全発酵」という語句を追加したことを示しています。また、「基本的に熱湯で入れ〜」の部分は<p>でマークアップした段落全体を追加したことを示しています。デフォルトスタイルシートにより、削除した部分には取り消し線が、追加した部分には下線が表示されます。'
+							p
+								a.btn.btn-default(href='demo/html/sample1/07/214.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+								| 
+								| &lt;section&gt;
+								| &lt;h1&gt;紅茶&lt;/h1&gt;
+								| &lt;p&gt;紅茶は、茶の葉を&lt;del&gt;半発酵&lt;/del&gt;&lt;ins&gt;全発酵&lt;/ins&gt;させて製造したお茶です。ダージリンやアッサム、ジャワ、ウバ、ニルギリなど、たくさんの銘柄があります。アールグレイといったフレーバーティーも有名です。&lt;/p&gt;
+								| 
+								| &lt;ins&gt;
+								| &lt;p&gt;基本的に熱湯で入れ、茶葉に合わせて抽出時間を十分に取ります。そのため、保温性の高いポットや温めた茶器を使って入れるのがポイントとなります。ティーコジーでポットをカバーし、温度が下がるのを防ぐのもおすすめです。&lt;/p&gt;
+								| &lt;/ins&gt;
+								| &lt;/section&gt;
+							pre(class='prettyprint linenums:1')
+								| del	{color: gray;}
+								| 
+								| ins	{color: red;}
+							p='ここではわかりやすくするため、<del>でマークアップした部分をグレーで、<ins>でマークアップした部分を赤色で表示するようにしています。'
+							p='cite属性では追加・削除箇所について説明したドキュメントのURLを、datatime属性では追加・削除した日時を示すことができます。'
+							p='たとえば、下のサンプルではToDoリストの項目ごとに、datetime属性で追加・削除した日時を示しています。'
+							p
+								a.btn.btn-default(href='demo/html/sample1/07/215.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;h1&gt;ToDo List&lt;/h1&gt;
+								| 
+								| &lt;ul&gt;
+								| &lt;li&gt;&lt;del datetime="2013-01-12"&gt;&lt;ins datetime="2013-01-05"&gt;あいさつ回りをする&lt;/ins&gt;&lt;/del&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;del datetime="2013-02-01"&gt;&lt;ins datetime="2013-01-12"&gt;新しいティーポットを探す&lt;/ins&gt;&lt;/del&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;ins datetime="2013-01-15"&gt;ポストカードの印刷&lt;/ins&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;ins datetime="2013-02-03"&gt;アールグレイを追加注文&lt;/ins&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;ins datetime="2013-02-05"&gt;お茶会の案内状を作る&lt;/ins&gt;&lt;/li&gt;
+								| &lt;/ul&gt;
+							pre(class='prettyprint linenums:1')
+								| ins	{text-decoration: none;}
+							p='ここでは<ins>でマークアップした部分に標準で表示される下線を削除して表示するようにしています。'
+							.alert.alert-warning NOTES: 
+							p datetime属性ではソフトウェアが理解できる形式で日時を指定する必要があります。
+							.alert.alert-warning NOTES: 
+							p ブラウザにはcite属性で示した情報にユーザーがアクセスできるようにすることが求められていますが、現在のところ各ブラウザは未対応です。
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

@@ -52,6 +52,78 @@ include ../head.jade
 									td
 										pre
 											| -
+							p='<wbr>は改行を認める場所を示す要素です。たとえば、アルファベットが連続して記述された長い単語の場合、途中に改行が入らないため、画面や枠からはみ出して表示されてしまいます。しかし、<wbr>で改行を認める箇所を指定しておくことにより、必要に応じて改行が挿入され、はみ出して表示されるのを防ぐことができます。'
+							p='たとえば、サンプルでは画面の横幅に合わせて、3つ目の<wbr>の位置に改行が挿入されていることがわかります。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h1&gt;CONTACT&lt;/h1&gt;
+									| 
+									| &lt;p&gt;
+									| 商品コード：&lt;br&gt;
+									| AWPOEWSDJKFURHEOWIJSDLFDKBVDNCQMEOESPRSK
+									| &lt;/p&gt;
+								figcaption='<wbr>を入れずに記述したもの。'
+							p
+								a.btn.btn-default(href='demo/html/sample1/07/217.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h1&gt;CONtACT&lt;/h1&gt;
+									| 
+									| &lt;p&gt;
+									| 商品コード：&lt;br&gt;
+									| AWPOEWSDJK&lt;wbr&gt;FURHEOWIJS&lt;wbr&gt;DLFDKBVDNC&lt;wbr&gt;QMEOESPRSK
+									| &lt;/p&gt;
+								figcaption='<wbr>を入れて記述したもの。必要にい応じて改行が挿入されます。'
+							.alert.alert-warning NOTES: パンくずリスト
+							p='HTML5にはパンくずリストを示す要素は用意されていませんが、下のサンプルのように記述する方法が提示されています。各海藻へのリンクは&gt;（>）で区切り、全体を段落として<p>でマークアップします。パンくずリストを主要なナビゲーションと考える場合には、さらに<nav>でマークアップすることも可能です。'
+							p
+								a.btn.btn-default(href='demo/html/sample1/07/218-1.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;p id="bread"&gt;
+								| &lt;a href="/"&gt;トップ&lt;/a&gt; &gt;
+								| &lt;a href="/column/"&gt;コラム&lt;/a&gt; &gt;
+								| &lt;a href="/column/tea/"&gt;お茶&lt;/a&gt; &gt;
+								| Short Tea Breaks
+								| &lt;/p&gt;
+							p='パンくずリストであることを明示したい場合には、microdataを利用します。たとえば、schema.orgのボキャブラリーを利用すると、下のように明示することが可能です。'
+							p
+								a.btn.btn-default(href='demo/html/sample1/07/218-2.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;body itemscope itemtype="http://schema.org/WebPage"&gt;
+								| ...
+								| &lt;p id="bread" itemprop="breadcrumb"&gt;
+								| &lt;a href="/"&gt;トップ&lt;/a&gt; &gt;
+								| &lt;a href="/column/"&gt;コラム&lt;/a&gt; &gt;
+								| &lt;a href="/column/tea/"&gt;お茶&lt;/a&gt; &gt;
+								| Short Tea Breaks
+								| &lt;/p&gt;
+							p なお、schema.orgのボキャブラリで明示したパンくずリストは、現在のところGoogleの検索結果にはリッチスニペットとして反映されません。反映させるためには、Google Rich Snippets' Vocabularies(Data-Vocabulary.org)をボキャブラリとして利用し、下のように明示します。
+							p
+								a.btn.btn-default(href='demo/html/sample1/07/218-3.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;p id="bread"&gt;
+								| &lt;span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"&gt;
+								| &lt;a href="/" itemprop="url"&gt;&lt;span itemprop="title"&gt;トップ&lt;/span&gt;&lt;/a&gt; &gt;
+								| &lt;/span&gt;
+								| &lt;span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"&gt;
+								| &lt;a href="/column/" itemprop="url"&gt;&lt;span itemprop="title"&gt;コラム&lt;/span&gt;&lt;/a&gt; &gt;
+								| &lt;/span&gt;
+								| &lt;span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"&gt;
+								| &lt;a href="/column/tea/" itemprop="url"&gt;&lt;span itemprop="title"&gt;お茶&lt;/span&gt;&lt;/a&gt; &gt;
+								| &lt;/span&gt;
+								| &lt;span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"&gt;
+								| &lt;span itemprop="title"&gt;Short Tea Breaks&lt;/span&gt;
+								| &lt;/span&gt;
+								| &lt;/p&gt;
+							p ※ Google Rich Snippets' Vocabulariesは、schema.org設立前にリッチスニペットの情報を明示するためにGoogleが用意したボキャブラリです。
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

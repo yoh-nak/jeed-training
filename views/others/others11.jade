@@ -22,7 +22,9 @@ include ../head.jade
 							p Linux / Mac
 							pre
 								| sudo npm install -g grunt-cli
-							.alert.alert-info jadeのコンパイル
+							.alert.alert-info 空のタスクを作成
+							h4 package.jsonの作成
+							pre npm init
 							h4 package.jsonを記述
 							pre
 								| {
@@ -31,6 +33,14 @@ include ../head.jade
 								| }
 							h4 プロジェクトにgruntをインストール
 							pre npm install grunt --save-dev
+							h4 Gruntfile.jsをを記述する
+								| module.exports = function(grunt){
+								|   grunt.initConfig({});
+								|   grunt.registerTask('default', []);
+								| };
+							h4 タスクの実行
+							pre grunt
+							.alert.alert-info jadeのコンパイル
 							h4 タスクのインストール
 							pre npm install grunt-contrib-jade --save-dev
 							h4 jadeの記述
@@ -107,7 +117,6 @@ include ../head.jade
 							pre grunt watch:jade
 							.alert.alert-info jade、stylus、CoffeeSriptの更新を同時に検知してコンパイル
 							h4 タスクのインストール
-							pre
 							pre npm install grunt-contrib-jade grunt-contrib-stylus grunt-contrib-coffee --save-dev
 							h4 Gruntfile.jsをにタスクを記述する
 							h4 jadeの記述
@@ -178,15 +187,36 @@ include ../head.jade
 								|   grunt.loadNpmTasks('grunt-contrib-stylus');
 								|   grunt.loadNpmTasks("grunt-contrib-watch");
 								| };
-							.alert.alert-info JavaScriptの圧縮を行う
-							h4 タスクのインストール
-							pre npm install grunt-contrib-uglify --save-dev
 							.alert.alert-info CSSの圧縮を行う
 							h4 タスクのインストール
 							pre npm install grunt-contrib-cssmin --save-dev
+							.alert.alert-info JavaScriptの圧縮を行う
+							h4 タスクのインストール
+							pre npm install grunt-contrib-uglify --save-dev
 							.alert.alert-info 画像の最適化を行う
 							h4 タスクのインストール
 							pre npm install grunt-contrib-imagemin --save-dev
+							//
+								.alert.alert-info JSファイルを連結する
+								h4 タスクのインストール
+								pre npm install grunt-contrib-concat --save-dev
+								h4 Gruntfile.jsをにタスクを記述する
+								pre(class='prettyprint lang-js linenums:1')
+									| module.exports = function(grunt){
+									|   grunt.initConfig({
+									|     concat: {
+									|       dist: {
+									|         src: [
+									|           'src/intro.js',
+									|           'src/project.js',
+									|           'src/outro.js'
+									|         ],
+									|         dest: 'dist/built.js'
+									|       }
+									|     }
+									|   });
+									|   grunt.loadNpmTasks('grunt-contrib-concat');
+									| }
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

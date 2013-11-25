@@ -34,14 +34,43 @@ include ../head.jade
 							h4 プロジェクトにgruntをインストール
 							pre npm install grunt --save-dev
 							h4 Gruntfile.jsをを記述する
+							pre
 								| module.exports = function(grunt){
 								|   grunt.initConfig({});
 								|   grunt.registerTask('default', []);
 								| };
 							h4 タスクの実行
 							pre grunt
+							.alert.alert-info JavaScriptのミニファイ
+							h4 プラグインのインストール
+							pre npm install grunt-contrib-uglify --save-dev
+							h4 タスクの定義
+								| module.exports = function(grunt){
+								|   grunt.initConfig({
+								|     //親タスク
+								|     uglify: {
+								|       //子タスク
+								|       dist: {
+								|         files: {
+								|           //出力
+								|           'dest/output.min.js': [
+								|             //ソース
+								|             'src/sample01.js',
+								|             'src/sample02.js'
+								|           ]
+								|         }
+								|       }
+								|     }
+								|   });
+								|   //プラグインからタスクを読み込む
+								|   grunt.loadNpmTasks('grunt-contrib-uglify');
+								|   //デフォルトのタスクとしてuglifyを定義
+								|   grunt.registerTask('default', ['uglify']);
+								| };
+							h4 タスクの実行
+							pre grunt
 							.alert.alert-info jadeのコンパイル
-							h4 タスクのインストール
+							h4 プラグインのインストール
 							pre npm install grunt-contrib-jade --save-dev
 							h4 jadeの記述
 							pre
@@ -76,7 +105,7 @@ include ../head.jade
 							h4 ビルドする
 							pre grunt
 							.alert.alert-info jadeファイルの更新を検知してコンパイル
-							h4 タスクのインストール
+							h4 プラグインのインストール
 							pre npm install grunt-contrib-watch --save-dev
 							h4 Gruntfile.jsをにタスクを記述する
 							pre(class='prettyprint lang-js linenums:1')
@@ -116,7 +145,7 @@ include ../head.jade
 							h4 ウォッチ
 							pre grunt watch:jade
 							.alert.alert-info jade、stylus、CoffeeSriptの更新を同時に検知してコンパイル
-							h4 タスクのインストール
+							h4 プラグインのインストール
 							pre npm install grunt-contrib-jade grunt-contrib-stylus grunt-contrib-coffee --save-dev
 							h4 Gruntfile.jsをにタスクを記述する
 							h4 jadeの記述
@@ -188,17 +217,14 @@ include ../head.jade
 								|   grunt.loadNpmTasks("grunt-contrib-watch");
 								| };
 							.alert.alert-info CSSの圧縮を行う
-							h4 タスクのインストール
+							h4 プラグインのインストール
 							pre npm install grunt-contrib-cssmin --save-dev
-							.alert.alert-info JavaScriptの圧縮を行う
-							h4 タスクのインストール
-							pre npm install grunt-contrib-uglify --save-dev
 							.alert.alert-info 画像の最適化を行う
-							h4 タスクのインストール
+							h4 プラグインのインストール
 							pre npm install grunt-contrib-imagemin --save-dev
 							//
 								.alert.alert-info JSファイルを連結する
-								h4 タスクのインストール
+								h4 プラグインのインストール
 								pre npm install grunt-contrib-concat --save-dev
 								h4 Gruntfile.jsをにタスクを記述する
 								pre(class='prettyprint lang-js linenums:1')

@@ -54,6 +54,27 @@ include ../head.jade
 											| bdo {
 											| 	unicode-bidi: bidi-override;
 											| }
+							p='各国の言語で記述した語句は、Unicodeの双方向アルゴリズムによってそれぞれ正しい書字方向で表示されます。しかし、期待通りの書字方向で表示されない場合は、<bdo>で双方向アルゴリズムを変更し、dir属性で指定した方向で表示することができます。'
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;
+								| アラビア語 『 السلام عليكم كيف حالكَ ؟ 』
+								| &lt;/p&gt;
+							.alert.alert-warning NOTES: 
+							p='<bdo>でマークアップすると、スタイルシートのunicode-bidiプロパティを「bidi-override」と指定したときと同じ処理が行われます。'
+							p='しかし、アラビア語の中に書字方向のことなる英単語を記述すると、アラビア語句の表示順が逆になります。'
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;
+								| アラビア語 『 السلام عليكم hello كيف حالكَ ؟ 』
+								| &lt;/p&gt;
+							p='このとき、全体を<bdo>でマークアップし、dir属性を「rtl」と指定すると、英単語も含めて右から左の書字方向で表示することができます。'
+							p
+								a.btn.btn-default(href='demo/html/sample1/07/212.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;
+								| アラビア語 『 &lt;bdo dir="rtl"&gt;&lt;span lang="ar"&gt;السلام عليكم&lt;/span&gt; &lt;span lang="en"&gt;hello&lt;/span&gt; &lt;span lang="ar"&gt;كيف حالكَ ؟&lt;/span&gt;&lt;/bdo&gt; 』
+								| &lt;/p&gt;
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

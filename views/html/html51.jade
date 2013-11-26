@@ -60,6 +60,152 @@ include ../head.jade
 											| iframe {
 											| 	border: 2px inset;
 											| }
+							p='<iframe>はページ内に組み込んだブラウジング・コンテキストを示す要素です。ブラウザではインラインフレームが構成され、src属性で指定したコンテンツが表示されます。'
+							p='下のサンプルの場合、sample.htmlのページにインラインフレームでsample.htmlのページにインラインフレームでcontent.htmlを表示するようにしています。このとき、インラインフレームの大きさはwidthとheight属性で1000×500ピクセルに設定しています。'
+							p
+								a.btn.btn-default(href='demo/html/sample1/05/134.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;header&gt;
+									| &lt;div id="header_inner"&gt;
+									| &lt;h1&gt;&lt;img src="img/logo.png" alt="SUN DIARY"&gt;&lt;/h1&gt;
+									| ...
+									| &lt;/header&gt;
+									| 
+									| &lt;div id="main"&gt;
+									| 
+									| &lt;iframe src="content.html" width="1000" height="500"&gt;&lt;/iframe&gt;
+									| 
+									| &lt;aside&gt;
+									| FOLLOW & SUBSCRIBE:
+									| &lt;ul id="iconmenu"&gt;
+									| …
+									| &lt;/ul&gt;
+									| &lt;/aside&gt;
+									| 
+									| &lt;/div&gt;
+									| 
+									| 
+									| &lt;footer&gt;
+									| &lt;small&gt;Copyright &copy; SUN DIARY, all rights reserved.&lt;/small&gt;
+									| &lt;/footer&gt;
+								figcaption sample.htmlのHTMLソース。
+							p='この他、<iframe>で指定できる属性は下のようになっています。'
+							table.table
+								tr
+									th='<iframe>の属性'
+									th 機能
+								tr
+									td src
+									td コンテンツのURLを指定。
+								tr
+									td srcdoc
+									td コンテンツの内容を記述。
+								tr
+									td name
+									td ブラウジング・コンテキスト名を指定。
+								tr
+									td sandbox
+									td サンドボックス化。
+								tr
+									td seamless
+									td シームレス表示。
+								tr
+									td width
+									td 横幅を指定。
+								tr
+									td height
+									td 高さを指定。
+							.alert.alert-warning NOTES: iOSとAndroidにおける&lt;iframe&gt;の表示
+							p='iOSとAndroidも<iframe>に対応していますが、iOSとAndroid2.3.xではインラインフレームが中身のコンテンツに合わせた大きさで表示されます。'
+							p='Android.3.x以降ではインラインフレームが指定した大きさで表示され、フレーム内をタップしてスクロールできるようになっています。'
+							.alert.alert-info サンドボックス化
+							p='インラインフレーム内のコンテンツには、標準では何の制限もかけられていません。そのため、スクリプトを実行することも可能です。たとえば、上のサンプルではインラインフレーム内のcontent.htmlでスクリプトを実行し、content.htmlの背景を黄色に、親ページのsample.htmlの背景を黒色に変更しています。'
+							p
+								a.btn.btn-default(href='demo/html/sample1/05/135-sandbox/01.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;iframe src="content.html" width="1000" height="500"&gt;&lt;/iframe&gt; 
+								figcaption sample.html
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;script&gt;
+									| window.onload = function() {
+									|      document.getElementsByTagName("body")[0].style.background = "yellow";
+									| 
+									| 
+									|      parent.document.getElementsByTagName("body")[0].style.background = "black";
+									| 
+									| 
+									| }
+									| &lt;/script&gt;
+									| &lt;/head&gt;
+									| &lt;body&gt;
+									| 
+									| &lt;article&gt;
+									| &lt;header&gt;
+									| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+									| &lt;time datetime="2013-01-15"&gt;January 15, 2013&lt;/time&gt;
+									| &lt;/header&gt;
+									| ...
+								figcaption content.html
+							p='しかし、sandbox属性を指定すると、インラインフレームをサンドボックス化し、フレーム内でのスクリプトの実行などを制限することができます。'
+							p='たとえば、下のようにsandbox属性を指定するとcontent.htmlではスクリプトが実行できなくなり、ページの背景色が変わらなくなります。このほか、content.htmlにおけるフォームデータの送信や、リンク先を新しいウィンドウで開く処理などにも制限がかかります。'
+							p
+								a.btn.btn-default(href='demo/html/sample1/05/135-sandbox/02.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;iframe src="content.html" width="1000" height="500" sandbox&gt;&lt;/iframe&gt; 
+								figcaption sample.html
+							p='なお、sandbox属性にはいくつかの値が用意されており、特定の制限のみを解除することが可能です。たとえば「allow-scrpts」と指定すると特定のスクリプトの実行を許可することができます。ただし、、インラインフレーム内で実行したスクリプトは同一生成元ポリシーで生成元が異なるものとして扱われ、親ページのDOMにはアクセスすることができません。そのため、content.htmlの背景色のみが変わります。'
+							p
+								a.btn.btn-default(href='demo/html/sample1/05/135-sandbox/03.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;iframe src="content.html" width="1000" height="500" sandbox="allow-scripts"&gt;&lt;/iframe&gt; 
+								figcaption='sample.html'
+							p='sandbox属性の値は半角スペースで区切り、複数指定することも可能です。たとえば、allow-scriptsとallow-same-originの両方を指定すると、スクリプトの実行を許可するとともに、同一生成元として扱い、親ページのDOMへのアクセスも許可することができます。この場合、サンプルではcontent.htmlとsample.htmlの背景色が変わります。'
+							p
+								a.btn.btn-default(href='demo/html/sample1/05/135-sandbox/04.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;iframe src="content.html" width="1000" height="500" sandbox="allow-scripts allow-same-origin"&gt;&lt;/iframe&gt; 
+								figcaption sample.html
+							p='なお、sandbox属性では指定できる値は下のようになっています。また、OperaとInternet Explorer9以前はsandbox属性には未対応です。'
+							table.table
+								tr
+									th sandbox属性の値
+									th 機能
+								tr
+									td allow-forms
+									td フォームの送信を許可する
+								tr
+									td allow-pointer-lock
+									td Pointer Lock APIを許可する
+								tr
+									td allow-popups
+									td リンク先のポップアップ表示を許可する
+								tr
+									td allow-same-origin
+									td 同一生成元として扱うことを許可する
+								tr
+									td allow-scripts
+									td スクリプトの実行を許可する
+								tr
+									td allow-top-navigation
+									td トップレベルウィンドウへのリンク先の表示を許可する
+							.alert.alert-info srcdoc属性でコンテンツを記述する
+							.alert.alert-info シームレス表示
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

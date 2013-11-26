@@ -129,7 +129,36 @@ include ../head.jade
 							pre npm install grunt-contrib-watch --save-dev
 							h4 Gruntfile.coffeeにタスクを記述
 							pre(class='prettyprint lang-js linenums:1')
-								|
+								| module.exports = (grunt) ->
+								|   grunt.initConfig
+								|     coffee:
+								|       options:
+								|         join: true
+								|       dist:
+								|         src: [
+								|           'src/*.coffee'
+								|         ]
+								|         dest: 'dest/sample.js'
+								|     uglify:
+								|       dist:
+								|         src: ['dest/sample.js']
+								|         dest:'dest/output.min.js'
+								|     watch:
+								|       coffee:
+								|         files: '<%= coffee.dist.src %>'
+								|         tasks: 'coffee:dist'
+								|       uglify:
+								|         files: '<%= uglify.dist.src %>'
+								|         tasks: 'uglify:dist'
+								| 
+								|   grunt.loadNpmTasks 'grunt-contrib-watch'
+								|   grunt.loadNpmTasks 'grunt-contrib-coffee'
+								|   grunt.loadNpmTasks 'grunt-contrib-uglify'
+								|   grunt.registerTask 'default', [
+								|     'watch'
+								|   ]
+							h4 タスクの実行
+							pre grunt
 							.alert.alert-info jadeのコンパイル
 							h4 プラグインのインストール
 							pre npm install grunt-contrib-jade --save-dev

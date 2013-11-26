@@ -16,10 +16,12 @@ include ../head.jade
 								a(href='http://gruntjs.com/',target='_blank') http://gruntjs.com/
 							hr
 							h4 インストール
-							p Windows
+							p
+								| Windows
 							pre
 								| npm install -g grunt-cli
-							p Linux / Mac
+							p
+								| Linux / Mac
 							pre
 								| sudo npm install -g grunt-cli
 							.alert.alert-info 空のタスクを作成
@@ -33,7 +35,7 @@ include ../head.jade
 								| }
 							h4 プロジェクトにgruntをインストール
 							pre npm install grunt --save-dev
-							h4 Gruntfile.jsをを記述する
+							h4 Gruntfile.jsにタスクを記述する
 							pre
 								| module.exports = function(grunt){
 								|   grunt.initConfig({});
@@ -68,6 +70,54 @@ include ../head.jade
 								|   //デフォルトのタスクとしてuglifyを定義
 								|   grunt.registerTask('default', ['uglify']);
 								| };
+							h4 タスクの実行
+							pre grunt
+							.alert.alert-info CoffeeScriptで記述
+							h4 Gruntfile.coffeeにタスクを記述
+							pre(class='prettyprint lang-js linenums:1')
+								| module.exports = (grunt) ->
+								|   grunt.initConfig
+								|     uglify:
+								|       dist:
+								|         files:
+								|           'dest/output.min.js':[
+								|             'src/sample01.js',
+								|             'src/sample02.js'
+								|           ]
+								| 
+								|   grunt.loadNpmTasks 'grunt-contrib-uglify'
+								|   grunt.registerTask 'default', ['uglify']
+							h4 タスクの実行
+							pre grunt
+							.alert.alert-info CoffeeScriptをコンパイルしてJavaScriptをミニファイ
+							h4 プラグインのインストール
+							pre npm install grunt-contrib-uglify grunt-contrib-coffee --save-dev
+							h4 Gruntfile.coffeeにタスクを記述
+							pre(class='prettyprint lang-js linenums:1')
+								| module.exports = (grunt) ->
+								|   grunt.initConfig
+								|     coffee:
+								|       options:
+								|         join: true
+								|       dist:
+								|         files:
+								|           'dest/sample.js': [
+								|             'src/sample01.coffee',
+								|             'src/sample02.coffee'
+								|           ]
+								|     uglify:
+								|       dist:
+								|         files:
+								|           'dest/output.min.js':[
+								|             'dest/sample.js'
+								|           ]
+								| 
+								|   grunt.loadNpmTasks 'grunt-contrib-coffee'
+								|   grunt.loadNpmTasks 'grunt-contrib-uglify'
+								|   grunt.registerTask 'default', [
+								|     'coffee',
+								|     'uglify'
+								|   ]
 							h4 タスクの実行
 							pre grunt
 							.alert.alert-info jadeのコンパイル

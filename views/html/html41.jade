@@ -55,6 +55,31 @@ include ../head.jade
 											| bdi {
 											| 	unicode-bidi: isolate;
 											| }
+							p='<bdi>は双方向アルゴリズムの処理の前後の文字に適用しないようにすることができます。'
+							p='たとえば、以下のように野菜の名前と個数をリストアップした場合、英語では「野菜の名前: 1個」という形で表示されますが、アラビア語では「1: 野菜の名前個」という形になっていることがわかります。これは、アラビア語の双方向アルゴリズムの処理が「: 1」まで適用されているためです。'
+							pre(class='prettyprint linenums:1')
+								| &lt;h1&gt;Ingredients&lt;/h1&gt;
+								| 
+								| &lt;ul&gt;
+								| &lt;li&gt;トマト tomato: 2個&lt;/li&gt;
+								| &lt;li&gt;ナス aubergine: 1個&lt;/li&gt;
+								| &lt;li&gt;たまねぎ بَصَلٌ: 1個&lt;/li&gt;
+								| &lt;/ul&gt;
+							.alert.alert-warning NOTES: 
+							p='<bdi>でマークアップすると、スタイルシートのunicode-bidiプロパティを「isolate」と指定したときと同じ処理が行われることになっています。ただし、<bdi>に対応したブラウザでも、現在のところunicode-bidi: isolateの指定には未対応となっていますので注意が必要です。'
+							p='そこで、野菜の名前を<bdi>でマークアップします。すると、双方向アルゴリズムの処理が前後の文字には適用されなくなり、アラビア語でも「野菜の名前: 1個」という形で表示することができます。'
+							p
+								a.btn.btn-default(href='demo/html/sample1/07/213.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;h1&gt;Ingredients&lt;/h1&gt;
+								| 
+								| &lt;ul&gt;
+								| &lt;li&gt;トマト &lt;bdi&gt;tomato&lt;/bdi&gt;: 2個&lt;/li&gt;
+								| &lt;li&gt;ナス &lt;bdi&gt;aubergine&lt;/bdi&gt;: 1個&lt;/li&gt;
+								| &lt;li&gt;たまねぎ &lt;bdi&gt;بَصَلٌ&lt;/bdi&gt;: 1個&lt;/li&gt;
+								| &lt;/ul&gt;
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

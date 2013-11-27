@@ -205,6 +205,36 @@ include ../head.jade
 									td allow-top-navigation
 									td トップレベルウィンドウへのリンク先の表示を許可する
 							.alert.alert-info srcdoc属性でコンテンツを記述する
+							p='srcdoc属性を利用すると、インラインフレームに表示するコンテンツ属性値として記述することができます。たとえば、サンプルでは記事に対して投稿されたコメントをsrcdoc属性で指定し、サンドボックス化したインラインフレームで表示するようにしています。これにより、スクリプトなどを含んだコメントが投稿された場合でも、実行される心配はなくなります。'
+							p='現在のところ、srcdoc属性に対応しているのはiOS6、Safari、Chromeとなっています。未対応ブラウザのためには、src属性をいっしょに指定することも可能です。その場合、対応ブラウザではsrcdoc属性の指定が優先されます。'
+							p
+								a.btn.btn-default(href='demo/html/sample1/05/137.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;h1&gt;Comments&lt;/h1&gt;
+								| 
+								| &lt;article id="comment-01"&gt;
+								| &lt;iframe srcdoc="&lt;p&gt;こんにちは。先日のお茶会でいただいたダージリンティ―がとても気に入りました。アイスティーにするのもオススメとのことでしたので、今度試してみたいと思います。&lt;/p&gt;" sandbox&gt;&lt;/iframe&gt;
+								| &lt;footer&gt;
+								| Posted by: 匿名希望 &lt;time datetime="2013-01-16T20:12"&gt;2013年1月16日 20:12&lt;/time&gt;
+								| &lt;/footer&gt;
+								| &lt;/article&gt;
+								| 
+								| &lt;article id="comment-02"&gt;
+								| &lt;iframe srcdoc="&lt;p&gt;次のお茶会も楽しみにしています。&lt;/p&gt;" sandbox&gt;&lt;/iframe&gt;
+								| &lt;footer&gt;
+								| Posted by: にゃん &lt;time datetime="2013-01-20T18:35"&gt;2013年1月20日 18:35&lt;/time&gt;
+								| &lt;/footer&gt;
+								| &lt;/article&gt;
+								| ...
+							pre(class='prettyprint linenums:1')
+								| iframe	{width: 100%;
+								| 	height: 80px;}
+							.alert.alert-warning NOTES: 
+							p='srcdoc属性の値の中では、「*（ダブルクォーテーション）」は「&amp;quot;」と記述します。'
+							pre(class='prettyprint linenums:1')
+								| &lt;iframe srcdoc="&lt;p&gt;&lt;a href=&quot;party.html&quot;&gt;次のお茶会&lt;/a&gt;も楽しみにしています。&lt;/p&gt;"&gt;&lt;/iframe&gt;
 							.alert.alert-info シームレス表示
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')

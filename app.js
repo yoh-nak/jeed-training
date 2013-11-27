@@ -63,7 +63,7 @@ app.get('/css:id:format', css.css);
 app.get('/rwd-id', rwd.rwd);
 app.get('/jquery:id', jquery.jquery);
 app.get('/jqm:id', jqm.jqm);
-app.get('/mobile:id', mobile.mobile);
+app.get('/mobile:id:format', mobile.mobile);
 app.get('/nodejs:id:format', nodejs.nodejs);
 app.get('/others:id:format', others.others);
 app.get('/diary:id:format', diary.diary);

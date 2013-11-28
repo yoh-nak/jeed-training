@@ -293,9 +293,6 @@ include ../head.jade
 										tr
 											td height
 											td 高さを指定。
-								p!='<span style="color:red;">※</span> ... &lt;video&gt;のみで利用できるもの。'
-								p='※ ... ブーリアン属性。'
-								.col-sm-6
 									table.table
 										tr
 											th='<source>の属性'
@@ -309,6 +306,61 @@ include ../head.jade
 										tr
 											td media
 											td メディアクエリを指定。
+							p!='<span style="color:red;">※</span> ... &lt;video&gt;のみで利用できるもの。'
+							p='※ ... ブーリアン属性。'
+							.col-sm-6
+							h4 ポスターフレーム画像のURLを指定
+							p 自動再生を設定しなかった場合、ページをロードしてもビデオは再生されず、最初のフレームが表示されます。このとき、poster属性を利用すると、最初のフレームの代わりに表示するポスターフレーム画像を指定することができます。サンプルでは、ポスタフレーム画像としてposter.pngを表示するように指定しています。
+							p
+								a.btn.btn-default(href='demo/html/sample1/05/147.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;video poster="poster.png" controls width="640" height="360"&gt;
+								| 	&lt;source src="sun.mp4" type="video/mp4"&gt;
+								| 	&lt;source src="sun.webm" type="video/webm"&gt;
+								| &lt;/video&gt;
+							h4 プリロードの方法を指定
+							p preload属性を利用すると、コンテンツのプリロード（先読み）の方法を指定することができます。ただし、この属性は製作者がユーザーにとってベストと考える方法をソフトウェアに示すもので、ユーザーによる設定や回線速度などに応じて、ソフトウェアには設定を無視することが認められています。
+							table.table
+								tr
+									th preload属性
+									th 機能
+								tr
+									td none
+									td コンテンツのメタデータ（大きさ、トラックリスト、再生時間など）や冒頭部分のデータのみをプリロードする。
+								tr
+									td auto
+									td コンテンツ全体のプリロードを認める。サーバーへの負荷を制限しない。
+							h4 メディアグループの設定
+							p 複数のビデオやオーディオにmediagroup属性で同じグループ名を指定すると、メディアグループが構成され、同期再生することができます。たとえば、下のサンプルでは同じビデオを3つ並べ、グループ名を「myvideo」と指定しています。これにより、1つ目のビデオに表示したコントローラーで再生ボタンをクリックすると、3つのビデオを動機再生することができます。
+							p
+								a.btn.btn-default(href='demo/html/sample1/05/148.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;video poster="poster.png" mediagroup="myvideo" controls&gt;
+								| &lt;source src="sun.mp4" type="video/mp4"&gt;
+								| &lt;source src="sun.webm" type="video/webm"&gt;
+								| &lt;/video&gt;
+								| 
+								| &lt;video poster="poster.png" mediagroup="myvideo"&gt;
+								| &lt;source src="sun.mp4" type="video/mp4"&gt;
+								| &lt;source src="sun.webm" type="video/webm"&gt;
+								| &lt;/video&gt;
+								| 
+								| &lt;video poster="poster.png" mediagroup="myvideo"&gt;
+								| &lt;source src="sun.mp4" type="video/mp4"&gt;
+								| &lt;source src="sun.webm" type="video/webm"&gt;
+								| &lt;/video&gt;
+							pre(class='prettyprint linenums:1')
+								| video:nth-of-type(1)	{width: 640px;}
+								| 
+								| video:nth-of-type(2), video:nth-of-type(3)
+								| 	{width: 310px;
+								| 	margin: 8px;}
+							.alert.alert-warning NOTES: 
+							p 現在のところ、mediagroup属性には各ブラウザとも未対応で、Chromeのバージョン25（beta版）が対応しています。
 		#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

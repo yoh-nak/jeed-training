@@ -1,16 +1,16 @@
 include ../head.jade
 	body
 		include navbar.jade
-		div.container
-			div.row
-				div.col-sm-3
+		.container
+			.row
+				.col-sm-3
 					include left.jade
-				div.col-sm-9
-					div.panel.panel-primary
-						div.panel-heading
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
 							i.glyphicon.glyphicon-book
 							| ビデオ／オーディオ
-						div.panel-body
+						.panel-body
 							table.browser-support
 								tr
 									td
@@ -207,11 +207,71 @@ include ../head.jade
 									td ○
 									td ☓
 							.alert.alert-warning NOTES: オーディオコンテンツ
-							p=''
+							p='オーディオコンテンツを扱いたい場合は<audio>を利用します。<video>と同じように、<source>を利用して複数のオーディオコンテンツを指定することも可能です。'
+							p='なお、主要ブラウザが対応したコーデックは下のようになっています。'
+							pre(class='prettyprint linenums:1')
+								| &lt;article&gt;
+								| &lt;h1&gt;About Sun DIARY&lt;/h1&gt;
+								| &lt;audio src="sun.mp3" controls&gt;&lt;/audio&gt;
+								| &lt;/article&gt;
+							table.table
+								tr
+									th コーデック
+									td iOS
+									td Android
+									td Chrome
+									td Safari
+									td Firefox
+									td Opera
+									td IE
+								tr
+									th MP3
+									td ○
+									td ○
+									td ○
+									td ○
+									td ☓
+									td ☓
+									td ○
+								tr
+									th Ogg
+									td ☓
+									td ○
+									td ○
+									td ☓
+									td ○
+									td ○
+									td ☓
 							.alert.alert-warning NOTES: 下位互換用のコンテンツ
-							p=''
+							p='<video>や<audio>の中には下位互換用のコンテンツを記述することができます。下位互換用のコンテンツは<video>や<audio>に未対応なブラウザで表示されます。'
+							pre(class='prettyprint linenums:1')
+								| &lt;video controls autoplay loop width="640" height="360"&gt;
+								| 	&lt;source src="sun.mp4" type="video/mp4"&gt;
+								| 	&lt;source src="sun.webm" type="video/webm"&gt;
+								| 
+								| 	&lt;img src="img/tea.jpg"&gt;
+								| 	&lt;p&gt;SUN DIARYではおいしいお茶の紹介を行っています。&lt;/p&gt;
+								| &lt;/video&gt;
 							.alert.alert-info 指定できる属性
-		div#footer=title
+							p='<video>や<audio>、<source>で指定できる属性は以下のようになっています。'
+							.row
+								.col-sm-6
+									table.table
+										tr
+											th='<video>/<audio>の属性'
+											th 機能
+										tr
+											td src
+											td ビデオやオーディオのURLを指定。
+								.col-sm-6
+									table.table
+										tr
+											th='<source>の属性'
+											th 機能
+										tr
+											td src
+											td ビデオやオーディオのURLを指定。
+		#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')
 		script.

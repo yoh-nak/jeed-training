@@ -1,16 +1,16 @@
 include ../head.jade
 	body
 		include navbar.jade
-		div.container
-			div.row
-				div.col-sm-3
+		.container
+			.row
+				.col-sm-3
 					include left.jade
-				div.col-sm-9
-					div.panel.panel-primary
-						div.panel-heading
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
 							i.glyphicon.glyphicon-book
 							| テキストトラック
-						div.panel-body
+						.panel-body
 							.alert.alert-info テキストトラック
 							table.browser-support
 								tr
@@ -54,7 +54,161 @@ include ../head.jade
 											| track {
 											| 	display: none;
 											| }
-		div#footer=title
+							p='<track>はメディア要素に対してテキストトラックを追加する要素で、字幕の表示やチャプターの指定などに利用することができます。'
+							p
+								a.btn.btn-default(href='demo/html/sample1/05/149.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;article&gt;
+								| &lt;h1&gt;About SUN DIARY&lt;/h1&gt;
+								| 
+								| &lt;video controls width="640" height="360"&gt;
+								|     &lt;source src="sun.mp4" type="video/mp4"&gt;
+								|     &lt;source src="sun.webm" type="video/webm"&gt;
+								|     &lt;track kind="captions" src="sun.vtt" srclang="ja" label="日本語字幕"&gt;
+								| &lt;/video&gt;
+								| 
+								| &lt;/article&gt;
+							figure
+								pre(class='prettyprint linenums:1')
+									| WEBVTT
+									| 
+									| 00:01.455 --> 00:02.303
+									| 〜ドラムの音〜
+									| 
+									| 00:02.303 --> 00:04.504
+									| 〜効果音〜
+									| 
+									| 00:04.504 -> 00:06.184
+									| SUN.DIARYです。どうぞよろしくお願いします。
+								figcaption テキストトラックデータ（sun.vtt）。
+							p='たとえば、上のサンプルでは字幕を表示するため、<video>の中に<track>を追加し、src属性でテキストトラックデータはタイムコードと字幕の内容を記述したものです。ここでは日本語の字幕データを用意したため、kind属性でテキストトラックの種類を「captions（字幕）」に、srclang属性で言語を「日本語」に、label属性でトラック名を「日本語字幕」と指定しています。このほか、指定できる属性は下のようになっています。'
+							table.table
+								tr
+									th='<track>の属性'
+									th 機能
+								tr
+									td kind
+									td テキストトラックの種類を指定。
+								tr
+									td src
+									td テキストトラックファイルのURLを指定。
+								tr
+									td srclang
+									td テキストトラックの言語を指定。
+								tr
+									td label
+									td テキストトラックの名前を指定。
+								tr
+									td default ※
+									td テキストトラックを標準で有効にする
+							p ※ ... 属性値を省略して記述できるもの。
+							p='なお、字幕は標準では無効となっていますので、表示するためにはコントローラーの「CC」ボタンをクリックして有効にする必要があります。'
+							.alert.alert-success IE NOTES: 
+							p='IE9以前のバージョンは<track>に未対応です。'
+							p
+								a.btn.btn-default(href='demo/html/sample1/05/150.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;video controls width="640" eight="360"&gt;
+								|     &lt;source src="sun.mp4" type="video/mp4"&gt;
+								|     &lt;source src="sun.webm" type="video/webm"&gt;
+								|     &lt;track kind="captions" src="sun.vtt" srclang="ja" label="日本語字幕"&gt;
+								|     &lt;track kind="captions" src="sun-en.vt" srclang="en" label="英語字幕"&gt;
+								| &lt;/video&gt;
+							figure
+								pre(class='prettyprint linenums:1')
+									| WEBVTT
+									| 
+									| 00:01.455 --> 00:02.303
+									| 〜ドラムの音〜
+									| 
+									| 00:02.303 --> 00:04.504
+									| 〜効果音〜
+									| 
+									| 00:04.504 -> 00:06.184
+									| SUN.DIARYです。どうぞよろしくお願いします。
+								figcaption 「日本語字幕のテキストトラックデータ（sun.vtt）。
+							figure
+								pre(class='prettyprint linenums:1')
+									| WEBVTT
+									| 
+									| 00:01.455 --> 00:02.303
+									| # Drumming Sound #
+									| 
+									| 00:02.303 --> 00:04.504
+									| # Sound Effect #
+									| 
+									| 00:04.504 -> 00:06.184
+									| SUN.DIARY!!!
+								figcaption 「英語字幕のテキストトラックデータ（sun-en.vtt）。
+							p='複数のテキストトラックを追加することもできます。たとえば、上のサンプルでは「日本語字幕」と「英語字幕」の2つのテキストトラックを追加しています。すると、Internet Explorerでは「CC」ボタンをクリックすると選択肢が表示され、字幕を切り替えて表示できるようになります。Chromeではブラウザで設定されている言語に合わせて、自動的に選択されます。'
+							p='なお、kind属性ではテキストトラックの種類を下のように指定することが可能です。字幕としてビデオに重ねて表示する場合は、「substitute」または「captions」と指定します。'
+							table.table
+								tr
+									th kind属性の値
+									th テキストトラックの種類
+								tr
+									td subtitle
+									td 字幕用のトラック。音声に文字を表示したもの、もしくは翻訳したもので、ビデオに重ねて表示されます。
+								tr
+									td captions
+									td 字幕用のトラック。音声や効果音といった音に関する情報を文字にしたもの、もしくは翻訳したもので、ビデオに重ねて表示されます。	
+								tr
+									td descriptions
+									td 説明用のトラック。映像の内容について説明したもので、音声に変換して読み上げることが想定されています。
+								tr
+									td chapters
+									td チャプター用のトラック。チャプターのタイトル情報で、ナビゲーションに使用することが想定されています。
+								tr
+									td metadata
+									td メタデータ用のトラック。スクリプトで使用するための情報で、ユーザーに直接提示することは想定されていません。
+							.alert.alert-warning NOTES: テキストトラックのデータフォーマット
+							p='テキストトラックデータはWebVTT（Web Video Text Track）またはTTML（Timed Text Markup Language）というフォーマットで用意します。現在のところ、Internet Explorerは両方に、ChromeはWebVTTのみに対応しています。たとえば、サンプルのテキストトラックデータをそれぞれのフォーマットで記述すると下のようになります。'
+							p
+								| WevVTT（Living Standard）
+								br
+								a(href='http://dev.w3.org/html5/webvtt/',target='_blank') http://dev.w3.org/html5/webvtt/
+							figure
+								pre(class='prettyprint linenums:1')
+									| WEBVTT
+									| 
+									| 00:01.455 --> 00:02.303
+									| 〜ドラムの音〜
+									| 
+									| 00:02.303 --> 00:04.504
+									| 〜効果音〜
+									| 
+									| 00:04.504 -> 00:06.184
+									| SUN.DIARYです。どうぞよろしくお願いします。
+								figcaption WebVTT形式のテキストトラックデータ（sun.vtt）。
+							p
+								| Timed Text Markup Language（TTML）1.0（勧告）
+								br
+								a(href='http://www.w3.org/TR/ttafl-dfxp/',target='_blank') http://www.w3.org/TR/ttafl-dfxp/
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+									| &lt;tt xmlns="http://www.w3.org/ns/ttml" xml:lang="en"&gt;
+									| &lt;body&gt;
+									| &lt;div&gt;
+									|     &lt;p begin="1.455s" end="2.303s"&gt;〜ドラムの音〜&lt;/p&gt;
+									|     &lt;p begin="2.303s" end="4.505s"&gt;〜効果音〜&lt;/p&gt;
+									|     &lt;p begin="4.504s" end="6.184s"&gt;SUN.DIARYです。どうぞよろしくお願いします。&lt;/p&gt;
+									| &lt;/div&gt;
+									| &lt;/body&gt;
+									| &lt;/tt&gt;
+								figcaption TTML形式のテキストトラックデータ（sun.ttml）。
+							p='なお、テキストトラックデータを機能させるためには、サーバー側でMIME TYPEの設定が必要です。それぞれのMIME TYPEは、WebVTTは「text/vtt」、TTMLは「application/ttml+xml」または「text/xml」となっています。'
+							figure
+								pre(class='prettyprint linenums:1')
+									AddType text/vtt .vtt
+									AddType application/ttml+xml .ttml
+								figcaption .htaccess
+							p='また、テキストトラックのデータ作成にはInternet Explorer Test Driveの「HTML5 Video Caption Maker」を利用することができます。'
+		#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')
 		script.

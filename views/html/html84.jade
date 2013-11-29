@@ -31,13 +31,34 @@ include ../head.jade
 							p iOS4.xは未対応
 							pre
 								| &lt;math&gt;...&lt;/math&gt;
-							p='MathML（Mathmatical Markup Language）'
-							p=''
-							p=''
+							p='MathML（Mathmatical Markup Language）は数式を表すために作成された、XMLをベースとした言語です。文法などについては以下の勧告で規定されています。'
+							p
+								| Mathmatical Markup Language（MathML）
+								br
+								a(href='http://www.w3.org/TR/MathML3/',target='_blank') http://www.w3.org/TR/MathML3/
+							p='HTML5ではMathMLの設定<math>〜</math>をHTMLソースの中に記述できるようになっています。たとえば、サンプルでは簡単な関係式や3×3のマトリクスを記述するため、次のような要素を使用しています。'
 							table.table
 								tr
 									th 要素
 									th 機能
+								tr
+									td='<mi>'
+									td 数式のまとまりを示す。
+								tr
+									td='<mn>'
+									td 記号を示す。
+								tr
+									td='<mn>'
+									td 数字を示す。
+								tr
+									td='<mo>'
+									td 演算子を示す。
+								tr
+									td='<msup>'
+									td='<msup>内の2つ目の要素が上付き文字を示す。'
+								tr
+									td='<mtable>/<mtr>/<mtd>'
+									td 行列を示す。
 							p
 								a.btn.btn-default(href='demo/html/sample1/05/157.html',target='_blank')
 									i.glyphicon.glyphicon-play
@@ -83,6 +104,9 @@ include ../head.jade
 								|      &lt;/mrow&gt;
 								| &lt;/math&gt;
 								| &lt;/p&gt;
+							.alert.alert-warning NOTES: 非表示の乗算記号
+							.alert.alert-warning NOTES: &lt;svg&gt;と&lt;math&gt;の属するカテゴリー
+							.alert.alert-warning NOTES: SVGを利用するメリット
 		#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

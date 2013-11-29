@@ -52,6 +52,84 @@ include ../head.jade
 									td
 										pre
 											| -
+							p
+								a.btn.btn-default(href='demo/html/sample1/05/154.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;script&gt;
+								| window.onload = function() {
+								| 
+								| var canvas = document.getElementById('mycanvas'); 
+								| if (canvas.getContext){
+								|      var ctx = canvas.getContext('2d');
+								| 
+								|      var img = new Image();
+								|      img.src = "img/tea.jpg";
+								|      img.onload = function() {
+								|              ctx.drawImage(img, 0,0);
+								| 
+								|           setTimeout(circle01,1000);
+								|           setTimeout(circle02,2000);
+								|           setTimeout(circle03,3000);
+								|      }
+								| 
+								|      function circle01() {
+								|           ctx.beginPath();
+								|           ctx.arc(560,125,160,0,Math.PI*2,true);
+								|           ctx.fillStyle = "rgba(241,130,121,0.5)";
+								|           ctx.fill();
+								|      }
+								| 
+								|      function circle02() {
+								|           ctx.beginPath();
+								|           ctx.arc(363,363,220,0,Math.PI*2,true);
+								|           ctx.fillStyle = "rgba(239,177,81,0.5)";
+								|           ctx.fill();
+								|      }
+								| 
+								|      function circle03() {
+								|           ctx.beginPath();
+								|           ctx.arc(784,399,150,0,Math.PI*2,true);
+								|           ctx.fillStyle = "rgba(236,243,36,0.5)";
+								|           ctx.fill();
+								|      }
+								| }
+								| 
+								| }
+								| &lt;/script&gt;
+								| &lt;/head&gt;
+								| ...
+								| 
+								| &lt;article&gt;
+								| &lt;hgroup&gt;
+								| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+								| &lt;h2&gt;ちょっとしたお茶の時間&lt;/h2&gt;
+								| &lt;/hgroup&gt;
+								| 
+								| &lt;canvas id="mycanvas" width="960" height="490"&gt;&lt;/canvas&gt;
+								| 
+								| &lt;/article&gt;
+							p='Canvasはビットマップ形式の図形をダイナミックに描画するための仕様で、ゲームグラフィクスの描画などに利用されています。'
+							p='Canvasを利用するためには、<canvas>で描画エリアを用意し、JavaScriptで描画を行います。サンプルの場合、<canvas>のwidthとheight属性で描画エリアを960x490ピクセルの大きさに設定し、その中に画像（tea.jpg）を表示するようにしています。さらに、1秒間隔で3つの円の図形を描画していくようにしています。'
+							p
+								| HTML Canvas 2D Context（勧告候補）
+								br
+								a(href='http://www.w3.org/TR/2dcontext/',target='_blank') http://www.w3.org/TR/2dcontext/
+							p
+								| HTML Living Standard: Canvas
+								br
+								a(href='http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html',target='_blank') http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html
+							.alert.alert-warning NOTES: Canvasの詳細について
+							p='Canvasを利用した描画の詳細については、WHATWGのHTML Living StandardやW3Cの「HTML Canvas 2D Context」を参照してください。'
+							.alert.alert-warning NOTES: 下位互換用のコンテンツ
+							p=''
+							pre(class='prettyprint linenums:1')
+								| &lt;canvas id="mycanvas" width="960" height="490"&gt;
+								| このブラウザはCanvasの機能に未対応です。
+								| &lt;/canvas&gt;
+							.alert.alert-success IE NOTES: 
+							P IE8以前のバージョンはCanvanの機能に未対応です。
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

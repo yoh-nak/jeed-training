@@ -259,6 +259,49 @@ include ../head.jade
 									td td
 									td align, bgcolor, char, charoff, height, nowrap, valign, width
 							.alert.alert-info セルの結合
+							p='<th>や<td>のrowspan、colspan属性を利用すると、複数の行や列にまたがったセルを作成することができます。'
+							h4 複数の行にまたがったセル
+							p='ここでは左端に「茶種」という列を追加し、ダージリンとジャワの列に「紅茶」、煎茶とほうじ茶の行に「緑茶」という見出しをつけるようにしています。'
+							p='そのためにはまず、1行目を構成する<tr>内に茶種のセルを追加します。これにより、セルが次の行にもまたがって表示されますので、3行目と5行目にセルを追加する必要はありません。'
+							pre(class='prettyprint linenums:1')
+								| &lt;table&gt;
+								| 
+								| &lt;tr&gt;
+								|     &lt;th&gt;茶種&lt;/th&gt;
+								|     &lt;th&gt;銘柄&lt;/th&gt;
+								|     &lt;th&gt;産地&lt;/th&gt;
+								|     &lt;th&gt;茶葉100gの価格&lt;/th&gt;
+								| 
+								| &lt;/tr&gt;
+								| &lt;tr&gt;
+								|     &lt;th rowspan="2"&gt;紅茶&lt;/th&gt;
+								|     &lt;th&gt;ダージリン&lt;/th&gt;
+								|     &lt;td&gt;インド&lt;/td&gt;
+								|     &lt;td&gt;1200円&lt;/td&gt;
+								| 
+								| &lt;/tr&gt;
+								| &lt;tr&gt;
+								|     &lt;th&gt;ジャワ&lt;/th&gt;
+								|     &lt;td&gt;インドネシア&lt;/td&gt;
+								|     &lt;td&gt;800円&lt;/td&gt;
+								| 
+								| &lt;/tr&gt;
+								| &lt;tr&gt;
+								|     &lt;th rowspan="2"&gt;緑茶&lt;/th&gt;
+								|     &lt;th&gt;煎茶&lt;/th&gt;
+								|     &lt;td&gt;静岡&lt;/td&gt;
+								|     &lt;td&gt;1000円&lt;/td&gt;
+								| 
+								| &lt;/tr&gt;
+								| &lt;tr&gt;
+								|     &lt;th&gt;ほうじ茶&lt;/th&gt;
+								|     &lt;td&gt;鹿児島&lt;/td&gt;
+								|     &lt;td&gt;800円&lt;/td&gt;
+								| 
+								| &lt;/tr&gt;
+								| &lt;/table&gt;
+							h4 複数の列にまたがったセル
+							p='複数の列にまたがったセルを作成する場合にはcolspan属性を使用します。たとえば、「茶種」のセルを1列目と2列目にまたがって表示するためには、2列目の「銘柄」のセルを削除し、下のようにcolspan属性を「2」と指定します。'
 							.alert.alert-info 代替の見出し
 							.alert.alert-info 見出しとデータの関係を明示する
 		.footer=title

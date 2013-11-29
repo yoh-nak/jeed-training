@@ -177,6 +177,90 @@ include ../head.jade
 											| 	vertical-align: inherit;
 											| 	border-color: gray;
 											| }
+							p='<table>はテーブル（表組）形式のデータを示す要素です。<table>内の<tr>で行を、<th>で見出しセルを、<td>でデータセルを構成します。このとき、<tr>の数で行数が、<tr>内のセルの数で列数が決まります。'
+							p='サンプルの場合、5行×3列のテーブルを作成し、見出しセルの背景を茶色で、データセルの背景を白色で表示するようにしています。'
+							p
+								a.btn.btn-default(href='demo/html/sample1/07/199.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+								| 
+								| &lt;table&gt;
+								| &lt;tr&gt;
+								|     &lt;th&gt;銘柄&lt;/th&gt;
+								|     &lt;th&gt;産地&lt;/th&gt;
+								|     &lt;th&gt;茶屋100gの価格&lt;/th&gt;
+								| &lt;/tr&gt;
+								| &lt;tr&gt;
+								|     &lt;th&gt;ダージリン&lt;/th&gt;
+								|     &lt;td&gt;インド&lt;/td&gt;
+								|     &lt;td&gt;1200円&lt;/td&gt;
+								| &lt;/tr&gt;
+								| 
+								| &lt;tr&gt;
+								|     &lt;th&gt;ジャワ&lt;/th&gt;
+								|     &lt;td&gt;インドネシア&lt;/td&gt;
+								|     &lt;td&gt;800円&lt;/td&gt;
+								| &lt;/tr&gt;
+								| &lt;tr&gt;
+								|     &lt;th&gt;煎茶&lt;/th&gt;
+								|     &lt;td&gt;静岡&lt;/td&gt;
+								|     &lt;td&gt;1000円&lt;/td&gt;
+								| &lt;/tr&gt;
+								| &lt;tr&gt;
+								|     &lt;th&gt;ほうじ茶&lt;/th&gt;
+								|     &lt;td&gt;鹿児島&lt;/td&gt;
+								|     &lt;td&gt;800円&lt;/td&gt;
+								| &lt;/tr&gt;
+								| &lt;/table&gt;
+							pre(class='prettyprint linenums:1')
+								| table,th,td{
+								| 	border:solid 1px #666;
+								| }
+								| table{
+								| 	border-collapse:collapse;
+								| 	margin:20px 0 0;
+								| }
+								| th,td{
+								| 	padding:7px 15px;
+								| }
+								| th{
+								| 	background:#d2bc8c;
+								| }
+								| th:first-child{
+								| 	text-align:left;
+								| 	pading:7px 60px 7px 15px;
+								| }
+								| th:nth-of-type(1){
+								| 	text-align:center;
+								| }
+								| th:nth-of-type(2){
+								| 	text-align:right;
+								| }
+							.alert.alert-warning NOTES: 
+							p スタイルシートを指定しなかった場合、標準ではセルを区切る罫線も表示されず、わかりにくい表示になってしまいますので注意が必要です。
+							.alert.alert-success DIFFERENCES: 
+							p HTML4.01やXHTML1.0のような属性を利用してテーブルのデザインを指定することができましたが、HTML5では廃止されています。これらはスタイルシートによる指定に置き換えることが可能です。
+							table.table
+								tr
+									th 要素
+									th HTML5で廃止された属性
+								tr
+									td table
+									td align, bgcolor, cellpadding, cellspacing, frame, rules, width
+								tr
+									td tr
+									td align, bgcolor, char, charoff, vertical-align
+								tr
+									td th
+									td align, bgcolor, char, charoff, height, nowrap, valign, width
+								tr
+									td td
+									td align, bgcolor, char, charoff, height, nowrap, valign, width
+							.alert.alert-info セルの結合
+							.alert.alert-info 代替の見出し
+							.alert.alert-info 見出しとデータの関係を明示する
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

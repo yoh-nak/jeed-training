@@ -234,6 +234,39 @@ include ../head.jade
 							h4 タスクの実行
 							pre grunt
 							.alert.alert-info 画像を最適化する
+							p あらかじめお使いの環境にoptipngとjpegtranをインストールしておく必要があります。
+							h4 optipngのインストール
+							p windows
+							pre
+							p Mac
+							pre
+							p Linux
+							pre
+							h4 jpegtranのインストール
+							p windows
+							pre
+							p Mac
+							pre
+							p Linux
+							pre
+							h4 プラグインのインストール
+							pre npm install grunt-img grunt-contrib-watch --save-dev
+							h4 Gruntfile.coffeeにタスクを記述
+							pre(class='prettyprint lang-js linenums:1')
+								| module.exports = (grunt) ->
+								| 	grunt.initConfig
+								|     img:
+								|       dist:
+								|         src: ['src/img/*']
+								|         dest: 'htdocs/img'
+								|     watch:
+								|       img:
+								|         files: '<%= img.dist.src %>'
+								|         tasks: 'img:dist'
+								|   
+								|   grunt.loadNpmTasks 'grunt-img'
+								|   grunt.registerTask 'default', 'watch'
+								|   grunt.loadNpmTasks 'grunt-contrib-watch'
 		div#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

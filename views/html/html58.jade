@@ -344,7 +344,103 @@ include ../head.jade
 							p='HTML4.0やXHTML1.0におけるabbr属性は、音声ブラウザでの利用を前提に、見出しを短く省略した値を指定するものと定義されていました。'
 							p='また、abbr属性は<td>で使用することもできましたが、HTML5では使用できなくなっています。さらに、<td>と<th>に見出しのジャンルなどを指定するaxis属性も用意されていましたが、HTML5では廃止されています。'
 							.alert.alert-info 見出しとデータの関係を明示する
-							
+							p='テーブルの構造が複雑な場合などには、scopeやheaders属性を利用して見だしてとデータの関係を明示することができます。'
+							h4 見出し側で示す場合
+							p='見出し側で関係を明示する場合、<th>のscope属性を利用します。たとえば、テーブルの構造上、「銘柄」は行と列のどちらかを見出しとも判別することができてしまいます。しかし、scope属性を「col」と指定することにより、列の見出しであることを明示することができます。'
+							pre(class='prettyprint linenums:1')
+								| &lt;table&gt;
+								| &lt;tr&gt;
+								|     &lt;th scope="col"&gt;銘柄&lt;/th&gt;
+								|     &lt;th&gt;産地&lt;/th&gt;
+								|     &lt;th&gt;茶葉100gの価格&lt;/th&gt;
+								| &lt;/tr&gt;
+								| &lt;tr&gt;
+								|     &lt;th&gt;タージリン&lt;/th&gt;
+								|     &lt;td&gt;インド&lt;/td&gt;
+								|     &lt;td&gt;1200円&lt;/td&gt;
+								| &lt;/tr&gt;
+								| ...
+							p='なお、scope属性で指定できる値は下のようになっています。'
+							table.table
+								tr
+									th scoped属性の値
+									th 行や列に対する見出しの位置づけ
+								tr
+									td row
+									td 行に対する見出し
+								tr
+									td col
+									td 列に対する見出し
+								tr
+									td rowgroup
+									td 行のグループに対する見出し
+								tr
+									td colgroup
+									td 列のグループに対する見出し
+								tr
+									td auto
+									td 自動判別
+							h4 データ側で示す場合
+							p='データ側で関係を明示する場合、まずは<th>にid属性を追加し、見出しにIDを指定します。これで見出しを参照できるようになりますので、<th>と<td>のheaders属性でセルが属する見出しのIDを指定します。半角スペースで区切ることにより、複数のIDを指定することができます。'
+							p='たとえば、「ほうじ茶」はheaders属性を「brand」と指定し、「銘柄」に属する項目であることを示しています。また、「1000円」はheaders属性を「tea03 price」と指定し、「煎茶」と「茶葉100gの価格」に属する項目であることを示しています。'
+							pre(class='prettyprint linenums:1')
+								| &lt;table&gt;
+								| &lt;tr&gt;
+								|     &lt;th id="brand"&gt;銘柄&lt;/th&gt;
+								|     &lt;th id="area"&gt;産地&lt;/th&gt;
+								|     &lt;th id="price"&gt;茶葉100gの価格&lt;/th&gt;
+								| &lt;/tr&gt;
+								| &lt;tr&gt;
+								|     &lt;th id="tea01" headers="brand"&gt;ダージリン&lt;/th&gt;
+								|     &lt;td headers="tea01 area"&gt;インド&lt;/td&gt;
+								|     &lt;td headers="tea01 price"&gt;1200円&lt;/td&gt;
+								| &lt;/tr&gt;
+								| &lt;tr&gt;
+								|     &lt;th id="tea02" headers="brand"&gt;ジャワ&lt;/th&gt;
+								|     &lt;td headers="tea02 area"&gt;インドネシア&lt;/td&gt;
+								|     &lt;td headers="tea02 price"&gt;800円&lt;/td&gt;
+								| &lt;/tr&gt;
+								| &lt;tr&gt;
+								|     &lt;th id="tea03" headers="brand"&gt;煎茶&lt;/th&gt;
+								|     &lt;td headers="tea03 area"&gt;静岡&lt;/td&gt;
+								|     &lt;td headers="tea03 price"&gt;1000円&lt;/td&gt;
+								| &lt;/tr&gt;
+								| &lt;tr&gt;
+								|     &lt;th id="tea04" headers="brand"&gt;ほうじ茶&lt;/th&gt;
+								|     &lt;td headers="tea04 area"&gt;鹿児島&lt;/td&gt;
+								|     &lt;td headers="tea04 price"&gt;800円&lt;/td&gt;
+								| &lt;/tr&gt;
+								| &lt;/table&gt;
+							.alert.alert-warning NOTES: 行や列のグループに対する見出しを明示する
+							p='テーブルでは<colgroup>や<thead>、<tbody>、<tfoot>を利用して行や列のグループを示すことができます。このときグループ見出しはscope属性を「colgroup」や「rowgroup」と指定して示すことが可能です。'
+							pre(class='prettyprint linenums:1')
+								| &lt;table&gt;
+								| &lt;colgroup&gt;&lt;col&gt;&lt;col&gt;&lt;/colgroup&gt;
+								| &lt;colgroup&gt;&lt;col&gt;&lt;col&gt;&lt;/colgroup&gt;
+								| &lt;thead&gt;
+								| &lt;tr&gt;
+								|     &lt;th colspan="2" scope="colgroup"&gt;茶種&lt;/th&gt;
+								|     &lt;th&gt;産地&lt;/th&gt;
+								|     &lt;th&gt;茶葉100gの価格&lt;/th&gt;
+								| &lt;/tr&gt;
+								| &lt;/thead&gt;
+								| &lt;tbody&gt;
+								| &lt;tr&gt;
+								|     &lt;th rowspan="2" scope="colgroup"&gt;紅茶&lt;/th&gt;
+								|     &lt;th&gt;タージリン&lt;/th&gt;
+								|     &lt;td&gt;インド&lt;/td&gt;
+								|     &lt;td&gt;1200円&lt;/td&gt;
+								| &lt;/tr&gt;
+								| &lt;tr&gt;
+								|     &lt;th&gt;ジャワ&lt;/th&gt;
+								|     &lt;td&gt;インドネシア&lt;/td&gt;
+								|     &lt;td&gt;800円&lt;/td&gt;
+								| &lt;/tr&gt;
+								| &lt;/tbody&gt;
+								| ...
+								| &lt;/table&gt;
+							.alert.alert-success DIFFERENCES: 
+							p='HTML4.01やXHTML1.0では<td>でもscope属性を利用することはできましたが、HTML5では廃止されています。'
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

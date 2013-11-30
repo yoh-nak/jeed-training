@@ -1,10 +1,55 @@
 include ../head.jade
 	body
 		include navbar.jade
-		div.container
-			div.row
-				div.col-sm-3
-				div.col-sm-6
-		div#footer=title
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;ボックスの種類
+						.panel-body
+							.alert.alert-info ボックスの種類
+							table.browser-support
+								tr
+									td
+										img(src='images/ic-apple.png')
+									td
+										img(src='images/ic-android.png')
+									td
+										img(src='images/ic-firefox.png') （※）
+									td
+										img(src='images/ic-safari.png')
+									td
+										img(src='images/ic-chrome.png')
+									td
+										img(src='images/ic-opera.png')
+									td
+										img(src='images/ic-ie.png')
+							pre
+								| &lt;display: ボックスの種類
+							table.table
+								tr
+									td 初期値
+									td inline
+								tr
+									td 継承
+									td なし
+								tr
+									td 適用先
+									td 全要素
+								tr
+									td 比率
+									td -
+								tr
+									td モジュール
+									td Basic Box Model
+		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
+		script(src='js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
 		script(src='js/bootstrap.min.js')
+		script(src='coffee/list-counter.js')

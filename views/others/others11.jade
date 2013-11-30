@@ -1,16 +1,16 @@
 include ../head.jade
 	body
 		include navbar.jade
-		div.container
-			div.row
-				div.col-sm-3
+		.container
+			.row
+				.col-sm-3
 					include left.jade
-				div.col-sm-9
-					div.panel.panel-primary
-						div.panel-heading
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
 							i.glyphicon.glyphicon-book
 							&nbsp;Grunt
-						div.panel-body
+						.panel-body
 							h4 公式サイト
 							p
 								a(href='http://gruntjs.com/',target='_blank') http://gruntjs.com/
@@ -75,7 +75,7 @@ include ../head.jade
 							.alert.alert-info CoffeeScriptで記述
 							h4 Gruntfile.coffeeにタスクを記述
 							pre(class='prettyprint lang-js linenums:1')
-								| module.exports = (grunt) ->
+								| module.exports = (grunt) -&gt;
 								|   grunt.initConfig
 								|     uglify:
 								|       dist:
@@ -94,7 +94,7 @@ include ../head.jade
 							pre npm install grunt-contrib-uglify grunt-contrib-coffee --save-dev
 							h4 Gruntfile.coffeeにタスクを記述
 							pre(class='prettyprint lang-js linenums:1')
-								| module.exports = (grunt) ->
+								| module.exports = (grunt) -&gt;
 								|   grunt.initConfig
 								|     coffee:
 								|       options:
@@ -129,7 +129,7 @@ include ../head.jade
 							pre npm install grunt-contrib-watch --save-dev
 							h4 Gruntfile.coffeeにタスクを記述
 							pre(class='prettyprint lang-js linenums:1')
-								| module.exports = (grunt) ->
+								| module.exports = (grunt) -&gt;
 								|   grunt.initConfig
 								|     coffee:
 								|       options:
@@ -145,10 +145,10 @@ include ../head.jade
 								|         dest:'dest/output.min.js'
 								|     watch:
 								|       coffee:
-								|         files: '<%= coffee.dist.src %>'
+								|         files: '&lt;%= coffee.dist.src %&gt;'
 								|         tasks: 'coffee:dist'
 								|       uglify:
-								|         files: '<%= uglify.dist.src %>'
+								|         files: '&lt;%= uglify.dist.src %&gt;'
 								|         tasks: 'uglify:dist'
 								| 
 								|   grunt.loadNpmTasks 'grunt-contrib-watch'
@@ -194,7 +194,7 @@ include ../head.jade
 								| 		p hoge
 							h4 Gruntfile.coffeeにタスクを記述
 							pre(class='prettyprint lang-js linenums:1')
-								| module.exports = (grunt) ->
+								| module.exports = (grunt) -&gt;
 								|   grunt.initConfig
 								|     stylus:
 								|       dist:
@@ -212,13 +212,13 @@ include ../head.jade
 								|           pretty: true
 								|     watch: 
 								|       stylus:
-								|         files: '<%= stylus.dist.src %>'
+								|         files: '&lt;%= stylus.dist.src %&gt;'
 								|         tasks: 'stylus:dist'
 								|       cssmin:
-								|         files: '<%= cssmin.dist.src %>'
+								|         files: '&lt;%= cssmin.dist.src %&gt;'
 								|         tasks: 'cssmin:dist'
 								|       jade:
-								|         files: '<%= jade.dist.src %>'
+								|         files: '&lt;%= jade.dist.src %&gt;'
 								|         tasks: 'jade:dist'
 								| 
 								|   grunt.loadNpmTasks 'grunt-contrib-stylus'
@@ -253,7 +253,7 @@ include ../head.jade
 							pre npm install grunt-img grunt-contrib-watch --save-dev
 							h4 Gruntfile.coffeeにタスクを記述
 							pre(class='prettyprint lang-js linenums:1')
-								| module.exports = (grunt) ->
+								| module.exports = (grunt) -&gt;
 								| 	grunt.initConfig
 								|     img:
 								|       dist:
@@ -261,13 +261,13 @@ include ../head.jade
 								|         dest: 'htdocs/img'
 								|     watch:
 								|       img:
-								|         files: '<%= img.dist.src %>'
+								|         files: '&lt;%= img.dist.src %&gt;'
 								|         tasks: 'img:dist'
 								|   
 								|   grunt.loadNpmTasks 'grunt-img'
 								|   grunt.registerTask 'default', 'watch'
 								|   grunt.loadNpmTasks 'grunt-contrib-watch'
-		div#footer=title
+		#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')
 		script.

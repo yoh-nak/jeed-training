@@ -91,6 +91,60 @@ include ../head.jade
 								| &lt;/p&gt;
 								| 
 								| &lt;/form&gt;
+							p='<form>で指定できる属性は以下のようになっています。'
+							table.table
+								tr
+									th='<form>の属性'
+									th 機能
+									th 指定できる値
+								tr
+									td accept-charset
+									td(colspan='2') 送信データのエンコードの種類
+									td 「UTF-8」など
+								tr
+									td action
+									td(colspan='2') 送信先のURL
+									td URL
+								tr
+									td(rowspan='2') autocomplete
+									td 有効にする
+									td on
+								tr
+									td 無効にする
+									td off
+								tr
+									td(rowspan='3') enctype
+									td(rowspan='3') 送信データの形式
+									td URLエンコード（初期値）
+									td application/x-www-form-urlencoded
+								tr
+									td マルチパートデータ
+									td multipart/form-data
+								tr
+									td プレインテキスト
+									td text/plain
+								tr
+									td(rowspan='2') method
+									td(rowspan='2') 送信方法
+									td HTTP GETメソッドで送信
+									td get
+								tr
+									td HTTP POSTメソッドで送信
+									td post
+								tr
+									td name
+									td(colspan='2') フォーム名
+									td 任意の名称
+								tr
+									td novalidate
+									td(colspan='2') 入力データの検証を無効化
+									td 任意の名称
+								tr
+									td target
+									td(colspan='2') 送信後のページの表示先
+									td _blank, _self, _parent, _top, 名前
+							.alert.alert-success DIFFERENCES: 
+							p='HTML4.01やXHTML1.0で採用されていた<form>のaccept属性はHTML5では廃止され、<input>のaccept属性を利用することが推奨されています。'
 							p='フォームは、テキストの入力フィールドや送信ボタンといった「フォームコントロール」と呼ばれるもので構成されています。このとき、フォームコントロール全体をマークアップし、送信先の指定などを行うのが<form>です。'
 							p='たとえば、サンプルでは<input>と<textarea>を利用して、「名前」と「メールアドレス」、「コメント」の入力フィールドと送信ボタンを用意し、全体を<form>でマークアップしています。'
 							p='<form>では、action属性で入力データの送信先を、method属性で送信方法を指定しています。なお、送信先には入力データの処理を行うスクリプトなどを指定する必要があり、他の属性はスクリプトに合わせて設定します。'

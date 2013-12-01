@@ -91,6 +91,75 @@ include ../head.jade
 											| 	display: block;
 											| 	unicode-bidi: isolate;
 											| }
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/242.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;form action="query.php" method="post"&gt;
+								| 
+								| &lt;fieldset&gt;
+								| &lt;legend&gt;プレゼント （１つ選択してください）&lt;/legend&gt;
+								| &lt;p&gt;
+								| &lt;label&gt;&lt;input type="radio" name="tea" value="紅茶"&gt; 紅茶 &lt;/label&gt;
+								| &lt;label&gt;&lt;input type="radio" name="tea" value="ウーロン茶"&gt; ウーロン茶 &lt;/label&gt;
+								| &lt;label&gt;&lt;input type="radio" name="tea" value="緑茶"&gt; 緑茶 &lt;/label&gt;
+								| &lt;/p&gt;
+								| &lt;/fieldset&gt;
+								| 
+								| &lt;fieldset&gt;
+								| &lt;legend&gt;連絡先&lt;/legend&gt;
+								| &lt;p&gt;
+								| &lt;label&gt;名前：
+								| &lt;input type="text" name="name" size="40"&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+								| 
+								| &lt;p&gt;
+								| &lt;label&gt;メールアドレス：
+								| &lt;input type="email" name="email" size="40"&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+								| &lt;/fieldset&gt;
+								| 
+								| &lt;p&gt;&lt;input type="submit" value="送信"&gt;&lt;/p&gt;
+								| 
+								| &lt;/form&gt;
+							p='<fieldset>はフォームのコントロールグループを示す要素です。また、グループには<legend>でキャプションをつけることができます。<legend>は<fieldset>の中に1つ目の子要素として記述します。'
+							p='たとえば、ここでは「プレゼント」および「連絡先」とキャプションをつけたグループを作成しています。各グループはデフォルトスタイルシートによって罫線で囲んで表示され、キャプションは罫線に重ねて表示されます。'
+							.alert.alert-success DIFFERENCES: 
+							p='HTML4.01やXHTML1.0における<legend>のalign属性はHTML5で廃止され、スタイルシートによる指定に置き換えることが推奨されています。'
+							.alert.alert-info グループを無効にする
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/243.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;h1&gt;SHOPPING&lt;/h1&gt;
+								| 
+								| &lt;form action="query.php" method="post"&gt;
+								| 
+								| &lt;fieldset name="card" disabled&gt;
+								| &lt;legend&gt;
+								| &lt;label&gt;
+								| &lt;input type="checkbox" name="bycard" onchange="form.card.disabled = !checked"&gt;
+								| クレジットカードを利用する
+								| &lt;/label&gt;
+								| &lt;/legend&gt;
+								| 
+								| &lt;p&gt;&lt;label&gt;名義人： &lt;input type="text" name="cardname" required&gt;&lt;/label&gt;&lt;/p&gt;
+								| 
+								| &lt;p&gt;&lt;label&gt;カード番号： &lt;input type="text" name="cardnum" required&gt;&lt;/label&gt;&lt;/p&gt;
+								| 
+								| &lt;p&gt;&lt;label&gt;有効期限： &lt;input type="text" name="cardexp" required&gt;&lt;/label&gt;&lt;/p&gt;
+								| &lt;/fieldset&gt;
+								| 
+								| &lt;p&gt;&lt;input type="submit" value="送信"&gt;&lt;/p&gt;
+								| &lt;/form&gt;
+							p='<fieldset>のdisabled属性を利用すると、グループ内のすべてのフォームコントロールを無効にすることができます。ただし、<legend>でマークアップしたキャプション内のコントロールは無効にはなりません。'
+							p='そのため、サンプルのようなキャプション内にチェックボックスを用意しておき、チェックをつけた場合にのみグループを無効にするといった使い方が可能です。'
+							.alert.alert-success DIFFERENCES: 
+							p='<fieldset>のdisabled属性にはiOS6以上、Firefox、Safari、Chromeが対応しています。また、Operaも対応していますが、<legend>内のコントロールも無効化されるという問題が見られます。'
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

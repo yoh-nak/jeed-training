@@ -71,102 +71,63 @@ include ../head.jade
 										| body {
 										|   font: 14px Arial, sans-serif;
 										| }
-							.alert.alert-info Interpolation
+							p コロンを利用すると値の設定と同時に変数の宣言が可能です。
+							.row
+								.col-sm-6
+									pre
+										| #logo
+										| 	width: w = 150px
+										| 	margin-left: -(w / 2)
+								.col-sm-6
+									pre
+										| #logo {
+										|   width: 150px;
+										|   margin-left: -75px;
+										| }
+							p これは@を利用して次のように記述することも可能です。
+							.row
+								.col-sm-6
+									pre
+										| #logo
+										| 	width: 150px
+										| 	margin-left: -(@width / 2)
+								.col-sm-6
+									pre
+										| #logo {
+										|   width: 150px;
+										|   margin-left: -75px;
+										| }
+							p='次のようにmixinをベースにした拡張も可能です。'
+							p='この場合、positionが指定されていてz-indexの指定がない場合は「z-index: 1」が出力されます。'
+							.row
+								.col-sm-6
+									pre
+										| position()
+										| 	position: arguments
+										| 	z-index: 1 unless @z-index
+										| 	
+										| #logo
+										| 	z-index: 20
+										| 	position: absolute
+										| 	
+										| #logo2
+										| 	position: absolute
+								.col-sm-6
+									pre
+										| #logo {
+										|   z-index: 20;
+										|   position: absolute;
+										| }
+										| #logo2 {
+										|   position: absolute;
+										|   z-index: 1;
+										| }
 							.alert.alert-info Interpolation
 							.alert.alert-info ループ
 							.alert.alert-info Mixins
 							.alert.alert-info 演算
 							.alert.alert-info 文字列の置き換え
 							.alert.alert-info 色に関する操作
-							//
-								p DOCTYPEを追加するには、「doctype」に続けてオプションに「html」を記述してコンパイルします。略すと「!!!」」と記述できます。
-								.row
-									.col-sm-6
-										pre doctype html
-									.col-sm-6
-										pre='<!DOCTYPE html>'
-									.col-sm-6
-										pre !!!
-									.col-sm-6
-										pre='<!DOCTYPE html>'
-								p よく使われるdoctypeの短縮形です。
-								table.table
-									tr
-										td xml
-										td='<?xml version="1.0" encoding="utf-8" ?>'
-									tr
-										td transitional
-										td='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'
-									tr
-										td strict
-										td='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">'
-									tr
-										td frameset
-										td='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">'
-									tr
-										td 1.1
-										td='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">'
-									tr
-										td basic
-										td='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">'
-									tr
-										td mobile
-										td='<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.2//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd">'
-								p 独自のdoctypeの記述できます。
-								.row
-									.col-sm-6
-										pre='doctype html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN"'
-									.col-sm-6
-										pre='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN">'
-								hr
-								.alert.alert-info Tags
-								p 行の最初のテキストはhtmlタグを表します。また、htmlのツリー構造を作るには、インデントを加えたタグをネストさせます。
-								.row
-									.col-sm-6
-										pre
-											| ul
-											| 	li
-											| 	li
-											| 	li
-									.col-sm-6
-										pre
-											| &lt;ul&gt;
-											| 	&lt;li&gt;&lt;/li&gt;
-											| 	&lt;li&gt;&lt;/li&gt;
-											| 	&lt;li&gt;&lt;/li&gt;
-											| &lt;/ul&gt;
-								p jadeは終了タグを持たないタグを判別できます。
-								.row
-									.col-sm-6
-										pre
-											| img
-									.col-sm-6
-										pre
-											| &lt;img&gt;
-								hr
-								.alert.alert-info Block Expansion
-								.alert.alert-info Attributes
-								.alert.alert-info Boolean Attributes
-								.alert.alert-info Class Attributes
-								.alert.alert-info Class Literal
-								.alert.alert-info ID Literal
-								.alert.alert-info Plain Text
-								.alert.alert-info Piped Text
-								.alert.alert-info Inline in a Tag
-								.alert.alert-info Block in a Tag
-								.alert.alert-info Code
-								.alert.alert-info Unbuffered Code
-								.alert.alert-info Buffered Code
-								.alert.alert-info Unescaped Buffered Code
-								.alert.alert-info Comments
-								.alert.alert-info Block Comments
-								.alert.alert-info Conditionals
-								.alert.alert-info Iteration
-								.alert.alert-info Case
-								.alert.alert-info Block Expansion
-								.alert.alert-info Filters
-								.alert.alert-info Mixins
-								.alert.alert-info Mixin Attributes
 		#footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/bootstrap.min.js')

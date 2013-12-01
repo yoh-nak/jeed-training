@@ -164,9 +164,94 @@ include ../head.jade
 									| &lt;/pre&gt;
 								figcaption サンプルで指定した送信先の設定（query.php）。
 							.alert.alert-info オートコンプリートを無効にする
-							p=''
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/238.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;h1&gt;CONTACT&lt;/h1&gt;
+								| &lt;p&gt;ご意見、ご感想、お問い合わせなどがありましたら、こちらのフォームより送信してください。&lt;/p&gt;
+								| 
+								|&lt;form action="query.php" method="post" autocomplete="off"&gt;
+								| 
+								| &lt;p&gt;
+								| &lt;label&gt;名前：
+								| &lt;input type="text" name="name" size="40"&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+								| ...
+								| 
+								| &lt;/form&gt;
+							p='フォームにはオートコンプリートの機能が用意されており、繰り返し入力する情報の場合、一部の文字を入力すると入力候補が表示されるようになっています。'
+							p='フォーム全体でこの機能を無効にしたい場合には、<form>のautocomplete属性を「off」と指定します。また、autocomplete属性はフォームコントロール側に指定することも可能で、<form>の指定よりも優先されます。'
+							.alert.alert-warning NOTES: 
+							p='フォームなどの項目でオートコンプリートが機能するかは、ブラウザに依存します。たとえば、Internet Explorerでは、「インターネットオプション＞コンテンツタブ」の「オートコンプリート＞設定」でオートコンプリートを有効にするフォームコントロールの種類を指定できるようになっています。'
 							.alert.alert-info データの検証を無効にする
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/239-1.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;form action="query.php" method="post" novalidate&gt;
+								| 
+								| &lt;p&gt;
+								| &lt;label&gt;名前：
+								| &lt;input type="text" name="name" size="40"&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+								| 
+								| &lt;p&gt;
+								| &lt;label&gt;メールアドレス：
+								| &lt;input type="email" name="email" size="40"&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+								| …
+								| 
+								| &lt;/form&gt;
+							p='フォームでは必要に応じて入力データが正しいのかどうかの検証が行われます。たとえば、<input type="email">で作成したメールアドレスの入力フィールドでは検証が行われ、メールアドレスとして正しくない値を入力するとエラーメッセージが表示されます。'
+							p='この検証機能を無効にしたい場合には、<form>のnovalidate属性を上のように指定します。'
+							.alert.alert-success IE NOTES: 
+							p IE9以前のバージョンは入力データの検証機能に未対応です。
 							.alert.alert-info='<form>の外にフォームコントロールを用意する'
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/239-2.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;h1&gt;CONTACT&lt;/h1&gt;
+								| &lt;p&gt;ご意見、ご感想、お問い合わせなどがありましたら、こちらのフォームより送信してください。&lt;/p&gt;
+								| 
+								| &lt;form action="query.php" method="post" id="contact"&gt;
+								| 
+								| &lt;p&gt;
+								| &lt;label&gt;名前：
+								| &lt;input type="text" name="name" size="40"&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+								| ...
+								| 
+								| &lt;/form&gt;
+								| 
+								| 
+								| 
+								| &lt;div id="sidebar"&gt;
+								| 
+								| &lt;aside&gt;
+								| &lt;h1&gt;好きなお茶&lt;/h1&gt;
+								| &lt;ul&gt;
+								| &lt;li&gt;&lt;label&gt;&lt;input type="radio" name="tea" value="紅茶" form="contact"&gt; 紅茶 &lt;/label&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;label&gt;&lt;input type="radio" name="tea" value="ウーロン茶" form="contact"&gt; ウーロン茶 &lt;/label&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;label&gt;&lt;input type="radio" name="tea" value="緑茶" form="contact"&gt; 緑茶 &lt;/label&gt;&lt;/li&gt;
+								| &lt;/ul&gt;
+								| &lt;/aside&gt;
+								| ...
+							p='通常、送信ボタンをクリックして送信されるデータは、<form>の中に記述したコントロールのデータです。しかし、<form>の外に記述したコントロールのデータをいっしょに送信するように指定することもできます。'
+							p='たとえば、ここでは<input type="radio">を利用してサイドバー部分に好きなお茶の選択肢を追加しています。しかし、このコントロールは<form>の外に記述していますので、そのままではデータがサーバーに送信されません。'
+							p='そこで、<input type="radio">にform属性を追加し、コンテンツ部分の<form>のIDを指定します。これにより、好きなお茶の情報がコンテンツ部分のフォームデータといっしょに送信されるようになります。ここではIDを「contact」と指定しています。'
+							p='なお、InternetExplorer10はform属性には未対応です。'
+							.alert.alert-warning NOTES: method属性の値「dialog」
+							p='WHATWGのHTML Living Standardでは、送信方法を指定するmethod属性に「dialog」という値が追加されています。アプリケーションのダイアログボックスなどにおける利用を想定しており、送信時にダイアログボックスを閉じるように想定されています。'
+							p='なお、ダイアログボックスは<dialog>という要素で構成することが考えられています。'
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

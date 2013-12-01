@@ -282,19 +282,144 @@ include ../head.jade
 											td size
 											td 表示する文字数の指定
 							h4 書字方向の情報を送信
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/246-2.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;
+								| &lt;label&gt;名前：
+								| &lt;input type="text" name="name" dirname="namedir"&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+							p='dirname属性を指定すると、コントロールに入力されたデータといっしょに書字方向の情報をサーバーに送信することができます。'
+							p='dirname属性では情報を区別するための名前を指定します。たとえば、「namedir」と指定しておくと、「namedir = ltr」というデータが送信されるようになります。「ltr」は書字方向が左から右であることを示す値です。右から左の場合は「rtl」という値が送信されます。'
+							.alert.alert-warning NOTES: 
+							p='iOS5.x以前やAndroid、Firefox、Internet Explorer 10はdirname属性に未対応です。'
 							h4 入力できる文字数の指定
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/247-1.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;
+								| &lt;label&gt;会員番号（８桁）：
+								| &lt;input type="text" name="name" maxlength="8"&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+							p='maxlenght属性では、入力できる文字数を指定します。たとえば、値を「8」と指定すると、8文字までしか入力できなくなります。'
 							h4 データ形式の指定
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/247-2.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								&lt;p&gt;
+								&lt;label&gt;会員番号：
+								&lt;input type="text" name="name" pattern="[a-z]+" title="すべて小文字のアルファベットで入力してください"&gt;
+								&lt;/label&gt;
+								&lt;/p&gt;
+							p='pattern属性を利用すると、入力を許可するデータの形式をJavaScriptの正規表現で指定することができます。たとえば、ここでは値を「[a-z]+」と指定し、小文字のアルファベットの入力のみを許可しています。'
+							p='送信時には入力データの検証が行われ、誤りがある場合にはエラーメッセージが表示され、送信が停止されます。そのため、謝った内容のままデータが送信されるのを防ぐことができます。'
+							p='また、pattern属性を指定した場合には、入力形式についての説明をtitle属性で記述しておくことが推奨されています。この説明はエラーメッセージといっしょに表示されます。'
+							.alert.alert-warning NOTES: 
+							p='各ブラウザは、入力されたデータが指定形式で正しく記述されているかどうか検証する機能を備えており、誤りがある場合にはエラーメッセージを表示し、送信を停止するようになっています。'
+							p='ただし、iOSやAndroid、Safariの場合、内部的に検証は行いますが、エラーメッセージの表示や送信の停止は行いません。検証結果を表示に反映させるには、JavaScriptのvalidity.validやCSSの:valid、:invalidセレクタを利用して処理を設定します。'
+							.alert.alert-success IE NOTES: 
+							p='IE9以前のバージョンはpattern属性や入力データの検証に未対応です。'
 							h4 プレースホルダーの指定
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/248-1.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;
+								| &lt;label&gt;会員番号：
+								| &lt;input type="text" name="name" maxlength="8" placeholder="８桁の会員番号"&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+							p='placeholder属性を利用すると、入力に関する簡単なヒントを示すことができます。これは「プレースホルダ」と呼ばれ、データが未入力の場合にのみ、上のように薄いグレーの文字で表示されます。'
+							.alert.alert-success IE NOTES: 
+							p='IE9以前のバージョンはplaceholder属性に未対応です。'
 							h4 表示専用にする
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/248-2.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;
+								| &lt;label&gt;会員番号：
+								| &lt;input type="text" name="name" value="ABCDEFGH" readonly&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+							p='readonly属性を指定すると、コントロールを表示専用にすることができます。過去に入力された変更不可なデータをフォームで扱う必要がある場合等に利用することができます。'
+							p='ここでは、value属性で会員番号を入力済みの状態で表示し、readonly属性で編集できないように設定しています。ただし、入力済みの値を選択し、コピーすることは可能です。また、入力済みの値はサーバーに送信されます。'
+							.alert.alert-warning NOTES: 
+							p='disabled属性で無効化したコントロールの場合、値の編集もコピーもできなくなります。また、サーバへの送信も行われません。'
 							h4 入力を必須にする
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/248-3.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;
+								| &lt;label&gt;会員番号：
+								| &lt;input type="text" name="name" required&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+							p='required属性を指定すると、入力が必須であることを示します。送信時には入力データの検証が行われ、未入力の場合はエラーメッセージが表示されます。'
+							.alert.alert-success IE NOTES: 
+							p='IE9以前のバージョンはrequired属性に未対応です。'
 							h4 表示する文字数の指定
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/249.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;
+								| &lt;label&gt;会員番号：
+								| &lt;input type="text" name="name" size="45"&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+							p='size属性ではコントロールの横幅を何文字分表示できる大きさにするかを指定します。ここでは、30文字分を表示するように設定しています。'
+							p='size属性を省略した場合、標準では20文字分の内容が表示されます。'
+							.alert.alert-warning NOTES: 
+							p='コントロールの横幅はスタイルシートのwidthプロパティでも変更することができます。このとき、size属性よりもwidthプロパティの指定が優先されます。'
+							.alert.alert-warning NOTES: inputmode属性による入力モードの指定
+							p='WHATWGのHTML Living StandardとW3CのHTML5.1では、データの入力モードを指定するinputmode属性が提案されており、type属性の値を「text」または「search」と指定したときに利用できることになっています。'
+							p='たとえば、inputmode属性を「katakana」と指定した場合、コントロールを選択したときにキーボードの入力モードが自動的にカタカナに切り替わるようになります。'
+							p='下のような値を指定できることになっていますが、現在のところ各ブラウザは未対応です。'
+							table.table
+								tr
+									th inputmode属性の値
+									th 入力モード
+								tr
+									td latin
+									td アルファベットの入力に最適なモード。
+								tr
+									td latin-name
+									td アルファベットの人名の入力に最適なモード。
+								tr
+									td kana
+									td ひらがなの入力に最適なモード。
+								tr
+									td katakana
+									td カタカナの入力に最適なモード。
 							
 							//<input type="search">
 							.alert.alert-info 検索
+
+							//<input type="url">
 							.alert.alert-info URL
+
+							//<input type="tel">
 							.alert.alert-info 電話番号
+
+							//<input type="email">
 							.alert.alert-info メールアドレス
 							h4 複数のメールアドレスを入力する
+
+							//<input type="passowrd">
 							.alert.alert-info パスワード
 							.alert.alert-info 日時
 							h4 年月日の入力

@@ -26,6 +26,7 @@ include ../head.jade
 										|   font-weight: bold;
 										| }
 							p このように基本的に括弧やセミコロン、コロンなどは省略して記述します。また値などのフォーマットもそろえて出力されます。
+							p セレクタをネストすることで複数のセレクタを出力することができます。
 							.row
 								.col-sm-6
 									pre
@@ -41,7 +42,35 @@ include ../head.jade
 										| body p {
 										|   color: #000;
 										| }
+							p='&をつけて記述することで親要素を参照するセレクタを出力できます。'
+							.row
+								.col-sm-6
+									pre
+										| body
+										| 	color red
+										| 	&amp;.hoge
+										| 		color black
+								.col-sm-6
+									pre
+										| body {
+										|   color: #f00;
+										| }
+										| body.hoge {
+										|   color: #000;
+										| }
 							.alert.alert-info Variables(変数)
+							p 変数「font-size」を作成し、以降のCSSで利用が可能です。
+							.row
+								.col-sm-6
+									pre
+										| font-size = 14px
+										| body
+										| 	font font-size Arial, sans-serif
+								.col-sm-6
+									pre
+										| body {
+										|   font: 14px Arial, sans-serif;
+										| }
 							.alert.alert-info Interpolation
 							.alert.alert-info Interpolation
 							.alert.alert-info ループ

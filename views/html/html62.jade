@@ -149,7 +149,21 @@ include ../head.jade
 							p='たとえば、サンプルでは<input>と<textarea>を利用して、「名前」と「メールアドレス」、「コメント」の入力フィールドと送信ボタンを用意し、全体を<form>でマークアップしています。'
 							p='<form>では、action属性で入力データの送信先を、method属性で送信方法を指定しています。なお、送信先には入力データの処理を行うスクリプトなどを指定する必要があり、他の属性はスクリプトに合わせて設定します。'
 							.alert.alert-info 送信されるデータ
+							p='データを入力して送信ボタンをクリックすると、<form>のaction属性で指定したURL属性で指定したURLにデータが送信されます。入力データは<input>や<textarea>といったフォームコントロールのname属性で指定したコントロール名とセットで「コントロール名 = 値」という形で送信されます。'
+							p='たとえば、「名前」のフィールドに入力したデータの場合、「name = 花子」というデータが送信されることになります。'
+							.alert.alert-warning NOTES: フォームのデータをPHPで処理する場合
+							p='フォームのデータをPHPで処理する場合、<form>のmethod属性が「post」で送信されたデータは$_POSTに、「get」で送信されたデータは$_GETに代入されます。そのため、下のように「print_r($_POST)」と指定して配列の中身を出力すると、送信された内容を確認することができます。'
+							p='なお、実際の運用ではデータをメールで受け取れるようにしたり、データに含まれるHTMLタグを除外するといった処理を設定していくことになります。'
+							figure
+								pre(class='prettyprint lang-php linenums:1')
+									| &lt;h1&gt;POSTED DATA&lt;/h1&gt;
+									| 
+									| &lt;pre&gt;
+									| &lt;?php print_r($_POST); ?&gt;
+									| &lt;/pre&gt;
+								figcaption サンプルで指定した送信先の設定（query.php）。
 							.alert.alert-info オートコンプリートを無効にする
+							p=''
 							.alert.alert-info データの検証を無効にする
 							.alert.alert-info='<form>の外にフォームコントロールを用意する'
 		.footer=title

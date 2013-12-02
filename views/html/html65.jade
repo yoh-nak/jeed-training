@@ -604,25 +604,216 @@ include ../head.jade
 											td 表示文字数の指定
 
 							.alert.alert-info 日時
+							p='<iput>で扱うデータが日時の情報であることを示すためには、type属性を下のいずれかの値に設定します。日時の情報は以下の形式で記述することが求められるため、各ブラウザはカレンダーといった簡単に日時を選択できるインターフェースを用意して、内部的に以下の記述に変換してサーバーに送信します。現在のところ、専用のインターフェースが用意されているのは、iOS5以上、Chrome、Operaです。'
+							p='ここではすべての値に対応しているOperaを利用して、インターフェースの表示とサーバーに送信されるデータを確認していきます。'
+							table.table
+								tr
+									th(rowspan='2') type属性の値
+									th(rowspan='2')  データの種類
+									th(rowspan='2')  タイムゾーンの情報
+									th(colspan='3') 専用のインターフェース
+								tr
+									td: img(src='images/ic-ios.png')
+									td: img(src='images/ic-chrome.png')
+									td: img(src='images/ic-opera.png')
+								tr
+									td data
+									td 年月日
+									td なし
+									td ○
+									td ○
+									td ○
+								tr
+									td month
+									td 年月
+									td なし
+									td ○
+									td ☓
+									td ○
+								tr
+									td week
+									td 週
+									td なし
+									td ☓
+									td ☓
+									td ○
+								tr
+									td time
+									td 時刻
+									td なし
+									td ○
+									td ○
+									td ○
+								tr
+									td datetime-local
+									td 日時（ローカル）
+									td なし
+									td ○
+									td ☓
+									td ○
+								tr
+									td datetime
+									td 日時（UTC）
+									td なし
+									td ○
+									td ☓
+									td ○
+
 							//<input type="date">
 							h4 年月日の入力
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/253.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;
+								| &lt;label&gt;年月日：
+								| &lt;input type="date" name="date"&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+							p='type属性を「date」と指定した場合、年月日をカレンダーで選択できるようになります。'
 
 							//<input type="month">
 							h4 年月の入力
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/254-1.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;
+								| &lt;label&gt;年月：
+								| &lt;input type="month" name="month"&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+							p='type属性を「month」と指定した場合、カレンダーで年月のみを選択することができます。'
 
 							//<input type="week">
 							h4 週の入力
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/254-2.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;
+								| &lt;label&gt;週：
+								| &lt;input type="week" name="week"&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+							p='type属性を「week」と指定した場合、カレンダーで週のみを選択できるようになります。サーバーには年と週の番号が送信されます。'
 
 							//<input type="time">
 							h4 時刻の入力
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/254-3.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;
+								| &lt;label&gt;時刻：
+								| &lt;input type="time" name="time"&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+							p='type属性を「time」と指定した場合、時刻の入力ボックスが表示されます。横のボタンで値を変更するか、値を直接入力することが可能です。'
 
 							//<input type="datatime-local">
 							h4 日時の入力（タイムゾーンの情報なし）
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/255-1.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;
+								| &lt;label&gt;日時：
+								| &lt;input type="datetime-local" name="local"&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+							p='type属性を「datetime-local」と指定した場合、年月日を指定できるカレンダーと時刻の入力ボックスが表示されます。サーバーには「年月日 T時:分」という形で日時のデータが送信されます。'
 
 							//<input type="datetime">
 							h4 日時の入力（タイムゾーンの情報あり）
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/255-2.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;
+								| &lt;label&gt;日時：
+								| &lt;input type="datetime" name="global"&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+							p='type属性を「datetime」と指定した場合、コントロールの横に「UTC」（協定世界時）で入力することを求めるようになります。'
+							p='サーバーに送信されるデータには末尾に「Z」が追加され、タイムゾーンが「UTC」であると明示されます。'
 
 							h4 日時関連のコントロールで指定できる属性
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/256.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;
+								| &lt;label&gt;時刻：
+								| &lt;input type="time" name="time" value="10:00" min="10:00" max="18:00" step="1800"&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+							p='日付関連のコントロールでは、下の属性を指定することができます。このうちmin、max、step属性を利用すると、入力可能な日時の範囲や間隔を指定できるようになります。'
+							p='たとえば、上のサンプルでは10:00〜18:00までの時刻を30分（1800秒）間隔で指定できるようにしています。'
+							table.table
+								tr
+									th 日時関連のコントロールで指定できる属性
+									th 機能
+								tr
+									td autocomplete
+									td オートコンプリート
+								tr
+									td list
+									td 入力候補の指定
+								tr
+									td max
+									td 最大値の指定
+								tr
+									td min
+									td 最小値の指定
+								tr
+									td readonly
+									td 表示専用にする
+								tr
+									td required
+									td 入力を必須にする
+								tr
+									td step
+									td 値の間隔を指定
+							.alert.alert-warning NOTES: 
+							p='step属性で指定できる値の単位は、type属性の値によって下のように変わります。サンプルの場合、type属性を「time」と指定していますので、step属性の値の単位は「秒」で指定しています。'
+							table.table
+								tr
+									th type属性の値
+									th step属性の単位
+									th step属性の初期値
+								tr
+									td date
+									td 日
+									td 1日
+								tr
+									td month
+									td 月
+									td 1月
+								tr
+									td week
+									td 週
+									td 1週間
+								tr
+									td time
+									td 秒
+									td 60秒
+								tr
+									td datetime-local
+									td 秒
+									td 60秒
+								tr
+									td datetime
+									td 秒
+									td 60秒
+									
 							//<input type="number">
 							.alert.alert-info 数値
 

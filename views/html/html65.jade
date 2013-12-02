@@ -1167,10 +1167,133 @@ include ../head.jade
 							
 							//<input type="hidden">
 							.alert.alert-info 隠し情報
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/265-1.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;h1&gt;MAIL ADDRESS SUBMIT&lt;/h1&gt;
+								| 
+								| &lt;form action="query.php" method="post"&gt;
+								| 
+								| &lt;input type="hidden" name="formtype" value="メール登録フォーム"&gt;
+								| 
+								| &lt;p&gt;
+								| &lt;label&gt;メールアドレス：
+								| &lt;input type="email" name="email"&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+								| 
+								| &lt;p&gt;&lt;input type="submit" value="送信"&gt;&lt;/p&gt;
+								| &lt;/form&gt;
+							p='type属性を「hidden」と指定した場合、<input>で扱う情報はユーザーに提示する必要がないことを示します。そのため、コントロールの表示は行われません。'
+							p='指定できる属性は下のようになっており、name属性で指定した名前と、value属性で指定した値がサーバーに送信されます。'
+							table.table
+								tr
+									th='<input type="hidden">で指定できる要素'
+									th 機能
+								tr
+									td disabled
+									td コントロールの無効化
+								tr
+									td form
+									td='<form>との関連付け'
+								tr
+									td name
+									td コントロール名の指定
+								tr
+									td value
+									td 初期値の指定
+							h4 エンコードの種類を送信する
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/265-2.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;h1&gt;MAIL ADDRESS SUBMIT&lt;/h1&gt;
+								| 
+								| &lt;form action="query.php" method="post"&gt;
+								| 
+								| &lt;input type="hidden" name="_charset_"&gt;
+								| 
+								| &lt;p&gt;
+								| &lt;label&gt;メールアドレス：
+								| &lt;input type="email" name="email"&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+								| 
+								| &lt;p&gt;&lt;input type="submit" value="送信"&gt;&lt;/p&gt;
+								| &lt;/form&gt;
+							p='name属性の値を「_charset_」と指定すると、フォームデータのエンコードの種類を送信することができます。この場合、value属性を指定しても無視されます。'
 
 							//<input type="submit">
 							.alert.alert-info 送信ボタン
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/266-1.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;form action="query.php" method="post"&gt;
+								| &lt;p&gt;
+								| &lt;label&gt;名前：
+								| &lt;input type="text" name="name"&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+								| 
+								| &lt;p&gt;&lt;input type="submit" value="送信"&gt;&lt;/p&gt;
+								| &lt;/form&gt;
+							p='type属性を「submit」と指定した場合、<input>はフォームデータの送信ボタンを構成します。ボタンに表示するラベルはvalue属性で指定することが可能です。ここでは「送信」と指定しています。'
+							p='なお、<input type="submit">では、以下の属性に加え、以下のようにフォームの設定を変更する属性を利用することが可能です。'
+							.alert.alert-warning NOTES: 
+							p='value属性を指定しなくても、主要ブラウザでは「送信」と表示されます。ただし、Internet Explorerでは「クエリ送信」と表示されますので、ここではvalue属性で「送信」と表示するように指定しています。'
+
 							h4 フォームの設定を変更する
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/266-2.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;form action="query.php" method="post"&gt;
+								| &lt;p&gt;
+								| &lt;label&gt;名前：
+								| &lt;input type="text" name="name"&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+								| 
+								| &lt;p&gt;&lt;input type="submit" value="送信" formaction="test.php"&gt;&lt;/p&gt;
+								| &lt;/form&gt;
+							p='<input type="submit">のformation属性を利用すると、<form>のaction属性で指定したフォームデータの送信先を変更することができます。たとえば、上のように指定した場合、<form>で指定したquery.phpではなく、<input type="submit">に用意されたtest.phpが送信先となります。'
+							p='同時に、<input type="submit">に用意されたいかの属性を利用すると、それぞれ対になった<form>の設定を変更することが可能です。'
+							table.table
+								tr
+									th='<input type="submit">の属性'
+									th='<form>の属性'
+									th 設定
+								tr
+									td formaction
+									td action
+									td 送信先のURL
+								tr
+									td formenctype
+									td enctype
+									td 送信データの形式
+								tr
+									td formmethod
+									td method
+									td 送信方法
+								tr
+									td formnovalidate
+									td novalidate
+									td 入力データの検証を無効化
+								tr
+									td formtarget
+									td target
+									td 送信後のページの表示先
+							.alert.alert-warning NOTES: 
+							p='iOS4.xとAndroid2.3xは未対応です。'
+							.alert.alert-success IE NOTES: 
+							p='IE9以前のバージョンは未対応です。'
+
 							//<input type="image">
 							.alert.alert-info 画像ボタン
 

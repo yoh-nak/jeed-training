@@ -1,26 +1,26 @@
 include ../head.jade
 	body
 		include navbar.jade
-		div.container
-			div.row
-				div.col-sm-3
+		.container
+			.row
+				.col-sm-3
 					include left.jade
-				div.col-sm-9
-					div.panel.panel-primary
-						div.panel-heading
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
 							i.glyphicon.glyphicon-book
 							&nbsp;Jade Languageリファレンス
-						div.panel-body
+						.panel-body
 							.alert.alert-info doctype
 							p DOCTYPEを追加するには、「doctype」に続けてオプションに「html」を記述してコンパイルします。略すと「!!!」」と記述できます。
-							div.row
-								div.col-sm-6
+							.row
+								.col-sm-6
 									pre doctype html
-								div.col-sm-6
+								.col-sm-6
 									pre='<!DOCTYPE html>'
-								div.col-sm-6
+								.col-sm-6
 									pre !!!
-								div.col-sm-6
+								.col-sm-6
 									pre='<!DOCTYPE html>'
 							p よく使われるdoctypeの短縮形です。
 							table.table
@@ -46,22 +46,22 @@ include ../head.jade
 									td mobile
 									td='<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.2//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd">'
 							p 独自のdoctypeの記述できます。
-							div.row
-								div.col-sm-6
+							.row
+								.col-sm-6
 									pre='doctype html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN"'
-								div.col-sm-6
+								.col-sm-6
 									pre='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN">'
 							hr
 							.alert.alert-info Tags
 							p 行の最初のテキストはhtmlタグを表します。また、htmlのツリー構造を作るには、インデントを加えたタグをネストさせます。
-							div.row
-								div.col-sm-6
+							.row
+								.col-sm-6
 									pre
 										| ul
 										| 	li
 										| 	li
 										| 	li
-								div.col-sm-6
+								.col-sm-6
 									pre
 										| &lt;ul&gt;
 										| 	&lt;li&gt;&lt;/li&gt;
@@ -69,38 +69,123 @@ include ../head.jade
 										| 	&lt;li&gt;&lt;/li&gt;
 										| &lt;/ul&gt;
 							p jadeは終了タグを持たないタグを判別できます。
-							div.row
-								div.col-sm-6
+							.row
+								.col-sm-6
 									pre
 										| img
-								div.col-sm-6
+								.col-sm-6
 									pre
 										| &lt;img&gt;
 							hr
 							.alert.alert-info Block Expansion
+							p 横並びでスペースを開けると、ネストされたタグをを作成できます。
+							.row
+								.col-sm-6
+									pre a: img
+								.col-sm-6
+									pre='<a><img></a>'
 							.alert.alert-info Attributes
+							p 属性はHTMLに似ていますが、それらの値は正規のJavaScriptです。
+							.row
+								.col-sm-6
+									pre
+										| a(href='google.com') Google
+										| a(class='button', href='google.com') Google
+								.col-sm-6
+									pre='<a href="google.com">Google</a><a href="google.com" class="button">Google</a>'
+							p 普通のJavaScriptの表現も動作します。
+							.row
+								.col-sm-6
+									pre
+										| - var authenticated = true
+										| body(class=authenticated?'authed':'anon')
+								.col-sm-6
+									pre='<body class="authed"></body>'
 							.alert.alert-info Boolean Attributes
+							p 真偽値はそのまま引き継がれ、falseのときは何も指定されない。
+							.row
+								.col-sm-6
+									pre
+										| input(type='checkbox', checked)
+										| input(type='checkbox', checked=true)
+										| input(type='checkbox', checked=false)
+										| input(type='checkbox', checked=true.toString())
+								.col-sm-6
+									pre
+										| &lt;input type="checkbox" checked="checked"/&gt;
+										| &lt;input type="checkbox" checked="checked"/&gt;
+										| &lt;input type="checkbox"/&gt;
+										| &lt;input type="checkbox" checked="true"/&gt;
 							.alert.alert-info Class Attributes
+							p クラス属性は任意の属性のように文字列を指定できますが、JavaScriptの配列から作成すると便利です。
+							.row
+								.col-sm-6
+									pre
+										| - var classes = ['foo', 'bar', 'baz']
+										| a(class=classes)
+								.col-sm-6
+									pre='<a class="foo bar baz"></a>'
 							.alert.alert-info Class Literal
+
 							.alert.alert-info ID Literal
+
 							.alert.alert-info Plain Text
+
 							.alert.alert-info Piped Text
+
 							.alert.alert-info Inline in a Tag
+
 							.alert.alert-info Block in a Tag
+
 							.alert.alert-info Code
+
 							.alert.alert-info Unbuffered Code
+
 							.alert.alert-info Buffered Code
+
 							.alert.alert-info Unescaped Buffered Code
+
 							.alert.alert-info Comments
+							p
+							.row
+								.col-sm-6
+									pre
+										| // just some paragraphs
+										| p foo
+										| p bar
+								.col-sm-6
+									pre
+										| &lt;!-- just some paragraphs--&gt;
+										| &lt;p&gt;foo&lt;/p&gt;
+										| &lt;p&gt;bar&lt;/p&gt;
+							p
+							.row
+								.col-sm-6
+									pre
+										| //- will not output within markup
+										| p foo
+										| p bar
+								.col-sm-6
+									pre
+										| &lt;p&gt;foo&lt;/p&gt;
+										| &lt;p&gt;bar&lt;/p&gt;
 							.alert.alert-info Block Comments
+
 							.alert.alert-info Conditionals
+
 							.alert.alert-info Iteration
+
 							.alert.alert-info Case
+
 							.alert.alert-info Block Expansion
+
 							.alert.alert-info Filters
+
 							.alert.alert-info Mixins
+
 							.alert.alert-info Mixin Attributes
-		div#footer=title
+
+		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/bootstrap.min.js')
 		script(src='coffee/list-counter.js')

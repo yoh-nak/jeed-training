@@ -962,8 +962,209 @@ include ../head.jade
 
 							//<input type="file">
 							.alert.alert-info ファイルの選択とアップロード
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/260-2.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;form action="file.php" method="post" enctype="multipart/form-data"&gt;
+								| &lt;p&gt;
+								| &lt;label&gt;アップロード：
+								| &lt;input type="file" name="myfile"&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+								| 
+								| &lt;p&gt;&lt;input type="submit" value="送信"&gt;&lt;/p&gt;
+								| &lt;/form&gt;
+							p='type属性を「file」と指定した場合、<input>で扱う情報が「選択されたファイルのリスト」であることを示します。コントロールには「ファイルを選択」というボタンが用意され、ファイルを選択することができます。標準では1つだけファイルを選択することが可能です。'
+							p='送信ボタンをクリックすると、選択したファイルはサーバーにアップロードされます。このとき、<form>のenctype属性では送信方法を「multipart/form-data」と指定し、action属性ではファイルの処理に対応したスクリプトを指定しておく必要があります。'
+							p='<input type="file">で指定できる属性は下のようになっています。'
+							table.table
+								tr
+									th='<input type="file">で指定できる属性'
+									th 機能
+								tr
+									td accept
+									td ファイルの種類の指定
+								tr
+									td multiple
+									td 複数ファイルの選択を許可する
+								tr
+									td required
+									td 入力を必須にする
+							.alert.alert-warning NOTES: アップロードファイルをPHPで処理する場合
+							p='PHPでは、アップロードされたファイルに関するデータが$_FILESに代入されます。たとえば、サンプルのように「teacup.jpg」というファイルをアップロードした場合、$_FILESの中身は以下のような配列になります。'
+							p='この中から$_FILES["myfile"]["tmp_name"]で一時的に保存されたファイルのパスを取得することができますので、下のようにmove_uploaded_file()でコピーして利用します。ここでは、file.phpと同じ場所にあるuploadフォルダにコピーし、<mg>でページに表示するようにしています。'
+							p='なお、実際の運用ではエラー処理やファイル名の変更、パーミッションの設定なども必要になります。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| Array
+									| {
+									|     [myfile] =&lt; Array
+									|         {
+									|             [name] =&lt; teacup.jpg
+									|             [type] =&lt; image/jpeg
+									|             [tmp_name] =&lt; /tmp/php0VXp6Q
+									|             [error] =&lt; 0
+									|             [size] =&lt; 25822
+									|         }
+									| }
+								figcapiton='$_FILESの中身。「myfile」は<input>属性え指定したコントロール名です。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h1&gt;UPLOADED FILE&lt;/h1&gt;
+									| 
+									| &lt;?php move_uploaded_file(
+									|     $_FILES["myfile"]["tmp_name"],
+									|     "upload/" . $_FILES["myfile"]["name"]
+									| ); ?&gt;
+									| 
+									| &lt;p&gt;
+									| &lt;img src="upload/&lt;?php echo $_FILES["myfile"]["name"]; ?&gt;&lt;br&gt;
+									| &lt;?php echo $_FILES["myfile"]["name"]; ?&gt;
+									| をアップロードしました。
+									| &lt;/p&gt;
+								figcaption='サンプルで指定した送信先の設定（file.php）。'
 							h4 ファイルの種類を指定する
-
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/262.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;form action="file.php" method="post" enctype="multipart/form-data"&gt;
+								| &lt;p&gt;
+								| &lt;label&gt;アップロード：
+								| &lt;input type="file" name="myfile" accept="image/*"&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+								| 
+								| &lt;p&gt;&lt;input type="submit" value="送信"&gt;&lt;/p&gt;
+								| &lt;/form&gt;
+							p='accept属性では、選択できるファイルの種類を指定します。たとえば、上のように、「image/*」と指定した場合、選択できるのは画像ファイルのみとなります。'
+							p='このほか、以下のような値でファイルの種類を指定することが可能です。複数の種類は「,（カンマ）」で区切って指定します。'
+							table.table
+								tr
+									th accept属性の値
+									th ファイルの種類
+								tr
+									td audio/*
+									td オーディオファイル
+								tr
+									td video/*
+									td ビデオファイル
+								tr
+									td image/*
+									td 画像ファイル
+								tr
+									td MIMEタイプ
+									td 「application/pdf」など
+								tr
+									td 拡張子
+									td 「.pdf」など
+							.alert.alert-success IE NOTES: 
+							p='IE9以前のバージョンはaccept属性に未対応です。'
+							.alert.alert-warning NOTES: iOSとAndroidにおけるファイルの選択とアップロード
+							p='iOSとAndroidでもファイルを選択し、アップロードすることができます。「ファイルの選択」ボタンをクリクするとメニューが表示されますので、既存のファイルから選択するか、カメラアプリを起動してその場で撮影したファイルをアップロードします。'
+							p='ただし、iOSでファイルの選択とアップロードに対応しているのはバージョン6以降となっており、アップロード可能なファイルの種類も画像とビデオに限定されています。accept属性では「video/*」または「image/*」の指定に対応しています。なお、アップロードした画像は「image.jpg」というファイル名になりますので、上書きを防ぐためにはファイル名を変更する処理が必要になります。'
+							p='Androidの場合、accept属性の「audio/*」、「video/*」、「image/*」のし低に対応しており、指定に応じて選択できるアプリが変わります。'
+							.alert.alert-warning NOTES: capture属性で直接カメラを起動する
+							p='W3Cの草案「HTML Media capture」（http://www.w3.org/TR/html-media-capture/）で提案されているcapture属性を利用すると、ファイルの選択メニューではなく、カメラが直接起動するように設定することができます。'
+							p='現在のところAndroid4.1以上が対応しており、たとえば、accept属性を「image/*」、capture属性を「camera」と指定して「ファイルの選択」ボタンをクリックすると、カメラアプリが直接起動するようになります。'
+							p='capture属性では下のような値が提案されており、ビデオカメラや音声レコーダーを直接起動することも可能です。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;label&gt;アップロード：
+									| &lt;input type="file" name="myfile" accept="image/*"&gt;
+									| &lt;/label&gt;
+								figcaption='capture属性を指定していないときのファイル選択：'
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/263-1.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;label&gt;アップロード：
+									| &lt;input type="file" name="myfile" accept="image/*" capture="camera"&gt;
+									| &lt;/label&gt;
+								figcaption='capture属性を「camera」と指定したときのファイル選択：'
+							table.table
+								tr
+									th='capture属性の値'
+									th 起動するキャプチャコントロール
+								tr
+									td camera
+									td カメラ
+								tr
+									td camcoder
+									td ビデオカメラ
+								tr
+									td microphone
+									td 音声レコーダー
+								tr
+									td filesystem
+									td ファイル選択
+							h4 複数のファイルを選択する
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/263-2.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;form action="file-multiple.php" method="post" enctype="multipart/form-data"&gt;
+								| &lt;p&gt;
+								| &lt;label&gt;アップロード：
+								| &lt;input type="file" name="myfile[]" multiple&gt;
+							p='multiple属性を指定すると、複数のファイルを選択し、まとめてアップロードができるようになります。'
+							.alert.alert-success IE NOTES: 
+							p='IE9以前のバージョンはmultiple属性にも未対応です。'
+							.alert.alert-warning NOTES: 
+							p='iOSでは既存の写真の中から複数のファイルを選択することができます。Androidは複数のファイルの選択に未対応です。'
+							.alert.alert-warning NOTES: 複数ファイルのデータをPHPで処理する場合
+							p='複数ファイルのデータをPHPで処理するためには、<input>のコントロール名を「myfile[]」という形で指定する必要があります。これにより、$_FILESには以下のような形でデータが代入されますので、ファイルごとコピーなどの処理を実行するように設定します。'
+							pre(class='prettyprint linenums:1')
+								| Array
+								| (
+								|     [myfile] =&gt; Array
+								|         (
+								|             [name] =&gt; Array
+								|                 (
+								|                 [0] =&gt; teacup.jpg
+								|                 [1] =&gt; cake.jpg
+								|                 )
+								| 
+								|             [type] =&gt; Array
+								|                  (
+								|                  [0] =&gt; image/jpeg
+								|                  [1] =&gt; image/jpeg
+								|                  )
+								| 
+								|             [tmp_name] =&gt; Array
+								|                 (
+								|                 [0] =&gt; /tmp/phpBrKgeZ
+								|                 [1] =&gt; /tmp/phpW8n97F
+								|                 )
+								| )
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h1&gt;UPLOADED FILE&lt;/h1&gt;
+									| 
+									| &lt;?php
+									| $filenum = count($_FILES["myfile"]["tmp_name"]);
+									| for($i = 0; $i &lt; $filenum; $i++): ?&gt;
+									| 
+									| &lt;?php move_upload_file(
+									|     $_FILES["myfile"]["tmp_name"][$i],
+									|     "upload/" . $_FILES["myfile"]["name"][$i]
+									| ): ?&gt;
+									| 
+									| &lt;p&gt;
+									| &lt;img src="upload/&lt;?php echo $_FILES["myfile"]["name"][$i]; ?&gt;"&gt;&lt;br&gt;
+									| &lt;?php echo $_FILES["myfile"]["name"][$i]; ?&gt;
+									| をアップロードしました。
+									| &lt;/p&gt;
+									| 
+									| &lt;?php endfor; ?&gt;
+								figcaption サンプルで指定した送信先の設定（file-multiple.php）
+							
 							//<input type="hidden">
 							.alert.alert-info 隠し情報
 

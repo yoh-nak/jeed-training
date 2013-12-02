@@ -813,18 +813,134 @@ include ../head.jade
 									td datetime
 									td 秒
 									td 60秒
-									
+
 							//<input type="number">
 							.alert.alert-info 数値
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/257-1.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;
+								| &lt;label&gt;注文個数（10個まで）：
+								| &lt;input type="number" name="qty" min="0" max="10"&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+							p='type属性の値を「number」と指定すると、<input>で扱うデータの種類が「数値」であることをしめします。また、データの検証が行われ、数値以外の値を入れるとエラーになります。'
+							p='サンプルではminやmax属性を指定し、0〜10の数値を入力できるようにしています。そのほか、以下の属性を指定することが可能です。'
+							.row
+								.col-sm-6
+									table.table
+										tr
+											th='<input type="number">で指定できる属性'
+											th 機能
+										tr
+											td autocomplete
+											td オートコンプリート
+										tr
+											td list
+											td 入力候補の指定
+										tr
+											td max
+											td 最大値の指定
+										tr
+											td min
+											td 最小値の指定
+								.col-sm-6
+									table.table
+										tr
+											th='<input type="number">で指定できる属性'
+											th 機能
+										tr
+											td placeholder
+											td プレースホルダの指定
+										tr
+											td readonly
+											td 表示専用にする
+										tr
+											td required
+											td 入力を必須にする
+										tr
+											td step
+											td 値の間隔の指定
+									.alert.alert-warning NOTES: 
+									p='iOSやAndroidでは<input type="number">のコントロールを選択すると数字を入力するキーが表示されます。'
 
 							//<input type="range">
 							.alert.alert-info 大まかな数値
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/257-2.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;
+								| &lt;label&gt;嫌い &lt;input type="range" name="value"&gt; 好き
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+							p='データの種類が「大まかな数値」であることを示す場合は、type属性の値を「range」と指定します。この場合、コントロールはスライダーの形で表示されます。標準ではスライダーの左端が「0」、中央が「50」、右端が「100」となります。'
+							p='指定できる属性は、<input type="number">の属性からplaceholder、readonly、required属性を除いたものとなっています。'
+							.alert.alert-warning NOTES: 
+							p='iOS4.xはスライダーの表示に未対応です。また、Android4.0以前ではスライダーの表示が崩れるという問題が見られます。'
 
 							//<input type="color">
 							.alert.alert-info カラーピッカー
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/258-1.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;
+								| &lt;label&gt;カラー：
+								| &lt;input type="color" name="color"&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+							p='type属性を「color」と指定した場合、<input>で扱うデータの種類が色の情報であることを示すことができます。コントロールは選択した色が表示され、クリックするとカラーピッカーを開いて色を変更することができます。色の値は16進数のデータで送信されます。'
 
 							//<input type="checkbox">
 							.alert.alert-info チェックボックス
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/258-2.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;好きなお茶を選択してください（複数選択可）：&lt;br&gt;
+								| &lt;label&gt;&lt;input type="checkbox" name="tea" value="紅茶"&gt; 紅茶 &lt;/label&gt;
+								| &lt;label&gt;&lt;input type="checkbox" name="tea" value="ウーロン茶"&gt; ウーロン茶 &lt;/label&gt;
+								| &lt;label&gt;&lt;input type="checkbox" name="tea" value="緑茶"&gt; 緑茶 &lt;/label&gt;
+								| &lt;/p&gt;
+							p='<input>で扱う情報が「オン」と「オフ」のどちらかであることを示す場合、type属性を「checkbox」と指定します。この場合、コントロールはチェックボックスの形で表示され、チェックをつけると「オン」、チェックをはずすと「オフ」として扱われます。'
+							p='サーバーにはチェックをつけたコントロールのデータのみが送信されます。ただし、標準では「on」という値が送信されるため、ここではvalue属性で送信する値を指定しています。'
+
+							h4 初期状態をオンにする
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;好きなお茶を選択してください（複数選択可）：&lt;br&gt;
+								| &lt;label&gt;&lt;input type="checkbox" name="tea" value="紅茶" checked&gt; 紅茶 &lt;/label&gt;
+								| &lt;label&gt;&lt;input type="checkbox" name="tea" value="ウーロン茶"&gt; ウーロン茶 &lt;/label&gt;
+								| &lt;label&gt;&lt;input type="checkbox" name="tea" value="緑茶"&gt; 緑茶 &lt;/label&gt;
+								| &lt;/p&gt;
+							p='チェックボックスは標準ではオフの状態になっていますが、checked属性を指定することにより、初期状態を「オン」の状態にすることができます。'
+							.alert.alert-warning NOTES: チェックボックスのデータをPHPで処理する場合
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/259.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;好きなお茶を選択してください（複数選択可）：&lt;br&gt;
+								| &lt;label&gt;&lt;input type="checkbox" name="tea[]" value="紅茶" checked&gt; 紅茶 &lt;/label&gt;
+								| &lt;label&gt;&lt;input type="checkbox" name="tea[]" value="ウーロン茶"&gt; ウーロン茶 &lt;/label&gt;
+								| &lt;label&gt;&lt;input type="checkbox" name="tea[]" value="緑茶"&gt; 緑茶 &lt;/label&gt;
+								| &lt;/p&gt;
+							p='フォームのデータをPHPで処理している場合、サンプルのように同じ「tea」というコントロール名を持つデータが複数送信されてくると、後から送信された「tea = 緑茶」といの値しか取得することしかできません。'
+							p='この問題を回避するためには、コントロール名を「tea[]」という形で指定します。これにより、PHPで以下のような配列の形でチェックボックスのデータを取得できるようになります。'
+							pre(class='prettyprint linenums:1')
+								| Array
+								| {
+								|      [tea] => Array
+								|           (
+								|                [0] => 紅茶
+								|                [1] => 緑茶
+								|           )
+								| }
 
 							//<input type="radio">
 							.alert.alert-info ラジオボタン

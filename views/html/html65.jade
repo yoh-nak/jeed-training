@@ -1296,6 +1296,85 @@ include ../head.jade
 
 							//<input type="image">
 							.alert.alert-info 画像ボタン
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/267.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;h1&gt;Click where you like!&lt;/h1&gt;
+								| 
+								| &lt;form action="query.php" method="post"&gt;
+								| &lt;p&gt;
+								| &lt;label&gt;名前：
+								| &lt;input type="text" name="name"&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+								| 
+								| &lt;p&gt;
+								| &lt;label&gt;好きなところをクリックしてください：
+								| &lt;input type="image" src="img/tea.jpg" name="click" alt="各種ケーキを盛り付けたお皿と白いティーポット、砂糖、紅茶をいれたティーカップをテーブルに並べています。"&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+								| &lt;/form&gt;
+							p='type属性を「image」と指定した場合、<input>は画像ボタンを構成します。画像はsrc属性で指定します。'
+							p='画像ボタンは<input type="submit">と同じように送信ボタンとして機能するため、クリックするとフォームデータがサーバーに送信されます。'
+							p='座標の値は画像の左上を頂点としたもので、単位はピクセルとなっています。サンプルの場合、画像の左上からx軸方向に371ピクセル、y軸方向に196ピクセルの位置をクリックしたことがわかります。'
+							p='また、座標の値には「コントロール名.x」、「コントロール名.y」という名前が付加されます。name属性で指定した値がコントロール名となりますので、サンプルでは「click.x」、「clicky」となっていることがわかります。'
+							p
+								| 送信されるデータ<br>
+								| name = 花子<br>
+								| click.x = 371<br>
+								| click.y = 196<br>
+							.alert.alert-warning NOTES: 
+							p='フォームデータをPHPで処理している場合、「click.x」や「click.y」に含まれるピリオドは、PHPによって「_（アンダーバー）」に変換されます。サンプルの場合、「click_x」、「click_y」となりますので注意が必要です。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| Array
+									| (
+									|      [name] => 花子
+									|      [click_x] => 371
+									|      [click_y] => 196
+									| )
+								figcaption='$_POSTに代入されたフォームデータの中身。'
+							p='<input type="image">では以下の属性を利用することが可能です。また、初期値を指定するvalue属性は省略し、記述しない決まりとなっています。'
+							.row
+								.col-sm-6
+									table.table
+										tr
+											th='<input type="image">で指定できる属性'
+											th 機能
+										tr
+											td formaction
+											td 送信先のURL
+										tr
+											td formenctype
+											td 送信データの形式
+										tr
+											td formmethod
+											td 送信方法
+										tr
+											td formnovalidate
+											td 入力データの検証を無効化
+										tr
+											td formtarget
+											td 送信後のページの表示先
+								.col-sm-6
+									table.table
+										tr
+											th='<input type="image">で指定できる属性'
+											th 機能
+										tr
+											td alt
+											td 代替テキスト
+										tr
+											td src
+											td 画像のURL
+										tr
+											td height
+											td 画像の高さ
+										tr
+											td width
+											td 画像の横幅
 
 							//<input type="reset">
 							.alert.alert-info リセットボタン

@@ -58,10 +58,13 @@ if ('development' == app.get('env')) {
 //単独
 app.get('/', routes.index);
 app.get('/users', user.list);
-app.get('/htmltag:id:format', html.html);
-app.get('/css:id:format', css.css);
-app.get('/rwd-id', rwd.rwd);
-app.get('/jquery:id', jquery.jquery);
+
+//app.get('/htmltag:id:format', html.html);
+app.get('/html/:id', html.html); //HTML
+
+app.get('/css:id:format', css.css); //CSS
+app.get('/rwd-id', rwd.rwd); //レスポンシブWEBデザイン
+app.get('/jquery:id', jquery.jquery); //jQuery
 app.get('/jqm:id', jqm.jqm);
 app.get('/mobile:id:format', mobile.mobile);
 app.get('/nodejs:id:format', nodejs.nodejs);
@@ -72,8 +75,8 @@ app.get('/others/:id', others.others);
 app.get('/diary:id:format', diary.diary);
 
 //JavaScript系
-app.get('/js-:id', js.js);
-app.get('/webapi-:id', js.webapi);
+app.get('/js-:id', js.js); //JavaScript基礎
+app.get('/webapi-:id', js.webapi); //WebAPI
 app.get('/html5api-:id', js.html5);
 app.get('/canvas:id:format', js.canvas);
 app.get('/enchant-:id', js.enchant);

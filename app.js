@@ -65,7 +65,10 @@ app.get('/jquery:id', jquery.jquery);
 app.get('/jqm:id', jqm.jqm);
 app.get('/mobile:id:format', mobile.mobile);
 app.get('/nodejs:id:format', nodejs.nodejs);
-app.get('/others:id:format', others.others);
+
+//app.get('/others:id:format', others.others);
+app.get('/others/:id', others.others);
+
 app.get('/diary:id:format', diary.diary);
 
 //JavaScript系

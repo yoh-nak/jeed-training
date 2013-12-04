@@ -52,6 +52,124 @@ include ../head2.jade
 									td 標準的なスタイル
 									td
 										| -
+							p
+								a.btn.btn-default(href='../demo/html/sample1/09/280.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;h1&gt;COMMENT POST&lt;/h1&gt;
+								| 
+								| &lt;form action="query.php" method="post"&gt;
+								| &lt;p&gt;
+								| &lt;label&gt;コメント：&lt;br&gt;
+								| &lt;textarea name="comment" cols="50" rows="8"&gt;&lt;/textarea&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+								| 
+								| &lt;p&gt;&lt;input type="submit" value="送信"&gt;&lt;/p&gt;
+								| &lt;/form&gt;
+							p='<textarea>が構成するコントロールでは、複数行のテキストデータを扱うことができます。cols属性では1行の文字数を、rows属性では行数を指定し、コントロールの大きさを調節します。サンプルでは1行の文字数を50文字に、行数を8行に指定しています。'
+							.alert.alert-warning NOTES: 
+							p='スクロールバーがない場合、cols属性で指定した文字数よりもバーの分だけ1行に入力できる文字数が増えます。'
+							p='また、コントロールの横幅と高さはスタイルシートのwidthとheightプロパティで調節することもできます。このとき、colsやrows属性の指定よりも、スタイルシートによる指定の方が優先されます。'
+							p='このほか、<textarea>では以下の属性を指定することが可能です。'
+							.row
+								.col-sm-6
+									table.table
+										tr
+											th='<textarea>で指定できる属性'
+											th 機能
+										tr
+											td autocomplete
+											td オートコンプリート
+										tr
+											td autofocus
+											td ページロード時にコントロールを選択
+										tr
+											td cols
+											td 1行の文字数
+										tr
+											td dirname
+											td 書字方向の情報を送信
+										tr
+											td disabled
+											td コントロールの無効化
+										tr
+											td form
+											td='<form>との関連付け'
+										tr
+											td maxlength
+											td 入力できる文字数を指定
+								.col-sm-6
+									table.table
+										tr
+											th='<textarea>で指定できる属性'
+											th 機能
+										tr
+											td name
+											td コントロール名の指定
+										tr
+											td placeholder
+											td プレースホルダの指定
+										tr
+											td readonly
+											td 表示専用にする
+										tr
+											td required
+											td 入力を必須にする
+										tr
+											td rows
+											td 表示する行数
+										tr
+											td wrap
+											td 送信データの改行
+							.alert.alert-warning NOTES: input属性による入力モードの指定
+							p='WHATWGのHTML Living StandardとW3CのHTML5.1では、<textarea>でinputmode属性を指定できるようにすることが提案されています。'
+							.alert.alert-info 初期値を指定する
+							p
+								a.btn.btn-default(href='../demo/html/sample1/09/281.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')	
+								| &lt;p&gt;
+								| &lt;label&gt;HTMLソース：
+								| &lt;textarea name="comment" cols="60" rows="12"&gt;
+								| &lt;!DOCTYPE html&gt;
+								| &lt;html&gt;
+								| &lt;head&gt;
+								| &lt;title&gt;TEST&lt;/title&gt;
+								| &lt;/head&gt;
+								| &lt;body&gt;
+								| 
+								| &lt;/body&gt;
+								| &lt;/html&gt;
+								| &lt;/textarea&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+							p='コントロールに入力済みの状態で表示したいテキストがある場合には、初期値として<textarea>〜</textarea>の中に記述します。'
+							p='たとえば、上のサンプルでは基本的はHTMLソースを入力済みの状態で表示するようにしています。HTMLタグを記述しても<textarea>の中身はすべてテキストデータとして扱われます。'
+							.alert.alert-info 折り返しの改行の送信
+							p
+								a.btn.btn-default(href='../demo/html/sample1/09/282.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')	
+								| &lt;p&gt;
+								| &lt;label&gt;コメント：
+								| &lt;textarea name="comment" cols="40" rows="10" wrap="hard"&gt;&lt;/textarea&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+							p='<textarea>のwrap属性を利用すると、折り返しの改行を送信するかどうかを指定することができます。送信しない場合は「soft」、送信する場合は「hard」と指定します。標準では「soft」の処理となり、折り返しの改行は送信されません。なお、「hard」と指定する場合、cols属性も必ず指定しておくことが求められます。'
+							table.table
+								tr
+									th wrap属性の値
+									th 機能
+								tr
+									td soft
+									td 折り返しの改行を送信しない
+								tr
+									td hard
+									td 折り返しの改行を送信する
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='../js/google-code-prettify/prettify.js')

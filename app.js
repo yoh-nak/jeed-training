@@ -62,7 +62,9 @@ app.get('/users', user.list);
 //app.get('/htmltag:id:format', html.html);
 app.get('/html/:id', html.html); //HTML
 
-app.get('/css:id:format', css.css); //CSS
+//app.get('/css:id:format', css.css);
+app.get('/_css/:id', css.css); //CSS
+
 app.get('/rwd-id', rwd.rwd); //レスポンシブWEBデザイン
 app.get('/jquery:id', jquery.jquery); //jQuery
 app.get('/jqm:id', jqm.jqm);
@@ -72,7 +74,8 @@ app.get('/nodejs:id:format', nodejs.nodejs);
 //app.get('/others:id:format', others.others);
 app.get('/others/:id', others.others);
 
-app.get('/diary:id:format', diary.diary);
+//app.get('/diary:id:format', diary.diary);
+app.get('/diary/:id', diary.diary); //日誌
 
 //JavaScript系
 app.get('/js-:id', js.js); //JavaScript基礎

@@ -54,6 +54,44 @@ include ../head2.jade
 									td 標準的なスタイル
 									td
 										| -
+							p
+								a.btn.btn-default(href='../demo/html/sample1/09/283.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;h1&gt;KEY GENERATOR&lt;/h1&gt;
+								| 
+								| &lt;form action="query.php" method="post"&gt;
+								| &lt;p&gt;&lt;keygen name="key"&gt;&lt;/p&gt;
+								| &lt;p&gt;&lt;input type="submit" value="送信"&gt;&lt;/p&gt;
+								| &lt;/form&gt;
+							p='<keygen>は秘密鍵と公開鍵の生成を行うコントロールを構成します。コントロールでは暗号強度（鍵の強さ）を選択することができ、送信ボタンをクリックすると秘密鍵がローカルに保存され、公開鍵がサーバーに送信されます。'
+							p='<keygen>で指定できる属性は下のようになっており、challenge属性ではチャレンジ文字列を、keytype属性では暗号方式を指定することが可能です。現在のところ、HTML5で規定された暗号方式はRSAのみとなっており、keytype属性の値を「rsa」と指定することで明示することが可能です。'
+							pre(class='prettyprint linenums:1')='<p><keygen name="key" keytype="rsa" challenge="123456789"></p>'
+							table.table
+								tr
+									th='<keygen>で指定できる属性'
+									th 機能
+								tr
+									td autofocus
+									td ページロード時にコントロールを選択
+								tr
+									td challenge
+									td チャレンジ文字列の指定
+								tr
+									td disabled
+									td コントロールの無効化
+								tr
+									td form
+									td='<form>との関連付け'
+								tr
+									td keytype
+									td 暗号方式の指定
+								tr
+									td name
+									td コントロール名の指定
+							.alert.alert-warning NOTES: 
+							p='Android 3.x/4.xではコントロールの表示は行われますが、公開鍵がサーバーに送信されません。aAndroid 2.3.xでは送信が行われます。'
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='../js/google-code-prettify/prettify.js')

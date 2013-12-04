@@ -9,7 +9,7 @@ include ../head2.jade
 					.panel.panel-primary
 						.panel-heading
 							i.glyphicon.glyphicon-book
-							| 選択肢
+							| &nbsp;選択肢
 						.panel-body
 							.alert.alert-info 選択肢
 							table.browser-support
@@ -44,7 +44,7 @@ include ../head2.jade
 								tr
 									td コンテンツモデル
 									td
-										| ゼロまたは1つ以上の<option>または<optgroup>
+										| ゼロまたは1つ以上の&lt;option&gt;または&lt;optgroup&gt;
 								tr
 									td 構成するボックス
 									td - （インラインブロックボックスを構成することが期待される）
@@ -132,7 +132,7 @@ include ../head2.jade
 								| 
 								| &lt;p&gt;&lt;input type="submit" value="送信"&gt;&lt;/p&gt;
 								| &lt;/form&gt;
-							p='<select>は<option>で記述した選択肢のセットを示す要素です。コントロールはドロップダウンボックスの形で表示され、選択肢の中から1つを選択することができます。サーバーには<select>のname属性で指定した名前と、<option>でマークアップしたコンテンツのうち、選択したものが送信されます。'
+							p='&lt;select>は<option>で記述した選択肢のセットを示す要素です。コントロールはドロップダウンボックスの形で表示され、選択肢の中から1つを選択することができます。サーバーには<select>のname属性で指定した名前と、<option>でマークアップしたコンテンツのうち、選択したものが送信されます。'
 							figure
 								pre
 									| tea = ダージリン
@@ -183,7 +183,248 @@ include ../head2.jade
 										tr
 											td value
 											td サーバーに送信する値の指定
-
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/272.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;h1&gt;TEA SELECTION&lt;/h1&gt;
+								| 
+								| &lt;form action="query.php" method="post"&gt;
+								| &lt;p&gt;
+								| &lt;label&gt;好きなお茶を選択してください：
+								| &lt;select name="tea"&gt;
+								| &lt;option&gt;ダージリン&lt;/option&gt;
+								| &lt;option&gt;アッサム&lt;/option&gt;
+								| &lt;option&gt;ニルギリ&lt;/option&gt;
+								| &lt;option&gt;東方美人&lt;/option&gt;
+								| &lt;option&gt;凍頂烏龍茶&lt;/option&gt;
+								| &lt;option&gt;煎茶&lt;/option&gt;
+								| &lt;option&gt;ほうじ茶&lt;/option&gt;
+								| &lt;/select&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+								| 
+								| &lt;p&gt;&lt;input type="submit" value="送信"&gt;&lt;/p&gt;
+								| &lt;/form&gt;
+							p='<select>は<option>で記述した選択肢のセットを示す要素です。コントロールはドロップダウンボックスの形で表示され、選択肢の中から1つを選択することができます。サーバーには<select>のname属性で指定した名前と、<option>でマークアップしたコンテンツのうち、選択したものが送信されます。'
+							figure
+								pre tea = ダージリン
+								figcaption 送信されるデータ。
+							p='<selet>と<option>で指定できる属性は次のようになっています。'
+							.row
+								.col-sm-6
+									table.table
+										tr
+											th='<select>で指定できる属性'
+											th 機能
+										tr
+											td autofocus
+											td ページロード時にコントロールを選択
+										tr
+											td disabled
+											td コントロールの無効化
+										tr
+											td form
+											td='<form>との関連付け'
+										tr
+											td multiple
+											td 複数選択を可能にする
+										tr
+											td name
+											td コントロール名の指定
+										tr
+											td reqired
+											td 入力を必須にする
+										tr
+											td size
+											td 表示する選択肢の数
+								.col-sm-6
+									table.table
+										tr
+											th='<option>で指定できる属性'
+											th 機能
+										tr
+											td disabled
+											td コントロールの無効化
+										tr
+											td label
+											td 画面に表示するラベルの指定
+										tr
+											td selected
+											td 選択済みの選択肢の指定
+										tr
+											td value
+											td サーバーに送信する値の指定
+							.alert.alert-info 画面に表示するラベルの指定
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/273-1.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;label&gt;好きなお茶を選択してください：
+								| &lt;select name="tea"&gt;
+								| &lt;option label="Darjeeling tea"&gt;ダージリン&lt;/option&gt;
+								| &lt;option label="Assam tea"&gt;アッサム&lt;/option&gt;
+								| &lt;option label="Nilgiri tea"&gt;ニルギリ&lt;/option&gt;
+								| &lt;option label="Oriental Beauty"&gt;東方美人&lt;/option&gt;
+								| &lt;option label="Dong Ding oolong"&gt;凍頂烏龍茶&lt;/option&gt;
+								| &lt;option label="Green tea"&gt;煎茶&lt;/option&gt;
+								| &lt;option label="Roasted Green tea"&gt;ほうじ茶&lt;/option&gt;
+								| &lt;/select&gt;
+								| &lt;/label&gt;
+							p='<option>のvalue属性を利用すると、サーバーに送信する値を指定することができます。この場合、<option>でマークアップしたコンテンツは送信されなくなります。'
+							figure
+								pre tea = ダージリン
+								ficcaption 送信されるデータ。
+							.alert.alert-info サーバーに送信する値の指定
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/273-2.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;label&gt;好きなお茶を選択してください：
+								| &lt;select name="tea"&gt;
+								| &lt;option value="tea01"&gt;ダージリン&lt;/option&gt;
+								| &lt;option value="tea02"&gt;アッサム&lt;/option&gt;
+								| &lt;option value="tea03"&gt;ニルギリ&lt;/option&gt;
+								| &lt;option value="tea04"&gt;東方美人&lt;/option&gt;
+								| &lt;option value="tea05"&gt;凍頂烏龍茶&lt;/option&gt;
+								| &lt;option value="tea06"&gt;煎茶&lt;/option&gt;
+								| &lt;option value="tea07"&gt;ほうじ茶&lt;/option&gt;
+								| &lt;/select&gt;
+								| &lt;/label&gt;
+							p='<option>のvalue属性を利用すると、サーバーに送信する値を指定することができます。この場合、<option>でマークアップしたコンテンツは送信されなくなります。'
+							figure
+								pre tea = tea01
+								ficcaption 送信されるデータ。
+							.alert.alert-info 初期状態を選択済みにする
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/274-1.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;
+								| &lt;label&gt;好きなお茶を選択してください：
+								| &lt;select name="tea"&gt;
+								| &lt;option&gt;ダージリン&lt;/option&gt;
+								| &lt;option&gt;アッサム&lt;/option&gt;
+								| &lt;option&gt;ニルギリ&lt;/option&gt;
+								| &lt;option selected&gt;東方美人&lt;/option&gt;
+								| &lt;option&gt;凍頂烏龍茶&lt;/option&gt;
+								| &lt;option&gt;煎茶&lt;/option&gt;
+								| &lt;option&gt;ほうじ茶&lt;/option&gt;
+								| &lt;/select&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+							p='<option>にselect属性を指定すると、初期状態を選択済みにすることができます。<select>内の1つの<option>にのみ指定することが可能で、ここでは「東宝美人」を選択済みの状態にしています。'
+							p='なお、multiple属性で複数の値を選択できるようにした場合、selected属性は複数の<option>に指定することが可能です。'
+							.alert.alert-info プレースホルダの表示
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/274-2.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;
+								| &lt;select name="tea" required&gt;
+								| &lt;option value=""&gt;好きなお茶を選択してください…&lt;/option&gt;
+								| &lt;option&gt;ダージリン&lt;/option&gt;
+								| &lt;option&gt;アッサム&lt;/option&gt;
+								| &lt;option&gt;ニルギリ&lt;/option&gt;
+								| &lt;option&gt;東方美人&lt;/option&gt;
+								| &lt;option&gt;凍頂烏龍茶&lt;/option&gt;
+								| &lt;option&gt;煎茶&lt;/option&gt;
+								| &lt;option&gt;ほうじ茶&lt;/option&gt;
+								| &lt;/select&gt;
+								| &lt;/p&gt;
+							p='入力に関するヒントなどをプレースホルダとして表示することも可能です。プレースホルダは1つ目の<option>で構成し、value属性の値を空にすることで選択肢ではないことを示します。たとえば、ここでは「好きなお茶を選択してください・・・」と表示するようにしています。'
+							p='また、<select>にrequired属性を指定しておくと、入力データの検証が行われ、プレースホルダを選択した状態ではデータを送信できなくなります。'
+							.alert.alert-warning NOTES: 
+							p='<select>の入力データの検証には、iOS4.x、Android2.x/3.xが未対応です。'
+							.alert.alert-info 複数の選択を可能にする
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/275-1.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;
+								| &lt;label&gt;好きなお茶を選択してください：&lt;br&gt;
+								| &lt;select name="tea[]" multiple&gt;
+								| &lt;option&gt;ダージリン&lt;/option&gt;
+								| &lt;option&gt;アッサム&lt;/option&gt;
+								| &lt;option&gt;ニルギリ&lt;/option&gt;
+								| &lt;option&gt;東方美人&lt;/option&gt;
+								| &lt;option&gt;凍頂烏龍茶&lt;/option&gt;
+								| &lt;option&gt;煎茶&lt;/option&gt;
+								| &lt;option&gt;ほうじ茶&lt;/option&gt;
+								| &lt;/select&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+							p='<select>のmultiple属性を利用すると、複数選択が可能であることを示します。コントロールはリストボックスの形で表示され、ShiftキーやCtrlキーを押しながら複数の項目を選択できるようになります'
+							figure
+								pre
+									| tea = アッサム
+									| tea = 東方美人
+								ficcaption 送信されるデータ。
+							.alert.alert-warning NOTES: 
+							p='フォームデータをPHPで処理している場合、複数選択を可能にした、<select>のデータを処理するためには、コントロール名を「tea[]」という形で指定します。'
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/275-2.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;
+								| &lt;label&gt;好きなお茶を選択してください：&lt;br&gt;
+								| &lt;select name="tea[]" multiple size="8"&gt;
+								| &lt;option&gt;ダージリン&lt;/option&gt;
+								| &lt;option&gt;アッサム&lt;/option&gt;
+								| &lt;option&gt;ニルギリ&lt;/option&gt;
+								| &lt;option&gt;東方美人&lt;/option&gt;
+								| &lt;option&gt;凍頂烏龍茶&lt;/option&gt;
+								| &lt;option&gt;煎茶&lt;/option&gt;
+								| &lt;option&gt;ほうじ茶&lt;/option&gt;
+								| &lt;/select&gt;
+								| &lt;/label&gt;
+								| &lt;/p&gt;
+							p='リストボックスは標準で4つの選択肢を表示する幅で表示されますが、表示数を変更する場合はsize属性を「8」と指定すると上のような表示になります。'
+							.alert.alert-info 選択肢のグループを示す
+							p
+								a.btn.btn-default(href='demo/html/sample1/09/276.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;label&gt;好きなお茶を選択してください：
+								| &lt;select name="tea"&gt;
+								| &lt;optgroup label="紅茶"&gt;
+								|      &lt;option&gt;ダージリン&lt;/option&gt;
+								|      &lt;option&gt;アッサム&lt;/option&gt;
+								|      &lt;option&gt;ニルギリ&lt;/option&gt;
+								| &lt;/optgroup&gt;
+								| &lt;optgroup label="ウーロン茶"&gt;
+								|      &lt;option&gt;東方美人&lt;/option&gt;
+								|      &lt;option&gt;凍頂烏龍茶&lt;/option&gt;
+								| &lt;/optgroup&gt;
+								| &lt;optgroup label="緑茶"&gt;
+								|      &lt;option&gt;煎茶&lt;/option&gt;
+								|      &lt;option&gt;ほうじ茶&lt;/option&gt;
+								| &lt;/optgroup&gt;
+								| &lt;/select&gt;
+								| &lt;/label&gt;
+							p='<optgroup>を利用すると、選択肢のグループを示すことができます。label属性でグループ名を指定することが求められており、上のようにグループごとにグループ名が表示されます。ここでは、選択肢を「紅茶」、「ウーロン茶」、「緑茶」の3つのグループに分類していますが、グループに関する情報はサーバーには送信されません。'
+							figure
+								pre tea = ダージリン
+								figcaption 送信されるデータ。
+							p='なお、<optgroup>で指定できる属性は下のようになっています。'
+							table.table
+								tr
+									th='<optgroup>で指定できる属性'
+									th 機能
+								tr
+									td disabled
+									td フォームコントロールの無効化
+								tr
+									td label
+									td グループ名の変更
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='../js/google-code-prettify/prettify.js')

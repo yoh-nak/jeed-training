@@ -9,7 +9,7 @@ include ../head2.jade
 					.panel.panel-primary
 						.panel-heading
 							i.glyphicon.glyphicon-book
-							| 計算結果
+							| &nbsp;S計算結果
 						.panel-body
 							.alert.alert-info 計算結果
 							table.browser-support
@@ -53,6 +53,46 @@ include ../head2.jade
 									td 標準的なスタイル
 									td
 										| -
+							p
+								a.btn.btn-default(href='../demo/html/sample1/09/284.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;h1&gt;CALCULATOR&lt;/h1&gt;
+								| 
+								| &lt;form oninput="total.value = num01.valueAsNumber + num02.valueAsNumber"&gt;
+								| &lt;input name="num01" type="number" value="0"&gt;
+								|  +
+								| &lt;input name="num02" type="number" value="0"&gt;
+								|  =
+								| &lt;output name="total"&gt;&lt;/output&gt;
+								| &lt;/form&gt;
+							p='<output>は計算結果を示す要素です。他のフォーム関連要素のようにテキストボックスなどの構成は行わず、計算結果のデータも、サーバーには送信されません。'
+							p='たとえば、サンプルでは<input type="number">で数値を入力するためのコントロールを2つ用意し、合計値を<output>で示すようにしています。'
+							.alert.alert-warning NOTES: 
+							p='サンプルでは、HTML5で用意されたJavaScriptの「valueAsNumber」を利用して、<input type="number">に入力された値を数値として扱うようにしています。ただし、「valueAsNumber」にはfirefoxが未対応です。対応する必要がある場合には次のように記述することも可能です。'
+							pre(class='prettyprint linenums:1')='<form oninput=total.value = Number(num01.value) + Number(num02.value)">'
+							p='<output>で指定できる属性は下のようになっています。このうち、for属性を利用すると計算する数値との関連を明示することができます。たとえば、次のように、<input type="number">のID属性をfor属性で指定します。'
+							pre(class='prettyprint linenums:1')
+								| &lt;input id="num01" name="num01" type="number" value="0"&gt;
+								|  +
+								| &lt;input id="num02" name="num02" type="number" value="0"&gt;
+								|  =
+								| &lt;output for="num01 num02" name="total"&gt;&lt;/output&gt;
+								| &lt;/form&gt;
+							table.table
+								tr
+									th='<output>で指定できる属性'
+									th 機能
+								tr
+									td for
+									td 計算する値との関連付け
+								tr
+									td form
+									td='<form>との関連付け'
+								tr
+									td name
+									td コントロール名の指定
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='../js/google-code-prettify/prettify.js')

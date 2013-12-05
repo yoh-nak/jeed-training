@@ -119,7 +119,95 @@ include ../head2.jade
 							p='たとえば、高機能なコメントサービスを提供するDISQUS（http://disqus.com/ ）では、各コメントの評価・編集・返信・シェアのボタンがユーザーの実行できるコマンドとして<menu>と<li>でマークアップされています。'
 							.alert.alert-success DIFFERENCES: 
 							p='HTML4.01やXHTML1.0では<menu>は非推奨とされていましたが、HTML5ではコマンドリストを示すものとして採用されています。'
-							
+							p='<menu>で示したコマンドリストは、標準ではリスト形式での表示となりますが、type属性の指定により、コンテキストメニューやツールバーの形で表示することも可能です。ただし、type属性の指定には各ブラウザともに未対応となっています。'
+							p='また、各コマンドは<command>で示すこともできますが、こちらについても各ブラウザは未対応です。'
+							table.table
+								tr
+									th='<menu>のtype属性の値'
+									th 表示形式
+								tr
+									td context
+									td コンテキストメニュー
+								tr
+									td toolbar
+									td ツールバー
+								tr
+									td なし（type属性を省略）
+									td リスト
+							.alert.alert-warning NOTES: コマンドリスト関連の変更
+							p='WHATWGのHTML Living StandardとW3CのHTML5.1 Nightlyでは<menu>のtype属性で指定できる値が下のように変更されています。また、<command>は<menuitem>に変更されていますので注意が必要です。'
+							table
+								tr
+									th='type属性の値'
+									th 表示形式
+								tr
+									td popup
+									td ポップアップメニュー（コンテキストメニューなど）
+								tr
+									td toolbar
+									td ツールバー
+								tr
+									td なし（type属性を省略）
+									td='ツールバー（※親要素に<menu type="toolbar">がある場合はポップアップメニュー）'
+							.alert.alert-warning='NOTES: <menu>と<menuitem>によるコンテキストメニューの表示'
+							p
+								a.btn.btn-default(href='../demo/html/sample1/10/294.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;img id="photo" contextmenu="mymenu" src="img/tea.jpg" alt="テーブルに紅茶とケーキのセットをサーブしました。ケーキはパウンドケーキにチーズケーキ、チョコレートケーキにアイスクリームを添えて、紅茶は白いティーポットに入れてお出ししています。"&gt;
+								| 
+								| 
+								| &lt;menu type="context" id="mymenu"&gt;
+								|      &lt;menuitem label="水平方向に反転" onclick="fliph()" icon="img/fliph.png"&gt;&lt;/menuitem&gt;
+								|      &lt;menuitem label="垂直方向に反転" onclick="flipv()" icon="img/flipv.png"&gt;&lt;/menuitem&gt;
+								| &lt;/menu&gt;
+								| 
+								| &lt;script&gt;
+								| function fliph() {
+								|      document.querySelector("#photo").classList.toggle("fliph");
+								| }
+								| 
+								| function flipv() {
+								|      document.querySelector("#photo").classList.toggle("flipv");
+								| }
+								| &lt;/script&gt;
+							pre(class='prettyprint linenums:1')
+								| .fliph	{-moz-transform: rotateY(180deg);}
+								| .flipv	{-moz-transform: rotateX(180deg);}
+								| .fliph.flipv	{-moz-transform: rotateY(180deg) rotateX(180deg);}
+								| 
+								| img	{-moz-transition: 0.2s;}
+							p=''
+							table.table
+								tr
+									th='<menuitem>の属性'
+									th 機能
+								tr
+									td type
+									td 
+								tr
+									td label
+									td 
+								tr
+									td icon
+									td 
+								tr
+									td disabled
+									td 
+								tr
+									td checked
+									td 
+								tr
+									td radiogroup
+									td 
+								tr
+									td command
+									td 
+								tr
+									td default
+									td 
+							p='なお、<menuitem>はHTML Living StandardやHTML5.1 NightlyではVideo要素として定義されていますので、終了タグ</menuitem>を記述する必要はありません。ただし、Firefoxでは</menuitem>がないと正しく処理が行われないため、サンプルでは記述するようにしています。'
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='../js/google-code-prettify/prettify.js')

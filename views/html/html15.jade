@@ -137,8 +137,26 @@ include ../head2.jade
 							p='<base>のtarget属性を利用すると、ブラウジング・コンテキストを指定することができます。ブラウジング・コンテキストはブラウザによって解釈され、それに応じてリンク先を表示する際の処理が変わります。'
 							p='たとえば、サンプルのように「_blank」と指定すると、タブブラウザではリンク先が新しいタブで表示されるようになります。target属性で指定できる値は以下のようになっており、ページ内のすべてのリンクに対して適用されます。'
 							table.table
+								tr
+									th target属性の値
+									th ブラウジング・コンテキスト
+								tr
+									td _blank
+									td 新しいウィンドウ（タブ）
+								tr
+									td _self
+									td 現在のウィンドウ（タブまたはフレーム）
+								tr
+									td _parent
+									td 親のウィンドウ（タブまたはフレーム）
+								tr
+									td _top
+									td 最上位階層のウィンドウ（タブまたはフレーム）
+								tr
+									td 名前
+									td 指定したブラウジング・コンテキスト名の運動（タブまたはフレーム）<br>※ 存在しない場合は指定した名前のウィンドウ（タブ）を新規に作成。
 							.alert.alert-warning NOTES: 
-							p=''
+							p='ブラウジング・コンテキストは、<a>のtarget属性で指定することもできます。その場合、<base>よりも<a>における指定の方が優先されますので注意が必要です。'
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='../js/google-code-prettify/prettify.js')

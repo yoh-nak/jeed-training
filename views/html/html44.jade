@@ -9,7 +9,7 @@ include ../head2.jade
 					.panel.panel-primary
 						.panel-heading
 							i.glyphicon.glyphicon-book
-							| ダイアログボックス
+							| &nbsp;ダイアログボックス
 						.panel-body
 							.alert.alert-info ダイアログボックス
 							table.browser-support
@@ -56,6 +56,46 @@ include ../head2.jade
 											| dialog {
 											| 	display: none;
 											| } 
+							p
+								a.btn.btn-default(href='../demo/html/sample1/10/295.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;nav&gt;
+								| &lt;ul&gt;
+								| 
+								| ...
+								| 
+								| &lt;li&gt;&lt;a onclick="document.querySelector('dialog').setAttribute('open','open')"&gt;CONTACT&lt;/a&gt;&lt;/li&gt;
+								| &lt;/ul&gt;
+								| &lt;/nav&gt;
+								| 
+								| &lt;dialog&gt;
+								| &lt;h1&gt;CONTACT&lt;/h1&gt;
+								| 
+								| ...
+								| 
+								| &lt;p&gt;
+								| &lt;input type="submit" value="送信"&gt;
+								| &lt;/p&gt;
+								| &lt;/form&gt;
+								| 
+								| &lt;a onclick="document.querySelector('dialog').removeAttribute('open')"&gt;閉じる&lt;/a&gt;
+								| 
+								| &lt;/dialog&gt;
+							pre(class='prettyprint linenums:1')
+								| dialog[open]	{position: absolute;
+								| 	top: 60px;
+								| 	left: 0px;
+								| 	width: 540px;}
+							p='<dialog>はユーザーによる操作や入力が必要な内容であることを示し、ダイアログボックスやウィンドウなどの形で表示を行う要素です。標準では非表示となり、open属性の指定によって表示することができます。'
+							p='サンプルでは問い合わせフォームを<dialog>でマークアップし、「CONTACT」というリンクをクリックすると表示されるようにしています。Chromeではダイアログボックスの形で、他のコンテンツよりも手前に重ねて表示されます。'
+							.alert.alert-warning NOTES: 
+							p
+								| WHATWG Wiki「Dialogs」
+								br
+								a(href='http://wiki.whatwg.org/wiki/dialogs',taregt='_blank') http://wiki.whatwg.org/wiki/dialogs
+							p='WHATWG Wikiの「Dialogs」のページでは、<dialog>の活用が可能と考えられるケースの実例が提示されています。'
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='../js/google-code-prettify/prettify.js')

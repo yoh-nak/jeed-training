@@ -9,9 +9,9 @@ include ../head2.jade
 					.panel.panel-primary
 						.panel-heading
 							i.glyphicon.glyphicon-book
-							| ページタイトル
+							| &nbsp;リンクに関する設定
 						.panel-body
-							.alert.alert-info ページタイトル
+							.alert.alert-info リンクに関する設定
 							table.browser-support
 								tr
 									td
@@ -54,6 +54,91 @@ include ../head2.jade
 											| base {
 											| 	display: none;
 											| }
+							p='<base>では、hrefとtarget属性を利用して、リンクのベースURLとブラウジング・コンテキストを指定することができます。'
+							table.table
+								tr
+									th='<base>の属性'
+									th 機能
+								tr
+									td href
+									td ベースURLの指定。
+								tr
+									td target
+									td ブラウジング・コンテキストの指定。
+							.alert.alert-info ベースURLを指定する
+							p
+								a.btn.btn-default(href='../demo/html/sample1/04/093.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;!DOCTYPE html&gt;
+								| &lt;html lang="ja"&gt;
+								| &lt;head&gt;
+								| &lt;meta charset="UTF-8"&gt;
+								| &lt;title&gt;ちょっとしたお茶の時間　-　SUN DIARY&lt;/title&gt;
+								| &lt;base href="http://tea.web/"&gt;
+								| &lt;meta name="viewport" content="width=1024"&gt;
+								| &lt;link rel="stylesheet" href="style.css"&gt;
+								| &lt;/head&gt;
+								| &lt;body&gt;
+								| 
+								| &lt;header id="header_inner"&gt;
+								| &lt;h1&gt;&lt;img src="img/logo.png" alt="SUN DIARY"&gt;&lt;/h1&gt;
+								| &lt;nav&gt;
+								| &lt;ul&gt;
+								| &lt;li&gt;&lt;a href="news.html"&gt;NEWS&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="column.html"&gt;COLUMN&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="gift.html"&gt;GIFT&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="contact.html"&gt;CONTACT&lt;/a&gt;&lt;/li&gt;
+								| &lt;/ul&gt;
+								| &lt;/nav&gt;
+								| &lt;/header&gt;
+								| ...
+							p='<base>のhref属性でベースURLを指定すると、ページ内のすべての相対URLがベースURLを基準に処理されるようになります。'
+							p='たとえば、上のサンプルではベースURLを「http://tea.web/」と指定しています。これにより、相対URLの形で指定した「style.css」や「img/logo.png」、「news.html」などが、「http://tea.web/style.css」や「http://tea.web/img/logo.png」、「http://tea.web/news.html」というURLで処理されます。'
+							.alert.alert-warning NOTES: 
+							p='ベースURLの前にスタイルシートの記述をした場合、style.cssには影響しません。'
+							pre(class='prettyprint linenums:1')
+								| &lt;head&gt;
+								| &lt;meta charset="UTF-8"&gt;
+								| &lt;title&gt;ちょっとしたお茶の時間 - SUN DIARY&lt;/title&gt;
+								| &lt;meta name="viewport" content="width=1024"&gt;
+								| &lt;link rel="stylesheet" href="style.css"&gt;
+								| &lt;base href="http://tea.web/"&gt;
+								| &lt;/head&gt;
+							.alert.alert-info ブラウジング・コンテキストを指定する
+							p
+								a.btn.btn-default(href='../demo/html/sample1/04/094.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;!DOCTYPE html&gt;
+								| &lt;html lang="ja"&gt;
+								| &lt;head&gt;
+								| &lt;meta charset="UTF-8"&gt;
+								| &lt;title&gt;SUN DIARY&lt;/title&gt;
+								| &lt;base target="_blank"&gt;
+								| &lt;meta name="viewport" content="width=1024"&gt;
+								| &lt;link rel="stylesheet" href="style-index.css"&gt;
+								| &lt;/head&gt;
+								| …
+								| &lt;section id="content"&gt;
+								| &lt;h1&gt;COLUMNS&lt;/h1&gt;
+								| 
+								| &lt;article&gt;
+								| &lt;a href="tea.html"&gt;
+								| &lt;img src="img/teapot.jpg" alt=""&gt;
+								| &lt;h1&gt;ちょっとしたお茶の時間&lt;/h1&gt;
+								| &lt;time datatime="2013-01-15"&gt;January 15, 2013&lt;/time&gt;
+								| &lt;p&gt;世界中にはたくさんのお茶があります。緑茶に紅茶、ウーロン茶など、その製法や味わいもさまざまですが、リラックスしたり、ちょっとした休憩したいときなどには欠かすことができません。…&lt;/p&gt;
+								| &lt;/a&gt;
+								| &lt;/article&gt;
+								| ...
+							p='<base>のtarget属性を利用すると、ブラウジング・コンテキストを指定することができます。ブラウジング・コンテキストはブラウザによって解釈され、それに応じてリンク先を表示する際の処理が変わります。'
+							p='たとえば、サンプルのように「_blank」と指定すると、タブブラウザではリンク先が新しいタブで表示されるようになります。target属性で指定できる値は以下のようになっており、ページ内のすべてのリンクに対して適用されます。'
+							table.table
+							.alert.alert-warning NOTES: 
+							p=''
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='../js/google-code-prettify/prettify.js')

@@ -178,35 +178,38 @@ include ../head2.jade
 								| .fliph.flipv	{-moz-transform: rotateY(180deg) rotateX(180deg);}
 								| 
 								| img	{-moz-transition: 0.2s;}
-							p=''
+							p='まず、<menu>で示したコマンドリストを画像に適用するため、<img>にグローバル属性のcontextmenu属性を追加し、<menu>のIDを指定します。ここではIDを「mymenu」と指定しています。'
+							p='次に、コマンドリストをコンテキストメニューの形で表示するため、<menu>のtype属性の値を「context」と指定します。'
+							p='各コマンドは<menuitem>で示します。<menuitem>で指定できる属性は以下のようになっており、サンプルではlabel属性でラベルを、icon属性でアイコン画像を指定しています。また、onclick属性ではコマンドを選択したときに実行する処理をJavaScriptで指定しています。ここではメニューの選択に応じて<img>に「fliph」や「flipv」というクラス名を付加し、CSS3のtansformプロパティで反転処理を適用するようにしています。'
 							table.table
 								tr
 									th='<menuitem>の属性'
 									th 機能
 								tr
 									td type
-									td 
+									td コマンドの種類<br>（command、checkbox、radio）を指定。
 								tr
 									td label
-									td 
+									td コマンドラインのラベルを指定。
 								tr
 									td icon
-									td 
+									td コマンドのアイコンを指定。
 								tr
-									td disabled
-									td 
+									td disabled ※
+									td コマンドの無効化。
 								tr
-									td checked
-									td 
+									td checked ※
+									td 初期状態をオンにする（type属性の値がcheckboxまたはradioの場合のみ指定可能）。
 								tr
 									td radiogroup
-									td 
+									td コマンドのグループを指定（type属性のあち阿賀radioの場合のみ指定可能）。
 								tr
-									td command
-									td 
+									td command ※
+									td コマンドとして実行する要素のIDを指定。
 								tr
-									td default
-									td 
+									td default ※
+									td 標準で実行するコマンドを指定。
+							p ※ ... ブーリアン属性
 							p='なお、<menuitem>はHTML Living StandardやHTML5.1 NightlyではVideo要素として定義されていますので、終了タグ</menuitem>を記述する必要はありません。ただし、Firefoxでは</menuitem>がないと正しく処理が行われないため、サンプルでは記述するようにしています。'
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')

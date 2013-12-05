@@ -60,6 +60,204 @@ include ../head2.jade
 											| meta {
 											| 	display: none;
 											| }
+							p='<meta>を利用すると、<title>、<base>、<link>、<style>、<script>では示すことのできないさまざまな付加情報（メタデータ）を明示することができます。'
+							.alert.alert-warning NOTES: 
+							p='<meta>は<head>の中に記述します。ただし、microdataのitemprop属性を指定した場合は<body>の中にも記述できるようになります。'
+							.alert.alert-info エンコードの種類
+							p
+								a.btn.btn-default(href='../demo/html/sample1/04/102.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;!DOCTYPE html&gt;
+								| &lt;html lang="ja"&gt;
+								| &lt;head&gt;
+								| &lt;meta charset="UTF-8"&gt;
+								| &lt;title&gt;ちょっとしたお茶の時間　-　SUN DIARY&lt;/title&gt;
+								| &lt;link rel="stylesheet" href="style.css"&gt;
+								| &lt;/head&gt;
+								| &lt;body&gt;
+								| ...
+							p='charset属性を利用すると、ページで使用したエンコードの種類を明示することができます。ページに1つのみ指定することが可能で、たとえば、上のサンプルでは「UTF-8」と指定しています。'
+							p='なお、ページのタイトルの文字化けを防ぐためには、<title>よりも先に<meta charset="〜">の指定を記述します。'
+							.alert.alert-info name属性で指定できるメタデータ
+							p='name属性を利用すると、下のようなメタデータを示すことができます。メタデータの値はcontent属性で指定します。'
+							table.table
+								tr
+									th name属性の値
+									th メタデータの値
+								tr
+									td application-name
+									td Webアプリケーション名
+								tr
+									td author
+									td ページの著者名
+								tr
+									td description
+									td ページの概要
+								tr
+									td generator
+									td ページを生成したソフトウェア
+								tr
+									td keywords
+									td ページのキーワード
+							h4 Webアプリケーション名
+							pre(class='prettyprint linenums:1')='<meta name="application-name" content="SUN DIARY APP">'
+							p='ページをWebアプリケーションとして作成した場合、name属性の値を「application-name」と指定してアプリケーション名を示すことができます。アプリケーション名の指定がある場合、<title>で指定したページのタイトルよりも優先して使用することが提案されています。'
+							h4 ページの著者名
+							pre(class='prettyprint linenums:1')='<meta name="author" content="Hanako">'
+							p='name属性の値を「author」と指定すると、ページの著者名を示すことができます。'
+							h4 ページの概要
+							pre(class='prettyprint linenums:1')='<meta name="description" content="緑茶に紅茶、ウーロン茶など、さまざまなお茶のおいしさと楽しみ方について">'
+							p='name属性の値を「description」と指定すると、ページの概要を示すことができます。'
+							h4 ページを生成したソフトウェア
+							pre(class='prettyprint linenums:1')='<meta name="generator" content="WordPress 3.5">'
+							p='name属性の値を「generator」と指定すると、ページの生成に使用したソフトウェアを示します。ソフトウェアで生成したページでない場合には指定することはできません。たとえば、WordPressのバージョン3.5で生成したことを示す場合は下のように記述します。'
+							h4 ページのキーワード
+							pre(class='prettyprint linenums:1')='<meta name="keyword" content="紅茶,緑茶,ウーロン茶">'
+							p='name属性の値を「keywords」と指定すると、ページに関連したキーワードを示すことができます。複数のキーワードは「,（カンマ）」で区切って指定します。'
+							.alert.alert-warning NOTES: その他のname属性の値
+							p='name属性で指定できる値は、HTML5に採用されているものの他に、「MetaExtensions」で提案されているものもあります。たとえば、スタンドアローンモードでの表示を指定する「apple-mobile-web-app-capable」や、ビューポートの設定を行う「viewport」などが提案されています。'
+							p
+								| MetaExtensions
+								br
+								a(href='http://wiki.whatwg.org/wiki/MetaExtensions',target='_blank') http://wiki.whatwg.org/wiki/MetaExtensions
+							h4 スタンドアローンモードでの表示
+							pre(class='prettyprint linenums:1')='<meta name="apple-mobile-web-app-capable" content="yes">'
+							p='name属性を「apple-mobile-web-app-capable」と指定すると、iOSでホーム画面に追加したWebクリップアイコンからページを開いたときに、ブラウザを使用せず、スタンドアローンモードで表示することができます。このモードはページを単体のWebアプリとして利用するために用意されたもので、アドレスバーなどを表示せず、フルスクリーンでの表示が行われます。この他にも、「apple-mobile-web-app-status-bar-style」など、iOS関連のrel属性の値が提案されています'
+							h4 ビューポートの設定
+							pre(class='prettyprint linenums:1')
+								| &lt;meta name="viewport" content="width=device-width"&gt;
+								| ...
+								| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+							pre(class='prettyprint linenums:1')
+								| h1	{font-size: 100px;}
+							p='name属性を「viewport」と指定すると、スマートフォンやタブレットのビューポートに関する設定を行うことができます。たとえば、ビュポートの横幅をデバイスのdensity（device-pixcel-ratio）に基づく解像度に設定するためには、content属性を「width=dvice-width」と指定します。'
+							p='<meta name="viewport">のcontent属性で指定できるパラメータは以下のようになっています。設定に関しては、W3Cの「CSS Device Application」（Editor\'s Draft）において標準化の作業が進められています。'
+							p
+								| CSS Device Adaptation
+								br
+								a(href='http://dev.w3.org/csswg/css-device-adapt/',target='_blank') http://dev.w3.org/csswg/css-device-adapt/
+							table.table
+								tr
+									th 設定
+									th パラメータ
+									th 指定できる値
+								tr
+									td ビューポートの横幅
+									td width
+									td 数値（ピクセル）／device-width
+								tr
+									td ビューポートの高さ
+									td height
+									td 数値（ピクセル）／device-height
+								tr
+									td ページの拡大率
+									td initial-scale
+									td 拡大率
+								tr
+									td 拡大率の最小値
+									td mimimum-scale
+									td 拡大率
+								tr
+									td 拡大率の最大値
+									td maximum-scale
+									td 拡大率
+								tr
+									td ユーザーによる拡大・縮小の可否
+									td user-scalable
+									td yes／no
+								tr
+									td ターゲットdensity ※
+									td target-denditydpi
+									td 数値（dpi）／device-dpi／low-dpi／medium-dpi／high-dpi
+							p
+								| ※ ターゲットdensityの指定は上記のEditor's Draftには採用されていません。<br>
+								| iOSは未対応で、Androidのみ対応となっています。
+							h4 Windows 8のピン留めアイコン
+							pre(class='prettyprint linenums:1')
+								| &lt;meta name="msapplication-TileImage" content="icon.png"&gt;
+								| &lt;meta name="msapplication-TileColor" content="#f2ebdc"&gt;
+							p='name属性を「msapplication-TileImage」と指定すると、Windows 8のスタート画面にページをピン留めしたときに表示するアイコンを示すことができます。また、「msapplication-TileColor」と指定すると、背景色も指定することが可能です。なお、アイコン画像は正方形で、144x144ピクセル以上の大きさで用意する必要があります。また、現在のところ「MetaExtensions」には未登録となっています。'
+							.alert.alert-info http-equiv属性で指定できるメタデータ
+							p='http-equiv属性を利用すると、HTTPヘッダーと上等の情報を<meta>で明示することができます。http-equiv属性で示すことができるメタデータは下のようになっており、各メタデータの値はcontent属性で指定します。'
+							table.table
+								tr
+									th http-equiv属性の値
+									th メタデータの種類
+								tr
+									td content-language
+									td 言語の種類
+								tr
+									td content-type
+									td エンコードの種類
+								tr
+									td default-style
+									td 優先代替スタイルシート
+								tr
+									td refresh
+									td リフレッシュ
+								tr
+									td set-cookie
+									td クッキーの指定
+							h4 言語の種類
+							pre(class='prettyprint linenums:1')='<meta http-equiv="content-language" content="ja">'
+							p='http-equiv属性を「content-language」と指定すると、ページで使用する言語の種類を示すことができます。ただし、言語の種類はlang属性を利用して明示することが推奨されています。'
+							h4 エンコードの種類
+							pre(class='prettyprint linenums:1')='<meta http-equiv="content-type" content="text/html;charset=UTF-8">'
+							p='http-equiv属性を「content-type」と指定すると、ページで使用するエンコードの種類を示すことができます。セマンティクス上ではcharset属性でエンコードの種類を示した場合と同じなため、どちらか一方の形式で記述する必要があります。charset属性を利用するとシンプルな形で記述することができますが、下位互換の必要がある場合にはhttp-equiv属性による指定を利用します。'
+							h4 優先代替スタイルシート
+							p
+								a.btn.btn-default(href='../demo/html/sample1/04/107.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;head&gt;
+								| …
+								| &lt;link rel="stylesheet" href="design.css"&gt;
+								| 
+								| &lt;link rel="alternate stylesheet" href="design-black.css" title="黒色の背景"&gt;
+								| 
+								| &lt;link rel="alternate stylesheet" href="design-sepia.css" title="セピア色の背景"&gt;
+								| 
+								| &lt;meta http-equiv="default-style" content="黒色の背景"&gt;
+								| &lt;/head&gt;
+							figure
+								pre(class='prettyprint linenums:1')
+									| body	{background-color: black;
+									| 	color: white;}
+								figcaption design-black.cssの設定。
+							figure
+								pre(class='prettyprint linenums:1')
+									| body	{background-color: #ffe4bc;}	
+								figcaption design-sepia.cssの設定。
+
+							p='http-equiv属性を「default-style」と指定すると、複数の代替スタイルシートのうち、優先代替スタイルシートとして扱いたいものを明示することができます。'
+							p='「黒色の背景」と「セピア色の背景」の2つの代替スタイルシートを用意したサンプルにおいて、下のように<meta>を指定すると、「黒色の背景」を優先代替スタイルシートに設定することができます。content属性の値を指定します。なお、<meta>で優先代替スタイルシートを示したときの処理は、<link>で示した時の処理と同じです。両方の指定がある場合、<meta>による指定が優先されます。'
+							h4 リフレッシュ
+							p
+								a.btn.btn-default(href='../demo/html/sample1/04/108-1.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')='<meta http-equiv="refresh" content="60">'
+							p='http-equiv属性を「refresh」と指定すると、一定間隔でページをリロードすることができます。content属性ではリロードする間隔を秒数で指定します。'
+							p='たとえば、下のように指定すると、６０秒間隔でページがリロードされるようになります。'
+							p
+								a.btn.btn-default(href='../demo/html/sample1/04/108-2.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')='<meta http-equiv="refresh" content="10; url=http://tes.web/">'
+							h4 クッキー
+							pre(class='prettyprint linenums:1')='<meta http-equiv="set-cookie" content="〜">'
+							p='http-equiv属性を「set-cookie」と指定すると、content属性でクッキーに関する情報を示すことができます。ただし、<meta>による指定よりもHTTPヘッダーの利用が推奨されています。'
+							.alert.alert-warning NOTES: 
+							p='http-equiv属性で指定できる値は、HTML5に採用されているものの他に、「PragmaExtensions」で提案されているものもあります。'
+							p
+								| PragmaExtensions
+								br
+								a(href='http://wiki.whatwg.org/wiki/PragaExtensions',target='_blank') http://wiki.whatwg.org/wiki/PragaExtensions
+							.alert.alert-success DIFFERENCES: 
+							p='HTML4.01やXHTML1.0における<meta>のschema属性は、HTML5では利用できなくなっています。'
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='../js/google-code-prettify/prettify.js')

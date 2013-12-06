@@ -48,45 +48,57 @@ include ../head2.jade
 							.alert.alert-warning NOTES: 
 							p='WHATWGのHTML Living Standardでは、microformatsのボキャブラリーであるhCardやhCalendarをmicrodataでも利用する方法が提案されています。'
 							.alert.alert-info microdataを利用した情報の付加
+							p
+								a.btn.btn-default(href='../demo/html/sample1/04/112.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;article itemscope itemtype="http://schema.org/Article"&gt;
+								| &lt;header&gt;
+								| &lt;h1 itemprop="name"&gt;Short Tea Breaks&lt;/h1&gt;
+								| &lt;time itemprop="datePublished" datetime="2013-01-15"&gt;January 15, 2013&lt;/time&gt;
+								| &lt;/header&gt;
+								| 
+								| &lt;img itemprop="image" src="img/tea.jpg" alt=""&gt;
+								| 
+								| &lt;p itemprop="description"&gt;世界中にはたくさんのお茶があります。緑茶に紅茶、ウーロン茶など、その製法や味わいもさまざまですが、リラックスしたり、ちょっと休憩したいときなどには欠かすことができません。お茶のお供に、おいしいお菓子もあると幸せな気分になってしまいます。&lt;/p&gt;
+								| 
+								| &lt;section&gt;
+								| &lt;h1&gt;紅茶&lt;/h1&gt;
+								| &lt;p&gt;紅茶は、茶の葉を全発酵させて製造したお茶です。...&lt;/p&gt;
+								| 
+								| &lt;p&gt;基本的に熱湯で入れ、茶葉に合わせて抽出時間を十分に取ります。...温度が下がるのを防ぐのもおすすめです。&lt;/p&gt;
+								| &lt;/section&gt;
+								| ...
+								| 
+								| &lt;/article&gt;
+							figure
+								table.table
+									tr
+										th 記事のタイトル
+										td Short Tea Breaks
+									tr
+										th 記事の投稿日
+										td 2013-01-15
+									tr
+										th 記事の画像
+										td http://sun.web/img/tea.jpg
+									tr
+										th 記事の概要
+										td 世界中にはたくさんのお茶があります。緑茶に紅茶、ウーロン茶など、その製法や味わいもさまざまですが、リラックスしたり、ちょっと休憩したいときなどには欠かすことができません。お茶のお供に、おいしいお菓子もあると幸せな気分になってしまいます。
+								figcaption microdataによって明示したコンテンツの内容
+							p='microdataを利用して情報を付加する方法を確認していきます。ここでは、ボキャブラリーとしてmicrodataで一般的なschema.orgを利用し、<article>でマークアップした部分が「記事」であることを明示します。また、<article>内の各パーツが記事のタイトル、投稿日、画像、概要であることも明示しています。'
+							p='まず、microdataで情報を付加するためには、HTMLタグでマークアップした箇所にitemscope属性を追加し、「アイテム」として扱うように設定します。さらに、itemtype属性でアイテムタイプを指定し、コンテンツの内容を明示します。'
+							p='サンプルの場合、<article>でマークアップした箇所が「記事」であることを明示するため、itemscopeとitemtype属性を追加し、アイテムタイプを「Article」と指定しています。「Article」はschema.orgのボキャブラリーにおいて「記事」を示すアイテムタイプで、itemtype属性の値を「http://schema.org/Article」と指定して明示します。'
+							p='次に、アイテム内の個々の要素にはitemprop属性を追加し、プロパティ名を指定することによって内容を明示します。サンプルの場合、<h1>でマークアップした見出しが記事のタイトルであることを明示するため、<h1>にitemprop属性を追加し、プロパティ名を「name」と指定しています。同様に、記事の投稿日、画像、概要を示すため、それぞれをマークアップした<time>、<img>、<p>にitemprop属性を追加し、プロパティ名を「datePublished」、「image」、「description」と指定しています。'
 							.alert.alert-info アイテムタイプ
+
 							.alert.alert-info プロパティ名
+
 							.alert.alert-info ExpectedType（予期される形式）
+
 							.alert.alert-warning NOTES: Google構造化データテストツールによる抽出結果
-							//
-								pre(class='prettyprint linenums:1')
-									| &lt;div itemscope itemtype="http://schema.org/Product"&gt;
-									| 
-									| &lt;img itemprop="image" src="img/teacup.jpg" alt=""&gt;
-									| 
-									| &lt;h2 itemprop="name"&gt;ダージリン・ファースとフラッシュ&lt;/h2&gt;
-									| 
-									| &lt;div itemprop="offers" itemscope itemtype="http://schema.org/Offer"&gt;
-									| 価格：&lt;span itemprop="price"&gt;900円&lt;/span&gt;
-									| &lt;/div&gt;
-									| 
-									| &lt;p itemprop="description"&gt;初摘みの茶葉のみで作ったダージリン。フレッシュな香りとさわやかな味わいが特徴です。&lt;/p&gt;
-									| 
-									| &lt;/div&gt;
-								p='HTML5の各要素にはセマンティクスが振られていますが、それだけでは不十分な場合にはボキャブラリー（語彙）を利用して情報を付加し、コンテンツの内容をより詳細に明示していきます。'
-								p='情報を付加するために利用できる規格としては、W3Cの「HTML Data Guide」という草案において、現在のところmicrodata、RDFa、microformatsの3つの規格が挙げられています。'
-								p='いずれの規格も、HTMLの属性を利用して情報の付加を行います。たとえば、下のサンプルではmicrodataのitemprop属性を利用して、コンテンツの内容が商品の名前や画像、価格、説明であることを明示しています。'
-								P='属性で指定できる値は「ボキャブラリー（語彙）」と呼ばれ、コンテンツの内容を明示します。ボキャブラリーはページの制作者が独自に作成することもできますが、共通のボキャブラリーを利用することにより、さまざまなソフトウェアでデータを活用することができるようになります。下のサンプルの場合、schema.orgで定義されたボキャブラリーを利用しています。'
-								p='どの規格やボキャブラリーを利用するかは、明示したいコンテンツの内容等に応じて選択します。'
-								.alert.alert-warning NOTES: 
-								p='「HTML Data Guide」はメタデータに関する規格や活用方法などについてまとめられている草案です。'
-								p
-									| HTML Data Guide
-									br
-									a(href='http://www.w3.org/TR/html-data-guide/',target='_blank') http://www.w3.org/TR/html-data-guide/
-								.alert.alert-info バリデータ
-								p='microdataなどで明示したコンテンツの内容がソフトウェアによってきちんと認識されるかどうかを確認するためには、次のようなバリデータを利用することができます。'
-								h4 Google構造化テストテストツール
-								p='構造化データテストツールは、Googleが提供しているツールです。チェックしたいページのURLを入力して「プレビュー」をクリックすると、「抽出された構造化データ」の欄にmicrodataなどで明示したコンテンツの内容がリストアップされます。'
-								p='また、コンテンツの内容によってはGoogleの検索結果に反映されるものがあり、「プレビュー」の欄でどのように表示されるかを確認することができます。'
-								h4 Bingマークアップバリデータ
-								p='Bingマークアップバリデータは、Microsoftが提供しているツールです。Bingのウェブマスターツールにサイトを登録することで利用することができます。ページのURLを入力して「検証」をクリックすると、microdataなどで明示したコンテンツの内容がリストアップされます。'
-								.alert.alert-warning NOTES: 
-								p='microdataの属性を<article>といった「セクショニングコンテンツ」カテゴリーに属する要素に指定した場合、情報が抽出されないという問題が見られます。'
+							
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='../js/google-code-prettify/prettify.js')

@@ -74,6 +74,9 @@ include ../head2.jade
 								| &lt;/article&gt;
 							figure
 								table.table
+									colgroup
+										col(style='width:150px;')
+										col
 									tr
 										th 記事のタイトル
 										td Short Tea Breaks
@@ -92,13 +95,270 @@ include ../head2.jade
 							p='サンプルの場合、<article>でマークアップした箇所が「記事」であることを明示するため、itemscopeとitemtype属性を追加し、アイテムタイプを「Article」と指定しています。「Article」はschema.orgのボキャブラリーにおいて「記事」を示すアイテムタイプで、itemtype属性の値を「http://schema.org/Article」と指定して明示します。'
 							p='次に、アイテム内の個々の要素にはitemprop属性を追加し、プロパティ名を指定することによって内容を明示します。サンプルの場合、<h1>でマークアップした見出しが記事のタイトルであることを明示するため、<h1>にitemprop属性を追加し、プロパティ名を「name」と指定しています。同様に、記事の投稿日、画像、概要を示すため、それぞれをマークアップした<time>、<img>、<p>にitemprop属性を追加し、プロパティ名を「datePublished」、「image」、「description」と指定しています。'
 							.alert.alert-info アイテムタイプ
-
+							p='schema.orgのボキャブラリーには、記事を示す「Article」や、イベントを示す「Event」、人物を示す「Person」など、さまざまなアイテムタイプが用意されており、これらを利用して多様なコンテンツの内容を明示していくことになります。すべてのアイテムタイプは以下のペジで確認することが可能です。'
+							p='アイテムタイプは「Thing」を頂点とした階層構造になっており、深い階層のアイテムタイプほど内容を具体的に明示するものとなっています。たとえば、記事であることを示す「Article」は、[Thing > CreativeWork > Article]に位置しており、さらに子階層の「Blog Posting」や「NewsArticle」を利用すると、「ブログ記事」や「ニュース記事」であることを示すことができます。'
+							p
+								| The Type Hierarchy
+								br
+								a(href='http://schema.org/docs/full.html',target='_blank') http://schema.org/docs/full.html
+							p='アイテムタイプはitemtype属性で示しますが、schema.orgのアイテムタイプは「http://schema.org/アイテムタイプ」というURLの形で指定します。'
 							.alert.alert-info プロパティ名
+							p='各アイテムタイプには、アイテムに関する情報を明示するためのプロパティ名が用意されており、itemprop属性で指定します。schema.orgのボキャブラリの場合、利用できるプロパティ名については、アイテムタイプごとに「http://schema.org/アイテムタイプ」という形のURLのページで確認することが可能です。'
+							p
+								| 「Article」で指定できるプロパティ名
+								br
+								a(href='http://schema.org/Article',target='_blank') http://schema.org/Article
+							figure
+								figcaption
+									p 「Article」で指定できる主なプロパティ名：
+									p ※すべてのプロパティ名については上のページを参照してください。
+								table.table
+									tr
+										th 「Thing」のプロパティ名
+										th Expected Type（期待される形式）
+										th 明示する内容
+									tr
+										td name
+										td Text
+										td アイテムの名前
+									tr
+										td description
+										td Text
+										td アイテムの説明・概要
+									tr
+										td image
+										td URL
+										td アイテムの画像
+									tr
+										td url
+										td URL
+										td アイテムのURL
+								table.table
+									tr
+										th 「Creative Work』のプロパティ名
+										th Expected Type（期待される形式）
+										th 明示する内容
+									tr
+										td author
+										td 「Organization」または「Person」
+										td 著者
+									tr
+										td comment
+										td 「UserComments」
+										td コメント
+									tr
+										td contentLocation
+										td 「Place」
+										td コンテンツの場所
+									tr
+										td copyrightHolder
+										td 「Organization」または「Person」
+										td コピーライト所有者
+									tr
+										td copyrightYear
+										td Number
+										td コピーライト発行年
+									tr
+										td dateCreated
+										td Date
+										td 作成日
+									tr
+										td dateModified
+										td Date
+										td 更新日
+									tr
+										td datePublished
+										td Date
+										td 投稿日・公開日
+									tr
+										td review
+										td 「Review」
+										td レビュー
+								table.table
+									tr
+										th 「Article」のプロパティ名
+										th Expected Type（期待される形式）
+										th 明示する内容
+									tr
+										td articleBody
+										td Text
+										td 記事の本文
+									tr
+										td articleSection
+										td Text
+										td 記事が属するセクション
+									tr
+										td wordCount
+										td Integer
+										td 文字数
 
+
+							p='schema.orgのボキャブラリーではアイテムタイプの階層構造に応じて、親のアイテムタイプで利用できるプロパティ名がこのアイテムタイプに継承される仕組みとなっています。'
+							p='たとえば、「Article」というアイテムタイプの場合、「Thing」と「CreativeWork」のプロパティ名を利用することが可能です。このうち、最上位階層の「Thing」にはnameやdescription、image、urlという基本的なプロパティ名が用意されており、すべてのアイテムタイプで利用できるようになっておいます。これらはアイテムタイプの名前や概要を示すものですが、「Article」アイテムタイプで利用することにより、記事のタイトルや概要を示すものとして扱われるようになります。'
+							p='この仕組みにはボキャブラリの管理が容易になるというメリットがあります。たとえば、サンプルで「記事」と明示した部分を「ブログの記事」と明示しなおす必要性が生じた場合、アイテムタイプを「Article」から「BlogPosting」に変更するだけで対応することができます。これは、「BlogPosting」が「Article」の子階層に位置し、「Article」のプロパティ名をすべて継承するためです。'
 							.alert.alert-info ExpectedType（予期される形式）
-
+							p='schema.orgでは、プロパティ名で明示できるコンテンツの形式がExpected Type（期待される形式）として示されています。'
+							p='たとえば、「datePublished」というプロパティ名で記事の投稿日を明示しようとした場合、Expected Typeが「Date」となっているため「2013-01-15」といったISO8601の形式で日付を示すことが求められています。'
+							table.table
+								tr
+									th(colspan='2') 基本的なExpected Type
+								tr
+									td Text
+									td テキスト
+								tr
+									td URL
+									td URL
+								tr
+									td Date
+									td 日付（ISO8601の形式）
+								tr
+									td Number
+									td 数字
+								tr
+									td Integer
+									td 整数
+							p='また、Expected Typeがアイテムタイプとなっているものについては、そのアイテムタイプを利用してコンテンツの内容を示すことが期待されます。'
+							p='たとえば、「Hanako」が記事の著者であることを明示しようとした場合、「author」というプロパティ名を付加します。ただし、著者は組織・団体または人物と考えられますので、「Person」となっています。そこで、「author」というプロパティ名を付加した要素に対してitemscopeとitemtype属性を追加し、「Organization」または「Person」で新しいアイテムを構成します。次のサンプルでは「Person」アイテムタイプを利用して、「Hanako」という「人物」が著者であることを明示しています。'
+							pre(class='prettyprint lang-html linenums:1')
+								| &lt;article itemscope itemtype="http://schema.org/Article"&gt;
+								| &lt;header&gt;
+								| &lt;h1 itemprop="name"&gt;Short Tea Breaks&lt;/h1&gt;
+								| &lt;time itemprop="dataPublished" datetime="2013-01-15"&gt;January 15, 2013&lt;/time&gt;
+								| 
+								| &lt;div itemprop="author" itemscope itemtype="http://schema.org/Person"&gt;
+								| Posted by &lt;span itemprop="name"&gt;Hanako&lt;/span&gt;
+								| &lt;/div&gt;
+								| &lt;/header&gt;
+								| ...
+								| &lt;/article&gt;
+							p='著者の「Hanako」が「組織・団体」の名称であることを示す場合には、「Organization」アイテムタイプで明示します。'
+							pre(class='prettyprint lang-html linenums:1')
+								| …
+								| &lt;div itemprop="author" itemscope itemtype="http://schema.org/Organization"&gt;
+								| Posted by &lt;span itemprop="name"&gt;Hanako&lt;/span&gt;
+								| &lt;/div&gt;
+							p='Expected Typeで示された「Organization」や「Person」の子階層のアイテムタイプを利用することも可能です。たとえば、著者の「Hanako」が「パン屋」の名称であることを示したい場合には、「Organization」の子階層にある「Bakery」アイテムタイプで明示します。'
+							pre(class='prettyprint lang-html linenums:1')
+								| …
+								| &lt;div itemprop="author" itemscope itemtype="http://schema.org/Bakery"&gt;
+								| Posted by &lt;span itemprop="name"&gt;Hanako&lt;/span&gt;
+								| &lt;/div&gt;
+							p='また、必要に応じて「Organization」や「Bakery」に用意されたプロパティ名を利用することも可能です。たとえば、次のように「email」というプロパティ名を利用すると、「Hanako」というパン屋のメールアドレスを示すことができます。'
+							pre(class='prettyprint linenums:1')
+								| …
+								| &lt;div itemprop="author" itemscope itemtype="http://schema.org/Bakery"&gt;
+								| Posted by &lt;span itemprop="name"&gt;Hanako&lt;/span&gt;
+								| &lt;span itemprop="email"&gt;hanako@sun.web&lt;/span&gt;
+								| &lt;/div&gt;
+							p='なお、Expected Typeがアイテムタイプの場合でも、詳細を明示する必要がない場合は次にようにText形式やURL形式で明示することが認められています。'
+							pre(class='prettyprint linenums:1')
+								| …
+								| &lt;div&gt;
+								| Posted by &lt;span itemprop="author"&gt;Hanako&lt;/span&gt;
+								| &lt;/div&gt;
 							.alert.alert-warning NOTES: Google構造化データテストツールによる抽出結果
-							
+							p='「Bakery」アイテムタイプで著者の名前とメールアドレスを明示いたサンプルをGoogle構造化データテストツールでチェックすると、「Article」アイテムタイプで明示した内容が「item」、「Bakery」アイテムタイプで明示した内容が「item 1」としてリストアップされます。このうち、「item」の「author」の欄には「item 1」と表示され、著者に関する内容は「item 1」で明示されていることがわかります。'
+							p
+								a.btn.btn-default(href='../demo/html/sample1/04/117.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;article itemscope itemtype="http://schema.org/Article"&gt;
+								| &lt;header&gt;
+								| &lt;h1 itemprop="name"&gt;Short Tea Breaks&lt;/h1&gt;
+								| &lt;time itemprop="datePublished" datetime="2013-01-15"&gt;January 15, 2013&lt;/time&gt;
+								| 
+								| &lt;div itemprop="author" itemscope itemtype="http://schema.org/Bakery"&gt;
+								| Posted by &lt;span itemprop="name"&gt;Hanako&lt;/span&gt;
+								| &lt;span itemprop="email"&gt;hanako@sun.web&lt;/span&gt;
+								| &lt;/div&gt;
+								| &lt;/header&gt;
+								| 
+								| ...
+								| 
+								| &lt;/article&gt;
+							.alert.alert-warning NOTES: Google+におけるmicrodataで明示したメタデータの活用
+							p='microdataでコンテンツの内容を明示したページをGoogle+から参照した場合、schema.orgの「name」、「description」、「image」プロパティで明示した内容が取得され、ページの概要として表示されます。'
+							.alert.alert-warning NOTES: 基本的な記述方法
+							p='microdataで情報を付加する場合、コンテンツに直接付加する方法と、コンテンツ外に記述する方法の2通りの記述方法があります。'
+							p='たとえば、以下のサンプルはコンテンツに直接付加する記述方法を利用したものです。著者名の後に記述したメールアドレスに注目すると、「著者のメールアドレス」であることを明示するため、<span>でマークアップし、itemprop属性で「email」というプロパティ名を付加しています。'
+							p='これは最も基本的な記述方法ですが、コンテンツ中にメールアドレスが存在していないと利用することができません。'
+							pre(class='prettyprint linenums:1')
+								| ...
+								| &lt;div itemprop="author" itemscope itemtype="http://schema.org/Bakery"&gt;
+								| Posted by &lt;span itemprop="name"&gt;Hanako&lt;/span&gt;
+								| &lt;span itemprop="email"&gt;hanako@sun.web&lt;/span&gt;
+								| &lt;/div&gt;
+							p='コンテンツ中にメールアドレスが存在しない場合には、コンテンツ外に記述する方法を利用して「著者のメールアドレス」を明示することができます。その場合、<meta>のcontent属性でメールアドレスを示し、itemprop属性で「email」というプロパティ名を付加します。セマンティクスの上では、情報をコンテンツに直接付加する方法で記述したときと同じ内容を明示したことになります。'
+							pre(class='prettyprint linenums:1')
+								| ...
+								| &lt;div itemprop="author" itemscope itemtype="http://schema.org/Bakery"&gt;
+								| Posted by &lt;span itemprop="name"&gt;Hanako&lt;/span&gt;
+								| &lt;meta itemprop="email"&gt;hanako@sun.web&lt;/meta&gt;
+								| &lt;/div&gt;
+							p='著者名の前後に存在していなくても、ページ内の他の箇所にメールアドレスが存在しているというケースもあります。このような場合、itemref属性を利用してメールアドレスがある場所のIDを指定します。この場合も、先の2つのサンプルとセマンティクスの上では同じとなります。'
+							pre(class='prettyprint linenums:1')
+								| ...
+								| &lt;div itemprop="author" itemscope itemtype="http://schema.org/Bakery" itemref="contact"&gt;
+								| Posted by &lt;span itemprop="name"&gt;Hanako&lt;/span&gt;
+								| &lt;meta itemprop="email"&gt;hanako@sun.web&lt;/meta&gt;
+								| &lt;/div&gt;
+								| …
+								| &lt;aside id="contact"&gt;
+								| &lt;h1&gt;CONTACT&lt;/h1&gt;
+								| &lt;span iteprop="email"&gt;hanako@sun.web&lt;/span&gt;
+								| &lt;/aside&gt;
+							.alert.alert-warning NOTES: URLと日付の明示
+							p='URLに情報を付加する必要がある場合、<a>や<link>のhref属性、<img>や<video>のsrc属性でURLを示し、itemprop属性でプロパティ名を付加することができます。'
+							figure
+								pre(class='prettyprint linenums:1')='<img itemprop="image" src="img/tea.jpg" alt="">'
+								figcaption src属性のURLが「記事の画像」であると明示したもの。
+							p='同様に、日付に情報を付加する場合、<time>のdatetime属性で日付を示し、itemprop属性でプロパティ名を付加することが可能です。'
+							figure
+								pre(class='prettyprint linenums:1')='<time itemprop="datePublished" datetime="2013-01-15">January 15, 2013</time>'
+								figcaption datetime属性の日付が「記事の投稿日」であると明示したもの。
+							.alert.alert-warning NOTES: itemid属性の利用
+							p='アイテムを示すグローバルな識別子がある場合、itemid属性で明示することができます。たとえば、書籍に関するコンテンツの場合、書籍ごとに割り振られたISBN（国際標準図書番号）をURNの形式で示すことができます。'
+							pre(class='prettyprint linenums:1')
+								| &lt;dl itemscope itemtype="http://schema.org/Book" itemid="urn:isbn:978-4-8399-4332-5"&gt;
+								| &lt;dt&gt;タイトル&lt;/dt&gt;
+								| &lt;dd itemprop="name"&gt;スマートフォンサイトのためのHTML5+CSS3&lt;/dd&gt;
+								| &lt;dt&gt;著者&lt;/dt&gt;
+								| &lt;dd itemprop="author"&gt;エ・ビスコム・テック・ラボ&lt;/dd&gt;
+								| &lt;/dl&gt;
+							.alert.alert-warning NOTES: microdataとリッチスニペット
+							p='Googleは、microdataなどで明示した特定のコンテンツの内容を「リッチスニペット」として検索結果に反映させます。どのように反映されるかは、Google構造かデータテストツールの「プレビュー」の欄で確認することができます。'
+							p='たとえば、上のサンプルはschema.orgの「Event」アイテムタイプでイベントの内容を明示したものです。プレビューの表示を確認すると、「location」と「startDate」、「endDate」プロパティで明示した開催場所と開催日時の内容が反映されることがわかります。'
+							p
+								a.btn.btn-default(href='../demo/html/sample1/04/120.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;!DOCTYPE html&gt;
+								| &lt;html lang="ja"&gt;
+								| &lt;head&gt;
+								| &lt;meta charset="UTF-8"&gt;
+								| &lt;title&gt;陶磁器フェア - SUN DIARY&lt;/title&gt;
+								| …
+								| 
+								| &lt;article&gt;
+								| &lt;h1&gt;Upcoming Events&lt;/h1&gt;
+								| 
+								| &lt;section itemscope itemtype="http://schema.org/Event"&gt;
+								| &lt;h1 itemprop="name"&gt;陶磁器フェア&lt;/h1&gt;
+								| &lt;dl&gt;
+								| &lt;dt&gt;場所：&lt;/dt&gt;
+								| &lt;dd itemprop="location"&gt;森林公園イベント広場&lt;/dd&gt;
+								| &lt;dt&gt;日時：&lt;/dt&gt;
+								| &lt;dd&gt;
+								| &lt;time itemprop="startDate" datetime="2013-04-01"&gt;2013年4月1日&lt;/time&gt;
+								| ～
+								| &lt;time itemprop="endDate" datetime="2013-04-05"&gt;4月5日&lt;/time&gt;
+								| &lt;/dd&gt;
+								| &lt;/dl&gt;
+								| &lt;/section&gt;
+								| 
+								| &lt;/article&gt;
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='../js/google-code-prettify/prettify.js')

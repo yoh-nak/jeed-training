@@ -9,7 +9,7 @@ include ../head2.jade
 					.panel.panel-primary
 						.panel-heading
 							i.glyphicon.glyphicon-book
-							| &nbsp;コンテンツの内容をより詳細に明示する
+							| &nbsp;RDFa
 						.panel-body
 							table.browser-support
 								tr
@@ -27,41 +27,85 @@ include ../head2.jade
 										img(src='../images/ic-opera.png')
 									td
 										img(src='../images/ic-ie.png')
-							.alert.alert-info 利用できる規格
-							pre(class='prettyprint linenums:1')
-								| &lt;div itemscope itemtype="http://schema.org/Product"&gt;
-								| 
-								| &lt;img itemprop="image" src="img/teacup.jpg" alt=""&gt;
-								| 
-								| &lt;h2 itemprop="name"&gt;ダージリン・ファースとフラッシュ&lt;/h2&gt;
-								| 
-								| &lt;div itemprop="offers" itemscope itemtype="http://schema.org/Offer"&gt;
-								| 価格：&lt;span itemprop="price"&gt;900円&lt;/span&gt;
-								| &lt;/div&gt;
-								| 
-								| &lt;p itemprop="description"&gt;初摘みの茶葉のみで作ったダージリン。フレッシュな香りとさわやかな味わいが特徴です。&lt;/p&gt;
-								| 
-								| &lt;/div&gt;
-							p='HTML5の各要素にはセマンティクスが振られていますが、それだけでは不十分な場合にはボキャブラリー（語彙）を利用して情報を付加し、コンテンツの内容をより詳細に明示していきます。'
-							p='情報を付加するために利用できる規格としては、W3Cの「HTML Data Guide」という草案において、現在のところmicrodata、RDFa、microformatsの3つの規格が挙げられています。'
-							p='いずれの規格も、HTMLの属性を利用して情報の付加を行います。たとえば、下のサンプルではmicrodataのitemprop属性を利用して、コンテンツの内容が商品の名前や画像、価格、説明であることを明示しています。'
-							P='属性で指定できる値は「ボキャブラリー（語彙）」と呼ばれ、コンテンツの内容を明示します。ボキャブラリーはページの制作者が独自に作成することもできますが、共通のボキャブラリーを利用することにより、さまざまなソフトウェアでデータを活用することができるようになります。下のサンプルの場合、schema.orgで定義されたボキャブラリーを利用しています。'
-							p='どの規格やボキャブラリーを利用するかは、明示したいコンテンツの内容等に応じて選択します。'
-							.alert.alert-warning NOTES: 
-							p='「HTML Data Guide」はメタデータに関する規格や活用方法などについてまとめられている草案です。'
+							.alert.alert-info RDFaとは
+							p='RDFaはRDF（Resource Description Framework）をXHTMLで利用するための規格といて策定が進められていましたが、RDFa1.1でHTML5に対応しました。情報の付加にはRDFaで定義された属性を使用しますが、「HTML+RDFa1.1」においてHTML5でも利用できるようにすることが求められており、HTMLのバリデータでも対応が進んでいます。'
 							p
-								| HTML Data Guide
+								| RDFa Core 1.1（勧告）
 								br
-								a(href='http://www.w3.org/TR/html-data-guide/',target='_blank') http://www.w3.org/TR/html-data-guide/
-							.alert.alert-info バリデータ
-							p='microdataなどで明示したコンテンツの内容がソフトウェアによってきちんと認識されるかどうかを確認するためには、次のようなバリデータを利用することができます。'
-							h4 Google構造化テストテストツール
-							p='構造化データテストツールは、Googleが提供しているツールです。チェックしたいページのURLを入力して「プレビュー」をクリックすると、「抽出された構造化データ」の欄にmicrodataなどで明示したコンテンツの内容がリストアップされます。'
-							p='また、コンテンツの内容によってはGoogleの検索結果に反映されるものがあり、「プレビュー」の欄でどのように表示されるかを確認することができます。'
-							h4 Bingマークアップバリデータ
-							p='Bingマークアップバリデータは、Microsoftが提供しているツールです。Bingのウェブマスターツールにサイトを登録することで利用することができます。ページのURLを入力して「検証」をクリックすると、microdataなどで明示したコンテンツの内容がリストアップされます。'
-							.alert.alert-warning NOTES: 
-							p='microdataの属性を<article>といった「セクショニングコンテンツ」カテゴリーに属する要素に指定した場合、情報が抽出されないという問題が見られます。'
+								a(href='http://ww.w3.org/TR/rdfa-syntax/',target='_blank') http://ww.w3.org/TR/rdfa-syntax/
+							p
+								| RDFa Lite 1.1（勧告）
+								br
+								a(href='http://www.w3.org/TR/rdfa-lite/',target='_blank') http://www.w3.org/TR/rdfa-lite/
+							p
+								| HTML+RDFa 1.1（草案）
+								br
+								a(href='http://www.w3.org/TR/rdfa-in-html/	',target='_blank') http://www.w3.org/TR/rdfa-in-html/	
+							.alert.alert-info RDFaで利用できるボキャブラリー
+							p='RDFaの最初の勧告が1999年にリリースされたこともあり、RDFaではさまざまなボキャブラリーを利用することができます。'
+							p='たとえば、ISO15836で国際基準となったDublin Coreや、FOAF（Friend of a Friend）、クリエイティブ・コモンズのccREL（The Creative Commons Rights Expression Language）、FacebookのOGP（Open Graph Protocol）などがあります。microdataで使用したschema.orgのボキャブラリーを使用することも可能です。'
+							p
+								| Dublin Core
+								br
+								a(href='http://dublincore.org/documents/dcmi-terms/',target='_blank') http://dublincore.org/documents/dcmi-terms/
+							p
+								| FOAF
+								br
+								a(href='http://xmlns.com/foaf/spec/',target='_blank') http://xmlns.com/foaf/spec/
+							p
+								| ccRel
+								br
+								a(href='http://www.w3.org/Submission/2008/SUBM-ccREL-20080501/',target='_blank') http://www.w3.org/Submission/2008/SUBM-ccREL-20080501/
+							p
+								| OGP
+								br
+								a(href='http://ogp.me/',target='_blank') http://ogp.me/
+							p
+								| schema.org
+								br
+								a(href='http://schema.org/',target='_blank') http://schema.org/
+							p
+								| RDFaに関する情報がまとめられたW3Cのサイト
+								br
+								a(href='http://ww.w3.rog/RDF/',target='_blank') http://ww.w3.rog/RDF/
+							.alert.alert-info RDFaを利用した情報の付加
+							p='RDFaでは、ボキャブラリーごとにコンテンツの内容を明示するためのプロパティ名が用意されており、property属性を利用してコンテンツに付加していきます。たとえば、サンプルではクリエイティブ・コモンズでページのライセンスを明示するため、作品のタイトルとクレジット、ライセンスを明示しています。'
+							p
+								a.btn.btn-default(href='../demo/html/sample1/04/122.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;
+								| &lt;a rel="cc:license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.ja"&gt;
+								| &lt;img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/88x31.png"&gt;
+								| &lt;/a&gt;
+								| &lt;br&gt;
+								| &lt;span property="dc:title"&gt;Short Tea Breaks&lt;/span&gt;
+								|  by
+								| &lt;span property="cc:attributionName"&gt;Hanako&lt;/span&gt;
+								|  is licensed under a
+								| &lt;a rel="cc:license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.ja"&gt;
+								| Creative Commons 表示 - 非営利 - 改変禁止 3.0 非移植 License
+								| &lt;/a&gt;.
+								| &lt;/p&gt;
+							figure
+								table.table
+									tr
+										th 作品のタイトル
+										td Short Tea Breaks
+									tr
+										th 作品のクレジット
+										td Hanako
+									tr
+										th 作品のライセンス
+										td http://creativecommons.org/licenses/by-nc-nd/3.0/deed.ja
+								figcaption RDFaによって明示したコンテンツの内容
+							h4 作品のタイトル
+							p='作品のタイトルは「dc:title」というプロパティ名で明示します。「dc:title」はRDFaにおいてリソースのタイトルを明示するための基本的はプロパティ名で、「dc:」はDublin Coreのボキャブラリーであることを表しています。'
+							h4 作品のクレジット
+							p='作品のクレジットは「cc:attributionName」というプロパティ名で明示します。「cc:attributionName」の「cc:」はクリエイティブ・コモンズのccRELのボキャブラリーであることを表しています。'
+							h4 作品のライセンス
+							p='作品のライセンスはクリエイティブ・コモンズのURLで明示するため、<a>のhref属性でURLを示し、rel属性で「cc:license」というプロパティ名を付加します。このプロパティ名も、cc:attributionNameと同じようにccRELのボキャブラリーとなっています。'
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='../js/google-code-prettify/prettify.js')

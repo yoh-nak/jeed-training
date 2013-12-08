@@ -9,7 +9,7 @@ include ../head2.jade
 					.panel.panel-primary
 						.panel-heading
 							i.glyphicon.glyphicon-book
-							| &nbsp;コンテンツの内容をより詳細に明示する
+							| &nbsp;microformats（マイクロフォーマット）
 						.panel-body
 							table.browser-support
 								tr
@@ -27,41 +27,199 @@ include ../head2.jade
 										img(src='../images/ic-opera.png')
 									td
 										img(src='../images/ic-ie.png')
-							.alert.alert-info 利用できる規格
-							pre(class='prettyprint linenums:1')
-								| &lt;div itemscope itemtype="http://schema.org/Product"&gt;
-								| 
-								| &lt;img itemprop="image" src="img/teacup.jpg" alt=""&gt;
-								| 
-								| &lt;h2 itemprop="name"&gt;ダージリン・ファースとフラッシュ&lt;/h2&gt;
-								| 
-								| &lt;div itemprop="offers" itemscope itemtype="http://schema.org/Offer"&gt;
-								| 価格：&lt;span itemprop="price"&gt;900円&lt;/span&gt;
-								| &lt;/div&gt;
-								| 
-								| &lt;p itemprop="description"&gt;初摘みの茶葉のみで作ったダージリン。フレッシュな香りとさわやかな味わいが特徴です。&lt;/p&gt;
-								| 
-								| &lt;/div&gt;
-							p='HTML5の各要素にはセマンティクスが振られていますが、それだけでは不十分な場合にはボキャブラリー（語彙）を利用して情報を付加し、コンテンツの内容をより詳細に明示していきます。'
-							p='情報を付加するために利用できる規格としては、W3Cの「HTML Data Guide」という草案において、現在のところmicrodata、RDFa、microformatsの3つの規格が挙げられています。'
-							p='いずれの規格も、HTMLの属性を利用して情報の付加を行います。たとえば、下のサンプルではmicrodataのitemprop属性を利用して、コンテンツの内容が商品の名前や画像、価格、説明であることを明示しています。'
-							P='属性で指定できる値は「ボキャブラリー（語彙）」と呼ばれ、コンテンツの内容を明示します。ボキャブラリーはページの制作者が独自に作成することもできますが、共通のボキャブラリーを利用することにより、さまざまなソフトウェアでデータを活用することができるようになります。下のサンプルの場合、schema.orgで定義されたボキャブラリーを利用しています。'
-							p='どの規格やボキャブラリーを利用するかは、明示したいコンテンツの内容等に応じて選択します。'
-							.alert.alert-warning NOTES: 
-							p='「HTML Data Guide」はメタデータに関する規格や活用方法などについてまとめられている草案です。'
+							.alert.alert-info microformatsとは
+							p='microformatsはclassやrelなど、HTMLに用意された属性を利用してメタデータの付加を行うシンプルな規格です。そのため、HTML5はもちろん、HTML4.01やXHTML1.0でも利用することができます。'
 							p
-								| HTML Data Guide
+								| Microformats
 								br
-								a(href='http://www.w3.org/TR/html-data-guide/',target='_blank') http://www.w3.org/TR/html-data-guide/
-							.alert.alert-info バリデータ
-							p='microdataなどで明示したコンテンツの内容がソフトウェアによってきちんと認識されるかどうかを確認するためには、次のようなバリデータを利用することができます。'
-							h4 Google構造化テストテストツール
-							p='構造化データテストツールは、Googleが提供しているツールです。チェックしたいページのURLを入力して「プレビュー」をクリックすると、「抽出された構造化データ」の欄にmicrodataなどで明示したコンテンツの内容がリストアップされます。'
-							p='また、コンテンツの内容によってはGoogleの検索結果に反映されるものがあり、「プレビュー」の欄でどのように表示されるかを確認することができます。'
-							h4 Bingマークアップバリデータ
-							p='Bingマークアップバリデータは、Microsoftが提供しているツールです。Bingのウェブマスターツールにサイトを登録することで利用することができます。ページのURLを入力して「検証」をクリックすると、microdataなどで明示したコンテンツの内容がリストアップされます。'
-							.alert.alert-warning NOTES: 
-							p='microdataの属性を<article>といった「セクショニングコンテンツ」カテゴリーに属する要素に指定した場合、情報が抽出されないという問題が見られます。'
+								a(href='http://microformats.org/',target='_blank') http://microformats.org/
+							.alert.alert-info microformatsで利用できるボキャブラリー
+							p='microformatsで利用できるボキャブラリーとしては、個人や組織について明示できるhCardや、イベントについて明示できるhCalendarなどがあります。'
+							p
+								| hCard
+								br
+								a(href='http://microformats.org/wiki/hcard',target='_blank') http://microformats.org/wiki/hcard
+							p
+								| hCalendar
+								br
+								a(href='http://microformats.org/wiki/hcalendar
+									',target='_blank') http://microformats.org/wiki/hcalendar
+							.alert.alert-info microformatsを利用した情報の付加
+							p='ここではボキャブラリーとしてhCardを利用し、「Hanako」という個人の名前やメールアドレスなどを明示していきます。まずは、全体をマークアップした<dl>にclass属性を追加し、「vcard」と指定して利用するボキャブラリーがhCardであることを明示します。'
+							p
+								a.btn.btn-default(href='../demo/html/sample1/04/126.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')	
+								| &lt;dl class="vcard"&gt;
+								| 
+								| &lt;dt&gt;名前：&lt;/dt&gt;
+								| &lt;dd class="fn"&gt;Hanako&lt;/dd&gt;
+								| 
+								| &lt;dt&gt;メールアドレス：&lt;/dt&gt;
+								| &lt;dd class="email"&gt;hanako@web.mail&lt;/dd&gt;
+								| 
+								| &lt;dt&gt;勤務先：&lt;/dt&gt;
+								| &lt;dd class="org"&gt;SUN DIARY社&lt;/dd&gt;
+								| 
+								| &lt;dt&gt;住所：&lt;/dt&gt;
+								| &lt;dd class="adr"&gt;
+								|      &lt;span class="region"&gt;東京都&lt;/span&gt;
+								|      &lt;span class="locality"&gt;中央区&lt;/span&gt;
+								|      &lt;span class="street-address"&gt;北1-1-1&lt;/span&gt;
+								| &lt;/dd&gt;
+								| 
+								| &lt;/dl&gt;
+							p='hCardには以下のようなプロパティが用意されており、class属性で付加することができます。サンプルでは名前、メールアドレス、勤務先、住所を明示してます。'
+							table.table
+								tr
+									th プロパティ名
+									td 明示する内容
+								tr
+									td fn
+									td 名前
+								tr
+									td nickname
+									td ニックネーム
+								tr
+									td email
+									td メールアドレス
+								tr
+									td org
+									td 勤務先
+								tr
+									td photo
+									td 写真、アイコン、アバター
+								tr
+									td tel
+									td 電話番号
+								tr
+									td adr
+									td 住所
+								tr
+									td country-name
+									td 国
+								tr
+									td postal-code
+									td 郵便番号
+								tr
+									td region
+									td 都道府県
+								tr
+									td locality
+									td 市区町村
+								tr
+									td street-address
+									td 番地・建物
+							p='※ 指定できるすべてのプロパティ名についてはhCardの規格書（http://microformats.org/wiki/hcard）を参照してください。'
+							.alert.alert-warning NOTES: microdataでhCardのボキャブラリーを利用する
+							p='hCardのボキャブラリーはmicrofataで利用することもできます。たとえば、サンプルと同じ内容を明示するためには下のような情報を付加します。'
+							p
+								a.btn.btn-default(href='../demo/html/sample1/04/127.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')	
+								| &lt;dl itemscope itemtype="http://microformats.org/profile/hcard"&gt;
+								| 
+								| &lt;dt&gt;名前：&lt;/dt&gt;
+								| &lt;dd itemprop="fn"&gt;Hanako&lt;/dd&gt;
+								| 
+								| &lt;dt&gt;メールアドレス：&lt;/dt&gt;
+								| &lt;dd itemprop="email"&gt;hanako@web.mail&lt;/dd&gt;
+								| 
+								| &lt;dt&gt;勤務先：&lt;/dt&gt;
+								| &lt;dd itemprop="org"&gt;SUN DIARY社&lt;/dd&gt;
+								| 
+								| &lt;dt&gt;住所：&lt;/dt&gt;
+								| &lt;dd itemprop="adr" itemscope&gt;
+								|      &lt;span itemprop="region"&gt;東京都&lt;/span&gt;
+								|      &lt;span itemprop="locality"&gt;中央区&lt;/span&gt;
+								|      &lt;span itemprop="street-address"&gt;北1-1-1&lt;/span&gt;
+								| &lt;/dd&gt;
+								| 
+								| &lt;/dl&gt;
+							.alert.alert-warning NOTES: WAI-ARIA
+							p='WAI-ARIAは、動的なWebコンテンツやWebアプリケーションにおけるアクセシビリティの確保を目的と下規格で、role属性やaria-*属性を利用してWebページ上のパーツの役割や状態を示すことができます。HTML4.01／XHTML1.0では文法違反となっていましたが、HTML5では問題なく利用できるようになっています。'
+							p='role属性やaria-*属性で指定できる主な値は以下のようになっています。サンプルではrole属性を利用して、ナビゲーション部分を「navigation」、メインコンテンツを「main」、装飾目的で表示している画像を「presentation」と明示しています。'
+							p
+								a.btn.btn-default(href='../demo/html/sample1/04/128.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')	
+								| &lt;header&gt;
+								| &lt;div id="header_inner"&gt;
+								| &lt;h1&gt;&lt;img src="img/logo.png" alt="SUN DIARY"&gt;&lt;/h1&gt;
+								| &lt;nav role="navigation" aria-label="グローバルナビゲーション"&gt;
+								| &lt;ul&gt;
+								| &lt;li&gt;&lt;a href="news.html"&gt;NEWS&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="column.html"&gt;COLUMN&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="gift.html"&gt;GIFT&lt;/a&gt;&lt;/li&gt;
+								| &lt;li&gt;&lt;a href="contact.html"&gt;CONTACT&lt;/a&gt;&lt;/li&gt;
+								| &lt;/ul&gt;
+								| &lt;/nav&gt;
+								| &lt;/div&gt;
+								| &lt;/header&gt;
+								| 
+								| &lt;div id="main"&gt;
+								| 
+								| &lt;article role="main"&gt;
+								| &lt;header&gt;
+								| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+								| &lt;time datetime="2013-01-15"&gt;January 15, 2013&lt;/time&gt;
+								| &lt;/header&gt;
+								| 
+								| &lt;img src="img/tea.jpg" alt="" role="presentation"&gt;
+								| ...
+								| 
+								| &lt;/article&gt;
+							p
+								| Accesible Rich Internet Application (WAI-ARIA) 1.0
+								br
+								a(href='http://www.w3.org/TR/wai-aria/',target='_blank') http://www.w3.org/TR/wai-aria/
+							p ※ 指定できるすべての属性値については上記の規格書を参照してください。
+							table.table
+								tr
+									th role属性の値
+									th 明示できる内容
+								tr
+									td banner
+									td サイトに関する情報を含む部分
+								tr
+									td button
+									td ボタン
+								tr
+									td document
+									td Webアプリケーションではなく、ドキュメント主体のコンテンツ
+								tr
+									td main
+									td メインコンテンツ
+								tr
+									td navigation
+									td ナビゲーションの機能を持つ部分
+								tr
+									td presentation
+									td 視覚的なデザインのために用意した要素
+							table.table
+								tr
+									th aria-*属性
+									th 属性の値
+									th 明示できる内容
+								tr
+									td aria-controls
+									td ID
+									td 制御先の要素
+								tr
+									td aria-disabled
+									td true/false
+									td 要素の有効・無効状態
+								tr
+									td aria-expanded
+									td true/false
+									td 要素の開閉状態
+								tr
+									td aria-label
+									td テキスト
+									td ユーザーにとってわかりやすい名称
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='../js/google-code-prettify/prettify.js')

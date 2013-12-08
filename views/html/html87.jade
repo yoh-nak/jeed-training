@@ -119,6 +119,93 @@ include ../head2.jade
 							pre(class='prettyprint linenums:1')
 								| &lt;html lang="ja" xmlns:dc="http://purl.org/dc/terms/" xmlns:cc="http://creativecommons.org/ns#"&gt;
 								| ...
+							.alert.alert-warning NOTES: ライセンスを示すプロパティ名
+							p='サンプルではライセンスを「cc:license」というプロパティ名で示したましたが、下のように「license」というプロパティ名で示すこともできます。どちらのプロパティ名を利用した場合でもセマンティクスの上では同じ内容を示したことになります。'
+							p='「license」はXHTMLのボキャブラリー（http://www.w3.org/1999/xhtml/vocab/）で定義されたプロパティ名で、「xhv:license」と記述することもできます。また、このボキャブラリーも標準で定義されていますので、prefix属性でボキャブラリーを明示する必要はありません。'
+							p='なお、「license」という値は、HTML5では<a>や<link>のrel属性の値として定義されています。そのため、HTML5でライセンスのURLを明示すると、RDFaを意識していなくても、RDFaによって詳細を明示した形になります。'
+							pre(class='prettyprint linenums:1')
+								| &lt;p&gt;
+								| &lt;a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.ja"&gt;
+								| &lt;img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/88x31.png"&gt;
+								| &lt;/a&gt;
+								| ...
+								| &lt;a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.ja"&gt;
+								| Creative Commons 表示 - 非営利 - 改変禁止 3.0 非移植 License
+								| &lt;/a&gt;.
+								| &lt;/p&gt;
+							.alert.alert-warning NOTES: RDFaでschema.orgのボキャブラリーを利用する
+							p='schema.orgのボキャブラリーはRDFaで利用することもできます。たとえば、サンプルの内容をRDFaとschema.orgのボキャブラリーで明示すると、下のようになります。'
+							p
+								a.btn.btn-default(href='../demo/html/sample1/04/124-1.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;article vocab="http://schema.org/" typeof="Article"&gt;
+								| &lt;header&gt;
+								| 
+								| &lt;h1 property="name"&gt;Short Tea Breaks&lt;/h1&gt;
+								| &lt;time property="datePublished" datetime="2013-01-15"&gt;January 15, 2013&lt;/time&gt;
+								| &lt;/header&gt;
+								| 
+								| &lt;img property="image" src="img/tea.jpg" alt=""&gt;
+								| 
+								| &lt;p property="description"&gt;世界中にはたくさんのお茶があります。緑茶に紅茶、ウーロン茶など、その製法や味わいもさまざまですが、リラックスしたり、ちょっと休憩したいときなどには欠かすことができません。お茶のお供に、おいしいお菓子もあると幸せな気分になってしまいます。&lt;/p&gt;
+								| ...
+								| &lt;/article&gt;
+							.alert.alert-warning NOTES: FacebookとOGP
+							p='ボキャブラリーとしてOGP（Open Graph Protocol）を利用し、ページのタイトルや画像などを明示しておくと、Facebookからページを参照したときに抽出され、ページの概要として表示されます。また、Google+などでも利用されるようになっています。'
+							p
+								a.btn.btn-default(href='../demo/html/sample1/04/124-2.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')
+								| &lt;!DOCTYPE html&gt;
+								| &lt;html lang="ja"&gt;
+								| &lt;head&gt;
+								| …
+								| 
+								| &lt;meta property="og:type" content="article"&gt;
+								| &lt;meta property="og:title" content="Short Tea Breaks - ちょっとしたお茶の時間"&gt;
+								| &lt;meta property="og:url" content="http://sun.web/tea.html"&gt;
+								| &lt;meta property="og:image" content="http://sun.web/img/tea-thumb.jpg"&gt;
+								| &lt;meta property="og:site_name" content="SUN DIARY"&gt;
+								| &lt;meta property="og:description" content="緑茶に紅茶、ウーロン茶など、さまざまなお茶のおいしさと楽しみ方について"&gt;
+								| &lt;/head&gt;
+							p='ページのタイトルなどは<meta>のcontent属性で示し、property属性でプロパティ名を付加します。ここでは、OGPで定義された下のプロパティ名を利用しています。'
+							p='なお、OGPは標準で定義されていますので、prefix属性でボキャブラリーを明示する必要はありません。'
+							p='※ FacebookのアプリケーションIDを示す「fg:app_id」といったプロパティを利用する場合、ボキャブラリーが標準では定義されていないため、「prefix="fb: http://ogp.me/ns/fb#"」でボキャブラリーを明示することが求められます。'
+							table.table
+								tr
+									th プロパティ名
+									th 明示する内容
+								tr
+									td og:type
+									td コンテンツの種類
+								tr
+									td og:title
+									td ページのタイトル
+								tr
+									td og:url
+									td ページのURL
+								tr
+									td og:image
+									td ページの画像
+								tr
+									td og:site_name
+									td サイト名
+								tr
+									td og:description
+									td ページの概要
+								tr
+									td og:email
+									td 連絡先メールアドレス
+							p='※ 指定できるすべてのプロパティ名についてはOGPのサイト（http://ogp.me/）やFacebookのテクニカルガイド（https://developers.facebook.com/docs/technical-guides/opengraph/）を参照してください。'
+							.alert.alert-warning NOTES: RDFa 1.1のバリデータ
+							p='RDFa 1.1 Validatorを利用すると、RDFaの記述に問題がないかをチェックすることができます。'
+							p
+								| RDFa 1.1 Validator
+								br
+								a(href='http://www.w3.org/2012/pyRdfa/Validator.html',target='_blank') http://www.w3.org/2012/pyRdfa/Validator.html
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='../js/google-code-prettify/prettify.js')

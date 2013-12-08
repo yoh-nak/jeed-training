@@ -11,7 +11,34 @@ include ../head2.jade
 							i.glyphicon.glyphicon-book
 							| &nbsp;未対応ブラウザへの対応
 						.panel-body
-							p 
+							.alert.alert-info html5shivの活用
+							p='主要なブラウザでは、未対応な要素にもスタイルシートが適用されます。そのため、スタイルシートの設定により、レイアウト崩れがないように対応することが可能です。'
+							p='しかし、Internet Explorer 8（IE8）以前では未対応な要素にはスタイルシートが適用されないという問題が発生します。そのため、IE8ではHTML5で新しく追加された要素にスタイルシートが適用されず、レイアウトが崩れるという問題が発生します。'
+							p='この問題を回避するためには、「html5shiv」というライブラリを活用します。下のサイトからzipファイルをダウンロードして解凍すると、distフォルダの中に次の2つのファイルが入っています。'
+							p
+								| html5shiv
+								br
+								a(href='http://code.google.com/p/html5shiv/') http://code.google.com/p/html5shiv/
+							ul
+								li html5shiv.js
+								li html5shiv-printshiv.js
+							p='ブラウザ画面での表示のみに対応する場合はhtml5shiv.jsを、画面表示と印刷時の出力の両方に対応する場合はhtml5shiv-printshiv.jsを利用します。'
+							p='たとえば、html4shiv.jsを利用するためには下のように<script>の設定を追加します。この設定はIE8以前で表示した場合にのみ適用するため、<!--[if lt IE 9]>〜<![endif]-->でマークアップしておきます。これで、IE8でもサンプルが以下のように表示されるようになります。'
+							p
+								a.btn.btn-default(href='../demo/html/sample1/03/062.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							pre(class='prettyprint linenums:1')	
+								| &lt;!DOCTYPE html&lt;
+								| &lt;html lang="ja"&lt;
+								| &lt;head&lt; 
+								| &lt;meta charset="UTF-8"&lt; 
+								| &lt;title&lt;SAMPLE&lt;/title&lt;
+								| ...
+								| &lt;!--[if lt IE9]&lt;
+								| 
+								| &lt;!--[endif]--&lt;
+								| &lt;/head&lt;
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='../js/google-code-prettify/prettify.js')

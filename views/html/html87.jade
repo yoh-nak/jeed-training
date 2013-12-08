@@ -106,6 +106,19 @@ include ../head2.jade
 							p='作品のクレジットは「cc:attributionName」というプロパティ名で明示します。「cc:attributionName」の「cc:」はクリエイティブ・コモンズのccRELのボキャブラリーであることを表しています。'
 							h4 作品のライセンス
 							p='作品のライセンスはクリエイティブ・コモンズのURLで明示するため、<a>のhref属性でURLを示し、rel属性で「cc:license」というプロパティ名を付加します。このプロパティ名も、cc:attributionNameと同じようにccRELのボキャブラリーとなっています。'
+							.alert.alert-warning NOTES: 利用するボキャブラリーの明示
+							p='RDFaで利用するボキャブラリーは、prefix属性で明示することができます。たとえば、Dublin CoreとccRELの利用を明示する場合は、下のように記述します。'
+							p='ただし、RDFa 1.1では主要ボキャブラリーが標準で定義されており、定義済みのボキャブラリーについてはprefix属性で明示する必要がなくなっています。Dublin CoreとccRELも定義済みとなっていますので、明示しなくても問題ありません。標準で定義されているボキャブラリーについては下のページを参照してください。'
+							pre(class='prettyprint linenums:1')='<html lang="ja" prefix="dc: http://purl.org/dc/terms/ cc: http://creativecommons.org/ns#">'
+							p
+								| RDFa Core Initial Context
+								br
+								a(href='http://www.w3.org/2011/rdfa-context/rdfa-1.1',target='_blank') http://www.w3.org/2011/rdfa-context/rdfa-1.1
+							.alert.alert-success DIFFERENCES: 
+							p='RDFa 1.0以前では、利用するボキャブラリーをxmlns属性で下のように明示する必要がありました。しかし、RDFa 1.1ではxmlns属性は非推奨となっていますので注意が必要です。'
+							pre(class='prettyprint linenums:1')
+								| &lt;html lang="ja" xmlns:dc="http://purl.org/dc/terms/" xmlns:cc="http://creativecommons.org/ns#"&gt;
+								| ...
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='../js/google-code-prettify/prettify.js')

@@ -43,6 +43,17 @@ include ../head2.jade
 							pre
 								| jade &lt;ファイル名&gt;.jade
 							hr
+							h4 複数のファイルをまとめてコンパイル
+							pre
+								| jade {ファイル名,ファイル名}.jade
+							hr
+							h4 全てのファイルをコンパイル
+							pre
+								| jade *.jade
+							h4 ファイル名を変えてコンパイル
+							pre
+								| jade &lt;ファイル名&gt;.jade ファイル名.html 
+							hr
 							h4 ファイルを整形してコンパイル
 							pre
 								| jade &lt;ファイル名&gt;.jade --pretty
@@ -55,11 +66,23 @@ include ../head2.jade
 							pre
 								| jade &lt;ファイル名&gt;.jade -o &lt;ディレクトリ名&gt;
 							hr
+							h4 全てのファイルの出力先のディレクトリを指定してコンパイル
+							pre
+								| jade *.jade --out &lt;ディレクトリ名&gt;
+							pre
+								| jade *.jade -o &lt;ディレクトリ名&gt;
+							hr
 							h4 ファイルの変更を監視して自動的にコンパイル
 							pre
 								| jade -w &lt;ファイル名&gt;.jade
 							pre
 								| jade --watch &lt;ファイル名&gt;.jade
+							hr
+							h4 全てのファイルを監視して自動的にコンパイル
+							pre
+								| jade -w * -P
+							pre
+								| jade --watch * --pretty
 							hr
 							h4 エラーメッセージを表示せずにコンパイル
 							pre

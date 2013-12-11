@@ -1,0 +1,212 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;スタイルシートの利用
+						.panel-body
+							.alert.alert-info スタイルシートの利用
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png')
+									td
+										img(src='../images/ic-android.png')
+									td
+										img(src='../images/ic-firefox.png')
+									td
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td
+										img(src='../images/ic-opera.png')
+									td
+										img(src='../images/ic-ie.png')
+							p ※ IE7以前は部分対応
+							p="外部スタイルシート"
+							pre='<link rel="stylesheet" href="CSSファイル">'
+							pre='@import url("CSSファイル")'
+							p='内部スタイルシート'
+							pre='<style> 設定 </style>'
+							p='インラインスタイルシート'
+							pre='<ELEMENT style="設定">'
+							p
+								| CSSファイル・・・外部スタイルシートファイル（〜.css）のURL<br>
+								| 設定・・・スタイルシートの設定
+							table.table
+								tr
+									td 初期値
+									td -
+								tr
+									td 継承
+									td -
+								tr
+									td 適用先
+									td -
+								tr
+									td 比率
+									td -
+								tr
+									td モジュール
+									td Syntax
+						//	
+							p='opacityプロパティを利用するとボックスの透明度を指定することができます。0で完全な透明に、1.0で不透明になります。'
+							hr
+							h4 SAMPLE A: 基本
+							p='下のサンプルは、ページの背景に横縞の画像（stripe.png）を、<h2>が構成するボックスの背景の木目画像（wood.jpg）を表示したものです。<h2>のopacityプロパティの値を「0.6」にすると、ボックスが半透明になり、横縞の画像が透けて見えるようになります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/03/119.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;body&gt;
+									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+									| &lt;/body&gt;
+								figcaption 119.html
+							figure
+								pre(class='prettyprint linenums:1')
+									| body
+									| 	h2 HAM SANDWICHES
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| body {
+									|     background-image: url(stripe.png);
+									| }
+									| 
+									| h2 {
+									|     font-family: 'Arial Black';
+									|     background-image: url(wood.jpg);
+									|     color: white;
+									|     opacity: 0.6;
+									| }
+							figure
+								pre(class='prettyprint linenums:1')
+									| body
+									| 	background-image url(stripe.png)
+									| h2
+									| 	font-family 'Arial Black'
+									| 	background-image: url(wood.jpg)
+									| 	color white
+									| 	opacity 0.6
+								figcaption （stylus）
+							.alert.alert-info IE NOTES: CSS Color Module Level 3への採用が見送られた機能
+							p='いくつかの機能は「CSS Color Module Level 3」での採用が見送られ、将来的なバージョンでの採用が考えられています。採用が見送られた機能はICCカラープロファイル関連のプロパティなどとなっています。'
+							table.table
+								tr
+									th 採用が見送られた機能
+								tr
+									td: ul
+										li color-profileプロパティ
+										li rendering-intentプロパティ
+										li @color-profile
+										li システムカラー名「flavor」
+							.alert.alert-success Polyfill: 
+							p パターン①
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;!DOCTYPE html&gt;
+									| &lt;html lang="ja"&gt;
+									| &lt;head&gt;
+									| ...
+									| 
+									| &lt;body&gt;
+									| &lt;h2&gt;HAM SANDWICHES&lt;/h1&gt;
+									| &lt;/body&gt; 
+							figure
+								pre(class='prettyprint linenums:1')
+									| !!!
+									| html(lang='ja')
+									| 	head
+									| 	body
+									| 		h2 HAM SANDWICHES
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| body
+									| 	background-image url(stripe.png)
+									| h2
+									| 	font-family 'Arial Black'
+									| 	background-image url(wood.jpg)
+									| 	color white
+									| 	-ms-filter "alpha(opacity=60)" /*! IE8 */
+									| 	opacity 0.6 /*! その他 */
+							figure
+								pre(class='prettyprint linenums:1')
+									| body
+									|     background-image　url(stripe.png)
+									| 
+									| h2
+									|     font-family　'Arial Black'
+									|     background-image　url(wood.jpg)
+									|     color　white
+									|     -ms-filter　"alpha(opacity=60)" // IE8
+									|     opacity　0.6 // その他				
+								figcaption （stylus）
+							p パターン②
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;!DOCTYPE html&gt;
+									| &lt;!--[if IE 8 ]&gt;&lt;html lang="ja" class="ie8"&gt;&lt;![endif]--&gt;
+									| &lt;!--[if !(IE) ]&gt;&lt;!--&gt;&lt;html lang="ja"&gt;&lt;!--&lt;![endif]--&gt;
+									| &lt;head&gt;
+									| ...
+									| 
+									| &lt;body&gt;
+									| &lt;h2&gt;HAM SANDWICHES&lt;/h1&gt;
+									| &lt;/body&gt; 
+							figure
+								pre(class='prettyprint linenums:1')
+									| !!!
+									| | &lt;!--[if IE 8 ]&gt;&lt;html lang="ja" class="ie8"&gt;&lt;![endif]--&gt;
+									| | &lt;!--[if !(IE) ]&gt;&lt;!--&gt;
+									| html(lang='ja')
+									| 	| &lt;!--&lt;![endif]--&gt;
+									| 	head
+									| 	body
+									| 		h2 HAM SANDWICHES
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| body {
+									|     background-image: url(stripe.png);
+									| }
+									| 
+									| h2 {
+									|     font-family: 'Arial Black';
+									|     background-image: url(wood.jpg);
+									|     color: white;
+									|     opacity: 0.6;
+									| }
+									| /* IE8 */
+									| .ie8 h2 {
+									|     -ms-filter: "alpha(opacity=60)";
+									| } 
+							figure
+								pre(class='prettyprint linenums:1')
+									| body
+									| 	background-image url(stripe.png)
+									| h2
+									| 	font-family 'Arial Black'
+									| 	background-image url(wood.jpg)
+									| 	color white
+									| 	opacity 0.6
+									| /*! IE8 */
+									| .ie8
+									| 	h2
+									| 		-ms-filter "alpha(opacity=60)" 
+								figcaption （stylus）
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

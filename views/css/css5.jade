@@ -772,6 +772,43 @@ include ../head2.jade
 								figcaption （Jade）
 							hr
 							h4 ユーザーアクション擬似クラス :hover / :focus / :active
+							p='ユーザーアクション疑似クラスの「:hover」、「:focus」、「:active」を利用すると、要素にカーソルを重ねたとき、フォーカスしたとき、クリックしたときにスタイルシートを適用することができます。ここでは、それぞれの状態のときにオレンジ色、ピンク色、赤色で表示するように指定しています。'
+							p='なお、リンク疑似クラスと異なり、ユーザーアクション疑似クラスは<a>でマークアップした部分以外にも適用することができます。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| a:link {
+									|     color: green;
+									| }
+									| a:visited {
+									|     color: gray;
+									| }
+									| a:hover {
+									|     color: orange;
+									| }
+									| a:focus {
+									|     color: hotpink;
+									| }
+									| a:active {
+									|     color: red;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| a
+									| 	&amp;:link
+									| 		color green
+									| 	&amp;:visited
+									| 		color gray
+									| 	&amp;:hover
+									| 		color orange
+									| 	&amp;:focus
+									| 		color hotpink
+									| 	&amp;:active
+									| 		color red
+								figcaption （stylus）
+							p='タッチパネルのデバイスではカーソルを重ねた状態と、クリックした状態の区別ができません。そのため、:hoverと:activeの適用に関しては、タッチパネル独特の反応になります。'
+							p='スタイルシートは後から記述した設定に応じて表示に反映させるtめには、「:link」、「:visited」、「:hover」、「:focus」、「:active」の順に記述する必要があります。'
+							p='リンクに表示される下線を削除するためには、text-decorationプロパティの値を「none」と指定します。'
 							hr
 							h4 ターゲット擬似クラス :target
 							hr

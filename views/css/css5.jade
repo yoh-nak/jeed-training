@@ -656,6 +656,78 @@ include ../head2.jade
 									| 	li.ham ハム&amp;チーズサンド
 									| 	li.ham-egg 卵&amp;野菜サンド
 									| 	li.daily.egg.ham 日替わりサンド
+								figcaption （Jade）
+							p='属生命と値の両方が完全に一致する場合だけに適用することもできます。たとえば、[class="ham"]と指定すると、class属性の値を「ham」と指定した要素が適用先となります。'
+							p <mark>※.ham（クラスセレクター）の場合はスペース区切りのクラスも適用されますが、属性セレクターの場合は区別されます。</mark>
+							figure
+								pre(class='prettyprint linenums:1')
+									| [class="ham"] {
+									| 	color: hotpink;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| [class="ham"]
+									| 	color hotpink
+								figcaption （stylus）
+							p='class属性の値の一部が「ham」と一致する場合に適用することも可能です。その場合は[class*=ham]と指定します。ここではどのclass属性の値にも「ham」が含まれるため、すべての文字がピンク色になります。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| [class*="ham"] {
+									| 	color: hotpink;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| [class*="ham"]
+									| 	color hotpink
+								figcaption （stylus）
+							p='[class^ham]と指定すると、class属性の値が「ham」で始まる要素に適用することができます。ここでは値を「ham」や「ham-egg」と指定した要素が適用先となります。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| [class^="ham"] {
+									| 	color: hotpink;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| [class^="ham"]
+									| 	color hotpink
+								figcaption （stylus）
+							p='[class$=ham]と指定すると、class属性の値が「ham」で終わる要素に適用することができます。ここでは値を「ham」や「daily egg ham」と指定した要素に適用されます。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| [class$="ham"] {
+									| 	color: hotpink;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| [class$="ham"]
+									| 	color hotpink
+								figcaption （stylus）
+							p='[class~="ham"]と指定すると、class属性の値がスペース区切りの語句のリストで「ham」という語句を含む場合に適用されます。ここでは値を「ham」や「daily egg ham」と指定した要素が適用先となります。「ham-egg」はスペース区切りの語句ではないため、適用先となりません。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| [class~="ham"] {
+									| 	color: hotpink;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| [class~="ham"]
+									| 	color hotpink
+								figcaption （stylus）
+							p='[class|="ham"]と指定すると、class属性の値がハイフン区切りの語句のリストで、最初の語句が「ham」の場合に適用されます。ここでは値を「ham」や「ham-egg」と指定した要素が適用先となります。「daily egg ham」はハイフン区切りの語句ではないため、適用先となりません。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| [class|="ham"] {
+									| 	color: hotpink;
+									| }
+							figure
+								pre(class='prettyprint linenums:1')
+									| [class|="ham"]
+									| 	color hotpink
 							hr
 							h4 リンク擬似クラス :link / :visited
 							hr

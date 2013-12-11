@@ -88,7 +88,7 @@ include ../head2.jade
 									| 	color white;
 									| 	opacity 0.6;
 								figcaption （stylus）
-							.alert.alert-success IE NOTES: CSS Color Module Level 3への採用が見送られた機能
+							.alert.alert-info IE NOTES: CSS Color Module Level 3への採用が見送られた機能
 							p='いくつかの機能は「CSS Color Module Level 3」での採用が見送られ、将来的なバージョンでの採用が考えられています。採用が見送られた機能はICCカラープロファイル関連のプロパティなどとなっています。'
 							table.table
 								tr
@@ -99,6 +99,59 @@ include ../head2.jade
 										li rendering-intentプロパティ
 										li @color-profile
 										li システムカラー名「flavor」
+							.alert.alert-success Polyfill: 
+							p パターン①
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;!DOCTYPE html&gt;
+									| &lt;html lang="ja"&gt;
+									| &lt;head&gt;
+									| ...
+									| 
+									| &lt;body&gt;
+									| &lt;h2&gt;HAM SANDWICHES&lt;/h1&gt;
+									| &lt;/body&gt; 
+							figure
+								pre(class='prettyprint linenums:1')
+									| body {
+									|     background-image: url(stripe.png);
+									| }
+									| 
+									| h2 {
+									|     font-family: 'Arial Black';
+									|     background-image: url(wood.jpg);
+									|     color: white;
+									|     -ms-filter: "alpha(opacity=60)"; /* IE8 */
+									|     opacity: 0.6; /* その他 */
+									| } 
+							p パターン②
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;!DOCTYPE html&gt;
+									| &lt;!--[if IE 8 ]&gt;&lt;html lang="ja" class="ie8 oldie"&gt;&lt;![endif]--&gt;
+									| &lt;!--[if !(IE) ]&gt;&lt;!--&gt;&lt;html lang="ja"&gt;&lt;!--&lt;![endif]--&gt;
+									| &lt;head&gt;
+									| ...
+									| 
+									| &lt;body&gt;
+									| &lt;h2&gt;HAM SANDWICHES&lt;/h1&gt;
+									| &lt;/body&gt; 
+							figure
+								pre(class='prettyprint linenums:1')
+									| body {
+									|     background-image: url(stripe.png);
+									| }
+									| 
+									| h2 {
+									|     font-family: 'Arial Black';
+									|     background-image: url(wood.jpg);
+									|     color: white;
+									|     opacity: 0.6;
+									| }
+									| /* IE8 */
+									| .ie8 h2 {
+									|     -ms-filter: "alpha(opacity=60)";
+									| } 
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='../js/google-code-prettify/prettify.js')

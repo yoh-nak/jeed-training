@@ -366,7 +366,7 @@ include ../head2.jade
 									td ×
 									td ○
 								tr
-									td(colspan='2') ::before、::after疑似要素
+									td(rowspan='2') ::before、::after疑似要素
 									td ::before
 									td 要素の前に挿入したコンテンツ。
 									td ×
@@ -382,7 +382,66 @@ include ../head2.jade
 									td ○
 							p='※・・・「::」の記述に未対応です。利用する場合は「:before」「:after」と記述します。'
 							.alert.alert-info 結合子
+							p='結合子（+など）を利用し、ドキュメントの構造で要素を指定します。'
+							table.table
+								tr
+									th 分類
+									th セレクタ
+									th 適用先
+									th IE6
+									th IE7
+									th IE8
+									th IE9
+								tr
+									td 子孫セレクタ
+									td A B
+									td A要素の階層下のすべてのB要素。
+									td ○
+									td ○
+									td ○
+									td ○
+								tr
+									td 子セレクタ
+									td A &gt; B
+									td A要素の1階層下のB要素。
+									td ×
+									td ○
+									td ○
+									td ○
+								tr
+									td 兄弟セレクタ（隣接セレクタ）
+									td A + B
+									td A要素の直後に記述した同階層のB要素。
+									td ×
+									td ○
+									td ○
+									td ○
+								tr
+									td 兄弟セレクタ（間接セレクタ）
+									td A ~ B
+									td A要素の後に記述したすべての同階層のB要素。
+									td ×
+									td ○
+									td ○
+									td ○
 							.alert.alert-info グループ化
+							p='複数の要素を指定します。'
+								tr
+									th 分類
+									th セレクタ
+									th 適用先
+									th IE6
+									th IE7
+									th IE8
+									th IE9
+								tr
+									td グルール化
+									td A, B
+									td A要素とB要素の両方に適用。
+									td ○
+									td ○
+									td ○
+									td ○
 							hr
 							h4 タイプセレクタ ELEMENT
 							hr

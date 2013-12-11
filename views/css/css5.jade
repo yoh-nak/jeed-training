@@ -810,6 +810,10 @@ include ../head2.jade
 							h4 ユーザーアクション擬似クラス :hover / :focus / :active
 							p='ユーザーアクション疑似クラスの「:hover」、「:focus」、「:active」を利用すると、要素にカーソルを重ねたとき、フォーカスしたとき、クリックしたときにスタイルシートを適用することができます。ここでは、それぞれの状態のときにオレンジ色、ピンク色、赤色で表示するように指定しています。'
 							p='なお、リンク疑似クラスと異なり、ユーザーアクション疑似クラスは<a>でマークアップした部分以外にも適用することができます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/01/022-hover.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
 							figure
 								pre(class='prettyprint linenums:1')
 									| a:link {
@@ -847,6 +851,38 @@ include ../head2.jade
 							p='リンクに表示される下線を削除するためには、text-decorationプロパティの値を「none」と指定します。'
 							hr
 							h4 ターゲット擬似クラス :target
+							p='<a href="〜">では特定のIDを指定して、ページ内をジャンプすることができます。ターゲット疑似クラス「:target」を利用すると、ページ内ジャンプのリンクをクリックしたときに、ジャンプ先の要素に対してスタイルシートを適用することができます。'
+							p='たとえば、下のサンプルでは<div id="photo">でマークアップした部分を緑色の背景色で表示したものです。その下には「Click」というリンクを用意して、ジャンプ先を「#photo」と指定しています。これでリンクをクリックすると、#photo:target {〜}の設定が<div id="photo">に適用され、background-imageプロパティで指定した背景画像が表示されます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/01/022-target.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| #photo {
+									|     background-color: yellowgreen;
+									| }
+									| #photo:target {
+									|     background-image: url(sandwiches.jpg);
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #photo
+									| 	background-color yellowgreen
+									| 	&amp;:target
+									| 		background-image url(sandwiches.jpg)
+								figcaption （stylus）
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;div id="photo"&gt;HAM SANDWICHES&lt;/div&gt;
+									| &lt;div&gt;&lt;a href="#photo"&gt;CLICK&lt;/a&gt;&lt;/div&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #photo HAM SANDWICHES
+									| div: a(href='#photo') CLICK
+								figcaption （Jade）
 							hr
 							h4 言語擬似クラス :lang()
 							hr

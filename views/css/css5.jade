@@ -1,0 +1,157 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;セレクター
+						.panel-body
+							.alert.alert-info セレクター
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png')
+									td
+										img(src='../images/ic-android.png')
+									td
+										img(src='../images/ic-firefox.png')
+									td
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td
+										img(src='../images/ic-opera.png')
+									td
+										img(src='../images/ic-ie.png')
+							p ※ IE8以前は部分対応
+							pre
+								| selector {property: value; }
+							p
+								| selector・・・セレクター<br>
+								| property・・・プロパティ名<br>
+								| value・・・プロパティの値
+							table.table
+								tr
+									td 初期値
+									td -
+								tr
+									td 継承
+									td -
+								tr
+									td 適用先
+									td -
+								tr
+									td 比率
+									td -
+								tr
+									td モジュール
+									td Selectors
+							p='スタイルシートの設定では、要素ごとのデザインを下のようにプロパティ名と値のセット（宣言）でしていします。たとえば、文字の色を赤色にしたい場合には、プロパティの値を「red」と指定します。'
+							pre='h1 {color: red;}'
+							p='どの要素のデザインであるかはセレクタで指定します。たとえば、 「h1」と指定すると<h1>でアークアップした部分の文字の色が赤色になります。'
+							p='要素をより限定するためには、複数のセレクタをつなげて記述します。たとえば、タイプセレクタの「h1」とIDセレクタの「#title」をつなげて「h1#title」と指定すると、<h1 id="title">でマークアップした部分のデザインを指定することができます。'
+							pre='h1#title {color: red;}'
+							p='CSS3の「Selectors Level3」で定義されたセレクタは以下のようになっており、組み合わせることでさまざまな条件で要素を指定することが可能です。これらのセレクタには各ブラウザが対応済みですが、IE8以前のバージョンに関しては対応にばらつきがありますので、バージョンごとの対応状況を掲載しています。'
+							.alert.alert-info シンプルセレクタ
+							p='「シンプルセレクタ」として分類されている基本的なセレクタです。'
+							table.table
+								tr
+									th 分類
+									th セレクタ
+									th 適用先
+									th IE6
+									th IE7
+									th IE8
+									th IE9
+								tr
+									td タイプセレクタ
+									td ELEMENT
+									td 指定した名前の要素。
+									td ○○○○
+								tr
+									td ユニバーサルセレクタ
+									td *
+									td すべての要素。
+									td ×
+									td ○
+									td ○
+									td ○
+								tr
+									td クラスセレクタ
+									td .class
+									td クラス名が「class」の要素。
+									td △※
+									td ○
+									td ○
+									td ○
+								tr
+									td IDセレクター
+									td #id
+									td IDが「id」の要素。
+									td ○
+									td ○
+									td ○
+									td ○
+								tr
+									td(rowspan='7') 属性セレクタ
+									td [att]
+									td 属性attが指定された要素。
+									td ×
+									td ○
+									td ○
+									td ○
+								tr
+									td [att="val"]
+									td 属性attの値が「val」の要素。
+									td ×
+									td ○
+									td ○
+									td ○
+								tr
+									td [att~="val"]
+									td 属性attの値に「val」というスペース区切りの語句がある要素。
+									td ×
+									td ○
+									td ○
+									td ○
+								tr
+									td [att|="val"]
+									td 属性attの値に「val」というハイフン（-）区切りの語句から始まる要素。
+									td ×
+									td ○
+									td ○
+									td ○
+								tr
+									td [att^="val"]
+									td 属性attの値が「val」で始まる要素。
+									td ×
+									td ○
+									td ○
+									td ○
+								tr
+									td [att$="val"]
+									td 属性attの値が「val」で終わる要素。
+									td ×
+									td ○
+									td ○
+									td ○
+								tr
+									td [att*="val"]
+									td 属性attの値の一部に「val」が含まれる要素。
+									td ×
+									td ○
+									td ○
+									td ○
+							p='※・・・複数のクラス名を指定する「.class.class」の記述に未対応です。'
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

@@ -724,12 +724,52 @@ include ../head2.jade
 									| [class|="ham"] {
 									| 	color: hotpink;
 									| }
+								figcaption （CSS）
 							figure
 								pre(class='prettyprint linenums:1')
 									| [class|="ham"]
 									| 	color hotpink
+								figcaption （stylus）
 							hr
 							h4 リンク擬似クラス :link / :visited
+							p='<a>でマークアップしてリンクを設定すると、文字が青色になり、下線を引いた形で表示されます。これはリンク先にアクセスしていない場合の表示で、アクセス済みの場合は紫色になります。'
+							p='こうしたリンクのデザインを変更するには、リンク疑似クラスを利用します。セレクタを「:link」と指定するとアクセスしていないリンクに、「:visited」と指定するとアクセス済みのリンクにスタイルシートを適用することができます。ここでは、アクセスしていないリンクを緑色に、アクセス済みのリンクを灰色で表示するようにしています。'
+							p='なお、:linkと:visitedの指定は<a>でマークアップした部分に対してのみ機能します。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| a:link {
+									| 	color: green;
+									| }
+									| a:visited {
+									| 	color: gray;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| a
+									| 	&amp;:link
+									| 		color green
+									| 	&amp;:visited
+									| 		color gray
+								figcaption （stylus）
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;ul&gt;
+									| &lt;li&gt;&lt;a href="..."&gt;ハム&amp;チーズサンド&lt;/a&gt;&lt;/li&gt;
+									| &lt;li&gt;&lt;a href="..."&gt;卵&amp;野菜サンド&lt;/a&gt;&lt;/li&gt;
+									| &lt;li&gt;&lt;a href="...".日替わりサンド&lt;/a&gt;&lt;/li&gt;
+									| &lt;/ul&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| ul
+									| 	li
+									| 		a(href='...') ハム&amp;チーズサンド
+									| 	li
+									| 		a(href='...') 卵&amp;野菜サンド
+									| 	li
+									| 		a(href='...')
+								figcaption （Jade）
 							hr
 							h4 ユーザーアクション擬似クラス :hover / :focus / :active
 							hr

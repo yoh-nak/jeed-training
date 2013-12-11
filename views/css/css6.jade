@@ -132,14 +132,105 @@ include ../head2.jade
 								figcaption （HTML）
 							figure
 								pre(class='prettyprint linenums:1')
+									| link(rel='stylesheet', href='style.css', type='text/css')
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
 									| &lt;style type="text/css"&gt;
 									| h1 {color: red;}
 									| &lt;/style&gt;
 								figcaption （HTML）
-
+							figure
+								pre(class='prettyprint linenums:1')
+									| style(type='text/css').
+									| 	h1 {
+									| 		color: red;
+									| 	}
 							.alert.alert-info media属性でメディアクエリを指定する
+							p='<link>と<style>では、media属性でメディアクエリを指定し、出力デバイスに応じてスタイルシートを適用することができます。たとえば、ブラウザ画面の横幅が500ピクセル以下の場合に適用するためには、下のように指定します。'
+							figure
+								pre(class='prettyprint linenums:1')='<link rel="stylesheet" media="all and (max-width: 500px)">'
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| link(rel='stylesheet', media='all and (max-width: 500px)')
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;style media="all and (max-width: 500px)"&gt;
+									| ...
+									| &lt;/style&gt;
+							figure
+								pre(class='prettyprint linenums:1')
+									| style(media='all and (max-width: 500px)').
+									|     ...
+							p='また、@importでも下のような形でメディアクエリを指定することができます。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| @import url("style.css") all and (max-width: 500px);
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| @media all and (max-width: 500px){
+									| 	@import url(style.css)
+									| }
+								figcaption （stylus）
 							.alert.alert-info エンコードの種類
+							p='外部スタイルシートは適用先のHTMLファイルと同じエンコードとして扱われます。しかし、エンコードが異なる場合などには@charsetでエンコードの種類を明示することができます。たとえば、UTF-8であることを示すためには、下のように指定します。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| @charset "UTF-8";
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| @charset "UTF-8"
+								figcaption （stylus）
 							.alert.alert-info スタイルシートの優先順位
+							p='外部スタイルシート、内部スタイルシート、インラインスタイルシートには優先順位があり、基本的には後から記述した設定の優先順位が高くなります。'
+							p='たとえば、下のサンプルは<h1>でマークアップした見出しの背景色をbackground-colorプロパティで指定したものです。外部スタイルシートではピンク色に、内部スタイルシートでは緑色に、インラインスタイルシートでは黄色に指定してあります。'
+							p='このとき、<link>よりも<style>を後に記述していますので、外部スタイルシートよりも内部スタイルシートの優先順位が高くなります。しかし、その後に記述したインラインスタイルシートの設定が最も優先されますので、<h1>の背景は黄色で表示されます。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1 {
+									| 	background-color: pink;
+									| 	font-family: 'Arial Black', sans-serif;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1
+									| 	background-color pink
+									| 	font-family 'Arial Black', sans-serif
+								figcaption （stylus）
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;head&gt;
+									| &lt;title&gt;SAMPLE&lt;/title&gt;
+									| &lt;link rel="stylesheet" media="all" href="style.css"&gt;
+									| &lt;style media="all"&gt;
+									| h1 {
+									|     background-color: green yellow;
+									| }
+									| &lt;/style&gt;
+									| &lt;/head&gt;
+									| &lt;body&gt;
+									|     &lt;h1 style="background-color:yellow;"&gt;
+									|     HAM SANDWICHES
+									|     &lt;/h1&gt;
+									| &lt;/body&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| head
+									| 	title SAMPLE
+									| 	link(rel='stylesheet', media='all', href='style.css')
+									| 	style(media='all').
+									| 		h1 {
+									| 			background-color: green yellow;
+									| 		}
+									| body
+									| 	h1(style='background-color: yellow;')
+									| 		| HAM SANDWICHES
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='../js/google-code-prettify/prettify.js')

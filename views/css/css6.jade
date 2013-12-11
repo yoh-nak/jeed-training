@@ -55,154 +55,80 @@ include ../head2.jade
 								tr
 									td モジュール
 									td Syntax
-						//	
-							p='opacityプロパティを利用するとボックスの透明度を指定することができます。0で完全な透明に、1.0で不透明になります。'
+							p='スタイルシートを利用すると、Webページのデザインやレイアウトを調節することができます。利用するためには、スタイルシートの設定を外部スタイルシート、内部スタイルシート、インラインスタイルシートのいずれかの形で用意し、Webページに適用します。'
+							p='IE7以前のバージョンは@importに未対応です。'
 							hr
-							h4 SAMPLE A: 基本
-							p='下のサンプルは、ページの背景に横縞の画像（stripe.png）を、<h2>が構成するボックスの背景の木目画像（wood.jpg）を表示したものです。<h2>のopacityプロパティの値を「0.6」にすると、ボックスが半透明になり、横縞の画像が透けて見えるようになります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/119.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;body&gt;
-									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
-									| &lt;/body&gt;
-								figcaption 119.html
-							figure
-								pre(class='prettyprint linenums:1')
-									| body
-									| 	h2 HAM SANDWICHES
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| body {
-									|     background-image: url(stripe.png);
-									| }
-									| 
-									| h2 {
-									|     font-family: 'Arial Black';
-									|     background-image: url(wood.jpg);
-									|     color: white;
-									|     opacity: 0.6;
-									| }
-							figure
-								pre(class='prettyprint linenums:1')
-									| body
-									| 	background-image url(stripe.png)
-									| h2
-									| 	font-family 'Arial Black'
-									| 	background-image: url(wood.jpg)
-									| 	color white
-									| 	opacity 0.6
-								figcaption （stylus）
-							.alert.alert-info IE NOTES: CSS Color Module Level 3への採用が見送られた機能
-							p='いくつかの機能は「CSS Color Module Level 3」での採用が見送られ、将来的なバージョンでの採用が考えられています。採用が見送られた機能はICCカラープロファイル関連のプロパティなどとなっています。'
-							table.table
-								tr
-									th 採用が見送られた機能
-								tr
-									td: ul
-										li color-profileプロパティ
-										li rendering-intentプロパティ
-										li @color-profile
-										li システムカラー名「flavor」
-							.alert.alert-success Polyfill: 
-							p パターン①
+							h4 外部スタイルシート
+							p='スタイルシートの設定を外部スタイルシートファイルに記述し、<link>で読み込んでWebページに適用する方法です。外部スタイルシートファイルには「.css」という拡張子をつけて保存します。たとえば、「style.css」という外部スタイルシートファイルを利用するためには下のように指定します。'
 							figure
 								pre(class='prettyprint linenums:1')
 									| &lt;!DOCTYPE html&gt;
 									| &lt;html lang="ja"&gt;
 									| &lt;head&gt;
-									| ...
-									| 
-									| &lt;body&gt;
-									| &lt;h2&gt;HAM SANDWICHES&lt;/h1&gt;
-									| &lt;/body&gt; 
+									| &lt;title&gt;SAMPLE&lt;/title&gt;
+									| &lt;link rel="stylesheet" href="style.css"&gt;
+									| …略...
+									| &lt;/head&gt;
+								figcaption （HTML）
 							figure
 								pre(class='prettyprint linenums:1')
 									| !!!
 									| html(lang='ja')
 									| 	head
-									| 	body
-									| 		h2 HAM SANDWICHES
+									| 		title SAMPLE
+									| 		link(rel='stylesheet', href='style.css')
+									| 	    | …略...
 								figcaption （Jade）
+							p='外部スタイルシートを利用すると、スタイルシートの設定をHTMLファイルとは別に管理し、複数のページで同じ設定を共有できるというメリットがあります。'
+							p='また、スタイルシートの設定の中に他の外部スタイルシートの設定を読み込む場合、@improtを利用することができます。'
 							figure
 								pre(class='prettyprint linenums:1')
-									| body
-									| 	background-image url(stripe.png)
-									| h2
-									| 	font-family 'Arial Black'
-									| 	background-image url(wood.jpg)
-									| 	color white
-									| 	-ms-filter "alpha(opacity=60)" /*! IE8 */
-									| 	opacity 0.6 /*! その他 */
+									| @import url("style.css");
+								figcaption （CSS）
 							figure
 								pre(class='prettyprint linenums:1')
-									| body
-									|     background-image　url(stripe.png)
-									| 
-									| h2
-									|     font-family　'Arial Black'
-									|     background-image　url(wood.jpg)
-									|     color　white
-									|     -ms-filter　"alpha(opacity=60)" // IE8
-									|     opacity　0.6 // その他				
+									| @import url(reset.css)
 								figcaption （stylus）
-							p パターン②
+							hr
+							h4 内部スタイルシート
+							p='スタイルシートの設定をHTMLソースの<style>〜</style>の中に記述する方法です。設定は記述したページのみに適用され、HTMLソースと同一ファイルで管理できるというわかりやすさがあります。'
 							figure
 								pre(class='prettyprint linenums:1')
-									| &lt;!DOCTYPE html&gt;
-									| &lt;!--[if IE 8 ]&gt;&lt;html lang="ja" class="ie8"&gt;&lt;![endif]--&gt;
-									| &lt;!--[if !(IE) ]&gt;&lt;!--&gt;&lt;html lang="ja"&gt;&lt;!--&lt;![endif]--&gt;
 									| &lt;head&gt;
-									| ...
-									| 
-									| &lt;body&gt;
-									| &lt;h2&gt;HAM SANDWICHES&lt;/h1&gt;
-									| &lt;/body&gt; 
+									| &lt;title&gt;SAMPLE&lt;/title&gt;
+									| &lt;style&gt;
+									| h1 {color: red;}
+									| &lt;/style&gt;
+									| …略…
+									| &lt;/head&gt;
+								figcaption （HTML）
 							figure
 								pre(class='prettyprint linenums:1')
-									| !!!
-									| | &lt;!--[if IE 8 ]&gt;&lt;html lang="ja" class="ie8"&gt;&lt;![endif]--&gt;
-									| | &lt;!--[if !(IE) ]&gt;&lt;!--&gt;
-									| html(lang='ja')
-									| 	| &lt;!--&lt;![endif]--&gt;
-									| 	head
-									| 	body
-									| 		h2 HAM SANDWICHES
+									| head
+									| 	title SAMPLE
+									| 		style.
+									| 			h1 {
+									| 				color: red;
+									| 			}
 								figcaption （Jade）
+							hr
+							h4 インラインスタイルシート
+							p='インラインスタイルシートは、スタイルシートの設定をHTMLのstyle属性で指定する方法です。直感的に利用することはできますが、多用するとスタイルシートの管理が煩雑になるという問題があります。'
 							figure
 								pre(class='prettyprint linenums:1')
-									| body {
-									|     background-image: url(stripe.png);
-									| }
-									| 
-									| h2 {
-									|     font-family: 'Arial Black';
-									|     background-image: url(wood.jpg);
-									|     color: white;
-									|     opacity: 0.6;
-									| }
-									| /* IE8 */
-									| .ie8 h2 {
-									|     -ms-filter: "alpha(opacity=60)";
-									| } 
+									| &lt;h1 style="color:red;"&gt;
+									| サンドイッチ
+									| &lt;/h1&gt;
+								figcaption （HTML）
 							figure
 								pre(class='prettyprint linenums:1')
-									| body
-									| 	background-image url(stripe.png)
-									| h2
-									| 	font-family 'Arial Black'
-									| 	background-image url(wood.jpg)
-									| 	color white
-									| 	opacity 0.6
-									| /*! IE8 */
-									| .ie8
-									| 	h2
-									| 		-ms-filter "alpha(opacity=60)" 
-								figcaption （stylus）
+									| h1(style='color: red;') サンドイッチ
+								figcaption （Jade）
+							hr
+							.alert.alert-info type属性でスタイルシートの種類を明示する
+							.alert.alert-info media属性でメディアクエリを指定する
+							.alert.alert-info エンコードの種類
+							.alert.alert-info スタイルシートの優先順位
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='../js/google-code-prettify/prettify.js')

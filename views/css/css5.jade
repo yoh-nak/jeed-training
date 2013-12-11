@@ -518,10 +518,144 @@ include ../head2.jade
 								figcaption （Jade）
 							hr
 							h4 クラスセレクタ .class
+							p='HTMLではclass属性を利用することで、要素に対してクラス名を指定することができます。このクラス名を使って特定の要素にスタイルシートを適用する場合にはクラスセレクタを利用します。'
+							p='たとえば、下のようにセレクタを「.ham」と指定すると、「ham」というクラス名を持った要素にスタイルシートを適用することができます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/01/019-class01.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| .ham {
+									|     color: hotpink;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| .ham
+									| 	color hotpink
+								figcaption （stylus）
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;ul&gt;
+									| &lt;li class="ham"&gt;ハム&amp;チーズサンド&lt;/li&gt;
+									| &lt;li class="ham-egg"&gt;卵&amp;野菜サンド&lt;/li&gt;
+									| &lt;li class="daily egg ham"&gt;日替わりサンド&lt;/li&gt;
+									| &lt;/ul&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| ul
+									| 	li.ham ハム&amp;チーズサンド
+									| 		li.ham-egg 卵&amp;野菜サンド
+									| 		li.daily.egg.ham 日替わりサンド
+								figcaption （Jade）
+							p='また、セレクタを「.ham.egg」と指定すると、「ham」と「egg」の両方のクラスを持つ要素に適用することができます。'
+							p='クラス名は、複数の要素に同じクラス名を指定したり、1つの要素に複数のクラス名を指定することができますので、あるルールに従って複数の要素に対してスタイルシートを適用する場合に利用することができます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/01/019-class02.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| .ham.egg {
+									|     color: hotpink;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| .ham.egg
+									| 	color hotpink
+								figcaption （stylus）
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;ul&gt;
+									| &lt;li class="ham"&gt;ハム&amp;チーズサンド&lt;/li&gt;
+									| &lt;li class="ham-egg"&gt;卵&amp;野菜サンド&lt;/li&gt;
+									| &lt;li class="daily egg ham"&gt;日替わりサンド&lt;/li&gt;
+									| &lt;/ul&gt;
+									| 
+									| &lt;dl&gt;
+									| &lt;li class="ham"&gt;ハム&amp;チーズサンド&lt;/li&gt;
+									| &lt;li class="ham-egg"&gt;卵&amp;野菜サンド&lt;/li&gt;
+									| &lt;li class="daily egg ham"&gt;日替わりサンド&lt;/li&gt;
+									| &lt;/dl&gt;
+									| 
+									| &lt;p class="ham"&gt;
+									|     ハム&amp;チーズサンド
+									| &lt;/p&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| ul
+									| 	li.ham ハム&amp;チーズサンド
+									| 	li.ham-egg 卵&amp;野菜サンド
+									| 	li.daily.egg.ham 日替わりサンド
+									| dl
+									| 	li.ham ハム&amp;チーズサンド
+									| 	li.ham-egg 卵&amp;野菜サンド
+									| 	li.daily.egg.ham 日替わりサンド
+									| p.ham
+									| 	| ハム&amp;チーズサンド
+								figcaption （Jade）
 							hr
-							h4 IEセレクタ #id
+							h4 IDセレクタ #id
+							p='HTMLではid属性を利用することで要素に対してIDを指定することができます。このIDを使って特定の要素にスタイルシートを適用する場合には、IDセレクタを利用します。たとえば、下のようにセレクタを「#ham」と指定すると、「ham」というIDを持つ要素にスタイルシートを適用することができます。'
+							p='IDは、ページ内で同じIDを繰り返したり、1つの要素に複数のIDを指定することはできません。そのため、ページ内にある1つの要素を特定し、スタイルシートを適用する場合に利用することができます。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| #ham {
+									|     color: hotpink;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #ham
+									| 	hotpink
+								figcaption （stylus）
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;ul&gt;
+									| &lt;li id="ham"&gt;ハム&amp;チーズサンド&lt;/li&gt;
+									| &lt;li id="ham-egg"&gt;卵&amp;野菜サンド&lt;/li&gt;
+									| &lt;li id="daily"&gt;日替わりサンド&lt;/li&gt;
+									| &lt;/ul&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| ul
+									| 	li#ham ハム&amp;チーズサンド
+									| 	li#ham-egg 卵&amp;野菜サンド
+									| 	li#daily 日替わりサンド
+								figcaption （Jade）
 							hr
 							h4 属性セレクタ [attr="val"]
+							p='特定の属性を持つ要素にスタイルシートを適用するには、属性セレクタを利用します。たとえば、class属性を持つ要素に適用するには、セレクタを[class]と指定します。下のサンプルでは、class属性を持つ3つの<li>にスタイルシートが適用されます。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| [class] {
+									|     color: hotpink;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| [class]
+									| 	color hotpink
+								figcaption （stylus）
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;ul&gt;
+									| &lt;li class="ham"&gt;ハム&amp;チーズサンド&lt;/li&gt;
+									| &lt;li class="ham-egg"&gt;卵&amp;野菜サンド&lt;/li&gt;
+									| &lt;li class="daily egg ham"&gt;日替わりサンド&lt;/li&gt;
+									| &lt;/ul&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| ul
+									| 	li.ham ハム&amp;チーズサンド
+									| 	li.ham-egg 卵&amp;野菜サンド
+									| 	li.daily.egg.ham 日替わりサンド
 							hr
 							h4 リンク擬似クラス :link / :visited
 							hr

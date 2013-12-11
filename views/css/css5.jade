@@ -885,12 +885,131 @@ include ../head2.jade
 								figcaption （Jade）
 							hr
 							h4 言語擬似クラス :lang()
+							p='HTMLではlang属性で言語の種類を指定することができます。下のサンプルでは<h2>でマークアップした見出しを英語で記述していますので、lang属性を「en」と指定しています。'
+							p='言語疑似クラス「:lang()」を利用すると、特定の言語に対してスタイルシートを適用することができます。たとえば、英語で記述した部分に適用するためには、セレクタを「:lang(en)」と指定します。ここでは背景色を緑色にして、「Arial Black」という欧文フォントで表示するようにしています。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/01/023-lang.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| :lang(en) {
+									|     font-family: 'Arial Black', sans-serif;
+									|     background-color: yellowgreen;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| :lang(en)
+									| 	font-family 'Arial Black', sans-serif
+									| 	background-color yellowgreen
+								figcaption （stylus）
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h2 lang="en"&gt;HAM SANDWICHES&lt;/h2&gt;
+									| &lt;p&gt;焼きたての手作りパンえ新鮮なハム、トマト、…略…&lt;/p&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2(lang='en') HAM SANDWICHES
+									| p 焼きたての手作りパンえ新鮮なハム、トマト、…略…
+								figcaption （Jade）
+
 							hr
 							h4 UI擬似クラス
-
+							p='UI疑似クラスは、ユーザーインターフェースに関する設定を行うもので、フォームの状態に応じてスタイルシートを適用することができます。'
+							p='「CSS3 Basic User Interface Module」ではさらに多くのインターフェース関連の疑似クラスが提案されています。'
 							h4 :enabled / :disabled
-
+							p='フォームが有効な場合には「:enabled」で、無効な場合には「:disabled」でスタイルシートを適用することができます。フォームは基本的に有効な状態で扱われますが、disabled属性を指定することが可能です。'
+							p='たとえば、下のサンプルではとえば、下のサンプルでは住所のテキストフィールドを無効にし、文字を入力できないようにしてあります。しかし、スタイルシートを適用しないと、見た目では無効となっていることがわかりません。そこで、「:enabled」と「:disabled」を利用して、テキストフィールドが有効な場合は緑色で、無効な場合は灰色で表示するように指定しています。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/01/023-ui01.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| :enabled {
+									|     background-color: greenyellow;
+									| }
+									| :disabled {
+									|     background-color: lightgray;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| :enabled
+									| 	background-color greenyellow
+									| 
+									| :disabled
+									| 	background-color lightgray
+								figcaption （stylus）
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;form action="…" method="post"&gt;
+									| &lt;p&gt;名前：&lt;input type="text" name="name"&gt;&lt;/p&gt;
+									| &lt;p&gt;住所：&lt;input type="text" name="add" disabled&gt;&lt;/p&gt;
+									| &lt;/form&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| form(action='…', method='post')
+									| 	p
+									| 		| 名前：
+									| 		input(type='text', name='name')
+									| 	p
+									| 		| 住所：
+									| 		input(type='text', name='add', disabled='disabled')
+								figcaption （Jade）
 							h4 :checked / :indeterminate
+							p='「:checked」と「:indeterminate」はフォームのチェックボックスやラジオボタンの状態の応じてスタイルシートを適用するセレクタです。まず、チェックボックスとラジオボタンには選択したときの「オン」、選択していないときの「オフ」の2種類の状態があります。さらに、HTML5ではJavaScriptを下のように指定することにより、どちらかはっきりしない「不確定」という状態で表示できるようになっています。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/01/023-ui02.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;script&gt;
+									| window.onload = function(){
+									|     document.getElementById('ham').intermediate = true;
+									| }
+									| &lt;/script&gt;
+									| 
+									| &lt;form action="…" method="post"&gt;
+									| &lt;input id="ham" type="checkbox"&gt;
+									| &lt;label for="ham"&gt;HAM SANDWICHES&lt;/label&gt;
+									| &lt;/form&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| script.
+									| 	window.onload = function(){
+									| 		document.getElementById('ham').intermediate = true;
+									| 	}
+									| form(action='…', method='post')
+									| 	input#ham(type='checkbox')
+									| 	label(for='ham') HAM SANDWICHES
+								figcaption （Jade）
+							p='チェックボックスが不確定な状態のときには「:intermediate」で、オンの状態の時には「:checked」でスタイルシートを適用します。ここでは<label>でマークアップしたラベルの背景を、不確定なときには赤色で、オンの時には緑色で表示するようにしています。オフのときには「:intermediate」も「:checked」も適用されませんので、白色の背景で表示されます。'
+							p='なお、「:intermediate」と「:checked」の設定は<input>に対して適用されますが、ここでは<input>に続けて記述した<label>に適用するため、セレクタを「:intermediate + label」、「:checked + label」と指定しています。これは隣接セレクタの記述形式を利用したものです。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| :intermediate + label {
+									|     background-color: red;
+									| }
+									| :checked + label {
+									|     background-color: greenyellow;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| :intermediate
+									| 	&amp; + label
+									| 		background-color red
+									| 
+									| :checked
+									| 	&amp; + label
+									| 		background-color greenyellow
+								figcaption （stylus）
 							hr
 							h4 構造擬似クラス（1） :root
 							hr

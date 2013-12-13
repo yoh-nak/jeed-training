@@ -505,6 +505,40 @@ include ../head2.jade
 										| +link('/foo', 'foo')(class="btn")
 								.col-sm-6
 									pre='<a href="/foo" class="btn">foo</a>'
+							.alert.alert-info 継承
+							.row
+								.col-sm-6
+									p layout.jade
+									pre
+										| !!!
+										| html
+										| 	head
+										| 		title タイトル
+										| 		block scripts
+										| 			script(src="/jquery.js")
+										| 	body
+										| 	block header
+										| 		header
+										| 			p ヘッダー
+										| 	block content
+										| 	block footer
+										| 		footer
+										| 			small フッター
+									p index.jade
+									pre
+										| //-拡張子省略可
+										| extends layout.jade
+										| 
+										| block scripts
+										| 	script(src="jquery.js")
+										| 
+										| block content
+										| 	h1 タイトル
+										| 	p こんにちは
+								.col-sm-6
+									p index.html
+									pre
+										| 
 							.alert.alert-info include
 							.row
 								.col-sm-6

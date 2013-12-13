@@ -1012,8 +1012,213 @@ include ../head2.jade
 								figcaption （stylus）
 							hr
 							h4 構造擬似クラス（1） :root
+							p='セレクタを「:root」とすると、ルート要素にスタイルシートを適用することができます。ルート要素はソース全体をマークアップしている要素のことで、HTMLでは<html>となります。たとえば、ルート要素の背景色を緑色に指定すると、下のようにページ全体の背景色が変わります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/01/025-root.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| :root {
+									|     background-color: greenyellow:
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| :root
+									| 	background-color greenyellow:
+								figcaption （stylus）
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;html&gt;
+									| …略…
+									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+									| …略...
+									| &lt;/html&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| html
+									| 	h2 HAM SANDWICHES
+								figcaption （Jade）
 							hr
 							h4 構造擬似クラス（2） :first-child / :last-child / :nth-child() / :nth-last-child() / :only-child
+							p=':first-childや:nth-child()などを利用すると、スタイルシートを最初と最後の要素のみに適用したり、1つおきに繰り返して起用するといったことができるようになります。'
+							p: u 最初と最後の要素に適用する
+							p='最初と最後の要素にスタイルシートを適用するには、:first-childと:last-childを利用します。たとえば、「li:first-child」と指定すると最初の<li>に、「:last-child」と指定すると最後に<li>に適用することができます。ここでは最初の<li>を黄色で、最後の<li>を緑色で表示するようにしています。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/01/025-child01.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| li:first-child {
+									|     background-color: yellow;
+									| }
+									| li:last-child {
+									|     background-color: greenyellow;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| li
+									| 	&amp;:first-child
+									| 		background-color yellow
+									| 	&amp;:last-child
+									| 		background-color greenyellow
+								figcaption （stylus）
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;ul&gt;
+									| &lt;li&gt;ハム&amp;チーズサンド&lt;/li&gt;
+									| &lt;li&gt;卵&amp;野菜サンド&lt;/li&gt;
+									| &lt;li&gt;カツサンド&lt;/li&gt;
+									| &lt;li&gt;チョコレート&lt;/li&gt;
+									| &lt;li&gt;日替わりサンド&lt;/li&gt;
+									| &lt;/ul&gt;
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| ul
+									| 	li ハム&amp;チーズサンド
+									| 		li 卵&amp;野菜サンド
+									| 		li カツサンド
+									| 		li チョコレート
+									| 		li 日替わりサンド
+								figcaption （Jade）
+							p='なお、:firls-childは:nth-child(1)、:last-childは:nth-last-child(1)と指定することも可能です。'
+							pre
+								| li:first-child {…}    ▶   li:nth-child(1)
+								| li:last-child {…}   ▶   li:nth-last-child(1)
+							p: u 指定したナンバーの要素に適用する
+							p=':nth-child()と:nth-last-child()は、:first-chidと:last-childを拡張したセレクタで、指定したナンバーの要素にスタイルシートを適用します。たとえば、最初から2つ目の<li>に適用する場合は「li:nth-child(2)」、最後から2つ目の<li>に適用する場合は「li:nth-last-child(2)」と指定します。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/01/025-child02.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| li:nth-child(2) {
+									|     background-color: yellow;
+									| }
+									| li:nth-last-child(2) {
+									|     background-color: greenyellow;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| li
+									| 	&amp;:nth-child(2)
+									| 		background-color yellow
+									| 	&amp;:nth-last-child(2)
+									| 		background-color greenyellow
+								figcaption （stylus）
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;ul&gt;
+									| &lt;li&gt;ハム&amp;チーズサンド&lt;/li&gt;
+									| &lt;li&gt;卵&amp;野菜サンド&lt;/li&gt;
+									| &lt;li&gt;カツサンド&lt;/li&gt;
+									| &lt;li&gt;チョコレート&lt;/li&gt;
+									| &lt;li&gt;日替わりサンド&lt;/li&gt;
+									| &lt;/ul&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| ul
+									| 	li ハム&amp;チーズサンド
+									| 	li 卵&amp;野菜サンド
+									| 	li カツサンド
+									| 	li チョコレート
+									| 	li 日替わりサンド
+								figcaption （Jade）
+							p: u 奇数と偶数の要素に適用する
+							p=':nth-child()と:nth-last-child()では、奇数と偶数の要素にスタイルシートを適用することもできます。奇数の要素は「odd」、偶数の要素は「even」で指定します。ここでは:nth-child()を利用して、最初の<li>から順に奇数の場合は黄色で、偶数の場合は緑色で表示するようにしています。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/01/025-child03.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| li:nth-child(odd) {
+									| 	background-color: yellow;
+									| }
+									| li:nth-child(even) {
+									| 	background-color: greenyellow;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| li
+									| 	&amp;:nth-child(odd)
+									| 		background-color yellow
+									| 	&amp;:nth-child(even)
+									| 		background-color greenyellow
+								figcaption （stylus）
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;ul&gt;
+									| &lt;li&gt;ハム&amp;チーズサンド&lt;/li&gt;
+									| &lt;li&gt;卵&amp;野菜サンド&lt;/li&gt;
+									| &lt;li&gt;カツサンド&lt;/li&gt;
+									| &lt;li&gt;チョコレート&lt;/li&gt;
+									| &lt;li&gt;日替わりサンド&lt;/li&gt;
+									| &lt;/ul&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| ul
+									| 	li ハム&amp;チーズサンド
+									| 	li 卵&amp;野菜サンド
+									| 	li カツサンド
+									| 	li チョコレート
+									| 	li 日替わりサンド
+							p: u 連続して要素に繰り返して適用する
+							p='連続した要素に2つおきや3つおきにスタイルシートを適用したい場合には「αn+β」という形式で値を指定します。αではいくつおきに適用するかを、βではいくつ目の要素に適用するかを指定します。nには0から順に0、1、2…と数が入りますので、「2n+1」と指定した場合には1つ目、3つ目、5つ目…と奇数の要素にスタイルシートを適用することができます。偶数の要素に適用する場合には「2n+2」と指定します。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/01/025-child04.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| li:nth-child(2n+1) {
+									| 	background-color: yellow;
+									| }
+									| li:nth-child(2n+2) {
+									| 	background-color: greenyellow;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| li
+									| 	&amp;:nth-child(2n + 1)
+									| 		background-color yellow
+									| 	&amp;:nth-child(2n + 2)
+									| 		background-color greenyellow
+								figcaption （stylus）
+							p='同じように3つおきに適用する場合は、下のように「3n+1」、「3n+2」、「3n+3」と指定します。ここでは、3つおきに1つ目の<li>を黄色で、2つ目の<li>を緑色で、3つ目の<li>を水色で表示するようにしています。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| li:nth-child(3n+1) {
+									| 	background-color: yellow;
+									| }
+									| li:nth-child(3n+2) {
+									| 	background-color: greenyellow;
+									| }
+									| li:nth-child(3n+3) {
+									| 	background-color: skyblue;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| li
+									| 	&amp;:nth-child(3n + 1)
+									| 		background-color yellow
+									| 	&amp;:nth-child(3n + 2)
+									| 		background-color greenyellow
+									| 	&amp;:nth-child(3n + 3)
+									| 		background-color skyblue
+								figcaption （stylus）
 							hr
 							h4 構造擬似クラス（3） :first-of-type / :last-of-type / :nth-of-type() / :nth-last-of-type() / :only-of-type
 							hr

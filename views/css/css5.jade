@@ -1308,6 +1308,88 @@ include ../head2.jade
 								figcaption （Jade）
 							hr
 							h4 構造擬似クラス（3） :first-of-type / :last-of-type / :nth-of-type() / :nth-last-of-type() / :only-of-type
+							p='「構造疑似クラス（２）」の:first-chldや:nth-child()などのセレクタには、:first-of-typeや:nth-of-type()といった対になるセレクタが用意されており、同じ形で利用することができます。ただし、奇数・偶数などを判定する際に、:first-childや:nth-child()がすべての要素をカウントするのに対して、:first-of-typeや:nth-of-type()では同じタイプの要素のみをカウントします。なお、いずれのセレクタでも親要素や子要素はカウントの対象とはなりません。'
+							table.table
+								tr
+									th すべての要素をカウント
+									th 同じタイプの要素のみをカウント
+								tr
+									td :first-child
+									td :first-of-type
+								tr
+									td :last-child
+									td :last-of-type
+								tr
+									td :nth-child()
+									td :nth-of-type()
+								tr
+									td :nth-last-child()
+									td :nth-last-of-type()
+								tr
+									td :only-child
+									td :only-of-type
+							p='たとえば、下のサンプルでは見出しと文章のセットを4つ記述したものです。見出しは<h2>で、文章は<p>でマークアップしています。このとき、「h2:nth-child(odd)」で奇数の<h2>が黄色に、「h2:nth-child(even)」で偶数の<h2>が緑色になるように指定すると、下のようにすべての見出しが黄色で表示されてしまいます。これは、:nth-child()が要素の数を<p>も含めてカウントし、すべての<h2>を奇数番目と判定するためです。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2:nth-child(odd) {
+									|     background-color: yellow;
+									| }
+									| h2:nth-child(even) {
+									|     background-color: greenyellow;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	&amp;:nth-child(odd)
+									| 		background-color yellow
+									| 	&amp;:nth-child(even)
+									| 		background-color greenyellow
+								figcaption （stylus）
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;div&gt;
+									| &lt;h2&gt;ハム&amp;チーズサンド&lt;/h2&gt;
+									| &lt;p&gt;新鮮なハムとチーズのサンドイッチです。&lt;/p&gt;
+									| &lt;h2&gt;卵&amp;野菜サンド&lt;/h2&gt;
+									| &lt;p&gt;卵と野菜のサンドイッチです。&lt;/p&gt;
+									| &lt;h2&gt;カツサンド&lt;/h2&gt;
+									| &lt;p&gt;大きなカツのサンドイッチです。&lt;/p&gt;
+									| &lt;h2&gt;日替わりサンド&lt;/h2&gt;
+									| &lt;p&gt;日替わりでお届けするサンドイッチです。&lt;/p&gt;
+									| &lt;/div&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	h2 ハム&amp;チーズサンド
+									| 	p 新鮮なハムとチーズのサンドイッチです。
+									| 	h2 卵&amp;野菜サンド
+									| 	p 卵と野菜のサンドイッチです。
+									| 	h2 カツサンド
+									| 	p 大きなカツのサンドイッチです。
+									| 	h2 日替わりサンド
+									| 	p 日替わりでお届けするサンドイッチです。
+								figcaption （Jade）
+							p=':nth-child()を、:nth-of-type()に置き換えて指定すると、奇数の見出しは黄色で、偶数の見出しは緑色で表示されています。これは、:nth-of-type()が<h2>の数だけカウントして、偶数と奇数を判定するためです。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/01/028-type.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2:nth-of-type(odd) {
+									|     background-color: yellow;
+									| }
+									| h2:nth-of-type(even) {
+									|     background-color: greenyellow;
+									| }
+								figcaption （CSS）
+									| h2
+									| 	&amp;:nth-of-type(odd)
+									| 		background-color yellow
+									| 	&amp;:nth-of-type(even)
+									| 		background-color greenyellow
 							hr
 							h4 構造擬似クラス（4） :empty
 							hr

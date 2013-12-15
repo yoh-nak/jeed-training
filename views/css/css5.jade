@@ -1703,7 +1703,168 @@ include ../head2.jade
 							hr
 							h4 グループ化 A, B 
 							p='複数の要素に同じ設定を適用したい場合、セレクターのグループ化の記述を利用します。たとえば、A要素とB要素を適用先とするためには、セレクタを「A, B」という形で記述します。下のサンプルでは<h1>と<h2>の背景を緑色にするため、セレクタを「h1, h2」と指定しています。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/01/032-group.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1, h2 {
+									|     background-color: greenyellow;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1, h2
+									| 	background-color greenyellow
+								figcaption （stylus）
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
+									| &lt;h2&gt;卵&amp;野菜サンド&lt;/h2&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1 HAM SANDWICHES
+									| h2 卵&amp;野菜サンド
+								figcaption （Jade）
+
 							.alert.alert-info セレクタの優先順位
+							p='スタイルシートの設定は1つの要素に対していつくでも適用することができるため、設定が重複するケースも出てきます。その場合、基本的には後から記述した設定の優先順位が高くなります。'
+							p='たとえば、下のサンプルではセレクタを「h1」と指定した設定を2つ記述しています。それぞれの設定では背景色をピンク色と緑色に指定していますが、後から記述した設定が優先され、<h1>でマークアップした見出しは緑色で表示されます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/01/033-01.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1 {
+									|     background-color: pink;
+									| }
+									| h1 {
+									|     background-color: greenyellow;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1
+									| 	background-color pink
+									| 	background-color greenyellow
+								figcaption （stylus）
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;div&gt;
+									| &lt;h1 id="sand"&gt;HAM SANDWICHES&lt;/h1&gt;
+									| &lt;/div&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	h1#sand HAM SANDWICHES
+								figcaption （Jade）
+							p='しかし、ピンク色の設定を子孫セレクタの形で「div h1」と指定すると、「h1」のセレクタよりも優先順位が高くなり、見出しをピンク色にすることができます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/01/033-02.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| div h1 {
+									|     background-color: pink;
+									| }
+									| h1 {
+									|     background-color: greenyellow;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	h1
+									| 		background-color pink
+									| h1
+									| 	background-color greenyellow
+								figcaption （stylus）
+							p='また、IDセレクタの形で「#sand」と指定し、背景色を黄色に指定した設定を追加します。すると、「h1」や「div h1」の設定よりも優先され、見出しが黄色に変わります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/01/033-03.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| #sand {
+									|     background-color: yellow;
+									| }
+									| div h1 {
+									|     background-color: pink;
+									| }
+									| h1 {
+									|     background-color: greenyellow;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #sand
+									| 	background-color yellow
+									| div
+									| 	h1
+									| 		background-color pink
+									| h1
+									| 	 background-color greenyellow
+								figcaption （stylus）
+							p='このように、優先順位はセレクタの指定によって変わります。セレクタごとにa〜dの順を算出し、aから順に比較して値が大きい場合は優先順位が高くなる仕組みとなっているためです。'
+							figure
+								table.table
+									tr
+										th 比較項目
+										th 見出し
+									tr
+										td a
+										td インラインスタイルシートに記述している場合は1。それ以外は0。
+									tr
+										td b
+										td IDの数d
+									tr
+										td c
+										td クラス／疑似クラスの数
+									tr
+										td d
+										td 要素名／疑似要素の数
+								figcaption セレクタの優先順位の算出方法。
+							p='aはインラインスタイルシートの設定かどうかで、b〜dはセレクタに含まれるID、クラス、要素名の数を求めます。サンプルの場合、「#sand」はb=1となり、他の2つよりもbの値が大きいので最も優先順位が高くなります。「div h1」と「h1」の場合は、それぞれd=2、d=1ですので、「div h1」の優先順位が高くなります。'
+							figure
+								table.table
+									tr
+										th 比較項目
+										th #sand
+										th div h2
+										th h2
+									tr
+										td a
+										td 0
+										td 0
+										td 0
+									tr
+										td b
+										td 1
+										td 0
+										td 0
+									tr
+										td c
+										td 0
+										td 0
+										td 0
+									tr
+										td d
+										td 0
+										td 2
+										td 1
+								figcaption サンプルの各セレクタの算出結果。
+							h4 !important
+							p='スタイルを記述する時に値の後に空白を挟んで「!important」を記述すると、通常の優先順位に関係無く優先的にスタイルが適用されます。'
+							pre
+								| セレクタ {
+								| 	プロパティ: 値 !important;
+								| }
 							.alert.alert-info CSS4のセレクタ
 							.alert.alert-info 特定の名前空間に属するスタイルシートを適用する
 		.footer=title

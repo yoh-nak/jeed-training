@@ -1392,10 +1392,101 @@ include ../head2.jade
 									| 		background-color greenyellow
 							hr
 							h4 構造擬似クラス（4） :empty
+							p='セレクタを「:empty」と指定すると、コンテンツが空の要素にスタイルシートを適用することができます。たとえば、下のサンプルではテーブルの左上のセルが空の状態になっています。'
+							p='「:empty」で空の要素の背景色をカーキ色に指定します。すると、左上のセルが指定した色で表示されます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/01/029-empty.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| :empty {
+									|     background-color: khaki;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| :empty
+									| 	background-color khaki
+								figcaption （stylus）
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;table&gt;
+									| &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;特徴&lt;/th&gt;&lt;tr&gt;
+									| …略...
+									| &lt;/table&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| table
+									| 	tr
+									| 		th
+									| 		th 特徴
+									| 	tr
+									| 		| …略...
+								figcaption （Jade）
 							hr
 							h4 否定擬似クラス :not()
+							p='「:not()」では、指定した条件に一致しない要素に対してスタイルシートを適用することができます。たとえば、下のサンプルでは見出しを<h1>以外の要素にスタイルシートを適用します。ただし「:not(h1)」では<html>や<body>にも適用されてしまうため、「#container :not(h1)」と指定して、<div id="container">内の<h1>以外の要素に適用するようにしています。これで、<img>と<p>に「opacity: 0.5」の設定が適用され、半透明な表示となります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/01/029-not.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| #container :not(h1) {
+									|     opacity: 0.5;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #container
+									| 	:not(h1)
+									| 		opacity 0.5
+								figcaption （stylus）
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;div id="container"&gt;
+									| &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
+									| &lt;img src="sand.jpg" alt="サンドイッチ"&gt;
+									| &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト…略…&lt;/p&gt;
+									| &lt;/div&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #container
+									| 	h1 HAM SANDWICHES
+									| 	img(src='sand.jpg', alt='サンドイッチ')
+									| 	p 焼きたての手作りパンで新鮮なハム、トマト…略…
+								figcaption （Jade）
 							hr
 							h4 ::first-line擬似要素
+							p='::first-line疑似要素を利用すると、要素の1行目にスタイルシートを適用することができます。たとえば、<p>でマークアップした文章の1行目に適用する場合、セレクタを「p::first-line」と指定します。ここでは1行目の背景を緑色で表示するようにしています。'
+							p='なお、::first-line疑似要素で適用したスタイルシートが機能するのは、displayプロパティの値がblock、inline-block、table-cell、table-captionの要素と定義されています。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/01/030-first-letter.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| p::first-line {
+									|     background-color: greenyellow;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| p
+									| 	&amp;::first-line
+									| 		background-color greenyellow
+								figcaption （stylus）
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。マスタードをピリッと…略...&lt;/p&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									p 焼きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。マスタードをピリッと…略...
+								figcaption （Jade）
 							hr
 							h4 ::first-letter擬似要素
 							hr

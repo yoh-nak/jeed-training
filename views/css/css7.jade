@@ -1,0 +1,215 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;背景色
+						.panel-body
+							.alert.alert-info 背景色
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png')
+									td
+										img(src='../images/ic-android.png')
+									td
+										img(src='../images/ic-firefox.png')
+									td
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td
+										img(src='../images/ic-opera.png')
+									td
+										img(src='../images/ic-ie.png')
+							pre
+								| background-color: 背景色
+							p='背景色・・・色の値'
+							table.table
+								tr
+									td 初期値
+									td transparent
+								tr
+									td 継承
+									td なし
+								tr
+									td 適用先
+									td 全要素
+								tr
+									td 比率
+									td -
+								tr
+									td モジュール
+									td Backgrounds and Borders
+							p='background-colorプロパティを利用するとボックスの背景色を指定することができます。'
+							hr
+							h4 SAMPLE A: 基本
+							p='下のサンプルでは<h2>でマークアップした見出しを表示したものです。ボックスの背景はbackgorund-colorプロパティの値が初期値の「transparent」で処理されるため、透明になります。'
+							p='背景に色を付けて表示するためには、background-colorプロパティを色で指定します。<h2>のbackground-colorプロパティの値を「orange」にすると、下のように背景がオレンジ色になります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/03/120-A.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 HAM SANDWICHES
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     background-color: orange;
+									| } 
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	background-color orange
+								figcaption （stylus）
+							hr
+							h4 SAMPLE B：背景色を半透明にする
+							p='背景色を半透明にするには、アルファチャンネルの設定が可能なrgba()やhsla()で指定します。下のサンプルでは、サンドイッチの画像（sand.jpg）に<h2>でマークアップした画像を重ねたものです。<h2>のbackground-colorプロパティの値を「rgba(255,255,255,0.7)にすると、見出しの背景を半透明な白色にして、サンドイッチの画像が透けて見えるようにすることができます。なお、IE8以前はrgba()の指定に未対応です。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/03/120-B.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;div&gt;
+									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+									| &lt;/div&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	h2 HAM SANDWICHES
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div {
+									|     background-image: url(sand.jpg);
+									|     width: 460px;
+									|     padding: 60px 20px;
+									| }
+									| h2 {
+									|     background-color: rgba(255,255,255,0.7);
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	background-image url(sand.jpg)
+									| 	width 460px
+									| 	padding 60px 20px
+									| h2
+									| 	background-color rgba(255,255,255,0.7)
+								figcaption （stylus）
+							.alert.alert-success Polyfill: 
+							p パターン①
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;!DOCTYPE html&gt;
+									| &lt;html lang="ja"&gt;
+									| &lt;head&gt;
+									| &lt;div&gt;
+									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+									| &lt;/div&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| !!!
+									| html(lang='ja')
+									| head
+									| 	div
+									| 		h2 HAM SANDWICHES
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div {
+									|     background-image: url(sand.jpg);
+									|     width: 460px;
+									|     padding: 60px 20px;
+									| }
+									| h2 {
+									|     /* IE8 */
+									|     -ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#7fffffff,endColorstr=#7fffffff)";
+									|     /* その他 */
+									|     background-color: rgba(255,255,255,0.7);
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	background-image url(sand.jpg)
+									| 	width 460px
+									| 	padding 60px 20px
+									| h2
+									| 	-ms-filter "progid:DXImageTransform.Microsoft.gradient(startColorstr=#7fffffff,endColorstr=#7fffffff)"
+									| 	background-color rgba(255,255,255,0.7)
+								figcaption （stylus）
+							p
+								| #<mark>7f</mark>ffffff<br>
+								| 最初の16進数の2ケタが00（透明）からff（不透明）までの透明度<br>
+								| 残りの16進数6ケタが色指定
+							p パターン②
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;!DOCTYPE html&gt;
+									| &lt;!--[if IE 8 ]&gt;&lt;html lang="ja" class="ie8 oldie"&gt;&lt;![endif]--&gt;
+									| &lt;!--[if !(IE) ]&gt;&lt;!--&gt;&lt;html lang="ja"&gt;&lt;!--&lt;![endif]--&gt;
+									| &lt;head&gt;
+									| …
+									| &lt;div&gt;
+									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+									| &lt;/div&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| !!!
+									| html(lang='ja')
+									| | &lt;!--[if IE 8 ]&gt;&lt;html lang="ja" class="ie8"&gt;&lt;![endif]--&gt;
+									| | &lt;!--[if !(IE) ]&gt;&lt;!--&gt;
+									| 	head
+									| 		| …
+									| 		div
+									| 		h2 HAM SANDWICHES
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div {
+									|     background-image: url(sand.jpg);
+									|     width: 460px;
+									|     padding: 60px 20px;
+									| }
+									| h2 {
+									|     background-color: rgba(255,255,255,0.7);
+									| }
+									| .ie8 h2 {
+									|      -ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#7fffffff,endColorstr=#7fffffff)";
+									| }
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	background-image url(sand.jpg)
+									| 	width 460px
+									| 	padding 60px 20px
+									| h2
+									| 	background-color rgba(255,255,255,0.7)
+									| .ie8
+									| 	h2
+									| 		-ms-filter "progid:DXImageTransform.Microsoft.gradient(startColorstr=#7fffffff,endColorstr=#7fffffff)"
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

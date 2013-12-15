@@ -1489,12 +1489,220 @@ include ../head2.jade
 								figcaption （Jade）
 							hr
 							h4 ::first-letter擬似要素
+							p='::first-letter疑似要素を利用すると、要素の1文字目にスタイルシートを適用することができます。たとえば、<p>でマークアップした文章の1文字目に適用する場合、セレクタを「p::first-letter」と指定します。ここでは1文字目の文字サイズを大きくして、背景を緑色で表示するようにしています。'
+							p='なお、::first-letter疑似要素で適用したスタイルシートが機能するのは、displayプロパティの値が、block、inline-block、list-item、table-cell、table-captionの要素と定義されています。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/01/030-first-line.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| p::first-letter {
+									|     font-size: 32px;
+									|     font-weight: bold;
+									|     line-height: 24px;
+									|     padding: 10px;
+									|     background-color: greenyellow;
+									|     float: left;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| p
+									| 	&amp;::first-letter
+									| 		font-size 32px
+									| 		font-weight bold
+									| 		line-height 24px
+									| 		padding 10px
+									| 		background-color greenyellow
+									| 		float left
+								figcaption （stylus）
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。マスタードをピリッと…略...&lt;/p&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| p 焼きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。マスタードをピリッと…略...
 							hr
 							h4 ::before / :after擬似要素
+							p='::beforeと::after疑似要素では、contentプロパティで指定したコンテンツの挿入先を指定します。たとえば、<h2>でマークアップした見出しの前に挿入するばあいは、「h2::before」、後に挿入する場合は「h1::after」と指定します。ここでは見出しの後に「★」という文字を挿入するため、セレクタを「h2::before」と指定しています。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/01/030-before-after.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2::before, h2::after {
+									|     content: "★";
+									|     color: blue;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2::before, h2::after
+									| 	content "★"
+									| 	color blue
+								figcaption （stylus）
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 HAM SANDWICHES
+								figcaption （Jade）
 							hr
 							h4 結合子の利用
+							p='<div id="container">内の<h2>など、ドキュメントの構造に応じてスタイルシートを適用するためには、結合子を利用してセレクタを利用します。'
+							hr
+							h4 子孫セレクタ A B
+							p='A要素内のすべてのB要素にスタイルシートを適用するには、半角スペースを結合子として、セレクタを「A B」という形で記述します。たとえば、下のサンプルでは「body p」と指定し、<body>内の<p>に対してスタイルシートを適用しています。'
+							p='なお、3つの文章のうち、最初の1つは<body>の1階層下に位置していますが、残りの2つは<div>によるマークアップで2階層下に位置しています。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/01/031-combinator01.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| body p {
+									|     color: red;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| body
+									| 	p
+									| 		color red
+								figcaption （stylus）
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;body&gt;
+									| &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
+									| &lt;p&gt;炊きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。&lt;/p&gt;
+									| 
+									| &lt;div&gt;
+									|     &lt;h2&gt;ハム&amp;チーズサンド&lt;/h2&gt;
+									|     &lt;p&gt;ハムとチーズのサンドイッチです。マヨネーズ…略…&lt;/p&gt;
+									|     &lt;h2&gt;卵&amp;野菜サンド&lt;/h2&gt;
+									|     &lt;p&gt;卵と野菜のサンドイッチです。からしソースが…略…&lt;/p&gt;
+									| &lt;/div&gt;
+									| &lt;/body&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| body
+									| 	h1 HAM SANDWICHES
+									| 	p 炊きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。
+									| 	div
+									| 		h2 ハム&amp;チーズサンド
+									| 		p ハムとチーズのサンドイッチです。マヨネーズ…略…
+									| 		h2 卵&amp;野菜サンド
+									| 		p 卵と野菜のサンドイッチです。からしソースが…略…
+								figcaption （Jade）
+							hr
+							h4 子セレクタ A &lt; B
+							p='「>」を結合子としてセレクタを「A > B」という形で記述すると、A要素の1階層下のB要素にのみスタイルシートを適用することができます。たとえば、「body > p」と指定すると、<body>の1階層下の<p>にのみ適用することが可能です。2階層下の<p>には適用されません。'
+							p='2階層下の<p>にのみ適用する場合には、ユニバーサルセレクタを利用して「body > * > p」と指定します。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/01/031-combinator02.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| body &lt; p {
+									|     color: red;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| body
+									| 	&amp; &lt; p
+									| 		color red
+								figcaption （stylus）
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;body&gt;
+									| &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
+									| &lt;p&gt;炊きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。&lt;/p&gt;
+									| 
+									| &lt;div&gt;
+									|     &lt;h2&gt;ハム&amp;チーズサンド&lt;/h2&gt;
+									|     &lt;p&gt;ハムとチーズのサンドイッチです。マヨネーズ…略…&lt;/p&gt;
+									|     &lt;h2&gt;卵&amp;野菜サンド&lt;/h2&gt;
+									|     &lt;p&gt;卵と野菜のサンドイッチです。からしソースが…略…&lt;/p&gt;
+									| &lt;/div&gt;
+									| &lt;/body&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| body
+									| 	h1 HAM SANDWICHES
+									| 	p 炊きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。
+									| 	div
+									| 		h2 ハム&amp;チーズサンド
+									| 		p ハムとチーズのサンドイッチです。マヨネーズ…略…
+									| 		h2 卵&amp;野菜サンド
+									| 		p 卵と野菜のサンドイッチです。からしソースが…略…
+								figcaption （Jade）
+							hr
+							h4 隣接セレクタ A + B
+							p='A要素の直後に記述したB要素にのみスタイルシートを適用するには、「+」を結合子としてセレクタを「A + B」という形で指定します。たとえば、下のサンプルではセレクタを「h2 + p」と指定して、<h2>の直後に記述した<p>にスタイルシートを適用しています。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/01/031-combinator03.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 + p {
+									|     color: red;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	&amp; + p
+									| 		color red
+								figcaption （stylus）
+							hr
+							h4 間接セレクタ A ~ B
+							p='A要素の後に記述したすべてのB要素にスタイルシートを適用するには「~（チルダ）」を結合子としてセレクタを「A ~ B」という形で記述します。たとえば、下のサンプルで「h2 ~ p」と指定すると、<h2>の後に記述したすべての<p>にスタイルシートが適用されます。ただし、適用先となるのは<h2>と同じ階層の<p>に限られます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/01/031-combinator04.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 ~ p {
+									|     color: red;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	&amp; ~ p
+									| 		color red
+								figcaption （stylus）
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
+									| &lt;p&gt;炊きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。&lt;/p&gt;
+									| 
+									| &lt;h2&gt;卵&amp;野菜サンド&lt;/h2&gt;
+									| &lt;p&gt;卵と野菜のサンドイッチです。からしソースが…略…&lt;/p&gt;
+									| &lt;p&gt;日替わりメニューや、好きな具をトッピング…略...&lt;/p&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1 HAM SANDWICHES
+									| p 炊きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。
+									| h2 卵&amp;野菜サンド
+									| p 卵と野菜のサンドイッチです。からしソースが…略…
+									| p 日替わりメニューや、好きな具をトッピング…略...
+								figcaption （Jade）
 							hr
 							h4 グループ化 A, B 
+							p='複数の要素に同じ設定を適用したい場合、セレクターのグループ化の記述を利用します。たとえば、A要素とB要素を適用先とするためには、セレクタを「A, B」という形で記述します。下のサンプルでは<h1>と<h2>の背景を緑色にするため、セレクタを「h1, h2」と指定しています。'
 							.alert.alert-info セレクタの優先順位
 							.alert.alert-info CSS4のセレクタ
 							.alert.alert-info 特定の名前空間に属するスタイルシートを適用する

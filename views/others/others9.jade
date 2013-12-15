@@ -512,7 +512,6 @@ include ../head2.jade
 									pre
 										| !!!
 										| html
-										| 	head
 										| 		title タイトル
 										| 		block scripts
 										| 			script(src="/jquery.js")
@@ -558,14 +557,14 @@ include ../head2.jade
 								.col-sm-6
 									p head.jade
 									pre
-										| !!!
-										| html
-										| 	head
-										| 		meta(charset='UTF-8')
-										| 		title
+										| head
+										| 	meta(charset='UTF-8')
+										| 	title
 									p index.jade
 									pre
-										| include head.jade
+										| !!!
+										| html
+										| 	include head.jade
 										| 	body
 										| 		h1
 										| 		p
@@ -582,6 +581,37 @@ include ../head2.jade
 										| 		&lt;p&gt;&lt;/p&gt;
 										| 	&lt;/body&gt;
 										| &lt;/html&gt;
+							.alert.alert-info mixin
+							.row
+								.col-sm-6
+									pre
+										| mixin field(type, name, label)
+										| 	.field(class='field-' + type)
+										| 		label #{label}:
+										| 		input(type=type, name='user[#{name}]', value=user[name])
+										| 
+										| form
+										| 	mixin field('text', 'name', 'Username')
+										| 	mixin field('text', 'email', 'Email')
+										| 	mixin field('password', 'pass', 'Password')
+										| 	input(type='submit', value='Sign Up')
+								.col-sm-6
+									pre
+										| &lt;form&gt;
+										| 	&lt;div class="field field-text"&gt;
+										| 		&lt;label&gt;Username:&lt;/label&gt;
+										| 		&lt;input type="text" name="user[name]" value="TJ Holowaychuk"/&gt;
+										| 	&lt;/div&gt;
+										| 	&lt;div class="field field-text"&gt;
+										| 		&lt;label&gt;Email:&lt;/label&gt;
+										| 		&lt;input type="text" name="user[email]" value="tj@learnboost.com"/&gt;
+										| 	&lt;/div&gt;
+										| 	&lt;div class="field field-password"&gt;
+										| 		&lt;label&gt;Password:&lt;/label&gt;
+										| 		&lt;input type="password" name="user[pass]"/&gt;
+										| 	&lt;/div&gt;
+										| 	&lt;input type="submit" value="Sign Up"/&gt;
+										| &lt;/form&gt;
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='../js/google-code-prettify/prettify.js')

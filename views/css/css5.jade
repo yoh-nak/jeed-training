@@ -1219,6 +1219,93 @@ include ../head2.jade
 									| 	&amp;:nth-child(3n + 3)
 									| 		background-color skyblue
 								figcaption （stylus）
+							p: u 最初の3つの要素に適用する
+							p='パラメータを「-n+3」と指定すると、最初の3つの要素にスタイルシートを適用することもできます。ここでは「li:nth-child(-n+3)」と指定して、最初の3つの<li>のみを黄色で表示するようにしています。これは、「αn+β」のαにマイナス値を指定できることと、「αn+β」の算出結果は0より大きい正の整数が有効値になることを利用しています。たとえば、「-n+3」の算出値は3、2、1、-1、…となりますので、3つ目、2つ目、1つ目の要素にのみスタイルシートが適用されます。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| li:nth-child(-n+3) {
+									|     background-color: yellow;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')	
+									| li
+									| 	&amp;:nth-child(-n + 3)
+									| 		background-color yellow
+								figcaption （stylus）
+							p: u 最初と最後の要素が一致する場合に適用する
+							p='セレクタを「:first-child:last-child」または「:nth-child(1):nth-last-child(1)」と指定すると、最初と最後の要素が一致する場合にスタイルシートを適用することができます。たとえば、下のサンプルでは「li:first-child:last-child」と指定して、<li>でマークアップした項目が1つだけのときに背景色が黄色になるようにしています。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| li:first-child:last-child {
+									|     background-color: yellow;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| li
+									| 	&amp;:first-child:last-child
+									| 		background-color yellow
+								figcaption （stylus）
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;ul&gt;
+									| &lt;li&gt;ハム&amp;チーズサンド&lt;/li&gt;
+									| &lt;/ul&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| ul
+									| 	li ハム&amp;チーズサンド
+								figcaption （Jade）
+							p='なお、「li:first-child:last-child」は「:only-child」と指定することもできます。'
+							pre
+								| li:first-child:last-child {..}    ▶   li:only-child
+							p: u 複数のリストがある場合の表示
+							p=':first-childや:nth-child()などの設定は、同じ階層のグループごとに適用されます。たとえば、下のサンプルでは<li>でマークアップした部分をキスの場合は黄色で、偶数の場合は緑色で表示するようにしたものですが、2つ目のリストの最初の項目は緑色ではなく、黄色で表示されています。これにより、<ul>〜</ul>でマークアップしたグループごとに設定が適用されることがわかります。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| li:nth-child(odd) {
+									|     background-color: yellow;
+									| }
+									| li:nth-child(even) {
+									|     background-color: greenyellow;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| li
+									| 	&amp;:nth-child(odd)
+									| 		background-color yellow
+									| 	&amp;:nth-child(even)
+									| 		background-color greenyellow
+								figcaption （stylus）
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h2&gt;SANDWICHES&lt;/h2&gt;
+									| &lt;ul&gt;
+									| &lt;li&gt;ハム&amp;チーズサンド&lt;/li&gt;
+									| &lt;li&gt;卵&amp;野菜サンド&lt;/li&gt;
+									| &lt;li&gt;カツサンド&lt;/li&gt;
+									| &lt;/ul&gt;
+									| &lt;ul&gt;
+									| &lt;li&gt;チョコレートパフェ&lt;/li&gt;
+									| &lt;li&gt;苺ミルク&lt;/li&gt;
+									| &lt;li&gt;アイスクリーム&lt;/li&gt;
+									| &lt;/ul&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 SANDWICHES
+									| 	ul
+									| 		li ハム&amp;チーズサンド
+									| 		li 卵&amp;野菜サンド
+									| 		li カツサンド
+									| 	ul
+									| 		li チョコレートパフェ
+									| 		li 苺ミルク
+									| 		li アイスクリーム
+								figcaption （Jade）
 							hr
 							h4 構造擬似クラス（3） :first-of-type / :last-of-type / :nth-of-type() / :nth-last-of-type() / :only-of-type
 							hr

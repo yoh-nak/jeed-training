@@ -237,6 +237,55 @@ include ../head2.jade
 										td no-repeat
 										td right bottom
 							hr
+							h4 SAMPLE C：背景画像と背景色を重ねて表示する
+							p='背景画像と背景色の両方を指定した場合、背景色が一番下に重ねて表示されます。たとえば、background-imageプロパティで背景画像に白い横縞の画像（sw.png）を指定し、background-colorプロパティで背景色をオレンジに指定すると下のような表示になります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/03/121-C.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 HAM SANDWICHES
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     padding: 65px 0;
+									|     color: white;
+									|     text-shadow: 0 0 10px black;
+									|     background-image: url(sw.png);
+									|     background-color: orange;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	padding 65px 0
+									| 	color white
+									| 	text-shadow 0 0 10px black
+									| 	background-image url(sw.png)
+									| 	background-color orange
+								figcaption （stylus）
+							hr
+							.alert.alert-success Polyfill: 
+							p
+								| CSS3 Pie
+								br
+								a(href='http://css3pie.com/download/',target='_blank') http://css3pie.com/download/
+							p 最大4つまで背景画像を指定可能。
+							pre(class='prettyprint linenums:1')
+									| h2
+									| 	padding 65px 0
+									| 	color white
+									| 	text-shadow 0 0 10px black
+									| 	background-image url(point.png), url(sw.png), url(sky.jpg)
+									| 	background-repeat no-repeat, repeat-x
+									| 	bakcground-position 18px 15px center, center, right bottom
+									| 	<mark>behavior: url(PIE.htc);</mark>
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='../js/google-code-prettify/prettify.js')

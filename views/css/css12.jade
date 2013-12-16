@@ -1,0 +1,182 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;背景の表示エリア
+						.panel-body
+							.alert.alert-info 背景の表示エリア
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png')
+									td
+										img(src='../images/ic-android.png')
+									td
+										img(src='../images/ic-firefox.png')
+									td
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td
+										img(src='../images/ic-opera.png')
+									td
+										img(src='../images/ic-ie.png')
+							p iOS4.x/Android3.x以前は部分対応。
+							p IE8以前は部分対応。
+							pre
+								| background-clip: 表示エリア
+							p
+								| 表示エリア・・・border-box ／ padding-box ／ content-box
+							table.table
+								tr
+									td 初期値
+									td border-box
+								tr
+									td 継承
+									td なし
+								tr
+									td 適用先
+									td 全要素
+								tr
+									td 比率
+									td -
+								tr
+									td モジュール
+									td Backgrounds and Borders
+							p='background-clipプロパティを利用すると、背景をボックスモデルのボーダーボックス、パティングボックス、コンテンツボックスのどのエリアに表示するかを指定することができます。'
+							table.table
+								tr
+									th 値
+									th 表示エリア
+								tr
+									td border-box
+									td ボーダーボックス
+								tr
+									td padding-box
+									td パディングボックス
+								tr
+									td content-box
+									td コンテンツボックス
+							p='複数の背景画像を表示する場合には、各画像の表示エリアをカンマで区切って指定することもできます。'
+							pre
+								| background-clip: 1枚目の表示エリア, 2枚目の表示エリア, ...
+							hr
+							h4 SAMPLE A：基本
+							p='下のサンプルは、<h2>の構成するボックスを太さ30ピクセルの半透明なピンク色の罫線で囲み、罫線の内側に30ピクセルのパディングを挿入したものです。このボックスに背景画像を表示すると、background-clipプロパティの値が初期値の「border-box」で処理され、ボーダーボックスが表示されます。'
+							p='background-clipプロパティの値を「padding-box」にするとパディングボックスが、「content-box」にするとコンテンツボックスが表示エリアとなり、下のように表示されます。'
+							p='<h2>の構成するボックスに背景画像を表示したもの。初期値の「border-box」で処理されます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/03/132-01.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							p='background-clipプロパティの値を「padding-box」にしたときの表示。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/03/132-02.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     border: solid 30px rgba(255,164,255,0.5);
+									|     padding: 30px;
+									|     background-image: url(flower.png);
+									|     background-clip: padding-box;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	border solid 30px rgba(255,164,255,0.5)
+									| 	padding 30px
+									| 	background-image url(flower.png)
+									| 	background-clip padding-box
+								figcaption （stylus）
+							p='background-clipプロパティの値を「content-box」にしたときの表示。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/03/132-03.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     border: solid 30px rgba(255,164,255,0.5);
+									|     padding: 30px;
+									|     background-image: url(flower.png);
+									|     background-clip: content-box;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	border solid 30px rgba(255,164,255,0.5)
+									| 	padding 30px
+									| 	background-image url(flower.png)
+									| 	background-clip content-box
+								figcaption （stylus）
+							p='iOS 4.xとAndroid 3.x以前は「content-box」の指定に未対応です。これらのブラウザでは、-webkit-background-clipプロパティの値を「content」にすると、コンテンツボックスを表示エリアにすることができます。'
+							hr
+							h4 文字で背景を切り抜く
+							p='Webkit系のブラウザで、-webkit-background-clipのプロパティを利用すると、文字の背景で切り抜くことができます。たとえば、下のように文字の背景に木目の背景画像（wood.jpg）を表示したものを用意します。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     font-family: Arial Black, Verdana, sans-serif;
+									|     background-image: url(wood.jpg);
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	font-family Arial Black, Verdana, sans-serif
+									| 	background-image url(wood.jpg)
+								figcaption （stylus）
+							p='-webkit-backgroiund-clipプロパティの値を「text」にすると、背景が表示されなくなることがわかります。「text」はWebkitによる独自拡張の値です。このとき、文字の下には背景が表示されていますが、文字が不透明なため見えていません。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     font-family: Arial Black, Verdana, sans-serif;
+									|     background-image: url(wood.jpg);
+									|     -webkit-background-clip: text;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	font-family Arial Black, Verdana, sans-serif
+									| 	background-image url(wood.jpg)
+									| 	-webkit-background-clip text
+								figcaption （stylus）
+							p='-webkit-text-fill-colorプロパティの値を「transparent」と指定し、文字を透明にします。すると、文字の下に背景が見えるようになり、文字で背景を切り抜いた形になります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/03/133.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     font-family: Arial Black, Verdana, sans-serif;
+									|     background-image: url(wood.jpg);
+									|     -webkit-background-clip: text;
+									|     -webkit-text-fill-color: transparent;
+									| }
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	font-family Arial Black, Verdana, sans-serif
+									| 	background-image url(wood.jpg)
+									| 	-webkit-background-clip text
+									| 	-webkit-text-fill-color transparent
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

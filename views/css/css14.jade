@@ -1,0 +1,177 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;背景画像の表示サイズ
+						.panel-body
+							.alert.alert-info 背景画像の表示サイズ
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png')
+									td
+										img(src='../images/ic-android.png')
+									td
+										img(src='../images/ic-firefox.png')
+									td
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td
+										img(src='../images/ic-opera.png')
+									td
+										img(src='../images/ic-ie.png')
+							p IE8以前は部分対応。
+							pre
+								| background-size: 横幅 高さ
+							p
+								| 横幅または高さ・・・数値 ／ auto ／ contain ／ cover
+							table.table
+								tr
+									td 初期値
+									td auto
+								tr
+									td 継承
+									td なし
+								tr
+									td 適用先
+									td 全要素
+								tr
+									td 比率
+									td background-originで指定したエリアの横幅と高さに対する比率
+								tr
+									td モジュール
+									td Backgrounds and Borders
+							p='background-sizeプロパティを利用すると背景画像の表示サイズを指定することができます。横幅と高さをスペースで区切って指定しますが、高さの値は省略することができ、その場合は「auto」として処理されます。'
+							table.table
+								tr
+									th 値
+									th 背景画像の大きさ
+								tr
+									td contain
+									td ボックス内に全体が収まる大きさで表示。
+								tr
+									td cover
+									td ボックス全体をカバーする大きさで表示。
+								tr
+									td auto
+									td 横幅と高さのどちらか一方の値に対し、アスペクト比を維持するサイズを算出。横幅と高さの両方を「auto」と指定した場合はオリジナルの大きさで表示されます。
+							p='複数の背景画像を表示する場合には、各画像の表示サイズをカンマで区切って指定することもできます。'
+							pre
+								| background-size: 1枚目の大きさ, 2枚目の大きさ, ...
+							hr
+							h4 SAMPLE A：基本
+							p='下のサンプルは60x60ピクセルの背景画像（flowwe.png）をボックスの中央に表示したものです。background-sizeプロパティの値は初期値の「auto」で処理されますので、背景画像はオリジナルの大きさで表示されます。'
+							p='background-sizeプロパティの値を「120px」にすると、背景画像が120ピクセルの横幅になるようにアスペクト比を維持した形で拡大・縮小して表示されます。サンプルで使用した画像はオリジナルの横幅が60ピクセルなため、拡大して表示されます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/03/135-A01.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     padding:45px;
+									|     color: rgba(0, 0, 0, 0.1);
+									|     border: solid 1px orange;
+									|     background-image: url(flower.png);
+									|     background-repeat: no-repeat;
+									|     background-position: center center;
+									|     background-size: 120px;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	padding 45px
+									| 	color rgba(0, 0, 0, 0.1)
+									| 	border solid 1px orange
+									| 	background-image url(flower.png)
+									| 	background-repeat no-repeat
+									| 	background-position center center
+									| 	background-size 120px
+								figcaption （stylus）
+							p='横幅と高さを別々に指定することもできます。たとえば、「200px 120px」と指定すると、背景画像の横幅が200ピクセル、高さが120ピクセルの大きさで表示されます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/03/135-A02.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     padding:45px;
+									|     color: rgba(0, 0, 0, 0.1);
+									|     border: solid 1px orange;
+									|     background-image: url(flower.png);
+									|     background-repeat: no-repeat;
+									|     background-position: center center;
+									|     background-size: 200px 120px;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	padding 45px
+									| 	color rgba(0, 0, 0, 0.1)
+									| 	border solid 1px orange
+									| 	background-image url(flower.png)
+									| 	background-repeat no-repeat
+									| 	background-position center center
+									| 	background-size 200px 120px
+								figcaption （stylus）
+							hr
+							h4 SAMPLE B：ボックスの大きさに合わせて表示する
+							p='背景画像をボックスの大きさに合わせて表示するためには、background-sizeプロパティの値を「contain」または「cover」にします。たとえば、「contain」にすると、背景が全体がちょうどボックスに収まる大きさで表示されます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/03/135-B01.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							p='また、「cover」にすると、背景画像はボックス全体をカバーする大きさで表示されます。いずれの値にした場合にも、背景画像のアスペクト比は維持されます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/03/135-B02.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							p='なお、上記のようにボックスの大きさに合わせた表示となるのは、background-originプロパティの値が初期値の「padding-box」で処理され、パディングボックスに合わせた表示となるためです。'
+							p='たとえば、background-originプロパティの値を「content-box」にすると、コンテンツボックスの大きさに合わせた表示になります。コンテンツボックスはパディングを除いた部分です。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/03/135-B03.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     padding:45px;
+									|     color: rgba(0, 0, 0, 0.1);
+									|     border: solid 1px orange;
+									|     background-image: url(flower.png);
+									|     background-repeat: no-repeat;
+									|     background-position: center center;
+									|     background-origin: content-box;
+									|     background-size: cover;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	padding 45px
+									| 	color rgba(0, 0, 0, 0.1)
+									| 	border solid 1px orange
+									| 	background-image url(flower.png)
+									| 	background-repeat no-repeat
+									| 	background-position center center
+									| 	background-origin content-box
+									| 	background-size cover
+								figcaption （stylus）
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

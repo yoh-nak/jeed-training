@@ -1,0 +1,247 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;円形グラデーションの表示
+						.panel-body
+							.alert.alert-info 円形グラデーションの表示
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png') （※）
+									td
+										img(src='../images/ic-android.png') （※）
+									td
+										img(src='../images/ic-firefox.png')
+									td
+										img(src='../images/ic-safari.png') （※）
+									td
+										img(src='../images/ic-chrome.png')
+									td
+										img(src='../images/ic-opera.png')
+									td.not-support
+										img(src='../images/ic-ie.png')
+							p ※ 部分対応。
+							p iOS4.x／Android3.x以前／IE9以前は未対応。
+							pre
+								| background: radial-gradient(形状,サイズ at 横方向の位置 縦方向の位置,カラーストップ,カラーストップ,…)
+							pre
+								| background-image: radial-gradient(形状,サイズ at 横方向の位置 縦方向の位置,カラーストップ,カラーストップ,…)
+							p
+								| 形状・・・circle／ellipsis<br>
+								| サイズ・・・数値／比率（形状がelllipseの場合のみ）／closest-side／closest-corner／farthest-side／farthest-corner<br>
+								| 横の表示位置・・・数値／比率／left／center／right<br>
+								| 縦の表示位置・・・数値／比率／top／center／bottom<br>
+								| カラーストッップ・・・色の値 位置（数値または%）
+							table.table
+								tr
+									td 初期値
+									td -
+								tr
+									td 継承
+									td -
+								tr
+									td 適用先
+									td -
+								tr
+									td 比率
+									td ボックスの横幅または高さに対する比率
+								tr
+									td モジュール
+									td Backgrounds and Borders
+							p='radial-gradient()を利用すると、円形グラデーションを画像として表示することができます。backgroundといった画像を扱うプロパティの値として、url()の代わりに指定することが可能です。'
+							hr
+							h4 SAMPLE A：円形グラデーションの表示
+							p='ボックスの背景を円形グラデーションで表示するには、radial-gradient()を下のように指定します。ここでは円の中心から黄、オレンジ、ピンクと色が変化するようにしています。'
+							p='まず、radial-gradient()の1つ目のパラメーターでは形状とサイズを指定します。指定できる形状は「circle（円）」または「ellipsis（楕円）」です。ここでは「circle 50px」と指定し、半径50ピクセルの円を表示するようにしています。'
+							p='2つ目のパラメーターでは円の中心点の位置をボックスの左辺と上辺からの距離（ピクセル）または比率（%）で指定します。ここでは「at 15% 50%」と指定しています。'
+							p='3つ目以降のパラメーターは「カラーストップ」です。ここでは円の中心となる始点（0%）を黄色に、50%をオレンジ色に、円の外周となる終点（100%）をピンク色に指定しています。なお、ボックスの背景のうち、円以外の部分は終点のピンク色で塗りつぶされます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/03/154-A01.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 HAM SANDWICHES
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     background: radial-gradient(
+									|         circle 50px at 15% 50%,
+									|         yellow 0%,
+									|         orange 50%,
+									|         pink 100%
+									|     );
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	background radial-gradient(
+									|         circle 50px at 15% 50%,
+									|         yellow 0%,
+									|         orange 50%,
+									|         pink 100%
+									|     )
+								figcaption （stylus）
+							p='楕円で表示する場合、形状を「ellipsis」、サイズを「横方向の半径 縦方向の半径」という形で指定します。たとえば、「ellipsis 200px 30px」と指定すると下のようになります。ここでは中心点の位置を「at 50% 50%」と指定し、ボックスの中央に表示するようにしています。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/03/154-A02.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     background: radial-gradient(
+									|         ellipse 200px 50px at 50% 50%,
+									|         yellow 0%,
+									|         orange 50%,
+									|         pink 100%
+									|     );
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	background radial-gradient(
+									|         ellipse 200px 50px at 50% 50%,
+									|         yellow 0%,
+									|         orange 50%,
+									|         pink 100%
+									|     )
+								figcaption （stylus）
+							p='iOS5.x以上、Android4.x、Safariに対応するためには「-webkit-」をつけた設定も記述します。ただし、古い草案に従っていることから、パラメータは「中心点の位置」、「サイズ（横方向と縦方向の半径）」、「カラーストップ」の順に指定する必要があります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/03/154-A01-withprefix.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     background: -webkit-radial-gradient(
+									|         15% 50%,
+									|          50px 50px,
+									|          yellow 0%,
+									|          orange 50%,
+									|          pink 100%
+									|     );
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	background -webkit-radial-gradient(
+									|         15% 50%,
+									|          50px 50px,
+									|          yellow 0%,
+									|          orange 50%,
+									|          pink 100%
+									|     )
+								figcaption （stylus）
+							p
+								a.btn.btn-default(href='../demo/css/sample1/03/154-A02-withprefix.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     background: -webkit-radial-gradient(
+									|          50% 50%,
+									|          200px 30px,
+									|          yellow 0%,
+									|          orange 50%,
+									|          pink 100%
+									|     );
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	background -webkit-radial-gradient(
+									|          50% 50%,
+									|          200px 30px,
+									|          yellow 0%,
+									|          orange 50%,
+									|          pink 100%
+									|     )
+								figcaption （stylus）
+							hr
+							h4 SAMPLE B：円形グラデーションの表示
+							p='円や楕円のサイズは以下のキーワードで指定することもできます。たとえば、円のグラデーションをclosest-cornerのサイズで表示したい場合には、形状とサイズを「circle closest-corner」と指定します。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/03/154-B.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     background: radial-gradient(
+									|         circle closest-corner at 15% 50%,
+									|         …略...
+									|     );
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	background radial-gradient(
+									|         circle closest-corner at 15% 50%,
+									|         …略...
+									|     )
+								figcaption （stylus）
+							p='-webkit-radial-gradient()でも、サイズを「circle closest-corner」と指定すると同じ形で表示することができます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/03/154-B-withprefix.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     background: -webkit-radial-gradient(
+									|         circle closest-corner at 15% 50%,
+									|         …略...
+									|     );
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	background -webkit-radial-gradient(
+									|         circle closest-corner at 15% 50%,
+									|         …略...
+									|     )
+								figcaption （stylus）
+							table.table
+								tr
+									th サイズの値
+									th 半径の処理
+								tr
+									td closest-side
+									td 中心点から最も近い辺までの長さを半径とする。
+								tr
+									td closest-corner
+									td 中心点から最も近い角までの長さを半径とする。
+								tr
+									td farthest-side
+									td 中心点から最も遠い辺までの長さを半径とする。
+								tr
+									td farthest-corner
+									td 中心点から最も遠い角までの長さを半径とする。
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

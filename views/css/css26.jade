@@ -1,0 +1,145 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;円形グラデーションの繰り返し
+						.panel-body
+							.alert.alert-info 円形グラデーションの繰り返し
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png') （※）
+									td
+										img(src='../images/ic-android.png') （※）
+									td
+										img(src='../images/ic-firefox.png')
+									td
+										img(src='../images/ic-safari.png') （※）
+									td
+										img(src='../images/ic-chrome.png')
+									td
+										img(src='../images/ic-opera.png')
+									td.not-support
+										img(src='../images/ic-ie.png')
+							p ※ 部分対応。
+							p iOS4.x／Android3.x以前／IE9以前は未対応。
+							pre
+								| 〜: repeating-radial-gradient(形状,サイズ at 横方向の位置 縦方向の位置,カラーストップ,カラーストップ,…)
+							p
+								| 形状・・・circle／ellipse<br>
+								| サイズ・・・数値／比率（形状がellipseの場合のみ）／closest-side／closest-corner／farthest-side／farthest-corner<br>
+								| 横の表示位置・・・数値／比率／left／center／right<br>
+								| 縦の表示位置・・・数値／比率／top／center／bottom<br>
+								| sカラーストップ・・・色の値／位置（数値または%）
+							table.table
+								tr
+									td 初期値
+									td -
+								tr
+									td 継承
+									td -
+								tr
+									td 適用先
+									td -
+								tr
+									td 比率
+									td ボックスの横幅または高さに対する比率
+								tr
+									td モジュール
+									td Image Values and Replaced Content
+							p='円形グラデーションを繰り返して表示する場合はrepeating-radial-gradient()を利用します。指定できる値や記述形式はradial-gradient()と同じです。'
+							p='iOS4.x/Android3.x以前はrepeating-radial-gradient()に未対応です。'
+							hr
+							h4 SAMPLE：円形グラデーションの繰り返し
+							p='下のサンプルはradial-gradient()を利用して円のグラデーションを表示しています。カラーストップで0%を黄色、50%をオレンジ色、100%をピンク色に指定していますが、円以外の部分はピンク色で表示され、グラデーションが繰り返し表示されることはありません。'
+
+							p='これに対し、repeating-radial-gradient()で同じ指定を行うと、グラデーションを繰り返して表示することができます。'
+							
+							p='iOS5.x以上、Android4.x、Safariに対応するためには、「-webkit-」をつけた設定も記述します。ただし、古い草案に従っていることから、パラメータは下のように指定する必要があります。'
+						//
+							p='線形グラデーションを繰り返して表示する場合はrepeating-linear-gradient()を利用します。指定できる値や記述形式はlinear-gradient()と同じです。'
+							p='iOS4.x/Android 3.x以前はrepeating-linear-gradient()に未対応です。'
+							hr
+							h4 SAMPLE：線形グラデーションの繰り返し
+							p='下のサンプルはlinear-gradient()で左から右に変化する線形グラデーションを表示したものです。カラーストップでは0%をオレンジ色（#ff8800）に、20%を黄色（#ffff00）に指定しています。しかし、20%〜100%の部分は黄色で表示され、グラデーションが繰り返し表示されることはありません。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									| 	background: linear-gradient(
+									| 		90deg,
+									| 		#ff8800 0%,
+									| 		#ffff00 20%
+									| 	);
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	background linear-gradient(
+									|  		90deg,
+									| 		#ff8800 0%,
+									| 		#ffff00 20%
+									| 	)
+								figcaption （Stylus）
+							p='これに対し、repeating-linear-gradient()で同じパラメータを指定すると、グラデーションを繰り返して表示することができます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/03/156.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									| 	background: repeating-linear-gradient(
+									| 		90deg,
+									| 		#ff8800 0%,
+									| 		#ffff00 20%
+									| 	);
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	background repeating-linear-gradient(
+									| 		90deg,
+									| 		#ff8800 0%,
+									| 		#ffff00 20%
+									| 	)
+								figcaption （Stylus）
+							p='iOS5.x以上、Android4.x、Safariに対応するためには「-webkit-」をつけた設定も記述します。ただし、古い草案に従っていることから、左から右に変化するグラデーションを表示するためには角度を「0deg」と指定する必要があります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/03/156-withprefix.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									| 	background: -webkit-repeating-linear-gradient(
+									| 		0deg,
+									| 		#ff8800 0%,
+									| 		#ffff00 20%
+									| 	);
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	background -webkit-repeating-linear-gradient(
+									| 		 0deg,
+									| 		#ff8800 0%,
+									| 		#ffff00 20%
+									| 	)
+								figcaption （Stylus）
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

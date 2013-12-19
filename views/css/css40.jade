@@ -135,7 +135,7 @@ include ../head2.jade
 								a(href='http://sourceforge.jp/projects/sfnet_yarska/releases/',target='_blank') http://sourceforge.jp/projects/sfnet_yarska/releases/
 							hr
 							h4 SAMPLE A：基本
-							p='サーバーに置いたフォントデータをWebフォントとして利用するためには、@font-faceのfont-familyディスクリプタでフォント名を、srcディスクリプタでフォントデータを指定してフォントの定義を行います。ここではWOFF形式のQuicksandというフォントを利用するため、font-familyディスクリプタの値を「Quicksand」と指定しています。srcディスクリプタの値は「url('') format(\'WOFF\')」という形で記述し、フォントデータのURLとフォーマットを指定します。'
+							p='サーバーに置いたフォントデータをWebフォントとして利用するためには、@font-faceのfont-familyディスクリプタでフォント名を、srcディスクリプタでフォントデータを指定してフォントの定義を行います。ここではWOFF形式のQuicksandというフォントを利用するため、font-familyディスクリプタの値を「Quicksand」と指定しています。srcディスクリプタの値は「url(\'\') format(\'WOFF\')」という形で記述し、フォントデータのURLとフォーマットを指定します。'
 							p='@font-faceで定義した「Quicksand」フォントを利用するためには、font-familyプロパティの値を「Quicksand」にします。'
 							p
 								a.btn.btn-default(href='../demo/css/sample1/04/182/182-A01.html',target='_blank')
@@ -218,7 +218,74 @@ include ../head2.jade
 							h4 SAMPLE B：主要なブラウザに対応する記述
 							p='@font-faceのsrcディスクリプタでは複数のフォントデータの候補をカンマで区切って指定することができます。ブラウザは指定されたフォントデータの中から利用できるものを使って表示を行います。この場合、最初に記述したデータほど優先順位が高くなります。'
 							p='最新の主要ブラウザに対応するためには、WOFFと、TrueTypeまたはOpenType形式のフォントデータを用意し、カンマで区切って指定します。たとえば、WOFFとTrueType形式のフォントデータを指定すると下のようになります。これでiOS5.x以上、Firefox、Safari、Chrome、Opera、IE9はWOFFで、iOS4.2やAndroidはTrueTypeフォントを表示することができます。'
-							
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/182/182-B.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| @font-face {
+									|     font-family: 'Quicksand';
+									|     src: url(Quicksand_Book.woff) format('woff'), url(Quicksand_Book.ttf) format('truetype');
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									@font-face
+										font-family 'Quicksand'
+										src url(Quicksand_Book.woff) format('woff'), url(Quicksand_Book.ttf) format('truetype')
+								figcaption （Stylus）
+							hr
+							h4 iOS4.1以前への対応
+							p='iOS4.1以前にも対応する場合、SVG形式のフォントデータも用意して、下のように指定を追加します。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| @font-face {
+									|     font-family: 'Quicksand';
+									|     src: url(Quicksand_Book.woff) format('woff'),
+									|           url(Quicksand_Book.ttf) format('truetype'),
+									|           url(Quicksand_Book.svg#qsbook) format('svg');
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| @font-face
+									|   font-family 'Quicksand'
+									|   src url(Quicksand_Book.woff) format('woff'), url(Quicksand_Book.ttf) format('truetype'), url(Quicksand_Book.svg#qsbook) format('svg')
+								figcaption （Stylus）
+							hr
+							h4 IE8以前への対応
+							p='IE8以前にも対応する場合、Embedded OpenType（EOT）形式のフォントデータも用意して設定を追加します。ただし、複数のフォントデータも用意して設定を追加します。ただし、複数のフォントデータをカンマで区切った記述には未対応なため、新しいsrcディスクリプタを追加してEOT形式のデータを指定します。このとき、既存のsrcよりも前に記述します。また、format()の記述には未対応なため、url()のみを記述します。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/03/184.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| @font-face {
+									|     font-family: 'Quicksand';,
+									|     src: url(Quicksand_Book.eot);
+									|     src: local('.'),
+									|           url(Quicksand_Book.woff) format('woff'),
+									|           url(Quicksand_Book.ttf) format('truetype'),
+									|           url(Quicksand_Book.svg#qsbook) format('svg');
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| @font-face
+									| 	font-family 'Quicksand'
+									| 	src url(Quicksand_Book.eot)
+									| 	src local('.'),
+									| 	url(Quicksand_Book.woff) format('woff'),
+									| 		url(Quicksand_Book.ttf) format('truetype'),
+									| 		url(Quicksand_Book.svg#qsbook) format('svg')
+								figcaption （Stylus）
+							p='@font-face内に複数のsrcディスクリプタがある場合、最後に記述したsrcが有効になりますので、IE8以前が2つ目のsrcを認識できないようにします。そこで、IE8が未対応のlocal()の指定を追加します。これにより、1つ目のsrcがIE8以前で、2つ目のsrcが他のブラウザで有効となり、環境ごとに対応したフォーマットのWebフォントを利用できるようになります。ただし、Android2.3.xではlocal()の指定によりWebフォントの指定が無効になるという問題が発生しますので、注意が必要です。'
+							hr
+							h4 SAMPLE C：斜体や太さの異なるフォントの定義 [font-style, font-weight]
+							p='@font-faceでは斜体や太さといった特徴を含めてフォントを定義することもできます。たとえば、SAMPLE Aで使用したQucksandというフォントには、下のように斜体や太字のフォントデータが用意されています。そこで、それぞれのフォントの定義を行い、Webページで利用できるようにします。ただし、同じ「Quicksand」のフォントであることを示すため、@font-faceのfont-familyは共通したフォント名で定義していきます。'
+							p='なお、わかりやすいように、srcディスクリプタではWOFF形式のフォントデータのみを指定しますが、複数のブラウザに対応させる場合はSAMPLE BのようにTrueType形式のフォントデータも指定してください。'
 						//
 							p='font-familyプロパティではフォント名または系統名でフォントを指定します。ただし、フォントは閲覧環境にインストールされている必要がありますので、主要な閲覧環境であるWindowsやMac OS X環境に標準でインストールされたフォントを指定するようにします。このとき、複数のフォントの候補をカンマで区切って指定しておくと、ブラウザは指定されたフォントの中から閲覧環境で利用できるものを使って表示を行います。この場合、最初に記述したフォントほど優先順位が高くなります。'
 							pre

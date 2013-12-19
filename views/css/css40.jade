@@ -1,0 +1,501 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;Webフォントの利用
+						.panel-body
+							.alert.alert-info Webフォントの利用
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png')
+									td
+										img(src='../images/ic-android.png')
+									td
+										img(src='../images/ic-firefox.png')
+									td
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td
+										img(src='../images/ic-opera.png')
+									td
+										img(src='../images/ic-ie.png')
+							p ※IE8以前は部分対応
+							pre
+								| @font-face {
+								|     font-family: フォント名
+								|     src: フォントデータ
+								|     font-style: 斜体のスタイル
+								|     font-weight: 太さのスタイル
+								|     font-stretch: 幅のスタイル
+								|     unicode-range: 文字範囲
+								| }
+							p
+								| フォント名・・・任意のフォント名
+								| フォントデータ・・・url()／url() format()／local()
+								| 斜体の指定・・・normal／italic／oblique
+								| 太さの指定・・・normal／bold／100／200／300／400／500／600／700／800／900
+								| 幅の指定・・・ultra-condensed／extra-condensed／condensed／semi-condensed／normal／semi-expanded／expanded／extra-expanded／ultra-expanded
+								| 文字範囲の指定・・・Unicodeのコードポイント
+							table.table
+								tr
+									td 初期値
+									td -
+								tr
+									td 継承
+									td -
+								tr
+									td 適用先
+									td -
+								tr
+									td 比率
+									td -
+								tr
+									td モジュール
+									td Fonts
+							p='Webページに使用できるフォントは、CSS2.1までは閲覧環境にインストールされたローカルフォントだけでしたが、CSS3からはサーバーに置いたフォントを読み込んで利用できるようになっています。こうしたフォントはWebフォントと呼ばれ、@font-faceで定義して利用します。なお、利用できるフォントはライセンスによってWebフォントとしての使用が許可されたものに限られます。'
+							p='各ブラウザが対応しているWebフォントのフォーマットは下のようになっています。WOFF（Web Open Font Format）はWebページで使うことを目的に作られたフォーマットで、他のフォーマットに比べてサイズが小さくなると行ったメリットがあります。しかし、AndroidやiOS4.x、IE8以前に対応するためには、WOFF以外のフォーマットも用意する必要があります。'
+							p='Embedded Open Type（EOT）は、IEのみがサポートしているフォーマットです。IEはバージョン4から@font-faceをサポートしており、そのとき対応したフォーマットがEOTでした。IE8以前に対応する場合に使用します。'
+							p='SVG Fontは、ベクタ形式の図形を描画するSVGで定義されたフォントです。iOS4.1以前のバージョンに対応する場合に使用します。'
+							table.table
+								tr
+									th 
+									th WOFF（.woff）
+									th TrueType（.ttf）
+									th OpenType（.otf）
+									th Embedded OpenType（.eot）
+									th SVG Font（.svg）
+								tr
+									th Firefox
+									td ○
+									td ○
+									td ○
+									td -
+									td -
+								tr
+									th Safari
+									td ○
+									td ○
+									td ○
+									td -
+									td ○
+								tr
+									th Chrome
+									td ○
+									td ○
+									td ○
+									td -
+									td ○
+								tr
+									th Opera
+									td ○
+									td ○
+									td ○
+									td -
+									td ○
+								tr
+									th IE
+									td ○ ※1
+									td ○ ※1
+									td ○ ※1
+									td ○
+									td ○
+								tr
+									th iOS
+									td ○ ※2
+									td ○ ※3
+									td ○ ※3
+									td -
+									td ○
+								tr
+									th Android
+									td -
+									td ○ ※4
+									td ○ ※4
+									td -
+									td ○ ※5
+							p
+								| ※1・・・IE9以上が対応。<br>
+								| ※2・・・iOS5.x以上が対応。<br>
+								| ※3・・・iOS4.2以上が対応。<br>
+								| ※4・・・Android2.2以上が対応。<br>
+								| ※5・・・Android3.x以上が対応。
+							p='IE9がWebフォントとして利用できるTrueTypeとOpentTypeのフォントは、フォントデータに含まれている埋め込み許可の制約レベルが「インストール可能」となっているものに限られます。'
+							p
+								| Quicksand_*フォントダウンロード
+								br
+								a(href='http://sourceforge.jp/projects/sfnet_yarska/releases/',target='_blank') http://sourceforge.jp/projects/sfnet_yarska/releases/
+							hr
+							h4 SAMPLE A：基本
+							p='サーバーに置いたフォントデータをWebフォントとして利用するためには、@font-faceのfont-familyディスクリプタでフォント名を、srcディスクリプタでフォントデータを指定してフォントの定義を行います。ここではWOFF形式のQuicksandというフォントを利用するため、font-familyディスクリプタの値を「Quicksand」と指定しています。srcディスクリプタの値は「url('') format(\'WOFF\')」という形で記述し、フォントデータのURLとフォーマットを指定します。'
+							p='@font-faceで定義した「Quicksand」フォントを利用するためには、font-familyプロパティの値を「Quicksand」にします。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/182/182-A01.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;div&gt;Ham Sandwiches&lt;/div&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div Ham Sandwiches
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| @font-face {
+									|     font-family: 'Quicksand';
+									|     src: url(Quicksand_Book.woff) format('woff');
+									| }
+									| 
+									| div {
+									|     font-family: Qucksand;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| @font-face
+									| 	font-family 'Quicksand'
+									| 	src url(Quicksand_Book.woff) format('woff')
+									| div
+									| 	font-family Qucksand
+								figcaption （Stylus）
+							tale.table
+								tr
+									th フォーマット
+									th format()の値
+								tr
+									td WOFF
+									td woff
+								tr
+									td TrueType
+									td truetype
+								tr
+									td OpenType
+									td opentype
+								tr
+									td Embedded Open Type
+									td embedded-opentype
+								tr
+									td SVG Font
+									td svg
+							h4 SVG Fontを利用する場合
+							p='SVGフォントを利用する場合、フォントファイルのURLにフォトのIDを「#」でつなげて記述します。フォントのIDはSVGデータの<font id="〜">で指定されたもので、ここでは「qsbook」となっています。'
+							p='なお、iOS4.xとOpera以外ではIDを指定せずにSVG Fontを利用することができます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/182/182-A02.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;?xml version="1.0" standalone="no"?&gt;
+									| &lt;!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"&gt;
+									| …略...
+									| &lt;font id="qsbook" horiz-adv-x="880" &gt;
+								figcaption （SVG）
+							figure
+								pre(class='prettyprint linenums:1')
+									| @font-face {
+									|     font-family: 'Quicksand';
+									|     src: url(Quicksand_Book.svg#qsbook) format('svg');
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| @font-face
+									| 	font-family 'Quicksand'
+									| 	src url(Quicksand_Book.svg#qsbook) format('svg')
+								figcaption （Stylus）
+							hr
+							h4 SAMPLE B：主要なブラウザに対応する記述
+							p='@font-faceのsrcディスクリプタでは複数のフォントデータの候補をカンマで区切って指定することができます。ブラウザは指定されたフォントデータの中から利用できるものを使って表示を行います。この場合、最初に記述したデータほど優先順位が高くなります。'
+							p='最新の主要ブラウザに対応するためには、WOFFと、TrueTypeまたはOpenType形式のフォントデータを用意し、カンマで区切って指定します。たとえば、WOFFとTrueType形式のフォントデータを指定すると下のようになります。これでiOS5.x以上、Firefox、Safari、Chrome、Opera、IE9はWOFFで、iOS4.2やAndroidはTrueTypeフォントを表示することができます。'
+							
+						//
+							p='font-familyプロパティではフォント名または系統名でフォントを指定します。ただし、フォントは閲覧環境にインストールされている必要がありますので、主要な閲覧環境であるWindowsやMac OS X環境に標準でインストールされたフォントを指定するようにします。このとき、複数のフォントの候補をカンマで区切って指定しておくと、ブラウザは指定されたフォントの中から閲覧環境で利用できるものを使って表示を行います。この場合、最初に記述したフォントほど優先順位が高くなります。'
+							pre
+								| font-family: 第1候補のフォント, 第2候補のフォント, …, 系統名
+							p='系統名は「セリフ」や「サンセリフ」といったフォントの種類を示すもので、閲覧環境で利用できるフォントの中からブラウザが最適なものを選んで表示を行います。複数の候補を指定する場合、最後に系統名を指定しておくことにより、指定したフォントがすべて利用できない環境でも同系統のフォントで表示することができます。'
+							table.table
+								tr
+									th 系統名の値
+									th フォントの系統
+								tr
+									td serif
+									td セリフ
+								tr
+									td sans-serif
+									td サンセリフ
+								tr
+									td monospace
+									td 等幅
+								tr
+									td cursive
+									td 筆記体
+								tr
+									td fantasy
+									td 装飾
+							hr
+							h4 SAMPLE A：基本
+							p='<h2>でアークアップした英語の文字を「Verdana（ヴァーダナ）」またはサンセリフのフォントで表示するように指定しています。「Verdana」はWindowsとMac OS Xの両方の環境に標準でインストールされてますので、他のフォント候補は指定していません。'
+							p='<p>でマークアップした日本語の文字はゴシック体のフォントで表示するため、Windows環境の「メイリオ」とMac OS X環境の「Hiragino Kaku Gothic Pro（ヒラギノ角ゴ）」で表示するように指定し、系統を「sans-serif」と指定しています。なお、半角スペースや日本語を含むフォント名は「\'」や「"」で囲んで記述します。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/03/180.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h2&gt;Ham Sandwiches&lt;/h2&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 Ham Sandwiches
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     font-family: Verdana, sans-serif
+									| }
+									| p {
+									|     font-family: 'メイリオ', 'Hiragino Kaku Gothic Pro', sans-serif;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	font-family Verdana, sans-serif
+									| p
+									| 	font-family 'メイリオ', 'Hiragino Kaku Gothic Pro', sans-serif
+								figcaption （Stylus）
+							hr
+							h4 SAMPLE B：標準でインストールされている主な日本語フォント
+							p='WidnowsおよびMac OS X環境には標準で下のような日本語フォントがインストールされています。各環境に共通したフォントはありませんので、指定する場合はSAMPLE Aのように複数の同系統のフォントを指定するようにします。'
+							table.table
+								tr
+									th フォント名
+									th Win
+									th Mac
+									th 系統
+								tr
+									td メイリオ
+									td ○
+									td 
+									td(rowspan='3') ゴシック体
+								tr
+									td MS Pゴシック
+									td ○
+									td 
+								tr
+									td Hiragino Kaku Gothic Pro<br>（ヒラギノ角ゴ Pro）
+									td 
+									td ○
+								tr
+									td MS P明朝
+									td ○
+									td 
+									td(rowspna='2') 明朝体
+								tr
+									td Hiragino Mincho Pro<br>（ヒラギノ明朝 Pro）
+									td 
+									td ○
+								tr
+									td MS ゴシック
+									td ○
+									td 
+									td(rowspna='2') 等幅
+								tr
+									td Osaka-mono
+									td 
+									td ○
+							p='古いOS X環境のSafariではフォント名を日本語で指定すると正しく表示することができなかったため、OS X環境用のフォントは英語名で指定するか、英語名と日本語名の両方を指定するのが一般的となっています。'
+							p='iOSの場合、4.xではゴシック体のみでしたが、5.x以上ではゴシック体と明朝体のフォントが用意されています。Androidの場合、利用できる日本語フォントはゴシック体のみとなっています。'
+							p!='<mark>iOS6ではデフォルトの日本語フォントが変更され、CSSで「font-family」の指定がない場合、明朝体がデフォルトになりました。</mark>'
+							table.table
+								tr
+									th モバイル環境
+									th フォント名
+								tr
+									td iOS
+									td Hiragino Kaku Gothic ProN W3
+								tr
+									td iOS
+									td Hiragino Kaku Gothic ProN W6
+								tr
+									td iOS
+									td Hiragino Mincho ProN W3
+								tr
+									td iOS
+									td Hiragino Mincho ProN W6
+								tr
+									td Android 2.x系
+									td Droid Sans Japanese
+								tr
+									td Android 4.x系
+									td モトヤLシーダ３等幅
+							p!='<mark>HTML文書を、<html lang="ja">賭した場合、日本語のテキスト表示は「font-family」の指定によって変わります。</mark>'
+							p!='<mark>これまでに制作したサイトの日本語の部分がiOS6で明朝体になってしまう場合は、font-familyに「sans-serif」を指定しましょう。また、HTML要素に「lang="ja"」の指定がない場合、日本語はゴシック体、欧文・数字などはセリフ体と、混合のようになってしまうので、font-familyは必ず指定しましょう。</mark>'
+							p!='<mark>Androidでは、機種のメーカーごとに独自のフォントをインストールしてデフォルト設定していることもあるので、端末によってデフォルトのフォントが違うケースがあります。また、ユーザーが好みのフォントをインストールすることも可能です。</mark>'
+							p!='<mark>Androidでは、先述のiOSと違い、デフォルトでは明朝体のフォントがインストールされていません。また、上記の標準の日本語フォントにおいても、太字（bold）が用意されていないので、この点は注意してください。</mark>'
+							p='このようにAndroidの日本語フォントでは、明朝体と太字がないなど、制限がいくつかあります。これに対処するためにも、スマートフォン用のサイトのデザインではゴシック体を使用するようにします。明朝体をどうしても使いたい時は、「iOSでは表示できるがAndroidでは表示できない」という旨を理解しておく必要があります。'
+							pre
+								| font-family: sans-serif
+							p='が一番安全な指定である、と言えます。'
+							p
+								| iOS5: Font list
+								br
+								a(href='http://support.apple.com/kb/HT4980',target='_blank') http://support.apple.com/kb/HT4980
+							p
+								| iOS6: Font list
+								br
+								a(href='http://support.apple.com/kb/HT5484',target='_blank') http://support.apple.com/kb/HT5484
+							hr
+							h4 SAMPLE C：標準でインストールされている主な欧文フォント
+							p='欧文フォントの場合、Windows、Mac OS X、iOS環境には下のように共通したフォントが多くインストールされており、フォントのデザインを揃えて表示することができます。'
+							table.table
+								tr
+									th フォント名
+									th Win
+									th Mac
+									th iOS
+									th Android
+								tr
+									td Arial
+									td ○
+									td ○
+									td ○
+									td SS
+								tr
+									td Arial Black
+									td ○
+									td ○
+									td -
+									td SS
+								tr
+									td Comic Sans MS
+									td ○
+									td ○
+									td -
+									td SS
+								tr
+									td Courier
+									td ○
+									td ○
+									td ○
+									td M
+								tr
+									td Courier New
+									td ○
+									td ○
+									td ○
+									td M
+								tr
+									td Georgia
+									td ○
+									td ○
+									td ○
+									td S
+								tr
+									td Impact
+									td ○
+									td ○
+									td -
+									td SS
+								tr
+									td Times New Roman
+									td ○
+									td ○
+									td ○
+									td S
+								tr
+									td Tahoma
+									td ○
+									td ○
+									td -
+									td SS
+								tr
+									td Trebouchet MS
+									td ○
+									td ○
+									td ○
+									td SS
+								tr
+									td Verdana
+									td ○
+									td ○
+									td ○
+									td SS
+								tr
+									td American Typewriter
+									td -
+									td ○
+									td ○
+									td SS
+								tr
+									td AppleGothic
+									td -
+									td ○
+									td ○
+									td SS
+								tr
+									td Helvetica
+									td ※1
+									td ○
+									td ○
+									td SS
+								tr
+									td Helvetica Neue
+									td -
+									td ○
+									td ○
+									td SS
+								tr
+									td Maker Felt
+									td -
+									td ○
+									td ○
+									td SS
+								tr
+									td Zapfino
+									td -
+									td ○
+									td ○
+									td SS
+								tr
+									td Roboto
+									td -
+									td -
+									td -
+									td SS
+							p
+								| ※Androidにおける表示：<br>
+								| SS・・・サンセリフ系のフォントで表示。<br>
+								| S・・・セリフ系のフォントで表示。<br>
+								| M・・・等幅系のフォントで表示。
+							p ※1・・・Arialに置き換えて表示します。
+							p='これに対し、Android環境の標準ブラウザでは、font-familyプロパティで指定したフォントで系統の判別が行われ、系統ごとに以下のフォントで表示が行われます。どの系統い判別されるかは、下の表を参照してください。'
+							table.table
+								tr
+									th 系統
+								tr
+									td サンセリフ（sans-serif）
+								tr
+									td セリフ（serif）
+								tr
+									td 等幅（monospace）
+							p='Android 2.3x/3.xでは、font-familyプロパティで指定した第1候補のフォントのみ系統判別が行われ、どのフォントで表示するかが決まります。判別できなかった場合、第2候補以降のフォントでの判別は行われず、サンセリフ系のフォントで表示が行われます。'
+							p='Windows、Mac OS X、iOS、Androidの各環境で同じフォントで表示するためには、Webフォントを利用します。'
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

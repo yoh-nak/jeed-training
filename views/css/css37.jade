@@ -1,0 +1,131 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;字形
+						.panel-body
+							.alert.alert-info 字形
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png')
+									td
+										img(src='../images/ic-android.png')
+									td
+										img(src='../images/ic-firefox.png')
+									td
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td
+										img(src='../images/ic-opera.png')
+									td
+										img(src='../images/ic-ie.png')
+							pre
+								| font-variant: 字形
+							p
+								| 字形・・・normal／ small-caps
+							table.table
+								tr
+									td 初期値
+									td normal
+								tr
+									td 継承
+									td あり
+								tr
+									td 適用先
+									td 全要素
+								tr
+									td 比率
+									td -
+								tr
+									td モジュール
+									td Fonts
+							p='font-variantプロパティの値を「small-caps」にすると、欧文をスモールキャップス（スモールキャピタル）の字形で表示することができます。フォントがスモールキャップスのデータを持たない場合、アルファベットの小文字を大文字に変換し、小文字の比率を維持したまま表示を行います。'
+							table.table
+								tr
+									th font-variantの値
+									th 字形
+								tr
+									td normal
+									td 通常の表示（字形の変更なし）。
+								tr
+									td small-caps
+									td スモールキャプスで表示。
+							hr
+							h4 SAMPLE：基本
+							p='下のサンプルは<h2>のfont-variantプロパティの値を「small-caps」にして、スモールキャップスで表示したものです。小文字で記述した部分が大文字に変換され、小文字の比率を維持したままで表示されていることが分かります。なお、日本語の文字に適用しても表示は変化しません。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/03/177.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h2&gt;Ham Sandwiches&lt;/h2&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 Ham Sandwiches
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     font-family: Verdana;
+									|     font-variant: small-caps;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	font-family Verdana
+									| 	font-variant small-caps
+								figcaption （Stylus）
+							hr
+							h4 文字の幅を指定する：font-stretch
+							p='CSS3のfont-stretchプロパティを利用すると、幅を広げてデザインしたExpandedや、縮めてデザインしたCondensedの文字で表示することができます。指定できる値は下のようになっています。'
+							table.table
+								tr
+									th font-stretchの値
+									th 幅の目安
+								tr
+									td ultra-condensed
+									td 幅が狭い
+								tr
+									td extra-condensed
+									td ▲
+								tr
+									td condensed
+									td ▲
+								tr
+									td semi-condensed
+									td ▲
+								tr
+									td normal
+									td 標準の幅
+								tr
+									td semi-expanded
+									td ▼
+								tr
+									td expanded
+									td ▼
+								tr
+									td extra-expanded
+									td ▼
+								tr
+									td ultra-expanded
+									td 幅が広い
+							p='現在のところ、各ブラウザは未対応です。ただし、@font-faceのfont-stretchディスクリプタでWebフォントの幅を定義すると、FirefoxとIE9以上ではfont-stretchプロパティで幅を指定してWebフォントを使い分けることができるようになります。'
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

@@ -1,0 +1,136 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;文字サイズの指定
+						.panel-body
+							.alert.alert-info 文字サイズの指定
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png')
+									td
+										img(src='../images/ic-android.png')
+									td
+										img(src='../images/ic-firefox.png')
+									td
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td
+										img(src='../images/ic-opera.png')
+									td
+										img(src='../images/ic-ie.png')
+							pre
+								| font-size: 文字の大きさ
+							p
+								| 文字の大きさ・・・数値／比率／xx-small／x-small／small／medium／large／x-large／xx-large／larger／smaller
+							table.table
+								tr
+									td 初期値
+									td medium
+								tr
+									td 継承
+									td あり
+								tr
+									td 適用先
+									td 全要素
+								tr
+									td 比率
+									td 直近の親要素の文字サイズに対する比率
+								tr
+									td モジュール
+									td Fonts
+							p='文字サイズの指定にはfont-sizeプロパティを利用します。指定しなかった場合、font-sizeプロパティの値は初期値の「medium」で処理され、ブラウザで設定された標準の文字サイズで処理されます。標準の文字サイズは主要なブラウザでは16ピクセルに設定されています。'
+							table.table
+								tr
+									th 標準サイズのキーワード
+									th mediumを基準とした大きさの目安
+									th 主要ブラウザの表示サイズ
+								tr
+									td xx-large
+									td 2倍
+									td 32px
+								tr
+									td x-large
+									td 3/2倍
+									td 24px
+								tr
+									td large
+									td 6/5倍
+									td 18px
+								tr
+									td medium
+									td 1倍
+									td 16px
+								tr
+									td small
+									td 8/9倍
+									td 13px
+								tr
+									td x-small
+									td 3/4倍
+									td 10px
+								tr
+									td xx-small
+									td 3/5倍
+									td 9px
+							p='値として指定できるキーワードは下のようになっており、「medium」を基準に大きさが変わるようになっています。各キーワード間の比率はCSS1では1,5倍、CSS2では1.2倍で変わることになっていましたが、xx-smallなどの可読性が悪くなるといった問題からCSS2.1では比率の記載は排除されています。これに対し、CSS3では可読性を考慮した倍率の目安が下のように提示されています。'
+							table.table
+								tr
+									th 相対サイズのキーワード
+									th 文字サイズ
+								tr
+									td larger
+									td ひとまわり大きくする
+								tr
+									td smaller
+									td ひとまわり小さくする
+							p='<mark>なお、可読性を保つため、Chromeは10px以下の、Operaは9px以下の文字サイズの指定を無視し、それぞれ10pxと9pxの大きさで表示します。また、Safariはemや%で指定した文字の大きさが9px以下になる場合、すべて9pxの大きさで表示します。Androidの標準ブラウザはChromeと、iOSのMobile SafariはSafariと同じ処理を行います。</mark>'
+							hr
+							h4 SAMPLE：基本
+							p='font-sizeプロパティで文字サイズを指定すると下のようになります。ここでは<h2>でマークアップした部分を32ピクセル、<p>でマークアップした部分を10ピクセルの文字サイズで表示するようにしています。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/03/174.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+									| &lt;p&gt;ハムサンド&lt;/p&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 HAM SANDWICHES
+									| p ハムサンド
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     font-size: 32px;
+									| }
+									| p {
+									|     font-size: 10px;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	font-size 32px
+									| p
+									| 	font-size 10px
+								figcaption （Stylus）
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

@@ -9,9 +9,9 @@ include ../head2.jade
 					.panel.panel-primary
 						.panel-heading
 							i.glyphicon.glyphicon-book
-							| &nbsp;フォントの指定
+							| &nbsp;文字のデザイン
 						.panel-body
-							.alert.alert-info フォントの指定
+							.alert.alert-info 文字のデザイン
 							table.browser-support
 								tr
 									td
@@ -29,14 +29,21 @@ include ../head2.jade
 									td
 										img(src='../images/ic-ie.png')
 							pre
-								| font-family: フォント名または系統名
+								| font: 斜体 字形 太さ 大きさ / 行の高さ フォント
+							pre
+								| font: システムフォント
 							p
-								| フォント名・・・メイリオ／Hiragino Kaku Gothic Proなど<br>
-								| 系統名・・・serf ／ sans-serif ／ cursive ／ fantasy ／ monospace
+								| 斜体・・・font-styleの値（normal ／ italic ／ oblique）<br>
+								| 字形・・・font-variantの値（normal/small-caps）<br>
+								| 太さ・・・font-weightの値（normal ／ bold ／ bolder ／ lighter ／ 100 ／ 200 ／ 300 ／ 400 ／ 500 ／ 600 ／ 700 ／ 800 ／ 900<br>
+								| 大きさ・・・font-sizeの値（数値 ／ 比率 ／ xx-small ／ x-small ／ small ／ medium ／ large ／ x-large ／ xx-large ／ larger ／ smaller<br>
+								| 行の高さ・・・line-heightの値（数値 ／ 比率 ／ 倍率 ／ normal）<br>
+								| フォント・・・font-familyの値（フォント名 ／ 系統名）<br>
+								| システムフォント・・・caption ／ icon ／ menu ／ message-box ／ small-caption ／ status-bar
 							table.table
 								tr
 									td 初期値
-									td ブラウザの標準フォント
+									td normal normal normal / normal ブラウザの標準フォント 
 								tr
 									td 継承
 									td あり
@@ -45,10 +52,13 @@ include ../head2.jade
 									td 全要素
 								tr
 									td 比率
-									td -
+									td 各プロパティ参照
 								tr
 									td モジュール
 									td Fonts
+							p='fontプロパティを利用すると、文字のデザインに関する設定をまとめて指定することができます。それぞれの値はfont-styleやfont-sizeといった個別のプロパティで指定することも可能です。'
+							p='なお、文字の大きさとフォントの指定は省略することができません。行の高さを指定する場合は文字の大きさの値に続けて「/」で区切って指定します。'
+						//-
 							p='font-familyプロパティではフォント名または系統名でフォントを指定します。ただし、フォントは閲覧環境にインストールされている必要がありますので、主要な閲覧環境であるWindowsやMac OS X環境に標準でインストールされたフォントを指定するようにします。このとき、複数のフォントの候補をカンマで区切って指定しておくと、ブラウザは指定されたフォントの中から閲覧環境で利用できるものを使って表示を行います。この場合、最初に記述したフォントほど優先順位が高くなります。'
 							pre
 								| font-family: 第1候補のフォント, 第2候補のフォント, …, 系統名

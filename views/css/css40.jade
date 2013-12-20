@@ -257,7 +257,7 @@ include ../head2.jade
 							h4 IE8以前への対応
 							p='IE8以前にも対応する場合、Embedded OpenType（EOT）形式のフォントデータも用意して設定を追加します。ただし、複数のフォントデータも用意して設定を追加します。ただし、複数のフォントデータをカンマで区切った記述には未対応なため、新しいsrcディスクリプタを追加してEOT形式のデータを指定します。このとき、既存のsrcよりも前に記述します。また、format()の記述には未対応なため、url()のみを記述します。'
 							p
-								a.btn.btn-default(href='../demo/css/sample1/03/184.html',target='_blank')
+								a.btn.btn-default(href='../demo/css/sample1/04/182/184.html',target='_blank')
 									i.glyphicon.glyphicon-play
 									| デモ
 							figure
@@ -286,6 +286,489 @@ include ../head2.jade
 							h4 SAMPLE C：斜体や太さの異なるフォントの定義 [font-style, font-weight]
 							p='@font-faceでは斜体や太さといった特徴を含めてフォントを定義することもできます。たとえば、SAMPLE Aで使用したQucksandというフォントには、下のように斜体や太字のフォントデータが用意されています。そこで、それぞれのフォントの定義を行い、Webページで利用できるようにします。ただし、同じ「Quicksand」のフォントであることを示すため、@font-faceのfont-familyは共通したフォント名で定義していきます。'
 							p='なお、わかりやすいように、srcディスクリプタではWOFF形式のフォントデータのみを指定しますが、複数のブラウザに対応させる場合はSAMPLE BのようにTrueType形式のフォントデータも指定してください。'
+							table.table
+								tr
+									th フォント名（ファイル名）
+								tr
+									td Qucksand Book（quicksand_book.woff）
+								tr
+									td Quicksand Book Oblique（quicksand_book_oblique.woff）
+								tr
+									td Quicksand_Bold（quicksand_book.woff）
+								tr
+									td Quicksand_Bold_Oblique（quicksand_bold_oblique.woff）
+							hr
+							h4 斜体フォントの定義
+							p='斜体フォントを定義する場合、font-styleディスクリプタを利用します。Quicksandの斜体フォントには「Oblique」と斜体を示す名称が含まれていますので、font-styleディスクリプタの値を「oblique」にします。なお、font-styleディスクリプタを使用しなかった場合、値は初期値の「normal」で処理され、正体のフォントとして定義されます。'
+							table.table
+								tr
+									th font-styleの値
+									th フォント名に含まれる斜体を示す名称
+								tr
+									td normal
+									td なし
+								tr
+									td italic
+									td Italic
+								tr
+									td oblique
+									td Oblique
+							hr
+							h4 太さの異なるフォントの定義
+							p='太さの異なるフォントを定義する場合、font-weightディスクリプタを利用します。フォント名に含まれる太さを示す名称fに対し、font-weightディスクリプタの値は次のように指定するのが目安として提示されています。Quicksandの太字フォントの名称は「Bold」となっていますので、font-weightディスクリプタの値は「Bold」にします。なお、font-weightディスクリプタを指定しなかった場合、値は初期値の「normal」で処理され、通常の太さのフォントとして定義されます。'
+							table.table
+								tr
+									th font-weightの値
+									th フォント名に含まれる太さを示す名称
+								tr
+									td 100
+									td Thin
+								tr
+									td 200
+									td Extra Light (Ultra Light)
+								tr
+									td 300
+									td Light
+								tr
+									td 400またはnormal
+									td Normal (Book, Legular)
+								tr
+									td 500
+									td Medium
+								tr
+									td 600
+									td Semi Bold (Demi Bold)
+								tr
+									td 700またはbold
+									td Bold
+								tr
+									td 800
+									td Extra Bold (Ultra Bold)
+								tr
+									td 900
+									td Black (Heavy)
+							hr
+							h4 定義したフォントの利用
+							p='定義したフォントを利用するには、font-familyプロパティでフォント名を指定します。あとは、font-styleとfont-weightプロパティの指定に応じて、斜体や太字のフォントで表示されます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/182/182-C.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;div style="font-family: Quicksand"&gt;
+									| &lt;span style="font-style: oblique"&gt;Ham&lt;/span&gt; Sandwiches
+									| &lt;/div&gt;
+									| 
+									| &lt;div style="font-family: Quicksand; font-weight: bold"&gt;
+									| &lt;span style="font-style: oblique"&gt;Ham&lt;/span&gt; Sandwiches
+									| &lt;/div&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div(style='font-family: Quicksand;')
+									| 	span(style='font-style: oblique;') Ham
+									| 	| Sandwiches
+									| div(style='font-family: Quicksand; font-weight: bold;')
+									| 	span(style='font-style: oblique;') Ham
+									| 	| Sandwiches
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| /* Quicksand Book 正体で標準の太さのフォント */
+									| @font-face {
+									|     font-family: 'Quicksand';
+									|     src: url(Qucksand_Book.woff) format('woff');
+									|     font-style: normal;
+									|     font-weight: normal;
+									| }
+									| 
+									| /* Quicksand Book Oblique斜体で標準の太さのフォント */
+									| @font-face {
+									|     font-family: 'Quicksand';
+									|     src: url(Qucksand_Book_Oblique.woff) format('woff');
+									|     font-style: oblique;
+									|     font-weight: normal;
+									| }
+									| 
+									| /* Quicksand Bold 正体で太いフォント */
+									| @font-face {
+									|     font-family: 'Quicksand';
+									|     src: url(Qucksand_Bold.woff) format('woff');
+									|     font-style: normal;
+									|     font-weight: bold;
+									| }
+									| 
+									| /* Quicksand Bold Oblique斜体で太いフォント */
+									| @font-face {
+									|     font-family: 'Quicksand';
+									|     src: url(Qucksand_Bold_Oblique.woff) format('woff');
+									|     font-style: oblique;
+									|     font-weight: bold;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| @font-face
+									|   font-family 'Quicksand'
+									|   src url(Qucksand_Book.woff) format('woff')
+									|   font-style normal
+									|   font-weight normal
+									| @font-face
+									|   font-family 'Quicksand'
+									|   src url(Qucksand_Book_Oblique.woff) format('woff')
+									|   font-style oblique
+									|   font-weight normal
+									| @font-face
+									|   font-family 'Quicksand'
+									|   src url(Qucksand_Bold.woff) format('woff')
+									|   font-style normal
+									|   font-weight bold
+									| @font-face
+									|   font-family 'Quicksand'
+									|   src url(Qucksand_Bold_Oblique.woff) format('woff')
+									|   font-style oblique
+									|   font-weight bold
+								figcaption （Stylus）
+							hr
+							h4 IE8以前への対応
+							p='IE8以前はfont-styleやfont-weightディスクリプタの指定に未対応です。そのため、斜体や太さの異なるフォントを定義する場合は、それぞれのフォント名を変え、個別のフォントとして定義する必要があります。たとえば、SAMPLE Cと同じフォントを再現するためには、下のような形でEOT形式のフォントを定義します。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;div style="font-family: QSBook"&gt;
+									| &lt;span style="font-family: QSOblique"&gt;Ham&lt;/span&gt; Sandwiches
+									| &lt;/div&gt;
+									| &lt;div style="font-family: QSBold"&gt;
+									| &lt;span style="font-family: QSBoldOblique"&gt;Ham&lt;/span&gt; Sandwiches
+									| &lt;/div&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div(style='font-family: QSBook;')
+									| 	span(style='font-family: QSOblique;') Ham
+									| 	| Sandwiches
+									| div(style='font-family: QSBold;')
+									| 	span(style='font-family: QSBoldOblique;') Ham
+									| 	| Sandwiches
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| @font-face {
+									|     font-family: 'QSBook';
+									|     src: url(Quicksand_Book.eot);
+									| }
+									| 
+									| @font-face {
+									|     font-family: 'QSOblique';
+									|     src: url(Qucksand_Book_Oblique.eot);
+									| }
+									| 
+									| @font-face {
+									|     font-fami;y: 'QSBold';
+									|     src: url(Quicksand_Bold.eot);
+									| }
+									| 
+									| @font-face {
+									|     font-family: 'QSBoldOblique';
+									|     src: url(Quicksand_Bold_Oblique);
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| @font-face
+									| 	font-family 'QSBook'
+									| 	src url(Quicksand_Book.eot)
+									| @font-face
+									| 	font-family 'QSOblique'
+									| 	src url(Qucksand_Book_Oblique.eot)
+									| @font-face
+									| 	font-family 'QSBold'
+									| 	src url(Quicksand_Bold.eot)
+									| @font-face
+									| 	font-family 'QSBoldOblique'
+									| 	src url(Quicksand_Bold_Oblique)
+								figcaption （Stylus）
+							p='こうして定義したフォントを利用する場合、font-familyプロパティでそれぞれのフォント名を指定します。SAMPLE Cのように同じフォント名を指定し、font-styleやfont-weightプロパティの指定でフォントを変更することはできません。'
+							hr
+							h4 SAMPLE D：幅の異なるフォントの定義 [font-stretch]
+							p='@font-faceでは斜体や太さと同じように、幅の特徴を含めてフォントを定義することができます。幅の特徴を指定するには、font-stretchディスクリプタを使用します。'
+							p='たとえば、PT Sansというフォントには、下のように幅を狭くデザインしたフォントデータが用意されていますので、font-stretchディスクリプタを利用してフォントを定義します。ただし、font-stretchディスクリプタの指定に対応しているのはFirefoxとIE9以上となっています。'
+							p PT Sansに用意された幅の異なるフォントデータ。
+							table.table
+								tr
+									th フォント名（ファイル名）
+								tr
+									td PT Sans Reglar（PTS55F.woff）
+								tr
+									td PT Sans Narrow Regular（PTN57F.woff）
+							p='font-stretchディスクリプタで指定できる幅は以下のようになっています。フォント名に含まれる名称との関連は提示されていませんが、normalを中心に、一番狭い幅をultra-condensed、一番広い幅をultra-expandedと指定することになっています。ここでは幅の狭いフォントを定義するため、font-stretchディスクリプタの値を「condensed」にします。また、font-stretchディスクリプタを指定しなかった場合、値は初期値の「normal」で処理されます。'
+							table.table
+								tr
+									th font-stretchの値
+									th 幅の目安
+								tr
+									td ultra-condensed
+									td 幅が狭い
+								tr
+									td extra-condensed
+									td ▲
+								tr
+									td condensed
+									td ▲
+								tr
+									td semi-condensed
+									td ▲
+								tr
+									td normal
+									td 標準の幅
+								tr
+									td semi-expanded
+									td ▼
+								tr
+									td expanded
+									td ▼
+								tr
+									td extra-expanded
+									td ▼
+								tr
+									td ultra-expanded
+									td 幅が広い
+							p='定義したフォントを利用する場合、font-familyプロパティでフォント名を、font-stretchプロパティで幅を指定します。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/182/182-D.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;div style="font-family: PTSans"&gt;
+									| Ham Sandwiches
+									| &lt;/div&gt;
+									| 
+									| &lt;div style="font-family: PTSans; font-stretch: condensed"&gt;
+									| Ham Sandwiches
+									| &lt;/div&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div(style='font-family: PTSans;')
+									| 	| Ham Sandwiches
+									| div(style='font-family: PTSans; font-stretch: condensed;')
+									| 	| Ham Sandwiches
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| /* PT Sans Regular 標準の幅のフォント */
+									| @font-face {
+									|     font-family: 'PTSans';
+									|     src: url(PT55F.woff);
+									|     font-stretch: normal;
+									| }
+									| /* PT Sans Regular 幅が狭いフォント */
+									| @font-face {
+									|     font-family: 'PTSans';
+									|     src: url(PT57F.woff);
+									|     font-stretch: condensed;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| @font-face
+									| 	font-family 'PTSans'
+									| 	src url(PT55F.woff)
+									| 	font-stretch normal
+									| @font-face
+									| 	font-family 'PTSans'
+									| 	src url(PT57F.woff)
+									| 	font-stretch condensed
+								figcaption （Stylus）
+							hr
+							h4 SAMPLE E：ローカルフォントの指定 [local()]
+							p='@font-faceのsrcディスクリプタではlocal()を利用してローカルフォントを指定することができます。たとえば、下のようにlocal()とurl()の指定をカンマで区切って記述すると、閲覧環境に「Quicksand」というローカルフォントがある場合はそのフォントで、ない場合はWebフォントで表示を行うことができます。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| @font-face {
+									|     font-family: 'Quicksand';
+									|     src: local('Quicksand'),
+									|            url(Quicksand_Book.woff) format('woff');
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| @font-face
+									| 	font-family 'Quicksand'
+									| 	src local('Quicksand'), url(Quicksand_Book.woff) format('woff')
+								figcaption （Stylus）
+							p='local()の指定をカンマで区切り、複数のローカルフォントを指定することもできます。たとえば、下のようにWindows環境とMac OS X環境の日本語フォントを指定し、フォント名を「jpfont」と指定しておくと、font-familyプロパティの値を「jpfont」にすることで環境ごとに最適なフォントで表示することができます。'
+							p='なお、local()で指定するフォントを日本語名で記述するとFirefox、IEではきちんと表示できなくなりますので、英語名で指定するようにしています。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/182/182-E.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| @font-face {
+									|     font-family: 'jpfont';
+									|     src: local('Meiryo'),
+									|            local('Hiragino Kaku Gothic Pro'),
+									|            local('sans-serif');
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									@font-face
+										font-family 'jpfont'
+										src local('Meiryo'),
+											local('Hiragino Kaku Gothic Pro'),
+											local('sans-serif')
+								figcaption （Stylus）
+							p='srcディスクリプタの1つ目の設定をlocal()にした場合、Android2.3.xでは2つ目以降のWebフォントの指定が無効になるという問題も見られます。また、IE8以前のバージョンはlocal()に未対応です。'
+							hr
+							h4 SAMPLE F：使用する文字範囲の指定 [unicode-range]
+							p='@font-faceのunicode-rangeディスクリプタを利用すると、使用する文字の範囲をUnicodeのコードポイントで指定することができます。たとえば、下のサンプルでは「mix」という名前のフォントを定義し、大文字のアルファベット（U+0041-005A）はWebフォントのTeutonicで、小文字のアルファベット（U+0061-007A）はローカルフォントのTimes New Romanで表示するように指定しています。'
+							p='なお、unicode-rangeディスクリプタに対応しているのはiOS、Android、Safari、Chrome、IE9以上となっています。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/182/182-F01.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;div style="font-family: mix"&gt;Ham Sandwiches&lt;/div&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div(style='font-family: mix;') Ham Sandwiches
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| @font-face {
+									|     font-family: mix;
+									|     src: url('teutonic3.woff') format('woff'),
+									|            url('teutonic3.ttf') format('truetype');
+									|     unicode-range: U+0041-005A;
+									| }
+									| 
+									| @font-face {
+									|     font-family: mix;
+									|     src: local('Times New Roman');
+									|     unicode-range: U+0061-007A;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| @font-face
+									| 	font-family mix
+									| 	src url('teutonic3.woff') format('woff'),　url('teutonic3.ttf') format('truetype')
+									| 	unicode-range U+0041-005A
+									| @font-face
+									| 	font-family mix
+									| 	src local('Times New Roman')
+									 |	unicode-range U+0061-007A
+								figcaption （Stylus）
+							p='unicode-rangeディスクリプタの指定は日本語フォントに対しても有効です。たとえば、下のサンプルは「mix」という名前のフォントを定義し、ゴシック体のフォントで表示するように指定したものです。ただし、ひらがな（U+3040-309F）については、明朝体のフォントで表示するように指定しています。なお、複数の文字の範囲はカンマで区切って指定します。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/182/182-F02.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;div style="font-family: mix"&gt;今日のお昼はハムサンド&lt;/div&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div(style='font-family: mix;') 今日のお昼はハムサンド
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| @font-face {
+									|     font-family: mix;
+									|     src: local('Meiryo'),
+									|            local('Hiragino Kaku Gothic Pro'),
+									|            local('HIragino Kaku Gothic ProN'),
+									|            local('sans-serif');
+									| }
+									| 
+									| @font-face {
+									|     font-family: mix;
+									|     src: local('MS PMincho'),
+									|           local('Hiragino Mincho Pro'),
+									|           local('Hiragino Mincho ProN'),
+									|           local('serif');
+									|     unicode-range: U+3040-309F, U+30A0-30FF;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| @font-face
+									| 	font-family mix
+									| 	src local('Meiryo'),
+									| 	local('Hiragino Kaku Gothic Pro'),
+									| 		local('HIragino Kaku Gothic ProN'),
+									| 		local('sans-serif')
+									| 	font-family mix
+									| 	src local('MS PMincho'),
+									| 	local('Hiragino Mincho Pro'),
+									| 		local('Hiragino Mincho ProN'),
+									| 		local('serif')
+									| 	unicode-range U+3040-309F, U+30A0-30FF
+								figcaption （Stylus）
+							p
+								| Uicode Range Generator
+								br
+								a(href='http://zenoplex.jp/tools/unicoderange_generator.html',target='_blank') http://zenoplex.jp/tools/unicoderange_generator.html
+							hr
+							h4 その他のディスクリプタ
+							p='CSS3では@font-faceで指定できるディスクリプタとしてfont-variantとfont-feature-settingsも提案されています。'
+							hr
+							h4 フリーで利用できるWebフォントとフォーマットの変換
+							P='Webフォントとして利用可能なフォントの多くは有料ですが、フリーで利用できるものもあります。たとえば、本書のサンプルではFont Squirrelというサイトで配布されているフォント（Quicksand、PT Sans、Teutonic）を使用しています。Font Squirrelは商用利用可能なフリーフォントを集めたサイトです。Webフォントとして利用できるものは「@font-face Kit」が用意されており、主要フォーマット（WOFF、TrueType、EOT、SVG）のデータをまとめてダウンロードすることができます。'
+							p='また、「@font-face Generator」の機能を利用すると、アップロードしたフォントデータを主要フォーマットに変換することも可能です。'
+							p
+								| Font Squirrel
+								br
+								a(href='http://www.fontsquirrel.com',target='_blank') http://www.fontsquirrel.com
+							p ※ 細かなライセンスはフォントごとに異なりますので、必ず確認するようにします。
+							hr
+							h4 Webフォントサービス
+							p='Webフォントサービスを利用すると、自分でフォントデータを用意しなくても、サービス提供元のサーバーに用意されたフォントデータを利用して文字を表示することができます。多くのWebフォントサービスは有料ですが、「Google Fonts」はフリーで利用することが可能です。'
+							p='Google Fontsの場合、フォントの一覧から使用したいフォントを選択し、外部スタイルシートの形でWebフォントの設定を読み込みます。すると、ブラウザやOSに合わせて最適な@font-faceの設定が読み込まれますので、font-familyプロパティでフォント名を指定すればWebフォントを利用することができます。'
+							p
+								| Google Web Fonts
+								br
+								a(href='http://www.google.com/fonts/',target='_blank') http://www.google.com/fonts/
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/182/184.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;div&gt;Ham Sandwiches&lt;/div&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div Ham Sandwiches
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| @import url(http://fonts.googleapis.com/css?family=Fontdiner+Swanky);
+									| 
+									| div {
+									|     font-family: 'Fotdiner Swanky';
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| @import url(http://fonts.googleapis.com/css?family=Fontdiner+Swanky);
+									| div
+									| 	font-family: 'Fotdiner Swanky';
+								figcaption （Stylus）
+							p='Chromeで表示したときに外部スタイルシートとして読み込まれる@font-faceの設定'
+							figure
+								pre(class='prettyprint linenums:1')
+							figure
+								pre(class='prettyprint linenums:1')
+							h4 ドットインストール
+							p
+								a(href='http://dotinstall.com/lessons/basic_google_web_fonts',target='_blank') Google Web Fonts入門
 						//
 							p='font-familyプロパティではフォント名または系統名でフォントを指定します。ただし、フォントは閲覧環境にインストールされている必要がありますので、主要な閲覧環境であるWindowsやMac OS X環境に標準でインストールされたフォントを指定するようにします。このとき、複数のフォントの候補をカンマで区切って指定しておくと、ブラウザは指定されたフォントの中から閲覧環境で利用できるものを使って表示を行います。この場合、最初に記述したフォントほど優先順位が高くなります。'
 							pre

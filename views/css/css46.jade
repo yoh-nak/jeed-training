@@ -1,0 +1,114 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;タブ幅の指定
+						.panel-body
+							.alert.alert-info タブ幅の指定
+							table.browser-support
+								tr
+									td.not-support
+										img(src='../images/ic-apple.png')
+									td.not-support
+										img(src='../images/ic-android.png')
+									td
+										img(src='../images/ic-firefox.png')
+									td.not-support
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td
+										img(src='../images/ic-opera.png')
+									td.not-support
+										img(src='../images/ic-ie.png')
+							pre
+								| tab-size: タブ幅
+							p
+								| タブ幅・・・整数
+							table.table
+								tr
+									td 初期値
+									td 8 
+								tr
+									td 継承
+									td あり
+								tr
+									td 適用先
+									td ブロックコンテナ
+								tr
+									td 比率
+									td -
+								tr
+									td モジュール
+									td Text
+							p='tab-sizeプロパティを利用するとタブ幅を指定することができます。タブ幅は文字数で指定します。'
+							hr
+							h4 SAMPLE：タブ幅の指定
+							p='下のサンプルはJavaScriptのプログラムコードを<div>でマークアップしたものです。white-spaceプロパティの値を「pre」にして、タブが表示されるようにしてあります。このとき、tab-sizeプロパティの値は初期値の「8」で処理されるため、タブ幅は8文字分の大きさで表示されます。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;div&gt;// プログラム   その1
+									| 	function init() {
+									| 		var canvas = document.getElementById('star');
+									| 		var ctx = vanvas.getContext('2d');
+									| 		draw(ctx);
+									| 	}
+									| &lt;/div&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div {
+									|     font-family: monospace;
+									|     border: solid 2px orange;
+									|     padding: 10px;
+									|     white-space: pre;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	font-family monospace
+									| 	border solid 2px orange
+									| 	padding 10px
+									| 	white-space pre
+								figcaption （Stylus）
+							p='tab-sizeプロパティの値を「3」にすると、タブ幅を3文字分の大きさにすることができます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/199.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| div {
+									|     font-family: monospace;
+									|     border: solid 2px orange;
+									|     padding: 10px;
+									|     white-space: pre;
+									|     tab-size: 3;
+									|     -moz-tab-size: 3;
+									|     -o-tab-size: 3;
+									| }
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	font-family monospace
+									| 	border solid 2px orange
+									| 	padding 10px
+									| 	white-space pre
+									| 	tab-size 3
+									| 	-moz-tab-size 3
+									| 	-o-tab-size 3
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

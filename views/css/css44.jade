@@ -68,111 +68,75 @@ include ../head2.jade
 							hr
 							h4 SAMPLE A：1文字目を大文字に変換
 							p='text-transformプロパティの値を「capitalize」にすると、各単語の1文字目を大文字に変換します。'
-							
-						//-
-							p='fontプロパティを利用すると、文字のデザインに関する設定をまとめて指定することができます。それぞれの値はfont-styleやfont-sizeといった個別のプロパティで指定することも可能です。'
-							p='なお、文字の大きさとフォントの指定は省略することができません。行の高さを指定する場合は文字の大きさの値に続けて「/」で区切って指定します。'
-							pre
-								| font: 斜体 字形 太さ 大きさ / 行の高さ フォント
 							p
-								| 斜体 = font-style（順不同／省略可）<br>
-								| 字形 = font-variant（順不同／省略可）<br>
-								| 太さ = font-weight（順不同／省略可）<br>
-								| 大きさ =  font-size<br>
-								| 行の高さ = line-height（省略可）<br>
-								| フォント = font-family
-							p='また、fontプロパティデはシステムフォントで表示するように指定することもできます。システムフォントは閲覧環境で利用されているフォントのことで、OSやブラウザの種類、ユーザーの設定などによって変わります。'
-							table.table
-								tr
-									th fontの値
-									th システムフォント
-								tr
-									td caption
-									td ボタンなどのフォント
-								tr
-									td icon
-									td アイコンなどのフォント
-								tr
-									td menu
-									td メニューのフォント
-								tr
-									td message-box
-									td ダイアログボックスのフォント
-								tr
-									td small-caption
-									td 小さなボタンなどのフォント
-								tr
-									td status-bar
-									td ステータスバーのフォント
-							hr
-							p='fontプロパティの設定には、font-stretchプロパティによる文字の幅の指定も記述することができます。その場合、斜体、字形、太さの値に加えて、幅の値を記述します。これらの値は順不同で記述することができ、省略することも可能です。'
-							p='ただし、各ブラウザは未対応で、幅の値を記述するとfontプロパティの設定が無効になります。'
-							pre
-								| font: <mark>斜体 字形 太さ 幅</mark>※ 大きさ / 行の高さ フォント
-							p ※ 順不同／省略可
-							p 幅 = font-stretch
-							hr
-							h4 SAMPLE：文字のデザインをまとめて指定する
-							p='fontプロパティを利用して文字のデザインをまとめて指定していきます。このとき、値を省略したものは初期値で処理されますので注意が必要です。'
-							p='たとえば、下のサンプルでは見出しを<h2>でマークアップしたものです。デフォルトスタイルシートいよって<h2>のfont-weightプロパティのの値が「bold」になり、太い文字で表示されます。'
+								a.btn.btn-default(href='../demo/css/sample1/04/196-A.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
 							figure
 								pre(class='prettyprint linenums:1')
-									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+									| &lt;h2&gt;Ham Sandwiches&lt;/h2&gt;
 								figcaption （HTML）
 							figure
 								pre(class='prettyprint linenums:1')
-									| h2 HAM SANDWICHES
+									| h2 Ham Sandwiches
 								figcaption （Jade）
-							p='<h2>のfontのプロパティの値を「32px Verdana, sans-serif」にすると、文字サイズを32ピクセルに、フォントをVerdanaにして表示することができます。ただし、文字は細くなってしまいます。これは、fontプロパティで太さの指定を省略したことから、太さの値が初期値の「normal」で処理されるためです。'
 							figure
 								pre(class='prettyprint linenums:1')
 									| h2 {
-									|     font: 32px Verdana, sans-serif;
+									|    text-transform: capitalize; 
 									| }
 								figcaption （CSS）
 							figure
 								pre(class='prettyprint linenums:1')
 									| h2
-									| 	font 32px Verdana, sans-serif
+									| 	text-transform capitalize
 								figcaption （Stylus）
-							p='太字で表示するためには、太さの値も指定します。fontプロパティの値を「bold 32px Verdana, sans-serif」にすると文字が太くなることがわかります。'
+							hr
+							h4 SAMPLE B：すべて大文字に変換
+							p='text-transformプロパティの値を「uppercase」にすると、すべて大文字に変換します。'
 							p
-								a.btn.btn-default(href='../demo/css/sample1/04/190.html',target='_blank')
+								a.btn.btn-default(href='../demo/css/sample1/04/196-B.html',target='_blank')
 									i.glyphicon.glyphicon-play
 									| デモ
 							figure
 								pre(class='prettyprint linenums:1')
 									| h2 {
-									|     font: bold 32px Verdana, sans-serif;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									h2
-										font bold 32px Verdana, sans-serif
-								figcaption （Stylus）
-							p='fontプロパティの「bold 32px Verdana, sans-serif」の設定を個別のプロパティで指定する場合、下のように記述します。斜体（font-style）、字形（font-variant）、行の高さ（line-height）の値は初期値の「normal」となります。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     font-style: normal;
-									|     font-variant: normal;
-									|     font-weight: bold;
-									|     font-size: 32px;
-									|     line-height: 32px;
-									|     font-family: Verdana, sans-serif;
+									|    text-transform: uppercase; 
 									| }
 								figcaption （CSS）
 							figure
 								pre(class='prettyprint linenums:1')
 									| h2
-									| 	font-style normal
-									| 	font-variant normal
-									| 	font-weight bold
-									| 	font-size 32px
-									| 	line-height 32px
-									| 	font-family Verdana, sans-serif
+									| 	text-transform uppercase
 								figcaption （Stylus）
+							hr
+							h4 SAMPLE C：すべて小文字に変換
+							p='text-transformプロパティの値を「lowercase」にすると、すべて小文字に変換します。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/196-C.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|    text-transform: lowercase; 
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	text-transform lowercase
+								figcaption （Stylus）
+							hr
+							h4 日本語の字形の変換
+							p='CSS3では日本語の字形を変換する方法も提案されています。現在のところ各ブラウザは未対応です。'
+							table.table
+								tr
+									th 値
+									th 字形
+								tr
+									td fullwidth
+									td 全角に変換
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='../js/google-code-prettify/prettify.js')

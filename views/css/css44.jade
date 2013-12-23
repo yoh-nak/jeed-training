@@ -9,9 +9,9 @@ include ../head2.jade
 					.panel.panel-primary
 						.panel-heading
 							i.glyphicon.glyphicon-book
-							| &nbsp;文字のデザイン
+							| &nbsp;字形の変換
 						.panel-body
-							.alert.alert-info 文字のデザイン
+							.alert.alert-info 字形の変換
 							table.browser-support
 								tr
 									td
@@ -29,21 +29,13 @@ include ../head2.jade
 									td
 										img(src='../images/ic-ie.png')
 							pre
-								| font: 斜体 字形 太さ 大きさ / 行の高さ フォント
-							pre
-								| font: システムフォント
+								| text-transform: 字形
 							p
-								| 斜体・・・font-styleの値（normal ／ italic ／ oblique）<br>
-								| 字形・・・font-variantの値（normal/small-caps）<br>
-								| 太さ・・・font-weightの値（normal ／ bold ／ bolder ／ lighter ／ 100 ／ 200 ／ 300 ／ 400 ／ 500 ／ 600 ／ 700 ／ 800 ／ 900<br>
-								| 大きさ・・・font-sizeの値（数値 ／ 比率 ／ xx-small ／ x-small ／ small ／ medium ／ large ／ x-large ／ xx-large ／ larger ／ smaller<br>
-								| 行の高さ・・・line-heightの値（数値 ／ 比率 ／ 倍率 ／ normal）<br>
-								| フォント・・・font-familyの値（フォント名 ／ 系統名）<br>
-								| システムフォント・・・caption ／ icon ／ menu ／ message-box ／ small-caption ／ status-bar
+								| 字形・・・none ／ capitalize ／ uppercase ／ lowercase
 							table.table
 								tr
 									td 初期値
-									td normal normal normal / normal ブラウザの標準フォント 
+									td none 
 								tr
 									td 継承
 									td あり
@@ -52,10 +44,32 @@ include ../head2.jade
 									td 全要素
 								tr
 									td 比率
-									td 各プロパティ参照
+									td -
 								tr
 									td モジュール
 									td Fonts
+							p='text-transformプロパティを利用すると、アルファベットを大文字や小文字に変換することができます。'
+							table.table
+								tr
+									th 値
+									th 字形
+								tr
+									td none
+									td 変換なし
+								tr
+									td capitalize
+									td 英単語の1文字目を大文字に変換
+								tr
+									td uppercase
+									td すべて大文字に変換
+								tr
+									td lowercase
+									td すべて小文字に変換
+							hr
+							h4 SAMPLE A：1文字目を大文字に変換
+							p='text-transformプロパティの値を「capitalize」にすると、各単語の1文字目を大文字に変換します。'
+							
+						//-
 							p='fontプロパティを利用すると、文字のデザインに関する設定をまとめて指定することができます。それぞれの値はfont-styleやfont-sizeといった個別のプロパティで指定することも可能です。'
 							p='なお、文字の大きさとフォントの指定は省略することができません。行の高さを指定する場合は文字の大きさの値に続けて「/」で区切って指定します。'
 							pre

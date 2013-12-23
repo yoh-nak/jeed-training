@@ -1,7 +1,7 @@
 #モジュール
 express = require("express")
 routes = require("./routes")
-user = require("./routes/user")
+#user = require("./routes/user")
 html = require("./routes/html")
 css = require("./routes/css")
 rwd = require("./routes/rwd")
@@ -53,7 +53,7 @@ app.use express.errorHandler()	if "development" is app.get("env")
 
 #単独
 app.get "/", routes.index
-app.get "/users", user.list
+#app.get "/users", user.list
 
 #app.get('/htmltag:id:format', html.html);
 app.get "/html/:id", html.html #HTML

@@ -1,0 +1,223 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;改行コード・タブ・スペースの表示
+						.panel-body
+							.alert.alert-info 改行コード・タブ・スペースの表示
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png')
+									td
+										img(src='../images/ic-android.png')
+									td
+										img(src='../images/ic-firefox.png')
+									td
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td
+										img(src='../images/ic-opera.png')
+									td
+										img(src='../images/ic-ie.png')
+							p ※ IE7以前は部分対応
+							pre
+								| white-space: 表示スタイル
+							p
+								| 表示スタイル・・・normal ／ nowrap ／ pre ／ pre-wrap ／ pre-line
+							table.table
+								tr
+									td 初期値
+									td none 
+								tr
+									td 継承
+									td あり
+								tr
+									td 適用先
+									td 全要素
+								tr
+									td 比率
+									td -
+								tr
+									td モジュール
+									td Text
+							p='white-spaceプロパティを利用すると、改行やタブ、スペースをWebページの表示に反映するかどうか、ブラウザによる自動改行を行うかどうかを下のように指定することができます。'
+							table.table
+								tr
+									th 値
+									th 改行コード
+									th タブ
+									th 連続したスペース
+									th 自動改行
+								tr
+									td normal
+									td ×
+									td ×
+									td ×
+									td あり
+								tr
+									td nowrap
+									td ×
+									td ×
+									td ×
+									td なし
+								tr
+									td pre
+									td ○
+									td ○
+									td ○
+									td なし
+								tr
+									td pre-wrap
+									td ○
+									td ○
+									td ○ 
+									td あり
+								tr
+									td pre-line
+									td ○
+									td ×
+									td ×
+									td あり
+							p='IE7以前は「pre-wrap」と「pre-line」の値に未対応です。'
+							hr
+							h4 SAMPLE A：改行コード・タブ・スペースを反映しない表示 [normal] [nowrap]
+							p='下のサンプルはJavaScriptのプログラムコードを<div>でマークアップしたもので、改行コード、タブ、連続した半角スペースを入れて記述してあります。しかし、Webページの表示には反映されず、それぞれ1つの半角スペースに置き換えて表示されます。これは、white-spaceプロパティの値が初期値の「normal」で処理されるためです。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/197-A01.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;div&gt;// プログラム   その１
+									| function init() {
+									| 	var canvas = document.getElementById("star");
+									| 	var ctx = canvas.getContext("2d");
+									| 	draw(ctx);
+									| 	}
+									| &lt;/div&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div {
+									|    font-family: monospace;
+									|     padding :10px;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	font-family monospace
+									| 	padding 10px
+								figcaption （Stylus）
+							p='white-spaceプロパティの値を「nowrap」にすると、自動改行をオフにすることができます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/197-A02.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| div {
+									|     …略…
+									|     padding :10px;
+									|     white-space: nowrap;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	…略…
+									| 	padding 10px
+									| 	white-space nowrap
+								figcaption （Stylus）
+							h4 SAMPLE B：改行コード・タブ・スペースを反映する表示 [pre] [pre-wrap]
+							p='white-spaceプロパティの値を「pre」にすると、改行コードとタブ、連続したスペースを表示に反映することができます。このとき、自動改行はオフになります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/197-B01.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| div {
+									|     …略…
+									|     padding :10px;
+									|     white-space: pre;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	…略…
+									| 	padding 10px
+									| 	white-space pre
+								figcaption （Stylus）
+							p='自動改行をオンにしたい場合は、値を「pre-wrap」と指定します。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/197-B02.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| div {
+									|     …略…
+									|     padding :10px;
+									|     white-space: pre-wrap;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	…略…
+									| 	padding 10px
+									| 	white-space pre-wrap
+								figcaption （Stylus）
+							hr
+							h4 SAMPLE C：改行コードのみを反映する表示 [pre-line]
+							p='white-spaceプロパティの値を「pre-line」にすると、改行コードのみを表示に反映することができます。タブと連続したスペースは反映されません。自動改行はオンとなります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/197-C.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| div {
+									|     …略…
+									|     padding :10px;
+									|     white-space: pre-line;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	…略…
+									| 	padding 10px
+									| 	white-space pre-line
+								figcaption （Stylus）
+							hr
+							h4='<pre>のwhite-spaceの値'
+							p='プログラムコードは整形済みテキストであることを明確にするため、<pre>でマークアップするのが一般的です。<pre>のwhite-spaceプロパティの値はデフォルトスタイルシートによって「pre」になりますので、改行やタブなどが表示に反映されます。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;pre&gt;// プログラム   その1↵
+									|function init() {↵
+									| 	var canvas = document.getElementById('star');
+									| 	var ctx = vanvas.getContext('2d');
+									| 	draw(ctx);
+									| }
+									| &lt;/pre&gt;
+								figcaption （HTML）
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

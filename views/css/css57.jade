@@ -1,0 +1,168 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;文字の間隔
+						.panel-body
+							.alert.alert-info 文字の間隔
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png')
+									td
+										img(src='../images/ic-android.png')
+									td
+										img(src='../images/ic-firefox.png')
+									td
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td
+										img(src='../images/ic-opera.png')
+									td
+										img(src='../images/ic-ie.png')
+							pre
+								| letter-spacing: 間隔
+							p
+								| 間隔・・・normal ／ 数値
+							table.table
+								tr
+									td 初期値
+									td normal
+								tr
+									td 継承
+									td あり
+								tr
+									td 適用先
+									td 全要素
+								tr
+									td 比率
+									td -
+								tr
+									td モジュール
+									td Text
+							p='letter-spacingプロパティを利用すると文字の間隔を指定することができます。「normal」と指定した場合は標準の間隔で表示されます。'
+							hr
+							h4 SAMPLE：文字の間隔を広くする
+							p='letter-spacingプロパティの値を「1em」にすると、文字の間に1文字分の余白が入り、文字の間隔を広くすることができます。'
+							p='なお、CSS3では文字の間に余白が入ることになっていますが、各ブラウザは文字の右側に余白を挿入します。文字と余白の背景に色をつけると、以下のように右端にも余白が入っていることがわかります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/216.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h2&gt;SANDWICHES&lt;/h2&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 SANDWICHES
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     text-align: center;
+									|     letter-spacing: 1em;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	text-align center
+									| 	letter-spacing 1em
+								figcaption （Stylus）
+							hr
+							h4 CSS3における文字の間隔の指定
+							p='CSS3では、word-spacingプロパティと同じように、letter-spacingプロパティデも最適値、最小値、最大値の3つの値を指定することが提案されています。また、半角スペース（U+0020）の横幅に対する比率（%）でも指定できるようになっていますが、いずれも各ブラウザは未対応です。'
+							pre
+								| letter-spacing: 最適値 最小値 最大値
+							hr
+							h4 数字やアルファベットなどの前後の余白
+							p='CSS4では、数字やアルファベット、岐号などの前後の余白サイズを調節するtext-spacingというプロパティが提案されています。これを利用すると、全角の括弧や岐号のカーニング（文字詰め）を調節することもできるようになりますが、主要ブラウザは未対応です。'
+							pre
+								| text-spacing: 余白の処理
+							p='なお、text-spacingプロパティは古い草案ではtext-autospaceとtext-trimプロパティといて提案されており、IEがtext-autospaceプロパティの一部の機能に対応しています。'
+							pre
+								| text-autospace: 余白の処理
+							p='IEのtext-autospaceプロパティで指定できる値は以下のようになっています。'
+							table.table
+								tr
+									th 値
+									th 余白の処理
+								tr
+									td none
+									td 余白を追加しない。
+								tr
+									td ideograph-numeric
+									td 数字の前後に余白を追加。
+								tr
+									td ideograph-alpha
+									td アルファベットの前後に余白を追加。
+							p='たとえば、下のサンプルは日本語の文章を両端揃えで表示したものです。text-autospaceプロパティの値を「ideograph-numeric」にすると、数字の前後の余白が大きくなります。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;p&gt;このHam Sandwichは焼きたての手作りパンで新鮮はハム、トマト、チーズ、レタスを挟んだものです。駅前には2000年に支店ができて、買いやすくなりました。&lt;/p&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| p このHam Sandwichは焼きたての手作りパンで新鮮はハム、トマト、チーズ、レタスを挟んだものです。駅前には2000年に支店ができて、買いやすくなりました。
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| p {
+									|     text-align: justify;
+									|     text-justify: inter-ideograph;
+									|     -ms-text-autospace: ideograph-alpha;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| p
+									| 	text-align justify
+									| 	text-justify inter-ideograph
+									| 	-ms-text-autospace ideograph-alpha
+								figcaption （Stylus）
+							p='また、値を「ideograph-alpha」にすると、アルファベットの前後に余白が追加されます。'
+							p='なお、追加される余白の大きさは、CSS4では1/4em（1文字の4分の1の大きさ）と定義されています。'
+							hr
+							h4 語句の前後の余白サイズを調節する方法
+							p='語句の前後の余白サイズはmarginやpaddingを利用して調節することもできます。'
+							p='たとえば、下のサンプルでは「Ham Sandwich」という語句を<strong>でマークアップしています。<strong>のpadding-leftとpadding-rightプロパティの値を「10ox」にすると、語句の前後に10ピクセルの余白を追加することもできます。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;p&gt;この&lt;strong&gt;Ham Sandwich&lt;/strong&gt;は焼きたての手作りパンで新鮮はハム、トマト、チーズ、レタスを挟んだものです。駅前には2000年に支店ができて、買いやすくなりました。&lt;/p&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| p
+									| 	| この
+									| 	strong Ham Sandwich
+									| 	| は焼きたての手作りパンで新鮮はハム、トマト、チーズ、レタスを挟んだものです。駅前には2000年に支店ができて、買いやすくなりました。
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| strong {
+									|     padding-left: 10px;
+									|     padding-right: 10px;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| strong
+									| 	padding-left 10px
+									| 	padding-right 10px
+								figcaption （Stylus）
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

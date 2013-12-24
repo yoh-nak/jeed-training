@@ -1,0 +1,96 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;単語の間隔
+						.panel-body
+							.alert.alert-info 単語の間隔
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png')
+									td
+										img(src='../images/ic-android.png')
+									td
+										img(src='../images/ic-firefox.png')
+									td
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td
+										img(src='../images/ic-opera.png')
+									td
+										img(src='../images/ic-ie.png')
+							pre
+								| word-spacing: 間隔
+							p
+								| 間隔・・・normal ／ 数値
+							table.table
+								tr
+									td 初期値
+									td normal
+								tr
+									td 継承
+									td あり
+								tr
+									td 適用先
+									td 全要素
+								tr
+									td 比率
+									td -
+								tr
+									td モジュール
+									td Text
+							p='word-spacingプロパティを利用すると、半角スペースで区切った単語の間隔を調節することができます。「normal」と指定した場合は標準の間隔で表示されます。'
+							hr
+							h4 SAMPLE：単語の間隔を広くする
+							p='word-spacingプロパティのアチアを「2em」にすると2文字分の余白が挿入され、下のように単語の間隔を広くすることができます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/215.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h2&gt;CHEESE TOMATO LETTUCE&lt;/h2&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 CHEESE TOMATO LETTUCE
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     text-align: center;
+									|     word-spacing: 2em;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	text-align center
+									| 	word-spacing 2em
+								figcaption （Stylus）
+							p='文字と余白の背景に色をつけると、単語の間にだけ余白が挿入され、両端には挿入されていないことがわかります。'
+							hr
+							h4 最適値・最小値・最大値の指定
+							p='CSS3では単語の間隔の最適値、最小値、最大値をスペースで区切って指定することが提案されています。標準では最適値で表示を行い、両端揃えの際には最小値と最大値の範囲で単語の間隔を調節します。現在のところ、各ブラウザは未対応です。'
+							pre
+								| word-spacing: 最適値 最小値 最大値
+							hr
+							h4 比率による指定
+							p='CSS3では単語の間隔を半角スペース（U+0020）の横幅に対する比率（%）でも指定できるようになっています。各ブラウザは未対応です。'
+							pre wordspacing: 100%;
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

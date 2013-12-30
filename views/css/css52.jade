@@ -1,0 +1,70 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;ハイフネーションの制限
+						.panel-body
+							.alert.alert-info ハイフネーションの制限
+							table.browser-support
+								tr
+									td.not-support
+										img(src='../images/ic-apple.png')
+									td.not-support
+										img(src='../images/ic-android.png')
+									td.not-support
+										img(src='../images/ic-firefox.png')
+									td.not-support
+										img(src='../images/ic-safari.png')
+									td.not-support
+										img(src='../images/ic-chrome.png')
+									td.not-support
+										img(src='../images/ic-opera.png')
+									td
+										img(src='../images/ic-ie.png')
+							p IE9以前は未対応。
+							pre
+								| hyphenate-limit-zone: 余白のサイズ
+							pre
+								| hyphenate-limit-chars: 文字数
+							pre
+								| hyphenate-limit-lines: 行数
+							p
+								| 余白サイズ・・・比率 ／ 数値<br>
+								| 文字数・・・auto ／ 整数<br>
+								| 行数・・・no-limit ／ 整数
+							table.table
+								tr
+									td 初期値
+									td
+										| hyphenate-limit-zone: 0<br>
+										| hyphenate-limit-chars: auto<br>
+										| hyphenate-limit-lines: no-limit
+								tr
+									td 継承
+									td あり
+								tr
+									td 適用先
+									td
+										| hyphenate-limit-zone: ブロックコンテナ<br>
+										| hyphenate-limit-chars: 全要素<br>
+										| hyphenate-limit-lines: ブロックコンテナ
+								tr
+									td 比率
+									td hyphenate-limit-zone: ボックスの横幅
+								tr
+									td モジュール
+									td Fonts
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

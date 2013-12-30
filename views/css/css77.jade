@@ -1,0 +1,585 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp; コンテンツの挿入・置換
+						.panel-body
+							.alert.alert-info  コンテンツの挿入・置換
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png') （※）
+									td
+										img(src='../images/ic-android.png') （※）
+									td
+										img(src='../images/ic-firefox.png') （※）
+									td
+										img(src='../images/ic-safari.png') （※）
+									td
+										img(src='../images/ic-chrome.png') （※）
+									td
+										img(src='../images/ic-opera.png')
+									td
+										img(src='../images/ic-ie.png') （※）
+							p ※ 部分対応。
+							pre
+								| content: コンテンツ
+							p
+								| コンテンツ・・・normal ／ none ／ all ／ 文字列 ／ counter() ／ url() ／ attr() ／ open-quote ／ close-quote ／ no-open-quote ／ no-close-quote
+							table.table
+								tr
+									td 初期値
+									td normal
+								tr
+									td 継承
+									td なし
+								tr
+									td 適用先
+									td 全要素
+								tr
+									td 比率
+									td -
+								tr
+									td モジュール
+									td Generated and Replaced Content
+							p='contentプロパティを利用すると、要素や疑似要素が構成したボックスに表示するコンテンツを指定することができます。'
+							hr
+							h4 疑似要素のコンテンツ
+							p='::before、::after疑似クラスを利用すると、要素の前後に仮想的なボックスを挿入することができます。このとき、ボックスの中に表示するコンテンツはcontentプロパティで指定します。'
+							p='たとえば、下のサンプルは<h1>でマークアップしたテキストをオレンジ色の罫線で囲んで表したものです。このテキストの前後に画像を表示したい場合、<h1>の::before疑似要素と::after疑似要素でテキストの前後に仮想的なボックスを挿入し、contentプロパティで画像を表示するように指定します。ここでは黄色い花の画像（flower-yellow.png）を指定しています。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1 HAM SANDWICHES
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1 {
+									|     border: solid 1px orange;
+									|     text-align: center;
+									|     padding: 10px;
+									| }
+									| h1::before {
+									|     content: url(floweryellow.png);
+									| }
+									| h1::after {
+									|     content: url(flower-yellow.png);
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1
+									| 	border solid 1px orange
+									| 	text-align center
+									| 	padding 10px
+									| 	&amp;::before
+									| 		content url(floweryellow.png)
+									| 	&amp;::after
+									| 		content url(flower-yellow.png)
+								figcaption （Stylus）
+							p='::before、::after疑似要素はインラインボックスを構成します。そのため、ボックスの左右にマージンを入れると、画像とテキストの間隔を調節することができます。たとえば、10ピクセルのマージンを入れると次のようになります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/258-01.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| …略...
+									| h1::before {
+									|     content: url(floweryellow.png);
+									|     margin-right: 10px;
+									| }
+									| h1::after {
+									|     content: url(flower-yellow.png);
+									|     margin-left: 10px;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| …略...
+									| h1
+									| 	&amp;::before
+									| 		content url(floweryellow.png)
+									| 		margin-right 10px
+									| 
+									| h1
+									| 	&amp;::after
+									|		content url(flower-yellow.png)
+									| 		margin-left 10px
+								figcaption （Stylus）
+							hr
+							h4 要素のコンテンツ
+							p='CSS3では、contentプロパティで既存のコンテンツを別のコンテンツに置換することもできます。たとえば、<h1>でマークアップしたテキストを画像に置き換える場合、<h1>のcontentプロパティで画像を指定します。たとえば、サンドイッチの画像（hamsand.jpg）を指定すると下のように置換されます。'
+							p='コンテンツを画像に置換する機能にはWebkit系のブラウザとOperaが対応しています。このとき、Webkit系のブラウザでは<h1>の構成するボックスの横幅が画像に合わせて変化しますが、Operaは変化しません。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/258-02.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1 HAM SANDWICHES
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1 {
+									|     border: solid 1px orange;
+									|     text-align: center;
+									|     padding: 10px;
+									|     content: url(hamsand.jpg);
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1
+									| 	border solid 1px orange
+									| 	text-align center
+									| 	padding 10px
+									| 	content url(hamsand.jpg)
+								figcaption （Stylus）
+							p='conentプロパティデは画像以外のコンテナに置換することもできますが、現在のところ対応しているのはOperaのみとなっています。'
+							hr
+							h4 画像置換
+								p='テキストを画像に置き換えるテクニックは「画像置換」呼ばれ、テキストリンクを画像に置き換えたい場合などに利用されます。これまでの方法ではbackground-imageプロパティで画像を指定し、テキストを隠すためにtext-indentプロパティを「-9999px」と指定するなど、ちょっとしたテクニックが必要でした。しかし、CSS3のcontentプロパティを利用すると、簡単に画像置換を行うことができます。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;a href="〜"&gt;RSS FEED&lt;/a&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| a(href='〜') RSS FEED
+								figcaption （Jade）
+							p text-indentプロパティを利用した画像置換の設定
+							figure
+								pre(class='prettyprint linenums:1')
+									| a {
+									|     background-image: url(feed.png);
+									|     background-repeat: no-repeat;
+									|     display: inline-block;
+									|     width: 40px;
+									|     height: 40px;
+									|     text-indent: -9999px
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| a
+									| 	background-image url(feed.png)
+									| 	background-repeat no-repeat
+									| 	display inline-block
+									| 	width 40px
+									| 	height 40px
+									| 	text-indent -9999px
+								figcaption （Stylus）
+							p='cntentプロパティを利用した画像置換の設定'
+							figure
+								pre(class='prettyprint linenums:1')
+									| a {
+									|     content: url(feed.png);
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									a
+										content url(feed.png)
+									figcaption （Stylus）
+							hr
+							h4 contentプロパティで指定できるコンテンツの種類
+							p='contentプロパティで指定できるコンテンツの種類は以下のようになっています。'
+							h4 文字列
+							p='文字列を指定する場合、「"」または「\'」で囲んで記述します。下のサンプルでは「New!」という文字を挿入するように指定し、色を赤色（red）に、文字サイズを20ピクセルに、右マージンを10ピクセルに指定しています。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/258-03.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1 HAM SANDWICHES
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1::before {
+									|     content: 'New!';
+									|     color: red;
+									|     font-size: 20px;
+									|     margin-right: 10px;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1
+									| 	&amp;::before
+									| 		content 'New!'
+									| 		color red
+									| 		font-size 20px
+									| 		margin-right 10px
+								figcaption （Stylus）
+							hr
+							h4 画像
+							p='画像を指定する場合、url()で画像のURLを指定します。下のサンプルではflower-yellow.pngという画像を挿入するように指定しています。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/258-04.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1 {
+									|     content: url(flower-yellow.png);
+									|     margin-right: 10px;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1
+									| 	content url(flower-yellow.png)
+									| 	margin-right 10px
+								figcaption （Stylus）
+							p='画像の代わりに、linear-gradient()やradial-gradient()でグラデーションを指定することもできます。たとえば、黄色からオレンジ色に変わる円形グラデーションを挿入するためには下のように指定します。'
+							p='なお、conentプロパティによるグラデーションの指定にはWebkit系のブラウザとIE10以上が対応しています。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/258-05.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1::before {
+									|      content: -webkit-gradient(radial, 50% 50%, 2, 50% 50%, 12, from(yellow), color-stop(80%, orange), to(white));
+									|      content: -webkit-radial-gradient(50% 50%, circle closest-side, yellow 0%, orange 80%,white 100%);
+									|      content: radial-gradient(circle closest-side at 50% 50%, yellow 0%, orange 80%, white 100%);
+									|      width: 25px;
+									|      height: 25px;
+									|      display: inline-block;
+									|      vertical-align: 0.3em;
+									|      margin-right: 10px;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1
+									| 	&amp;::before
+									| 		content -webkit-gradient(radial, 50% 50%, 2, 50% 50%, 12, from(yellow), color-stop(80%, orange), to(white))
+									| 		content -webkit-radial-gradient(50% 50%, circle closest-side, yellow 0%, orange 80%,white 100%)
+									| 		content radial-gradient(circle closest-side at 50% 50%, yellow 0%, orange 80%, white 100%)
+									| 		width 25px
+									| 		height 25px
+									| 		display inline-block
+									| 		vertical-align 0.3em
+									| 		margin-right 10px
+								figcaption （Stylus）
+							hr
+							h4 カウンター
+							p='counter()でカウンター名を指定すると、連番を挿入することができます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/258-06.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1::before {
+									|     content: counter(mycount);
+									|     color: red;
+									|     margin-right: 10px;
+									| }
+									| h1 {
+									|     counter-increment: mycount;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1
+									| 	counter-increment mycount
+									| 	&amp;::before
+									| 		content counter(mycount)
+									| 		color red
+									| 		margin-right 10px
+								figcaption （Stylus）
+							hr
+							h4 属性値
+							p='attr()を利用すると属性値を取得して挿入することができます。たとえば、title属性の値を取得して挿入するためには、contentプロパティの値を「attr(title)」と指定します。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/258-07.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h1 title="サンドイッチ"&gt;HAM SANDWICHES&lt;/h1&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1(title='サンドイッチ') HAM SANDWICHES
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1::after {
+									|     content: attr(title);
+									|     color: red;
+									|     font-size: 18px;
+									|     margin-left: 10px
+									| }
+									| h1 {
+									|     counter-increment: mycount;
+									| }
+								figcaption （CSS） 
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1
+									| 	counter-increment mycount
+									| 	&amp;::after
+									| 		content attr(title)
+									| 		color red
+									| 		font-size 18px
+									| 		margin-left 10px
+								figcaption （Stylus）
+							p='CSS3で提案されているstring-setプロパティやstring()を利用するとattr()で取得した値を他の場所に受け渡して利用することができるようになります。現在のところ、各ブラウザは未対応です。'
+							hr
+							h4 引用符
+							p='contentプロパティの値を「open-quote」、「close-quote」にすると引用符を挿入することができます。下のサンプルは<h1>でマークアップしたテキストの一部を<span>でマークアップしたもので、<h1>と<span>の前後に引用符を挿入するようにしています。'
+							p='挿入される引用符は、マークアップの階層構造やブラウザによって変わります。たとえば、IEでは親要素の<h1>は「」で、子要素の<span>は『』で囲まれます。FirefoxやWebkit系のブラウザではそれぞれ" "と' 'で囲まれます。Operaではどちらも" "で囲んだ表示になります。なお、表示に使用する引用符はquoteプロパティで指定することもできます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/258-08.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h1&gt;&lt;span&gt;HAM&lt;/span&gt; SANDWICHES&lt;/h1&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1
+									| 	span HAM
+									| 	| SANDWICHES
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1::before {
+									|     content: open-quote;
+									| }
+									| h1::after {
+									|     content: close-quote;
+									| }
+									| h1::before, h1::after {
+									|     color: red;
+									| }
+									| 
+									| span::before {
+									|     content: open-quote;
+									| }
+									| span::after {
+									|     content: close-quote;
+									| }
+									| span::before, span::after {
+									|     color: blue;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1
+									| 	&amp;::before
+									| 		content open-quote
+									| 	&amp;::after
+									| 		content close-quote
+									| 
+									| h1::before, h1::after
+									| 	color red
+									| 
+									| span
+									| 	&amp;::before
+									| 		content open-quote
+									| 	&amp;::after
+									| 		content close-quote
+									| 
+									| span::before, span::after
+									| 	color blue
+								figcaption （Stylus）
+							p='iOS4.x/Android3.x以前はcontentプロパティによる引用符の指定に未対応です。'
+							p='contentプロパティの値を「no-open-quote」、「no-close-quote」にすると、<h1>の前後には引用符が挿入されなくなります。しかし、子要素<span>の前後には「」ではなく、これまでと同じように『』が挿入されます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/258-08-noquote.html ',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1::before {
+									|     content: no-open-quote;
+									| }
+									| h1::after {
+									|     content: no-close-quote;
+									| }
+									| h1::before, h1::after {
+									|     color: red;
+									| }
+									| 
+									| span::before {
+									|     content: open-quote;
+									| }
+									| span::after {
+									|     content: close-quote;
+									| }
+									| span::before, span::after {
+									|     color: blue;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1
+									| 	&amp;::before
+									| 		content no-open-quote
+									| 	&amp;::after
+									| 		content no-close-quote
+									| 
+									| h1::before, h1::after
+									| 	color red
+									| 
+									| span
+									| 	&amp;::before
+									| 		content open-quote
+									| 	&amp;::after
+									| 		content close-quote
+									| 
+									| span::before, span::after
+									| 	color blue
+								figcaption （Stylus）
+							hr
+							h4 空のコンテンツ
+							p='contentプロパティの値を「none」にすると、コンテンツを空にすることができます。たとえば、下のサンプルは<h1>の::before疑似要素でテキストの前に前後（flower.png）を挿入したものです。'
+							p='このとき、2つ目の::before疑似要素のcontentプロパティの値を「none」にすると、画像が挿入されなくなります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/258-09.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h1 id="head01"&gt;HAM SANDWICHES&lt;/h1&gt;
+									| &lt;h1 id="head02"&gt;CHEESE BURGER&lt;/h1&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1#head01 HAM SANDWICHES
+									| h1#head02 CHEESE BURGER
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1::before {
+									|     content: url(flower-yellow.png);
+									|     margin-right: 10px;
+									| }
+									| h1#02::before {
+									|     conent: none;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1
+									| 	&amp;::before
+									| 		content url(flower-yellow.png)
+									| 		margin-right 10px
+									| 
+									| h1#02
+									| 	&amp;::before
+									| 		conent none
+								figcaption （Stylus）
+							p='iOS4.x/Android2.3.xは「none」の指定に未対応です。'
+							p='また、疑似要素ではなく要素のcontentプロパティの値を「none」にすると、既存のコンテンツを非表示にすることができます。たとえば<h1>のcontentプロパティの値を「none」にすると、テキストが表示されなくなります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/258-10.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h1 id="head01"&gt;HAM SANDWICHES&lt;/h1&gt;
+									| &lt;h1 id="head02"&gt;CHEESE BURGER&lt;/h1&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1#head01 HAM SANDWICHES
+									| h1#head02 CHEESE BURGER
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1::before {
+									|     content: url(flower-yellow.png);
+									|     margin-right: 10px;
+									| }
+									| h1#02 {
+									|     conent: none;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1
+									| 	&amp;::before
+									| 		content url(flower-yellow.png)
+									| 		margin-right 10px
+									| 
+									| h1#02
+									| 	conent none
+								figcaption （Stylus）
+							p='要素のコンテンツを非表示にする機能にはOperaが対応しています。'
+							hr
+							h4 複数のコンテンツを組み合わせた指定
+							p='contentプロパティでは複数のコンテンツを組み合わせて指定することもできます。各コンテンツは半角スペースで区切って指定します。たとえば、下のサンンプルでは黄色い花の画像（flower-yellow.png）と「New!」という赤色の文字を組み合わせて挿入しています。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/258-11.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1 HAM SANDWICHES
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1::before {
+									|     content: url(flower-yellow.png) 'New!';
+									|     color: red;
+									|     font-size: 20px;
+									|     margin-right: 10px;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h1
+									| 	&amp;::before
+									| 		content url(flower-yellow.png) 'New!'
+									| 		color red
+									| 		font-size 20px
+									| 		margin-right 10px
+								figcaption （Stylus）
+							hr
+							h4 複数の画像候補の指定
+							p='CSSでは複数の画像の候補をカンマで区切って指定できるようになっています。この場合、最初に指定した画像ほど優先順位が高くなります。また、画像がすべて表示できなかった場合に備え、一番最後に画像以外のコンテンツを指定しておくこともできます。現在のところ、各ブラウザは未対応です。'
+							pre
+								| content: 第1候補の画像, 第2候補の画像, …, 他のコンテンツ
+							hr
+							h4 CSS3のcontentプロパティで指定できるコンテンツの種類
+							p='CSS3ではcontentプロパティでさまざまなコンテンツを指定できるようになっています。たとえば、list-style-typeプロパティの値を指定すると、黒丸や白丸といったリストマークを表示することができます。また、現在の日付を取得する「date()」、WebページのURLを取得する「document-url」、HTMLタグでマークアップした中身を取得する「contents」などの値も提案されています。各ブラウザは未対応です'
+							hr
+							h4 CSS3で提案されている疑似要素
+							p='::beforeや::afterでは要素が構成するボックス内に疑似要素を挿入しますが、CSS3で提案されている::outsideを利用すると、ボックス外に挿入することができます。また、リストマークを構成する::markerや::line-makerなども提案されています。現在のところ、各ブラウザは未対応です。'
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

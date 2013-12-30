@@ -1,0 +1,159 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp; 縦書きの中の文字の向き
+						.panel-body
+							.alert.alert-info  縦書きの中の文字の向き
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png') （※）
+									td
+										img(src='../images/ic-android.png') （※）
+									td.not-support
+										img(src='../images/ic-firefox.png')
+									td
+										img(src='../images/ic-safari.png') （※）
+									td
+										img(src='../images/ic-chrome.png') （※）
+									td.not-support
+										img(src='../images/ic-opera.png')
+									td.not-support
+										img(src='../images/ic-ie.png')
+							p ※ 部分対応。
+							p iOS4.x/Android4.0.x以前は未対応
+							pre
+								| text-orientation: 向き
+							p
+								| 向き・・・mixed ／ upright ／ sideways-right ／ sideways-left ／ sideways ／ use-glyph-orientation
+							table.table
+								tr
+									td 初期値
+									td mixed
+								tr
+									td 継承
+									td あり
+								tr
+									td 適用先
+									td 全要素（テーブルの行列関連の要素を除く）
+								tr
+									td 比率
+									td -
+								tr
+									td モジュール
+									td Writing Modes
+							p='text-orieionプロパティを利用すると、縦書きの中の文字の向きを指定することができます。'
+							hr
+							h4 SAMPLE：文字の向きの指定
+							p='コンテンツを縦書きで表示すると、日本語の文字は正しい向きになりますが、英数字は時計回りに90度回転した形で表示されます。これは、text-orientationプロパティの値が初期値の「mixed」で処理されるためです。'
+							p='text-orientationプロパティの値を「upright」にすると、すべての文字を時計回りに90度回転した形で表示することが可能です。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;body&gt;
+									| &lt;h1&gt;HAMサンドイッチ&lt;/h1&gt;
+									| &lt;p&gt;焼きたての手作りパンで新鮮はHam、Tomato、Cheese、Lettuceを挟んだサンドイッチです。お店の近くを通るだびに買いこんでしまいます。&lt;/p&gt;
+									| &lt;/body&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| body
+									| 	h1 HAMサンドイッチ
+									| 	p 焼きたての手作りパンで新鮮はHam、Tomato、Cheese、Lettuceを挟んだサンドイッチです。お店の近くを通るだびに買いこんでしまいます。
+								figcaption （Jade）
+							p 初期値の「mixed」で処理されたときの表示。
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/248-01.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| body {
+									|     -ms-wriging-mode: tb-rl;
+									|     -webkit-writing-mode: vertical-rl;
+									|     -webkit-text-orientation: mixed;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| body
+									| 	-ms-wriging-mode tb-rl
+									| 	-webkit-writing-mode vertical-rl
+									| 	-webkit-text-orientation mixed
+								figcaption （Stylus）
+							p 値を「upright」にしたときの表示。
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/248-02.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| body {
+									|     -ms-wriging-mode: tb-rl;
+									|     -webkit-writing-mode: vertical-rl;
+									|     -webkit-text-orientation: upright;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| body
+									| 	-ms-wriging-mode tb-rl
+									| 	-webkit-writing-mode vertical-rl
+									| 	-webkit-text-orientation upright
+								figcaption （Stylus）
+							p 値を「sideways-right」にしたときの表示。
+							figure
+								pre(class='prettyprint linenums:1')
+									| body {
+									|     -ms-wriging-mode: tb-rl;
+									|     -webkit-writing-mode: vertical-rl;
+									|     -webkit-text-orientation: sideways-right;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| body
+									| 	-ms-wriging-mode tb-rl
+									| 	-webkit-writing-mode vertical-rl
+									| 	-webkit-text-orientation sideways-right
+								figcaption （Stylus）
+							p='現在のところ、「sideways-right」に対応しているのはChromeのみとなっています。他にも以下のような値を指定することができますが、各ブラウザは未対応です。'
+							table.table
+								tr
+									th 値
+									th 縦書きの中の文字の向き
+								tr
+									td mixed
+									td 英数字を時計回りに90度回転した形で表示。
+								tr
+									td upright
+									td 英数字を文字ごとに縦向きにして表示。
+								tr
+									td sideways-right
+									td すべての文字を時計回りに90度回転した形で表示。
+								tr
+									td sideways-left
+									td すべての文字を反時計回りに90度回転した形で表示。
+								tr
+									td sideways
+									td 右から左の縦書きでは「sideways-right」で、左から右の縦書きでは「sideways-left」で表示。
+								tr
+									td use-glyph-orientation
+									td SVGにおける設定で表示。
+							hr
+							h4 複数の文字を1文字として扱う
+							p='CSS3で提案されているtext-combine-horizontalプロパティを利用すると、1文字分のスペースに複数の文字を表示できるようになります。ただし、各ブラウザは未対応です。'
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

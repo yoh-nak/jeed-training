@@ -85,7 +85,7 @@
 
   app.get("/rwd-id", rwd.rwd);
 
-  app.get("/jquery:id", jquery.jquery);
+  app.get("/jquery/:id", jquery.jquery);
 
   app.get("/jqm:id", jqm.jqm);
 

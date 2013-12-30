@@ -5,7 +5,7 @@
   config = require("../config.json");
 
   exports.jquery = function(req, res) {
-    return res.render("jquery/jquery-" + req.params.id + ".jade", {
+    return res.render("jquery/jquery" + req.params.id + ".jade", {
       title: config.title,
       instructor: config.instructor,
       pretty: true

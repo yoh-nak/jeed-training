@@ -1,0 +1,119 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp; 文字のアウトライン
+						.panel-body
+							.alert.alert-info  文字のアウトライン
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png')
+									td
+										img(src='../images/ic-android.png')
+									td.not-support
+										img(src='../images/ic-firefox.png')
+									td
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td.not-support
+										img(src='../images/ic-opera.png')
+									td.not-support
+										img(src='../images/ic-ie.png')
+							pre
+								| text-stroke: 太さ 色
+							pre
+								| text-stroke-width: 太さ
+							pre
+								| text-stroke-color: 色
+							p
+								| 太さ・・・数値 ／ thin ／ medium ／ thick<br>
+								| 色・・・色の値
+							table.table
+								tr
+									td 初期値
+									td -
+								tr
+									td 継承
+									td -
+								tr
+									td 適用先
+									td -
+								tr
+									td 比率
+									td -
+								tr
+									td モジュール
+									td -
+							p='text-strokeプロパティを利用すると文字のアウトラインを表示することができます。たとえば、下のように値を「2px crimson」にすると、太さ2ピクセルの赤色（crimson）のアウトラインが表示されます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/230.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 HAM SANDWICHES
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     color: pink;
+									|     -webkit-text-stroke: 2px crimson;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	color pink
+									| 	-webkit-text-stroke 2px crimson
+								figcaption （Stylus）
+							p='同じ設定をtext-stroke-widthとtext-stroke-colorプロパティで指定する場合、次のように記述します。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     color: pink;
+									|     -webkit-text-stroke-width: 2px;
+									|     -webkit-text-stroke-color: crimson;
+									| }
+								figcaption （CSS） 
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	color pink
+									| 	-webkit-text-stroke-width 2px
+									| 	-webkit-text-stroke-color crimson
+								figcaption （Stylus）
+							p='なお、太さの値はキーワードで指定することもできます。サンプルを各キーワードで表示すると、下のように太さが変わります。'
+							table.table
+								tr
+									th 値
+									th 太さ
+								tr
+									td thin
+									td 細いアウトライン
+								tr
+									td medium
+									td 中太のアウトライン
+								tr
+									td thick
+									td 太いアウトライン
+							p='古い仕様ではアウトラインの設定を行うtext-outlineプロパティが提案されていましたが、現在は削除されています。'
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

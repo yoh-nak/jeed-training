@@ -1,0 +1,130 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;テーブルの罫線の間隔
+						.panel-body
+							.alert.alert-info テーブルの罫線の間隔
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png')
+									td
+										img(src='../images/ic-android.png')
+									td
+										img(src='../images/ic-firefox.png')
+									td
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td
+										img(src='../images/ic-opera.png')
+									td
+										img(src='../images/ic-ie.png')
+							p IE7以前は未対応。
+							pre
+								| border-spacing: 間隔
+							p
+								| 間隔・・・数値
+							table.table
+								tr
+									td 初期値
+									td 0
+								tr
+									td 継承
+									td あり
+								tr
+									td 適用先
+									td displayの値が「table」または「inline-table」の要素
+								tr
+									td 比率
+									td -
+								tr
+									td モジュール
+									td Tables
+							p='テーブルの罫線を重ねずに表示しているときに、border-spacingプロパティを利用すると罫線の間隔を調節することができます。'
+							hr
+							h4 SAMPLE A：罫線の間隔を広くする
+							p='下のサンプルは罫線を重ねずにテーブルを表示したものです。border-spacingプロパティの初期値は「0」ですが、デフォルトスタイルシートによって<table>のborder-spacingプロパティの値は「2px」で処理されるため、少しだけ間隔を空けた表示になります。'
+							p='たとえば、border-spacingプロパティの値を「20px」にすると、罫線の間隔を大きくすることができます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/275-A.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;table&gt;
+									| &lt;tr&gt;
+									| &lt;th&gt;ハムサンド&lt;/th&gt;
+									| &lt;td&gt;自家製ハムとゴーダチーズに、新鮮なレタスをはさんだサンドイッチです。トマトまたはマヨネーズソースが選べます。&lt;/td&gt;
+									| &lt;/tr&gt;
+									| &lt;tr&gt;
+									| &lt;th&gt;野菜サンド&lt;/th&gt;
+									| &lt;td&gt;自家製ハムに、トマトやレタス、キュウリ、ブロッコリなど新鮮な野菜をたっぷりはさんだサンドイッチです。さっぱりイタリアンドレッシングソースもあります。&lt;/td&gt;
+									| &lt;/tr&gt;
+									| &lt;/table&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| table
+									| 	tr
+									| 		th ハムサンド
+									| 		td 自家製ハムとゴーダチーズに、新鮮なレタスをはさんだサンドイッチです。トマトまたはマヨネーズソースが選べます。
+									| 	tr
+									| 		th 野菜サンド
+									| 		td 自家製ハムに、トマトやレタス、キュウリ、ブロッコリなど新鮮な野菜をたっぷりはさんだサンドイッチです。さっぱりイタリアンドレッシングソースもあります。
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| table, th, td {
+									|     border: solid 2px orange;
+									| }
+									| table {
+									|     border-spacing: 20px;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| table, th, td
+									| 	border solid 2px orange
+									| 
+									| table
+									| 	border-spacing 20px
+							hr
+							h4 SAMPLE B：縦横の間隔を個別に指定する
+							p='縦横の罫線の間隔を個別に指定することもできます。その場合、横方向と縦方向の間隔をスペースで区切って指定します。たとえば、「40px 10px」にすると、横方向の間隔を40ピクセルに、縦方向の間隔を10ピクセウrにすることができます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/275-B.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| table, th, td {
+									|     border: solid 2px orange;
+									| }
+									| table {
+									|     border-spacing: 40px 10px;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| table, th, td
+									| 	border solid 2px orange
+									| 
+									| table
+									| 	border-spacing 40px 10px
+								figcaption （Stylus）
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

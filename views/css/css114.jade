@@ -1,0 +1,150 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;横幅と高さの最小値・最大値
+						.panel-body
+							.alert.alert-info 横幅と高さの最小値・最大値
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png')
+									td
+										img(src='../images/ic-android.png')
+									td
+										img(src='../images/ic-firefox.png')
+									td
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td
+										img(src='../images/ic-opera.png')
+									td
+										img(src='../images/ic-ie.png')
+							p IE6以前は未対応
+							pre
+								| max-width: 値
+							pre
+								| min-width: 値
+							pre
+								| max-height: 値
+							pre
+								| min-height: 値
+							p
+								| 値・・・数値 ／ 比率 ／ auto
+							table.table
+								tr
+									td 初期値
+									td auto
+								tr
+									td 継承
+									td なし
+								tr
+									td 適用先
+									td 全要素（<mark>非置換のインライン要素／テーブルの行、列、グループを構成する要素を除く</mark>）
+								tr
+									td 比率
+									td 親要素の横幅 ／ 高さ
+								tr
+									td モジュール
+									td Basic Box Model
+							p='max-widthプロパティなどを利用すると、ボックスの横幅と高さの最小値と最大値を指定することができます。'
+							hr
+							h4 SAMPLE A：横幅の最小値と最大値の指定
+							p='下のサンプルでは<h2>でマークアップした部分に構成されるボックスの背景をオレンジ色で表示したものです。横幅を指定していない場合、ボックスの横幅はブラウザ画面に合わせて変わります。そのため、ブラウザ画面の大きさによっては、ボックスの横幅が極端に長くなったり、短くなったりしてしまいます。'
+							p='ボックスの横幅が極端に変化しないようにするためには、横幅の最小値と最大値を指定します。たとえば、min-widthプロパティの値を「350px」、max-widthプロパティの値を「500px」にすると、ボックスの横幅は350〜500ピクセルの範囲で変化するようになります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/065-A.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 HAM SANDWICHES
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     background-color: orange;
+									|     min-width: 350px;
+									|     max-width: 500px;
+									| }
+								figcaption （CSS） 
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	background-color orange
+									| 	min-width 350px
+									| 	max-width 500px
+								figcaption （Stylus）
+							hr
+							h4 SAMPLE B：高さの最小値と最大値の指定
+							p='たとえば、下のサンプルは<div>でマークアップした部分に構成されるボックスをオレンジ色の罫線で囲み、背景を薄い黄色で表示したものです。高さを指定していない場合、<div>が構成するボックスの高さは中身のコンテンツに合わせて決まります。たとえば、文章を追加すると、その分だけボックスの高さが変わります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/065-B01.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							p='ボックスの高さが極端に変化しないようにするためには、高さの最小値と最大値を指定します。、min-heightプロパティの値を「100px」、max-heightプロパティの値を「200px」にすると、ボックスの高さは100〜200ピクセルの範囲で変化するようになります。200ピクセルの高さに収まらないコンテンツはボックスからはみ出す形で表示されます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/065-B02.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;div&gt;
+									| &lt;h2&gt;HAM SANDWICHE&lt;/h2&gt;
+									| &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト、…略…&lt;/p&gt;
+									| &lt;/div&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	h2 HAM SANDWICHE
+									| 	p 焼きたての手作りパンで新鮮なハム、トマト、…略…
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     background-color: orange;
+									|     min-width: 350px;
+									|     max-width: 500px;
+									| }
+								figcaption （CSS） 
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	background-color orange
+									| 	min-width 350px
+									| 	max-width 500px
+								figcaption （Stylus）
+							p='overflowプロパティの値を「auto」にすると、必要に応じてスクロールバーを表示し、インラインフレームの形でコンテンツを表示することができます。たとえば、上のサンプルに「overflow: auto」の指定を追加すると、以下のような表示になります。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     …略…
+									|     overflow: auto;
+									| }
+								figcaption （CSS） 
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	…略…
+									| 	overflow auto
+								figcaption （Stylus）
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

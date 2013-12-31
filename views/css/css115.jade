@@ -1,0 +1,187 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;ボックスの配置と回り込み
+						.panel-body
+							.alert.alert-info ボックスの配置と回り込み
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png')
+									td
+										img(src='../images/ic-android.png')
+									td
+										img(src='../images/ic-firefox.png')
+									td
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td
+										img(src='../images/ic-opera.png')
+									td
+										img(src='../images/ic-ie.png')
+							pre
+								| float: 配置
+							p
+								| 配置・・・left ／ right ／ none
+							table.table
+								tr
+									td 初期値
+									td none
+								tr
+									td 継承
+									td なし
+								tr
+									td 適用先
+									td 全要素（positionの値が「absolute」「fixed」の要素を除く）
+								tr
+									td 比率
+									td -
+								tr
+									td モジュール
+									td Basic Box Model
+							p='floatはボックスの配置を指定するプロパティです。floatプロパティでボックスを左または右に配置すると、逆サイドに後続のコンテンツが回り込んでレイアウトされるという特徴があります。'
+							hr
+							h4 SAMPLE A：ボックスの配置の指定
+							p='下のサンプルは画像と文章を表示したものです。画像にはキャプションをつけて<div>でマークアップし、背景をオレンジ色に、横幅を200ピクセルにしています。また、文章は<p>でマークアップしています。'
+							p='<div>のfloatプロパティの値を「left」にすると、オレンジ色のボックスは左側に配置され、逆サイドに後続のコンテンツが回り込みます。ここでは、<p>でマークアップした文章が回り込んだ表示になります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/067-A.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;div&gt;&lt;img src="sand.jpg" alt=""&gt;HAM SANDWICHES&lt;/div&gt;
+									| &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト、…略...&lt;/p&gt;
+									| &lt;p&gt;日替わりメニューや、好きな具をトッピング…略...&lt;/p&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	img(src='sand.jpg', alt='')
+									| 	| HAM SANDWICHES
+									| 	p 焼きたての手作りパンで新鮮なハム、トマト、…略...
+									| 	p 日替わりメニューや、好きな具をトッピング…略...
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div {
+									|     background-color: orange;
+									|     width: 200px;
+									|     padding: 10px;
+									|     text-align: center;
+									|     float: left;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	background-color orange
+									| 	width 200px
+									| 	padding 10px
+									| 	text-align center
+									| 	float left
+								figcaption （Stylus）
+							p='floatプロパティの値を「right」にすると、オレンジ色のボックスを右側に配置することができます。'
+							hr
+							h4 SAMPLE B：逆サイドに後続のコンテンツが回り込む仕組み
+							p='floatプロパティで配置を指定した部分は「フローティングボックス（浮動ボックス）」という特殊なボックスを構成し、通常のボックスからは存在しないものとして扱われます。これにより、フローティングボックスには後続のコンテンツが回り込んだ表示になります。'
+							p='たとえば、SAMPLE Aで<p>の背景を緑色にすると、下のようにボックスが構成されていることが分かります。floatプロパティで配置を指定していない場合、<div>はブロックボックスを構成しますので、<p>は<div>の下に表示されます。'
+							p='しかし、floatプロパティで配置を指定すると、<div>はフローティングボックスを構成し、<p>から見て存在しないものとなります。その結果、<p>の構成するボックスは下のように<div>と重なって表示されます。ただし、「ボックスの中身はフローティングボックスと重ならないように表示する」という決まりがあるため、<p>の中身である文章は<div>の右側に回り込んだ形で表示されます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/067-B.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							hr
+							h4 SAMPLE C：ブロックボックスを横に並べて表示する（段組み）
+							p='ブロックボックスを横に並べ、段組みのレイアウトを作るときにもfloatプロパティを利用します。その場合、横に並べたいすべてのボックスのfloatプロパティで配置を指定します。'
+							p='たとえば、下のサンプルは画像を<div id="column01">で、文章を<div id="column02">でマークアップしたものです。それぞれ背景をオレンジ色と緑色に、横幅を200ピクセルと400ピクセルに指定しています。'
+							p='<div id="column01">と<div id="column02">のfloatプロパティの値を「left」と指定すると、全ページの図のように2段組みの形で表示されます。これは、フローティングボックスには他のフローティングボックスが回り込むという特徴があるためです。ここでは、<div id="column01">が左側に配置され、逆サイドに後続のフローティングボックスである<div id="column02">が回り込んで表示されます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/067-C.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;div id="column01"&gt;
+									|     &lt;img src="sand.jpg" alt=""&gt;HAM SANDWICHES
+									| &lt;/div&gt;
+									| &lt;div id="column02"&gt;
+									|     &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト、…略...&lt;/p&gt;
+									|     &lt;p&gt;日替わりメニューや、好きな具をトッピング…略...&lt;/p&gt;
+									| &lt;/div&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #column01
+									| 	img(src='sand.jpg', alt='')
+									| 	| HAM SANDWICHES
+									| #column02
+									| 	p 焼きたての手作りパンで新鮮なハム、トマト、…略...
+									| 	p 日替わりメニューや、好きな具をトッピング…略...
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #column01 {
+									|     background-color: orange;
+									|     width: 200px;
+									|     padding :10px;
+									|     text-align: center;
+									|     float: left;
+									| }
+									| #column02 {
+									|     background-color: greenyellow;
+									|     width: 400px;
+									|     padding: 0 10px;
+									|     margin-left: 20px;
+									|     float: left;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #column01
+									| 	background-color orange
+									| 	width 200px
+									| 	padding 10px
+									| 	text-align center
+									| 	float left
+									| 
+									| #column02
+									| 	background-color greenyellow
+									| 	width 400px
+									| 	padding 0 10px
+									| 	margin-left 20px
+									| 	float left
+								figcaption （Stylus）
+							p='<div id="column01">のfloatプロパティの値のみ「left」と指定すると、<div id="column01">と<div id="column02">の構成するボックスはSAMPLE Bと同じように重なって表示され、横に並べることはできません。'
+							hr
+							h4 floatを利用したレイアウトの問題点とCSS3の新しいレイアウト機能
+							p='段組みなどのレイアウトを形にする場合、現状ではfloatプロパティを利用するのが一般的です。しかし、floatプロパティによるレイアウトには以下のような問題点があり、カスタマイズを難しくしています。さまざまなテクニックの組み合わせにより回避することもできますが、複雑な設定が必要になります。'
+							ul
+								li 段組みの格段の高さを揃えるのが難しい。
+								li ブラウザ画面に合わせて横幅が変わるようなリキッドレイアウトの設定が難しい。
+								li 「フローティングボックスは存在しないものとして扱われる」という特徴により、親要素や前後のコンテンツとの間での配置調節が難しい。
+							p など
+							p こうした問題を解決し、もっと簡単にレイアウトをコントロールできるようにするため、CSS3では下のように新しいレイアウトの機能が提案されています。
+							ul
+								li フレキシブルボックスレイアウト
+								li グリッドレイアウト
+								li テンプレートレイアウト
+								li マルチカラムレイアウト
+								li リージョンレイアウト
+								li エクスクルージョン
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

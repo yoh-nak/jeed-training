@@ -1,0 +1,319 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp; テーブルの罫線の表示
+						.panel-body
+							.alert.alert-info  テーブルの罫線の表示
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png')
+									td
+										img(src='../images/ic-android.png')
+									td
+										img(src='../images/ic-firefox.png')
+									td
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td
+										img(src='../images/ic-opera.png')
+									td
+										img(src='../images/ic-ie.png')
+							p IE7以前は部分対応。
+							pre
+								| border-collapse: 表示方法
+							p
+								| 表示方法・・・separate ／ collapse
+							table.table
+								tr
+									td 初期値
+									td separate
+								tr
+									td 継承
+									td あり
+								tr
+									td 適用先
+									td displayの値が「table」または「inline-table」の要素
+								tr
+									td 比率
+									td -
+								tr
+									td モジュール
+									td Tables
+							p='border-collapseプロパティを利用すると、テーブルの罫線を重ねて表示するかどうかを指定することができます。'
+							table.table
+								tr
+									th border-collapse
+									th 表示方法
+								tr
+									td separate
+									td 重ねずに表示。
+								tr
+									td collapse
+									td 重ねて表示。
+							hr
+							h4 SAMPLE A：罫線を重ねずに表示する
+							p='テーブル罫線はborderプロパティを利用して、<table>でマークアップしたテーブル全体と、<th>でマークアプしたデータセルのまわりに表示することができます。'
+							p='下のサンプルは<table>、<th>、<td>のまわりに太さ2ピクセルで赤色、緑色、青色の罫線を表示したものです。各罫線は重ねずに個別に表示されます。これは、border-collapseプロパティの値が初期値の「separate」で処理されるためです。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/272-A.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;table&gt;
+									| &lt;tr&gt;
+									| &lt;th&gt;ハムサンド&lt;/th&gt;
+									| &lt;td&gt;自家製ハムとゴーダチーズに、新鮮なレタスをはさんだサンドイッチです。トマトまたはマヨネーズソースが選べます。&lt;/td&gt;
+									| &lt;/tr&gt;
+									| &lt;tr&gt;
+									| &lt;th&gt;野菜サンド&lt;/th&gt;
+									| &lt;td&gt;自家製ハムに、トマトやレタス、キュウリ、ブロッコリなど新鮮な野菜をたっぷりはさんだサンドイッチです。さっぱりイタリアンドレッシングソースもあります。&lt;/td&gt;
+									| &lt;/tr&gt;
+									| &lt;/table&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| table
+									| 	tr
+									| 		th ハムサンド
+									| 		td 自家製ハムとゴーダチーズに、新鮮なレタスをはさんだサンドイッチです。トマトまたはマヨネーズソースが選べます。
+									| 	tr
+									| 		th 野菜サンド
+									| 		td 自家製ハムに、トマトやレタス、キュウリ、ブロッコリなど新鮮な野菜をたっぷりはさんだサンドイッチです。さっぱりイタリアンドレッシングソースもあります。
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| table {
+									|     border: solid 2px red;
+									| }
+									| th {
+									|     border: solid 2px limegreen;
+									| }
+									| td {
+									|     border: solid 2px blue;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| table
+									| 	border solid 2px red
+									| 
+									| th
+									| 	border solid 2px limegreen
+									| 
+									| td
+									| 	border solid 2px blue
+								figcaption （Stylus）
+							hr
+							h4 SAMPLE B：罫線を重ねて表示する
+							p='border-collapseプロパティの値を「collapse」にすると、罫線は重ねて表示されます。罫線の太さとスタイルが同じ場合、<th>と<td>の罫線が上になり、下になった<table>の罫線は見えなくなります。また、<th>と<td>の罫線は左上のものほど上に重なって表示されます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/272-B01.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| table {
+									|     border: solid 2px red;
+									|     border-collapse: collapse;
+									| }
+									| th {
+									|     border: solid 2px limegreen;
+									| }
+									| td {
+									|     border: solid 2px blue;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| table
+									| 	border solid 2px red
+									| 	border-collapse collapse
+									| 
+									| th
+									| 	border solid 2px limegreen
+									| 
+									| td
+									| 	border solid 2px blue
+								figcaption （Stylus）
+							p='IE7以前では罫線の重なり順が逆になり、<table>の罫線が一番上に表示されます。'
+							p='罫線の太さが同じでスタイルが異なる場合、スタイルによって重なり順が決まります。下のサンプルでは<table>の二重線（double）、<td>の実践（solid）、<th>の点線（dotted）の順に表示されます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/272-B02.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| table {
+									|     border: double 4px red;
+									|     border-collapse: collapse;
+									| }
+									| th {
+									|     border: dotted 4px limegreen;
+									| }
+									| td {
+									|     border: solid 4px blue;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| table
+									| 	border double 4px red
+									| 	border-collapse collapse
+									| 
+									| th
+									| 	border dotted 4px limegreen
+									| 
+									| td
+									| 	border solid 4px blue
+								figcaption （Stylus）
+							table.table
+								tr
+									th border-styleの値
+									th 罫線のスタイル
+									th 重なり順
+								tr
+									td double
+									td 二重線
+									td 上
+								tr
+									td solid
+									td 実線
+									td ▲
+								tr
+									td dashed
+									td 破線
+									td │
+								tr
+									td dotted
+									td 点線
+									td │
+								tr
+									td ridge
+									td 立体枠
+									td │
+								tr
+									td outset
+									td 立体枠
+									td │
+								tr
+									td groove
+									td 立体枠
+									td ▼
+								tr
+									td inset
+									td 立体枠
+									td 下
+							p='罫線の太さが異なる場合は、太い方が上になります。下のサンプルでは<table>の6px、<td>の4px、<th>の2pxの順に表示されます。なお、太さとスタイルの両方が異なる場合、太さの違いで順が決まります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/272-B03.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| table {
+									|     border: solid 6px red;
+									|     border-collapse: collapse;
+									| }
+									| th {
+									|     border: solid 2px limegreen;
+									| }
+									| td {
+									|     border: solid 4px blue;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| table
+									| 	border solid 6px red
+									| 	border-collapse collapse
+									| 
+									| th
+									| 	border solid 2px limegreen
+									| 
+									| td
+									| 	border solid 4px blue
+								figcaption （Stylus）
+							p='IE7以前では罫線のスタイルの違いは重なり順に影響しません。また、太さの違いは<td>と<th>の表示には影響しますが、<table>には影響しません。<table>の罫線は常に一番上に表示されます。'
+							hr
+							h4 SAMPLE C：罫線を非表示にする
+							p='borderプロパティの値を「none」または「hidden」にすると、罫線を非表示にすることができます。罫線を重ねていない場合はどちらの値を指定しても表示結果は同じですが、罫線を重ねている場合は処理が変わります。'
+							p='たとえば、罫線を重ねて表示したSAMPLE Bのテーブルで表示を確認していきます。'
+							p='<th>のborderプロパティの値を「none」にすると、緑色の罫線のみが非表示になり、<table>の赤色や<td>の青色の罫線が見えるようになります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/272-C01.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| table {
+									|     border: solid 2px red;
+									|     border-collapse: collapse;
+									| }
+									| th {
+									|     border: none;
+									| }
+									| td {
+									|     border: solid 2px blue;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| table
+									| 	border solid 2px red
+									| 	border-collapse collapse
+									| 
+									| th
+									| 	border none
+									| 
+									| td
+									| 	border solid 2px blue
+								figcaption （Stylus）
+							p='<th>のborderプロパティの値を「hidden」にすると、緑色の罫線だけでなく、重なっているすべての罫線が非表示になります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/272-C02.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| table {
+									|     border: solid 2px red;
+									|     border-collapse: collapse;
+									| }
+									| th {
+									|     border: hidden;
+									| }
+									| td {
+									|     border: solid 2px blue;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| table
+									| 	border solid 2px red
+									| 	border-collapse collapse
+									| 
+									| th
+									| 	border hidden
+									| 
+									| td
+									| 	border solid 2px blue
+								figcaption （Stylus）
+							p='IE7以前は「hidden」の指定に未対応で、「none」と同じ表示になります。'
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

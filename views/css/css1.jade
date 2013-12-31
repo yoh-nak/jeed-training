@@ -52,20 +52,383 @@ include ../head2.jade
 									td Basic Box Model
 							p='CSSでは、HTMLタグでマークアップした部分にボックスを構成します。ボックスはレイアウトをコントロールするための構造を持っていると同時に、CSSで定められたさまざまな機能をプロパティとして持っています。CSSによるページデザインは、この値をコントロールすることで実現することになります。'
 							p='ただし、利用できるプロパティはボックスの種類によって決まります。ボックスの種類はdisplayプロパティの値として指定することができますが、HTML5では要素ごとのdisplayプロパティの値をデフォルトスタイルシートの形で提示しています。'
-							pre(class='prettyprint linenums:1')
-								| &lt;div&gt;
-								| &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
-								| &lt;p&gt;焼きたての手作りパンで新鮮なハム…略…&lt;/p&gt;
-								| &lt;/div&gt;
-							p (jade)
-							pre(class='prettyprint linenums:1')
-								| div
-								| 	h1 HAM SANDWICHES
-								| 	p 焼きたての手作りパンで新鮮なハム…略…
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;div&gt;
+									| &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
+									| &lt;p&gt;焼きたての手作りパンで新鮮なハム…略…&lt;/p&gt;
+									| &lt;/div&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	h1 HAM SANDWICHES
+									| 	p 焼きたての手作りパンで新鮮なハム…略…
+								figcaption （Jade）
+							p='基本的なボックスの種類とdisplayプロパティの値は以下のようになっています。'
+							table.table
+								tr
+									th displayの値
+									th ボックスの種類
+								tr
+									td block
+									td ブロックボックス
+								tr
+									td inline
+									td インラインボックス
+								tr
+									td inline-block
+									td インラインブロックボックス
+								tr
+									td list-item
+									td ブロックとマーカーボックス
+								tr
+									td run-in
+									td ランインボックス
+								tr
+									td
+										| table ／ inline-table ／ table-row-group ／ <br>
+										| table-header-group  ／  table-footer-group ／ <br>
+										| table-row  ／ table-column-group  ／ table-column ／ <br>
+										| table-cell ／ table-caption
+									td テーブル関連のボックス
+								tr
+									td none
+									td ボックスを構成しない
+							p='基本的なボックスの他にも、フレキシブルボックスレイアウトで構成されるフレックスコンテナボックスや、グリッドレイアウトで構成されるグリッドコンテナなど、CSS3によるレイアウト機能の拡張により、構成されるボックスの種類も増えています。'
+							hr
+							h4 ブロックボックス [block]
+							p='displayプロパティの値を「block」にすると、ブロックボックスが構成されます。たとえば、下のサンプルでは<a>のdisplayプロパティの値を「block」にして、ブロックボックスを構成するように指定しています。また、わかりやすくするため、各ボックスの背景はオレンジ色で表示しています。'
+							p='ブロックボックスの前後には改行が入り、ブラウザ画面や親要素の横幅いっぱいに表示されるのが特徴です。高さはボックスのコンテンツに合わせて決まります。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;a href="#"&gt;サンドイッチ&lt;/a&gt;
+									| &lt;a href="#"&gt;ハンバーガー&lt;/a&gt;
+									| &lt;a href="#"&gt;サラダ&lt;/a&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| a(href='#') サンドイッチ
+									| a(href='#') ハンバーガー
+									| a(href='#') サラダ
+								figcaption （Jade）
+							p='ブロックボックスの横幅や高さは、必要に応じてwidthとheightプロパティで指定することも可能です。'
+							a.btn.btn-default(href='../demo/css/sample1/02/052-block.html',target='_blank')
+								i.glyphicon.glyphicon-play
+								| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| a {
+									|     display: block;
+									|     background-color: orange;
+									|     margin: 10px 0;
+									|     padding: 5px;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| a
+									| 	display block
+									| 	background-color orange
+									| 	margin 10px 0
+									| 	padding 5px
+								figcaption （Stylus）
+							hr
+							h4 インラインボックス[inline]
+							p='displayプロパティの値を「inline」にすると、インラインボックスが構成されます。インラインボックスの前後には改行が入らず、前後のインラインボックスと1行につながって表示されるのが特徴です。'
+							p='そのため、下のように指定すると、<a>でマークアップした部分がインラインボックスを構成し、横に並んで表示されます。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| a {
+									|     display: inline;
+									|     background-color: orange;
+									|     …略...
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| a
+									| 	display inline
+									| 	background-color orange
+								figcaption （Stylus）
+							p='インラインボックスの横幅や高さはボックス内のコンテンツによって決まります。widthやheightプロパティはインラインボックスでは機能せず、ボックスの横幅や高さを変更することはできませんので注意が必要です。'
+							a.btn.btn-default(href='../demo/css/sample1/02/052-inline.html',target='_blank')
+								i.glyphicon.glyphicon-play
+								| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| a {
+									|     display: inline;
+									|     width: 150px;
+									|     background-color: orange;
+									|     …略...
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| a
+									| 	display inline
+									| 	width 150px
+									| 	background-color orange
+								figcaption （Stylus）
+							hr
+							h4 インラインブロックボックス [inline-block]
+							p='displayプロパティの値を「inline-block」にすると、インラインブロックボックスが構成されます。インラインブロックボックスはインラインボックスと同じように前後に改行を入れずに表示されますが、ブロックボックスのようにwidthとheightプロパティでボックスの横幅と高さを調節できるのが特徴です。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| a {
+									|     display: inline-block;
+									|     background-color: orange;
+									|     …略...
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| a
+									| 	display inline-block
+									| 	background-color orange
+								figcaption （Stylus）
+							p='たとえば、<a>のdisplayプロパティの値を「inline-block」にすると、下のように各ボックスが1行に並んで表示されます。さらに、widthプロパティで横幅を指定すると、各ボックスの横幅を揃えて表示することができます。'
+							a.btn.btn-default(href='../demo/css/sample1/02/052-inline-block',target='_blank')
+								i.glyphicon.glyphicon-play
+								| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| a {
+									|     display: inline-block;
+									|     width: 150px;
+									|     background-color: orange;
+									|     …略...
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| a
+									| 	display inline-block
+									| 	width 150px
+									| 	background-color orange
+								figcaption （Stylus）
+							p='<img>や<video>のように外部コンテンツを読み込んで表示する要素は「置換要素」と呼ばれ、構成するボックスはインラインブロックボックスと同じように扱われます。ただし、画像のように固有の大きさを持つコンテンツを読み込んだ場合、widthやheightプロパティを指定すると拡大縮小の処理が行われます。HTML5のデフォルトスタイルシートの指針では置換要素のdisplayプロパティの値は指定されておらず、ブラウザに対して「置換要素として扱うこと」が求められています。'
+							hr
+							h4 リスト [list-item]
+							p='displayプロパティの値を「list-item」にすると、ブロックボックスとマーカーボックスが構成され、リスト形式の表示になります。ブロックボックスにはHTMLタグでマークアップした中身が、マーカーボックスにはリストマークが表示されます。'
+							p='マーカーボックスにはブロックボックスの左側のマージンエリアに表示されます。そこで、下のサンプルではmarginプロパティで左マージンの大きさを20ピクセルに指定し、表示スペースを確保するようにしています。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;a href="#"&gt;サンドイッチ&lt;/a&gt;
+									| &lt;a href="#"&gt;ハンバーガー&lt;/a&gt;
+									| &lt;a href="#"&gt;サラダ&lt;/a&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| a(href='#') サンドイッチ
+									| a(href='#') ハンバーガー
+									| a(href='#') サラダ
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| a {
+									|     display: list-item;
+									|     background-color: orange;
+									|     margin: 10px 0 10px 20px;
+									|     padding: 5px;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| a
+									| 	display list-item
+									| 	background-color orange
+									| 	margin 10px 0 10px 20px
+									| 	padding 5px
+								figcaption （Stylus）
+							p='list-style-typeプロパティを利用すると、リストマークの種類を変更することができます。たとえば、「list-style-type:lower-alphabet」と指定すると、小文字のアルファベットで表示されます。'
+							a.btn.btn-default(href='../demo/css/sample1/02/052-list-item.html',target='_blank')
+								i.glyphicon.glyphicon-play
+								| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| a {
+									|     display: list-item;
+									|     list-style-type: lower-alpha;
+									|     background-color: orange;
+									|     …略...
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| a
+									| 	display list-item
+									| 	list-style-type lower-alpha
+									| 	background-color orange
+								figcaption （Stylus）
+							hr
+							h4 ランインボックス [run-in]
+							p='displayプロパティの値を「run-in」にすると、ランインボックスが構成されます。ランインボックスは前後のブロックボックス内にインラインボックスとして挿入されます。'
+							p='このボックスは「追い込み見出し（run-in heading）と呼ばれる形で見出しをレイアウトしたいときに利用することができます。「追い込み見出し」は本文の行頭に見出しを入れてレイアウトするもので、一般的には太字やイタリック体で表示されます。'
+							p='たとえば、下のサンプルは見出しを<h2>で、文章を<p>でマークアップし、背景をオレンジ色と緑色で表示したものです。デフォルトスタイルシートにより、<h2>と<p>のdisplayプロパティの値は「block」になりますので、それぞれブロックボックスを構成します。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+									| &lt;p&gt;焼きたての手作りパンで新鮮なハム…略…&lt;/p&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 HAM SANDWICHES
+									| p 焼きたての手作りパンで新鮮なハム…略…
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     background-color: orange;
+									| }
+									| p {
+									|     background-color: greenyellow;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	background-color orange
+									| 
+									| p
+									| 	background-color greenyellow
+								figcaption （Stylus）
+							p='このとき、<h2>のdisplayプロパティの値を「run-in」に変更すると、<h2>がランインボックスを構成し、後続の<p>のブロックボックス内に挿入されます。'
+							a.btn.btn-default(href='../demo/css/sample1/02/052-run-in.html',target='_blank')
+								i.glyphicon.glyphicon-play
+								| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     background-color: orange;
+									|     display: run-in;
+									| }
+									| p {
+									|     background-color: greenyellow;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	background-color orange
+									| 	display run-in
+									| 
+									| p
+									| 	background-color greenyellow
+								figcaption （Stylus）
+							p='なお、後続がインラインボックスの場合や、floatやpositionプロパティを指定したボックスの場合、ランインボックスはブロックボックスとして扱われ、後続のボックス内に挿入されることはありません。'
+							p='また、FirefoxとIE7以下は「run-in」の指定に未対応です。'
+							hr
+							h4 ボックスを構成しない [none]
+							p='displayプロパティの値を「none」にすると、ボックスが構成されなくなります。このとき、コンテンツ（要素）だけが残るのではなく、要素そのものも存在しないものとして扱われることになります。'
+							p='たとえば、下のサンプルは背景色の異なるブロックボックスを3つ表示したものです。このうち、ピンク色のボックスのdisplayプロパティを「none」にすると、ボックスが構成されなくなり、ピンク色のボックスが存在しないものとしてレイアウトされます。'
+							a.btn.btn-default(href='../demo/css/sample1/02/052-none.html',target='_blank')
+								i.glyphicon.glyphicon-play
+								| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;div id="item01"&gt;サンドイッチ&lt;/div&gt;
+									| &lt;div id="item02"&gt;ハンバーガー&lt;/div&gt;
+									| &lt;div id="item03"&gt;サラダ&lt;/div&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #item01 サンドイッチ
+									| #item02 ハンバーガー
+									| #item03 サラダ
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #item01 {
+									|     background-color: orange;
+									| }
+									| #item02 {
+									|     background-color: pink;
+									|     display: none;
+									| }
+									| #item03 {
+									|     background-color: greenyellow;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #item01
+									| 	background-color orange
+									| 
+									| #item02
+									| 	background-color pink
+									| 	display none
+									| 
+									| #item03
+									| 	background-color greenyellow
+								figcaption （Stylus）
+							p='コンテンツを非表示にしたい場合は、visibilityプロパティを利用します。'
+							hr
+							h4 テーブル関連のボックス
+							p='displayプロパティには、「table」や「table-cell」など、テーブル関連のボックスを構成する値が用意されています。これらを利用すると、<div>などでマークアップしたコンテンツをテーブルの形でレイアウトすることができます。'
+							a.btn.btn-default(href='../demo/css/sample1/02/052-table.html',target='_blank')
+								i.glyphicon.glyphicon-play
+								| デモ
+							hr
+							h4 CSS3で追加されたdisplayプロパティの値
+							p='CSS3ではdisplayプロパティに「compact」や「ruby」といった値が追加され、コンパクトボックスやルビ関連のボックスを構成できるようになっています。コンパクトボックスは後続のブロックボックスのマージンエリアに挿入されるボックスで、ルビ関連のボックスはふりがなを表示するためのボックスです。現在のところ、各ブラウザは未対応です。'
+							table.table
+								tr
+									th displayの値
+									th ボックスの種類
+								tr
+									td compact
+									td コンパクトボックス
+								tr
+									td
+										| ruby ／ ruby-base ／ ruby-text ／ <br>
+										| ruby-base-container ／ ruby-text-container
+									td ルビ関連のボックス
+							hr
+							h4 デフォルトスタイルシート
+							p='Webページにはブラウザによってデフォルトスタイルシートが適用され、必要最小限のデザインを施した形で表示されます。'
+							p='デフォルトスタイルシートの設定に関しては、HTML4用の指針がCSS2.1で、HTML5用の指針がHTML5の仕様書で提示されており、現在、主要なブラウザはHTML5の指針に従ってデフォルトスタイルシートを用意するようになっています。'
 							p
-								a.btn.btn-default(href='../demo/css/sample1/02/052-block.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
+								| HTML5で提示されたデフォルトスタイルシートの指針
+								br
+								a(href='http://www.w3.org/TR/html5/rendering.html',target='_blank') http://www.w3.org/TR/html5/rendering.html
+							p='すべてのブラウザが対応している訳ではありませんが、以下のようにしてブラウザに組み込まれているデフォルトスタイルシートを確認することができます。'
+							p
+								| Webkit系のブラウザでは、下記のページでデフォルトスタイルシートを確認できます。
+								br
+								a(href='http://trac.webkit.org/browser/trunk/Source/WebCore/css/html.css',target='_blank') http://trac.webkit.org/browser/trunk/Source/WebCore/css/html.css
+							p
+								| Firefoxでは、ブラウザのアドレスに「resource://gre-resources/html.css」と入力するか、下記のページでデフォルトスタイルシートを確認できます。
+								br
+								a(href='http://mxr.mozilla.org/mozilla-central/source/layout/style/html.css',target='_blank') http://mxr.mozilla.org/mozilla-central/source/layout/style/html.css
+							hr
+							h4 プロパティの適用先
+							p='CSSでは、要素が構成するボックスの種類によって利用できるプロパティがきまります。'
+							p='あるボックスがどのプロパティを利用できるのかは、仕様書の各プロパティの定義の中で、プロパティの「適用先」に明示されています。ただし、displayプロパティの値で明示しているものばかりではなく、「〜レベル要素」や「〜レベルボックス」といった形で明示される場合も多くなっています。そのため、それらに内包されるdisplayプロパティの値を理解しておく必要があります。'
+							p='また、displayプロパティの値で明示しているものも、「〜要素」という形で明示される場合が多くなっています。たとえば、「インラインブロック要素」と記載されている場合、displayプロパティの値が「inline-block」のものを表しています。'
+							p='ただし、「テーブル要素」はdisplayの値が「table」なのか、「table-*」のものも含むのかなど、曖昧でわかりにくいという指摘もあり、用語や定義を明確にしていこうという動きも出ています。'
+							table.table
+								tr
+									th プロパティの適用先
+									th displayの値
+								tr
+									td ブロックレベルボックス<br>（ブロックレベル要素）
+									td block ／ list-item ／ table ／ table-* ※
+								tr
+									td ブロックコンテナボックス<br>（ブロックコンテナ要素）
+									td block ／ list-item ／ inline-block ／ table-cell ／ table-taption ※
+								tr
+									td インラインレベルボックス<br>（インラインレベル要素）
+									td inline ／ inline-block ／ inline-tableatomic
+								tr
+									td インラインレベルボックス<br>（atomicインラインレベル要素）
+									td inline-block ／ inline-table<br>置換要素の構成するボックス
+							p='※・・・CSS3の草案およびEditor\'s Draftで追加された値。'
+
+	
+
+
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='../js/google-code-prettify/prettify.js')

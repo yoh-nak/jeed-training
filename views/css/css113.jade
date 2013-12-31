@@ -1,0 +1,143 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;横幅と高さの指定
+						.panel-body
+							.alert.alert-info 横幅と高さの指定
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png')
+									td
+										img(src='../images/ic-android.png')
+									td
+										img(src='../images/ic-firefox.png')
+									td
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td
+										img(src='../images/ic-opera.png')
+									td
+										img(src='../images/ic-ie.png')
+							pre
+								| width: 値
+							pre
+								| height: 値
+							p
+								| 値・・・数値 ／ 比率 ／ auto
+							table.table
+								tr
+									td 初期値
+									td auto
+								tr
+									td 継承
+									td なし
+								tr
+									td 適用先
+									td 全要素（<mark>非置換のインライン要素／テーブルの行、列、グループを構成する要素を除く</mark>）
+								tr
+									td 比率
+									td 親要素の横幅 ／ 高さ
+								tr
+									td モジュール
+									td Basic Box Model
+							p='widthとheightプロパティを利用すると、ボックスの横幅と高さを指定することができます。'
+						//-
+							p='テーブルの罫線を重ねずに表示しているときに、empty-cellプロパティを利用すると空セルの表示について指定することができます。'
+							table.table
+								tr
+									th empty-cellの値
+									th 空セルの表示
+								tr
+									td show
+									td 空セルの罫線と背景を表示する。
+								tr
+									td hide
+									td 空セルの罫線と背景を表示しない。
+							hr
+							h4 SAMPLE：空セルの表示
+							p='下のサンプルは罫線を重ねずにテーブルを表示したもので、各セルを緑色の罫線で囲み、背景を黄色に設定しています。また、右下のセルはコンテンツを記述していない空セルとなっています。このとき、empty-cellsプロパティの値は初期値の「show」で処理されるため、空セルにも罫線や背景が表示されます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/276-01.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;table&gt;
+									| &lt;tr&gt;
+									| &lt;th&gt;ハムサンド&lt;/th&gt;
+									| &lt;td&gt;自家製ハムとゴーダチーズに、新鮮なレタスをはさんだサンドイッチです。トマトまたはマヨネーズソースが選べます。&lt;/td&gt;
+									| &lt;/tr&gt;
+									| &lt;tr&gt;
+									| &lt;th&gt;野菜サンド&lt;/th&gt;
+									| &lt;td&gt;&lt;/td&gt;
+									| &lt;/tr&gt;
+									| &lt;/table&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| table
+									| 	tr
+									| 		th ハムサンド
+									| 		td 自家製ハムとゴーダチーズに、新鮮なレタスをはさんだサンドイッチです。トマトまたはマヨネーズソースが選べます。
+									| 	tr
+									| 		th 野菜サンド
+									| 		td
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| table, th, td {
+									|     border: solid 2px limegreen;
+									| }
+									| table {
+									|     background-color: yellow;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| table, th, td
+									| 	border solid 2px limegreen
+									| 
+									| table
+									| 	background-color yellow
+								figcaption （Stylus）
+							p='empty-cellsプロパティの値を「hide」にすると、空セルの罫線と背景は表示されなくなります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/04/276-02.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| table, th, td {
+									|     border: solid 2px limegreen;
+									| }
+									| table {
+									|     background-color: yellow;
+									|     empty-cells: hide;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| table, th, td
+									| 	border solid 2px limegreen
+									| 
+									| table
+									| 	background-color yellow
+									| 	empty-cells hide
+								figcaption （Stylus）
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

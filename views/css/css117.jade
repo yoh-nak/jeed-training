@@ -224,6 +224,23 @@ include ../head2.jade
 									| 	overflow-x scroll
 									| 	overflow-y hidden
 								figcaption （Stylus）
+							p='CSS3では、overflowプロパティで横方向と縦方向の設定を個別に指定する方法も提案されています。その場合、それぞれの値をスペースで区切って指定します。ただし、各ブラウザは未対応です。'
+							pre
+								| overflow: 横方向の表示方法 縦方向の表示方向
+							hr
+							h4 IE6での表示
+							p='overflowプロパティの値が「visible」の場合、IE6ではボックスの大きさの指定が無視され、オーバーフローしたコンテンツをすべて含んだ表示となります。'
+							hr
+							h4 iOSとAndroidでの表示
+							p='overflowプロパティの値を「scroll」または「auto」と指定してインラインフレームの形で表示したコンテンツはiOS4.xでは2本指で、iOS5.x以降やAndroid3.x以降では1本指でスライドすることができます。'
+							p='スクロールバーは標準では表示されませんが、iOS5.x以降では-webkt-overflow-scrollingプロパティの値を「touch」と指定することにより、表示することが可能です。'
+							hr
+							h4 overflow-style
+							p='CSS3で提案されているoverflow-styleプロパティを利用すると、overflowプロパティの値を「scroll」や「auto」にしたときのコンテンツのスクロール方法を指定することができます。たとえば、overflow-styleプロパティの値を「scrollbar」にした場合はスクロールバーを表示し、「move」にした場合はiOSやAndroidのようにコンテンツに直接触れてスライドする形にします。また、「marquee」にした場合、マーキーの機能を利用してコンテンツを自動スクロールします。現在のところ、各ブラウザは未対応です。'
+							hr
+							h4 マーキーの機能
+							p='CSS3でマーキーの機能を有効にするoverflow-styleプロパティは各ブラウザとも未対応となっています。ただし、Webkit系ブラウザはoverflowプロパティで、Operaはdisplayプロパティで「marquee」という値をサポートしており、マーキーの機能を利用することが可能です。利用する場合は値にベンダープレフィックスをつけて記述します。'
+							p='たとえば、下のようにoverflowプロパティの値を「-webkit-marquee」、displayプロパティの値を「-wap-marquee」と指定すると、ボックス内のコンテンツが右から左にスクロールして表示されます。'
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='../js/google-code-prettify/prettify.js')

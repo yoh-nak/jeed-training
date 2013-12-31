@@ -1,0 +1,283 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;フレキシブルボックスレイアウト
+						.panel-body
+							.alert.alert-info フレキシブルボックスレイアウト
+							table.browser-support
+								tr
+									td.not-support
+										img(src='../images/ic-apple.png')
+									td.not-support
+										img(src='../images/ic-android.png')
+									td
+										img(src='../images/ic-firefox.png')
+									td.not-support
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td
+										img(src='../images/ic-opera.png')
+									td.not-support
+										img(src='../images/ic-ie.png')
+							pre
+								| display: フレックスコンテナボックスの種類
+							p
+								| フレックスコンテナボックスの種類・・・flex ／ inline-flex
+							table.table
+								tr
+									td 初期値
+									td displayを参照
+								tr
+									td 継承
+									td -
+								tr
+									td 適用先
+									td -
+								tr
+									td 比率
+									td -
+								tr
+									td モジュール
+									td Flexible Box Layout
+							p='フレキシブルボックスレイアウトの機能を利用すると、段組みのレイアウトを簡単に設定することができます。'
+							p='たとえば、下のように<div id="column01">と<div id="column02">で構成した2つのボックスを2段組みにしたい場合、親要素<div id="container">のdisplayプロパティの値を「flex」または「inline-flex」にします。すると、子要素の2つのボックスが横に並び、高さも揃えて表示されます。'
+							p='このとき、親要素の<div id="container">が構成するボックスは「フレキシブルコンテナボックス」と呼ばれ、displayプロパティの値が「flex」の場合はブロックレベルボックスとして、「inline-flex」の場合はインラインレベルボックスとして扱われます。'
+							p='フレックスコンテナボックスの子要素は「フレックスアイテム」と呼ばれ、横1列に並べて表示されます。ただし以下のプロパティを利用すると、複数行で並べたり、並び順を変更したりすることもできます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/077-01.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;div id="container"&gt;
+									| &lt;div id="column01"&gt;&lt;img src="sandwiches.jpg"…略...&lt;/div&gt;
+									| &lt;div id="column02"&gt;&lt;p&gt;焼きたての手作りパン…略...&lt;/p&gt;&lt;/div&gt;
+									| &lt;/div&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #container
+									| 	#column01
+									| 		img(src='sandwiches.jpg')
+									| 	#column02
+									| 		p 焼きたての手作りパン…略...
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #container {
+									|     border: dotted 2px blue;
+									|     display: -webkit-flex;
+									|     display: -moz-flex;
+									|     display: flex;
+									| }
+									| #column01 {
+									|     background-color: orange;
+									|     width: 200px;
+									| }
+									| 
+									| #column02 {
+									|     background-color: greenyellow;
+									|     width: 400px;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #container
+									| 	border dotted 2px blue
+									| 	display -webkit-flex
+									| 	display -moz-flex
+									| 	display flex
+									| 
+									| #column01
+									| 	background-color orange
+									| 	width 200px
+									| 
+									| #column02
+									| 	background-color greenyellow
+									| 	width 400px
+								figcaption （Stylus）
+							p!='<mark>Firefoxでフレキシブルボックスレイアウトの機能を利用するためには、about:configで「layout.css.flexbox.enabled」をtrueに設定する必要があります。</mark>'
+							table.table
+								tr
+									th displayの値
+									th 構成するフレックスコンテナボックス
+								tr
+									td box
+									td ブロックレベルのフレックスコンテナボックスを構成
+								tr
+									td inline-box
+									td インラインレベルのフレックスコンテナボックスを構成
+						//-
+							p='visibilityプロパティを利用すると、ボックスモデルに従って構成したボックスの表示・非表示を指定することができます。'
+							table.table
+								tr
+									th 値
+									th 表示・非表示
+								tr
+									td visible
+									td 表示する。
+								tr
+									td hidden
+									td 非表示にする。
+								tr
+									td collapse
+									td テーブルの行を表示しない。
+							hr
+							h4 SAMPLE A：ボックスを隠す
+							p='下のサンプルは背景色の異なるボックスを、それぞれ10ピクセルの緑色の罫線で囲んで表示したものです。すべてのボックスが表示されるのは、visibilityプロパティの値が初期値の「visible」で処理されるためです。'
+							p='このうち、ピンク色のボックスのvisibilityプロパティの値を「hidden」にすると、ボックスが非表示になります。ただし、ボックスが表示されているスペースはそのまま残ります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/075-A.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;div id="item01"&gt;サンドイッチ&lt;/div&gt;
+									| &lt;div id="item02"&gt;ハンバーガー&lt;/div&gt;
+									| &lt;div id="item03"&gt;サラダ&lt;/div&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #item01 サンドイッチ
+									| #item02 ハンバーガー
+									| #item03 サラダ
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div {
+									|     border: solid 10px green;
+									| }
+									| #item01 {
+									|     background-color: orange;
+									| }
+									| #item02 {
+									|     background-color: pink;
+									|     visibility: hidden;
+									| }
+									| #item03 {
+									|     background-color: greenyellow;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	border solid 10px green
+									| 
+									| #item01
+									| 	background-color orange
+									| 
+									| #item02
+									| 	background-color pink
+									| 	visibility hidden
+									| 
+									| #item03
+									| 	background-color greenyellow
+								figcaption （Stylus）
+							p='displayプロパティの値を「none」と指定すると、ボックスを構成せず、要素そのものも存在しないものとして扱うことができます。'
+							hr
+							h4 SAMPLE B：テーブルの列や行を隠す
+							p='visibilityプロパティではテーブルの行や列を隠すこともできます。このとき、値を「hidden」と「collapse」のどちらにするかで隠し方が変わります。'
+							p='たとえば、下のサンプルではテーブルを表示したものです。CSS3の:nth-child()セレクタを利用して、奇数行は薄い黄色で、具数行は黄緑色で表示するようにしています。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;table&gt;
+									| &lt;tr id="sand01"&gt;
+									| &lt;th&gt;ハムサンド&lt;/th&gt;
+									| &lt;td&gt;自家製ハムとゴーダチーズに、新鮮なレタス…略…&lt;/td&gt;
+									| &lt;/tr&gt;
+									| &lt;tr id="sand02"&gt;
+									| &lt;th&gt;野菜サンド&lt;/th&gt;
+									| …略...
+									| &lt;/tr&gt;
+									| &lt;/table&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| table
+									| 	tr#sand01
+									| 		th ハムサンド
+									| 		td 自家製ハムとゴーダチーズに、新鮮なレタス…略…
+									| 	tr#sand02
+									| 		th 野菜サンド
+									| 		| …略...
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| table {
+									|     border-collapse: collapse;
+									| }
+									| th, td {
+									|     border: solid 2px gray;
+									| }
+									| tr:nth-child(odd) {
+									|     background-color: lemonchiffon;
+									| }
+									| tr:nth-child(even) {
+									|     background-color: greenyellow;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| table
+									| 	border-collapse collapse
+									| 
+									| th, td
+									| 	border solid 2px gray
+									| 
+									| tr
+									| 	&amp;:nth-child(odd)
+									| 		background-color lemonchiffon
+									| 	&amp;:nth-child(even)
+									| 		background-color greenyellow
+								figcaption （Stylus）
+							p='2行目をマークアップした<tr>のvisibilityプロパティの値を「hidden」にすると、下のように表示スペースを残したまま行が非表示になります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/075-B01.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| …略...
+									| tr#sand02 {
+									|     visibility: hidden;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| …略...
+									| tr#sand02
+									| 	visibility hidden
+								figcaption （Stylus）
+							p='visibilityプロパティの値を「collapse」にすると、下のように表示スペースを含めて非表示にすることができます。なお、Webkit系のブラウザとIE8以下は「collapse」の指定に未対応となっています。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/075-B02.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| …略...
+									| tr#sand02 {
+									|     visibility: collapse;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| …略...
+									| tr#sand02
+									| 	visibility collapse
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

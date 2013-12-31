@@ -116,164 +116,174 @@ include ../head2.jade
 								tr
 									td inline-box
 									td インラインレベルのフレックスコンテナボックスを構成
-						//-
-							p='visibilityプロパティを利用すると、ボックスモデルに従って構成したボックスの表示・非表示を指定することができます。'
+							hr
+							h4 段の追加
+							p='段を増やすには、フレックスコンテナボックスの中にフレックスアイテムを追加します。たとえば、下のように背景をピンク色にした<div id="column03">を3つ目にフレックスアイテムとして追加すると、3段組みのレイアウトになります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/077-02.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;div id="container"&gt;
+									| &lt;div id="column01"&gt;&lt;img src="sandwiches.jpg"…略...&lt;/div&gt;
+									| &lt;div id="column02"&gt;&lt;p&gt;焼きたての手作りパン…略...&lt;/p&gt;&lt;/div&gt;
+									| &lt;div id="column03"&gt;&lt;ul&gt;&lt;li&gt;ハムチーズ…略…&lt;/p&gt;&lt;/div&gt;
+									| &lt;/div&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #container
+									| 	#column01
+									| 		img(src='sandwiches.jpg')
+									| 	#column02
+									| 		p 焼きたての手作りパン…略...
+									| 	#column03
+									| 		ul
+									| 			li ハムチーズ…略…
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #container {
+									|     border: dotted 2px blue;
+									|     display: -webkit-flex;
+									|     display: -moz-flex;
+									|     display: flex;
+									| }
+									| #column01 {
+									|     background-color: orange;
+									|     width: 200px;
+									| }
+									| #column02 {
+									|     background-color: greenyellow;
+									|     width: 400px;
+									| }
+									| #column03 {
+									|     background-color: pink;
+									|     width: 200px;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #container
+									| 	border dotted 2px blue
+									| 	display -webkit-flex
+									| 	display -moz-flex
+									| 	display flex
+									| 
+									| #column01
+									| 	background-color orange
+									| 	width 200px
+									| 
+									| #column02
+									| 	background-color greenyellow
+									| 	width 400px
+									| 
+									| #column03
+									| 	background-color pink
+									| 	width 200px
+								figcaption （Stylus）
+							p='フレックスアイテムのまわりにマージンを挿入すると、格段の間隔を調節することもできます。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| #container div {
+									|     margin-right: 20px;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #container
+									| 	div
+									| 		margin-right 20px
+								figcaption （Stylus）
+							hr
+							h4 主要ブラウザでフレキシブルボックスレイアウトの表示を行う
+							p='フレキシブルボックスレイアウトの仕様は策定家庭で何度も修正が加えられたことから、ブラウザによって異なる時期の仕様に対応した状態となっています。しかし、プロパティ名や値の表記が変わっただけで、機能そのものは大きく変化していません。たとえば、フレックスコンテナボックスを構成する場合、各ブラウザが対応したdisplayプロパティの値は下のようになっています。'
 							table.table
 								tr
-									th 値
-									th 表示・非表示
+									th 仕様
+									th(colspan='2') プロパティ
+									th iOS
+									th Android
+									th Firefox
+									th Safari
+									th Chrome
+									th Opera
+									th IE10
 								tr
-									td visible
-									td 表示する。
+									td 2009年草案
+									td box
+									td inline-box
+									td ○
+									td ○
+									td ○
+									td ○
+									td ○
+									td ×
+									td ×
 								tr
-									td hidden
-									td 非表示にする。
+									td 2012年草案
+									td flexbox
+									td inline-flexbox
+									td ×
+									td ×
+									td ×
+									td ×
+									td ×
+									td ×
+									td ×
+									td ○
 								tr
-									td collapse
-									td テーブルの行を表示しない。
-							hr
-							h4 SAMPLE A：ボックスを隠す
-							p='下のサンプルは背景色の異なるボックスを、それぞれ10ピクセルの緑色の罫線で囲んで表示したものです。すべてのボックスが表示されるのは、visibilityプロパティの値が初期値の「visible」で処理されるためです。'
-							p='このうち、ピンク色のボックスのvisibilityプロパティの値を「hidden」にすると、ボックスが非表示になります。ただし、ボックスが表示されているスペースはそのまま残ります。'
+									td 勧告候補
+									td flex
+									td inline-flex
+									td ×
+									td ×
+									td ○
+									td ×
+									td ○
+									td ○
+									td ×
+							p='※ Opera以外はベンダープレフィックスが必要です。'
+							p='※ Firefoxで勧告候補の仕様を利用するには、about:configで「layout.css.flexbox.enabled」をtrueに設定する必要があります。'
+							p='そのため、古い草案に従った設定も記述しておくと、主要ブラウザ（iOS、Android、Firefox、Safari、Chrome、Opera、IE10以上）でフレキシブルボックスレイアウトの表示を行うことができるようになります。'
+							p='なお、FirefoxやChromeは2009年の草案と最新の勧告候補の両方に対応しています。こうしたブラウザでは最新の仕様で表示するため、勧告候補に従った設定は最後に記述するようにします。'
 							p
-								a.btn.btn-default(href='../demo/css/sample1/02/075-A.html',target='_blank')
+								a.btn.btn-default(href='../demo/css/sample1/02/077-02-compatible.html',target='_blank')
 									i.glyphicon.glyphicon-play
 									| デモ
 							figure
 								pre(class='prettyprint linenums:1')
-									| &lt;div id="item01"&gt;サンドイッチ&lt;/div&gt;
-									| &lt;div id="item02"&gt;ハンバーガー&lt;/div&gt;
-									| &lt;div id="item03"&gt;サラダ&lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #item01 サンドイッチ
-									| #item02 ハンバーガー
-									| #item03 サラダ
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     border: solid 10px green;
+									| #container {
+									|     border: dotted 2px blue;
+									| 
+									|     /* 2009年草案 */
+									|     display: -webkit-box;
+									|     display: -moz-box;
+									| 
+									|     /* 2012年草案 */
+									|     display: -ms-flexbox;
+									|     
+									|     /* 勧告候補 */
+									| 
+									|     display: -webkit-flex;
+									|     display: -moz-flex;
+									|     display: flex;
 									| }
-									| #item01 {
-									|     background-color: orange;
-									| }
-									| #item02 {
-									|     background-color: pink;
-									|     visibility: hidden;
-									| }
-									| #item03 {
-									|     background-color: greenyellow;
-									| }
+									| …略...
 								figcaption （CSS）
 							figure
 								pre(class='prettyprint linenums:1')
-									| div
-									| 	border solid 10px green
-									| 
-									| #item01
-									| 	background-color orange
-									| 
-									| #item02
-									| 	background-color pink
-									| 	visibility hidden
-									| 
-									| #item03
-									| 	background-color greenyellow
+									| #container
+									| 	border dotted 2px blue
+									| 	display -webkit-box
+									| 	display -moz-box
+									| 	display -ms-flexbox
+									| 	display -webkit-flex
+									| 	display -moz-flex
+									| 	display flex
 								figcaption （Stylus）
-							p='displayプロパティの値を「none」と指定すると、ボックスを構成せず、要素そのものも存在しないものとして扱うことができます。'
-							hr
-							h4 SAMPLE B：テーブルの列や行を隠す
-							p='visibilityプロパティではテーブルの行や列を隠すこともできます。このとき、値を「hidden」と「collapse」のどちらにするかで隠し方が変わります。'
-							p='たとえば、下のサンプルではテーブルを表示したものです。CSS3の:nth-child()セレクタを利用して、奇数行は薄い黄色で、具数行は黄緑色で表示するようにしています。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;table&gt;
-									| &lt;tr id="sand01"&gt;
-									| &lt;th&gt;ハムサンド&lt;/th&gt;
-									| &lt;td&gt;自家製ハムとゴーダチーズに、新鮮なレタス…略…&lt;/td&gt;
-									| &lt;/tr&gt;
-									| &lt;tr id="sand02"&gt;
-									| &lt;th&gt;野菜サンド&lt;/th&gt;
-									| …略...
-									| &lt;/tr&gt;
-									| &lt;/table&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| table
-									| 	tr#sand01
-									| 		th ハムサンド
-									| 		td 自家製ハムとゴーダチーズに、新鮮なレタス…略…
-									| 	tr#sand02
-									| 		th 野菜サンド
-									| 		| …略...
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| table {
-									|     border-collapse: collapse;
-									| }
-									| th, td {
-									|     border: solid 2px gray;
-									| }
-									| tr:nth-child(odd) {
-									|     background-color: lemonchiffon;
-									| }
-									| tr:nth-child(even) {
-									|     background-color: greenyellow;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| table
-									| 	border-collapse collapse
-									| 
-									| th, td
-									| 	border solid 2px gray
-									| 
-									| tr
-									| 	&amp;:nth-child(odd)
-									| 		background-color lemonchiffon
-									| 	&amp;:nth-child(even)
-									| 		background-color greenyellow
-								figcaption （Stylus）
-							p='2行目をマークアップした<tr>のvisibilityプロパティの値を「hidden」にすると、下のように表示スペースを残したまま行が非表示になります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/075-B01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| …略...
-									| tr#sand02 {
-									|     visibility: hidden;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| …略...
-									| tr#sand02
-									| 	visibility hidden
-								figcaption （Stylus）
-							p='visibilityプロパティの値を「collapse」にすると、下のように表示スペースを含めて非表示にすることができます。なお、Webkit系のブラウザとIE8以下は「collapse」の指定に未対応となっています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/075-B02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| …略...
-									| tr#sand02 {
-									|     visibility: collapse;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| …略...
-									| tr#sand02
-									| 	visibility collapse
+							p='※ IE11では勧告候補に従った形でフレキシブルボックスレイアウトを利用できるようになるようです。'
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='../js/google-code-prettify/prettify.js')

@@ -5,7 +5,7 @@
   config = require("../config.json");
 
   exports.rwd = function(req, res) {
-    return res.render("rwd/rwd-" + req.params.id + ".jade", {
+    return res.render("rwd/rwd" + req.params.id + ".jade", {
       title: config.title,
       instructor: config.instructor,
       pretty: true

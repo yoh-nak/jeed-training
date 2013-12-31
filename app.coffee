@@ -59,10 +59,12 @@ app.get "/html/:id", html.html #HTML
 
 #app.get('/css:id:format', css.css);
 app.get "/_css/:id", css.css #CSS
-app.get "/rwd-id", rwd.rwd #レスポンシブWEBデザイン
+app.get "/rwd/:id", rwd.rwd #レスポンシブWEBデザイン
 app.get "/jquery/:id", jquery.jquery #jQuery
-app.get "/jqm:id", jqm.jqm
-app.get "/mobile:id:format", mobile.mobile
+#app.get "/jqm:id", jqm.jqm
+app.get "/jqm/:id", jqm.jqm #jQuery Mobile
+#app.get "/mobile:id:format", mobile.mobile
+app.get "/mobile/:id", mobile.mobile
 app.get "/nodejs:id:format", nodejs.nodejs
 
 #app.get('/others:id:format', others.others);

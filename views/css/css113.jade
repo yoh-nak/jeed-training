@@ -51,89 +51,178 @@ include ../head2.jade
 									td モジュール
 									td Basic Box Model
 							p='widthとheightプロパティを利用すると、ボックスの横幅と高さを指定することができます。'
-						//-
-							p='テーブルの罫線を重ねずに表示しているときに、empty-cellプロパティを利用すると空セルの表示について指定することができます。'
-							table.table
-								tr
-									th empty-cellの値
-									th 空セルの表示
-								tr
-									td show
-									td 空セルの罫線と背景を表示する。
-								tr
-									td hide
-									td 空セルの罫線と背景を表示しない。
 							hr
-							h4 SAMPLE：空セルの表示
-							p='下のサンプルは罫線を重ねずにテーブルを表示したもので、各セルを緑色の罫線で囲み、背景を黄色に設定しています。また、右下のセルはコンテンツを記述していない空セルとなっています。このとき、empty-cellsプロパティの値は初期値の「show」で処理されるため、空セルにも罫線や背景が表示されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/276-01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
+							h4 SAMPLE A：横幅の指定
+							p='下のサンプルは<h2>でマークアップした部分に構成されるボックスの背景をオレンジ色にしたものです。デフォルトスタイルシートでは<h2>のwidthプロパティの値は指定されていませんので、初期値の「auto」で処理され、ボックスの横幅はブラウザ画面または親要素に合わせて表示されます。'
 							figure
 								pre(class='prettyprint linenums:1')
-									| &lt;table&gt;
-									| &lt;tr&gt;
-									| &lt;th&gt;ハムサンド&lt;/th&gt;
-									| &lt;td&gt;自家製ハムとゴーダチーズに、新鮮なレタスをはさんだサンドイッチです。トマトまたはマヨネーズソースが選べます。&lt;/td&gt;
-									| &lt;/tr&gt;
-									| &lt;tr&gt;
-									| &lt;th&gt;野菜サンド&lt;/th&gt;
-									| &lt;td&gt;&lt;/td&gt;
-									| &lt;/tr&gt;
-									| &lt;/table&gt;
+									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
 								figcaption （HTML）
 							figure
 								pre(class='prettyprint linenums:1')
-									| table
-									| 	tr
-									| 		th ハムサンド
-									| 		td 自家製ハムとゴーダチーズに、新鮮なレタスをはさんだサンドイッチです。トマトまたはマヨネーズソースが選べます。
-									| 	tr
-									| 		th 野菜サンド
-									| 		td
+									| h2 HAM SANDWICHES
 								figcaption （Jade）
 							figure
 								pre(class='prettyprint linenums:1')
-									| table, th, td {
-									|     border: solid 2px limegreen;
+									| h2 {
+									|      background-color: orange;
 									| }
-									| table {
-									|     background-color: yellow;
-									| }
-								figcaption （CSS）
+								figcaption （CSS） 
 							figure
 								pre(class='prettyprint linenums:1')
-									| table, th, td
-									| 	border solid 2px limegreen
-									| 
-									| table
-									| 	background-color yellow
+									| h2
+									| 	background-color orange
 								figcaption （Stylus）
-							p='empty-cellsプロパティの値を「hide」にすると、空セルの罫線と背景は表示されなくなります。'
+							p='widthプロパティの値を「300px」にすると、300ピクセルの横幅で表示することができます。'
 							p
-								a.btn.btn-default(href='../demo/css/sample1/04/276-02.html',target='_blank')
+								a.btn.btn-default(href='../demo/css/sample1/02/063-A.html',target='_blank')
 									i.glyphicon.glyphicon-play
 									| デモ
 							figure
 								pre(class='prettyprint linenums:1')
-									| table, th, td {
-									|     border: solid 2px limegreen;
-									| }
-									| table {
-									|     background-color: yellow;
-									|     empty-cells: hide;
+									| h2 {
+									|     background-color: orange;
+									|     width: 300px;
 									| }
 								figcaption （CSS）
 							figure
 								pre(class='prettyprint linenums:1')
-									| table, th, td
-									| 	border solid 2px limegreen
-									| 
-									| table
-									| 	background-color yellow
-									| 	empty-cells hide
+									| h2
+									| 	background-color orange
+									| 	width 300px
 								figcaption （Stylus）
+							hr
+							h4 SAMPLE B：高さの指定
+							p='<h2>のheightプロパティの値もデフォルトスタイルシートでは指定されていませんので、初期値「auto」で処理されます。そのため、ボックスの高さはマークアップしたコンテンツに合わせて表示されます。ここでは文字の大きさに合わせた高さになります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/063-B.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 HAM SANDWICHES
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     background-color: orange;
+									| }
+								figcaption （CSS） 
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	background-color orange
+								figcaption （Stylus）
+							p='heightプロパティの値を「100px」にすると、ボックスの高さを100ピクセルにすることができます。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     background-color: orange;
+									|     height: 100px;
+									| } 
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	background-color orange
+									| 	height 100px
+								figcaption （Stylus）
+							hr
+							h4 SAMPLE C：罫線やパディングを挿入したときの大きさ
+							p='widthとheightプロパティが指定するものは、ボックスモデルのコンテンツエリアの横幅と高さで、罫線やパディングの大きさは含みません。たとえば、下のサンプルでは横幅を300px、高さを100pxと指定したボックスに、20pxの罫線とパディングを挿入しています。この場合、罫線とパディングを含んだ横幅は380pxに、高さは180pxになります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/063-C.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 HAM SANDWICHES
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2 {
+									|     background-color: orange;
+									|     width: 300px;
+									|     height:100px;
+									|     padding: 20px;
+									|     border: solid 20px pink;
+									| }
+								figcaption （CSS） 
+							figure
+								pre(class='prettyprint linenums:1')
+									| h2
+									| 	background-color orange
+									| 	width 300px
+									| 	height 100px
+									| 	padding 20px
+									| 	border solid 20px pink
+								figcaption （Stylus）
+							p='CSS3のbox-sizingプロパティを利用すると、widthとheightで指定した横幅と高さに、罫線やパディングの大きさを含めることができます。'
+							p='また、「CSS basic box model」のEditor\'s Draftではwidthプロパティの値を「300px border-box」と指定することで罫線やパティングを含める方法も提案されていますが、各ブラウザ未対応です。'
+							hr
+							h4 ボックスの中身に合わせた大きさで表示する
+							p='「CSS basic box model」のEditor\'s Draftでは、widthとheightプロパティで指定できる値が以下のように提案されており、横幅と高さをボックスの中身に合わせた大きさで表示できるようになります。'
+							p='現在のところ、FirefoxとChromeがwidthプロパティでの指定に対応しており、ベンダープレフィックスを付けて記述します。また、Safariは「fit-content」に相当する「intrinsic」という値のみをサポートしています。'
+							h4 widthプロパティの値を「max-content」にしたときの表示
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/064-fit-content.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| div {
+									|     width: -webkit-max-content;
+									|     width: -moz-max-content;
+									| }
+								figcaption （CSS） 
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	width -webkit-max-content
+									| 	width -moz-max-content
+								figcaption （Stylus）
+							h4 widthプロパティの値を「min-content」にしたときの表示
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/064-min-conent.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| div {
+									|     width: -webkit-min-content;
+									|     width: -moz-min-content;
+									| }
+								figcaption （CSS） 
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	width -webkit-min-content
+									| 	width -moz-min-content
+								figcaption （Stylus）
+							table.table
+								tr
+									th 値
+									th 表示
+								tr
+									td available
+									td 画面または親要素に合わせた大きさで表示。
+								tr
+									td max-content
+									td 自動改行しない場合に最大となる中身の大きさを採用。
+								tr
+									td min-content
+									td 可能なところすべてで自動改行を行った際に、最大となる中身の大きさを採用。
+								tr
+									td fit-content
+									td 画面または親要素に合わせた大きさで表示。ただし、max-content以上、min-content以下の大きさにはなりません。
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='../js/google-code-prettify/prettify.js')

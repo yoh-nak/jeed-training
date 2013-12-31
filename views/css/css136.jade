@@ -1,0 +1,167 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;ボックス（エクスクルージョンボックス）の形状
+						.panel-body
+							.alert.alert-info ボックス（エクスクルージョンボックス）の形状
+							table.browser-support
+								tr
+									td.not-support
+										img(src='../images/ic-apple.png')
+									td.not-support
+										img(src='../images/ic-android.png')
+									td.not-support
+										img(src='../images/ic-firefox.png')
+									td.not-support
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td.not-support
+										img(src='../images/ic-opera.png')
+									td.not-support
+										img(src='../images/ic-ie.png')
+							p IE9以前は未対応。
+							pre
+								| shape-outside: アウトサイドの形状
+							pre
+								| shape-inside: インサイドの形状
+							p
+								| アウトサイドの形状・・・auto ／ 形状 ／ url<br>
+								| インサイドの形状・・・outside-shape ／ auto ／ 形状 ／ url
+							table.table
+								tr
+									td 初期値
+									td
+										| shape-outside・・・auto<br>
+										| shape-inside・・・outside-shape
+								tr
+									td 継承
+									td なし
+								tr
+									td 適用先
+									td
+										| 適用先 shape-outside・・・エクスクルージョン要素 ／ フロート要素<br>
+										| shape-inside・・・ブロックレベル要素 
+								tr
+									td 比率
+									td -
+								tr
+									td モジュール
+									td Exclusions and Shapes
+							p='エクスクルージョン（除外）の機能を利用したレイアウトでは、shape-outsideプロパティを利用してエクスクルージョンボックスの形状を指定することができます。これにより、四角形だけでなく、さまざまな形状のボックスにコンテンツが回り込んだレイアウトを設定できるようになります。たとえば、形状を円にすると下のようなレイアウトになると考えられています。'
+							p='また、エクスクルージョンボックスの形状を指定すると、ボックス内のコンテンツもその形に合わせたレイアウトになります。これは、shape-outsideプロパティを指定すると同時に、ボックス内の形状を指定するshape-insideプロパティの値が初期値の「outside-shape」で処理され、自動的にshape-outsideプロパティと同じ形状で処理される仕組みになっているためです。'
+							figure
+								pre(class='prettyprint linenums:1')
+									div {
+									    position: absolute;
+									    wrap-flow: auto;
+									    shape-outside: circle(400px, 400px, 400px);
+									}
+							figure
+								pre(class='prettyprint linenums:1')
+									div
+										position absolute
+										wrap-flow auto
+										shape-outside circle(400px, 400px, 400px)
+							p='現在のところ、shape-outsideプロパティに対応したブラウザはありませんが、Chromeがshape-outsideプロパティのみを先行してサポートしており、ボックス内のコンテンツに対する形状を指定できるようになっています。'
+							p='なお、shape-outsideプロパティはエクスクルージョンボックスでの利用が前提となっていますが、shape-insideプロパティはブロックレベルボックスで利用することが可能です。'
+							p!='<mark>Chromeで表示を確認するには、chrome://flags/で「試験運用版のWebkit機能を有効にする」を有効にする必要があります。</mark>'
+							hr
+							h4 SAMPLE：形状を指定する
+							p='shape-insideプロパティを利用して、ボックス内のコンテンツに対する形状を指定してみます。そこで、下のように<div>でマークアップした文章を用意します。<div>の構成するボックスは400x400ピクセルの大きさに設定してあります。'
+							p='<div>のshape-insideプロパティの値を「circle(200px, 200px, 200px)にすると、ボックス内のコンテンツに対する形状が半径200ピクセルの円になり、円の形状に合わせて文章がレイアウトされます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/115-01.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| div {
+									|     width: 400px;
+									|     height: 400px;
+									|     overflow: hidden;
+									|     -webkit-shape-inside: circle(200px, 200px, 200px);
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	width 400px
+									| 	height 400px
+									| 	overflow hidden
+									| 	-webkit-shape-inside circle(200px, 200px, 200px)
+								figcaption （Stylus）
+							p='コンテンツエリアの形状は、SVGにおける図形の記述形式に従って指定します。現在のところ、Chromeは四角形、円、多角形の記述に対応しており、以下のような形式で指定します。座標の原点はボックスの左上となります。'
+							p='円の形状を指定するcircle()にはChrome27からの対応となっています。また、SVG形式の画像やアルファチャンネルを持つ画像のURLを指定し、形状として利用する方法も提案されていますが、現在のところChromeは未対応です。'
+							table.table
+								tr
+									th 形状
+									th 記述形式
+								tr
+									td 四角形
+									td rectangle(始点のx座標, 始点のy座標, 横幅, 高さ, 角丸の横方向の半径, 角丸の縦方向の半径)
+								tr
+									td 円
+									td circle(中心点のx座標, 中心点のy座標, 半径)
+								tr
+									td 多角形
+									td polygon(x1座標, y1座標, x2座標, y2座標, …, xn座標, yn座標)
+							p='「-webkit-shape-inside: rectangle(0, 0, 400px, 400px, 100px, 100px)」と指定し、コンテンツエリアを角丸の四角形の形状にしたときの表示。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/115-02.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| div {
+									|     width: 400px;
+									|     height: 400px;
+									|     overflow: hidden;
+									|     -webkit-shape-inside: rectangle(0, 0, 400px, 400px, 100px, 100px);
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	width 400px
+									| 	height 400px
+									| 	overflow hidden
+									| 	-webkit-shape-inside rectangle(0, 0, 400px, 400px, 100px, 100px)
+								figcaption （Stylus）
+							p='「-webkit-shape-inside: polygon(150px, 0, 250px, 0, 400px, 400px, 0, 400px)」と指定し、コンテンツエリアを台形の形状にしたときの表示。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/115-03.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| div {
+									|     width: 400px;
+									|     height: 400px;
+									|     overflow: hidden;
+									|     -webkit-shape-inside: polygon(150px, 0, 250px, 0, 400px, 400px, 0, 400px);
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	width 400px
+									| 	height 400px
+									| 	overflow hidden
+									| 	-webkit-shape-inside polygon(150px, 0, 250px, 0, 400px, 400px, 0, 400px)
+								figcaption （Stylus）
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

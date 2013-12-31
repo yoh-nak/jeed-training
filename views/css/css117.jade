@@ -1,0 +1,233 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;オーバーフローしたコンテンツの表示
+						.panel-body
+							.alert.alert-info オーバーフローしたコンテンツの表示
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png')
+									td
+										img(src='../images/ic-android.png')
+									td
+										img(src='../images/ic-firefox.png')
+									td
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td
+										img(src='../images/ic-opera.png')
+									td
+										img(src='../images/ic-ie.png')
+							p IE6以前は部分対応。
+							pre
+								| overflow: 表示方法
+							p
+								| 表示方法・・visible ／ hidden ／ scroll ／ auto
+							table.table
+								tr
+									td 初期値
+									td visible
+								tr
+									td 継承
+									td なし
+								tr
+									td 適用先
+									td 非置換ブロックレベル要素／非置換インラインブロック要素
+								tr
+									td 比率
+									td -
+								tr
+									td モジュール
+									td Basic Box Model
+							p='overflowプロパティを利用すると、ボックス内にコンテンツが収まらず、オーバーフローしたときの表示方法を指定することができます。'
+							table.table
+								tr
+									th 値
+									th オーバーフローしたコンテンツの表示方法
+								tr
+									td visible
+									td 表示する。
+								tr
+									td hidden
+									td 隠す。
+								tr
+									td scroll
+									td スクロールバーを表示して閲覧できるようにする。
+								tr
+									td auto
+									td 必要に応じてスクロールバーを表示して閲覧できるようにする。
+							hr
+							h4 SAMPLE A：オーバーフローしたコンテンツの表示
+							p='ボックスの横幅と高さをwidthとheightプロパティで指定すると、ボックス内にコンテンツが収まらないケースが出てきます。たとえば、下のサンプルは<div>が構成するボックスの横幅を360pxに、高さを120pxに指定したものです。罫線とパティングを含めると、384x144ピクセルの大きさになります。<div>デマークアップしたコンテンツがこの大きさに収まらない場合、オーバーフローした部分はボックスからはみ出す形で表示されます。これは、overflowプロパティの値が初期値の「visible」で対処されるためです。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/071-A01.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;div&gt;
+									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+									| &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト、…略…&lt;/p&gt;
+									| &lt;/div&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	h2 HAM SANDWICHES
+									| 	p 焼きたての手作りパンで新鮮なハム、トマト、…略…
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div {
+									|     border: solid 2px orange;
+									|     background-color: lemonchiffon;
+									|     width: 360px;
+									|     height: 120px;
+									|     padding: 10px;
+									|     margin: auto;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	border solid 2px orange
+									| 	background-color lemonchiffon
+									| 	width 360px
+									| 	height 120px
+									| 	padding 10px
+									| 	margin auto
+								figcaption （Stylus）
+							p='overlowプロパティの値を「hidden」にすると、オーバーフローした部分を隠すことができます。ただし、隠した部分は閲覧できなくなります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/071-A02.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| div {
+									|     border: solid 2px orange;
+									|     background-color: lemonchiffon;
+									|     width: 360px;
+									|     height: 120px;
+									|     padding: 10px;
+									|     margin: auto;
+									|     overflow: hidden;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	border solid 2px orange
+									| 	background-color lemonchiffon
+									| 	width 360px
+									| 	height 120px
+									| 	padding 10px
+									| 	margin auto
+									| 	overflow hidden
+								figcaption （Stylus）
+							p='オーバーフローしたコンテンツを隠した状態で閲覧できるようにするためには、overflowプロパティの値を「scroll」にします。すると、ボックスにスクロールバーが表示され、インラインフレームの形でコンテンツを閲覧できるようになります。ただし、コンテンツの分量と関係なく、常に縦横にスクロールバーが表示されます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/071-A03.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| div {
+									|     border: solid 2px orange;
+									|     background-color: lemonchiffon;
+									|     width: 360px;
+									|     height: 120px;
+									|     padding: 10px;
+									|     margin: auto;
+									|     overflow: scroll;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	border solid 2px orange
+									| 	background-color lemonchiffon
+									| 	width 360px
+									| 	height 120px
+									| 	padding 10px
+									| 	margin auto
+									| 	overflow scroll
+								figcaption （Stylus）
+							p='スクロールバーを必要に応じて表示するためには、値を「auto」と指定します。すると、コンテンツがオーバーフローしている縦方向のスクロールバーのみが表示されます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/071-A04.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| div {
+									|     border: solid 2px orange;
+									|     background-color: lemonchiffon;
+									|     width: 360px;
+									|     height: 120px;
+									|     padding: 10px;
+									|     margin: auto;
+									|     overflow: auto;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	border solid 2px orange
+									| 	background-color lemonchiffon
+									| 	width 360px
+									| 	height 120px
+									| 	padding 10px
+									| 	margin auto
+									| 	overflow auto
+								figcaption （Stylus）
+							hr
+							h4 SAMPLE B：横方向と縦方向の表示方法を個別に指定する
+							p='overflowプロパティの設定は、横方向と縦方向の設定を個別に指定することもできます。その場合、overflow-xとoverflow-yプロパティを利用します。'
+							p='たとえば、overflow-xプロパティの値を「scroll」、overflow-yプロパティの値を「hidden」にすると、横方向はスクロールバーが表示され、縦方向はスクロールバーを隠した表示となります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/071-B.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| div {
+									|     border: solid 2px orange;
+									|     background-color: lemonchiffon;
+									|     width: 360px;
+									|     height: 120px;
+									|     padding: 10px;
+									|     margin: auto;
+									|     overflow-x: scroll;
+									|     overflow-y: hidden;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	border solid 2px orange
+									| 	background-color lemonchiffon
+									| 	width 360px
+									| 	height 120px
+									| 	padding 10px
+									| 	margin auto
+									| 	overflow-x scroll
+									| 	overflow-y hidden
+								figcaption （Stylus）
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

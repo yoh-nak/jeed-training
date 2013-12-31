@@ -1,0 +1,355 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;フレックスアイテムの可変設定
+						.panel-body
+							.alert.alert-info フレックスアイテムの可変設定
+							table.browser-support
+								tr
+									td.not-support
+										img(src='../images/ic-apple.png')
+									td.not-support
+										img(src='../images/ic-android.png')
+									td
+										img(src='../images/ic-firefox.png')
+									td.not-support
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td
+										img(src='../images/ic-opera.png')
+									td
+										img(src='../images/ic-ie.png') （※）
+							p ※ 部分対応。
+							p IE9以前は未対応。
+							pre
+								| flex: 伸長する際の比率 縮小する際の比率 横幅
+							pre
+								| flex-grow: 伸長する際の比率
+							pre
+								| flex-shrink: 縮小する際の比率
+							pre
+								| flex-basis: 基準の横幅
+							p
+								| 伸長する際の比率 ／ 縮小する際の比率・・・比率<br>
+								| 基準の横幅・・・数値／auto
+							table.table
+								tr
+									td 初期値
+									td 0 1 auto
+								tr
+									td 継承
+									td なし
+								tr
+									td 適用先
+									td フレックスアイテム
+								tr
+									td 比率
+									td -
+								tr
+									td モジュール
+									td Flexible Box Layout
+							p='フレキシブルボックスレイアウトで横幅が変化するリキッドレイアウトを行いたい場合、フレックスアイテムの可変設定を行います。'
+							hr
+							h4 基準の横幅よりも大きくなるようにする
+							p='フレキシブルボックスレイアウトの機能を利用して3段組みにしたサンプルの場合、各フレックスアイテムの横幅はwidthプロパティで200px、400px、200pxに指定してあります。そのため、画面の横幅を変えてもフレックスアイテムの横幅は変化しません。'
+							p='横幅を可変にするためには、下のように設定を記述します。ここでは緑色のフレックスアイテムの横幅を変えるため、<div id="column02">のflexプロパティの値を「1 0 400px」と指定し、伸長する際の比率を「1」、縮小する際の比率を「0」、基準の横幅を「400px」にしています。これで、画面を大きくすると緑色のフレックスアイテムの横幅が変わるようになります。ただし、400ピクセルより小さな横幅になるのは禁止しています。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/079-01.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| …略...
+									| 
+									| #column01 {
+									|     background-color: orange;
+									|     width: 200px;
+									| }
+									| #column02 {
+									|     background-color: greenyellow;
+									|     -webkit-flex: 1 0 400px;
+									|     -moz-flex: 1 0 400px;
+									|     flex: 1 0 400px;
+									| }
+									| #column03 {
+									|     background-color: pink;
+									|     width: 200px;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #column01
+									| 	background-color orange
+									| 	width 200px
+									| 
+									| #column02
+									| 	background-color greenyellow
+									| 	-webkit-flex 1 0 400px
+									| 	-moz-flex 1 0 400px
+									| 	flex 1 0 400px
+									| 
+									| #column03
+									| 	background-color pink
+									| 	width 200px
+								figcaption （Stylus）
+							p='複数のボックスの横幅が変わるようにすることもできます。たとえば、<div id="column03">のflexプロパティの値を「1 0 200px」と指定すると、下のように緑色とピンク色のフレックスアイテムの横幅が変わるようになります。'
+							p='このとき、緑色とピンク色のフレックスアイテムの横幅の変化量は、伸長する際の比率の値によって決まります。ここではそれぞれ「1」と指定していますので、基準の横幅で表示したときにできる余剰スペースを1:1で分割した大きさの分だけ、各フレックスアイテムの横幅が大きくなります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/079-02.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| …略...
+									| 
+									| #column01 {
+									|     background-color: orange;
+									|     width: 200px;
+									| }
+									| #column02 {
+									|     background-color: greenyellow;
+									|     -webkit-flex: 1 0 400px;
+									|     -moz-flex: 1 0 400px;
+									|     flex: 1 0 400px;
+									| }
+									| #column03 {
+									|     background-color: pink;
+									|     -webkit-flex: 1 0 200px;
+									|     -moz-flex: 1 0 200px;
+									|     flex: 1 0 200px;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| …略...
+									| #column01
+									| 	background-color orange
+									| 	width 200px
+									| 
+									| #column02
+									| 	background-color greenyellow
+									| 	-webkit-flex 1 0 400px
+									| 	-moz-flex 1 0 400px
+									| 	flex 1 0 400px
+									| 
+									| #column03
+									| 	background-color pink
+									| 	-webkit-flex 1 0 200px
+									| 	-moz-flex 1 0 200px
+									| 	flex 1 0 200px
+								figcaption （Stylus）
+							hr
+							h4 基準の横幅よりも小さくなるようにする
+							p='画面が小さくなったときに、緑色とピンク色のフレックスアイテムの横幅が変化するように設定します。そこで、<div id="column02">のflexプロパティの値を「0 1 400px」、<div id="column03">のflexプロパティの値を「0 1 200px」にします。ここでは、伸長する際の比率を「0」に、縮小する際の比率を「1」にすることで、画面が狭くなり、基準の横幅を確保できなくなった場合にのみ横幅が変わるようにしています。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/079-03.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| …略...
+									| 
+									| #column01 {
+									|     background-color: orange;
+									|     width: 200px;
+									| }
+									| #column02 {
+									|     background-color: greenyellow;
+									|     -webkit-flex: 0 1 400px;
+									|     -moz-flex: 0 1 400px;
+									|     flex: 0 1 400px;
+									| }
+									| #column03 {
+									|     background-color: pink;
+									|     -webkit-flex: 0 1 200px;
+									|     -moz-flex: 0 1 200px;
+									|     flex: 0 1 200px;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| …略...
+									| #column01
+									| 	background-color orange
+									| 	width 200px
+									| 
+									| #column02
+									| 	background-color greenyellow
+									| 	-webkit-flex 0 1 400px
+									| 	-moz-flex 0 1 400px
+									| 	flex 0 1 400px
+									| 
+									| #column03
+									| 	background-color pink
+									| 	-webkit-flex 0 1 200px
+									| 	-moz-flex 0 1 200px
+									| 	flex 0 1 200px
+								figcaption （Stylus）
+							hr
+							h4 flexプロパティの値を個別に指定する
+							p='flexプロパティの値は個別に指定することもできます。その場合、伸長する際の比率はflex-growプロパティで、縮小する際の比率はflex-shrinkプロパティで、基準の横幅はflex-basisプロパティで指定します。'
+							p='なお、IE10はこれらのプロパティには未対応です。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| #column02 {
+									|     flex: 1 0 400px;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #column02
+									| 	flex 1 0 400px
+								figcaption （Stylus）
+							p ▼
+							figure
+								pre(class='prettyprint linenums:1')
+									| #column02 {
+									|     flex-grow: 1;
+									|     flex-shrink: 0;
+									|     flex-basis: 400px;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #column02
+									| 	flex-grow 1
+									| 	flex-shrink 0
+									| 	flex-basis 400px
+								figcaption （Stylus）
+							hr
+							h4 主要ブラウザでフレックスアイテムを可変にする
+							p='主要ブラウザでフレックスアイテムを可変にするためには、flexプロパティだけでなく、古い草案のbox-flexプロパティを使った設定も記述します。ただし、box-flexプロパティには伸長する際の比率、縮小する機能はありません。可変にする場合は値を「1」と指定します。'
+							p='たとえば、基準の横幅よりも小さくなるようにしたサンプルの場合、下のように指定します。ここではbox-flexプロパティを使用するブラウザのために、max-widthプロパティで基準の横幅を指定しています。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/079-03-compatible.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| #container {
+									|     border: dotted 2px blue;
+									| 
+									|     /* 2009年草案 */
+									|     display: -webkit-box;
+									|     display: -moz-box;
+									| 
+									|     /* 2012年草案 */
+									|     display: -ms-flexbox;
+									|     
+									|     /* 勧告候補 */
+									| 
+									|     display: -webkit-flex;
+									|     display: -moz-flex;
+									|     display: flex;
+									| }
+									| #column01 {
+									|     background-color: orange;
+									|     width: 200px;
+									| }
+									| #column02 {
+									|     background-color: green yellow;
+									|     max-width: 400px;
+									|     -webkit-box-flex: 1;
+									|     -moz-box-flex: 1;
+									|     -ms-flex: 0 1 400px;
+									|     -webkit-flex: 0 1 400px;
+									|     -moz-flex: 0 1 400px;
+									|     flex: 0 1 400px;
+									| }
+									| #column03 {
+									|     background-color: pink;
+									|     max-width: 200px;
+									|     -webkit-box-flex: 1;
+									|     -moz-box-flex: 1;
+									|     -ms-flex: 0 1 200px;
+									|     -webkit-flex: 0 1 200px;
+									|     -moz-flex: 0 1 200px;
+									|     flex: 0 1 200px;
+									| 
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #container
+									| 	border dotted 2px blue
+									| 	display -webkit-box
+									| 	display -moz-box
+									| 	display -ms-flexbox
+									| 	display -webkit-flex
+									| 	display -moz-flex
+									| 	display flex
+									| 
+									| #column01
+									| 	background-color orange
+									| 	width 200px
+									| 
+									| #column02
+									| 	background-color green yellow
+									| 	max-width 400px
+									| 	-webkit-box-flex 1
+									| 	-moz-box-flex 1
+									| 	-ms-flex 0 1 400px
+									| 	-webkit-flex 0 1 400px
+									| 	-moz-flex 0 1 400px
+									| 	flex 0 1 400px
+									| 
+									| #column03
+									| 	background-color pink
+									| 	max-width 200px
+									| 	-webkit-box-flex 1
+									| 	-moz-box-flex 1
+									| 	-ms-flex 0 1 200px
+									| 	-webkit-flex 0 1 200px
+									| 	-moz-flex 0 1 200px
+									| 	flex 0 1 200px
+								figcaption （Stylus）
+							p='なお、IE10は2012年の草案に従ってフレキシブルボックスレイアウトの機能をサポートしていますが、flexプロパティについては勧告候補に従っています。個別に値を指定するflex-grow、flex-shrink、flex-basisプロパティには未対応です。'
+							table.table
+								tr
+									th 仕様
+									th プロパティ
+									th iOS
+									th Android
+									th Firefox
+									th Safari
+									th Chrome
+									th Opera
+									th IE10
+								tr
+									td 2009年草案
+									td box-flex
+									td ○
+									td ○
+									td ○
+									td ○
+									td ○
+									td ×
+									td ×
+								tr
+									td 勧告候補
+									td flex
+									td ×
+									td ×
+									td ○
+									td ×
+									td ○
+									td ○
+									td ○
+							p='※ Opera以外はベンダープレフィックスが必要です。'
+							p='※ Firefoxで勧告候補の仕様を利用するには、about:configで「layout.css.flexbox.enabled」をtrueに設定する必要があります。'
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

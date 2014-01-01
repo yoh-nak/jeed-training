@@ -1,0 +1,464 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;フレキシブルボックスレイアウトの配置
+						.panel-body
+							.alert.alert-info フレキシブルボックスレイアウトの配置
+							table.browser-support
+								tr
+									td.not-support
+										img(src='../images/ic-apple.png')
+									td.not-support
+										img(src='../images/ic-android.png')
+									td
+										img(src='../images/ic-firefox.png')
+									td.not-support
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td
+										img(src='../images/ic-opera.png')
+									td.not-support
+										img(src='../images/ic-ie.png')
+							pre
+								| justify-content: 横方向の配置
+							pre
+								| align-items: 縦方向の配置
+							pre
+								| align-self: フレックスアイテムの縦方向の配置
+							pre
+								| align-content: 複数行の縦方向の配置
+							p
+								| 横方向の配置・・・flex-start ／ flex-end ／ center ／ space-between ／ space-around<br>
+								| 縦方向の配置・・・flex-start ／ flex-end ／ baseline ／ stretch<br>
+								| フレックスアイテムの縦方向の配置・・・auto ／ flex-start ／ flex-end ／ center ／ baseline ／ stretch<br>
+								| 複数行の縦方向の配置・・・flex-start ／ flex-end ／ center ／ space-between ／ space-around ／ stretch
+							table.table
+								tr
+									td 初期値
+									td
+										| justify-content・・・flex-start<br>
+										| align-items、align-content・・・stretch<br>
+										| align-self・・・auto
+								tr
+									td 継承
+									td なし
+								tr
+									td 適用先
+									td
+										| justify-content、align-items・・・フレックスコンテナ<br>
+										| align-self・・・フレックスアイテム<br>
+										| align-content・・・複数行のフレックスコンテナ
+								tr
+									td 比率
+									td -
+								tr
+									td モジュール
+									td Flexible Box Layout
+							p='justify-contentプロパティなどを利用すると、フレキシブルボックスレイアウトの横方向や縦方向の配置を指定することができます。'
+							hr
+							h4 横方向の配置を指定する
+							p='下のサンプルは3つのボックスを横に並べて表示したものです。フレックスコンテナボックスを構成する<div id="container">のjustify-contentプロパティの値を下のように指定すると、横方向の配置が変わります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/085-01-space-between.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;div id="container"&gt;
+									| &lt;div id="column01"&gt;&lt;img src="sandwiches.jpg"…略...&lt;/div&gt;
+									| &lt;div id="column02"&gt;&lt;p&gt;焼きたての手作りパン…略...&lt;/p&gt;&lt;/div&gt;
+									| &lt;div id="column03"&gt;&lt;ul&gt;&lt;li&gt;ハムチーズ…略…&lt;/p&gt;&lt;/div&gt;
+									| &lt;/div&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #container
+									| 	#column01
+									| 		img(src='sandwiches.jpg')
+									| 	#column02
+									| 		p 焼きたての手作りパン…略...
+									| 	#column03
+									| 		ul
+									| 			li ハムチーズ…略…
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #container {
+									|     …略…
+									|     -webkit-justify-content: 〜;
+									|     -moz-justify-content: 〜;
+									|     justify-content: 〜;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #container
+									| 	…略…
+									| 	-webkit-justify-content 〜
+									| 	-moz-justify-content 〜
+									| 	justify-content 〜
+								figcaption （Stylus）
+							table.table
+								tr
+									th justify-contentプロパティの値
+									th 横方向の配置
+								tr
+									td flex-start
+									td 書字方向の開始位置
+								tr
+									td flex-end
+									td 書字方向の終了位置
+								tr
+									td center
+									td 中央
+								tr
+									td space-between
+									td 両端揃え（フレックスアイテムの間に余白を挿入）
+								tr
+									td space-around
+									td 両端揃え（フレックスアイテムの左右に余白を挿入）
+							hr
+							h4 縦方向の配置を指定する
+							p='<div id="container">のalign-itemsプロパティの値を下のように指定すると、縦方向の配置が変わります。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/085-02-center.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| #container {
+									|     …略…
+									|     -webkit-align-items: 〜;
+									|     -moz-align-items: 〜;
+									|     justify-align-items: 〜;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #container
+									| 	…略…
+									| 	-webkit-align-items 〜
+									| 	-moz-align-items 〜
+									| 	justify-align-items 〜
+								figcaption （Stylus）
+							table.table
+								tr
+									th align-itemsプロパティの値
+									th 縦方向の配置
+								tr
+									td flex-start
+									td 書字方向の開始位置
+								tr
+									td flex-end
+									td 書字方向の終了位置
+								tr
+									td center
+									td 中央
+								tr
+									td baseline
+									td ベースライン
+								tr
+									td stretch
+									td ストレッチ
+							p='align-selfプロパティを利用すると、フレックスアイテムごとに縦方向の配置を変えることがでいます。たとえば、<div id="column01">のalign-selfプロパティの値を「center」にすると、オレンジ色のフレックスアイテムを中央に揃えて表示することができます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/085-03.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| #container {
+									|     …略…
+									|     -webkit-align-items: stretch;
+									|     -moz-align-items: stretch;
+									|     justify-align-items: stretch
+									| }
+									| #column01 {
+									|     background-color: orange;
+									|     width: 200px;
+									|     -webkit-align-self: center;
+									|     -moz-align-self: center;
+									|     align-self: center;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #container
+									| 	…略…
+									|     -webkit-align-items stretch
+									| 	-moz-align-items stretch
+									| 	justify-align-items stretch
+									| 
+									| #column01
+									| 	background-color orange
+									| 	width 200px
+									| 	-webkit-align-self center
+									| 	-moz-align-self center
+									| 	align-self center
+								figcaption （Stylus）
+							table.table
+								tr
+									th align-selfプロパティの値
+									th 縦方向の配置
+								tr
+									td auto
+									td align-itemsプロパティの値に従う
+								tr
+									td flex-start
+									td 書字方向の開始位置
+								tr
+									td flex-end
+									td 書字方向の終了位置
+								tr
+									td center
+									td 中央
+								tr
+									td baseline
+									td ベースライン
+								tr
+									td stretch
+									td ストレッチ
+							hr
+							h4 複数行の縦方向の配置を指定する
+							p='複数行でレイアウトしたときの縦方向の配置はalign-contentプロパティの値で決まります。'
+							p='たとえば、複数行のサンプルの場合、フレックスコンテナボックスを構成する<ul>のalign-contentプロパティの値を下のように指定すると、縦方向の配置が変わります。ここではわかりやすくするため、フレックスコンテナボックスの高さを300ピクセルに指定しています。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/085-04.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;ul&gt;
+									| &lt;li&gt;SANDWICHE&lt;/li&gt;
+									| &lt;li&gt;BURGER&lt;/li&gt;
+									| &lt;li&gt;DESSERT&lt;/li&gt;
+									| &lt;li&gt;SALAD&lt;/li&gt;
+									| &lt;li&gt;BAGEL&lt;/li&gt;
+									| &lt;/ul&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| ul
+									| 	li SANDWICHE
+									| 	li BURGER
+									| 	li DESSERT
+									| 	li SALAD
+									| 	li BAGEL
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| ul {
+									|     border: dotted 2px blue;
+									|     height: 300px;
+									|     display: -webkit-flex;
+									|     display: flex;
+									|     -webkit-flex-wrap: wrap;
+									|     flex-wrap: wrap;
+									|     -webkit-align-content: 〜;
+									|     align-content: 〜;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| ul
+									| 	border dotted 2px blue
+									| 	height 300px
+									| 	display -webkit-flex
+									| 	display flex
+									| 	-webkit-flex-wrap wrap
+									| 	flex-wrap wrap
+									| 	-webkit-align-content 〜
+									| 	align-content 〜
+								figcaption （Stylus）
+							table.table
+								tr
+									th align-contentプロパティの値
+									th 縦方向の配置
+								tr
+									td flex-start
+									td 書字方向の開始位置
+								tr
+									td flex-end
+									td 書字方向の終了位置
+								tr
+									td center
+									td 中央
+								tr
+									td space-between
+									td 両端揃え（フレックスアイテムの間に余白を挿入）
+								tr
+									td space-around
+									td 両端揃え（フレックスアイテムの上下に余白を挿入）
+								tr
+									td stretch
+									td ストレッチ
+							p='Firefoxはalign-contentプロパティには未対応です。'
+							hr
+							h4 主要ブラウザにおける配置の指定
+							p='古い草案に対応したブラウザでは、横方向や縦方向の配置を指定するのに下のプロパティで指定できる値は以下のようになっています。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/085-01-center-compatible.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| #container {
+									|     …略…
+									|      -webkit-box-pack: center;
+									|      -moz-box-pack: center;
+									|      -ms-flex-pack: center;
+									| 
+									|      -webkit-justify-content: center;
+									|      -moz-justify-content: center;
+									|      justify-content: center;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #container
+									| 	…略…
+									| 	-webkit-box-pack center
+									| 	-moz-box-pack center
+									| 	-ms-flex-pack center
+									| 	-webkit-justify-content center
+									| 	-moz-justify-content center
+									| 	justify-content center
+								figcaption （Stylus）
+							table.table
+								tr
+									th 仕様
+									th プロパティ
+									th iOS
+									th Android
+									th Firefox
+									th Safari
+									th Chrome
+									th Opera
+									th IE10
+								tr
+									td 2009年草案
+									td box-pack
+									td ○
+									td ○
+									td ○
+									td ○
+									td ○
+									td ×
+									td ×
+								tr
+									td 2012年草案
+									td flex-pack
+									td ×
+									td ×
+									td ×
+									td ×
+									td ×
+									td ×
+									td ○
+								tr
+									td 勧告候補
+									td justify-content
+									td ×
+									td ×
+									td ○
+									td ×
+									td ○
+									td ○
+									td ×
+							p='※ Opera以外はベンダープレフィックスが必要です。'
+							p='※ Firefoxで勧告候補の仕様を利用するには、about:configで「layout.css.flexbox.enabled」をtrueに設定する必要があります。'
+							p
+								| box-packおよびflex-packプロパティの値：
+								br
+								| start ／ end ／ center ／ justify'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/085-02-center-compatible.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| #container {
+									|     …略…
+									|      -webkit-box-align: center;
+									|      -moz-box-align: center;
+									|      -ms-flex-align: center;
+									| 
+									|      -webkit-align-items: center;
+									|      -moz-align-items: center;
+									|      align-items: center;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| #container
+									| 	…略…
+									| 	 -webkit-box-align center
+									| 	-moz-box-align center
+									| 	-ms-flex-align center
+									| 	-webkit-align-items center
+									| 	-moz-align-items center
+									| 	align-items center
+								figcaption （Stylus）
+							table.table
+								tr
+									th 仕様
+									th プロパティ
+									th iOS
+									th Android
+									th Firefox
+									th Safari
+									th Chrome
+									th Opera
+									th IE10
+								tr
+									td 2009年草案
+									td box-align
+									td ○
+									td ○
+									td ○
+									td ○
+									td ○
+									td ×
+									td ×
+								tr
+									td 2012年草案
+									td flex-align
+									td ×
+									td ×
+									td ×
+									td ×
+									td ×
+									td ×
+									td ○
+								tr
+									td 勧告候補
+									td align-items
+									td ×
+									td ×
+									td ○
+									td ×
+									td ○
+									td ○
+									td ×
+							p='※ Opera以外はベンダープレフィックスが必要です。'
+							p='※ Firefoxで勧告候補の仕様を利用するには、about:configで「layout.css.flexbox.enabled」をtrueに設定する必要があります。'
+							p
+								| box-alignおよびflex-alignプロパティの値：
+								br
+								| start ／ end ／ center ／ stretch ／ baseline'
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

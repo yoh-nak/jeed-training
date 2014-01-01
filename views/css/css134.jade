@@ -1,0 +1,89 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;コンテンツの表示範囲
+						.panel-body
+							.alert.alert-info コンテンツの表示範囲
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png')
+									td
+										img(src='../images/ic-android.png')
+									td
+										img(src='../images/ic-firefox.png')
+									td
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td
+										img(src='../images/ic-opera.png')
+									td
+										img(src='../images/ic-ie.png')
+							p IE7以前は未対応。
+							pre
+								| clip: rect(上辺, 右辺, 下辺, 左辺)
+							p
+								| 上辺・・・数値<br>
+								| 下辺・・・数値<br>
+								| 右辺・・・数値<br>
+								| 左辺・・・数値
+							table.table
+								tr
+									td 初期値
+									td auto
+								tr
+									td 継承
+									td なし
+								tr
+									td 適用先
+									td positionプロパティの値が「absolute」または「fixed」の要素
+								tr
+									td 比率
+									td -
+								tr
+									td モジュール
+									td Positioned Layout
+							p='positionプロパティの値を「absolute」または「fixed」にしたボックスの場合、clipプロパティでボックス内のコンテンツの表示範囲を指定することができます。'
+							hr
+							h4 SAMPLE：表示範囲の指定
+							p='下のサンプルは見出しと画像を<div>でマークアップし、<div>のpositionプロパティの値を「absolute」にしたものです。<div>の構成するボックスは500x300ピクセルの大きさに設定しています。'
+							p='このとき、clipプロパティの値を「rect(50px, 450px, 250px, 50px)にすると、ボックス内のコンテンツの表示範囲が次のようになります。rect()ではボックスの上辺と左辺からの距離で表示範囲を指定します。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/112.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| div {
+									|     position: absolute;
+									|     width: 500px;
+									|     height: 300px;
+									|     clip: rect(50px, 450px, 250px, 50px);
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	position absolute
+									| 	width 500px
+									| 	height 300px
+									| 	clip rect(50px, 450px, 250px, 50px)
+								figcaption （Stylus）
+							p='CSS3で提案されているinset()を利用すると、上記サンプルの表示は「clip: inset(50px, 50px, 50px, 50px)」と指定することができます。現在のところ、各ブラウザは未対応です。'
+							p='IE7以前のバージョンに対応するためには、rect()の各値をスペースで区切って記述する必要があります。下位互換のため、主要ブラウザはスペースで区切る記述にも対応しています。'
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

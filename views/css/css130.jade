@@ -1,0 +1,208 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;マルチカラムの改段・改ページ
+						.panel-body
+							.alert.alert-info マルチカラムの改段・改ページ
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png') （※）
+									td
+										img(src='../images/ic-android.png') （※）
+									td.not-support
+										img(src='../images/ic-firefox.png')
+									td
+										img(src='../images/ic-safari.png') （※）
+									td
+										img(src='../images/ic-chrome.png') （※）
+									td
+										img(src='../images/ic-opera.png')
+									td
+										img(src='../images/ic-ie.png')
+							p ※ 部分対応。
+							p IE9以前には未対応。
+							pre
+								| break-before: ボックスの前での処理
+							pre
+								| break-after: ボックスの後での処理
+							pre
+								| break-inside: ボックス内での処理
+							p
+								| ボックスの前での処理・・・auto ／ always ／ avoid ／ left ／ right ／ page ／ column ／ avoid-page ／ avoid-column<br>
+								| ボックスの後での処理・・・auto ／ always ／ avoid ／ left ／ right ／ page ／ column ／ avoid-page ／ avoid-column<br>
+								| ボックス内での処理・・・auto ／ avoid ／ avoid-page ／ avoid-column
+							table.table
+								tr
+									td 初期値
+									td auto
+								tr
+									td 継承
+									td なし
+								tr
+									td 適用先
+									td ブロックレベル要素
+								tr
+									td 比率
+									td -
+								tr
+									td モジュール
+									td Multi-column Layout
+							p='break-beforeなどのプロパティを利用すると、マルチカラムの段組み内のコンテンツに改段や改ページを挿入することができます。改段では表示する段を、改ページでは印刷時に出力するページを変えることが可能です。改ページの処理についてはpage-break-beforeプロパティを参照してください。なお、Webkit系ブラウザは下のプロパティで対応しています。'
+							table.table
+								tr
+									th プロパティ名
+									th Webkitブラウザが対応したプロパティ名
+									th 改段／改ページの挿入位置
+								tr
+									td break-before
+									td -webkit-column-break-before
+									td ボックスの前に挿入。
+								tr
+									td break-after
+									td -webkit-column-break-after
+									td ボックスの後に挿入。
+								tr
+									td break-inside
+									td -webkit-column-break-inside
+									td ボックス内に挿入。
+							hr
+							h4 SAMPLE A：見出しの前に改段を挿入する
+							p='下のサンプルはマルチカラムの機能を利用し、<div>でマークアップしたコンテンツを3段組みで表示したものです。コンテンツには自動的に改段が挿入されますが、これはbreak-before、break-after、break-insideプロパティの値が初期値の「auto」で処理されるためです。'
+							p='しかし、「auto」で改段を挿入すると、段の下部に見出しが取り残されるといった問題が発生します。このようなケースでは、見出しの前に改段を入れるように指定します。そのためには、見出しをマークアップした<h2>ノbreak-beforeプロパティの値を「column」にします。Webkit系のブラウザにも対応する場合は-webkit-column-break-beforeプロパティの値をalways」としてしておきます。'
+							p='なお、IE10では1つ目の<h2>の前にも改段が挿入されてしまうため、ここではセレクタを「h2:nth-of-type(2)」と指定し、2つ目の<h2>の前に改段を挿入するようにしています。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/103-A.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;div&gt;
+									| &lt;h2&gt;おすすめのサンドイッチ&lt;/h2&gt;
+									| &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト、…略…&lt;/p&gt;
+									| &lt;h2&gt;採りたての野菜&lt;/h2&gt;
+									| …略...
+									| &lt;/div&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	h2 おすすめのサンドイッチ
+									| 	p 焼きたての手作りパンで新鮮なハム、トマト、…略…
+									| 	h2 採りたての野菜
+									| 		| …略...
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div {
+									|     width; 800px;
+									|     margin: auto;
+									|     column-count: 2;
+									|     -moz-column-count: 2;
+									|     -webkit-column-count: 2;
+									| }
+									| h2 {
+									|     background-color: greenyellow;
+									|     padding: 5px;
+									| }
+									| h2:nth-of-type(2) {
+									|     break-before: column;
+									|     -webkit-column-break-before: always;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	margin auto
+									| 	column-count 2
+									| 	-moz-column-count 2
+									| 	-webkit-column-count 2
+									| 
+									| h2
+									| 	background-color greenyellow
+									| 	padding 5px
+									| 	&amp;:nth-of-type(2)
+									| 		break-before column
+									| 		-webkit-column-break-before always
+								figcaption （Stylus）
+							p='break-beforeなどのプロパティで指定できる値は下のようになっています。「avoid」と指定すると改段の挿入を禁止することもできます。'
+							table.table
+								tr
+									th 値
+									th 処理
+									th Webkit系ブラウザの対応値
+								tr
+									td auto
+									td 必要に応じて改ページ／改段を挿入。
+									td auto
+								tr
+									td always
+									td 常に改ページを挿入。
+									td -
+								tr
+									td avoid
+									td 改ページ／改段の挿入を禁止。
+									td avoid
+								tr
+									td left
+									td 左ページにくるように改ページを挿入。
+									td -
+								tr
+									td right
+									td 右ページにくるように改ページを挿入。
+									td -
+								tr
+									td page
+									td 常に改ページを挿入。
+									td -
+								tr
+									td column
+									td 常に改段を挿入。
+									td always／left／right
+								tr
+									td avoid-page
+									td 改ページの挿入を禁止。
+									td -
+								tr
+									td avoid-column
+									td 改段の挿入を禁止。
+									td -
+							hr
+							h4 SAMPLE B：文章中の改段を禁止する
+							p='break-insideプロパティを利用すると、ボックス内での改段を禁止することができます。たとえば、下のサンプルではコンテンツを2段組で表示したものです。<p>でマークアップした文章の途中に改段が入り、末尾の1行のみが2段目に表示されています。'
+							p='このとき、<p>のbreak-insideプロパティの値を「avoid」にすると、文章中に改段を入れないようにすることができます。Webkit系のブラウザにも対応する場合は、-webkit-column-break-insideプロパティの値を「avoid」にしておきます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/103-B.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| …略..
+									| p {
+									|     break-inside: avoid;
+									|     -webkit-column-break-inside: avoid;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									…略..
+									p
+										break-inside avoid
+										-webkit-column-break-inside avoid
+								figcaption （Stylus）
+							p='Androidの標準ブラウザは-webkit-column-break-insideプロパティに未対応です。Android版のChromeは対応しています。'
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

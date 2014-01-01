@@ -1,0 +1,117 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;マルチカラムレイアウトの段の区切り線
+						.panel-body
+							.alert.alert-info マルチカラムレイアウトの段の区切り線
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png')
+									td
+										img(src='../images/ic-android.png')
+									td
+										img(src='../images/ic-firefox.png')
+									td
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td
+										img(src='../images/ic-opera.png')
+									td
+										img(src='../images/ic-ie.png')）
+							p IE9以前は未対応。
+							pre
+								| column-rule: スタイル 太さ 色
+							pre
+								| column-rule-style: スタイル
+							pre
+								| column-rule-width: 太さ
+							pre
+								| column-rule-color: 色
+							p
+								| スタイル・・・none ／ hidden ／ dotted ／ dashed ／ solid ／ double ／ groove ／ ridge ／ inset ／ outset<br>
+								| 太さ・・・数値 ／ 比率 ／ thin ／ medium ／ thick<br>
+								| 色・・・色の値
+							table.table
+								tr
+									td 初期値
+									td none medium colorプロパティの値
+								tr
+									td 継承
+									td なし
+								tr
+									td 適用先
+									td マルチカラム要素
+								tr
+									td 比率
+									td -
+								tr
+									td モジュール
+									td Multi-column Layout
+							p='column-ruleプロパティを利用すると、マルチカラムの格段の間に区切り線を表示することができます。区切り線はスタイル、太さ、色の値を指定して表示します。指定できる値はborderプロパティと同じで、column-rule-style、column-rule-width、colunn-rule-colorプロパティで各値を個別に指定することもできます。'
+							pre
+								| column-rule: スタイル※1 太さ※2 色※3
+							p
+								| ※1・・・column-rule-styleプロパティの値<br>
+								| ※2・・・column-rule-widthプロパティの値<br>
+								| ※3・・・column-rule-colorプロパティの値
+							hr
+							h4 SAMPLE：段の間に区切り線を表示する
+							p='下のサンプルはマルチカラムの機能を利用して、2段組みにしたものです。段の間隔はcolumn-gapプロパティで40ピクセルにしてあります。column-ruleプロパティの値を「solid 2px greenyellow」にすると、太さ2ピクセルの緑色の区切り線を表示することができます。区切り線の太さは段の間隔に影響しません。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/02/100.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;div&gt;
+									| &lt;h2&gt;おすすめのサンドイッチ&lt;/h2&gt;
+									| &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト、チーズ、レタス
+									| …略...
+									| &lt;/div&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	h2 おすすめのサンドイッチ
+									| 	p
+									| 		| 焼きたての手作りパンで新鮮なハム、トマト、チーズ、レタス
+									| 		| …略...
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div {
+									|     width: 800px;
+									|     margin: auto;
+									|     column-count: 2;
+									|     column-gap: 40px;
+									|     column-rule: solid 2px greenyellow;
+									|     …略...
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| div
+									| 	width 800px
+									| 	margin auto
+									| 	column-count 2
+									| 	column-gap 40px
+									| 	column-rule solid 2px greenyellow
+								figcaption （Stylus）
+							p='区切り線の段の間隔よりも太くすると、両サイドのコンテンツに重なって表示されます。ただし、Webkit系のブラウザでは区切り線が表示されなくなりますので注意が必要です。'
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

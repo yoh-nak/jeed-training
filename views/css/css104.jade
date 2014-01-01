@@ -1,0 +1,157 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;アウトラインのデザイン
+						.panel-body
+							.alert.alert-info アウトラインのデザイン
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png')
+									td
+										img(src='../images/ic-android.png')
+									td
+										img(src='../images/ic-firefox.png')
+									td
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td
+										img(src='../images/ic-opera.png')
+									td
+										img(src='../images/ic-ie.png') （※）
+							p ※ 部分対応。
+							p IE7以前は未対応。
+							pre
+								| outline: スタイル 太さ 色
+							pre
+								| outline-style: スタイル
+							pre
+								| outline-width: 太さ
+							pre
+								| outline-color: 色
+							pre
+								| outline-offset: オフセット
+							p
+								| スタイル・・・auto ／ none ／ hidden ／ dotted ／ dashed ／ solid ／ double ／ groove ／ ridge ／ inset ／ outset<br>
+								| 太さ・・・数値 ／ 比率 ／ thin ／ medium ／ thick<br>
+								| 色・・・色の値<br>
+								| オフセット・・・数値
+							table.table
+								tr
+									td 初期値
+									td outline: none medium invert / outline-offset: 0
+								tr
+									td 継承
+									td なし
+								tr
+									td 適用先
+									td 全要素
+								tr
+									td 比率
+									td 太さの値：コンテナブロックの横幅に対する比率
+								tr
+									td モジュール
+									td Basic User Interface
+							p='outlineプロパティを利用すると、アウトラインのデザインを指定することができます。アウトラインは罫線の外側に表示される枠線で、リンクやフォーム、ボタンなどの選択を示すために使用されます。ボックスの大きさやまわりのレイアウトに影響することはありません。'
+							p='たとえば、ブラウザでリンクを選択すると、IEでは黒色の点線で、Chromeではオレンジ色の実践で囲んで表示されます。'
+							p='黄緑色の罫線で囲んだリンクを選択してみると、罫線の外側に黒色の点線やオレンジ色の実線が表示されることがわかります。'
+							hr
+							h4 アウトラインのデザインを指定する
+							p='リンクなどを選択したときに表示されるアウトラインのデザインはブラウザによってことなります。そこで、outlineプロパティでアウトラインのデザインを指定し、ブラウザごとの表示を揃えるようにしています。'
+							p='outlineプロパティで指定できる値はborderプロパティと共通したものとなっています。たとえば、下のようにoutlineプロパティの値を「dashed 5px orange」にすると、太さ5ピクセルのオレンジ色の点線でアウトラインが表示されます。なお、リンクを選択したときのデザインはa:focus{〜}で指定します。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/06/328-01.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| &lt;a href="#"&gt;HAM SANDWICHES&lt;/a&gt;
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									| a(href='#') HAM SANDWICHES
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									| a {
+									|     border: solid 4px greenyellow;
+									|     padding 10px 20px;
+									|     background-color: darkgreen;
+									|     color: white;
+									| }
+									| a:focus {
+									|     outline: dotted 5px orange;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| a
+									| 	border solid 4px greenyellow
+									| 	background-color darkgreen
+									| 	color white
+									| 	&amp;:focus
+									| 		outline dotted 5px orange
+								figcaption （Stylus）
+							p='outlineプロパティの設定は、outline-style、outline-width、outline-colorプロパティで個別に指定することもできます。たとえば、下の設定は次のように記述することが可能です。'
+							figure
+								pre(class='prettyprint linenums:1')
+									| a:focus {
+									|     outline-style: dotted;
+									|     outline-width: 5px;
+									|     outline-color: orange;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| a
+									| 	&amp;:focus
+									| 		outline-style dotted
+									| 		outline-width 5px
+									| 		outline-color orange
+							hr
+							h4 アウトラインと罫線の間隔を指定する
+							p='outline-offsetプロパティを利用すると、アウトラインと罫線の間隔を指定することができます。たとえば、値を「10px」にすると、下のようにオレンジ色のアウトラインと黄緑色の罫線との間に10ピクセルの余白を入れることができます。'
+							p
+								a.btn.btn-default(href='../demo/css/sample1/06/328-02.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+							figure
+								pre(class='prettyprint linenums:1')
+									| a {
+									|     border: solid 4px greenyellow;
+									|     padding 10px 20px;
+									|     background-color: darkgreen;
+									|     color: white;
+									| }
+									| a:focus {
+									|     outline: dotted 5px orange;
+									|     outline-offset: 10px;
+									| }
+								figcaption （CSS）
+							figure
+								pre(class='prettyprint linenums:1')
+									| a
+									| 	border solid 4px greenyellow
+									| 	background-color darkgreen
+									| 	color white
+									| 	&amp;:focus
+									| 		outline dotted 5px orange
+									| 		outline-offset 10px
+								figcaption （Stylus）
+							p='Internet Explorerはoutline-offsetプロパティに未対応です。'
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

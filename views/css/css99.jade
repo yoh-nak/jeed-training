@@ -1,0 +1,59 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;図形によるマスク
+						.panel-body
+							.alert.alert-info 図形によるマスク
+							table.browser-support
+								tr
+									td.not-support
+										img(src='../images/ic-apple.png')
+									td.not-support
+										img(src='../images/ic-android.png')
+									td
+										img(src='../images/ic-firefox.png')
+									td.not-support
+										img(src='../images/ic-safari.png')
+									td.not-support
+										img(src='../images/ic-chrome.png')
+									td.not-support
+										img(src='../images/ic-opera.png')
+									td.not-support
+										img(src='../images/ic-ie.png')
+							pre
+								| clip-path: 図形
+							p
+								| 図形・・・形状 ／ url() ／ none
+							table.table
+								tr
+									td 初期値
+									td none
+								tr
+									td 継承
+									td なし
+								tr
+									td 適用先
+									td 全要素
+								tr
+									td 比率
+									td -
+								tr
+									td モジュール
+									td Masking
+							p='clip-pathプロパティを利用すると、図形の形状を指定してコンテンツを切り抜くことができます。図形の形状はエクスクルージョンボックスで定義されたrectangle()やcircle()、polygon()を利用し、下のような形で指定できることになっていますが、各ブラウザは未対応です。'
+							p='また、図形の形状はSVGの<clipPath>で定義した図形で指定することもできます。たとえば、下のサンプルはSVGの<polygon />で記述した星形の図形を<clipPath>でマークアップし、IDを「myclip」と指定したものです。<civ>のclip-pathプロパティの値を「url(#myclip)」にすると、この図形の形でコンテンツを切り抜くことができます。現在のところFirefoxが対応しており、星形の図形は<div>が構成するボックスに合わせて自動的に伸縮されます。'
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

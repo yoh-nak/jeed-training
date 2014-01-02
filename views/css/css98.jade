@@ -1,0 +1,72 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;分割画像によるマスク
+						.panel-body
+							.alert.alert-info 分割画像によるマスク
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png')
+									td.not-support
+										img(src='../images/ic-android.png')
+									td.not-support
+										img(src='../images/ic-firefox.png')
+									td
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td.not-support
+										img(src='../images/ic-opera.png')
+									td.not-support
+										img(src='../images/ic-ie.png')
+							pre
+								| mask-box-image: 画像 分割位置/太さ/表示位置 スタイル
+							p
+								| 画像・・・url() ／ none<br>
+								| 分割位置・・・数値（ピクセルで単位なしで指定） ／ 比率 ／ fill<br>
+								| 太さ・・・数値 ／ 比率 ／ 倍率 ／ auto<br>
+								| 表示位置・・・数値 ／ 倍率<br>
+								| スタイル・・・stretch ／ repeat ／ round
+							table.table
+								tr
+									td 初期値
+									td none 100% / 1 0 stretch
+								tr
+									td 継承
+									td なし
+								tr
+									td 適用先
+									td 全要素
+								tr
+									td(rowspan='3') 比率
+									td 分割位置：画像の大きさに対する比率
+								tr
+
+									td 太さ：ボックスの大きさに対する比率&amp;border-widthに対する倍率
+								tr
+
+									td 表示位置：border-widthに対する倍率
+								tr
+									td モジュール
+									td Masking
+							p='mask-box-imageプロパティを利用すると、マスク用の画像を9分割し、ボックスに合わせてコンテンツを切り抜くことができます。'
+							p='たとえば、下のサンプルは<div>が構成するボックスにサンドイッチの画像と文字を表示したものです。<div>のmask-box-imageプロパティで次のようなマスク画像（maskbox.png）を指定し、各辺から30ピクセルの位置で分割するように指定すると、コンテンツを下のような形で切り抜くことができます。'
+							p='確変（②④⑥⑧）のマスクはボックスの大きさに合わせて伸縮されますが、これはスタイルの値が初期値の「stretch」で処理されるためです。スタイルの値を「repeat」にすると、各辺のマスクを繰り返して使用することができます。'
+							p='なお、mask-box-imageプロパティで指定できる値はborder-imageプロパティと共通したものとなっています。'
+							p='mask-box-imageプロパティの値は、それぞれmask-box-image-source、mask-box-image-slice、mask-box-image-width、mask-box-image-outset、mask-box-image-repeatプロパティで指定できることになっていますが、各ブラウザは未対応です。'
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

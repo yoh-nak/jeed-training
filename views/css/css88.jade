@@ -1,0 +1,69 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;3Dトランスフォームの原点
+						.panel-body
+							.alert.alert-info 3Dトランスフォームの原点
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png')
+									td
+										img(src='../images/ic-android.png')
+									td
+										img(src='../images/ic-firefox.png')
+									td
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td.not-support
+										img(src='../images/ic-opera.png')
+									td
+										img(src='../images/ic-ie.png')
+							p Android2.3.x/IE9以前は未対応。
+							pre
+								| transform: x軸方向の処理 y軸方向の処理 z軸方向の処理
+							p
+								| x軸方向の位置・・・数値 ／ 比率 ／ left ／ center ／ right<br>
+								| y軸方向の位置・・・数値 ／ 比率 ／ top ／ center ／ bottom<br>
+								| z軸方向の位置・・・数値
+							table.table
+								tr
+									td 初期値
+									td 50% 50% 0
+								tr
+									td 継承
+									td なし
+								tr
+									td 適用先
+									td transformプロパティと同じ
+								tr
+									td 比率
+									td ボックスの横幅と高さに対する比率
+								tr
+									td モジュール
+									td Transforms
+							p='transform-originプロパティを利用すると、transformプロパティで3次元の変形処理を行うときのローカル座標系の原点の位置を指定することができます。'
+							h4 x軸方向とy軸方向の位置
+							p='下のサンプルは<span>でマークアップした語句と<img>で挿入した画像を横に並べて表示したものです。<img>のtransformプロパティの値を「rotateY(-45deg)」にすると、y軸にマイナス45度の回転が行われます。このとき、transform-originプロパティの値は初期値の「50% 50% 0」で処理されますので、原点の位置は<img>の構成するボックスの左上からx軸方向に50%、y軸方向に50%、z軸方向に0の位置にセットされます。'
+							p='transform-originプロパティの値を「0% 5% 0」にすると、原点をボックスの左辺の中央にセットすることができます。'
+							p='x軸方向とy軸方向の位置を指定する比率は、下のキーワードに置き換えて指定することも可能です。'
+							p='原点の位置はピクセルで指定することもできます。たとえば、「50px 30px 0」と指定すると、ボックスの左上からx軸方向に50ピクセル、y軸方向に30ピクセルの位置が原点となります。'
+							h4 z軸方向の位置
+							p='下のサンプルは<div>でマークアップした要素をy軸まわりに30度回転したものです。transform-originプロパティの値が初期値の「50% 50% 0」で処理された場合、y軸の負の方向からxy平面を見ると、原点の位置は以下のようになっています。'
+							p='transform-orignプロパティの値を「50% 50% 100px」にした場合、原点がz軸方向に100ピクセルの位置にセットされ、回転が行われます。なお、z軸方向に100ピクセルの位置にセットされ、回転が行われます。なお、z軸方向の位置は比率で指定することはできません。'
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

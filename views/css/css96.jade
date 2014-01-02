@@ -1,0 +1,72 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;ディレイ中と再生後の表示
+						.panel-body
+							.alert.alert-info ディレイ中と再生後の表示
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png')
+									td
+										img(src='../images/ic-android.png')
+									td
+										img(src='../images/ic-firefox.png')
+									td
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td
+										img(src='../images/ic-opera.png')
+									td
+										img(src='../images/ic-ie.png')
+							p Android2.3.x/IE9以前は未対応。
+							pre
+								| animation-fill-mode: 表示
+							p
+								| 表示・・・none ／ forwards ／ backwards ／ both
+							table.table
+								tr
+									td 初期値
+									td none
+								tr
+									td 継承
+									td なし
+								tr
+									td 適用先
+									td 全要素／::before、::after疑似要素
+								tr
+									td 比率
+									td -
+								tr
+									td モジュール
+									td Animations
+							p='animation-fill-modeプロパティを利用すると、アニメーションのディレイ中と再生後の表示を指定することができます。'
+							hr
+							h4 SAMPLE A：ディレイ中と再生後の標準の表示
+							p='下のサンプルは、<h1>のbackground-colorプロパティの値を「gray」にし、背景色を灰色に指定したものです。さらに、animationプロパティの値を「myanim 5s 10s 1」にし、10秒のディレイの後に、背景色が水色、ピンク色、黄色に変化するアニメーションを1回だけ再生するようにしています。'
+							p='ディレイ中と再生後は背景が灰色で表示されますが、これはanimation-fill-modeプロパティの値が初期値の「none」で処理されるためです。'
+							hr
+							h4 SAMPLE B：ディレイ中の表示の指定
+							p='animation-fill-modeプロパティの値を「backwards」にすると、ディレイ中の表示をアニメーションの始点の表示に置き換えることができます。サンプルの場合、ディレイ中の背景が水色で表示されるようになります。'
+							h4 SAMPLE C：再生後の表示の指定
+							p='animation-fill-modeプロパティの値を「forwards」にすると、再生後の表示をアニメーションの終点の表示に置き換えることができます。サンプルの場合、再生後の背景色が黄色で表示されるようになります。'
+							hr
+							h4 SAMPLE D：ディレイ中と再生後の表示の指定
+							p='animation-fill-modeプロパティの値を「both」にすると、ディレイ中は始点の表示に、再生後は終点の表示に置き換わります。サンプルの場合、ディレイ中は水色で、再生後は黄色で表示されるようになります。'
+							p='animation-fill-modeプロパティの設定はanimationプロパティに含めて記述することもできます。たとえば、SAMPLE Dの設定は下のように記述することもできます。'
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

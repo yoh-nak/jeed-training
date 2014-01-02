@@ -1,0 +1,102 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;分割画像によるマスク
+						.panel-body
+							.alert.alert-info 分割画像によるマスク
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png') （※）
+									td
+										img(src='../images/ic-android.png') （※）
+									td
+										img(src='../images/ic-firefox.png') （※）
+									td
+										img(src='../images/ic-safari.png') （※）
+									td
+										img(src='../images/ic-chrome.png') （※）
+									td.not-support
+										img(src='../images/ic-opera.png')
+									td.not-support
+										img(src='../images/ic-ie.png')
+							p ※ 部分対応。
+							pre
+								| mask: マスク
+								| 	表示位置/表示サイズ
+								| 	表示スタイル
+								| 	基点 表示エリア
+							pre
+								| mask-image: マスク
+							pre
+								| mask-position: 表示位置
+							pre
+								| mask-size: 表示サイズ
+							pre
+								| mask-repeat: 表示スタイル
+							pre
+								| mask-origin: 基点
+							pre
+								| mask-clip: 表示エリア
+							p
+								| マスク・・・url() ／ none
+								| 表示位置・・・数値 ／ left ／ center ／ right ／ top ／ bottom
+								| 表示サイズ・・・contain ／ cover ／ auto ／ 数値
+								| 表示スタイル・・・repeat ／ repeat-x ／ repeat-y ／ no-repeat ／ space ／ round
+								| 基点・・・border-box ／ padding-box ／ content-box
+								| 表示エリア・・・border-box ／ padding-box ／ content-box
+							table.table
+								tr
+									td 初期値
+									td mask: none 0% 0% / auto repeat padding-box border-box
+								tr
+									td 継承
+									td なし
+								tr
+									td 適用先
+									td 全要素
+								tr
+									td 比率
+									td -
+								tr
+									td モジュール
+									td Masking
+							p='マスクの機能を利用すると、マスク用の画像やSVGの<mask>で定義した図形を使ってコンテンツを切り抜くことができます。'
+							p='iOS、Android、Chromeはマスク用の画像の指定に、FirefoxはSVGの<mask>で定義した図形の指定に対応しています。'
+							hr
+							h4 SAMPLE A：画像によるマスク
+							p='下のサンプルは<div>で300x150ピクセルのボックスを構成し、サンドイッチの画像と文字を表示したものです。（mask.png）を指定すると、コンテンツを星形に切り抜くことができます。このとき、mask-repeatプロパティが初期値の「repeat」で処理されるため、マスク画像はボックスの大きさに合わせて縦横に繰り返して表示され、複数の星形で切り抜いた表示になります。'
+							p='mask-positionといったマスク関連のプロパティを利用すると、マスク画像の配置や表示サイズなどを調節することができます。たとえば、下のサンプルではマスク画像を<div>が構成するボックスの中央に配置し、表示サイズを300x150ピクセルに、繰り返しをなしに設定しています。'
+							p='また、これらの設定はmaskプロパティで次にようにまとめて指定することもできます。'
+							p='なお、マスク関連のプロパティで指定できる値は、以下の背景画像関連のプロパティと共通したものとなっています。そのため、値の指定方法などについては背景画像関連のプロパティを参照してください。'
+							p='草案で提案されているmask-source-typeというプロパティを利用すると、マスクを「ルミナンスマスク」と「アルファマスク」のどちらとして扱うかを指定できるようになります。'
+							hr
+							h4='SAMPLE B：SVGの<mask>で定義したマスク用の図形によるマスク'
+							p='マスク画像の代わりにSVGの<mask>で定義したマスク用の図形を指定することもできます。'
+							p='たとえば、下のサンプルはSVGの<polygon />で記述した星形の図形を<mask>でマークアップし、IDを「mymask」と指定したものです。<div>のmaskプロパティの値を「url(#mymask)」と指定すると、この図形でコンテンツを切り抜くことができます。現在のところFirefoxが対応しており、星形の図形は<div>が構成するボックスに合わせて自動的に大きさが調節され、コンテンツを切り抜きます。'
+							p='Firefoxはmaskプロパティのみに対応しています。'
+							h4 マスクの種類を指定する
+							p='草案で提案されているmask-typeプロパティを利用すると、<mask>で定義した図形を「ルミナンスマスク」と「アルファマスク」のどちらとして扱うかを指定することができます。たとえば、<polygon />で下のようなグレーの星形の図形を記述し、マスクとして利用したときに表示の違いを確認すると以下のようになります。'
+							p='なお、現在のところFirefoxが対応していますが、表示を確認するためにはabout:configで「layout.css.masking.enabled」をtrueにする必要があります。'
+							hr
+							h4 ルミナンスマスク
+							p='<mask>のmask-typeプロパティの値を「luminance」にすると、ルミナンスマスクとして扱い、図形の輝度を利用してマスクの処理を行います。'
+							hr
+							h4 アルファマスク
+							p='<mask>のmask-typeプロパティの値を「alpha」にすると、図形をアルファマスクとして扱い、図形の形でコンテンツを切り抜きます。'
+							p='※ mask-typeプロパティを利用できるのはSVGの<mask>のみとなっていますので注意が必要です。'
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

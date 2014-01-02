@@ -1,0 +1,101 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;トランジション
+						.panel-body
+							.alert.alert-info トランジション
+							table.browser-support
+								tr
+									td
+										img(src='../images/ic-apple.png')
+									td
+										img(src='../images/ic-android.png')
+									td
+										img(src='../images/ic-firefox.png')
+									td
+										img(src='../images/ic-safari.png')
+									td
+										img(src='../images/ic-chrome.png')
+									td
+										img(src='../images/ic-opera.png')
+									td
+										img(src='../images/ic-ie.png')
+							p IE9以前は未対応。
+							pre
+								| transition: 再生時間 プロパティ 補間方法 ディレイ
+							pre
+								| transition-duration: 再生時間
+							pre
+								| transition-property: プロパティ
+							pre
+								| transition-timing-function: 補間方法
+							pre
+								| transition-delay: ディレイ
+							p
+								| プロパティ・・・none ／ all ／ プロパティ名<br>
+								| 再生時間・・・時間<br>
+								| 補間方法・・・ease ／ linear ／ ease-in ／ ease-out ／ ease-in-out ／ cubic-beier()<br>
+								| ディレイ・・・時間
+							table.table
+								tr
+									td 初期値
+									td transition: 0s all ease 0s
+								tr
+									td 継承
+									td なし
+								tr
+									td 適用先
+									td 全要素／::before、::after疑似要素
+								tr
+									td 比率
+									td -
+								tr
+									td モジュール
+									td Transitions
+							p='transition-durationなどのプロパティを利用すると、「カーソルを重ねる」といった動作をきっかけに、始点と終点の2点間のデザインをアニメーションを変化させることができます。また、各プロパティの設定はtransitionプロパティでまとめて設定することもできます。'
+							hr
+							h4 SAMPLE A：アニメーションの設定
+							p='アニメーションを設定するには、始点と終点のデザインの指定が必要です。たとえば、カーソルを重ねたときにリンクのデザインをアニメーションで変化させる場合、カーソルを重ねていないときの表示を始点に、カーソルを重ねたときの表示を終点にします。そのため、始点のデザインはa{〜}で、終点()のデザインはa:hover{〜}で指定します。'
+							p='始点と終点の間をアニメーションで変化させるためには、<a>のtransition-durationプロパティで再生時間を指定します。たとえば、「1s」と指定してリンクにカーソルを重ねると、1秒間で文字サイズが24から36ピクセルに、背景色が水色から黄色に変化します。'
+							p='アニメーションの再生後、カーソルを重ねたままにしておくと、リンクは終点のデザインで表示されたままとなります。リンクからカーソルを外すと、アニメーションの再生は解除され、始点の表示に変わります。'
+							h4 SAMPLE B：特定のプロパティのみをアニメーションで表示
+							p='SAMPLE Aでは始点と終点で指定したすべてのプロパティ（font-sizeとbackground-color）の設定がアニメーションの対象となっています。これは、transition-propertyプロパティの値が初期値の「all」で処理されるためです。'
+							p='特定のプロパティのみをアニメーションの対象とする場合は、transition-propertyの値でプロパティ名を指定します。たとえば、「background-color」を指定すると、背景色のみがアニメーションで変化すりょうになります。なお、文字の大きさはカーソルを重ねた瞬間に変わり、アニメーションによる表示は行われません。'
+							hr
+							h4 SAMPLE C：補間方法
+							p='transition-timing-functionプロパティでは、始点と終点の間の変化の仕方を調節することができます。この調節を「補間」や「イージング」と呼び、どのように変化させるかは下のベジエ曲線で表します。主要な変化のパターンは以下のキーワードで指定できるようになっており、より細かく調節したい場合にはcubic-bezier()関数でベジエ曲線のP1とP2の座標を指定します。'
+							p='SAMPLEAの場合、transition-timing-functionプロパティの値は初期値の「ease」で処理され、最初と最後が滑らかに変化します。これを一定の速度で変化させる場合、transition-timing-functionプロパティの値を「linear」にします。'
+							hr
+							h4 SAMPLE D：ディレイ
+							p='transition-delayプロパティでは、指定した時間の分だけアニメーションの再生時間を遅らせることができます。たとえば、SAMPLE Aの再生を5秒遅らせる場合は、値を「5s」にします。'
+							p='なお、transitionプロパティを利用してアニメーション関連の設定をまとめて指定する場合、各値は順不同で指定することができますが、再生時間とディレイの値については、再生時間の指定を先に記述する必要があります。たとえば、下のサンプルのtransition-durationとtransition-delayプロパティの値は次のように指定します。'
+							hr
+							h4 SAMPLE E：複数の設定の指定
+							p='トランジション関連のプロパティでは、複数の設定をカンマで区切って指定することができます。たとえば、下のサンプルでは文字サイズと背景色に対し、それぞれ個別にアニメーションの設定を行っています。'
+							p='まず、文字サイズについてはアニメーションの対象とするプロパティを「font-size」、再生時間を「1s」、ディレイを「0」と指定し、1秒間でサイズが変化するようにしています。次に、背景色については対象とするプロパティを「background-color」、再生時間を「1s」、ディレイを「1s」と指定し、1秒間のディレイの後に、1秒間で色が変化するようにしています。'
+							p='これにより、カーソルを重ねると最初の1秒間で文字サイズが変わり、その後の1秒間で背景色が変化するアニメーションが再生されます。'
+							p='なお、transitionプロパティでも複数の設定をカンマで区切って指定することができます。たとえば、下のサンプルの設定は以下のようにまとめて記述することができます。'
+							hr
+							h4 :forcusを利用したトランジションの設定
+							p='トランジションの機能を利用したアニメーションでは、:hoverと同じように、:activeや:focusなどを利用することもできます。'
+							p='たとえば、<input>で構成したフォームのテキストボックスを選択したときに、背景色を変化させたい場合、始点のデザインをinput{〜}で、終点のデザインをinput:focu{〜}で指定します。下のサンプルでは、背景色が白色から黄色に変わるようにしています。'
+							hr
+							h4 iOSとAndroidにおけるアニメーションの再生
+							p='iOSとAndroidのブラウザもトランジションの機能に対応しており、アニメーションを再生することができます。ただし、スクリーンをタッチして操作するという性質上、iOSとAndroidのブラウザでは:hoverの認識されるタイミングが異なっています。'
+							p='iOSとAndroidのブラウザで「リンクをタッチしたとき」をきっかけにアニメーションを再生するためには、下のように<a>にontouchstart属性を指定します。'
+							p='また、ブラウザ独自のハイライト処理やポップアップ表示を無効にするため、-webkit-touch-calloutや-webkit-tap-highlight-colorプロパティの指定も行っています。'
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

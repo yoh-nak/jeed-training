@@ -11,6 +11,8 @@ include ../head2.jade
 							i.glyphicon.glyphicon-book
 							| &nbsp;Expressのインストール
 						.panel-body
+							p ※ 先にnode.jsをインストールしておく必要があります。
+							hr
 							p ①まずグローバルにExpressをインストールします。
 							pre
 								| (sudo )npm install -g expres
@@ -61,9 +63,10 @@ include ../head2.jade
 							p ④サーバーを起動します。（80番ポートを使用する場合はsudoが必要です。）
 							pre
 								| node app
-							//-
-								figure
-									pre(class='prettyprint linenums:1')
+							hr
+							p ※ CoffeeScriptで記述する場合はapp.jsをapp.coffeeに変換しておきましょう。（js2coffeeの使い方参照。）
+							pre
+								| js2coffee -it app.js &gt; app.coffee
 		.footer=title
 		script(src='http://code.jquery.com/jquery.js')
 		script(src='js/google-code-prettify/prettify.js')

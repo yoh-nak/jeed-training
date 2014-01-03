@@ -1,0 +1,73 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;Expressのインストール
+						.panel-body
+							p ①まずグローバルにExpressをインストールします。
+							pre
+								| (sudo )npm install -g expres
+							hr
+							p ②次にローカルにExpressのスケルトンコードを作成します。このとき、オプションで指定したnpmパッケージがpackage.jsonに記述されます。
+							p: u Jadeテンプレートエンジンを指定してインストール
+							pre
+								| express myapp
+							p: u EJSテンプレートエンジンを指定してインストール
+							pre
+								| express myapp -e
+							pre
+								| express myapp --ejs
+							p: u jshtmlテンプレートエンジンを指定してインストール
+							pre
+								| express myapp -J
+							pre
+								| express myapp --jshtml
+
+							p: u hoganテンプレートエンジンを指定してインストール
+							pre
+								| express myapp -H
+							pre
+								| express myapp --hogan
+							p: u LESS CSSエンジンを指定してインストール
+							pre
+								| express -c less
+							pre
+								| express --css less
+							p: u Stylus CSSエンジンを指定してインストール
+							pre
+								| express -c stylus
+							pre
+								| express -css stylus
+							p: u セッションサポートを追加してインストール
+							pre
+								| express myapp -s
+							pre
+								| express myapp --sessions
+							p: u まとめて指定してインストール（例：Jade、Stylus、セッションサポート）
+							pre
+								| express myapp -sc stylus
+							hr
+							p ③package.jsonに記述されたnpmパッケージをローカルにインストールします。
+							pre
+								| npm install
+							hr
+							p ④サーバーを起動します。（80番ポートを使用する場合はsudoが必要です。）
+							pre
+								| node app
+							//-
+								figure
+									pre(class='prettyprint linenums:1')
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='js/bootstrap.min.js')
+		script(src='coffee/list-counter.js')

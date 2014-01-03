@@ -40,8 +40,6 @@ app.use require("stylus").middleware(
 )
 ###
 
-
-
 #CoffeeScript動的コンパイル
 ###
 app.use require("connect-coffee-script")(

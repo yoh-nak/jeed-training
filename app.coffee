@@ -49,31 +49,17 @@ app.use require("connect-coffee-script")(
 app.use express.errorHandler()	if "development" is app.get("env")
 
 #ルーティングGET送信
-
-#単独
 app.get "/", routes.index
-#app.get "/users", user.list
-
-#app.get('/htmltag:id:format', html.html);
 app.get "/html/:id", html.html #HTML
-
-#app.get('/css:id:format', css.css);
 app.get "/_css/:id", css.css #CSS
 app.get "/rwd/:id", rwd.rwd #レスポンシブWEBデザイン
 app.get "/jquery/:id", jquery.jquery #jQuery
-#app.get "/jqm:id", jqm.jqm
 app.get "/jqm/:id", jqm.jqm #jQuery Mobile
-#app.get "/mobile:id:format", mobile.mobile
 app.get "/mobile/:id", mobile.mobile
-app.get "/nodejs:id:format", nodejs.nodejs
-
-#app.get('/others:id:format', others.others);
+#app.get "/nodejs:id:format", nodejs.nodejs
+app.get "/nodejs/:id", nodejs.nodejs
 app.get "/others/:id", others.others
-
-#app.get('/diary:id:format', diary.diary);
 app.get "/diary/:id", diary.diary #日誌
-
-#JavaScript系
 app.get "/js-:id", js.js #JavaScript基礎
 app.get "/webapi-:id", js.webapi #WebAPI
 app.get "/html5api-:id", js.html5
@@ -81,8 +67,6 @@ app.get "/canvas:id:format", js.canvas
 app.get "/enchant-:id", js.enchant
 app.get "/library:id:format", js.library
 app.get "/jsrecipe-:id", js.recipe
-
-#資料系
 app.get "/material-:id", material.material
 app.get "/cordova:id:format", material.cordova
 app.get "/material/git-:id", material.git

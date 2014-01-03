@@ -91,7 +91,7 @@
 
   app.get("/mobile/:id", mobile.mobile);
 
-  app.get("/nodejs:id:format", nodejs.nodejs);
+  app.get("/nodejs/:id", nodejs.nodejs);
 
   app.get("/others/:id", others.others);
 

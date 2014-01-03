@@ -60,18 +60,26 @@
 
   app.use(app.router);
 
+  app.use(require("stylus").middleware(__dirname + "/public"));
+
   app.use(express["static"](path.join(__dirname, "public")));
 
-  app.use(require("stylus").middleware({
-    src: __dirname + "/views",
-    dest: __dirname + "/public"
-  }));
+  /*
+  app.use require("stylus").middleware(
+  	src: __dirname + "/views"
+  	dest: __dirname + "/public"
+  )
+  */
 
-  app.use(require("connect-coffee-script")({
-    src: __dirname + "/views",
-    dest: __dirname + "/public",
-    bare: true
-  }));
+
+  /*
+  app.use require("connect-coffee-script")(
+  	src: __dirname + "/views"
+  	dest: __dirname + "/public"
+  	bare: true
+  )
+  */
+
 
   if ("development" === app.get("env")) {
     app.use(express.errorHandler());
@@ -110,17 +118,17 @@
   app.get("/library:id:format", js.library);
 
   app.get("/jsrecipe-:id", js.recipe);
-  
+
   app.get("/material-:id", material.material);
 
   app.get("/cordova:id:format", material.cordova);
 
   app.get("/material/git-:id", material.git);
-  
+
   app.get("/material/vagrant-:id", material.vagrant);
 
   app.post("/xml-:id", js.webapiXML);
-  
+
   http.createServer(app).listen(app.get("port"), function() {
     return console.log("Express server listening on port " + app.get("port"));
   });

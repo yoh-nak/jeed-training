@@ -4,6 +4,10 @@
 
   define = require("../models/define");
 
+  require("jade").filters.code = function(block) {
+    return block.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  };
+
   exports.js = function(req, res) {
     return res.render("js/js-" + req.params.id, {
       title: define.title,

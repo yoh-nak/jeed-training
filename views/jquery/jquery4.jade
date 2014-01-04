@@ -1,0 +1,59 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;実行される順番
+						.panel-body
+							figure
+								pre(class='prettyprint linenums:1')
+									:code
+										<!DOCTYPE html>
+										<html lang="ja-JP">
+										<head>
+										<meta charset="utf-8">
+										<title></title>
+										<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+										<script src="script.js"></script>
+										</head>
+										<body>
+										テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+										</body>
+										</html>
+								figcaption （HTML）
+							figure
+								pre(class='prettyprint linenums:1')
+									:code
+										doctype
+										html(lang='ja-JP')
+											head
+												meta(charset='utf-8')
+												title
+												script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+												script(src='script.js')
+											body
+												| テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+								figcaption （Jade）
+							figure
+								pre(class='prettyprint linenums:1')
+									:code
+										window.alert('Hello World!');
+								figcaption （JavaScript）
+							figure
+								pre(class='prettyprint linenums:1')
+									:code
+										window.alert 'Hello World!'
+								figcaption （CoffeeScript）
+		.footer=title
+		script(src='http://code.jquery.com/jquery.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

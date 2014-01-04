@@ -1,0 +1,132 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;click()メソッド
+						.panel-body
+							p h1要素、p要素、input要素、img要素をクリックしてalert()を実行してみましょう。
+							p
+								a.btn.btn-default(href='../demo/jquery/exercise4/index1.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+								button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+									i.glyphicon.glyphicon-question-sign
+									| &nbsp;解答例
+							#demo.collapse.out
+								figure
+									pre(class='prettyprint linenums:1')
+										:code
+											<!DOCTYPE html>
+											<html lang="ja-JP">
+											<head>
+											<meta charset="UTF-8">
+											<title></title>
+											<link rel="stylesheet" href="style.css">
+											</head>
+											<body>
+												<h1>h1要素</h1>
+												<p>p要素</p>
+												<input type="button" value="input要素">
+												<img src="200x200.png">
+												<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+												<script src="script.js"></script>
+											</body>
+											</html>
+									figcaption （HTML）
+								figure
+									pre(class='prettyprint linenums:1')
+										:code
+											doctype
+											html(lang='ja-JP')
+												head
+													meta(charset='UTF-8')
+													title
+													link(rel='stylesheet',href='style.css')
+												body
+													h1 h1要素
+													p p要素
+													input(type='button', value='input要素')
+													img(src='200x200.png')
+													script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+													script(src='script.js')
+								figure
+									pre(class='prettyprint linenums:1')
+										:code
+											h1,p,input,img{
+												width:200px;
+												height:200px;
+												line-height:200px;
+												text-align:center;
+												font-size:20px;
+												cursor:pointer;
+												border:1px solid grey;
+												margin:10px;
+												display:block;
+											}
+									figcaption （CSS）
+								figure
+									pre(class='prettyprint linenums:1')
+										:code
+											size()
+												200px
+
+											h1,p,input,img
+												width size()
+												height size()
+												line-height size()
+												text-align center
+												font-size size() * 0.1
+												cursor pointer
+												border 1px solid grey
+												margin 10px
+												display block
+									figcaption （Stylus）
+								figure
+									pre(class='prettyprint linenums:1')
+										:code
+											$('h1').click(function(){
+												alert('h1要素がクリックされました');
+											});
+											$('p').click(function(){
+												alert('p要素がクリックされました');
+											});
+											$('input').click(function(){
+												alert('input要素がクリックされました');
+											});
+											$('img').click(function(){
+												alert('img要素がクリックされました');
+											});
+									figcaption （JavaScript）
+								figure
+									pre(class='prettyprint linenums:1')
+										:code
+											$('h1').click ->
+												window.alert 'h1要素がクリックされました'
+												return
+
+											$('p').click ->
+												window.alert 'p要素がクリックされました'
+												return
+
+											$('input').click ->
+												alert 'input要素がクリックされました'
+												return
+
+											$('img').click ->
+												window.alert 'img要素がクリックされました'
+												return
+									figcaption （CoffeeScript）
+		.footer=title
+		script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

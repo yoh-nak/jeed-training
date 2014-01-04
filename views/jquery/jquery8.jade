@@ -9,15 +9,15 @@ include ../head2.jade
 					.panel.panel-primary
 						.panel-heading
 							i.glyphicon.glyphicon-book
-							| &nbsp;click()メソッド
+							| &nbsp;text()メソッド
 						.panel-body
-							p jQueryのclick()メソッドはclickイベント発生時の処理を記述することができます。
+							p text()メソッドは、$メソッドで指定した要素のコンテンツを、text()メソッドの引数で指定した文字列に変更します。
 							p
-								a.btn.btn-default(href='../demo/jquery/exercise3/index1.html',target='_blank')
+								a.btn.btn-default(href='../demo/jquery/exercise5/index1.html',target='_blank')
 									i.glyphicon.glyphicon-play
 									| デモ
 								| 
-								a.btn.btn-default(href='http://api.jquery.com/click/',target='_blank')
+								a.btn.btn-default(href='http://api.jquery.com/text/',target='_blank')
 									i.glyphicon.glyphicon-info-sign
 									| &nbsp;参考
 							figure
@@ -28,14 +28,14 @@ include ../head2.jade
 										<head>
 										<meta charset="UTF-8">
 										<title></title>
-										<link rel="stylesheet" href="style.css">
 										</head>
 										<body>
-										<div>
-										テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-										</div>
-										<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-										<script src="script.js"></script>
+											<p id="first">変更前</p>
+											<p>
+											<input type="button" value="変更">
+											</p>
+											<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+											<script src="script.js"></script>
 										</body>
 										</html>
 								figcaption （HTML）
@@ -47,38 +47,25 @@ include ../head2.jade
 											head
 												meta(charset='UTF-8')
 												title
-												link(rel='stylesheet', href='style.css')
 											body
-												div
-													| テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+												p#first 変更前
+												p
+													input(type='button', value='変更')
 												script(src='http://code.jquery.com/jquery-1.10.2.min.js')
 												script(src='script.js')
 								figcaption （Jade）
 							figure
 								pre(class='prettyprint linenums:1')
 									:code
-										div{
-											cursor:pointer;
-										}
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									:code
-										div
-											cursor pointer
-								figcaption （Stylus）
-							figure
-								pre(class='prettyprint linenums:1')
-									:code
-										$('div').click(function(){
-											window.alert('Hello World!');
+										$('input').click(function(){
+											$('#first').text('変更後');
 										});
 								figcaption （JavaScript）
 							figure
 								pre(class='prettyprint linenums:1')
 									:code
-										$('div').click ->
-											window.alert 'Hello World!'
+										$('input').click ->
+											$('#first').text "変更後"
 											return
 								figcaption （CoffeeScript）
 		.footer=title

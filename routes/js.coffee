@@ -4,7 +4,8 @@ require("jade").filters.code = (block) ->
   block.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace /"/g, "&quot;"
 
 exports.js = (req, res) ->
-	res.render "js/js-" + req.params.id,
+	#res.render "js/js-" + req.params.id,
+	res.render "js/js-" + req.params.id + req.params.format,
 		title: define.title
 		instructor: define.instructor
 
@@ -16,7 +17,8 @@ exports.enchant = (req, res) ->
 
 #Web API
 exports.webapi = (req, res) ->
-	res.render "js/webapi/webapi-" + req.params.id,
+	#res.render "js/webapi/webapi-" + req.params.id,
+	res.render "js/webapi/webapi-" + req.params.id + req.params.format,
 		title: define.title
 		instructor: define.instructor
 
@@ -27,7 +29,8 @@ exports.webapiXML = (req, res) ->
 
 #HTML5 API
 exports.html5 = (req, res) ->
-	res.render "js/html5/html5-" + req.params.id,
+	#res.render "js/html5/html5-" + req.params.id,
+	res.render "js/html5/html5-" + req.params.id + req.params.format,
 		title: define.title
 		instructor: define.instructor
 

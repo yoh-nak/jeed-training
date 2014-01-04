@@ -44,7 +44,7 @@
 
   app.set("views", __dirname + "/views");
 
-  app.set("view engine", "ejs");
+  app.set("view engine", "jade");
 
   app.use(express.favicon());
 
@@ -105,11 +105,11 @@
 
   app.get("/diary/:id", diary.diary);
 
-  app.get("/js-:id", js.js);
+  app.get("/js-:id:format", js.js);
 
-  app.get("/webapi-:id", js.webapi);
+  app.get("/webapi-:id:format", js.webapi);
 
-  app.get("/html5api-:id", js.html5);
+  app.get("/html5api-:id:format", js.html5);
 
   app.get("/canvas:id:format", js.canvas);
 

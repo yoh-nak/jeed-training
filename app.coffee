@@ -22,7 +22,7 @@ app = express()
 app.use express.basicAuth("nakano", "nakano") #ベーシック認証
 app.set "port", process.env.PORT or 3000
 app.set "views", __dirname + "/views"
-app.set "view engine", "ejs"
+app.set "view engine", "jade"
 app.use express.favicon()
 app.use express.logger("dev")
 app.use express.bodyParser()
@@ -59,14 +59,14 @@ app.get "/_css/:id", css.css # CSS
 app.get "/rwd/:id", rwd.rwd # レスポンシブWEBデザイン
 app.get "/jquery/:id", jquery.jquery # jQuery
 app.get "/jqm/:id", jqm.jqm # jQuery Mobile
-app.get "/mobile/:id", mobile.mobile
+app.get "/mobile/:id", mobile.mobile # スマホサイト
 app.get "/nodejs/:id", nodejs.nodejs # Node.js
 app.get "/others/:id", others.others
 app.get "/diary/:id", diary.diary # 日誌
-app.get "/js-:id", js.js # JavaScript基礎
-app.get "/webapi-:id", js.webapi # WebAPI
-app.get "/html5api-:id", js.html5
-app.get "/canvas:id:format", js.canvas
+app.get "/js-:id:format", js.js # JavaScript基礎
+app.get "/webapi-:id:format", js.webapi # WebAPI
+app.get "/html5api-:id:format", js.html5 # HTML5 API
+app.get "/canvas:id:format", js.canvas # Canvas
 app.get "/enchant-:id", js.enchant
 app.get "/library:id:format", js.library
 app.get "/jsrecipe-:id", js.recipe

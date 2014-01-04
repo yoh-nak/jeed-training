@@ -9,7 +9,7 @@
   };
 
   exports.js = function(req, res) {
-    return res.render("js/js-" + req.params.id, {
+    return res.render("js/js-" + req.params.id + req.params.format, {
       title: define.title,
       instructor: define.instructor
     });
@@ -23,7 +23,7 @@
   };
 
   exports.webapi = function(req, res) {
-    return res.render("js/webapi/webapi-" + req.params.id, {
+    return res.render("js/webapi/webapi-" + req.params.id + req.params.format, {
       title: define.title,
       instructor: define.instructor
     });
@@ -35,7 +35,7 @@
   };
 
   exports.html5 = function(req, res) {
-    return res.render("js/html5/html5-" + req.params.id, {
+    return res.render("js/html5/html5-" + req.params.id + req.params.format, {
       title: define.title,
       instructor: define.instructor
     });

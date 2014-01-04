@@ -1,0 +1,75 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;text()メソッド①課題
+						.panel-body
+							p ボタンをクリックして、a要素のコンテンツを「日本最大のポータルサイト」のテキストに変更してみましょう。
+							p
+								a.btn.btn-default(href='../demo/jquery/exercise6/index1.html',target='_blank')
+									i.glyphicon.glyphicon-play
+									| デモ
+								button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+									i.glyphicon.glyphicon-question-sign
+									| &nbsp;解答例
+							#demo.collapse.out
+								figure
+									pre(class='prettyprint linenums:1')
+										:code
+											<!DOCTYPE html>
+											<html lang="ja-JP">
+											<head>
+											<meta charset="UTF-8">
+											<title></title>
+											</head>
+											<body>
+												<input type="button" name="" value="クリック">
+												<a href="http://www.yahoo.co.jp/">Yahoo!</a>
+												<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+												<script src="script.js"></script>
+											</body>
+											</html>
+									figcaption （HTML）
+								figure
+									pre(class='prettyprint linenums:1')
+										:code
+											doctype
+											html(lang='ja-JP')
+												head
+													meta(charset='UTF-8')
+													title
+												body
+													input(type='button', name='', value='クリック')
+													a(href='http://www.yahoo.co.jp/') Yahoo!
+													script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+													script(src='script.js')
+
+									figcaption （Jade）
+								figure
+									pre(class='prettyprint linenums:1')
+										:code
+											$('input').click(function(){
+												$('a').text('日本最大のポータルサイト');
+											});
+									figcaption （JavaScript）
+								figure
+									pre(class='prettyprint linenums:1')
+										:code
+											$('input').click ->
+												$('a').text '日本最大のポータルサイト'
+												return
+									figcaption （CoffeeScript）
+		.footer=title
+		script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

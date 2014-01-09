@@ -41,6 +41,13 @@ exports.canvas = (req, res) ->
 		instructor: define.instructor
 		pretty: true
 
+#Cordva
+exports.cordova = (req, res) ->
+	res.render "js/cordova/cordova" + req.params.id,
+		title: define.title
+		instructor: define.instructor
+		pretty: true
+
 #Library
 exports.library = (req, res) ->
 	res.render "js/library/library" + req.params.id + req.params.format,

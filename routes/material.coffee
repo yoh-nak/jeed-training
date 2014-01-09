@@ -20,6 +20,7 @@ exports.vagrant = (req, res) ->
 		instructor: define.instructor
 
 exports.cordova = (req, res) ->
-	res.render "material/cordova/cordova1" + req.params.id,
+	res.render "material/cordova/cordova" + req.params.id,
+	#res.render "material/cordova-" + req.params.id + req.params.format,
 		title: define.title
 		instructor: define.instructor

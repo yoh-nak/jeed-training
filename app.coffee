@@ -71,7 +71,7 @@ app.get "/enchant-:id", js.enchant
 app.get "/library:id:format", js.library
 app.get "/jsrecipe-:id", js.recipe
 app.get "/material-:id", material.material
-app.get "/cordova:id:format", material.cordova
+app.get "/cordova/:id", js.cordova
 app.get "/material/git-:id", material.git
 app.get "/material/vagrant-:id", material.vagrant
 

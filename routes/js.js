@@ -49,6 +49,14 @@
     });
   };
 
+  exports.cordova = function(req, res) {
+    return res.render("js/cordova/cordova" + req.params.id, {
+      title: define.title,
+      instructor: define.instructor,
+      pretty: true
+    });
+  };
+
   exports.library = function(req, res) {
     return res.render("js/library/library" + req.params.id + req.params.format, {
       title: define.title,

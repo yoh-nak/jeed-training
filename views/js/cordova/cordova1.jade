@@ -1,0 +1,148 @@
+!!! 5
+html(lang='ja')
+head
+    meta(charset='utf-8')
+    title
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(href='../css/bootstrap.min.css', rel='stylesheet', media='screen')
+    link(href='../css/common.css', rel='stylesheet', media='screen')
+  body
+    include navbar.jade
+    .container
+      .row
+        .col-sm-3
+          include left.jade
+        .col-sm-9
+          .panel.panel-primary
+            .panel-heading Apache Cordovaについて
+            .panel-body
+              h4 Apache Cordova
+              pre.
+                \n公式サイト
+                http://cordova.apache.org/
+                
+                APIドキュメント
+                http://cordova.apache.org/docs/ja/edge/index.                
+                コマンドラインインターフェース
+                                
+              h4 Adobe Phonegap
+              pre.
+                \n公式サイト
+                http://phonegap.com/
+                
+                APIドキュメント
+                http://docs.phonegap.com/en/3.0.0/index.html
+                                
+              h4 Adobe Phonegap Build
+              pre.
+                \n公式サイト
+                https://build.phonegap.com/
+                                
+              h4 Monaca
+              pre.
+                \n公式サイト
+                http://monaca.mobi/?lang=ja
+                                
+              h4 Android Studio & Phonegap3の設定
+              pre.
+                \n/**********************************/
+                //JDKのインストール
+                //Androidの開発に必須
+                /**********************************/
+                
+                Java SEのダウンロードしてインストール
+                http://www.oracle.com/technetwork/jp/java/javase/downloads/index.html
+                
+                コマンドプロンプトで「java -version」と入力してバージョンが表示されればOK
+                JDKがパソコンにインストールされ、実行できていることが確認できます。
+                
+                
+                javaのコンパイラーのパスを環境変数に登録します。
+                javaのコンパイラを使うアプリケーションが、コンパイラーの場所を認識するために必須の設定です。
+                
+                環境変数にJAVA_HOMEを追加して
+                C:\Program Files\Java\jdk1.7.0_45\binのパスを指定
+                
+                環境変数pathの先頭にC:\Program Files\Java\jdk1.7.0_45\binのパスを追記
+                ※パスがsystem32のパスより後に書かれているとAndroid Studioがインストールできないので要注意
+                
+                
+                /**********************************/
+                //Apache Antのインストール
+                //CordovaでAndroidのプロジェクトを生成するため
+                /**********************************/
+                
+                http://ant.apache.org/
+                
+                .zip archiveをダウンロードしてC直下に解凍し、
+                C:\apache-ant-1.9.2\binのパスを環境変数pathに追記
+                
+                
+                
+                /**********************************/
+                //Android Studioのインストール
+                /**********************************/
+                
+                Androidアプリの開発をするために必須の開発ツールです。
+                ネイティブアプリのプログラムを記述したり、Androidアプリの本体であるapkファイルを生成するために使います。
+                
+                Cordovaではウェブビューのソースコードをネイティブアプリに組み込むために使います。
+                
+                http://developer.android.com/sdk/installing/studio.html
+                
+                
+                /**********************************/
+                //Android SDKのインストール
+                /**********************************/
+                
+                Android Studioを使用する場合は、Android Studioをインストールする際に一緒にAndroid SDKもインストールされています。
+                
+                
+                Android SDKを環境変数に設定
+                Androidの開発用に使われるコマンドを実行するための設定です。
+                
+                Android Studio付属のAndroid SDKのの中にあるtoolsとplatform-toolsのディレクトリを環境変数pathに追記
+                C:\Users\e4300\AppData\Local\Android\android-studio\sdk\tools
+                C:\Users\e4300\AppData\Local\Android\android-studio\sdk\platform-tools
+                
+                
+                /**********************************/
+                //Cordova 3.x.xのインストール
+                /**********************************/
+                
+                さきにnode.jsをインストールしておく必要があります。
+                http://nodejs.org/
+                
+                インストールしたらnode -vコマンドを実行しバージョンが表示されたらインストールできています。
+                
+                node.jsをインストールしたらnode package manager（npm）コマンドからcordovaをインストールします。
+                npm install -g cordova
+                
+                cordovaがインストールできているかどうかはnpm cordova -vで確認できます。
+                
+                
+                /**********************************/
+                //Cordovaの組み込まれたAndroidプロジェクトを生成
+                /**********************************/
+                
+                各プラットフォーム共通の設定ファイルを生成します。
+                cordova create c:\helloworld com.example.helloworld HelloWorld
+                
+                ディレクトリを移動します。
+                cd c:\helloworld
+                
+                Androidプロジェクトを生成します。
+                cordova platform add android
+                
+                Androidプロジェクトを削除するときに実行します。
+                cordova platform remove android
+                
+                Cordovaのプラグインを追加します。
+                cordova plugin add ＜git-url＞
+                
+                Cordovaのプラグインを削除するときに実行します。
+                cordova plugin remove ＜git-url＞
+                                
+    #footer
+    script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+    script(src='js/bootstrap.min.js')

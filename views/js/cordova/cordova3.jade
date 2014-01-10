@@ -35,6 +35,40 @@ include ../../head3.jade
                     li 実機で確認する
                 p 本書では、Mac OS XからAndroidアプリの開発環境を導入する手順を紹介していきますが、WindowsでもLinuxでもその手順はほとんど変わりません。
                 .alert.alert-info 必要とする環境
+                p Androidアプリ開発環境に必要なものを確認していきます。以下のようになります。
+                ul
+                    li Linux、Windows、Mac OS XのいずれかのOS
+                    li JDK（Java SE Development Kit）
+                p Androidは、iOSアプリ開発とは違ってLinuxやWindowsやMac OS Xに向けてマルチプラットフォームな開発環境を提供しています。Androidアプリの開発にはJavaやそのコンパイラを部分的に利用し、開発環境の多くはJavaによって記述されています。JDKには、Javaで記述したアプリの動作に必要なJVM（Java仮想マシン）やJavaのコンパイラが含まれています。したがって、これらのOSとJDKをインストールしておけば問題ありません。
+                p JDKをインストールするには、以下のURLからJDKをインストールしてください。すでにJDKをインストールしている場合には必要ありません。
+                ul
+                    li Java SE Development Kit 7 Download<br><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html" target="_blank">http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html</a>
+                p iOSでは実機で開発する際には開発者ライセンスを購入する必要がありましたが、Androidではその必要はありません。
+                .alert.alert-info Android SDKをインストールする
+                p Androidアプリの開発環境を整えるためにAndroid SDK（Android Software Development Kit）をインストールします。この中には、起動すればすぐに利用できるAndroidの開発環境であるIDE、Android端末に関連する開発ツール・ライブラリ、Android端末をパソコン上で再現するエミュレータなど、Androidアプリを開発するためのものがすべて一式揃っています。IDEには、Androidアプリ開発用にあらかじめカスタマイズされたEclipseが収められています。
+                p Android SDKは、以下のページで[Download the SDK]ボタンを押し、圧縮ファイルをダウンロードしていきます。
+                ul
+                    li Android SDK Download<br><a href="http://developer.android.com/sdk/index.html" target="_blank">http://developer.android.com/sdk/index.html</a>
+                p 圧縮ファイルのダウンロードが終わったら、任意の場所に展開してください。
+                .alert.alert-info Eclipseを起動する
+                p 解凍したAndroid SDKのeclipseディレクトリに移動し、Eclipseを起動します。
+                p EclipseはIBM社が開発したオープンソースのIDEです。Eclipseにプラグインを実装することで様々なプラットフォームに向けたIDEを提供できます。Androidでは、ADT（Android Development Tool）というAndroidアプリ開発用のプラグインを提供しています。
+                p Android SDKにバンドルされているEclipseには、あらかじめADTが組み込まれているので、起動するとすぐにAndroidアプリ開発に移行することができます。
+                .alert.alert-info Eclipseの初期設定
+                p Eclipseを起動するとワークスペースの設定を求めるダイアログが表示されます。[Workspace]欄にディレクトリを指定して[OK]ボタンを押します。
+                p ワークスペースとは、EclipseがプロジェクトやEclipse自体の設定ファイルを置く場所を指定します。指定したディレクトリのなかにmetadataディレクトリが作成され、その中にEclipse自体の設定が保存されます。また、新しくプロジェクトを作成する際にも指定したワークスペースのディレクトリ以下にプロジェクトが作成されます。
+                p [Use this as the default and do not ask again]にチェックして入れておくと、次回の起動時にこのダイアログを表示しないようにできます。
+                .alert.alert-info プロジェクトの作成
+                p ワークスペースを指定してEclipseを起動すると、「Welcome!」画面が表示されます。
+                p [New Android Application...]ボタンを押すと、新しく作成するプロジェクトの基本設定を行うダイアログが表示されます。[Application Name]欄にアプリケーション名、[Project Name]欄にプロジェクト名を入力します。ここでは両方とも「HelloWorldExample」と入力して「New」ボタンを押します。
+                p 次のダイアログでは以下のように設定します。プロジェクトのひな形にアイコンやアクティビティのコードをいれるかどうかを選択します。[Create Ativity]にチェックを付けるのを忘れないでください。
+                p 次のダイアログでは、起動アイコンについての初期設定を行います。以下のように特に設定せずにそのままにしておいて結構です。
+                p 次のダイアログでは、アクティビティをあらかじめプロジェクトに作成しておくかどうかについて設定します。Androidのひな形を選択できますが、ここでは特に必要ないので空のアクティビティコードを生成する「Blank Activity」を選択します。以下のように入力します。
+                p 次のダイアログでは、起動アイコンについての初期設定を行います。以下のように特に設定せずにそのままにしておいて結構です。アクティビティやレイアウトの名前を設定します。ここでは特に変える必要がないので、[Finish]ボタンをクリックするだけです。プロジェクトの作成が完了するとEclipseのAndroidアプリのプロジェクトが開きます。
+                .alert.alert-info エミュレータを起動する
+                .alert.alert-info プロジェクトを実行する
+                .alert.alert-info 実機での確認
+                .alert.alert-info 開発者オプションを設定する
             //-
                 p Cordovaでは従来から、iOSやAndroidなどの各種プラットフォーム向けネイティブコードによる実行時のフレームワークを提供しています。Cordovaで開発したハイブリッドアプリがモバイル端末内で動作するときには、このフレームワークも同時に動いています。ここでは、このフレームワークをCordovaフレームワークと呼びます。
                 p Cordova3.0から、Cordovaフレームワークとは別に、Cordovaを用いたアプリのプロジェクトを管理するためにNode.js製のコマンドラインツールが導入されるようになりました。Node.jsは非同期I/Oを特徴とするJavaScript処理系です。JavaScriptエンジンとして、Chromeがオープンソースで公開しているV8を利用しています。

@@ -119,7 +119,32 @@ include ../../head3.jade
                 p platformディレクトリ以下には、あるモバイルプラットフォーム特有のファイルが作成されます。例えば、Androidの場合にはAndroidアプリを作成するためのantプロジェクトが生成され、iOSの場合にはXcodeプロジェクトが生成されます。開発者は、プラットフォーム特有のカスタマイズをしたい場合、platformディレクトリ以下のファイルを編集します。
                 p mergeディレクトリには、プラットフォーム特有のHTML5リソースを配置します。例えば、Androidプラットフォームだけで用いたい画像やJavaScriptをmerges/androidディレクトリ以下に配置します。アプリで利用するリソースがプラットフォームごとに違っていたり、完全にワンソースでマルチプラットフォーム対応するのが難しかったりする場合などに利用されます。
                 p pluginsディレクトリ以下は、Cordovaで利用するプラグインやその設定ファイルを格納する場所です。Cordovaでは、ネイティブ機能へのアクセスをプラグインという形で管理しています。必要なネイティブ機能を使いたい場合には、該当するプラグインをプロジェクトに導入します。
-
+                .alert.alert-info Androidエミュレータを利用する
+                p AndroidでもiOSでも、実機を使わず開発マシン上で動作確認できるようにするために、AndroidエミュレータやiOSシミュレータが提供されています。
+                p Androidエミュレータを利用するには、cordova emulateコマンドを使います。
+                pre
+                    :code
+                        $ cordova emulate android -d
+                p このコマンドを実行してしばらくすると、Androidエミュレータが起動します。プロジェクトが実行されるのを確認して下さい。
+                .alert.alert-info iOSシミュレータを利用する
+                p プロジェクトがビルドされてアプリが生成されます。cordovaコマンドがiOSアプリを実行するとき、iOSシミュレータをコマンドラインから扱うためのツールであるios-simを利用します。
+                p ios-simは、Homebrewからインストールします。Homebrewは、Mac OS X用のパッケージ管理ツールです。Homebrewを通じて様々なツールやライブラリをインストールできます。
+                ul
+                    li URL phonegap/ios-sim<br><a href="http://github.com/phonegap/ios-sim" target="_blank">http://github.com/phonegap/ios-sim</a>
+                    li URL Homebrew<br><a href="http://brew.sh">http://brew.sh</a>
+                p Homebrewをインストールしていない場合には、ターミナルから以下のコマンドを実行してHomebrewをインストールしてください。
+                p
+                    :code
+                        $ ruby -e "$(curl -fsSL https://raw.github.com/mxcl/hoebrew/go)"
+                p 次に、Homebrewからios-simをインストールしてください。
+                p
+                    :code
+                        $ brew install ios-sim
+                p ios-simのインストールが完了したら、cordova emulate iosコマンドを実行します。
+                p
+                    :code
+                        $ cordova emulate ios -d
+                p 成功すればiOSシミュレータが起動し、Cordovaアプリケーションが実行されます。
             //-
                 .alert.alert-info 物理とは何か
                 p 一言で言えば、物理学はものとエネルギーを探求する自然科学です。具体的には、物理学は自然世界のメカニズムに注目し、ものが実際に動いているように動く理由、仕組みを理解しようとします。みなさんが今関心を持っているのは、物理学の中でもものの動きに直接関係している分野であり、ものの動きに影響を及ぼすさまざまなものです。物理学には、ほかにも探求すべき分野が無数にありますが、お互いのために、今日のところは基礎だけを見ていくことにしましょう。

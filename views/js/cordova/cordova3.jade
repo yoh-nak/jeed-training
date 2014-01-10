@@ -1,10 +1,17 @@
-include ../../head3.jade
-    body
-    include navbar.jade
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block body
+    include navbar
     .container
       .row
         .col-sm-3
-          include left.jade
+          include left
         .col-sm-9
           .panel.panel-primary
             .panel-heading Androidの開発環境
@@ -92,6 +99,10 @@ include ../../head3.jade
                 p adb devicesコマンドは、マシンに接続しているAndroid端末のリストを表示します。先ほど起動したエミュレータを閉じて、adb devicesコマンドを実行してください。
                 h4 3 プロジェクトを実行する
                 p Eclipseからプロジェクトを実行すると、自動的に端末にアプリがインストールされ、実行されます。  
-    #footer
+    .footer=title
     script(src='http://code.jquery.com/jquery-1.10.2.min.js')
-    script(src='js/bootstrap.min.js')
+    script(src='../../js/google-code-prettify/prettify.js')
+    script.
+        prettyPrint();
+    script(src='../../js/bootstrap.min.js')
+    script(src='../../coffee/list-counter.js')

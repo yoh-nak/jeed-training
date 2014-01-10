@@ -1,10 +1,17 @@
-include ../../head3.jade
-    body
-    include navbar.jade
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block body
+    include navbar
     .container
       .row
         .col-sm-3
-          include left.jade
+          include left
         .col-sm-9
           .panel.panel-primary
             .panel-heading Cordovaを用いた開発環境の構築する
@@ -229,6 +236,10 @@ include ../../head3.jade
                 .well.well-sm 第3法則
                 p すべての作用には、同じ大きさで向きが逆の反作用があります。聞いたことがありますか?おそらく、これはニュートンの3つの法則の中でももっとも有名なものでしょう。これは、ものAが別のものBに力を作用させると、ものBが同じ大きさで逆向きの力をものAに作用させるということです。だからと言って、2つのものが同じように加速していくわけではありません。ニュートンの第2法則ですでに明らかなように、同じように加速するのは、2つのものの質量が同じときだけです。
                                 
-    #footer
+    .footer=title
     script(src='http://code.jquery.com/jquery-1.10.2.min.js')
-    script(src='js/bootstrap.min.js')
+    script(src='../../js/google-code-prettify/prettify.js')
+    script.
+        prettyPrint();
+    script(src='../../js/bootstrap.min.js')
+    script(src='../../coffee/list-counter.js')

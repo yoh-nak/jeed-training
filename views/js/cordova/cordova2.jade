@@ -153,12 +153,105 @@ block body
                         $ cordova emulate ios -d
                 p 成功すればiOSシミュレータが起動し、Cordovaアプリケーションが実行されます。
                 .alert.alert-info 実機でプロジェクトを実行する
+                p 実機でプロジェクトを実行するには、cordova runコマンドに対象プラットフォームを指定して実行します。USBデバッグをONにしたAndroid端末と開発マシンをUSBケーブルで接続してから、cordova runコマンドを実行してください。
+                pre
+                    :code
+                        $ cordova run android
+                p cordova runコマンドは、以下の3つのことを同時に行うコマンドです。
+                ul
+                    li wwwディレクトリ以下のファイルから、あるプラットフォーム用のプロジェクトを作成する
+                    li 作成したプラットフォーム特有のプロジェクトをビルドする
+                    li ビルドしたアプリや端末をエミュレータにインストールして実行する
+                p 成功すれば、Android端末にアプリがインストールされて実行されます。うまくいかない場合には、-dオプションを付けて詳細メッセージを表示しながらもう一度試してみましょう。
+                pre
+                    :code
+                        $ cordova run android -d
+                p iOSの場合、現在のCordova3.0.6ではcordovaコマンドによる実機へのアプリのインストールはサポートされていません。したがって、cordovaコマンドが生成したプロジェクトをXcodeで開いた上でプロジェクトを実行する必要があります。プロジェクトは、次のようにopenコマンドでplatform/ios以下のHelloWorld.xcodeprojファイルを指定すると自動的にXcodeで開かれます。
+                pre
+                    :code
+                        $ open platform/ios/HelloWorld.xcodeproj
                 .alert.alert-info 基本的な開発の流れを理解する
+                p さて、ここまでcordovaコマンドラインツールを使ってプロジェクトを作成し、実際にアプリをビルドして実機やエミュレータで実行する手順を説明しました。ここでいったん実際にアプリを開発する際の基本的な流れについて整理します。
+                ol
+                    li プロジェクトを作成する
+                    li 実機やエミュレータで動作を確認する
+                    li wwwディレクトリ以下のソースコードを編集する
+                    li 2に戻る
+                p まず、開発者はcordovaコマンドを用いてプロジェクトを作成します。プロジェクトを作成する際には、アプリの動作対象とするプラットフォーム―ここでは、AndroidやiOS―を追加します。次に、実機やエミュレータで実行できるか確かめます。作成した直後は、何もソースコードを編集していない状態ですが、ここでcordova runコマンドやcordova emulateコマンドを実行して、プロジェクトが意図通りに作成できているかどうかを確認します。
+                p プロジェクトが作成されているか確認した後、プロジェクトのwww以下のディレクトリにあるWebリソースを編集してアプリのコードを記述します。それ以降は、動作確認とコード編集の繰り返しというサイクルに入ります。
                 .alert.alert-info ブラウザで確認する
+                p パソコンのブラウザであれば、使い慣れたWebインスペクタがすぐに利用できるので、ハイブリッドアプリでもパソコンのブラウザ上で実行できるようにしておくと便利です。いちいち端末やエミュレータ内で実行するよりも直接ブラウザで動作させたほうが、開発中は都合がよい場合もあります。
                 .alert.alert-info cordovaコマンドの管理
+                p cordovaコマンドには、作成したアプリをブラウザから読み込めるようにするために、アプリをホストするローカルなWebサーバを起ち上げることができます。
+                pre
+                    :code
+                        $ cordova serve android
+                        Static file server running at
+                          => http://localhost:8000/
+                        CTRL + C to shutdown
+                p cordova serverコマンドにプラットフォームを指定して実行すると、そのマシン上にそのプラットフォーム向けのファイルをホストするWebサーバが立ち上がり、そのWebサーバをホストしているアドレスが表示されます。
+                p パソコンのブラウザで表示されたアドレスにアクセスすると、指定したプラットフォーム向けのWebアプリをみることができます。cordova serveコマンドを起ち上げてからwww以下を編集しても反映されないことに注意してください。wwwディレクトリ以下の編集を反映させたい場合には、いったん[CTRL] + [C]キーを押して終了し、もう一度cordova serveコマンドを実行してください。
+                .alert.alert-info cordovaコマンドの管理
+                p cordovaコマンドをアップデートするには、npmを通じて以下のコマンドを実行します。
+                pre
+                    :code
+                        $ npm update cordova -g
+                p 環境によってsudoを付けることを忘れないでください。npm installコマンドでは、バージョンを指定したインストールが可能です。ある特定のcordovaコマンドをインストールしたい場合には、以下のように「@」バージョンを指定してnpm installコマンドを実行してください。
+                pre
+                    :code
+                        $ npm install cordova@3.0.0 -g
                 .alert.alert-info Cordovaを用いてアプリを開発する
+                p 開発環境の構築とプロジェクトの導入について説明しましたので、次は実際にCordovaアプリケーションを記述する手順について説明します。具体的な手順以外にもあらかじめ知っておくべき基礎知識を併せて解説します。
+                p Cordovaアプリケーションで、Cordovaが提供するネイティブ機能にJavaScriptからアクセスするためには、Cordovaフレームワークが提供するJavaScript側インターフェースであるcordova.jsを利用する必要があります。まず、このcordova.jsの利用について説明します。
+                p cordovaコマンドを用いる場合は、モバイルアプリのアイコンやスプラッシュスクリーンや各種設定をwwwディレクトリ以下に配置しますが、これらのリソースについて説明します。
+                p また、Cordovaフレームワークは、実行時に参照する設定ファイルを持ちます。ここではその設定ファイルの編集方法やどのよな設定項目があるのかについて紹介します。
                 .alert.alert-info wwwディレクトリ以下の構造を確認する
+                p さて、ここで一度wwwディレクトリ以下の構造を確認します。cordovaコマンドで作成したプロジェクトのwwwディレクトリの構造は以下のようになります。
+                pre
+                    :code
+                        www/
+                            config.xml
+                            css
+                            img
+                            index.html
+                            js
+                            res
+                            spec
+                            spec.html
+                p css、img、jsなどのディレクトリには、その名のとおりアプリで利用するCSSや画像やJavaScriptが収められています。それ以外のディレクトリの概要は以下のようになっています。
+                table.table
+                    caption wwwディレクトリ以下の構造
+                    tr
+                        th 名前
+                        th 役割
+                    tr
+                        td config.xml
+                        td cordovaの設定ファイル
+                    tr
+                        td index.html
+                        td アプリのエントリポイント
+                    tr
+                        td spec
+                        td specディレクトリ
+                    tr
+                        td spec.html
+                        td specを実行するHTML
+                p config.xmlは、Cordovaフレームワークが実行時に参照する設定が収められているXMLファイルです。アプリの実行時の設定が記述できます。
+                p このXMLファイルのスキーマは、W3CのPackaged Web Appsという仕様に従って定義されています。
+                ul
+                    li URL Packaged Web Apps（Widgets） - Packaging and XML Configuration<br><a href="http://www.w3.org/TR/widgets/" target="_blank">http://www.w3.org/TR/widgets/</a>
+                p index.htmlは、アプリが起動したときに読み込まれる起動ポイントとなるHTMLファイルです。アプリは、このHTMLを起点として動作します。
+                p spec.htmlやspecは、JavaScriptのコードをテストするためのフレームワークであるJasmineのためのディレクトリです。specディレクトリ以下には、アプリを記述するJavaScriptのテスト用コードが置かれています。spec.htmlは、それらのテストコードをまとめて実行するためのファイルです。
+                p Jasmineの詳細については、以下のJasmine公式のWebサイトを参照してください。
+                ul
+                    li URL Jasmine<br><a href="http://pivotal.github.com/jasmine/" target="_blank">http://pivotal.github.com/jasmine/</a>
                 .alert.alert-info index.html
+                p cordovaコマンドラインから作成したプロジェクトでは、アプリを記述するためのHTMLなどのファイルをwwwディレクトリ以下に置きます。開発者は、このwwwディレクトリ以下のファイルを編集してアプリを実装します。このディレクトリに記述した内容は、ビルドの際にプラットフォーム特有のプロジェクトファイルを生成するために利用されます。
+                p その中でも、wwwwディレクトリ以下のindex.htmlファイルは、Cordovaが起動すると最初に読み込まれるHTMLです。一度index.htmlを編集した後、動作確認をしてみましょう。
+                pre
+                    :code
+                        $ cordova emulate ios
+                p index.htmlを編集した内容が、起動したアプリに反映されているかどうかを確認してください。
                 .alert.alert-info cordova.js
                 .alert.alert-info devicereadyイベント
                 .alert.alert-info アプリの設定

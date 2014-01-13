@@ -253,7 +253,47 @@ block body
                         $ cordova emulate ios
                 p index.htmlを編集した内容が、起動したアプリに反映されているかどうかを確認してください。
                 .alert.alert-info cordova.js
+                p Cordovaフレームワークでは、JavaScript側のインターフェースとしてcordova.jsを用意しています。ハイブリッドアプリ開発者やCordovaプラグイン開発者は、このcordova.jsが提供するインターフェースを通じてネイティブ側の機能にアクセスします。
+                p wwwディレクトリのindex.htmlの下のほうを見ると、cordova.jsを読み込んでいる箇所があります。
+                pre
+                    :code
+                        <div class="app">
+                            <h1>Apache Cordova</h1>
+                            <div id="deviceready" class="blink">
+                                <p class="event listening">Connecting to Device</p>
+                                <p class="event received">Device is Ready</p>
+                            </div>
+                        </div>
+                        <script type="text/javascript" src="cordova.js"></script>
+                        <script type="text/javascript" src="js/index.js"></script>
+                p Cordovaを用いたアプリでは、HTML中でcordova.jsを読み込まないと、Cordovaが提供する諸機能にJavaScriptからアクセスできません。
+                p 具体的なネイティブ機能を提供するCordovaプラグインでは開発者が利用できるJavaScript側のAPIインターフェイスを提供していますが、実際にはそれはプラグイン内部でcordova.jsが提供するインターフェイスのラッパとして機能しています。
+                p 例えば、端末のカメラ機能を利用できるCameraプラグインでは、navigator.cameraオブジェクトを用いて以下のようにカメラを呼び出します。
+                pre
+                    :code
+                        document.addEventListener('deviceready',function(){
+                            var options = {
+                                quality: 50,
+                                destinationType: navigator.camera.DestinationType.FILE_URI
+                            };
+
+                            //camera.getPictureメソッドを使って端末のカメラを呼び出す
+                            navigator.camera.getPicture(function(imageData){
+                                alert(imageData);
+                            },function(){
+                                alert('fail');
+                            },options);
+                        },false);
+                p このコードではcamera.getPictureメソッドを用いてカメラを起動していますが、その実装を見てみると、cordova/execというモジュールが利用されています。このモジュールは、Cordovaが提供しているJavaScriptからネイティブへアクセスするための共通インターフェースを提供しています。どのプラグインもこのcordova/execモジュールを使って、自身のプラグインのネイティブコードを呼び出しています。
                 .alert.alert-info devicereadyイベント
+                p Cordovaフレームワークを用いる際に把握して置かなければならないことの1つに、devicereadyイベントがあります。
+                p Cordovaを用いたアプリが実行されるとき、Cordovaが提供しているネイティブ機能をHTML側からすぐに呼び出せるわけではありません。Cordovaフレームワークは、HTMLの読み込み直後に、ネイティブとHTML5のとのブリッジを確立するための初期化処理を行います。この初期化処理を行う前にネイティブの機能を呼びだそうとしてもできません。フレームワークは、この処理が終わると、HTML5側にdevicereadyというCordovaフレームワーク特有のイベントを発火します。
+                p ハイブリッドアプリ開発者は、HTML5側でdevicereadyイベントを察知した後にネイティブ機能を呼び出さなければいけません。したがって、HTMLの読み込みの際にJavaScript側からネイティブの機能を呼び出したいときには、以下のようにdevicereadyイベントのイベントリスナを登録して、そのコールバック内でCordovaの諸機能を呼び出す必要があります。
+                pre
+                    :code
+                        document.addEventListener('deviceready',function(){
+                            console.log('devicereadyイベントが発火されました');
+                        },false);
                 .alert.alert-info アプリの設定
                 .alert.alert-info config.xmlの構造
                 .alert.alert-info アプリに関する設定

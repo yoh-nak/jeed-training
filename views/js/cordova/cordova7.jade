@@ -1,0 +1,42 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block body
+    include navbar
+    .container
+      .row
+        .col-sm-3
+          include left
+        .col-sm-9
+          .panel.panel-primary
+            .panel-heading 実機でプロジェクトを実行する
+            .panel-body
+                p 実機でプロジェクトを実行するには、cordova runコマンドに対象プラットフォームを指定して実行します。USBデバッグをONにしたAndroid端末と開発マシンをUSBケーブルで接続してから、cordova runコマンドを実行してください。
+                pre
+                    :code
+                        $ cordova run android
+                p cordova runコマンドは、以下の3つのことを同時に行うコマンドです。
+                ul
+                    li wwwディレクトリ以下のファイルから、あるプラットフォーム用のプロジェクトを作成する
+                    li 作成したプラットフォーム特有のプロジェクトをビルドする
+                    li ビルドしたアプリや端末をエミュレータにインストールして実行する
+                p 成功すれば、Android端末にアプリがインストールされて実行されます。うまくいかない場合には、-dオプションを付けて詳細メッセージを表示しながらもう一度試してみましょう。
+                pre
+                    :code
+                        $ cordova run android -d
+                p iOSの場合、現在のCordova3.0.6ではcordovaコマンドによる実機へのアプリのインストールはサポートされていません。したがって、cordovaコマンドが生成したプロジェクトをXcodeで開いた上でプロジェクトを実行する必要があります。プロジェクトは、次のようにopenコマンドでplatform/ios以下のHelloWorld.xcodeprojファイルを指定すると自動的にXcodeで開かれます。
+                pre
+                    :code
+                        $ open platform/ios/HelloWorld.xcodeproj
+    .footer=title
+    script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+    script(src='../../js/google-code-prettify/prettify.js')
+    script.
+        prettyPrint();
+    script(src='../../js/bootstrap.min.js')
+    script(src='../../coffee/list-counter.js')

@@ -1,0 +1,77 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block body
+    include navbar
+    .container
+      .row
+        .col-sm-3
+          include left
+        .col-sm-9
+          .panel.panel-primary
+            .panel-heading プロジェクトを作成する
+            .panel-body
+                p cordovaコマンドのインストールが完了したら、次はcordovaコマンドを用いたプロジェクトを作成します。AndroidとiOSの開発ができるプロジェクトを作成します。cordova createコマンドを用いて以下のようにプロジェクトを作成します。
+                pre
+                    :code
+                        $ cordova create hello com.example.hello HelloWorld -d
+                p このコマンドは、helloディレクトリ以下にアプリの識別子としてcom.example.helloを持つ「HelloWorld」という名前のアプリのプロジェクトを作成します。-dオプションは、cordovaコマンド実行中の途中経過を表示するオプションです。
+                p 次に、プロジェクトにAndroidとiOS用のファイルを追加します。以下のようにhelloディレクトリ以下に移動してcordova platformコマンドを実行します。iOSとAndroid用のプロジェクトファイルが追加されます。
+                pre
+                    :code
+                        $ cd hello
+
+                        $ cordova platform add ios
+                        $ cordova platform add android
+                p このコマンドを実行すると、iOSのためのXcodeプロジェクトが生成されます。本書では解説しませんが、webOSやWindows Phoneなどの他のプラットフォームもこのコマンドで追加できます。
+                p プロジェクトが現在どのようなプラットフォームに向けて開発されているのかを知るにはcordova platform lsコマンドを実行します。
+                pre
+                    :code
+                        $ cordova platform ls
+                        ["ios"]
+                p プラットフォームから外すには、次のようにcordova platform removeコマンドを用います。
+                pre
+                    :code
+                        $ cordova platform remove ios
+                .alert.alert-info Android向けのコンポーネントをインストールする
+                p 対応プラットフォームにAndroidを追加すると、次のようなエラーが出る場合があります。
+                pre
+                    :code
+                        $ cordova platform add android
+                        [Error: Please install Android target 17 (the android 4.2 SKD). Make sure you have the latest Android tools installed as well. Run `android` from your command-line to install/update any missing SDKs or tools.]
+                p この場合には、Android SDK Managerを起動して、エラーメッセージに該当するパッケージをインストールします。以下のようにandroidコマンドを実行すると、Android SDK Managerが立ち上がります。エラーメッセージ中に記述されているAndroid 4.2.2 SDKをインストールします。
+                pre
+                    :code
+                        $ android
+                p Android 4.2.2関連のコンポーネントにチェックを入れて、[Install Packages]ボタンを押します。すると、インストールコンポーネントのライセンスを確認する画面に移動します。すべてのコンポーネントのライセンスを確認して[Accept]にチェックを入れます。[Install]ボタンを押すと、インストールが始まります。しばらくしてAndroid SDK Managerの該当するコンポーネントの横に、インストールされている旨が表示されればインストールは完了です。完了後、再びcordova platform add androidコマンドを実行します。
+                pre
+                    :code
+                        $ cordova platform add android
+                .alert.alert-info プロジェクト構造を確認する
+                p ここでいったんプロジェクトのディレクトリ構造を確認します。cordovaコマンドで作成したプロジェクトのディレクトリ構造は以下のようになります。
+                pre
+                    :code
+                        hello/
+                            .cordova   -> cordovaプロジェクト設定ファイルが格納されている
+                            www        -> HTML5リソースやアプリ設定に関するファイル
+                            platform   -> 各プラットフォーム特有のプロジェクトファイルが記述されている
+                            merges     -> 各プラットフォーム特有のリソース
+                                          wwwディレクトリがプラットフォームごとにコンパイルされる際にマージされる
+                            plugins    -> Cordovaプラグインが格納されています
+                p .cordovaディレクトリには、cordovaコマンドで作成したプロジェクト自体の設定が格納されます。例えば、cordova createコマンドの実行時に指定したアプリ名やアプリの識別子の情報は、このディレクトリのconfig.jsonに保管されます。cordovaコマンドは、この.cordovaディレクトリでプロジェクトを識別します。プロジェクトのサブディレクトリ以下ではcordovaコマンドを用いてプロジェクトを編集することもでき、cordovaコマンドの内部では親ディレクトリをたどって.cordovaディレクトリを探して識別します。
+                p wwwディレクトリには、HTML5で記述したアプリのコードや、Cordovaフレームワークが設定ファイルとして利用するXMLファイルなどが含まれています。ハイブリッドアプリ開発者は、主にこのwwwディレクトリ以下にHTMLやCSS、JavaScriptを記述してアプリを開発することになります。
+                p platformディレクトリ以下には、あるモバイルプラットフォーム特有のファイルが作成されます。例えば、Androidの場合にはAndroidアプリを作成するためのantプロジェクトが生成され、iOSの場合にはXcodeプロジェクトが生成されます。開発者は、プラットフォーム特有のカスタマイズをしたい場合、platformディレクトリ以下のファイルを編集します。
+                p mergeディレクトリには、プラットフォーム特有のHTML5リソースを配置します。例えば、Androidプラットフォームだけで用いたい画像やJavaScriptをmerges/androidディレクトリ以下に配置します。アプリで利用するリソースがプラットフォームごとに違っていたり、完全にワンソースでマルチプラットフォーム対応するのが難しかったりする場合などに利用されます。
+                p pluginsディレクトリ以下は、Cordovaで利用するプラグインやその設定ファイルを格納する場所です。Cordovaでは、ネイティブ機能へのアクセスをプラグインという形で管理しています。必要なネイティブ機能を使いたい場合には、該当するプラグインをプロジェクトに導入します。
+    .footer=title
+    script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+    script(src='../../js/google-code-prettify/prettify.js')
+    script.
+        prettyPrint();
+    script(src='../../js/bootstrap.min.js')
+    script(src='../../coffee/list-counter.js')

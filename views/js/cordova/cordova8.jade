@@ -1,0 +1,179 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block body
+    include navbar
+    .container
+      .row
+        .col-sm-3
+          include left
+        .col-sm-9
+          .panel.panel-primary
+            .panel-heading 基本的な開発の流れを理解する
+            .panel-body
+                p さて、ここまでcordovaコマンドラインツールを使ってプロジェクトを作成し、実際にアプリをビルドして実機やエミュレータで実行する手順を説明しました。ここでいったん実際にアプリを開発する際の基本的な流れについて整理します。
+                ol
+                    li プロジェクトを作成する
+                    li 実機やエミュレータで動作を確認する
+                    li wwwディレクトリ以下のソースコードを編集する
+                    li 2に戻る
+                p まず、開発者はcordovaコマンドを用いてプロジェクトを作成します。プロジェクトを作成する際には、アプリの動作対象とするプラットフォーム―ここでは、AndroidやiOS―を追加します。次に、実機やエミュレータで実行できるか確かめます。作成した直後は、何もソースコードを編集していない状態ですが、ここでcordova runコマンドやcordova emulateコマンドを実行して、プロジェクトが意図通りに作成できているかどうかを確認します。
+                p プロジェクトが作成されているか確認した後、プロジェクトのwww以下のディレクトリにあるWebリソースを編集してアプリのコードを記述します。それ以降は、動作確認とコード編集の繰り返しというサイクルに入ります。
+                .alert.alert-info ブラウザで確認する
+                p パソコンのブラウザであれば、使い慣れたWebインスペクタがすぐに利用できるので、ハイブリッドアプリでもパソコンのブラウザ上で実行できるようにしておくと便利です。いちいち端末やエミュレータ内で実行するよりも直接ブラウザで動作させたほうが、開発中は都合がよい場合もあります。
+                .alert.alert-info cordovaコマンドの管理
+                p cordovaコマンドには、作成したアプリをブラウザから読み込めるようにするために、アプリをホストするローカルなWebサーバを起ち上げることができます。
+                pre
+                    :code
+                        $ cordova serve android
+                        Static file server running at
+                          => http://localhost:8000/
+                        CTRL + C to shutdown
+                p cordova serverコマンドにプラットフォームを指定して実行すると、そのマシン上にそのプラットフォーム向けのファイルをホストするWebサーバが立ち上がり、そのWebサーバをホストしているアドレスが表示されます。
+                p パソコンのブラウザで表示されたアドレスにアクセスすると、指定したプラットフォーム向けのWebアプリをみることができます。cordova serveコマンドを起ち上げてからwww以下を編集しても反映されないことに注意してください。wwwディレクトリ以下の編集を反映させたい場合には、いったん[CTRL] + [C]キーを押して終了し、もう一度cordova serveコマンドを実行してください。
+                .alert.alert-info cordovaコマンドの管理
+                p cordovaコマンドをアップデートするには、npmを通じて以下のコマンドを実行します。
+                pre
+                    :code
+                        $ npm update cordova -g
+                p 環境によってsudoを付けることを忘れないでください。npm installコマンドでは、バージョンを指定したインストールが可能です。ある特定のcordovaコマンドをインストールしたい場合には、以下のように「@」バージョンを指定してnpm installコマンドを実行してください。
+                pre
+                    :code
+                        $ npm install cordova@3.0.0 -g
+                .alert.alert-info Cordovaを用いてアプリを開発する
+                p 開発環境の構築とプロジェクトの導入について説明しましたので、次は実際にCordovaアプリケーションを記述する手順について説明します。具体的な手順以外にもあらかじめ知っておくべき基礎知識を併せて解説します。
+                p Cordovaアプリケーションで、Cordovaが提供するネイティブ機能にJavaScriptからアクセスするためには、Cordovaフレームワークが提供するJavaScript側インターフェースであるcordova.jsを利用する必要があります。まず、このcordova.jsの利用について説明します。
+                p cordovaコマンドを用いる場合は、モバイルアプリのアイコンやスプラッシュスクリーンや各種設定をwwwディレクトリ以下に配置しますが、これらのリソースについて説明します。
+                p また、Cordovaフレームワークは、実行時に参照する設定ファイルを持ちます。ここではその設定ファイルの編集方法やどのよな設定項目があるのかについて紹介します。
+                .alert.alert-info wwwディレクトリ以下の構造を確認する
+                p さて、ここで一度wwwディレクトリ以下の構造を確認します。cordovaコマンドで作成したプロジェクトのwwwディレクトリの構造は以下のようになります。
+                pre
+                    :code
+                        www/
+                            config.xml
+                            css
+                            img
+                            index.html
+                            js
+                            res
+                            spec
+                            spec.html
+                p css、img、jsなどのディレクトリには、その名のとおりアプリで利用するCSSや画像やJavaScriptが収められています。それ以外のディレクトリの概要は以下のようになっています。
+                table.table
+                    caption wwwディレクトリ以下の構造
+                    tr
+                        th 名前
+                        th 役割
+                    tr
+                        td config.xml
+                        td cordovaの設定ファイル
+                    tr
+                        td index.html
+                        td アプリのエントリポイント
+                    tr
+                        td spec
+                        td specディレクトリ
+                    tr
+                        td spec.html
+                        td specを実行するHTML
+                p config.xmlは、Cordovaフレームワークが実行時に参照する設定が収められているXMLファイルです。アプリの実行時の設定が記述できます。
+                p このXMLファイルのスキーマは、W3CのPackaged Web Appsという仕様に従って定義されています。
+                ul
+                    li URL Packaged Web Apps（Widgets） - Packaging and XML Configuration<br><a href="http://www.w3.org/TR/widgets/" target="_blank">http://www.w3.org/TR/widgets/</a>
+                p index.htmlは、アプリが起動したときに読み込まれる起動ポイントとなるHTMLファイルです。アプリは、このHTMLを起点として動作します。
+                p spec.htmlやspecは、JavaScriptのコードをテストするためのフレームワークであるJasmineのためのディレクトリです。specディレクトリ以下には、アプリを記述するJavaScriptのテスト用コードが置かれています。spec.htmlは、それらのテストコードをまとめて実行するためのファイルです。
+                p Jasmineの詳細については、以下のJasmine公式のWebサイトを参照してください。
+                ul
+                    li URL Jasmine<br><a href="http://pivotal.github.com/jasmine/" target="_blank">http://pivotal.github.com/jasmine/</a>
+                .alert.alert-info index.html
+                p cordovaコマンドラインから作成したプロジェクトでは、アプリを記述するためのHTMLなどのファイルをwwwディレクトリ以下に置きます。開発者は、このwwwディレクトリ以下のファイルを編集してアプリを実装します。このディレクトリに記述した内容は、ビルドの際にプラットフォーム特有のプロジェクトファイルを生成するために利用されます。
+                p その中でも、wwwwディレクトリ以下のindex.htmlファイルは、Cordovaが起動すると最初に読み込まれるHTMLです。一度index.htmlを編集した後、動作確認をしてみましょう。
+                pre
+                    :code
+                        $ cordova emulate ios
+                p index.htmlを編集した内容が、起動したアプリに反映されているかどうかを確認してください。
+                .alert.alert-info cordova.js
+                p Cordovaフレームワークでは、JavaScript側のインターフェースとしてcordova.jsを用意しています。ハイブリッドアプリ開発者やCordovaプラグイン開発者は、このcordova.jsが提供するインターフェースを通じてネイティブ側の機能にアクセスします。
+                p wwwディレクトリのindex.htmlの下のほうを見ると、cordova.jsを読み込んでいる箇所があります。
+                pre
+                    :code
+                        <div class="app">
+                            <h1>Apache Cordova</h1>
+                            <div id="deviceready" class="blink">
+                                <p class="event listening">Connecting to Device</p>
+                                <p class="event received">Device is Ready</p>
+                            </div>
+                        </div>
+                        <script type="text/javascript" src="cordova.js"></script>
+                        <script type="text/javascript" src="js/index.js"></script>
+                p Cordovaを用いたアプリでは、HTML中でcordova.jsを読み込まないと、Cordovaが提供する諸機能にJavaScriptからアクセスできません。
+                p 具体的なネイティブ機能を提供するCordovaプラグインでは開発者が利用できるJavaScript側のAPIインターフェイスを提供していますが、実際にはそれはプラグイン内部でcordova.jsが提供するインターフェイスのラッパとして機能しています。
+                p 例えば、端末のカメラ機能を利用できるCameraプラグインでは、navigator.cameraオブジェクトを用いて以下のようにカメラを呼び出します。
+                pre
+                    :code
+                        document.addEventListener('deviceready',function(){
+                            var options = {
+                                quality: 50,
+                                destinationType: navigator.camera.DestinationType.FILE_URI
+                            };
+
+                            //camera.getPictureメソッドを使って端末のカメラを呼び出す
+                            navigator.camera.getPicture(function(imageData){
+                                alert(imageData);
+                            },function(){
+                                alert('fail');
+                            },options);
+                        },false);
+                p このコードではcamera.getPictureメソッドを用いてカメラを起動していますが、その実装を見てみると、cordova/execというモジュールが利用されています。このモジュールは、Cordovaが提供しているJavaScriptからネイティブへアクセスするための共通インターフェースを提供しています。どのプラグインもこのcordova/execモジュールを使って、自身のプラグインのネイティブコードを呼び出しています。
+                .alert.alert-info devicereadyイベント
+                p Cordovaフレームワークを用いる際に把握して置かなければならないことの1つに、devicereadyイベントがあります。
+                p Cordovaを用いたアプリが実行されるとき、Cordovaが提供しているネイティブ機能をHTML側からすぐに呼び出せるわけではありません。Cordovaフレームワークは、HTMLの読み込み直後に、ネイティブとHTML5のとのブリッジを確立するための初期化処理を行います。この初期化処理を行う前にネイティブの機能を呼びだそうとしてもできません。フレームワークは、この処理が終わると、HTML5側にdevicereadyというCordovaフレームワーク特有のイベントを発火します。
+                p ハイブリッドアプリ開発者は、HTML5側でdevicereadyイベントを察知した後にネイティブ機能を呼び出さなければいけません。したがって、HTMLの読み込みの際にJavaScript側からネイティブの機能を呼び出したいときには、以下のようにdevicereadyイベントのイベントリスナを登録して、そのコールバック内でCordovaの諸機能を呼び出す必要があります。
+                pre
+                    :code
+                        document.addEventListener('deviceready',function(){
+                            console.log('devicereadyイベントが発火されました');
+                        },false);
+                .alert.alert-info アプリの設定
+                .alert.alert-info config.xmlの構造
+                .alert.alert-info アプリに関する設定
+                .alert.alert-info 設定を反映させる
+                .alert.alert-info Android特有の設定項目
+                .alert.alert-info iOS特有の設定項目
+                .alert.alert-info アプリのアイコンを設定する
+                .alert.alert-info アプリのスプラッシュスクリーンを設定する
+                .alert.alert-info ドメインホワイトリストを設定する
+                .alert.alert-info ドメインホワイトリストの基本的な設定方法
+                .alert.alert-info プラットフォームごとにカスタマイズする
+                .alert.alert-info HTML5側をプラットフォームごとに切り替える
+                .alert.alert-info ネイティブ側をプラットフォームごとに切り替える
+                .alert.alert-info Cordovaプラグインを利用する
+                .alert.alert-info プラグインを導入する
+                .alert.alert-info プラグインを管理する
+                .alert.alert-info プラグインのインストールを理解する
+                .alert.alert-info プラグインの仕組み
+                .alert.alert-info 組み込みプラグインの一覧
+                .alert.alert-info Android向けのCordovaプラグインを実装する
+                .alert.alert-info Android向けのプラグイン開発の詳細
+                .alert.alert-info iOS向けのCordovaプラグインを実装する
+                .alert.alert-info cordovaコマンドからインストールできるプラグインを実装する
+                .alert.alert-info その他のコマンドの解説
+                .alert.alert-info 既存のアプリにCordovaを組み込む
+                .alert.alert-info Cordovaフレームワークのダウンロード
+                .alert.alert-info AndroidのプロジェクトにCordovaフレームワークを導入する
+                .alert.alert-info 画面の一部でCordovaを用いる
+                .alert.alert-info iOSのプロジェクトにCordovaフレームワークを導入する
+                .alert.alert-info wwwディレクトリに配置する
+                .alert.alert-info Cordovaフレームワークを呼び出すコードを記述する
+    .footer=title
+    script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+    script(src='../../js/google-code-prettify/prettify.js')
+    script.
+        prettyPrint();
+    script(src='../../js/bootstrap.min.js')
+    script(src='../../coffee/list-counter.js')

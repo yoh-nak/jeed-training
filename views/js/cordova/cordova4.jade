@@ -1,0 +1,47 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block body
+    include navbar
+    .container
+      .row
+        .col-sm-3
+          include left
+        .col-sm-9
+          .panel.panel-primary
+            .panel-heading plugmanコマンドを使ってCordovaプラグインを導入する
+            .panel-body
+                .alert.alert-info plugmanコマンドのインストール
+                pre
+                    :code
+                        $ npm install plugman -g
+                .alert.alert-info plugmanコマンドを使ってCordovaプラグインを導入する
+                p ここまでCordovaフレームワーク自体の導入方法を解説しましたが、Cordovaプラグインはどのようにして導入すればいいのでしょうか？cordovaコマンドを用いずにCordovaプラグインを導入するには、plugmanコマンドを用います。
+                p plugmanコマンドは、Cordova開発チームが提供しているCordovaプラグインを管理するためのコマンドラインツールです。cordovaコマンドは、内部でプラグインの管理のためにこのツールを利用しています。したがって、cordovaコマンドを用いてプロジェクトを作成した場合には、このplugmanコマンドは利用しません。逆に、ここで記述している既存のアプリのプロジェクトに対してCordovaプラグインを導入するためには、plugmanコマンドを利用します。
+                .alert.alert-info plugmanコマンドのインストール
+                p npmを通じてplugmanコマンドをインストールします。
+                pre
+                    :code
+                        $ npm install plugman -g
+                p 成功したら、正しくインストールできているかどうかを確認します。
+                pre
+                    :code
+                        $ plugman -v
+                        plugman version 0.10.1
+                .alert.alert-info plugmanコマンドを使ってCordovaプラグインを導入する
+                p plugmanコマンドを用いてCordovaプラグインを導入するには、プラグインのリポジトリのURLだけでなく、プラットフォームとプロジェクトのディレクトリを指定します。
+                pre
+                    :code
+                        $ plugman install --platform android --project ./MyProject --plugin （プラグインのURL）
+    .footer=title
+    script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+    script(src='../../js/google-code-prettify/prettify.js')
+    script.
+        prettyPrint();
+    script(src='../../js/bootstrap.min.js')
+    script(src='../../coffee/list-counter.js')

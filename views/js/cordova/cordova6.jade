@@ -1,0 +1,51 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block body
+    include navbar
+    .container
+      .row
+        .col-sm-3
+          include left
+        .col-sm-9
+          .panel.panel-primary
+            .panel-heading エミュレータの利用
+            .panel-body
+                .alert.alert-info Androidエミュレータを利用する
+                p AndroidでもiOSでも、実機を使わず開発マシン上で動作確認できるようにするために、AndroidエミュレータやiOSシミュレータが提供されています。
+                p Androidエミュレータを利用するには、cordova emulateコマンドを使います。
+                pre
+                    :code
+                        $ cordova emulate android -d
+                p このコマンドを実行してしばらくすると、Androidエミュレータが起動します。プロジェクトが実行されるのを確認して下さい。
+                .alert.alert-info iOSシミュレータを利用する
+                p プロジェクトがビルドされてアプリが生成されます。cordovaコマンドがiOSアプリを実行するとき、iOSシミュレータをコマンドラインから扱うためのツールであるios-simを利用します。
+                p ios-simは、Homebrewからインストールします。Homebrewは、Mac OS X用のパッケージ管理ツールです。Homebrewを通じて様々なツールやライブラリをインストールできます。
+                ul
+                    li URL phonegap/ios-sim<br><a href="http://github.com/phonegap/ios-sim" target="_blank">http://github.com/phonegap/ios-sim</a>
+                    li URL Homebrew<br><a href="http://brew.sh">http://brew.sh</a>
+                p Homebrewをインストールしていない場合には、ターミナルから以下のコマンドを実行してHomebrewをインストールしてください。
+                p
+                    :code
+                        $ ruby -e "$(curl -fsSL https://raw.github.com/mxcl/hoebrew/go)"
+                p 次に、Homebrewからios-simをインストールしてください。
+                p
+                    :code
+                        $ brew install ios-sim
+                p ios-simのインストールが完了したら、cordova emulate iosコマンドを実行します。
+                p
+                    :code
+                        $ cordova emulate ios -d
+                p 成功すればiOSシミュレータが起動し、Cordovaアプリケーションが実行されます。
+    .footer=title
+    script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+    script(src='../../js/google-code-prettify/prettify.js')
+    script.
+        prettyPrint();
+    script(src='../../js/bootstrap.min.js')
+    script(src='../../coffee/list-counter.js')

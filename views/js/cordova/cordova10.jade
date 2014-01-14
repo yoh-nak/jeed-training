@@ -17,30 +17,45 @@ block body
             .panel-heading アプリのアイコンを設定する
             .panel-body
                 .alert.alert-info アプリのアイコンを設定する
-                .alert.alert-info アプリのスプラッシュスクリーンを設定する
-                .alert.alert-info ドメインホワイトリストを設定する
-                .alert.alert-info ドメインホワイトリストの基本的な設定方法
-                .alert.alert-info プラットフォームごとにカスタマイズする
-                .alert.alert-info HTML5側をプラットフォームごとに切り替える
-                .alert.alert-info ネイティブ側をプラットフォームごとに切り替える
-                .alert.alert-info Cordovaプラグインを利用する
-                .alert.alert-info プラグインを導入する
-                .alert.alert-info プラグインを管理する
-                .alert.alert-info プラグインのインストールを理解する
-                .alert.alert-info プラグインの仕組み
-                .alert.alert-info 組み込みプラグインの一覧
-                .alert.alert-info Android向けのCordovaプラグインを実装する
-                .alert.alert-info Android向けのプラグイン開発の詳細
-                .alert.alert-info iOS向けのCordovaプラグインを実装する
-                .alert.alert-info cordovaコマンドからインストールできるプラグインを実装する
-                .alert.alert-info その他のコマンドの解説
-                .alert.alert-info 既存のアプリにCordovaを組み込む
-                .alert.alert-info Cordovaフレームワークのダウンロード
-                .alert.alert-info AndroidのプロジェクトにCordovaフレームワークを導入する
-                .alert.alert-info 画面の一部でCordovaを用いる
-                .alert.alert-info iOSのプロジェクトにCordovaフレームワークを導入する
-                .alert.alert-info wwwディレクトリに配置する
-                .alert.alert-info Cordovaフレームワークを呼び出すコードを記述する
+                p アプリのアイコンやスプラッシュスクリーンを設定するには、platforms以下のプラットフォームごとのプロジェクトを編集します。
+                p 例として、Androidのアイコンを編集しましょう。platforms/android/resディレクトリにはAndroidアプリで利用するリソースが収められています。このディレクトリ以下にアイコンを表示するPNGファイルを置きます。
+                p Androidのアイコンとして必要な画像は4つです。Androidは、様々な解像度を持つデバイスに対応するために、デバイスのディスプレイのピクセル密度をldpi、mdpi、hdpi、xhdpiの4つに分けています。アイコン画像もこれに合わせて4つ用意します。以下の表は、resディレクトリ以下のアイコン画像のファイルの場所とそのアイコンが必要とする画像のサイズです。
+                table.table
+                    tr
+                        th アイコンのファイル名
+                        th 必要な画像の大きさ
+                    tr
+                        td drawable-ldpi/icon.png
+                        td 36x36px
+                    tr
+                        td drawable-mdpi/icon.png
+                        td 48x48px
+                    tr
+                        td drawable-hdpi/icon.png
+                        td 72x72px
+                    tr
+                        td drawable-xhdpi/icon.png
+                        td 96x96px
+                p アイコン画像にはここで挙げているサイズの画像以外にもGoogle Play Storeに提供する際に512x512pxサイズの画像が必要となります。この512x512pxのアイコンは、Google Play StoreアプリやWebサイトでアプリのアイコンとして表示されます。
+                p 次にiOSのアイコンを編集しましょう。iOSアプリのアイコンは、platforms/ios/HelloWorld/Resources/iconsディレクトリ以下に納められています。iPhoneとiPadとそれらのRetina版のアイコン画像を用意する必要があります。
+                table.table
+                    tr
+                        th アイコンのファイル名
+                        th 必要な画像の大きさ
+                    tr
+                        td icon.png
+                        td 57x57px
+                    tr
+                        td icon@2x.png
+                        td 114x114px
+                    tr
+                        td icon-72.png
+                        td 72x72px
+                    tr
+                        td icon-72@2x.png
+                        td 144x144px
+                p iOSアプリでは、Retinaディスプレイ用の画像リソースには、ファイルの拡張子の前に「@2x」を付けます。
+                p またAndroid同様、ここで挙げているサイズ以外にもApp Storeに提出する際に1024x1024pxのサイズのアイコン画像が必要です。
     .footer=title
     script(src='http://code.jquery.com/jquery-1.10.2.min.js')
     script(src='../../js/google-code-prettify/prettify.js')

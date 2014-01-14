@@ -1,0 +1,38 @@
+include ../head2.jade
+	body
+		include navbar.jade
+		.container
+			.row
+				.col-sm-3
+					include left.jade
+				.col-sm-9
+					.panel.panel-primary
+						.panel-heading
+							i.glyphicon.glyphicon-book
+							| &nbsp;positionプロパティの特徴
+						.panel-body
+							.alert.alert-info positionプロパティの特徴
+							pre
+								:code
+									* relative
+
+									1. 指定した要素の通常の表示位置を基点にした移動
+									2. 移動前の表示スペースはそのまま残る
+
+									* absolute
+
+									1. 指定した要素のpositionプロパティ（staticを除く）を指定された親要素を基点にした移動
+									2. 親要素にpositionプロパティの指定がない場合は、ブラウザの左上を基点にした移動
+									3. 移動前の表示スペースは残らない
+
+									* fixed
+
+									1. ブラウザの左上を基点にした移動
+									2. 移動前の表示スペースは残らない
+		.footer=title
+		script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+		script(src='../js/google-code-prettify/prettify.js')
+		script.
+			prettyPrint();
+		script(src='../js/bootstrap.min.js')
+		script(src='../coffee/list-counter.js')

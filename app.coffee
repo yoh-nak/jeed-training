@@ -66,7 +66,7 @@ app.get "/diary/:id", diary.diary # 日誌
 app.get "/js-:id:format", js.js # JavaScript基礎
 app.get "/webapi-:id:format", js.webapi # WebAPI
 app.get "/html5api-:id:format", js.html5 # HTML5 API
-app.get "/canvas:id:format", js.canvas # Canvas
+app.get "/canvas/:id", js.canvas # Canvas
 app.get "/enchant-:id", js.enchant
 app.get "/library:id:format", js.library
 app.get "/jsrecipe-:id", js.recipe

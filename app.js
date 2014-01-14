@@ -111,7 +111,7 @@
 
   app.get("/html5api-:id:format", js.html5);
 
-  app.get("/canvas:id:format", js.canvas);
+  app.get("/canvas/:id", js.canvas);
 
   app.get("/enchant-:id", js.enchant);
 

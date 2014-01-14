@@ -42,7 +42,7 @@
   };
 
   exports.canvas = function(req, res) {
-    return res.render("js/canvas/canvas" + req.params.id + req.params.format, {
+    return res.render("js/canvas/canvas" + req.params.id, {
       title: define.title,
       instructor: define.instructor,
       pretty: true

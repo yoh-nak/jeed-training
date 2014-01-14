@@ -36,7 +36,8 @@ exports.html5 = (req, res) ->
 
 #Canvas
 exports.canvas = (req, res) ->
-	res.render "js/canvas/canvas" + req.params.id + req.params.format,
+	#res.render "js/canvas/canvas" + req.params.id + req.params.format,
+	res.render "js/canvas/canvas" + req.params.id,
 		title: define.title
 		instructor: define.instructor
 		pretty: true

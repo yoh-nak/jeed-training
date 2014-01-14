@@ -58,10 +58,36 @@ block body
                     :code
                         <name>HelloWorldApp</name>
                 p Cordovaフレームワーク用の設定値は、widget要素以下にpreference要素を用いて設定します。例えば、iOSのCordovaフレームワークで利用できる"DisallowOverscroll"この設定は、後述するcordova以下のように記述します。
+                pre
+                    :code
+                        <preference name="DisallowOverscroll" value="true" />
+                p アプリに関する設定では、他にもアプリの概要を記述するdescription要素と、アプリの開発者について記述するauthor要素がありますが、これらはiOSとAndroidのプロジェクトではあまり利用されていないようです。
                 .alert.alert-info 設定を反映させる
-
+                p ここでいったん設定を反映する手順を確認します。www/config.xmlを編集して変更した設定を、プラットフォーム別のプロジェクトに反映します。
+                pre
+                    :code
+                        $ cordova prepare -d
+                p このコマンドを実行すると、プロジェクトの情報やコンテンツが、platformsディレクトリ以下の各プラットフォーム向けのプロジェクトに反映されます。
+                p config.xmlは、各プラットフォーム向けのプロジェクトディレクトリ以下にもあります。各プラットフォームのCordovaフレームワークが実際に実行時に読み込んでいる設定ファイルはそのconfig.xmlです。
+                p iOSのプロジェクトでは、platforms/ios/（アプリ名）/config.xmlにあります。Androidのプロジェクトでは、platforms/android/res/xml/config.xmlにあります。
                 .alert.alert-info Android特有の設定項目
+                p Androidアプリで利用できる設定項目は以下のようになります。
+                ul
+                    li loadingDialog<br>アプリの読み込み中に、ネイティブのロード中を表すダイアログを表示します。フォーマットは、「タイトル、読み込み中・・・」です。
+                    li loadingPageDialog<br>HTMLのページを読み込んでいるときに、ネイティブのロード中を表すダイアログを表示します。遷移してHTMLを読み込むたびに表示されます。フォーマットは、loadingDialog設定と同様です。
+                    li errorURL<br>アプリのエラーページを設定します。Androidプロジェクトのwwwディレクトリからのパスを指定します。
+                    li backgroundColor<br>アプリの背景色を指定します。4バイトの16進数をサポートしています。最初の1バイトはアルファ値で、残りの3バイトは標準的なRGB値です。例えば、00000000は透明な黒です。真っ白にするにはffffffffです。
+                    li loadUrlTimeoutValue<br>Cordovaがアプリを読み込む際に、タイムアウトエラーを投げるのをどれくらい待つかを設定します。
+                    li keepRunning<br>アプリがバックグラウンドに回ってもCordovaを実行し続けるかどうかを設定します。trueかfalseを指定します。デフォルトはtrueです。
+                    li splashscreen<br>res/drawableディレクトリ以下の画像を拡張子なしで指定します。
+                    li disallowOverscroll（boolian、defaults to false）：<br>Androidでオーバースクロールするときに、画面の端が光るような表現が用いられます。この設定では、オーバースクロール時の表現をなくすかどうかを設定します。trueかfalseを指定します。デフォルトはfalseです。
                 .alert.alert-info iOS特有の設定項目
+                p iOSアプリで利用される設定項目は以下のようになります。
+                ul
+                    li DisallowOverscrill<br>WebViewをオーバースクロールさせたくない場合にtrueを設定します。trueかfalseを指定します。デフォルトはfalseです。
+                    li TopActivityIndicator<br>ステータスバーに表示されるインジケータの種類を設定します。このインジケータは、アプリがネットワーク通信するときなどに表示されます。Cordovaでは、ページの読み込み中には、このインジケーターが表示されます。執筆時の最新のCordova 3.0.6にはバグがあり、このインジケータは表示されません。有効な値は、whiteLargeとwhiteとgrayです。デフォルトはgrayです。
+                    li EnableVierportScale<br>metaタグによるviewportのスケールを有効にしない場合にtrueを設定します。trueにすると、metaタグのviewportでスケールが有効になりません。trueかfalseを指定します。デフォルトはfalseです。
+                    li 
                 .alert.alert-info アプリのアイコンを設定する
                 .alert.alert-info アプリのスプラッシュスクリーンを設定する
                 .alert.alert-info ドメインホワイトリストを設定する

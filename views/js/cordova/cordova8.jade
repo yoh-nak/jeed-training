@@ -26,7 +26,6 @@ block body
                 p プロジェクトが作成されているか確認した後、プロジェクトのwww以下のディレクトリにあるWebリソースを編集してアプリのコードを記述します。それ以降は、動作確認とコード編集の繰り返しというサイクルに入ります。
                 .alert.alert-info ブラウザで確認する
                 p パソコンのブラウザであれば、使い慣れたWebインスペクタがすぐに利用できるので、ハイブリッドアプリでもパソコンのブラウザ上で実行できるようにしておくと便利です。いちいち端末やエミュレータ内で実行するよりも直接ブラウザで動作させたほうが、開発中は都合がよい場合もあります。
-                .alert.alert-info cordovaコマンドの管理
                 p cordovaコマンドには、作成したアプリをブラウザから読み込めるようにするために、アプリをホストするローカルなWebサーバを起ち上げることができます。
                 pre
                     :code
@@ -139,37 +138,46 @@ block body
                         document.addEventListener('deviceready',function(){
                             console.log('devicereadyイベントが発火されました');
                         },false);
-                .alert.alert-info アプリの設定
-                .alert.alert-info config.xmlの構造
-                .alert.alert-info アプリに関する設定
-                .alert.alert-info 設定を反映させる
-                .alert.alert-info Android特有の設定項目
-                .alert.alert-info iOS特有の設定項目
-                .alert.alert-info アプリのアイコンを設定する
-                .alert.alert-info アプリのスプラッシュスクリーンを設定する
-                .alert.alert-info ドメインホワイトリストを設定する
-                .alert.alert-info ドメインホワイトリストの基本的な設定方法
-                .alert.alert-info プラットフォームごとにカスタマイズする
-                .alert.alert-info HTML5側をプラットフォームごとに切り替える
-                .alert.alert-info ネイティブ側をプラットフォームごとに切り替える
-                .alert.alert-info Cordovaプラグインを利用する
-                .alert.alert-info プラグインを導入する
-                .alert.alert-info プラグインを管理する
-                .alert.alert-info プラグインのインストールを理解する
-                .alert.alert-info プラグインの仕組み
-                .alert.alert-info 組み込みプラグインの一覧
-                .alert.alert-info Android向けのCordovaプラグインを実装する
-                .alert.alert-info Android向けのプラグイン開発の詳細
-                .alert.alert-info iOS向けのCordovaプラグインを実装する
-                .alert.alert-info cordovaコマンドからインストールできるプラグインを実装する
-                .alert.alert-info その他のコマンドの解説
-                .alert.alert-info 既存のアプリにCordovaを組み込む
-                .alert.alert-info Cordovaフレームワークのダウンロード
-                .alert.alert-info AndroidのプロジェクトにCordovaフレームワークを導入する
-                .alert.alert-info 画面の一部でCordovaを用いる
-                .alert.alert-info iOSのプロジェクトにCordovaフレームワークを導入する
-                .alert.alert-info wwwディレクトリに配置する
-                .alert.alert-info Cordovaフレームワークを呼び出すコードを記述する
+                p devicereadyイベント以外にもCordovaアプリケーションが内部でHTMLを読み込むときには、いくつか読み込みに関連するイベントが発火されます。これらは、Cordovaフレームワークが発行するイベントではなく、レンダリングエンジンが発行する組み込みのイベントです。
+                p HTMLが読み込まれているとき、最初に発火するのがDOMContentLoadedイベントです。DOMContentLoadedイベントは、読み込んでいるHTMLがレンダリングエンジンによってすべてパースされたときに発火します。HTML中に含まれている外部のCSSやJavaScriptの読み込みが終わらなくてもこのイベントは発火します。ただし、そのHTML中にscriptタグで埋め込まれているJavaScriptの実行はHTMLのパース処理をブロックするので注意してください。
+                p その次に、loadイベントが発火します。このイベントは、読み込んだHTMLだけではなく、そのHTMLが依存しているすべての関連リソースが読み込まれてレンダリングが終了したときに発火します。HTMLが依存している関連リソースとは、外部のCSSやJavaSriptやAjaxやiframe内のドキュメントなど、そのページのレンダリングに必要になるもののすべてです。
+                p DOM要素以外のJavaScriptやCSSや画像などの読み込みが終わり、loadイベントが発火した後、Cordovaフレームワークはブリッジの初期化処理を行います。その処理が完了してJavaScript側からネイティブ側へアクセスできるようになって初めてdevicereadyイベントが発火します。
+                p devicereadyイベントが発火するまでに、関連するイベントが発火する順番を整理すると以下のようになります。
+                table.table
+                    tr
+                        th 順番
+                        th イベント名
+                        th 発火のタイミング
+                    tr
+                        td 1
+                        td DOMContentLoaded
+                        td そのHTMLのすべてのDOM要素が読み込まれたとき
+                    tr
+                        td 2
+                        td load
+                        td そのページのレンダリングに必要なすべてのリソースがすべて読み込まれたとき
+                    tr
+                        td 3
+                        td deviceready
+                        td JavaScriptからネイティブ機能へアクセス可能になったとき
+                p この関連するイベントが発火するタイミングは、以下のようなJavaScriptで確かめることができます。
+                pre
+                    :code
+                        document.addEventListener('DOMContentLoaded',function(){
+                            console.log('DOMContentLoadedイベントが発火しました');
+                        },false);
+
+                        document.addEventListener('load',function(){
+                            console.log('loadイベントが発火しました');
+                        },false);
+
+                        document.addEventListener('deviceready',function(){
+                            console.log('devicereadyイベントが発火しました');
+                        },false);
+                p devicereadyイベントは必ずloadイベントの後に発行されます。このため、loadイベントの発行が遅れると、その分devicereadyイベントの発行も遅れることになります。
+                p loadイベントは読み込まれているHTMLの関連リソースすべてが読み込まれてレンダリングが完了して初めて発火します。
+                p devicereadyイベントを早く発行してほしい場合には、すぐに利用しないリソースは最初に読み込まずdevicereadyイベント後に読み込むようにしてください。そうすると、読み込みのせいでdevicereadyイベントの発火のタイミングが遅延することはなくなります。
+                p devicereadyイベントは、HTMLの読み込み時に毎回発火します。アプリの起動時だけではないことに注意してください。
     .footer=title
     script(src='http://code.jquery.com/jquery-1.10.2.min.js')
     script(src='../../js/google-code-prettify/prettify.js')

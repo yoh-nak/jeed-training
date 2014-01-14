@@ -1,0 +1,96 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block body
+    include navbar
+    .container
+      .row
+        .col-sm-3
+          include left
+        .col-sm-9
+          .panel.panel-primary
+            .panel-heading アプリの設定
+            .panel-body
+                p Cordovaを用いたアプリには、アプリや特定のプラットフォームでの挙動の詳細詳細を設定する様々なパラメータが存在します。
+                p アプリの設定は、wwwディレクトリ以下のconfig.xmlファイルを編集して行います。このconfig.xmlに記述した設定は、cordovaコマンドラインツールにより、各プラットフォーム特有のプロジェクトのconfig.xmlに反映されます。
+                p ここではconfig.xmlの基本的な構造やその設定項目を説明します。併せて、プラットフォームごとに異なるアプリのアイコンやスプラッシュスクリーンの設定についても説明します。
+                .alert.alert-info config.xmlの構造
+                p Cordovaが参照するconfig.xmlのスキーマは、W3Cの策定する以下の仕様に基づいています。
+                ul
+                    li URL Packaged Web App（Widgets） - Packaging and XML Configuration （Second Edition）<br><a href="http://www.w3.org/TR/widgets/" target="_blank">http://www.w3.org/TR/widgets/</a>
+                p この仕様は、汎用的なWebアプリをパッケージ化する際のメタデータを記述する設定ファイルのスキーマを定めています。config.xmlは、具体的には以下のように構造化されています。
+                pre
+                    :code
+                        <widgets>
+                            <name></name>
+                            <preference />
+                            <feature>
+                                <param />
+                            </feature>
+                            <access />
+                            <content />
+                        </widgets>
+                h4 preference要素
+                p Cordovaフレームワークでは、実行時のフレームワークの挙動を設定で変更できます。name属性の名前、value属性には設定の値を記述します。
+                h4 access要素
+                p アプリ内で許可するドメインをホワイトリスト形式で記述します。この要素に記述されていないドメインでホストされているHTMLは読み込めません。
+                h4 feature要素
+                p Cordovaフレームワークでは、端末のあるネイティブ機能へのアクセスをプラグインが提供します。Cordovaフレームワークは、実行時にこのfeature要素を見て、どのプラグインが有効になっているかを知ります。feature要素では、アプリが利用するプラグイン名とそれに対応するネイティブ側のプラグインのクラス名を指定します。
+                p この設定は、後述するcordova pluginコマンドによって自動的に挿入されるので、多くの場合、開発者が記述する必要はありません。
+                h4 content要素
+                p この要素では、Cordovaを用いたハイブリッドアプリが最初に読み込むHTMLのパスを指定します。デフォルトでは、index.htmlが読み込まれます。
+                pre
+                    :code
+                        <content src="hoge.html" />
+                .alert.alert-info アプリに関する設定
+                p www/config.xmlを編集して、アプリに関する基本的な情報を設定します。
+                p アプリの識別子は、widget要素のid属性で指定します。Androidアプリでは、アプリの識別子がアプリケーションのパッケージ名として利用されます。iOSでは、AppIDとして利用されます。アプリの識別子は、逆ドメイン形式で記述します。アプリのバージョンは、widget要素のversion属性で指定します。。
+                pre
+                    :code
+                        <widget id="com.example.hellohello" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+                p アプリ名は、widget要素以下にname要素を用いて記述します。アプリ名は、iOS用のプロジェクトではプロジェクト名としても利用されます。
+                pre
+                    :code
+                        <name>HelloWorldApp</name>
+                p Cordovaフレームワーク用の設定値は、widget要素以下にpreference要素を用いて設定します。例えば、iOSのCordovaフレームワークで利用できる"DisallowOverscroll"この設定は、後述するcordova以下のように記述します。
+                .alert.alert-info 設定を反映させる
+
+                .alert.alert-info Android特有の設定項目
+                .alert.alert-info iOS特有の設定項目
+                .alert.alert-info アプリのアイコンを設定する
+                .alert.alert-info アプリのスプラッシュスクリーンを設定する
+                .alert.alert-info ドメインホワイトリストを設定する
+                .alert.alert-info ドメインホワイトリストの基本的な設定方法
+                .alert.alert-info プラットフォームごとにカスタマイズする
+                .alert.alert-info HTML5側をプラットフォームごとに切り替える
+                .alert.alert-info ネイティブ側をプラットフォームごとに切り替える
+                .alert.alert-info Cordovaプラグインを利用する
+                .alert.alert-info プラグインを導入する
+                .alert.alert-info プラグインを管理する
+                .alert.alert-info プラグインのインストールを理解する
+                .alert.alert-info プラグインの仕組み
+                .alert.alert-info 組み込みプラグインの一覧
+                .alert.alert-info Android向けのCordovaプラグインを実装する
+                .alert.alert-info Android向けのプラグイン開発の詳細
+                .alert.alert-info iOS向けのCordovaプラグインを実装する
+                .alert.alert-info cordovaコマンドからインストールできるプラグインを実装する
+                .alert.alert-info その他のコマンドの解説
+                .alert.alert-info 既存のアプリにCordovaを組み込む
+                .alert.alert-info Cordovaフレームワークのダウンロード
+                .alert.alert-info AndroidのプロジェクトにCordovaフレームワークを導入する
+                .alert.alert-info 画面の一部でCordovaを用いる
+                .alert.alert-info iOSのプロジェクトにCordovaフレームワークを導入する
+                .alert.alert-info wwwディレクトリに配置する
+                .alert.alert-info Cordovaフレームワークを呼び出すコードを記述する
+    .footer=title
+    script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+    script(src='../../js/google-code-prettify/prettify.js')
+    script.
+        prettyPrint();
+    script(src='../../js/bootstrap.min.js')
+    script(src='../../coffee/list-counter.js')

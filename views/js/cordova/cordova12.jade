@@ -1,0 +1,68 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block body
+    include navbar
+    .container
+      .row
+        .col-sm-3
+          include left
+        .col-sm-9
+          .panel.panel-primary
+            .panel-heading ドメインホワイトリストを設定する
+            .panel-body
+                p Cordovaアプリケーションで読み込まれるHTMLは、JavaScriptからネイティブの機能へアクセスできる特殊な環境に置かれています。
+                p このため、信頼できないHTMLファイルを読み込んでしまうとCordovaが提供するネイティブ機能を通じて端末の情報を盗まれる危険があります。config.xmlのaccess要素は、こういった危険を避けるために信頼できるドメインを設定して、それ以外の信頼できないドメインのHTMLは読み込まないようにします。
+                .alert.alert-info ドメインホワイトリストの基本的な設定方法
+                p ドメインホワイトリストは、config.xml内でaccess要素によって記述します。
+                p cordovaコマンドでプロジェクトを作成したときには、access要素は以下のように記述されています。
+                pre
+                    :code
+                        <access origin="*" />
+                p これは、どのドメインのHTMLも読み込まれるように設定されています。たとえば、ページ中でどこかの別ページに遷移します。そのページの中でcordova.jsを読み込むと、そのアプリで提供されているCordovaのネイティブ機能をそのページでも利用できるようになります。
+                p ここでは、信頼できるドメインのみを適切に指定することが重要です。アプリ内で外部のHTMLを読み込む必要がなければ、access要素は削除してください。
+                p access要素は、複数指定することができます。例えば、http://example.comとhttp://foobar.example.comのページの読み込みを有効にするには、以下のようにaccess要素を2つ並べます。
+                pre
+                    :code
+                        <access origin="http://example.com" />
+                        <access origin="http://foobar.example.com" />
+                p 指定するドメインには、パターンを用いることができます。例えば、example.comのサブドメインすべてをホワイトリストに追加するには、以下のようにサブドメインの部分に「*」を指定します。
+                pre
+                    :code
+                        <access origin="http://*.example.com" />
+                p access要素のorigin属性に指定できる文字列は、W3C Widget Accessの仕様に基いています。
+                ul
+                    li URL W3C Widget Access<br><a href="http://www.w3.org/TR/widgets-access/">http://www.w3.org/TR/widgets-access/</a>
+                .alert.alert-info プラットフォームごとにカスタマイズする
+                .alert.alert-info HTML5側をプラットフォームごとに切り替える
+                .alert.alert-info ネイティブ側をプラットフォームごとに切り替える
+                .alert.alert-info Cordovaプラグインを利用する
+                .alert.alert-info プラグインを導入する
+                .alert.alert-info プラグインを管理する
+                .alert.alert-info プラグインのインストールを理解する
+                .alert.alert-info プラグインの仕組み
+                .alert.alert-info 組み込みプラグインの一覧
+                .alert.alert-info Android向けのCordovaプラグインを実装する
+                .alert.alert-info Android向けのプラグイン開発の詳細
+                .alert.alert-info iOS向けのCordovaプラグインを実装する
+                .alert.alert-info cordovaコマンドからインストールできるプラグインを実装する
+                .alert.alert-info その他のコマンドの解説
+                .alert.alert-info 既存のアプリにCordovaを組み込む
+                .alert.alert-info Cordovaフレームワークのダウンロード
+                .alert.alert-info AndroidのプロジェクトにCordovaフレームワークを導入する
+                .alert.alert-info 画面の一部でCordovaを用いる
+                .alert.alert-info iOSのプロジェクトにCordovaフレームワークを導入する
+                .alert.alert-info wwwディレクトリに配置する
+                .alert.alert-info Cordovaフレームワークを呼び出すコードを記述する
+    .footer=title
+    script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+    script(src='../../js/google-code-prettify/prettify.js')
+    script.
+        prettyPrint();
+    script(src='../../js/bootstrap.min.js')
+    script(src='../../coffee/list-counter.js')

@@ -16,30 +16,62 @@ block body
           .panel.panel-primary
             .panel-heading アプリのスプラッシュスクリーンを設定する
             .panel-body
-                .alert.alert-info アプリのスプラッシュスクリーンを設定する
-                .alert.alert-info ドメインホワイトリストを設定する
-                .alert.alert-info ドメインホワイトリストの基本的な設定方法
-                .alert.alert-info プラットフォームごとにカスタマイズする
-                .alert.alert-info HTML5側をプラットフォームごとに切り替える
-                .alert.alert-info ネイティブ側をプラットフォームごとに切り替える
-                .alert.alert-info Cordovaプラグインを利用する
-                .alert.alert-info プラグインを導入する
-                .alert.alert-info プラグインを管理する
-                .alert.alert-info プラグインのインストールを理解する
-                .alert.alert-info プラグインの仕組み
-                .alert.alert-info 組み込みプラグインの一覧
-                .alert.alert-info Android向けのCordovaプラグインを実装する
-                .alert.alert-info Android向けのプラグイン開発の詳細
-                .alert.alert-info iOS向けのCordovaプラグインを実装する
-                .alert.alert-info cordovaコマンドからインストールできるプラグインを実装する
-                .alert.alert-info その他のコマンドの解説
-                .alert.alert-info 既存のアプリにCordovaを組み込む
-                .alert.alert-info Cordovaフレームワークのダウンロード
-                .alert.alert-info AndroidのプロジェクトにCordovaフレームワークを導入する
-                .alert.alert-info 画面の一部でCordovaを用いる
-                .alert.alert-info iOSのプロジェクトにCordovaフレームワークを導入する
-                .alert.alert-info wwwディレクトリに配置する
-                .alert.alert-info Cordovaフレームワークを呼び出すコードを記述する
+                p スプラッシュスクリーンとは、アプリの起動時に表示する画像です。
+                p Androidアプリでスプラッシュスクリーンを設定するには、config.xmlのsplashscreen設定に画像名を記述します。Androidアプリでは、リソース中の画像を表す識別子に拡張子を用いません。この画像の名前には、拡張子を含めないでください。
+                pre
+                    :code
+                        <preference name="splashscreen" value="splash" />
+                p 上記の例では、画像名として「splash」を指定しているので、スプラッシュ画像としてsplash.pngをplatform/android/res以下に、アイコン画像と同様に複数のピクセル密度向けの画像（ldpi、mdpi、hdpi、xhdpi）を納めてください。
+                p ここで、1つ注意すべきことがあります。Androidではディスプレイの大きさが標準化されておらず、デバイスによってバラバラなのです。では、Androidでスプラッシュスクリーンのために用意する画像のサイズはどうすればよいのでしょうか？Androidアプリ開発では、こうったときのために9patchと呼ばれる伸び縮みの箇所を指定できる画像フォーマットを利用します。PNGを拡張したこの画像形式の拡張子には「.9.png」を用います。このスプラッシュスクリーン画像にもこの9patch形式の画像を用意してください。
+                p 用意する画像のパスとその画像の最低限のサイズの大きさの対応は以下のようになります。上記のスプラッシュスクリーンの設定では画像名に「splash」と付けているので、それと同じ名前の画像ファイルを置きます。
+                table.table
+                    tr
+                        th 画像のファイル名
+                        th 画像サイズ（縦×横）
+                    tr
+                        td drawable-ldpg/splash.9.png
+                        td 426x320px以上の9patch画像
+                    tr
+                        td drawable-mdpi/splash.9.png
+                        td 470x320px以上の9patch画像
+                    tr
+                        td drawable-hdpi/splash.9.png
+                        td 640x480px以上の9patch画像
+                    tr
+                        td drawable-xhdpi/splash.9.png
+                        td 960x720px以上の9patch画像
+                p 9patch画像は、自動的にデバイス画面前面を覆うように表示されます。9patch形式の画像は、Android SDKに含まれているdraw9patchというアプリケーションを利用します。Android SDKにパスを通してある状態ならば、以下のようにターミナルでdraw9patchコマンドを実行すると、9patch形式の画像を作成するツールが開きます。draw9patchコマンドは、Android SDKのsdk/toolsディレクトリにあります。
+                pre
+                    :code
+                        $ draw9patch
+                p iOSアプリでは、iOS自体がスプラッシュスクリーンを表示する仕組みを持っています。あらかじめのスプラッシュスクリーン用の画像を置くだけで有効になります。iOS用のスプラッシュスクリーン画像の置き場所は、platforms/ios/（プロジェクト名）/Resources/splashディレクトリです。画像の種類は以下のようになります。
+                table.table
+                    tr
+                        th 画像のファイル名
+                        th 画像のサイズ（縦×横）
+                    tr
+                        td Default-568h@2x~iphone.png
+                        td 640x1136
+                    tr
+                        td Default-Landscape~ipad.png
+                        td 1024x748
+                    tr
+                        td Default-Landscape@2x~ipad.png
+                        td 2048x1496
+                    tr
+                        td Default-Portrait~ipad.png
+                        td 768x1004
+                    tr
+                        td Default-Portrait@2x~ipad.png
+                        td 1536x2008
+                    tr
+                        td Default~iphone.png
+                        td 320x480
+                    tr
+                        td Default@2x~iphone.png
+                        td 640x960
+                p iOSアプリでは、起動時のオリエンテーションをスプラッシュスクリーンの画像の有無で指定します。例えば、Default-Portrait~ipad.png画像がある場合には縦画面で起動しますし、Default-Landscape~ipad.png画像がある場合には、横画面でも起動します。
+                p Default-568h@2x~iphone.pngは、iPhone5以降のディスプレイで表示されるスプラッシュスクリーン画像です。この画像がない場合には、iPhone5の解像度に対応していないアプリとして判断され、アプリには上下に黒い帯が出た状態のまま動作するようになります。
     .footer=title
     script(src='http://code.jquery.com/jquery-1.10.2.min.js')
     script(src='../../js/google-code-prettify/prettify.js')

@@ -15,25 +15,134 @@ block body
         .col-sm-9
           .panel.panel-primary
             .panel-heading Cordovaプラグインを利用する
-            .panel-body
-                .alert.alert-info Cordovaプラグインを利用する
+            .panel-bodys
+                p Cordova3.0からは、ネイティブ機能を提供するものはすべてプラグインとして管理されるようになりました。以前ではCordovaフレームワークに組み込まれていたネイティブ機能も、すべてプラグインとして提供されています。ソースコードのリポジトリとしても全く別になりました。
+                p Cordovaでは、cordova pluginコマンドを用いてプラグインを管理します。開発者はコマンドを通じて様々なプラグインを簡単に導入することができます。
+                p 開発者は、公式で提供されているプラグインで以下の機能を利用できます。
+                ul
+                	li 加速度センサ
+                	li カメラ・録音
+                	li コンパス
+                	li ネットワーク接続
+                	li 端末内のコンタクトリスト
+                	li デバイス情報
+                	li イベント
+                	li ファイルストレージ
+                	li 位置情報
+                	li 国際化
+                	li アプリ内ブラウザ
+                	li 音声・動画
+                	li アラート・ダイアログ・バイブレーション
+                p ここでは、Cordovaプラグインについての概要と、実際にアプリのプロジェクトへCordovaプラグインを導入する方法を紹介します。
                 .alert.alert-info プラグインを導入する
+                p Cordovaプラグインをプロジェクトに導入するためには、cordova pluginコマンドを使います。コマンドには、プラグインのgitリポジトリのURLを指定します。例えば、端末のカメラ機能を利用できるプラグインを導入するには、以下のようにそのプラグインのコードが保管されているgitリポジトリのアドレスを指定します。
+                pre
+                	:code
+                		$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-camera.git
+                p このコマンドを用いると、プロジェクトのpluginsディレクトリに追加したプラグインの実体がダウンロードされます。
+                p また、次にcordova prepareコマンド、cordova runコマンド、cordova emulateコマンド、cordova buildコマンドを実行したときに、プラグインのネイティブコード、設定、JavaScript側のインターフェースが各プラットフォームのプロジェクトに反映されます。
+                p さっそく導入したCameraプラグインを使ってみましょう。www/js/index.jsの35行目付近にあるonDeviceReadyメソッドの部分を以下のように編集します。
+                pre
+                	:code
+                		onDeviceReady: function(){
+                		    app.receivedEvent('deviceready');
+
+                		    // カメラへのオプション
+                		    var options = {
+                		        quality: 50,
+                		        destinationType: navigator.camera.DestinationType.File_URI
+                		    };
+
+                		    // カメラを起動する
+                		    navigator.camera.getPicture(function(imageData)){
+                		        alert(imageData);
+                		    }, function() {
+                		        alert('fail');
+                		    }, options);
+                		},
+                p 編集が完了したら、cordova runコマンドやcordova emulateコマンドで事項してください。
+                pre
+                	:code
+                		$ cordova run -d
+                p アプリの起動直後にカメラが起動すれば成功です。他のプラグインも同様のやり方で導入することができます。
                 .alert.alert-info プラグインを管理する
+                p プロジェクトにインストールされているプラグインを一覧するには、cordova plugin lsコマンドを用います。
+                pre
+                	:code
+                		$ cordova plugin ls
+                		[ 'org.apache.core.camera' ]
+                p このプロジェクトにインストールしているプラグインの一覧が表示されます。上記の例では、先ほど導入したカメラプラグインの識別子が表示されています。
+                p プラグインをプロジェクトからアンインストールするには、cordova plugin rmコマンドにそのプラグインの識別子を指定します。リポジトリの場所を指定してプラグインをインストールするのとは違って、プラグインをアンインストールするときにはそのプラグインの識別子を指定します。
+                pre
+                	:code
+                		$ cordova plugin rm org.apache.core.camera
+                p プラグインを取り除いたことを確認するために、cordova plugin lsコマンドを実行します。
+                pre
+                	:code
+                		$ cordova plugin ls
+                		No plugins added. Use 'cordova plugin add <plugin>'.
+                p プラグインが削除されていることがわかります。
                 .alert.alert-info プラグインのインストールを理解する
+                p 導入したプラグインがどのようにプロジェクトに反映されるか確認してみましょう。ここでは端末の位置情報を扱うことができるGeolocationプラグインを例として導入してみます。
+                p 各種設定や導入したプラグインを実際の各プラットフォームのプロジェクトに反映させるには、cordova prepareコマンドを用います。
+                pre
+                	:code
+                		$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-geolocation.git
+
+                		$ cordova prepare -d
+                p pluginsディレクトリを見ると、org.apache.cordova.core.geolocationディレクトリが作成されています。その中には、先ほどcordova plugin addコマンドで指定したgitリポジトリの内容がそのまま置かれています。
+                p では、Androidのプロジェクトを見てみましょう。AndroidManifest.xmlを見ると、端末の位置情報にアクセスするためのパーミッションが追加されています。
+                pre
+                	:code
+                		<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+                		<uses-permission android:name="android.persmission.ACCESS_FINE_LOCATION" />
+                p Androidアプリでは、あらかじめAndroid端末の利用する機能をAndroidManifest.xmlに記述します。これにより、もしセキュリティの脆弱性によりアプリ内で任意のコードが実行されたとしても、パーミッションに記述されていない機能は利用できません。また、このパーミッションはGoogle Play Storeでアプリをインストールする際に、このアプリがアクセスする機能としてユーザに表示されます。
+                p 位置情報を扱うためのネイティブコードは、platforms/android/src/org/apache/cordova/core以下に追加されます。
+                pre
+                	:code
+                		$ ls platforms/android/src/org/apache/cordova/core
+                		CordovaLocationListener.java
+                		GPSListener.java
+                		GeoBroker.jada
+                		NetworkListener.java
+                p JavaScript側のインターフェースは、platforms/android/assets/www/plugins/org.apache.cordova.core.geolocation/www/以下に配置されます。
+                pre
+                	:code
+                		$ ls platforms/android/assets/www/plugins/org.apache.cordova.core.geolocation/www/
+                		Coordinates.js
+                		Postion.js
+                		PositionError.js
+                		geolocation.js
+                p また、platforms/android/asset/www/cordova_plugins.jsを見ると、以下のようにGeolocationプラグインの情報が追加されていることがわかります。
+                pre
+                	:code
+                		cordova.define('cordova/plugin_list', function(require, exports, module){
+                		module.exports = [
+                		    {
+                		        "file":
+                		            "plugins/org.apache.cordova.core.geolocation/www/Coordinates.js",
+                		        "id": "org.apache.cordova.core.geolocation.Coordinates",
+                		        "clobbers": [
+                		            "Coordinates"
+                		        ]
+                		    },
+                		    {
+                		        "file":
+                		    },
+                		    {
+
+                		    },
+                		    {
+
+                		    }
+                		];
+                		});
                 .alert.alert-info プラグインの仕組み
                 .alert.alert-info 組み込みプラグインの一覧
                 .alert.alert-info Android向けのCordovaプラグインを実装する
                 .alert.alert-info Android向けのプラグイン開発の詳細
                 .alert.alert-info iOS向けのCordovaプラグインを実装する
                 .alert.alert-info cordovaコマンドからインストールできるプラグインを実装する
-                .alert.alert-info その他のコマンドの解説
-                .alert.alert-info 既存のアプリにCordovaを組み込む
-                .alert.alert-info Cordovaフレームワークのダウンロード
-                .alert.alert-info AndroidのプロジェクトにCordovaフレームワークを導入する
-                .alert.alert-info 画面の一部でCordovaを用いる
-                .alert.alert-info iOSのプロジェクトにCordovaフレームワークを導入する
-                .alert.alert-info wwwディレクトリに配置する
-                .alert.alert-info Cordovaフレームワークを呼び出すコードを記述する
     .footer=title
     script(src='http://code.jquery.com/jquery-1.10.2.min.js')
     script(src='../../js/google-code-prettify/prettify.js')

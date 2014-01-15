@@ -127,18 +127,56 @@ block body
                 		        ]
                 		    },
                 		    {
-                		        "file":
+                		        "file": "plugins/org.apache.cordova.core.geolocation/www/PositionError.js",
+                		        "id": "org.apache.cordova.core.geolocation.PositionError",
+                		        "clobbers": [
+                		            "PositonError"
+                		        ]
                 		    },
                 		    {
-
+                		        "file": "plugins/org.apache.cordova.core.geolocaton/www/Position.js",
+                		        "id": "org.apache.cordova.core.geolocation.Position",
+                		        "clobbers": [
+                		            "Position"
+                		        ]
                 		    },
                 		    {
-
+                		        "file": "plugins/org.apache.cordova.core.geolocation/www/geolocation.js",
+                		        "id": "org.apache.cordova.core.geolocation.geolocation",
+                		        "clobbers": [
+                		            "navigator.gelocation"
+                		        ]
                 		    }
                 		];
                 		});
+				p 次はiOSのプロジェクトで更新されたファイルを見てみましょう。platforms/ios/（プロジェクト名）/Pluginsディレクトリには位置情報を扱うObjective-Cのコードが追加されています。
+				pre
+					:code
+						$ ls platforms/ios/（プロジェクト名）/config.xmlの内容を見ると、Geolocationプラグインに関する設定項目が追加されています。
+				pre
+					:code
+						<feature name="Geolication">
+						    <param name="ios-package" value="CDVLocation" />
+						</feature>
+				p JavaScrpt側のインターフェースとプラグイン定義は、Androidの場合と同様にplatforms/ios/wwwディレクトリ以下に追加されます。
+				p ここでは、cordovaコマンドを通じてプラグインを追加すると、裏ではどのように各プラットフォームのプロジェクトに反映されるかについて解説しました。
                 .alert.alert-info プラグインの仕組み
+                p Cordovaプラグインプラグインは、Cordova Pluginの仕様に従ってまとめられている1つのパッケージです。このパッケージの中には以下のようなものが含まれています。
+                ul
+                	li プラグインに関する情報
+                	li JavaScriptインターフェース
+                	li 各プラットフォーム向けのネイティブコード
+                	li 依存関係
+                p Cordovaのプラグインには、各プラットフォーム特有のネイティブコードが含まれています。このコードは、iOSではObjective-C、AndroidではJavaで記述されています。また、このパッケージにはHTML5側のインターフェースを定義するJavaScriptのコードが定義されています。
+                p Cordovaのプラグインには、プラグインの依存関係を定義することができます。あるプラグインが、別のプラグインの実装に対して依存していることを定義することで、プラグインのインストール時には自動的にその依存先のプラグインも同時にインストールされます。
+                p 開発者は、cordova pluginコマンドを使ってこれらのコンポーネントをiOSやAndroidの各プラットフォームに配置します。
                 .alert.alert-info 組み込みプラグインの一覧
+                p Cordovaがあらかじめ用意しているプラグインとそのgitリポジトリは、以下の通りです。
+                table.table
+                	tr
+                		th プラグイン名
+                		th 概要
+                		th リポジトリのURL
                 .alert.alert-info Android向けのCordovaプラグインを実装する
                 .alert.alert-info Android向けのプラグイン開発の詳細
                 .alert.alert-info iOS向けのCordovaプラグインを実装する

@@ -23,27 +23,73 @@ block body
                     li HTML5側をプラットフォームごとに切り替える
                     li ネイティブ側をプラットフォームごとに切り替える
                 .alert.alert-info HTML5側をプラットフォームごとに切り替える
-                p 
+                p まず、Webリソースをプラットフォームごとに切り替える方法を紹介します。プロジェクトのディレクトリには、mergesディレクトリがあります。以下のようにcordova platform addコマンドでプロジェクトにプラットフォーム対応を追加すると、mergeディレクトリ以下にもそのプラットフォームのディレクトリができます。
+                pre
+                    :code
+                        $ cordova platform ls
+                        [ 'android', 'ios' ]
+
+                        $ ls merges/
+                        android ios
+                p このディレクトリには、ある特定のプラットフォームでのにアプリに同梱するファイルを置くことができます。
+                p 例えば、merge/androidディレクトリに置いたファイルは、cordovaプロジェクトをビルドする際にAndroid特有のプロジェクトファイルのwwwディレクトリの中身にマージされます。具体的には、wwwディレクトリの内容はAndroidではplatform/android/assets/wwwディレクトリ以下にコピーされた後、merges/androidディレクトリの内容がplatforms/android/assets/wwwディレクトリ以下にさらにコピーされます。同じ名前のファイルがある場合には上書きされます。
                 .alert.alert-info ネイティブ側をプラットフォームごとに切り替える
-                p 
-                .alert.alert-info Cordovaプラグインを利用する
-                .alert.alert-info プラグインを導入する
-                .alert.alert-info プラグインを管理する
-                .alert.alert-info プラグインのインストールを理解する
-                .alert.alert-info プラグインの仕組み
-                .alert.alert-info 組み込みプラグインの一覧
-                .alert.alert-info Android向けのCordovaプラグインを実装する
-                .alert.alert-info Android向けのプラグイン開発の詳細
-                .alert.alert-info iOS向けのCordovaプラグインを実装する
-                .alert.alert-info cordovaコマンドからインストールできるプラグインを実装する
-                .alert.alert-info その他のコマンドの解説
-                .alert.alert-info 既存のアプリにCordovaを組み込む
-                .alert.alert-info Cordovaフレームワークのダウンロード
-                .alert.alert-info AndroidのプロジェクトにCordovaフレームワークを導入する
-                .alert.alert-info 画面の一部でCordovaを用いる
-                .alert.alert-info iOSのプロジェクトにCordovaフレームワークを導入する
-                .alert.alert-info wwwディレクトリに配置する
-                .alert.alert-info Cordovaフレームワークを呼び出すコードを記述する
+                p HTML5に関連するリソースではなく、ネイティブでコードを切り替えたい場合には、platformsディレクトリに生成されたプラットフォーム特有のプロジェクトファイルを修正します。
+                p ここでは、cordovaコマンドが生成する各プラットフォーム特有のプロジェクトの構造について説明します。
+                p Androidでは、ビルドツールであるantでビルドできる構成のディレクトリが生成されます。cordova run コマンドやcordova emulateコマンドは、このAndroid用のプロジェクトを実行するためにプロジェクトをビルドするantコマンドと、開発マシンとAndroid端末の間を取り持つadbコマンドを内部で利用します。
+                p platforms/androidディレクトリの外観は以下のようになっています。
+                pre
+                    :code
+                        platforms/android
+                            AndroidManifest.xml -> Androidの情報を設定するファイル
+                            ant.properties -> antツールの設定ファイル
+                            assets -> Androidアプリが利用するリソースが入っているディレクトリ
+                                    さらにこのディレクトリのwwwディレクトリにはcordovaがAndroidアプリ用に生成したアプリのファイルが納められている
+                            bin -> ビルドしたファイルが入っているディレクトリ
+                            build.xml -> Androidアプリをビルドする手順を示すファイル。
+                                    antが利用する
+                            cordova -> cordovaがビルドの際に利用するシェルスクリプトを格納するディレクトリ
+                            gen -> Android SDKがリソースから生成するJavaファイルを格納するディレクトリ
+                            libs -> このAndroidプロジェクトで利用するJARファイルを格納するディレクトリ。デフォルトではcordova.jarが入っている
+                            local.properties -> Android SDKが生成したこの開発マシンに関する設定ファイル
+                            proguard-project.txt -> proguardの設定ファイル
+                            project.properties -> Android SDKが生成したプロジェクトに関する設定ファイル
+                            res -> Androidアプリが利用するリソースを納めるディレクトリ
+                                    xml/config.xmlには、Android向けのCordovaフレームワークが参照する設定ファイルが配置されている
+                            src -> AndroidアプリのためのJavaコードを格納するディレクトリ
+                                    Cordovaフレームワークを呼び出すコードが入っている
+                p この生成されたAndroidプロジェクトを、Android SDKに付属するEclipseで開く方法を紹介します。
+                p="Android SDKのEclipseを起動した状態で、左のプロジェクト欄を右クリックし、[New]->[Other]を選択すると、ウィザードを選択するダイアログが開きます。ダイアログの中から、「Android Project from Existing Code」を選択して[Next]ボタンを押します。platforms/androidディレクトリをRootディレクトリとして選択して[Finish]ボタンを押すと、Eclipseのプロジェクトとしてインポートできます。"
+                p iOSでは、iOSアプリはXcodeでなければビルドできないので、Xcode用のプロジェクトが生成されます。cordovaコマンドやcordova emulateコマンドは、プロジェクトを実行するためにxcodebuildというXcodeのプロジェクトを実行するためのコマンドを内部で利用します。
+                p platforms/iosディレクトリの外観は以下のようになっています。
+                pre
+                    :code
+                        platforms/ios
+                            Cordova.ib -> Cordovaフレームワークのプロジェクトが納められているディレクトリ
+                            HelloWorld -> iOSアプリ用のプロジェクトのファイルが納められているディレクトリ
+                                Classes -> Cordovaフレームワークを呼び出すコードが納められているディレクトリ
+                                HelloWorld-Info.plist -> iOSアプリの情報を設定するファイル
+                                HelloWorld-Prefix.pch -> コンパイルするすべてのコードの頭につくファイル
+                                Plugins -> プラグインのコードを納めるディレクトリ
+                                Resources -> iOSアプリが利用するリソースファイルを納めるディレクトリ
+                                        icons、splashディレクトリにはアイコンやスプラッシュスクリーン用の画像が納められている
+                                config.xml -> Cordovaフレームワークが参照するiOSアプリ特有の設定ファイル
+                                main.m -> iOSアプリのネイティブ側でのエントリポイント
+                            HelloWorld.xcodeproj -> Xcode用のプロジェクト
+                            build -> ビルドされた結果できあがるファイルを納めるディレクトリ
+                            cordova -> cordovaがビルドの際に用いるシェルスクリプトが入っているディレクトリ
+                            www -> cordovaがiOSアプリように生成したアプリのファイルが納められているディレクトリ
+                p Xcodeでこのプロジェクトを開くには、ターミナルからopenコマンドでHelloWorld.xcodeprojを開きます。
+                pre
+                    :code
+                        $ open platforms/ios/HelloWorld.xcodeproj
+                p もしくは、Finder上でplatforms/ios/HelloWorld/xcodeprojをダブルクリックします。
+                p 執筆時点のcordovaコマンドでは、若干プロジェクトの実行処理に時間がかかるようです。EclipseやXcodeからプロジェクトを実行したほうが処理が速いので、すばやくプロジェクトを実行したい開発者はEclipseやXcodeから直接プロジェクトを実行するとよいでしょう。具体的には、以下のような開発サイクルを取ります。
+                ol
+                    li wwwディレクトリ以下のHTMLやCSSなどのファイルを編集する
+                    li cordova prepareコマンドを実行して各プラットフォームのプロジェクトに配置する
+                    li EclipseやXcodeで実行する
+                p="EclipseはプロジェクトのファイルがEclipse以外から更新されても検知できないので、Eclipseで実行する前にプロジェクトのリフレッシュを実行することを忘れないでください。メニューから[File]->[Refresh]を選択するか、[F5]キーを押すと、プロジェクト内のファイルが更新されます。"
     .footer=title
     script(src='http://code.jquery.com/jquery-1.10.2.min.js')
     script(src='../../js/google-code-prettify/prettify.js')

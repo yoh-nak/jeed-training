@@ -26,7 +26,40 @@ block content
                     li JavaScriptからプラグインのコードを呼び出す
                 p これらの作業は、Android用のプロジェクトであるplatforms/androidディレクトリ以下で行います。ネイティブ側のコードをJavaで記述するので、Eclipseを起動してAndroidのプロジェクトを開いてください。
                 .alert.alert-info config.xmlを編集して、プラグインに関する情報を追加する
+                p Cordovaでプラグインを実装するには、まずCordovaフレームワークが実行時に参照する設定ファイルであるconfig.xmlにプラグインに関する情報を追加します。Androidプロジェクトの場合には、config.xmlはres/xml/config.xmlにあります。
+                p config.xmlに登録する情報は、プラグイン名とAndroid用のプラグインのコードを記述するクラス名の2つです。JavaScriptからはここで指定したプラグイン名を用いてプラグインを呼び出します。ここでは、プラグイン名を「MyFirstPlugin」、クラス名を「com.example.hello.MyFirstPlugin」にします。res/xml/config.xmlを開いて、widget要素に以下のようにfeature要素を追加してください。
+                pre
+                    :code
+                        <feature name="MyFirstPlugin">
+                            <param name="android-package" value="com.example.hello.MyFirstPlugin"
+                        </feature>
                 .alert.alert-info Javaでプラグインのコードを記述する
+                p Androidのプロジェクトでは、com.example.hello.MyfirstPluginというクラスを作成します。config.xmlに追加したプラグインのクラス名と同じクラス名です。プラグインを実装するクラスはCordovaPluginクラスを継承する必要があります。
+                p Eclipseの画面の左にあるPacakge Explorerからsrcディレクトリを開き、com.example.helloパッケージを右クリックして表示されるメニューで[New]→[Class]を選択してください。
+                p 新しいクラス作成ダイアログが表示されるので、[Name]欄にクラス名として「MyFirstPlugin」、[SupperClass]欄に親クラス名として「CordovaPlugin」を指定します。
+                p [Finish]ボタンを押すと、MyFirstPluginクラスが作成されます。これを開いて、以下のように記述してください。
+                figure
+                    figcaption MyFirstPlugin.javaの基本形
+                    pre
+                        :code
+                            package com.example.hello;
+
+                            import org.apache.cordova.CallbackContext;
+                            import org.apache.cordova.CordovaPlugin;
+                            import org.json.JSONArray;
+                            import org.json.JSONException;
+
+                            public class MyFirstPlugin extends CordovaPlugin{
+                                @Override
+                                public boolean execute(String action, JSON args, CallbackContext callbackContext) throws JSON Exception {
+                                    return true;
+                                }
+                            }
+                p AndroidのCordovaプラグインのJavaの部分は、このコードが基本になります。executeメソッド内に、JavaScriptから呼び出せるネイティブの処理を記述します。JavaScriptからMyFirstPluginを呼び出すと、Cordova内部のブリッジ機構によりこのexecuteメソッドが呼び出されます。executeメソッドのシグネチャは以下のようになっています。
+                pre
+                    :code
+                        public boolean execute(String action.JSONArray args, CallbackContext callbackContext) throws JSONException
+                p action引数には
                 .alert.alert-info JavaScriptからプラグインのコードを呼び出す
                 .alert.alert-info Android向けのプラグイン開発の詳細
                 p 

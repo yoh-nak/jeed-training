@@ -18,9 +18,9 @@ block content
 						i.glyphicon.glyphicon-book
 						| &nbsp;html()メソッド②課題
 					.panel-body
-						p h1要素をクリックして、h1要素の子要素であるimg要素を、span要素の子要素に複製し、に拡大表示させてみましょう。
+						p ボタンをクリックして、p要素内のHTML要素をエスケープして、span要素内に表示させてみましょう。
 						p
-							a.btn.btn-default(href='../demo/jquery/exercise12/index1.html',target='_blank')
+							a.btn.btn-default(href='../demo/jquery/exercise13/index1.html',target='_blank')
 								i.glyphicon.glyphicon-play
 								| デモ
 							button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
@@ -38,8 +38,9 @@ block content
 										<link rel="stylesheet" href="style.css">
 										</head>
 										<body>
-										<h1><img src="img/enlarge.png"></h1>
-										<span></span>
+											<p><b>テキスト</b><i>テキスト</i><u>テキスト</u><s>テキスト</s></p>
+											<span></span>
+											<input type="button" value="click">
 										<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 										<script src="script.js"></script>
 										</body>
@@ -55,60 +56,22 @@ block content
 												title
 												link(rel='stylesheet', href='style.css')
 											body
-												h1: img(src='img/enlarge.png',alt='')
+												p
+													b テキスト
+													i テキスト
+													u テキスト
+													s テキスト
 												span
+												input(type='button',value='click')
 												script(src='http://code.jquery.com/jquery-1.10.2.min.js')
 												script(src='script.js')
-
 								figcaption （Jade）
 							figure
 								pre(class='prettyprint linenums:1')
 									:code
-										h1{
-											width:200px;
-											height:200px;
-											cursor:pointer;
-										}
-										span{
-											display:inline-block;
-											position:absolute;
-											top:100px;
-											left:100px;
-										}
-										span img{
-											width:400px;
-											height:400px;
-										}
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									:code
-										size()
-											200px
-
-										pos()
-											100px
-
-										h1
-											width size()
-											height size()
-											corsor pointer
-
-										span
-											display inline-block
-											position absolute
-											top pos()
-											left pos()
-											img
-												width: size() * 2
-												height: size() * 2
-								figcaption （Stylus）
-							figure
-								pre(class='prettyprint linenums:1')
-									:code
 										$(function(){
-											$('h1').click(function(){
-												$('span').html($(this).html());
+											$('input').click(function(){
+												$('span').text($('p').html());
 											});
 										});
 								figcaption （JavaScript）
@@ -116,8 +79,8 @@ block content
 								pre(class='prettyprint linenums:1')
 									:code
 										$ ->
-											$('h1').click ->
-												$('span').html $(this).html();
+											$('input').click ->
+												$('span').text $('p').html();
 												return
 											return
 								figcaption （CoffeeScript）

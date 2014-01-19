@@ -1,75 +1,79 @@
-include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;text()メソッド②
-						.panel-body
-							p text()メソッドは、text()メソッドに引数を渡さなかった場合、$メソッドで指定した要素のコンテンツを取得します。
-							p
-								a.btn.btn-default(href='../demo/jquery/exercise7/index1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-								| 
-								a.btn.btn-default(href='http://api.jquery.com/text/',target='_blank')
-									i.glyphicon.glyphicon-info-sign
-									| &nbsp;参考
-							figure
-								pre(class='prettyprint linenums:1')
-									:code
-										<!DOCTYPE html>
-										<html lang="ja-JP">
-										<head>
-										<meta charset="UTF-8">
-										<title></title>
-										</head>
-										<body>
-											<p id="first">取得する文字列</p>
-											<input type="button" value="取得">
-											<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-											<script src="script.js"></script>
-										</body>
-										</html>
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									:code
-										doctype
-										html(lang='ja-JP')
-											head
-												meta(charset='UTF-8')
-												title
-											body
-												p#first 取得する文字列
-												input(type='button', value='取得')
-												script(src='http://code.jquery.com/jquery-1.10.2.min.js')
-												script(src='script.js')
+extends ../layout
 
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									:code
+block link
+	link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+	link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+	link(href='../css/style.css',rel='stylesheet',media='screen')
+	link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+	include navbar.jade
+	.container
+		.row
+			.col-sm-3
+				include left.jade
+			.col-sm-9
+				.panel.panel-primary
+					.panel-heading
+						i.glyphicon.glyphicon-book
+						| &nbsp;text()メソッド②
+					.panel-body
+						p text()メソッドは、text()メソッドに引数を渡さなかった場合、$メソッドで指定した要素のコンテンツを取得します。
+						p
+							a.btn.btn-default(href='../demo/jquery/exercise7/index1.html',target='_blank')
+								i.glyphicon.glyphicon-play
+								| デモ
+							| 
+							a.btn.btn-default(href='http://api.jquery.com/text/',target='_blank')
+								i.glyphicon.glyphicon-info-sign
+								| &nbsp;参考
+						figure
+							pre(class='prettyprint linenums:1')
+								:code
+									<!DOCTYPE html>
+									<html lang="ja-JP">
+									<head>
+									<meta charset="UTF-8">
+									<title></title>
+									</head>
+									<body>
+										<p id="first">取得する文字列</p>
+										<input type="button" value="取得">
+										<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+										<script src="script.js"></script>
+									</body>
+									</html>
+							figcaption （HTML）
+						figure
+							pre(class='prettyprint linenums:1')
+								:code
+									doctype
+									html(lang='ja-JP')
+										head
+											meta(charset='UTF-8')
+											title
+										body
+											p#first 取得する文字列
+											input(type='button', value='取得')
+											script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+											script(src='script.js')
+
+							figcaption （Jade）
+						figure
+							pre(class='prettyprint linenums:1')
+								:code
+									$(function(){
 										$('input').click(function(){
 											window.alert($('#first').text());
 										});
-								figcaption （JavaScript）
-							figure
-								pre(class='prettyprint linenums:1')
-									:code
+									});
+							figcaption （JavaScript）
+						figure
+							pre(class='prettyprint linenums:1')
+								:code
+									$ ->
 										$('input').click ->
 											window.alert $('#first').text()
 											return
-								figcaption （CoffeeScript）
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.10.2.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+										return
+							figcaption （CoffeeScript）

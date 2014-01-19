@@ -1,113 +1,121 @@
-include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;実行される順番
-						.panel-body
-							p head要素内にJavaScriptを記述するとJavaScriptを実行してからbody要素がレンダリングされます。
-							p
-								a.btn.btn-default(href='../demo/jquery/exercise1/index1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									:code
-										<!DOCTYPE html>
-										<html lang="ja-JP">
-										<head>
-										<meta charset="utf-8">
-										<title></title>
-										<!--↓ココ-->
-										<script src="script.js"></script>
-										<!--↑ココ-->
-										</head>
-										<body>
-										テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-										</body>
-										</html>
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									:code
-										doctype
-										html(lang='ja-JP')
-											head
-												meta(charset='utf-8')
-												title
-												//-↓ココ
-												script(src='script.js')
-												//-↑ココ
-											body
-												| テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									:code
-										window.alert('Hello World!');
-								figcaption （JavaScript）
-							figure
-								pre(class='prettyprint linenums:1')
-									:code
-										window.alert 'Hello World!'
-								figcaption （CoffeeScript）
-							hr
-							p bodyの終了タグの前にJavaScriptを記述すると、body要素をレンダリングした後にJavaScriptを実行します。
-							p
-								a.btn.btn-default(href='../demo/jquery/exercise1/index2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									:code
-										<!DOCTYPE html>
-										<html lang="ja-JP">
-										<head>
-										<meta charset="utf-8">
-										<title></title>
-										</head>
-										<body>
-										テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-										<!--↓ココ-->
-										<script src="script.js"></script>
-										<!--↑ココ-->
-										</body>
-										</html>
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									:code
-										doctype
-										html(lang='ja-JP')
-											head
-												meta(charset='utf-8')
-												title
-											body
-												| テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-												//-↓ココ
-												script(src='script.js')
-												//-↑ココ
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									:code
-										window.alert('Hello World!');
-								figcaption （JavaScript）
-							figure
-								pre(class='prettyprint linenums:1')
-									:code
-										window.alert 'Hello World!'
-								figcaption （CoffeeScript）
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.10.2.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+extends ../layout
+
+block link
+	link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+	link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+	link(href='../css/style.css',rel='stylesheet',media='screen')
+	link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+	include navbar.jade
+	.container
+		.row
+			.col-sm-3
+				include left.jade
+			.col-sm-9
+				.panel.panel-primary
+					.panel-heading
+						i.glyphicon.glyphicon-book
+						| &nbsp;実行される順番
+					.panel-body
+						p head要素内にJavaScriptを記述するとJavaScriptを実行してからbody要素がレンダリングされます。
+						p
+							a.btn.btn-default(href='../demo/jquery/exercise1/index1.html',target='_blank')
+								i.glyphicon.glyphicon-play
+								| デモ
+						figure
+							//-pre(class='prettyprint linenums:1')
+							pre
+								:code
+									<!DOCTYPE html>
+									<html lang="ja-JP">
+									<head>
+									<meta charset="utf-8">
+									<title></title>
+									<!--↓ココ-->
+									<script src="script.js"></script>
+									<!--↑ココ-->
+									</head>
+									<body>
+									テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+									</body>
+									</html>
+							figcaption （HTML）
+						figure
+							//-pre(class='prettyprint linenums:1')
+							pre
+								:code
+									doctype
+									html(lang='ja-JP')
+										head
+											meta(charset='utf-8')
+											title
+											//-↓ココ
+											script(src='script.js')
+											//-↑ココ
+										body
+											| テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+							figcaption （Jade）
+						figure
+							//-pre(class='prettyprint linenums:1')
+							pre
+								:code
+									window.alert('Hello World!');
+							figcaption （JavaScript）
+						figure
+							//-pre(class='prettyprint linenums:1')
+							pre
+								:code
+									window.alert 'Hello World!'
+							figcaption （CoffeeScript）
+						hr
+						p bodyの終了タグの前にJavaScriptを記述すると、body要素をレンダリングした後にJavaScriptを実行します。
+						p
+							a.btn.btn-default(href='../demo/jquery/exercise1/index2.html',target='_blank')
+								i.glyphicon.glyphicon-play
+								| デモ
+						figure
+							//-pre(class='prettyprint linenums:1')
+							pre
+								:code
+									<!DOCTYPE html>
+									<html lang="ja-JP">
+									<head>
+									<meta charset="utf-8">
+									<title></title>
+									</head>
+									<body>
+									テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+									<!--↓ココ-->
+									<script src="script.js"></script>
+									<!--↑ココ-->
+									</body>
+									</html>
+							figcaption （HTML）
+						figure
+							//-pre(class='prettyprint linenums:1')
+							pre
+								:code
+									doctype
+									html(lang='ja-JP')
+										head
+											meta(charset='utf-8')
+											title
+										body
+											| テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+											//-↓ココ
+											script(src='script.js')
+											//-↑ココ
+							figcaption （Jade）
+						figure
+							//-pre(class='prettyprint linenums:1')
+							pre
+								:code
+									window.alert('Hello World!');
+							figcaption （JavaScript）
+						figure
+							//-pre(class='prettyprint linenums:1')
+							pre
+								:code
+									window.alert 'Hello World!'
+							figcaption （CoffeeScript）

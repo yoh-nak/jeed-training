@@ -1,3 +1,5 @@
-$('input').click ->
- $('#first').text "変更後"
- return
+$ ->
+	$('input').click ->
+		$('#first').text "変更後"
+		return
+	return

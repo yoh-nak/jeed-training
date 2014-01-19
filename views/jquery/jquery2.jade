@@ -1,75 +1,95 @@
-include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;jQueryの読み込み方
-						.panel-body
-							h4 ダウンロードして直接ファイルを読み込む
-							figure
-								//-pre(class='prettyprint linenums:1')
-								pre
-									| &lt;script src="./jquery-1.10.2.min.js"&gt;&lt;/script&gt;
-								pre
-									| script(src='./jquery-1.10.2.min.js')
-							h4 jQueryのCDNから読み込む
-							figure
-								//-pre(class='prettyprint linenums:1')
-								pre
-									| &lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
-								pre
-									| script(src='http://code.jquery.com/jquery-1.10.2.min.js')
-							h4 GoogleのCDNから読み込む
-							figure
-								//-pre(class='prettyprint linenums:1')
-								pre
-									| &lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"&gt;&lt;/script&gt;
-								pre
-									| script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
-							h4 GoogleのCDNから読み込んだ後、バージョン指定
-							figure
-								//-pre(class='prettyprint linenums:1')
-								pre
-									| &lt;script src="http://www.google.com/jsapi"&gt;&lt;/script&gt;
-									| &lt;script&gt;google.load("jquery","1.10.2");&lt;/script&gt;
-								pre
-									| script(src='http://www.google.com/jsapi')
-									| script.
-									| 	google.load("jquery","1.10.2");
-							h4 GoogleのCDNから読み込んだ後、バージョン指定（マイナーバージョンは最新のもの）
-							figure
-								//-pre(class='prettyprint linenums:1')
-								pre
-									| &lt;script src="http://www.google.com/jsapi"&gt;&lt;/script&gt;
-									| &lt;script&gt;google.load("jquery","1.10");&lt;/script&gt;
-								pre
-									| script(src='http://www.google.com/jsapi')
-									| script.
-									| 	google.load("jquery","1.10");
-							h4 MicrosoftのCDNから読み込む
-							figure
-								//-pre(class='prettyprint linenums:1')
-								pre
-									| &lt;script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
-								pre
-									| script(src='http://ajax.microsoft.com/ajax/jquery/jquery-1.10.2.min.js')
-							h4 cdnjsのCDNから読み込む
-							figure
-								//-pre(class='prettyprint linenums:1')
-								pre
-									| &lt;script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min.js"&gt;&lt;/script&gt;
-								pre
-									| script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min.js')
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.10.2.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+extends ../layout
+
+block link
+	link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+	link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+	link(href='../css/style.css',rel='stylesheet',media='screen')
+	link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+	include navbar.jade
+	.container
+		.row
+			.col-sm-3
+				include left.jade
+			.col-sm-9
+				.panel.panel-primary
+					.panel-heading
+						i.glyphicon.glyphicon-book
+						| &nbsp;jQueryの読み込み方
+					.panel-body
+						.alert.alert-info ダウンロードして直接ファイルを読み込む
+						figure
+							pre
+								| &lt;script src="./jquery-1.10.2.min.js"&gt;&lt;/script&gt;
+							figcaption （HTML）
+						figure
+							pre
+								| script(src='./jquery-1.10.2.min.js')
+							figcaption （Jade）
+						hr
+						.alert.alert-info jQueryのCDNから読み込む
+						figure
+							pre
+								| &lt;script src="http://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
+							figcaption （HTML）
+						figure
+							pre
+								| script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+							figcaption （Jade）
+						hr
+						.alert.alert-info GoogleのCDNから読み込む
+						figure
+							pre
+								| &lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"&gt;&lt;/script&gt;
+							figcaption （HTML）
+						figure
+							pre
+								| script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
+							figcaption （Jade）
+						hr
+						.alert.alert-info GoogleのCDNから読み込んだ後、バージョン指定
+						figure
+							pre
+								| &lt;script src="http://www.google.com/jsapi"&gt;&lt;/script&gt;
+								| &lt;script&gt;google.load("jquery","1.10.2");&lt;/script&gt;
+							figcaption （HTML）
+						figure
+							pre
+								| script(src='http://www.google.com/jsapi')
+								| script.
+								| 	google.load("jquery","1.10.2");
+							figcaption （Jade）
+						hr
+						.alert.alert-info GoogleのCDNから読み込んだ後、バージョン指定（マイナーバージョンは最新のもの）
+						figure
+							pre
+								| &lt;script src="http://www.google.com/jsapi"&gt;&lt;/script&gt;
+								| &lt;script&gt;google.load("jquery","1.10");&lt;/script&gt;
+							figcaption （HTML）
+						figure
+							pre
+								| script(src='http://www.google.com/jsapi')
+								| script.
+								| 	google.load("jquery","1.10");
+							figcaption （Jade）
+						hr
+						.alert.alert-info MicrosoftのCDNから読み込む
+						figure
+							pre
+								| &lt;script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
+							figcaption （HTML）
+						figure
+							pre
+								| script(src='http://ajax.microsoft.com/ajax/jquery/jquery-1.10.2.min.js')
+							figcaption （Jade）
+						hr
+						.alert.alert-info cdnjsのCDNから読み込む
+						figure
+							pre
+								| &lt;script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min.js"&gt;&lt;/script&gt;
+							figcaption （HTML）
+						figure
+							pre
+								| script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min.js')
+							figcaption （Jade）

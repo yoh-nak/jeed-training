@@ -2,7 +2,7 @@
 (function() {
   $(function() {
     $('input').click(function() {
-      $('a').text('日本最大のポータルサイト');
+      $('#first').html("<mark>変更後</mark>");
     });
   });
 

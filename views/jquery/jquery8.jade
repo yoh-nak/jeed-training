@@ -1,77 +1,81 @@
-include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;text()メソッド①
-						.panel-body
-							p text()メソッドは、$メソッドで指定した要素のコンテンツを、text()メソッドの引数で指定した文字列に変更します。
-							p
-								a.btn.btn-default(href='../demo/jquery/exercise5/index1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-								| 
-								a.btn.btn-default(href='http://api.jquery.com/text/',target='_blank')
-									i.glyphicon.glyphicon-info-sign
-									| &nbsp;参考
-							figure
-								pre(class='prettyprint linenums:1')
-									:code
-										<!DOCTYPE html>
-										<html lang="ja-JP">
-										<head>
-										<meta charset="UTF-8">
-										<title></title>
-										</head>
-										<body>
-											<p id="first">変更前</p>
-											<p>
-											<input type="button" value="変更">
-											</p>
-											<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-											<script src="script.js"></script>
-										</body>
-										</html>
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									:code
-										doctype
-										html(lang='ja-JP')
-											head
-												meta(charset='UTF-8')
-												title
-											body
-												p#first 変更前
-												p
-													input(type='button', value='変更')
-												script(src='http://code.jquery.com/jquery-1.10.2.min.js')
-												script(src='script.js')
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									:code
+extends ../layout
+
+block link
+	link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+	link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+	link(href='../css/style.css',rel='stylesheet',media='screen')
+	link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+	include navbar.jade
+	.container
+		.row
+			.col-sm-3
+				include left.jade
+			.col-sm-9
+				.panel.panel-primary
+					.panel-heading
+						i.glyphicon.glyphicon-book
+						| &nbsp;text()メソッド①
+					.panel-body
+						p text()メソッドは、$メソッドで指定した要素のコンテンツを、text()メソッドの引数で指定した文字列に変更します。HTML要素を引数に指定した場合、HTMLタグはエスケープされます。
+						p
+							a.btn.btn-default(href='../demo/jquery/exercise5/index1.html',target='_blank')
+								i.glyphicon.glyphicon-play
+								| デモ
+							| 
+							a.btn.btn-default(href='http://api.jquery.com/text/',target='_blank')
+								i.glyphicon.glyphicon-info-sign
+								| &nbsp;参考
+						figure
+							pre(class='prettyprint linenums:1')
+								:code
+									<!DOCTYPE html>
+									<html lang="ja-JP">
+									<head>
+									<meta charset="UTF-8">
+									<title></title>
+									</head>
+									<body>
+										<p id="first">変更前</p>
+										<p>
+										<input type="button" value="変更">
+										</p>
+										<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+										<script src="script.js"></script>
+									</body>
+									</html>
+							figcaption （HTML）
+						figure
+							pre(class='prettyprint linenums:1')
+								:code
+									doctype
+									html(lang='ja-JP')
+										head
+											meta(charset='UTF-8')
+											title
+										body
+											p#first 変更前
+											p
+												input(type='button', value='変更')
+											script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+											script(src='script.js')
+							figcaption （Jade）
+						figure
+							pre(class='prettyprint linenums:1')
+								:code
+									$(function(){
 										$('input').click(function(){
 											$('#first').text('変更後');
 										});
-								figcaption （JavaScript）
-							figure
-								pre(class='prettyprint linenums:1')
-									:code
+									});
+							figcaption （JavaScript）
+						figure
+							pre(class='prettyprint linenums:1')
+								:code
+									$ ->
 										$('input').click ->
 											$('#first').text "変更後"
 											return
-								figcaption （CoffeeScript）
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.10.2.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+										return
+							figcaption （CoffeeScript）

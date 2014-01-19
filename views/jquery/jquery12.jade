@@ -16,15 +16,15 @@ block content
 				.panel.panel-primary
 					.panel-heading
 						i.glyphicon.glyphicon-book
-						| &nbsp;ready()メソッド
+						| &nbsp;html()メソッド①
 					.panel-body
-						p head要素内にJavaScriptの処理を記述した場合、jQueryのready()メソッドでloadイベント発生時の処理を記述することができます。
+						p html()メソッドは、$メソッドで指定した要素のコンテンツを、html)メソッドの引数で指定したHTML要素に変更します。
 						p
-							a.btn.btn-default(href='../demo/jquery/exercise2/index1.html',target='_blank')
+							a.btn.btn-default(href='../demo/jquery/exercise9/index1.html',target='_blank')
 								i.glyphicon.glyphicon-play
 								| デモ
 							| 
-							a.btn.btn-default(href='http://api.jquery.com/ready/',target='_blank')
+							a.btn.btn-default(href='http://api.jquery.com/html/',target='_blank')
 								i.glyphicon.glyphicon-info-sign
 								| &nbsp;参考
 						figure
@@ -33,13 +33,16 @@ block content
 									<!DOCTYPE html>
 									<html lang="ja-JP">
 									<head>
-									<meta charset="utf-8">
+									<meta charset="UTF-8">
 									<title></title>
-									<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-									<script src="script.js"></script>
 									</head>
 									<body>
-									テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+									<p id="first">変更前</p>
+									<p>
+									<input type="button" value="変更">
+									</p>
+									<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+										<script src="script.js"></script>
 									</body>
 									</html>
 							figcaption （HTML）
@@ -49,38 +52,29 @@ block content
 									doctype
 									html(lang='ja-JP')
 										head
-											meta(charset='utf-8')
+											meta(charset='UTF-8')
 											title
+										body
+											p#first 変更前
+											p: input(type='button', value='変更')
 											script(src='http://code.jquery.com/jquery-1.10.2.min.js')
 											script(src='script.js')
-										body
-											| テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
 							figcaption （Jade）
 						figure
 							pre(class='prettyprint linenums:1')
 								:code
-									$(document).ready(function(){
-										window.alert("Hello World!");
-									});
-
-									//ready()メソッドは以下のように省略して記述できます。
-									/*
 									$(function(){
-										window.alert("Hello World!");
-									})
-									*/
+										$('input').click(function(){
+											$("#first").html("<mark>変更後</mark>");
+										});
+									});
 							figcaption （JavaScript）
 						figure
 							pre(class='prettyprint linenums:1')
 								:code
-									$(document).ready ->
-										window.alert "Hello World!"
-										return
-
-									#ready()メソッドは以下のように省略して記述できます。
-									###
 									$ ->
-										window.alert "Hello World!"
+										$('input').click ->
+											$('#first').html "<mark>変更後</mark>"
+											return
 										return
-									###
 							figcaption （CoffeeScript）

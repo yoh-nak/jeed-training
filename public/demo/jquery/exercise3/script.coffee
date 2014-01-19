@@ -1,3 +1,5 @@
-$('div').click ->
- window.alert 'Hello World!'
- return
+$ ->
+	$('div').click ->
+		window.alert 'Hello World!'
+		return
+	return

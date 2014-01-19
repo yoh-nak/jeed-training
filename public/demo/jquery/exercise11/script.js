@@ -2,7 +2,7 @@
 (function() {
   $(function() {
     $('input').click(function() {
-      $('a').text('日本最大のポータルサイト');
+      window.alert($('#first').html());
     });
   });
 

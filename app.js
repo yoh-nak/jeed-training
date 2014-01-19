@@ -93,6 +93,8 @@
 
   app.get("/rwd/:id", rwd.rwd);
 
+  app.get("/bootstrap/:id", rwd.bootstrap);
+
   app.get("/jquery/:id", jquery.jquery);
 
   app.get("/jqm/:id", jqm.jqm);

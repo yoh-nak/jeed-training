@@ -1,4 +1,4 @@
-define = require("../models/define")
+define = require("../libs/define")
 
 require("jade").filters.code = (block) ->
   block.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace /"/g, "&quot;"

@@ -1,4 +1,4 @@
-define = require("../models/define")
+define = require("../libs/define")
 
 require("jade").filters.code = (block) ->
   block.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace /"/g, "&quot;"
@@ -38,6 +38,13 @@ exports.html5 = (req, res) ->
 exports.canvas = (req, res) ->
 	#res.render "js/canvas/canvas" + req.params.id + req.params.format,
 	res.render "js/canvas/canvas" + req.params.id,
+		title: define.title
+		instructor: define.instructor
+		pretty: true
+
+#AngularJS
+exports.angular = (req, res) ->
+	res.render "js/angular/angular" + req.params.id,
 		title: define.title
 		instructor: define.instructor
 		pretty: true

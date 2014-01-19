@@ -103,6 +103,8 @@
 
   app.get("/nodejs/:id", nodejs.nodejs);
 
+  app.get("/angular/:id", js.angular);
+
   app.get("/others/:id", others.others);
 
   app.get("/diary/:id", diary.diary);

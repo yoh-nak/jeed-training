@@ -2,7 +2,7 @@
 (function() {
   var define;
 
-  define = require("../models/define");
+  define = require("../libs/define");
 
   require("jade").filters.code = function(block) {
     return block.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -43,6 +43,14 @@
 
   exports.canvas = function(req, res) {
     return res.render("js/canvas/canvas" + req.params.id, {
+      title: define.title,
+      instructor: define.instructor,
+      pretty: true
+    });
+  };
+
+  exports.angular = function(req, res) {
+    return res.render("js/angular/angular" + req.params.id, {
       title: define.title,
       instructor: define.instructor,
       pretty: true

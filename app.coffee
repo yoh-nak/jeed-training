@@ -62,6 +62,7 @@ app.get "/jquery/:id", jquery.jquery # jQuery
 app.get "/jqm/:id", jqm.jqm # jQuery Mobile
 app.get "/mobile/:id", mobile.mobile # スマホサイト
 app.get "/nodejs/:id", nodejs.nodejs # Node.js
+app.get "/angular/:id", js.angular # AngularJS
 app.get "/others/:id", others.others
 app.get "/diary/:id", diary.diary # 日誌
 app.get "/js-:id:format", js.js # JavaScript基礎

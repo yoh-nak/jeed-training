@@ -14,6 +14,8 @@ material = require("./routes/material")
 diary = require("./routes/diary")
 http = require("http")
 fs = require("fs")
+stylus = require("stylus")
+nib = require("nib")
 coffee = require("coffee-script")
 path = require("path")
 app = express()
@@ -30,7 +32,13 @@ app.use express.methodOverride()
 app.use express.cookieParser("your secret here")
 app.use express.session()
 app.use app.router
-app.use require("stylus").middleware(__dirname + "/public")
+#app.use require("stylus").middleware(__dirname + "/public")
+compile = (str, path) ->
+	stylus(str).set("filename", path).set("compress", true).use nib()
+app.use stylus.middleware(
+	src: __dirname + "/public"
+	compile: compile
+)
 app.use express.static(path.join(__dirname, "public"))
 
 ###

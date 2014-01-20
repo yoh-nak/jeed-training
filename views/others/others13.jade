@@ -1,310 +1,310 @@
-include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							&nbsp;Stylus リファレンス
-						.panel-body
-							.alert.alert-info Selectors（セレクタ）
-							p stylusはPythonようにインデントベースの記述を行います。
-							.row
-								.col-sm-6
-									pre
-										| .hoge
-										| 	color blue
-										| 	font-weight bold
-								.col-sm-6
-									pre
-										| .hoge {
-										|   color: #00f;
-										|   font-weight: bold;
-										| }
-							p このように基本的に括弧やセミコロン、コロンなどは省略して記述します。また値などのフォーマットもそろえて出力されます。
-							p セレクタをネストすることで複数のセレクタを出力することができます。
-							.row
-								.col-sm-6
-									pre
-										| body
-										| 	color red
-										| 	p
-										| 		color black
-								.col-sm-6
-									pre
-										| body {
-										|   color: #f00;
-										| }
-										| body p {
-										|   color: #000;
-										| }
-							p='&をつけて記述することで親要素を参照するセレクタを出力できます。'
-							.row
-								.col-sm-6
-									pre
-										| body
-										| 	color red
-										| 	&amp;.hoge
-										| 		color black
-								.col-sm-6
-									pre
-										| body {
-										|   color: #f00;
-										| }
-										| body.hoge {
-										|   color: #000;
-										| }
-							.alert.alert-info Variables(変数)
-							p 変数「font-size」を作成し、以降のCSSで利用が可能です。
-							.row
-								.col-sm-6
-									pre
-										| font-size = 14px
-										| body
-										| 	font font-size Arial, sans-serif
-								.col-sm-6
-									pre
-										| body {
-										|   font: 14px Arial, sans-serif;
-										| }
-							p コロンを利用すると値の設定と同時に変数の宣言が可能です。
-							.row
-								.col-sm-6
-									pre
-										| #logo
-										| 	width: w = 150px
-										| 	margin-left: -(w / 2)
-								.col-sm-6
-									pre
-										| #logo {
-										|   width: 150px;
-										|   margin-left: -75px;
-										| }
-							p これは@を利用して次のように記述することも可能です。
-							.row
-								.col-sm-6
-									pre
-										| #logo
-										| 	width: 150px
-										| 	margin-left: -(@width / 2)
-								.col-sm-6
-									pre
-										| #logo {
-										|   width: 150px;
-										|   margin-left: -75px;
-										| }
-							p='次のようにmixinをベースにした拡張も可能です。'
-							p='この場合、positionが指定されていてz-indexの指定がない場合は「z-index: 1」が出力されます。'
-							.row
-								.col-sm-6
-									pre
-										| position()
-										| 	position: arguments
-										| 	z-index: 1 unless @z-index
-										| 	
-										| #logo
-										| 	z-index: 20
-										| 	position: absolute
-										| 	
-										| #logo2
-										| 	position: absolute
-								.col-sm-6
-									pre
-										| #logo {
-										|   z-index: 20;
-										|   position: absolute;
-										| }
-										| #logo2 {
-										|   position: absolute;
-										|   z-index: 1;
-										| }
-							.alert.alert-info Interpolation（補間）
-							p='このようにvendor()を定義しておくとベンダープリフィックスの定義が簡単です。'
-							.row
-								.col-sm-6
-									pre
-										| vendor(prop, args)
-										| 	-webkit-{prop} args
-										| 	-moz-{prop} args
-										| 	{prop} args
-										| 		
-										| .hoge
-										| 	vendor('box-shadow', 1px 0  0 #CCC)
-								.col-sm-6
-									pre
-										| .hoge {
-										|   -webkit-box-shadow: 1px 0 0 #ccc;
-										|   -moz-box-shadow: 1px 0 0 #ccc;
-										|   box-shadow: 1px 0 0 #ccc;
-										| }
-							.alert.alert-info ループ
-							p='for文を利用することもできます。'
-							.row
-								.col-sm-6
-									pre
-										| table
-										| 	for row in 1 2 3 4 5
-										| 		tr:nth-child({row})
-										| 			height: 10px * row
-								.col-sm-6
-									pre
-										| table tr:nth-child(1) {
-										|   height: 10px;
-										| }
-										| table tr:nth-child(2) {
-										|   height: 20px;
-										| }
-										| table tr:nth-child(3) {
-										|   height: 30px;
-										| }
-										| table tr:nth-child(4) {
-										|   height: 40px;
-										| }
-										| table tr:nth-child(5) {
-										|   height: 50px;
-										| }
-							.alert.alert-info Mixins
-							p='ミックスインで様々な定義が可能。'
-							p='次のようにie8用に別のスタイルを定義もできます。'
-							.row
-								.col-sm-6
-									pre
-										| box-shadow()
-										| 	-webkit-box-shadow arguments
-										| 	-moz-box-shadow arguments
-										| 	box-shadow arguments
-										| 	.ie8 &amp;
-										| 	border 1px solid arguments[length(arguments) - 1]
-										| 		
-										| .box
-										| 	box-shadow 1px 1px 3px #eee
-								.col-sm-6
-									pre	
-										| .box {
-										|   -webkit-box-shadow: 1px 1px 3px #eee;
-										|   -moz-box-shadow: 1px 1px 3px #eee;
-										|   box-shadow: 1px 1px 3px #eee;
-										| }
-										| .ie8 .box {
-										|   border: 1px solid #eee;
-										| }
-							p='演算もできるのでプラスマイナスを変換することも可能です。'
-							.row
-								.col-sm-6
-									pre
-										| pad(n)
-										|  	padding (- n)
-								.col-sm-6
-									pre	
-										| body
-										|  	pad(5px)
-							.alert.alert-info 演算
-							p='他にも様々な計算が可能です。'
-							.row
-								.col-sm-6
-									pre
-										| body
-										|   foo: 5px + 10
-										|   foo: 2 ** 8
-										|   foo: 5px * 2
-										|   foo: !!''
-										|   foo: foo and bar and baz
-										|   foo: foo or bar or baz
-										|   foo: 1..5
-										|   foo: 1...5
-										|   foo: 'foo' is a 'string'
-										|   foo: (1 2 3) == (1 2 3)
-										|   foo: (1 2 3) == (1 2)
-										|   foo: ((one 1) (two 2)) == ((one 1) (two 2)) 
-										|   foo: ((one 1) (two 2)) == ((one 1) (two)) 
-										|   foo: ((one 1) (two 2))[0]
-										|   foo: 3 in (1 2 3 4)
-								.col-sm-6
-									pre
-										| body {
-										|   foo: 15px;
-										|   foo: 256;
-										|   foo: 10px;
-										|   foo: false;
-										|   foo: baz;
-										|   foo: foo;
-										|   foo: 1 2 3 4 5;
-										|   foo: 1 2 3 4;
-										|   foo: true;
-										|   foo: true;
-										|   foo: false;
-										|   foo: true;
-										|   foo: false;
-										|   foo: one 1;
-										|   foo: true;
-										| }
-							p='演算だけでなく値や文字列に関しても操作可能です。'
-							.row
-								.col-sm-6
-									pre
-										| body
-										|   foo: foo + bar
-										|   foo: 'foo ' + bar
-										|   foo: 'foo ' + 'bar'
-										|   foo: 'foo ' + 5px
-										|   foo: 2s - 500ms
-										|   foo: 5000ms == 5s
-										|   foo: 50deg
-								.col-sm-6
-									pre
-										| body {
-										|   foo: foobar;
-										|   foo: "foo bar";
-										|   foo: "foo bar";
-										|   foo: "foo 5px";
-										|   foo: 1.5s;
-										|   foo: true;
-										|   foo: 50deg;
-										| }
-							.alert.alert-info 文字列の置き換え
-							p='文字列の置き換えも可能。もうCSSというより完全にプログラム言語'
-							.row
-								.col-sm-6
-									pre
-										| body
-										|   foo: '%s / %s' % (5px 10px)
-										|   foo: 'MS:WeirdStuff(opacity=%s)' % 1
-										|   foo: unquote('MS:WeirdStuff(opacity=1)')
-								.col-sm-6
-									pre	
-										| body {
-										|   foo: 5px / 10px;
-										|   foo: MS:WeirdStuff(opacity=1);
-										|   foo: MS:WeirdStuff(opacity=1);
-										| }
-							.alert.alert-info 色に関する操作
-							p='色に関しても様々な操作が可能です。'
-							.row
-								.col-sm-6
-									pre
-										| body
-										|   foo: white - 50%
-										|   foo: black + 50%
-										|   foo: #eee - #f00
-										|   foo: #eee - rgba(black,.5)
-										|   foo: #cc0000 + 30deg
-								.col-sm-6
-									pre
-										| body {
-										|   foo: #808080;
-										|   foo: #808080;
-										|   foo: #0ee;
-										|   foo: rgba(238,238,238,0.5);
-										|   foo: #c60;
-										| }
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.10.2.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+extends ../layout
+
+block link
+	link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+	link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+	link(href='../css/style.css',rel='stylesheet',media='screen')
+	link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+	include navbar.jade
+	.container
+		.row
+			.col-sm-3
+				include left.jade
+			.col-sm-9
+				.panel.panel-primary
+					.panel-heading
+						i.glyphicon.glyphicon-book
+						&nbsp;Stylus リファレンス
+					.panel-body
+						.alert.alert-info Selectors（セレクタ）
+						p stylusはPythonようにインデントベースの記述を行います。
+						.row
+							.col-sm-6
+								pre
+									| .hoge
+									| 	color blue
+									| 	font-weight bold
+							.col-sm-6
+								pre
+									| .hoge {
+									|   color: #00f;
+									|   font-weight: bold;
+									| }
+						p このように基本的に括弧やセミコロン、コロンなどは省略して記述します。また値などのフォーマットもそろえて出力されます。
+						p セレクタをネストすることで複数のセレクタを出力することができます。
+						.row
+							.col-sm-6
+								pre
+									| body
+									| 	color red
+									| 	p
+									| 		color black
+							.col-sm-6
+								pre
+									| body {
+									|   color: #f00;
+									| }
+									| body p {
+									|   color: #000;
+									| }
+						p='&をつけて記述することで親要素を参照するセレクタを出力できます。'
+						.row
+							.col-sm-6
+								pre
+									| body
+									| 	color red
+									| 	&amp;.hoge
+									| 		color black
+							.col-sm-6
+								pre
+									| body {
+									|   color: #f00;
+									| }
+									| body.hoge {
+									|   color: #000;
+									| }
+						.alert.alert-info Variables(変数)
+						p 変数「font-size」を作成し、以降のCSSで利用が可能です。
+						.row
+							.col-sm-6
+								pre
+									| font-size = 14px
+									| body
+									| 	font font-size Arial, sans-serif
+							.col-sm-6
+								pre
+									| body {
+									|   font: 14px Arial, sans-serif;
+									| }
+						p コロンを利用すると値の設定と同時に変数の宣言が可能です。
+						.row
+							.col-sm-6
+								pre
+									| #logo
+									| 	width: w = 150px
+									| 	margin-left: -(w / 2)
+							.col-sm-6
+								pre
+									| #logo {
+									|   width: 150px;
+									|   margin-left: -75px;
+									| }
+						p これは@を利用して次のように記述することも可能です。
+						.row
+							.col-sm-6
+								pre
+									| #logo
+									| 	width: 150px
+									| 	margin-left: -(@width / 2)
+							.col-sm-6
+								pre
+									| #logo {
+									|   width: 150px;
+									|   margin-left: -75px;
+									| }
+						p='次のようにmixinをベースにした拡張も可能です。'
+						p='この場合、positionが指定されていてz-indexの指定がない場合は「z-index: 1」が出力されます。'
+						.row
+							.col-sm-6
+								pre
+									| position()
+									| 	position: arguments
+									| 	z-index: 1 unless @z-index
+									| 	
+									| #logo
+									| 	z-index: 20
+									| 	position: absolute
+									| 	
+									| #logo2
+									| 	position: absolute
+							.col-sm-6
+								pre
+									| #logo {
+									|   z-index: 20;
+									|   position: absolute;
+									| }
+									| #logo2 {
+									|   position: absolute;
+									|   z-index: 1;
+									| }
+						.alert.alert-info Interpolation（補間）
+						p='このようにvendor()を定義しておくとベンダープリフィックスの定義が簡単です。'
+						.row
+							.col-sm-6
+								pre
+									| vendor(prop, args)
+									| 	-webkit-{prop} args
+									| 	-moz-{prop} args
+									| 	{prop} args
+									| 		
+									| .hoge
+									| 	vendor('box-shadow', 1px 0  0 #CCC)
+							.col-sm-6
+								pre
+									| .hoge {
+									|   -webkit-box-shadow: 1px 0 0 #ccc;
+									|   -moz-box-shadow: 1px 0 0 #ccc;
+									|   box-shadow: 1px 0 0 #ccc;
+									| }
+						.alert.alert-info ループ
+						p='for文を利用することもできます。'
+						.row
+							.col-sm-6
+								pre
+									| table
+									| 	for row in 1 2 3 4 5
+									| 		tr:nth-child({row})
+									| 			height: 10px * row
+							.col-sm-6
+								pre
+									| table tr:nth-child(1) {
+									|   height: 10px;
+									| }
+									| table tr:nth-child(2) {
+									|   height: 20px;
+									| }
+									| table tr:nth-child(3) {
+									|   height: 30px;
+									| }
+									| table tr:nth-child(4) {
+									|   height: 40px;
+									| }
+									| table tr:nth-child(5) {
+									|   height: 50px;
+									| }
+						.alert.alert-info Mixins
+						p='ミックスインで様々な定義が可能。'
+						p='次のようにie8用に別のスタイルを定義もできます。'
+						.row
+							.col-sm-6
+								pre
+									| box-shadow()
+									| 	-webkit-box-shadow arguments
+									| 	-moz-box-shadow arguments
+									| 	box-shadow arguments
+									| 	.ie8 &amp;
+									| 	border 1px solid arguments[length(arguments) - 1]
+									| 		
+									| .box
+									| 	box-shadow 1px 1px 3px #eee
+							.col-sm-6
+								pre	
+									| .box {
+									|   -webkit-box-shadow: 1px 1px 3px #eee;
+									|   -moz-box-shadow: 1px 1px 3px #eee;
+									|   box-shadow: 1px 1px 3px #eee;
+									| }
+									| .ie8 .box {
+									|   border: 1px solid #eee;
+									| }
+						p='演算もできるのでプラスマイナスを変換することも可能です。'
+						.row
+							.col-sm-6
+								pre
+									| pad(n)
+									|  	padding (- n)
+							.col-sm-6
+								pre	
+									| body
+									|  	pad(5px)
+						.alert.alert-info 演算
+						p='他にも様々な計算が可能です。'
+						.row
+							.col-sm-6
+								pre
+									| body
+									|   foo: 5px + 10
+									|   foo: 2 ** 8
+									|   foo: 5px * 2
+									|   foo: !!''
+									|   foo: foo and bar and baz
+									|   foo: foo or bar or baz
+									|   foo: 1..5
+									|   foo: 1...5
+									|   foo: 'foo' is a 'string'
+									|   foo: (1 2 3) == (1 2 3)
+									|   foo: (1 2 3) == (1 2)
+									|   foo: ((one 1) (two 2)) == ((one 1) (two 2)) 
+									|   foo: ((one 1) (two 2)) == ((one 1) (two)) 
+									|   foo: ((one 1) (two 2))[0]
+									|   foo: 3 in (1 2 3 4)
+							.col-sm-6
+								pre
+									| body {
+									|   foo: 15px;
+									|   foo: 256;
+									|   foo: 10px;
+									|   foo: false;
+									|   foo: baz;
+									|   foo: foo;
+									|   foo: 1 2 3 4 5;
+									|   foo: 1 2 3 4;
+									|   foo: true;
+									|   foo: true;
+									|   foo: false;
+									|   foo: true;
+									|   foo: false;
+									|   foo: one 1;
+									|   foo: true;
+									| }
+						p='演算だけでなく値や文字列に関しても操作可能です。'
+						.row
+							.col-sm-6
+								pre
+									| body
+									|   foo: foo + bar
+									|   foo: 'foo ' + bar
+									|   foo: 'foo ' + 'bar'
+									|   foo: 'foo ' + 5px
+									|   foo: 2s - 500ms
+									|   foo: 5000ms == 5s
+									|   foo: 50deg
+							.col-sm-6
+								pre
+									| body {
+									|   foo: foobar;
+									|   foo: "foo bar";
+									|   foo: "foo bar";
+									|   foo: "foo 5px";
+									|   foo: 1.5s;
+									|   foo: true;
+									|   foo: 50deg;
+									| }
+						.alert.alert-info 文字列の置き換え
+						p='文字列の置き換えも可能。もうCSSというより完全にプログラム言語'
+						.row
+							.col-sm-6
+								pre
+									| body
+									|   foo: '%s / %s' % (5px 10px)
+									|   foo: 'MS:WeirdStuff(opacity=%s)' % 1
+									|   foo: unquote('MS:WeirdStuff(opacity=1)')
+							.col-sm-6
+								pre	
+									| body {
+									|   foo: 5px / 10px;
+									|   foo: MS:WeirdStuff(opacity=1);
+									|   foo: MS:WeirdStuff(opacity=1);
+									| }
+						.alert.alert-info 色に関する操作
+						p='色に関しても様々な操作が可能です。'
+						.row
+							.col-sm-6
+								pre
+									| body
+									|   foo: white - 50%
+									|   foo: black + 50%
+									|   foo: #eee - #f00
+									|   foo: #eee - rgba(black,.5)
+									|   foo: #cc0000 + 30deg
+							.col-sm-6
+								pre
+									| body {
+									|   foo: #808080;
+									|   foo: #808080;
+									|   foo: #0ee;
+									|   foo: rgba(238,238,238,0.5);
+									|   foo: #c60;
+									| }

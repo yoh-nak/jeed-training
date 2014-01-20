@@ -59,7 +59,21 @@ block content
                 pre
                     :code
                         public boolean execute(String action.JSONArray args, CallbackContext callbackContext) throws JSONException
-                p action引数には、JavaScriptが指定したプラグインのアクション名が入ります。
+                p action引数には、JavaScriptが指定したプラグインのアクション名が入ります。args引数には、JavaScriptから渡されてくるJSON形式の引数が格納されています。callbackContext引数は、JavaScript側に値を返したりプラグインの結果やエラーを通知したりするためのメソッドを持つオブジェクトです。execute()メソッドは、JavaScriptからの呼び出しがネイティブ側に受け入れられたかどうかの値を返します。もし、action引数に渡っているアクション名が間違っている場合にはfalseを返してプラグインの呼び出しが間違っていることを伝えます。
+                p このMyFirstPluginで、JavaScript側から渡されてきた値をポップアップで表示してみます。executeメソッド内を以下のように書き換えます。
+                figure
+                    figcaption JavaScriptから渡されてきた文字列をポップアップで表示する
+                    pre
+                        :code
+                            public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+
+                                callbackContext.success();
+                                android.widget.Toast.makeText(
+                                    this.cordova.getActivity(), args.getString(0), 2000).show();
+
+                                return true;
+                            }
+                p このコードでは、action引数を利用していません。args引数から渡された文字列を、ポップアップを表示するメソッドに渡しています。
                 .alert.alert-info JavaScriptからプラグインのコードを呼び出す
                 .alert.alert-info Android向けのプラグイン開発の詳細
                 p 

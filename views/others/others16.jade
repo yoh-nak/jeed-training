@@ -26,8 +26,17 @@ include ../head2.jade
 								| $ stylus test.styl -I path/to/nib/lib
 							p Windows
 							pre
-								| stylus test.styl -I C:\Users\ユーザ名\AppData\Roaming\npm\node_modules\nib\lib
-							p='3. 以下の様な text.css ファイルが出力されます'
+								:code
+									stylus test.styl -I C:\Users\ユーザ名\AppData\Roaming\npm\node_modules\nib\lib
+							p nibのパスを環境変数に登録しておくと便利です。
+							pre
+								:code
+									setx nib C:\Users\ユーザ名\AppData\Roaming\npm\node_modules\nib\lib
+							p 環境変数にnibのパスを登録すると以下のように省略できます。
+							pre
+								:code
+									stylus test.styl -I %nib%
+							p='3. 以下のような text.css ファイルが出力されます'
 							pre
 								| div {
 								|   -webkit-border-radius: 5px;

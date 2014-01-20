@@ -1,621 +1,622 @@
-include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							&nbsp;Jade Languageリファレンス
-						.panel-body
-							.alert.alert-info doctype
-							p DOCTYPEを追加するには、「doctype」に続けてオプションに「html」を記述してコンパイルします。略すと「!!!」」と記述できます。
-							.row
-								.col-sm-6
-									pre doctype html
-								.col-sm-6
-									pre='<!DOCTYPE html>'
-								.col-sm-6
-									pre !!!
-								.col-sm-6
-									pre='<!DOCTYPE html>'
-							p よく使われるdoctypeの短縮形です。
-							table.table
-								tr
-									td xml
-									td='<?xml version="1.0" encoding="utf-8" ?>'
-								tr
-									td transitional
-									td='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'
-								tr
-									td strict
-									td='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">'
-								tr
-									td frameset
-									td='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">'
-								tr
-									td 1.1
-									td='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">'
-								tr
-									td basic
-									td='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">'
-								tr
-									td mobile
-									td='<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.2//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd">'
-							p 独自のdoctypeの記述できます。
-							.row
-								.col-sm-6
-									pre='doctype html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN"'
-								.col-sm-6
-									pre='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN">'
-							hr
-							.alert.alert-info Tags
-							p 行の最初のテキストはhtmlタグを表します。また、htmlのツリー構造を作るには、インデントを加えたタグをネストさせます。
-							.row
-								.col-sm-6
-									pre
-										| ul
-										| 	li
-										| 	li
-										| 	li
-								.col-sm-6
-									pre
-										| &lt;ul&gt;
-										| 	&lt;li&gt;&lt;/li&gt;
-										| 	&lt;li&gt;&lt;/li&gt;
-										| 	&lt;li&gt;&lt;/li&gt;
-										| &lt;/ul&gt;
-							p jadeは終了タグを持たないタグを判別できます。
-							.row
-								.col-sm-6
-									pre
-										| img
-								.col-sm-6
-									pre
-										| &lt;img&gt;
-							hr
-							.alert.alert-info Block Expansion
-							p 横並びでスペースを開けると、ネストされたタグをを作成できます。
-							.row
-								.col-sm-6
-									pre a: img
-								.col-sm-6
-									pre='<a><img></a>'
-							.alert.alert-info Attributes
-							p 属性はHTMLに似ていますが、それらの値は正規のJavaScriptです。
-							.row
-								.col-sm-6
-									pre
-										| a(href='google.com') Google
-										| a(class='button', href='google.com') Google
-								.col-sm-6
-									pre='<a href="google.com">Google</a><a href="google.com" class="button">Google</a>'
-							p 普通のJavaScriptの表現も動作します。
-							.row
-								.col-sm-6
-									pre
-										| - var authenticated = true
-										| body(class=authenticated?'authed':'anon')
-								.col-sm-6
-									pre='<body class="authed"></body>'
-							.alert.alert-info Boolean Attributes
-							p 真偽値はそのまま引き継がれ、falseのときは何も指定されない。
-							.row
-								.col-sm-6
-									pre
-										| input(type='checkbox', checked)
-										| input(type='checkbox', checked=true)
-										| input(type='checkbox', checked=false)
-										| input(type='checkbox', checked=true.toString())
-								.col-sm-6
-									pre
-										| &lt;input type="checkbox" checked="checked"/&gt;
-										| &lt;input type="checkbox" checked="checked"/&gt;
-										| &lt;input type="checkbox"/&gt;
-										| &lt;input type="checkbox" checked="true"/&gt;
-							.alert.alert-info Class Attributes
-							p クラス属性は任意の属性のように文字列を指定できますが、JavaScriptの配列から作成すると便利です。
-							.row
-								.col-sm-6
-									pre
-										| - var classes = ['foo', 'bar', 'baz']
-										| a(class=classes)
-								.col-sm-6
-									pre='<a class="foo bar baz"></a>'
-							.alert.alert-info Class Literal
-							p 
-							.row
-								.col-sm-6
-									pre a.button
-								.col-sm-6
-									pre='<a class="button"></a>'
-							p
-							.row
-								.col-sm-6
-									pre .col-sm-6
-								.col-sm-6
-									pre='<div class="content"></div>'
+extends ../layout
 
-							.alert.alert-info ID Literal
-							p
-							.row
-								.col-sm-6
-									pre a#main-link
-								.col-sm-6
-									pre='<a id="main-link"></a>'
-							p
-							.row
-								.col-sm-6
-									pre #content
-								.col-sm-6
-									pre='<div id="content"></div>'
+block link
+	link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+	link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+	link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+	link(href='../css/style.css',rel='stylesheet',media='screen')
+	link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
 
-							.alert.alert-info Plain Text
-							p
+block content
+	include navbar.jade
+	.container
+		.row
+			.col-sm-3
+				include left.jade
+			.col-sm-9
+				.panel.panel-primary
+					.panel-heading
+						i.glyphicon.glyphicon-book
+						&nbsp;Jade Languageリファレンス
+					.panel-body
+						.alert.alert-info doctype
+						p DOCTYPEを追加するには、「doctype」に続けてオプションに「html」を記述してコンパイルします。略すと「!!!」」と記述できます。
+						.row
+							.col-sm-6
+								pre doctype html
+							.col-sm-6
+								pre='<!DOCTYPE html>'
+							.col-sm-6
+								pre !!!
+							.col-sm-6
+								pre='<!DOCTYPE html>'
+						p よく使われるdoctypeの短縮形です。
+						table.table
+							tr
+								td xml
+								td='<?xml version="1.0" encoding="utf-8" ?>'
+							tr
+								td transitional
+								td='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'
+							tr
+								td strict
+								td='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">'
+							tr
+								td frameset
+								td='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">'
+							tr
+								td 1.1
+								td='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">'
+							tr
+								td basic
+								td='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">'
+							tr
+								td mobile
+								td='<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.2//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd">'
+						p 独自のdoctypeの記述できます。
+						.row
+							.col-sm-6
+								pre='doctype html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN"'
+							.col-sm-6
+								pre='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN">'
+						hr
+						.alert.alert-info Tags
+						p 行の最初のテキストはhtmlタグを表します。また、htmlのツリー構造を作るには、インデントを加えたタグをネストさせます。
+						.row
+							.col-sm-6
+								pre
+									| ul
+									| 	li
+									| 	li
+									| 	li
+							.col-sm-6
+								pre
+									| &lt;ul&gt;
+									| 	&lt;li&gt;&lt;/li&gt;
+									| 	&lt;li&gt;&lt;/li&gt;
+									| 	&lt;li&gt;&lt;/li&gt;
+									| &lt;/ul&gt;
+						p jadeは終了タグを持たないタグを判別できます。
+						.row
+							.col-sm-6
+								pre
+									| img
+							.col-sm-6
+								pre
+									| &lt;img&gt;
+						hr
+						.alert.alert-info Block Expansion
+						p 横並びでスペースを開けると、ネストされたタグをを作成できます。
+						.row
+							.col-sm-6
+								pre a: img
+							.col-sm-6
+								pre='<a><img></a>'
+						.alert.alert-info Attributes
+						p 属性はHTMLに似ていますが、それらの値は正規のJavaScriptです。
+						.row
+							.col-sm-6
+								pre
+									| a(href='google.com') Google
+									| a(class='button', href='google.com') Google
+							.col-sm-6
+								pre='<a href="google.com">Google</a><a href="google.com" class="button">Google</a>'
+						p 普通のJavaScriptの表現も動作します。
+						.row
+							.col-sm-6
+								pre
+									| - var authenticated = true
+									| body(class=authenticated?'authed':'anon')
+							.col-sm-6
+								pre='<body class="authed"></body>'
+						.alert.alert-info Boolean Attributes
+						p 真偽値はそのまま引き継がれ、falseのときは何も指定されない。
+						.row
+							.col-sm-6
+								pre
+									| input(type='checkbox', checked)
+									| input(type='checkbox', checked=true)
+									| input(type='checkbox', checked=false)
+									| input(type='checkbox', checked=true.toString())
+							.col-sm-6
+								pre
+									| &lt;input type="checkbox" checked="checked"/&gt;
+									| &lt;input type="checkbox" checked="checked"/&gt;
+									| &lt;input type="checkbox"/&gt;
+									| &lt;input type="checkbox" checked="true"/&gt;
+						.alert.alert-info Class Attributes
+						p クラス属性は任意の属性のように文字列を指定できますが、JavaScriptの配列から作成すると便利です。
+						.row
+							.col-sm-6
+								pre
+									| - var classes = ['foo', 'bar', 'baz']
+									| a(class=classes)
+							.col-sm-6
+								pre='<a class="foo bar baz"></a>'
+						.alert.alert-info Class Literal
+						p 
+						.row
+							.col-sm-6
+								pre a.button
+							.col-sm-6
+								pre='<a class="button"></a>'
+						p
+						.row
+							.col-sm-6
+								pre .col-sm-6
+							.col-sm-6
+								pre='<div class="content"></div>'
 
-							.alert.alert-info Piped Text
-							p
-							.row
-								.col-sm-6
-									pre
-										| | Plain text can include &lt;strong&gt;html&lt;/strong&gt;
-										| p
-										|   | It must always be on its own line
-								.col-sm-6
-									pre
-										| Plain text can include &lt;strong&gt;html&lt;/strong&gt;
-										| &lt;p&gt;It must always be on its own line&lt;/p&gt;
-							.alert.alert-info Inline in a Tag
-							p
-							.row
-								.col-sm-6
-									pre='p Plain text can include <strong>html</strong>'
-								.col-sm-6
-									pre='<p>Plain text can include <strong>html</strong></p>'
+						.alert.alert-info ID Literal
+						p
+						.row
+							.col-sm-6
+								pre a#main-link
+							.col-sm-6
+								pre='<a id="main-link"></a>'
+						p
+						.row
+							.col-sm-6
+								pre #content
+							.col-sm-6
+								pre='<div id="content"></div>'
 
-							.alert.alert-info Block in a Tag
-							p
-							.row
-								.col-sm-6
-									pre
-										| script.
-										|   if (usingJade)
-										|     console.log('you are awesome')
-										|   else
-										|     console.log('use jade')
-								.col-sm-6
-									pre
-										| &lt;script&gt;
-										|   if (usingJade)
-										|     console.log('you are awesome')
-										|   else
-										|     console.log('use jade')
-										| &lt;/script&gt;
+						.alert.alert-info Plain Text
+						p
 
-							.alert.alert-info Code
-							p
+						.alert.alert-info Piped Text
+						p
+						.row
+							.col-sm-6
+								pre
+									| | Plain text can include &lt;strong&gt;html&lt;/strong&gt;
+									| p
+									|   | It must always be on its own line
+							.col-sm-6
+								pre
+									| Plain text can include &lt;strong&gt;html&lt;/strong&gt;
+									| &lt;p&gt;It must always be on its own line&lt;/p&gt;
+						.alert.alert-info Inline in a Tag
+						p
+						.row
+							.col-sm-6
+								pre='p Plain text can include <strong>html</strong>'
+							.col-sm-6
+								pre='<p>Plain text can include <strong>html</strong></p>'
 
-							.alert.alert-info Unbuffered Code
-							p
-							.row
-								.col-sm-6
-									pre
-										| - for (var x = 0; x &lt; 3; x++)
-										|   li item
-								.col-sm-6
-									pre
-										| &lt;li&gt;item&lt;/li&gt;
-										| &lt;li&gt;item&lt;/li&gt;
-										| &lt;li&gt;item&lt;/li&gt;
-							.alert.alert-info Buffered Code
-							p
-							.row
-								.col-sm-6
-									pre
-										| p
-										|   = 'This code is <escaped>!'
-								.col-sm-6
-									pre
-										| &lt;p&gt;This code is &lt;escaped&gt;!
-										| &lt;/p&gt;
-							p
-							.row
-								.col-sm-6
-									pre='p= \'This code is\' + \' <escaped>!\''
-								.col-sm-6
-									pre='<p>This code is &lt;escaped&gt;!</p>'
+						.alert.alert-info Block in a Tag
+						p
+						.row
+							.col-sm-6
+								pre
+									| script.
+									|   if (usingJade)
+									|     console.log('you are awesome')
+									|   else
+									|     console.log('use jade')
+							.col-sm-6
+								pre
+									| &lt;script&gt;
+									|   if (usingJade)
+									|     console.log('you are awesome')
+									|   else
+									|     console.log('use jade')
+									| &lt;/script&gt;
 
-							.alert.alert-info Unescaped Buffered Code
-							p
-							.row
-								.col-sm-6
-									pre
-										| p
-										|   != 'This code is &lt;strong&gt;not&lt;/strong&gt; escaped!'
-								.col-sm-6
-									pre
-										| &lt;p&gt;This code is &lt;strong&gt;not&lt;/strong&gt; escaped!
-										| &lt;/p&gt;
-							p
-							.row
-								.col-sm-6
-									pre='p!= \'This code is <strong>not</strong> escaped!\''
-								.col-sm-6
-									pre='<p>This code is <strong>not</strong> escaped!</p>'
+						.alert.alert-info Code
+						p
 
-							.alert.alert-info Comments
-							p
-							.row
-								.col-sm-6
-									pre
-										| // just some paragraphs
-										| p foo
-										| p bar
-								.col-sm-6
-									pre
-										| &lt;!-- just some paragraphs--&gt;
-										| &lt;p&gt;foo&lt;/p&gt;
-										| &lt;p&gt;bar&lt;/p&gt;
-							p
-							.row
-								.col-sm-6
-									pre
-										| //- will not output within markup
-										| p foo
-										| p bar
-								.col-sm-6
-									pre
-										| &lt;p&gt;foo&lt;/p&gt;
-										| &lt;p&gt;bar&lt;/p&gt;
-							.alert.alert-info Block Comments
-							p
-							.row
-								.col-sm-6
-									pre
-										| body
-										|   //
-										|     #content
-										|       h1 Example
-								.col-sm-6
-									pre
-										| &lt;body&gt;
-										|   &lt;!--
-										|   &lt;div id="content"&gt;
-										|     &lt;h1&gt;Example&lt;/h1&gt;
-										|   &lt;/div&gt;
-										|   --&gt;
-										| &lt;/body&gt;
-							p
-							.row
-								.col-sm-6
-									pre
-										| head
-										|   //if lt IE 8
-										|     script(src='/ie-sucks.js')
-								.col-sm-6
-									pre
-										| &lt;head&gt;
-										|   &lt;!--[if lt IE 8]&gt;
-										|   &lt;script src="/ie-sucks.js"&gt;&lt;/script&gt;
-										|   &lt;![endif]--&gt;
-										| &lt;/head&gt;
+						.alert.alert-info Unbuffered Code
+						p
+						.row
+							.col-sm-6
+								pre
+									| - for (var x = 0; x &lt; 3; x++)
+									|   li item
+							.col-sm-6
+								pre
+									| &lt;li&gt;item&lt;/li&gt;
+									| &lt;li&gt;item&lt;/li&gt;
+									| &lt;li&gt;item&lt;/li&gt;
+						.alert.alert-info Buffered Code
+						p
+						.row
+							.col-sm-6
+								pre
+									| p
+									|   = 'This code is <escaped>!'
+							.col-sm-6
+								pre
+									| &lt;p&gt;This code is &lt;escaped&gt;!
+									| &lt;/p&gt;
+						p
+						.row
+							.col-sm-6
+								pre='p= \'This code is\' + \' <escaped>!\''
+							.col-sm-6
+								pre='<p>This code is &lt;escaped&gt;!</p>'
 
-							.alert.alert-info Conditionals
-							p
-							.row
-								.col-sm-6
-									pre
-										| - var user = { description: 'foo bar baz' }
-										| #user
-										|   if user.description
-										|     h2 Description
-										|     p.description= user.description
-										|   else
-										|     h1 Description
-										|     p.description User has no description
-								.col-sm-6
-									pre
-										| &lt;div id="user"&gt;
-										|   &lt;h2&gt;Description&lt;/h2&gt;
-										|   &lt;p class="description"&gt;foo bar baz&lt;/p&gt;
-										| &lt;/div&gt;
-							p
-							.row
-								.col-sm-6
-									pre
-										| unless user.isAnonymous
-										|   p You're logged in as \#{user.name}
-								.col-sm-6
-									pre
-										| if !user.isAnonymous
-										|   p You're logged in as \#{user.name}
+						.alert.alert-info Unescaped Buffered Code
+						p
+						.row
+							.col-sm-6
+								pre
+									| p
+									|   != 'This code is &lt;strong&gt;not&lt;/strong&gt; escaped!'
+							.col-sm-6
+								pre
+									| &lt;p&gt;This code is &lt;strong&gt;not&lt;/strong&gt; escaped!
+									| &lt;/p&gt;
+						p
+						.row
+							.col-sm-6
+								pre='p!= \'This code is <strong>not</strong> escaped!\''
+							.col-sm-6
+								pre='<p>This code is <strong>not</strong> escaped!</p>'
 
-							.alert.alert-info Iteration
-							p
-							.row
-								.col-sm-6
-									pre
-										| ul
-										|   each val in [1, 2, 3, 4, 5]
-										|     li= val
-								.col-sm-6
-									pre
-										| &lt;ul&gt;
-										|   &lt;li&gt;1&lt;/li&gt;
-										|   &lt;li&gt;2&lt;/li&gt;
-										|   &lt;li&gt;3&lt;/li&gt;
-										|   &lt;li&gt;4&lt;/li&gt;
-										|   &lt;li&gt;5&lt;/li&gt;
-										| &lt;/ul&gt;
-							p
-							.row
-								.col-sm-6
-									pre
-										| ul
-										|   each val, index in ['one', 'two', 'three']
-										|     li= index + ': ' + val
-								.col-sm-6
-									pre
-										| &lt;ul&gt;
-										|   &lt;li&gt;0: one&lt;/li&gt;
-										|   &lt;li&gt;1: two&lt;/li&gt;
-										|   &lt;li&gt;2: three&lt;/li&gt;
-										| &lt;/ul&gt;
-							p
-							.row
-								.col-sm-6
-									pre
-										| ul
-										|   each val, index in {1: 'one', 2: 'two', 3: 'three'}
-										|     li= index + ': ' + val
-								.col-sm-6
-									pre
-										| &lt;ul&gt;
-										|   &lt;li&gt;1: one&lt;/li&gt;
-										|   &lt;li&gt;2: two&lt;/li&gt;
-										|   &lt;li&gt;3: three&lt;/li&gt;
-										| &lt;/ul&gt;
+						.alert.alert-info Comments
+						p
+						.row
+							.col-sm-6
+								pre
+									| // just some paragraphs
+									| p foo
+									| p bar
+							.col-sm-6
+								pre
+									| &lt;!-- just some paragraphs--&gt;
+									| &lt;p&gt;foo&lt;/p&gt;
+									| &lt;p&gt;bar&lt;/p&gt;
+						p
+						.row
+							.col-sm-6
+								pre
+									| //- will not output within markup
+									| p foo
+									| p bar
+							.col-sm-6
+								pre
+									| &lt;p&gt;foo&lt;/p&gt;
+									| &lt;p&gt;bar&lt;/p&gt;
+						.alert.alert-info Block Comments
+						p
+						.row
+							.col-sm-6
+								pre
+									| body
+									|   //
+									|     #content
+									|       h1 Example
+							.col-sm-6
+								pre
+									| &lt;body&gt;
+									|   &lt;!--
+									|   &lt;div id="content"&gt;
+									|     &lt;h1&gt;Example&lt;/h1&gt;
+									|   &lt;/div&gt;
+									|   --&gt;
+									| &lt;/body&gt;
+						p
+						.row
+							.col-sm-6
+								pre
+									| head
+									|   //if lt IE 8
+									|     script(src='/ie-sucks.js')
+							.col-sm-6
+								pre
+									| &lt;head&gt;
+									|   &lt;!--[if lt IE 8]&gt;
+									|   &lt;script src="/ie-sucks.js"&gt;&lt;/script&gt;
+									|   &lt;![endif]--&gt;
+									| &lt;/head&gt;
 
-							.alert.alert-info Case
-							.row
-								.col-sm-6
-									pre
-										| - var friends = 10
-										| case friends
-										|   when 0
-										|     p you have no friends
-										|   when 1
-										|     p you have a friend
-										|   default
-										|     p you have #{friends} friends
-								.col-sm-6
-									pre='<p>you have 10 friends</p>'
+						.alert.alert-info Conditionals
+						p
+						.row
+							.col-sm-6
+								pre
+									| - var user = { description: 'foo bar baz' }
+									| #user
+									|   if user.description
+									|     h2 Description
+									|     p.description= user.description
+									|   else
+									|     h1 Description
+									|     p.description User has no description
+							.col-sm-6
+								pre
+									| &lt;div id="user"&gt;
+									|   &lt;h2&gt;Description&lt;/h2&gt;
+									|   &lt;p class="description"&gt;foo bar baz&lt;/p&gt;
+									| &lt;/div&gt;
+						p
+						.row
+							.col-sm-6
+								pre
+									| unless user.isAnonymous
+									|   p You're logged in as \#{user.name}
+							.col-sm-6
+								pre
+									| if !user.isAnonymous
+									|   p You're logged in as \#{user.name}
 
-							.alert.alert-info Block Expansion
-							.row
-								.col-sm-6
-									pre
-										| - var friends = 1
-										| case friends
-										|   when 0: p you have no friends
-										|   when 1: p you have a friend
-										|   default: p you have #{friends} friends
-								.col-sm-6
-									pre='<p>you have a friend</p>'
+						.alert.alert-info Iteration
+						p
+						.row
+							.col-sm-6
+								pre
+									| ul
+									|   each val in [1, 2, 3, 4, 5]
+									|     li= val
+							.col-sm-6
+								pre
+									| &lt;ul&gt;
+									|   &lt;li&gt;1&lt;/li&gt;
+									|   &lt;li&gt;2&lt;/li&gt;
+									|   &lt;li&gt;3&lt;/li&gt;
+									|   &lt;li&gt;4&lt;/li&gt;
+									|   &lt;li&gt;5&lt;/li&gt;
+									| &lt;/ul&gt;
+						p
+						.row
+							.col-sm-6
+								pre
+									| ul
+									|   each val, index in ['one', 'two', 'three']
+									|     li= index + ': ' + val
+							.col-sm-6
+								pre
+									| &lt;ul&gt;
+									|   &lt;li&gt;0: one&lt;/li&gt;
+									|   &lt;li&gt;1: two&lt;/li&gt;
+									|   &lt;li&gt;2: three&lt;/li&gt;
+									| &lt;/ul&gt;
+						p
+						.row
+							.col-sm-6
+								pre
+									| ul
+									|   each val, index in {1: 'one', 2: 'two', 3: 'three'}
+									|     li= index + ': ' + val
+							.col-sm-6
+								pre
+									| &lt;ul&gt;
+									|   &lt;li&gt;1: one&lt;/li&gt;
+									|   &lt;li&gt;2: two&lt;/li&gt;
+									|   &lt;li&gt;3: three&lt;/li&gt;
+									| &lt;/ul&gt;
 
-							.alert.alert-info Filters
-							.row
-								.col-sm-6
-									pre
-										| :markdown
-										|   # Markdown
-										|   
-										|   I often like including markdown documents in my jade templates.
-										| :coffee
-										|   console.log 'This is coffee script'
-								.col-sm-6
-									pre
-										| &lt;h1&gt;Markdown&lt;/h1&gt;
-										| &lt;p&gt;I often like including markdown documents in my jade templates.&lt;/p&gt;
-										| &lt;script&gt;console.log('This is coffee script')&lt;/script&gt;
+						.alert.alert-info Case
+						.row
+							.col-sm-6
+								pre
+									| - var friends = 10
+									| case friends
+									|   when 0
+									|     p you have no friends
+									|   when 1
+									|     p you have a friend
+									|   default
+									|     p you have #{friends} friends
+							.col-sm-6
+								pre='<p>you have 10 friends</p>'
 
-							.alert.alert-info Mixins
-							.row
-								.col-sm-6
-									pre
-										| //- Declaration
-										| mixin list
-										|   ul
-										|     li foo
-										|     li bar
-										|     li baz
-										| //- Use
-										| +list()
-										| +list()
-								.col-sm-6
-									pre
-										| &lt;ul&gt;
-										|   &lt;li&gt;foo&lt;/li&gt;
-										|   &lt;li&gt;bar&lt;/li&gt;
-										|   &lt;li&gt;baz&lt;/li&gt;
-										| &lt;/ul&gt;
-										| &lt;ul&gt;
-										|   &lt;li&gt;foo&lt;/li&gt;
-										|   &lt;li&gt;bar&lt;/li&gt;
-										|   &lt;li&gt;baz&lt;/li&gt;
-										| &lt;/ul&gt;
-							.row
-								.col-sm-6
-									pre
-										| mixin pets(pets)
-										|   ul.pets
-										|     - each pet in pets
-										|       li= pet
-										| +pets(['cat', 'dog', 'pig'])
-								.col-sm-6
-									pre
-										| &lt;ul class="pets"&gt;
-										|   &lt;li&gt;cat&lt;/li&gt;
-										|   &lt;li&gt;dog&lt;/li&gt;
-										|   &lt;li&gt;pig&lt;/li&gt;
-										| &lt;/ul&gt;
-							.row
-								.col-sm-6
-									pre
-										| mixin article(title)
-										|   .article
-										|     .article-wrapper
-										|       h1= title
-										|       if block
-										|         block
-										|       else
-										|         p No content provided
-										|         
-										| +article('Hello world')
-										| 
-										| +article('Hello world')
-										|   p This is my
-										|   p Amazing article
-								.col-sm-6
-									pre
-										| &lt;div class="article"&gt;
-										|   &lt;div class="article-wrapper"&gt;
-										|     &lt;h1&gt;Hello world&lt;/h1&gt;
-										|     &lt;p&gt;No content provided&lt;/p&gt;
-										|   &lt;/div&gt;
-										| &lt;/div&gt;
-										| &lt;div class="article"&gt;
-										|   &lt;div class="article-wrapper"&gt;
-										|     &lt;h1&gt;Hello world&lt;/h1&gt;
-										|     &lt;p&gt;This is my&lt;/p&gt;
-										|     &lt;p&gt;Amazing article&lt;/p&gt;
-										|   &lt;/div&gt;
-										| &lt;/div&gt;
+						.alert.alert-info Block Expansion
+						.row
+							.col-sm-6
+								pre
+									| - var friends = 1
+									| case friends
+									|   when 0: p you have no friends
+									|   when 1: p you have a friend
+									|   default: p you have #{friends} friends
+							.col-sm-6
+								pre='<p>you have a friend</p>'
 
-							.alert.alert-info Mixin Attributes
-							.row
-								.col-sm-6
-									pre
-										| mixin link(href, name)
-										|   a(class=attributes.class, href=href)= name
-										|   
-										| +link('/foo', 'foo')(class="btn")
-								.col-sm-6
-									pre='<a href="/foo" class="btn">foo</a>'
-							.alert.alert-info 継承
-							.row
-								.col-sm-6
-									p layout.jade
-									pre
-										| !!!
-										| html
-										| 		title タイトル
-										| 		block scripts
-										| 			script(src="/jquery.js")
-										| 	body
-										| 		block header
-										| 			header
-										| 				p ヘッダー
-										| 		block content
-										| 		block footer
-										| 			footer
-										| 				small フッター
-									p index.jade
-									pre
-										| //-拡張子省略可
-										| extends layout.jade
-										| 
-										| block scripts
-										| 	script(src="jquery.js")
-										| 
-										| block content
-										| 	h1 タイトル
-										| 	p こんにちは
-								.col-sm-6
-									p index.html
-									pre
-										| &lt;!DOCTYPE html&gt;
-										| &lt;html&gt;
-										|   &lt;head&gt;
-										|     &lt;title&gt;タイトル&lt;/title&gt;
-										|     &lt;script src="jquery.js"&gt;&lt;/script&gt;
-										|   &lt;/head&gt;
-										|   &lt;body&gt;
-										|     &lt;header&gt;
-										|       &lt;p&gt;ヘッダー&lt;/p&gt;
-										|     &lt;/header&gt;
-										|     &lt;h1&gt;タイトル&lt;/h1&gt;
-										|     &lt;p&gt;こんにちは&lt;/p&gt;
-										|     &lt;footer&gt;&lt;small&gt;フッター&lt;/small&gt;&lt;/footer&gt;
-										|   &lt;/body&gt;
-										| &lt;/html&gt;
-							.alert.alert-info include
-							.row
-								.col-sm-6
-									p head.jade
-									pre
-										| head
-										| 	meta(charset='UTF-8')
-										| 	title
-									p index.jade
-									pre
-										| !!!
-										| html
-										| 	include head.jade
-										| 	body
-										| 		h1
-										| 		p
-								.col-sm-6
-									p index.html
-									pre
-										&lt;!DOCTYPE html&gt;
-										| &lt;html&gt;
-										| 	&lt;head&gt;
-										| 	&lt;meta charset="UTF-8"&gt;
-										| 	&lt;title&gt;&lt;/title&gt;
-										| 	&lt;body&gt;
-										| 		&lt;h1&gt;&lt;/h1&gt;
-										| 		&lt;p&gt;&lt;/p&gt;
-										| 	&lt;/body&gt;
-										| &lt;/html&gt;
-							.alert.alert-info mixin
-							.row
-								.col-sm-6
-									pre
-										| mixin field(type, name, label)
-										| 	.field(class='field-' + type)
-										| 		label #{label}:
-										| 		input(type=type, name='user[#{name}]', value=user[name])
-										| 
-										| form
-										| 	mixin field('text', 'name', 'Username')
-										| 	mixin field('text', 'email', 'Email')
-										| 	mixin field('password', 'pass', 'Password')
-										| 	input(type='submit', value='Sign Up')
-								.col-sm-6
-									pre
-										| &lt;form&gt;
-										| 	&lt;div class="field field-text"&gt;
-										| 		&lt;label&gt;Username:&lt;/label&gt;
-										| 		&lt;input type="text" name="user[name]" value="TJ Holowaychuk"/&gt;
-										| 	&lt;/div&gt;
-										| 	&lt;div class="field field-text"&gt;
-										| 		&lt;label&gt;Email:&lt;/label&gt;
-										| 		&lt;input type="text" name="user[email]" value="tj@learnboost.com"/&gt;
-										| 	&lt;/div&gt;
-										| 	&lt;div class="field field-password"&gt;
-										| 		&lt;label&gt;Password:&lt;/label&gt;
-										| 		&lt;input type="password" name="user[pass]"/&gt;
-										| 	&lt;/div&gt;
-										| 	&lt;input type="submit" value="Sign Up"/&gt;
-										| &lt;/form&gt;
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.10.2.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+						.alert.alert-info Filters
+						.row
+							.col-sm-6
+								pre
+									| :markdown
+									|   # Markdown
+									|   
+									|   I often like including markdown documents in my jade templates.
+									| :coffee
+									|   console.log 'This is coffee script'
+							.col-sm-6
+								pre
+									| &lt;h1&gt;Markdown&lt;/h1&gt;
+									| &lt;p&gt;I often like including markdown documents in my jade templates.&lt;/p&gt;
+									| &lt;script&gt;console.log('This is coffee script')&lt;/script&gt;
+
+						.alert.alert-info Mixins
+						.row
+							.col-sm-6
+								pre
+									| //- Declaration
+									| mixin list
+									|   ul
+									|     li foo
+									|     li bar
+									|     li baz
+									| //- Use
+									| +list()
+									| +list()
+							.col-sm-6
+								pre
+									| &lt;ul&gt;
+									|   &lt;li&gt;foo&lt;/li&gt;
+									|   &lt;li&gt;bar&lt;/li&gt;
+									|   &lt;li&gt;baz&lt;/li&gt;
+									| &lt;/ul&gt;
+									| &lt;ul&gt;
+									|   &lt;li&gt;foo&lt;/li&gt;
+									|   &lt;li&gt;bar&lt;/li&gt;
+									|   &lt;li&gt;baz&lt;/li&gt;
+									| &lt;/ul&gt;
+						.row
+							.col-sm-6
+								pre
+									| mixin pets(pets)
+									|   ul.pets
+									|     - each pet in pets
+									|       li= pet
+									| +pets(['cat', 'dog', 'pig'])
+							.col-sm-6
+								pre
+									| &lt;ul class="pets"&gt;
+									|   &lt;li&gt;cat&lt;/li&gt;
+									|   &lt;li&gt;dog&lt;/li&gt;
+									|   &lt;li&gt;pig&lt;/li&gt;
+									| &lt;/ul&gt;
+						.row
+							.col-sm-6
+								pre
+									| mixin article(title)
+									|   .article
+									|     .article-wrapper
+									|       h1= title
+									|       if block
+									|         block
+									|       else
+									|         p No content provided
+									|         
+									| +article('Hello world')
+									| 
+									| +article('Hello world')
+									|   p This is my
+									|   p Amazing article
+							.col-sm-6
+								pre
+									| &lt;div class="article"&gt;
+									|   &lt;div class="article-wrapper"&gt;
+									|     &lt;h1&gt;Hello world&lt;/h1&gt;
+									|     &lt;p&gt;No content provided&lt;/p&gt;
+									|   &lt;/div&gt;
+									| &lt;/div&gt;
+									| &lt;div class="article"&gt;
+									|   &lt;div class="article-wrapper"&gt;
+									|     &lt;h1&gt;Hello world&lt;/h1&gt;
+									|     &lt;p&gt;This is my&lt;/p&gt;
+									|     &lt;p&gt;Amazing article&lt;/p&gt;
+									|   &lt;/div&gt;
+									| &lt;/div&gt;
+
+						.alert.alert-info Mixin Attributes
+						.row
+							.col-sm-6
+								pre
+									| mixin link(href, name)
+									|   a(class=attributes.class, href=href)= name
+									|   
+									| +link('/foo', 'foo')(class="btn")
+							.col-sm-6
+								pre='<a href="/foo" class="btn">foo</a>'
+						.alert.alert-info 継承
+						.row
+							.col-sm-6
+								p layout.jade
+								pre
+									| !!!
+									| html
+									| 		title タイトル
+									| 		block scripts
+									| 			script(src="/jquery.js")
+									| 	body
+									| 		block header
+									| 			header
+									| 				p ヘッダー
+									| 		block content
+									| 		block footer
+									| 			footer
+									| 				small フッター
+								p index.jade
+								pre
+									| //-拡張子省略可
+									| extends layout.jade
+									| 
+									| block scripts
+									| 	script(src="jquery.js")
+									| 
+									| block content
+									| 	h1 タイトル
+									| 	p こんにちは
+							.col-sm-6
+								p index.html
+								pre
+									| &lt;!DOCTYPE html&gt;
+									| &lt;html&gt;
+									|   &lt;head&gt;
+									|     &lt;title&gt;タイトル&lt;/title&gt;
+									|     &lt;script src="jquery.js"&gt;&lt;/script&gt;
+									|   &lt;/head&gt;
+									|   &lt;body&gt;
+									|     &lt;header&gt;
+									|       &lt;p&gt;ヘッダー&lt;/p&gt;
+									|     &lt;/header&gt;
+									|     &lt;h1&gt;タイトル&lt;/h1&gt;
+									|     &lt;p&gt;こんにちは&lt;/p&gt;
+									|     &lt;footer&gt;&lt;small&gt;フッター&lt;/small&gt;&lt;/footer&gt;
+									|   &lt;/body&gt;
+									| &lt;/html&gt;
+						.alert.alert-info include
+						.row
+							.col-sm-6
+								p head.jade
+								pre
+									| head
+									| 	meta(charset='UTF-8')
+									| 	title
+								p index.jade
+								pre
+									| !!!
+									| html
+									| 	include head.jade
+									| 	body
+									| 		h1
+									| 		p
+							.col-sm-6
+								p index.html
+								pre
+									&lt;!DOCTYPE html&gt;
+									| &lt;html&gt;
+									| 	&lt;head&gt;
+									| 	&lt;meta charset="UTF-8"&gt;
+									| 	&lt;title&gt;&lt;/title&gt;
+									| 	&lt;body&gt;
+									| 		&lt;h1&gt;&lt;/h1&gt;
+									| 		&lt;p&gt;&lt;/p&gt;
+									| 	&lt;/body&gt;
+									| &lt;/html&gt;
+						.alert.alert-info mixin
+						.row
+							.col-sm-6
+								pre
+									| mixin field(type, name, label)
+									| 	.field(class='field-' + type)
+									| 		label #{label}:
+									| 		input(type=type, name='user[#{name}]', value=user[name])
+									| 
+									| form
+									| 	mixin field('text', 'name', 'Username')
+									| 	mixin field('text', 'email', 'Email')
+									| 	mixin field('password', 'pass', 'Password')
+									| 	input(type='submit', value='Sign Up')
+							.col-sm-6
+								pre
+									| &lt;form&gt;
+									| 	&lt;div class="field field-text"&gt;
+									| 		&lt;label&gt;Username:&lt;/label&gt;
+									| 		&lt;input type="text" name="user[name]" value="TJ Holowaychuk"/&gt;
+									| 	&lt;/div&gt;
+									| 	&lt;div class="field field-text"&gt;
+									| 		&lt;label&gt;Email:&lt;/label&gt;
+									| 		&lt;input type="text" name="user[email]" value="tj@learnboost.com"/&gt;
+									| 	&lt;/div&gt;
+									| 	&lt;div class="field field-password"&gt;
+									| 		&lt;label&gt;Password:&lt;/label&gt;
+									| 		&lt;input type="password" name="user[pass]"/&gt;
+									| 	&lt;/div&gt;
+									| 	&lt;input type="submit" value="Sign Up"/&gt;
+									| &lt;/form&gt;

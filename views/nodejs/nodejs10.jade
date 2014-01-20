@@ -1,0 +1,165 @@
+extends ../layout
+
+block link
+	link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+	link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+	link(href='../css/style.css',rel='stylesheet',media='screen')
+	link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+	include navbar.jade
+	.container
+		.row
+			.col-sm-3
+				include left.jade
+			.col-sm-9
+				.panel.panel-primary
+					.panel-heading
+						i.glyphicon.glyphicon-book
+						| &nbsp;Expressで動的ページを追加する
+					.panel-body
+						.alert.alert-info viewsディレクトリ直下にテンプレートを作成
+						p ① viewsディレクトリ内に「mypage1.jade」を追加します。
+						hr
+						p ② routesディレクトリ内に「mypage.js」を追加します。
+						hr
+						p ③ 「mypage.js」に以下のように記述します。
+						pre(class='prettyprint linenums:1')
+							:code
+								/*
+								* GET my page.
+								*/
+
+								exports.mypage1 = function(req, res){
+									res.render('mypage1', {});
+								};
+						p ④ 「app.js」に以下のように追記します。
+						pre(class='prettyprint linenums:1')
+							:code
+								/**
+								* Module dependencies.
+								*/
+
+								var express = require('express')
+								, routes = require('./routes')
+								, user = require('./routes/user')
+								, http = require('http')
+								, path = require('path')
+								, stylus = require("stylus")
+								, nib = require("nib");
+
+								//↓追記
+								// routes
+								var mypage = require('./routes/mypage');
+								//↑追記
+
+								var app = express();
+
+								// all environments
+								app.set('port', process.env.PORT || 3000);
+								app.set('views', __dirname + '/views');
+								app.set('view engine', 'jade');
+								app.use(express.favicon());
+								app.use(express.logger('dev'));
+								app.use(express.bodyParser());
+								app.use(express.methodOverride());
+								app.use(app.router);
+								var compile = function(str, path) {
+									return stylus(str).set("filename", path).set("compress", true).use(nib());
+								};
+								app.use(stylus.middleware({
+									src: __dirname + "/public",
+									compile: compile
+								}));
+								app.use(express.static(path.join(__dirname, 'public')));
+
+								// development only
+								if ('development' == app.get('env')) {
+									app.use(express.errorHandler());
+								}
+
+								app.get('/', routes.index);
+								app.get('/users', user.list);
+								//↓追記
+								app.get('/mypage1', mypage.mypage1);
+								//↑追記
+
+								http.createServer(app).listen(app.get('port'), function(){
+									console.log('Express server listening on port ' + app.get('port'));
+								});
+						hr
+						p ⑤ ブラウザで「http://localhost:3000/mypage1」にアクセスします。
+						hr
+						.alert.alert-info viewsディレクトリの一階層下にテンプレートを作成
+						p ① viewsディレクトリ内に「mypage/mypage2.jade」を追加します。
+						hr
+						p ② 「routes/mypage.js」に以下のように追記します。
+						pre(class='prettyprint linenums:1')
+							:code
+								/*
+								* GET my page.
+								*/
+
+								exports.mypage1 = function(req, res){
+									res.render('mypage1', {});
+								};
+
+								exports.mypage2 = function(req, res){
+									res.render('mypage/mypage2', {});
+								};
+						hr
+						p ③ 「app.js」に以下のように追記します。
+						pre(class='prettyprint linenums:1')
+							:code
+								/**
+								* Module dependencies.
+								*/
+
+								var express = require('express')
+								, routes = require('./routes')
+								, user = require('./routes/user')
+								, http = require('http')
+								, path = require('path')
+								, stylus = require("stylus")
+								, nib = require("nib");
+
+								// routes
+								var mypage = require('./routes/mypage');
+
+								var app = express();
+
+								// all environments
+								app.set('port', process.env.PORT || 3000);
+								app.set('views', __dirname + '/views');
+								app.set('view engine', 'jade');
+								app.use(express.favicon());
+								app.use(express.logger('dev'));
+								app.use(express.bodyParser());
+								app.use(express.methodOverride());
+								app.use(app.router);
+								var compile = function(str, path) {
+									return stylus(str).set("filename", path).set("compress", true).use(nib());
+								};
+								app.use(stylus.middleware({
+									src: __dirname + "/public",
+									compile: compile
+								}));
+								app.use(express.static(path.join(__dirname, 'public')));
+
+								// development only
+								if ('development' == app.get('env')) {
+									app.use(express.errorHandler());
+								}
+
+								app.get('/', routes.index);
+								app.get('/users', user.list);
+								app.get('/mypage1', mypage.mypage1);
+								//↓追記
+								app.get('/mypage1', mypage.mypage2);
+								//↑追記
+
+								http.createServer(app).listen(app.get('port'), function(){
+									console.log('Express server listening on port ' + app.get('port'));
+								});
+						hr
+						p ④ ブラウザで「http://localhost:3000/mypage2」にアクセスします。

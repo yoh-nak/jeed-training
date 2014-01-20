@@ -1,0 +1,78 @@
+extends ../layout
+
+block link
+	link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+	link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+	link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+	link(href='../css/style.css',rel='stylesheet',media='screen')
+	link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+	include navbar.jade
+	.container
+		.row
+			.col-sm-3
+				include left.jade
+			.col-sm-9
+				.panel.panel-primary
+					.panel-heading
+						i.glyphicon.glyphicon-book
+						| &nbsp;npmコマンドの使い方
+					.panel-body
+						.alert.alert-info npmのバージョンを確認する
+						pre
+							:code
+								npm -v
+						pre
+							:code
+								npm --version
+						hr
+						.alert.alert-info npmのヘルプを確認する
+						pre
+							:code
+								npm -h
+						pre
+							:code
+								npm --help
+						hr
+						.alert.alert-info グローパルパッケージのインストール
+						p グローバルパッケージをインストールする場合はオプションの-gが必要です。またグローバルパッケージの扱いは、UNIX環境では管理者権限で実行する必要があります。
+						pre
+							:code
+								(sudo )npm install -g パッケージ名
+						p パッケージは半角スペースで区切ってまとめてインストールすることができます。
+						pre
+							:code
+								(sudo )npm install -g パッケージ名1 パッケージ名2 ...
+						hr
+						.alert.alert-info グローパルパッケージのバージョンを指定してインストール
+						pre
+							:code
+								(sudo )npm install -g パッケージ名@x.x.x
+						hr
+						.alert.alert-info グローパルパッケージのアンインストール
+						pre
+							:code
+								(sudo )npm remove -g パッケージ名
+						pre
+							:code
+								(sudo )npm rm -g パッケージ名
+						hr
+						.alert.alert-info インストールしたグローパルパッケージの確認
+						pre
+							:code
+								(sudo )npm list -g
+						pre
+							:code
+								(sudo )npm ls -g
+						hr
+						.alert.alert-info インストールしたグローパルパッケージを絞り込んで確認
+						pre
+							:code
+								(sudo )npm list -g パッケージ名
+						pre
+							:code
+								(sudo )npm ls -g パッケージ名
+						hr
+						.alert.alert-info ローカルパッケージのコマンド
+						p グローバルパッケージのコマンドオプション-gを除いたものと同じです。UNIX環境では管理者権限で実行する必要はありません。

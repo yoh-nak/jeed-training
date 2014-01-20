@@ -1,57 +1,56 @@
-include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;Node.js資料
-						.panel-body
-							h4 Node.js
-							p
-								| Node.js公式サイト
-								br
-								a(href='http://nodejs.org/',target='_blank')
-									| http://nodejs.org/
-							p
-								| Node.js API ドキュメント
-								br
-								a(href='http://nodejs.org/api/',target='_blank')
-									| http://nodejs.org/api/
-							p
-								| Node.jsのインストール
-							pre 
-								| wget http://nodejs.org/dist/v0.10.24/node-v0.10.24.tar.gz
-								| tar -zxf node-v0.10.24.tar.gz
-								| cd node-v0.10.24
-								| ./configure
-								| make
-								| sudo make install
-							hr
-							h4 npm（node package manager）
-							p
-								| npm公式サイト
-								br
-								a(href='https://npmjs.org/',target='_blank')
-									| https://npmjs.org/
-							p
-								| npm API ドキュメント
-								br
-								a(href='https://npmjs.org/doc/',target='_blank')
-									| https://npmjs.org/doc/
-							hr
-							h4 ドットインストール
-							p
-								a(href='http://dotinstall.com/lessons/basic_nodejs', target='_blank') Node.js入門
-							
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.10.2.min.js')
-		script(src='js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='js/bootstrap.min.js')
-		script(src='coffee/list-counter.js')
+extends ../layout
+
+block link
+	link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+	link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+	link(href='../css/style.css',rel='stylesheet',media='screen')
+	link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+	include navbar.jade
+	.container
+		.row
+			.col-sm-3
+				include left.jade
+			.col-sm-9
+				.panel.panel-primary
+					.panel-heading
+						i.glyphicon.glyphicon-book
+						| &nbsp;Node.js資料
+					.panel-body
+						h4 Node.js
+						p
+							| Node.js公式サイト
+							br
+							a(href='http://nodejs.org/',target='_blank')
+								| http://nodejs.org/
+						p
+							| Node.js API ドキュメント
+							br
+							a(href='http://nodejs.org/api/',target='_blank')
+								| http://nodejs.org/api/
+						p
+							| Node.jsのインストール
+						pre 
+							| wget http://nodejs.org/dist/v0.10.24/node-v0.10.24.tar.gz
+							| tar -zxf node-v0.10.24.tar.gz
+							| cd node-v0.10.24
+							| ./configure
+							| make
+							| sudo make install
+						hr
+						h4 npm（node package manager）
+						p
+							| npm公式サイト
+							br
+							a(href='https://npmjs.org/',target='_blank')
+								| https://npmjs.org/
+						p
+							| npm API ドキュメント
+							br
+							a(href='https://npmjs.org/doc/',target='_blank')
+								| https://npmjs.org/doc/
+						hr
+						h4 ドットインストール
+						p
+							a(href='http://dotinstall.com/lessons/basic_nodejs', target='_blank') Node.js入門

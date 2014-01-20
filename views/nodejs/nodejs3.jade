@@ -1,69 +1,69 @@
-include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| ExpressでBASIC認証を使う
-						.panel-body
-							h4 ExpressでBASIC認証を使う
-							p app.jsのミドルウェア設定に「app.use(express.basicAuth('ユーザ名', 'パスワード'));」の1行を追加するだけで設定できます。
-							pre.prettyprint
-								| /**
-								|  * Module dependencies.
-								|  */
-								| 
-								| //モジュール読み込み
-								| var express = require('express')
-								|   , routes = require('./routes')
-								|   , user = require('./routes/user')
-								|   , http = require('http')
-								|   , path = require('path');
-								| 
-								| var app = express();
-								| 
-								| 
-								| //ミドルウェア
-								| 
-								| // ベーシック認証
-								| app.use(express.basicAuth('ユーザ名', 'パスワード'));
-								| 
-								| // all environments
-								| app.set('port', process.env.PORT || 3000);
-								| app.set('views', __dirname + '/views');
-								| app.set('view engine', 'ejs');
-								| app.use(express.favicon());
-								| app.use(express.logger('dev'));
-								| app.use(express.bodyParser());
-								| app.use(express.methodOverride());
-								| app.use(express.cookieParser('your secret here'));
-								| app.use(express.session());
-								| app.use(app.router);
-								| app.use(express.static(path.join(__dirname, 'public')));
-								| 
-								| // development only
-								| if ('development' == app.get('env')) {
-								|   app.use(express.errorHandler());
-								| }
-								| 
-								| //ルーティング
-								| app.get('/', routes.index);
-								| app.get('/users', user.list);
-								| 
-								| 
-								| //サーバー起動
-								| http.createServer(app).listen(app.get('port'), function(){
-								|   console.log('Express server listening on port ' + app.get('port'));
-								| });
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.10.2.min.js')
-		script(src='js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='js/bootstrap.min.js')
-		script(src='coffee/list-counter.js')
+extends ../layout
+
+block link
+	link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+	link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+	link(href='../css/style.css',rel='stylesheet',media='screen')
+	link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+	include navbar.jade
+	.container
+		.row
+			.col-sm-3
+				include left.jade
+			.col-sm-9
+				.panel.panel-primary
+					.panel-heading
+						i.glyphicon.glyphicon-book
+						| ExpressでBASIC認証を使う
+					.panel-body
+						h4 ExpressでBASIC認証を使う
+						p app.jsのミドルウェア設定に「app.use(express.basicAuth('ユーザ名', 'パスワード'));」の1行を追加するだけで設定できます。
+						pre.prettyprint
+							| /**
+							|  * Module dependencies.
+							|  */
+							| 
+							| //モジュール読み込み
+							| var express = require('express')
+							|   , routes = require('./routes')
+							|   , user = require('./routes/user')
+							|   , http = require('http')
+							|   , path = require('path');
+							| 
+							| var app = express();
+							| 
+							| 
+							| //ミドルウェア
+							| 
+							| // ベーシック認証
+							| app.use(express.basicAuth('ユーザ名', 'パスワード'));
+							| 
+							| // all environments
+							| app.set('port', process.env.PORT || 3000);
+							| app.set('views', __dirname + '/views');
+							| app.set('view engine', 'ejs');
+							| app.use(express.favicon());
+							| app.use(express.logger('dev'));
+							| app.use(express.bodyParser());
+							| app.use(express.methodOverride());
+							| app.use(express.cookieParser('your secret here'));
+							| app.use(express.session());
+							| app.use(app.router);
+							| app.use(express.static(path.join(__dirname, 'public')));
+							| 
+							| // development only
+							| if ('development' == app.get('env')) {
+							|   app.use(express.errorHandler());
+							| }
+							| 
+							| //ルーティング
+							| app.get('/', routes.index);
+							| app.get('/users', user.list);
+							| 
+							| 
+							| //サーバー起動
+							| http.createServer(app).listen(app.get('port'), function(){
+							|   console.log('Express server listening on port ' + app.get('port'));
+							| });

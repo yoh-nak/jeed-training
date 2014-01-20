@@ -1,82 +1,82 @@
-include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;Expressのインストール
-						.panel-body
-							p ※ 先にnode.jsをインストールしておく必要があります。
-							hr
-							p ①まずグローバルにExpressをインストールします。
-							pre
-								| (sudo )npm install -g expres
-							hr
-							p ②次にローカルにExpressのスケルトンコードを作成します。このとき、オプションで指定したnpmパッケージがpackage.jsonに記述されます。
-							p: u Jadeテンプレートエンジンを指定してインストール
-							pre
-								| express アプリ名
-							p: u EJSテンプレートエンジンを指定してインストール
-							pre
-								| express アプリ名 -e
-							pre
-								| express アプリ名 --ejs
-							p: u jshtmlテンプレートエンジンを指定してインストール
-							pre
-								| express アプリ名 -J
-							pre
-								| express アプリ名 --jshtml
+extends ../layout
 
-							p: u hoganテンプレートエンジンを指定してインストール
-							pre
-								| express アプリ名 -H
-							pre
-								| express アプリ名 --hogan
-							p: u LESS CSSエンジンを指定してインストール
-							pre
-								| express -c less
-							pre
-								| express --css less
-							p: u Stylus CSSエンジンを指定してインストール
-							pre
-								| express -c stylus
-							pre
-								| express -css stylus
-							p: u セッションサポートを追加してインストール
-							pre
-								| express アプリ名 -s
-							pre
-								| express アプリ名 --sessions
-							p: u まとめて指定してインストール（例：Jade、Stylus、セッションサポート）
-							pre
-								| express アプリ名 -sc stylus
-							hr
-							p ③package.jsonに記述されたnpmパッケージをローカルにインストールします。
-							pre
-								| npm install
-							hr
-							p ④サーバーを起動します。（80番ポートを使用する場合はsudoが必要です。）
-							pre
-								| node app
-							hr
-							p ※ バージョンアップでコマンドが変わることがあります。その場合はいかのコマンドでヘルプを参照してください。
-							pre
-								| express -h
-							pre
-								| express --help
-							hr
-							p ※ CoffeeScriptで記述する場合はapp.jsをapp.coffeeに変換しておきましょう。（js2coffeeの使い方参照。）
-							pre
-								| js2coffee -it app.js &gt; app.coffee
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.10.2.min.js')
-		script(src='js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='js/bootstrap.min.js')
-		script(src='coffee/list-counter.js')
+block link
+	link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+	link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+	link(href='../css/style.css',rel='stylesheet',media='screen')
+	link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+	include navbar.jade
+	.container
+		.row
+			.col-sm-3
+				include left.jade
+			.col-sm-9
+				.panel.panel-primary
+					.panel-heading
+						i.glyphicon.glyphicon-book
+						| &nbsp;Expressのインストール
+					.panel-body
+						p ※ 先にnode.jsをインストールしておく必要があります。
+						hr
+						p ①まずグローバルにExpressをインストールします。
+						pre
+							| (sudo )npm install -g expres
+						hr
+						p ②次にローカルにExpressのスケルトンコードを作成します。このとき、オプションで指定したnpmパッケージがpackage.jsonに記述されます。
+						p: u Jadeテンプレートエンジンを指定してインストール
+						pre
+							| express アプリ名
+						p: u EJSテンプレートエンジンを指定してインストール
+						pre
+							| express アプリ名 -e
+						pre
+							| express アプリ名 --ejs
+						p: u jshtmlテンプレートエンジンを指定してインストール
+						pre
+							| express アプリ名 -J
+						pre
+							| express アプリ名 --jshtml
+
+						p: u hoganテンプレートエンジンを指定してインストール
+						pre
+							| express アプリ名 -H
+						pre
+							| express アプリ名 --hogan
+						p: u LESS CSSエンジンを指定してインストール
+						pre
+							| express アプリ名 -c less
+						pre
+							| express アプリ名 --css less
+						p: u Stylus CSSエンジンを指定してインストール
+						pre
+							| express アプリ名 -c stylus
+						pre
+							| express アプリ名 --css stylus
+						p: u セッションサポートを追加してインストール
+						pre
+							| express アプリ名 -s
+						pre
+							| express アプリ名 --sessions
+						p: u まとめて指定してインストール（例：Jade、Stylus、セッションサポート）
+						pre
+							| express アプリ名 -sc stylus
+						hr
+						p ③package.jsonに記述されたnpmパッケージをローカルにインストールします。
+						pre
+							| npm install
+						hr
+						p ④サーバーを起動します。（80番ポートを使用する場合はsudoが必要です。）
+						pre
+							| node app
+						hr
+						p ※ バージョンアップでコマンドが変わることがあります。その場合はいかのコマンドでヘルプを参照してください。
+						pre
+							| express -h
+						pre
+							| express --help
+						hr
+						p ※ CoffeeScriptで記述する場合はapp.jsをapp.coffeeに変換しておきましょう。（js2coffeeの使い方参照。）
+						pre
+							| js2coffee -it app.js &gt; app.coffee

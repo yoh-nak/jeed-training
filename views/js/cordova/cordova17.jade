@@ -75,9 +75,98 @@ block content
                             }
                 p このコードでは、action引数を利用していません。args引数から渡された文字列を、ポップアップを表示するメソッドに渡しています。
                 .alert.alert-info JavaScriptからプラグインのコードを呼び出す
+                p ネイティブ側で実装したコードは、cordova.execメソッドから呼び出します。どんなプラグインも、このexecメソッドを通じて呼び出します。execメソッドのシグネチャは以下のようになっています。
+                pre
+                    :code
+                        cordova.exec(<successFunction>, <failFunction>, <service>, <action>, [<args>]);
+                table.table
+                    tr
+                        th 名前
+                        th 概要
+                    tr
+                        td='<successFunction>'
+                        td 呼び出し成功時に実行される関数
+                    tr
+                        td='<failFunction>'
+                        td 呼び出し失敗時に実行される関数
+                    tr
+                        td='<service>'
+                        td config.xmlに追加したプラグイン名
+                    tr
+                        td='<action>'
+                        td 呼び出すプラグインのアクション名
+                    tr
+                        td='<args>'
+                        td ネイティブ側に引数として渡す配列。JSON化できるもののみを渡す
+                p 先ほどJavaで実装したFirstPluginを呼び出します。www/index.js以下を編集します。devicereadyイベントが発火してから初めてプラグインのメソッドを利用できるようになります。
+                pre
+                    :code
+                        onDeviceReady: function() {
+
+                            cordova.exec(function(){
+                                console.log('プラグイン呼び出しに成功しました');
+                            }, function(){
+                                console.log('プラグイン呼び出しに失敗しました')
+                            }, 'MyFirstPlugin', 'actionName', ['Hello my first Cordova Plugin']);
+                        }
+                p cordova prepareコマンドを実行して配置します。Eclipseから[File]→[Refresh]を選択して、実行してください。
+                p 成功すると、JavaScriptから渡した文字列がポップアップとして表示されます。
+                .alert.alert-info プラグインから、JavaScriptに対して値を返すときには、プラグインのexecuteメソッドに渡されたCallbackContextオブジェクトのsuccessメソッドに文字列を渡します。
+                pre
+                    :code
+                        public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+                            callbackContext.success("A message from java");
+
+                            return true;
+                        }
+                p Java側から渡されたメッセージは、cordova.execメソッドに渡した成功時に呼ばれるコールバックの引数に渡されます。
+                pre
+                    :code
+                        cordova.exec(function(message) {
+                            alert(message);
+                        }, function(){
+                            alert('プラグイン呼び出しに失敗');
+                        }, "MyFirstPlugin", "hello", []);
+                p これを実行して成功すると、Java側から受け取ったメッセージが入ったアラートが表示されます。
                 .alert.alert-info Android向けのプラグイン開発の詳細
-                p 
+                p 他にもプラグインからは様々な処理を行うことができます。詳細はAndroidのプラグイン開発について記述されている以下のCordovaのドキュメントを参照してください。
+                ul
+                    li URL Android Plugins<br><a href="http://cordova.apache.org/docs/en/3.0.0/guide_platforms_andorid_plugin.md.html">http://cordova.apache.org/docs/en/3.0.0/guide_platforms_andorid_plugin.md.html</a>
                 .alert.alert-info iOS向けのCordovaプラグインを実装する
-                p 
+                p Androidの次は、iOSプロジェクト向けのCordovaプラグインを実装する手順を紹介します。
+                ol
+                    li config.xmlを編集して、プラグインに関する情報を追加するプラグインに関する情報を追加する
+                    li Objective-Cでプラグインのコードを記述する
+                    li JavaScriptからプラグインのコードを呼び出す
+                p これらの作業をplatform/iosディレクトリ以下で行います。platforms/ios/（プロジェクト名）.xcodeprojファイルを開いてXcodeを起動してください。
+                .alert.alert-info config.xmlを編集してプラグインに関する情報を追加する
+                p Androidと同様に、config.xmlにプラグインに関する情報を追加します。iOS向けプロジェクトの場合には、config.xmlはplatform/ios/（プロジェクト名）ディレクトリ以下にあります。
+                p ここでも、プラグイン名とObjective-Cでプラグインの処理を実装するクラス名を追加します。config.xmlのwidget要素以下にfeature要素を追加します。プラグイン名を「MyFirstPlugin」、プラグインの実装に使うクラス名を「HWMyFirstPlugin」にします。
+                pre
+                    :code
+                        <feature name="MyFirstPlugin">
+                            <param name="ios-package" value="HWMyFirstPlugin" />
+                        </feature>
+                .alert.alert-info Objective-Cで記述する
+                p XcodeのProject NavigatorからClassesディレクトリを右クリックして、メニューから[New File]を選択してください。
+                p 新しいファイルを作成するためのダイアログが表示されるので、iOSの[Cocoa Touch]カテゴリの[Objective-C class]を選択して[Next]ボタンを押してください。
+                p 新規作成クラスのダイアログが表示されるので、[Class]欄にクラス名として「HWMyFirstPlugin」、[Subclass of]欄に親クラス名として「CDVPlugin」を入力します。
+                p Androidの場合と同様に、プラグインを実装するクラスにはCordovaプラグインクラスを継承する必要があります。
+                p 新規作成するファイルを保存する場所を選択するダイアログが表示されます。ここではそのまま[Create]ボタンを押します。
+                p 追加したHWMyFirstPlugin.hを編集して、ヘッダファイルのインポートにCordova/CDV.hファイルを使うように変更します。
+                pre
+                    :code
+                        #import <Cordova/CDV.h>
+
+                        @interface HWMyFirstPlugin : CDVPlugin
+                        @end
+                p HWMyFirstPlugin.mにリストのようにhelloメソッドを追加します。先ほど作成したAndroid向けのプラグインの実装では、executeメソッドにアクション名が渡されましたが、iOSではアクション名はなく、その代わりJavaScript側で指定したアクション名のメソッドが呼び出されます。hello()メソッドは、JavaScriptからの呼び出しがネイティブ側に受け入れられたかどうかの値を返します。もし、action引数に渡っているアクション名が間違っている場合にはfalseを返してプラグインの呼び出しが間違っていることを伝えます。Objective-Cから生成した文字列をJavaScript側に返します。
+                pre
+                    :code
+                .alert.alert-info JavaScriptから呼び出す
+                p Androidと同じようにcordova.execメソッドを使って先ほど記述したリストのコードを呼び出します。devicereadyイベント発火後にcordova.execメソッドを使います。index.jsのonDeviceReadyメソッド内にリストのように記述します。呼び出し側はAndroidと同じです。
+                pre
+                    :code
+                .alert.alert-info iOS向けプラグイン開発の詳細
                 .alert.alert-info cordovaコマンドからインストールできるプラグインを実装する
                 p 

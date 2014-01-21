@@ -108,6 +108,8 @@
 
   app.get("/jquery/:id", jquery.jquery);
 
+  app.get("/jqueryui/:id", jquery.jqueryui);
+
   app.get("/jqm/:id", jqm.jqm);
 
   app.get("/mobile/:id", mobile.mobile);

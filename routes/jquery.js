@@ -16,4 +16,12 @@
     });
   };
 
+  exports.jqueryui = function(req, res) {
+    return res.render("jquery/jqueryui/jqueryui" + req.params.id, {
+      title: define.title,
+      instructor: define.instructor,
+      pretty: true
+    });
+  };
+
 }).call(this);

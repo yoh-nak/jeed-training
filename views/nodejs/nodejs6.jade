@@ -17,8 +17,72 @@ block content
 				.panel.panel-primary
 					.panel-heading
 						i.glyphicon.glyphicon-book
-						| &nbsp;npm
+						| &nbsp;便利なnpmパッケージ
 					.panel-body
-						h4 hotnode
-						h4 js2coffee
-						h4 forever
+						.alert.alert-info js2coffee
+						p jsファイルをCoffeeScriptに変換します。
+						p: u インストール
+						pre
+							:code
+								(sudo )npm install -g js2coffee
+						p: u 使い方
+						hr
+						.alert.alert-info hotnode
+						p Node.jsのソースが編集されたら自動的にサーバーを再起動します。
+						p: u インストール
+						pre
+							:code
+								(sudo )npm install -g hotnode
+						p: u 使い方
+						hr
+						.alert.alert-info forever
+						p Node.jsのサーバーがクラッシュしたとき自動的に再起動します。
+						p /etc/rc.localファイルにコマンドを記述すればサーバの起動時にforeverが実行されます。
+						p: u インストール
+						pre
+							:code
+								(sudo )npm install -g forever
+						p: u 使い方
+						hr
+						.alert.alert-info http-proxy
+						p 80番ポートを使って複数のNode.jsのプロセスにホスト名、ドメイン名を割り当てます。
+						p /etc/rc.localファイルにコマンドを記述すればサーバの起動時にhttp-proxyが実行されます。
+						p: u インストール
+						pre
+							:code
+								(sudo )npm install -g http-proxy
+						p: u 使い方
+						p proxy.jsを記述します。
+						pre(class='prettyprint linenums:1')
+							:code
+								require('http-proxy').createServer({
+									router: {
+										'login.nodecookbook.com': 'localhost:3000',
+										'nodecookbook.com': 'localhost:8080'
+									}
+								}).listen(80, function(){
+									process.setuid('www-data');
+								});
+						p windowsの場合は「process.setuid('www-data');」を無効にします。
+						pre(class='prettyprint linenums:1')
+							:code
+								require('http-proxy').createServer({
+									router: {
+										'login.nodecookbook.com': 'localhost:3000',
+										'nodecookbook.com': 'localhost:8080'
+									}
+								}).listen(80, function(){
+									//process.setuid('www-data');
+								});
+						p 本番環境（Linuxの場合）では/etc/rc.localに追記します。
+						pre(class='prettyprint linenums:1')
+							:code
+								sudo node /フルパス/login/app.js
+								sudo node /フルパス/server.js
+								sudo node /フルパス/proxy.js
+						p foreverを使う場合は/etc/rc.localに以下のように記述します。
+						pre(class='prettyprint linenums:1')
+							:code
+								sudo forever /フルパス/login/app.js
+								sudo forever /フルパス/server.js
+								sudo forever /フルパス/proxy.js

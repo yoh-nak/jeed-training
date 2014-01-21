@@ -67,6 +67,7 @@ app.get "/_css/:id", css.css # CSS
 app.get "/rwd/:id", rwd.rwd # レスポンシブWEBデザイン
 app.get "/bootstrap/:id", rwd.bootstrap # Bootstrap
 app.get "/jquery/:id", jquery.jquery # jQuery
+app.get "/jqueryui/:id", jquery.jqueryui # jQuery UI
 app.get "/jqm/:id", jqm.jqm # jQuery Mobile
 app.get "/mobile/:id", mobile.mobile # スマホサイト
 app.get "/nodejs/:id", nodejs.nodejs # Node.js

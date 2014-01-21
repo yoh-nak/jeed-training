@@ -9,7 +9,7 @@
   };
 
   exports.material = function(req, res) {
-    return res.render("material/material" + req.params.id + req.params.format, {
+    return res.render("material/material-" + req.params.id + req.params.format, {
       title: define.title,
       instructor: define.instructor,
       pretty: true

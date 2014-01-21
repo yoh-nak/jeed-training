@@ -16,7 +16,7 @@
   };
 
   exports.enchant = function(req, res) {
-    return res.render("js/enchant/enchant-" + req.params.id, {
+    return res.render("js/enchant/enchant" + req.params.id, {
       title: define.title,
       instructor: define.instructor
     });

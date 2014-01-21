@@ -11,7 +11,7 @@ exports.js = (req, res) ->
 
 #enchant.js
 exports.enchant = (req, res) ->
-	res.render "js/enchant/enchant-" + req.params.id,
+	res.render "js/enchant/enchant" + req.params.id,
 		title: define.title
 		instructor: define.instructor
 

@@ -1,0 +1,61 @@
+extends ../layout
+
+block link
+	link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+	link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+	link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+	link(href='../css/style.css',rel='stylesheet',media='screen')
+	link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+	include navbar.jade
+	.container
+		.row
+			.col-sm-3
+				include left.jade
+			.col-sm-9
+				.panel.panel-primary
+					.panel-heading
+						i.glyphicon.glyphicon-book
+						| &nbsp;attr()メソッド①
+					.panel-body
+						p attr()メソッドは、$メソッドで指定した要素に対して、attr()メソッドの引数にオブジェクトを指定することで複数の属性を同時に設定することができます。
+						p
+							a.btn.btn-default(href='../demo/jquery/exercise15/index1.html',target='_blank')
+								i.glyphicon.glyphicon-play
+								| デモ
+							| 
+							a.btn.btn-default(href='http://api.jquery.com/attr/',target='_blank')
+								i.glyphicon.glyphicon-info-sign
+								| &nbsp;参考
+						pre(class='prettyprint linenums:1')
+							:code
+								doctype
+								html(lang='ja-JP')
+									head
+										meta(charset='UTF-8')
+										title
+									body
+										p: img(src='img/enlarge.png',alt='')
+										p: input(type='button',value='変更')
+										script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+										script(src='script.js')
+						pre(class='prettyprint linenums:1')
+							:code
+								$(function(){
+									$('input').click(function(){
+										$('img').attr({
+											width:'400px',
+											height:'400px'
+										});
+									});
+								});					
+						pre(class='prettyprint linenums:1')
+							:code
+								$ ->
+									$("input").click ->
+										$("img").attr
+											width: "400px"
+											height: "400px"
+										return
+									return

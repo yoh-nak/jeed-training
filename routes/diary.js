@@ -9,7 +9,7 @@
   };
 
   exports.diary = function(req, res) {
-    return res.render("diary/diary" + req.params.id + ".jade", {
+    return res.render("diary/diary" + req.params.id, {
       title: define.title,
       instructor: define.instructor,
       pretty: true

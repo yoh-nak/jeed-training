@@ -8,8 +8,8 @@
     return block.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   };
 
-  exports.css = function(req, res) {
-    return res.render("css/css" + req.params.id, {
+  exports.mongodb = function(req, res) {
+    return res.render("mongodb/mongodb" + req.params.id, {
       title: define.title,
       instructor: define.instructor,
       pretty: true

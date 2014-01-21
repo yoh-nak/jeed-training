@@ -9,7 +9,7 @@
   };
 
   exports.index = function(req, res) {
-    res.render("index.jade", {
+    res.render("index", {
       title: define.title,
       instructor: define.instructor,
       pretty: true

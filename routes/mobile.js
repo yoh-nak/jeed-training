@@ -9,7 +9,7 @@
   };
 
   exports.mobile = function(req, res) {
-    return res.render("mobile/mobile" + req.params.id + ".jade", {
+    return res.render("mobile/mobile" + req.params.id, {
       title: define.title,
       instructor: define.instructor,
       pretty: true

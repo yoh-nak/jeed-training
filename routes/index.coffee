@@ -4,7 +4,7 @@ require("jade").filters.code = (block) ->
   block.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace /"/g, "&quot;"
 
 exports.index = (req, res) ->
-	res.render "index.jade",
+	res.render "index",
 		title: define.title
 		instructor: define.instructor
 		pretty: true

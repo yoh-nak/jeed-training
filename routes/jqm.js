@@ -9,7 +9,7 @@
   };
 
   exports.jqm = function(req, res) {
-    return res.render("jqm/jqm" + req.params.id + ".jade", {
+    return res.render("jqm/jqm" + req.params.id, {
       title: define.title,
       instructor: define.instructor,
       pretty: true

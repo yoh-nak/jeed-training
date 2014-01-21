@@ -3,8 +3,8 @@ define = require("../libs/define")
 require("jade").filters.code = (block) ->
   block.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace /"/g, "&quot;"
 
-exports.others = (req, res) ->
-	res.render "others/others" + req.params.id,
+exports.mongodb = (req, res) ->
+	res.render "mongodb/mongodb" + req.params.id,
 		title: define.title
 		instructor: define.instructor
 		pretty: true

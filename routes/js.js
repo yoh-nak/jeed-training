@@ -65,6 +65,14 @@
     });
   };
 
+  exports.requirejs = function(req, res) {
+    return res.render("js/require/require" + req.params.id, {
+      title: define.title,
+      instructor: define.instructor,
+      pretty: true
+    });
+  };
+
   exports.library = function(req, res) {
     return res.render("js/library/library" + req.params.id + req.params.format, {
       title: define.title,

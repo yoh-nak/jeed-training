@@ -56,6 +56,13 @@ exports.cordova = (req, res) ->
 		instructor: define.instructor
 		pretty: true
 
+#RequireJS
+exports.requirejs = (req, res) ->
+	res.render "js/require/require" + req.params.id,
+		title: define.title
+		instructor: define.instructor
+		pretty: true
+
 #Library
 exports.library = (req, res) ->
 	res.render "js/library/library" + req.params.id + req.params.format,

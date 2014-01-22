@@ -122,6 +122,8 @@
 
   app.get("/angular/:id", js.angular);
 
+  app.get("/requirejs/:id", js.requirejs);
+
   app.get("/others/:id", others.others);
 
   app.get("/diary/:id", diary.diary);

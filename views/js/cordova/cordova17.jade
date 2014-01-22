@@ -168,6 +168,19 @@ block content
                 p Androidと同じようにcordova.execメソッドを使って先ほど記述したリストのコードを呼び出します。devicereadyイベント発火後にcordova.execメソッドを使います。index.jsのonDeviceReadyメソッド内にリストのように記述します。呼び出し側はAndroidと同じです。
                 pre
                     :code
+                        onDeviceReady: function(){
+                            app.receivedEvent('deviceready');
+
+                            cordova.exec(function(value){
+                                alert(value);
+                            }, function(){
+
+                            }, "MyFirstPlugin", "hello", ['My first Cordova Plugin']);
+                        },
+                p cordova prepareコマンドを実行した後、プロジェクトをXcodeから実行してください。成功すると、Ocjective-Cから受け取った値が表示されます。
                 .alert.alert-info iOS向けプラグイン開発の詳細
+                p 詳細は、iOS向けのプラグインの開発について記述されている以下のCordovaドキュメントを参照してください。
+                ul: li URL iOS Plugin<br><a href="http://cordova.apache.org/docs/en/3.0.0/guide_platforms_ios_plugin.md.html">ttp://cordova.apache.org/docs/en/3.0.0/guide_platforms_ios_plugin.md.html</a>
                 .alert.alert-info cordovaコマンドからインストールできるプラグインを実装する
-                p 
+                p 開発者は自由にコマンドからインストールできるプラグインを公開することができます。本書ではcordovaコマンドからインストールできるプラグインの公開方法については割愛します。cordovaコマンドからインストールできるプラグインの実装方法にいては、以下のCordovaドキュメントを参照してください。
+                ul: li URL Plugin Development Guide<br><a href="http://cordova.apache.org/docs/en/3.0.0/guide_hybrid_plugins_index.md.html"></a>

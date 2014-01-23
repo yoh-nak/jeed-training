@@ -75,6 +75,8 @@ app.get "/nodejs/:id", nodejs.nodejs # Node.js
 app.get "/mongodb/:id", mongodb.mongodb # MongoDB
 app.get "/angular/:id", js.angular # AngularJS
 app.get "/requirejs/:id", js.requirejs # RequireJS
+app.get "/underscore/:id", js.underscore # Underscore.js
+app.get "/jasmine/:id", js.jasmine # Jasmine
 app.get "/others/:id", others.others
 app.get "/diary/:id", diary.diary # 日誌
 app.get "/js-:id:format", js.js # JavaScript基礎

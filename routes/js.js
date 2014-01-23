@@ -73,6 +73,22 @@
     });
   };
 
+  exports.underscore = function(req, res) {
+    return res.render("js/underscore/underscore" + req.params.id, {
+      title: define.title,
+      instructor: define.instructor,
+      pretty: true
+    });
+  };
+
+  exports.jasmine = function(req, res) {
+    return res.render("js/jasmine/jasmine" + req.params.id, {
+      title: define.title,
+      instructor: define.instructor,
+      pretty: true
+    });
+  };
+
   exports.library = function(req, res) {
     return res.render("js/library/library" + req.params.id + req.params.format, {
       title: define.title,

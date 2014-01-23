@@ -124,6 +124,10 @@
 
   app.get("/requirejs/:id", js.requirejs);
 
+  app.get("/underscore/:id", js.underscore);
+
+  app.get("/jasmine/:id", js.jasmine);
+
   app.get("/others/:id", others.others);
 
   app.get("/diary/:id", diary.diary);

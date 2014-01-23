@@ -63,6 +63,20 @@ exports.requirejs = (req, res) ->
 		instructor: define.instructor
 		pretty: true
 
+#Underscore.js
+exports.underscore = (req, res) ->
+	res.render "js/underscore/underscore" + req.params.id,
+		title: define.title
+		instructor: define.instructor
+		pretty: true
+
+#Jasmine
+exports.jasmine = (req, res) ->
+	res.render "js/jasmine/jasmine" + req.params.id,
+		title: define.title
+		instructor: define.instructor
+		pretty: true
+
 #Library
 exports.library = (req, res) ->
 	res.render "js/library/library" + req.params.id + req.params.format,

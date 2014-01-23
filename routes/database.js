@@ -9,7 +9,15 @@
   };
 
   exports.mongodb = function(req, res) {
-    return res.render("mongodb/mongodb" + req.params.id, {
+    return res.render("database/mongodb/mongodb" + req.params.id, {
+      title: define.title,
+      instructor: define.instructor,
+      pretty: true
+    });
+  };
+
+  exports.redis = function(req, res) {
+    return res.render("database/redis/redis" + req.params.id, {
       title: define.title,
       instructor: define.instructor,
       pretty: true

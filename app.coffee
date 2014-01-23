@@ -10,7 +10,7 @@ mobile = require("./routes/mobile")
 others = require("./routes/others")
 jqm = require("./routes/jqm")
 nodejs = require("./routes/nodejs")
-mongodb = require("./routes/mongodb")
+database = require("./routes/database")
 material = require("./routes/material")
 diary = require("./routes/diary")
 http = require("http")
@@ -72,7 +72,8 @@ app.get "/jqueryui/:id", jquery.jqueryui # jQuery UI
 app.get "/jqm/:id", jqm.jqm # jQuery Mobile
 app.get "/mobile/:id", mobile.mobile # スマホサイト
 app.get "/nodejs/:id", nodejs.nodejs # Node.js
-app.get "/mongodb/:id", mongodb.mongodb # MongoDB
+app.get "/mongodb/:id", database.mongodb # MongoDB
+app.get "/redis/:id", database.redis # Redis
 app.get "/angular/:id", js.angular # AngularJS
 app.get "/requirejs/:id", js.requirejs # RequireJS
 app.get "/underscore/:id", js.underscore # Underscore.js

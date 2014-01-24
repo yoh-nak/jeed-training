@@ -8,4 +8,8 @@
 
   exports.json2 = "http://cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js";
 
+  exports.sum = function(a, b){
+  	return a + b;
+  };
+
 }).call(this);

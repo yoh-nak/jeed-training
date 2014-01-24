@@ -1,18 +1,14 @@
 extends ../layout
 
 block link
-	link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
-	link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
-	link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
-	link(href='../css/style.css',rel='stylesheet',media='screen')
-	link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+	include ../link1
 
 block content
-	include navbar.jade
+	include navbar
 	.container
 		.row
 			.col-sm-3
-				include left.jade
+				include left
 			.col-sm-9
 				.panel.panel-primary
 					.panel-heading
@@ -85,3 +81,20 @@ block content
 										return
 									###
 							figcaption （CoffeeScript）
+						hr
+						.alert.alert-info 非同期処理について
+						p JavaScriptの非同期処理では、次に実行する関数の待ち行列（キュー）のようなものができており、非同期処理が実行されたタイミングに関係なく、準備ができた関数からその待ち行列に並んでいきます。
+						pre(class='prettyprint linenums:1')
+							:code
+								window.alert('1番目に実行されます');
+								$(document).ready(function(){
+									window.alert('3番目に実行されます');
+								});
+								window.alert('2番目に実行されます');
+						pre(class='prettyprint linenums:1')
+							:code
+								window.alert '1番目に実行されます'
+								$(document).ready ->
+									window.alert '3番目に実行されます'
+									return
+								window.alert '2番目に実行されます'

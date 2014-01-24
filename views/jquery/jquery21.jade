@@ -13,11 +13,11 @@ block content
 				.panel.panel-primary
 					.panel-heading
 						i.glyphicon.glyphicon-book
-						| &nbsp;attr()メソッド①課題
+						| &nbsp;attr()メソッド②課題
 					.panel-body
-						p ボタンをクリックして、iframe要素に読み込まれた画像を差し替えてみましょう。
+						p ボタンをクリックして、a要素のhref属性を取得し、リンクの文字を画像に変えてみましょう。
 						p
-							a.btn.btn-default(href='../demo/jquery/exercise16/index1.html',target='_blank')
+							a.btn.btn-default(href='../demo/jquery/exercise18/index1.html',target='_blank')
 								i.glyphicon.glyphicon-play
 								| デモ
 							button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
@@ -33,21 +33,32 @@ block content
 												title
 												link(rel='stylesheet', href='style.css')
 											body
-												iframe(src='img/before.png',width='200',height='200')
-												p: input(type='button',value='click')
+												p: a(href='img/show.png',alt='') リンク
+												p: input(type='button',value='表示')
 												script(src='http://code.jquery.com/jquery-1.10.2.min.js')
 												script(src='script.js')
 								pre(class='prettyprint linenums:1')
 									:code
-										$(function(){
-											$('input').click(function(){
-												$('iframe').attr('src','img/after.png');
+										$(function() {
+											$('input').click(function() {
+												$('a').html('<img>');
+												$('img').attr('src', $('a').attr('href'));
+												
+												//以下の記述でも可
+												//$('a').html('<img src="' + $('a').attr('href') + '" alt="">');
 											});
 										});
 								pre(class='prettyprint linenums:1')
 									:code
 										$ ->
 											$('input').click ->
-												$('iframe').attr 'src', 'img/after.png'
+												$('a').html '<img>'
+												$('img').attr 'src', $('a').attr 'href'
+												
+												#以下の記述でも可
+												###
+												$('a').html '<img src="' + $('a').attr 'href' + '" alt="">'
+												###
+
 												return
 											return

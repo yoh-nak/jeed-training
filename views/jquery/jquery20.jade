@@ -13,11 +13,11 @@ block content
 				.panel.panel-primary
 					.panel-heading
 						i.glyphicon.glyphicon-book
-						| &nbsp;attr()メソッド①
+						| &nbsp;attr()メソッド②
 					.panel-body
-						p attr()メソッドは、$メソッドで指定した要素に対して、attr()メソッドの引数にオブジェクトを指定することで複数の属性を同時に設定することができます。
+						p attr()メソッドは、第1引数のみ指定した場合、$メソッドで指定した要素に設定されている、attr()メソッドの引数で指定した属性の属性値を取得することができます。
 						p
-							a.btn.btn-default(href='../demo/jquery/exercise15/index1.html',target='_blank')
+							a.btn.btn-default(href='../demo/jquery/exercise17/index1.html',target='_blank')
 								i.glyphicon.glyphicon-play
 								| デモ
 							| 
@@ -31,27 +31,23 @@ block content
 									head
 										meta(charset='UTF-8')
 										title
+										link(rel='stylesheet', href='style.css')
 									body
-										p: img(src='img/enlarge.png',alt='')
-										p: input(type='button',value='変更')
+										p: a(href='http://www.google.co.jp/') google
+										p: input(type='button',value='取得')
 										script(src='http://code.jquery.com/jquery-1.10.2.min.js')
 										script(src='script.js')
 						pre(class='prettyprint linenums:1')
 							:code
-								$(function(){
-									$('input').click(function(){
-										$('img').attr({
-											width:'400px',
-											height:'400px'
-										});
+								$(function() {
+									$('input').click(function() {
+										window.alert($('a').attr('href'));
 									});
-								});					
+								});				
 						pre(class='prettyprint linenums:1')
 							:code
 								$ ->
-									$("input").click ->
-										$("img").attr
-											width: "400px"
-											height: "400px"
+									$('input').click ->
+										window.alert $('a').attr 'href'
 										return
 									return

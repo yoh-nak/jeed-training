@@ -144,7 +144,7 @@
 
   app.get("/enchant/:id", js.enchant);
 
-  app.get("/library:id:format", js.library);
+  app.get("/library/:id", js.library);
 
   app.get("/jsrecipe-:id", js.recipe);
 

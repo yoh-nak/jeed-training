@@ -90,7 +90,7 @@
   };
 
   exports.library = function(req, res) {
-    return res.render("js/library/library" + req.params.id + req.params.format, {
+    return res.render("js/library/library" + req.params.id, {
       title: define.title,
       instructor: define.instructor,
       pretty: true

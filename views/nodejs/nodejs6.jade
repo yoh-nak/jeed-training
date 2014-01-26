@@ -32,7 +32,7 @@ block content
 								hotnode サーバー
 						hr
 						.alert.alert-info forever
-						p Node.jsのサーバーがクラッシュしたとき自動的に再起動します。
+						p Node.jsのサーバーがクラッシュしたとき自動的に再起動します。Windowsは非対応です。
 						p /etc/rc.localファイルにコマンドを記述すればサーバの起動時にforeverが実行されます。
 						p: u インストール
 						pre
@@ -90,3 +90,39 @@ block content
 								sudo forever /フルパス/login/app.js
 								sudo forever /フルパス/server.js
 								sudo forever /フルパス/proxy.js
+						.alert.alert-info winser
+						pre
+							:code
+								node.js用に書かれたプログラムを、Windowsでサービス登録してバックグラウンドで自動実行します。
+
+								WinSer: node.js applications as windows services
+								http://joseoncode.com/2012/04/06/winser-node-dot-js-applications-as-windows-services/
+
+								npmコマンドでインストールできます。
+
+								npm install winser
+
+								実際のプログラムをサービス化するにあたって、package.jsonを作成しておく必要があります。package.jsonのnameがそのままサービス名として登録されます。他の項目はどうでもいいです。
+
+								コマンドプロンプトを管理者権限で実行します。
+
+								C:\> chcp 437
+
+								日本語環境の場合、chcpコマンドでコマンドプロンプトを英語モードにしないと、 
+								You must run this tool as an administrator 
+								というエラーが出ます。
+
+								そして、自分の作ったプログラムのディレクトリに移動して、 
+								C:\path\to\node_modules\.bat\winser.cmd -i 
+								でサービスに登録されます。
+
+								cmdファイル経由ではなく、 
+								node.exe C:\path\to\winser\winser -i 
+								でもOKです。
+
+								ちなみに、サービス自体はnssmが登録します。
+
+								NSSM – the Non-Sucking Service Manager
+								http://nssm.cc/
+
+								ファイアウォールを通す場合は、nssmを指定します。

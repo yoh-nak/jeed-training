@@ -1,0 +1,52 @@
+extends ../layout
+
+block link
+	include ../link1
+
+block content
+	include navbar
+	.container
+		.row
+			.col-sm-3
+				include left
+			.col-sm-9
+				.panel.panel-primary
+					.panel-heading
+						i.glyphicon.glyphicon-book
+						| &nbsp;css()メソッド①
+					.panel-body
+						p css()メソッドは、$メソッドで指定した要素に対して、第1引数で指定したCSSプロパティに、第2引数で指定した値をセットします。
+						p
+							a.btn.btn-default(href='../demo/jquery/exercise21/index1.html',target='_blank')
+								i.glyphicon.glyphicon-play
+								| デモ
+							| 
+							a.btn.btn-default(href='http://api.jquery.com/css/',target='_blank')
+								i.glyphicon.glyphicon-info-sign
+								| &nbsp;参考
+						pre(class='prettyprint linenums:1')
+							:code
+								doctype
+								html(lang='ja-JP')
+									head
+										meta(charset='UTF-8')
+										title
+									body
+										p テキストテキストテキストテキストテキスト
+										p: input(type='button',value='変更')
+										script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+										script(src='script.js')
+						pre(class='prettyprint linenums:1')
+							:code
+								$(function() {
+									$('input').click(function() {
+										$('p').css('color', '#FF0000');
+									});
+								});
+						pre(class='prettyprint linenums:1')
+							:code
+								$ ->
+									$('input').click ->
+										$('p').css 'color', '#FF0000';
+										return
+									return

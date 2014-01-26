@@ -1,0 +1,60 @@
+extends ../layout
+
+block link
+	include ../link1
+
+block content
+	include navbar
+	.container
+		.row
+			.col-sm-3
+				include left
+			.col-sm-9
+				.panel.panel-primary
+					.panel-heading
+						i.glyphicon.glyphicon-book
+						| &nbsp;removeAttr()メソッド②課題
+					.panel-body
+						p ボタンをクリックして、チェックボックスをリセットさせましょう。
+						p
+							a.btn.btn-default(href='../demo/jquery/exercise20/index1.html',target='_blank')
+								i.glyphicon.glyphicon-play
+								| デモ
+							button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+								i.glyphicon.glyphicon-question-sign
+								| &nbsp;解答例
+						#demo.collapse.out
+								pre(class='prettyprint linenums:1')
+									:code
+										doctype
+										html(lang='ja-JP')
+											head
+												meta(charset='UTF-8')
+												title
+											body
+												p
+													input#html(type='checkbox',value='1',checked)
+													label(for='html') HTML
+													input#css(type='checkbox',value='1',checked)
+													label(for='css') CSS
+													input#jquery(type='checkbox',value='1',checked)
+													label(for='jquery') jQuery
+													input#javascript(type='checkbox',value='1',checked)
+													label(for='javascript') JavaScript
+													input(type='button',value='リセット')
+												script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+												script(src='script.js')
+								pre(class='prettyprint linenums:1')
+									:code
+										$(function() {
+											$('input[type="button"]').click(function() {
+												$('input[type="checkbox"]').removeAttr('checked');
+											});
+										});
+								pre(class='prettyprint linenums:1')
+									:code
+										$ ->
+											$('input[type="button"]').click ->
+												$('input[type="checkbox"]').removeAttr 'checked'
+												return
+											return

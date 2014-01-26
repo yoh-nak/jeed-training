@@ -118,6 +118,8 @@
 
   app.get("/nodejs/:id", nodejs.nodejs);
 
+  app.get("/mysql/:id", database.mysql);
+
   app.get("/mongodb/:id", database.mongodb);
 
   app.get("/redis/:id", database.redis);

@@ -8,6 +8,14 @@
     return block.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   };
 
+  exports.mysql = function(req, res) {
+    return res.render("database/mysql/mysql" + req.params.id, {
+      title: define.title,
+      instructor: define.instructor,
+      pretty: true
+    });
+  };
+
   exports.mongodb = function(req, res) {
     return res.render("database/mongodb/mongodb" + req.params.id, {
       title: define.title,

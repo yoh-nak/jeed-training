@@ -1,0 +1,28 @@
+extends ../../layout
+
+block link
+	include ../../link2
+
+block content
+	include ../navbar
+	.container
+		.row
+			.col-sm-3
+				include ../left
+			.col-sm-9
+				.panel.panel-primary
+					.panel-heading
+						i.glyphicon.glyphicon-book
+						| &nbsp;RedisのCRUD
+					.panel-body
+						.alert.alert-info 接続
+						pre
+							:code
+								redis-cli
+						.alert.alert-info 確認
+						pre
+							:code
+								redis 127.0.0.1:6379> set key val
+								OK
+								redis 127.0.0.1:6379> get key
+								"val"

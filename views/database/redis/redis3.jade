@@ -20,6 +20,7 @@ block content
 							:code
 								redis-server /usr/local/etc/redis.conf
 						.alert.alert-info Redisサーバーの終了
+						p: mark クライアントからshutdownで終了しないとディスクに保存されません。
 						pre
 							:code
 								Crtl+ C
@@ -27,7 +28,7 @@ block content
 						pre
 							:code
 								redis-cli
-						.alert.alert-info 終了
+						.alert.alert-info Resisクライアントの終了
 						pre
 							:code
 								exit
@@ -35,14 +36,3 @@ block content
 						pre
 							:code
 								shutdown
-						.alert.alert-info 接続
-						pre
-							:code
-								redis-cli
-						.alert.alert-info 確認
-						pre
-							:code
-								redis 127.0.0.1:6379> set key val
-								OK
-								redis 127.0.0.1:6379> get key
-								"val"

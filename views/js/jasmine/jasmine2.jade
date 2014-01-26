@@ -20,9 +20,39 @@ block content
 						| &nbsp;Matcher
 					.panel-body
 						.alert.alert-info toBeDefined() / toBeUndefined()
-						.alert.alert-info toBeNull() / -
+						.alert.alert-info toBeNull()
 						.alert.alert-info toBe(expected) / toNotBe(expected)
-						.alert.alert-info toEqual(expected) / toNotEqual(expected)
+						.alert.alert-info toEqual(expected) / not.toEqual(expected)
+						h4 関数
+						pre(class='prettyprint linenums:1')
+							:code
+								var add = function(a, b){
+									return a + b;
+								};
+						h4 スペック
+						pre(class='prettyprint linenums:1')
+							:code
+								describe('add', function() {
+									it('足し算の合計をかえすべき', function() {
+										var result = add(1, 2);
+										expect(result).toEqual(3);
+									});
+								});
+						h4 関数
+						pre(class='prettyprint linenums:1')
+							:code
+								var multiply = function(a, b){
+									return a * b;
+								};
+						h4 スペック
+						pre(class='prettyprint linenums:1')
+							:code
+								describe('multiply', function() {
+									it('負の数どうしをかけると正の数になるべき', function() {
+										var result = multiply(-1, -2);
+										expect(result).not.toEqual(-2);
+									});
+								});
 						.alert.alert-info toBeTruthy() / toBeFalsy()
 						.alert.alert-info toBeBreaterThan(expedted) / toBeLessThan(expected)
 						.alert.alert-info toContain(expected) / toNotContain(expected)

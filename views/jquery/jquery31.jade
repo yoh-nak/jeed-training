@@ -13,15 +13,15 @@ block content
 				.panel.panel-primary
 					.panel-heading
 						i.glyphicon.glyphicon-book
-						| &nbsp;addClass()メソッド
+						| &nbsp;removeClass()メソッド
 					.panel-body
-						p addClass()メソッドは、$メソッドで指定した要素に、addClassメソッドの引数で指定したクラスを適用します。
+						p removeClass()メソッドは、$メソッドで指定した要素に適用されたクラスのうち、addClassメソッドの引数で指定したクラスを外します。
 						p
-							a.btn.btn-default(href='../demo/jquery/exercise26/index1.html',target='_blank')
+							a.btn.btn-default(href='../demo/jquery/exercise28/index1.html',target='_blank')
 								i.glyphicon.glyphicon-play
 								| デモ
 							| 
-							a.btn.btn-default(href='http://api.jquery.com/addClass/',target='_blank')
+							a.btn.btn-default(href='http://api.jquery.com/removeClass/',target='_blank')
 								i.glyphicon.glyphicon-info-sign
 								| &nbsp;参考
 						pre(class='prettyprint linenums:1')
@@ -33,7 +33,7 @@ block content
 										title
 										link(rel='stylesheet',href='style.css')
 									body
-										p テキストテキストテキストテキストテキスト
+										p.red テキストテキストテキストテキストテキスト
 										p: input(type='button',value='クリック')
 										script(src='http://code.jquery.com/jquery-1.10.2.min.js')
 										script(src='script.js')
@@ -45,13 +45,13 @@ block content
 							:code
 								$(function() {
 									$('input').click(function() {
-										$('p:first-of-type').addClass('red');
+										$('p:first-of-type').removeClass('red');
 									});
 								});
 						pre(class='prettyprint linenums:1')
 							:code
 								$ ->
 									$('input').click ->
-										$('p:first-of-type').addClass('red');
+										$('p:first-of-type').removeClass('red');
 										return
 									return

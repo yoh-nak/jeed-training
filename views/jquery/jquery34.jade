@@ -13,15 +13,15 @@ block content
 				.panel.panel-primary
 					.panel-heading
 						i.glyphicon.glyphicon-book
-						| &nbsp;addClass()メソッド
+						| &nbsp;toggleClass()メソッド
 					.panel-body
-						p addClass()メソッドは、$メソッドで指定した要素に、addClassメソッドの引数で指定したクラスを適用します。
+						p click()メソッドのコールバックで使われた、toggleClass()メソッドは、$メソッドで指定した要素にに対して、addClass()、removeClass()を繰り返し実行します。その際、toggleClassメソッドに指定したクラスが、$メソッドで指定した要素になければ、先にaddClass()を実行します。また、toggleClassメソッドに指定したクラスが$メソッドで指定した要素にあれば、先にremoveClass()を実行します。
 						p
-							a.btn.btn-default(href='../demo/jquery/exercise26/index1.html',target='_blank')
+							a.btn.btn-default(href='../demo/jquery/exercise31/index1.html',target='_blank')
 								i.glyphicon.glyphicon-play
 								| デモ
 							| 
-							a.btn.btn-default(href='http://api.jquery.com/addClass/',target='_blank')
+							a.btn.btn-default(href='http://api.jquery.com/toggleClass/',target='_blank')
 								i.glyphicon.glyphicon-info-sign
 								| &nbsp;参考
 						pre(class='prettyprint linenums:1')
@@ -45,13 +45,13 @@ block content
 							:code
 								$(function() {
 									$('input').click(function() {
-										$('p:first-of-type').addClass('red');
+										$('p:first-of-type').toggleClass('red');
 									});
 								});
 						pre(class='prettyprint linenums:1')
 							:code
 								$ ->
 									$('input').click ->
-										$('p:first-of-type').addClass('red');
+										$('p:first-of-type').toggleClass('red');
 										return
 									return

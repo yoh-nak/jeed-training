@@ -15,7 +15,13 @@ block content
 						i.glyphicon.glyphicon-book
 						| &nbsp;RedisのCRUD
 					.panel-body
+						.alert.alert-info サーバの起動
+						p まずRedisサーバーを起動します。
+						pre
+							:code
+								redis-server
 						.alert.alert-info 接続
+						p 別のターミナルでRedisサーバーに接続します。
 						pre
 							:code
 								redis-cli
@@ -26,3 +32,78 @@ block content
 								OK
 								redis 127.0.0.1:6379> get key
 								"val"
+						.alert.alert-info データベースの選択
+						p: mark データベースは番号で管理され、名前をつけることはできません。
+						p デフォルトでは0番のデータベースに接続されていますが、以下のように切り替えることができます。
+						pre
+							:code
+								select 1
+						pre
+							:code
+								select 2
+						p とりあえず0に合わせておきましょう。
+						pre
+							:code
+								select 0
+						.alert.alert-info データの保存
+						p Redisでは自動的にディスクに保存されますが、明示的にディスクに保存することができます。
+						pre
+							:code
+								bgsave
+						p 保存先は、Resisサーバーを起動したディレクトリに、「dump.rdb」のファイル名で保存されています。
+						p: mark Redisを起動するときは、同じディレクトリで起動する必要があります。
+						.alert.alert-info Strig型の書き込み
+						p データの書き込み
+						pre
+							:code
+								set key value
+						p まとめて書き込み
+						pre
+							:code
+								mset key value key value ...
+						p データの取得
+						pre
+							:code
+								get key
+						p まとめてデータの取得
+						pre
+							:code
+								mget key key key ...
+						p 「name」というキーに、「nakano」という値を格納します。
+						pre
+							:code
+								set name nakano
+						p 「name」キーを取得します。
+						pre
+							:code
+								get name
+						p まとめて「email」キーと「score」キーに値を格納します。
+						pre
+							:code
+								mset email hoge@foo.com score 120
+						p キーに格納された値をまとめて取得します。
+						pre
+							:code
+								mget name email score
+						.alert.alert-info 数値を増減する
+						p 以下のコマンドでStringに数値が格納された場合に値を増減させることができます。
+						pre
+							:code
+								incre / increby 増加幅
+								decre / decreby 減少幅
+						p 数値を1繰り上げます。
+						pre
+							:code
+								incre score
+						p 数値を取得します。
+						pre
+							:code
+								get score
+						p 数値を10減少させます。
+						pre
+							:code
+								decreby score 10
+						p 数値を取得します。
+						pre
+							:code
+								get score

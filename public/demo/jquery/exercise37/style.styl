@@ -1,0 +1,29 @@
+size()
+	200px
+
+pos()
+	fixed
+
+prefix(prop, val)
+	-webkit-{prop} val
+	{prop} val
+
+.before
+	position pos()
+	top 10%
+	right @top
+	width size()
+	height @width
+
+.after
+	position pos()
+	top 50%
+	left @top
+	width size()*2
+	height @width
+	margin-left -@width*0.5
+	margin-top -@height*0.5
+
+	prefix('transition-property', all)	
+	prefix('transition-duration', 500ms)
+	prefix('transition-timing-function', ease-in-out)

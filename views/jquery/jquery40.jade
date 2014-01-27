@@ -1,0 +1,87 @@
+extends ../layout
+
+block link
+	include ../link1
+
+block content
+	include navbar
+	.container
+		.row
+			.col-sm-3
+				include left
+			.col-sm-9
+				.panel.panel-primary
+					.panel-heading
+						i.glyphicon.glyphicon-book
+						| &nbsp;メソッドチェーン課題
+					.panel-body
+						p ボタンを押して、img要素のクラスを切り替え、img要素をブラウザの中央に配置してみましょう。その際、画像も差し替え、拡大して表示してみましょう。
+						p
+							a.btn.btn-default(href='../demo/jquery/exercise37/index1.html',target='_blank')
+								i.glyphicon.glyphicon-play
+								| デモ
+							button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+								i.glyphicon.glyphicon-question-sign
+								| &nbsp;解答例
+						#demo.collapse.out
+								pre(class='prettyprint linenums:1')
+									:code
+										doctype
+										html(lang='ja-JP')
+											head
+												meta(charset='UTF-8')
+												title
+												link(rel='stylesheet', href='style.css')
+											body
+												img.before(src='img/before.png',alt='')
+												p: input(type='button',value='変更')
+												script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+												script(src='script.js')
+								pre(class='prettyprint linenums:1')
+									:code
+										size()
+											200px
+
+										pos()
+											fixed
+
+										prefix(prop, val)
+											-webkit-{prop} val
+											{prop} val
+
+										.before
+											position pos()
+											top 10%
+											right @top
+											width size()
+											height @width
+
+										.after
+											position pos()
+											top 50%
+											left @top
+											width size()*2
+											height @width
+											margin-left -@width*0.5
+											margin-top -@height*0.5
+
+											prefix('transition-property', all)	
+											prefix('transition-duration', 500ms)
+											prefix('transition-timing-function', ease-in-out)
+								pre(class='prettyprint linenums:1')
+									:code
+										$(function() {
+											$('input').click(function() {
+												$('img').removeClass('before').addClass('after').attr('src', 'img/after.png');
+											});
+										});
+								pre(class='prettyprint linenums:1')
+									:code
+										$ ->
+											$('input').click ->
+												$('img')
+													.removeClass('before')
+													.addClass('after')
+													.attr('src','img/after.png')
+												return
+											return

@@ -66,9 +66,23 @@ exports.underscore = (req, res) ->
 		instructor: define.instructor
 		pretty: true
 
+#json2.js
+exports.json2js = (req, res) ->
+	res.render "js/json2js/json2js" + req.params.id,
+		title: define.title
+		instructor: define.instructor
+		pretty: true
+
 #Jasmine
 exports.jasmine = (req, res) ->
 	res.render "js/jasmine/jasmine" + req.params.id,
+		title: define.title
+		instructor: define.instructor
+		pretty: true
+
+#Jasmine
+exports.jsdoc = (req, res) ->
+	res.render "js/jsdoc/jsdoc" + req.params.id,
 		title: define.title
 		instructor: define.instructor
 		pretty: true

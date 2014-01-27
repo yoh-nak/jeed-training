@@ -132,6 +132,10 @@
 
   app.get("/jasmine/:id", js.jasmine);
 
+  app.get("/jsdoc/:id", js.jsdoc);
+
+  app.get("/json2js/:id", js.json2js);
+
   app.get("/others/:id", others.others);
 
   app.get("/diary/:id", diary.diary);

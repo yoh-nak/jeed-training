@@ -1,0 +1,71 @@
+extends ../../layout
+
+block link
+	link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+	link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+	link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+	link(href='../../css/style.css',rel='stylesheet',media='screen')
+	link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+	include navbar
+	.container
+		.row
+			.col-sm-3
+				include left
+			.col-sm-9
+				.panel.panel-primary
+					.panel-heading
+						i.glyphicon.glyphicon-book
+						| &nbsp;JSDoc
+					.panel-body
+						.alert.alert-info 公式ドキュメント
+						a(href='http://usejsdoc.org/',target='_blank') http://usejsdoc.org/
+						hr
+						.alert.alert-info JSDocのインストール
+						pre
+							:code
+								(sudo )npm install -g jsdoc
+						hr
+						.alert.alert-info JSDocの使い方
+						p 以下のようなmain.jsファイルがあったとします。
+						pre(class='prettyprint linenums:1')
+							:code
+								/**
+								合計値を算出する
+								@param {number} left 左辺値
+								@parem {number} right 右辺値
+								@return {number} 合計値
+								@example
+									sum(1, 2); //=> 3
+									sum(1); //=> NaN
+								*/
+								function sum(left, right){
+									return left + right;
+								}
+
+								/**
+								平均値を算出する
+								@param {number} left 左辺値
+								@parem {number} right 右辺値
+								@return {number} 合計値
+								@example
+									ave(1, 3); //=> 2
+									ave(1); //=> NaN
+								*/
+								function ave(left, right){
+									return (left + right) / 2;
+								}
+						p ドキュメントを生成したいjsファイルのあるディレクトリにcdし、以下のコマンドを実行します。
+						pre
+							:code
+								jsdoc main.js
+						p そのディレクトリにoutディレクトリが生成され、その中にHTML形式でドキュメントが生成されます。
+						p
+							a.btn.btn-default(href='../demo/jsdoc/out/index.html',target='_blank')
+								i.glyphicon.glyphicon-play
+								| デモ
+						p 尚、以下のコマンドでヘルプが表示されます。
+						pre
+							:code
+								jsdoc -h

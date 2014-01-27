@@ -81,8 +81,24 @@
     });
   };
 
+  exports.json2js = function(req, res) {
+    return res.render("js/json2js/json2js" + req.params.id, {
+      title: define.title,
+      instructor: define.instructor,
+      pretty: true
+    });
+  };
+
   exports.jasmine = function(req, res) {
     return res.render("js/jasmine/jasmine" + req.params.id, {
+      title: define.title,
+      instructor: define.instructor,
+      pretty: true
+    });
+  };
+
+  exports.jsdoc = function(req, res) {
+    return res.render("js/jsdoc/jsdoc" + req.params.id, {
       title: define.title,
       instructor: define.instructor,
       pretty: true

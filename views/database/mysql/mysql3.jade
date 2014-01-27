@@ -1,0 +1,107 @@
+extends ../../layout
+
+block link
+	include ../../link2
+
+block content
+	include ../navbar
+	.container
+		.row
+			.col-sm-3
+				include ../left
+			.col-sm-9
+				.panel.panel-primary
+					.panel-heading
+						i.glyphicon.glyphicon-book
+						| &nbsp;MySQLのCRUD
+					.panel-body
+						h4 データベースの接続
+						pre
+							:code
+								mysql -u root -p
+						h4 データベースの作成
+						pre
+							:code
+								CREATE DATABASE データベース名;
+						pre
+							:code
+								CREATE DATABASE db1;
+						h4 作成したデータベースを確認する
+						pre
+							:code
+								SHOW DATABASES;
+						h4 使うデータベースを指定する
+						pre
+							:code
+								USE データベース名;
+						pre
+							:code
+								USE db1;
+						h4 現在使用しているデータベースの表示
+						pre
+							:code
+								SELECT DATABASE();
+						h4 テーブルを作成する
+						pre
+							:code
+								CREATE TABLE テーブル名 (カラム名1 データ型1, カラム名2 データ型2…);
+						pre
+							:code
+								CREATE TABLE tb1(bang VARCHAR(10), nama VARCHAR(10), tosi INT);
+						pre
+							:code
+								CREATE TABLE tb1(bang VARCHAR(10), nama VARCHAR(10), tosi INT)
+								CHARSET=utf8;
+						table.table
+							tr
+								th 具体的な内容
+								th 社員番号
+								th 氏名
+								th 年齢
+							tr
+								td カラム名（列名）
+								td bang
+								td nama
+								td tosi
+							tr
+								td データ型
+								td VARCHAR(10)
+								td VARCHAR(10)
+								td INT
+						p テーブル名、フィールド名はバッククオートで囲むことができる
+						pre
+							:code
+								CREATE TABLE `tb1`(`bang` VARCHAR(10), `nama` VARCHAR(10), `tosi` INT);
+						h4 すべてのテーブルを表示
+						pre
+							:code
+								SHOW TABLES;
+						h4 他のデータベースへのアクセス
+						pre
+							:code
+								SELECT * FROM db2.table;
+						h4 テーブルのカラム構造を確認する
+						pre
+							:code
+								DESC テーブル名;
+						pre
+							:code
+								DESC tb1;
+						h4 テーブルにデータを挿入する
+						pre
+							:code
+								INSERT INTO テーブル名 VALUES(データ1, データ2…);
+						pre
+							:code
+								INSERT INTO tb1 VALUES('A101','佐藤','40');
+								INSERT INTO tb1 VALUES('A102','高橋','28');
+								INSERT INTO tb1 VALUES('A103','中川','20');
+						h4 カラム名を指定してデータを挿入する
+						pre
+							:code
+								INSERT INTO テーブル名(カラム名1, カラム名2…) VALUES(データ1, データ2…);
+						pre
+							:code
+								INSERT INTO tb1(tosi, nama, bang) VALUES('23', '渡辺', 'A104');
+
+

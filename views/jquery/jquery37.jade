@@ -1,0 +1,55 @@
+extends ../layout
+
+block link
+	include ../link1
+
+block content
+	include navbar
+	.container
+		.row
+			.col-sm-3
+				include left
+			.col-sm-9
+				.panel.panel-primary
+					.panel-heading
+						i.glyphicon.glyphicon-book
+						| &nbsp;remove()メソッド
+					.panel-body
+						p remove()メソッドは$メソッドで指定した要素を取り除きます。
+						p
+							a.btn.btn-default(href='../demo/jquery/exercise34/index1.html',target='_blank')
+								i.glyphicon.glyphicon-play
+								| デモ
+							| 
+							a.btn.btn-default(href='http://api.jquery.com/remove/',target='_blank')
+								i.glyphicon.glyphicon-info-sign
+								| &nbsp;参考
+						pre(class='prettyprint linenums:1')
+							:code
+								doctype
+								html(lang='ja-JP')
+									head
+										meta(charset='UTF-8')
+										title
+										link(rel='stylesheet',href='style.css')
+									body
+										p
+											mark テキスト
+											| テキストテキストテキスト
+										p: input(type='button',value='削除')
+										script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+										script(src='script.js')
+						pre(class='prettyprint linenums:1')
+							:code
+								$(function() {
+									$('input').click(function() {
+										$('mark').remove();
+									});
+								});
+						pre(class='prettyprint linenums:1')
+							:code
+								$ ->
+									$('input').click ->
+										$('mark').remove();
+										return
+									return

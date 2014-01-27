@@ -171,12 +171,61 @@ block content
 									});
 								});
 						.alert.alert-info toBeFalsy()
+						pre(class='prettyprint linenums:1')
+							:code
+								describe('bool', function() {
+									it('falseを返すべき', function() {
+										expect(bool('foo')).toBeFalsy();
+									});
+								});
 						.alert.alert-info toBeGreaterThan(expedted)
+						pre(class='prettyprint linenums:1')
+							:code
+								describe('compare', function() {
+									it('aがbより大きいべき', function() {
+										expect(compare(2, 1)).toBeGreaterThan(1);
+									});
+								});
 						.alert.alert-info toBeLessThan(expected)
+						pre(class='prettyprint linenums:1')
+							:code
+								describe('compare', function() {
+									it('aがbより小さいべき', function() {
+										expect(compare(1, 2)).toBeLessThan(2);
+									});
+								});
 						.alert.alert-info toContain(expected)
+						pre(class='prettyprint linenums:1')
+							:code
+								describe('ary', function() {
+									it('配列の要素に0を含むべき', function() {
+										expect(ary([0,1,2,3])).toContain(0);
+									});
+								});	
 						.alert.alert-info not.toContain(expected)
+						pre(class='prettyprint linenums:1')
+							:code
+								describe('ary', function() {
+									it('配列の要素に0を含まないべき', function() {
+										expect(ary([1,2,3,4])).not.toContain(0);
+									});
+								});	
 						.alert.alert-info toMatch(expected)
+						pre(class='prettyprint linenums:1')
+							:code
+								describe('str', function() {
+									it('引数に文字が与えられるべき', function() {
+										expect(str('hoge')).toMatch(/^[\D]+$/);
+									});
+								});
 						.alert.alert-info toNotMatch(expected)
+						pre(class='prettyprint linenums:1')
+							:code
+								describe('str', function() {
+									it('引数に文字以外が与えられるべきではない', function() {
+										expect(str('1')).not.toMatch(/^[\D]+$/);
+									});
+								});
 						p 以下のようにまとめて記述できます。
 						pre(class='prettyprint linenums:1')
 							:code

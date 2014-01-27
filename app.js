@@ -66,7 +66,7 @@
 
   RedisStore = require('connect-redis')(express);
 
-  app.use(epress.session({
+  app.use(express.session({
     secret: 'himitsu',
     store: new RedisStore
   }));

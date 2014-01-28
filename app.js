@@ -159,6 +159,8 @@
 
   app.get("/library/:id", js.library);
 
+  app.get("/framework/:id", js.framework);
+
   app.get("/jsrecipe-:id", js.recipe);
 
   app.get("/material:id:format", material.material);

@@ -94,6 +94,7 @@ app.get "/html5api-:id:format", js.html5 # HTML5 API
 app.get "/canvas/:id", js.canvas # Canvas
 app.get "/enchant/:id", js.enchant # enchant.js
 app.get "/library/:id", js.library # ライブラリ
+app.get "/framework/:id", js.framework # フレームワーク
 app.get "/jsrecipe-:id", js.recipe
 app.get "/material:id:format", material.material
 app.get "/cordova/:id", js.cordova

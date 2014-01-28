@@ -113,6 +113,14 @@
     });
   };
 
+  exports.framework = function(req, res) {
+    return res.render("js/framework/framework" + req.params.id, {
+      title: define.title,
+      instructor: define.instructor,
+      pretty: true
+    });
+  };
+
   exports.recipe = function(req, res) {
     return res.render("js/recipe/recipe1-" + req.params.id, {
       title: define.title,

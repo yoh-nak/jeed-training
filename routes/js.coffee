@@ -94,6 +94,13 @@ exports.library = (req, res) ->
 		instructor: define.instructor
 		pretty: true
 
+#Framework
+exports.framework = (req, res) ->
+	res.render "js/framework/framework" + req.params.id,
+		title: define.title
+		instructor: define.instructor
+		pretty: true
+
 #JavaScriptレシピ
 exports.recipe = (req, res) ->
 	res.render "js/recipe/recipe1-" + req.params.id,

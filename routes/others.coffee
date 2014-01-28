@@ -9,3 +9,7 @@ exports.others = (req, res) ->
 		instructor: define.instructor
 		pretty: true
 
+exports.git = (req, res) ->
+	res.render "others/git/git" + req.params.id,
+		title: define.title
+		instructor: define.instructor

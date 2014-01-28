@@ -16,13 +16,6 @@
     });
   };
 
-  exports.git = function(req, res) {
-    return res.render("material/git/git1-" + req.params.id, {
-      title: define.title,
-      instructor: define.instructor
-    });
-  };
-
   exports.vagrant = function(req, res) {
     return res.render("material/vagrant/vagrant1-" + req.params.id, {
       title: define.title,

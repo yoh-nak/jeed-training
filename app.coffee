@@ -87,6 +87,7 @@ app.get "/jasmine/:id", js.jasmine # Jasmine
 app.get "/jsdoc/:id", js.jsdoc # JSDoc
 app.get "/json2js/:id", js.json2js # json2.js
 app.get "/others/:id", others.others
+app.get "/git/:id", others.git # Git/GitHub
 app.get "/diary/:id", diary.diary # 日誌
 app.get "/js-:id:format", js.js # JavaScript基礎
 app.get "/webapi-:id:format", js.webapi # WebAPI
@@ -98,7 +99,6 @@ app.get "/framework/:id", js.framework # フレームワーク
 app.get "/jsrecipe-:id", js.recipe
 app.get "/material:id:format", material.material
 app.get "/cordova/:id", js.cordova
-app.get "/material/git-:id", material.git
 app.get "/material/vagrant-:id", material.vagrant
 
 #ルーティングPOST送信

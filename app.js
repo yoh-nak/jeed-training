@@ -145,6 +145,8 @@
 
   app.get("/others/:id", others.others);
 
+  app.get("/git/:id", others.git);
+
   app.get("/diary/:id", diary.diary);
 
   app.get("/js-:id:format", js.js);
@@ -166,8 +168,6 @@
   app.get("/material:id:format", material.material);
 
   app.get("/cordova/:id", js.cordova);
-
-  app.get("/material/git-:id", material.git);
 
   app.get("/material/vagrant-:id", material.vagrant);
 

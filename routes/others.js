@@ -16,4 +16,11 @@
     });
   };
 
+  exports.git = function(req, res) {
+    return res.render("others/git/git" + req.params.id, {
+      title: define.title,
+      instructor: define.instructor
+    });
+  };
+
 }).call(this);

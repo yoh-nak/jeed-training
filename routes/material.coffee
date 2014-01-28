@@ -9,11 +9,6 @@ exports.material = (req, res) ->
 		instructor: define.instructor
 		pretty: true
 
-exports.git = (req, res) ->
-	res.render "material/git/git1-" + req.params.id,
-		title: define.title
-		instructor: define.instructor
-
 exports.vagrant = (req, res) ->
 	res.render "material/vagrant/vagrant1-" + req.params.id,
 		title: define.title

@@ -1,0 +1,53 @@
+extends ../layout
+
+block link
+	include ../link1
+
+block content
+	include navbar
+	.container
+		.row
+			.col-sm-3
+				include left
+			.col-sm-9
+				.panel.panel-primary
+					.panel-heading
+						i.glyphicon.glyphicon-book
+						| &nbsp;wrapInner()メソッド
+					.panel-body
+						p $()メソッドで指定した要素の内側を、wrapInner()メソッドの引数で指定した要素で包みます。
+						p
+							a.btn.btn-default(href='../demo/jquery/exercise51/index1.html',target='_blank')
+								i.glyphicon.glyphicon-play
+								| デモ
+							| 
+							a.btn.btn-default(href='http://api.jquery.com/wrapInner/',target='_blank')
+								i.glyphicon.glyphicon-info-sign
+								| &nbsp;参考
+						pre(class='prettyprint linenums:1')
+							:code
+								doctype
+								html(lang='ja-JP')
+									head
+										meta(charset='UTF-8')
+										title
+									body
+										p <b>テキスト</b><b>テキスト</b><b>テキスト</b>
+										p <b>テキスト</b>テキスト<b>テキスト</b>
+										p: input(type='button',value='全て包む')
+										script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+										script(src='script.js')
+						pre(class='prettyprint linenums:1')
+							:code
+								$(function() {
+									$('input').click(function() {
+										$('b').wrapInner('<mark></mark>');
+									});
+								});
+						pre(class='prettyprint linenums:1')
+							:code
+								$ ->
+									$('input').click ->
+										$('b').wrapInner '<mark></mark>'
+										return
+									return

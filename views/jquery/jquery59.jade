@@ -13,9 +13,9 @@ block content
 				.panel.panel-primary
 					.panel-heading
 						i.glyphicon.glyphicon-book
-						| &nbsp;要素の挿入課題
+						| &nbsp;要素の移動課題
 					.panel-body
-						p ボタンをクリックして、li要素を追加してみましょう。
+						p ボタンをクリックして、li要素を移動してみましょう。
 						p
 							a.btn.btn-default(href='../demo/jquery/exercise57/index1.html',target='_blank')
 								i.glyphicon.glyphicon-play
@@ -31,26 +31,35 @@ block content
 											head
 												meta(charset='UTF-8')
 												title
+												link(rel='stylesheet',href='style.css')
 											body
-												ul: li メニューメニューメニュー
-												p: input(type='button',value='追加')
+												ul
+													li メニュー1メニュー1メニュー1
+													li メニュー2メニュー2メニュー2
+													li メニュー3メニュー3メニュー3
+													li メニュー4メニュー4メニュー4
+												p
+													input(type='button',value='▲')
+													input(type='button',value='▼')
 												script(src='http://code.jquery.com/jquery-1.11.0.min.js')
 												script(src='script.js')
 								pre(class='prettyprint linenums:1')
 									:code
 										$(function() {
-											$('input').click(function() {
-												$('ul').append($('<li>メニューメニューメニュー</li>'));
+											$('input:first-of-type').click(function() {
+												$('li:first-of-type').appendTo('ul');
+											});
+											$('input:last-of-type').click(function() {
+												$('li:last-of-type').prependTo('ul');
 											});
 										});
 								pre(class='prettyprint linenums:1')
 									:code
 										$ ->
-											$('input').click ->
-												$('ul').append $('<li>メニューメニューメニュー</li>')
+											$('input:first-of-type').click ->
+												$('li:first-of-type').appendTo('ul')
 												return
-											return
+											$('input:last-of-type').click ->
+												$('li:last-of-type').prependTo('ul')
 												return
-											###
-											
 											return

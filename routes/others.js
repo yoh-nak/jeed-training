@@ -23,4 +23,11 @@
     });
   };
 
+  exports.vagrant = function(req, res) {
+    return res.render("others/vagrant/vagrant" + req.params.id, {
+      title: define.title,
+      instructor: define.instructor
+    });
+  };
+
 }).call(this);

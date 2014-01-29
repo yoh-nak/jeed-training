@@ -147,6 +147,8 @@
 
   app.get("/git/:id", others.git);
 
+  app.get("/vagrant/:id", others.vagrant);
+
   app.get("/diary/:id", diary.diary);
 
   app.get("/js-:id:format", js.js);
@@ -168,8 +170,6 @@
   app.get("/material:id:format", material.material);
 
   app.get("/cordova/:id", js.cordova);
-
-  app.get("/material/vagrant-:id", material.vagrant);
 
   app.post("/xml-:id", js.webapiXML);
 

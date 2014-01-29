@@ -1,5 +1,5 @@
 $ ->
 	$('input').click ->
-		$('ul').append $('<li>メニューメニューメニュー</li>')
+		$('ul').append '<li>メニューメニューメニュー</li>'
 		return
 	return

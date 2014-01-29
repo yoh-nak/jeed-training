@@ -13,3 +13,9 @@ exports.git = (req, res) ->
 	res.render "others/git/git" + req.params.id,
 		title: define.title
 		instructor: define.instructor
+
+exports.vagrant = (req, res) ->
+	res.render "others/vagrant/vagrant" + req.params.id,
+		title: define.title
+		instructor: define.instructor
+

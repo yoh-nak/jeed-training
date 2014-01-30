@@ -1,0 +1,118 @@
+extends ../../layout
+
+block link
+	link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+	link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+	link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+	link(href='../../css/style.css',rel='stylesheet',media='screen')
+	link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+	include ../navbar
+	.container
+		.row
+			.col-sm-3
+				include ../left
+			.col-sm-9
+				.panel.panel-primary
+					.panel-heading
+						i.glyphicon.glyphicon-book
+						| &nbsp;Node.jsデプロイ環境構築
+					.panel-body
+						pre
+							:code
+								node.jsインストール
+								gcc、g++必要
+								sudo apt-get install gcc g++
+
+								sudo apt-get update
+								sudo apt-get install git-core git scons build-essential scons libpcre++-dev xulrunner-dev libboost-dev libboost-program-options-dev libboost-thread-dev libboost-filesystem-dev
+
+								wget http://nodejs.org/dist/v0.10.25/node-v0.10.25.tar.gz
+								tar -zxf node-v0.10.25.tar.gz
+								cd node-v0.10.25
+								./configure
+								make
+								sudo make install
+
+
+								npm install -g express jade stylus nib coffee-script hotnode forever grunt-cli js2coffee http-proxy
+
+								=============================
+								git インストール
+								sudo apt-get install git
+
+								ベアリポジトリ
+								cd ~
+								mkdir myapp.git
+								cd myapp.git
+								git --bare init --shared
+
+								#git --bare init
+								#git init --bare --shared=0640 myapp.git
+								#git init --bare --shared=true myapp.git
+
+
+								/*
+								sudo vim ~/myapp.git/hooks/pre-receive
+
+								#!/bin/sh
+								echo "Stop myapp service"
+								service myapp stop
+
+								sudo chmod +x /home/vagrant/myapp.git/hooks/pre-receive
+								*/
+
+
+								sudo vim ~/myapp.git/hooks/post-receive
+
+								/*
+								#!/bin/sh
+								echo "Checkout the Files"
+								GIT_WORK_TREE=/home/vagrant/myapp.git git checkout -f
+								echo "start service"
+								service nsmag start
+								*/
+
+								#!/bin/sh
+								GIT_WORK_TREE=/home/vagrant/myapp
+								export GIT_WORK_TREE
+								git checkout -f
+
+
+								sudo chmod +x /home/vagrant/myapp.git/hooks/post-receive
+
+
+								=============================
+
+								ローカルリポジトリ
+								git config --global user.name "Yohsuke Nakano"
+								git config --global user.email hoge@sample.com
+
+								.gitignoreに記述
+								.DS_Store
+								node_modules
+
+								git init
+								git add .
+								git commit -m "first commit"
+
+								=============================
+
+								リモートリポジトリへのプッシュ
+
+								git remote add origin vagrant@192.168.33.10:/home/vagrant/myapp.git
+								git push -u origin master
+
+
+								マニュアル
+								http://www.saturngod.net/deploy-node-js-website-with-git
+								http://stackoverflow.com/questions/9132144/how-can-i-automatically-deploy-my-app-after-a-git-push-github-and-node-js
+						hr
+						pre
+							:code
+								ドットインストール
+									
+								Vagrant門
+								http://dotinstall.com/lessons/basic_vagrantt
+

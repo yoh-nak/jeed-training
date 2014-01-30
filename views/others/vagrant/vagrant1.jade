@@ -17,84 +17,128 @@ block content
 				.panel.panel-primary
 					.panel-heading
 						i.glyphicon.glyphicon-book
-						| &nbsp;資料
+						| &nbsp; Vagrant 資料
 					.panel-body
 						p
 							| Vagrant 公式サイト
 							br
 							a(href='http://www.vagrantup.com/',target='_blank')
 								| http://www.vagrantup.com/
+						p
+							| Vagrant Box 配布サイト
+							br
+							a(href='http://www.vagrantbox.es/',target='_blank')
+								| http://www.vagrantbox.es/
 						hr
+						.alert.alert-info BOX（テンプレート）取得
+						h4 CentOS 64bit
 						pre
 							:code
-								vagrant 公式サイト
-								http://www.vagrantup.com/
-
-								=============================
-
-								BOX（テンプレート）取得
-								vagrant box add precise32 \
-								http://files.vagrantup.com/precise32.box
-
-								仮想OS用ディレクトリ作成
+								vagrant box add centos64 http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.4-x86_64-v20130731.box
+						h4 Ubuntu 32bit
+						pre
+							:code
+								vagrant box add precise32 http://files.vagrantup.com/precise32.box
+						hr
+						.alert.alert-info インストールしたBoxの確認
+						pre
+							:code
+								vagrant box list
+						hr
+						.alert.alert-info インストールしたBoxの削除
+						pre
+							:code
+								vagrant box remove centos64 virtualbox
+								vagrant box remove precise32 virtualbox
+						hr
+						.alert.alert-info 仮想マシン用ディレクトリ作成
+						p ※ 作成するディレクトリ名は任意
+						h4 CentOS 64bit
+						pre
+							:code
+								cd ~
+								mkdir myCentos64VM
+								cd myCentos64VM
+						h4 Ubuntu 32bit
+						pre
+							:code
 								cd ~
 								mkdir myPrecise32VM
 								cd myPrecise32VM
-
-								Vagrant設定ファイル生成
+						hr
+						.alert.alert-info BOVagrant設定ファイル生成
+						h4 ContOS 64bit
+						pre
+							:code
+								vagrant init centos64
+						h4 Ubuntu 32bit
+						pre
+							:code
 								vagrant init precise32
-
-								仮想OSインストール
+						hr
+						.alert.alert-info 仮想マシンインストール
+						pre
+							:code
 								vagrant up
-
-								=============================
-
-								状態
+						hr
+						.alert.alert-info 仮想マシンの状態確認
+						pre
+							:code
 								vagrant status
-
-								スリープ
+						hr
+						.alert.alert-info 仮想マシンのスリープ
+						pre
+							:code
 								vagrant suspend
-
-								復帰
+						hr
+						.alert.alert-info 仮想マシンのスリープからの復帰
+						pre
+							:code
 								vagrant resume
-
-								終了
+						hr
+						.alert.alert-info 仮想マシンの終了
+						pre
+							:code
 								vagrant halt
-
-								起動
+						hr
+						.alert.alert-info 仮想マシンの起動
+						pre
+							:code
 								vagrant up
-
-								再起動
+						hr
+						.alert.alert-info 仮想マシンの再起動
+						pre
+							:code
 								vagrant reload
-
-								仮想マシン削除
+						hr
+						.alert.alert-info 仮想マシンの削除
+						pre
+							:code
 								vagrant destloy
-
-								=============================
-
-								接続
+						hr
+						.alert.alert-info 仮想マシンへの接続
+						pre
+							:code
 								vagrant ssh
-
-								=============================
-
-								LANで仮想環境にアクセス可能にする
-
-								CentOSの場合
-
-								IPv4のファイヤーウォールを無効にする
+						hr
+						.alert.alert-info LANで仮想マシンにアクセス可能にする
+						h4 CentOS 64bit
+						p: u IPv4のファイヤーウォールを無効にする
+						pre
+							:code
 								sudo service iptables save
 								sudo service iptables stop
 								sudo chkconfig iptables off
-
-								IPv6のファイヤーウォールを無効にする
+						p: u IPv6のファイヤーウォールを無効にする
+						pre
+							:code
 								sudo service ip6tables save
 								sudo service ip6tables stop
 								sudo chkconfig ip6tables off
-
-								Ubuntuの場合
-
-								ファイヤーウォールを無効にする
-
+						h4 Ubuntuの場合
+						p: u ファイヤーウォールを無効にする
+						pre
+							:code
 								sudo iptables -X
 								sudo iptables -t nat -F
 								sudo iptables -t nat -X
@@ -104,127 +148,44 @@ block content
 								sudo iptables -P FORWARD ACCEPT
 								sudo iptables -P OUTPUT ACCEPT
 								sudo ufw disable
-
-								=============================
-
-								仮想環境を抜ける
-								exit
-
-								=============================
-
-								Vagrantfileを編集
-								config.vm.network :private_network, ip: "192.168.33.10"
-
-								Vagrant再起動
-								vagrant reload
-
-								Vagrant接続
-								vagrant ssh
-
-								=============================
-
-								共有フォルダ
-
-								仮想マシンの/vagrant = Macの~/myPrecise32VM
-
-								Webサーバーのドキュメントルートと共有フォルダをリンク
-								sudo -rf /var/www/html
-								sudo ln -fs /vagrant /var/www/html
-
-								=============================
-
-								node.jsインストール
-								gcc、g++必要
-								sudo apt-get install gcc g++
-
-								sudo apt-get update
-								sudo apt-get install git-core git scons build-essential scons libpcre++-dev xulrunner-dev libboost-dev libboost-program-options-dev libboost-thread-dev libboost-filesystem-dev
-
-								wget http://nodejs.org/dist/v0.10.25/node-v0.10.25.tar.gz
-								tar -zxf node-v0.10.25.tar.gz
-								cd node-v0.10.25
-								./configure
-								make
-								sudo make install
-
-
-								npm install -g express jade stylus nib coffee-script hotnode forever grunt-cli js2coffee http-proxy
-
-								=============================
-								git インストール
-								sudo apt-get install git
-
-								ベアリポジトリ
-								cd ~
-								mkdir myapp.git
-								cd myapp.git
-								git --bare init --shared
-
-								#git --bare init
-								#git init --bare --shared=0640 myapp.git
-								#git init --bare --shared=true myapp.git
-
-
-								/*
-								sudo vim ~/myapp.git/hooks/pre-receive
-
-								#!/bin/sh
-								echo "Stop myapp service"
-								service myapp stop
-
-								sudo chmod +x /home/vagrant/myapp.git/hooks/pre-receive
-								*/
-
-
-								sudo vim ~/myapp.git/hooks/post-receive
-
-								/*
-								#!/bin/sh
-								echo "Checkout the Files"
-								GIT_WORK_TREE=/home/vagrant/myapp.git git checkout -f
-								echo "start service"
-								service nsmag start
-								*/
-
-								#!/bin/sh
-								GIT_WORK_TREE=/home/vagrant/myapp
-								export GIT_WORK_TREE
-								git checkout -f
-
-
-								sudo chmod +x /home/vagrant/myapp.git/hooks/post-receive
-
-
-								=============================
-
-								ローカルリポジトリ
-								git config --global user.name "Yohsuke Nakano"
-								git config --global user.email hoge@sample.com
-
-								.gitignoreに記述
-								.DS_Store
-								node_modules
-
-								git init
-								git add .
-								git commit -m "first commit"
-
-								=============================
-
-								リモートリポジトリへのプッシュ
-
-								git remote add origin vagrant@192.168.33.10:/home/vagrant/myapp.git
-								git push -u origin master
-
-
-								マニュアル
-								http://www.saturngod.net/deploy-node-js-website-with-git
-								http://stackoverflow.com/questions/9132144/how-can-i-automatically-deploy-my-app-after-a-git-push-github-and-node-js
 						hr
+						.alert.alert-info 仮想環境を抜ける
 						pre
 							:code
-								ドットインストール
-									
+								exit
+						hr
+						.alert.alert-info Vagrantfileを編集
+						pre
+							:code
+								# Create a private network, which allows host-only access to the machine
+								# using a specific IP.
+								config.vm.network :private_network, ip: "192.168.33.10"
+						hr
+						.alert.alert-info Vagrant再起動
+						pre
+							:code
+								vagrant reload
+						hr
+						.alert.alert-info Vagrant接続
+						pre
+							:code
+								vagrant ssh
+						hr
+						.alert.alert-info Vagrantの共有フォルダ
+						pre
+							:code
+								仮想マシンの/vagrant = Macの~/myCentOS64VM
+								仮想マシンの/vagrant = Macの~/myPrecise32VM
+						hr
+						.alert.alert-info Webサーバーのドキュメントルートと共有フォルダをリンク
+						pre
+							:code
+								sudo rm -rf /var/www/html
+								sudo ln -fs /vagrant /var/www/html
+						hr
+						.alert.alert-info ドットインストール
+						pre
+							:code
 								Vagrant門
 								http://dotinstall.com/lessons/basic_vagrantt
 

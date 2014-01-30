@@ -1,0 +1,94 @@
+extends ../layout
+
+block link
+	include ../link1
+
+block content
+	include navbar
+	.container
+		.row
+			.col-sm-3
+				include left
+			.col-sm-9
+				.panel.panel-primary
+					.panel-heading
+						i.glyphicon.glyphicon-book
+						| &nbsp;$(':first-child')擬似クラス 課題
+					.panel-body
+						p ボタンをクリックして最初のli要素を回転させましょう。
+						p
+							a.btn.btn-default(href='../demo/jquery/exercise77/index1.html',target='_blank')
+								i.glyphicon.glyphicon-play
+								| デモ
+							button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+								i.glyphicon.glyphicon-question-sign
+								| &nbsp;解答例
+						#demo.collapse.out
+								pre(class='prettyprint linenums:1')
+									:code
+										doctype
+										html(lang='ja-JP')
+											head
+												meta(charset='UTF-8')
+												title
+												link(rel='stylesheet',href='style.css')
+											body
+												p: input(type='button',value='回転')
+												ul
+													li テキストテキストテキストテキスト
+													li テキストテキストテキストテキスト
+													li テキストテキストテキストテキスト
+													li テキストテキストテキストテキスト
+												script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+												script(src='script.js')
+								pre(class='prettyprint linenums:1')
+									:code
+										doctype
+										html(lang='ja-JP')
+											head
+												meta(charset='UTF-8')
+												title
+												link(rel='stylesheet',href='style.css')
+											body
+												p: input(type='button',value='回転')
+												ul
+													-for(var i = 0; i < 4; i++)
+														li テキストテキストテキストテキスト
+												script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+												script(src='script.js')
+								pre(class='prettyprint linenums:1')
+									:code
+										prefix(prop, val)
+											-webkit-{prop} val
+											{prop} val
+
+										.turn
+											prefix('transform', rotateX(0deg))	
+											prefix('animation-name', myanim)	
+											prefix('animation-duration', 1s)
+
+										@keyframes myanim{
+											0%{
+												prefix('transform', rotateX(0deg))
+											}
+											50%{
+												prefix('transform', rotateX(180deg))
+											}
+											100%{
+												prefix('transform', rotateX(360deg))
+											}
+										}
+								pre(class='prettyprint linenums:1')
+									:code
+										$(function() {
+											$('input').click(function() {
+												$('li:first-child').addClass('turn');
+											});
+										});
+								pre(class='prettyprint linenums:1')
+									:code
+										$ ->
+											$('input').click ->
+												$('li:first-child').addClass('turn')
+												return
+											return

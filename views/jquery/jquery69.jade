@@ -1,0 +1,68 @@
+extends ../layout
+
+block link
+	include ../link1
+
+block content
+	include navbar
+	.container
+		.row
+			.col-sm-3
+				include left
+			.col-sm-9
+				.panel.panel-primary
+					.panel-heading
+						i.glyphicon.glyphicon-book
+						| &nbsp;$('ユニバーサルセレクター')
+					.panel-body
+						p
+							a.btn.btn-default(href='../demo/jquery/exercise67/index1.html',target='_blank')
+								i.glyphicon.glyphicon-play
+								| デモ
+							| 
+							a.btn.btn-default(href='http://api.jquery.com/jQuery/',target='_blank')
+								i.glyphicon.glyphicon-info-sign
+								| &nbsp;参考
+						pre(class='prettyprint linenums:1')
+							:code
+								doctype
+								html(lang='ja-JP')
+									head
+										meta(charset='UTF-8')
+										title
+									body
+										ul
+											li <span>テキスト</span>テキストテキストテキスト
+											li テキスト<span>テキスト</span>テキストテキスト
+											li テキストテキスト<span>テキスト</span>テキスト
+											li テキストテキストテキスト<span>テキスト</span>
+										script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+										script(src='script.js')
+						pre(class='prettyprint linenums:1')
+							:code
+								doctype
+								html(lang='ja-JP')
+									head
+										meta(charset='UTF-8')
+										title
+									body
+										ul
+											-for(var i = 0; i < 4; i++)
+												li
+													-for(var j = 0; j < 4; j++)
+														-if(i==j)
+															span テキスト
+														-else
+															| テキスト
+										script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+										script(src='script.js')
+						pre(class='prettyprint linenums:1')
+							:code
+								$(function() {
+									$('*', 'li').css('color', '#FF0000');
+								});
+						pre(class='prettyprint linenums:1')
+							:code
+								$ ->
+									$('*', 'li').css 'color', '#FF0000'
+									return

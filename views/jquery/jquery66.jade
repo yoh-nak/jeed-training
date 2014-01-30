@@ -1,0 +1,119 @@
+extends ../layout
+
+block link
+	include ../link1
+
+block content
+	include navbar
+	.container
+		.row
+			.col-sm-3
+				include left
+			.col-sm-9
+				.panel.panel-primary
+					.panel-heading
+						i.glyphicon.glyphicon-book
+						| &nbsp;$('クラスセレクター') 課題
+					.panel-body
+						p ページを読み込んだ段階で、tr要素の偶数行にeven、奇数行にoddクラスをつけトランジションをかけてみましょう。
+						p
+							a.btn.btn-default(href='../demo/jquery/exercise64/index1.html',target='_blank')
+								i.glyphicon.glyphicon-play
+								| デモ
+							button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+								i.glyphicon.glyphicon-question-sign
+								| &nbsp;解答例
+						#demo.collapse.out
+								pre(class='prettyprint linenums:1')
+									:code
+										doctype
+										html(lang='ja-JP')
+											head
+												meta(charset='UTF-8')
+												title
+												link(rel='stylesheet',href='style.css')
+											body
+												table(border='1')
+													tr.even
+														td テキスト
+														td テキスト
+														td テキスト
+														td テキスト
+													tr.odd
+														td テキスト
+														td テキスト
+														td テキスト
+														td テキスト
+													tr.even
+														td テキスト
+														td テキスト
+														td テキスト
+														td テキスト
+													tr.odd
+														td テキスト
+														td テキスト
+														td テキスト
+														td テキスト
+													tr.even
+														td テキスト
+														td テキスト
+														td テキスト
+														td テキスト
+													tr.odd
+														td テキスト
+														td テキスト
+														td テキスト
+														td テキスト
+								pre(class='prettyprint linenums:1')
+									:code
+										doctype
+										html(lang='ja-JP')
+											head
+												meta(charset='UTF-8')
+												title
+												link(rel='stylesheet',href='style.css')
+											body
+												table(border='1')
+													- for(var i = 0; i < 3; i++)
+														tr.even
+															td テキスト
+															td テキスト
+															td テキスト
+															td テキスト
+														tr.odd
+															td テキスト
+															td テキスト
+															td テキスト
+															td テキスト
+												script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+												script(src='script.js')
+
+								pre(class='prettyprint linenums:1')
+									:code
+										prefix(prop, val)
+											-webkit-{prop} val
+											{prop} val
+
+										.even
+											background-color transparent
+										.odd
+											background-color transparent
+
+										.load
+											prefix('transition-property', all)	
+											prefix('transition-duration', 500ms)
+											prefix('transition-timing-function', ease-in-out)
+											&.even
+												background-color red
+											&.odd
+												background-color blue
+								pre(class='prettyprint linenums:1')
+									:code
+										$(function() {
+											$('.even,.odd').addClass('load');
+										});
+								pre(class='prettyprint linenums:1')
+									:code
+										$ ->
+											$('.even,.odd').addClass 'load'
+											return

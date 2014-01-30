@@ -19,30 +19,60 @@ block content
 						i.glyphicon.glyphicon-book
 						| &nbsp;Node.jsデプロイ環境構築
 					.panel-body
+						.alert.alert-info Node.jsのインストール
+						p OSのアップデート
+						h4 CentOS 64bit
 						pre
 							:code
-								node.jsインストール
+								sudo yum -y update
+						h4 Ubuntu 32bit
+						pre
+							:code
+								sudo apt-get update
+						p 依存パッケージのダウンロード
+						pre
+							:code
+								sudo yum -y install git-core git scons build-essential scons libpcre++-dev xulrunner-dev libboost-dev libboost-program-options-dev libboost-thread-dev libboost-filesystem-dev
+						pre
+							:code
+								sudo apt-get install git-core git scons build-essential scons libpcre++-dev xulrunner-dev libboost-dev libboost-program-options-dev libboost-thread-dev libboost-filesystem-dev
+						pre
+							:code
 								gcc、g++必要
 								sudo apt-get install gcc g++
-
-								sudo apt-get update
-								sudo apt-get install git-core git scons build-essential scons libpcre++-dev xulrunner-dev libboost-dev libboost-program-options-dev libboost-thread-dev libboost-filesystem-dev
-
+						p Node.jsのソースをダウンロード
+						pre
+							:code
 								wget http://nodejs.org/dist/v0.10.25/node-v0.10.25.tar.gz
+						p Node.jsのソースの解凍
+						pre
+							:code
 								tar -zxf node-v0.10.25.tar.gz
+						p Node.jsのソースのビルド
+						pre
+							:code
 								cd node-v0.10.25
 								./configure
 								make
+						p Node.jsのインストール
+						pre
+							:code
 								sudo make install
-
-
-								npm install -g express jade stylus nib coffee-script hotnode forever grunt-cli js2coffee http-proxy
-
-								=============================
-								git インストール
-								sudo apt-get install git
-
-								ベアリポジトリ
+						p foreverとhttp-proxyのインストール
+						h4 CentOS 64bit
+						pre
+							:code
+								su
+								パスワード: vagrant
+								npm install -g forever http-proxy
+						h4 Ubuntu 32bit
+						pre
+							:code
+								sudo npm install -g forever http-proxy
+						hr
+						.alert.alert-info ベアリポジトリの作成
+						pre
+							:code
 								cd ~
 								mkdir myapp.git
 								cd myapp.git
@@ -62,9 +92,9 @@ block content
 
 								sudo chmod +x /home/vagrant/myapp.git/hooks/pre-receive
 								*/
+								sudo yum install -y vim
 
-
-								sudo vim ~/myapp.git/hooks/post-receive
+								sudo vim /home/vagrant/myapp.git/hooks/post-receive
 
 								/*
 								#!/bin/sh
@@ -83,9 +113,9 @@ block content
 								sudo chmod +x /home/vagrant/myapp.git/hooks/post-receive
 
 
-								=============================
 
 								ローカルリポジトリ
+								gitの設定
 								git config --global user.name "Yohsuke Nakano"
 								git config --global user.email hoge@sample.com
 
@@ -99,20 +129,15 @@ block content
 
 								=============================
 
-								リモートリポジトリへのプッシュ
-
+						.alert.alert-info リモートリポジトリへのプッシュ
+						pre
+							:code
 								git remote add origin vagrant@192.168.33.10:/home/vagrant/myapp.git
 								git push -u origin master
+								password: vagrant
 
-
+						pre
+							:code
 								マニュアル
 								http://www.saturngod.net/deploy-node-js-website-with-git
 								http://stackoverflow.com/questions/9132144/how-can-i-automatically-deploy-my-app-after-a-git-push-github-and-node-js
-						hr
-						pre
-							:code
-								ドットインストール
-									
-								Vagrant門
-								http://dotinstall.com/lessons/basic_vagrantt
-

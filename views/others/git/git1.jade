@@ -67,6 +67,770 @@ block content
 								Windows, Mac, Linux
 						pre
 							:code
+								ローカルでのバージョン管理
+
+								作業フォルダ
+								作業ディレクトリ
+								作業ツリー
+
+								↓アドする、ステージする、キャッシュする
+
+								ステージ
+								ステージングエリア
+								インデックス
+								キャッシュ
+
+								↓コミットする
+
+								リポジトリ
+
+								↓チェックアウト
+
+								作業（ワーキング）フォルダ
+								作業（ワーキング）ディレクトリ
+								作業（ワーキング）ツリー
+
+
+								リモートリポジトリでの共同作業
+
+								ローカルリポジトリ
+
+
+								↓プッシュ
+
+								リモートリポジトリ
+								裸の（ベア）リポジトリ 
+
+								↓プル
+
+								ローカルリポジトリ + 作業ツリー
+
+
+								gitの設定
+
+								ユーザー名の設定
+								git config --global user.name "(your name)"
+
+
+								メールアドレスの設定
+
+								git config --global user.email "(your email)"
+
+								Gitの表示を色分けする
+								git config --global color.ui true
+
+								設定の確認
+								git config -l
+
+								git config --help（qで終了）
+								git help config
+
+
+								初めてのコミットをしてみよう 
+
+
+								現在のディレクトリを確認
+								pwd
+
+								ディレクトリの作成
+								mkdir myweb
+
+								ディレクトリの移動
+								cd myweb
+
+								Gitの初期化
+								git init
+
+						pre
+							:code
+								隠しファイルも確認
+							| ls -a
+						pre
+							:code
+									ファイルの作成
+						pre
+							:code
+								vim index.html
+								入力モード
+								i
+								入力内容
+								line 1
+								コマンドモード
+								ESC
+
+								保存
+								:wq
+
+
+								ファイルの確認
+								cat index.html
+
+
+								ログの確認
+								git log
+
+								ステージにファイルを置く
+								git add index.html
+
+
+								ログの確認
+								git log
+
+
+								コミットする->vimが起動
+
+								git commit
+
+								インサートモード
+								i
+
+								コミットメッセージ
+								initial commit
+
+								コマンドモード
+								ESC
+
+								保存
+								:wq
+
+								ログの確認
+								git log
+
+
+
+								gitのログを見てみよう
+
+								git log
+
+								1行ログの確認
+								git log --oneline
+
+								どこが変更されたか
+								git log -p
+
+								どのファイルが変更されたか
+								git log --stat 
+
+
+
+								現在の状態を把握しよう
+
+
+								vim index.html
+
+								インサートモード
+								i
+
+								追記内容
+								line1
+								line2
+
+								コマンドモード
+								ESC
+
+								保存
+								:wq
+
+								作業ツリーとステージの状態の確認
+								git status  
+
+								元に戻す
+								git checkout -- index.html
+
+								確認
+								cat index.html
+
+
+								ログの確認
+								git log
+
+
+
+								差分を確認してみよう
+
+
+								git status
+
+								vim index.html
+								i
+								line 1
+								line 2
+								ESC
+								:wq
+
+								git status
+
+								ステージしていない状態
+								作業ツリーとステージの比較
+								git diff
+
+								git add index.html
+
+								git status
+
+								ステージした後の状態
+								ステージとリポジトリの比較
+								git diff --cached
+
+
+
+								作業ツリーを最新のコミットの状態にリセット
+								git reset --hard HEAD
+
+
+								補足
+								ステージを最新のコミットの状態にリセット
+								git reset --soft HEAD
+
+
+
+								gitでのファイル操作について 
+
+								git status
+
+								vim index.html
+								vim
+								i
+								line 1
+								line 2
+								ESC
+								:wq
+
+
+								git status
+
+
+								現在のディレクトリ以下をステージする
+								git add .
+
+
+								補足:複数ファイルを指定する
+								git add index.html style.css common.js
+
+
+								git stastus
+
+
+								Git管理下のファイル操作
+								git rm index.html
+								git rm --cached index.html
+								git mv index.html index2.html
+								git mv --cached index.html index2.html
+
+
+								git reset --hard HEAD
+
+
+
+
+								git管理に含めない設定について 
+
+
+								空ファイルの作成
+								touch error.log
+
+								ls
+
+								無視するファイルの指定
+								vim .gitignore
+
+								内容
+								*.log
+
+								ESC
+								:wq
+
+								ls
+
+								git status
+
+								git add .
+
+								git status
+
+
+
+								git reset --hard HEAD
+
+
+
+								直前のコミットを変更する
+
+								git rm -f .gitignore
+								error.logはgitで管理されていないので
+								rm erorr.log
+
+
+								ls
+
+								vim
+								line1
+								line2
+								ESC
+								:wq
+
+								git add .
+
+								vimを起動せずにコミット
+								git commit -m "line 2 added"
+
+								git log
+
+
+
+								vim index.tml
+								line1
+									line2
+								ESC
+								:wq
+
+
+								git add .
+
+								最新のコミットの修正
+								git commit --amend
+
+								:wq
+
+								git log
+
+
+
+								参考
+								GUIツールで確認
+								gitk
+
+
+
+								（HEADの）ひとつ前のコミットにリセット
+								git reset --hard HEAD^
+
+
+
+								過去のバージョンに戻ってみよう (1)
+
+								git log
+
+								vim index.html
+
+								line1
+								line2
+								ESC
+								:wq
+
+
+								git add .
+								git commit -m "line 2 added"
+
+
+								git log
+
+
+								vim index.html
+								line1
+								line2
+								line3
+
+								git add .
+
+								git log
+
+								git reset --hard HEAD
+
+								git log
+
+								cat index.html
+
+								git log
+
+								git reset --hard HEAD^
+
+								git reset --hard コミットID（最低7桁）
+
+
+								git log
+
+								cat index.html
+
+
+
+								git log
+
+								前回取り消したコミットに戻る
+								git reset --hard ORIG_HEAD
+
+
+								git log
+
+
+
+								ブランチを使ってみよう
+
+
+								現在のブランチの確認
+								git branch
+
+
+								ブランチの作成
+								git branch hoge
+
+								ブランチの確認
+								git branch
+
+
+								ブランチの移動
+								git checkout hoge
+
+								ブランチの確認
+								git branch
+
+
+								ls
+
+								vim myscript.js
+								i
+								alert();
+								ESC
+								:wq
+
+								git add .
+								git commit -m "script added"
+
+								git log
+
+								ブランチを移動
+								git checkout master
+
+								git log
+
+
+
+								ブランチをマージしてみよう
+
+								git branch
+
+
+								ブランチのマージ
+								git merge hoge
+
+								ls
+
+								git log
+
+								git branch
+
+								ブランチ削除
+								git branch -d hoge
+
+								git branch
+
+
+								git reset --hard HEAD^
+
+
+
+
+
+								マージの衝突を解決してみよう (1)
+
+
+								現在のブランチを確認する
+								git branch
+
+
+								コミットログの確認
+								git log
+
+
+								ls
+
+
+								ブランチを作ってチェックアウト
+								git checkout -b hogehoge  
+								
+								git branch
+
+
+								vim index.html
+
+								line first
+								ESC
+								:wq
+
+								git add .
+								git commit -m "not 1 but first"
+
+
+								マスターブランチに戻る
+								git checkout master
+
+
+								vim index.tml
+
+								line 1st
+								ESC
+								:wq
+
+								git add .
+								git commit -m "not 1 but 1st"
+
+								git branch
+
+
+								ブランチのマージ
+								git merge hogehoge
+
+
+								マージの衝突を解決してみよう (2) 
+
+								git status
+
+								vim index.html
+
+								<<<<< HEAD
+								line 1st
+
+								===========
+								line first
+								>>>>>>> hogehoge
+
+								↓DDで1行ずつ削除
+
+								line 1st
+
+
+								ESC
+								:wq
+
+								git add .
+								git commit -m "conflict fixed"
+
+								git log
+
+								git status
+
+
+								git reset --hard HEAD^^
+
+
+
+								タグを使ってみよう
+
+								git log
+
+								vim indexhtml
+
+								line 1
+								line 2
+								ESC
+								:wq
+
+								git add .
+								git commit -m "line 2 added"
+
+								git log
+
+
+								コミットにタグを追加
+								git tag v1.0
+
+								git tag
+
+
+								git show v1.0
+
+
+								git log
+
+								過去のコミットにタグを追加
+								git tag v0.9 コミットID
+
+								git tag
+
+								git show v0.9
+
+								git tag
+
+
+								タグの削除
+								git tag -d v0.9
+
+								git tag
+
+
+
+								git reset --hard HEAD^
+
+
+
+								エイリアスを使ってみよう
+
+								短縮コマンドの設定
+								git config --global alias.co checkout
+								git config --global alias.st status
+								git config --global alias.br branch
+								git config --global alias.ci commit
+
+								git config -l
+
+								設定の削除
+								git config --global --unset alias.co
+
+
+
+								はじめての共同作業
+
+								共有リポジトリ ourweb.git
+
+								Aさんの作業ツリー myweb
+
+								bさんの作業ツリー myweb2
+
+
+								cd ~/Desktop
+
+								mkdir ourweb.git
+
+								(mkdir ~/Desktop/ourweb.git)
+
+								cd ourweb.git/
+
+
+								共有リポジトリの初期化
+								git init --bare 
+
+
+								cd ..
+								cd myweb
+
+								git status
+
+								git log
+
+
+								共有リポジトリにpushしてみよう
+
+								git remote add origin ~/Desktop/ourweb.git
+
+								origin:リモートリポジトリ名（任意）
+
+								設定の確認
+								git config -l
+
+
+								リモートリポジトリの削除
+								git remote rm origin
+
+
+								リモートリポジトリにHEADの状態をプッシュ
+								git push origin master
+
+
+
+								リポジトリの内容を共有してみよう
+
+								Bのターミナル
+								git clone ~/ourweb.git/ myweb2
+
+								cd myweb2
+
+								ls
+
+								git log
+
+								vim index
+
+								line 1
+								line 2
+								ESC
+								:wq
+
+								git add .
+								git commit -m "line 2 added"
+
+								リモートリポジトリにプッシュ
+								git push origin master
+
+								Aのターミナル
+								git pull origin master
+
+								git log
+
+
+								共有時のトラブルを解決する
+
+								Bのターミナル
+
+								vim index.html
+								i
+								line 1
+								line 2
+								line 3
+								ESC
+								:wq
+
+								git add .
+								git commit -m "line 3 aded"
+
+								git push origin master
+
+
+								Aのターミナル
+								vim index.html
+								i
+								line 1
+								line 2
+								line third
+								ESC
+								:wq
+
+								アドしてコミット
+								git commit -am "line third added"
+
+
+								git push origin master
+								エラー
+
+
+								先にプル
+								git pull origin master
+
+								vim index.html
+
+
+								line 1
+								line 2
+								<<<<<<< HEAD
+								line third
+								=========
+								line 3
+
+								↓ddで1行ずつ削除
+
+								line 1
+								line 2
+								line third
+								ESC
+								:wq
+
+								git commit -am "conflict fixed"
+
+								git push origin master
+
+
+
+								Bさんのターミナル
+
+								git pull origin master
+								
+
+								日本語ファイルの文字化け
+
+								$ git config --global core.quotepath false
+								$ git log --summary
+
+						pre
+							:code
 								ドットインストール
 									
 								git入門

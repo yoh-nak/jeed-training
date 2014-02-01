@@ -89,46 +89,77 @@ block content
 								sudo npm install -g forever http-proxy
 						hr
 						.alert.alert-info ベアリポジトリの作成
+						p myapp.gitをベアリポジトリ、デプロイ先をmywebとするとして、ディレクトリを作成します。
 						pre
 							:code
 								cd ~
-								mkdir myapp.git
+								mkdir myapp.git myweb
+						p ベアリポジトリにcdし、初期化します。
+						pre
+							:code
+
 								cd myapp.git
 								git init --bare --shared
-
-								post-receiveにhook
+						hr
+						.alert.alert-info post-receiveにhook
+						p post-receiveはベアリポジトリにpushされた後に実行されるシェルのことです。
+						p まず、ベアリポジトリのhookディレクトリにpost-receiveというファイルを作成します。
+						pre
+							:code
 								sudo vim /home/vagrant/myapp.git/hooks/post-receive
-
+						p vimなどのテキストエディタを使って、post-receiveに以下のように記述します。
+						pre(class='prettyprint linenums:1')
+							:code
 								#!/bin/sh
 								GIT_WORK_TREE=/home/vagrant/myapp
 								export GIT_WORK_TREE
 								git checkout -f
-
-								//パーミッションの変更
+						p ※ post-receiveでpackage.jsonにモジュールが追加されていたときのために、npm installを実行できるようにしておくと便利です。
+						p post-receiveを作成したら、パーミッションの変更をしておきましょう。
+						pre
+							:code
 								sudo chmod +x /home/vagrant/myapp.git/hooks/post-receive
 						hr
 						.alert.alert-info ローカルリポジトリの作成
 						p これらは、クライアント側の操作になります。まず開発用のローカルPCにgitをインストールしておきましょう。
+						p まだ、gitの初期設定がされていない場合は、ユーザ名とメールアドレスを設定します。
 						pre
 							:code
-								ローカルリポジトリ
-								gitの設定
 								git config --global user.name "Yohsuke Nakano"
 								git config --global user.email hoge@sample.com
-
-								.gitignoreに記述
-								.DS_Store
-								node_modules
-
+						p アプリケーションを作成するディレクトリを作成します。
+						pre
+							:code
+								mkdir myapp
+						p アプリケーションのディレクトリにcdし、ローカルリポジトリの初期化をします。
+						pre
+							:code
+								cd myapp
 								git init
+						p .gitignoreを作成します。
+						pre
+							:code
+								touch .gitignore
+						p .gitignoreにコミット時に無視するいファイルを記述します。
+						pre
+							:code
+								.DS_Store
+								node_modules		
+						p ソースコードを作成した後、最初のコミットを行います。
+						pre
+							:code
 								git add .
 								git commit -m "first commit"
 						hr
 						.alert.alert-info リモートリポジトリへのプッシュ
-						p デプロイして公開するリポジトリになるため、「origin」ではなく、明示的に「deploy」としておくとよい。
+						p アプリケーションにリモートリポジトリの設定をします。
+						p デプロイして公開するリポジトリになるため、「origin」ではなく、明示的に「deploy」としておくとよいでしょう。
 						pre
 							:code
 								git remote add deploy vagrant@192.168.33.10:/home/vagrant/myapp.git
-
+						p デプロイ先にpushします。
+						pre
+							:code
 								git push -u deploy master
 								password: vagrant
+						p サーバーにssh接続し、サーバーを起動したら、http://localhost:3000にアクセスしてみましょう。

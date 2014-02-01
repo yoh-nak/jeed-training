@@ -39,9 +39,11 @@ block content
 							:code
 								sudo apt-get install git-core git scons build-essential scons libpcre++-dev xulrunner-dev libboost-dev libboost-program-options-dev libboost-thread-dev libboost-filesystem-dev
 						p ついでにインストールされていなかったときのためにvim gcc、g++
+						p: u CentOS
 						pre
 							:code
-								sudo yum install -y wget vim gcc g++		
+								sudo yum install -y wget vim gcc g++
+						p: u Ubuntu
 						pre
 							:code
 								sudo apt-get install wget vim gcc g++
@@ -68,19 +70,23 @@ block content
 						hr
 						.alert.alert-info 必要なnpmグローバルパッケージのインストール
 						p foreverとhttp-proxyのインストール
-						h4 CentOS
+						p: u CentOS
 						p CentOSの場合、「sudo npm install -g」ができないので、ルートユーザにログインしなおす。
 						pre
 							:code
 								su
 								password: vagrant
-								npm install -g forever http-proxy
-								su vagrant
-								password: vagrant
-						h4 Ubuntu
 						pre
 							:code
-								sudo npm install -g forever http-proxy hotnode
+								npm install -g forever http-proxy
+						pre
+							:code
+								su vagrant
+								password: vagrant
+						p: u Ubuntu
+						pre
+							:code
+								sudo npm install -g forever http-proxy
 						hr
 						.alert.alert-info ベアリポジトリの作成
 						pre
@@ -100,6 +106,9 @@ block content
 
 								//パーミッションの変更
 								sudo chmod +x /home/vagrant/myapp.git/hooks/post-receive
+						hr
+						.alert.alert-info ローカルリポジトリの作成
+						p これらは、クライアント側の操作になります。まず開発用のローカルPCにgitをインストールしておきましょう。
 						pre
 							:code
 								ローカルリポジトリ
@@ -123,11 +132,3 @@ block content
 
 								git push -u deploy master
 								password: vagrant
-
-						pre
-							:code
-								資料
-								http://www.saturngod.net/deploy-node-js-website-with-git
-								http://stackoverflow.com/questions/9132144/how-can-i-automatically-deploy-my-app-after-a-git-push-github-and-node-js
-
-								http://futuremix.org/2007/08/openssh-warning

@@ -1,104 +1,104 @@
 extends ../layout
 
 block link
-	include ../link1
+    include ../link1
 
 block content
-	include navbar
-	.container
-		.row
-			.col-sm-3
-				include left
-			.col-sm-9
-				.panel.panel-primary
-					.panel-heading
-						i.glyphicon.glyphicon-book
-						| &nbsp;$('グループセレクター') 課題
-					.panel-body
-						p ボタンをクリックして、ul要素、ol要素、span要素を同じ表示にしてまとめてみましょう。
-						p
-							a.btn.btn-default(href='../demo/jquery/exercise70/index1.html',target='_blank')
-								i.glyphicon.glyphicon-play
-								| デモ
-							button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
-								i.glyphicon.glyphicon-question-sign
-								| &nbsp;解答例
-						#demo.collapse.out
-								pre(class='prettyprint linenums:1')
-									:code
-										doctype
-										html(lang='ja-JP')
-											head
-												meta(charset='UTF-8')
-												title
-											body
-												p: input(type='button',value='クリック')
-												ul
-													li ul要素 ul要素 ul要素 ul要素
-													li ul要素 ul要素 ul要素 ul要素
-													li ul要素 ul要素 ul要素 ul要素
-													li ul要素 ul要素 ul要素 ul要素
-												ol
-													li ol要素 ol要素 ol要素 ol要素
-													li ol要素 ol要素 ol要素 ol要素
-													li ol要素 ol要素 ol要素 ol要素
-													li ol要素 ol要素 ol要素 ol要素
-												div
-													| div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素
-													| span span要素 span要素 span要素span span要素 span要素 span要素span span要素 span要素 span要素span span要素 span要素 span要素span span要素 span要素 span要素
-													| div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素
-												script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-												script(src='script.js')
-								pre(class='prettyprint linenums:1')
-									:code
-										doctype
-										html(lang='ja-JP')
-											head
-												meta(charset='UTF-8')
-												title
-											body
-												p: input(type='button',value='クリック')
-												ul
-													-for(var i = 0; i < 4; i++)
-														li ul要素 ul要素 ul要素 ul要素
-												ol
-													-for(var i = 0; i < 4; i++)
-														li ol要素 ol要素 ol要素 ol要素
-												div
-													| div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素
-													-for(var i = 0; i < 4; i++)
-														span span要素 span要素 span要素
-													| div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素
-												script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-												script(src='script.js')
-								pre(class='prettyprint linenums:1')
-									:code
-										$(function() {
-											$('input').click(function() {
-												$('li,span').css({
-													'listStyleType': 'square',
-													'display': 'list-item'
-												});
-												$('span').wrapAll('<div></div>').parent()
-													.css({
-														'marginTop': '16px',
-														'marginBottom': '16px',
-														'paddingLeft': '40px'
-													})
-													.insertAfter('ol');
-											});
-										});
-								pre(class='prettyprint linenums:1')
-									:code
-										$ ->
-											$('input').click ->
-												$('li,span').css
-													'listStyleType': 'square'
-													'display': 'list-item'
-												$('span').wrapAll('<div></div>').parent().css
-													'marginTop': '16px'
-													'marginBottom': '16px'
-													'paddingLeft': '40px'
-												.insertAfter('ol')
-												return
-											return
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;$('グループセレクター') 課題
+                    .panel-body
+                        p ボタンをクリックして、ul要素、ol要素、span要素を同じ表示にしてまとめてみましょう。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise70/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | &nbsp;解答例
+                        #demo.collapse.out
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                            body
+                                                p: input(type='button',value='クリック')
+                                                ul
+                                                    li ul要素 ul要素 ul要素 ul要素
+                                                    li ul要素 ul要素 ul要素 ul要素
+                                                    li ul要素 ul要素 ul要素 ul要素
+                                                    li ul要素 ul要素 ul要素 ul要素
+                                                ol
+                                                    li ol要素 ol要素 ol要素 ol要素
+                                                    li ol要素 ol要素 ol要素 ol要素
+                                                    li ol要素 ol要素 ol要素 ol要素
+                                                    li ol要素 ol要素 ol要素 ol要素
+                                                div
+                                                    | div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素
+                                                    | span span要素 span要素 span要素span span要素 span要素 span要素span span要素 span要素 span要素span span要素 span要素 span要素span span要素 span要素 span要素
+                                                    | div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                            body
+                                                p: input(type='button',value='クリック')
+                                                ul
+                                                    -for(var i = 0; i < 4; i++)
+                                                        li ul要素 ul要素 ul要素 ul要素
+                                                ol
+                                                    -for(var i = 0; i < 4; i++)
+                                                        li ol要素 ol要素 ol要素 ol要素
+                                                div
+                                                    | div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素
+                                                    -for(var i = 0; i < 4; i++)
+                                                        span span要素 span要素 span要素
+                                                    | div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素 div要素
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $(function() {
+                                            $('input').click(function() {
+                                                $('li,span').css({
+                                                    'listStyleType': 'square',
+                                                    'display': 'list-item'
+                                                });
+                                                $('span').wrapAll('<div></div>').parent()
+                                                    .css({
+                                                        'marginTop': '16px',
+                                                        'marginBottom': '16px',
+                                                        'paddingLeft': '40px'
+                                                    })
+                                                    .insertAfter('ol');
+                                            });
+                                        });
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $ ->
+                                            $('input').click ->
+                                                $('li,span').css
+                                                    'listStyleType': 'square'
+                                                    'display': 'list-item'
+                                                $('span').wrapAll('<div></div>').parent().css
+                                                    'marginTop': '16px'
+                                                    'marginBottom': '16px'
+                                                    'paddingLeft': '40px'
+                                                .insertAfter('ol')
+                                                return
+                                            return

@@ -111,10 +111,18 @@ block content
 						pre(class='prettyprint linenums:1')
 							:code
 								#!/bin/sh
-								GIT_WORK_TREE=/home/vagrant/myapp
+								GIT_WORK_TREE=/home/vagrant/myweb
 								export GIT_WORK_TREE
 								git checkout -f
-						p ※ post-receiveでpackage.jsonにモジュールが追加されていたときのために、npm installを実行できるようにしておくと便利です。
+						p post-receiveでpackage.jsonにローカルモジュールが追加されていたときのために、npm installを実行できるようにしておくと便利です。
+						pre(class='prettyprint linenums:1')
+							:code
+								#!/bin/sh
+								GIT_WORK_TREE=/home/vagrant/myweb
+								export GIT_WORK_TREE
+								git checkout -f
+
+								/usr/local/bin/npm install ${GIT_WORK_TREE}
 						p post-receiveを作成したら、パーミッションの変更をしておきましょう。
 						pre
 							:code

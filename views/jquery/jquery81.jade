@@ -1,0 +1,69 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;::first-line/first-letter擬似要素
+                    .panel-body
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise80/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/jQuery/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        link(rel='stylesheet',href='style.css')
+                                    body
+                                        div#first
+                                            p テキストテキストテキストテキスト
+                                            p テキストテキストテキストテキスト
+                                            p テキストテキストテキストテキスト
+                                            p テキストテキストテキストテキスト
+                                        div#second
+                                            p
+                                                | テキストテキストテキストテキスト<br>
+                                                | テキストテキストテキストテキスト<br>
+                                                | テキストテキストテキストテキスト<br>
+                                                | テキストテキストテキストテキスト
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        link(rel='stylesheet',href='style.css')
+                                    body
+                                        div#first
+                                            -for(var i = 0; i < 4; i++)
+                                                p テキストテキストテキストテキスト
+                                        div#second
+                                            p
+                                                -for(var i = 0; i < 4; i++)
+                                                    | テキストテキストテキストテキスト
+                                                    -if(i != 3)
+                                                        br
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                #first p:first-letter
+                                    color red
+                                #second p:first-line
+                                    color blue

@@ -1,253 +1,253 @@
 extends ../layout
 
 block link
-	link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
-	link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
-	link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
-	link(href='../css/style.css',rel='stylesheet',media='screen')
-	link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
 
 block content
-	include navbar.jade
-	.container
-		.row
-			.col-sm-3
-				include left.jade
-			.col-sm-9
-				.panel.panel-primary
-					.panel-heading
-						i.glyphicon.glyphicon-book
-						| &nbsp;Expressで動的ページを追加する
-					.panel-body
-						.alert.alert-info 「http://localhost:3000/id」でアクセスできるようにする
-						p ① viewsディレクトリ内に「mypage1.jade」を追加します。
-						hr
-						p ② routesディレクトリ内に「mypage.js」を追加します。
-						hr
-						p ③ 「mypage.js」に以下のように記述します。
-						pre(class='prettyprint linenums:1')
-							:code
-								/*
-								* GET my page.
-								*/
+    include navbar.jade
+    .container
+        .row
+            .col-sm-3
+                include left.jade
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;Expressで動的ページを追加する
+                    .panel-body
+                        .alert.alert-info 「http://localhost:3000/id」でアクセスできるようにする
+                        p ① viewsディレクトリ内に「mypage1.jade」を追加します。
+                        hr
+                        p ② routesディレクトリ内に「mypage.js」を追加します。
+                        hr
+                        p ③ 「mypage.js」に以下のように記述します。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /*
+                                * GET my page.
+                                */
 
-								exports.mypage = function(req, res){
-									res.render('mypage' + req.params.id, {});
-								};
-						p ④ 「app.js」に以下のように追記します。
-						pre(class='prettyprint linenums:1')
-							:code
-								/**
-								* Module dependencies.
-								*/
+                                exports.mypage = function(req, res){
+                                    res.render('mypage' + req.params.id, {});
+                                };
+                        p ④ 「app.js」に以下のように追記します。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /**
+                                * Module dependencies.
+                                */
 
-								var express = require('express')
-								, routes = require('./routes')
-								, user = require('./routes/user')
-								, http = require('http')
-								, path = require('path')
-								, stylus = require("stylus")
-								, nib = require("nib");
+                                var express = require('express')
+                                , routes = require('./routes')
+                                , user = require('./routes/user')
+                                , http = require('http')
+                                , path = require('path')
+                                , stylus = require("stylus")
+                                , nib = require("nib");
 
-								//↓追記
-								// routes
-								var mypage = require('./routes/mypage');
-								//↑追記
+                                //↓追記
+                                // routes
+                                var mypage = require('./routes/mypage');
+                                //↑追記
 
-								var app = express();
+                                var app = express();
 
-								// all environments
-								app.set('port', process.env.PORT || 3000);
-								app.set('views', __dirname + '/views');
-								app.set('view engine', 'jade');
-								app.use(express.favicon());
-								app.use(express.logger('dev'));
-								app.use(express.bodyParser());
-								app.use(express.methodOverride());
-								app.use(app.router);
-								var compile = function(str, path) {
-									return stylus(str).set("filename", path).set("compress", true).use(nib());
-								};
-								app.use(stylus.middleware({
-									src: __dirname + "/public",
-									compile: compile
-								}));
-								app.use(express.static(path.join(__dirname, 'public')));
+                                // all environments
+                                app.set('port', process.env.PORT || 3000);
+                                app.set('views', __dirname + '/views');
+                                app.set('view engine', 'jade');
+                                app.use(express.favicon());
+                                app.use(express.logger('dev'));
+                                app.use(express.bodyParser());
+                                app.use(express.methodOverride());
+                                app.use(app.router);
+                                var compile = function(str, path) {
+                                    return stylus(str).set("filename", path).set("compress", true).use(nib());
+                                };
+                                app.use(stylus.middleware({
+                                    src: __dirname + "/public",
+                                    compile: compile
+                                }));
+                                app.use(express.static(path.join(__dirname, 'public')));
 
-								// development only
-								if ('development' == app.get('env')) {
-									app.use(express.errorHandler());
-								}
+                                // development only
+                                if ('development' == app.get('env')) {
+                                    app.use(express.errorHandler());
+                                }
 
-								app.get('/', routes.index);
-								app.get('/users', user.list);
-								//↓追記
-								app.get('/:id', mypage.mypage);
-								//↑追記
+                                app.get('/', routes.index);
+                                app.get('/users', user.list);
+                                //↓追記
+                                app.get('/:id', mypage.mypage);
+                                //↑追記
 
-								http.createServer(app).listen(app.get('port'), function(){
-									console.log('Express server listening on port ' + app.get('port'));
-								});
-						p 以下のように正規表現を使うことでidを数字に限定することができます。
-						pre
-							:code
-								app.get('/:id([0-9]+)', mypage.mypage);
-						hr
-						p ⑤ ブラウザで「http://localhost:3000/1」にアクセスします。
-						hr
-						p ⑥ viewsディレクトリ内に「mypage2.jade」を追加します。
-						hr
-						p ⑦ ブラウザで「http://localhost:3000/2」にアクセスします。
-						hr
-						.alert.alert-info 「http://localhost:3000/xxxid」でアクセスできるようにする
-						p ① viewsディレクトリ内に「mypage1.jade」を追加します。
-						hr
-						p ② routesディレクトリ内に「mypage.js」を追加します。
-						hr
-						p ③ 「mypage.js」に以下のように記述します。
-						pre(class='prettyprint linenums:1')
-							:code
-								/*
-								* GET my page.
-								*/
+                                http.createServer(app).listen(app.get('port'), function(){
+                                    console.log('Express server listening on port ' + app.get('port'));
+                                });
+                        p 以下のように正規表現を使うことでidを数字に限定することができます。
+                        pre
+                            :code
+                                app.get('/:id([0-9]+)', mypage.mypage);
+                        hr
+                        p ⑤ ブラウザで「http://localhost:3000/1」にアクセスします。
+                        hr
+                        p ⑥ viewsディレクトリ内に「mypage2.jade」を追加します。
+                        hr
+                        p ⑦ ブラウザで「http://localhost:3000/2」にアクセスします。
+                        hr
+                        .alert.alert-info 「http://localhost:3000/xxxid」でアクセスできるようにする
+                        p ① viewsディレクトリ内に「mypage1.jade」を追加します。
+                        hr
+                        p ② routesディレクトリ内に「mypage.js」を追加します。
+                        hr
+                        p ③ 「mypage.js」に以下のように記述します。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /*
+                                * GET my page.
+                                */
 
-								exports.mypage = function(req, res){
-									res.render('mypage' + req.params.id, {});
-								};
-						p ④ 「app.js」に以下のように追記します。
-						pre(class='prettyprint linenums:1')
-							:code
-								/**
-								* Module dependencies.
-								*/
+                                exports.mypage = function(req, res){
+                                    res.render('mypage' + req.params.id, {});
+                                };
+                        p ④ 「app.js」に以下のように追記します。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /**
+                                * Module dependencies.
+                                */
 
-								var express = require('express')
-								, routes = require('./routes')
-								, user = require('./routes/user')
-								, http = require('http')
-								, path = require('path')
-								, stylus = require("stylus")
-								, nib = require("nib");
+                                var express = require('express')
+                                , routes = require('./routes')
+                                , user = require('./routes/user')
+                                , http = require('http')
+                                , path = require('path')
+                                , stylus = require("stylus")
+                                , nib = require("nib");
 
-								//↓追記
-								// routes
-								var mypage = require('./routes/mypage');
-								//↑追記
+                                //↓追記
+                                // routes
+                                var mypage = require('./routes/mypage');
+                                //↑追記
 
-								var app = express();
+                                var app = express();
 
-								// all environments
-								app.set('port', process.env.PORT || 3000);
-								app.set('views', __dirname + '/views');
-								app.set('view engine', 'jade');
-								app.use(express.favicon());
-								app.use(express.logger('dev'));
-								app.use(express.bodyParser());
-								app.use(express.methodOverride());
-								app.use(app.router);
-								var compile = function(str, path) {
-									return stylus(str).set("filename", path).set("compress", true).use(nib());
-								};
-								app.use(stylus.middleware({
-									src: __dirname + "/public",
-									compile: compile
-								}));
-								app.use(express.static(path.join(__dirname, 'public')));
+                                // all environments
+                                app.set('port', process.env.PORT || 3000);
+                                app.set('views', __dirname + '/views');
+                                app.set('view engine', 'jade');
+                                app.use(express.favicon());
+                                app.use(express.logger('dev'));
+                                app.use(express.bodyParser());
+                                app.use(express.methodOverride());
+                                app.use(app.router);
+                                var compile = function(str, path) {
+                                    return stylus(str).set("filename", path).set("compress", true).use(nib());
+                                };
+                                app.use(stylus.middleware({
+                                    src: __dirname + "/public",
+                                    compile: compile
+                                }));
+                                app.use(express.static(path.join(__dirname, 'public')));
 
-								// development only
-								if ('development' == app.get('env')) {
-									app.use(express.errorHandler());
-								}
+                                // development only
+                                if ('development' == app.get('env')) {
+                                    app.use(express.errorHandler());
+                                }
 
-								app.get('/', routes.index);
-								app.get('/users', user.list);
-								//↓追記
-								app.get('/xxx:id', mypage.mypage);
-								//↑追記
+                                app.get('/', routes.index);
+                                app.get('/users', user.list);
+                                //↓追記
+                                app.get('/xxx:id', mypage.mypage);
+                                //↑追記
 
-								http.createServer(app).listen(app.get('port'), function(){
-									console.log('Express server listening on port ' + app.get('port'));
-								});
-						hr
-						p ⑤ ブラウザで「http://localhost:3000/xxx1」にアクセスします。
-						hr
-						p ⑥ viewsディレクトリ内に「mypage2.jade」を追加します。
-						hr
-						p ⑦ ブラウザで「http://localhost:3000/xxx2」にアクセスします。
-						hr
-						.alert.alert-info 「http://localhost:3000/xxx/id」でアクセスできるようにする
-						p ① viewsディレクトリ内に「mypage1.jade」を追加します。
-						hr
-						p ② routesディレクトリ内に「mypage.js」を追加します。
-						hr
-						p ③ 「mypage.js」に以下のように記述します。
-						pre(class='prettyprint linenums:1')
-							:code
-								/*
-								* GET my page.
-								*/
+                                http.createServer(app).listen(app.get('port'), function(){
+                                    console.log('Express server listening on port ' + app.get('port'));
+                                });
+                        hr
+                        p ⑤ ブラウザで「http://localhost:3000/xxx1」にアクセスします。
+                        hr
+                        p ⑥ viewsディレクトリ内に「mypage2.jade」を追加します。
+                        hr
+                        p ⑦ ブラウザで「http://localhost:3000/xxx2」にアクセスします。
+                        hr
+                        .alert.alert-info 「http://localhost:3000/xxx/id」でアクセスできるようにする
+                        p ① viewsディレクトリ内に「mypage1.jade」を追加します。
+                        hr
+                        p ② routesディレクトリ内に「mypage.js」を追加します。
+                        hr
+                        p ③ 「mypage.js」に以下のように記述します。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /*
+                                * GET my page.
+                                */
 
-								exports.mypage = function(req, res){
-									res.render('mypage' + req.params.id, {});
-								};
-						p ④ 「app.js」に以下のように追記します。
-						pre(class='prettyprint linenums:1')
-							:code
-								/**
-								* Module dependencies.
-								*/
+                                exports.mypage = function(req, res){
+                                    res.render('mypage' + req.params.id, {});
+                                };
+                        p ④ 「app.js」に以下のように追記します。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /**
+                                * Module dependencies.
+                                */
 
-								var express = require('express')
-								, routes = require('./routes')
-								, user = require('./routes/user')
-								, http = require('http')
-								, path = require('path')
-								, stylus = require("stylus")
-								, nib = require("nib");
+                                var express = require('express')
+                                , routes = require('./routes')
+                                , user = require('./routes/user')
+                                , http = require('http')
+                                , path = require('path')
+                                , stylus = require("stylus")
+                                , nib = require("nib");
 
-								//↓追記
-								// routes
-								var mypage = require('./routes/mypage');
-								//↑追記
+                                //↓追記
+                                // routes
+                                var mypage = require('./routes/mypage');
+                                //↑追記
 
-								var app = express();
+                                var app = express();
 
-								// all environments
-								app.set('port', process.env.PORT || 3000);
-								app.set('views', __dirname + '/views');
-								app.set('view engine', 'jade');
-								app.use(express.favicon());
-								app.use(express.logger('dev'));
-								app.use(express.bodyParser());
-								app.use(express.methodOverride());
-								app.use(app.router);
-								var compile = function(str, path) {
-									return stylus(str).set("filename", path).set("compress", true).use(nib());
-								};
-								app.use(stylus.middleware({
-									src: __dirname + "/public",
-									compile: compile
-								}));
-								app.use(express.static(path.join(__dirname, 'public')));
+                                // all environments
+                                app.set('port', process.env.PORT || 3000);
+                                app.set('views', __dirname + '/views');
+                                app.set('view engine', 'jade');
+                                app.use(express.favicon());
+                                app.use(express.logger('dev'));
+                                app.use(express.bodyParser());
+                                app.use(express.methodOverride());
+                                app.use(app.router);
+                                var compile = function(str, path) {
+                                    return stylus(str).set("filename", path).set("compress", true).use(nib());
+                                };
+                                app.use(stylus.middleware({
+                                    src: __dirname + "/public",
+                                    compile: compile
+                                }));
+                                app.use(express.static(path.join(__dirname, 'public')));
 
-								// development only
-								if ('development' == app.get('env')) {
-									app.use(express.errorHandler());
-								}
+                                // development only
+                                if ('development' == app.get('env')) {
+                                    app.use(express.errorHandler());
+                                }
 
-								app.get('/', routes.index);
-								app.get('/users', user.list);
-								//↓追記
-								app.get('/xxx/:id', mypage.mypage);
-								//↑追記
+                                app.get('/', routes.index);
+                                app.get('/users', user.list);
+                                //↓追記
+                                app.get('/xxx/:id', mypage.mypage);
+                                //↑追記
 
-								http.createServer(app).listen(app.get('port'), function(){
-									console.log('Express server listening on port ' + app.get('port'));
-								});
-						hr
-						p ⑤ ブラウザで「http://localhost:3000/xxx/1」にアクセスします。
-						hr
-						p ⑥ viewsディレクトリ内に「mypage2.jade」を追加します。
-						hr
-						p ⑦ ブラウザで「http://localhost:3000/xxx/2」にアクセスします。
-						p <mark>※ この場合、/public/ディレクトリに含まれる静的ファイルへのパスが変わるので注意しましょう。</mark>
+                                http.createServer(app).listen(app.get('port'), function(){
+                                    console.log('Express server listening on port ' + app.get('port'));
+                                });
+                        hr
+                        p ⑤ ブラウザで「http://localhost:3000/xxx/1」にアクセスします。
+                        hr
+                        p ⑥ viewsディレクトリ内に「mypage2.jade」を追加します。
+                        hr
+                        p ⑦ ブラウザで「http://localhost:3000/xxx/2」にアクセスします。
+                        p <mark>※ この場合、/public/ディレクトリに含まれる静的ファイルへのパスが変わるので注意しましょう。</mark>

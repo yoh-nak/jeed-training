@@ -1,65 +1,65 @@
 extends ../layout
 
 block link
-	link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
-	link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
-	link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
-	link(href='../css/style.css',rel='stylesheet',media='screen')
-	link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
 
 block content
-	include navbar.jade
-	.container
-		.row
-			.col-sm-3
-				include left.jade
-			.col-sm-9
-				.panel.panel-primary
-					.panel-heading
-						i.glyphicon.glyphicon-book
-						| &nbsp;ExpressでStylusを使う
-					.panel-body
-						p ① ローカルにExpressのスケルトンコードを作成します。このときオプションでCSSエンジンにStylusを指定します。
-						pre
-							:code
-								express アプリ名 -c stylus
-						pre
-							:code
-								express アプリ名 --css stylus
-						hr
-						p ② このときpackege.jsonに以下のコードが挿し込まれます。
-						pre
-							:code
-								{
-									"name": "application-name",
-									"version": "0.0.1",
-									"private": true,
-									"scripts": {
-										"start": "node app.js"
-									},
-									"dependencies": {
-										"express": "3.3.4",
-										"jade": "*",
-										"stylus": "*"
-									}
-								}
-						hr
-						p ③ package.jsonに記述された依存パッケージをローカルにインストールします。
-						pre
-							:code
-								npm install
-						hr
-						p ④ app.jsに自動的に以下のコードが挿し込まれます。
-						pre
-							:code
-								app.use(require('stylus').middleware(__dirname + '/public'));
-						hr
-						p ⑤ public/stylesheets/のディレクトリに「ファイル名.styl」を作成し、stylusのコードを記述します。
-						hr
-						p ⑥ HTMLから、「ファイル名.styl」と同一のファイル名で、/stylesheets/ファイル名.cssを読み込むと、自動的に「ファイル名.styl」がコンパイルされ、「ファイル名.css」が生成されます。
-						pre
-							:code
-								<link rel="stylesheet" href="/stylesheets/ファイル名.css">
-						pre
-							:code
-								link(rel="stylesheet",href="/stylesheets/ファイル名.css")
+    include navbar.jade
+    .container
+        .row
+            .col-sm-3
+                include left.jade
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;ExpressでStylusを使う
+                    .panel-body
+                        p ① ローカルにExpressのスケルトンコードを作成します。このときオプションでCSSエンジンにStylusを指定します。
+                        pre
+                            :code
+                                express アプリ名 -c stylus
+                        pre
+                            :code
+                                express アプリ名 --css stylus
+                        hr
+                        p ② このときpackege.jsonに以下のコードが挿し込まれます。
+                        pre
+                            :code
+                                {
+                                    "name": "application-name",
+                                    "version": "0.0.1",
+                                    "private": true,
+                                    "scripts": {
+                                        "start": "node app.js"
+                                    },
+                                    "dependencies": {
+                                        "express": "3.3.4",
+                                        "jade": "*",
+                                        "stylus": "*"
+                                    }
+                                }
+                        hr
+                        p ③ package.jsonに記述された依存パッケージをローカルにインストールします。
+                        pre
+                            :code
+                                npm install
+                        hr
+                        p ④ app.jsに自動的に以下のコードが挿し込まれます。
+                        pre
+                            :code
+                                app.use(require('stylus').middleware(__dirname + '/public'));
+                        hr
+                        p ⑤ public/stylesheets/のディレクトリに「ファイル名.styl」を作成し、stylusのコードを記述します。
+                        hr
+                        p ⑥ HTMLから、「ファイル名.styl」と同一のファイル名で、/stylesheets/ファイル名.cssを読み込むと、自動的に「ファイル名.styl」がコンパイルされ、「ファイル名.css」が生成されます。
+                        pre
+                            :code
+                                <link rel="stylesheet" href="/stylesheets/ファイル名.css">
+                        pre
+                            :code
+                                link(rel="stylesheet",href="/stylesheets/ファイル名.css")

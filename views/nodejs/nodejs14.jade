@@ -1,76 +1,76 @@
 extends ../layout
 
 block link
-	link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
-	link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
-	link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
-	link(href='../css/style.css',rel='stylesheet',media='screen')
-	link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
 
 block content
-	include navbar
-	.container
-		.row
-			.col-sm-3
-				include left
-			.col-sm-9
-				.panel.panel-primary
-					.panel-heading
-						i.glyphicon.glyphicon-book
-						| &nbsp;Redisと連携する
-					.panel-body
-						p
-							| node_redis npmパッケージサイト
-							br
-							a(href='https://npmjs.org/package/redis',target='_blank')
-								| https://npmjs.org/package/redis
-						p
-							| node_redis GitHubサイト
-							br
-							a(href='https://github.com/mranney/node_redis',target='_blank')
-								| https://github.com/mranney/node_redis
-						hr
-						h4 サンプルコード
-						p: u app.js
-						pre(class='prettyprint linenums:1')
-							:code
-								var http = require('http');
-								var redis = require('redis');
-								var client = redis.createClient();
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;Redisと連携する
+                    .panel-body
+                        p
+                            | node_redis npmパッケージサイト
+                            br
+                            a(href='https://npmjs.org/package/redis',target='_blank')
+                                | https://npmjs.org/package/redis
+                        p
+                            | node_redis GitHubサイト
+                            br
+                            a(href='https://github.com/mranney/node_redis',target='_blank')
+                                | https://github.com/mranney/node_redis
+                        hr
+                        h4 サンプルコード
+                        p: u app.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var http = require('http');
+                                var redis = require('redis');
+                                var client = redis.createClient();
 
-								var kyeword = '';
+                                var kyeword = '';
 
-								//文字列挿入
-								client.set('mydata', 'こんにちは');
+                                //文字列挿入
+                                client.set('mydata', 'こんにちは');
 
-								//文字列検索
-								client.get('mydata',function(err,data){
-										keyword = data;
-								});
+                                //文字列検索
+                                client.get('mydata',function(err,data){
+                                        keyword = data;
+                                });
 
-								//ハッシュデータ検索
-								var find = ['email', 'score'];
-								client.hmget('myhash',find,function(err,replies){
-									replies.forEach(function(reply, i){
-										//コンソールに出力
-										console.log(find[i] + ': ' + replies[i]);
-									});
-								});
+                                //ハッシュデータ検索
+                                var find = ['email', 'score'];
+                                client.hmget('myhash',find,function(err,replies){
+                                    replies.forEach(function(reply, i){
+                                        //コンソールに出力
+                                        console.log(find[i] + ': ' + replies[i]);
+                                    });
+                                });
 
-								//ハッシュデータ全リスト
-								client.hgetall('myhash',function(err,replies){
-									//コンソールに出力
-									console.log(replies);
-								});
+                                //ハッシュデータ全リスト
+                                client.hgetall('myhash',function(err,replies){
+                                    //コンソールに出力
+                                    console.log(replies);
+                                });
 
-								http.createServer(function (req, res) {
-									res.writeHead(200, {'Content-Type': 'text/plain'});
+                                http.createServer(function (req, res) {
+                                    res.writeHead(200, {'Content-Type': 'text/plain'});
 
-									//文字列をブラウザに出力
-									res.end(keyword + '\n');
+                                    //文字列をブラウザに出力
+                                    res.end(keyword + '\n');
 
-								}).listen(1337, '127.0.0.1');
+                                }).listen(1337, '127.0.0.1');
 
-								console.log('Server running at http://127.0.0.1:1337/');
+                                console.log('Server running at http://127.0.0.1:1337/');
 
 

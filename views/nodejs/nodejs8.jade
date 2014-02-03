@@ -1,131 +1,131 @@
 extends ../layout
 
 block link
-	link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
-	link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
-	link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
-	link(href='../css/style.css',rel='stylesheet',media='screen')
-	link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
 
 block content
-	include navbar.jade
-	.container
-		.row
-			.col-sm-3
-				include left.jade
-			.col-sm-9
-				.panel.panel-primary
-					.panel-heading
-						i.glyphicon.glyphicon-book
-						| &nbsp;Expressでnibを使う
-					.panel-body
-						p ① Expressのアプリのトップディレクトリにcdします。
-						pre
-							:code
-								cd アプリ名
-						hr
-						p ② nibのローカルパッケージをインストールします。
-						pre
-							:code
-								npm install nib
-						hr
-						p ③ package.jsonにnibの依存パッケージを追記します。
-						pre(class='prettyprint linenums:1')
-							:code
-								{
-									"name": "application-name",
-									"version": "0.0.1",
-									"private": true,
-									"scripts": {
-										"start": "node app.js"
-									},
-									"dependencies": {
-										"express": "3.3.4",
-										"jade": "*",
-										"stylus": "*",
-										"nib": "*"
-									}
-								}
-						hr
-						p ④ バージョンを指定しする場合は以下のようにします。
-						pre(class='prettyprint linenums:1')
-							:code
-								{
-									"name": "application-name",
-									"version": "0.0.1",
-									"private": true,
-									"scripts": {
-										"start": "node app.js"
-									},
-									"dependencies": {
-										"express": "3.3.4",
-										"jade": "1.1.5",
-										"stylus": "0.42.1",
-										"nib": "1.0.2"
-									}
-								}
-						hr
-						p ⑤ app.jsを以下のように書き換えます。
-						pre(class='prettyprint linenums:1')
-							:code
-								/**
-								* Module dependencies.
-								*/
+    include navbar.jade
+    .container
+        .row
+            .col-sm-3
+                include left.jade
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;Expressでnibを使う
+                    .panel-body
+                        p ① Expressのアプリのトップディレクトリにcdします。
+                        pre
+                            :code
+                                cd アプリ名
+                        hr
+                        p ② nibのローカルパッケージをインストールします。
+                        pre
+                            :code
+                                npm install nib
+                        hr
+                        p ③ package.jsonにnibの依存パッケージを追記します。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                {
+                                    "name": "application-name",
+                                    "version": "0.0.1",
+                                    "private": true,
+                                    "scripts": {
+                                        "start": "node app.js"
+                                    },
+                                    "dependencies": {
+                                        "express": "3.3.4",
+                                        "jade": "*",
+                                        "stylus": "*",
+                                        "nib": "*"
+                                    }
+                                }
+                        hr
+                        p ④ バージョンを指定しする場合は以下のようにします。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                {
+                                    "name": "application-name",
+                                    "version": "0.0.1",
+                                    "private": true,
+                                    "scripts": {
+                                        "start": "node app.js"
+                                    },
+                                    "dependencies": {
+                                        "express": "3.3.4",
+                                        "jade": "1.1.5",
+                                        "stylus": "0.42.1",
+                                        "nib": "1.0.2"
+                                    }
+                                }
+                        hr
+                        p ⑤ app.jsを以下のように書き換えます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /**
+                                * Module dependencies.
+                                */
 
-								var express = require('express')
-								, routes = require('./routes')
-								, user = require('./routes/user')
-								, http = require('http')
-								, path = require('path')
-								//↓追記
-								, stylus = require("stylus")
-								, nib = require("nib");
-								//↑追記
+                                var express = require('express')
+                                , routes = require('./routes')
+                                , user = require('./routes/user')
+                                , http = require('http')
+                                , path = require('path')
+                                //↓追記
+                                , stylus = require("stylus")
+                                , nib = require("nib");
+                                //↑追記
 
-								var app = express();
+                                var app = express();
 
-								// all environments
-								app.set('port', process.env.PORT || 3000);
-								app.set('views', __dirname + '/views');
-								app.set('view engine', 'jade');
-								app.use(express.favicon());
-								app.use(express.logger('dev'));
-								app.use(express.bodyParser());
-								app.use(express.methodOverride());
-								app.use(app.router);
-								//↓編集
-								//app.use(require('stylus').middleware(__dirname + '/public'));
-								var compile = function(str, path) {
-									return stylus(str).set("filename", path).set("compress", true).use(nib());
-								};
-								app.use(stylus.middleware({
-									src: __dirname + "/public",
-									compile: compile
-								}));
-								//↑編集
-								app.use(express.static(path.join(__dirname, 'public')));
+                                // all environments
+                                app.set('port', process.env.PORT || 3000);
+                                app.set('views', __dirname + '/views');
+                                app.set('view engine', 'jade');
+                                app.use(express.favicon());
+                                app.use(express.logger('dev'));
+                                app.use(express.bodyParser());
+                                app.use(express.methodOverride());
+                                app.use(app.router);
+                                //↓編集
+                                //app.use(require('stylus').middleware(__dirname + '/public'));
+                                var compile = function(str, path) {
+                                    return stylus(str).set("filename", path).set("compress", true).use(nib());
+                                };
+                                app.use(stylus.middleware({
+                                    src: __dirname + "/public",
+                                    compile: compile
+                                }));
+                                //↑編集
+                                app.use(express.static(path.join(__dirname, 'public')));
 
-								// development only
-								if ('development' == app.get('env')) {
-									app.use(express.errorHandler());
-								}
+                                // development only
+                                if ('development' == app.get('env')) {
+                                    app.use(express.errorHandler());
+                                }
 
-								app.get('/', routes.index);
-								app.get('/users', user.list);
+                                app.get('/', routes.index);
+                                app.get('/users', user.list);
 
-								http.createServer(app).listen(app.get('port'), function(){
-									console.log('Express server listening on port ' + app.get('port'));
-								});
-						hr
-						p ⑥ stylファイルの一行目に以下のように追記します。
-						pre(class='prettyprint linenums:1')
-							:code
-								↓追記
-								@import 'nib'
-								↑追記
+                                http.createServer(app).listen(app.get('port'), function(){
+                                    console.log('Express server listening on port ' + app.get('port'));
+                                });
+                        hr
+                        p ⑥ stylファイルの一行目に以下のように追記します。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                ↓追記
+                                @import 'nib'
+                                ↑追記
 
-								body
-									padding: 50px
-									font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
-								a
-									color: #00B7FF
+                                body
+                                    padding: 50px
+                                    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+                                a
+                                    color: #00B7FF

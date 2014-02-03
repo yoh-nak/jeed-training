@@ -31,28 +31,28 @@ block content
                                             head
                                                 meta(charset='UTF-8')
                                                 title
-                                                link(rel='stylesheet',href='style.css')
                                             body
-                                                ul
-                                                    li テキストテキストテキストテキスト
-                                                    li テキストテキストテキストテキスト
-                                                    li テキストテキストテキストテキスト
-                                                    li テキストテキストテキストテキスト
-                                                ul
-                                                    li テキストテキストテキストテキスト
-                                                    li テキストテキストテキストテキスト
-                                                    li テキストテキストテキストテキスト
-                                                    li テキストテキストテキストテキスト
-                                                ul
-                                                    li テキストテキストテキストテキスト
-                                                    li テキストテキストテキストテキスト
-                                                    li テキストテキストテキストテキスト
-                                                    li テキストテキストテキストテキスト
-                                                ul
-                                                    li テキストテキストテキストテキスト
-                                                    li テキストテキストテキストテキスト
-                                                    li テキストテキストテキストテキスト
-                                                    li テキストテキストテキストテキスト
+                                                table(border='1')
+                                                    tr
+                                                        td td要素
+                                                        td td要素
+                                                        td td要素
+                                                        td td要素
+                                                    tr
+                                                        td td要素
+                                                        td td要素
+                                                        td td要素
+                                                        td td要素
+                                                    tr
+                                                        td td要素
+                                                        td td要素
+                                                        td td要素
+                                                        td td要素
+                                                    tr
+                                                        td td要素
+                                                        td td要素
+                                                        td td要素
+                                                        td td要素
                                                 script(src='http://code.jquery.com/jquery-1.11.0.min.js')
                                                 script(src='script.js')
                                 pre(class='prettyprint linenums:1')
@@ -72,42 +72,18 @@ block content
                                                 script(src='script.js')
                                 pre(class='prettyprint linenums:1')
                                     :code
-                                        prefix(prop, val)
-                                            -webkit-{prop} val
-                                            {prop} val
-
-                                        li
-                                            opacity 1.0
-                                        .turn
-                                            prefix('transform', rotateX(0deg))  
-                                            prefix('animation-name', myanim)    
-                                            prefix('animation-duration', 1s)
-                                        .fade
-                                            opacity 0.2
-                                            prefix('transition-property', all)  
-                                            prefix('transition-duration', 500ms)
-                                            prefix('transition-timing-function', ease-in-out)
-
-                                        @keyframes myanim
-                                            0%
-                                                prefix('transform', rotateX(0deg))
-                                            50%
-                                                prefix('transform', rotateX(180deg))
-                                            100%
-                                                prefix('transform', rotateX(360deg))
-                                pre(class='prettyprint linenums:1')
-                                    :code
                                         $(function() {
-                                            $('li').click(function() {
-                                             $(this).addClass('turn').removeClass('fade');
-                                                $('li').not(this).addClass('fade').removeClass('turn');
+                                            $('td').click(function() {
+                                                $('td:empty').css('background-color', 'blue');
+                                                $(this).text('').css('background-color', 'red');
                                             });
                                         });
                                 pre(class='prettyprint linenums:1')
                                     :code
                                         $ ->
-                                            $('li').click ->
-                                                $(this).addClass('turn').removeClass('fade')
-                                                $('li').not(this).addClass('fade').removeClass('turn')
+                                            
+                                            $('td').click ->
+                                                $('td:empty').css('background-color','blue')
+                                                $(this).text('').css('background-color','red')
                                                 return
                                             return

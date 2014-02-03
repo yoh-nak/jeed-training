@@ -5,7 +5,7 @@
   define = require("../libs/define");
 
   require("jade").filters.code = function(block) {
-    return block.replace(/|/g, "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;").replace(/"/g, "&quot;");
+    return block.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   };
 
   exports.jquery = function(req, res) {

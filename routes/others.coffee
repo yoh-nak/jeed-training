@@ -19,7 +19,7 @@ exports.vagrant = (req, res) ->
 		title: define.title
 		instructor: define.instructor
 
-exports.gennymotion = (req, res) ->
-	res.render "others/gennymotion/gennymotion" + req.params.id,
+exports.genymotion = (req, res) ->
+	res.render "others/genymotion/genymotion" + req.params.id,
 		title: define.title
 		instructor: define.instructor

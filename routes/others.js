@@ -30,8 +30,8 @@
     });
   };
 
-  exports.gennymotion = function(req, res) {
-    return res.render("others/gennymotion/gennymotion" + req.params.id, {
+  exports.genymotion = function(req, res) {
+    return res.render("others/genymotion/genymotion" + req.params.id, {
       title: define.title,
       instructor: define.instructor
     });

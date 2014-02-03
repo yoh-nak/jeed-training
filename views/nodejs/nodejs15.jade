@@ -1,0 +1,112 @@
+extends ../layout
+
+block link
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;関数を順番に実行する
+                    .panel-body
+                        p
+                            | step npmパッケージサイト
+                            br
+                            a(href='https://npmjs.org/package/step',target='_blank')
+                                | https://npmjs.org/package/step
+                        p
+                            | step GitHubサイト
+                            br
+                            a(href='https://github.com/creationix/step',target='_blank')
+                                | https://github.com/creationix/step
+                        hr
+                        p 非同期プログラムは、コールバックの階層が深くなるとコードの見通しが悪くなりがちです。stepは、引数で指定した関数を順番に実行することができます。
+                        p 下記サンプルのように、各関数の戻り値は次の関数の第二引数として渡されます。
+                        hr
+                        h4 インストール
+                        pre
+                            :code
+                                npm install step
+                        hr
+                        h4 サンプルコード
+                        p: u hello.txt
+                        pre
+                            :code
+                                Hello World!
+                        p: u app.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var http = require('http');
+                                var fs = require('fs');
+                                var Step = require('step');
+
+                                var keyword = '';
+
+                                //順番に実行する
+                                Step(
+                                    function first(){
+                                        //ファイルを読み込む
+                                        fs.readFile('./hello.txt', this);
+                                    },
+                                    function second(err, str){
+                                        if(err) throw err;
+                                        //読み込んだ内容を文字列に置換し、次の関数の第2引数に渡す
+                                        return str.toString();
+                                    },
+                                    function third(err, str){
+                                        if(err) throw err;
+                                        keyword = str;
+                                        //サーバーの起動
+                                        http.createServer(function (req, res) {
+                                            res.writeHead(200, {'Content-Type': 'text/plain'});
+                                            
+                                            //文字列をブラウザに出力
+                                            res.end(keyword + '\n');
+                                            
+                                        }).listen(1337, '127.0.0.1');
+                                    }
+                                );
+                                 
+                                console.log('Server running at http://127.0.0.1:1337/');
+                        hr
+                        p: u app.coffee
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                http = require("http")
+                                fs = require("fs")
+                                Step = require("step")
+                                keyword = ""
+
+                                #順番に実行する
+                                Step (first = ->
+                                    #ファイルを読み込む
+                                    fs.readFile "./hello.txt", this
+                                ), (second = (err, str) ->
+                                    throw err if err
+                                    #読み込んだ内容を文字列に置換し、次の関数の第2引数に渡す
+                                    str.toString()
+                                ), third = (err, str) ->
+                                    throw err if err
+                                    keyword = str
+                                    
+                                    #サーバーの起動
+                                    http.createServer((req, res) ->
+                                        res.writeHead 200,
+                                            "Content-Type": "text/plain"
+                                        #文字列をブラウザに出力
+                                        res.end keyword + "\n"
+                                    ).listen 1337, "127.0.0.1"
+
+                                console.log "Server running at http://127.0.0.1:1337/"
+
+                

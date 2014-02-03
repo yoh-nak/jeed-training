@@ -4,9 +4,11 @@
 
   define = require("../libs/define");
 
-  require("jade").filters.code = function(block) {
-    return block.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-  };
+
+  /*
+  require("jade").filters.code = (block) ->
+  	block.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace /"/g, "&quot;"
+   */
 
   exports.css = function(req, res) {
     return res.render("css/css" + req.params.id, {

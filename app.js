@@ -44,6 +44,10 @@
 
   app = express();
 
+  require("jade").filters.code = function(block) {
+    return block.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/&lt;mark&gt;/g, "<mark>").replace(/&lt;\/mark&gt;/g, "</mark>").replace(/"/g, "&quot;");
+  };
+
   app.use(express.basicAuth("nakano", "nakano"));
 
   app.set("port", process.env.PORT || 3000);

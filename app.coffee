@@ -21,6 +21,16 @@ coffee = require("coffee-script")
 path = require("path")
 app = express()
 
+require("jade").filters.code = (block) ->
+	block
+		.replace(/&/g, "&amp;")
+		.replace(/</g, "&lt;")
+		.replace(/>/g, "&gt;")
+		.replace(/&lt;mark&gt;/g, "<mark>")
+		.replace(/&lt;\/mark&gt;/g, "</mark>")
+		.replace /"/g, "&quot;"
+
+
 #ミドルウェア
 app.use express.basicAuth("nakano", "nakano") #ベーシック認証
 app.set "port", process.env.PORT or 3000

@@ -43,11 +43,11 @@ block content
                                         "express": "3.3.4",
                                         "jade": "*",
                                         "stylus": "*",
-                                        "nib": "*"
+                                        <mark>"nib": "*"</mark>
                                     }
                                 }
                         hr
-                        p ④ バージョンを指定しする場合は以下のようにします。
+                        p バージョンを指定しする場合は以下のようにします。
                         pre(class='prettyprint linenums:1')
                             :code
                                 {
@@ -61,11 +61,11 @@ block content
                                         "express": "3.3.4",
                                         "jade": "1.1.5",
                                         "stylus": "0.42.1",
-                                        "nib": "1.0.2"
+                                        <mark>"nib": "1.0.2"</mark>
                                     }
                                 }
                         hr
-                        p ⑤ app.jsを以下のように書き換えます。
+                        p ④ app.jsを以下のように書き換えます。
                         pre(class='prettyprint linenums:1')
                             :code
                                 /**
@@ -77,10 +77,8 @@ block content
                                 , user = require('./routes/user')
                                 , http = require('http')
                                 , path = require('path')
-                                //↓追記
-                                , stylus = require("stylus")
-                                , nib = require("nib");
-                                //↑追記
+                                <mark>, stylus = require("stylus")
+                                , nib = require("nib");</mark>
 
                                 var app = express();
 
@@ -93,16 +91,14 @@ block content
                                 app.use(express.bodyParser());
                                 app.use(express.methodOverride());
                                 app.use(app.router);
-                                //↓編集
-                                //app.use(require('stylus').middleware(__dirname + '/public'));
+                                <mark>//app.use(require('stylus').middleware(__dirname + '/public'));
                                 var compile = function(str, path) {
                                     return stylus(str).set("filename", path).set("compress", true).use(nib());
                                 };
                                 app.use(stylus.middleware({
                                     src: __dirname + "/public",
                                     compile: compile
-                                }));
-                                //↑編集
+                                }));</mark>
                                 app.use(express.static(path.join(__dirname, 'public')));
 
                                 // development only
@@ -117,12 +113,10 @@ block content
                                     console.log('Express server listening on port ' + app.get('port'));
                                 });
                         hr
-                        p ⑥ stylファイルの一行目に以下のように追記します。
+                        p ⑤ stylファイルの一行目に以下のように追記します。
                         pre(class='prettyprint linenums:1')
                             :code
-                                ↓追記
-                                @import 'nib'
-                                ↑追記
+                                <mark>@import 'nib'</mark>
 
                                 body
                                     padding: 50px

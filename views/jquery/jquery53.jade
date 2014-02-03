@@ -1,53 +1,53 @@
 extends ../layout
 
 block link
-	include ../link1
+    include ../link1
 
 block content
-	include navbar
-	.container
-		.row
-			.col-sm-3
-				include left
-			.col-sm-9
-				.panel.panel-primary
-					.panel-heading
-						i.glyphicon.glyphicon-book
-						| &nbsp;wrapAll()メソッド
-					.panel-body
-						p $()メソッドで指定した要素を、wrapAll()メソッドの引数で指定した要素で包みます。その時、$()メソッドで指定した要素はすべて、1つのwrapAll()メソッドの引数で指定した要素に包まれるように、親子関係を無視して要素が移動します。
-						p
-							a.btn.btn-default(href='../demo/jquery/exercise50/index1.html',target='_blank')
-								i.glyphicon.glyphicon-play
-								| デモ
-							| 
-							a.btn.btn-default(href='http://api.jquery.com/wrapAll/',target='_blank')
-								i.glyphicon.glyphicon-info-sign
-								| &nbsp;参考
-						pre(class='prettyprint linenums:1')
-							:code
-								doctype
-								html(lang='ja-JP')
-									head
-										meta(charset='UTF-8')
-										title
-									body
-										p テキストテキストテキスト
-										p テキストテキストテキスト
-										p: input(type='button',value='内側を包む')
-										script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-										script(src='script.js')
-						pre(class='prettyprint linenums:1')
-							:code
-								$(function() {
-									$('input').click(function() {
-										$('p').wrapInner('<mark></mark>');
-									});
-								});
-						pre(class='prettyprint linenums:1')
-							:code
-								$ ->
-									$('input').click ->
-										$('p').wrapInner '<mark></mark>'
-										return
-									return
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;wrapAll()メソッド
+                    .panel-body
+                        p $()メソッドで指定した要素を、wrapAll()メソッドの引数で指定した要素で包みます。その時、$()メソッドで指定した要素はすべて、1つのwrapAll()メソッドの引数で指定した要素に包まれるように、親子関係を無視して要素が移動します。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise50/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/wrapAll/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                    body
+                                        p テキストテキストテキスト
+                                        p テキストテキストテキスト
+                                        p: input(type='button',value='内側を包む')
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('input').click(function() {
+                                        $('p').wrapInner('<mark></mark>');
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('input').click ->
+                                        $('p').wrapInner '<mark></mark>'
+                                        return
+                                    return

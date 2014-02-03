@@ -1,53 +1,53 @@
 extends ../layout
 
 block link
-	include ../link1
+    include ../link1
 
 block content
-	include navbar
-	.container
-		.row
-			.col-sm-3
-				include left
-			.col-sm-9
-				.panel.panel-primary
-					.panel-heading
-						i.glyphicon.glyphicon-book
-						| &nbsp;attr()メソッド②
-					.panel-body
-						p attr()メソッドは、第1引数のみ指定した場合、$メソッドで指定した要素に設定されている、attr()メソッドの引数で指定した属性の属性値を取得することができます。
-						p
-							a.btn.btn-default(href='../demo/jquery/exercise17/index1.html',target='_blank')
-								i.glyphicon.glyphicon-play
-								| デモ
-							| 
-							a.btn.btn-default(href='http://api.jquery.com/attr/',target='_blank')
-								i.glyphicon.glyphicon-info-sign
-								| &nbsp;参考
-						pre(class='prettyprint linenums:1')
-							:code
-								doctype
-								html(lang='ja-JP')
-									head
-										meta(charset='UTF-8')
-										title
-										link(rel='stylesheet', href='style.css')
-									body
-										p: a(href='http://www.google.co.jp/') google
-										p: input(type='button',value='取得')
-										script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-										script(src='script.js')
-						pre(class='prettyprint linenums:1')
-							:code
-								$(function() {
-									$('input').click(function() {
-										window.alert($('a').attr('href'));
-									});
-								});				
-						pre(class='prettyprint linenums:1')
-							:code
-								$ ->
-									$('input').click ->
-										window.alert $('a').attr 'href'
-										return
-									return
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;attr()メソッド②
+                    .panel-body
+                        p attr()メソッドは、第1引数のみ指定した場合、$メソッドで指定した要素に設定されている、attr()メソッドの引数で指定した属性の属性値を取得することができます。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise17/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/attr/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        link(rel='stylesheet', href='style.css')
+                                    body
+                                        p: a(href='http://www.google.co.jp/') google
+                                        p: input(type='button',value='取得')
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('input').click(function() {
+                                        window.alert($('a').attr('href'));
+                                    });
+                                });                
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('input').click ->
+                                        window.alert $('a').attr 'href'
+                                        return
+                                    return

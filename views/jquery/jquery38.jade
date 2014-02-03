@@ -1,109 +1,109 @@
 extends ../layout
 
 block link
-	include ../link1
+    include ../link1
 
 block content
-	include navbar
-	.container
-		.row
-			.col-sm-3
-				include left
-			.col-sm-9
-				.panel.panel-primary
-					.panel-heading
-						i.glyphicon.glyphicon-book
-						| &nbsp;remove()メソッド課題
-					.panel-body
-						p img要素をクリックして、クリックしたimg要素を消してみましょう。
-						p
-							a.btn.btn-default(href='../demo/jquery/exercise35/index1.html',target='_blank')
-								i.glyphicon.glyphicon-play
-								| デモ
-							button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
-								i.glyphicon.glyphicon-question-sign
-								| &nbsp;解答例
-						#demo.collapse.out
-								pre(class='prettyprint linenums:1')
-									:code
-										doctype
-										html(lang='ja-JP')
-											head
-												meta(charset='UTF-8')
-												title
-												link(rel='stylesheet', href='style.css')
-											body
-												img(src='img/image1.png',alt='')
-												img(src='img/image2.png',alt='')
-												img(src='img/image3.png',alt='')
-												img(src='img/image4.png',alt='')
-												img(src='img/image5.png',alt='')
-												script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-												script(src='script.js')
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;remove()メソッド課題
+                    .panel-body
+                        p img要素をクリックして、クリックしたimg要素を消してみましょう。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise35/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | &nbsp;解答例
+                        #demo.collapse.out
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                                link(rel='stylesheet', href='style.css')
+                                            body
+                                                img(src='img/image1.png',alt='')
+                                                img(src='img/image2.png',alt='')
+                                                img(src='img/image3.png',alt='')
+                                                img(src='img/image4.png',alt='')
+                                                img(src='img/image5.png',alt='')
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
 
-										//-以下のように記述することもできます。	
-										//-
-											doctype
-											html(lang='ja-JP')
-												head
-													meta(charset='UTF-8')
-													title
-													link(rel='stylesheet', href='style.css')
-												body
-													- for(var i = 1; i <= 5; i++){
-													img(src='img/image' + i + '.png',alt='')
-													- }
-													script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-													script(src='script.js')
-								pre(class='prettyprint linenums:1')
-									:code
-										$(function() {
-											$('img[src$="1.png"]').click(function() {
-												$('img[src$="1.png"]').remove();
-											});
-											$('img[src$="2.png"]').click(function() {
-												$('img[src$="2.png"]').remove();
-											});
-											$('img[src$="3.png"]').click(function() {
-												$('img[src$="3.png"]').remove();
-											});
-											$('img[src$="4.png"]').click(function() {
-												$('img[src$="4.png"]').remove();
-											});
-											$('img[src$="5.png"]').click(function() {
-												$('img[src$="5.png"]').remove();
-											});
+                                        //-以下のように記述することもできます。    
+                                        //-
+                                            doctype
+                                            html(lang='ja-JP')
+                                                head
+                                                    meta(charset='UTF-8')
+                                                    title
+                                                    link(rel='stylesheet', href='style.css')
+                                                body
+                                                    - for(var i = 1; i <= 5; i++){
+                                                    img(src='img/image' + i + '.png',alt='')
+                                                    - }
+                                                    script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                    script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $(function() {
+                                            $('img[src$="1.png"]').click(function() {
+                                                $('img[src$="1.png"]').remove();
+                                            });
+                                            $('img[src$="2.png"]').click(function() {
+                                                $('img[src$="2.png"]').remove();
+                                            });
+                                            $('img[src$="3.png"]').click(function() {
+                                                $('img[src$="3.png"]').remove();
+                                            });
+                                            $('img[src$="4.png"]').click(function() {
+                                                $('img[src$="4.png"]').remove();
+                                            });
+                                            $('img[src$="5.png"]').click(function() {
+                                                $('img[src$="5.png"]').remove();
+                                            });
 
-											//以下のように記述することもできます
-											/*
-											$('img').click(function(){
-												$(this).remove()
-											});
-											*/
-										});
-								pre(class='prettyprint linenums:1')
-									:code
-										$ ->
-											$('img[src$="1.png"]').click ->
-												$('img[src$="1.png"]').remove()
-												return
-											$('img[src$="2.png"]').click ->
-												$('img[src$="2.png"]').remove()
-												return
-											$('img[src$="3.png"]').click ->
-												$('img[src$="3.png"]').remove()
-												return
-											$('img[src$="4.png"]').click ->
-												$('img[src$="4.png"]').remove()
-												return
-											$('img[src$="5.png"]').click ->
-												$('img[src$="5.png"]').remove()
-												return
+                                            //以下のように記述することもできます
+                                            /*
+                                            $('img').click(function(){
+                                                $(this).remove()
+                                            });
+                                            */
+                                        });
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $ ->
+                                            $('img[src$="1.png"]').click ->
+                                                $('img[src$="1.png"]').remove()
+                                                return
+                                            $('img[src$="2.png"]').click ->
+                                                $('img[src$="2.png"]').remove()
+                                                return
+                                            $('img[src$="3.png"]').click ->
+                                                $('img[src$="3.png"]').remove()
+                                                return
+                                            $('img[src$="4.png"]').click ->
+                                                $('img[src$="4.png"]').remove()
+                                                return
+                                            $('img[src$="5.png"]').click ->
+                                                $('img[src$="5.png"]').remove()
+                                                return
 
-											#以下のように記述することもできます
-											###
-											$('img').click ->
-												$(this).remove()
-												return
-											###
-											return
+                                            #以下のように記述することもできます
+                                            ###
+                                            $('img').click ->
+                                                $(this).remove()
+                                                return
+                                            ###
+                                            return

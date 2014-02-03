@@ -1,53 +1,53 @@
 extends ../layout
 
 block link
-	include ../link1
+    include ../link1
 
 block content
-	include navbar
-	.container
-		.row
-			.col-sm-3
-				include left
-			.col-sm-9
-				.panel.panel-primary
-					.panel-heading
-						i.glyphicon.glyphicon-book
-						| &nbsp;attr()メソッド①課題
-					.panel-body
-						p ボタンをクリックして、iframe要素に読み込まれた画像を差し替えてみましょう。
-						p
-							a.btn.btn-default(href='../demo/jquery/exercise16/index1.html',target='_blank')
-								i.glyphicon.glyphicon-play
-								| デモ
-							button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
-								i.glyphicon.glyphicon-question-sign
-								| &nbsp;解答例
-						#demo.collapse.out
-								pre(class='prettyprint linenums:1')
-									:code
-										doctype
-										html(lang='ja-JP')
-											head
-												meta(charset='UTF-8')
-												title
-												link(rel='stylesheet', href='style.css')
-											body
-												iframe(src='img/before.png',width='200',height='200')
-												p: input(type='button',value='click')
-												script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-												script(src='script.js')
-								pre(class='prettyprint linenums:1')
-									:code
-										$(function(){
-											$('input').click(function(){
-												$('iframe').attr('src','img/after.png');
-											});
-										});
-								pre(class='prettyprint linenums:1')
-									:code
-										$ ->
-											$('input').click ->
-												$('iframe').attr 'src', 'img/after.png'
-												return
-											return
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;attr()メソッド①課題
+                    .panel-body
+                        p ボタンをクリックして、iframe要素に読み込まれた画像を差し替えてみましょう。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise16/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | &nbsp;解答例
+                        #demo.collapse.out
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                                link(rel='stylesheet', href='style.css')
+                                            body
+                                                iframe(src='img/before.png',width='200',height='200')
+                                                p: input(type='button',value='click')
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $(function(){
+                                            $('input').click(function(){
+                                                $('iframe').attr('src','img/after.png');
+                                            });
+                                        });
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $ ->
+                                            $('input').click ->
+                                                $('iframe').attr 'src', 'img/after.png'
+                                                return
+                                            return

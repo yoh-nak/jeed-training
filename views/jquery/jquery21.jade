@@ -1,64 +1,64 @@
 extends ../layout
 
 block link
-	include ../link1
+    include ../link1
 
 block content
-	include navbar
-	.container
-		.row
-			.col-sm-3
-				include left
-			.col-sm-9
-				.panel.panel-primary
-					.panel-heading
-						i.glyphicon.glyphicon-book
-						| &nbsp;attr()メソッド②課題
-					.panel-body
-						p ボタンをクリックして、a要素のhref属性を取得し、リンクの文字を画像に変えてみましょう。
-						p
-							a.btn.btn-default(href='../demo/jquery/exercise18/index1.html',target='_blank')
-								i.glyphicon.glyphicon-play
-								| デモ
-							button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
-								i.glyphicon.glyphicon-question-sign
-								| &nbsp;解答例
-						#demo.collapse.out
-								pre(class='prettyprint linenums:1')
-									:code
-										doctype
-										html(lang='ja-JP')
-											head
-												meta(charset='UTF-8')
-												title
-												link(rel='stylesheet', href='style.css')
-											body
-												p: a(href='img/show.png',alt='') リンク
-												p: input(type='button',value='表示')
-												script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-												script(src='script.js')
-								pre(class='prettyprint linenums:1')
-									:code
-										$(function() {
-											$('input').click(function() {
-												$('a').html('<img>');
-												$('img').attr('src', $('a').attr('href'));
-												
-												//以下の記述でも可
-												//$('a').html('<img src="' + $('a').attr('href') + '" alt="">');
-											});
-										});
-								pre(class='prettyprint linenums:1')
-									:code
-										$ ->
-											$('input').click ->
-												$('a').html '<img>'
-												$('img').attr 'src', $('a').attr 'href'
-												
-												#以下の記述でも可
-												###
-												$('a').html '<img src="' + $('a').attr 'href' + '" alt="">'
-												###
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;attr()メソッド②課題
+                    .panel-body
+                        p ボタンをクリックして、a要素のhref属性を取得し、リンクの文字を画像に変えてみましょう。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise18/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | &nbsp;解答例
+                        #demo.collapse.out
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                                link(rel='stylesheet', href='style.css')
+                                            body
+                                                p: a(href='img/show.png',alt='') リンク
+                                                p: input(type='button',value='表示')
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $(function() {
+                                            $('input').click(function() {
+                                                $('a').html('<img>');
+                                                $('img').attr('src', $('a').attr('href'));
+                                                
+                                                //以下の記述でも可
+                                                //$('a').html('<img src="' + $('a').attr('href') + '" alt="">');
+                                            });
+                                        });
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $ ->
+                                            $('input').click ->
+                                                $('a').html '<img>'
+                                                $('img').attr 'src', $('a').attr 'href'
+                                                
+                                                #以下の記述でも可
+                                                ###
+                                                $('a').html '<img src="' + $('a').attr 'href' + '" alt="">'
+                                                ###
 
-												return
-											return
+                                                return
+                                            return

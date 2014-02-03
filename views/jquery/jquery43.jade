@@ -1,135 +1,135 @@
 extends ../layout
 
 block link
-	include ../link1
+    include ../link1
 
 block content
-	include navbar
-	.container
-		.row
-			.col-sm-3
-				include left
-			.col-sm-9
-				.panel.panel-primary
-					.panel-heading
-						i.glyphicon.glyphicon-book
-						| &nbsp;$メソッドのthis課題
-					.panel-body
-						p ボタンをクリックしてh1要素、img要素を変えてみましょう。その際、thisを用いてできるだけ短いソースにしましょう。
-						p
-							a.btn.btn-default(href='../demo/jquery/exercise40/index1.html',target='_blank')
-								i.glyphicon.glyphicon-play
-								| デモ
-							button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
-								i.glyphicon.glyphicon-question-sign
-								| &nbsp;解答例
-						#demo.collapse.out
-								pre(class='prettyprint linenums:1')
-									:code
-										doctype
-										html(lang='ja-JP')
-											head
-												meta(charset='UTF-8')
-												title
-												link(rel='stylesheet', href='style.css')
-											body
-												h1 変更前
-												p
-													input#before(type='button',value='変更前',title='img/before.png')
-													input#after(type='button',value='変更後',title='img/after.png')
-												p
-													img(src='img/before.png')
-												script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-												script(src='script.js')
-								pre(class='prettyprint linenums:1')
-									:code
-										$(function() {
-											$('#before').click(function() {
-												$('img').attr({
-													'src': 'img/before.png',
-													title: '変更前'
-												});
-												$('h1').text('変更前');
-											});
-											$('#after').click(function() {
-												$('img').attr({
-													'src': 'img/after.png',
-													'title': '変更後'
-												});
-												$('h1').text('変更後');
-											});
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;$メソッドのthis課題
+                    .panel-body
+                        p ボタンをクリックしてh1要素、img要素を変えてみましょう。その際、thisを用いてできるだけ短いソースにしましょう。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise40/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | &nbsp;解答例
+                        #demo.collapse.out
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                                link(rel='stylesheet', href='style.css')
+                                            body
+                                                h1 変更前
+                                                p
+                                                    input#before(type='button',value='変更前',title='img/before.png')
+                                                    input#after(type='button',value='変更後',title='img/after.png')
+                                                p
+                                                    img(src='img/before.png')
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $(function() {
+                                            $('#before').click(function() {
+                                                $('img').attr({
+                                                    'src': 'img/before.png',
+                                                    title: '変更前'
+                                                });
+                                                $('h1').text('変更前');
+                                            });
+                                            $('#after').click(function() {
+                                                $('img').attr({
+                                                    'src': 'img/after.png',
+                                                    'title': '変更後'
+                                                });
+                                                $('h1').text('変更後');
+                                            });
 
-											//要領の良い記述1
-											/*
-											$('#before').click(function() {
-												$('img').attr({
-													'src': $(this).attr('title'),
-													'title': $(this).attr('value')
-												});
-												$('h1').text($(this).attr('value'));
-											});
-											$('#after').click(function() {
-												$('img').attr({
-													'src': $(this).attr('title'),
-													'title': $(this).attr('value')
-												});
-												$('h1').text($(this).attr('value'));
-											});
-											*/
+                                            //要領の良い記述1
+                                            /*
+                                            $('#before').click(function() {
+                                                $('img').attr({
+                                                    'src': $(this).attr('title'),
+                                                    'title': $(this).attr('value')
+                                                });
+                                                $('h1').text($(this).attr('value'));
+                                            });
+                                            $('#after').click(function() {
+                                                $('img').attr({
+                                                    'src': $(this).attr('title'),
+                                                    'title': $(this).attr('value')
+                                                });
+                                                $('h1').text($(this).attr('value'));
+                                            });
+                                            */
 
-											//要領の良い記述2
-											/*
-											$('input').click(function() {
-												$('img').attr({
-													'src': $(this).attr('title'),
-													'title': $(this).attr('value')
-												});
-												$('h1').text($(this).attr('value'));
-											});
-											*/
-										});
-								pre(class='prettyprint linenums:1')
-									:code
-										$ ->
-											$('#before').click ->
-												$('img').attr
-													'src': 'img/before.png'
-													title: '変更前'
-												$('h1').text '変更前'	
-												return
+                                            //要領の良い記述2
+                                            /*
+                                            $('input').click(function() {
+                                                $('img').attr({
+                                                    'src': $(this).attr('title'),
+                                                    'title': $(this).attr('value')
+                                                });
+                                                $('h1').text($(this).attr('value'));
+                                            });
+                                            */
+                                        });
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $ ->
+                                            $('#before').click ->
+                                                $('img').attr
+                                                    'src': 'img/before.png'
+                                                    title: '変更前'
+                                                $('h1').text '変更前'    
+                                                return
 
-											$('#after').click ->
-												$('img').attr
-													'src': 'img/after.png'
-													'title': '変更後'
-												$('h1').text('変更後');
-												return
+                                            $('#after').click ->
+                                                $('img').attr
+                                                    'src': 'img/after.png'
+                                                    'title': '変更後'
+                                                $('h1').text('変更後');
+                                                return
 
-											#要領のよい記述1
-											###
-											$('#before').click ->
-												$('img').attr
-													'src': $(this).attr 'title'
-													'title': $(this).attr 'value'
-												$('h1').text $(this).attr 'value'
-												return
+                                            #要領のよい記述1
+                                            ###
+                                            $('#before').click ->
+                                                $('img').attr
+                                                    'src': $(this).attr 'title'
+                                                    'title': $(this).attr 'value'
+                                                $('h1').text $(this).attr 'value'
+                                                return
 
-											$('#after').click ->
-												$('img').attr
-													'src': $(this).attr 'title'
-													'title': $(this).attr 'value'
-												$('h1').text $(this).attr 'value'
-												return
-											###
+                                            $('#after').click ->
+                                                $('img').attr
+                                                    'src': $(this).attr 'title'
+                                                    'title': $(this).attr 'value'
+                                                $('h1').text $(this).attr 'value'
+                                                return
+                                            ###
 
-											#要領のよい記述2
-											###
-											$('input').click ->
-												$('img').attr
-													'src': $(this).attr 'title'
-													'title': $(this).attr 'value'
-												$('h1').text $(this).attr 'value'
-												return
-											###
-											
-											return
+                                            #要領のよい記述2
+                                            ###
+                                            $('input').click ->
+                                                $('img').attr
+                                                    'src': $(this).attr 'title'
+                                                    'title': $(this).attr 'value'
+                                                $('h1').text $(this).attr 'value'
+                                                return
+                                            ###
+                                            
+                                            return

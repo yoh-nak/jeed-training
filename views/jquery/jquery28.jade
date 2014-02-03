@@ -1,97 +1,97 @@
 extends ../layout
 
 block link
-	include ../link1
+    include ../link1
 
 block content
-	include navbar
-	.container
-		.row
-			.col-sm-3
-				include left
-			.col-sm-9
-				.panel.panel-primary
-					.panel-heading
-						i.glyphicon.glyphicon-book
-						| &nbsp;css()メソッド②課題
-					.panel-body
-						p ボタンをクリックして、各要素のdisplayプロパティをalert()メソッドで表示してみましょう。
-						p
-							a.btn.btn-default(href='../demo/jquery/exercise25/index1.html',target='_blank')
-								i.glyphicon.glyphicon-play
-								| デモ
-							button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
-								i.glyphicon.glyphicon-question-sign
-								| &nbsp;解答例
-						#demo.collapse.out
-								pre(class='prettyprint linenums:1')
-									:code
-										doctype
-										html(lang='ja-JP')
-											head
-												meta(charset='UTF-8')
-												title
-											body
-												div div要素
-												hr
-												span span要素
-												hr
-												img(src='img/img.png',alt='')
-												hr
-												table
-													tr
-														td td要素
-												hr
-												ul
-													li li要素
-												script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-												script(src='script.js')
-								pre(class='prettyprint linenums:1')
-									:code
-										$(function() {
-											$('div').click(function() {
-												window.alert($('div').css('display'));
-											});
-											$('span').click(function() {
-												window.alert($('span').css('display'));
-											});
-											$('img').click(function() {
-												window.alert($('img').css('display'));
-											});
-											$('td').click(function() {
-												window.alert($('td').css('display'));
-											});
-											$('li').click(function() {
-												window.alert($('li').css('display'));
-											});
-											/*
-											$('div,span,img,td,li').click(function() {
-												window.alert($(this).css('display'));
-											});
-											*/
-										});
-								pre(class='prettyprint linenums:1')
-									:code
-										$ ->
-											$('div').click ->
-												window.alert $('div').css 'display'
-												return
-											$('span').click ->
-												window.alert $('span').css 'display'
-												return
-											$('img').click ->
-												window.alert $('img').css 'display'
-												return
-											$('td').click ->
-												window.alert $('td').css 'display'
-												return
-											$('li').click ->
-												window.alert $('li').css 'display'
-												return
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;css()メソッド②課題
+                    .panel-body
+                        p ボタンをクリックして、各要素のdisplayプロパティをalert()メソッドで表示してみましょう。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise25/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | &nbsp;解答例
+                        #demo.collapse.out
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                            body
+                                                div div要素
+                                                hr
+                                                span span要素
+                                                hr
+                                                img(src='img/img.png',alt='')
+                                                hr
+                                                table
+                                                    tr
+                                                        td td要素
+                                                hr
+                                                ul
+                                                    li li要素
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $(function() {
+                                            $('div').click(function() {
+                                                window.alert($('div').css('display'));
+                                            });
+                                            $('span').click(function() {
+                                                window.alert($('span').css('display'));
+                                            });
+                                            $('img').click(function() {
+                                                window.alert($('img').css('display'));
+                                            });
+                                            $('td').click(function() {
+                                                window.alert($('td').css('display'));
+                                            });
+                                            $('li').click(function() {
+                                                window.alert($('li').css('display'));
+                                            });
+                                            /*
+                                            $('div,span,img,td,li').click(function() {
+                                                window.alert($(this).css('display'));
+                                            });
+                                            */
+                                        });
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $ ->
+                                            $('div').click ->
+                                                window.alert $('div').css 'display'
+                                                return
+                                            $('span').click ->
+                                                window.alert $('span').css 'display'
+                                                return
+                                            $('img').click ->
+                                                window.alert $('img').css 'display'
+                                                return
+                                            $('td').click ->
+                                                window.alert $('td').css 'display'
+                                                return
+                                            $('li').click ->
+                                                window.alert $('li').css 'display'
+                                                return
 
-											#以下の記述でも可
-											###
-											$('div,span,img,td,li').click ->
-												window.alert $(this).css 'display'
-											###
-											return
+                                            #以下の記述でも可
+                                            ###
+                                            $('div,span,img,td,li').click ->
+                                                window.alert $(this).css 'display'
+                                            ###
+                                            return

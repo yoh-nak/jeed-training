@@ -1,57 +1,57 @@
 extends ../layout
 
 block link
-	include ../link1
+    include ../link1
 
 block content
-	include navbar
-	.container
-		.row
-			.col-sm-3
-				include left
-			.col-sm-9
-				.panel.panel-primary
-					.panel-heading
-						i.glyphicon.glyphicon-book
-						| &nbsp;toggleClass()メソッド
-					.panel-body
-						p click()メソッドのコールバックで使われた、toggleClass()メソッドは、$メソッドで指定した要素にに対して、addClass()、removeClass()を繰り返し実行します。その際、toggleClassメソッドに指定したクラスが、$メソッドで指定した要素になければ、先にaddClass()を実行します。また、toggleClassメソッドに指定したクラスが$メソッドで指定した要素にあれば、先にremoveClass()を実行します。
-						p
-							a.btn.btn-default(href='../demo/jquery/exercise31/index1.html',target='_blank')
-								i.glyphicon.glyphicon-play
-								| デモ
-							| 
-							a.btn.btn-default(href='http://api.jquery.com/toggleClass/',target='_blank')
-								i.glyphicon.glyphicon-info-sign
-								| &nbsp;参考
-						pre(class='prettyprint linenums:1')
-							:code
-								doctype
-								html(lang='ja-JP')
-									head
-										meta(charset='UTF-8')
-										title
-										link(rel='stylesheet',href='style.css')
-									body
-										p テキストテキストテキストテキストテキスト
-										p: input(type='button',value='クリック')
-										script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-										script(src='script.js')
-						pre(class='prettyprint linenums:1')
-							:code
-								.red
-									color #FF0000
-						pre(class='prettyprint linenums:1')
-							:code
-								$(function() {
-									$('input').click(function() {
-										$('p:first-of-type').toggleClass('red');
-									});
-								});
-						pre(class='prettyprint linenums:1')
-							:code
-								$ ->
-									$('input').click ->
-										$('p:first-of-type').toggleClass('red');
-										return
-									return
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;toggleClass()メソッド
+                    .panel-body
+                        p click()メソッドのコールバックで使われた、toggleClass()メソッドは、$メソッドで指定した要素にに対して、addClass()、removeClass()を繰り返し実行します。その際、toggleClassメソッドに指定したクラスが、$メソッドで指定した要素になければ、先にaddClass()を実行します。また、toggleClassメソッドに指定したクラスが$メソッドで指定した要素にあれば、先にremoveClass()を実行します。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise31/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/toggleClass/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        link(rel='stylesheet',href='style.css')
+                                    body
+                                        p テキストテキストテキストテキストテキスト
+                                        p: input(type='button',value='クリック')
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                .red
+                                    color #FF0000
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('input').click(function() {
+                                        $('p:first-of-type').toggleClass('red');
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('input').click ->
+                                        $('p:first-of-type').toggleClass('red');
+                                        return
+                                    return

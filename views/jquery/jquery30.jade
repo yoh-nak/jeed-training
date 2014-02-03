@@ -1,81 +1,81 @@
 extends ../layout
 
 block link
-	include ../link1
+    include ../link1
 
 block content
-	include navbar
-	.container
-		.row
-			.col-sm-3
-				include left
-			.col-sm-9
-				.panel.panel-primary
-					.panel-heading
-						i.glyphicon.glyphicon-book
-						| &nbsp;addClass()メソッド課題
-					.panel-body
-						p img要素をクリックして、要素のサイズを2倍にしてみましょう。
-						p
-							a.btn.btn-default(href='../demo/jquery/exercise27/index1.html',target='_blank')
-								i.glyphicon.glyphicon-play
-								| デモ
-							button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
-								i.glyphicon.glyphicon-question-sign
-								| &nbsp;解答例
-						#demo.collapse.out
-								pre(class='prettyprint linenums:1')
-									:code
-										doctype
-										html(lang='ja-JP')
-											head
-												meta(charset='UTF-8')
-												title
-												link(rel='stylesheet',href='style.css')
-											body
-												img(src='img/enlarge.png')
-												script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-												script(src='script.js')
-								pre(class='prettyprint linenums:1')
-									:code
-										size()
-											200px
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;addClass()メソッド課題
+                    .panel-body
+                        p img要素をクリックして、要素のサイズを2倍にしてみましょう。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise27/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | &nbsp;解答例
+                        #demo.collapse.out
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                                link(rel='stylesheet',href='style.css')
+                                            body
+                                                img(src='img/enlarge.png')
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        size()
+                                            200px
 
-										img
-											width size()
-											height @width
-											cursor pointer
+                                        img
+                                            width size()
+                                            height @width
+                                            cursor pointer
 
-											-webkit-transition-property width, height
-											transition-property width, height
+                                            -webkit-transition-property width, height
+                                            transition-property width, height
 
-											-webkit-transition-duration 500ms
-											transition-duration 500ms
+                                            -webkit-transition-duration 500ms
+                                            transition-duration 500ms
 
-											-webkit-transition-timing-function ease-in-out
-											transition-timing-function ease-in-out;
+                                            -webkit-transition-timing-function ease-in-out
+                                            transition-timing-function ease-in-out;
 
-										.enlarge
-											width size()*2
-											height @width
-								pre(class='prettyprint linenums:1')
-									:code
-										$(function() {
-											$('img').click(function() {
-												$('img').addClass('enlarge');
+                                        .enlarge
+                                            width size()*2
+                                            height @width
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $(function() {
+                                            $('img').click(function() {
+                                                $('img').addClass('enlarge');
 
-												//以下の記述でも可
-												//$(this).addClass('enlarge');
-											});
-										});
-								pre(class='prettyprint linenums:1')
-									:code
-										$ ->
-											$('img').click ->
-												$('img').addClass 'enlarge'
+                                                //以下の記述でも可
+                                                //$(this).addClass('enlarge');
+                                            });
+                                        });
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $ ->
+                                            $('img').click ->
+                                                $('img').addClass 'enlarge'
 
-												#以下の記述でも可
-												#$(this).addClass 'enlarge'
+                                                #以下の記述でも可
+                                                #$(this).addClass 'enlarge'
 
-												return
-											return
+                                                return
+                                            return

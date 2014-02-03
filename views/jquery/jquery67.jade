@@ -1,76 +1,76 @@
 extends ../layout
 
 block link
-	include ../link1
+    include ../link1
 
 block content
-	include navbar
-	.container
-		.row
-			.col-sm-3
-				include left
-			.col-sm-9
-				.panel.panel-primary
-					.panel-heading
-						i.glyphicon.glyphicon-book
-						| &nbsp;$('子孫セレクター')
-					.panel-body
-						p 子孫セレクターは「$('祖先 自分')」のように半角スペースで区切って表現しますが、jQueryでは$('自分', '祖先'')のように、第2引数で絞りこまれた、第1引数という記述もできます。これは$('自分').find('祖先')の動きと同じになります。
-						p また、jQueryのthisを使って表現する場合、$('this 要素')という記述はできない代わりに、「$('span',this)」のように、引数を2つ使うか、「$(this).find('span')」のようにfind()メソッドを使って代用することができます。
-						p
-							a.btn.btn-default(href='../demo/jquery/exercise65/index1.html',target='_blank')
-								i.glyphicon.glyphicon-play
-								| デモ
-							| 
-							a.btn.btn-default(href='http://api.jquery.com/jQuery/',target='_blank')
-								i.glyphicon.glyphicon-info-sign
-								| &nbsp;参考
-						pre(class='prettyprint linenums:1')
-							:code
-								doctype
-								html(lang='ja-JP')
-									head
-										meta(charset='UTF-8')
-										title
-									body
-										ul
-											li <span>テキスト</span>テキストテキストテキスト
-											li テキストテキストテキストテキスト
-											li テキストテキストテキストテキスト
-											li テキストテキストテキストテキスト
-										script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-										script(src='script.js')
-						pre(class='prettyprint linenums:1')
-							:code
-								doctype
-								html(lang='ja-JP')
-									head
-										meta(charset='UTF-8')
-										title
-									body
-										ul
-											- for(var i = 0; i < 4; i++)
-												- if(i == 0)
-													li <span>テキスト</span>テキストテキストテキスト
-												- else
-													li テキストテキストテキストテキスト
-										script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-										script(src='script.js')
-						pre(class='prettyprint linenums:1')
-							:code
-								$(function() {
-									$('ul span').css('background-color', 'yellow');
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;$('子孫セレクター')
+                    .panel-body
+                        p 子孫セレクターは「$('祖先 自分')」のように半角スペースで区切って表現しますが、jQueryでは$('自分', '祖先'')のように、第2引数で絞りこまれた、第1引数という記述もできます。これは$('自分').find('祖先')の動きと同じになります。
+                        p また、jQueryのthisを使って表現する場合、$('this 要素')という記述はできない代わりに、「$('span',this)」のように、引数を2つ使うか、「$(this).find('span')」のようにfind()メソッドを使って代用することができます。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise65/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/jQuery/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                    body
+                                        ul
+                                            li <span>テキスト</span>テキストテキストテキスト
+                                            li テキストテキストテキストテキスト
+                                            li テキストテキストテキストテキスト
+                                            li テキストテキストテキストテキスト
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                    body
+                                        ul
+                                            - for(var i = 0; i < 4; i++)
+                                                - if(i == 0)
+                                                    li <span>テキスト</span>テキストテキストテキスト
+                                                - else
+                                                    li テキストテキストテキストテキスト
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('ul span').css('background-color', 'yellow');
 
-									//以下のように記述することもできます。
-									//$('span', 'ul').css('background-color', 'yellow');
-									//$('ul').find('span').css('background-color', 'yellow');
-								});
-						pre(class='prettyprint linenums:1')
-							:code
-								$ ->
-									$('ul li').css 'background-color', 'yellow'
+                                    //以下のように記述することもできます。
+                                    //$('span', 'ul').css('background-color', 'yellow');
+                                    //$('ul').find('span').css('background-color', 'yellow');
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('ul li').css 'background-color', 'yellow'
 
-									#以下のように記述することもできます。
-									#$('span', 'ul').css 'background-color', 'yellow'
-									#$('ul').find('span').css 'background-color', 'yellow'
-									return
+                                    #以下のように記述することもできます。
+                                    #$('span', 'ul').css 'background-color', 'yellow'
+                                    #$('ul').find('span').css 'background-color', 'yellow'
+                                    return

@@ -1,169 +1,169 @@
 extends ../layout
 
 block link
-	include ../link1
+    include ../link1
 
 block content
-	include navbar
-	.container
-		.row
-			.col-sm-3
-				include left
-			.col-sm-9
-				.panel.panel-primary
-					.panel-heading
-						i.glyphicon.glyphicon-book
-						| &nbsp;Traversing API
-					.panel-body
-						p prev()、prevAll()、next()、nextAll()、parent()などのメソッドを使用して現在の要素から相対的な位置関係の要素を取得するサンプル コード例です。
-						p prev()、prevAll()、next()、nextAll()、parent()などのメソッドを利用することで、現在の要素を基点にして、その前、次など相対的な関係にある要素を取り出すことができます。
-						p たとえば、以下のサンプルは、id 属性が「iam」である要素を基点として、兄弟要素や親子要素を取り出し、そのスタイルを変更する例です。
-						p
-							a.btn.btn-default(href='../demo/jquery/exercise52/index1.html',target='_blank')
-								i.glyphicon.glyphicon-play
-								| デモ
-							| 
-							a.btn.btn-default(href='http://api.jquery.com/category/traversing/',target='_blank')
-								i.glyphicon.glyphicon-info-sign
-								| &nbsp;参考
-						pre(class='prettyprint linenums:1')
-							:code
-								doctype
-								html(lang='ja-JP')
-									head
-										meta(charset='UTF-8')
-										title
-									body
-										div 祖先
-											div 親
-												.border 兄1
-												div 兄2
-												#iam ぼく
-													div 子供1
-													div 子供2
-												.border 弟1
-												div 弟2
-										script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-										script(src='script.js')
-						pre(class='prettyprint linenums:1')
-							:code
-								$(function() {
-									$('#iam')
-										.css('background-color', 'Yellow')
-									
-									.children()
-										.css('font-weight', 'bold')
-										
-									.end().prev()
-										.css('background-color', 'Lime')
-										
-									.end().prevAll()
-										.css('color', 'Red')
-										
-									.end().prevUntil('.border')
-										.css('font-style', 'italic')
-										
-									.end().next()
-										.css('background-color', 'Aqua')
-										
-									.end().nextAll()
-										.css('color', 'Blue')
-										
-									.end().nextUntil('.border')
-										.css('font-size', 'xx-small')
-										
-									.end().parent()
-										.css('border', 'solid 1px Black');
-								});
-						pre(class='prettyprint linenums:1')
-							:code
-								$ ->
-									$('#iam')  # id 属性が "iam" である要素を取得 
-									.css('background-color', 'Yellow')  # 背景を黄色に 
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;Traversing API
+                    .panel-body
+                        p prev()、prevAll()、next()、nextAll()、parent()などのメソッドを使用して現在の要素から相対的な位置関係の要素を取得するサンプル コード例です。
+                        p prev()、prevAll()、next()、nextAll()、parent()などのメソッドを利用することで、現在の要素を基点にして、その前、次など相対的な関係にある要素を取り出すことができます。
+                        p たとえば、以下のサンプルは、id 属性が「iam」である要素を基点として、兄弟要素や親子要素を取り出し、そのスタイルを変更する例です。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise52/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/category/traversing/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                    body
+                                        div 祖先
+                                            div 親
+                                                .border 兄1
+                                                div 兄2
+                                                #iam ぼく
+                                                    div 子供1
+                                                    div 子供2
+                                                .border 弟1
+                                                div 弟2
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('#iam')
+                                        .css('background-color', 'Yellow')
+                                    
+                                    .children()
+                                        .css('font-weight', 'bold')
+                                        
+                                    .end().prev()
+                                        .css('background-color', 'Lime')
+                                        
+                                    .end().prevAll()
+                                        .css('color', 'Red')
+                                        
+                                    .end().prevUntil('.border')
+                                        .css('font-style', 'italic')
+                                        
+                                    .end().next()
+                                        .css('background-color', 'Aqua')
+                                        
+                                    .end().nextAll()
+                                        .css('color', 'Blue')
+                                        
+                                    .end().nextUntil('.border')
+                                        .css('font-size', 'xx-small')
+                                        
+                                    .end().parent()
+                                        .css('border', 'solid 1px Black');
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('#iam')  # id 属性が "iam" である要素を取得 
+                                    .css('background-color', 'Yellow')  # 背景を黄色に 
 
-									.children()  # 子要素群を取得 
-									.css('font-weight', 'bold')  # フォントを太字に 
-									.end()  # カレント要素を元の位置に 
+                                    .children()  # 子要素群を取得 
+                                    .css('font-weight', 'bold')  # フォントを太字に 
+                                    .end()  # カレント要素を元の位置に 
 
-									.prev()  # 直前の兄要素を取得 
-									.css('background-color', 'Lime')  # 背景をライム色に 
-									.end()  # カレント要素を元の位置に 
+                                    .prev()  # 直前の兄要素を取得 
+                                    .css('background-color', 'Lime')  # 背景をライム色に 
+                                    .end()  # カレント要素を元の位置に 
 
-									.prevAll()  # すべての兄要素を取得 
-									.css('color', 'Red')  # テキストを赤色に 
-									.end()  # カレント要素を元の位置に 
+                                    .prevAll()  # すべての兄要素を取得 
+                                    .css('color', 'Red')  # テキストを赤色に 
+                                    .end()  # カレント要素を元の位置に 
 
-									.prevUntil('.border')  # class 属性が "border" である兄要素まで取得 
-									.css('font-style', 'italic')  # フォントを斜体に 
-									.end()  # カレント要素を元の位置に 
+                                    .prevUntil('.border')  # class 属性が "border" である兄要素まで取得 
+                                    .css('font-style', 'italic')  # フォントを斜体に 
+                                    .end()  # カレント要素を元の位置に 
 
-									.next()  # 直後の弟要素を取得 
-									.css('background-color', 'Aqua')  # 背景をアクア色に 
-									.end()  # カレント要素を元の位置に 
+                                    .next()  # 直後の弟要素を取得 
+                                    .css('background-color', 'Aqua')  # 背景をアクア色に 
+                                    .end()  # カレント要素を元の位置に 
 
-									.nextAll()  # すべての弟要素を取得 
-									.css('color', 'Blue')  # テキストを青色に 
-									.end()  # カレント要素を元の位置に 
+                                    .nextAll()  # すべての弟要素を取得 
+                                    .css('color', 'Blue')  # テキストを青色に 
+                                    .end()  # カレント要素を元の位置に 
 
-									.nextUntil('.border')  # class 属性が "border" である弟要素まで取得 (=該当なし) 
-									.css('font-size', 'xx-small')  # フォントサイズを最小に 
-									.end()  # カレント要素を元の位置に 
+                                    .nextUntil('.border')  # class 属性が "border" である弟要素まで取得 (=該当なし) 
+                                    .css('font-size', 'xx-small')  # フォントサイズを最小に 
+                                    .end()  # カレント要素を元の位置に 
 
-									.parent()  # 親要素を取得 
-									.css('border', 'solid 1px Black');  # 黒の枠線を付与 
-						p サンプルではそれぞれのメソッドでカレント要素を移動し、スタイル変更した後、基点 (id 属性が 「iam」) の要素に戻り、また移動して…という動作を繰り返しています。それぞれのメソッドの意味については、サンプル内のコメントを参照すれば直感的に理解できると思いますので、注意すべき点のみ以下に補足しておきます。
-						h4: u (1) prevUntil()、nextUntil()メソッドの境界
-						p prevAll()、nextAll()は、セレクター式に合致する要素が見つかるまで、その兄/弟要素を取得します。ただし、セレクター式に合致した要素そのものは結果に含まれない点に注意してください。よって、サンプルでも「nextUntil('.border')」に合致する要素は存在しないことになります。
-						h4: u (2) その他のメソッドでセレクター式を指定した場合
-						p prev() / prevAll()、next() / nextAll()、parents()メソッドでも引数としてセレクター式を指定できます。その場合、たとえば prev メソッドであれば、直前の兄要素がセレクター式に合致した場合のみ取得しますし、prevAll()メソッドであれば、セレクター式に合致した兄要素のみを取得します。
-						p
-							a.btn.btn-default(href='../demo/jquery/exercise53/index1.html',target='_blank')
-								i.glyphicon.glyphicon-play
-								| デモ
-							| 
-							a.btn.btn-default(href='http://api.jquery.com/category/traversing/',target='_blank')
-								i.glyphicon.glyphicon-info-sign
-								| &nbsp;参考
-						pre(class='prettyprint linenums:1')
-							:code
-								doctype
-								html(lang='ja-JP')
-									head
-										meta(charset='UTF-8')
-										title
-									body
-										div 兄1
-										.new 兄2
-										div 兄3
-										#me ぼく
-										.new 弟1
-										div 弟2
-										.new 弟3
-										script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-										script(src='script.js')
-						pre(class='prettyprint linenums:1')
-							:code
-								$(function() {
-									$('#me')
-									.css('background-color', 'Yellow')
-									
-									.prev('.new')
-									.css('background-color', 'Aqua')
-									.end()
+                                    .parent()  # 親要素を取得 
+                                    .css('border', 'solid 1px Black');  # 黒の枠線を付与 
+                        p サンプルではそれぞれのメソッドでカレント要素を移動し、スタイル変更した後、基点 (id 属性が 「iam」) の要素に戻り、また移動して…という動作を繰り返しています。それぞれのメソッドの意味については、サンプル内のコメントを参照すれば直感的に理解できると思いますので、注意すべき点のみ以下に補足しておきます。
+                        h4: u (1) prevUntil()、nextUntil()メソッドの境界
+                        p prevAll()、nextAll()は、セレクター式に合致する要素が見つかるまで、その兄/弟要素を取得します。ただし、セレクター式に合致した要素そのものは結果に含まれない点に注意してください。よって、サンプルでも「nextUntil('.border')」に合致する要素は存在しないことになります。
+                        h4: u (2) その他のメソッドでセレクター式を指定した場合
+                        p prev() / prevAll()、next() / nextAll()、parents()メソッドでも引数としてセレクター式を指定できます。その場合、たとえば prev メソッドであれば、直前の兄要素がセレクター式に合致した場合のみ取得しますし、prevAll()メソッドであれば、セレクター式に合致した兄要素のみを取得します。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise53/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/category/traversing/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                    body
+                                        div 兄1
+                                        .new 兄2
+                                        div 兄3
+                                        #me ぼく
+                                        .new 弟1
+                                        div 弟2
+                                        .new 弟3
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('#me')
+                                    .css('background-color', 'Yellow')
+                                    
+                                    .prev('.new')
+                                    .css('background-color', 'Aqua')
+                                    .end()
 
-									.nextAll('.new')
-									.css('background-color', 'Lime');
-								});
-						pre(class='prettyprint linenums:1')
-							:code
-								$ ->
-									$('#me')  # id 属性が "me" である要素を取得 
-									.css('background-color', 'Yellow')  # 背景を黄色に 
+                                    .nextAll('.new')
+                                    .css('background-color', 'Lime');
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('#me')  # id 属性が "me" である要素を取得 
+                                    .css('background-color', 'Yellow')  # 背景を黄色に 
 
-									.prev('.new')  # 直前の兄要素が class="new" である場合のみ取得 (＝該当なし) 
-									.css('background-color', 'Aqua')  # 背景をアクア色に 
-									.end()  # カレント要素を元の位置に 
+                                    .prev('.new')  # 直前の兄要素が class="new" である場合のみ取得 (＝該当なし) 
+                                    .css('background-color', 'Aqua')  # 背景をアクア色に 
+                                    .end()  # カレント要素を元の位置に 
 
-									.nextAll('.new')  # class="new" である弟要素を取得 
-									.css('background-color', 'Lime');  # 背景をライム色に
-									return
+                                    .nextAll('.new')  # class="new" である弟要素を取得 
+                                    .css('background-color', 'Lime');  # 背景をライム色に
+                                    return

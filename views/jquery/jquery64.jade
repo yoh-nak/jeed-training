@@ -1,132 +1,132 @@
 extends ../layout
 
 block link
-	include ../link1
+    include ../link1
 
 block content
-	include navbar
-	.container
-		.row
-			.col-sm-3
-				include left
-			.col-sm-9
-				.panel.panel-primary
-					.panel-heading
-						i.glyphicon.glyphicon-book
-						| &nbsp;$('IDセレクター') 課題
-					.panel-body
-						p 左端のimg要素をクリックしてブラウザの真ん中に移動しましょう。
-						p
-							a.btn.btn-default(href='../demo/jquery/exercise62/index1.html',target='_blank')
-								i.glyphicon.glyphicon-play
-								| デモ
-							button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
-								i.glyphicon.glyphicon-question-sign
-								| &nbsp;解答例
-						#demo.collapse.out
-								pre(class='prettyprint linenums:1')
-									:code
-										doctype
-										html(lang='ja-JP')
-											head
-												meta(charset='UTF-8')
-												title
-												link(rel='stylesheet',href='style.css')
-											body
-												p
-													img#first(src='img/before.png',alt='')
-													img#second(src='img/before.png',alt='')
-													img#third(src='img/before.png',alt='')
-													img#fourth(src='img/before.png',alt='')
-												script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-												script(src='script.js')	
-								pre(class='prettyprint linenums:1')
-									:code
-										doctype
-										html(lang='ja-JP')
-											head
-												meta(charset='UTF-8')
-												title
-												link(rel='stylesheet',href='style.css')
-											body
-												- var num = ['first','second','third','fourth'];
-												p
-													- for(var i = 0; i < num.length; i++)
-														img(id='\#{num[i]}',src='img/before.png',alt='')
-												script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-												script(src='script.js')
-								pre(class='prettyprint linenums:1')
-									:code
-										prefix(prop, val)
-											-webkit-{prop} val
-											{prop} val
-										size()
-											200px
-										img
-											position fixed
-											prefix('transition-property', all)	
-											prefix('transition-duration', 500ms)
-											prefix('transition-timing-function', ease-in-out)
-											&#first
-												top 0
-												left 0
-												width size()
-												height @width
-												margin-left 0
-												margin-top 0
-												z-index 4
-												cursor pointer
-											&#second
-												top 0
-												left size()
-												width size()
-												height @width
-												z-index 1
-											&#third
-												top 0
-												left size()*2
-												width size()
-												height @width
-												z-index 2
-											&#fourth
-												top 0
-												left size()*3
-												width size()
-												height @width
-												z-index 3
-								pre(class='prettyprint linenums:1')
-									:code
-										$(function() {
-											$('#first').click(function() {
-												$(this)
-													.css({
-														'top': '50%',
-														'left': '50%',
-														'width': '400px',
-														'height': '400px',
-														'margin-left': '-200px',
-														'margin-top': '-200px'
-													})
-													.attr('src', 'img/after.png');
-											});
-											return;
-										});
-								pre(class='prettyprint linenums:1')
-									:code
-										$ ->
-											$('#first')
-												.click ->
-													$(this)
-														.css
-															'top': '50%'
-															'left': '50%'
-															'width': '400px'
-															'height': '400px'
-															'margin-left': '-200px'
-															'margin-top': '-200px'
-														.attr 'src', 'img/after.png'
-													return
-											return
-													'height': '400px'
-												return
-											return
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;$('IDセレクター') 課題
+                    .panel-body
+                        p 左端のimg要素をクリックしてブラウザの真ん中に移動しましょう。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise62/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | &nbsp;解答例
+                        #demo.collapse.out
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                                link(rel='stylesheet',href='style.css')
+                                            body
+                                                p
+                                                    img#first(src='img/before.png',alt='')
+                                                    img#second(src='img/before.png',alt='')
+                                                    img#third(src='img/before.png',alt='')
+                                                    img#fourth(src='img/before.png',alt='')
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')    
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                                link(rel='stylesheet',href='style.css')
+                                            body
+                                                - var num = ['first','second','third','fourth'];
+                                                p
+                                                    - for(var i = 0; i < num.length; i++)
+                                                        img(id='\#{num[i]}',src='img/before.png',alt='')
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        prefix(prop, val)
+                                            -webkit-{prop} val
+                                            {prop} val
+                                        size()
+                                            200px
+                                        img
+                                            position fixed
+                                            prefix('transition-property', all)    
+                                            prefix('transition-duration', 500ms)
+                                            prefix('transition-timing-function', ease-in-out)
+                                            &#first
+                                                top 0
+                                                left 0
+                                                width size()
+                                                height @width
+                                                margin-left 0
+                                                margin-top 0
+                                                z-index 4
+                                                cursor pointer
+                                            &#second
+                                                top 0
+                                                left size()
+                                                width size()
+                                                height @width
+                                                z-index 1
+                                            &#third
+                                                top 0
+                                                left size()*2
+                                                width size()
+                                                height @width
+                                                z-index 2
+                                            &#fourth
+                                                top 0
+                                                left size()*3
+                                                width size()
+                                                height @width
+                                                z-index 3
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $(function() {
+                                            $('#first').click(function() {
+                                                $(this)
+                                                    .css({
+                                                        'top': '50%',
+                                                        'left': '50%',
+                                                        'width': '400px',
+                                                        'height': '400px',
+                                                        'margin-left': '-200px',
+                                                        'margin-top': '-200px'
+                                                    })
+                                                    .attr('src', 'img/after.png');
+                                            });
+                                            return;
+                                        });
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $ ->
+                                            $('#first')
+                                                .click ->
+                                                    $(this)
+                                                        .css
+                                                            'top': '50%'
+                                                            'left': '50%'
+                                                            'width': '400px'
+                                                            'height': '400px'
+                                                            'margin-left': '-200px'
+                                                            'margin-top': '-200px'
+                                                        .attr 'src', 'img/after.png'
+                                                    return
+                                            return
+                                                    'height': '400px'
+                                                return
+                                            return

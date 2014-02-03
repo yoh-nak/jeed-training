@@ -1,207 +1,207 @@
 extends ../../layout
 
 block link
-	link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
-	link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
-	link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
-	link(href='../../css/style.css',rel='stylesheet',media='screen')
-	link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
 
 block content
-	include ../navbar
-	.container
-		.row
-			.col-sm-3
-				include ../left
-			.col-sm-9
-				.panel.panel-primary
-					.panel-heading
-						i.glyphicon.glyphicon-book
-						| &nbsp; Vagrant 資料
-					.panel-body
-						p
-							| Vagrant 公式サイト
-							br
-							a(href='http://www.vagrantup.com/',target='_blank')
-								| http://www.vagrantup.com/
-						p
-							| Vagrant Box 配布サイト
-							br
-							a(href='http://www.vagrantbox.es/',target='_blank')
-								| http://www.vagrantbox.es/
-						hr
-						.alert.alert-info VirtualBoxのインストール
-						p VagrantはVirtualBoxの機能を利用してするので、先にインストールしておきます。
-						p
-							| VirtualBoxのダウンロード
-							br
-							a(href='https://www.virtualbox.org/',target='_blank')
-								| https://www.virtualbox.org/
-						hr
-						.alert.alert-info BOX（テンプレート）取得
-						h4 CentOS 64bit
-						pre
-							:code
-								vagrant box add centos64 http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.4-x86_64-v20130731.box
-						h4 Ubuntu 32bit
-						pre
-							:code
-								vagrant box add precise32 http://files.vagrantup.com/precise32.box
-						hr
-						.alert.alert-info インストールしたBoxの確認
-						pre
-							:code
-								vagrant box list
-						hr
-						.alert.alert-info インストールしたBoxの削除
-						pre
-							:code
-								vagrant box remove centos64 virtualbox
-								vagrant box remove precise32 virtualbox
-						hr
-						.alert.alert-info 仮想マシン用ディレクトリ作成
-						p ※ 作成するディレクトリ名は任意
-						h4 CentOS 64bit
-						pre
-							:code
-								cd ~
-								mkdir myCentos64VM
-								cd myCentos64VM
-						h4 Ubuntu 32bit
-						pre
-							:code
-								cd ~
-								mkdir myPrecise32VM
-								cd myPrecise32VM
-						hr
-						.alert.alert-info BOVagrant設定ファイル生成
-						h4 ContOS 64bit
-						pre
-							:code
-								vagrant init centos64
-						h4 Ubuntu 32bit
-						pre
-							:code
-								vagrant init precise32
-						hr
-						.alert.alert-info 仮想マシンインストール
-						pre
-							:code
-								vagrant up
-						hr
-						.alert.alert-info 仮想マシンの状態確認
-						pre
-							:code
-								vagrant status
-						hr
-						.alert.alert-info 仮想マシンのスリープ
-						pre
-							:code
-								vagrant suspend
-						hr
-						.alert.alert-info 仮想マシンのスリープからの復帰
-						pre
-							:code
-								vagrant resume
-						hr
-						.alert.alert-info 仮想マシンの終了
-						pre
-							:code
-								vagrant halt
-						hr
-						.alert.alert-info 仮想マシンの起動
-						pre
-							:code
-								vagrant up
-						hr
-						.alert.alert-info 仮想マシンの再起動
-						pre
-							:code
-								vagrant reload
-						hr
-						.alert.alert-info 仮想マシンの削除
-						pre
-							:code
-								vagrant destloy
-						hr
-						.alert.alert-info 仮想マシンへの接続
-						pre
-							:code
-								vagrant ssh
-						hr
-						.alert.alert-info LANで仮想マシンにアクセス可能にする
-						h4 CentOS 64bit
-						p CentOS6以降から以下のファイルに記述するでパフォーマンスがあがります。
-						pre
-							:code
-								sudo vi  /etc/resolv.conf
-						p 1行目に追記します。
-						pre
-							:code
-							options single-request-reopen
-						p: u IPv4のファイヤーウォールを無効にする
-						pre
-							:code
-								sudo service iptables save
-								sudo service iptables stop
-								sudo chkconfig iptables off
-						p: u IPv6のファイヤーウォールを無効にする
-						pre
-							:code
-								sudo service ip6tables save
-								sudo service ip6tables stop
-								sudo chkconfig ip6tables off
-						h4 Ubuntuの場合
-						p: u ファイヤーウォールを無効にする
-						pre
-							:code
-								sudo iptables -X
-								sudo iptables -t nat -F
-								sudo iptables -t nat -X
-								sudo iptables -t mangle -F
-								sudo iptables -t mangle -X
-								sudo iptables -P INPUT ACCEPT
-								sudo iptables -P FORWARD ACCEPT
-								sudo iptables -P OUTPUT ACCEPT
-								sudo ufw disable
-						hr
-						.alert.alert-info 仮想環境を抜ける
-						pre
-							:code
-								exit
-						hr
-						.alert.alert-info Vagrantfileを編集
-						pre
-							:code
-								# Create a private network, which allows host-only access to the machine
-								# using a specific IP.
-								config.vm.network :private_network, ip: "192.168.33.10"
-						hr
-						.alert.alert-info Vagrant再起動
-						pre
-							:code
-								vagrant reload
-						hr
-						.alert.alert-info Vagrant接続
-						pre
-							:code
-								vagrant ssh
-						hr
-						.alert.alert-info Vagrantの共有フォルダ
-						pre
-							:code
-								仮想マシンの/vagrant = Macの~/myCentOS64VM
-								仮想マシンの/vagrant = Macの~/myPrecise32VM
-						hr
-						.alert.alert-info Webサーバーのドキュメントルートと共有フォルダをリンク
-						pre
-							:code
-								sudo rm -rf /var/www/html
-								sudo ln -fs /vagrant /var/www/html
-						hr
-						.alert.alert-info ドットインストール
-						pre
-							:code
-								Vagrant門
-								http://dotinstall.com/lessons/basic_vagrantt
+    include ../navbar
+    .container
+        .row
+            .col-sm-3
+                include ../left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp; Vagrant 資料
+                    .panel-body
+                        p
+                            | Vagrant 公式サイト
+                            br
+                            a(href='http://www.vagrantup.com/',target='_blank')
+                                | http://www.vagrantup.com/
+                        p
+                            | Vagrant Box 配布サイト
+                            br
+                            a(href='http://www.vagrantbox.es/',target='_blank')
+                                | http://www.vagrantbox.es/
+                        hr
+                        .alert.alert-info VirtualBoxのインストール
+                        p VagrantはVirtualBoxの機能を利用してするので、先にインストールしておきます。
+                        p
+                            | VirtualBoxのダウンロード
+                            br
+                            a(href='https://www.virtualbox.org/',target='_blank')
+                                | https://www.virtualbox.org/
+                        hr
+                        .alert.alert-info BOX（テンプレート）取得
+                        h4 CentOS 64bit
+                        pre
+                            :code
+                                vagrant box add centos64 http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.4-x86_64-v20130731.box
+                        h4 Ubuntu 32bit
+                        pre
+                            :code
+                                vagrant box add precise32 http://files.vagrantup.com/precise32.box
+                        hr
+                        .alert.alert-info インストールしたBoxの確認
+                        pre
+                            :code
+                                vagrant box list
+                        hr
+                        .alert.alert-info インストールしたBoxの削除
+                        pre
+                            :code
+                                vagrant box remove centos64 virtualbox
+                                vagrant box remove precise32 virtualbox
+                        hr
+                        .alert.alert-info 仮想マシン用ディレクトリ作成
+                        p ※ 作成するディレクトリ名は任意
+                        h4 CentOS 64bit
+                        pre
+                            :code
+                                cd ~
+                                mkdir myCentos64VM
+                                cd myCentos64VM
+                        h4 Ubuntu 32bit
+                        pre
+                            :code
+                                cd ~
+                                mkdir myPrecise32VM
+                                cd myPrecise32VM
+                        hr
+                        .alert.alert-info BOVagrant設定ファイル生成
+                        h4 ContOS 64bit
+                        pre
+                            :code
+                                vagrant init centos64
+                        h4 Ubuntu 32bit
+                        pre
+                            :code
+                                vagrant init precise32
+                        hr
+                        .alert.alert-info 仮想マシンインストール
+                        pre
+                            :code
+                                vagrant up
+                        hr
+                        .alert.alert-info 仮想マシンの状態確認
+                        pre
+                            :code
+                                vagrant status
+                        hr
+                        .alert.alert-info 仮想マシンのスリープ
+                        pre
+                            :code
+                                vagrant suspend
+                        hr
+                        .alert.alert-info 仮想マシンのスリープからの復帰
+                        pre
+                            :code
+                                vagrant resume
+                        hr
+                        .alert.alert-info 仮想マシンの終了
+                        pre
+                            :code
+                                vagrant halt
+                        hr
+                        .alert.alert-info 仮想マシンの起動
+                        pre
+                            :code
+                                vagrant up
+                        hr
+                        .alert.alert-info 仮想マシンの再起動
+                        pre
+                            :code
+                                vagrant reload
+                        hr
+                        .alert.alert-info 仮想マシンの削除
+                        pre
+                            :code
+                                vagrant destloy
+                        hr
+                        .alert.alert-info 仮想マシンへの接続
+                        pre
+                            :code
+                                vagrant ssh
+                        hr
+                        .alert.alert-info LANで仮想マシンにアクセス可能にする
+                        h4 CentOS 64bit
+                        p CentOS6以降から以下のファイルに記述するでパフォーマンスがあがります。
+                        pre
+                            :code
+                                sudo vi  /etc/resolv.conf
+                        p 1行目に追記します。
+                        pre
+                            :code
+                            options single-request-reopen
+                        p: u IPv4のファイヤーウォールを無効にする
+                        pre
+                            :code
+                                sudo service iptables save
+                                sudo service iptables stop
+                                sudo chkconfig iptables off
+                        p: u IPv6のファイヤーウォールを無効にする
+                        pre
+                            :code
+                                sudo service ip6tables save
+                                sudo service ip6tables stop
+                                sudo chkconfig ip6tables off
+                        h4 Ubuntuの場合
+                        p: u ファイヤーウォールを無効にする
+                        pre
+                            :code
+                                sudo iptables -X
+                                sudo iptables -t nat -F
+                                sudo iptables -t nat -X
+                                sudo iptables -t mangle -F
+                                sudo iptables -t mangle -X
+                                sudo iptables -P INPUT ACCEPT
+                                sudo iptables -P FORWARD ACCEPT
+                                sudo iptables -P OUTPUT ACCEPT
+                                sudo ufw disable
+                        hr
+                        .alert.alert-info 仮想環境を抜ける
+                        pre
+                            :code
+                                exit
+                        hr
+                        .alert.alert-info Vagrantfileを編集
+                        pre
+                            :code
+                                # Create a private network, which allows host-only access to the machine
+                                # using a specific IP.
+                                config.vm.network :private_network, ip: "192.168.33.10"
+                        hr
+                        .alert.alert-info Vagrant再起動
+                        pre
+                            :code
+                                vagrant reload
+                        hr
+                        .alert.alert-info Vagrant接続
+                        pre
+                            :code
+                                vagrant ssh
+                        hr
+                        .alert.alert-info Vagrantの共有フォルダ
+                        pre
+                            :code
+                                仮想マシンの/vagrant = Macの~/myCentOS64VM
+                                仮想マシンの/vagrant = Macの~/myPrecise32VM
+                        hr
+                        .alert.alert-info Webサーバーのドキュメントルートと共有フォルダをリンク
+                        pre
+                            :code
+                                sudo rm -rf /var/www/html
+                                sudo ln -fs /vagrant /var/www/html
+                        hr
+                        .alert.alert-info ドットインストール
+                        pre
+                            :code
+                                Vagrant門
+                                http://dotinstall.com/lessons/basic_vagrantt
 

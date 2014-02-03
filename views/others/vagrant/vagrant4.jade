@@ -1,129 +1,129 @@
 extends ../../layout
 
 block link
-	link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
-	link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
-	link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
-	link(href='../../css/style.css',rel='stylesheet',media='screen')
-	link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
 
 block content
-	include ../navbar
-	.container
-		.row
-			.col-sm-3
-				include ../left
-			.col-sm-9
-				.panel.panel-primary
-					.panel-heading
-						i.glyphicon.glyphicon-book
-						| &nbsp;Node.jsアプリケーションのルーティング
-					.panel-body
-						.alert.alert-info http-proxyとは
-						p 80番ポートを使って複数のNode.jsのプロセスにホスト名、ドメイン名を割り当てます。
-						hr
-						.alert.alert-info http-proxyのインストール
-						p: u CentOS
-						pre
-							:code
-								su
-								password: vagrant
-								npm install -g http-proxy
-						p: u Ubuntu
-						pre
-							:code
-								sudo npm install -g http-proxy
-						hr
-						.alert.alert-info http-proxyの使い方
-						p proxy.jsを記述します。
-						pre(class='prettyprint linenums:1')
-							:code
-								require('http-proxy').createServer({
-									router: {
-										'login.nodecookbook.com': 'localhost:3000',
-										'nodecookbook.com': 'localhost:8080'
-									}
-								}).listen(80, function(){
-									process.setuid('www-data');
-								});
-						p windowsの場合は「process.setuid('www-data');」を無効にします。
-						pre(class='prettyprint linenums:1')
-							:code
-								require('http-proxy').createServer({
-									router: {
-										'login.nodecookbook.com': 'localhost:3000',
-										'nodecookbook.com': 'localhost:8080'
-									}
-								}).listen(80, function(){
-									//process.setuid('www-data');
-								});
-						hr
-						.alert.alert-info http-proxyの自動起動
-						p 本番環境では/etc/rc.localに追記します。
-						p: u CentOS
-						pre
-							:code
-								/usr/local/bin/node /home/vagrant/myweb/app.js
-								/usr/local/bin/node /home/vagrant/mysocket/server.js
-								/usr/local/bin/node /home/vagrant/myproxy/proxy.js
-						p: u Ubuntu
-						pre
-							:code
-								sudo node /home/vagrant/myweb/app.js
-								sudo node /home/vagrant/mysocket/server.js
-								sodu node /home/vagrant/myproxy/proxy.js
-						hr
-						.alert.alert-info foreverでhttp-proxyを永続化する
-						p foreverを使う場合は/etc/rc.localに以下のように記述します。
-						p: u CentOS
-						pre(class='prettyprint linenums:1')
-							:code
-								#!/bin/sh
-								#
-								# This script will be executed *after* all the other init scripts.
-								# You can put your own initialization stuff in here if you don't
-								# want to do the full Sys V style init stuff.
+    include ../navbar
+    .container
+        .row
+            .col-sm-3
+                include ../left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;Node.jsアプリケーションのルーティング
+                    .panel-body
+                        .alert.alert-info http-proxyとは
+                        p 80番ポートを使って複数のNode.jsのプロセスにホスト名、ドメイン名を割り当てます。
+                        hr
+                        .alert.alert-info http-proxyのインストール
+                        p: u CentOS
+                        pre
+                            :code
+                                su
+                                password: vagrant
+                                npm install -g http-proxy
+                        p: u Ubuntu
+                        pre
+                            :code
+                                sudo npm install -g http-proxy
+                        hr
+                        .alert.alert-info http-proxyの使い方
+                        p proxy.jsを記述します。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                require('http-proxy').createServer({
+                                    router: {
+                                        'login.nodecookbook.com': 'localhost:3000',
+                                        'nodecookbook.com': 'localhost:8080'
+                                    }
+                                }).listen(80, function(){
+                                    process.setuid('www-data');
+                                });
+                        p windowsの場合は「process.setuid('www-data');」を無効にします。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                require('http-proxy').createServer({
+                                    router: {
+                                        'login.nodecookbook.com': 'localhost:3000',
+                                        'nodecookbook.com': 'localhost:8080'
+                                    }
+                                }).listen(80, function(){
+                                    //process.setuid('www-data');
+                                });
+                        hr
+                        .alert.alert-info http-proxyの自動起動
+                        p 本番環境では/etc/rc.localに追記します。
+                        p: u CentOS
+                        pre
+                            :code
+                                /usr/local/bin/node /home/vagrant/myweb/app.js
+                                /usr/local/bin/node /home/vagrant/mysocket/server.js
+                                /usr/local/bin/node /home/vagrant/myproxy/proxy.js
+                        p: u Ubuntu
+                        pre
+                            :code
+                                sudo node /home/vagrant/myweb/app.js
+                                sudo node /home/vagrant/mysocket/server.js
+                                sodu node /home/vagrant/myproxy/proxy.js
+                        hr
+                        .alert.alert-info foreverでhttp-proxyを永続化する
+                        p foreverを使う場合は/etc/rc.localに以下のように記述します。
+                        p: u CentOS
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                #!/bin/sh
+                                #
+                                # This script will be executed *after* all the other init scripts.
+                                # You can put your own initialization stuff in here if you don't
+                                # want to do the full Sys V style init stuff.
 
-								touch /var/lock/subsys/local
+                                touch /var/lock/subsys/local
 
-								#foreverの起動コマンドを記述します
-								/usr/local/bin/node /usr/local/bin/forever start /home/vagrant/myweb/app.js　\
-								-p /var/run/forever \
-								--pidfile /var/run/node-app.pid \
-								-l /var/log/node-app.log -a \
-								-d /home/vagrant/myweb/
+                                #foreverの起動コマンドを記述します
+                                /usr/local/bin/node /usr/local/bin/forever start /home/vagrant/myweb/app.js　\
+                                -p /var/run/forever \
+                                --pidfile /var/run/node-app.pid \
+                                -l /var/log/node-app.log -a \
+                                -d /home/vagrant/myweb/
 
-								/usr/local/bin/node /usr/local/bin/forever start /home/vagrant/mysocket/server.js　\
-								-p /var/run/forever \
-								--pidfile /var/run/node-app.pid \
-								-l /var/log/node-app.log -a \
-								-d /home/vagrant/mysocket/
+                                /usr/local/bin/node /usr/local/bin/forever start /home/vagrant/mysocket/server.js　\
+                                -p /var/run/forever \
+                                --pidfile /var/run/node-app.pid \
+                                -l /var/log/node-app.log -a \
+                                -d /home/vagrant/mysocket/
 
-								/usr/local/bin/node /usr/local/bin/forever start /home/vagrant/myproxy/proxy.js　\
-								-p /var/run/forever \
-								--pidfile /var/run/node-app.pid \
-								-l /var/log/node-app.log -a \
-								-d /home/vagrant/myproxy/
-						p: u Ubuntu
-						pre(class='prettyprint linenums:1')
-							:code
-								#!/bin/sh
+                                /usr/local/bin/node /usr/local/bin/forever start /home/vagrant/myproxy/proxy.js　\
+                                -p /var/run/forever \
+                                --pidfile /var/run/node-app.pid \
+                                -l /var/log/node-app.log -a \
+                                -d /home/vagrant/myproxy/
+                        p: u Ubuntu
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                #!/bin/sh
 
-								#foreverの起動コマンドを記述します
-								sudo /usr/local/bin/forever start /home/vagrant/myweb/app.js　\
-								-p /var/run/forever \
-								--pidfile /var/run/node-app.pid \
-								-l /var/log/node-app.log -a \
-								-d /home/vagrant/myweb/
+                                #foreverの起動コマンドを記述します
+                                sudo /usr/local/bin/forever start /home/vagrant/myweb/app.js　\
+                                -p /var/run/forever \
+                                --pidfile /var/run/node-app.pid \
+                                -l /var/log/node-app.log -a \
+                                -d /home/vagrant/myweb/
 
-								sudo /usr/local/bin/forever start /home/vagrant/mysocket/server.js　\
-								-p /var/run/forever \
-								--pidfile /var/run/node-app.pid \
-								-l /var/log/node-app.log -a \
-								-d /home/vagrant/mysocket/
+                                sudo /usr/local/bin/forever start /home/vagrant/mysocket/server.js　\
+                                -p /var/run/forever \
+                                --pidfile /var/run/node-app.pid \
+                                -l /var/log/node-app.log -a \
+                                -d /home/vagrant/mysocket/
 
-								sudo /usr/local/bin/forever start /home/vagrant/myproxy/proxy.js　\
-								-p /var/run/forever \
-								--pidfile /var/run/node-app.pid \
-								-l /var/log/node-app.log -a \
-								-d /home/vagrant/myproxy/
+                                sudo /usr/local/bin/forever start /home/vagrant/myproxy/proxy.js　\
+                                -p /var/run/forever \
+                                --pidfile /var/run/node-app.pid \
+                                -l /var/log/node-app.log -a \
+                                -d /home/vagrant/myproxy/

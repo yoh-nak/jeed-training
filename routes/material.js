@@ -16,19 +16,4 @@
     });
   };
 
-
-  /*
-  exports.vagrant = (req, res) ->
-  	res.render "material/vagrant/vagrant1-" + req.params.id,
-  		title: define.title
-  		instructor: define.instructor
-   */
-
-  exports.cordova = function(req, res) {
-    return res.render("material/cordova/cordova" + req.params.id, {
-      title: define.title,
-      instructor: define.instructor
-    });
-  };
-
 }).call(this);

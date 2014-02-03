@@ -38,7 +38,6 @@ app.use express.session
 	store: new RedisStore
 
 app.use app.router
-#app.use require("stylus").middleware(__dirname + "/public")
 compile = (str, path) ->
 	stylus(str).set("filename", path).set("compress", true).use nib()
 app.use stylus.middleware(
@@ -101,7 +100,6 @@ app.get "/framework/:id", js.framework # フレームワーク
 app.get "/jsrecipe-:id", js.recipe
 app.get "/material:id:format", material.material
 app.get "/cordova/:id", js.cordova
-#app.get "/material/vagrant-:id", material.vagrant
 
 #ルーティングPOST送信
 app.post "/xml-:id", js.webapiXML

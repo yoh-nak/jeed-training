@@ -1,0 +1,100 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;$(':first-line/first-letter擬似要素') 課題
+                    .panel-body
+                        p p要素をクリックして、1文字目、1列目にスタイルをつけてみましょう。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise81/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | &nbsp;解答例
+                        #demo.collapse.out
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                                link(rel='stylesheet',href='style.css')
+                                            body
+                                                p
+                                                    | テキストテキストテキストテキスト<br>
+                                                    | テキストテキストテキストテキスト<br>
+                                                    | テキストテキストテキストテキスト<br>
+                                                    | テキストテキストテキストテキスト
+                                                p
+                                                    | テキストテキストテキストテキスト<br>
+                                                    | テキストテキストテキストテキスト<br>
+                                                    | テキストテキストテキストテキスト<br>
+                                                    | テキストテキストテキストテキスト
+                                                p
+                                                    | テキストテキストテキストテキスト<br>
+                                                    | テキストテキストテキストテキスト<br>
+                                                    | テキストテキストテキストテキスト<br>
+                                                    | テキストテキストテキストテキスト
+                                                p
+                                                    | テキストテキストテキストテキスト<br>
+                                                    | テキストテキストテキストテキスト<br>
+                                                    | テキストテキストテキストテキスト<br>
+                                                    | テキストテキストテキストテキスト
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                                link(rel='stylesheet',href='style.css')
+                                            body
+                                                -for(var i = 0; i < 4; i++)
+                                                    p
+                                                        -for(var j = 0; j < 4; j++)
+                                                            | テキストテキストテキストテキスト
+                                                            -if(j != 3)
+                                                                br
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        p
+                                            color black
+                                            font-size 16px
+                                            cursor pointer
+                                            &.after:first-line
+                                                color orange
+                                                font-size 16px
+                                            &.after:first-letter
+                                                color red
+                                                font-size 24px
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $(function() {
+                                            $('p').click(function() {
+                                                $(this).addClass('after');
+                                            });
+                                        });
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $ ->
+                                            $('p').click ->
+                                                $(this).addClass 'after'
+                                                return
+                                            return

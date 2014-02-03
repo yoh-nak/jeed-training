@@ -4,12 +4,6 @@
 
   define = require("../libs/define");
 
-
-  /*
-  require("jade").filters.code = (block) ->
-  	block.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace /"/g, "&quot;"
-   */
-
   exports.mobile = function(req, res) {
     return res.render("mobile/mobile" + req.params.id, {
       title: define.title,

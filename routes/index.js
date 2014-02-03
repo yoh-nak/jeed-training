@@ -4,12 +4,6 @@
 
   define = require("../libs/define");
 
-
-  /*
-  require("jade").filters.code = (block) ->
-  	block.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace /"/g, "&quot;"
-   */
-
   exports.index = function(req, res) {
     res.render("index", {
       title: define.title,

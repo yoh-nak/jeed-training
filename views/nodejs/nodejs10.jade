@@ -61,10 +61,7 @@ block content
                                 , stylus = require("stylus")
                                 , nib = require("nib");
 
-                                //↓追記
-                                // routes
-                                var mypage = require('./routes/mypage');
-                                //↑追記
+                                <mark>var mypage = require('./routes/mypage');</mark>
 
                                 var app = express();
 
@@ -93,9 +90,7 @@ block content
 
                                 app.get('/', routes.index);
                                 app.get('/users', user.list);
-                                //↓追記
-                                app.get('/mypage1', mypage.mypage1);
-                                //↑追記
+                                <mark>app.get('/mypage1', mypage.mypage1);</mark>
 
                                 http.createServer(app).listen(app.get('port'), function(){
                                     console.log('Express server listening on port ' + app.get('port'));
@@ -117,9 +112,9 @@ block content
                                     res.render('mypage1', {});
                                 };
 
-                                exports.mypage2 = function(req, res){
+                                <mark>exports.mypage2 = function(req, res){
                                     res.render('mypage/mypage2', {});
-                                };
+                                };</mark>
                         hr
                         p ③ 「app.js」に以下のように追記します。
                         pre(class='prettyprint linenums:1')
@@ -167,9 +162,7 @@ block content
                                 app.get('/', routes.index);
                                 app.get('/users', user.list);
                                 app.get('/mypage1', mypage.mypage1);
-                                //↓追記
-                                app.get('/mypage1', mypage.mypage2);
-                                //↑追記
+                                <mark>app.get('/mypage2', mypage.mypage2);</mark>
 
                                 http.createServer(app).listen(app.get('port'), function(){
                                     console.log('Express server listening on port ' + app.get('port'));

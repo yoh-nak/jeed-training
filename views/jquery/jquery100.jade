@@ -1,0 +1,120 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;$(':nth-last-of-type擬似クラス') 課題
+                    .panel-body
+                        p img要素をクリックして、img要素をスライドさせてみましょう。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise99/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | &nbsp;解答例
+                        #demo.collapse.out
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                                link(rel='stylesheet',href='style.css')
+                                            body
+                                                #outer
+                                                    #inner
+                                                        img(src='img/image1.png',alt='')
+                                                        img(src='img/image2.png',alt='')
+                                                        img(src='img/image3.png',alt='')
+                                                        img(src='img/image4.png',alt='')
+                                                        img(src='img/image5.png',alt='')
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                                link(rel='stylesheet',href='style.css')
+                                            body
+                                                #outer
+                                                    #inner
+                                                        -for(var i = 5; i > 0; i--)
+                                                            img(src='img/image#{i}.png',alt='')
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        prefix(prop, val)
+                                            -webkit-{prop} val
+                                            {prop} val
+
+                                        size()
+                                            200px
+                                        img
+                                            cursor pointer
+                                            float right
+                                        #outer
+                                            width size()
+                                            height @width
+                                            overflow hidden
+                                        #inner
+                                            float right
+                                            width size()*5
+                                            margin-right -(size()*4)
+                                            overflow hidden
+                                            prefix('transition-property', all)  
+                                            prefix('transition-duration', 500ms)
+                                            prefix('transition-timing-function', ease-in-out)
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $(function() {
+                                            $('img:nth-last-of-type(1)').click(function() {
+                                                $('#inner').css('margin-right', '-600px');
+                                            });
+                                            $('img:nth-last-of-type(2)').click(function() {
+                                                $('#inner').css('margin-right', '-400px');
+                                            });
+                                            $('img:nth-last-of-type(3)').click(function() {
+                                                $('#inner').css('margin-right', '-200px');
+                                            });
+                                            $('img:nth-last-of-type(4)').click(function() {
+                                                $('#inner').css('margin-right', '0px');
+                                            });
+                                            $('img:nth-last-of-type(5)').click(function() {
+                                                $('#inner').css('margin-right', '-800px');
+                                            });
+                                        });
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $ ->
+                                            $('img:nth-last-of-type(1)').click ->
+                                                $('#inner').css 'margin-right','-600px'
+                                                return
+                                            $('img:nth-last-of-type(2)').click ->
+                                                $('#inner').css 'margin-right','-400px'
+                                                return
+                                            $('img:nth-last-of-type(3)').click ->
+                                                $('#inner').css 'margin-right','-200px'
+                                                return
+                                            $('img:nth-last-of-type(4)').click ->
+                                                $('#inner').css 'margin-right','0px'
+                                                return
+                                            $('img:nth-last-of-type(5)').click ->
+                                                $('#inner').css 'margin-right','-800px'
+                                                return
+                                            return

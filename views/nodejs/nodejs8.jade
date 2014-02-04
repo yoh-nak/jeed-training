@@ -65,6 +65,54 @@ block content
                                     }
                                 }
                         hr
+                        p また、「--save」オプションを付けてインストールすると、自動的にpackage.jsonにインストールしたバージョンのローカルパッケージが追加されます。
+                        pre
+                            :code
+                                npm install nib --save
+                        p 同様に削除する場合も「--save」オプションをつけると、package.jsonから削除されます。
+                        pre
+                            :code
+                                npm rm nib --save
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                {
+                                  "name": "application-name",
+                                  "version": "0.0.1",
+                                  "private": true,
+                                  "scripts": {
+                                    "start": "node app.js"
+                                  },
+                                  "dependencies": {
+                                    "express": "3.3.4",
+                                    "jade": "*",
+                                    "stylus": "*",
+                                    <mark>"nib": "~1.0.2"</mark>
+                                  }
+                                }
+                        hr
+                        p 「--save-dev」オプションを付けてインストールすると、環境変数「NODE_ENV」が「development」の環境のときに「npm install」でインストールされるパッケージとして追記されます。
+                        pre
+                            :code
+                                npm install nib --save-dev
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                {
+                                  "name": "application-name",
+                                  "version": "0.0.1",
+                                  "private": true,
+                                  "scripts": {
+                                    "start": "node app.js"
+                                  },
+                                  "dependencies": {
+                                    "express": "3.3.4",
+                                    "jade": "*",
+                                    "stylus": "*"
+                                  },
+                                  <mark>"devDependencies": {
+                                    "nib": "~1.0.2"
+                                  }</mark>
+                                }
+                        p なお、Node.jsで本番環境で指定する環境変数「NODE_ENV」は「production」と指定することになっています。
                         p ④ app.jsを以下のように書き換えます。
                         pre(class='prettyprint linenums:1')
                             :code

@@ -6,6 +6,12 @@ exports.mysql = (req, res) ->
 		instructor: define.instructor
 		pretty: true
 
+exports.postgres = (req, res) ->
+	res.render "database/postgres/postgres" + req.params.id,
+		title: define.title
+		instructor: define.instructor
+		pretty: true
+
 exports.mongodb = (req, res) ->
 	res.render "database/mongodb/mongodb" + req.params.id,
 		title: define.title

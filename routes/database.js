@@ -12,6 +12,14 @@
     });
   };
 
+  exports.postgres = function(req, res) {
+    return res.render("database/postgres/postgres" + req.params.id, {
+      title: define.title,
+      instructor: define.instructor,
+      pretty: true
+    });
+  };
+
   exports.mongodb = function(req, res) {
     return res.render("database/mongodb/mongodb" + req.params.id, {
       title: define.title,

@@ -89,6 +89,7 @@ app.get "/jqm/:id", jqm.jqm # jQuery Mobile
 app.get "/mobile/:id", mobile.mobile # スマホサイト
 app.get "/nodejs/:id", nodejs.nodejs # Node.js
 app.get "/mysql/:id", database.mysql # MySQL
+app.get "/postgres/:id", database.postgres # PostgreSQL
 app.get "/mongodb/:id", database.mongodb # MongoDB
 app.get "/redis/:id", database.redis # Redis
 app.get "/angular/:id", js.angular # AngularJS

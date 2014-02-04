@@ -1,0 +1,33 @@
+extends ../../layout
+
+block link
+    include ../../link2
+
+block content
+    include ../navbar
+    .container
+        .row
+            .col-sm-3
+                include ../left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;PostgreSQL資料
+                    .panel-body
+                        h4 公式サイト
+                        p
+                            a(href='http://www-jp.mysql.com/',target='_blank') http://www-jp.mysql.com/
+                        hr
+                        pre
+                            :code
+                                パスを通す
+                                Mac
+                                export PATH=$PATH:/Library/PostgreSQL/9.3/bin
+
+                                db作成
+                                createdb blogapp -p 5433 -U postgres
+                                dropdb blogapp -p 5433 -U postgres
+
+                                DB変更
+                                \c DB名

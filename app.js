@@ -131,6 +131,8 @@
 
   app.get("/mysql/:id", database.mysql);
 
+  app.get("/postgres/:id", database.postgres);
+
   app.get("/mongodb/:id", database.mongodb);
 
   app.get("/redis/:id", database.redis);

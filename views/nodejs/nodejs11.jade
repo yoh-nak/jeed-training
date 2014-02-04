@@ -49,10 +49,7 @@ block content
                                 , stylus = require("stylus")
                                 , nib = require("nib");
 
-                                //↓追記
-                                // routes
-                                var mypage = require('./routes/mypage');
-                                //↑追記
+                                <mark>var mypage = require('./routes/mypage');</mark>
 
                                 var app = express();
 
@@ -81,9 +78,7 @@ block content
 
                                 app.get('/', routes.index);
                                 app.get('/users', user.list);
-                                //↓追記
-                                app.get('/:id', mypage.mypage);
-                                //↑追記
+                                <mark>app.get('/:id', mypage.mypage);</mark>
 
                                 http.createServer(app).listen(app.get('port'), function(){
                                     console.log('Express server listening on port ' + app.get('port'));
@@ -129,10 +124,7 @@ block content
                                 , stylus = require("stylus")
                                 , nib = require("nib");
 
-                                //↓追記
-                                // routes
-                                var mypage = require('./routes/mypage');
-                                //↑追記
+                                <mark>var mypage = require('./routes/mypage');</mark>
 
                                 var app = express();
 
@@ -161,9 +153,7 @@ block content
 
                                 app.get('/', routes.index);
                                 app.get('/users', user.list);
-                                //↓追記
-                                app.get('/xxx:id', mypage.mypage);
-                                //↑追記
+                                <mark>app.get('/xxx:id', mypage.mypage);</mark>
 
                                 http.createServer(app).listen(app.get('port'), function(){
                                     console.log('Express server listening on port ' + app.get('port'));
@@ -205,10 +195,7 @@ block content
                                 , stylus = require("stylus")
                                 , nib = require("nib");
 
-                                //↓追記
-                                // routes
-                                var mypage = require('./routes/mypage');
-                                //↑追記
+                                <mark>var mypage = require('./routes/mypage');</mark>
 
                                 var app = express();
 
@@ -237,9 +224,7 @@ block content
 
                                 app.get('/', routes.index);
                                 app.get('/users', user.list);
-                                //↓追記
-                                app.get('/xxx/:id', mypage.mypage);
-                                //↑追記
+                                <mark>app.get('/xxx/:id', mypage.mypage);</mark>
 
                                 http.createServer(app).listen(app.get('port'), function(){
                                     console.log('Express server listening on port ' + app.get('port'));
@@ -251,3 +236,53 @@ block content
                         hr
                         p ⑦ ブラウザで「http://localhost:3000/xxx/2」にアクセスします。
                         p <mark>※ この場合、/public/ディレクトリに含まれる静的ファイルへのパスが変わるので注意しましょう。</mark>
+                        hr
+                        .alert.alert-info app.jsからテンプレートを出力する
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /**
+                                * Module dependencies.
+                                */
+
+                                var express = require('express')
+                                , routes = require('./routes')
+                                , user = require('./routes/user')
+                                , http = require('http')
+                                , path = require('path')
+                                , stylus = require("stylus")
+                                , nib = require("nib");
+
+                                var app = express();
+
+                                // all environments
+                                app.set('port', process.env.PORT || 3000);
+                                app.set('views', __dirname + '/views');
+                                app.set('view engine', 'jade');
+                                app.use(express.favicon());
+                                app.use(express.logger('dev'));
+                                app.use(express.bodyParser());
+                                app.use(express.methodOverride());
+                                app.use(app.router);
+                                var compile = function(str, path) {
+                                    return stylus(str).set("filename", path).set("compress", true).use(nib());
+                                };
+                                app.use(stylus.middleware({
+                                    src: __dirname + "/public",
+                                    compile: compile
+                                }));
+                                app.use(express.static(path.join(__dirname, 'public')));
+
+                                // development only
+                                if ('development' == app.get('env')) {
+                                    app.use(express.errorHandler());
+                                }
+
+                                app.get('/', routes.index);
+                                app.get('/users', user.list);
+                                <mark>app.get('/:id', function(req, res){
+                                    res.render('mypage' + req.params.id, {});
+                                });</mark>
+
+                                http.createServer(app).listen(app.get('port'), function(){
+                                    console.log('Express server listening on port ' + app.get('port'));
+                                });

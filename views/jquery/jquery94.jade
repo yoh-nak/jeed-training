@@ -1,0 +1,117 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;$(':nth-child擬似クラス') 課題
+                    .panel-body
+                        p ボタンをクリックして、last-of-typeのp要素を回転させてみましょう。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise93/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | &nbsp;解答例
+                        #demo.collapse.out
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                            body
+                                                p
+                                                    input(type='button',value='1')
+                                                    input(type='button',value='2')
+                                                    input(type='button',value='3')
+                                                    input(type='button',value='4')
+                                                ul
+                                                    li テキストテキストテキストテキスト
+                                                    li テキストテキストテキストテキスト
+                                                    li テキストテキストテキストテキスト
+                                                    li テキストテキストテキストテキスト
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                            body
+                                                p
+                                                    -for(var i = 0; i < 4; i++)
+                                                        input(type='button',value='#{i}')
+                                                ul
+                                                    -for(var i = 0; i < 4; i++)
+                                                        li テキストテキストテキストテキスト
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $(function() {
+                                        $('input:nth-child(1)').click(function() {
+                                            $('li').css('color', 'black');
+                                            $('li:nth-child(1)').css('color', 'red');
+                                        });
+                                        $('input:nth-child(2)').click(function() {
+                                            $('li').css('color', 'black');
+                                            $('li:nth-child(2)').css('color', 'red');
+                                        });
+                                        $('input:nth-child(3)').click(function() {
+                                            $('li').css('color', 'black');
+                                            $('li:nth-child(3)').css('color', 'red');
+                                        });
+                                        $('input:nth-child(4)').click(function() {
+                                            $('li').css('color', 'black');
+                                            $('li:nth-child(4)').css('color', 'red');
+                                        });
+
+                                        //以下のように記述することもできます。
+                                        /*
+                                        $('input').click(function(){
+                                            $('li:nth-child(' + $(this).attr('value') + ')').css('color', 'red');
+                                        });
+                                        */
+                                        });
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $ ->
+                                            $('input:nth-child(1)').click ->
+                                                $('li').css 'color', 'black'
+                                                $('li:nth-child(1)').css 'color', 'red'
+                                                return
+                                            $('input:nth-child(2)').click ->
+                                                $('li').css 'color', 'black'
+                                                $('li:nth-child(2)').css 'color', 'red'
+                                                return
+                                            $('input:nth-child(3)').click ->
+                                                $('li').css 'color', 'black'
+                                                $('li:nth-child(3)').css 'color', 'red'
+                                                return
+                                            $('input:nth-child(4)').click ->
+                                                $('li').css 'color', 'black'
+                                                $('li:nth-child(4)').css 'color', 'red'
+                                                return
+
+                                            #以下のように記述することもできます。
+                                            ###
+                                            $('input').click ->
+                                                $('li').css 'color', 'black'
+                                                $('li:nth-child(' + $(this).attr('value') + ')').css 'color', 'red'
+                                                return
+                                            ###
+                                            return

@@ -1,174 +1,174 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;ボックスの大きさの算出方法
-						.panel-body
-							.alert.alert-info ボックスの大きさの算出方法
-							table.browser-support
-								tr
-									td.not-support
-										img(src='../images/ic-apple.png')
-									td.not-support
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td.not-support
-										img(src='../images/ic-opera.png')
-									td.not-support
-										img(src='../images/ic-ie.png')
-							p iOS4.x/Android2.3.xは-webkit-で対応。IE7以前：未対応。
-							pre
-								| box-sizing: 値
-							p
-								| 値・・・content-box ／ border-box
-							table.table
-								tr
-									td 初期値
-									td content-box
-								tr
-									td 継承
-									td なし 
-								tr
-									td 適用先
-									td widthとheightプロパティを適用できる全要素
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td Basic User Interface
-							p='box-sizingプロパティを利用すると、ボックスの大きさの算出方法を指定することができます。'
-							p='たとえば、下のサンプルは<h1>のwidthとheightプロパティでボックスの横幅を300px、高さを100xにしたものです。さらに、borderとpaddingプロパティで、20pxの罫線とパディングを挿入しています。'
-							p='このとき、横幅と高さの指定に罫線とパディングの大きさは含まれません。これは、box-sizingプロパティの値が初期値の「content-box」で処理され、widthとheightプロパティの値がコンテンツエリアの横幅と高さになるためです。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/06/330-01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1 HAM SANDWICHES
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1 {
-									|     background-color: orange;
-									|     width: 300px;
-									|     height: 100px;
-									|     padding: 20px;
-									|     border: solid 20px pink;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1
-									| 	background-color orange
-									| 	width 300px
-									| 	height 100px
-									| 	padding 20px
-									| 	border solid 20px pink
-								figcaption （Stylus）
-							p='box-sizingプロパティの値を「border-box」にすると、widthとheightプロパティの値はボーダーボックスの横幅と高さになります。そのため、横幅と高さの指定に罫線とパディングの大きさが含まれ、下のような表示になります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/06/330-02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1 {
-									|     background-color: orange;
-									|     width: 300px;
-									|     height: 100px;
-									|     padding: 20px;
-									|     border: solid 20px pink;
-									|     -webkit-box-sizing: border-box;
-									|     -moz-box-sizing: border:box;
-									|     box-sizing: border-box;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1
-									| 	background-color orange
-									| 	width 300px
-									| 	height 100px
-									| 	padding 20px
-									| 	border solid 20px pink
-									| 	-webkit-box-sizing border-box
-									| 	-moz-box-sizing border:box
-									| 	box-sizing border-box
-								figcaption （Stylus）
-							hr
-							h4 段組みのレイアウトが崩れるのを防ぐ
-							p='ボックスを横に並べて段組みを行う場合、box-sizingプロパティの値を「border-box」にすることでレイアウトが崩れるのを防ぐことができます。'
-							p='たとえば、下のサンプルは2つの<div>でオレンジ色と緑色のボックスを構成したものです。各ボックスのまわりには太20ピクセルの罫線を表示してあります。'
-							p='この2つのボックスを横に並べて2段組みのレイアウトで表示するため、<div>のwidthプロパティの値を「50%」にfloatプロパティの値を「left」にします。しかし、box-sizingプロパティの値が初期値の「content-box」で処理された場合、罫線を含むボックスの横幅が50%より大きくなるため、2段組みの表示にはなりません。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;SANDWICHES&lt;/h1&gt;
-									| &lt;div&gt;DESSERTS&lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1 SANDWICHES
-									| div DESSERTS
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     width: 50%;
-									|     float: left;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	width 50%
-									| 	float left
-								figcaption （Stylus）
-							p='そこで、box-sizingプロパティの値を「border-box」にします。これで罫線を含むボックスの横幅が50%となり、2段組みで表示することができます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/06/331.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     width: 50%;
-									|     float: left;
-									|     -webkit-box-sizing: border-box;
-									|     -moz-box-sizing: border-box;
-									|     box-sizing: border-box;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	width 50%
-									| 	float left
-									| 	-webkit-box-sizing border-box
-									| 	-moz-box-sizing border-box
-									| 	box-sizing border-box
-								figcaption （Stylus）
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;ボックスの大きさの算出方法
+                        .panel-body
+                            .alert.alert-info ボックスの大きさの算出方法
+                            table.browser-support
+                                tr
+                                    td.not-support
+                                        img(src='../images/ic-apple.png')
+                                    td.not-support
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td.not-support
+                                        img(src='../images/ic-opera.png')
+                                    td.not-support
+                                        img(src='../images/ic-ie.png')
+                            p iOS4.x/Android2.3.xは-webkit-で対応。IE7以前：未対応。
+                            pre
+                                | box-sizing: 値
+                            p
+                                | 値・・・content-box ／ border-box
+                            table.table
+                                tr
+                                    td 初期値
+                                    td content-box
+                                tr
+                                    td 継承
+                                    td なし 
+                                tr
+                                    td 適用先
+                                    td widthとheightプロパティを適用できる全要素
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td Basic User Interface
+                            p='box-sizingプロパティを利用すると、ボックスの大きさの算出方法を指定することができます。'
+                            p='たとえば、下のサンプルは<h1>のwidthとheightプロパティでボックスの横幅を300px、高さを100xにしたものです。さらに、borderとpaddingプロパティで、20pxの罫線とパディングを挿入しています。'
+                            p='このとき、横幅と高さの指定に罫線とパディングの大きさは含まれません。これは、box-sizingプロパティの値が初期値の「content-box」で処理され、widthとheightプロパティの値がコンテンツエリアの横幅と高さになるためです。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/06/330-01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1 HAM SANDWICHES
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1 {
+                                    |     background-color: orange;
+                                    |     width: 300px;
+                                    |     height: 100px;
+                                    |     padding: 20px;
+                                    |     border: solid 20px pink;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1
+                                    |     background-color orange
+                                    |     width 300px
+                                    |     height 100px
+                                    |     padding 20px
+                                    |     border solid 20px pink
+                                figcaption （Stylus）
+                            p='box-sizingプロパティの値を「border-box」にすると、widthとheightプロパティの値はボーダーボックスの横幅と高さになります。そのため、横幅と高さの指定に罫線とパディングの大きさが含まれ、下のような表示になります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/06/330-02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1 {
+                                    |     background-color: orange;
+                                    |     width: 300px;
+                                    |     height: 100px;
+                                    |     padding: 20px;
+                                    |     border: solid 20px pink;
+                                    |     -webkit-box-sizing: border-box;
+                                    |     -moz-box-sizing: border:box;
+                                    |     box-sizing: border-box;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1
+                                    |     background-color orange
+                                    |     width 300px
+                                    |     height 100px
+                                    |     padding 20px
+                                    |     border solid 20px pink
+                                    |     -webkit-box-sizing border-box
+                                    |     -moz-box-sizing border:box
+                                    |     box-sizing border-box
+                                figcaption （Stylus）
+                            hr
+                            h4 段組みのレイアウトが崩れるのを防ぐ
+                            p='ボックスを横に並べて段組みを行う場合、box-sizingプロパティの値を「border-box」にすることでレイアウトが崩れるのを防ぐことができます。'
+                            p='たとえば、下のサンプルは2つの<div>でオレンジ色と緑色のボックスを構成したものです。各ボックスのまわりには太20ピクセルの罫線を表示してあります。'
+                            p='この2つのボックスを横に並べて2段組みのレイアウトで表示するため、<div>のwidthプロパティの値を「50%」にfloatプロパティの値を「left」にします。しかし、box-sizingプロパティの値が初期値の「content-box」で処理された場合、罫線を含むボックスの横幅が50%より大きくなるため、2段組みの表示にはなりません。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;SANDWICHES&lt;/h1&gt;
+                                    | &lt;div&gt;DESSERTS&lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1 SANDWICHES
+                                    | div DESSERTS
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     width: 50%;
+                                    |     float: left;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     width 50%
+                                    |     float left
+                                figcaption （Stylus）
+                            p='そこで、box-sizingプロパティの値を「border-box」にします。これで罫線を含むボックスの横幅が50%となり、2段組みで表示することができます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/06/331.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     width: 50%;
+                                    |     float: left;
+                                    |     -webkit-box-sizing: border-box;
+                                    |     -moz-box-sizing: border-box;
+                                    |     box-sizing: border-box;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     width 50%
+                                    |     float left
+                                    |     -webkit-box-sizing border-box
+                                    |     -moz-box-sizing border-box
+                                    |     box-sizing border-box
+                                figcaption （Stylus）
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

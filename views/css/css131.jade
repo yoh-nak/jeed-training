@@ -1,149 +1,149 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;リージョンレイアウト
-						.panel-body
-							.alert.alert-info リージョンレイアウト
-							table.browser-support
-								tr
-									td.not-support
-										img(src='../images/ic-apple.png')
-									td.not-support
-										img(src='../images/ic-android.png')
-									td.not-support
-										img(src='../images/ic-firefox.png')
-									td.not-support
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td.not-support
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png') （※）
-							p ※ 部分対応。
-							p IE9以前は未対応。
-							pre
-								| flow-into: コンテンツ名
-							pre
-								| flow-from: コンテンツ名
-							p
-								| コンテンツ名・・・コンテンツ名 ／ none
-							table.table
-								tr
-									td 初期値
-									td none
-								tr
-									td 継承
-									td なし
-								tr
-									td 適用先
-									td
-										| flow-into・・・全要素（疑似要素を除く）<br>
-										| flow-from・・・非置換ブロックコンテナ
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td Region
-							p='リージョンの機能を利用すると、複数のボックスにコンテンツを流し込んで表示することができます。'
-							p='たとえば、下のサンプルは<div>で構成した3つのボックス（#box1〜#box3）と、<article>でマークアップしたコンテンツを用意したものです。3つのボックスは、floatプロパティやグリッドレイアウトなどの機能を利用して配置と大きさを調整しておきます。'
-							p='<article>でマークアップしたコンテンツを3つのボックスに流し込んでレイアウトします。そこで、<article>のflow-intoプロパティの値を「mydata」と指定します。これで、<article>でマークアップした部分が「mydata」というコンテンツ名で扱えるようになり、ブラウザ画面には表示されなくなります。'
-							p='次に、3つのボックスのflow-fromプロパティの値を「mydata」と指定します。これで、3つのボックスは「リージョンボックス」といて扱われ、指定したコンテンツが流し込まれた状態で表示されます。流し込まれる順番は、HTMLソースに記述した#box1、#box2、#box3の順になります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/105-div.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div id="box1"&gt;&lt;/div&gt;
-									| &lt;div id="box2"&gt;&lt;/div&gt;
-									| &lt;div id="box3"&gt;&lt;/div&gt;
-									| 
-									| &lt;article&gt;
-									| &lt;h2&gt;おすすめのサンドイッチ&lt;/h2&gt;
-									| …略...
-									| &lt;/article&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #box1
-									| #box2
-									| #box3
-									| article
-									| 	h2 おすすめのサンドイッチ
-									| 	| …略...
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| article {
-									|     -webkit-flow-into: mydata;
-									| }
-									| #box1, #box2, #box3 {
-									|     -webkit-flow-from: mydata;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| article
-									| 	-webkit-flow-into mydata
-									| 
-									| #box1, #box2, #box3
-									| 	-webkit-flow-from mydata
-								figcaption （Stylus）
-							p='リージョンボックスの大きさを変えると、流し込んだコンテンツもそれに合わせて表示されます。'
-							p='なお、コンテンツ名は任意に指定することができますが、「none」、「inherit」、「default」、「auto」、「initial」を使用することは禁止されています。'
-							p='Chromeで表示を確認するためには、chrome://flagsで「試験運用版のWebkit機能を有効にする」を有効にする必要があります。'
-							p='IE10はリージョンの機能に対応していますが、flow-intoプロパティで指定できるのは<iframe>で指定したコンテンツのみとなっています。そこで、コンテンツページ（contents.html）を用意し、<iframe>で下のように指定します。'
-							p='<iframe>で指定したコンテンツを3つのボックスに流し込んでレイアウトするため、<iframe>のflow-intoプロパティの値を「mydata」と指定します。あとは、3つのボックスのflow-fromプロパティの値を「mydata」と指定すると、指定したコンテンツが流し込まれた状態で表示されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/105-iframe.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div id="box1"&gt;&lt;/div&gt;
-									| &lt;div id="box2"&gt;&lt;/div&gt;
-									| &lt;div id="box3"&gt;&lt;/div&gt;
-									| 
-									| &lt;iframe src="contents.html"&gt;&lt;/iframe&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #box1
-									| #box2
-									| #box3
-									| iframe(src='contents.html')
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| iframe {
-									|     -ms-flow-into: mydata;
-									| }
-									| #box1, #box2, #box3 {
-									|     -ms-flow-from: mydata;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| iframe
-									| 	-ms-flow-into mydata
-									| 
-									| #box1, #box2, #box3
-									| 	-ms-flow-from mydata
-								figcaption （Stylus）
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;リージョンレイアウト
+                        .panel-body
+                            .alert.alert-info リージョンレイアウト
+                            table.browser-support
+                                tr
+                                    td.not-support
+                                        img(src='../images/ic-apple.png')
+                                    td.not-support
+                                        img(src='../images/ic-android.png')
+                                    td.not-support
+                                        img(src='../images/ic-firefox.png')
+                                    td.not-support
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td.not-support
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png') （※）
+                            p ※ 部分対応。
+                            p IE9以前は未対応。
+                            pre
+                                | flow-into: コンテンツ名
+                            pre
+                                | flow-from: コンテンツ名
+                            p
+                                | コンテンツ名・・・コンテンツ名 ／ none
+                            table.table
+                                tr
+                                    td 初期値
+                                    td none
+                                tr
+                                    td 継承
+                                    td なし
+                                tr
+                                    td 適用先
+                                    td
+                                        | flow-into・・・全要素（疑似要素を除く）<br>
+                                        | flow-from・・・非置換ブロックコンテナ
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td Region
+                            p='リージョンの機能を利用すると、複数のボックスにコンテンツを流し込んで表示することができます。'
+                            p='たとえば、下のサンプルは<div>で構成した3つのボックス（#box1〜#box3）と、<article>でマークアップしたコンテンツを用意したものです。3つのボックスは、floatプロパティやグリッドレイアウトなどの機能を利用して配置と大きさを調整しておきます。'
+                            p='<article>でマークアップしたコンテンツを3つのボックスに流し込んでレイアウトします。そこで、<article>のflow-intoプロパティの値を「mydata」と指定します。これで、<article>でマークアップした部分が「mydata」というコンテンツ名で扱えるようになり、ブラウザ画面には表示されなくなります。'
+                            p='次に、3つのボックスのflow-fromプロパティの値を「mydata」と指定します。これで、3つのボックスは「リージョンボックス」といて扱われ、指定したコンテンツが流し込まれた状態で表示されます。流し込まれる順番は、HTMLソースに記述した#box1、#box2、#box3の順になります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/105-div.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div id="box1"&gt;&lt;/div&gt;
+                                    | &lt;div id="box2"&gt;&lt;/div&gt;
+                                    | &lt;div id="box3"&gt;&lt;/div&gt;
+                                    | 
+                                    | &lt;article&gt;
+                                    | &lt;h2&gt;おすすめのサンドイッチ&lt;/h2&gt;
+                                    | …略...
+                                    | &lt;/article&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #box1
+                                    | #box2
+                                    | #box3
+                                    | article
+                                    |     h2 おすすめのサンドイッチ
+                                    |     | …略...
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | article {
+                                    |     -webkit-flow-into: mydata;
+                                    | }
+                                    | #box1, #box2, #box3 {
+                                    |     -webkit-flow-from: mydata;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | article
+                                    |     -webkit-flow-into mydata
+                                    | 
+                                    | #box1, #box2, #box3
+                                    |     -webkit-flow-from mydata
+                                figcaption （Stylus）
+                            p='リージョンボックスの大きさを変えると、流し込んだコンテンツもそれに合わせて表示されます。'
+                            p='なお、コンテンツ名は任意に指定することができますが、「none」、「inherit」、「default」、「auto」、「initial」を使用することは禁止されています。'
+                            p='Chromeで表示を確認するためには、chrome://flagsで「試験運用版のWebkit機能を有効にする」を有効にする必要があります。'
+                            p='IE10はリージョンの機能に対応していますが、flow-intoプロパティで指定できるのは<iframe>で指定したコンテンツのみとなっています。そこで、コンテンツページ（contents.html）を用意し、<iframe>で下のように指定します。'
+                            p='<iframe>で指定したコンテンツを3つのボックスに流し込んでレイアウトするため、<iframe>のflow-intoプロパティの値を「mydata」と指定します。あとは、3つのボックスのflow-fromプロパティの値を「mydata」と指定すると、指定したコンテンツが流し込まれた状態で表示されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/105-iframe.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div id="box1"&gt;&lt;/div&gt;
+                                    | &lt;div id="box2"&gt;&lt;/div&gt;
+                                    | &lt;div id="box3"&gt;&lt;/div&gt;
+                                    | 
+                                    | &lt;iframe src="contents.html"&gt;&lt;/iframe&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #box1
+                                    | #box2
+                                    | #box3
+                                    | iframe(src='contents.html')
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | iframe {
+                                    |     -ms-flow-into: mydata;
+                                    | }
+                                    | #box1, #box2, #box3 {
+                                    |     -ms-flow-from: mydata;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | iframe
+                                    |     -ms-flow-into mydata
+                                    | 
+                                    | #box1, #box2, #box3
+                                    |     -ms-flow-from mydata
+                                figcaption （Stylus）
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

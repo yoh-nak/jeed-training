@@ -1,1876 +1,1876 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;セレクタ
-						.panel-body
-							.alert.alert-info セレクタ
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							p ※ IE8以前は部分対応
-							pre
-								| selector {property: value; }
-							p
-								| selector・・・セレクタ<br>
-								| property・・・プロパティ名<br>
-								| value・・・プロパティの値
-							table.table
-								tr
-									td 初期値
-									td -
-								tr
-									td 継承
-									td -
-								tr
-									td 適用先
-									td -
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td Selectors
-							p='スタイルシートの設定では、要素ごとのデザインを下のようにプロパティ名と値のセット（宣言）でしていします。たとえば、文字の色を赤色にしたい場合には、プロパティの値を「red」と指定します。'
-							pre='h1 {color: red;}'
-							p='どの要素のデザインであるかはセレクタで指定します。たとえば、 「h1」と指定すると<h1>でアークアップした部分の文字の色が赤色になります。'
-							p='要素をより限定するためには、複数のセレクタをつなげて記述します。たとえば、タイプセレクタの「h1」とIDセレクタの「#title」をつなげて「h1#title」と指定すると、<h1 id="title">でマークアップした部分のデザインを指定することができます。'
-							pre='h1#title {color: red;}'
-							p='CSS3の「Selectors Level3」で定義されたセレクタは以下のようになっており、組み合わせることでさまざまな条件で要素を指定することが可能です。これらのセレクタには各ブラウザが対応済みですが、IE8以前のバージョンに関しては対応にばらつきがありますので、バージョンごとの対応状況を掲載しています。'
-							.alert.alert-info シンプルセレクタ
-							p='「シンプルセレクタ」として分類されている基本的なセレクタです。'
-							table.table
-								tr
-									th 分類
-									th セレクタ
-									th 適用先
-									th IE6
-									th IE7
-									th IE8
-									th IE9
-								tr
-									td タイプセレクタ
-									td ELEMENT
-									td 指定した名前の要素。
-									td ○
-									td ○
-									td ○
-									td ○
-								tr
-									td ユニバーサルセレクタ
-									td *
-									td すべての要素。
-									td ×
-									td ○
-									td ○
-									td ○
-								tr
-									td クラスセレクタ
-									td .class
-									td クラス名が「class」の要素。
-									td △※
-									td ○
-									td ○
-									td ○
-								tr
-									td IDセレクタ
-									td #id
-									td IDが「id」の要素。
-									td ○
-									td ○
-									td ○
-									td ○
-								tr
-									td(rowspan='7') 属性セレクタ
-									td [att]
-									td 属性attが指定された要素。
-									td ×
-									td ○
-									td ○
-									td ○
-								tr
-									td [att="val"]
-									td 属性attの値が「val」の要素。
-									td ×
-									td ○
-									td ○
-									td ○
-								tr
-									td [att~="val"]
-									td 属性attの値に「val」というスペース区切りの語句がある要素。
-									td ×
-									td ○
-									td ○
-									td ○
-								tr
-									td [att|="val"]
-									td 属性attの値に「val」というハイフン（-）区切りの語句から始まる要素。
-									td ×
-									td ○
-									td ○
-									td ○
-								tr
-									td [att^="val"]
-									td 属性attの値が「val」で始まる要素。
-									td ×
-									td ○
-									td ○
-									td ○
-								tr
-									td [att$="val"]
-									td 属性attの値が「val」で終わる要素。
-									td ×
-									td ○
-									td ○
-									td ○
-								tr
-									td [att*="val"]
-									td 属性attの値の一部に「val」が含まれる要素。
-									td ×
-									td ○
-									td ○
-									td ○
-							p='※・・・複数のクラス名を指定する「.class.class」の記述に未対応です。'
-							.alert.alert-info シンプルセレクタ（疑似クラス）
-							p='「シンプルセレクタ」として分類されたセレクタのうち、「疑似クラス」と呼ばれているものです。他のシンプルセレクタやドキュメントの構造では示すことのできない要素を指定します'
-							table.table
-								tr
-									th 分類
-									th セレクタ
-									th 適用先
-									th IE6
-									th IE7
-									th IE8
-									th IE9
-								tr
-									td(rowspan='2') ダイナミック疑似クラス<br>（リンク疑似クラス）
-									td :link
-									td リンク先に未アクセスの要素。
-									td ○
-									td ○
-									td ○
-									td ○
-								tr
-									td :visited
-									td リンク先にアクセス済みの要素。
-									td ○
-									td ○
-									td ○
-									td ○
-								tr
-									td(rowspan='3') ダイナミック疑似クラス<br>（ユーザーアクション疑似クラス）
-									td :hover
-									td カーソルを重ねた要素。
-									td △※
-									td ○
-									td ○
-									td ○
-								tr
-									td :focus
-									td フォーカスした要素。
-									td △※
-									td △※
-									td ○
-									td ○
-								tr
-									td :active
-									td アクティブな要素。
-									td △※
-									td △※
-									td ○
-									td ○
-								tr
-									td ターゲット疑似クラス
-									td :target
-									td リンクターゲットの要素。
-									td ×
-									td ×
-									td ×
-									td ○
-								tr
-									td 言語疑似クラス
-									td :lang(〜)
-									td 指定した言語の要素。
-									td ×
-									td ×
-									td ○
-									td ○
-								tr
-									td(rowspan='4') UI疑似クラス
-									td :enabled
-									td 有効な状態の要素。
-									td ×
-									td ×
-									td ×
-									td ○
-								tr
-									td :disabled
-									td 無効な状態の要素。
-									td ×
-									td ×
-									td ×
-									td ○
-								tr
-									td :checked
-									td オンの状態のラジオボタンやチェックボックス。
-									td ×
-									td ×
-									td ×
-									td ○
-								tr
-									td :indeterminate
-									td 不確定な状態のチェックボックス。
-									td ×
-									td ×
-									td ×
-									td ○
-								tr
-									td(rowspan='12') 構造疑似クラス
-									td :root
-									td ルート要素。
-									td ×
-									td ×
-									td ×
-									td ○
-								tr
-									td :first-child
-									td 最初の要素（全要素をカウント）。
-									td ×
-									td ○
-									td ○
-									td ○
-								tr
-									td :last-child
-									td 最後の要素（全要素をカウント）。
-									td ×
-									td ×
-									td ×
-									td ○
-								tr
-									td :nth-child(〜)
-									td 最初から〜番目の要素や奇数・偶数の要素（全要素をカウント）。
-									td ×
-									td ×
-									td ×
-									td ○
-								tr
-									td :nth-last-child(〜)
-									td 最後から〜番目の要素や奇数・偶数の要素（全要素をカウント）。
-									td ×
-									td ×
-									td ×
-									td ○
-								tr
-									td :only-child
-									td 最初と最後が一致する要素（全要素をカウント）。
-									td ×
-									td ×
-									td ×
-									td ○
-								tr
-									td :first-of-type
-									td 最初の要素（同じ要素をカウント）。
-									td ×
-									td ×
-									td ×
-									td ○
-								tr
-									td :last-of-type
-									td 最後の要素（同じ要素をカウント）。
-									td ×
-									td ×
-									td ×
-									td ○
-								tr
-									td :nth-of-type(〜)
-									td 最初から〜番目の要素や奇数・偶数の要素（同じ要素をカウント）。
-									td ×
-									td ×
-									td ×
-									td ○
-								tr
-									td :nth-lalt-of-type(〜)
-									td 最後から〜番目の要素や奇数・偶数の要素（同じ要素をカウント）。
-									td ×
-									td ×
-									td ×
-									td ○
-								tr
-									td :only-of-type
-									td 最初と最後が一致する要素（同じ要素をカウント）。
-									td ×
-									td ×
-									td ×
-									td ○
-								tr
-									td :empty
-									td 空の要素。
-									td ×
-									td ×
-									td ×
-									td ○
-								tr
-									td 否定疑似クラス
-									td :not(〜)
-									td 指定した条件と一致しない要素。
-									td ×
-									td ×
-									td ×
-									td ○
-							p='※・・・<a>以外の要素への適用に未対応です。'
-							.alert.alert-info 擬似要素
-							p='疑似要素では仮想的に作成した要素を指定します。'
-							table.table
-								tr
-									th 分類
-									th セレクタ
-									th 適用先
-									th IE6
-									th IE7
-									th IE8
-									th IE9
-								tr
-									td ::first-line疑似要素
-									td ::first-line
-									td 要素の1行目。
-									td ×
-									td ×
-									td ×
-									td ○
-								tr
-									td ::first-letter疑似要素
-									td ::first-letter
-									td 要素の1文字目。
-									td ×
-									td ×
-									td ×
-									td ○
-								tr
-									td(rowspan='2') ::before、::after疑似要素
-									td ::before
-									td 要素の前に挿入したコンテンツ。
-									td ×
-									td ×
-									td △※
-									td ○
-								tr
-									td ::after
-									td 要素の後に挿入したコンテンツ。
-									td ×
-									td ×
-									td △※
-									td ○
-							p='※・・・「::」の記述に未対応です。利用する場合は「:before」「:after」と記述します。'
-							.alert.alert-info 結合子
-							p='結合子（+など）を利用し、ドキュメントの構造で要素を指定します。'
-							table.table
-								tr
-									th 分類
-									th セレクタ
-									th 適用先
-									th IE6
-									th IE7
-									th IE8
-									th IE9
-								tr
-									td 子孫セレクタ
-									td A B
-									td A要素の階層下のすべてのB要素。
-									td ○
-									td ○
-									td ○
-									td ○
-								tr
-									td 子セレクタ
-									td A &gt; B
-									td A要素の1階層下のB要素。
-									td ×
-									td ○
-									td ○
-									td ○
-								tr
-									td 兄弟セレクタ（隣接セレクタ）
-									td A + B
-									td A要素の直後に記述した同階層のB要素。
-									td ×
-									td ○
-									td ○
-									td ○
-								tr
-									td 兄弟セレクタ（間接セレクタ）
-									td A ~ B
-									td A要素の後に記述したすべての同階層のB要素。
-									td ×
-									td ○
-									td ○
-									td ○
-							.alert.alert-info グループ化
-							p='複数の要素を指定します。'
-								tr
-									th 分類
-									th セレクタ
-									th 適用先
-									th IE6
-									th IE7
-									th IE8
-									th IE9
-								tr
-									td グルール化
-									td A, B
-									td A要素とB要素の両方に適用。
-									td ○
-									td ○
-									td ○
-									td ○
-							hr
-							h4 タイプセレクタ ELEMENT
-							p='タイプセレクタは要素名（タグ名）で適用先を指定するセレクタです。たとえば、セレクタを「li」と指定すると、<li>とマークアップした部分にスタイルシートを適用することができます。下のサンプルでは、文字の色をピンク色にしています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/019-element.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| li {
-									|     color: hotpink;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| li
-									| 	color hotpink
-								figcaption （stylus）
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h2&gt;SANDWICHES&lt;/h2&gt;
-									| &lt;ul&gt;
-									| &lt;li&gt;ハム&amp;チーズサンド&lt;/li&gt;
-									| &lt;li&gt;卵&amp;野菜サンド&lt;/li&gt;
-									| &lt;li&gt;日替わりサンド&lt;/lI&gt;
-									| &lt;/ul&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 SANDWICHES
-									| ul
-									| 	li ハム&amp;チーズサンド
-									| 	li 卵&amp;野菜サンド
-									| 	li 日替わりサンド
-								figcaption （Jade）
-							hr
-							h4 ユニバーサルセレクタ *
-							p='ユニバーサルセレクタ「*」を利用すると、すべての要素を適用先にすることができます。下のようにセレクタを「*」をと指定すると、すべての要素がピンク色の文字で表示されます。このとき、<h2>、<ul>、<li>だけでなく、コンテンツ全体をマークアップしている<body>と、HTMLソース全体をマークアップしている<html>も適用先に含まれていますので注意が必要です。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/019-univ.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| * {
-									|     color: hotpink;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| *
-									| 	color hotpink
-								figcaption （stylus）
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;html&gt;
-									| …略…
-									| &lt;body&gt;
-									|     &lt;h2&gt;SANDWICHES&lt;/h2&gt;
-									|     &lt;ul&gt;
-									|     &lt;li&gt;ハム&amp;チーズサンド&lt;/li&gt;
-									|     …略...
-									|     &lt;/ul&gt;
-									| &lt;/body&gt;
-									| &lt;/html&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| html
-									| 	body
-									| 		h2
-									| 		ul
-									| 			li ハム&amp;チーズサンド
-								figcaption （Jade）
-							hr
-							h4 クラスセレクタ .class
-							p='HTMLではclass属性を利用することで、要素に対してクラス名を指定することができます。このクラス名を使って特定の要素にスタイルシートを適用する場合にはクラスセレクタを利用します。'
-							p='たとえば、下のようにセレクタを「.ham」と指定すると、「ham」というクラス名を持った要素にスタイルシートを適用することができます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/019-class01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| .ham {
-									|     color: hotpink;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| .ham
-									| 	color hotpink
-								figcaption （stylus）
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;ul&gt;
-									| &lt;li class="ham"&gt;ハム&amp;チーズサンド&lt;/li&gt;
-									| &lt;li class="ham-egg"&gt;卵&amp;野菜サンド&lt;/li&gt;
-									| &lt;li class="daily egg ham"&gt;日替わりサンド&lt;/li&gt;
-									| &lt;/ul&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| ul
-									| 	li.ham ハム&amp;チーズサンド
-									| 		li.ham-egg 卵&amp;野菜サンド
-									| 		li.daily.egg.ham 日替わりサンド
-								figcaption （Jade）
-							p='また、セレクタを「.ham.egg」と指定すると、「ham」と「egg」の両方のクラスを持つ要素に適用することができます。'
-							p='クラス名は、複数の要素に同じクラス名を指定したり、1つの要素に複数のクラス名を指定することができますので、あるルールに従って複数の要素に対してスタイルシートを適用する場合に利用することができます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/019-class02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| .ham.egg {
-									|     color: hotpink;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| .ham.egg
-									| 	color hotpink
-								figcaption （stylus）
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;ul&gt;
-									| &lt;li class="ham"&gt;ハム&amp;チーズサンド&lt;/li&gt;
-									| &lt;li class="ham-egg"&gt;卵&amp;野菜サンド&lt;/li&gt;
-									| &lt;li class="daily egg ham"&gt;日替わりサンド&lt;/li&gt;
-									| &lt;/ul&gt;
-									| 
-									| &lt;dl&gt;
-									| &lt;li class="ham"&gt;ハム&amp;チーズサンド&lt;/li&gt;
-									| &lt;li class="ham-egg"&gt;卵&amp;野菜サンド&lt;/li&gt;
-									| &lt;li class="daily egg ham"&gt;日替わりサンド&lt;/li&gt;
-									| &lt;/dl&gt;
-									| 
-									| &lt;p class="ham"&gt;
-									|     ハム&amp;チーズサンド
-									| &lt;/p&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| ul
-									| 	li.ham ハム&amp;チーズサンド
-									| 	li.ham-egg 卵&amp;野菜サンド
-									| 	li.daily.egg.ham 日替わりサンド
-									| dl
-									| 	li.ham ハム&amp;チーズサンド
-									| 	li.ham-egg 卵&amp;野菜サンド
-									| 	li.daily.egg.ham 日替わりサンド
-									| p.ham
-									| 	| ハム&amp;チーズサンド
-								figcaption （Jade）
-							hr
-							h4 IDセレクタ #id
-							p='HTMLではid属性を利用することで要素に対してIDを指定することができます。このIDを使って特定の要素にスタイルシートを適用する場合には、IDセレクタを利用します。たとえば、下のようにセレクタを「#ham」と指定すると、「ham」というIDを持つ要素にスタイルシートを適用することができます。'
-							p='IDは、ページ内で同じIDを繰り返したり、1つの要素に複数のIDを指定することはできません。そのため、ページ内にある1つの要素を特定し、スタイルシートを適用する場合に利用することができます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/020-id.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| #ham {
-									|     color: hotpink;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #ham
-									| 	hotpink
-								figcaption （stylus）
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;ul&gt;
-									| &lt;li id="ham"&gt;ハム&amp;チーズサンド&lt;/li&gt;
-									| &lt;li id="ham-egg"&gt;卵&amp;野菜サンド&lt;/li&gt;
-									| &lt;li id="daily"&gt;日替わりサンド&lt;/li&gt;
-									| &lt;/ul&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| ul
-									| 	li#ham ハム&amp;チーズサンド
-									| 	li#ham-egg 卵&amp;野菜サンド
-									| 	li#daily 日替わりサンド
-								figcaption （Jade）
-							hr
-							h4 属性セレクタ [attr="val"]
-							p='特定の属性を持つ要素にスタイルシートを適用するには、属性セレクタを利用します。たとえば、class属性を持つ要素に適用するには、セレクタを[class]と指定します。下のサンプルでは、class属性を持つ3つの<li>にスタイルシートが適用されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/020-att01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| [class] {
-									|     color: hotpink;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| [class]
-									| 	color hotpink
-								figcaption （stylus）
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;ul&gt;
-									| &lt;li class="ham"&gt;ハム&amp;チーズサンド&lt;/li&gt;
-									| &lt;li class="ham-egg"&gt;卵&amp;野菜サンド&lt;/li&gt;
-									| &lt;li class="daily egg ham"&gt;日替わりサンド&lt;/li&gt;
-									| &lt;/ul&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| ul
-									| 	li.ham ハム&amp;チーズサンド
-									| 	li.ham-egg 卵&amp;野菜サンド
-									| 	li.daily.egg.ham 日替わりサンド
-								figcaption （Jade）
-							p='属生命と値の両方が完全に一致する場合だけに適用することもできます。たとえば、[class="ham"]と指定すると、class属性の値を「ham」と指定した要素が適用先となります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/020-att02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							p <mark>※.ham（クラスセレクター）の場合はスペース区切りのクラスも適用されますが、属性セレクターの場合は区別されます。</mark>
-							figure
-								pre(class='prettyprint linenums:1')
-									| [class="ham"] {
-									| 	color: hotpink;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| [class="ham"]
-									| 	color hotpink
-								figcaption （stylus）
-							p='class属性の値の一部が「ham」と一致する場合に適用することも可能です。その場合は[class*=ham]と指定します。ここではどのclass属性の値にも「ham」が含まれるため、すべての文字がピンク色になります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/020-att03.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| [class*="ham"] {
-									| 	color: hotpink;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| [class*="ham"]
-									| 	color hotpink
-								figcaption （stylus）
-							p='[class^ham]と指定すると、class属性の値が「ham」で始まる要素に適用することができます。ここでは値を「ham」や「ham-egg」と指定した要素が適用先となります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/020-att04.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| [class^="ham"] {
-									| 	color: hotpink;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| [class^="ham"]
-									| 	color hotpink
-								figcaption （stylus）
-							p='[class$=ham]と指定すると、class属性の値が「ham」で終わる要素に適用することができます。ここでは値を「ham」や「daily egg ham」と指定した要素に適用されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/020-att05.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| [class$="ham"] {
-									| 	color: hotpink;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| [class$="ham"]
-									| 	color hotpink
-								figcaption （stylus）
-							p='[class~="ham"]と指定すると、class属性の値がスペース区切りの語句のリストで「ham」という語句を含む場合に適用されます。ここでは値を「ham」や「daily egg ham」と指定した要素が適用先となります。「ham-egg」はスペース区切りの語句ではないため、適用先となりません。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/020-att06.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| [class~="ham"] {
-									| 	color: hotpink;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| [class~="ham"]
-									| 	color hotpink
-								figcaption （stylus）
-							p='[class|="ham"]と指定すると、class属性の値がハイフン区切りの語句のリストで、最初の語句が「ham」の場合に適用されます。ここでは値を「ham」や「ham-egg」と指定した要素が適用先となります。「daily egg ham」はハイフン区切りの語句ではないため、適用先となりません。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/020-att07.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| [class|="ham"] {
-									| 	color: hotpink;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| [class|="ham"]
-									| 	color hotpink
-								figcaption （stylus）
-							hr
-							h4 リンク擬似クラス :link / :visited
-							p='<a>でマークアップしてリンクを設定すると、文字が青色になり、下線を引いた形で表示されます。これはリンク先にアクセスしていない場合の表示で、アクセス済みの場合は紫色になります。'
-							p='こうしたリンクのデザインを変更するには、リンク疑似クラスを利用します。セレクタを「:link」と指定するとアクセスしていないリンクに、「:visited」と指定するとアクセス済みのリンクにスタイルシートを適用することができます。ここでは、アクセスしていないリンクを緑色に、アクセス済みのリンクを灰色で表示するようにしています。'
-							p='なお、:linkと:visitedの指定は<a>でマークアップした部分に対してのみ機能します。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/021-link.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| a:link {
-									| 	color: green;
-									| }
-									| a:visited {
-									| 	color: gray;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| a
-									| 	&amp;:link
-									| 		color green
-									| 	&amp;:visited
-									| 		color gray
-								figcaption （stylus）
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;ul&gt;
-									| &lt;li&gt;&lt;a href="..."&gt;ハム&amp;チーズサンド&lt;/a&gt;&lt;/li&gt;
-									| &lt;li&gt;&lt;a href="..."&gt;卵&amp;野菜サンド&lt;/a&gt;&lt;/li&gt;
-									| &lt;li&gt;&lt;a href="...".日替わりサンド&lt;/a&gt;&lt;/li&gt;
-									| &lt;/ul&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| ul
-									| 	li
-									| 		a(href='...') ハム&amp;チーズサンド
-									| 	li
-									| 		a(href='...') 卵&amp;野菜サンド
-									| 	li
-									| 		a(href='...')
-								figcaption （Jade）
-							hr
-							h4 ユーザーアクション擬似クラス :hover / :focus / :active
-							p='ユーザーアクション疑似クラスの「:hover」、「:focus」、「:active」を利用すると、要素にカーソルを重ねたとき、フォーカスしたとき、クリックしたときにスタイルシートを適用することができます。ここでは、それぞれの状態のときにオレンジ色、ピンク色、赤色で表示するように指定しています。'
-							p='なお、リンク疑似クラスと異なり、ユーザーアクション疑似クラスは<a>でマークアップした部分以外にも適用することができます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/022-hover.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| a:link {
-									|     color: green;
-									| }
-									| a:visited {
-									|     color: gray;
-									| }
-									| a:hover {
-									|     color: orange;
-									| }
-									| a:focus {
-									|     color: hotpink;
-									| }
-									| a:active {
-									|     color: red;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| a
-									| 	&amp;:link
-									| 		color green
-									| 	&amp;:visited
-									| 		color gray
-									| 	&amp;:hover
-									| 		color orange
-									| 	&amp;:focus
-									| 		color hotpink
-									| 	&amp;:active
-									| 		color red
-								figcaption （stylus）
-							p='タッチパネルのデバイスではカーソルを重ねた状態と、クリックした状態の区別ができません。そのため、:hoverと:activeの適用に関しては、タッチパネル独特の反応になります。'
-							p='スタイルシートは後から記述した設定に応じて表示に反映させるtめには、「:link」、「:visited」、「:hover」、「:focus」、「:active」の順に記述する必要があります。'
-							p='リンクに表示される下線を削除するためには、text-decorationプロパティの値を「none」と指定します。'
-							hr
-							h4 ターゲット擬似クラス :target
-							p='<a href="〜">では特定のIDを指定して、ページ内をジャンプすることができます。ターゲット疑似クラス「:target」を利用すると、ページ内ジャンプのリンクをクリックしたときに、ジャンプ先の要素に対してスタイルシートを適用することができます。'
-							p='たとえば、下のサンプルでは<div id="photo">でマークアップした部分を緑色の背景色で表示したものです。その下には「Click」というリンクを用意して、ジャンプ先を「#photo」と指定しています。これでリンクをクリックすると、#photo:target {〜}の設定が<div id="photo">に適用され、background-imageプロパティで指定した背景画像が表示されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/022-target.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| #photo {
-									|     background-color: yellowgreen;
-									| }
-									| #photo:target {
-									|     background-image: url(sandwiches.jpg);
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #photo
-									| 	background-color yellowgreen
-									| 	&amp;:target
-									| 		background-image url(sandwiches.jpg)
-								figcaption （stylus）
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div id="photo"&gt;HAM SANDWICHES&lt;/div&gt;
-									| &lt;div&gt;&lt;a href="#photo"&gt;CLICK&lt;/a&gt;&lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #photo HAM SANDWICHES
-									| div: a(href='#photo') CLICK
-								figcaption （Jade）
-							hr
-							h4 言語擬似クラス :lang()
-							p='HTMLではlang属性で言語の種類を指定することができます。下のサンプルでは<h2>でマークアップした見出しを英語で記述していますので、lang属性を「en」と指定しています。'
-							p='言語疑似クラス「:lang()」を利用すると、特定の言語に対してスタイルシートを適用することができます。たとえば、英語で記述した部分に適用するためには、セレクタを「:lang(en)」と指定します。ここでは背景色を緑色にして、「Arial Black」という欧文フォントで表示するようにしています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/023-lang.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| :lang(en) {
-									|     font-family: 'Arial Black', sans-serif;
-									|     background-color: yellowgreen;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| :lang(en)
-									| 	font-family 'Arial Black', sans-serif
-									| 	background-color yellowgreen
-								figcaption （stylus）
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h2 lang="en"&gt;HAM SANDWICHES&lt;/h2&gt;
-									| &lt;p&gt;焼きたての手作りパンえ新鮮なハム、トマト、…略…&lt;/p&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2(lang='en') HAM SANDWICHES
-									| p 焼きたての手作りパンえ新鮮なハム、トマト、…略…
-								figcaption （Jade）
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;セレクタ
+                        .panel-body
+                            .alert.alert-info セレクタ
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            p ※ IE8以前は部分対応
+                            pre
+                                | selector {property: value; }
+                            p
+                                | selector・・・セレクタ<br>
+                                | property・・・プロパティ名<br>
+                                | value・・・プロパティの値
+                            table.table
+                                tr
+                                    td 初期値
+                                    td -
+                                tr
+                                    td 継承
+                                    td -
+                                tr
+                                    td 適用先
+                                    td -
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td Selectors
+                            p='スタイルシートの設定では、要素ごとのデザインを下のようにプロパティ名と値のセット（宣言）でしていします。たとえば、文字の色を赤色にしたい場合には、プロパティの値を「red」と指定します。'
+                            pre='h1 {color: red;}'
+                            p='どの要素のデザインであるかはセレクタで指定します。たとえば、 「h1」と指定すると<h1>でアークアップした部分の文字の色が赤色になります。'
+                            p='要素をより限定するためには、複数のセレクタをつなげて記述します。たとえば、タイプセレクタの「h1」とIDセレクタの「#title」をつなげて「h1#title」と指定すると、<h1 id="title">でマークアップした部分のデザインを指定することができます。'
+                            pre='h1#title {color: red;}'
+                            p='CSS3の「Selectors Level3」で定義されたセレクタは以下のようになっており、組み合わせることでさまざまな条件で要素を指定することが可能です。これらのセレクタには各ブラウザが対応済みですが、IE8以前のバージョンに関しては対応にばらつきがありますので、バージョンごとの対応状況を掲載しています。'
+                            .alert.alert-info シンプルセレクタ
+                            p='「シンプルセレクタ」として分類されている基本的なセレクタです。'
+                            table.table
+                                tr
+                                    th 分類
+                                    th セレクタ
+                                    th 適用先
+                                    th IE6
+                                    th IE7
+                                    th IE8
+                                    th IE9
+                                tr
+                                    td タイプセレクタ
+                                    td ELEMENT
+                                    td 指定した名前の要素。
+                                    td ○
+                                    td ○
+                                    td ○
+                                    td ○
+                                tr
+                                    td ユニバーサルセレクタ
+                                    td *
+                                    td すべての要素。
+                                    td ×
+                                    td ○
+                                    td ○
+                                    td ○
+                                tr
+                                    td クラスセレクタ
+                                    td .class
+                                    td クラス名が「class」の要素。
+                                    td △※
+                                    td ○
+                                    td ○
+                                    td ○
+                                tr
+                                    td IDセレクタ
+                                    td #id
+                                    td IDが「id」の要素。
+                                    td ○
+                                    td ○
+                                    td ○
+                                    td ○
+                                tr
+                                    td(rowspan='7') 属性セレクタ
+                                    td [att]
+                                    td 属性attが指定された要素。
+                                    td ×
+                                    td ○
+                                    td ○
+                                    td ○
+                                tr
+                                    td [att="val"]
+                                    td 属性attの値が「val」の要素。
+                                    td ×
+                                    td ○
+                                    td ○
+                                    td ○
+                                tr
+                                    td [att~="val"]
+                                    td 属性attの値に「val」というスペース区切りの語句がある要素。
+                                    td ×
+                                    td ○
+                                    td ○
+                                    td ○
+                                tr
+                                    td [att|="val"]
+                                    td 属性attの値に「val」というハイフン（-）区切りの語句から始まる要素。
+                                    td ×
+                                    td ○
+                                    td ○
+                                    td ○
+                                tr
+                                    td [att^="val"]
+                                    td 属性attの値が「val」で始まる要素。
+                                    td ×
+                                    td ○
+                                    td ○
+                                    td ○
+                                tr
+                                    td [att$="val"]
+                                    td 属性attの値が「val」で終わる要素。
+                                    td ×
+                                    td ○
+                                    td ○
+                                    td ○
+                                tr
+                                    td [att*="val"]
+                                    td 属性attの値の一部に「val」が含まれる要素。
+                                    td ×
+                                    td ○
+                                    td ○
+                                    td ○
+                            p='※・・・複数のクラス名を指定する「.class.class」の記述に未対応です。'
+                            .alert.alert-info シンプルセレクタ（疑似クラス）
+                            p='「シンプルセレクタ」として分類されたセレクタのうち、「疑似クラス」と呼ばれているものです。他のシンプルセレクタやドキュメントの構造では示すことのできない要素を指定します'
+                            table.table
+                                tr
+                                    th 分類
+                                    th セレクタ
+                                    th 適用先
+                                    th IE6
+                                    th IE7
+                                    th IE8
+                                    th IE9
+                                tr
+                                    td(rowspan='2') ダイナミック疑似クラス<br>（リンク疑似クラス）
+                                    td :link
+                                    td リンク先に未アクセスの要素。
+                                    td ○
+                                    td ○
+                                    td ○
+                                    td ○
+                                tr
+                                    td :visited
+                                    td リンク先にアクセス済みの要素。
+                                    td ○
+                                    td ○
+                                    td ○
+                                    td ○
+                                tr
+                                    td(rowspan='3') ダイナミック疑似クラス<br>（ユーザーアクション疑似クラス）
+                                    td :hover
+                                    td カーソルを重ねた要素。
+                                    td △※
+                                    td ○
+                                    td ○
+                                    td ○
+                                tr
+                                    td :focus
+                                    td フォーカスした要素。
+                                    td △※
+                                    td △※
+                                    td ○
+                                    td ○
+                                tr
+                                    td :active
+                                    td アクティブな要素。
+                                    td △※
+                                    td △※
+                                    td ○
+                                    td ○
+                                tr
+                                    td ターゲット疑似クラス
+                                    td :target
+                                    td リンクターゲットの要素。
+                                    td ×
+                                    td ×
+                                    td ×
+                                    td ○
+                                tr
+                                    td 言語疑似クラス
+                                    td :lang(〜)
+                                    td 指定した言語の要素。
+                                    td ×
+                                    td ×
+                                    td ○
+                                    td ○
+                                tr
+                                    td(rowspan='4') UI疑似クラス
+                                    td :enabled
+                                    td 有効な状態の要素。
+                                    td ×
+                                    td ×
+                                    td ×
+                                    td ○
+                                tr
+                                    td :disabled
+                                    td 無効な状態の要素。
+                                    td ×
+                                    td ×
+                                    td ×
+                                    td ○
+                                tr
+                                    td :checked
+                                    td オンの状態のラジオボタンやチェックボックス。
+                                    td ×
+                                    td ×
+                                    td ×
+                                    td ○
+                                tr
+                                    td :indeterminate
+                                    td 不確定な状態のチェックボックス。
+                                    td ×
+                                    td ×
+                                    td ×
+                                    td ○
+                                tr
+                                    td(rowspan='12') 構造疑似クラス
+                                    td :root
+                                    td ルート要素。
+                                    td ×
+                                    td ×
+                                    td ×
+                                    td ○
+                                tr
+                                    td :first-child
+                                    td 最初の要素（全要素をカウント）。
+                                    td ×
+                                    td ○
+                                    td ○
+                                    td ○
+                                tr
+                                    td :last-child
+                                    td 最後の要素（全要素をカウント）。
+                                    td ×
+                                    td ×
+                                    td ×
+                                    td ○
+                                tr
+                                    td :nth-child(〜)
+                                    td 最初から〜番目の要素や奇数・偶数の要素（全要素をカウント）。
+                                    td ×
+                                    td ×
+                                    td ×
+                                    td ○
+                                tr
+                                    td :nth-last-child(〜)
+                                    td 最後から〜番目の要素や奇数・偶数の要素（全要素をカウント）。
+                                    td ×
+                                    td ×
+                                    td ×
+                                    td ○
+                                tr
+                                    td :only-child
+                                    td 最初と最後が一致する要素（全要素をカウント）。
+                                    td ×
+                                    td ×
+                                    td ×
+                                    td ○
+                                tr
+                                    td :first-of-type
+                                    td 最初の要素（同じ要素をカウント）。
+                                    td ×
+                                    td ×
+                                    td ×
+                                    td ○
+                                tr
+                                    td :last-of-type
+                                    td 最後の要素（同じ要素をカウント）。
+                                    td ×
+                                    td ×
+                                    td ×
+                                    td ○
+                                tr
+                                    td :nth-of-type(〜)
+                                    td 最初から〜番目の要素や奇数・偶数の要素（同じ要素をカウント）。
+                                    td ×
+                                    td ×
+                                    td ×
+                                    td ○
+                                tr
+                                    td :nth-lalt-of-type(〜)
+                                    td 最後から〜番目の要素や奇数・偶数の要素（同じ要素をカウント）。
+                                    td ×
+                                    td ×
+                                    td ×
+                                    td ○
+                                tr
+                                    td :only-of-type
+                                    td 最初と最後が一致する要素（同じ要素をカウント）。
+                                    td ×
+                                    td ×
+                                    td ×
+                                    td ○
+                                tr
+                                    td :empty
+                                    td 空の要素。
+                                    td ×
+                                    td ×
+                                    td ×
+                                    td ○
+                                tr
+                                    td 否定疑似クラス
+                                    td :not(〜)
+                                    td 指定した条件と一致しない要素。
+                                    td ×
+                                    td ×
+                                    td ×
+                                    td ○
+                            p='※・・・<a>以外の要素への適用に未対応です。'
+                            .alert.alert-info 擬似要素
+                            p='疑似要素では仮想的に作成した要素を指定します。'
+                            table.table
+                                tr
+                                    th 分類
+                                    th セレクタ
+                                    th 適用先
+                                    th IE6
+                                    th IE7
+                                    th IE8
+                                    th IE9
+                                tr
+                                    td ::first-line疑似要素
+                                    td ::first-line
+                                    td 要素の1行目。
+                                    td ×
+                                    td ×
+                                    td ×
+                                    td ○
+                                tr
+                                    td ::first-letter疑似要素
+                                    td ::first-letter
+                                    td 要素の1文字目。
+                                    td ×
+                                    td ×
+                                    td ×
+                                    td ○
+                                tr
+                                    td(rowspan='2') ::before、::after疑似要素
+                                    td ::before
+                                    td 要素の前に挿入したコンテンツ。
+                                    td ×
+                                    td ×
+                                    td △※
+                                    td ○
+                                tr
+                                    td ::after
+                                    td 要素の後に挿入したコンテンツ。
+                                    td ×
+                                    td ×
+                                    td △※
+                                    td ○
+                            p='※・・・「::」の記述に未対応です。利用する場合は「:before」「:after」と記述します。'
+                            .alert.alert-info 結合子
+                            p='結合子（+など）を利用し、ドキュメントの構造で要素を指定します。'
+                            table.table
+                                tr
+                                    th 分類
+                                    th セレクタ
+                                    th 適用先
+                                    th IE6
+                                    th IE7
+                                    th IE8
+                                    th IE9
+                                tr
+                                    td 子孫セレクタ
+                                    td A B
+                                    td A要素の階層下のすべてのB要素。
+                                    td ○
+                                    td ○
+                                    td ○
+                                    td ○
+                                tr
+                                    td 子セレクタ
+                                    td A &gt; B
+                                    td A要素の1階層下のB要素。
+                                    td ×
+                                    td ○
+                                    td ○
+                                    td ○
+                                tr
+                                    td 兄弟セレクタ（隣接セレクタ）
+                                    td A + B
+                                    td A要素の直後に記述した同階層のB要素。
+                                    td ×
+                                    td ○
+                                    td ○
+                                    td ○
+                                tr
+                                    td 兄弟セレクタ（間接セレクタ）
+                                    td A ~ B
+                                    td A要素の後に記述したすべての同階層のB要素。
+                                    td ×
+                                    td ○
+                                    td ○
+                                    td ○
+                            .alert.alert-info グループ化
+                            p='複数の要素を指定します。'
+                                tr
+                                    th 分類
+                                    th セレクタ
+                                    th 適用先
+                                    th IE6
+                                    th IE7
+                                    th IE8
+                                    th IE9
+                                tr
+                                    td グルール化
+                                    td A, B
+                                    td A要素とB要素の両方に適用。
+                                    td ○
+                                    td ○
+                                    td ○
+                                    td ○
+                            hr
+                            h4 タイプセレクタ ELEMENT
+                            p='タイプセレクタは要素名（タグ名）で適用先を指定するセレクタです。たとえば、セレクタを「li」と指定すると、<li>とマークアップした部分にスタイルシートを適用することができます。下のサンプルでは、文字の色をピンク色にしています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/019-element.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | li {
+                                    |     color: hotpink;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | li
+                                    |     color hotpink
+                                figcaption （stylus）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h2&gt;SANDWICHES&lt;/h2&gt;
+                                    | &lt;ul&gt;
+                                    | &lt;li&gt;ハム&amp;チーズサンド&lt;/li&gt;
+                                    | &lt;li&gt;卵&amp;野菜サンド&lt;/li&gt;
+                                    | &lt;li&gt;日替わりサンド&lt;/lI&gt;
+                                    | &lt;/ul&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 SANDWICHES
+                                    | ul
+                                    |     li ハム&amp;チーズサンド
+                                    |     li 卵&amp;野菜サンド
+                                    |     li 日替わりサンド
+                                figcaption （Jade）
+                            hr
+                            h4 ユニバーサルセレクタ *
+                            p='ユニバーサルセレクタ「*」を利用すると、すべての要素を適用先にすることができます。下のようにセレクタを「*」をと指定すると、すべての要素がピンク色の文字で表示されます。このとき、<h2>、<ul>、<li>だけでなく、コンテンツ全体をマークアップしている<body>と、HTMLソース全体をマークアップしている<html>も適用先に含まれていますので注意が必要です。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/019-univ.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | * {
+                                    |     color: hotpink;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | *
+                                    |     color hotpink
+                                figcaption （stylus）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;html&gt;
+                                    | …略…
+                                    | &lt;body&gt;
+                                    |     &lt;h2&gt;SANDWICHES&lt;/h2&gt;
+                                    |     &lt;ul&gt;
+                                    |     &lt;li&gt;ハム&amp;チーズサンド&lt;/li&gt;
+                                    |     …略...
+                                    |     &lt;/ul&gt;
+                                    | &lt;/body&gt;
+                                    | &lt;/html&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | html
+                                    |     body
+                                    |         h2
+                                    |         ul
+                                    |             li ハム&amp;チーズサンド
+                                figcaption （Jade）
+                            hr
+                            h4 クラスセレクタ .class
+                            p='HTMLではclass属性を利用することで、要素に対してクラス名を指定することができます。このクラス名を使って特定の要素にスタイルシートを適用する場合にはクラスセレクタを利用します。'
+                            p='たとえば、下のようにセレクタを「.ham」と指定すると、「ham」というクラス名を持った要素にスタイルシートを適用することができます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/019-class01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | .ham {
+                                    |     color: hotpink;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | .ham
+                                    |     color hotpink
+                                figcaption （stylus）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;ul&gt;
+                                    | &lt;li class="ham"&gt;ハム&amp;チーズサンド&lt;/li&gt;
+                                    | &lt;li class="ham-egg"&gt;卵&amp;野菜サンド&lt;/li&gt;
+                                    | &lt;li class="daily egg ham"&gt;日替わりサンド&lt;/li&gt;
+                                    | &lt;/ul&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ul
+                                    |     li.ham ハム&amp;チーズサンド
+                                    |         li.ham-egg 卵&amp;野菜サンド
+                                    |         li.daily.egg.ham 日替わりサンド
+                                figcaption （Jade）
+                            p='また、セレクタを「.ham.egg」と指定すると、「ham」と「egg」の両方のクラスを持つ要素に適用することができます。'
+                            p='クラス名は、複数の要素に同じクラス名を指定したり、1つの要素に複数のクラス名を指定することができますので、あるルールに従って複数の要素に対してスタイルシートを適用する場合に利用することができます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/019-class02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | .ham.egg {
+                                    |     color: hotpink;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | .ham.egg
+                                    |     color hotpink
+                                figcaption （stylus）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;ul&gt;
+                                    | &lt;li class="ham"&gt;ハム&amp;チーズサンド&lt;/li&gt;
+                                    | &lt;li class="ham-egg"&gt;卵&amp;野菜サンド&lt;/li&gt;
+                                    | &lt;li class="daily egg ham"&gt;日替わりサンド&lt;/li&gt;
+                                    | &lt;/ul&gt;
+                                    | 
+                                    | &lt;dl&gt;
+                                    | &lt;li class="ham"&gt;ハム&amp;チーズサンド&lt;/li&gt;
+                                    | &lt;li class="ham-egg"&gt;卵&amp;野菜サンド&lt;/li&gt;
+                                    | &lt;li class="daily egg ham"&gt;日替わりサンド&lt;/li&gt;
+                                    | &lt;/dl&gt;
+                                    | 
+                                    | &lt;p class="ham"&gt;
+                                    |     ハム&amp;チーズサンド
+                                    | &lt;/p&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ul
+                                    |     li.ham ハム&amp;チーズサンド
+                                    |     li.ham-egg 卵&amp;野菜サンド
+                                    |     li.daily.egg.ham 日替わりサンド
+                                    | dl
+                                    |     li.ham ハム&amp;チーズサンド
+                                    |     li.ham-egg 卵&amp;野菜サンド
+                                    |     li.daily.egg.ham 日替わりサンド
+                                    | p.ham
+                                    |     | ハム&amp;チーズサンド
+                                figcaption （Jade）
+                            hr
+                            h4 IDセレクタ #id
+                            p='HTMLではid属性を利用することで要素に対してIDを指定することができます。このIDを使って特定の要素にスタイルシートを適用する場合には、IDセレクタを利用します。たとえば、下のようにセレクタを「#ham」と指定すると、「ham」というIDを持つ要素にスタイルシートを適用することができます。'
+                            p='IDは、ページ内で同じIDを繰り返したり、1つの要素に複数のIDを指定することはできません。そのため、ページ内にある1つの要素を特定し、スタイルシートを適用する場合に利用することができます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/020-id.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #ham {
+                                    |     color: hotpink;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #ham
+                                    |     hotpink
+                                figcaption （stylus）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;ul&gt;
+                                    | &lt;li id="ham"&gt;ハム&amp;チーズサンド&lt;/li&gt;
+                                    | &lt;li id="ham-egg"&gt;卵&amp;野菜サンド&lt;/li&gt;
+                                    | &lt;li id="daily"&gt;日替わりサンド&lt;/li&gt;
+                                    | &lt;/ul&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ul
+                                    |     li#ham ハム&amp;チーズサンド
+                                    |     li#ham-egg 卵&amp;野菜サンド
+                                    |     li#daily 日替わりサンド
+                                figcaption （Jade）
+                            hr
+                            h4 属性セレクタ [attr="val"]
+                            p='特定の属性を持つ要素にスタイルシートを適用するには、属性セレクタを利用します。たとえば、class属性を持つ要素に適用するには、セレクタを[class]と指定します。下のサンプルでは、class属性を持つ3つの<li>にスタイルシートが適用されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/020-att01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | [class] {
+                                    |     color: hotpink;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | [class]
+                                    |     color hotpink
+                                figcaption （stylus）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;ul&gt;
+                                    | &lt;li class="ham"&gt;ハム&amp;チーズサンド&lt;/li&gt;
+                                    | &lt;li class="ham-egg"&gt;卵&amp;野菜サンド&lt;/li&gt;
+                                    | &lt;li class="daily egg ham"&gt;日替わりサンド&lt;/li&gt;
+                                    | &lt;/ul&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ul
+                                    |     li.ham ハム&amp;チーズサンド
+                                    |     li.ham-egg 卵&amp;野菜サンド
+                                    |     li.daily.egg.ham 日替わりサンド
+                                figcaption （Jade）
+                            p='属生命と値の両方が完全に一致する場合だけに適用することもできます。たとえば、[class="ham"]と指定すると、class属性の値を「ham」と指定した要素が適用先となります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/020-att02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            p <mark>※.ham（クラスセレクター）の場合はスペース区切りのクラスも適用されますが、属性セレクターの場合は区別されます。</mark>
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | [class="ham"] {
+                                    |     color: hotpink;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | [class="ham"]
+                                    |     color hotpink
+                                figcaption （stylus）
+                            p='class属性の値の一部が「ham」と一致する場合に適用することも可能です。その場合は[class*=ham]と指定します。ここではどのclass属性の値にも「ham」が含まれるため、すべての文字がピンク色になります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/020-att03.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | [class*="ham"] {
+                                    |     color: hotpink;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | [class*="ham"]
+                                    |     color hotpink
+                                figcaption （stylus）
+                            p='[class^ham]と指定すると、class属性の値が「ham」で始まる要素に適用することができます。ここでは値を「ham」や「ham-egg」と指定した要素が適用先となります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/020-att04.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | [class^="ham"] {
+                                    |     color: hotpink;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | [class^="ham"]
+                                    |     color hotpink
+                                figcaption （stylus）
+                            p='[class$=ham]と指定すると、class属性の値が「ham」で終わる要素に適用することができます。ここでは値を「ham」や「daily egg ham」と指定した要素に適用されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/020-att05.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | [class$="ham"] {
+                                    |     color: hotpink;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | [class$="ham"]
+                                    |     color hotpink
+                                figcaption （stylus）
+                            p='[class~="ham"]と指定すると、class属性の値がスペース区切りの語句のリストで「ham」という語句を含む場合に適用されます。ここでは値を「ham」や「daily egg ham」と指定した要素が適用先となります。「ham-egg」はスペース区切りの語句ではないため、適用先となりません。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/020-att06.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | [class~="ham"] {
+                                    |     color: hotpink;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | [class~="ham"]
+                                    |     color hotpink
+                                figcaption （stylus）
+                            p='[class|="ham"]と指定すると、class属性の値がハイフン区切りの語句のリストで、最初の語句が「ham」の場合に適用されます。ここでは値を「ham」や「ham-egg」と指定した要素が適用先となります。「daily egg ham」はハイフン区切りの語句ではないため、適用先となりません。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/020-att07.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | [class|="ham"] {
+                                    |     color: hotpink;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | [class|="ham"]
+                                    |     color hotpink
+                                figcaption （stylus）
+                            hr
+                            h4 リンク擬似クラス :link / :visited
+                            p='<a>でマークアップしてリンクを設定すると、文字が青色になり、下線を引いた形で表示されます。これはリンク先にアクセスしていない場合の表示で、アクセス済みの場合は紫色になります。'
+                            p='こうしたリンクのデザインを変更するには、リンク疑似クラスを利用します。セレクタを「:link」と指定するとアクセスしていないリンクに、「:visited」と指定するとアクセス済みのリンクにスタイルシートを適用することができます。ここでは、アクセスしていないリンクを緑色に、アクセス済みのリンクを灰色で表示するようにしています。'
+                            p='なお、:linkと:visitedの指定は<a>でマークアップした部分に対してのみ機能します。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/021-link.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | a:link {
+                                    |     color: green;
+                                    | }
+                                    | a:visited {
+                                    |     color: gray;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | a
+                                    |     &amp;:link
+                                    |         color green
+                                    |     &amp;:visited
+                                    |         color gray
+                                figcaption （stylus）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;ul&gt;
+                                    | &lt;li&gt;&lt;a href="..."&gt;ハム&amp;チーズサンド&lt;/a&gt;&lt;/li&gt;
+                                    | &lt;li&gt;&lt;a href="..."&gt;卵&amp;野菜サンド&lt;/a&gt;&lt;/li&gt;
+                                    | &lt;li&gt;&lt;a href="...".日替わりサンド&lt;/a&gt;&lt;/li&gt;
+                                    | &lt;/ul&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ul
+                                    |     li
+                                    |         a(href='...') ハム&amp;チーズサンド
+                                    |     li
+                                    |         a(href='...') 卵&amp;野菜サンド
+                                    |     li
+                                    |         a(href='...')
+                                figcaption （Jade）
+                            hr
+                            h4 ユーザーアクション擬似クラス :hover / :focus / :active
+                            p='ユーザーアクション疑似クラスの「:hover」、「:focus」、「:active」を利用すると、要素にカーソルを重ねたとき、フォーカスしたとき、クリックしたときにスタイルシートを適用することができます。ここでは、それぞれの状態のときにオレンジ色、ピンク色、赤色で表示するように指定しています。'
+                            p='なお、リンク疑似クラスと異なり、ユーザーアクション疑似クラスは<a>でマークアップした部分以外にも適用することができます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/022-hover.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | a:link {
+                                    |     color: green;
+                                    | }
+                                    | a:visited {
+                                    |     color: gray;
+                                    | }
+                                    | a:hover {
+                                    |     color: orange;
+                                    | }
+                                    | a:focus {
+                                    |     color: hotpink;
+                                    | }
+                                    | a:active {
+                                    |     color: red;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | a
+                                    |     &amp;:link
+                                    |         color green
+                                    |     &amp;:visited
+                                    |         color gray
+                                    |     &amp;:hover
+                                    |         color orange
+                                    |     &amp;:focus
+                                    |         color hotpink
+                                    |     &amp;:active
+                                    |         color red
+                                figcaption （stylus）
+                            p='タッチパネルのデバイスではカーソルを重ねた状態と、クリックした状態の区別ができません。そのため、:hoverと:activeの適用に関しては、タッチパネル独特の反応になります。'
+                            p='スタイルシートは後から記述した設定に応じて表示に反映させるtめには、「:link」、「:visited」、「:hover」、「:focus」、「:active」の順に記述する必要があります。'
+                            p='リンクに表示される下線を削除するためには、text-decorationプロパティの値を「none」と指定します。'
+                            hr
+                            h4 ターゲット擬似クラス :target
+                            p='<a href="〜">では特定のIDを指定して、ページ内をジャンプすることができます。ターゲット疑似クラス「:target」を利用すると、ページ内ジャンプのリンクをクリックしたときに、ジャンプ先の要素に対してスタイルシートを適用することができます。'
+                            p='たとえば、下のサンプルでは<div id="photo">でマークアップした部分を緑色の背景色で表示したものです。その下には「Click」というリンクを用意して、ジャンプ先を「#photo」と指定しています。これでリンクをクリックすると、#photo:target {〜}の設定が<div id="photo">に適用され、background-imageプロパティで指定した背景画像が表示されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/022-target.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #photo {
+                                    |     background-color: yellowgreen;
+                                    | }
+                                    | #photo:target {
+                                    |     background-image: url(sandwiches.jpg);
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #photo
+                                    |     background-color yellowgreen
+                                    |     &amp;:target
+                                    |         background-image url(sandwiches.jpg)
+                                figcaption （stylus）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div id="photo"&gt;HAM SANDWICHES&lt;/div&gt;
+                                    | &lt;div&gt;&lt;a href="#photo"&gt;CLICK&lt;/a&gt;&lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #photo HAM SANDWICHES
+                                    | div: a(href='#photo') CLICK
+                                figcaption （Jade）
+                            hr
+                            h4 言語擬似クラス :lang()
+                            p='HTMLではlang属性で言語の種類を指定することができます。下のサンプルでは<h2>でマークアップした見出しを英語で記述していますので、lang属性を「en」と指定しています。'
+                            p='言語疑似クラス「:lang()」を利用すると、特定の言語に対してスタイルシートを適用することができます。たとえば、英語で記述した部分に適用するためには、セレクタを「:lang(en)」と指定します。ここでは背景色を緑色にして、「Arial Black」という欧文フォントで表示するようにしています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/023-lang.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | :lang(en) {
+                                    |     font-family: 'Arial Black', sans-serif;
+                                    |     background-color: yellowgreen;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | :lang(en)
+                                    |     font-family 'Arial Black', sans-serif
+                                    |     background-color yellowgreen
+                                figcaption （stylus）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h2 lang="en"&gt;HAM SANDWICHES&lt;/h2&gt;
+                                    | &lt;p&gt;焼きたての手作りパンえ新鮮なハム、トマト、…略…&lt;/p&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2(lang='en') HAM SANDWICHES
+                                    | p 焼きたての手作りパンえ新鮮なハム、トマト、…略…
+                                figcaption （Jade）
 
-							hr
-							h4 UI擬似クラス
-							p='UI疑似クラスは、ユーザーインターフェースに関する設定を行うもので、フォームの状態に応じてスタイルシートを適用することができます。'
-							p='「CSS3 Basic User Interface Module」ではさらに多くのインターフェース関連の疑似クラスが提案されています。'
-							h4 :enabled / :disabled
-							p='フォームが有効な場合には「:enabled」で、無効な場合には「:disabled」でスタイルシートを適用することができます。フォームは基本的に有効な状態で扱われますが、disabled属性を指定することが可能です。'
-							p='たとえば、下のサンプルではとえば、下のサンプルでは住所のテキストフィールドを無効にし、文字を入力できないようにしてあります。しかし、スタイルシートを適用しないと、見た目では無効となっていることがわかりません。そこで、「:enabled」と「:disabled」を利用して、テキストフィールドが有効な場合は緑色で、無効な場合は灰色で表示するように指定しています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/023-ui01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| :enabled {
-									|     background-color: greenyellow;
-									| }
-									| :disabled {
-									|     background-color: lightgray;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| :enabled
-									| 	background-color greenyellow
-									| 
-									| :disabled
-									| 	background-color lightgray
-								figcaption （stylus）
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;form action="…" method="post"&gt;
-									| &lt;p&gt;名前：&lt;input type="text" name="name"&gt;&lt;/p&gt;
-									| &lt;p&gt;住所：&lt;input type="text" name="add" disabled&gt;&lt;/p&gt;
-									| &lt;/form&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| form(action='…', method='post')
-									| 	p
-									| 		| 名前：
-									| 		input(type='text', name='name')
-									| 	p
-									| 		| 住所：
-									| 		input(type='text', name='add', disabled='disabled')
-								figcaption （Jade）
-							h4 :checked / :indeterminate
-							p='「:checked」と「:indeterminate」はフォームのチェックボックスやラジオボタンの状態の応じてスタイルシートを適用するセレクタです。まず、チェックボックスとラジオボタンには選択したときの「オン」、選択していないときの「オフ」の2種類の状態があります。さらに、HTML5ではJavaScriptを下のように指定することにより、どちらかはっきりしない「不確定」という状態で表示できるようになっています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/023-ui02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;script&gt;
-									| window.onload = function(){
-									|     document.getElementById('ham').intermediate = true;
-									| }
-									| &lt;/script&gt;
-									| 
-									| &lt;form action="…" method="post"&gt;
-									| &lt;input id="ham" type="checkbox"&gt;
-									| &lt;label for="ham"&gt;HAM SANDWICHES&lt;/label&gt;
-									| &lt;/form&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| script.
-									| 	window.onload = function(){
-									| 		document.getElementById('ham').intermediate = true;
-									| 	}
-									| form(action='…', method='post')
-									| 	input#ham(type='checkbox')
-									| 	label(for='ham') HAM SANDWICHES
-								figcaption （Jade）
-							p='チェックボックスが不確定な状態のときには「:intermediate」で、オンの状態の時には「:checked」でスタイルシートを適用します。ここでは<label>でマークアップしたラベルの背景を、不確定なときには赤色で、オンの時には緑色で表示するようにしています。オフのときには「:intermediate」も「:checked」も適用されませんので、白色の背景で表示されます。'
-							p='なお、「:intermediate」と「:checked」の設定は<input>に対して適用されますが、ここでは<input>に続けて記述した<label>に適用するため、セレクタを「:intermediate + label」、「:checked + label」と指定しています。これは隣接セレクタの記述形式を利用したものです。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| :intermediate + label {
-									|     background-color: red;
-									| }
-									| :checked + label {
-									|     background-color: greenyellow;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| :intermediate
-									| 	&amp; + label
-									| 		background-color red
-									| 
-									| :checked
-									| 	&amp; + label
-									| 		background-color greenyellow
-								figcaption （stylus）
-							hr
-							h4 構造擬似クラス（1） :root
-							p='セレクタを「:root」とすると、ルート要素にスタイルシートを適用することができます。ルート要素はソース全体をマークアップしている要素のことで、HTMLでは<html>となります。たとえば、ルート要素の背景色を緑色に指定すると、下のようにページ全体の背景色が変わります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/025-root.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| :root {
-									|     background-color: greenyellow:
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| :root
-									| 	background-color greenyellow:
-								figcaption （stylus）
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;html&gt;
-									| …略…
-									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
-									| …略...
-									| &lt;/html&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| html
-									| 	h2 HAM SANDWICHES
-								figcaption （Jade）
-							hr
-							h4 構造擬似クラス（2） :first-child / :last-child / :nth-child() / :nth-last-child() / :only-child
-							p=':first-childや:nth-child()などを利用すると、スタイルシートを最初と最後の要素のみに適用したり、1つおきに繰り返して起用するといったことができるようになります。'
-							p: u 最初と最後の要素に適用する
-							p='最初と最後の要素にスタイルシートを適用するには、:first-childと:last-childを利用します。たとえば、「li:first-child」と指定すると最初の<li>に、「:last-child」と指定すると最後に<li>に適用することができます。ここでは最初の<li>を黄色で、最後の<li>を緑色で表示するようにしています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/025-child01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| li:first-child {
-									|     background-color: yellow;
-									| }
-									| li:last-child {
-									|     background-color: greenyellow;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| li
-									| 	&amp;:first-child
-									| 		background-color yellow
-									| 	&amp;:last-child
-									| 		background-color greenyellow
-								figcaption （stylus）
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;ul&gt;
-									| &lt;li&gt;ハム&amp;チーズサンド&lt;/li&gt;
-									| &lt;li&gt;卵&amp;野菜サンド&lt;/li&gt;
-									| &lt;li&gt;カツサンド&lt;/li&gt;
-									| &lt;li&gt;チョコレート&lt;/li&gt;
-									| &lt;li&gt;日替わりサンド&lt;/li&gt;
-									| &lt;/ul&gt;
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| ul
-									| 	li ハム&amp;チーズサンド
-									| 		li 卵&amp;野菜サンド
-									| 		li カツサンド
-									| 		li チョコレート
-									| 		li 日替わりサンド
-								figcaption （Jade）
-							p='なお、:firls-childは:nth-child(1)、:last-childは:nth-last-child(1)と指定することも可能です。'
-							pre
-								| li:first-child {…}    ▶   li:nth-child(1)
-								| li:last-child {…}   ▶   li:nth-last-child(1)
-							p: u 指定したナンバーの要素に適用する
-							p=':nth-child()と:nth-last-child()は、:first-chidと:last-childを拡張したセレクタで、指定したナンバーの要素にスタイルシートを適用します。たとえば、最初から2つ目の<li>に適用する場合は「li:nth-child(2)」、最後から2つ目の<li>に適用する場合は「li:nth-last-child(2)」と指定します。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/025-child02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| li:nth-child(2) {
-									|     background-color: yellow;
-									| }
-									| li:nth-last-child(2) {
-									|     background-color: greenyellow;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| li
-									| 	&amp;:nth-child(2)
-									| 		background-color yellow
-									| 	&amp;:nth-last-child(2)
-									| 		background-color greenyellow
-								figcaption （stylus）
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;ul&gt;
-									| &lt;li&gt;ハム&amp;チーズサンド&lt;/li&gt;
-									| &lt;li&gt;卵&amp;野菜サンド&lt;/li&gt;
-									| &lt;li&gt;カツサンド&lt;/li&gt;
-									| &lt;li&gt;チョコレート&lt;/li&gt;
-									| &lt;li&gt;日替わりサンド&lt;/li&gt;
-									| &lt;/ul&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| ul
-									| 	li ハム&amp;チーズサンド
-									| 	li 卵&amp;野菜サンド
-									| 	li カツサンド
-									| 	li チョコレート
-									| 	li 日替わりサンド
-								figcaption （Jade）
-							p: u 奇数と偶数の要素に適用する
-							p=':nth-child()と:nth-last-child()では、奇数と偶数の要素にスタイルシートを適用することもできます。奇数の要素は「odd」、偶数の要素は「even」で指定します。ここでは:nth-child()を利用して、最初の<li>から順に奇数の場合は黄色で、偶数の場合は緑色で表示するようにしています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/025-child03.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| li:nth-child(odd) {
-									| 	background-color: yellow;
-									| }
-									| li:nth-child(even) {
-									| 	background-color: greenyellow;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| li
-									| 	&amp;:nth-child(odd)
-									| 		background-color yellow
-									| 	&amp;:nth-child(even)
-									| 		background-color greenyellow
-								figcaption （stylus）
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;ul&gt;
-									| &lt;li&gt;ハム&amp;チーズサンド&lt;/li&gt;
-									| &lt;li&gt;卵&amp;野菜サンド&lt;/li&gt;
-									| &lt;li&gt;カツサンド&lt;/li&gt;
-									| &lt;li&gt;チョコレート&lt;/li&gt;
-									| &lt;li&gt;日替わりサンド&lt;/li&gt;
-									| &lt;/ul&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| ul
-									| 	li ハム&amp;チーズサンド
-									| 	li 卵&amp;野菜サンド
-									| 	li カツサンド
-									| 	li チョコレート
-									| 	li 日替わりサンド
-							p: u 連続して要素に繰り返して適用する
-							p='連続した要素に2つおきや3つおきにスタイルシートを適用したい場合には「αn+β」という形式で値を指定します。αではいくつおきに適用するかを、βではいくつ目の要素に適用するかを指定します。nには0から順に0、1、2…と数が入りますので、「2n+1」と指定した場合には1つ目、3つ目、5つ目…と奇数の要素にスタイルシートを適用することができます。偶数の要素に適用する場合には「2n+2」と指定します。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/025-child04.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| li:nth-child(2n+1) {
-									| 	background-color: yellow;
-									| }
-									| li:nth-child(2n+2) {
-									| 	background-color: greenyellow;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| li
-									| 	&amp;:nth-child(2n + 1)
-									| 		background-color yellow
-									| 	&amp;:nth-child(2n + 2)
-									| 		background-color greenyellow
-								figcaption （stylus）
-							p='同じように3つおきに適用する場合は、下のように「3n+1」、「3n+2」、「3n+3」と指定します。ここでは、3つおきに1つ目の<li>を黄色で、2つ目の<li>を緑色で、3つ目の<li>を水色で表示するようにしています。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| li:nth-child(3n+1) {
-									| 	background-color: yellow;
-									| }
-									| li:nth-child(3n+2) {
-									| 	background-color: greenyellow;
-									| }
-									| li:nth-child(3n+3) {
-									| 	background-color: skyblue;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| li
-									| 	&amp;:nth-child(3n + 1)
-									| 		background-color yellow
-									| 	&amp;:nth-child(3n + 2)
-									| 		background-color greenyellow
-									| 	&amp;:nth-child(3n + 3)
-									| 		background-color skyblue
-								figcaption （stylus）
-							p: u 最初の3つの要素に適用する
-							p='パラメータを「-n+3」と指定すると、最初の3つの要素にスタイルシートを適用することもできます。ここでは「li:nth-child(-n+3)」と指定して、最初の3つの<li>のみを黄色で表示するようにしています。これは、「αn+β」のαにマイナス値を指定できることと、「αn+β」の算出結果は0より大きい正の整数が有効値になることを利用しています。たとえば、「-n+3」の算出値は3、2、1、-1、…となりますので、3つ目、2つ目、1つ目の要素にのみスタイルシートが適用されます。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| li:nth-child(-n+3) {
-									|     background-color: yellow;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')	
-									| li
-									| 	&amp;:nth-child(-n + 3)
-									| 		background-color yellow
-								figcaption （stylus）
-							p: u 最初と最後の要素が一致する場合に適用する
-							p='セレクタを「:first-child:last-child」または「:nth-child(1):nth-last-child(1)」と指定すると、最初と最後の要素が一致する場合にスタイルシートを適用することができます。たとえば、下のサンプルでは「li:first-child:last-child」と指定して、<li>でマークアップした項目が1つだけのときに背景色が黄色になるようにしています。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| li:first-child:last-child {
-									|     background-color: yellow;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| li
-									| 	&amp;:first-child:last-child
-									| 		background-color yellow
-								figcaption （stylus）
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;ul&gt;
-									| &lt;li&gt;ハム&amp;チーズサンド&lt;/li&gt;
-									| &lt;/ul&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| ul
-									| 	li ハム&amp;チーズサンド
-								figcaption （Jade）
-							p='なお、「li:first-child:last-child」は「:only-child」と指定することもできます。'
-							pre
-								| li:first-child:last-child {..}    ▶   li:only-child
-							p: u 複数のリストがある場合の表示
-							p=':first-childや:nth-child()などの設定は、同じ階層のグループごとに適用されます。たとえば、下のサンプルでは<li>でマークアップした部分をキスの場合は黄色で、偶数の場合は緑色で表示するようにしたものですが、2つ目のリストの最初の項目は緑色ではなく、黄色で表示されています。これにより、<ul>〜</ul>でマークアップしたグループごとに設定が適用されることがわかります。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| li:nth-child(odd) {
-									|     background-color: yellow;
-									| }
-									| li:nth-child(even) {
-									|     background-color: greenyellow;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| li
-									| 	&amp;:nth-child(odd)
-									| 		background-color yellow
-									| 	&amp;:nth-child(even)
-									| 		background-color greenyellow
-								figcaption （stylus）
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h2&gt;SANDWICHES&lt;/h2&gt;
-									| &lt;ul&gt;
-									| &lt;li&gt;ハム&amp;チーズサンド&lt;/li&gt;
-									| &lt;li&gt;卵&amp;野菜サンド&lt;/li&gt;
-									| &lt;li&gt;カツサンド&lt;/li&gt;
-									| &lt;/ul&gt;
-									| &lt;ul&gt;
-									| &lt;li&gt;チョコレートパフェ&lt;/li&gt;
-									| &lt;li&gt;苺ミルク&lt;/li&gt;
-									| &lt;li&gt;アイスクリーム&lt;/li&gt;
-									| &lt;/ul&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 SANDWICHES
-									| 	ul
-									| 		li ハム&amp;チーズサンド
-									| 		li 卵&amp;野菜サンド
-									| 		li カツサンド
-									| 	ul
-									| 		li チョコレートパフェ
-									| 		li 苺ミルク
-									| 		li アイスクリーム
-								figcaption （Jade）
-							hr
-							h4 構造擬似クラス（3） :first-of-type / :last-of-type / :nth-of-type() / :nth-last-of-type() / :only-of-type
-							p='「構造疑似クラス（２）」の:first-chldや:nth-child()などのセレクタには、:first-of-typeや:nth-of-type()といった対になるセレクタが用意されており、同じ形で利用することができます。ただし、奇数・偶数などを判定する際に、:first-childや:nth-child()がすべての要素をカウントするのに対して、:first-of-typeや:nth-of-type()では同じタイプの要素のみをカウントします。なお、いずれのセレクタでも親要素や子要素はカウントの対象とはなりません。'
-							table.table
-								tr
-									th すべての要素をカウント
-									th 同じタイプの要素のみをカウント
-								tr
-									td :first-child
-									td :first-of-type
-								tr
-									td :last-child
-									td :last-of-type
-								tr
-									td :nth-child()
-									td :nth-of-type()
-								tr
-									td :nth-last-child()
-									td :nth-last-of-type()
-								tr
-									td :only-child
-									td :only-of-type
-							p='たとえば、下のサンプルでは見出しと文章のセットを4つ記述したものです。見出しは<h2>で、文章は<p>でマークアップしています。このとき、「h2:nth-child(odd)」で奇数の<h2>が黄色に、「h2:nth-child(even)」で偶数の<h2>が緑色になるように指定すると、下のようにすべての見出しが黄色で表示されてしまいます。これは、:nth-child()が要素の数を<p>も含めてカウントし、すべての<h2>を奇数番目と判定するためです。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2:nth-child(odd) {
-									|     background-color: yellow;
-									| }
-									| h2:nth-child(even) {
-									|     background-color: greenyellow;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	&amp;:nth-child(odd)
-									| 		background-color yellow
-									| 	&amp;:nth-child(even)
-									| 		background-color greenyellow
-								figcaption （stylus）
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div&gt;
-									| &lt;h2&gt;ハム&amp;チーズサンド&lt;/h2&gt;
-									| &lt;p&gt;新鮮なハムとチーズのサンドイッチです。&lt;/p&gt;
-									| &lt;h2&gt;卵&amp;野菜サンド&lt;/h2&gt;
-									| &lt;p&gt;卵と野菜のサンドイッチです。&lt;/p&gt;
-									| &lt;h2&gt;カツサンド&lt;/h2&gt;
-									| &lt;p&gt;大きなカツのサンドイッチです。&lt;/p&gt;
-									| &lt;h2&gt;日替わりサンド&lt;/h2&gt;
-									| &lt;p&gt;日替わりでお届けするサンドイッチです。&lt;/p&gt;
-									| &lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	h2 ハム&amp;チーズサンド
-									| 	p 新鮮なハムとチーズのサンドイッチです。
-									| 	h2 卵&amp;野菜サンド
-									| 	p 卵と野菜のサンドイッチです。
-									| 	h2 カツサンド
-									| 	p 大きなカツのサンドイッチです。
-									| 	h2 日替わりサンド
-									| 	p 日替わりでお届けするサンドイッチです。
-								figcaption （Jade）
-							p=':nth-child()を、:nth-of-type()に置き換えて指定すると、奇数の見出しは黄色で、偶数の見出しは緑色で表示されています。これは、:nth-of-type()が<h2>の数だけカウントして、偶数と奇数を判定するためです。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/028-type.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2:nth-of-type(odd) {
-									|     background-color: yellow;
-									| }
-									| h2:nth-of-type(even) {
-									|     background-color: greenyellow;
-									| }
-								figcaption （CSS）
-									| h2
-									| 	&amp;:nth-of-type(odd)
-									| 		background-color yellow
-									| 	&amp;:nth-of-type(even)
-									| 		background-color greenyellow
-							hr
-							h4 構造擬似クラス（4） :empty
-							p='セレクタを「:empty」と指定すると、コンテンツが空の要素にスタイルシートを適用することができます。たとえば、下のサンプルではテーブルの左上のセルが空の状態になっています。'
-							p='「:empty」で空の要素の背景色をカーキ色に指定します。すると、左上のセルが指定した色で表示されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/029-empty.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| :empty {
-									|     background-color: khaki;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| :empty
-									| 	background-color khaki
-								figcaption （stylus）
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;table&gt;
-									| &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;特徴&lt;/th&gt;&lt;tr&gt;
-									| …略...
-									| &lt;/table&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| table
-									| 	tr
-									| 		th
-									| 		th 特徴
-									| 	tr
-									| 		| …略...
-								figcaption （Jade）
-							hr
-							h4 否定擬似クラス :not()
-							p='「:not()」では、指定した条件に一致しない要素に対してスタイルシートを適用することができます。たとえば、下のサンプルでは見出しを<h1>以外の要素にスタイルシートを適用します。ただし「:not(h1)」では<html>や<body>にも適用されてしまうため、「#container :not(h1)」と指定して、<div id="container">内の<h1>以外の要素に適用するようにしています。これで、<img>と<p>に「opacity: 0.5」の設定が適用され、半透明な表示となります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/029-not.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container :not(h1) {
-									|     opacity: 0.5;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container
-									| 	:not(h1)
-									| 		opacity 0.5
-								figcaption （stylus）
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div id="container"&gt;
-									| &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
-									| &lt;img src="sand.jpg" alt="サンドイッチ"&gt;
-									| &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト…略…&lt;/p&gt;
-									| &lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container
-									| 	h1 HAM SANDWICHES
-									| 	img(src='sand.jpg', alt='サンドイッチ')
-									| 	p 焼きたての手作りパンで新鮮なハム、トマト…略…
-								figcaption （Jade）
-							hr
-							h4 ::first-line擬似要素
-							p='::first-line疑似要素を利用すると、要素の1行目にスタイルシートを適用することができます。たとえば、<p>でマークアップした文章の1行目に適用する場合、セレクタを「p::first-line」と指定します。ここでは1行目の背景を緑色で表示するようにしています。'
-							p='なお、::first-line疑似要素で適用したスタイルシートが機能するのは、displayプロパティの値がblock、inline-block、table-cell、table-captionの要素と定義されています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/030-first-letter.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| p::first-line {
-									|     background-color: greenyellow;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	&amp;::first-line
-									| 		background-color greenyellow
-								figcaption （stylus）
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。マスタードをピリッと…略...&lt;/p&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									p 焼きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。マスタードをピリッと…略...
-								figcaption （Jade）
-							hr
-							h4 ::first-letter擬似要素
-							p='::first-letter疑似要素を利用すると、要素の1文字目にスタイルシートを適用することができます。たとえば、<p>でマークアップした文章の1文字目に適用する場合、セレクタを「p::first-letter」と指定します。ここでは1文字目の文字サイズを大きくして、背景を緑色で表示するようにしています。'
-							p='なお、::first-letter疑似要素で適用したスタイルシートが機能するのは、displayプロパティの値が、block、inline-block、list-item、table-cell、table-captionの要素と定義されています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/030-first-line.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| p::first-letter {
-									|     font-size: 32px;
-									|     font-weight: bold;
-									|     line-height: 24px;
-									|     padding: 10px;
-									|     background-color: greenyellow;
-									|     float: left;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	&amp;::first-letter
-									| 		font-size 32px
-									| 		font-weight bold
-									| 		line-height 24px
-									| 		padding 10px
-									| 		background-color greenyellow
-									| 		float left
-								figcaption （stylus）
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。マスタードをピリッと…略...&lt;/p&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p 焼きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。マスタードをピリッと…略...
-							hr
-							h4 ::before / :after擬似要素
-							p='::beforeと::after疑似要素では、contentプロパティで指定したコンテンツの挿入先を指定します。たとえば、<h2>でマークアップした見出しの前に挿入するばあいは、「h2::before」、後に挿入する場合は「h1::after」と指定します。ここでは見出しの後に「★」という文字を挿入するため、セレクタを「h2::before」と指定しています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/030-before-after.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2::before, h2::after {
-									|     content: "★";
-									|     color: blue;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2::before, h2::after
-									| 	content "★"
-									| 	color blue
-								figcaption （stylus）
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 HAM SANDWICHES
-								figcaption （Jade）
-							hr
-							h4 結合子の利用
-							p='<div id="container">内の<h2>など、ドキュメントの構造に応じてスタイルシートを適用するためには、結合子を利用してセレクタを利用します。'
-							hr
-							h4 子孫セレクタ A B
-							p='A要素内のすべてのB要素にスタイルシートを適用するには、半角スペースを結合子として、セレクタを「A B」という形で記述します。たとえば、下のサンプルでは「body p」と指定し、<body>内の<p>に対してスタイルシートを適用しています。'
-							p='なお、3つの文章のうち、最初の1つは<body>の1階層下に位置していますが、残りの2つは<div>によるマークアップで2階層下に位置しています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/031-combinator01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| body p {
-									|     color: red;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| body
-									| 	p
-									| 		color red
-								figcaption （stylus）
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;body&gt;
-									| &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
-									| &lt;p&gt;炊きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。&lt;/p&gt;
-									| 
-									| &lt;div&gt;
-									|     &lt;h2&gt;ハム&amp;チーズサンド&lt;/h2&gt;
-									|     &lt;p&gt;ハムとチーズのサンドイッチです。マヨネーズ…略…&lt;/p&gt;
-									|     &lt;h2&gt;卵&amp;野菜サンド&lt;/h2&gt;
-									|     &lt;p&gt;卵と野菜のサンドイッチです。からしソースが…略…&lt;/p&gt;
-									| &lt;/div&gt;
-									| &lt;/body&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| body
-									| 	h1 HAM SANDWICHES
-									| 	p 炊きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。
-									| 	div
-									| 		h2 ハム&amp;チーズサンド
-									| 		p ハムとチーズのサンドイッチです。マヨネーズ…略…
-									| 		h2 卵&amp;野菜サンド
-									| 		p 卵と野菜のサンドイッチです。からしソースが…略…
-								figcaption （Jade）
-							hr
-							h4 子セレクタ A &lt; B
-							p='「>」を結合子としてセレクタを「A > B」という形で記述すると、A要素の1階層下のB要素にのみスタイルシートを適用することができます。たとえば、「body > p」と指定すると、<body>の1階層下の<p>にのみ適用することが可能です。2階層下の<p>には適用されません。'
-							p='2階層下の<p>にのみ適用する場合には、ユニバーサルセレクタを利用して「body > * > p」と指定します。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/031-combinator02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| body &lt; p {
-									|     color: red;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| body
-									| 	&amp; &lt; p
-									| 		color red
-								figcaption （stylus）
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;body&gt;
-									| &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
-									| &lt;p&gt;炊きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。&lt;/p&gt;
-									| 
-									| &lt;div&gt;
-									|     &lt;h2&gt;ハム&amp;チーズサンド&lt;/h2&gt;
-									|     &lt;p&gt;ハムとチーズのサンドイッチです。マヨネーズ…略…&lt;/p&gt;
-									|     &lt;h2&gt;卵&amp;野菜サンド&lt;/h2&gt;
-									|     &lt;p&gt;卵と野菜のサンドイッチです。からしソースが…略…&lt;/p&gt;
-									| &lt;/div&gt;
-									| &lt;/body&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| body
-									| 	h1 HAM SANDWICHES
-									| 	p 炊きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。
-									| 	div
-									| 		h2 ハム&amp;チーズサンド
-									| 		p ハムとチーズのサンドイッチです。マヨネーズ…略…
-									| 		h2 卵&amp;野菜サンド
-									| 		p 卵と野菜のサンドイッチです。からしソースが…略…
-								figcaption （Jade）
-							hr
-							h4 隣接セレクタ A + B
-							p='A要素の直後に記述したB要素にのみスタイルシートを適用するには、「+」を結合子としてセレクタを「A + B」という形で指定します。たとえば、下のサンプルではセレクタを「h2 + p」と指定して、<h2>の直後に記述した<p>にスタイルシートを適用しています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/031-combinator03.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 + p {
-									|     color: red;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	&amp; + p
-									| 		color red
-								figcaption （stylus）
-							hr
-							h4 間接セレクタ A ~ B
-							p='A要素の後に記述したすべてのB要素にスタイルシートを適用するには「~（チルダ）」を結合子としてセレクタを「A ~ B」という形で記述します。たとえば、下のサンプルで「h2 ~ p」と指定すると、<h2>の後に記述したすべての<p>にスタイルシートが適用されます。ただし、適用先となるのは<h2>と同じ階層の<p>に限られます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/031-combinator04.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 ~ p {
-									|     color: red;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	&amp; ~ p
-									| 		color red
-								figcaption （stylus）
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
-									| &lt;p&gt;炊きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。&lt;/p&gt;
-									| 
-									| &lt;h2&gt;卵&amp;野菜サンド&lt;/h2&gt;
-									| &lt;p&gt;卵と野菜のサンドイッチです。からしソースが…略…&lt;/p&gt;
-									| &lt;p&gt;日替わりメニューや、好きな具をトッピング…略...&lt;/p&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1 HAM SANDWICHES
-									| p 炊きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。
-									| h2 卵&amp;野菜サンド
-									| p 卵と野菜のサンドイッチです。からしソースが…略…
-									| p 日替わりメニューや、好きな具をトッピング…略...
-								figcaption （Jade）
-							hr
-							h4 グループ化 A, B 
-							p='複数の要素に同じ設定を適用したい場合、セレクターのグループ化の記述を利用します。たとえば、A要素とB要素を適用先とするためには、セレクタを「A, B」という形で記述します。下のサンプルでは<h1>と<h2>の背景を緑色にするため、セレクタを「h1, h2」と指定しています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/032-group.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1, h2 {
-									|     background-color: greenyellow;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1, h2
-									| 	background-color greenyellow
-								figcaption （stylus）
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
-									| &lt;h2&gt;卵&amp;野菜サンド&lt;/h2&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1 HAM SANDWICHES
-									| h2 卵&amp;野菜サンド
-								figcaption （Jade）
+                            hr
+                            h4 UI擬似クラス
+                            p='UI疑似クラスは、ユーザーインターフェースに関する設定を行うもので、フォームの状態に応じてスタイルシートを適用することができます。'
+                            p='「CSS3 Basic User Interface Module」ではさらに多くのインターフェース関連の疑似クラスが提案されています。'
+                            h4 :enabled / :disabled
+                            p='フォームが有効な場合には「:enabled」で、無効な場合には「:disabled」でスタイルシートを適用することができます。フォームは基本的に有効な状態で扱われますが、disabled属性を指定することが可能です。'
+                            p='たとえば、下のサンプルではとえば、下のサンプルでは住所のテキストフィールドを無効にし、文字を入力できないようにしてあります。しかし、スタイルシートを適用しないと、見た目では無効となっていることがわかりません。そこで、「:enabled」と「:disabled」を利用して、テキストフィールドが有効な場合は緑色で、無効な場合は灰色で表示するように指定しています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/023-ui01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | :enabled {
+                                    |     background-color: greenyellow;
+                                    | }
+                                    | :disabled {
+                                    |     background-color: lightgray;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | :enabled
+                                    |     background-color greenyellow
+                                    | 
+                                    | :disabled
+                                    |     background-color lightgray
+                                figcaption （stylus）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;form action="…" method="post"&gt;
+                                    | &lt;p&gt;名前：&lt;input type="text" name="name"&gt;&lt;/p&gt;
+                                    | &lt;p&gt;住所：&lt;input type="text" name="add" disabled&gt;&lt;/p&gt;
+                                    | &lt;/form&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | form(action='…', method='post')
+                                    |     p
+                                    |         | 名前：
+                                    |         input(type='text', name='name')
+                                    |     p
+                                    |         | 住所：
+                                    |         input(type='text', name='add', disabled='disabled')
+                                figcaption （Jade）
+                            h4 :checked / :indeterminate
+                            p='「:checked」と「:indeterminate」はフォームのチェックボックスやラジオボタンの状態の応じてスタイルシートを適用するセレクタです。まず、チェックボックスとラジオボタンには選択したときの「オン」、選択していないときの「オフ」の2種類の状態があります。さらに、HTML5ではJavaScriptを下のように指定することにより、どちらかはっきりしない「不確定」という状態で表示できるようになっています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/023-ui02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;script&gt;
+                                    | window.onload = function(){
+                                    |     document.getElementById('ham').intermediate = true;
+                                    | }
+                                    | &lt;/script&gt;
+                                    | 
+                                    | &lt;form action="…" method="post"&gt;
+                                    | &lt;input id="ham" type="checkbox"&gt;
+                                    | &lt;label for="ham"&gt;HAM SANDWICHES&lt;/label&gt;
+                                    | &lt;/form&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | script.
+                                    |     window.onload = function(){
+                                    |         document.getElementById('ham').intermediate = true;
+                                    |     }
+                                    | form(action='…', method='post')
+                                    |     input#ham(type='checkbox')
+                                    |     label(for='ham') HAM SANDWICHES
+                                figcaption （Jade）
+                            p='チェックボックスが不確定な状態のときには「:intermediate」で、オンの状態の時には「:checked」でスタイルシートを適用します。ここでは<label>でマークアップしたラベルの背景を、不確定なときには赤色で、オンの時には緑色で表示するようにしています。オフのときには「:intermediate」も「:checked」も適用されませんので、白色の背景で表示されます。'
+                            p='なお、「:intermediate」と「:checked」の設定は<input>に対して適用されますが、ここでは<input>に続けて記述した<label>に適用するため、セレクタを「:intermediate + label」、「:checked + label」と指定しています。これは隣接セレクタの記述形式を利用したものです。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | :intermediate + label {
+                                    |     background-color: red;
+                                    | }
+                                    | :checked + label {
+                                    |     background-color: greenyellow;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | :intermediate
+                                    |     &amp; + label
+                                    |         background-color red
+                                    | 
+                                    | :checked
+                                    |     &amp; + label
+                                    |         background-color greenyellow
+                                figcaption （stylus）
+                            hr
+                            h4 構造擬似クラス（1） :root
+                            p='セレクタを「:root」とすると、ルート要素にスタイルシートを適用することができます。ルート要素はソース全体をマークアップしている要素のことで、HTMLでは<html>となります。たとえば、ルート要素の背景色を緑色に指定すると、下のようにページ全体の背景色が変わります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/025-root.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | :root {
+                                    |     background-color: greenyellow:
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | :root
+                                    |     background-color greenyellow:
+                                figcaption （stylus）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;html&gt;
+                                    | …略…
+                                    | &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+                                    | …略...
+                                    | &lt;/html&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | html
+                                    |     h2 HAM SANDWICHES
+                                figcaption （Jade）
+                            hr
+                            h4 構造擬似クラス（2） :first-child / :last-child / :nth-child() / :nth-last-child() / :only-child
+                            p=':first-childや:nth-child()などを利用すると、スタイルシートを最初と最後の要素のみに適用したり、1つおきに繰り返して起用するといったことができるようになります。'
+                            p: u 最初と最後の要素に適用する
+                            p='最初と最後の要素にスタイルシートを適用するには、:first-childと:last-childを利用します。たとえば、「li:first-child」と指定すると最初の<li>に、「:last-child」と指定すると最後に<li>に適用することができます。ここでは最初の<li>を黄色で、最後の<li>を緑色で表示するようにしています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/025-child01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | li:first-child {
+                                    |     background-color: yellow;
+                                    | }
+                                    | li:last-child {
+                                    |     background-color: greenyellow;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | li
+                                    |     &amp;:first-child
+                                    |         background-color yellow
+                                    |     &amp;:last-child
+                                    |         background-color greenyellow
+                                figcaption （stylus）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;ul&gt;
+                                    | &lt;li&gt;ハム&amp;チーズサンド&lt;/li&gt;
+                                    | &lt;li&gt;卵&amp;野菜サンド&lt;/li&gt;
+                                    | &lt;li&gt;カツサンド&lt;/li&gt;
+                                    | &lt;li&gt;チョコレート&lt;/li&gt;
+                                    | &lt;li&gt;日替わりサンド&lt;/li&gt;
+                                    | &lt;/ul&gt;
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ul
+                                    |     li ハム&amp;チーズサンド
+                                    |         li 卵&amp;野菜サンド
+                                    |         li カツサンド
+                                    |         li チョコレート
+                                    |         li 日替わりサンド
+                                figcaption （Jade）
+                            p='なお、:firls-childは:nth-child(1)、:last-childは:nth-last-child(1)と指定することも可能です。'
+                            pre
+                                | li:first-child {…}    ▶   li:nth-child(1)
+                                | li:last-child {…}   ▶   li:nth-last-child(1)
+                            p: u 指定したナンバーの要素に適用する
+                            p=':nth-child()と:nth-last-child()は、:first-chidと:last-childを拡張したセレクタで、指定したナンバーの要素にスタイルシートを適用します。たとえば、最初から2つ目の<li>に適用する場合は「li:nth-child(2)」、最後から2つ目の<li>に適用する場合は「li:nth-last-child(2)」と指定します。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/025-child02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | li:nth-child(2) {
+                                    |     background-color: yellow;
+                                    | }
+                                    | li:nth-last-child(2) {
+                                    |     background-color: greenyellow;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | li
+                                    |     &amp;:nth-child(2)
+                                    |         background-color yellow
+                                    |     &amp;:nth-last-child(2)
+                                    |         background-color greenyellow
+                                figcaption （stylus）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;ul&gt;
+                                    | &lt;li&gt;ハム&amp;チーズサンド&lt;/li&gt;
+                                    | &lt;li&gt;卵&amp;野菜サンド&lt;/li&gt;
+                                    | &lt;li&gt;カツサンド&lt;/li&gt;
+                                    | &lt;li&gt;チョコレート&lt;/li&gt;
+                                    | &lt;li&gt;日替わりサンド&lt;/li&gt;
+                                    | &lt;/ul&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ul
+                                    |     li ハム&amp;チーズサンド
+                                    |     li 卵&amp;野菜サンド
+                                    |     li カツサンド
+                                    |     li チョコレート
+                                    |     li 日替わりサンド
+                                figcaption （Jade）
+                            p: u 奇数と偶数の要素に適用する
+                            p=':nth-child()と:nth-last-child()では、奇数と偶数の要素にスタイルシートを適用することもできます。奇数の要素は「odd」、偶数の要素は「even」で指定します。ここでは:nth-child()を利用して、最初の<li>から順に奇数の場合は黄色で、偶数の場合は緑色で表示するようにしています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/025-child03.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | li:nth-child(odd) {
+                                    |     background-color: yellow;
+                                    | }
+                                    | li:nth-child(even) {
+                                    |     background-color: greenyellow;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | li
+                                    |     &amp;:nth-child(odd)
+                                    |         background-color yellow
+                                    |     &amp;:nth-child(even)
+                                    |         background-color greenyellow
+                                figcaption （stylus）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;ul&gt;
+                                    | &lt;li&gt;ハム&amp;チーズサンド&lt;/li&gt;
+                                    | &lt;li&gt;卵&amp;野菜サンド&lt;/li&gt;
+                                    | &lt;li&gt;カツサンド&lt;/li&gt;
+                                    | &lt;li&gt;チョコレート&lt;/li&gt;
+                                    | &lt;li&gt;日替わりサンド&lt;/li&gt;
+                                    | &lt;/ul&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ul
+                                    |     li ハム&amp;チーズサンド
+                                    |     li 卵&amp;野菜サンド
+                                    |     li カツサンド
+                                    |     li チョコレート
+                                    |     li 日替わりサンド
+                            p: u 連続して要素に繰り返して適用する
+                            p='連続した要素に2つおきや3つおきにスタイルシートを適用したい場合には「αn+β」という形式で値を指定します。αではいくつおきに適用するかを、βではいくつ目の要素に適用するかを指定します。nには0から順に0、1、2…と数が入りますので、「2n+1」と指定した場合には1つ目、3つ目、5つ目…と奇数の要素にスタイルシートを適用することができます。偶数の要素に適用する場合には「2n+2」と指定します。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/025-child04.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | li:nth-child(2n+1) {
+                                    |     background-color: yellow;
+                                    | }
+                                    | li:nth-child(2n+2) {
+                                    |     background-color: greenyellow;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | li
+                                    |     &amp;:nth-child(2n + 1)
+                                    |         background-color yellow
+                                    |     &amp;:nth-child(2n + 2)
+                                    |         background-color greenyellow
+                                figcaption （stylus）
+                            p='同じように3つおきに適用する場合は、下のように「3n+1」、「3n+2」、「3n+3」と指定します。ここでは、3つおきに1つ目の<li>を黄色で、2つ目の<li>を緑色で、3つ目の<li>を水色で表示するようにしています。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | li:nth-child(3n+1) {
+                                    |     background-color: yellow;
+                                    | }
+                                    | li:nth-child(3n+2) {
+                                    |     background-color: greenyellow;
+                                    | }
+                                    | li:nth-child(3n+3) {
+                                    |     background-color: skyblue;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | li
+                                    |     &amp;:nth-child(3n + 1)
+                                    |         background-color yellow
+                                    |     &amp;:nth-child(3n + 2)
+                                    |         background-color greenyellow
+                                    |     &amp;:nth-child(3n + 3)
+                                    |         background-color skyblue
+                                figcaption （stylus）
+                            p: u 最初の3つの要素に適用する
+                            p='パラメータを「-n+3」と指定すると、最初の3つの要素にスタイルシートを適用することもできます。ここでは「li:nth-child(-n+3)」と指定して、最初の3つの<li>のみを黄色で表示するようにしています。これは、「αn+β」のαにマイナス値を指定できることと、「αn+β」の算出結果は0より大きい正の整数が有効値になることを利用しています。たとえば、「-n+3」の算出値は3、2、1、-1、…となりますので、3つ目、2つ目、1つ目の要素にのみスタイルシートが適用されます。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | li:nth-child(-n+3) {
+                                    |     background-color: yellow;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')    
+                                    | li
+                                    |     &amp;:nth-child(-n + 3)
+                                    |         background-color yellow
+                                figcaption （stylus）
+                            p: u 最初と最後の要素が一致する場合に適用する
+                            p='セレクタを「:first-child:last-child」または「:nth-child(1):nth-last-child(1)」と指定すると、最初と最後の要素が一致する場合にスタイルシートを適用することができます。たとえば、下のサンプルでは「li:first-child:last-child」と指定して、<li>でマークアップした項目が1つだけのときに背景色が黄色になるようにしています。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | li:first-child:last-child {
+                                    |     background-color: yellow;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | li
+                                    |     &amp;:first-child:last-child
+                                    |         background-color yellow
+                                figcaption （stylus）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;ul&gt;
+                                    | &lt;li&gt;ハム&amp;チーズサンド&lt;/li&gt;
+                                    | &lt;/ul&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ul
+                                    |     li ハム&amp;チーズサンド
+                                figcaption （Jade）
+                            p='なお、「li:first-child:last-child」は「:only-child」と指定することもできます。'
+                            pre
+                                | li:first-child:last-child {..}    ▶   li:only-child
+                            p: u 複数のリストがある場合の表示
+                            p=':first-childや:nth-child()などの設定は、同じ階層のグループごとに適用されます。たとえば、下のサンプルでは<li>でマークアップした部分をキスの場合は黄色で、偶数の場合は緑色で表示するようにしたものですが、2つ目のリストの最初の項目は緑色ではなく、黄色で表示されています。これにより、<ul>〜</ul>でマークアップしたグループごとに設定が適用されることがわかります。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | li:nth-child(odd) {
+                                    |     background-color: yellow;
+                                    | }
+                                    | li:nth-child(even) {
+                                    |     background-color: greenyellow;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | li
+                                    |     &amp;:nth-child(odd)
+                                    |         background-color yellow
+                                    |     &amp;:nth-child(even)
+                                    |         background-color greenyellow
+                                figcaption （stylus）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h2&gt;SANDWICHES&lt;/h2&gt;
+                                    | &lt;ul&gt;
+                                    | &lt;li&gt;ハム&amp;チーズサンド&lt;/li&gt;
+                                    | &lt;li&gt;卵&amp;野菜サンド&lt;/li&gt;
+                                    | &lt;li&gt;カツサンド&lt;/li&gt;
+                                    | &lt;/ul&gt;
+                                    | &lt;ul&gt;
+                                    | &lt;li&gt;チョコレートパフェ&lt;/li&gt;
+                                    | &lt;li&gt;苺ミルク&lt;/li&gt;
+                                    | &lt;li&gt;アイスクリーム&lt;/li&gt;
+                                    | &lt;/ul&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 SANDWICHES
+                                    |     ul
+                                    |         li ハム&amp;チーズサンド
+                                    |         li 卵&amp;野菜サンド
+                                    |         li カツサンド
+                                    |     ul
+                                    |         li チョコレートパフェ
+                                    |         li 苺ミルク
+                                    |         li アイスクリーム
+                                figcaption （Jade）
+                            hr
+                            h4 構造擬似クラス（3） :first-of-type / :last-of-type / :nth-of-type() / :nth-last-of-type() / :only-of-type
+                            p='「構造疑似クラス（２）」の:first-chldや:nth-child()などのセレクタには、:first-of-typeや:nth-of-type()といった対になるセレクタが用意されており、同じ形で利用することができます。ただし、奇数・偶数などを判定する際に、:first-childや:nth-child()がすべての要素をカウントするのに対して、:first-of-typeや:nth-of-type()では同じタイプの要素のみをカウントします。なお、いずれのセレクタでも親要素や子要素はカウントの対象とはなりません。'
+                            table.table
+                                tr
+                                    th すべての要素をカウント
+                                    th 同じタイプの要素のみをカウント
+                                tr
+                                    td :first-child
+                                    td :first-of-type
+                                tr
+                                    td :last-child
+                                    td :last-of-type
+                                tr
+                                    td :nth-child()
+                                    td :nth-of-type()
+                                tr
+                                    td :nth-last-child()
+                                    td :nth-last-of-type()
+                                tr
+                                    td :only-child
+                                    td :only-of-type
+                            p='たとえば、下のサンプルでは見出しと文章のセットを4つ記述したものです。見出しは<h2>で、文章は<p>でマークアップしています。このとき、「h2:nth-child(odd)」で奇数の<h2>が黄色に、「h2:nth-child(even)」で偶数の<h2>が緑色になるように指定すると、下のようにすべての見出しが黄色で表示されてしまいます。これは、:nth-child()が要素の数を<p>も含めてカウントし、すべての<h2>を奇数番目と判定するためです。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2:nth-child(odd) {
+                                    |     background-color: yellow;
+                                    | }
+                                    | h2:nth-child(even) {
+                                    |     background-color: greenyellow;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     &amp;:nth-child(odd)
+                                    |         background-color yellow
+                                    |     &amp;:nth-child(even)
+                                    |         background-color greenyellow
+                                figcaption （stylus）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div&gt;
+                                    | &lt;h2&gt;ハム&amp;チーズサンド&lt;/h2&gt;
+                                    | &lt;p&gt;新鮮なハムとチーズのサンドイッチです。&lt;/p&gt;
+                                    | &lt;h2&gt;卵&amp;野菜サンド&lt;/h2&gt;
+                                    | &lt;p&gt;卵と野菜のサンドイッチです。&lt;/p&gt;
+                                    | &lt;h2&gt;カツサンド&lt;/h2&gt;
+                                    | &lt;p&gt;大きなカツのサンドイッチです。&lt;/p&gt;
+                                    | &lt;h2&gt;日替わりサンド&lt;/h2&gt;
+                                    | &lt;p&gt;日替わりでお届けするサンドイッチです。&lt;/p&gt;
+                                    | &lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     h2 ハム&amp;チーズサンド
+                                    |     p 新鮮なハムとチーズのサンドイッチです。
+                                    |     h2 卵&amp;野菜サンド
+                                    |     p 卵と野菜のサンドイッチです。
+                                    |     h2 カツサンド
+                                    |     p 大きなカツのサンドイッチです。
+                                    |     h2 日替わりサンド
+                                    |     p 日替わりでお届けするサンドイッチです。
+                                figcaption （Jade）
+                            p=':nth-child()を、:nth-of-type()に置き換えて指定すると、奇数の見出しは黄色で、偶数の見出しは緑色で表示されています。これは、:nth-of-type()が<h2>の数だけカウントして、偶数と奇数を判定するためです。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/028-type.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2:nth-of-type(odd) {
+                                    |     background-color: yellow;
+                                    | }
+                                    | h2:nth-of-type(even) {
+                                    |     background-color: greenyellow;
+                                    | }
+                                figcaption （CSS）
+                                    | h2
+                                    |     &amp;:nth-of-type(odd)
+                                    |         background-color yellow
+                                    |     &amp;:nth-of-type(even)
+                                    |         background-color greenyellow
+                            hr
+                            h4 構造擬似クラス（4） :empty
+                            p='セレクタを「:empty」と指定すると、コンテンツが空の要素にスタイルシートを適用することができます。たとえば、下のサンプルではテーブルの左上のセルが空の状態になっています。'
+                            p='「:empty」で空の要素の背景色をカーキ色に指定します。すると、左上のセルが指定した色で表示されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/029-empty.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | :empty {
+                                    |     background-color: khaki;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | :empty
+                                    |     background-color khaki
+                                figcaption （stylus）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;table&gt;
+                                    | &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;特徴&lt;/th&gt;&lt;tr&gt;
+                                    | …略...
+                                    | &lt;/table&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | table
+                                    |     tr
+                                    |         th
+                                    |         th 特徴
+                                    |     tr
+                                    |         | …略...
+                                figcaption （Jade）
+                            hr
+                            h4 否定擬似クラス :not()
+                            p='「:not()」では、指定した条件に一致しない要素に対してスタイルシートを適用することができます。たとえば、下のサンプルでは見出しを<h1>以外の要素にスタイルシートを適用します。ただし「:not(h1)」では<html>や<body>にも適用されてしまうため、「#container :not(h1)」と指定して、<div id="container">内の<h1>以外の要素に適用するようにしています。これで、<img>と<p>に「opacity: 0.5」の設定が適用され、半透明な表示となります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/029-not.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container :not(h1) {
+                                    |     opacity: 0.5;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container
+                                    |     :not(h1)
+                                    |         opacity 0.5
+                                figcaption （stylus）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div id="container"&gt;
+                                    | &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
+                                    | &lt;img src="sand.jpg" alt="サンドイッチ"&gt;
+                                    | &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト…略…&lt;/p&gt;
+                                    | &lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container
+                                    |     h1 HAM SANDWICHES
+                                    |     img(src='sand.jpg', alt='サンドイッチ')
+                                    |     p 焼きたての手作りパンで新鮮なハム、トマト…略…
+                                figcaption （Jade）
+                            hr
+                            h4 ::first-line擬似要素
+                            p='::first-line疑似要素を利用すると、要素の1行目にスタイルシートを適用することができます。たとえば、<p>でマークアップした文章の1行目に適用する場合、セレクタを「p::first-line」と指定します。ここでは1行目の背景を緑色で表示するようにしています。'
+                            p='なお、::first-line疑似要素で適用したスタイルシートが機能するのは、displayプロパティの値がblock、inline-block、table-cell、table-captionの要素と定義されています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/030-first-letter.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p::first-line {
+                                    |     background-color: greenyellow;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     &amp;::first-line
+                                    |         background-color greenyellow
+                                figcaption （stylus）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。マスタードをピリッと…略...&lt;/p&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    p 焼きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。マスタードをピリッと…略...
+                                figcaption （Jade）
+                            hr
+                            h4 ::first-letter擬似要素
+                            p='::first-letter疑似要素を利用すると、要素の1文字目にスタイルシートを適用することができます。たとえば、<p>でマークアップした文章の1文字目に適用する場合、セレクタを「p::first-letter」と指定します。ここでは1文字目の文字サイズを大きくして、背景を緑色で表示するようにしています。'
+                            p='なお、::first-letter疑似要素で適用したスタイルシートが機能するのは、displayプロパティの値が、block、inline-block、list-item、table-cell、table-captionの要素と定義されています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/030-first-line.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p::first-letter {
+                                    |     font-size: 32px;
+                                    |     font-weight: bold;
+                                    |     line-height: 24px;
+                                    |     padding: 10px;
+                                    |     background-color: greenyellow;
+                                    |     float: left;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     &amp;::first-letter
+                                    |         font-size 32px
+                                    |         font-weight bold
+                                    |         line-height 24px
+                                    |         padding 10px
+                                    |         background-color greenyellow
+                                    |         float left
+                                figcaption （stylus）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。マスタードをピリッと…略...&lt;/p&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p 焼きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。マスタードをピリッと…略...
+                            hr
+                            h4 ::before / :after擬似要素
+                            p='::beforeと::after疑似要素では、contentプロパティで指定したコンテンツの挿入先を指定します。たとえば、<h2>でマークアップした見出しの前に挿入するばあいは、「h2::before」、後に挿入する場合は「h1::after」と指定します。ここでは見出しの後に「★」という文字を挿入するため、セレクタを「h2::before」と指定しています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/030-before-after.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2::before, h2::after {
+                                    |     content: "★";
+                                    |     color: blue;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2::before, h2::after
+                                    |     content "★"
+                                    |     color blue
+                                figcaption （stylus）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 HAM SANDWICHES
+                                figcaption （Jade）
+                            hr
+                            h4 結合子の利用
+                            p='<div id="container">内の<h2>など、ドキュメントの構造に応じてスタイルシートを適用するためには、結合子を利用してセレクタを利用します。'
+                            hr
+                            h4 子孫セレクタ A B
+                            p='A要素内のすべてのB要素にスタイルシートを適用するには、半角スペースを結合子として、セレクタを「A B」という形で記述します。たとえば、下のサンプルでは「body p」と指定し、<body>内の<p>に対してスタイルシートを適用しています。'
+                            p='なお、3つの文章のうち、最初の1つは<body>の1階層下に位置していますが、残りの2つは<div>によるマークアップで2階層下に位置しています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/031-combinator01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | body p {
+                                    |     color: red;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | body
+                                    |     p
+                                    |         color red
+                                figcaption （stylus）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;body&gt;
+                                    | &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
+                                    | &lt;p&gt;炊きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。&lt;/p&gt;
+                                    | 
+                                    | &lt;div&gt;
+                                    |     &lt;h2&gt;ハム&amp;チーズサンド&lt;/h2&gt;
+                                    |     &lt;p&gt;ハムとチーズのサンドイッチです。マヨネーズ…略…&lt;/p&gt;
+                                    |     &lt;h2&gt;卵&amp;野菜サンド&lt;/h2&gt;
+                                    |     &lt;p&gt;卵と野菜のサンドイッチです。からしソースが…略…&lt;/p&gt;
+                                    | &lt;/div&gt;
+                                    | &lt;/body&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | body
+                                    |     h1 HAM SANDWICHES
+                                    |     p 炊きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。
+                                    |     div
+                                    |         h2 ハム&amp;チーズサンド
+                                    |         p ハムとチーズのサンドイッチです。マヨネーズ…略…
+                                    |         h2 卵&amp;野菜サンド
+                                    |         p 卵と野菜のサンドイッチです。からしソースが…略…
+                                figcaption （Jade）
+                            hr
+                            h4 子セレクタ A &lt; B
+                            p='「>」を結合子としてセレクタを「A > B」という形で記述すると、A要素の1階層下のB要素にのみスタイルシートを適用することができます。たとえば、「body > p」と指定すると、<body>の1階層下の<p>にのみ適用することが可能です。2階層下の<p>には適用されません。'
+                            p='2階層下の<p>にのみ適用する場合には、ユニバーサルセレクタを利用して「body > * > p」と指定します。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/031-combinator02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | body &lt; p {
+                                    |     color: red;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | body
+                                    |     &amp; &lt; p
+                                    |         color red
+                                figcaption （stylus）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;body&gt;
+                                    | &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
+                                    | &lt;p&gt;炊きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。&lt;/p&gt;
+                                    | 
+                                    | &lt;div&gt;
+                                    |     &lt;h2&gt;ハム&amp;チーズサンド&lt;/h2&gt;
+                                    |     &lt;p&gt;ハムとチーズのサンドイッチです。マヨネーズ…略…&lt;/p&gt;
+                                    |     &lt;h2&gt;卵&amp;野菜サンド&lt;/h2&gt;
+                                    |     &lt;p&gt;卵と野菜のサンドイッチです。からしソースが…略…&lt;/p&gt;
+                                    | &lt;/div&gt;
+                                    | &lt;/body&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | body
+                                    |     h1 HAM SANDWICHES
+                                    |     p 炊きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。
+                                    |     div
+                                    |         h2 ハム&amp;チーズサンド
+                                    |         p ハムとチーズのサンドイッチです。マヨネーズ…略…
+                                    |         h2 卵&amp;野菜サンド
+                                    |         p 卵と野菜のサンドイッチです。からしソースが…略…
+                                figcaption （Jade）
+                            hr
+                            h4 隣接セレクタ A + B
+                            p='A要素の直後に記述したB要素にのみスタイルシートを適用するには、「+」を結合子としてセレクタを「A + B」という形で指定します。たとえば、下のサンプルではセレクタを「h2 + p」と指定して、<h2>の直後に記述した<p>にスタイルシートを適用しています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/031-combinator03.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 + p {
+                                    |     color: red;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     &amp; + p
+                                    |         color red
+                                figcaption （stylus）
+                            hr
+                            h4 間接セレクタ A ~ B
+                            p='A要素の後に記述したすべてのB要素にスタイルシートを適用するには「~（チルダ）」を結合子としてセレクタを「A ~ B」という形で記述します。たとえば、下のサンプルで「h2 ~ p」と指定すると、<h2>の後に記述したすべての<p>にスタイルシートが適用されます。ただし、適用先となるのは<h2>と同じ階層の<p>に限られます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/031-combinator04.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 ~ p {
+                                    |     color: red;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     &amp; ~ p
+                                    |         color red
+                                figcaption （stylus）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
+                                    | &lt;p&gt;炊きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。&lt;/p&gt;
+                                    | 
+                                    | &lt;h2&gt;卵&amp;野菜サンド&lt;/h2&gt;
+                                    | &lt;p&gt;卵と野菜のサンドイッチです。からしソースが…略…&lt;/p&gt;
+                                    | &lt;p&gt;日替わりメニューや、好きな具をトッピング…略...&lt;/p&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1 HAM SANDWICHES
+                                    | p 炊きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。
+                                    | h2 卵&amp;野菜サンド
+                                    | p 卵と野菜のサンドイッチです。からしソースが…略…
+                                    | p 日替わりメニューや、好きな具をトッピング…略...
+                                figcaption （Jade）
+                            hr
+                            h4 グループ化 A, B 
+                            p='複数の要素に同じ設定を適用したい場合、セレクターのグループ化の記述を利用します。たとえば、A要素とB要素を適用先とするためには、セレクタを「A, B」という形で記述します。下のサンプルでは<h1>と<h2>の背景を緑色にするため、セレクタを「h1, h2」と指定しています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/032-group.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1, h2 {
+                                    |     background-color: greenyellow;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1, h2
+                                    |     background-color greenyellow
+                                figcaption （stylus）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
+                                    | &lt;h2&gt;卵&amp;野菜サンド&lt;/h2&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1 HAM SANDWICHES
+                                    | h2 卵&amp;野菜サンド
+                                figcaption （Jade）
 
-							.alert.alert-info セレクタの優先順位
-							p='スタイルシートの設定は1つの要素に対していつくでも適用することができるため、設定が重複するケースも出てきます。その場合、基本的には後から記述した設定の優先順位が高くなります。'
-							p='たとえば、下のサンプルではセレクタを「h1」と指定した設定を2つ記述しています。それぞれの設定では背景色をピンク色と緑色に指定していますが、後から記述した設定が優先され、<h1>でマークアップした見出しは緑色で表示されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/033-01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1 {
-									|     background-color: pink;
-									| }
-									| h1 {
-									|     background-color: greenyellow;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1
-									| 	background-color pink
-									| 	background-color greenyellow
-								figcaption （stylus）
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div&gt;
-									| &lt;h1 id="sand"&gt;HAM SANDWICHES&lt;/h1&gt;
-									| &lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	h1#sand HAM SANDWICHES
-								figcaption （Jade）
-							p='しかし、ピンク色の設定を子孫セレクタの形で「div h1」と指定すると、「h1」のセレクタよりも優先順位が高くなり、見出しをピンク色にすることができます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/033-02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| div h1 {
-									|     background-color: pink;
-									| }
-									| h1 {
-									|     background-color: greenyellow;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	h1
-									| 		background-color pink
-									| h1
-									| 	background-color greenyellow
-								figcaption （stylus）
-							p='また、IDセレクタの形で「#sand」と指定し、背景色を黄色に指定した設定を追加します。すると、「h1」や「div h1」の設定よりも優先され、見出しが黄色に変わります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/01/033-03.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| #sand {
-									|     background-color: yellow;
-									| }
-									| div h1 {
-									|     background-color: pink;
-									| }
-									| h1 {
-									|     background-color: greenyellow;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #sand
-									| 	background-color yellow
-									| div
-									| 	h1
-									| 		background-color pink
-									| h1
-									| 	 background-color greenyellow
-								figcaption （stylus）
-							p='このように、優先順位はセレクタの指定によって変わります。セレクタごとにa〜dの順を算出し、aから順に比較して値が大きい場合は優先順位が高くなる仕組みとなっているためです。'
-							figure
-								table.table
-									tr
-										th 比較項目
-										th 見出し
-									tr
-										td a
-										td インラインスタイルシートに記述している場合は1。それ以外は0。
-									tr
-										td b
-										td IDの数d
-									tr
-										td c
-										td クラス／疑似クラスの数
-									tr
-										td d
-										td 要素名／疑似要素の数
-								figcaption セレクタの優先順位の算出方法。
-							p='aはインラインスタイルシートの設定かどうかで、b〜dはセレクタに含まれるID、クラス、要素名の数を求めます。サンプルの場合、「#sand」はb=1となり、他の2つよりもbの値が大きいので最も優先順位が高くなります。「div h1」と「h1」の場合は、それぞれd=2、d=1ですので、「div h1」の優先順位が高くなります。'
-							figure
-								table.table
-									tr
-										th 比較項目
-										th #sand
-										th div h2
-										th h2
-									tr
-										td a
-										td 0
-										td 0
-										td 0
-									tr
-										td b
-										td 1
-										td 0
-										td 0
-									tr
-										td c
-										td 0
-										td 0
-										td 0
-									tr
-										td d
-										td 0
-										td 2
-										td 1
-								figcaption サンプルの各セレクタの算出結果。
-							h4 !important
-							p='スタイルを記述する時に値の後に空白を挟んで「!important」を記述すると、通常の優先順位に関係無く優先的にスタイルが適用されます。'
-							pre
-								| セレクタ {
-								| 	プロパティ: 値 !important;
-								| }
-							.alert.alert-info CSS4のセレクタ
-							.alert.alert-info 特定の名前空間に属するスタイルシートを適用する
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+                            .alert.alert-info セレクタの優先順位
+                            p='スタイルシートの設定は1つの要素に対していつくでも適用することができるため、設定が重複するケースも出てきます。その場合、基本的には後から記述した設定の優先順位が高くなります。'
+                            p='たとえば、下のサンプルではセレクタを「h1」と指定した設定を2つ記述しています。それぞれの設定では背景色をピンク色と緑色に指定していますが、後から記述した設定が優先され、<h1>でマークアップした見出しは緑色で表示されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/033-01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1 {
+                                    |     background-color: pink;
+                                    | }
+                                    | h1 {
+                                    |     background-color: greenyellow;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1
+                                    |     background-color pink
+                                    |     background-color greenyellow
+                                figcaption （stylus）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div&gt;
+                                    | &lt;h1 id="sand"&gt;HAM SANDWICHES&lt;/h1&gt;
+                                    | &lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     h1#sand HAM SANDWICHES
+                                figcaption （Jade）
+                            p='しかし、ピンク色の設定を子孫セレクタの形で「div h1」と指定すると、「h1」のセレクタよりも優先順位が高くなり、見出しをピンク色にすることができます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/033-02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div h1 {
+                                    |     background-color: pink;
+                                    | }
+                                    | h1 {
+                                    |     background-color: greenyellow;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     h1
+                                    |         background-color pink
+                                    | h1
+                                    |     background-color greenyellow
+                                figcaption （stylus）
+                            p='また、IDセレクタの形で「#sand」と指定し、背景色を黄色に指定した設定を追加します。すると、「h1」や「div h1」の設定よりも優先され、見出しが黄色に変わります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/01/033-03.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #sand {
+                                    |     background-color: yellow;
+                                    | }
+                                    | div h1 {
+                                    |     background-color: pink;
+                                    | }
+                                    | h1 {
+                                    |     background-color: greenyellow;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #sand
+                                    |     background-color yellow
+                                    | div
+                                    |     h1
+                                    |         background-color pink
+                                    | h1
+                                    |      background-color greenyellow
+                                figcaption （stylus）
+                            p='このように、優先順位はセレクタの指定によって変わります。セレクタごとにa〜dの順を算出し、aから順に比較して値が大きい場合は優先順位が高くなる仕組みとなっているためです。'
+                            figure
+                                table.table
+                                    tr
+                                        th 比較項目
+                                        th 見出し
+                                    tr
+                                        td a
+                                        td インラインスタイルシートに記述している場合は1。それ以外は0。
+                                    tr
+                                        td b
+                                        td IDの数d
+                                    tr
+                                        td c
+                                        td クラス／疑似クラスの数
+                                    tr
+                                        td d
+                                        td 要素名／疑似要素の数
+                                figcaption セレクタの優先順位の算出方法。
+                            p='aはインラインスタイルシートの設定かどうかで、b〜dはセレクタに含まれるID、クラス、要素名の数を求めます。サンプルの場合、「#sand」はb=1となり、他の2つよりもbの値が大きいので最も優先順位が高くなります。「div h1」と「h1」の場合は、それぞれd=2、d=1ですので、「div h1」の優先順位が高くなります。'
+                            figure
+                                table.table
+                                    tr
+                                        th 比較項目
+                                        th #sand
+                                        th div h2
+                                        th h2
+                                    tr
+                                        td a
+                                        td 0
+                                        td 0
+                                        td 0
+                                    tr
+                                        td b
+                                        td 1
+                                        td 0
+                                        td 0
+                                    tr
+                                        td c
+                                        td 0
+                                        td 0
+                                        td 0
+                                    tr
+                                        td d
+                                        td 0
+                                        td 2
+                                        td 1
+                                figcaption サンプルの各セレクタの算出結果。
+                            h4 !important
+                            p='スタイルを記述する時に値の後に空白を挟んで「!important」を記述すると、通常の優先順位に関係無く優先的にスタイルが適用されます。'
+                            pre
+                                | セレクタ {
+                                |     プロパティ: 値 !important;
+                                | }
+                            .alert.alert-info CSS4のセレクタ
+                            .alert.alert-info 特定の名前空間に属するスタイルシートを適用する
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

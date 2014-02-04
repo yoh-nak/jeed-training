@@ -1,393 +1,393 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;3Dトランスフォーム
-						.panel-body
-							.alert.alert-info 3Dトランスフォーム
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td.not-support
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							p Android2.3.x/IE9以前は未対応。iOS4.x/Android3.xは部分対応。
-							pre
-								| transform: 変形処理
-							p
-								| 変形処理・・・translate() ／ translate3d() ／ translateX() ／ translateY() ／ translateZ() ／ scale() ／ scale3d() ／ scaleX ／ scaleY() ／ scaleZ() ／ rotate() ／ rotate3d() ／ rotateX() ／ rotateY() ／ rotateZ() ／ skew() ／ skewX() ／ skewY() ／ matrix() ／ matrix3d() ／ perspective() ／ none
-							table.table
-								tr
-									td 初期値
-									td none
-								tr
-									td 継承
-									td なし
-								tr
-									td 適用先
-									td ブロックレベル要素 ／ atomicインラインレベル要素 ／ displayプロパティの値がtable-row, table-row-group, table-header-group, table-footer-group, table-cell, table-captionの要素
-								tr
-									td 比率
-									td ボックスの横幅と高さに対する比率
-								tr
-									td モジュール
-									td Transforms
-							p='transformプロパティでは、2次元の変形処理に加えて、3次元の変形処理を指定することができます。3次元の処理は下のトランスフォーム関数のうち、赤字で示した関数を指定します。スキューに関しては3次元の処理はありません。'
-							table.table
-								tr
-									th トランスフォーム関数
-									th 指定できる変形処理
-								tr
-									td rotate() ／ rotate3d() ／ rotateX() ／ rotateY() ／ rotateZ()
-									td 回転
-								tr
-									td translate() ／ translate3d() ／ translateX() ／ translateY() ／ translateZ()
-									td 移動
-								tr
-									td scale() ／ scale3d() ／ scaleX() ／ scaleY() ／ scaleZ()
-									td 拡大縮小
-								tr
-									td skew() ／ skewX() ／ skewY()
-									td スキュー（シアー）
-								tr
-									td matrix() ／ matrix3d()
-									td 変換マトリクス（変換行列）
-								tr
-									td erspective()
-									td 透視投影
-							hr
-							h4 SAMPLE A：3次元の座標系
-							p='transformプロパティを利用することにより、要素はブラウザが構成する3次元空間の中に配慮されます。この3次元空間はブラウザ画面の左上を原点としてz軸が手前に伸びる座標空間で、z=0のxy平面がブラウザ画面となっています。'
-							p='また、3次元空間の中に配置した要素にはローカル座標系が構成されますが、これは2次元のときの座標系にz軸を拡張した構成になっており、transformプロパティの処理は、このローカル座標に対する操作となります。'
-							hr
-							h4 SAMPLE B：3次元のtransformプロパティの処理と表示
-							p='transformプロパティで3次元の移動と回転の処理を行い、結果を確認していきます。たとえば、<div>でマークアップした要素をz軸方向へ100ピクセル移動して、x軸まわりに45度回転させます。すると、<div>でマークアップした要素の構成するローカル座標系が、ブラウザの構成する座標系の中で下のように移動・回転することになります。'
-							p='このとき、ローカル座標系の原点は<div>が構成するボックスの中にセットされます。これは、transform-originプロパティの値が初期値の「50% 50% 0」で処理されるためです。'
-							p='tranfromプロパティによる処理の結果は、ブラウザ画面、つまりz=0のxy平面に投影されます。その結果、下の図のような表示となります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/05/284-B01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div&gt;SANDWICHES&lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div SANDWICHES
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     background: url(sandwiches.jpg);
-									|     -webkit-transform: translateZ(100px) rotateX(45deg);
-									|     transform: translateZ(100px) rotate(45deg);
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	background url(sandwiches.jpg)
-									| 	-webkit-transform translateZ(100px) rotateX(45deg)
-									| 	transform translateZ(100px) rotate(45deg)
-								figcaption （Stylus）
-							p='「透視投影」いよる投影を行うこともできます。この場合、perspective()では投影中心の位置をz=0 xy平面からの距離として指定します。'
-							p='投影中心とz=0のxy平面が近いほど歪みが大きく遠近感を強調した表示となり、遠くなるほど平行投影での表示に近づいていきます。'
-							p='なお、3次元の変形処理を行っていない場合には、perspective()を指定しても表示結果には影響しません。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/05/284-B02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div&gt;SANDWICHES&lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div SANDWICHES
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     background: url(sandwiches.jpg);
-									|     -webkit-transform: perspective(500px) translateZ(100px) rotateX(45deg);
-									|     transform: perspective(500px) translateZ(100px) rotateX(45deg);
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	background url(sandwiches.jpg)
-									| 	-webkit-transform perspective(500px) translateZ(100px) rotateX(45deg)
-									| 	transform perspective(500px) translateZ(100px) rotateX(45deg)
-								figcaption （Stylus）
-							p='perspective()の値には「px」といった単位をつけて指定します。しかし、iOS4.x/Android3.x単位の指定に未対応です。これらのブラウザにも対応する場合、次のように単位をつけない指定も記述しておきます。「500」と指定した場合、「500px」として処理されます。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     background: url(sandwiches.jpg);
-									|     -webkit-transform: perspective(500) translateZ(100px) rotateX(45deg);
-									|     -webkit-transform: perspective(500px) translateZ(100px) rotateX(45deg);
-									|     transform: perspective(500px) translateZ(100px) rotateX(45deg);
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	background url(sandwiches.jpg)
-									| 	-webkit-transform perspective(500) translateZ(100px) rotateX(45deg)
-									| 	-webkit-transform perspective(500px) translateZ(100px) rotateX(45deg)
-									| 	transform perspective(500px) translateZ(100px) rotateX(45deg)
-								figcaption （Stylus）
-							hr
-							h4 SAMPLE C：回転・拡大縮小・移動
-							p='<div>でマークアップした要素に対して回転・拡大縮小・移動の処理を行い、結果を確認していきます。このとき、perspective(500px)と指定し、透視投影で表示します。'
-							p='まず、transformプロパティの値を「rotateY(30deg)」にして、y軸まわりに30度の回転を行います。すると、ブラウザ画面つまりz=0のxy平面への投影結果は下のようになります。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;SANDWICHES&lt;/h1&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1 SANDWICHES
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     background: url(sandwiches.jpg);
-									|     -webkit-transform: perspective(500px) rotateY(30deg);
-									|     transform: perspective(500px) rotateY(30deg);
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	background url(sandwiches.jpg)
-									| 	-webkit-transform perspective(500px) rotateY(30deg)
-									| 	transform perspective(500px) rotateY(30deg)
-								figcaption （Stylus）
-							p='y軸の負の方向からxy平面を見ると、<div>の構成するローカル座標系は以下のように反時計回りに30度回転されたことになります。'
-							p='次に、拡大縮小の処理を行います。ここではx軸方向を0.5倍に、y軸方向を1倍に、z軸方向を2倍に拡大縮小するため、「scale3d(0.5,1,2)」と指定しています。すると、30度回転したローカル座標系のx軸とz軸の方向に対して拡大縮小が行われ、1目盛りの大きさが変化します。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     background: url(sandwiches.jpg);
-									|     -webkit-transform: perspective(500px) rotateY(30deg) scale3d(0.5, 1.2);
-									|     transform: perspective(500px) rotateY(30deg) scale3d(0.5, 1.2);
-									| }
-								figcaption （CSS） 
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	background url(sandwiches.jpg)
-									| 	-webkit-transform perspective(500px) rotateY(30deg) scale3d(0.5, 1.2)
-									| 	transform perspective(500px) rotateY(30deg) scale3d(0.5, 1.2)
-								figcaption （Stylus）
-							p='最後に、「translate3d(-100px,0,100px)」と指定して移動の処理を行います。これにより、拡大縮小したローカル座標系の上でx軸方向にマイナス100ピクセル、z軸方向に100ピクセルの移動方向が行われることになります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/05/284-C.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     background: url(sandwiches.jpg);
-									|     -webkit-transform: perspective(500px) rotateY(30deg) scale3d(0.5, 1.2) translate3d(-100px, 0, 100px);
-									|     transform: perspective(500px) rotateY(30deg) scale3d(0.5, 1.2) translate3d(-100px, 0, 100px);
-									| }
-								figcaption （CSS） 
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	background url(sandwiches.jpg)
-									| 	-webkit-transform perspective(500px) rotateY(30deg) scale3d(0.5, 1.2) translate3d(-100px, 0, 100px)
-									| 	transform perspective(500px) rotateY(30deg) scale3d(0.5, 1.2) translate3d(-100px, 0, 100px)
-								figcaption （Stylus）
-							hr
-							h4 3次元の変形処理の実行順
-							p='2次元の場合と同じように、3次元の変形処理においても処理の実行順を変えると処理結果が変わってきます。たとえば、SAMPLE Cの移動の処理を一番最初に実行すると、処理結果が変わります。'
-							hr
-							h4 SAMPLE D：トランスフォーム関数で指定できる値
-							p='3次元の回転、移動、拡大縮小の処理では、トランスフォーム関数の値を下のような記述形式で指定します。マイナスの値を指定することも可能です。'
-							p='rotate3d()、scale3d()、translate3d()では各値を省略することはできません。'
-							table.table
-								tr
-									th 変形処理
-									th トランスフォーム関数
-									th 値
-								tr
-									td 回転
-									td 
-										| rotate3d(Ax, Ay, Az)<br>
-										| rotateX(Ax)<br>
-										| rotateY(Ay)<br>
-										| rotateZ(Az)
-									td 
-										| Ax・・・x軸まわりの回転角度<br>
-										| Ay・・・y軸まわりの回転角度<br>
-										| Az・・・z軸まわりの回転角度
-								tr
-									td 移動
-									td 
-										| scale3d(Sx, Sy, Sz)<br>
-										| scaleX(Sx)<br>
-										| scaleY(Sy)<br>
-										| scaleZ(Sz) 
-									td 
-										| Sx・・・x軸方向の拡大縮小の倍率<br>
-										| Sy・・・y軸方向の拡大縮小の倍率<br>
-										| Sz・・・z軸方向の拡大縮小の倍率
-								tr
-									td 拡大縮小
-									td 
-										| translate3d(Tx, Ty, Tz)<br>
-										| translateX(Tx)<br>
-										| translateY(Ty)<br>
-										| translateZ(Tz)
-									td 
-										| Tx・・・x軸方向の移動距離<br>
-										| Ty・・・y軸方向の移動距離<br>
-										| Tz・・・z軸方向の移動距離
-							h4='SAMPLE E：変換マトリクス（変換行列）'
-							p='プログラムで扱いやすいように、3次元の回転、移動、拡大縮小の処理は行列の形で指定することもできます。行列の値はトランスフォーム関数のmatrix3d()で指定します。'
-							p='4x4の変換マトリクス'
-							pre
-								| ┏　　　　　　　┓
-								| ┃ａ　ｅ　ｉ　ｍ┃
-								| ┃ｂ　ｆ　ｊ　ｎ┃
-								| ┃ｃ　ｇ　ｋ　ｏ┃
-								| ┃ｄ　ｈ　ｌ　ｐ┃
-								| ┗　　　　　　　┛
-							pre
-								| matrix3d(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p)
-							p a〜p・・・変換マトリクスの値
-							p
-								a.btn.btn-default(href='../demo/css/sample1/05/284-E01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;SANDWICHES&lt;/h1&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1 SANDWICHES
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     background: url(sandwiches.jpg);
-									|     -webkit-transform:
-									|     matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 100, 1)
-									|     matrix3d(1, 0, 0, 0, 0, 0.707, 0,.707, 0, 0, -0.707, 0.707, 0, 0, 0, 0, 1);
-									|     
-									|     transform:
-									|     matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 100, 1)
-									|     matrix3d(1, 0, 0, 0, 0, 0.707, 0,.707, 0, 0, -0.707, 0.707, 0, 0, 0, 0, 1);
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	background url(sandwiches.jpg)
-									| 	-webkit-transform matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 100, 1)
-									|   matrix3d(1, 0, 0, 0, 0, 0.707, 0,.707, 0, 0, -0.707, 0.707, 0, 0, 0, 0, 1)
-									| 	transform matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 100, 1)
-									|   matrix3d(1, 0, 0, 0, 0, 0.707, 0,.707, 0, 0, -0.707, 0.707, 0, 0, 0, 0, 1)
-    							figcaption （Stylus）
-    						hr
-    						p='回転、拡大縮小、移動の各処理結果は以下のように指定します。'
-    						h4 移動
-    						pre
-    							| matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, Tx, Ty, Tz, 1)
-    						p Tx, Ty, Tz・・・横／縦／奥行き方向の移動距離
-    						h4 拡大縮小
-    						pre
-    							| matrix3d(Sx, 0, 0, 0, 0, Sy, 0, 0, 0, 0, Sz, 0, 0, 0, 0, 1)
-    						p Sx, Sy, Sz・・・横／縦／奥行き方向の倍率
-    						h4 回転
-    						pre
-    							| matrix3d(1, 0, 0, 0, 0, cos(X), sin(X), 0, 0, -sin(x), cos(x), 0, 0, 0, 0, 1)
-    						p X・・・x軸まわりの回転角度
-    						pre
-    							| matrix3d(cos(Y), 0, -sin(Y), 0, 0, 1, 0, 0, sin(Y), 0, cos(Y), 0, 0, 0, 0, 1)
-    						p Y・・・y軸まわりの回転角度
-    						pre
-    							| matrix3d(cos(Z), sin(Z), 0, 0, -sin(Z), cos(Z), 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
-    						p Y・・・z軸まわりの回転角度
-    						hr
-    						p perspective()が行う透視投影の処理は以下のように指定します。
-    						pre
-    							| perspective(D)
-    						p ▼
-    						pre
-    							| matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -1/D, 0, 0, 0, 1)
-    						p D・・・z=0のxy平面から投影中心までの距離
-    						p また、2次元のmatrix()の処理は以下のように指定することができます。
-    						pre
-    							| matrix(a, b, c, d, e, f)
-    						p ▼
-    						pre
-    							| matrix3d(a, b, 0, 0, c, d, 0, 0, 0, 0, 1, 0, e, f, 0, 1)
-    						p
-								a.btn.btn-default(href='../demo/css/sample1/05/284-E02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;SANDWICHES&lt;/h1&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1 SANDWICHES
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     background: url(sandwiches.jpg);
-									|     -webkit-transform:
-									|     matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 1, -0.002, 0, 0, 0, 1)
-									|     matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 100, 1)
-									|     matrix3d(1, 0, 0, 0, 0, 0.707, 0,.707, 0, 0, -0.707, 0.707, 0, 0, 0, 0, 1);
-									|     
-									|     transform:
-									|     matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 1, -0.002, 0, 0, 0, 1)
-									|     matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 100, 1)
-									|     matrix3d(1, 0, 0, 0, 0, 0.707, 0,.707, 0, 0, -0.707, 0.707, 0, 0, 0, 0, 1);
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	background url(sandwiches.jpg)
-									| 	-webkit-transform matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 1, -0.002, 0, 0, 0, 1)
-									| 	matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 100, 1)
-									| 	matrix3d(1, 0, 0, 0, 0, 0.707, 0,.707, 0, 0, -0.707, 0.707, 0, 0, 0, 0, 1)
-									| 	transform matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 1, -0.002, 0, 0, 0, 1)
-									| 	matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 100, 1)
-									| 	matrix3d(1, 0, 0, 0, 0, 0.707, 0,.707, 0, 0, -0.707, 0.707, 0, 0, 0, 0, 1)
-								figcaption （Stylus）
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;3Dトランスフォーム
+                        .panel-body
+                            .alert.alert-info 3Dトランスフォーム
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td.not-support
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            p Android2.3.x/IE9以前は未対応。iOS4.x/Android3.xは部分対応。
+                            pre
+                                | transform: 変形処理
+                            p
+                                | 変形処理・・・translate() ／ translate3d() ／ translateX() ／ translateY() ／ translateZ() ／ scale() ／ scale3d() ／ scaleX ／ scaleY() ／ scaleZ() ／ rotate() ／ rotate3d() ／ rotateX() ／ rotateY() ／ rotateZ() ／ skew() ／ skewX() ／ skewY() ／ matrix() ／ matrix3d() ／ perspective() ／ none
+                            table.table
+                                tr
+                                    td 初期値
+                                    td none
+                                tr
+                                    td 継承
+                                    td なし
+                                tr
+                                    td 適用先
+                                    td ブロックレベル要素 ／ atomicインラインレベル要素 ／ displayプロパティの値がtable-row, table-row-group, table-header-group, table-footer-group, table-cell, table-captionの要素
+                                tr
+                                    td 比率
+                                    td ボックスの横幅と高さに対する比率
+                                tr
+                                    td モジュール
+                                    td Transforms
+                            p='transformプロパティでは、2次元の変形処理に加えて、3次元の変形処理を指定することができます。3次元の処理は下のトランスフォーム関数のうち、赤字で示した関数を指定します。スキューに関しては3次元の処理はありません。'
+                            table.table
+                                tr
+                                    th トランスフォーム関数
+                                    th 指定できる変形処理
+                                tr
+                                    td rotate() ／ rotate3d() ／ rotateX() ／ rotateY() ／ rotateZ()
+                                    td 回転
+                                tr
+                                    td translate() ／ translate3d() ／ translateX() ／ translateY() ／ translateZ()
+                                    td 移動
+                                tr
+                                    td scale() ／ scale3d() ／ scaleX() ／ scaleY() ／ scaleZ()
+                                    td 拡大縮小
+                                tr
+                                    td skew() ／ skewX() ／ skewY()
+                                    td スキュー（シアー）
+                                tr
+                                    td matrix() ／ matrix3d()
+                                    td 変換マトリクス（変換行列）
+                                tr
+                                    td erspective()
+                                    td 透視投影
+                            hr
+                            h4 SAMPLE A：3次元の座標系
+                            p='transformプロパティを利用することにより、要素はブラウザが構成する3次元空間の中に配慮されます。この3次元空間はブラウザ画面の左上を原点としてz軸が手前に伸びる座標空間で、z=0のxy平面がブラウザ画面となっています。'
+                            p='また、3次元空間の中に配置した要素にはローカル座標系が構成されますが、これは2次元のときの座標系にz軸を拡張した構成になっており、transformプロパティの処理は、このローカル座標に対する操作となります。'
+                            hr
+                            h4 SAMPLE B：3次元のtransformプロパティの処理と表示
+                            p='transformプロパティで3次元の移動と回転の処理を行い、結果を確認していきます。たとえば、<div>でマークアップした要素をz軸方向へ100ピクセル移動して、x軸まわりに45度回転させます。すると、<div>でマークアップした要素の構成するローカル座標系が、ブラウザの構成する座標系の中で下のように移動・回転することになります。'
+                            p='このとき、ローカル座標系の原点は<div>が構成するボックスの中にセットされます。これは、transform-originプロパティの値が初期値の「50% 50% 0」で処理されるためです。'
+                            p='tranfromプロパティによる処理の結果は、ブラウザ画面、つまりz=0のxy平面に投影されます。その結果、下の図のような表示となります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/05/284-B01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div&gt;SANDWICHES&lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div SANDWICHES
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     background: url(sandwiches.jpg);
+                                    |     -webkit-transform: translateZ(100px) rotateX(45deg);
+                                    |     transform: translateZ(100px) rotate(45deg);
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     background url(sandwiches.jpg)
+                                    |     -webkit-transform translateZ(100px) rotateX(45deg)
+                                    |     transform translateZ(100px) rotate(45deg)
+                                figcaption （Stylus）
+                            p='「透視投影」いよる投影を行うこともできます。この場合、perspective()では投影中心の位置をz=0 xy平面からの距離として指定します。'
+                            p='投影中心とz=0のxy平面が近いほど歪みが大きく遠近感を強調した表示となり、遠くなるほど平行投影での表示に近づいていきます。'
+                            p='なお、3次元の変形処理を行っていない場合には、perspective()を指定しても表示結果には影響しません。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/05/284-B02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div&gt;SANDWICHES&lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div SANDWICHES
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     background: url(sandwiches.jpg);
+                                    |     -webkit-transform: perspective(500px) translateZ(100px) rotateX(45deg);
+                                    |     transform: perspective(500px) translateZ(100px) rotateX(45deg);
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     background url(sandwiches.jpg)
+                                    |     -webkit-transform perspective(500px) translateZ(100px) rotateX(45deg)
+                                    |     transform perspective(500px) translateZ(100px) rotateX(45deg)
+                                figcaption （Stylus）
+                            p='perspective()の値には「px」といった単位をつけて指定します。しかし、iOS4.x/Android3.x単位の指定に未対応です。これらのブラウザにも対応する場合、次のように単位をつけない指定も記述しておきます。「500」と指定した場合、「500px」として処理されます。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     background: url(sandwiches.jpg);
+                                    |     -webkit-transform: perspective(500) translateZ(100px) rotateX(45deg);
+                                    |     -webkit-transform: perspective(500px) translateZ(100px) rotateX(45deg);
+                                    |     transform: perspective(500px) translateZ(100px) rotateX(45deg);
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     background url(sandwiches.jpg)
+                                    |     -webkit-transform perspective(500) translateZ(100px) rotateX(45deg)
+                                    |     -webkit-transform perspective(500px) translateZ(100px) rotateX(45deg)
+                                    |     transform perspective(500px) translateZ(100px) rotateX(45deg)
+                                figcaption （Stylus）
+                            hr
+                            h4 SAMPLE C：回転・拡大縮小・移動
+                            p='<div>でマークアップした要素に対して回転・拡大縮小・移動の処理を行い、結果を確認していきます。このとき、perspective(500px)と指定し、透視投影で表示します。'
+                            p='まず、transformプロパティの値を「rotateY(30deg)」にして、y軸まわりに30度の回転を行います。すると、ブラウザ画面つまりz=0のxy平面への投影結果は下のようになります。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;SANDWICHES&lt;/h1&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1 SANDWICHES
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     background: url(sandwiches.jpg);
+                                    |     -webkit-transform: perspective(500px) rotateY(30deg);
+                                    |     transform: perspective(500px) rotateY(30deg);
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     background url(sandwiches.jpg)
+                                    |     -webkit-transform perspective(500px) rotateY(30deg)
+                                    |     transform perspective(500px) rotateY(30deg)
+                                figcaption （Stylus）
+                            p='y軸の負の方向からxy平面を見ると、<div>の構成するローカル座標系は以下のように反時計回りに30度回転されたことになります。'
+                            p='次に、拡大縮小の処理を行います。ここではx軸方向を0.5倍に、y軸方向を1倍に、z軸方向を2倍に拡大縮小するため、「scale3d(0.5,1,2)」と指定しています。すると、30度回転したローカル座標系のx軸とz軸の方向に対して拡大縮小が行われ、1目盛りの大きさが変化します。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     background: url(sandwiches.jpg);
+                                    |     -webkit-transform: perspective(500px) rotateY(30deg) scale3d(0.5, 1.2);
+                                    |     transform: perspective(500px) rotateY(30deg) scale3d(0.5, 1.2);
+                                    | }
+                                figcaption （CSS） 
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     background url(sandwiches.jpg)
+                                    |     -webkit-transform perspective(500px) rotateY(30deg) scale3d(0.5, 1.2)
+                                    |     transform perspective(500px) rotateY(30deg) scale3d(0.5, 1.2)
+                                figcaption （Stylus）
+                            p='最後に、「translate3d(-100px,0,100px)」と指定して移動の処理を行います。これにより、拡大縮小したローカル座標系の上でx軸方向にマイナス100ピクセル、z軸方向に100ピクセルの移動方向が行われることになります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/05/284-C.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     background: url(sandwiches.jpg);
+                                    |     -webkit-transform: perspective(500px) rotateY(30deg) scale3d(0.5, 1.2) translate3d(-100px, 0, 100px);
+                                    |     transform: perspective(500px) rotateY(30deg) scale3d(0.5, 1.2) translate3d(-100px, 0, 100px);
+                                    | }
+                                figcaption （CSS） 
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     background url(sandwiches.jpg)
+                                    |     -webkit-transform perspective(500px) rotateY(30deg) scale3d(0.5, 1.2) translate3d(-100px, 0, 100px)
+                                    |     transform perspective(500px) rotateY(30deg) scale3d(0.5, 1.2) translate3d(-100px, 0, 100px)
+                                figcaption （Stylus）
+                            hr
+                            h4 3次元の変形処理の実行順
+                            p='2次元の場合と同じように、3次元の変形処理においても処理の実行順を変えると処理結果が変わってきます。たとえば、SAMPLE Cの移動の処理を一番最初に実行すると、処理結果が変わります。'
+                            hr
+                            h4 SAMPLE D：トランスフォーム関数で指定できる値
+                            p='3次元の回転、移動、拡大縮小の処理では、トランスフォーム関数の値を下のような記述形式で指定します。マイナスの値を指定することも可能です。'
+                            p='rotate3d()、scale3d()、translate3d()では各値を省略することはできません。'
+                            table.table
+                                tr
+                                    th 変形処理
+                                    th トランスフォーム関数
+                                    th 値
+                                tr
+                                    td 回転
+                                    td 
+                                        | rotate3d(Ax, Ay, Az)<br>
+                                        | rotateX(Ax)<br>
+                                        | rotateY(Ay)<br>
+                                        | rotateZ(Az)
+                                    td 
+                                        | Ax・・・x軸まわりの回転角度<br>
+                                        | Ay・・・y軸まわりの回転角度<br>
+                                        | Az・・・z軸まわりの回転角度
+                                tr
+                                    td 移動
+                                    td 
+                                        | scale3d(Sx, Sy, Sz)<br>
+                                        | scaleX(Sx)<br>
+                                        | scaleY(Sy)<br>
+                                        | scaleZ(Sz) 
+                                    td 
+                                        | Sx・・・x軸方向の拡大縮小の倍率<br>
+                                        | Sy・・・y軸方向の拡大縮小の倍率<br>
+                                        | Sz・・・z軸方向の拡大縮小の倍率
+                                tr
+                                    td 拡大縮小
+                                    td 
+                                        | translate3d(Tx, Ty, Tz)<br>
+                                        | translateX(Tx)<br>
+                                        | translateY(Ty)<br>
+                                        | translateZ(Tz)
+                                    td 
+                                        | Tx・・・x軸方向の移動距離<br>
+                                        | Ty・・・y軸方向の移動距離<br>
+                                        | Tz・・・z軸方向の移動距離
+                            h4='SAMPLE E：変換マトリクス（変換行列）'
+                            p='プログラムで扱いやすいように、3次元の回転、移動、拡大縮小の処理は行列の形で指定することもできます。行列の値はトランスフォーム関数のmatrix3d()で指定します。'
+                            p='4x4の変換マトリクス'
+                            pre
+                                | ┏　　　　　　　┓
+                                | ┃ａ　ｅ　ｉ　ｍ┃
+                                | ┃ｂ　ｆ　ｊ　ｎ┃
+                                | ┃ｃ　ｇ　ｋ　ｏ┃
+                                | ┃ｄ　ｈ　ｌ　ｐ┃
+                                | ┗　　　　　　　┛
+                            pre
+                                | matrix3d(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p)
+                            p a〜p・・・変換マトリクスの値
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/05/284-E01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;SANDWICHES&lt;/h1&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1 SANDWICHES
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     background: url(sandwiches.jpg);
+                                    |     -webkit-transform:
+                                    |     matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 100, 1)
+                                    |     matrix3d(1, 0, 0, 0, 0, 0.707, 0,.707, 0, 0, -0.707, 0.707, 0, 0, 0, 0, 1);
+                                    |     
+                                    |     transform:
+                                    |     matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 100, 1)
+                                    |     matrix3d(1, 0, 0, 0, 0, 0.707, 0,.707, 0, 0, -0.707, 0.707, 0, 0, 0, 0, 1);
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     background url(sandwiches.jpg)
+                                    |     -webkit-transform matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 100, 1)
+                                    |   matrix3d(1, 0, 0, 0, 0, 0.707, 0,.707, 0, 0, -0.707, 0.707, 0, 0, 0, 0, 1)
+                                    |     transform matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 100, 1)
+                                    |   matrix3d(1, 0, 0, 0, 0, 0.707, 0,.707, 0, 0, -0.707, 0.707, 0, 0, 0, 0, 1)
+                                figcaption （Stylus）
+                            hr
+                            p='回転、拡大縮小、移動の各処理結果は以下のように指定します。'
+                            h4 移動
+                            pre
+                                | matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, Tx, Ty, Tz, 1)
+                            p Tx, Ty, Tz・・・横／縦／奥行き方向の移動距離
+                            h4 拡大縮小
+                            pre
+                                | matrix3d(Sx, 0, 0, 0, 0, Sy, 0, 0, 0, 0, Sz, 0, 0, 0, 0, 1)
+                            p Sx, Sy, Sz・・・横／縦／奥行き方向の倍率
+                            h4 回転
+                            pre
+                                | matrix3d(1, 0, 0, 0, 0, cos(X), sin(X), 0, 0, -sin(x), cos(x), 0, 0, 0, 0, 1)
+                            p X・・・x軸まわりの回転角度
+                            pre
+                                | matrix3d(cos(Y), 0, -sin(Y), 0, 0, 1, 0, 0, sin(Y), 0, cos(Y), 0, 0, 0, 0, 1)
+                            p Y・・・y軸まわりの回転角度
+                            pre
+                                | matrix3d(cos(Z), sin(Z), 0, 0, -sin(Z), cos(Z), 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+                            p Y・・・z軸まわりの回転角度
+                            hr
+                            p perspective()が行う透視投影の処理は以下のように指定します。
+                            pre
+                                | perspective(D)
+                            p ▼
+                            pre
+                                | matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -1/D, 0, 0, 0, 1)
+                            p D・・・z=0のxy平面から投影中心までの距離
+                            p また、2次元のmatrix()の処理は以下のように指定することができます。
+                            pre
+                                | matrix(a, b, c, d, e, f)
+                            p ▼
+                            pre
+                                | matrix3d(a, b, 0, 0, c, d, 0, 0, 0, 0, 1, 0, e, f, 0, 1)
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/05/284-E02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;SANDWICHES&lt;/h1&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1 SANDWICHES
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     background: url(sandwiches.jpg);
+                                    |     -webkit-transform:
+                                    |     matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 1, -0.002, 0, 0, 0, 1)
+                                    |     matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 100, 1)
+                                    |     matrix3d(1, 0, 0, 0, 0, 0.707, 0,.707, 0, 0, -0.707, 0.707, 0, 0, 0, 0, 1);
+                                    |     
+                                    |     transform:
+                                    |     matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 1, -0.002, 0, 0, 0, 1)
+                                    |     matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 100, 1)
+                                    |     matrix3d(1, 0, 0, 0, 0, 0.707, 0,.707, 0, 0, -0.707, 0.707, 0, 0, 0, 0, 1);
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     background url(sandwiches.jpg)
+                                    |     -webkit-transform matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 1, -0.002, 0, 0, 0, 1)
+                                    |     matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 100, 1)
+                                    |     matrix3d(1, 0, 0, 0, 0, 0.707, 0,.707, 0, 0, -0.707, 0.707, 0, 0, 0, 0, 1)
+                                    |     transform matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 1, -0.002, 0, 0, 0, 1)
+                                    |     matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 100, 1)
+                                    |     matrix3d(1, 0, 0, 0, 0, 0.707, 0,.707, 0, 0, -0.707, 0.707, 0, 0, 0, 0, 1)
+                                figcaption （Stylus）
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

@@ -1,153 +1,153 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;自動改行のルール
-						.panel-body
-							.alert.alert-info 自動改行のルール
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png') （※）
-									td
-										img(src='../images/ic-android.png') （※）
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png') （※）
-									td
-										img(src='../images/ic-chrome.png') （※）
-									td.not-support
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png') （※）
-							p ※ 部分対応。
-							pre
-								| word-break: ルール
-							p
-								| ルール・・・normal ／ break-all ／ keep-all ／ keep-words
-							table.table
-								tr
-									td 初期値
-									td normal
-								tr
-									td 継承
-									td あり
-								tr
-									td 適用先
-									td 全要素
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td Text
-							p='word-breakプロパティを利用するとブラウザによる自動改行のルールを指定することができます。'
-							table.table
-								tr
-									th 値
-									th 自動改行のルール
-								tr
-									td normal
-									td 言語ごとの標準ルールで改行を入れる。
-								tr
-									td break-all
-									td 任意の文字の間に改行を入れる。
-								tr
-									td keep-all
-									td 単語の途中に改行を入れない。
-							hr
-							h4 SAMPLE：自動改行のルールの指定
-							p='下のサンプルは英単語を含んだ日本語の文章を表示したものです。word-breakプロパティの値は初期値の「normal」で処理されますので、自動改行は言語ごとのルールで行われます。そのため、日本語の部分では文字の間に改行が入りますが、英単語の途中には改行が入らず、スペースの位置で改行されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/201-01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;p&gt;手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。マヨネーズソースがおいしくて、お店の近くを通るたびに買いこんでしまいます。国道をまっすぐ南下したら「HAM SANDWICHES」の看板を右折してください。&lt;/p&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p 手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。マヨネーズソースがおいしくて、お店の近くを通るたびに買いこんでしまいます。国道をまっすぐ南下したら「HAM SANDWICHES」の看板を右折してください。
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p {
-									|     border: solid 2px orange;
-									|     padding: 10px;
-									|     word-break: normal;
-									|     -ms-word-break: normal;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	border solid 2px orange
-									| 	padding 10px
-									| 	word-break normal
-									| 	-ms-word-break normal
-								figcaption （Stylus）
-							p='word-breakプロパティの値を「break-all」にすると、任意の文字の間に改行が入ります。この場合、英単語の途中にも改行が入るようになります。日本語の中に少しだけ英単語が入るような文章での利用が考えられています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/201-02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| p {
-									|     border: solid 2px orange;
-									|     padding: 10px;
-									|     word-break: break-all;
-									|     -ms-word-break: break-all;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	border solid 2px orange
-									| 	padding 10px
-									| 	word-break break-all
-									| 	-ms-word-break break-all
-								figcaption （Stylus）
-							p='word-breakプロパティの値を「keep-all」にすると、単語の途中に改行が入らなくなり、スペースの位置のみ改行が行われます。日本語の文章の場合、単語の区切りを示すスペースがありませんので、改行が入らなくなります。このルールは英文の中に少しだけ日本語が入るような文章での利用が考えられています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/201-03.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| p {
-									|     border: solid 2px orange;
-									|     padding: 10px;
-									|     word-break: keep-all;
-									|     -ms-word-break: keep-all;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	border solid 2px orange
-									| 	padding 10px
-									| 	word-break keep-all
-									| 	-ms-word-break keep-all
-								figcaption （Stylus）
-							p='値を「keep-all」にした場合、IEではスペースの位置だけでなく、日本語の句読点の位置にも改行が入ります。また、Webkit系のブラウザは「keep-all」の指定に未対応です。'
-							p='古い草案では「keep-words」という値も提案されていましたが、現在は削除されています。'
-							hr
-							p 実体参照のハイフネーション
-							pre &shy;
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;自動改行のルール
+                        .panel-body
+                            .alert.alert-info 自動改行のルール
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png') （※）
+                                    td
+                                        img(src='../images/ic-android.png') （※）
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png') （※）
+                                    td
+                                        img(src='../images/ic-chrome.png') （※）
+                                    td.not-support
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png') （※）
+                            p ※ 部分対応。
+                            pre
+                                | word-break: ルール
+                            p
+                                | ルール・・・normal ／ break-all ／ keep-all ／ keep-words
+                            table.table
+                                tr
+                                    td 初期値
+                                    td normal
+                                tr
+                                    td 継承
+                                    td あり
+                                tr
+                                    td 適用先
+                                    td 全要素
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td Text
+                            p='word-breakプロパティを利用するとブラウザによる自動改行のルールを指定することができます。'
+                            table.table
+                                tr
+                                    th 値
+                                    th 自動改行のルール
+                                tr
+                                    td normal
+                                    td 言語ごとの標準ルールで改行を入れる。
+                                tr
+                                    td break-all
+                                    td 任意の文字の間に改行を入れる。
+                                tr
+                                    td keep-all
+                                    td 単語の途中に改行を入れない。
+                            hr
+                            h4 SAMPLE：自動改行のルールの指定
+                            p='下のサンプルは英単語を含んだ日本語の文章を表示したものです。word-breakプロパティの値は初期値の「normal」で処理されますので、自動改行は言語ごとのルールで行われます。そのため、日本語の部分では文字の間に改行が入りますが、英単語の途中には改行が入らず、スペースの位置で改行されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/201-01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;p&gt;手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。マヨネーズソースがおいしくて、お店の近くを通るたびに買いこんでしまいます。国道をまっすぐ南下したら「HAM SANDWICHES」の看板を右折してください。&lt;/p&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p 手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。マヨネーズソースがおいしくて、お店の近くを通るたびに買いこんでしまいます。国道をまっすぐ南下したら「HAM SANDWICHES」の看板を右折してください。
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p {
+                                    |     border: solid 2px orange;
+                                    |     padding: 10px;
+                                    |     word-break: normal;
+                                    |     -ms-word-break: normal;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     border solid 2px orange
+                                    |     padding 10px
+                                    |     word-break normal
+                                    |     -ms-word-break normal
+                                figcaption （Stylus）
+                            p='word-breakプロパティの値を「break-all」にすると、任意の文字の間に改行が入ります。この場合、英単語の途中にも改行が入るようになります。日本語の中に少しだけ英単語が入るような文章での利用が考えられています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/201-02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p {
+                                    |     border: solid 2px orange;
+                                    |     padding: 10px;
+                                    |     word-break: break-all;
+                                    |     -ms-word-break: break-all;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     border solid 2px orange
+                                    |     padding 10px
+                                    |     word-break break-all
+                                    |     -ms-word-break break-all
+                                figcaption （Stylus）
+                            p='word-breakプロパティの値を「keep-all」にすると、単語の途中に改行が入らなくなり、スペースの位置のみ改行が行われます。日本語の文章の場合、単語の区切りを示すスペースがありませんので、改行が入らなくなります。このルールは英文の中に少しだけ日本語が入るような文章での利用が考えられています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/201-03.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p {
+                                    |     border: solid 2px orange;
+                                    |     padding: 10px;
+                                    |     word-break: keep-all;
+                                    |     -ms-word-break: keep-all;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     border solid 2px orange
+                                    |     padding 10px
+                                    |     word-break keep-all
+                                    |     -ms-word-break keep-all
+                                figcaption （Stylus）
+                            p='値を「keep-all」にした場合、IEではスペースの位置だけでなく、日本語の句読点の位置にも改行が入ります。また、Webkit系のブラウザは「keep-all」の指定に未対応です。'
+                            p='古い草案では「keep-words」という値も提案されていましたが、現在は削除されています。'
+                            hr
+                            p 実体参照のハイフネーション
+                            pre &shy;
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

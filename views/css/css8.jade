@@ -1,295 +1,295 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;背景画像
-						.panel-body
-							.alert.alert-info 背景画像
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							p IE8以前は部分対応。
-							pre
-								| background-image: 背景画像のURL
-							pre
-								| background-image: 1枚目の画像のURL, 2枚目の画像のURL, ...
-							p='背景画像のURL・・・url() ／ none'
-							table.table
-								tr
-									td 初期値
-									td none
-								tr
-									td 継承
-									td なし
-								tr
-									td 適用先
-									td 全要素
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td Backgrounds and Borders
-							p='background-imageを利用するとボックスの背景画像を指定することができます。また、CSS3ではURLをカンマで区切って指定することにより、複数の背景画像を重ねて表示することができます。ただし、IE8以前のバージョンではCSS3の機能には未対応です。'
-							h4 SAMPLE A: 基本
-							p='下のサンプルでは<h2>でマークアップした見出しの罫線で囲んで表示したものです。background-imageプロパティの値は初期値の「none」で処理されるため、背景画像は表示されません。'
-							p='<h2>のbackground-imageの値を「url(stripe.png)」にすると、下のように横縞の画像（stripe.png）が背景画像として表示されます。なお、背景画像は標準では縦横に繰り返して表示されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/121-A01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 HAM SANDWICHES
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     padding: 40px;
-									|     border: solid 1px darkred;
-									|     background-image: url(stripe.png);
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	padding 40px
-									| 	border solid 1px darkred
-									| 	background-image url(stripe.png)
-								figcaption （stylus）
-							hr
-							p='背景画像の表示スタイルや表示位置などは以下のプロパティで指定します。background-clipプロパティ以外の指定では、background-imageプロパティで背景画像を指定した場合に有効になります。たとえば、下のサンプルではbackground-repeatプロパティで背景画像を横方向だけに繰り返し、background-positionプロパティでボックスの中央に揃えて表示するように指定しています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/121-A02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 HAM SANDWICHES
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     padding: 40px;
-									|     border: solid 1px darkred;
-									|     background-image: url(stripe.png);
-									|     background-repeat: repeat-x;
-									|     background-position: center center;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	padding 40px
-									| 	border solid 1px darkred
-									| 	background-image url(stripe.png)
-									| 	background-repeat repeat-x
-									| 	background-position center center
-							table.table
-								tr
-									th 背景画像関連のプロパティ
-									th 指定できる設定
-								tr
-									td background-repeat
-									td 背景画像の表示スタイル
-								tr
-									td background-position
-									td 背景画像の表示位置
-								tr
-									td background-attachment
-									td 背景画像の固定対象
-								tr
-									td background-clip
-									td 背景画像の表示範囲
-								tr
-									td background-origin
-									td 背景画像の表示位置の基点
-								tr
-									td background-size
-									td 背景画像の大きさ
-							hr
-							h4 SAMPLE B：複数の背景画像を重ねて表示する （Multiple Backgrounds)
-							p='複数の背景画像を重ねて表示する場合は、一番上のものから順にカンマで区切って指定します。下のサンプルでは白い横縞の画像（stripe.png）をサンドイッチの画像（sand.jpg）の上に重ねて表示しています。なお、横縞の画像は黒色の部分を透過し、24bitの透過PNGフォーマットで保存してあります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/121-B01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 HAM SANDWICHES
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     padding: 65px 0;
-									|     color: white;
-									|     text-shadow: 0 0 10px black;
-									|     background-image: url(sw.png), url(sand.jpg);
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	padding 65px 0
-									| 	color white
-									| 	text-shadow 0 0 10px black
-									| 	background-image url(sw.png), url(sand.jpg)
-								figcaption （stylus）
-							p='横縞とサンドイッチの画像は1枚の背景画像として用意することもできますが、2枚に分けておくことにより、必要に応じてサンドイッチの画像だけ差し替えると行った使い方ができます。たとえば、サンドイッチの画像を青空の画像に差し替えると下のような表示になります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/121-B02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     padding: 65px 0;
-									|     color: white;
-									|     text-shadow: 0 0 10px black;
-									|     background-image: url(sw.png), url(sky.jpg);
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	padding 65px 0
-									| 	color white
-									| 	text-shadow 0 0 10px black
-									| 	background-image url(sw.png), url(sky.jpg)
-								figcaption （stylus）
-							hr
-							p='また、複数の背景画像を表示した場合にも、画像ごとに表示スタイルや表示位置などを指定することができます。このとき、background-repeatプロパティなどでも、各画像の設定を間まで区切って指定します。背景画像の数に対して指定した値の数が足りない場合は、1つ目の設定から順に繰り替えして適用し、値が多すぎる場合は破棄します。'
-							P='下のサンプルでは花柄の画像（point.png）を追加し、全部で3枚の画像を重ねて表示したものです。background-repeatとbackground-positionプロパティで各画像の表示スタイルと表示位置を指定しています。'
-							p='このとき、background-repeatプロパティの値は「no-repeat, repeat-x」と2つしか指定していませんので、3枚目の画像の表示スタイルは1つ目の値「no-repeat」で処理されます。background-positionプロパティについては3つの値を指定していますので、順に各画像の値として処理されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/121-B03.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     padding: 65px 0;
-									|     color: white;
-									|     text-shadow: 0 0 10px black;
-									|     background-image: url(point.png), url(sw.png), url(sky.jpg);
-									|     background-repeat: no-repeat, repeat-x;
-									|     bakcground-position: 18px 15px center, center, right bottom;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	padding 65px 0
-									| 	color white
-									| 	text-shadow 0 0 10px black
-									| 	background-image url(point.png), url(sw.png), url(sky.jpg)
-									| 	background-repeat no-repeat, repeat-x
-									| 	bakcground-position 18px 15px center, center, right bottom
-								figcaption （stylus）
-							figure
-								table.table
-									tr
-										th 画像
-										th 表示スタイル：background-repeatの値
-										th 表示位置：background-positionの値
-									tr
-										td 花の画像（point.png）
-										td no-repeat
-										td 18px 15px
-									tr
-										td 横縞の画像（sw.png）
-										td repeat-x
-										td center center
-									tr
-										td 青空の画像（sky.jpg）
-										td no-repeat
-										td right bottom
-							hr
-							h4 SAMPLE C：背景画像と背景色を重ねて表示する
-							p='背景画像と背景色の両方を指定した場合、背景色が一番下に重ねて表示されます。たとえば、background-imageプロパティで背景画像に白い横縞の画像（sw.png）を指定し、background-colorプロパティで背景色をオレンジに指定すると下のような表示になります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/121-C.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 HAM SANDWICHES
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     padding: 65px 0;
-									|     color: white;
-									|     text-shadow: 0 0 10px black;
-									|     background-image: url(sw.png);
-									|     background-color: orange;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	padding 65px 0
-									| 	color white
-									| 	text-shadow 0 0 10px black
-									| 	background-image url(sw.png)
-									| 	background-color orange
-								figcaption （stylus）
-							hr
-							.alert.alert-success Polyfill: 
-							p
-								| CSS3 Pie
-								br
-								a(href='http://css3pie.com/download/',target='_blank') http://css3pie.com/download/
-							p 最大4つまで背景画像を指定可能。
-							pre(class='prettyprint linenums:1')
-									| h2
-									| 	padding 65px 0
-									| 	color white
-									| 	text-shadow 0 0 10px black
-									| 	background-image url(point.png), url(sw.png), url(sky.jpg)
-									| 	background-repeat no-repeat, repeat-x
-									| 	bakcground-position 18px 15px center, center, right bottom
-									| 	<mark>behavior: url(PIE.htc);</mark>
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;背景画像
+                        .panel-body
+                            .alert.alert-info 背景画像
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            p IE8以前は部分対応。
+                            pre
+                                | background-image: 背景画像のURL
+                            pre
+                                | background-image: 1枚目の画像のURL, 2枚目の画像のURL, ...
+                            p='背景画像のURL・・・url() ／ none'
+                            table.table
+                                tr
+                                    td 初期値
+                                    td none
+                                tr
+                                    td 継承
+                                    td なし
+                                tr
+                                    td 適用先
+                                    td 全要素
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td Backgrounds and Borders
+                            p='background-imageを利用するとボックスの背景画像を指定することができます。また、CSS3ではURLをカンマで区切って指定することにより、複数の背景画像を重ねて表示することができます。ただし、IE8以前のバージョンではCSS3の機能には未対応です。'
+                            h4 SAMPLE A: 基本
+                            p='下のサンプルでは<h2>でマークアップした見出しの罫線で囲んで表示したものです。background-imageプロパティの値は初期値の「none」で処理されるため、背景画像は表示されません。'
+                            p='<h2>のbackground-imageの値を「url(stripe.png)」にすると、下のように横縞の画像（stripe.png）が背景画像として表示されます。なお、背景画像は標準では縦横に繰り返して表示されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/121-A01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 HAM SANDWICHES
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     padding: 40px;
+                                    |     border: solid 1px darkred;
+                                    |     background-image: url(stripe.png);
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     padding 40px
+                                    |     border solid 1px darkred
+                                    |     background-image url(stripe.png)
+                                figcaption （stylus）
+                            hr
+                            p='背景画像の表示スタイルや表示位置などは以下のプロパティで指定します。background-clipプロパティ以外の指定では、background-imageプロパティで背景画像を指定した場合に有効になります。たとえば、下のサンプルではbackground-repeatプロパティで背景画像を横方向だけに繰り返し、background-positionプロパティでボックスの中央に揃えて表示するように指定しています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/121-A02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 HAM SANDWICHES
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     padding: 40px;
+                                    |     border: solid 1px darkred;
+                                    |     background-image: url(stripe.png);
+                                    |     background-repeat: repeat-x;
+                                    |     background-position: center center;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     padding 40px
+                                    |     border solid 1px darkred
+                                    |     background-image url(stripe.png)
+                                    |     background-repeat repeat-x
+                                    |     background-position center center
+                            table.table
+                                tr
+                                    th 背景画像関連のプロパティ
+                                    th 指定できる設定
+                                tr
+                                    td background-repeat
+                                    td 背景画像の表示スタイル
+                                tr
+                                    td background-position
+                                    td 背景画像の表示位置
+                                tr
+                                    td background-attachment
+                                    td 背景画像の固定対象
+                                tr
+                                    td background-clip
+                                    td 背景画像の表示範囲
+                                tr
+                                    td background-origin
+                                    td 背景画像の表示位置の基点
+                                tr
+                                    td background-size
+                                    td 背景画像の大きさ
+                            hr
+                            h4 SAMPLE B：複数の背景画像を重ねて表示する （Multiple Backgrounds)
+                            p='複数の背景画像を重ねて表示する場合は、一番上のものから順にカンマで区切って指定します。下のサンプルでは白い横縞の画像（stripe.png）をサンドイッチの画像（sand.jpg）の上に重ねて表示しています。なお、横縞の画像は黒色の部分を透過し、24bitの透過PNGフォーマットで保存してあります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/121-B01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 HAM SANDWICHES
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     padding: 65px 0;
+                                    |     color: white;
+                                    |     text-shadow: 0 0 10px black;
+                                    |     background-image: url(sw.png), url(sand.jpg);
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     padding 65px 0
+                                    |     color white
+                                    |     text-shadow 0 0 10px black
+                                    |     background-image url(sw.png), url(sand.jpg)
+                                figcaption （stylus）
+                            p='横縞とサンドイッチの画像は1枚の背景画像として用意することもできますが、2枚に分けておくことにより、必要に応じてサンドイッチの画像だけ差し替えると行った使い方ができます。たとえば、サンドイッチの画像を青空の画像に差し替えると下のような表示になります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/121-B02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     padding: 65px 0;
+                                    |     color: white;
+                                    |     text-shadow: 0 0 10px black;
+                                    |     background-image: url(sw.png), url(sky.jpg);
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     padding 65px 0
+                                    |     color white
+                                    |     text-shadow 0 0 10px black
+                                    |     background-image url(sw.png), url(sky.jpg)
+                                figcaption （stylus）
+                            hr
+                            p='また、複数の背景画像を表示した場合にも、画像ごとに表示スタイルや表示位置などを指定することができます。このとき、background-repeatプロパティなどでも、各画像の設定を間まで区切って指定します。背景画像の数に対して指定した値の数が足りない場合は、1つ目の設定から順に繰り替えして適用し、値が多すぎる場合は破棄します。'
+                            P='下のサンプルでは花柄の画像（point.png）を追加し、全部で3枚の画像を重ねて表示したものです。background-repeatとbackground-positionプロパティで各画像の表示スタイルと表示位置を指定しています。'
+                            p='このとき、background-repeatプロパティの値は「no-repeat, repeat-x」と2つしか指定していませんので、3枚目の画像の表示スタイルは1つ目の値「no-repeat」で処理されます。background-positionプロパティについては3つの値を指定していますので、順に各画像の値として処理されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/121-B03.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     padding: 65px 0;
+                                    |     color: white;
+                                    |     text-shadow: 0 0 10px black;
+                                    |     background-image: url(point.png), url(sw.png), url(sky.jpg);
+                                    |     background-repeat: no-repeat, repeat-x;
+                                    |     bakcground-position: 18px 15px center, center, right bottom;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     padding 65px 0
+                                    |     color white
+                                    |     text-shadow 0 0 10px black
+                                    |     background-image url(point.png), url(sw.png), url(sky.jpg)
+                                    |     background-repeat no-repeat, repeat-x
+                                    |     bakcground-position 18px 15px center, center, right bottom
+                                figcaption （stylus）
+                            figure
+                                table.table
+                                    tr
+                                        th 画像
+                                        th 表示スタイル：background-repeatの値
+                                        th 表示位置：background-positionの値
+                                    tr
+                                        td 花の画像（point.png）
+                                        td no-repeat
+                                        td 18px 15px
+                                    tr
+                                        td 横縞の画像（sw.png）
+                                        td repeat-x
+                                        td center center
+                                    tr
+                                        td 青空の画像（sky.jpg）
+                                        td no-repeat
+                                        td right bottom
+                            hr
+                            h4 SAMPLE C：背景画像と背景色を重ねて表示する
+                            p='背景画像と背景色の両方を指定した場合、背景色が一番下に重ねて表示されます。たとえば、background-imageプロパティで背景画像に白い横縞の画像（sw.png）を指定し、background-colorプロパティで背景色をオレンジに指定すると下のような表示になります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/121-C.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 HAM SANDWICHES
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     padding: 65px 0;
+                                    |     color: white;
+                                    |     text-shadow: 0 0 10px black;
+                                    |     background-image: url(sw.png);
+                                    |     background-color: orange;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     padding 65px 0
+                                    |     color white
+                                    |     text-shadow 0 0 10px black
+                                    |     background-image url(sw.png)
+                                    |     background-color orange
+                                figcaption （stylus）
+                            hr
+                            .alert.alert-success Polyfill: 
+                            p
+                                | CSS3 Pie
+                                br
+                                a(href='http://css3pie.com/download/',target='_blank') http://css3pie.com/download/
+                            p 最大4つまで背景画像を指定可能。
+                            pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     padding 65px 0
+                                    |     color white
+                                    |     text-shadow 0 0 10px black
+                                    |     background-image url(point.png), url(sw.png), url(sky.jpg)
+                                    |     background-repeat no-repeat, repeat-x
+                                    |     bakcground-position 18px 15px center, center, right bottom
+                                    |     <mark>behavior: url(PIE.htc);</mark>
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

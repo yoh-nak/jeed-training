@@ -1,139 +1,139 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp; 垂直方向の行揃え
-						.panel-body
-							.alert.alert-info  垂直方向の行揃え
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png') （※）
-									td.not-support
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td.not-support
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png') （※）
-							p ※ 部分対応。
-							p iOS4.xは未対応。
-							pre
-								| writing-mode: 縦書き・横書き
-							p
-								| 縦書き・横書き・・・horizontal-tb ／ vertical-rl ／ vertical-lr
-							table.table
-								tr
-									td 初期値
-									td horizontal-tb
-								tr
-									td 継承
-									td あり
-								tr
-									td 適用先
-									td 全要素（テーブルの行列関連の要素を除く）
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td Writing Modes
-							p='writing-modeプロパティを利用すると、縦書き・横書きの書字方向を指定することができます。IEは下のように独自の値での対応となっていますので注意が必要です。'
-							hr
-							h4 SAMPLE：縦書き・横書きの指定
-							p='Webページのコンテンツは横書きで、上から下の向かって表示されます。これは、writing-modeプロパティの値が初期値の「horizontal-tb」で処理されるためです。'
-							p='writing-modeプロパティの値を「vertical-rl」にすると、縦書きにして、右から左に向かって表示することができます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/246-01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;body&gt;
-									| &lt;h1&gt;ハムサンドイッチ&lt;/h1&gt;
-									| &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト、チーズ…略…&lt;/p&gt;
-									| &lt;/body&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| body
-									| 	h1 ハムサンドイッチ
-									| 	p 焼きたての手作りパンで新鮮なハム、トマト、チーズ…略…
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| body {
-									|     font-family: 'メイリオ', sans-serif;
-									|     -webkit-writing-mode: horizontal-tb;
-									|     -ms-writing-mode: lr-tb;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| body
-									| 	font-family 'メイリオ', sans-serif
-									| 	-webkit-writing-mode horizontal-tb
-									| 	-ms-writing-mode lr-tb
-								figcaption （Stylus）
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/246-02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| body {
-									|     font-family: 'メイリオ', sans-serif;
-									|     -webkit-writing-mode: vertical-rl;
-									|     -ms-writing-mode: tb-rl;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| body
-									| 	font-family 'メイリオ', sans-serif
-									| 	-webkit-writing-mode vertical-rl
-									| 	-ms-writing-mode tb-rl
-								figcaption （Stylus）
-							p='writing-modeプロパティの値を「vertical-lr」にすると、縦書きを左から右の向きで表示することができます。この縦書きはモンゴル語などで利用されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/246-03.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| body {
-									|     font-family: 'メイリオ', sans-serif;
-									|     -webkit-writing-mode: vertical-lr;
-									|     -ms-writing-mode: tb-lr;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| body
-									| 	font-family 'メイリオ', sans-serif
-									| 	-webkit-writing-mode vertical-lr
-									| 	-ms-writing-mode tb-lr
-								figcaption （Stylus）
-							p='IEでは「-ms-」をつけた記述が推奨されていますが、IE7以前のバージョンにも対応する場合は「-ms-」をつけない記述も追加します。'
-							p='サンプルでは<body>のwriting-modeプロパティの値を変更し、ページ全体を縦書きで表示するようにしています。ただし、<body>での設定にはIE7以前のバージョンが未対応になっています。'
-							p='Windows版の古いChromeで縦書き表示を行うためには、縦書き用のフォント（「@メイリオ」など）を指定する必要がありましたが、現在は指定しなくても表示できるようになっています。'
-							p='Android4.0.x以前で縦書き表示を行うと、文字の向きや句読点の位置がおかしくなるという問題が見られます。Android4.1以上ではきちんと表示できるようになっています。'
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp; 垂直方向の行揃え
+                        .panel-body
+                            .alert.alert-info  垂直方向の行揃え
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png') （※）
+                                    td.not-support
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td.not-support
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png') （※）
+                            p ※ 部分対応。
+                            p iOS4.xは未対応。
+                            pre
+                                | writing-mode: 縦書き・横書き
+                            p
+                                | 縦書き・横書き・・・horizontal-tb ／ vertical-rl ／ vertical-lr
+                            table.table
+                                tr
+                                    td 初期値
+                                    td horizontal-tb
+                                tr
+                                    td 継承
+                                    td あり
+                                tr
+                                    td 適用先
+                                    td 全要素（テーブルの行列関連の要素を除く）
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td Writing Modes
+                            p='writing-modeプロパティを利用すると、縦書き・横書きの書字方向を指定することができます。IEは下のように独自の値での対応となっていますので注意が必要です。'
+                            hr
+                            h4 SAMPLE：縦書き・横書きの指定
+                            p='Webページのコンテンツは横書きで、上から下の向かって表示されます。これは、writing-modeプロパティの値が初期値の「horizontal-tb」で処理されるためです。'
+                            p='writing-modeプロパティの値を「vertical-rl」にすると、縦書きにして、右から左に向かって表示することができます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/246-01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;body&gt;
+                                    | &lt;h1&gt;ハムサンドイッチ&lt;/h1&gt;
+                                    | &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト、チーズ…略…&lt;/p&gt;
+                                    | &lt;/body&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | body
+                                    |     h1 ハムサンドイッチ
+                                    |     p 焼きたての手作りパンで新鮮なハム、トマト、チーズ…略…
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | body {
+                                    |     font-family: 'メイリオ', sans-serif;
+                                    |     -webkit-writing-mode: horizontal-tb;
+                                    |     -ms-writing-mode: lr-tb;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | body
+                                    |     font-family 'メイリオ', sans-serif
+                                    |     -webkit-writing-mode horizontal-tb
+                                    |     -ms-writing-mode lr-tb
+                                figcaption （Stylus）
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/246-02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | body {
+                                    |     font-family: 'メイリオ', sans-serif;
+                                    |     -webkit-writing-mode: vertical-rl;
+                                    |     -ms-writing-mode: tb-rl;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | body
+                                    |     font-family 'メイリオ', sans-serif
+                                    |     -webkit-writing-mode vertical-rl
+                                    |     -ms-writing-mode tb-rl
+                                figcaption （Stylus）
+                            p='writing-modeプロパティの値を「vertical-lr」にすると、縦書きを左から右の向きで表示することができます。この縦書きはモンゴル語などで利用されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/246-03.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | body {
+                                    |     font-family: 'メイリオ', sans-serif;
+                                    |     -webkit-writing-mode: vertical-lr;
+                                    |     -ms-writing-mode: tb-lr;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | body
+                                    |     font-family 'メイリオ', sans-serif
+                                    |     -webkit-writing-mode vertical-lr
+                                    |     -ms-writing-mode tb-lr
+                                figcaption （Stylus）
+                            p='IEでは「-ms-」をつけた記述が推奨されていますが、IE7以前のバージョンにも対応する場合は「-ms-」をつけない記述も追加します。'
+                            p='サンプルでは<body>のwriting-modeプロパティの値を変更し、ページ全体を縦書きで表示するようにしています。ただし、<body>での設定にはIE7以前のバージョンが未対応になっています。'
+                            p='Windows版の古いChromeで縦書き表示を行うためには、縦書き用のフォント（「@メイリオ」など）を指定する必要がありましたが、現在は指定しなくても表示できるようになっています。'
+                            p='Android4.0.x以前で縦書き表示を行うと、文字の向きや句読点の位置がおかしくなるという問題が見られます。Android4.1以上ではきちんと表示できるようになっています。'
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

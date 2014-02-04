@@ -1,195 +1,195 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;背景画像の固定対象
-						.panel-body
-							.alert.alert-info 背景画像の固定対象
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png') （※）
-									td
-										img(src='../images/ic-android.png') （※）
-									td
-										img(src='../images/ic-firefox.png') （※）
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							p ※ 部分対応。
-							p IE8以前は部分対応。
-							pre
-								| background-attachment: 固定対象
-							p
-								| 固定対象・・・scroll ／ fixed ／ local
-							table.table
-								tr
-									td 初期値
-									td scroll
-								tr
-									td 継承
-									td なし
-								tr
-									td 適用先
-									td 全要素
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td Backgrounds and Borders
-							p='background-attachmentプロパティを利用すると背景画像の固定対象を指定することができます。'
-							table.table
-								tr
-									th 値
-									th 固定対象
-								tr
-									td scroll
-									td ボックス
-								tr
-									td fixed
-									td ブラウザ画面（ビューポート）
-								tr
-									td local
-									td ボックス内のコンテンツ
-							p='複数の背景画像を表示する場合には、各画像の固定対象をカンマで区切って指定します。なお、IE8以前のバージョンは複数の指定に未対応です。'
-							pre
-								| background-attachment: 1枚目の固定対象, 2枚目の固定対象, ...
-							hr
-							h4 SAMPLE A：ボックスに指定 [scroll]
-							p='下のサンプルは<h2>が構成するボックスの背景画像（flower.png）を繰り返しなしで表示したものです。'
-							p='background-attachmentプロパティの値は初期値の「scroll」で処理されるため、背景画像は<h2>が構成するボックスに対して固定表示されます。そのため、ページをスクロールするとボックスといっしょにスクロールされます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/129-A.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
-									| &lt;p&gt;焼きたての手作りパンで…略...買い込んでしまいます。&lt;/p&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 HAM SANDWICHES
-									| p 焼きたての手作りパンで…略...買い込んでしまいます。
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     padding: 45px 0;
-									|     border: solid 1px orange;
-									|     background-image: url(flower.png);
-									|     background-repeat: no-repat;
-									|     background-position: left top;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	padding 45px 0
-									| 	border solid 1px orange
-									| 	background-image url(flower.png)
-									| 	background-repeat no-repat
-									| 	background-position left top
-								figcaption （stylus）
-							hr
-							h4 SAMPLE B：ブラウザ画面に固定 [fixed]
-							p='background-attachmentプロパティの値を「fixed」にすると、背景画像はブラウザ画面（ビューポート）に対して固定されます。この場合、背景画像はブラウザ画面の左上に揃えて、表示され、ページをスクロールしても動かなくなります。ただし、背景画像が表示されるのは<h2>が構成するボックスの範囲内に限られます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/129-B.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     padding: 45px 0;
-									|     border: solid 1px orange;
-									|     background-image: url(flower.png);
-									|     background-repeat: no-repat;
-									|     background-position: left top;
-									|     background-attachment: fixed;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	padding 45px 0
-									| 	border solid 1px orange
-									| 	background-image url(flower.png)
-									| 	background-repeat no-repat
-									| 	background-position left top
-									| 	background-attachment fixed
-								figcaption （stylus）
-							p='なお、iOSではブラウザ画面に対して固定されず、ページ一緒にスクロールして動いてしまいます。'
-							hr
-							h4 SAMPLE C：ボックス内のコンテンツに固定 [local]
-							p='background-attachmentプロパティの値を「local」にすると、背景画像はボックス内のコンテンツに対して固定されます。通常は「scroll」と同じようにボックスに対して固定した表示になりますが、ボックスがインラインフレームを構成する場合は表示に違いが出てきます。'
-							p='たとえば、下のサンプルはoverflowプロパティを利用して、<div>の構成するボックスをインラインフレームの形で表示したものです。ボックスには背景画像（flower.png）を表示しています。'
-							p='<div>のbackground-attachmentのプロパティの値を「scroll」にすると、背景画像はボックスに対して固定されます。そのため、ボックス内のコンテンツをスクロールしても背景画像の表示位置は変化しません。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/129-C01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							p='<div>のbackground-attachmentプロパティの値を「local」にすると、背景画像はボックス内のコンテンツに対して固定されます。そのため、ボックス内のコンテンツをスクロールすると、背景画像もコンテンツと一緒にスクロールされます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/129-C02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div&gt;
-									|     &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
-									|     &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。…略…います。&lt;/p&gt;
-									| &lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	h2 HAM SANDWICHES
-									| 	p 焼きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。…略…います。
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     width: 400px;
-									|     height: 120px;
-									|     overflow: auto;
-									|     border: solid 1px orange;
-									|     background-image: url(flower.png);
-									|     background-repeat: no-repeat;
-									|     background-position: left top;
-									|     background-attachment: local;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	width 400px
-									| 	height 120px
-									| 	overflow auto
-									| 	border solid 1px orange
-									| 	background-image url(flower.png)
-									| 	background-repeat no-repeat
-									| 	background-position left top
-									| 	background-attachment local
-								figcaption （stylus）
-							p='なお、AndroidとFirefox、IE8以前は「local」の指定に未対応です。'
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;背景画像の固定対象
+                        .panel-body
+                            .alert.alert-info 背景画像の固定対象
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png') （※）
+                                    td
+                                        img(src='../images/ic-android.png') （※）
+                                    td
+                                        img(src='../images/ic-firefox.png') （※）
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            p ※ 部分対応。
+                            p IE8以前は部分対応。
+                            pre
+                                | background-attachment: 固定対象
+                            p
+                                | 固定対象・・・scroll ／ fixed ／ local
+                            table.table
+                                tr
+                                    td 初期値
+                                    td scroll
+                                tr
+                                    td 継承
+                                    td なし
+                                tr
+                                    td 適用先
+                                    td 全要素
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td Backgrounds and Borders
+                            p='background-attachmentプロパティを利用すると背景画像の固定対象を指定することができます。'
+                            table.table
+                                tr
+                                    th 値
+                                    th 固定対象
+                                tr
+                                    td scroll
+                                    td ボックス
+                                tr
+                                    td fixed
+                                    td ブラウザ画面（ビューポート）
+                                tr
+                                    td local
+                                    td ボックス内のコンテンツ
+                            p='複数の背景画像を表示する場合には、各画像の固定対象をカンマで区切って指定します。なお、IE8以前のバージョンは複数の指定に未対応です。'
+                            pre
+                                | background-attachment: 1枚目の固定対象, 2枚目の固定対象, ...
+                            hr
+                            h4 SAMPLE A：ボックスに指定 [scroll]
+                            p='下のサンプルは<h2>が構成するボックスの背景画像（flower.png）を繰り返しなしで表示したものです。'
+                            p='background-attachmentプロパティの値は初期値の「scroll」で処理されるため、背景画像は<h2>が構成するボックスに対して固定表示されます。そのため、ページをスクロールするとボックスといっしょにスクロールされます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/129-A.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+                                    | &lt;p&gt;焼きたての手作りパンで…略...買い込んでしまいます。&lt;/p&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 HAM SANDWICHES
+                                    | p 焼きたての手作りパンで…略...買い込んでしまいます。
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     padding: 45px 0;
+                                    |     border: solid 1px orange;
+                                    |     background-image: url(flower.png);
+                                    |     background-repeat: no-repat;
+                                    |     background-position: left top;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     padding 45px 0
+                                    |     border solid 1px orange
+                                    |     background-image url(flower.png)
+                                    |     background-repeat no-repat
+                                    |     background-position left top
+                                figcaption （stylus）
+                            hr
+                            h4 SAMPLE B：ブラウザ画面に固定 [fixed]
+                            p='background-attachmentプロパティの値を「fixed」にすると、背景画像はブラウザ画面（ビューポート）に対して固定されます。この場合、背景画像はブラウザ画面の左上に揃えて、表示され、ページをスクロールしても動かなくなります。ただし、背景画像が表示されるのは<h2>が構成するボックスの範囲内に限られます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/129-B.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     padding: 45px 0;
+                                    |     border: solid 1px orange;
+                                    |     background-image: url(flower.png);
+                                    |     background-repeat: no-repat;
+                                    |     background-position: left top;
+                                    |     background-attachment: fixed;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     padding 45px 0
+                                    |     border solid 1px orange
+                                    |     background-image url(flower.png)
+                                    |     background-repeat no-repat
+                                    |     background-position left top
+                                    |     background-attachment fixed
+                                figcaption （stylus）
+                            p='なお、iOSではブラウザ画面に対して固定されず、ページ一緒にスクロールして動いてしまいます。'
+                            hr
+                            h4 SAMPLE C：ボックス内のコンテンツに固定 [local]
+                            p='background-attachmentプロパティの値を「local」にすると、背景画像はボックス内のコンテンツに対して固定されます。通常は「scroll」と同じようにボックスに対して固定した表示になりますが、ボックスがインラインフレームを構成する場合は表示に違いが出てきます。'
+                            p='たとえば、下のサンプルはoverflowプロパティを利用して、<div>の構成するボックスをインラインフレームの形で表示したものです。ボックスには背景画像（flower.png）を表示しています。'
+                            p='<div>のbackground-attachmentのプロパティの値を「scroll」にすると、背景画像はボックスに対して固定されます。そのため、ボックス内のコンテンツをスクロールしても背景画像の表示位置は変化しません。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/129-C01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            p='<div>のbackground-attachmentプロパティの値を「local」にすると、背景画像はボックス内のコンテンツに対して固定されます。そのため、ボックス内のコンテンツをスクロールすると、背景画像もコンテンツと一緒にスクロールされます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/129-C02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div&gt;
+                                    |     &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+                                    |     &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。…略…います。&lt;/p&gt;
+                                    | &lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     h2 HAM SANDWICHES
+                                    |     p 焼きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。…略…います。
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     width: 400px;
+                                    |     height: 120px;
+                                    |     overflow: auto;
+                                    |     border: solid 1px orange;
+                                    |     background-image: url(flower.png);
+                                    |     background-repeat: no-repeat;
+                                    |     background-position: left top;
+                                    |     background-attachment: local;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     width 400px
+                                    |     height 120px
+                                    |     overflow auto
+                                    |     border solid 1px orange
+                                    |     background-image url(flower.png)
+                                    |     background-repeat no-repeat
+                                    |     background-position left top
+                                    |     background-attachment local
+                                figcaption （stylus）
+                            p='なお、AndroidとFirefox、IE8以前は「local」の指定に未対応です。'
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

@@ -1,104 +1,104 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;ハイフネーション
-						.panel-body
-							.alert.alert-info ハイフネーション
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png') （※）
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png') （※）
-									td.not-support
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							pre
-								| hyphens: ハイフネーションの処理
-							p
-								| ハイフネーションの処理・・・none ／ manual ／ auto
-							table.table
-								tr
-									td 初期値
-									td normal
-								tr
-									td 継承
-									td あり
-								tr
-									td 適用先
-									td 全要素
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td Text
-							p='hyphensプロパティを利用すると、ハイフネーションの処理を指定することができます。'
-							table.table
-								tr
-									th 値
-									th ハイフネーションの処理
-								tr
-									td none
-									td ハイフネーションの処理を行わない。
-								tr
-									td manual
-									td &amp;shy;の位置でハイフネーションの処理を行う。
-								tr
-									td auto
-									td &amp;shy;の位置に加えて、任意の位置で自動的にハイフネーションの処理を行う。
-							hr
-							h4 SAMPLE：ハイフネーションの処理
-							p='欧文では、ハイフン（-）でつなぐことで単語の途中に改行を入れることができます。この処理は「ハイフネーション」と呼ばれ、HTMLではハイフネーションが可能な位置を「&shy;」で示した位置以外ではハイフネーションの処理は行われませんが、これはhyphensプロパティの値が初期値の「manual」で処理されているためです。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/205.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;p&gt;This is my favorite sandwich with fresh tomato, lettuce, cheese and ham. Freshly baked bread &lt;span&gt;may&amp;shy;on&amp;shy;naise&lt;/span&gt; with mustard added are so &lt;span&gt;deli&shy;cious&lt;/span&gt;. Daily special is also available, so I always stop at a shop. If desired, you can enjoy variety choice of fixings.&lt;/p&gt; 
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p This is my favorite sandwich with fresh tomato, lettuce, cheese and ham. Freshly baked bread &lt;span&gt;may&amp;shy;on&amp;shy;naise&lt;/span&gt; with mustard added are so &lt;span&gt;deli&shy;cious&lt;/span&gt;. Daily special is also available, so I always stop at a shop. If desired, you can enjoy variety choice of fixings.
-								figcaption （Jade）
-							p='任意の位置で自動的にハイフネーションの処理を行うためには、hyphensプロパティの値を「auto」にします。すると、「&shy;」を指定していない「lettuce」や「special」、「desired」という単語でもハイフネーションの処理が行われるようになります。なお、これはIE10での表示結果で、どの単語でハイフネーションの処理が行われるかはブラウザによって変わります。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| p {
-									|     -moz-hyphens: auto;
-									|     -webkit-hyphens: auto;
-									|     -ms-hyphens: auto;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	-moz-hyphens auto
-									| 	-webkit-hyphens auto
-									| 	-ms-hyphens auto
-								figcaption （Stylus）
-							p='iOS5.x、Android、Chromeは「auto」の指定に未対応です。'
-							p='hyphensプロパティの値を「none」にすると、ハイフネーションの処理を行わないようにすることができます。'
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;ハイフネーション
+                        .panel-body
+                            .alert.alert-info ハイフネーション
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png') （※）
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png') （※）
+                                    td.not-support
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            pre
+                                | hyphens: ハイフネーションの処理
+                            p
+                                | ハイフネーションの処理・・・none ／ manual ／ auto
+                            table.table
+                                tr
+                                    td 初期値
+                                    td normal
+                                tr
+                                    td 継承
+                                    td あり
+                                tr
+                                    td 適用先
+                                    td 全要素
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td Text
+                            p='hyphensプロパティを利用すると、ハイフネーションの処理を指定することができます。'
+                            table.table
+                                tr
+                                    th 値
+                                    th ハイフネーションの処理
+                                tr
+                                    td none
+                                    td ハイフネーションの処理を行わない。
+                                tr
+                                    td manual
+                                    td &amp;shy;の位置でハイフネーションの処理を行う。
+                                tr
+                                    td auto
+                                    td &amp;shy;の位置に加えて、任意の位置で自動的にハイフネーションの処理を行う。
+                            hr
+                            h4 SAMPLE：ハイフネーションの処理
+                            p='欧文では、ハイフン（-）でつなぐことで単語の途中に改行を入れることができます。この処理は「ハイフネーション」と呼ばれ、HTMLではハイフネーションが可能な位置を「&shy;」で示した位置以外ではハイフネーションの処理は行われませんが、これはhyphensプロパティの値が初期値の「manual」で処理されているためです。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/205.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;p&gt;This is my favorite sandwich with fresh tomato, lettuce, cheese and ham. Freshly baked bread &lt;span&gt;may&amp;shy;on&amp;shy;naise&lt;/span&gt; with mustard added are so &lt;span&gt;deli&shy;cious&lt;/span&gt;. Daily special is also available, so I always stop at a shop. If desired, you can enjoy variety choice of fixings.&lt;/p&gt; 
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p This is my favorite sandwich with fresh tomato, lettuce, cheese and ham. Freshly baked bread &lt;span&gt;may&amp;shy;on&amp;shy;naise&lt;/span&gt; with mustard added are so &lt;span&gt;deli&shy;cious&lt;/span&gt;. Daily special is also available, so I always stop at a shop. If desired, you can enjoy variety choice of fixings.
+                                figcaption （Jade）
+                            p='任意の位置で自動的にハイフネーションの処理を行うためには、hyphensプロパティの値を「auto」にします。すると、「&shy;」を指定していない「lettuce」や「special」、「desired」という単語でもハイフネーションの処理が行われるようになります。なお、これはIE10での表示結果で、どの単語でハイフネーションの処理が行われるかはブラウザによって変わります。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p {
+                                    |     -moz-hyphens: auto;
+                                    |     -webkit-hyphens: auto;
+                                    |     -ms-hyphens: auto;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     -moz-hyphens auto
+                                    |     -webkit-hyphens auto
+                                    |     -ms-hyphens auto
+                                figcaption （Stylus）
+                            p='iOS5.x、Android、Chromeは「auto」の指定に未対応です。'
+                            p='hyphensプロパティの値を「none」にすると、ハイフネーションの処理を行わないようにすることができます。'
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

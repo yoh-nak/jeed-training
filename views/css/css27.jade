@@ -1,170 +1,170 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;グラデーションの表示
-						.panel-body
-							.alert.alert-info グラデーションの表示
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td.not-support
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td.not-support
-										img(src='../images/ic-opera.png')
-									td.not-support
-										img(src='../images/ic-ie.png')
-							pre
-								| background: gradient(linear, 始点, 終点, 始点の色, カラーストップ, 終点の色)
-							pre
-								| background-image: gradient(linear, 始点, 終点, 始点の色, カラーストップ, 終点の色)
-							pre
-								| background: gradient(radial, 始点, 終点, 始点の色, カラーストップ, 終点の色)
-							pre
-								| background-image: gradient(radial, 始点, 終点, 始点の色, カラーストップ, 終点の色)
-							p
-								| 始点・終点・・・横の表示位置 縦の表示位置<br>
-								| 横の表示位置・・・数値／比率／left／center／right<br>
-								| 縦の表示位置・・・数値／比率／top／center／bottom<br>
-								| 始点・終点の半径・・・数値（ピクセルのみで単位なしで指定）<br>
-								| 始点の色・・・from(色の値)<br>
-								| カラーストップ・・・color-stop(位置（%） 色の値)<br>
-								| 終点の色・・・to(色の値)
-							table.table
-								tr
-									td 初期値
-									td -
-								tr
-									td 継承
-									td -
-								tr
-									td 適用先
-									td -
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td -
-							p='CSSでグラデーションを表示する機能は、Webkitが拡張したgradient()によって生まれました。そのままの形でCSS3に採用されることはありませんでしたが、linear-gradient()やradial-gradient()に未対応のWebkit系ブラウザでグラデーションを表示するのに利用することができます。'
-							p='gradient()では、1つ目のパラメータでグラデーションの形状を指定します。この指定によって2つ目以降のパラメータの記述形式も変わります。'
-							table.table
-								tr
-									th 1つ目のパラメータの値
-									th グラデーションの形状
-								tr
-									td linear
-									td 線形グラデーション
-								tr
-									td radial
-									td 円形グラデーション
-							hr
-							h4 線形グラデーションの表示
-							p='線形プレデーションを表示する場合、下のように記述します。ここでは、始点をボックスの左上（left top）に、始点を右上（right top）に指定し、始点の色をオレンジ色（orange）に、終点の色を黄色（yellow）に指定しています。これで、左から右に向かってオレンジ色から黄色に変化するグラデーションを表示することができます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/158-01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     background: -webkit-gradient(
-									|         linear,
-									|         left top,
-									|         right top,
-									|         from(orange),
-									|         to(yellow)
-									|     }
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	background -webkit-gradient(
-									|         linear,
-									|         left top,
-									|         right top,
-									|         from(orange),
-									|         to(yellow)
-								figcaption （Stylus）
-							p='始点と終点の間に色を追加する場合はカラーストップを指定します。ここでは始点と終点の中間にピンク色を追加するため、color-stop(50%, pink)という指定を追加しています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/158-02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     background: -webkit-gradient(
-									|         linear,
-									|         left top,
-									|         right top,
-									|         from(orange),
-									|         color-stop(50%, pink),
-									|         to(yellow)
-									|     }
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	background -webkit-gradient(
-									|         linear,
-									|         left top,
-									|         right top,
-									|         from(orange),
-									|         color-stop(50%, pink),
-									|         to(yellow)
-							hr
-							h4 円形グラデーションの表示
-							p='円形グラデーションを表示する場合、下のように記述します。ここでは、円の中心点を「15% 50%」と指定しています。'
-							p='また、始点と終点がそれぞれ構成する円の半径を10ピクセルと50ピクセルに指定し、始点から順に黄色、オレンジ色、ピンク色と色が変わるようにしています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/158-03.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     background: -webkit-gradient(
-									|         radial,
-									|         15% 50%, 10, 
-									|         15% 50%, 50, 
-									|         from(yellow),
-									|         color-stop(50%, orange),
-									|         to(pink)
-									|     }
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	background -webkit-gradient(
-									|         radial,
-									|         15% 50%, 10, 
-									|         15% 50%, 50, 
-									|         from(yellow),
-									|         color-stop(50%, orange),
-									|         to(pink)
-								figcaption （Stylus）
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;グラデーションの表示
+                        .panel-body
+                            .alert.alert-info グラデーションの表示
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td.not-support
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td.not-support
+                                        img(src='../images/ic-opera.png')
+                                    td.not-support
+                                        img(src='../images/ic-ie.png')
+                            pre
+                                | background: gradient(linear, 始点, 終点, 始点の色, カラーストップ, 終点の色)
+                            pre
+                                | background-image: gradient(linear, 始点, 終点, 始点の色, カラーストップ, 終点の色)
+                            pre
+                                | background: gradient(radial, 始点, 終点, 始点の色, カラーストップ, 終点の色)
+                            pre
+                                | background-image: gradient(radial, 始点, 終点, 始点の色, カラーストップ, 終点の色)
+                            p
+                                | 始点・終点・・・横の表示位置 縦の表示位置<br>
+                                | 横の表示位置・・・数値／比率／left／center／right<br>
+                                | 縦の表示位置・・・数値／比率／top／center／bottom<br>
+                                | 始点・終点の半径・・・数値（ピクセルのみで単位なしで指定）<br>
+                                | 始点の色・・・from(色の値)<br>
+                                | カラーストップ・・・color-stop(位置（%） 色の値)<br>
+                                | 終点の色・・・to(色の値)
+                            table.table
+                                tr
+                                    td 初期値
+                                    td -
+                                tr
+                                    td 継承
+                                    td -
+                                tr
+                                    td 適用先
+                                    td -
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td -
+                            p='CSSでグラデーションを表示する機能は、Webkitが拡張したgradient()によって生まれました。そのままの形でCSS3に採用されることはありませんでしたが、linear-gradient()やradial-gradient()に未対応のWebkit系ブラウザでグラデーションを表示するのに利用することができます。'
+                            p='gradient()では、1つ目のパラメータでグラデーションの形状を指定します。この指定によって2つ目以降のパラメータの記述形式も変わります。'
+                            table.table
+                                tr
+                                    th 1つ目のパラメータの値
+                                    th グラデーションの形状
+                                tr
+                                    td linear
+                                    td 線形グラデーション
+                                tr
+                                    td radial
+                                    td 円形グラデーション
+                            hr
+                            h4 線形グラデーションの表示
+                            p='線形プレデーションを表示する場合、下のように記述します。ここでは、始点をボックスの左上（left top）に、始点を右上（right top）に指定し、始点の色をオレンジ色（orange）に、終点の色を黄色（yellow）に指定しています。これで、左から右に向かってオレンジ色から黄色に変化するグラデーションを表示することができます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/158-01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     background: -webkit-gradient(
+                                    |         linear,
+                                    |         left top,
+                                    |         right top,
+                                    |         from(orange),
+                                    |         to(yellow)
+                                    |     }
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     background -webkit-gradient(
+                                    |         linear,
+                                    |         left top,
+                                    |         right top,
+                                    |         from(orange),
+                                    |         to(yellow)
+                                figcaption （Stylus）
+                            p='始点と終点の間に色を追加する場合はカラーストップを指定します。ここでは始点と終点の中間にピンク色を追加するため、color-stop(50%, pink)という指定を追加しています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/158-02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     background: -webkit-gradient(
+                                    |         linear,
+                                    |         left top,
+                                    |         right top,
+                                    |         from(orange),
+                                    |         color-stop(50%, pink),
+                                    |         to(yellow)
+                                    |     }
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     background -webkit-gradient(
+                                    |         linear,
+                                    |         left top,
+                                    |         right top,
+                                    |         from(orange),
+                                    |         color-stop(50%, pink),
+                                    |         to(yellow)
+                            hr
+                            h4 円形グラデーションの表示
+                            p='円形グラデーションを表示する場合、下のように記述します。ここでは、円の中心点を「15% 50%」と指定しています。'
+                            p='また、始点と終点がそれぞれ構成する円の半径を10ピクセルと50ピクセルに指定し、始点から順に黄色、オレンジ色、ピンク色と色が変わるようにしています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/158-03.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     background: -webkit-gradient(
+                                    |         radial,
+                                    |         15% 50%, 10, 
+                                    |         15% 50%, 50, 
+                                    |         from(yellow),
+                                    |         color-stop(50%, orange),
+                                    |         to(pink)
+                                    |     }
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     background -webkit-gradient(
+                                    |         radial,
+                                    |         15% 50%, 10, 
+                                    |         15% 50%, 50, 
+                                    |         from(yellow),
+                                    |         color-stop(50%, orange),
+                                    |         to(pink)
+                                figcaption （Stylus）
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

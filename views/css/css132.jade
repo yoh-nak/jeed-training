@@ -1,335 +1,335 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;ポジションレイアウト
-						.panel-body
-							.alert.alert-info ポジションレイアウト
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png') （※）
-									td
-										img(src='../images/ic-android.png') （※）
-									td
-										img(src='../images/ic-firefox.png') （※）
-									td
-										img(src='../images/ic-safari.png') （※）
-									td
-										img(src='../images/ic-chrome.png') （※）
-									td
-										img(src='../images/ic-opera.png') （※）
-									td
-										img(src='../images/ic-ie.png')
-							p ※ 部分対応。
-							p IE9以前は部分対応。
-							pre
-								| position: 表示位置の指定方法
-							p
-								| 表示位置・・・static ／ relative ／ absolute ／ fixed ／ page
-							pre
-								| top: 距離
-							pre
-								| bottom: 距離
-							pre
-								| right: 距離
-							pre
-								| left: 距離
-							p
-								| 距離・・・数値 ／ 比率 ／ auto
-							table.table
-								tr
-									td 初期値
-									td position・・・static／leftなど・・・auto 
-								tr
-									td 継承
-									td なし
-								tr
-									td 適用先
-									td
-										| position・・・全要素<br>
-										| leftなど・・・position（static以外の値）を指定した要素
-								tr
-									td 比率
-									td
-										| topとbottom・・・親要素の高さ<br>
-										| leftとright・・・親要素の横幅
-								tr
-									td モジュール
-									td Positioned Layout
-							p='ポジションレイアウトの機能を利用すると、ボックスの表示位置を細かく調節することができます。positionプロパティで位置の指定方法を決め、top、left、bottom、rightプロパティで基点からの距離を指定して調節します。'
-							table.table
-								tr
-									th positionの値
-									th 位置指定の方法
-								tr
-									td static
-									td ポジションレイアウトを行わない。
-								tr
-									td relative
-									td 通常の表示位置を基点にした位置指定。
-								tr
-									td absolute
-									td 親要素を基点にした位置指定。
-								tr
-									td fixed
-									td ブラウザ画面を基点にした位置指定。
-								tr
-									td page
-									td ページボックスやリージョンボックスを基点にした位置指定。
-							hr
-							h4 SAMPLE A：通常の表示位置を基点にした位置指定
-							p='positionプロパティの値を「relative」にすると、通常の表示位置を基点にした位置指定を行うことができます。たとえば、<h2>でマークアップした見出しを右下にずらして表示したい場合、<h2>のpositionプロパティの値を「relative」にして、topとleftプロパティでずらす距離を指定します。ここでは上から25ピクセル、左から40ピクセルずらすように指定しています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/107-A01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div&gt;
-									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
-									| &lt;p&gt;手作りパンで新鮮なハム、トマト、チーズ、…略…&lt;/p&gt;
-									| &lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	h2 HAM SANDWICHES
-									| 	p 手作りパンで新鮮なハム、トマト、チーズ、…略…
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     border: solid 2px orange;
-									|     width: 400px;
-									|     margin: auto;
-									|     padding :10px;
-									| }
-									| h2 {
-									|     background-color: greenyellow;
-									|     margin: 0;
-									|     padding: 5px;
-									|     position: relative;
-									|     top: 25px;
-									|     left: 40px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	border solid 2px orange
-									| 	width 400px
-									| 	margin auto
-									| 	padding 10px
-									| 
-									| h2
-									| 	background-color greenyellow
-									| 	margin 0
-									| 	padding 5px
-									| 	position relative
-									| 	top 25px
-									| 	left 40px
-								figcaption （Stylus）
-							p='なお、positionプロパティの値を「relative」にしたボックスは特殊なボックスを構成し、通常のボックスの上に重なって表示されます。また、元の表示スペースはそのまま残ります。'
-							p='topとleftプロパティの変わりに、bottomプロパティの値を「-25px」、rightプロパティの値を「-40px」と指定しても同じ表示結果になります。4つすべてのプロパティで距離を指定した場合、topとleftプロパティの値で表示位置が決まり、bottomとrightプロパティの値は初期値の「auto」として処理されます。'
-							hr
-							h4 SAMPLE B：親要素を基点にした位置指定
-							p='positionプロパティの値を「absolute」にすると、親要素を基点にした位置指定を行うことができます。ただし、基点にする親要素はpositionプロパティの値を「static」以外にしておく必要があります。'
-							p='たとえば、親要素<div>のpositionプロパティの値を「relative」、子要素<h2>のpositionプロパティの値を「absolute」にすると、<h2>の位置指定は<div>の構成するボックスとなります。topとleftプロパティの値を「25px」にすると、<h2>の構成するボックスは<div>の上辺と左辺から25ピクセルの位置に表示されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/107-B01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     border: solid 2px orange;
-									|     width: 400px;
-									|     margin: auto;
-									|     padding :10px;
-									|     position: relative;
-									| }
-									| h2 {
-									|     background-color: greenyellow;
-									|     margin: 0;
-									|     padding: 5px;
-									|     position: absolute;
-									|     top: 25px;
-									|     left: 25px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	border solid 2px orange
-									| 	width 400px
-									| 	margin auto
-									| 	padding 10px
-									| 	position relative
-									| 
-									| h2
-									| 	background-color greenyellow
-									| 	margin 0
-									| 	padding 5px
-									| 	position absolute
-									| 	top 25px
-									| 	left 25px
-								figcaption （Stylus）
-							p='なお、positionプロパティの値を「absolute」にしたボックスは通常のボックスからは存在しないものとして扱われ、上に重なって表示されます。また、ボックスは中身に合わせた大きさで表示されます。サンプルの場合、見出しの語句に合わせた横幅になっていることがわかります。'
-							p='positionプロパティの値を「static」以外にした親要素がない場合、ブラウザ画面が基点となります。ただし、SAMPLE Cのように画面に対して固定されることはありません。'
-							p='top、right、bottom、leftプロパティで親要素の4辺からの距離を指定した場合には、距離に合わせてボックスの大きさが変わります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/107-B02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     border: solid 2px orange;
-									|     width: 400px;
-									|     margin: auto;
-									|     padding :10px;
-									|     position: relative;
-									| }
-									| h2 {
-									|     background-color: greenyellow;
-									|     margin: 0;
-									|     padding: 5px;
-									|     position: absolute;
-									|     top: 25px;
-									|     left: 25px;
-									|     right: 25px;
-									|     bottom: 25px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	border solid 2px orange
-									| 	width 400px
-									| 	margin auto
-									| 	padding 10px
-									| 	position relative
-									| 
-									| h2
-									| 	background-color greenyellow
-									| 	margin 0
-									| 	padding 5px
-									| 	position absolute
-									| 	top 25px
-									| 	left 25px
-									| 	right 25px
-									| 	bottom 25px
-								figcaption （Stylus）
-							hr
-							h4 SAMPLE C：ブラウザ画面を基点にした位置指定
-							p='positionプロパティの値を「fixed」にした場合、基本的に「absolute」にしたときと同じように処理されます。ただし、基点となるのはブラウザの画面で、位置指定したボックスは画面に対して固定されます。'
-							p='たとえば、下のサンプルでは<h2>のpositionプロパティの値を「fixed」にして、topとleftプロパティの値を「0」にしています。これにより、<h2>が構成するボックスは画面の左上に固定表示され、ページをスクロールしても動かなくなります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/107-C.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     border: solid 2px orange;
-									|     width: 400px;
-									|     margin: auto;
-									|     padding :10px;
-									| }
-									| h2 {
-									|     background-color: greenyellow;
-									|     margin: 0;
-									|     padding: 5px;
-									|     position: static;
-									|     top: 0;
-									|     left: 0;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	border solid 2px orange
-									| 	width 400px
-									| 	margin auto
-									| 	padding 10px
-									| 
-									| h2
-									| 	background-color greenyellow
-									| 	margin 0
-									| 	padding 5px
-									| 	position static
-									| 	top 0
-									| 	left 0
-								figcaption （Stylus）
-							p='<h2>のwidthプロパティの値を「100%」にすると、見出しを画面の横幅いっぱいに表示することができます。'
-							p='IE6は「fixed」の指定には未対応です。'
-							p='iOS4.xとAndroid2.3.xではpositionプロパティの値を「fixed」にしたボックスを表示すると、ページをロードした段階では主要ブラウザと同じように指定した位置に表示されますが、画面に対して固定されず、ページといっしょにスクロールされてしまいます。スクロールされることを除くと、レイアウトが崩れるといった問題は発生しません。'
-							hr
-							h4 SAMPLE D：ページボックスやリージョンボックスを基点にした位置指定
-							p='positionプロパティの値を「page」にした場合、基本的に「absolute」にしたときと同じように処理されます。ただし、ページメディアに出力した場合はページボックスが、リージョンレイアウトで表示した場合はリージョンボックスが基点となります。現在のところ、IE10が対応しており、値にはベンダープレフィックスをつけて記述します。'
-							p='たとえば、下のサンプルは<h2>でマークアップした見出しのうち、1つ目の見出しを赤色で、2つ目の見出しを黄色で表示したものです。印刷すると、1ページ目に赤色の、2ページ目に黄色の見出しが出力されます。'
-							p='このとき、<h2>のpositionプロパティの値を「page」に、topとleftプロパティの値を「0」にして印刷すると、見出しがそれぞれページボックスの左上に揃えて出力されます。なお、この設定は印刷した場合のみに適用するため、@media print {〜}の中に記述しています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/107-D-page.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| @media print {
-									|     h2 {
-									|         position: -ms-page;
-									|         top: 0;
-									|         left: 0;
-									|     }
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| @media　print
-									| 	h2
-									| 		position -ms-page
-									| 		top 0
-									| 		left 0
-								figcaption （Stylus）
-							p='<h2>のpositionプロパティの値を「absolute」にして印刷すると、すべての見出しが1ページ目のページボックスの左上に揃えて出力されます。'
-							p='リージョンレイアウトにおける処理も確認しておきます。たとえば、1つ目の見出しを赤色に、2つ目の見出しを黄色にすると下のようになります。'
-							p='ここで<h2>のpositionプロパティの値を「page」に、topとleftプロパティの値を「0』にすると、見出しがそれぞれのリージョンボックスの左上に揃えて表示されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/107-D-region.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| @media print {
-									|     h2 {
-									|         position: -ms-region;
-									|         top: 0;
-									|         left: 0;
-									|     }
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| @media print
-									| 	h2
-									| 		position -ms-region
-									| 		top 0
-									| 		left 0
-								figcaption （Stylus）
-							p='<h2>のpositionプロパティの値を「absolute」にすると、すべての見出しが1つ目のリージョンボックスの左上に揃えて表示されます。'
-							p='CSS3では、親要素の中央に揃えて配置するための「center」というpositionプロパティの値も提案されていますが、現在のところ各ブラウザは未対応です。'
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;ポジションレイアウト
+                        .panel-body
+                            .alert.alert-info ポジションレイアウト
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png') （※）
+                                    td
+                                        img(src='../images/ic-android.png') （※）
+                                    td
+                                        img(src='../images/ic-firefox.png') （※）
+                                    td
+                                        img(src='../images/ic-safari.png') （※）
+                                    td
+                                        img(src='../images/ic-chrome.png') （※）
+                                    td
+                                        img(src='../images/ic-opera.png') （※）
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            p ※ 部分対応。
+                            p IE9以前は部分対応。
+                            pre
+                                | position: 表示位置の指定方法
+                            p
+                                | 表示位置・・・static ／ relative ／ absolute ／ fixed ／ page
+                            pre
+                                | top: 距離
+                            pre
+                                | bottom: 距離
+                            pre
+                                | right: 距離
+                            pre
+                                | left: 距離
+                            p
+                                | 距離・・・数値 ／ 比率 ／ auto
+                            table.table
+                                tr
+                                    td 初期値
+                                    td position・・・static／leftなど・・・auto 
+                                tr
+                                    td 継承
+                                    td なし
+                                tr
+                                    td 適用先
+                                    td
+                                        | position・・・全要素<br>
+                                        | leftなど・・・position（static以外の値）を指定した要素
+                                tr
+                                    td 比率
+                                    td
+                                        | topとbottom・・・親要素の高さ<br>
+                                        | leftとright・・・親要素の横幅
+                                tr
+                                    td モジュール
+                                    td Positioned Layout
+                            p='ポジションレイアウトの機能を利用すると、ボックスの表示位置を細かく調節することができます。positionプロパティで位置の指定方法を決め、top、left、bottom、rightプロパティで基点からの距離を指定して調節します。'
+                            table.table
+                                tr
+                                    th positionの値
+                                    th 位置指定の方法
+                                tr
+                                    td static
+                                    td ポジションレイアウトを行わない。
+                                tr
+                                    td relative
+                                    td 通常の表示位置を基点にした位置指定。
+                                tr
+                                    td absolute
+                                    td 親要素を基点にした位置指定。
+                                tr
+                                    td fixed
+                                    td ブラウザ画面を基点にした位置指定。
+                                tr
+                                    td page
+                                    td ページボックスやリージョンボックスを基点にした位置指定。
+                            hr
+                            h4 SAMPLE A：通常の表示位置を基点にした位置指定
+                            p='positionプロパティの値を「relative」にすると、通常の表示位置を基点にした位置指定を行うことができます。たとえば、<h2>でマークアップした見出しを右下にずらして表示したい場合、<h2>のpositionプロパティの値を「relative」にして、topとleftプロパティでずらす距離を指定します。ここでは上から25ピクセル、左から40ピクセルずらすように指定しています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/107-A01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div&gt;
+                                    | &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+                                    | &lt;p&gt;手作りパンで新鮮なハム、トマト、チーズ、…略…&lt;/p&gt;
+                                    | &lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     h2 HAM SANDWICHES
+                                    |     p 手作りパンで新鮮なハム、トマト、チーズ、…略…
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     border: solid 2px orange;
+                                    |     width: 400px;
+                                    |     margin: auto;
+                                    |     padding :10px;
+                                    | }
+                                    | h2 {
+                                    |     background-color: greenyellow;
+                                    |     margin: 0;
+                                    |     padding: 5px;
+                                    |     position: relative;
+                                    |     top: 25px;
+                                    |     left: 40px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     border solid 2px orange
+                                    |     width 400px
+                                    |     margin auto
+                                    |     padding 10px
+                                    | 
+                                    | h2
+                                    |     background-color greenyellow
+                                    |     margin 0
+                                    |     padding 5px
+                                    |     position relative
+                                    |     top 25px
+                                    |     left 40px
+                                figcaption （Stylus）
+                            p='なお、positionプロパティの値を「relative」にしたボックスは特殊なボックスを構成し、通常のボックスの上に重なって表示されます。また、元の表示スペースはそのまま残ります。'
+                            p='topとleftプロパティの変わりに、bottomプロパティの値を「-25px」、rightプロパティの値を「-40px」と指定しても同じ表示結果になります。4つすべてのプロパティで距離を指定した場合、topとleftプロパティの値で表示位置が決まり、bottomとrightプロパティの値は初期値の「auto」として処理されます。'
+                            hr
+                            h4 SAMPLE B：親要素を基点にした位置指定
+                            p='positionプロパティの値を「absolute」にすると、親要素を基点にした位置指定を行うことができます。ただし、基点にする親要素はpositionプロパティの値を「static」以外にしておく必要があります。'
+                            p='たとえば、親要素<div>のpositionプロパティの値を「relative」、子要素<h2>のpositionプロパティの値を「absolute」にすると、<h2>の位置指定は<div>の構成するボックスとなります。topとleftプロパティの値を「25px」にすると、<h2>の構成するボックスは<div>の上辺と左辺から25ピクセルの位置に表示されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/107-B01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     border: solid 2px orange;
+                                    |     width: 400px;
+                                    |     margin: auto;
+                                    |     padding :10px;
+                                    |     position: relative;
+                                    | }
+                                    | h2 {
+                                    |     background-color: greenyellow;
+                                    |     margin: 0;
+                                    |     padding: 5px;
+                                    |     position: absolute;
+                                    |     top: 25px;
+                                    |     left: 25px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     border solid 2px orange
+                                    |     width 400px
+                                    |     margin auto
+                                    |     padding 10px
+                                    |     position relative
+                                    | 
+                                    | h2
+                                    |     background-color greenyellow
+                                    |     margin 0
+                                    |     padding 5px
+                                    |     position absolute
+                                    |     top 25px
+                                    |     left 25px
+                                figcaption （Stylus）
+                            p='なお、positionプロパティの値を「absolute」にしたボックスは通常のボックスからは存在しないものとして扱われ、上に重なって表示されます。また、ボックスは中身に合わせた大きさで表示されます。サンプルの場合、見出しの語句に合わせた横幅になっていることがわかります。'
+                            p='positionプロパティの値を「static」以外にした親要素がない場合、ブラウザ画面が基点となります。ただし、SAMPLE Cのように画面に対して固定されることはありません。'
+                            p='top、right、bottom、leftプロパティで親要素の4辺からの距離を指定した場合には、距離に合わせてボックスの大きさが変わります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/107-B02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     border: solid 2px orange;
+                                    |     width: 400px;
+                                    |     margin: auto;
+                                    |     padding :10px;
+                                    |     position: relative;
+                                    | }
+                                    | h2 {
+                                    |     background-color: greenyellow;
+                                    |     margin: 0;
+                                    |     padding: 5px;
+                                    |     position: absolute;
+                                    |     top: 25px;
+                                    |     left: 25px;
+                                    |     right: 25px;
+                                    |     bottom: 25px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     border solid 2px orange
+                                    |     width 400px
+                                    |     margin auto
+                                    |     padding 10px
+                                    |     position relative
+                                    | 
+                                    | h2
+                                    |     background-color greenyellow
+                                    |     margin 0
+                                    |     padding 5px
+                                    |     position absolute
+                                    |     top 25px
+                                    |     left 25px
+                                    |     right 25px
+                                    |     bottom 25px
+                                figcaption （Stylus）
+                            hr
+                            h4 SAMPLE C：ブラウザ画面を基点にした位置指定
+                            p='positionプロパティの値を「fixed」にした場合、基本的に「absolute」にしたときと同じように処理されます。ただし、基点となるのはブラウザの画面で、位置指定したボックスは画面に対して固定されます。'
+                            p='たとえば、下のサンプルでは<h2>のpositionプロパティの値を「fixed」にして、topとleftプロパティの値を「0」にしています。これにより、<h2>が構成するボックスは画面の左上に固定表示され、ページをスクロールしても動かなくなります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/107-C.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     border: solid 2px orange;
+                                    |     width: 400px;
+                                    |     margin: auto;
+                                    |     padding :10px;
+                                    | }
+                                    | h2 {
+                                    |     background-color: greenyellow;
+                                    |     margin: 0;
+                                    |     padding: 5px;
+                                    |     position: static;
+                                    |     top: 0;
+                                    |     left: 0;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     border solid 2px orange
+                                    |     width 400px
+                                    |     margin auto
+                                    |     padding 10px
+                                    | 
+                                    | h2
+                                    |     background-color greenyellow
+                                    |     margin 0
+                                    |     padding 5px
+                                    |     position static
+                                    |     top 0
+                                    |     left 0
+                                figcaption （Stylus）
+                            p='<h2>のwidthプロパティの値を「100%」にすると、見出しを画面の横幅いっぱいに表示することができます。'
+                            p='IE6は「fixed」の指定には未対応です。'
+                            p='iOS4.xとAndroid2.3.xではpositionプロパティの値を「fixed」にしたボックスを表示すると、ページをロードした段階では主要ブラウザと同じように指定した位置に表示されますが、画面に対して固定されず、ページといっしょにスクロールされてしまいます。スクロールされることを除くと、レイアウトが崩れるといった問題は発生しません。'
+                            hr
+                            h4 SAMPLE D：ページボックスやリージョンボックスを基点にした位置指定
+                            p='positionプロパティの値を「page」にした場合、基本的に「absolute」にしたときと同じように処理されます。ただし、ページメディアに出力した場合はページボックスが、リージョンレイアウトで表示した場合はリージョンボックスが基点となります。現在のところ、IE10が対応しており、値にはベンダープレフィックスをつけて記述します。'
+                            p='たとえば、下のサンプルは<h2>でマークアップした見出しのうち、1つ目の見出しを赤色で、2つ目の見出しを黄色で表示したものです。印刷すると、1ページ目に赤色の、2ページ目に黄色の見出しが出力されます。'
+                            p='このとき、<h2>のpositionプロパティの値を「page」に、topとleftプロパティの値を「0」にして印刷すると、見出しがそれぞれページボックスの左上に揃えて出力されます。なお、この設定は印刷した場合のみに適用するため、@media print {〜}の中に記述しています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/107-D-page.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @media print {
+                                    |     h2 {
+                                    |         position: -ms-page;
+                                    |         top: 0;
+                                    |         left: 0;
+                                    |     }
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @media　print
+                                    |     h2
+                                    |         position -ms-page
+                                    |         top 0
+                                    |         left 0
+                                figcaption （Stylus）
+                            p='<h2>のpositionプロパティの値を「absolute」にして印刷すると、すべての見出しが1ページ目のページボックスの左上に揃えて出力されます。'
+                            p='リージョンレイアウトにおける処理も確認しておきます。たとえば、1つ目の見出しを赤色に、2つ目の見出しを黄色にすると下のようになります。'
+                            p='ここで<h2>のpositionプロパティの値を「page」に、topとleftプロパティの値を「0』にすると、見出しがそれぞれのリージョンボックスの左上に揃えて表示されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/107-D-region.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @media print {
+                                    |     h2 {
+                                    |         position: -ms-region;
+                                    |         top: 0;
+                                    |         left: 0;
+                                    |     }
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @media print
+                                    |     h2
+                                    |         position -ms-region
+                                    |         top 0
+                                    |         left 0
+                                figcaption （Stylus）
+                            p='<h2>のpositionプロパティの値を「absolute」にすると、すべての見出しが1つ目のリージョンボックスの左上に揃えて表示されます。'
+                            p='CSS3では、親要素の中央に揃えて配置するための「center」というpositionプロパティの値も提案されていますが、現在のところ各ブラウザは未対応です。'
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

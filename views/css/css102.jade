@@ -1,432 +1,432 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;インターフェースセレクタ
-						.panel-body
-							.alert.alert-info インターフェースセレクタ
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png') （※）
-									td
-										img(src='../images/ic-android.png') （※）
-									td
-										img(src='../images/ic-firefox.png') （※）
-									td
-										img(src='../images/ic-safari.png') （※）
-									td
-										img(src='../images/ic-chrome.png') （※）
-									td
-										img(src='../images/ic-opera.png') （※）
-									td
-										img(src='../images/ic-ie.png') （※）
-							p ※ 部分対応。
-							p IE9以前は未対応。
-							pre
-								| :valid {入力値が正しい場合に適用する設定}
-							pre
-								| :invalid {入力値が正しくない場合に適用する設定}
-							pre
-								| :required {入力値が必須な場合に適用する設定}
-							pre
-								| :optional {入力値が必須ではない場合に適用する設定}
-							pre
-								| :in-range {入力値が範囲内の場合に適用する設定}
-							pre
-								| :out-of-range {入力値が範囲外の場合に適用する設定}
-							pre
-								| :read-only {変更できない要素に適用する設定}
-							pre
-								| :read-write {変更できる要素に適用する設定}
-							pre
-								| :default {標準で選択された要素に適用する設定}
-							table.table
-								tr
-									td 初期値
-									td -
-								tr
-									td 継承
-									td - 
-								tr
-									td 適用先
-									td -
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td Basic User Interface
-							p='CSS3の「Basic User Interface Module」では、下のセレクタをインターフェースセレクタとして分類・定義しています。'
-							p='このうち、:hover、:fosuc、:active、:enabled、:disabled、:checked、:indeterminateについては、シンプルセレクタとして「Selector Level 3」で定義されています。'
-							p='「Basic User Interface Module」で定義されたセレクタは、フォームの設定や入力データの検証結果を判別するものとなっています。また、CSS4ではこらすべてが「Selectors Level 4」という形で扱われています。'
-							table.table
-								tr
-									th インターフェースセレクタ
-									th(colspan='2') 定義されたモジュール
-								tr
-									td :hover
-									td(rowspan='7') Selectors Level 3
-									td(rowspan='16') Selectors Level 4
-								tr
-									td :focus
-								tr
-									td :active
-								tr
-									td :enabled
-								tr
-									td :disabled
-								tr
-									td :checked
-								tr
-									td :indeterminate
-								tr
-									td :valid
-									td(rowspan='9') Basic User Interface Module
-								tr
-									td :invalid
-								tr
-									td :required
-								tr
-									td :optional
-								tr
-									td :in-range
-								tr
-									td :out-of-range
-								tr
-									td :read-only
-								tr
-									td :read-white
-								tr
-									td :default
-							hr
-							h4 :valid／:invalid
-							p='フォームに入力した値が正しい形式の場合は「:valid」で、正しくない形式の場合は、「:invalid」でスタイルシートを適用することができます。'
-							p='たとえば、下のサンプルはHtML5の<input type="url">でURL専用のフォームコントロールを表示したものです。値を正しい形式で入力した場合は緑色で、間違った形式で入力した場合には赤色で表示するようにしています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/06/324-01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;form action="…" method="post"&gt;
-									| &lt;p&gt;URL：&lt;input type="url" name="url"&gt;&lt;/p&gt;
-									| &lt;/form&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| form(action='…', method='post')
-									| 	p
-									| 		| URL：
-									| 		input(type='url', name='url')
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| :invalid {
-									|     background-color: red;
-									| }
-									| :valid {
-									|     backgorund-color: greenyellow;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| :invalid
-									| 	background-color red
-									| 
-									| :valid
-									| 	backgorund-color greenyellow
-								figcaption （Stylus）
-							hr
-							h4 :required／:optional
-							p='HTML5のrequired属性を利用すると、フォームの入力を必須にすることができます。たとえば、下のサンプルでは「名前」の入力を必須にしています。'
-							p='このとき、入力を必須にした場合は「:required」で、入力を必須にしていない場合は「:optional」でスタイルシートを適用することができます。下のサンプルでは、入力を必須にしたコントロールをピンク色で、必須にしていないコントロールを薄い黄色で表示するようにしています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/06/324-02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;form action="…" method="post"&gt;
-									| &lt;p&gt;名前：&lt;input type="text" name="name" required&gt;&lt;/p&gt;
-									| &lt;p&gt;住所：&lt;input type="text" name="add"&gt;&lt;/p&gt;
-									| &lt;/form&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| form(action='…', method='post')
-									| 	p
-									| 		| 名前：
-									| 		input(type='text', name='name', required='required')
-									| 	p
-									| 		| 住所：
-									| 		input(type='text', name='add')
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| :required {
-									|     background-color: pink;
-									| }
-									| :optional {
-									|     background-color: lemonchiffon;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| :required
-									| 	background-color pink
-									| 
-									| :optional
-									| 	background-color lemonchiffon
-								figcaption （Stylus）
-							hr
-							h4 :in-range／:out-of-range
-							p='下のサンプルは、HTML5の<input type="number">で数値専用のフォームコントロールを表示したものです。minとmax属性では入力可能な範囲を1〜10と指定しています。'
-							p='このとき入力された値が範囲内の場合は「:in-range」で、範囲外の場合は「out-of-range」でスタイルシートを提要することができます。ここでは範囲内の場合は緑色で、範囲外の場合は赤色で表示するようにしています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/06/324-03.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;form action="…" method="post"&gt;
-									| &lt;p&gt;番号（1〜10）
-									| &lt;input type="number" min="1" max="10"&gt;&lt;/p&gt;
-									| &lt;/form&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| form(action='…', method='post')
-									| 	p
-									| 		| 番号（1〜10）
-									| 		input(type='number', min='1', max='10')
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| :in-range {
-									|     background-color: greenyellow;
-									| }
-									| :out-of-range {
-									|     background-color: red;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| :in-range
-									| 	background-color greenyellow
-									| 
-									| :out-of-range
-									| 	background-color red
-								figcaption （Stylus）
-							p='FirefoxとInternet Explorerは未対応です。'
-							hr
-							h4 :read-only／:read-write
-							p='フォームのコントロールはユーザーが変更できるものとして扱われますが、readonly属性で表示せんようにしたコントロールやフォーム以外の要素についてはユーザーが変更できないものとして扱われます。たとえば、下のサンプルでは「住所」のコントロールを表示専用にしてあります。'
-							p='このとき、ユーザーが変更できない要素には「:read-only」で、ユーザーが変更できる要素には「:read-write」でスタイルシートを適用することができます。そこで、変更できない要素を灰色で、変更できる要素を黄色で表示するように指定すると、『名前」のコントロール以外は灰色で表示されます。<html>や<body>も変更できない要素として扱われ、ページの背景も灰色になりますので注意が必要です。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/06/324-04.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;body&gt;
-									| 
-									| &lt;form action="…" method="post"&gt;
-									| &lt;p&gt;名前：&lt;input type="text" name="name"&gt;&lt;/p&gt;
-									| &lt;p&gt;住所：&lt;input type="text" name="add" value="東京都" readonly&gt;&lt;/p&gt;
-									| &lt;/form&gt;
-									| 
-									| &lt;/body&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| body
-									| 	form(action='…', method='post')
-									| 		p
-									| 			| 名前：
-									| 			input(type='text', name='name')
-									| 		p
-									| 			| 住所：
-									| 			input(type='text', name='add', value='東京都', readonly='readonly')
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| :read-only {
-									|     background-color: lightgray;
-									| }
-									| :read-write {
-									|     background-color: yellow;
-									| }
-									| :-moz-read-only {
-									|     background-color: lightgray;
-									| }
-									| :-moz-read-write {
-									|     background-color: yellow;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| :read-only
-									| 	background-color lightgray
-									| 
-									| :read-write
-									| 	background-color yellow
-									| 
-									| :-moz-read-only
-									| 	background-color lightgray
-									| 
-									| :-moz-read-write
-									| 	background-color yellow
-								figcaption （Stylus）
-							p='Firefoxでは「-moz-」をつけて記述する必要があります。Internet Explorerは未対応です。'
-							p='また、Webkit系のブラウザでは「:read-only」の設定がフォーム関連の要素にのみ適用され、ページの背景は灰色になりません。'
-							p='CSS4の「SelectorsLevel 4」では、HTML5のcontenteditable属性の値を「true」にし、編集でいるようにした要素も「ユーザーが変更できるもの」として扱うことが提案されています。現在のところ「:rad-write」のスタイルシートを「contenteditable="true"」と指定した要素に適用するのはFirefoxのみとなっています。'
-							hr
-							h4 :default
-							p='複数の選択肢があるときに、初期状態で選択される要素には「:default」でスタイルシートを適用することができます。たとえば、複数の送信ボタンを用意した場合、初期状態で選択されるのは最初に記述したボタンです。「:default」でボタンの背景を緑色で表示するように指定すると、最初のボタンの色が変わることがわかります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/06/324-05.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;form action="…" method="post"&gt;
-									| &lt;input type="submit" value="サンドイッチ"&gt;
-									| &lt;input type="submit" value="ハンバーガー"&gt;
-									| &lt;input type="submit" value="デザート"&gt;
-									| &lt;/form&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| form(action='…', method='post')
-									| 	input(type='submit', value='サンドイッチ')
-									| 	input(type='submit', value='ハンバーガー')
-									| 	input(type='submit', value='デザート')
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| :default {
-									|     background-color: greenyellow;
-									|     border: solid 1px gray;
-									|     border-radius: 3px;
-									|     padding: 5px 7px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| :default
-									| 	background-color greenyellow
-									| 	border solid 1px gray
-									| 	border-radius 3px
-									| 	padding 5px 7px
-								figcaption （Stylus）
-							p='Operaは送信ボタンに対する「:default」の適用には未対応です。'
-							p='Internet Explorerは「:default」に未対応です。'
-							p='チェックボックスの場合、checked属性を指定したものが初期状態で選択されるものとして扱われ、「:defualt」でスタイルシートを適用することができます。'
-							p='たとえば、下のサンプルでは2つ目のチェックボックスにchecked属性を指定し、初期状態で選択するようにしています。このとき、「:default + lable」で背景を緑色で表示するように指定すると、2つ目のチェックボックスのラベルの背景色が変わります。なお、このチェックボックスの選択を解除しても、初期状態で選択されることに変わりはありませんので、「:default」の設定は適用され続けます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/06/324-06.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;form action="…" method="post"&gt;
-									| &lt;input id="sand" type="checkbox"&gt;
-									| &lt;label for="sand"&gt;サンドイッチ&lt;/label&gt;
-									| &lt;input id="burger" type="checkbox"&gt;
-									| &lt;label for="burger"&gt;ハンバーガー&lt;/label&gt;
-									| &lt;input id="dessert" type="checkbox"&gt;
-									| &lt;label for="dessert"&gt;デザート&lt;/label&gt;
-									| &lt;/form&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| form(action='…', method='post')
-									| 	input#sand(type='checkbox')
-									| 	label(for='sand') サンドイッチ
-									| 	input#burger(type='checkbox')
-									| 	label(for='burger') ハンバーガー
-									| 	input#dessert(type='checkbox')
-									| 	label(for='dessert') デザート
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| :default + label {
-									| 
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| :default
-									| 	&amp; + label
-								figcaption （Stylus）
-							p='Webkit系のブラウザはチェックボックスに対する「:default」の適用には未対応です。'
-							hr
-							h4 ハイライト表示のデザインを指定する　::selection
-							p='「::selection」というセレクタを利用すると、コンテンツを選択してハイライト表示した箇所にスタイルシートを適用することができます。たとえば、background-colorプロパティの値を「yellow」にすると、ハイライトカラーが黄色になります。'
-							p='各ブラウザが対応していますが、IEはバージョン9からのサポートで、Firefoxでは「-moz-」をつけて記述する必要があります。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1 HAM SANDWICHES
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| ::selection {
-									|     background-color: yellow;
-									| }
-									| ::-moz-selection {
-									|     background-color: yellow;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| ::selection
-									| 	background-color yellow
-									| 
-									| ::-moz-selection
-									| 	background-color yellow
-								figcaption （Stylus）
-							hr
-							h4 ユーザーによるコンテンツの選択を禁止する　user-select
-							p='user-selectプロパティの値を「none」にすると、ユーザーによるコンテンツの選択を禁止することができます。Opera以外の各ブラウザが対応しており、下のようにベンダープレフィックスをつけて記述します。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1 HAM SANDWICHES
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1 {
-									|     -webkit-user-select: none;
-									|     -moz-user-select: none;
-									|     -ms-user-select: none;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1
-									| 	-webkit-user-select none
-									| 	-moz-user-select none
-									| 	-ms-user-select none
-								figcaption （Stylus）
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;インターフェースセレクタ
+                        .panel-body
+                            .alert.alert-info インターフェースセレクタ
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png') （※）
+                                    td
+                                        img(src='../images/ic-android.png') （※）
+                                    td
+                                        img(src='../images/ic-firefox.png') （※）
+                                    td
+                                        img(src='../images/ic-safari.png') （※）
+                                    td
+                                        img(src='../images/ic-chrome.png') （※）
+                                    td
+                                        img(src='../images/ic-opera.png') （※）
+                                    td
+                                        img(src='../images/ic-ie.png') （※）
+                            p ※ 部分対応。
+                            p IE9以前は未対応。
+                            pre
+                                | :valid {入力値が正しい場合に適用する設定}
+                            pre
+                                | :invalid {入力値が正しくない場合に適用する設定}
+                            pre
+                                | :required {入力値が必須な場合に適用する設定}
+                            pre
+                                | :optional {入力値が必須ではない場合に適用する設定}
+                            pre
+                                | :in-range {入力値が範囲内の場合に適用する設定}
+                            pre
+                                | :out-of-range {入力値が範囲外の場合に適用する設定}
+                            pre
+                                | :read-only {変更できない要素に適用する設定}
+                            pre
+                                | :read-write {変更できる要素に適用する設定}
+                            pre
+                                | :default {標準で選択された要素に適用する設定}
+                            table.table
+                                tr
+                                    td 初期値
+                                    td -
+                                tr
+                                    td 継承
+                                    td - 
+                                tr
+                                    td 適用先
+                                    td -
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td Basic User Interface
+                            p='CSS3の「Basic User Interface Module」では、下のセレクタをインターフェースセレクタとして分類・定義しています。'
+                            p='このうち、:hover、:fosuc、:active、:enabled、:disabled、:checked、:indeterminateについては、シンプルセレクタとして「Selector Level 3」で定義されています。'
+                            p='「Basic User Interface Module」で定義されたセレクタは、フォームの設定や入力データの検証結果を判別するものとなっています。また、CSS4ではこらすべてが「Selectors Level 4」という形で扱われています。'
+                            table.table
+                                tr
+                                    th インターフェースセレクタ
+                                    th(colspan='2') 定義されたモジュール
+                                tr
+                                    td :hover
+                                    td(rowspan='7') Selectors Level 3
+                                    td(rowspan='16') Selectors Level 4
+                                tr
+                                    td :focus
+                                tr
+                                    td :active
+                                tr
+                                    td :enabled
+                                tr
+                                    td :disabled
+                                tr
+                                    td :checked
+                                tr
+                                    td :indeterminate
+                                tr
+                                    td :valid
+                                    td(rowspan='9') Basic User Interface Module
+                                tr
+                                    td :invalid
+                                tr
+                                    td :required
+                                tr
+                                    td :optional
+                                tr
+                                    td :in-range
+                                tr
+                                    td :out-of-range
+                                tr
+                                    td :read-only
+                                tr
+                                    td :read-white
+                                tr
+                                    td :default
+                            hr
+                            h4 :valid／:invalid
+                            p='フォームに入力した値が正しい形式の場合は「:valid」で、正しくない形式の場合は、「:invalid」でスタイルシートを適用することができます。'
+                            p='たとえば、下のサンプルはHtML5の<input type="url">でURL専用のフォームコントロールを表示したものです。値を正しい形式で入力した場合は緑色で、間違った形式で入力した場合には赤色で表示するようにしています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/06/324-01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;form action="…" method="post"&gt;
+                                    | &lt;p&gt;URL：&lt;input type="url" name="url"&gt;&lt;/p&gt;
+                                    | &lt;/form&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | form(action='…', method='post')
+                                    |     p
+                                    |         | URL：
+                                    |         input(type='url', name='url')
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | :invalid {
+                                    |     background-color: red;
+                                    | }
+                                    | :valid {
+                                    |     backgorund-color: greenyellow;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | :invalid
+                                    |     background-color red
+                                    | 
+                                    | :valid
+                                    |     backgorund-color greenyellow
+                                figcaption （Stylus）
+                            hr
+                            h4 :required／:optional
+                            p='HTML5のrequired属性を利用すると、フォームの入力を必須にすることができます。たとえば、下のサンプルでは「名前」の入力を必須にしています。'
+                            p='このとき、入力を必須にした場合は「:required」で、入力を必須にしていない場合は「:optional」でスタイルシートを適用することができます。下のサンプルでは、入力を必須にしたコントロールをピンク色で、必須にしていないコントロールを薄い黄色で表示するようにしています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/06/324-02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;form action="…" method="post"&gt;
+                                    | &lt;p&gt;名前：&lt;input type="text" name="name" required&gt;&lt;/p&gt;
+                                    | &lt;p&gt;住所：&lt;input type="text" name="add"&gt;&lt;/p&gt;
+                                    | &lt;/form&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | form(action='…', method='post')
+                                    |     p
+                                    |         | 名前：
+                                    |         input(type='text', name='name', required='required')
+                                    |     p
+                                    |         | 住所：
+                                    |         input(type='text', name='add')
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | :required {
+                                    |     background-color: pink;
+                                    | }
+                                    | :optional {
+                                    |     background-color: lemonchiffon;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | :required
+                                    |     background-color pink
+                                    | 
+                                    | :optional
+                                    |     background-color lemonchiffon
+                                figcaption （Stylus）
+                            hr
+                            h4 :in-range／:out-of-range
+                            p='下のサンプルは、HTML5の<input type="number">で数値専用のフォームコントロールを表示したものです。minとmax属性では入力可能な範囲を1〜10と指定しています。'
+                            p='このとき入力された値が範囲内の場合は「:in-range」で、範囲外の場合は「out-of-range」でスタイルシートを提要することができます。ここでは範囲内の場合は緑色で、範囲外の場合は赤色で表示するようにしています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/06/324-03.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;form action="…" method="post"&gt;
+                                    | &lt;p&gt;番号（1〜10）
+                                    | &lt;input type="number" min="1" max="10"&gt;&lt;/p&gt;
+                                    | &lt;/form&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | form(action='…', method='post')
+                                    |     p
+                                    |         | 番号（1〜10）
+                                    |         input(type='number', min='1', max='10')
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | :in-range {
+                                    |     background-color: greenyellow;
+                                    | }
+                                    | :out-of-range {
+                                    |     background-color: red;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | :in-range
+                                    |     background-color greenyellow
+                                    | 
+                                    | :out-of-range
+                                    |     background-color red
+                                figcaption （Stylus）
+                            p='FirefoxとInternet Explorerは未対応です。'
+                            hr
+                            h4 :read-only／:read-write
+                            p='フォームのコントロールはユーザーが変更できるものとして扱われますが、readonly属性で表示せんようにしたコントロールやフォーム以外の要素についてはユーザーが変更できないものとして扱われます。たとえば、下のサンプルでは「住所」のコントロールを表示専用にしてあります。'
+                            p='このとき、ユーザーが変更できない要素には「:read-only」で、ユーザーが変更できる要素には「:read-write」でスタイルシートを適用することができます。そこで、変更できない要素を灰色で、変更できる要素を黄色で表示するように指定すると、『名前」のコントロール以外は灰色で表示されます。<html>や<body>も変更できない要素として扱われ、ページの背景も灰色になりますので注意が必要です。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/06/324-04.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;body&gt;
+                                    | 
+                                    | &lt;form action="…" method="post"&gt;
+                                    | &lt;p&gt;名前：&lt;input type="text" name="name"&gt;&lt;/p&gt;
+                                    | &lt;p&gt;住所：&lt;input type="text" name="add" value="東京都" readonly&gt;&lt;/p&gt;
+                                    | &lt;/form&gt;
+                                    | 
+                                    | &lt;/body&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | body
+                                    |     form(action='…', method='post')
+                                    |         p
+                                    |             | 名前：
+                                    |             input(type='text', name='name')
+                                    |         p
+                                    |             | 住所：
+                                    |             input(type='text', name='add', value='東京都', readonly='readonly')
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | :read-only {
+                                    |     background-color: lightgray;
+                                    | }
+                                    | :read-write {
+                                    |     background-color: yellow;
+                                    | }
+                                    | :-moz-read-only {
+                                    |     background-color: lightgray;
+                                    | }
+                                    | :-moz-read-write {
+                                    |     background-color: yellow;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | :read-only
+                                    |     background-color lightgray
+                                    | 
+                                    | :read-write
+                                    |     background-color yellow
+                                    | 
+                                    | :-moz-read-only
+                                    |     background-color lightgray
+                                    | 
+                                    | :-moz-read-write
+                                    |     background-color yellow
+                                figcaption （Stylus）
+                            p='Firefoxでは「-moz-」をつけて記述する必要があります。Internet Explorerは未対応です。'
+                            p='また、Webkit系のブラウザでは「:read-only」の設定がフォーム関連の要素にのみ適用され、ページの背景は灰色になりません。'
+                            p='CSS4の「SelectorsLevel 4」では、HTML5のcontenteditable属性の値を「true」にし、編集でいるようにした要素も「ユーザーが変更できるもの」として扱うことが提案されています。現在のところ「:rad-write」のスタイルシートを「contenteditable="true"」と指定した要素に適用するのはFirefoxのみとなっています。'
+                            hr
+                            h4 :default
+                            p='複数の選択肢があるときに、初期状態で選択される要素には「:default」でスタイルシートを適用することができます。たとえば、複数の送信ボタンを用意した場合、初期状態で選択されるのは最初に記述したボタンです。「:default」でボタンの背景を緑色で表示するように指定すると、最初のボタンの色が変わることがわかります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/06/324-05.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;form action="…" method="post"&gt;
+                                    | &lt;input type="submit" value="サンドイッチ"&gt;
+                                    | &lt;input type="submit" value="ハンバーガー"&gt;
+                                    | &lt;input type="submit" value="デザート"&gt;
+                                    | &lt;/form&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | form(action='…', method='post')
+                                    |     input(type='submit', value='サンドイッチ')
+                                    |     input(type='submit', value='ハンバーガー')
+                                    |     input(type='submit', value='デザート')
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | :default {
+                                    |     background-color: greenyellow;
+                                    |     border: solid 1px gray;
+                                    |     border-radius: 3px;
+                                    |     padding: 5px 7px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | :default
+                                    |     background-color greenyellow
+                                    |     border solid 1px gray
+                                    |     border-radius 3px
+                                    |     padding 5px 7px
+                                figcaption （Stylus）
+                            p='Operaは送信ボタンに対する「:default」の適用には未対応です。'
+                            p='Internet Explorerは「:default」に未対応です。'
+                            p='チェックボックスの場合、checked属性を指定したものが初期状態で選択されるものとして扱われ、「:defualt」でスタイルシートを適用することができます。'
+                            p='たとえば、下のサンプルでは2つ目のチェックボックスにchecked属性を指定し、初期状態で選択するようにしています。このとき、「:default + lable」で背景を緑色で表示するように指定すると、2つ目のチェックボックスのラベルの背景色が変わります。なお、このチェックボックスの選択を解除しても、初期状態で選択されることに変わりはありませんので、「:default」の設定は適用され続けます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/06/324-06.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;form action="…" method="post"&gt;
+                                    | &lt;input id="sand" type="checkbox"&gt;
+                                    | &lt;label for="sand"&gt;サンドイッチ&lt;/label&gt;
+                                    | &lt;input id="burger" type="checkbox"&gt;
+                                    | &lt;label for="burger"&gt;ハンバーガー&lt;/label&gt;
+                                    | &lt;input id="dessert" type="checkbox"&gt;
+                                    | &lt;label for="dessert"&gt;デザート&lt;/label&gt;
+                                    | &lt;/form&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | form(action='…', method='post')
+                                    |     input#sand(type='checkbox')
+                                    |     label(for='sand') サンドイッチ
+                                    |     input#burger(type='checkbox')
+                                    |     label(for='burger') ハンバーガー
+                                    |     input#dessert(type='checkbox')
+                                    |     label(for='dessert') デザート
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | :default + label {
+                                    | 
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | :default
+                                    |     &amp; + label
+                                figcaption （Stylus）
+                            p='Webkit系のブラウザはチェックボックスに対する「:default」の適用には未対応です。'
+                            hr
+                            h4 ハイライト表示のデザインを指定する　::selection
+                            p='「::selection」というセレクタを利用すると、コンテンツを選択してハイライト表示した箇所にスタイルシートを適用することができます。たとえば、background-colorプロパティの値を「yellow」にすると、ハイライトカラーが黄色になります。'
+                            p='各ブラウザが対応していますが、IEはバージョン9からのサポートで、Firefoxでは「-moz-」をつけて記述する必要があります。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1 HAM SANDWICHES
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ::selection {
+                                    |     background-color: yellow;
+                                    | }
+                                    | ::-moz-selection {
+                                    |     background-color: yellow;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ::selection
+                                    |     background-color yellow
+                                    | 
+                                    | ::-moz-selection
+                                    |     background-color yellow
+                                figcaption （Stylus）
+                            hr
+                            h4 ユーザーによるコンテンツの選択を禁止する　user-select
+                            p='user-selectプロパティの値を「none」にすると、ユーザーによるコンテンツの選択を禁止することができます。Opera以外の各ブラウザが対応しており、下のようにベンダープレフィックスをつけて記述します。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1 HAM SANDWICHES
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1 {
+                                    |     -webkit-user-select: none;
+                                    |     -moz-user-select: none;
+                                    |     -ms-user-select: none;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1
+                                    |     -webkit-user-select none
+                                    |     -moz-user-select none
+                                    |     -ms-user-select none
+                                figcaption （Stylus）
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

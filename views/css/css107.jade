@@ -1,108 +1,108 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;テキストがオーバーフローしたときの表示
-						.panel-body
-							.alert.alert-info テキストがオーバーフローしたときの表示
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							pre
-								| text-overflow: 表示
-							p
-								| 表示・・・clip ／ ellipsis
-							table.table
-								tr
-									td 初期値
-									td clip
-								tr
-									td 継承
-									td なし 
-								tr
-									td 適用先
-									td ブロックコンテナ
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td Basic User Interface
-							p='text-overflowプロパティを利用するとテキストがボックスの右端でオバーフローしたときの表示を指定することができます。'
-							p='たとえば、下のサンプルは<p>でマークアップしたテキストを黄緑色の背景色にして表示したものです。ブラウザの画面の横幅に関係なく、常に1行で表示するため、<p>のwhite-spaceプロパティの値を「nowrap」にしています。また、画面の横幅からはみ出した部分は非表示にするため、overflowプロパティの値を「hidden」にしています。'
-							p='このとき、ブラウザ画面の横幅を短くすると、<p>の構成するボックスにテキストが収まらなくなり、右端で途切れた表示になります。これは、text-overflowプロパティの値が初期値の「clip」で処理されるためです。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
-									| &lt;p&gt;新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。&lt;/p&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1 HAM SANDWICHES
-									| p 新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p {
-									|     background: greenyellow;
-									|     overflow: hidden;
-									|     white-space: nowrap;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	background greenyellow
-									| 	overflow hidden
-									| 	white-space nowrap
-								figcaption （Stylus）
-							p='text-overflowプロパティの値を「ellipsis」にすると、ボックスにテキストが収まらない場合には右端に「・・・」という省略記号が表示されるようになります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/06/333.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| p {
-									|     background: greenyellow;
-									|     overflow: hidden;
-									|     white-space: nowrap;
-									|     text-overflow: ellipsis;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	background greenyellow
-									| 	overflow hidden
-									| 	white-space nowrap
-									| 	text-overflow ellipsis
-								figcaption （Stylus）
-							p='text-overflowでは省略記号を値として指定できるようにすることも提案されていますが、各ブラウザは未対応です。'
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;テキストがオーバーフローしたときの表示
+                        .panel-body
+                            .alert.alert-info テキストがオーバーフローしたときの表示
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            pre
+                                | text-overflow: 表示
+                            p
+                                | 表示・・・clip ／ ellipsis
+                            table.table
+                                tr
+                                    td 初期値
+                                    td clip
+                                tr
+                                    td 継承
+                                    td なし 
+                                tr
+                                    td 適用先
+                                    td ブロックコンテナ
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td Basic User Interface
+                            p='text-overflowプロパティを利用するとテキストがボックスの右端でオバーフローしたときの表示を指定することができます。'
+                            p='たとえば、下のサンプルは<p>でマークアップしたテキストを黄緑色の背景色にして表示したものです。ブラウザの画面の横幅に関係なく、常に1行で表示するため、<p>のwhite-spaceプロパティの値を「nowrap」にしています。また、画面の横幅からはみ出した部分は非表示にするため、overflowプロパティの値を「hidden」にしています。'
+                            p='このとき、ブラウザ画面の横幅を短くすると、<p>の構成するボックスにテキストが収まらなくなり、右端で途切れた表示になります。これは、text-overflowプロパティの値が初期値の「clip」で処理されるためです。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
+                                    | &lt;p&gt;新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。&lt;/p&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1 HAM SANDWICHES
+                                    | p 新鮮なハム、トマト、チーズ、レタスを挟んだサンドイッチです。
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p {
+                                    |     background: greenyellow;
+                                    |     overflow: hidden;
+                                    |     white-space: nowrap;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     background greenyellow
+                                    |     overflow hidden
+                                    |     white-space nowrap
+                                figcaption （Stylus）
+                            p='text-overflowプロパティの値を「ellipsis」にすると、ボックスにテキストが収まらない場合には右端に「・・・」という省略記号が表示されるようになります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/06/333.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p {
+                                    |     background: greenyellow;
+                                    |     overflow: hidden;
+                                    |     white-space: nowrap;
+                                    |     text-overflow: ellipsis;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     background greenyellow
+                                    |     overflow hidden
+                                    |     white-space nowrap
+                                    |     text-overflow ellipsis
+                                figcaption （Stylus）
+                            p='text-overflowでは省略記号を値として指定できるようにすることも提案されていますが、各ブラウザは未対応です。'
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

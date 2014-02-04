@@ -1,452 +1,452 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;マージンの挿入
-						.panel-body
-							.alert.alert-info マージンの挿入
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							pre
-								| margin: マージンの大きさ
-							p
-								| マージンの大きさ・・・数値 ／ 比率 ／ auto
-							table.table
-								tr
-									td 初期値
-									td 0
-								tr
-									td 継承
-									td なし
-								tr
-									td 適用先
-									td 全要素（<mark>displayの値がtable、inline-table、table-caption以外のテーブル要素を除く</mark>）
-								tr
-									td 比率
-									td 親要素の横幅
-								tr
-									td モジュール
-									td Basic Box Model
-							p='CSSのボックスモデルでは罫線の外側に挿入する余白をマージンと呼び、この余白の大きさをmarginプロパティで指定します。'
-							hr
-							h4 SAMPLE A：マージンの挿入
-							p='下のサンプルは<div>でマークアップした語句をオレンジ色の罫線で囲み、背景を薄いオレンジ色で表示したものです。このとき、<div>のmarginプロパティの色を「40px」と指定すると、罫線の外側に40ピクセルのマージンを挿入することができます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/058-A.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div&gt;HAM SANDWICHES&lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div HAM SANDWICHES
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     border: solid 2px orange;
-									|     background-color: moccasin;
-									|     text-align: center;
-									|     margin: 40px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	border solid 2px orange
-									| 	background-color moccasin
-									| 	text-align center
-									| 	margin 40px
-								figcaption （Stylus）
-							hr
-							h4 SAMPLE B：マージンの大きさを辺ごとに変える
-							p='marginプロパティでは値を下の形式で記述することにより、上下左右の辺ごとにマージンの大きさを指定することができます。たとえば、値を「20px 40px 60px 80px」と指定すると、以下のようにマージンが挿入されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/058-B.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     border: solid 2px orange;
-									|     background-color: moccasin;
-									|     text-align: center;
-									|     margin: 20px 40px 60px 80px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	border solid 2px orange
-									| 	background-color moccasin
-									| 	text-align center
-									| 	margin 20px 40px 60px 80px
-								figcaption （Stylus）
-							p マージンの値の記述形式
-							pre
-								| 全 ／ 上 右 下 左 ／ 上 左右 下 ／ 上下 左右
-							p='また、プロパティを下の形で記述すると、特定の辺のマージンの大きさを指定することができます。たとえば、上マージンを40ピクセルにする場合は「marign-top: 40px」と指定します。'
-							pre
-								| margin-*：マージンの大きさ
-							p='*・・・top ／ right ／ bottom ／ left'
-							hr
-							h4 SAMPLE C：横幅を指定したボックスを中央に配置する
-							p='widthプロパティで横幅を指定したボックスは左揃えで表示されます。たとえば、下のサンプルではボックスの横幅を300ピクセルに指定しています。'
-							p='このボックスを中央に配置するためには、margin-leftとmargin-rightプロパティを「auto」に指定します。すると、ボックスの左右に自動的に同じ大きさのマージンが挿入され、ボックスが中央に表示されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/058-C.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div&gt;HAM SANDWICHES&lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div HAM SANDWICHES
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     border: solid 2px orange;
-									|     background-color: moccasin;
-									|     text-align: center;
-									|     width: 300px;
-									|     margin-left: auto;
-									|     margin-right: auto;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	border solid 2px orange
-									| 	background-color moccasin
-									| 	text-align center
-									| 	width 300px
-									| 	margin-left auto
-									| 	margin-right auto
-								figcaption （Stylus）
-							hr
-							h4 SAMPLE D：上下マージンの重ね合わせ
-							p='ブロックレベルボックスを並べて表示すると、上下マージンの重ね合わせが行われます。たとえば、下のサンプは<h2>と<p>でマークアップしたコンテンツを上下に並べて表示したものです。<h2>と<p>のdisplayプロパティの値はデフォルトスタイルシートによって「block」になりますので、それぞれブロックボックスを構成します。'
-							p='このとき、ボックスの上下に40ピクセルと20ピクセルのマージンを挿入すると、見出しと文章の間隔はマージンを合算した60ピクセルではなく、重ね合わせた40ピクセルとなります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/058-D01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
-									| &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト…&lt;/p&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 HAM SANDWICHES
-									| p 焼きたての手作りパンで新鮮なハム、トマト…
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2{
-									|     border: solid 2px orange;
-									|     background-color: moccasin;
-									|     text-align: center;
-									|     margin-top 40px;
-									|     margin-bottom: 40px;
-									| }
-									| p {
-									|     border: solid 2px limegreen;
-									|     background-color: pale green;
-									|     margin-top: 20px;
-									|     margin-bottom: 20px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	border solid 2px orange
-									| 	background-color moccasin
-									| 	text-align center
-									| 	margin-bottom 40px
-									| 
-									| p
-									| 	border solid 2px limegreen
-									| 	background-color pale green
-									| 	margin-top 20px
-									| 	margin-bottom 20px
-								figcaption （Stylus）
-							p='ただし、floatプロパティで配置したり、positionプロパティの値を「abosolute」と指定した場合には、重ね合わせの処理は行われません。たとえば、下のように<p>のfloatプロパティの値を「left」と指定すると、見出しと文章の間隔はマージンを合算した60ピクセルとなります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/058-D02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| …略...
-									| p {
-									|     border: solid 2px limegreen;
-									|     background-color: pale green;
-									|     margin-top: 20px;
-									|     margin-bottom: 20px;
-									|     float:left;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| …略...
-									| p
-									| 	border solid 2px limegreen
-									| 	background-color pale green
-									| 	margin-top 20px
-									| 	margin-bottom 20px
-									| 	float left
-								figcaption （Stylus）
-							p!='<mark>なお、左右マージンや罫線やパディングの重ね合わせは行われません。</mark>'
-							hr
-							h4 SAMPLE E：親要素と子要素の上下マージョンの重ね合わせ
-							p='上下マージンの重ね合わせは、親要素と子要素でも行われます。たとえば、下のサンプルでは<h2>と<p>を<div>でマークアップしたものです。親要素<div>の背景は紫色で表示しています。'
-							p='親要素<div>の上下には30ピクセルのマージンを挿入していますが、上マージンは子要素<h2>の上マージンと、下マージンは子要素<p>の下マージンと重ね合わせが行われます。その結果、<div>が構成する上下の余白は40pxと30ピクセルになります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/058-E01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div&gt;
-									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
-									| &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト…&lt;/p&gt;
-									| &lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	h2 HAM SANDWICHES
-									| 	p 焼きたての手作りパンで新鮮なハム、トマト…
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     background-color: lavender;
-									|     margin-top: 30px;
-									|     margin-bottom:30px;
-									| }
-									| h2 {
-									|     border: solid 2px orange;
-									|     text-align: center;
-									|     margin-top: 40px;
-									|     margin-bottom: 40px;
-									| }
-									| p {
-									|     border: solid 2px limegreen;
-									|     margin-top: 20px;
-									|     margin-bottom: 20px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	background-color lavender
-									| 	margin-top 30px
-									| 	margin-bottom 30px
-									| 
-									| h2
-									| 	border solid 2px orange
-									| 	text-align center
-									| 	margin-top 40px
-									| 	margin-bottom 40px
-									| 
-									| p
-									| 	border solid 2px limegreen
-									| 	margin-top 20px
-									| 	margin-bottom 20px
-								figcaption （Stylus）
-							p='親要素と子要素の場合も、floatプロパティで配置を指定したり、positionプロパティの値を「aboslute」と指定した場合には、重ね合わせの処理は行われなくなります。たとえば、<div>のfloatプロパティの値を「left」と指定すると、<h2>の上マージンと<p>の下マージンは<div>が構成するボックスの中に含まれ、<div>の上下の余白は30ピクセルとなります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/058-E02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     background-color: lavender;
-									|     margin-top: 30px;
-									|     margin-bottom:30px;
-									|     float: left;
-									| }
-									| h2 {
-									|     border: solid 2px orange;
-									|     text-align: center;
-									|     margin-top: 40px;
-									|     margin-bottom: 40px;
-									| }
-									| …略...
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	background-color lavender
-									| 	margin-top 30px
-									| 	margin-bottom 30px
-									| 	float left
-									| 
-									| h2
-									| 	border solid 2px orange
-									| 	text-align center
-									| 	margin-top 40px
-									| 	margin-bottom 40px
-								figcaption （Stylus）
-							p='また、親要素のまわりに罫線やパディングを挿入した場合にも、重ね合わせは行われなくなります。たとえば、<div>のまわりを太さ5ピクセル罫線で囲むと次のようになります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/058-E03.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     background-color: lavender;
-									|     margin-top: 30px;
-									|     margin-bottom:30px;
-									|     border: solid 5px blue;
-									| }
-									| h2 {
-									|     border: solid 2px orange;
-									|     text-align: center;
-									|     margin-top: 40px;
-									|     margin-bottom: 40px;
-									| }
-									| …略...
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	background-color lavender
-									| 	margin-top 30px
-									| 	margin-bottom 30px
-									| 	border solid 5px blue
-									| 
-									| h2
-									| 	border solid 2px orange
-									| 	text-align center
-									| 	margin-top 40px
-									| 	margin-bottom 40px
-								figcaption （Stylus）
-							hr
-							h4 インラインレベルボックスのマージン
-							p <mark>インラインレベルボックスの上下マージンの重ね合わせは行われません。</mark>
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;マージンの挿入
+                        .panel-body
+                            .alert.alert-info マージンの挿入
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            pre
+                                | margin: マージンの大きさ
+                            p
+                                | マージンの大きさ・・・数値 ／ 比率 ／ auto
+                            table.table
+                                tr
+                                    td 初期値
+                                    td 0
+                                tr
+                                    td 継承
+                                    td なし
+                                tr
+                                    td 適用先
+                                    td 全要素（<mark>displayの値がtable、inline-table、table-caption以外のテーブル要素を除く</mark>）
+                                tr
+                                    td 比率
+                                    td 親要素の横幅
+                                tr
+                                    td モジュール
+                                    td Basic Box Model
+                            p='CSSのボックスモデルでは罫線の外側に挿入する余白をマージンと呼び、この余白の大きさをmarginプロパティで指定します。'
+                            hr
+                            h4 SAMPLE A：マージンの挿入
+                            p='下のサンプルは<div>でマークアップした語句をオレンジ色の罫線で囲み、背景を薄いオレンジ色で表示したものです。このとき、<div>のmarginプロパティの色を「40px」と指定すると、罫線の外側に40ピクセルのマージンを挿入することができます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/058-A.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div&gt;HAM SANDWICHES&lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div HAM SANDWICHES
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     border: solid 2px orange;
+                                    |     background-color: moccasin;
+                                    |     text-align: center;
+                                    |     margin: 40px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     border solid 2px orange
+                                    |     background-color moccasin
+                                    |     text-align center
+                                    |     margin 40px
+                                figcaption （Stylus）
+                            hr
+                            h4 SAMPLE B：マージンの大きさを辺ごとに変える
+                            p='marginプロパティでは値を下の形式で記述することにより、上下左右の辺ごとにマージンの大きさを指定することができます。たとえば、値を「20px 40px 60px 80px」と指定すると、以下のようにマージンが挿入されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/058-B.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     border: solid 2px orange;
+                                    |     background-color: moccasin;
+                                    |     text-align: center;
+                                    |     margin: 20px 40px 60px 80px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     border solid 2px orange
+                                    |     background-color moccasin
+                                    |     text-align center
+                                    |     margin 20px 40px 60px 80px
+                                figcaption （Stylus）
+                            p マージンの値の記述形式
+                            pre
+                                | 全 ／ 上 右 下 左 ／ 上 左右 下 ／ 上下 左右
+                            p='また、プロパティを下の形で記述すると、特定の辺のマージンの大きさを指定することができます。たとえば、上マージンを40ピクセルにする場合は「marign-top: 40px」と指定します。'
+                            pre
+                                | margin-*：マージンの大きさ
+                            p='*・・・top ／ right ／ bottom ／ left'
+                            hr
+                            h4 SAMPLE C：横幅を指定したボックスを中央に配置する
+                            p='widthプロパティで横幅を指定したボックスは左揃えで表示されます。たとえば、下のサンプルではボックスの横幅を300ピクセルに指定しています。'
+                            p='このボックスを中央に配置するためには、margin-leftとmargin-rightプロパティを「auto」に指定します。すると、ボックスの左右に自動的に同じ大きさのマージンが挿入され、ボックスが中央に表示されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/058-C.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div&gt;HAM SANDWICHES&lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div HAM SANDWICHES
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     border: solid 2px orange;
+                                    |     background-color: moccasin;
+                                    |     text-align: center;
+                                    |     width: 300px;
+                                    |     margin-left: auto;
+                                    |     margin-right: auto;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     border solid 2px orange
+                                    |     background-color moccasin
+                                    |     text-align center
+                                    |     width 300px
+                                    |     margin-left auto
+                                    |     margin-right auto
+                                figcaption （Stylus）
+                            hr
+                            h4 SAMPLE D：上下マージンの重ね合わせ
+                            p='ブロックレベルボックスを並べて表示すると、上下マージンの重ね合わせが行われます。たとえば、下のサンプは<h2>と<p>でマークアップしたコンテンツを上下に並べて表示したものです。<h2>と<p>のdisplayプロパティの値はデフォルトスタイルシートによって「block」になりますので、それぞれブロックボックスを構成します。'
+                            p='このとき、ボックスの上下に40ピクセルと20ピクセルのマージンを挿入すると、見出しと文章の間隔はマージンを合算した60ピクセルではなく、重ね合わせた40ピクセルとなります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/058-D01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+                                    | &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト…&lt;/p&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 HAM SANDWICHES
+                                    | p 焼きたての手作りパンで新鮮なハム、トマト…
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2{
+                                    |     border: solid 2px orange;
+                                    |     background-color: moccasin;
+                                    |     text-align: center;
+                                    |     margin-top 40px;
+                                    |     margin-bottom: 40px;
+                                    | }
+                                    | p {
+                                    |     border: solid 2px limegreen;
+                                    |     background-color: pale green;
+                                    |     margin-top: 20px;
+                                    |     margin-bottom: 20px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     border solid 2px orange
+                                    |     background-color moccasin
+                                    |     text-align center
+                                    |     margin-bottom 40px
+                                    | 
+                                    | p
+                                    |     border solid 2px limegreen
+                                    |     background-color pale green
+                                    |     margin-top 20px
+                                    |     margin-bottom 20px
+                                figcaption （Stylus）
+                            p='ただし、floatプロパティで配置したり、positionプロパティの値を「abosolute」と指定した場合には、重ね合わせの処理は行われません。たとえば、下のように<p>のfloatプロパティの値を「left」と指定すると、見出しと文章の間隔はマージンを合算した60ピクセルとなります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/058-D02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | …略...
+                                    | p {
+                                    |     border: solid 2px limegreen;
+                                    |     background-color: pale green;
+                                    |     margin-top: 20px;
+                                    |     margin-bottom: 20px;
+                                    |     float:left;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | …略...
+                                    | p
+                                    |     border solid 2px limegreen
+                                    |     background-color pale green
+                                    |     margin-top 20px
+                                    |     margin-bottom 20px
+                                    |     float left
+                                figcaption （Stylus）
+                            p!='<mark>なお、左右マージンや罫線やパディングの重ね合わせは行われません。</mark>'
+                            hr
+                            h4 SAMPLE E：親要素と子要素の上下マージョンの重ね合わせ
+                            p='上下マージンの重ね合わせは、親要素と子要素でも行われます。たとえば、下のサンプルでは<h2>と<p>を<div>でマークアップしたものです。親要素<div>の背景は紫色で表示しています。'
+                            p='親要素<div>の上下には30ピクセルのマージンを挿入していますが、上マージンは子要素<h2>の上マージンと、下マージンは子要素<p>の下マージンと重ね合わせが行われます。その結果、<div>が構成する上下の余白は40pxと30ピクセルになります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/058-E01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div&gt;
+                                    | &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+                                    | &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト…&lt;/p&gt;
+                                    | &lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     h2 HAM SANDWICHES
+                                    |     p 焼きたての手作りパンで新鮮なハム、トマト…
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     background-color: lavender;
+                                    |     margin-top: 30px;
+                                    |     margin-bottom:30px;
+                                    | }
+                                    | h2 {
+                                    |     border: solid 2px orange;
+                                    |     text-align: center;
+                                    |     margin-top: 40px;
+                                    |     margin-bottom: 40px;
+                                    | }
+                                    | p {
+                                    |     border: solid 2px limegreen;
+                                    |     margin-top: 20px;
+                                    |     margin-bottom: 20px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     background-color lavender
+                                    |     margin-top 30px
+                                    |     margin-bottom 30px
+                                    | 
+                                    | h2
+                                    |     border solid 2px orange
+                                    |     text-align center
+                                    |     margin-top 40px
+                                    |     margin-bottom 40px
+                                    | 
+                                    | p
+                                    |     border solid 2px limegreen
+                                    |     margin-top 20px
+                                    |     margin-bottom 20px
+                                figcaption （Stylus）
+                            p='親要素と子要素の場合も、floatプロパティで配置を指定したり、positionプロパティの値を「aboslute」と指定した場合には、重ね合わせの処理は行われなくなります。たとえば、<div>のfloatプロパティの値を「left」と指定すると、<h2>の上マージンと<p>の下マージンは<div>が構成するボックスの中に含まれ、<div>の上下の余白は30ピクセルとなります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/058-E02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     background-color: lavender;
+                                    |     margin-top: 30px;
+                                    |     margin-bottom:30px;
+                                    |     float: left;
+                                    | }
+                                    | h2 {
+                                    |     border: solid 2px orange;
+                                    |     text-align: center;
+                                    |     margin-top: 40px;
+                                    |     margin-bottom: 40px;
+                                    | }
+                                    | …略...
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     background-color lavender
+                                    |     margin-top 30px
+                                    |     margin-bottom 30px
+                                    |     float left
+                                    | 
+                                    | h2
+                                    |     border solid 2px orange
+                                    |     text-align center
+                                    |     margin-top 40px
+                                    |     margin-bottom 40px
+                                figcaption （Stylus）
+                            p='また、親要素のまわりに罫線やパディングを挿入した場合にも、重ね合わせは行われなくなります。たとえば、<div>のまわりを太さ5ピクセル罫線で囲むと次のようになります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/058-E03.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     background-color: lavender;
+                                    |     margin-top: 30px;
+                                    |     margin-bottom:30px;
+                                    |     border: solid 5px blue;
+                                    | }
+                                    | h2 {
+                                    |     border: solid 2px orange;
+                                    |     text-align: center;
+                                    |     margin-top: 40px;
+                                    |     margin-bottom: 40px;
+                                    | }
+                                    | …略...
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     background-color lavender
+                                    |     margin-top 30px
+                                    |     margin-bottom 30px
+                                    |     border solid 5px blue
+                                    | 
+                                    | h2
+                                    |     border solid 2px orange
+                                    |     text-align center
+                                    |     margin-top 40px
+                                    |     margin-bottom 40px
+                                figcaption （Stylus）
+                            hr
+                            h4 インラインレベルボックスのマージン
+                            p <mark>インラインレベルボックスの上下マージンの重ね合わせは行われません。</mark>
 
-						//-
-							p='max-widthプロパティなどを利用すると、ボックスの横幅と高さの最小値と最大値を指定することができます。'
-							hr
-							h4 SAMPLE A：横幅の最小値と最大値の指定
-							p='下のサンプルでは<h2>でマークアップした部分に構成されるボックスの背景をオレンジ色で表示したものです。横幅を指定していない場合、ボックスの横幅はブラウザ画面に合わせて変わります。そのため、ブラウザ画面の大きさによっては、ボックスの横幅が極端に長くなったり、短くなったりしてしまいます。'
-							p='ボックスの横幅が極端に変化しないようにするためには、横幅の最小値と最大値を指定します。たとえば、min-widthプロパティの値を「350px」、max-widthプロパティの値を「500px」にすると、ボックスの横幅は350〜500ピクセルの範囲で変化するようになります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/065-A.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 HAM SANDWICHES
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     background-color: orange;
-									|     min-width: 350px;
-									|     max-width: 500px;
-									| }
-								figcaption （CSS） 
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	background-color orange
-									| 	min-width 350px
-									| 	max-width 500px
-								figcaption （Stylus）
-							hr
-							h4 SAMPLE B：高さの最小値と最大値の指定
-							p='たとえば、下のサンプルは<div>でマークアップした部分に構成されるボックスをオレンジ色の罫線で囲み、背景を薄い黄色で表示したものです。高さを指定していない場合、<div>が構成するボックスの高さは中身のコンテンツに合わせて決まります。たとえば、文章を追加すると、その分だけボックスの高さが変わります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/065-B01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							p='ボックスの高さが極端に変化しないようにするためには、高さの最小値と最大値を指定します。、min-heightプロパティの値を「100px」、max-heightプロパティの値を「200px」にすると、ボックスの高さは100〜200ピクセルの範囲で変化するようになります。200ピクセルの高さに収まらないコンテンツはボックスからはみ出す形で表示されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/065-B02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div&gt;
-									| &lt;h2&gt;HAM SANDWICHE&lt;/h2&gt;
-									| &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト、…略…&lt;/p&gt;
-									| &lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	h2 HAM SANDWICHE
-									| 	p 焼きたての手作りパンで新鮮なハム、トマト、…略…
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     background-color: orange;
-									|     min-width: 350px;
-									|     max-width: 500px;
-									| }
-								figcaption （CSS） 
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	background-color orange
-									| 	min-width 350px
-									| 	max-width 500px
-								figcaption （Stylus）
-							p='overflowプロパティの値を「auto」にすると、必要に応じてスクロールバーを表示し、インラインフレームの形でコンテンツを表示することができます。たとえば、上のサンプルに「overflow: auto」の指定を追加すると、以下のような表示になります。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     …略…
-									|     overflow: auto;
-									| }
-								figcaption （CSS） 
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	…略…
-									| 	overflow auto
-								figcaption （Stylus）
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+                        //-
+                            p='max-widthプロパティなどを利用すると、ボックスの横幅と高さの最小値と最大値を指定することができます。'
+                            hr
+                            h4 SAMPLE A：横幅の最小値と最大値の指定
+                            p='下のサンプルでは<h2>でマークアップした部分に構成されるボックスの背景をオレンジ色で表示したものです。横幅を指定していない場合、ボックスの横幅はブラウザ画面に合わせて変わります。そのため、ブラウザ画面の大きさによっては、ボックスの横幅が極端に長くなったり、短くなったりしてしまいます。'
+                            p='ボックスの横幅が極端に変化しないようにするためには、横幅の最小値と最大値を指定します。たとえば、min-widthプロパティの値を「350px」、max-widthプロパティの値を「500px」にすると、ボックスの横幅は350〜500ピクセルの範囲で変化するようになります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/065-A.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 HAM SANDWICHES
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     background-color: orange;
+                                    |     min-width: 350px;
+                                    |     max-width: 500px;
+                                    | }
+                                figcaption （CSS） 
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     background-color orange
+                                    |     min-width 350px
+                                    |     max-width 500px
+                                figcaption （Stylus）
+                            hr
+                            h4 SAMPLE B：高さの最小値と最大値の指定
+                            p='たとえば、下のサンプルは<div>でマークアップした部分に構成されるボックスをオレンジ色の罫線で囲み、背景を薄い黄色で表示したものです。高さを指定していない場合、<div>が構成するボックスの高さは中身のコンテンツに合わせて決まります。たとえば、文章を追加すると、その分だけボックスの高さが変わります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/065-B01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            p='ボックスの高さが極端に変化しないようにするためには、高さの最小値と最大値を指定します。、min-heightプロパティの値を「100px」、max-heightプロパティの値を「200px」にすると、ボックスの高さは100〜200ピクセルの範囲で変化するようになります。200ピクセルの高さに収まらないコンテンツはボックスからはみ出す形で表示されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/065-B02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div&gt;
+                                    | &lt;h2&gt;HAM SANDWICHE&lt;/h2&gt;
+                                    | &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト、…略…&lt;/p&gt;
+                                    | &lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     h2 HAM SANDWICHE
+                                    |     p 焼きたての手作りパンで新鮮なハム、トマト、…略…
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     background-color: orange;
+                                    |     min-width: 350px;
+                                    |     max-width: 500px;
+                                    | }
+                                figcaption （CSS） 
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     background-color orange
+                                    |     min-width 350px
+                                    |     max-width 500px
+                                figcaption （Stylus）
+                            p='overflowプロパティの値を「auto」にすると、必要に応じてスクロールバーを表示し、インラインフレームの形でコンテンツを表示することができます。たとえば、上のサンプルに「overflow: auto」の指定を追加すると、以下のような表示になります。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     …略…
+                                    |     overflow: auto;
+                                    | }
+                                figcaption （CSS） 
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     …略…
+                                    |     overflow auto
+                                figcaption （Stylus）
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

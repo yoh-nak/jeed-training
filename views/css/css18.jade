@@ -1,345 +1,345 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;画像を使った罫線の表示
-						.panel-body
-							.alert.alert-info 画像を使った罫線の表示
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png') （※）
-									td
-										img(src='../images/ic-android.png') （※）
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png') （※）
-									td
-										img(src='../images/ic-chrome.png') （※）
-									td
-										img(src='../images/ic-opera.png') （※）
-									td.not-support
-										img(src='../images/ic-ie.png')
-							p ※ 部分対応。
-							p iOS4.xは-webkit-で部分対応。
-							pre
-								| border-image: 画像 分割位置／太さ／表示位置 スタイル
-							p ショートハンド
-							pre
-								| border-image-source: 画像
-							pre
-								| border-image-slice: 分割位置
-							pre
-								| border-image-outset: 表示位置
-							pre
-								| border-image-width: 太さ
-							pre
-								| border-image-repeat:スタイル
-							p
-								| 画像・・・url()<br>
-								| 分割位置・・・数値（ピクセルで単位なしで指定）／比率／fill<br>
-								| 太さ・・・数値／比率／倍率／auto<br>
-								| スタイル・・・stretch／repeat／round
-							table.table
-								tr
-									td 初期値
-									td none 100% / 1 stretch
-								tr
-									td 継承
-									td なし
-								tr
-									td 適用先
-									td 全要素（border-collapseで罫線を重ねたテーブルを除く）
-								tr
-									td(rowspan='3') 比率
-									td 分割位置：画像の大きさに対する比率
-								tr
-									td 太さ：ボックスの大きさに対する比率&amp;border-widthに対する倍率
-								tr
-									td 表示位置：border-widthに対する倍率
-								tr
-									td モジュール
-									td Backgrounds and Borders
-							p='border-imageプロパティを利用すると、1枚の画像を使って罫線を表示することができます。また、border-imageプロパティの設定は、border-image-sourceといった個別のプロパティで指定することもできます。'
-							hr
-							h4 SAMPLE A：画像を使った罫線の表示
-							p='下のサンプルはボックスを太さ15ピクセルのオレンジ色の罫線で囲んだものです。この罫線を画像（border.png）を使って表示するためには、border-image-sourceプロパティで画像を指定します。さらに、border-image-sliceプロパティを利用し、画像を9つに分割する位置を指定します。ここでは値を「30」にして、画像の各辺から30ピクセルの位置で分割するようにしています。'
-							p='これで、角（①③⑦⑨）と各辺（②④⑥⑧）の画像を利用して下のように罫線が表示されます。このとき、各辺の画像はボックスに合わせて伸縮されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/144-A.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     border: solid 15px orange;
-									|     padding: 20px;
-									|     border-image-source: url(border.png);
-									|     border-image-slice: 30;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	border solid 15px orange
-									| 	padding 20px
-									| 	border-image-source url(border.png)
-									| 	border-image-slice 30
-								figcaption （stylus）
-							table
-								tr
-									td ①
-									td &nbsp;&nbsp;
-									td &nbsp;&nbsp;
-									td ②
-									td &nbsp;&nbsp;
-									td &nbsp;&nbsp;
-									td ③
-								tr
-									td &nbsp;&nbsp;
-									td &nbsp;&nbsp;
-									td &nbsp;&nbsp;
-									td &nbsp;&nbsp;
-									td &nbsp;&nbsp;
-									td &nbsp;&nbsp;
-									td &nbsp;&nbsp;
-								tr
-									td ④
-									td &nbsp;&nbsp;
-									td &nbsp;&nbsp;
-									td ⑤
-									td &nbsp;&nbsp;
-									td &nbsp;&nbsp;
-									td ⑥
-								tr
-									td &nbsp;&nbsp;
-									td &nbsp;&nbsp;
-									td &nbsp;&nbsp;
-									td &nbsp;&nbsp;
-									td &nbsp;&nbsp;
-									td &nbsp;&nbsp;
-									td &nbsp;&nbsp;
-								tr
-									td ⑦
-									td  &nbsp;&nbsp;
-									td  &nbsp;&nbsp;
-									td ⑧
-									td  &nbsp;&nbsp;
-									td  &nbsp;&nbsp;
-									td ⑨
-							p='border-image-sliceプロパティの値に「fill」を追加すると罫線の内側（⑤）に画像を表示することも可能です。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/144-A-fill.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     …略...
-									|     border-image-source: url(border.png);
-									|     border-image-slice: 30 fill;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	…略...
-									| 	border-image-source url(border.png)
-									| 	border-image-slice 30 fill
-								figcaption （stylus）
-							p='なお、border-image-sliceプロパティで辺ごとに異なる分割位置を指定したい場合には、以下の記述形式を利用することができます。'
-							p='分割位置の記述形式。'
-							pre
-								| 全 ／ 上⨆右 下 左 ／ 上 左右 下 ／ 上下 左右
-							hr
-							h4 SAMPLE B：罫線の太さの指定
-							p='border-image-widthプロパティを利用すると、画像を使った罫線の太さを変更することができます。たとえば、border-image-widthプロパティの値を「30px」にすると、30ピクセルの太さになります。'
-							p='辺ごとに太さを変えたい場合には、以下の記述形式を利用します。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/144-B.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     border: solid 15px orange;
-									|     border-image-source: url(border.png);
-									|     border-image-slice: 30;
-									|     border-image-width: 30px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	border solid 15px orange
-									| 	border-image-source url(border.png)
-									| 	border-image-slice 30
-									| 	border-image-width 30px
-								figcaption （stylus）
-							p 罫線の太さの値の記述形式。
-							pre
-								| 全 ／ 上 右 下 左 ／ 上 左右 下 ／ 上下 左右
-							hr
-							h4 SAMPLE C：罫線の表示位置の指定
-							p='画像を使った罫線はボーダーボックスの内側に合わせて表示されます。これは、border-image-outsetプロパティの値が初期値の「0」で処理されるためです。'
-							p='border-image-outsetプロパティの値を「40px」にすると、ボーダーボックスよりも40ピクセル外側に罫線を表示することができます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/144-C.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     border: solid 15px orange;
-									|     padding: 20px;
-									|     border-image-source: url(border.png);
-									|     border-image-slice: 30;
-									|     border-image-width: 30px;
-									|     border-image-outset: 40px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	border solid 15px orange
-									| 	padding 20px
-									| 	border-image-source url(border.png)
-									| 	border-image-slice 30
-									| 	border-image-width 30px
-									| 	border-image-outset 40px
-								figcaption （stylus）
-							hr
-							h4 SAMPLE D：罫線の表示スタイルの指定
-							p='画像を使って罫線を表示すると、各辺の画像（②④⑥⑧）はボックスに合わせて伸縮して表示されます。これは、border-image-repeatプロパティの値が初期値の「stretch」で処理されるためです。'
-							p='border-image-repeatプロパティの値を「repeat」にすると、各辺の画像を繰り返して表示することができます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/144-D01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|    border: solid 15px orange;
-									|     padding: 24px 20px;
-									|     border-image-source: url(border.png);
-									|     border-image-slice: 30;
-									|     border-image-width: 30px;
-									|     border-image-repeat: repeat;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	border solid 15px orange
-									| 	padding 24px 20px
-									| 	border-image-source url(border.png)
-									| 	border-image-slice 30
-									| 	border-image-width 30px
-									| 	border-image-repeat repeat
-								figcaption （stylus）
-							p='また、値を「round」にした場合も、「repeat」と同じように繰り返して表示するようにすることができます。ただし、画像が角で途切れないように、最小限の伸縮が行われます。なお、Webkit系のブラウザ（iOS、Android、Safari、Chrome）は「round」の指定には未対応で、「repeat」と同じ表示になります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/144-D02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     border: solid 15px orange;
-									|     padding: 24px 20px;
-									|     border-image-source: url(border.png);
-									|     border-image-slice: 30;
-									|     border-image-width: 30px;
-									|     border-image-repeat: round;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	border solid 15px orange
-									| 	padding 24px 20px
-									| 	border-image-source url(border.png)
-									| 	border-image-slice 30
-									| 	border-image-width 30px
-									| 	border-image-repeat round
-								figcaption （stylus）
-							hr
-							h4 SAMPLE E：設定をまとめて指定
-							p='border-imageプロパティを利用すると、画像を使った罫線に関する設定をまとめて記述することができます。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     border: solid 15px orange;
-									|     padding: 24px 20px;
-									|     border-image-source: url(border.png);
-									|     border-image-slice: 30;
-									|     border-image-width: 30px;
-									|     border-image-outset: 0;
-									|     border-image-repeat: repeat;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	border solid 15px orange
-									| 	padding 24px 20px
-									| 	border-image-source url(border.png)
-									| 	border-image-slice 30
-									| 	border-image-width 30px
-									| 	border-image-outset 0
-									| 	border-image-repeat repeat
-								figcaption （stylus）
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/144-E.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     border: solid 15px orange;
-									|     padding: 24px 20px;
-									|     border-image: url(border.png) 30 / 30px / 0 repeat;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	border solid 15px orange
-									| 	padding 24px 20px
-									| 	border-image url(border.png) 30 / 30px / 0 repeat
-								figcaption （stylus）
-							p='iOS4.x／Android／Operaはborder-imageプロパティにのみ対応しており、次のようにベンダープレフィックスを付けて記述する必要があります。また、表示位置（border-image-outset）プロパティの指定には未対応なため、それ以外の値を指定するようにします。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     border: solid 15px orange;
-									|     padding: 24px 20px;
-									|     -webkit-border-image: url(border.png) 30 / 30px repeat;
-									|     -o-border-image: url(border.png) 30 / 30px repeat;
-									|     border-image: url(border.png) 30 / 30px / 0 repeat;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	border solid 15px orange
-									| 	padding 24px 20px
-									| 	-webkit-border-image url(border.png) 30 / 30px repeat
-									| 	-o-border-image url(border.png) 30 / 30px repeat
-									| 	border-image url(border.png) 30 / 30px / 0 repeat
-								figcaption （stylus）
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;画像を使った罫線の表示
+                        .panel-body
+                            .alert.alert-info 画像を使った罫線の表示
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png') （※）
+                                    td
+                                        img(src='../images/ic-android.png') （※）
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png') （※）
+                                    td
+                                        img(src='../images/ic-chrome.png') （※）
+                                    td
+                                        img(src='../images/ic-opera.png') （※）
+                                    td.not-support
+                                        img(src='../images/ic-ie.png')
+                            p ※ 部分対応。
+                            p iOS4.xは-webkit-で部分対応。
+                            pre
+                                | border-image: 画像 分割位置／太さ／表示位置 スタイル
+                            p ショートハンド
+                            pre
+                                | border-image-source: 画像
+                            pre
+                                | border-image-slice: 分割位置
+                            pre
+                                | border-image-outset: 表示位置
+                            pre
+                                | border-image-width: 太さ
+                            pre
+                                | border-image-repeat:スタイル
+                            p
+                                | 画像・・・url()<br>
+                                | 分割位置・・・数値（ピクセルで単位なしで指定）／比率／fill<br>
+                                | 太さ・・・数値／比率／倍率／auto<br>
+                                | スタイル・・・stretch／repeat／round
+                            table.table
+                                tr
+                                    td 初期値
+                                    td none 100% / 1 stretch
+                                tr
+                                    td 継承
+                                    td なし
+                                tr
+                                    td 適用先
+                                    td 全要素（border-collapseで罫線を重ねたテーブルを除く）
+                                tr
+                                    td(rowspan='3') 比率
+                                    td 分割位置：画像の大きさに対する比率
+                                tr
+                                    td 太さ：ボックスの大きさに対する比率&amp;border-widthに対する倍率
+                                tr
+                                    td 表示位置：border-widthに対する倍率
+                                tr
+                                    td モジュール
+                                    td Backgrounds and Borders
+                            p='border-imageプロパティを利用すると、1枚の画像を使って罫線を表示することができます。また、border-imageプロパティの設定は、border-image-sourceといった個別のプロパティで指定することもできます。'
+                            hr
+                            h4 SAMPLE A：画像を使った罫線の表示
+                            p='下のサンプルはボックスを太さ15ピクセルのオレンジ色の罫線で囲んだものです。この罫線を画像（border.png）を使って表示するためには、border-image-sourceプロパティで画像を指定します。さらに、border-image-sliceプロパティを利用し、画像を9つに分割する位置を指定します。ここでは値を「30」にして、画像の各辺から30ピクセルの位置で分割するようにしています。'
+                            p='これで、角（①③⑦⑨）と各辺（②④⑥⑧）の画像を利用して下のように罫線が表示されます。このとき、各辺の画像はボックスに合わせて伸縮されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/144-A.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     border: solid 15px orange;
+                                    |     padding: 20px;
+                                    |     border-image-source: url(border.png);
+                                    |     border-image-slice: 30;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     border solid 15px orange
+                                    |     padding 20px
+                                    |     border-image-source url(border.png)
+                                    |     border-image-slice 30
+                                figcaption （stylus）
+                            table
+                                tr
+                                    td ①
+                                    td &nbsp;&nbsp;
+                                    td &nbsp;&nbsp;
+                                    td ②
+                                    td &nbsp;&nbsp;
+                                    td &nbsp;&nbsp;
+                                    td ③
+                                tr
+                                    td &nbsp;&nbsp;
+                                    td &nbsp;&nbsp;
+                                    td &nbsp;&nbsp;
+                                    td &nbsp;&nbsp;
+                                    td &nbsp;&nbsp;
+                                    td &nbsp;&nbsp;
+                                    td &nbsp;&nbsp;
+                                tr
+                                    td ④
+                                    td &nbsp;&nbsp;
+                                    td &nbsp;&nbsp;
+                                    td ⑤
+                                    td &nbsp;&nbsp;
+                                    td &nbsp;&nbsp;
+                                    td ⑥
+                                tr
+                                    td &nbsp;&nbsp;
+                                    td &nbsp;&nbsp;
+                                    td &nbsp;&nbsp;
+                                    td &nbsp;&nbsp;
+                                    td &nbsp;&nbsp;
+                                    td &nbsp;&nbsp;
+                                    td &nbsp;&nbsp;
+                                tr
+                                    td ⑦
+                                    td  &nbsp;&nbsp;
+                                    td  &nbsp;&nbsp;
+                                    td ⑧
+                                    td  &nbsp;&nbsp;
+                                    td  &nbsp;&nbsp;
+                                    td ⑨
+                            p='border-image-sliceプロパティの値に「fill」を追加すると罫線の内側（⑤）に画像を表示することも可能です。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/144-A-fill.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     …略...
+                                    |     border-image-source: url(border.png);
+                                    |     border-image-slice: 30 fill;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     …略...
+                                    |     border-image-source url(border.png)
+                                    |     border-image-slice 30 fill
+                                figcaption （stylus）
+                            p='なお、border-image-sliceプロパティで辺ごとに異なる分割位置を指定したい場合には、以下の記述形式を利用することができます。'
+                            p='分割位置の記述形式。'
+                            pre
+                                | 全 ／ 上⨆右 下 左 ／ 上 左右 下 ／ 上下 左右
+                            hr
+                            h4 SAMPLE B：罫線の太さの指定
+                            p='border-image-widthプロパティを利用すると、画像を使った罫線の太さを変更することができます。たとえば、border-image-widthプロパティの値を「30px」にすると、30ピクセルの太さになります。'
+                            p='辺ごとに太さを変えたい場合には、以下の記述形式を利用します。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/144-B.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     border: solid 15px orange;
+                                    |     border-image-source: url(border.png);
+                                    |     border-image-slice: 30;
+                                    |     border-image-width: 30px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     border solid 15px orange
+                                    |     border-image-source url(border.png)
+                                    |     border-image-slice 30
+                                    |     border-image-width 30px
+                                figcaption （stylus）
+                            p 罫線の太さの値の記述形式。
+                            pre
+                                | 全 ／ 上 右 下 左 ／ 上 左右 下 ／ 上下 左右
+                            hr
+                            h4 SAMPLE C：罫線の表示位置の指定
+                            p='画像を使った罫線はボーダーボックスの内側に合わせて表示されます。これは、border-image-outsetプロパティの値が初期値の「0」で処理されるためです。'
+                            p='border-image-outsetプロパティの値を「40px」にすると、ボーダーボックスよりも40ピクセル外側に罫線を表示することができます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/144-C.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     border: solid 15px orange;
+                                    |     padding: 20px;
+                                    |     border-image-source: url(border.png);
+                                    |     border-image-slice: 30;
+                                    |     border-image-width: 30px;
+                                    |     border-image-outset: 40px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     border solid 15px orange
+                                    |     padding 20px
+                                    |     border-image-source url(border.png)
+                                    |     border-image-slice 30
+                                    |     border-image-width 30px
+                                    |     border-image-outset 40px
+                                figcaption （stylus）
+                            hr
+                            h4 SAMPLE D：罫線の表示スタイルの指定
+                            p='画像を使って罫線を表示すると、各辺の画像（②④⑥⑧）はボックスに合わせて伸縮して表示されます。これは、border-image-repeatプロパティの値が初期値の「stretch」で処理されるためです。'
+                            p='border-image-repeatプロパティの値を「repeat」にすると、各辺の画像を繰り返して表示することができます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/144-D01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |    border: solid 15px orange;
+                                    |     padding: 24px 20px;
+                                    |     border-image-source: url(border.png);
+                                    |     border-image-slice: 30;
+                                    |     border-image-width: 30px;
+                                    |     border-image-repeat: repeat;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     border solid 15px orange
+                                    |     padding 24px 20px
+                                    |     border-image-source url(border.png)
+                                    |     border-image-slice 30
+                                    |     border-image-width 30px
+                                    |     border-image-repeat repeat
+                                figcaption （stylus）
+                            p='また、値を「round」にした場合も、「repeat」と同じように繰り返して表示するようにすることができます。ただし、画像が角で途切れないように、最小限の伸縮が行われます。なお、Webkit系のブラウザ（iOS、Android、Safari、Chrome）は「round」の指定には未対応で、「repeat」と同じ表示になります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/144-D02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     border: solid 15px orange;
+                                    |     padding: 24px 20px;
+                                    |     border-image-source: url(border.png);
+                                    |     border-image-slice: 30;
+                                    |     border-image-width: 30px;
+                                    |     border-image-repeat: round;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     border solid 15px orange
+                                    |     padding 24px 20px
+                                    |     border-image-source url(border.png)
+                                    |     border-image-slice 30
+                                    |     border-image-width 30px
+                                    |     border-image-repeat round
+                                figcaption （stylus）
+                            hr
+                            h4 SAMPLE E：設定をまとめて指定
+                            p='border-imageプロパティを利用すると、画像を使った罫線に関する設定をまとめて記述することができます。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     border: solid 15px orange;
+                                    |     padding: 24px 20px;
+                                    |     border-image-source: url(border.png);
+                                    |     border-image-slice: 30;
+                                    |     border-image-width: 30px;
+                                    |     border-image-outset: 0;
+                                    |     border-image-repeat: repeat;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     border solid 15px orange
+                                    |     padding 24px 20px
+                                    |     border-image-source url(border.png)
+                                    |     border-image-slice 30
+                                    |     border-image-width 30px
+                                    |     border-image-outset 0
+                                    |     border-image-repeat repeat
+                                figcaption （stylus）
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/144-E.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     border: solid 15px orange;
+                                    |     padding: 24px 20px;
+                                    |     border-image: url(border.png) 30 / 30px / 0 repeat;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     border solid 15px orange
+                                    |     padding 24px 20px
+                                    |     border-image url(border.png) 30 / 30px / 0 repeat
+                                figcaption （stylus）
+                            p='iOS4.x／Android／Operaはborder-imageプロパティにのみ対応しており、次のようにベンダープレフィックスを付けて記述する必要があります。また、表示位置（border-image-outset）プロパティの指定には未対応なため、それ以外の値を指定するようにします。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     border: solid 15px orange;
+                                    |     padding: 24px 20px;
+                                    |     -webkit-border-image: url(border.png) 30 / 30px repeat;
+                                    |     -o-border-image: url(border.png) 30 / 30px repeat;
+                                    |     border-image: url(border.png) 30 / 30px / 0 repeat;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     border solid 15px orange
+                                    |     padding 24px 20px
+                                    |     -webkit-border-image url(border.png) 30 / 30px repeat
+                                    |     -o-border-image url(border.png) 30 / 30px repeat
+                                    |     border-image url(border.png) 30 / 30px / 0 repeat
+                                figcaption （stylus）
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

@@ -1,310 +1,310 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;フレキシブルボックスレイアウトの方向と改行
-						.panel-body
-							.alert.alert-info フレキシブルボックスレイアウトの方向と改行
-							table.browser-support
-								tr
-									td.not-support
-										img(src='../images/ic-apple.png')
-									td.not-support
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td.not-support
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png') （※）
-							p ※ 部分対応。
-							pre
-								| flex-flow: 方向 改行
-							pre
-								| flex-direction: 方向
-							pre
-								| flex-wrap: 改行
-							p
-								| 方向・・・row ／ row-reverse ／ column ／ column-reverse<br>
-								| 改行・・・nowrap ／ wrap ／ wrap-reverse
-							table.table
-								tr
-									td 初期値
-									td row nowrap
-								tr
-									td 継承
-									td なし
-								tr
-									td 適用先
-									td フレックスコンテナ
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td Flexible Box Layout
-							p='フレキシブルボックスレイアウトの方向を指定すると、ボックスを縦方向や逆方向に並べることができます。また、改行を許可することで、複数行でレイアウトすることもできます。'
-							p='Firefoxは改行の指定に未対応です。'
-							hr
-							h4 方向を指定する
-							p='下のサンプルは、5つのボックスをフレキシブルボックスレイアウトの機能を利用して横に並べて表示したものです。左から右の方向に並べて表示されますが、これはflex-directionプロパティの値が初期値の「row」で処理されるためです。flex-directionプロパティの値を「row-reverse」にすると、右から左の方向に並べて表示することができます。'
-							p='また、値を「column」や「column-reverse」にすると、以下のように縦方向に並べて表示することもできます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/083-01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;ul&gt;
-									| &lt;li&gt;SANDWICHE&lt;/li&gt;
-									| &lt;li&gt;BURGER&lt;/li&gt;
-									| &lt;li&gt;DESSERT&lt;/li&gt;
-									| &lt;li&gt;SALAD&lt;/li&gt;
-									| &lt;li&gt;BAGEL&lt;/li&gt;
-									| &lt;/ul&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| ul
-									| 	li SANDWICHE
-									| 	li BURGER
-									| 	li DESSERT
-									| 	li SALAD
-									| 	li BAGEL
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| ul {
-									|     border: dotted 2px blue;
-									|     display: -webkit-flex;
-									|     display: -moz-flex;
-									|     display: flex;
-									|     -webkit-flex-direction: row-reverse;
-									|     -moz-flex-direction: row-reverse;
-									|     flex-direction: row-reverse;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| ul
-									| 	border dotted 2px blue
-									| 	display -webkit-flex
-									| 	display -moz-flex
-									| 	display flex
-									| 	-webkit-flex-direction row-reverse
-									| 	-moz-flex-direction row-reverse
-									| 	flex-direction row-reverse
-								figcaption （Stylus）
-							table.table
-								tr
-									th flex-directionプロパティの値
-									th 方向
-								tr
-									td row
-									td 横方向
-								tr
-									td row-reverse
-									td 横方向（逆）
-								tr
-									td column
-									td 縦方向
-								tr
-									td column-reverse
-									td 縦方向（逆）
-							hr
-							h4 複数行でレイアウトする
-							p='フレキシブルボックスレイアウトでレイアウトしたボックスは、ブラウザ画面の横幅を狭くしても1行に並べて表示されます。これは、flex-wrapプロパティの値が初期値の「nowrap」で処理されます。'
- 							p='flex-wrapプロパティの値を「wrap」にすると、必要に応じて改行を挿入し、複数行で表示することができます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/083-02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| ul {
-									|     …略…
-									|     -webkit-flex-wrap: wrap;
-									|     flex-wrap: wrap;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| ul
-									| 	…略…
-									| 	-webkit-flex-wrap wrap
-									| 	flex-wrap wrap
-								figcaption （Stylus）
-							p='また、値を「wrap-reverse」にすると以下のような表示になります。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| ul {
-									|     …略…
-									|     -webkit-flex-wrap: wrap-reverse;
-									|     flex-wrap: wrap-reverse;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| ul
-									| 	…略…
-									| 	-webkit-flex-wrap wrap-reverse
-									| 	flex-wrap wrap-reverse
-								figcaption （Stylus）
-							table.table
-								tr
-									th flex-wrapプロパティの値
-									th 改行
-								tr
-									td nowrap
-									td 改行しない
-								tr
-									td wrap
-									td 改行する
-								tr
-									td wrap-reverse
-									td 改行する（逆）
-							hr
-							h4 方向と改行の設定をいっしょに指定する
-							p='方向と改行の設定はいっしょに指定することもできます。たとえば、flex-directionプロパティの値を「row-reverse」に、flex-wrapプロパティの値を「wrap」にすると下のような表示になります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/083-03.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| ul {
-									|     …略…
-									|     -webkit-flex-direction: row-reverse;
-									|     -webkit-flex-wrap: wrap;
-									|     flex-direction: row-reverse;
-									|     flex-wrap: wrap;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| ul
-									| 	…略…
-									| 	-webkit-flex-direction row-reverse
-									| 	-webkit-flex-wrap wrap
-									| 	flex-direction row-reverse
-									| 	flex-wrap wrap
-								figcaption （Stylus）
-							p='また、方向と改行の設定はflex-flowプロパティを利用して、以下のようにまとめて記述することも可能です。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| ul {
-									|     …略…
-									|     -webkit-flex-flow: row-reverse wrap;
-									|     flex-flow: row-reverse wrap;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| ul
-									| 	…略…
-									| 	-webkit-flex-flow row-reverse wrap
-									| 	flex-flow row-reverse wrap
-								figcaption （Stylus）
-							hr
-							h4 主要ブラウザにおけるフレキシブルボックスレイアウトの方向と改行の指定
-							p='古い草案に対応したブラウザでは、flex-directionプロパティに相当するbox-orientプロパティを利用することができます。ただし、指定できる値は「horizontal」と「vertical」のみとなっています。IE10は勧告候補に従って、flex-flow、flex-direction、flex-wrapプロパティに対応しています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/083-column-compatible.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| ul {
-									|      border: dotted 2px blue;
-									| 
-									|      /* 2009年草案 */
-									|      display: -webkit-box;
-									|      display: -moz-box;
-									| 
-									|      /* 2012年草案 */
-									|      display: -ms-flexbox;
-									| 
-									|      /* 勧告候補 */
-									|      display: -webkit-flex;
-									|      display: -moz-flex;
-									|      display: flex;
-									| 
-									| 
-									|      -webkit-box-orient: vertical;
-									|      -moz-box-orient: vertical;
-									|      -ms-box-orient: vertical;
-									| 
-									|      -webkit-flex-direction: column;
-									|      -moz-flex-direction: column;
-									|      -ms-flex-direction: column;
-									|      flex-direction: column;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| ul
-									| 	border dotted 2px blue
-									| 	display -webkit-box
-									| 	display -moz-box
-									| 	display -ms-flexbox
-									| 	display -webkit-flex
-									| 	display -moz-flex
-									| 	display flex
-									| 	-webkit-box-orient vertical
-									| 	-moz-box-orient vertical
-									| 	-ms-box-orient vertical
-									| 	-webkit-flex-direction column
-									| 	-moz-flex-direction column
-									| 	-ms-flex-direction column
-									| 	flex-direction column
-								figcaption （Stylus）
-							table.table
-								tr
-									th 仕様
-									th プロパティ
-									th iOS
-									th Android
-									th Firefox
-									th Safari
-									th Chrome
-									th Opera
-									th IE10
-								tr
-									td 2009年草案
-									td box-orient
-									td ○
-									td ○
-									td ○
-									td ○
-									td ○
-									td ×
-									td ×
-								tr
-									td 勧告候補
-									td flex-direction
-									td ×
-									td ×
-									td ○
-									td ×
-									td ○
-									td ○
-									td ○
-							p ※ Opera以外はベンダープレフィックスが必要です。
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;フレキシブルボックスレイアウトの方向と改行
+                        .panel-body
+                            .alert.alert-info フレキシブルボックスレイアウトの方向と改行
+                            table.browser-support
+                                tr
+                                    td.not-support
+                                        img(src='../images/ic-apple.png')
+                                    td.not-support
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td.not-support
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png') （※）
+                            p ※ 部分対応。
+                            pre
+                                | flex-flow: 方向 改行
+                            pre
+                                | flex-direction: 方向
+                            pre
+                                | flex-wrap: 改行
+                            p
+                                | 方向・・・row ／ row-reverse ／ column ／ column-reverse<br>
+                                | 改行・・・nowrap ／ wrap ／ wrap-reverse
+                            table.table
+                                tr
+                                    td 初期値
+                                    td row nowrap
+                                tr
+                                    td 継承
+                                    td なし
+                                tr
+                                    td 適用先
+                                    td フレックスコンテナ
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td Flexible Box Layout
+                            p='フレキシブルボックスレイアウトの方向を指定すると、ボックスを縦方向や逆方向に並べることができます。また、改行を許可することで、複数行でレイアウトすることもできます。'
+                            p='Firefoxは改行の指定に未対応です。'
+                            hr
+                            h4 方向を指定する
+                            p='下のサンプルは、5つのボックスをフレキシブルボックスレイアウトの機能を利用して横に並べて表示したものです。左から右の方向に並べて表示されますが、これはflex-directionプロパティの値が初期値の「row」で処理されるためです。flex-directionプロパティの値を「row-reverse」にすると、右から左の方向に並べて表示することができます。'
+                            p='また、値を「column」や「column-reverse」にすると、以下のように縦方向に並べて表示することもできます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/083-01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;ul&gt;
+                                    | &lt;li&gt;SANDWICHE&lt;/li&gt;
+                                    | &lt;li&gt;BURGER&lt;/li&gt;
+                                    | &lt;li&gt;DESSERT&lt;/li&gt;
+                                    | &lt;li&gt;SALAD&lt;/li&gt;
+                                    | &lt;li&gt;BAGEL&lt;/li&gt;
+                                    | &lt;/ul&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ul
+                                    |     li SANDWICHE
+                                    |     li BURGER
+                                    |     li DESSERT
+                                    |     li SALAD
+                                    |     li BAGEL
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ul {
+                                    |     border: dotted 2px blue;
+                                    |     display: -webkit-flex;
+                                    |     display: -moz-flex;
+                                    |     display: flex;
+                                    |     -webkit-flex-direction: row-reverse;
+                                    |     -moz-flex-direction: row-reverse;
+                                    |     flex-direction: row-reverse;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ul
+                                    |     border dotted 2px blue
+                                    |     display -webkit-flex
+                                    |     display -moz-flex
+                                    |     display flex
+                                    |     -webkit-flex-direction row-reverse
+                                    |     -moz-flex-direction row-reverse
+                                    |     flex-direction row-reverse
+                                figcaption （Stylus）
+                            table.table
+                                tr
+                                    th flex-directionプロパティの値
+                                    th 方向
+                                tr
+                                    td row
+                                    td 横方向
+                                tr
+                                    td row-reverse
+                                    td 横方向（逆）
+                                tr
+                                    td column
+                                    td 縦方向
+                                tr
+                                    td column-reverse
+                                    td 縦方向（逆）
+                            hr
+                            h4 複数行でレイアウトする
+                            p='フレキシブルボックスレイアウトでレイアウトしたボックスは、ブラウザ画面の横幅を狭くしても1行に並べて表示されます。これは、flex-wrapプロパティの値が初期値の「nowrap」で処理されます。'
+                             p='flex-wrapプロパティの値を「wrap」にすると、必要に応じて改行を挿入し、複数行で表示することができます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/083-02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ul {
+                                    |     …略…
+                                    |     -webkit-flex-wrap: wrap;
+                                    |     flex-wrap: wrap;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ul
+                                    |     …略…
+                                    |     -webkit-flex-wrap wrap
+                                    |     flex-wrap wrap
+                                figcaption （Stylus）
+                            p='また、値を「wrap-reverse」にすると以下のような表示になります。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ul {
+                                    |     …略…
+                                    |     -webkit-flex-wrap: wrap-reverse;
+                                    |     flex-wrap: wrap-reverse;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ul
+                                    |     …略…
+                                    |     -webkit-flex-wrap wrap-reverse
+                                    |     flex-wrap wrap-reverse
+                                figcaption （Stylus）
+                            table.table
+                                tr
+                                    th flex-wrapプロパティの値
+                                    th 改行
+                                tr
+                                    td nowrap
+                                    td 改行しない
+                                tr
+                                    td wrap
+                                    td 改行する
+                                tr
+                                    td wrap-reverse
+                                    td 改行する（逆）
+                            hr
+                            h4 方向と改行の設定をいっしょに指定する
+                            p='方向と改行の設定はいっしょに指定することもできます。たとえば、flex-directionプロパティの値を「row-reverse」に、flex-wrapプロパティの値を「wrap」にすると下のような表示になります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/083-03.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ul {
+                                    |     …略…
+                                    |     -webkit-flex-direction: row-reverse;
+                                    |     -webkit-flex-wrap: wrap;
+                                    |     flex-direction: row-reverse;
+                                    |     flex-wrap: wrap;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ul
+                                    |     …略…
+                                    |     -webkit-flex-direction row-reverse
+                                    |     -webkit-flex-wrap wrap
+                                    |     flex-direction row-reverse
+                                    |     flex-wrap wrap
+                                figcaption （Stylus）
+                            p='また、方向と改行の設定はflex-flowプロパティを利用して、以下のようにまとめて記述することも可能です。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ul {
+                                    |     …略…
+                                    |     -webkit-flex-flow: row-reverse wrap;
+                                    |     flex-flow: row-reverse wrap;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ul
+                                    |     …略…
+                                    |     -webkit-flex-flow row-reverse wrap
+                                    |     flex-flow row-reverse wrap
+                                figcaption （Stylus）
+                            hr
+                            h4 主要ブラウザにおけるフレキシブルボックスレイアウトの方向と改行の指定
+                            p='古い草案に対応したブラウザでは、flex-directionプロパティに相当するbox-orientプロパティを利用することができます。ただし、指定できる値は「horizontal」と「vertical」のみとなっています。IE10は勧告候補に従って、flex-flow、flex-direction、flex-wrapプロパティに対応しています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/083-column-compatible.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ul {
+                                    |      border: dotted 2px blue;
+                                    | 
+                                    |      /* 2009年草案 */
+                                    |      display: -webkit-box;
+                                    |      display: -moz-box;
+                                    | 
+                                    |      /* 2012年草案 */
+                                    |      display: -ms-flexbox;
+                                    | 
+                                    |      /* 勧告候補 */
+                                    |      display: -webkit-flex;
+                                    |      display: -moz-flex;
+                                    |      display: flex;
+                                    | 
+                                    | 
+                                    |      -webkit-box-orient: vertical;
+                                    |      -moz-box-orient: vertical;
+                                    |      -ms-box-orient: vertical;
+                                    | 
+                                    |      -webkit-flex-direction: column;
+                                    |      -moz-flex-direction: column;
+                                    |      -ms-flex-direction: column;
+                                    |      flex-direction: column;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ul
+                                    |     border dotted 2px blue
+                                    |     display -webkit-box
+                                    |     display -moz-box
+                                    |     display -ms-flexbox
+                                    |     display -webkit-flex
+                                    |     display -moz-flex
+                                    |     display flex
+                                    |     -webkit-box-orient vertical
+                                    |     -moz-box-orient vertical
+                                    |     -ms-box-orient vertical
+                                    |     -webkit-flex-direction column
+                                    |     -moz-flex-direction column
+                                    |     -ms-flex-direction column
+                                    |     flex-direction column
+                                figcaption （Stylus）
+                            table.table
+                                tr
+                                    th 仕様
+                                    th プロパティ
+                                    th iOS
+                                    th Android
+                                    th Firefox
+                                    th Safari
+                                    th Chrome
+                                    th Opera
+                                    th IE10
+                                tr
+                                    td 2009年草案
+                                    td box-orient
+                                    td ○
+                                    td ○
+                                    td ○
+                                    td ○
+                                    td ○
+                                    td ×
+                                    td ×
+                                tr
+                                    td 勧告候補
+                                    td flex-direction
+                                    td ×
+                                    td ×
+                                    td ○
+                                    td ×
+                                    td ○
+                                    td ○
+                                    td ○
+                            p ※ Opera以外はベンダープレフィックスが必要です。
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

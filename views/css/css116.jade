@@ -1,129 +1,129 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;回り込みの解除
-						.panel-body
-							.alert.alert-info 回り込みの解除
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							pre
-								| clear: 解除
-							p
-								| 解除・・・none ／ left ／ right ／ both
-							table.table
-								tr
-									td 初期値
-									td none
-								tr
-									td 継承
-									td なし
-								tr
-									td 適用先
-									td ブロック要素
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td Basic Box Model
-							p='floatプロパティを指定したフローティングボックスへの回り込みを解除するには、clearプロパティを利用します。'
-							table.table
-								tr
-									th 値
-									th 解除
-								tr
-									td none
-									td 回り込みを解除しない。
-								tr
-									td left
-									td 左に配置したフローティングボックスに対する回り込みを解除。
-								tr
-									td right
-									td 右に配置したフローティングボックスに対する回り込みを解除。
-								tr
-									td both
-									td フローティングボックスに対する回り込みを解除。
-							hr
-							h4 SAMPLE：回り込みの解除
-							p='たとえば、下のサンプルは<div>でマークアップした画像を左側に配置するため、「float: left」と指定したものです。これにより、<div>が構成するボックスはフローティングボックスとなり、逆サイドに後続の文章が回り込んで表示されます。ここでは、<p id="text01">でマークアップした1つ目の段落を緑色の文字で、<p id="text02">でマークアップした2つ目の段落を青色の文字で表示しています。'
-							p='2つ目の段落が回り込まないようにするためには、<p id="text02">のclearプロパティの値を指定します。ここでは、左側に配置したフローティングボックスに対する回り込みを解除するため、値を「left」または「both」と指定します。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/070.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div&gt;&lt;img src="sand.jpg" alt=""&gt;HAM SANDWICHES&lt;/div&gt;
-									| &lt;p id="text01"&gt;焼きたての手作りパンで新鮮なハム、トマト、…略...&lt;/p&gt;
-									| &lt;p id="text02"&gt;日替わりメニューや、好きな具をトッピング…略...&lt;/p&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	img(src='sand.jpg', alt='')
-									| 	| HAM SANDWICHES
-									| 	p#text01 焼きたての手作りパンで新鮮なハム、トマト、…略...
-									| 	p#text02 日替わりメニューや、好きな具をトッピング…略...
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     background-color: orange;
-									|     width: 200px;
-									|     padding: 10px;
-									|     text-align: center;
-									|     float: left;
-									| }
-									| #text01 {
-									|     color: green;
-									| }
-									| #text02 {
-									|     color: blue;
-									|     clear: left;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	background-color orange
-									| 	width 200px
-									| 	padding 10px
-									| 	text-align center
-									| 	float left
-									| 
-									| #text01
-									| 	color green
-									| 
-									| #text02
-									| 	color blue
-									| 	clear left
-								figcaption （Stylus）
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;回り込みの解除
+                        .panel-body
+                            .alert.alert-info 回り込みの解除
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            pre
+                                | clear: 解除
+                            p
+                                | 解除・・・none ／ left ／ right ／ both
+                            table.table
+                                tr
+                                    td 初期値
+                                    td none
+                                tr
+                                    td 継承
+                                    td なし
+                                tr
+                                    td 適用先
+                                    td ブロック要素
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td Basic Box Model
+                            p='floatプロパティを指定したフローティングボックスへの回り込みを解除するには、clearプロパティを利用します。'
+                            table.table
+                                tr
+                                    th 値
+                                    th 解除
+                                tr
+                                    td none
+                                    td 回り込みを解除しない。
+                                tr
+                                    td left
+                                    td 左に配置したフローティングボックスに対する回り込みを解除。
+                                tr
+                                    td right
+                                    td 右に配置したフローティングボックスに対する回り込みを解除。
+                                tr
+                                    td both
+                                    td フローティングボックスに対する回り込みを解除。
+                            hr
+                            h4 SAMPLE：回り込みの解除
+                            p='たとえば、下のサンプルは<div>でマークアップした画像を左側に配置するため、「float: left」と指定したものです。これにより、<div>が構成するボックスはフローティングボックスとなり、逆サイドに後続の文章が回り込んで表示されます。ここでは、<p id="text01">でマークアップした1つ目の段落を緑色の文字で、<p id="text02">でマークアップした2つ目の段落を青色の文字で表示しています。'
+                            p='2つ目の段落が回り込まないようにするためには、<p id="text02">のclearプロパティの値を指定します。ここでは、左側に配置したフローティングボックスに対する回り込みを解除するため、値を「left」または「both」と指定します。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/070.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div&gt;&lt;img src="sand.jpg" alt=""&gt;HAM SANDWICHES&lt;/div&gt;
+                                    | &lt;p id="text01"&gt;焼きたての手作りパンで新鮮なハム、トマト、…略...&lt;/p&gt;
+                                    | &lt;p id="text02"&gt;日替わりメニューや、好きな具をトッピング…略...&lt;/p&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     img(src='sand.jpg', alt='')
+                                    |     | HAM SANDWICHES
+                                    |     p#text01 焼きたての手作りパンで新鮮なハム、トマト、…略...
+                                    |     p#text02 日替わりメニューや、好きな具をトッピング…略...
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     background-color: orange;
+                                    |     width: 200px;
+                                    |     padding: 10px;
+                                    |     text-align: center;
+                                    |     float: left;
+                                    | }
+                                    | #text01 {
+                                    |     color: green;
+                                    | }
+                                    | #text02 {
+                                    |     color: blue;
+                                    |     clear: left;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     background-color orange
+                                    |     width 200px
+                                    |     padding 10px
+                                    |     text-align center
+                                    |     float left
+                                    | 
+                                    | #text01
+                                    |     color green
+                                    | 
+                                    | #text02
+                                    |     color blue
+                                    |     clear left
+                                figcaption （Stylus）
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

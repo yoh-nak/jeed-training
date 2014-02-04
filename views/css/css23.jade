@@ -1,381 +1,381 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;線形グラデーションの表示
-						.panel-body
-							.alert.alert-info 線形グラデーションの表示
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png') （※）
-									td
-										img(src='../images/ic-android.png') （※）
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png') （※）
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							p ※ 部分対応。
-							p iOS4.x／Android3.x以前／IE9は以前未対応。
-							pre
-								| background: linear-gradient(角度,カラーストップ,カラーストップ,…)
-							pre
-								| background-image: linear-gradient(角度,カラーストップ,カラーストップ,…)
-							p
-								| 角度・・・角度／to top／to bottom／to left／to right<br>
-								| カラーストップ・・・色の値 位置（数値または%）
-							table.table
-								tr
-									td 初期値
-									td -
-								tr
-									td 継承
-									td -
-								tr
-									td 適用先
-									td -
-								tr
-									td 比率
-									td ボックスの横幅または高さに対する比率
-								tr
-									td モジュール
-									td Image Values and Replaced Content
-							p='linear-gradient()を利用すると、線形グラデーションを画像として表示することができます。backgroundといった画像を扱うプロパティの値として、url()の代わりに指定することが可能です。'
-							p='<mark>iOS4.x/Android3.x以前はlinear-gradient()に未対応です。これらのブラウザでグラデーションを表示するためにはgradient()を利用します。</mark>'
-							p='画像を扱うプロパティにはbackground、background-image、border-image、list-style-imageなどがあります。'
-							hr
-							h4 SAMPLE A：線形グラデーションの表示
-							p='ボックスの背景を線形グラデーションで表示するには、linear-gradient()を下のように指定します。ここでは、下から上にオレンジ色から黄色に変わるグラデーションを表示しています。'
-							p='まず、linear-gradient()の1つ目のパラメーターではグラデーションの角度を指定します。「0deg（0度）」と指定すると、下から上の向きとなります。'
-							p='2つ目と3つ目のパラメーターは「カラーストップ」と呼ばれ、色の値と位置を半角スペースで区切って指定します。ここでは始点（0%）をオレンジ色に、終点（100%）を黄色に指定します。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/152-A01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 HAM SANDWICHES
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     background: linear-gradient(
-									|         0deg,
-									|         #ff8800 0%,
-									|         #ffff00 100%
-									|     );
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	background linear-gradient(
-									|         0deg,
-									|         #ff8800 0%,
-									|         #ffff00 100%
-									|     )
-								figcaption （stylus）
-							p='角度を「90deg（90度）」と指定すると時計回りに90度回転して表示され、左から右に変化するグラデーションになります。角度はマイナスの値でも指定することができます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/152-A02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     background: linear-gradient(
-									|         90deg,
-									|         #ff8800 0%,
-									|         #ffff00 100%
-									|     );
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	background linear-gradient(
-									|         90deg,
-									|         #ff8800 0%,
-									|         #ffff00 100%
-									|     )
-								figcaption （stylus）
-							p!='<mark>iOS5.x以上、Android4.x、Safariに対応するためには「-webkit-」をつけた設定も記述します。ただし、古い草案に従っていることから、「0deg」と指定すると左から右に変化するグラデーションとなります。サンプルのように下から上に変化させるためには「90deg」と指定します。</mark>'
-							p!='<mark>なお、Firefox、Chrome、Opera、IE10においてベンダープレフィックスをつけた記述を行うと、古い草案に従った処理が行われますので注意が必要です。</mark>'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/152-A01-withprefix.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')	
-									| h2 {
-									|     background: -webkit-linear-gradient(
-									|         0deg,
-									|         #ff8800 0%,
-									|         #ffff00 100%
-									|     );
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')	
-									| h2
-									| 	background -webkit-linear-gradient(
-									|         0deg,
-									|         #ff8800 0%,
-									|         #ffff00 100%
-									|     )
-								figcaption （stylus）
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/152-A02-withprefix.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     background: -webkit-linear-gradient(
-									|         90deg,
-									|         #ff8800 0%,
-									|         #ffff00 100%
-									|     );
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	background -webkit-linear-gradient(
-									|         90deg,
-									|         #ff8800 0%,
-									|         #ffff00 100%
-									|     )
-								figcaption （stylus）
-							p='特定の角度は以下のキーワードで指定することもできます。なお、角度の指定は省略することができ、その場合は「to bottom」として処理されます。'
-							table.table
-								tr
-									th キーワード
-									th 角度
-									th グラデーションの向き
-								tr
-									td to top
-									td 0deg
-									td 下から上
-								tr
-									td to right
-									td 90deg
-									td 左から右
-								tr
-									td to bottom
-									td 180deg
-									td 上から下
-								tr
-									td to left
-									td 270deg
-									td 右から左
-							p='<mark>Webkit系のブラウザが対応している-webkit-linear-gradient()では、以下のキーワードで角度を指定することができます。省略した場合は「top」として処理されます。</mark>'
-							table.table
-								tr
-									th キーワード
-									th 角度
-									th グラデーションの向き
-								tr
-									td bottom
-									td 90deg
-									td 下から上
-								tr
-									td left
-									td 0deg
-									td 左から右
-								tr
-									td top
-									td 270deg
-									td 上から下
-								tr
-									td right
-									td 180deg
-									td 右から左
-							hr
-							h4 SAMPLE B：カラーストップを増やしたときの表示
-							p='カラーストップを増やすと、グラデーションの色を細かく変化させることができます。ここでは6つのカラーストップで色を指定しています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/152-B.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     background: linear-gradient(
-									|         90deg,
-									|         #7fccf1 0%,
-									|         #8f82ba 20%,
-									|         #ed9fbe 40%,
-									|         #f09c76 60%,
-									|         #fff59b 80%,
-									|         #89c797 100%
-									|     );
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	background linear-gradient(
-									|         90deg,
-									|         #7fccf1 0%,
-									|         #8f82ba 20%,
-									|         #ed9fbe 40%,
-									|         #f09c76 60%,
-									|         #fff59b 80%,
-									|         #89c797 100%
-									|     )
-								figcaption （stylus）
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/152-B-withprefix.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|      background: -webkit-linear-gradient(
-									|                0deg,
-									|                #7fccf1 0%,
-									|                #8f82ba 20%,
-									|                #ed9fbe 40%,
-									|                #f09c76 60%,
-									|                #fff59b 80%,
-									|                #89c797 100%
-									|     );
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	background -webkit-linear-gradient(
-									|                0deg,
-									|                #7fccf1 0%,
-									|                #8f82ba 20%,
-									|                #ed9fbe 40%,
-									|                #f09c76 60%,
-									|                #fff59b 80%,
-									|                #89c797 100%
-									|     )
-								figcaption （stylus）
-							hr
-							h4 SAMPLE C：対角線で変化するグラデーションの表示
-							p='角度を示すキーワードを以下のように指定すると、ボックスの角から対角線で変化するグラデーションを表示することができます。'
-							table.table
-								tr
-									th 角度の指定
-									th グラデーションの向き
-								tr
-									td to top left
-									td 右下から左上
-								tr
-									td to top right
-									td 左下から右上
-								tr
-									td to bottom left
-									td 右上から左下
-								tr
-									td to bottom right
-									td 左上から右下
-							p='この場合、グラデーションの角度はボックスの大きさに合わせて自動的に変わります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/152-C.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     background: linear-gradient(
-									|         to bottom right,
-									|         #7fccf1 0%,
-									|         #8f82ba 20%,
-									|         #ed9fbe 40%,
-									|         #f09c76 60%,
-									|         #fff59b 80%,
-									|         #89c797 100%
-									|     );
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	background linear-gradient(
-									|         to bottom right,
-									|         #7fccf1 0%,
-									|         #8f82ba 20%,
-									|         #ed9fbe 40%,
-									|         #f09c76 60%,
-									|         #fff59b 80%,
-									|         #89c797 100%
-									|     )
-								figcaption （stylus）
-							p='<mark>-webkit-linear-gradient()では下のキーワードで指定します。</mark>'
-							table.table
-								tr
-									th 角度の指定
-									th グラデーションの向き
-								tr
-									td bottom right
-									td 右下から左上
-								tr
-									td bottom left
-									td 左下から右上
-								tr
-									td top right
-									td 右上から左下
-								tr
-									td top left
-									td 左上から右下
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/152-C-withprefix.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|      background: -webkit-linear-gradient(
-									|                top left,
-									|                #7fccf1 0%,
-									|                #8f82ba 20%,
-									|                #ed9fbe 40%,
-									|                #f09c76 60%,
-									|                #fff59b 80%,
-									|                #89c797 100%
-									|      );
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	background -webkit-linear-gradient(
-									|                top left,
-									|                #7fccf1 0%,
-									|                #8f82ba 20%,
-									|                #ed9fbe 40%,
-									|                #f09c76 60%,
-									|                #fff59b 80%,
-									|                #89c797 100%
-									|      )
-								figcaption （stylus）
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;線形グラデーションの表示
+                        .panel-body
+                            .alert.alert-info 線形グラデーションの表示
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png') （※）
+                                    td
+                                        img(src='../images/ic-android.png') （※）
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png') （※）
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            p ※ 部分対応。
+                            p iOS4.x／Android3.x以前／IE9は以前未対応。
+                            pre
+                                | background: linear-gradient(角度,カラーストップ,カラーストップ,…)
+                            pre
+                                | background-image: linear-gradient(角度,カラーストップ,カラーストップ,…)
+                            p
+                                | 角度・・・角度／to top／to bottom／to left／to right<br>
+                                | カラーストップ・・・色の値 位置（数値または%）
+                            table.table
+                                tr
+                                    td 初期値
+                                    td -
+                                tr
+                                    td 継承
+                                    td -
+                                tr
+                                    td 適用先
+                                    td -
+                                tr
+                                    td 比率
+                                    td ボックスの横幅または高さに対する比率
+                                tr
+                                    td モジュール
+                                    td Image Values and Replaced Content
+                            p='linear-gradient()を利用すると、線形グラデーションを画像として表示することができます。backgroundといった画像を扱うプロパティの値として、url()の代わりに指定することが可能です。'
+                            p='<mark>iOS4.x/Android3.x以前はlinear-gradient()に未対応です。これらのブラウザでグラデーションを表示するためにはgradient()を利用します。</mark>'
+                            p='画像を扱うプロパティにはbackground、background-image、border-image、list-style-imageなどがあります。'
+                            hr
+                            h4 SAMPLE A：線形グラデーションの表示
+                            p='ボックスの背景を線形グラデーションで表示するには、linear-gradient()を下のように指定します。ここでは、下から上にオレンジ色から黄色に変わるグラデーションを表示しています。'
+                            p='まず、linear-gradient()の1つ目のパラメーターではグラデーションの角度を指定します。「0deg（0度）」と指定すると、下から上の向きとなります。'
+                            p='2つ目と3つ目のパラメーターは「カラーストップ」と呼ばれ、色の値と位置を半角スペースで区切って指定します。ここでは始点（0%）をオレンジ色に、終点（100%）を黄色に指定します。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/152-A01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 HAM SANDWICHES
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     background: linear-gradient(
+                                    |         0deg,
+                                    |         #ff8800 0%,
+                                    |         #ffff00 100%
+                                    |     );
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     background linear-gradient(
+                                    |         0deg,
+                                    |         #ff8800 0%,
+                                    |         #ffff00 100%
+                                    |     )
+                                figcaption （stylus）
+                            p='角度を「90deg（90度）」と指定すると時計回りに90度回転して表示され、左から右に変化するグラデーションになります。角度はマイナスの値でも指定することができます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/152-A02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     background: linear-gradient(
+                                    |         90deg,
+                                    |         #ff8800 0%,
+                                    |         #ffff00 100%
+                                    |     );
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     background linear-gradient(
+                                    |         90deg,
+                                    |         #ff8800 0%,
+                                    |         #ffff00 100%
+                                    |     )
+                                figcaption （stylus）
+                            p!='<mark>iOS5.x以上、Android4.x、Safariに対応するためには「-webkit-」をつけた設定も記述します。ただし、古い草案に従っていることから、「0deg」と指定すると左から右に変化するグラデーションとなります。サンプルのように下から上に変化させるためには「90deg」と指定します。</mark>'
+                            p!='<mark>なお、Firefox、Chrome、Opera、IE10においてベンダープレフィックスをつけた記述を行うと、古い草案に従った処理が行われますので注意が必要です。</mark>'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/152-A01-withprefix.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')    
+                                    | h2 {
+                                    |     background: -webkit-linear-gradient(
+                                    |         0deg,
+                                    |         #ff8800 0%,
+                                    |         #ffff00 100%
+                                    |     );
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')    
+                                    | h2
+                                    |     background -webkit-linear-gradient(
+                                    |         0deg,
+                                    |         #ff8800 0%,
+                                    |         #ffff00 100%
+                                    |     )
+                                figcaption （stylus）
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/152-A02-withprefix.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     background: -webkit-linear-gradient(
+                                    |         90deg,
+                                    |         #ff8800 0%,
+                                    |         #ffff00 100%
+                                    |     );
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     background -webkit-linear-gradient(
+                                    |         90deg,
+                                    |         #ff8800 0%,
+                                    |         #ffff00 100%
+                                    |     )
+                                figcaption （stylus）
+                            p='特定の角度は以下のキーワードで指定することもできます。なお、角度の指定は省略することができ、その場合は「to bottom」として処理されます。'
+                            table.table
+                                tr
+                                    th キーワード
+                                    th 角度
+                                    th グラデーションの向き
+                                tr
+                                    td to top
+                                    td 0deg
+                                    td 下から上
+                                tr
+                                    td to right
+                                    td 90deg
+                                    td 左から右
+                                tr
+                                    td to bottom
+                                    td 180deg
+                                    td 上から下
+                                tr
+                                    td to left
+                                    td 270deg
+                                    td 右から左
+                            p='<mark>Webkit系のブラウザが対応している-webkit-linear-gradient()では、以下のキーワードで角度を指定することができます。省略した場合は「top」として処理されます。</mark>'
+                            table.table
+                                tr
+                                    th キーワード
+                                    th 角度
+                                    th グラデーションの向き
+                                tr
+                                    td bottom
+                                    td 90deg
+                                    td 下から上
+                                tr
+                                    td left
+                                    td 0deg
+                                    td 左から右
+                                tr
+                                    td top
+                                    td 270deg
+                                    td 上から下
+                                tr
+                                    td right
+                                    td 180deg
+                                    td 右から左
+                            hr
+                            h4 SAMPLE B：カラーストップを増やしたときの表示
+                            p='カラーストップを増やすと、グラデーションの色を細かく変化させることができます。ここでは6つのカラーストップで色を指定しています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/152-B.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     background: linear-gradient(
+                                    |         90deg,
+                                    |         #7fccf1 0%,
+                                    |         #8f82ba 20%,
+                                    |         #ed9fbe 40%,
+                                    |         #f09c76 60%,
+                                    |         #fff59b 80%,
+                                    |         #89c797 100%
+                                    |     );
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     background linear-gradient(
+                                    |         90deg,
+                                    |         #7fccf1 0%,
+                                    |         #8f82ba 20%,
+                                    |         #ed9fbe 40%,
+                                    |         #f09c76 60%,
+                                    |         #fff59b 80%,
+                                    |         #89c797 100%
+                                    |     )
+                                figcaption （stylus）
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/152-B-withprefix.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |      background: -webkit-linear-gradient(
+                                    |                0deg,
+                                    |                #7fccf1 0%,
+                                    |                #8f82ba 20%,
+                                    |                #ed9fbe 40%,
+                                    |                #f09c76 60%,
+                                    |                #fff59b 80%,
+                                    |                #89c797 100%
+                                    |     );
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     background -webkit-linear-gradient(
+                                    |                0deg,
+                                    |                #7fccf1 0%,
+                                    |                #8f82ba 20%,
+                                    |                #ed9fbe 40%,
+                                    |                #f09c76 60%,
+                                    |                #fff59b 80%,
+                                    |                #89c797 100%
+                                    |     )
+                                figcaption （stylus）
+                            hr
+                            h4 SAMPLE C：対角線で変化するグラデーションの表示
+                            p='角度を示すキーワードを以下のように指定すると、ボックスの角から対角線で変化するグラデーションを表示することができます。'
+                            table.table
+                                tr
+                                    th 角度の指定
+                                    th グラデーションの向き
+                                tr
+                                    td to top left
+                                    td 右下から左上
+                                tr
+                                    td to top right
+                                    td 左下から右上
+                                tr
+                                    td to bottom left
+                                    td 右上から左下
+                                tr
+                                    td to bottom right
+                                    td 左上から右下
+                            p='この場合、グラデーションの角度はボックスの大きさに合わせて自動的に変わります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/152-C.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     background: linear-gradient(
+                                    |         to bottom right,
+                                    |         #7fccf1 0%,
+                                    |         #8f82ba 20%,
+                                    |         #ed9fbe 40%,
+                                    |         #f09c76 60%,
+                                    |         #fff59b 80%,
+                                    |         #89c797 100%
+                                    |     );
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     background linear-gradient(
+                                    |         to bottom right,
+                                    |         #7fccf1 0%,
+                                    |         #8f82ba 20%,
+                                    |         #ed9fbe 40%,
+                                    |         #f09c76 60%,
+                                    |         #fff59b 80%,
+                                    |         #89c797 100%
+                                    |     )
+                                figcaption （stylus）
+                            p='<mark>-webkit-linear-gradient()では下のキーワードで指定します。</mark>'
+                            table.table
+                                tr
+                                    th 角度の指定
+                                    th グラデーションの向き
+                                tr
+                                    td bottom right
+                                    td 右下から左上
+                                tr
+                                    td bottom left
+                                    td 左下から右上
+                                tr
+                                    td top right
+                                    td 右上から左下
+                                tr
+                                    td top left
+                                    td 左上から右下
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/152-C-withprefix.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |      background: -webkit-linear-gradient(
+                                    |                top left,
+                                    |                #7fccf1 0%,
+                                    |                #8f82ba 20%,
+                                    |                #ed9fbe 40%,
+                                    |                #f09c76 60%,
+                                    |                #fff59b 80%,
+                                    |                #89c797 100%
+                                    |      );
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     background -webkit-linear-gradient(
+                                    |                top left,
+                                    |                #7fccf1 0%,
+                                    |                #8f82ba 20%,
+                                    |                #ed9fbe 40%,
+                                    |                #f09c76 60%,
+                                    |                #fff59b 80%,
+                                    |                #89c797 100%
+                                    |      )
+                                figcaption （stylus）
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

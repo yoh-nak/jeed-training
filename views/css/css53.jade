@@ -1,415 +1,415 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;行揃えの指定
-						.panel-body
-							.alert.alert-info 行揃えの指定
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png') （※）
-									td
-										img(src='../images/ic-android.png') （※）
-									td
-										img(src='../images/ic-firefox.png') （※）
-									td
-										img(src='../images/ic-safari.png') （※）
-									td
-										img(src='../images/ic-chrome.png') （※）
-									td
-										img(src='../images/ic-opera.png') （※）
-									td
-										img(src='../images/ic-ie.png') （※）
-							p ※ 部分対応。
-							pre
-								| text-align: 行揃え
-							p
-								| 行揃え・・・left ／ right ／ center ／ justify ／ start ／ end ／ match-parent ／ 文字列
-							table.table
-								tr
-									td 初期値
-									td start
-								tr
-									td 継承
-									td あり
-								tr
-									td 適用先
-									td ブロックコンテナ
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td Text
-							p='text-alignプロパティを利用すると、行揃えを指定することができます。CSS3で追加された値のうち、「start」と「end」にはFirefoxとWebkit系ブラウザが対応していますが、OperaとIEは未対応となっています。「match-parent」と文字列の指定には各ブラウザとも未対応です。'
-							table.table
-								tr
-									th 値
-									th 行揃え
-								tr
-									td left
-									td 左揃え
-								tr
-									td right
-									td 右揃え
-								tr
-									td center
-									td 中央揃え
-								tr
-									td justify
-									td 両端揃え
-								tr
-									td start
-									td 書字方向の書き出し側に揃える
-								tr
-									td end
-									td 「start」の逆側に揃える
-								tr
-									td match-parent
-									td 親要素の書字方向に合わせた行揃え
-								tr
-									td 文字列
-									td 指定した文字で揃える
-							hr
-							h4 SAMPLE A：左揃え、右揃え、中央揃えの表示
-							p='下のサンプルでは見出しと文章を<h2>と<p>でマークアップして記述したものです。<h2>と<p>のtext-alignプロパティの値を「left」、「right」、「center」にすると、左揃え、右揃え、中央揃えで表示することができます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/208-A01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
-									| &lt;p&gt;焼きてての手作りパンで新鮮なハム、…略…が楽しめます。&lt;/p&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1 HAM SANDWICHES
-									| p 焼きてての手作りパンで新鮮なハム、…略…が楽しめます。
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2, p {
-									|     text-align: left;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2, p
-									| 	text-align left
-								figcaption （Stylus）
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/208-A02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2, p {
-									|     text-align: right;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2, p
-									| 	text-align right
-								figcaption （Stylus）
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/208-A03.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2, p {
-									|     text-align: center;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2, p
-									| 	text-align center
-								figcaption （Stylus）
-							hr
-							h4 text-alignプロパティとボックスの配置
-							p='text-alignプロパティで指定することができるのは、ボックスの中身であるコンテンツの行揃えのみで、ボックスそのものの行揃えをコントロールすることはできません。たとえば、<h2>でマークアップした部分が構成するボックスをオレンジ色の罫線で囲み、横幅を400ピクセルに指定すると、下のような表示になります。ここではtext-alignプロパティの値を「left」にして、左揃えで表示するようにしています。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1 HAM SANDWICHES
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     width: 400px;
-									|     border: solid 2px orange;
-									|     text-align: left;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	width 400px
-									| 	border solid 2px orange
-									| 	text-align left
-								figcaption （Stylus）
-							p='text-alignプロパティの値を「center」にすると、ボックス内の文字が中央揃えで表示されます。しかし、ボックスの配置は左揃えのまま、変化しないことが分かります。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     width: 400px;
-									|     border: solid 2px orange;
-									|     text-align: center;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	width 400px
-									| 	border solid 2px orange
-									| 	text-align center
-								figcaption （Stylus）
-							p='ボックスも中央揃えにするためには、ボックスを左右のマージンを「auto」と指定します。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     width: 400px;
-									|     border: solid 2px orange;
-									|     text-align: left;
-									|     margin-left: auto;
-									|     margin-right: auto;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	width 400px
-									| 	border solid 2px orange
-									| 	text-align left
-									| 	margin-left auto
-									| 	margin-right auto
-								figcaption （Stylus）
-							hr
-							h4 SAMPLE B：両端揃えの表示
-							p='両端揃えで表示するためには、text-alignプロパティの値を「justify」にします。ただし、日本語の文章を両端揃えにできるのはFirefoxのみとなっています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/208-B.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
-									| &lt;p&gt;焼きたての手作りパンで新鮮なハム、…略…が楽しめます。&lt;/p&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 HAM SANDWICHES
-									| p 焼きたての手作りパンで新鮮なハム、…略…が楽しめます。
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2, p {
-									|     text-align: justify;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2, p
-									| 	text-align justify
-								figcaption （Stylus）
-							p='IEではtext-justifyプロパティを「linear-ideograph」と指定することで日本語の文章を両端揃えにすることができます。'
-							p='現在のところ、Webkit系のブラウザとOperaは日本語の文章の両端揃えには未対応です。'
-							p='英文の両端揃えには各ブラウザが対応しています。'
-							p='なお、両端揃えでは1行だけの文章や、文章の最終行は左揃えで表示されます。これらの行揃えを変更したい場合には、text-align-lastプロパティを利用します。'
-							hr
-							h4 SAMPLE C：書字方向に合わせた行揃え
-							p='書字方向に合わせた行揃えで表示するためには、text-alignプロパティの値を「start」または「end」にします。「start」にした場合は、書き出し側に揃えて表示することができます。たとえば、書字方向が左から右の日本語の文章は左揃えで右から左のアラビア語の文章は右揃えで表示されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/208-C01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;p&gt;
-									| こんにちは。&lt;br&gt;
-									| ご機嫌いかがですか？&lt;br&gt;
-									| また後で会いましょう。
-									| &lt;/p&gt;
-									| 
-									| &lt;p lang="ar"&gt;
-									| السلام عليكم&lt;br&gt;
-									| كيف حالكَ ؟&lt;br&gt;
-									| أراك في مابعد
-									| &lt;/p&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	| こんにちは。
-									| 	br
-									| 	| ご機嫌いかがですか？
-									| 	br
-									| 	| また後で会いましょう。
-									| p(lang='ar')
-									| 	| السلام عليكم
-									| 	br
-									| 	| كيف حالكَ ؟
-									| 	br
-									| 	| أراك في مابعد
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p {
-									|     background-color: #ffffcc;
-									|     text-align: start;
-									| }
-									| p:lang(ar) {
-									|     direction: rtl;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	background-color #ffffcc
-									| 	text-align start
-									| 	&amp;:lang(ar)
-									| 		direction rtl
-								figcaption （Stylus）
-							p='text-alignプロパティの値を「end」にすると、行揃えを「start」の逆にすることができます。たとえば、日本語の文章は右揃えで、アラビア語の文章は左揃えで表示されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/208-C02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| p {
-									|     background-color: #ffffcc;
-									|     text-align: end;
-									| }
-									| p:lang(ar) {
-									|     direction: rtl;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	background-color #ffffcc
-									| 	text-align end
-									| 	&amp;:lang(ar)
-									| 		direction rtl
-								figcaption （Stylus）
-							hr
-							h4 SAMPLE D：親要素の書字方向に合わせた行揃え
-							p='親要素の書字方向に合わせて行揃えを行いたい場合、text-alignプロパティの値を「match-parent」にします。'
-							p='たとえば、下のサンプルは日本語とアラビア語の文章を<div>でマークアップし、<div>のtext-alignプロパティの値を「start」にしたものです。text-alignプロパティの値は子要素に継承されますので、子要素<p>のtext-alignプロパティの値も「start」で処理され、日本語とアラビア語の文章はSAMPLE Cのようにそれぞれ書字方向に合わせて左揃えと右揃えで表示されます。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div&gt;
-									| &lt;p&gt;
-									| こんにちは。&lt;br&gt;
-									| ご機嫌いかがですか？&lt;br&gt;
-									| また後で会いましょう。
-									| &lt;/p&gt;
-									| 
-									| &lt;p lang="ar"&gt;
-									| السلام عليكم&lt;br&gt;
-									| كيف حالكَ ؟&lt;br&gt;
-									| أراك في مابعد
-									| &lt;/p&gt;
-									| &lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	p
-									| 		| こんにちは。
-									| 		br
-									| 		| ご機嫌いかがですか？
-									| 		br
-									| 		| また後で会いましょう。
-									| 	p(lang='ar')
-									| 		| السلام عليكم
-									| 		br
-									| 		| كيف حالكَ ؟
-									| 		br
-									| 		| أراك في مابعد
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     text-align: start;
-									| }
-									| p {
-									|     background-color: #ffffcc;
-									| }
-									| p:lang(ar) {
-									|     direcrion: rtl;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	text-align start
-									| 
-									| p
-									| 	background-color #ffffcc
-									| 	&amp;:lang(ar)
-									| 		direcrion rtl
-								figcaption （Stylus）
-							p='子要素の書字方向に関係なく、親要素の書字方向に合わせて行揃えを行いたい場合には、text-alignプロパティの値を「match-parent」にします。たとえば、アラビア語の文章をマークアップした<p lang="ar">のtext-alignプロパティの値を「match-parent」にすると、親要素<div>の書字方向（左から右）に合わせて行揃えが行われ、左揃えで表示することができます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/208-D.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     text-align: start;
-									| }
-									| p {
-									|     background-color: #ffffcc;
-									| }
-									| p:lang(ar) {
-									|     direcrion: rtl;
-									|     text-align: -webkit-match-parent;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	text-align start
-									| 
-									| p
-									| 	background-color #ffffcc
-									| 	&amp;:lang(ar)
-									| 		direcrion rtl
-									| 		text-align -webkit-match-parent
-								figcaption （Stylus）
-							p='現在のところ、「match-parent」の指定にはChromeが対応しています。'
-							hr
-							h4 指定した文字で揃える
-							p='CSS3ではtext-alignプロパティで指定した文字で揃える方法も提案されています。たとえば、下のように小数点で揃えて表示するといったことができるようになります。ただし各ブラウザは未対応です。'
-							pre
-								|   1.25
-								| 100.52
-								|   0.3333
-							figure
-								pre(class='prettyprint linenums:1')
-									| text-align: "." center;
-								figcaption （CSS）
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;行揃えの指定
+                        .panel-body
+                            .alert.alert-info 行揃えの指定
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png') （※）
+                                    td
+                                        img(src='../images/ic-android.png') （※）
+                                    td
+                                        img(src='../images/ic-firefox.png') （※）
+                                    td
+                                        img(src='../images/ic-safari.png') （※）
+                                    td
+                                        img(src='../images/ic-chrome.png') （※）
+                                    td
+                                        img(src='../images/ic-opera.png') （※）
+                                    td
+                                        img(src='../images/ic-ie.png') （※）
+                            p ※ 部分対応。
+                            pre
+                                | text-align: 行揃え
+                            p
+                                | 行揃え・・・left ／ right ／ center ／ justify ／ start ／ end ／ match-parent ／ 文字列
+                            table.table
+                                tr
+                                    td 初期値
+                                    td start
+                                tr
+                                    td 継承
+                                    td あり
+                                tr
+                                    td 適用先
+                                    td ブロックコンテナ
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td Text
+                            p='text-alignプロパティを利用すると、行揃えを指定することができます。CSS3で追加された値のうち、「start」と「end」にはFirefoxとWebkit系ブラウザが対応していますが、OperaとIEは未対応となっています。「match-parent」と文字列の指定には各ブラウザとも未対応です。'
+                            table.table
+                                tr
+                                    th 値
+                                    th 行揃え
+                                tr
+                                    td left
+                                    td 左揃え
+                                tr
+                                    td right
+                                    td 右揃え
+                                tr
+                                    td center
+                                    td 中央揃え
+                                tr
+                                    td justify
+                                    td 両端揃え
+                                tr
+                                    td start
+                                    td 書字方向の書き出し側に揃える
+                                tr
+                                    td end
+                                    td 「start」の逆側に揃える
+                                tr
+                                    td match-parent
+                                    td 親要素の書字方向に合わせた行揃え
+                                tr
+                                    td 文字列
+                                    td 指定した文字で揃える
+                            hr
+                            h4 SAMPLE A：左揃え、右揃え、中央揃えの表示
+                            p='下のサンプルでは見出しと文章を<h2>と<p>でマークアップして記述したものです。<h2>と<p>のtext-alignプロパティの値を「left」、「right」、「center」にすると、左揃え、右揃え、中央揃えで表示することができます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/208-A01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
+                                    | &lt;p&gt;焼きてての手作りパンで新鮮なハム、…略…が楽しめます。&lt;/p&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1 HAM SANDWICHES
+                                    | p 焼きてての手作りパンで新鮮なハム、…略…が楽しめます。
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2, p {
+                                    |     text-align: left;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2, p
+                                    |     text-align left
+                                figcaption （Stylus）
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/208-A02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2, p {
+                                    |     text-align: right;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2, p
+                                    |     text-align right
+                                figcaption （Stylus）
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/208-A03.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2, p {
+                                    |     text-align: center;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2, p
+                                    |     text-align center
+                                figcaption （Stylus）
+                            hr
+                            h4 text-alignプロパティとボックスの配置
+                            p='text-alignプロパティで指定することができるのは、ボックスの中身であるコンテンツの行揃えのみで、ボックスそのものの行揃えをコントロールすることはできません。たとえば、<h2>でマークアップした部分が構成するボックスをオレンジ色の罫線で囲み、横幅を400ピクセルに指定すると、下のような表示になります。ここではtext-alignプロパティの値を「left」にして、左揃えで表示するようにしています。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1 HAM SANDWICHES
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     width: 400px;
+                                    |     border: solid 2px orange;
+                                    |     text-align: left;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     width 400px
+                                    |     border solid 2px orange
+                                    |     text-align left
+                                figcaption （Stylus）
+                            p='text-alignプロパティの値を「center」にすると、ボックス内の文字が中央揃えで表示されます。しかし、ボックスの配置は左揃えのまま、変化しないことが分かります。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     width: 400px;
+                                    |     border: solid 2px orange;
+                                    |     text-align: center;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     width 400px
+                                    |     border solid 2px orange
+                                    |     text-align center
+                                figcaption （Stylus）
+                            p='ボックスも中央揃えにするためには、ボックスを左右のマージンを「auto」と指定します。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     width: 400px;
+                                    |     border: solid 2px orange;
+                                    |     text-align: left;
+                                    |     margin-left: auto;
+                                    |     margin-right: auto;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     width 400px
+                                    |     border solid 2px orange
+                                    |     text-align left
+                                    |     margin-left auto
+                                    |     margin-right auto
+                                figcaption （Stylus）
+                            hr
+                            h4 SAMPLE B：両端揃えの表示
+                            p='両端揃えで表示するためには、text-alignプロパティの値を「justify」にします。ただし、日本語の文章を両端揃えにできるのはFirefoxのみとなっています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/208-B.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+                                    | &lt;p&gt;焼きたての手作りパンで新鮮なハム、…略…が楽しめます。&lt;/p&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 HAM SANDWICHES
+                                    | p 焼きたての手作りパンで新鮮なハム、…略…が楽しめます。
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2, p {
+                                    |     text-align: justify;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2, p
+                                    |     text-align justify
+                                figcaption （Stylus）
+                            p='IEではtext-justifyプロパティを「linear-ideograph」と指定することで日本語の文章を両端揃えにすることができます。'
+                            p='現在のところ、Webkit系のブラウザとOperaは日本語の文章の両端揃えには未対応です。'
+                            p='英文の両端揃えには各ブラウザが対応しています。'
+                            p='なお、両端揃えでは1行だけの文章や、文章の最終行は左揃えで表示されます。これらの行揃えを変更したい場合には、text-align-lastプロパティを利用します。'
+                            hr
+                            h4 SAMPLE C：書字方向に合わせた行揃え
+                            p='書字方向に合わせた行揃えで表示するためには、text-alignプロパティの値を「start」または「end」にします。「start」にした場合は、書き出し側に揃えて表示することができます。たとえば、書字方向が左から右の日本語の文章は左揃えで右から左のアラビア語の文章は右揃えで表示されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/208-C01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;p&gt;
+                                    | こんにちは。&lt;br&gt;
+                                    | ご機嫌いかがですか？&lt;br&gt;
+                                    | また後で会いましょう。
+                                    | &lt;/p&gt;
+                                    | 
+                                    | &lt;p lang="ar"&gt;
+                                    | السلام عليكم&lt;br&gt;
+                                    | كيف حالكَ ؟&lt;br&gt;
+                                    | أراك في مابعد
+                                    | &lt;/p&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     | こんにちは。
+                                    |     br
+                                    |     | ご機嫌いかがですか？
+                                    |     br
+                                    |     | また後で会いましょう。
+                                    | p(lang='ar')
+                                    |     | السلام عليكم
+                                    |     br
+                                    |     | كيف حالكَ ؟
+                                    |     br
+                                    |     | أراك في مابعد
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p {
+                                    |     background-color: #ffffcc;
+                                    |     text-align: start;
+                                    | }
+                                    | p:lang(ar) {
+                                    |     direction: rtl;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     background-color #ffffcc
+                                    |     text-align start
+                                    |     &amp;:lang(ar)
+                                    |         direction rtl
+                                figcaption （Stylus）
+                            p='text-alignプロパティの値を「end」にすると、行揃えを「start」の逆にすることができます。たとえば、日本語の文章は右揃えで、アラビア語の文章は左揃えで表示されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/208-C02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p {
+                                    |     background-color: #ffffcc;
+                                    |     text-align: end;
+                                    | }
+                                    | p:lang(ar) {
+                                    |     direction: rtl;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     background-color #ffffcc
+                                    |     text-align end
+                                    |     &amp;:lang(ar)
+                                    |         direction rtl
+                                figcaption （Stylus）
+                            hr
+                            h4 SAMPLE D：親要素の書字方向に合わせた行揃え
+                            p='親要素の書字方向に合わせて行揃えを行いたい場合、text-alignプロパティの値を「match-parent」にします。'
+                            p='たとえば、下のサンプルは日本語とアラビア語の文章を<div>でマークアップし、<div>のtext-alignプロパティの値を「start」にしたものです。text-alignプロパティの値は子要素に継承されますので、子要素<p>のtext-alignプロパティの値も「start」で処理され、日本語とアラビア語の文章はSAMPLE Cのようにそれぞれ書字方向に合わせて左揃えと右揃えで表示されます。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div&gt;
+                                    | &lt;p&gt;
+                                    | こんにちは。&lt;br&gt;
+                                    | ご機嫌いかがですか？&lt;br&gt;
+                                    | また後で会いましょう。
+                                    | &lt;/p&gt;
+                                    | 
+                                    | &lt;p lang="ar"&gt;
+                                    | السلام عليكم&lt;br&gt;
+                                    | كيف حالكَ ؟&lt;br&gt;
+                                    | أراك في مابعد
+                                    | &lt;/p&gt;
+                                    | &lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     p
+                                    |         | こんにちは。
+                                    |         br
+                                    |         | ご機嫌いかがですか？
+                                    |         br
+                                    |         | また後で会いましょう。
+                                    |     p(lang='ar')
+                                    |         | السلام عليكم
+                                    |         br
+                                    |         | كيف حالكَ ؟
+                                    |         br
+                                    |         | أراك في مابعد
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     text-align: start;
+                                    | }
+                                    | p {
+                                    |     background-color: #ffffcc;
+                                    | }
+                                    | p:lang(ar) {
+                                    |     direcrion: rtl;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     text-align start
+                                    | 
+                                    | p
+                                    |     background-color #ffffcc
+                                    |     &amp;:lang(ar)
+                                    |         direcrion rtl
+                                figcaption （Stylus）
+                            p='子要素の書字方向に関係なく、親要素の書字方向に合わせて行揃えを行いたい場合には、text-alignプロパティの値を「match-parent」にします。たとえば、アラビア語の文章をマークアップした<p lang="ar">のtext-alignプロパティの値を「match-parent」にすると、親要素<div>の書字方向（左から右）に合わせて行揃えが行われ、左揃えで表示することができます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/208-D.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     text-align: start;
+                                    | }
+                                    | p {
+                                    |     background-color: #ffffcc;
+                                    | }
+                                    | p:lang(ar) {
+                                    |     direcrion: rtl;
+                                    |     text-align: -webkit-match-parent;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     text-align start
+                                    | 
+                                    | p
+                                    |     background-color #ffffcc
+                                    |     &amp;:lang(ar)
+                                    |         direcrion rtl
+                                    |         text-align -webkit-match-parent
+                                figcaption （Stylus）
+                            p='現在のところ、「match-parent」の指定にはChromeが対応しています。'
+                            hr
+                            h4 指定した文字で揃える
+                            p='CSS3ではtext-alignプロパティで指定した文字で揃える方法も提案されています。たとえば、下のように小数点で揃えて表示するといったことができるようになります。ただし各ブラウザは未対応です。'
+                            pre
+                                |   1.25
+                                | 100.52
+                                |   0.3333
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | text-align: "." center;
+                                figcaption （CSS）
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

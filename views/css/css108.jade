@@ -1,265 +1,265 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;カーソルの形状
-						.panel-body
-							.alert.alert-info カーソルの形状
-							table.browser-support
-								tr
-									td.not-support
-										img(src='../images/ic-apple.png')
-									td.not-support
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png') （※）
-									td
-										img(src='../images/ic-safari.png') （※）
-									td
-										img(src='../images/ic-chrome.png') （※）
-									td
-										img(src='../images/ic-opera.png') （※）
-									td
-										img(src='../images/ic-ie.png') （※）
-							p ※ 部分対応。
-							pre
-								| cursor: カーソルの形状
-							p
-								| カーソルの形状・・・auto ／ url() ／ default ／ none ／ context-menu ／ help ／ pointer ／ progress ／ wait ／ cell/ ／ crosshair ／ text ／ vertical-text ／ alias ／ copy ／ move ／ no-drop ／ not-allowed ／ e-resize ／ n-resize ／ ne-resize ／ nw-resize ／ s-resize ／ se-resize ／ sw-resize ／ w-resize ／ ew-resize ／ ns-resize ／ nesw-resize ／ nwse-resize ／ col-resize ／ row-resize ／ all-scroll ／ zoom-in ／ zoom-out
-							table.table
-								tr
-									td 初期値
-									td auto
-								tr
-									td 継承
-									td あり 
-								tr
-									td 適用先
-									td 全要素
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td Basic User Interface
-							p='要素にカーソルを重ねると、カーソルは自動的に最適な形状で表示されます。これは、cursorプロパティの値が初期値の「auto」で処理されるためです。cursorプロパティを利用すると、カーソルの形状を記述することができます。'
-							p='たとえば、下のサンプルは<h1>のcursorプロパティの値を「pointer」にしたものです。<h1>の構成するボックスにカーソルを重ねると、カーソルがポインタの形状で表示されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/06/334-01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1 HAM SANDWICHES
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1 {
-									|     cursor: pointer;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1
-									| 	cursor pointer
-								figcaption （Stylus）
-							p='画像をカーソルとして表示することもできます。たとえば、下のサンプルはPNG形式のcursor.pngをカーソルとして指定したものです。ただし、IEに対応するためにはcur形式の画像も指定しておく必要があります。複数のカーソルの形状の候補はカンマで区切って指定します。なお、Operaは画像の指定に未対応です。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/06/334-02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1 {
-									|     cursor: url(cursor.png), url(cursor.cur), auto;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1
-									| 	cursor url(cursor.png), url(cursor.cur), auto
-								figcaption （Stylus）
-							table.table
-								tr
-									th cursorの値
-									th cursorの値
-								tr
-									td auto
-									td e-resize
-								tr
-									td default
-									td n-resize
-								tr
-									td none ※1
-									td ne-resize
-								tr
-									td context-menu ※1
-									td nw-resize
-								tr
-									td help
-									td s-resize
-								tr
-									td pointer
-									td se-resize
-								tr
-									td progresss
-									td w-resize
-								tr
-									td wait
-									td w-resize
-								tr
-									td cell ※1
-									td ew-resize ※1
-								tr
-									td crosshair
-									td ns-resize ※1
-								tr
-									td text
-									td nesw-resize ※1
-								tr
-									td vertical-text
-									td nwse-resize ※1
-								tr
-									td alias ※1
-									td col-resize
-								tr
-									td copy ※1
-									td row-resize
-								tr
-									td move
-									td all-scroll
-								tr
-									td no-drop
-									td zoom-in ※2
-								tr
-									td not-allowed
-									td zoom-out ※2
-							p
-								| ※1・・・IE8以前のバージョンは未対応。<br>
-								| ※2・・・Operaのみが対応
-							hr
-							h4 IMEのオン／オフの指定　ime-mode
-							p='ime-modeプロパティを利用すると、フォームのコントロールを選択したときに日本語や中国語などの入力を行うIME（Input Method Editor）をオンにするかどうかを指定することができます。現在のところ、FirefoxとIEが対応しています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/06/335-ime-mode.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;form action="…" method="post"&gt;
-									| &lt;label&gt;URL：&lt;input type="url" name="url"&gt;&lt;/label&gt;
-									| &lt;/form&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| form(action='…', method='post')
-									| 	label
-									| 		| URL：
-									| 		input(type='url', name='url')
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| input {
-									|     ime-mode: disabled;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| input
-									| 	ime-mode disabled
-								figcaption （Stylus）
-							table.table
-								tr
-									th ime-modeの値
-									th IMEのオン／オフ
-									th ユーザーによる変更
-								tr
-									td auto
-									td ユーザーの設定を継承。
-									td ○
-								tr
-									td active
-									td IMEをオンにする。<br>日本語の入力モードになります。
-									td ○
-								tr
-									td inactive
-									td IMEをオフにする。<br>英語での有力モードになります。
-									td ○
-								tr
-									td disabled
-									td IMEをオフにする。<br>英語での入力モードになります。
-									td ×
-							p='なお、ime-modeプロパティはCSS3の「Basic User Interface」で定義されていますが、リスクのある機能とされ、将来的に仕様から削除される可能性があります。'
-							hr
-							h4 アピアランス
-							p='appearanceプロパティを利用すると、ブラウザがフォームなどの表示に標準で使用するデザインで表示することができます。たとえば、<div>のappearanceプロパティの値を「button」にすると、標準のボタンでデザインで表示することができます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/06/335-appearance.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1 HAM SANDWICHES
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1 {
-									|     -moz-appearance: button;
-									|     -webkit-appearance: button;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1
-									| 	-moz-appearance button
-									| 	-webkit-appearance button
-								figcaption （Stylus）
-							p='ただし、CSS3の古い草案には採用されていましたが、現在は削除されています。また、ブラウザごとの対応の違いが大きいことから、Firefoxのドキュメントでは使用しないことが推奨されています。'
-							hr
-							h4 プログレスバー／メーターの向き
-							p='orientプロパティを利用すると、HTML5の<progress>および<meter>プロパティで構成されるプログレスバーやメーターの向きを指定することができます。初期値は「horizontal」で処理され、横向きの表示になりますが、値を「vertical」にすることで、下のようにベンダープレフィックスをつけて記述します。他のブラウザは未対応です。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/06/335-orient.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;progress value="0.3"&gt;&lt;/progress&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| progress(value='0.3')
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| progress {
-									|     -moz-orient: vertical;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| progress
-									| 	-moz-orient vertical
-								figcaption （Stylus）
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;カーソルの形状
+                        .panel-body
+                            .alert.alert-info カーソルの形状
+                            table.browser-support
+                                tr
+                                    td.not-support
+                                        img(src='../images/ic-apple.png')
+                                    td.not-support
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png') （※）
+                                    td
+                                        img(src='../images/ic-safari.png') （※）
+                                    td
+                                        img(src='../images/ic-chrome.png') （※）
+                                    td
+                                        img(src='../images/ic-opera.png') （※）
+                                    td
+                                        img(src='../images/ic-ie.png') （※）
+                            p ※ 部分対応。
+                            pre
+                                | cursor: カーソルの形状
+                            p
+                                | カーソルの形状・・・auto ／ url() ／ default ／ none ／ context-menu ／ help ／ pointer ／ progress ／ wait ／ cell/ ／ crosshair ／ text ／ vertical-text ／ alias ／ copy ／ move ／ no-drop ／ not-allowed ／ e-resize ／ n-resize ／ ne-resize ／ nw-resize ／ s-resize ／ se-resize ／ sw-resize ／ w-resize ／ ew-resize ／ ns-resize ／ nesw-resize ／ nwse-resize ／ col-resize ／ row-resize ／ all-scroll ／ zoom-in ／ zoom-out
+                            table.table
+                                tr
+                                    td 初期値
+                                    td auto
+                                tr
+                                    td 継承
+                                    td あり 
+                                tr
+                                    td 適用先
+                                    td 全要素
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td Basic User Interface
+                            p='要素にカーソルを重ねると、カーソルは自動的に最適な形状で表示されます。これは、cursorプロパティの値が初期値の「auto」で処理されるためです。cursorプロパティを利用すると、カーソルの形状を記述することができます。'
+                            p='たとえば、下のサンプルは<h1>のcursorプロパティの値を「pointer」にしたものです。<h1>の構成するボックスにカーソルを重ねると、カーソルがポインタの形状で表示されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/06/334-01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1 HAM SANDWICHES
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1 {
+                                    |     cursor: pointer;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1
+                                    |     cursor pointer
+                                figcaption （Stylus）
+                            p='画像をカーソルとして表示することもできます。たとえば、下のサンプルはPNG形式のcursor.pngをカーソルとして指定したものです。ただし、IEに対応するためにはcur形式の画像も指定しておく必要があります。複数のカーソルの形状の候補はカンマで区切って指定します。なお、Operaは画像の指定に未対応です。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/06/334-02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1 {
+                                    |     cursor: url(cursor.png), url(cursor.cur), auto;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1
+                                    |     cursor url(cursor.png), url(cursor.cur), auto
+                                figcaption （Stylus）
+                            table.table
+                                tr
+                                    th cursorの値
+                                    th cursorの値
+                                tr
+                                    td auto
+                                    td e-resize
+                                tr
+                                    td default
+                                    td n-resize
+                                tr
+                                    td none ※1
+                                    td ne-resize
+                                tr
+                                    td context-menu ※1
+                                    td nw-resize
+                                tr
+                                    td help
+                                    td s-resize
+                                tr
+                                    td pointer
+                                    td se-resize
+                                tr
+                                    td progresss
+                                    td w-resize
+                                tr
+                                    td wait
+                                    td w-resize
+                                tr
+                                    td cell ※1
+                                    td ew-resize ※1
+                                tr
+                                    td crosshair
+                                    td ns-resize ※1
+                                tr
+                                    td text
+                                    td nesw-resize ※1
+                                tr
+                                    td vertical-text
+                                    td nwse-resize ※1
+                                tr
+                                    td alias ※1
+                                    td col-resize
+                                tr
+                                    td copy ※1
+                                    td row-resize
+                                tr
+                                    td move
+                                    td all-scroll
+                                tr
+                                    td no-drop
+                                    td zoom-in ※2
+                                tr
+                                    td not-allowed
+                                    td zoom-out ※2
+                            p
+                                | ※1・・・IE8以前のバージョンは未対応。<br>
+                                | ※2・・・Operaのみが対応
+                            hr
+                            h4 IMEのオン／オフの指定　ime-mode
+                            p='ime-modeプロパティを利用すると、フォームのコントロールを選択したときに日本語や中国語などの入力を行うIME（Input Method Editor）をオンにするかどうかを指定することができます。現在のところ、FirefoxとIEが対応しています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/06/335-ime-mode.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;form action="…" method="post"&gt;
+                                    | &lt;label&gt;URL：&lt;input type="url" name="url"&gt;&lt;/label&gt;
+                                    | &lt;/form&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | form(action='…', method='post')
+                                    |     label
+                                    |         | URL：
+                                    |         input(type='url', name='url')
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | input {
+                                    |     ime-mode: disabled;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | input
+                                    |     ime-mode disabled
+                                figcaption （Stylus）
+                            table.table
+                                tr
+                                    th ime-modeの値
+                                    th IMEのオン／オフ
+                                    th ユーザーによる変更
+                                tr
+                                    td auto
+                                    td ユーザーの設定を継承。
+                                    td ○
+                                tr
+                                    td active
+                                    td IMEをオンにする。<br>日本語の入力モードになります。
+                                    td ○
+                                tr
+                                    td inactive
+                                    td IMEをオフにする。<br>英語での有力モードになります。
+                                    td ○
+                                tr
+                                    td disabled
+                                    td IMEをオフにする。<br>英語での入力モードになります。
+                                    td ×
+                            p='なお、ime-modeプロパティはCSS3の「Basic User Interface」で定義されていますが、リスクのある機能とされ、将来的に仕様から削除される可能性があります。'
+                            hr
+                            h4 アピアランス
+                            p='appearanceプロパティを利用すると、ブラウザがフォームなどの表示に標準で使用するデザインで表示することができます。たとえば、<div>のappearanceプロパティの値を「button」にすると、標準のボタンでデザインで表示することができます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/06/335-appearance.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;HAM SANDWICHES&lt;/h1&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1 HAM SANDWICHES
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1 {
+                                    |     -moz-appearance: button;
+                                    |     -webkit-appearance: button;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1
+                                    |     -moz-appearance button
+                                    |     -webkit-appearance button
+                                figcaption （Stylus）
+                            p='ただし、CSS3の古い草案には採用されていましたが、現在は削除されています。また、ブラウザごとの対応の違いが大きいことから、Firefoxのドキュメントでは使用しないことが推奨されています。'
+                            hr
+                            h4 プログレスバー／メーターの向き
+                            p='orientプロパティを利用すると、HTML5の<progress>および<meter>プロパティで構成されるプログレスバーやメーターの向きを指定することができます。初期値は「horizontal」で処理され、横向きの表示になりますが、値を「vertical」にすることで、下のようにベンダープレフィックスをつけて記述します。他のブラウザは未対応です。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/06/335-orient.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;progress value="0.3"&gt;&lt;/progress&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | progress(value='0.3')
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | progress {
+                                    |     -moz-orient: vertical;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | progress
+                                    |     -moz-orient vertical
+                                figcaption （Stylus）
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

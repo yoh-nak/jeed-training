@@ -1,430 +1,430 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp; 行の高さの調節
-						.panel-body
-							.alert.alert-info  行の高さの調節
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							pre
-								| line-height: 高さ
-							p
-								| 高さ・・・normal ／ 数値 ／ 倍率 ／ 比率
-							table.table
-								tr
-									td 初期値
-									td normal
-								tr
-									td 継承
-									td あり
-								tr
-									td 適用先
-									td 全要素
-								tr
-									td 比率
-									td 要素の文字サイズに対する比率
-								tr
-									td モジュール
-									td Line Layout
-							p='line-heightプロパティを利用すると、行の高さを調節することができます。'
-							hr
-							h4 SAMPLE A：行の間隔を広くする
-							p='下のサンプルは文章を表示したものです。line-heightプロパティの値は初期値の「normal」で処理されるため、各ブラウザはギョの高さを文字サイズとほぼ同じ大きさに設定します。そのため、行の間隔が狭く、文章が読みづらくなります。'
-							p='そこで、line-heightプロパティを利用して行の間隔を調節します。たとえば、line-heightプロパティの値32ピクセルにすると下のように行の間隔が広くなります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/234-A.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト、レタスを挟んだサンドイッチです。…略…&lt;/p&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p 焼きたての手作りパンで新鮮なハム、トマト、レタスを挟んだサンドイッチです。…略…
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p {
-									|     font-size: 16px;
-									|     line-height: 32px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	font-size 16px
-									| 	line-height 32px
-								figcaption （Stylus）
-							p='ここではfont-sizeプロパティで文字サイズを16ピクセルに指定していますので、line-heightとfont-sizeプロパティの大きさの差分である16ピクセルの余白が文字の上下に半分ずつ割り振られ、下のように行の高さが32ピクセルとなります。文字の上下に挿入される余白はレディング（leading）と呼ばれます。'
-							p='なお、サンプルのように文字サイズの2倍の行の高さにしたい場合、line-heightプロパティの値を倍率で「2」や、比率「200%」と指定することもできます。'
-							hr
-							h4 SAMPLE B：行の高さを算出
-							p='SAMPLE Aではline-heightプロパティの値=行の高さと考えることができますが、高さの異なる要素を1行に表示したい場合、次のように高さが算出されます。'
-							p='たとえば、下のサンプルは<p>でマークアップした語句の一部を<span>でマークアップしたものです。この場合、1行の中にAとBの2つのインラインボックスが存在するものとして処理されます。これらのボックスは文字のベースラインで揃えて表示されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/234-B.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;p&gt;Daily &lt;span&gt;Special&lt;/span&gt;&lt;/p&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	| Daily
-									| 	span Special
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p {
-									|     font-size: 16px;
-									|     line-height: 50px;
-									|     border: solid 2px orange;
-									|     text-align:center;
-									| }
-									| span {
-									|     font-size: 32px;
-									|     line-height: 100px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	font-size 16px
-									| 	line-height 50px
-									| 	border solid 2px orange
-									| 	text-align center
-									| 
-									| span
-									| 	font-size 32px
-									| 	line-height 100px
-								figcaption （Stylus）
-							p='ベースラインはアルファベットを揃えて表示するための基準線です。揃える位置を変えたい場合はvertical-alignを利用します。'
-							p='各インラインボックスの高さはfont-sizeプロパティの値で決まるため、Aが16ピクセル、Bが32ピクセルとなります。また、line-heightプロパティの値で決まる高さは「拡張したインラインボックスの高さ」と呼ばれ、Aが50ピクセル、Bが100pxとなります。さらに、これらの値から、それぞれの文字の上下には17pxと34pxのレディングが入ることがわかります。'
-							p='このとき、行の高さは「すべての拡張したインラインボックスを内包する高さ」で決まるため、ここでは100ピクセルとなります。'
-							p='サンプルでは1行しか表示していないので、行の高さが<p>の構成するボックスの高さになります。'
-							p='縦書きになった場合、line-heightが指定するのは拡張したインラインボックスの横幅となります。'
-							hr
-							h4 インラインボックスの高さの算出方法の指定
-							p='インラインボックスの高さはfont-sizeプロパティで指定した文字の大きさで決まりますが、CSS3のtext-heightプロパティを利用すると、フォントのアセンダやディセンダ、ルビやベースラインシフトなどを含めた高さにするかどうかを指定できるようになります。現在のところ、各ブラウザは未対応です。'
-							hr
-							h4 行の高さの算出方法
-							p='行の高さは拡張したインラインボックスを内包する高さいなりますが、CSS3のEditor\'s Draftで提案されているline-box-containプロパティを利用すると、何を内包する高さで算出するかを指定できるようになります。現在のところ、各ブラウザは未対応です。'
-							hr
-							h4 SAMPLE C：line-heightの値の継承
-							p='line-heightプロパティの値は親から子へと継承されます。たとえば、<p>のline-heightプロパティの値を「64px」にすると、子要素である<span>のline-heightプロパティの値も「64px」で処理されます。ただし、最終的な行の高さは、フォントのデザインによってベースラインの位置が変わってくるため、フォントに関する正確な情報がないと算出することができません。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/234-C01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;p&gt;Daily &lt;span&gt;Special&lt;/span&gt;&lt;/p&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	| Daily
-									| 	span Special
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p {
-									|     font-size: 16px;
-									|     line-height: 64px;
-									|     border: solid 2px orange;
-									|     text-align:center;
-									| }
-									| span {
-									|     font-size: 32px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	font-size 16px
-									| 	line-height 64px
-									| 	border solid 2px orange
-									| 	text-align center
-									| 
-									| span
-									| 	font-size 32px
-								figcaption （Stylus）
-							p='line-heightプロパティの値は比率と倍率でも指定することができますが、継承の処理に違いがありますので注意が必要です。比率（%）で指定した場合は算出値が継承されますが、倍率で指定した場合は倍率値が継承されます。'
-							p='たとえば、下のサンプルは<p>のline-heightプロパティの値を「400%」にしたものです。<p>の文字のサイズは16pxにしていますので、line-heightプロパティの値は「64px」で処理されます。このとき、子要素に算出値が継承され、<span>のline-heightプロパティの値は「64px」で処理されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/234-C02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| p {
-									|     font-size: 16px;
-									|     line-height: 400%;
-									|     border: solid 2px orange;
-									|     text-align:center;
-									| }
-									| span {
-									|     font-size: 32px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	font-size 16px
-									| 	line-height 400%
-									| 	border solid 2px orange
-									| 	text-align center
-									| 
-									| span
-									| 	font-size 32px
-								figcaption （Stylus）
-							p='一方、倍率で「4」にした場合も、<p>のline-heightプロパティの値は「64px」で処理されます。しかし、子要素には算出値の「64px」ではなく、倍率値「4」が継承されます。そのため、子要素<span>のline-heightプロパティの値は文字サイズの32ピクセルの4倍となる「128px」で処理されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/234-C03.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| p {
-									|     font-size: 16px;
-									|     line-height: 4;
-									|     border: solid 2px orange;
-									|     text-align:center;
-									| }
-									| span {
-									|     font-size: 32px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	font-size 16px
-									| 	line-height 4
-									| 	border solid 2px orange
-									| 	text-align center
-									| 
-									| span
-									| 	font-size 32px
-								figcaption （Stylus）
-							hr
-							h4 SAMPLE D：行から文字がはみ出すケース
-							p='行の高さによっては、行の上下に文字がはみ出すケースもあります。たとえば、<p>のline-heightプロパティの値を文字サイズと同じ「16px」にします。この場合、<p>の中に直接記述した語句の上下にレディングは入らず、拡張したインラインボックスの高さは「16px」となります。また、子要素<span>のline-heightプロパティの値も「16px」で処理されますが、文字サイズが「32px」のためレディングがマイナスとなり、拡張したインラインボックスよりもインラインボックスの高さが大きくなります。しかし、行の高さは拡張したインラインボックスの高さで決まりますので、行から文字がはみ出した表示になるというわけです。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/234-D.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| p {
-									|     font-size: 16px;
-									|     line-height: 16px;
-									|     border: solid 2px orange;
-									|     text-align:center;
-									| }
-									| span {
-									|     font-size: 32px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	font-size 16px
-									| 	line-height 16px
-									| 	border solid 2px orange
-									| 	text-align center
-									| 
-									| span
-									| 	font-size 32px
-								figcaption （Stylus）
-							hr
-							h4 SAMPLE E：インラインボックスにパディング、罫線、マージンを表示した場合
-							p='インラインボックスのパディング、罫線、マージンの大きさは行の高さの算出には影響しません。たとえば、下のサンプルはSAMPLE Cで<p>のline-heightプロパティの値を「64px」にしたものです。<span>の構成するボックスに5pxのパディングを挿入し、20pxの緑色の罫線で囲むと、行の高さには影響せず、行からはみ出す形で表示されることが分かります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/234-E.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;p&gt;Daily &lt;span&gt;Special&lt;/span&gt;&lt;/p&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	| Daily
-									| 	span Special
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p {
-									|     font-size: 16px;
-									|     line-height: 64px;
-									|     border: solid 2px orange;
-									|     text-align:center;
-									| }
-									| span {
-									|     font-size: 32px;
-									|     padding: 5px;
-									|     border: solid 20px limegreen;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									p
-										font-size 16px
-										line-height 64px
-										border solid 2px orange
-										text-align center
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp; 行の高さの調節
+                        .panel-body
+                            .alert.alert-info  行の高さの調節
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            pre
+                                | line-height: 高さ
+                            p
+                                | 高さ・・・normal ／ 数値 ／ 倍率 ／ 比率
+                            table.table
+                                tr
+                                    td 初期値
+                                    td normal
+                                tr
+                                    td 継承
+                                    td あり
+                                tr
+                                    td 適用先
+                                    td 全要素
+                                tr
+                                    td 比率
+                                    td 要素の文字サイズに対する比率
+                                tr
+                                    td モジュール
+                                    td Line Layout
+                            p='line-heightプロパティを利用すると、行の高さを調節することができます。'
+                            hr
+                            h4 SAMPLE A：行の間隔を広くする
+                            p='下のサンプルは文章を表示したものです。line-heightプロパティの値は初期値の「normal」で処理されるため、各ブラウザはギョの高さを文字サイズとほぼ同じ大きさに設定します。そのため、行の間隔が狭く、文章が読みづらくなります。'
+                            p='そこで、line-heightプロパティを利用して行の間隔を調節します。たとえば、line-heightプロパティの値32ピクセルにすると下のように行の間隔が広くなります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/234-A.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト、レタスを挟んだサンドイッチです。…略…&lt;/p&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p 焼きたての手作りパンで新鮮なハム、トマト、レタスを挟んだサンドイッチです。…略…
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p {
+                                    |     font-size: 16px;
+                                    |     line-height: 32px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     font-size 16px
+                                    |     line-height 32px
+                                figcaption （Stylus）
+                            p='ここではfont-sizeプロパティで文字サイズを16ピクセルに指定していますので、line-heightとfont-sizeプロパティの大きさの差分である16ピクセルの余白が文字の上下に半分ずつ割り振られ、下のように行の高さが32ピクセルとなります。文字の上下に挿入される余白はレディング（leading）と呼ばれます。'
+                            p='なお、サンプルのように文字サイズの2倍の行の高さにしたい場合、line-heightプロパティの値を倍率で「2」や、比率「200%」と指定することもできます。'
+                            hr
+                            h4 SAMPLE B：行の高さを算出
+                            p='SAMPLE Aではline-heightプロパティの値=行の高さと考えることができますが、高さの異なる要素を1行に表示したい場合、次のように高さが算出されます。'
+                            p='たとえば、下のサンプルは<p>でマークアップした語句の一部を<span>でマークアップしたものです。この場合、1行の中にAとBの2つのインラインボックスが存在するものとして処理されます。これらのボックスは文字のベースラインで揃えて表示されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/234-B.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;p&gt;Daily &lt;span&gt;Special&lt;/span&gt;&lt;/p&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     | Daily
+                                    |     span Special
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p {
+                                    |     font-size: 16px;
+                                    |     line-height: 50px;
+                                    |     border: solid 2px orange;
+                                    |     text-align:center;
+                                    | }
+                                    | span {
+                                    |     font-size: 32px;
+                                    |     line-height: 100px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     font-size 16px
+                                    |     line-height 50px
+                                    |     border solid 2px orange
+                                    |     text-align center
+                                    | 
+                                    | span
+                                    |     font-size 32px
+                                    |     line-height 100px
+                                figcaption （Stylus）
+                            p='ベースラインはアルファベットを揃えて表示するための基準線です。揃える位置を変えたい場合はvertical-alignを利用します。'
+                            p='各インラインボックスの高さはfont-sizeプロパティの値で決まるため、Aが16ピクセル、Bが32ピクセルとなります。また、line-heightプロパティの値で決まる高さは「拡張したインラインボックスの高さ」と呼ばれ、Aが50ピクセル、Bが100pxとなります。さらに、これらの値から、それぞれの文字の上下には17pxと34pxのレディングが入ることがわかります。'
+                            p='このとき、行の高さは「すべての拡張したインラインボックスを内包する高さ」で決まるため、ここでは100ピクセルとなります。'
+                            p='サンプルでは1行しか表示していないので、行の高さが<p>の構成するボックスの高さになります。'
+                            p='縦書きになった場合、line-heightが指定するのは拡張したインラインボックスの横幅となります。'
+                            hr
+                            h4 インラインボックスの高さの算出方法の指定
+                            p='インラインボックスの高さはfont-sizeプロパティで指定した文字の大きさで決まりますが、CSS3のtext-heightプロパティを利用すると、フォントのアセンダやディセンダ、ルビやベースラインシフトなどを含めた高さにするかどうかを指定できるようになります。現在のところ、各ブラウザは未対応です。'
+                            hr
+                            h4 行の高さの算出方法
+                            p='行の高さは拡張したインラインボックスを内包する高さいなりますが、CSS3のEditor\'s Draftで提案されているline-box-containプロパティを利用すると、何を内包する高さで算出するかを指定できるようになります。現在のところ、各ブラウザは未対応です。'
+                            hr
+                            h4 SAMPLE C：line-heightの値の継承
+                            p='line-heightプロパティの値は親から子へと継承されます。たとえば、<p>のline-heightプロパティの値を「64px」にすると、子要素である<span>のline-heightプロパティの値も「64px」で処理されます。ただし、最終的な行の高さは、フォントのデザインによってベースラインの位置が変わってくるため、フォントに関する正確な情報がないと算出することができません。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/234-C01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;p&gt;Daily &lt;span&gt;Special&lt;/span&gt;&lt;/p&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     | Daily
+                                    |     span Special
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p {
+                                    |     font-size: 16px;
+                                    |     line-height: 64px;
+                                    |     border: solid 2px orange;
+                                    |     text-align:center;
+                                    | }
+                                    | span {
+                                    |     font-size: 32px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     font-size 16px
+                                    |     line-height 64px
+                                    |     border solid 2px orange
+                                    |     text-align center
+                                    | 
+                                    | span
+                                    |     font-size 32px
+                                figcaption （Stylus）
+                            p='line-heightプロパティの値は比率と倍率でも指定することができますが、継承の処理に違いがありますので注意が必要です。比率（%）で指定した場合は算出値が継承されますが、倍率で指定した場合は倍率値が継承されます。'
+                            p='たとえば、下のサンプルは<p>のline-heightプロパティの値を「400%」にしたものです。<p>の文字のサイズは16pxにしていますので、line-heightプロパティの値は「64px」で処理されます。このとき、子要素に算出値が継承され、<span>のline-heightプロパティの値は「64px」で処理されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/234-C02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p {
+                                    |     font-size: 16px;
+                                    |     line-height: 400%;
+                                    |     border: solid 2px orange;
+                                    |     text-align:center;
+                                    | }
+                                    | span {
+                                    |     font-size: 32px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     font-size 16px
+                                    |     line-height 400%
+                                    |     border solid 2px orange
+                                    |     text-align center
+                                    | 
+                                    | span
+                                    |     font-size 32px
+                                figcaption （Stylus）
+                            p='一方、倍率で「4」にした場合も、<p>のline-heightプロパティの値は「64px」で処理されます。しかし、子要素には算出値の「64px」ではなく、倍率値「4」が継承されます。そのため、子要素<span>のline-heightプロパティの値は文字サイズの32ピクセルの4倍となる「128px」で処理されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/234-C03.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p {
+                                    |     font-size: 16px;
+                                    |     line-height: 4;
+                                    |     border: solid 2px orange;
+                                    |     text-align:center;
+                                    | }
+                                    | span {
+                                    |     font-size: 32px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     font-size 16px
+                                    |     line-height 4
+                                    |     border solid 2px orange
+                                    |     text-align center
+                                    | 
+                                    | span
+                                    |     font-size 32px
+                                figcaption （Stylus）
+                            hr
+                            h4 SAMPLE D：行から文字がはみ出すケース
+                            p='行の高さによっては、行の上下に文字がはみ出すケースもあります。たとえば、<p>のline-heightプロパティの値を文字サイズと同じ「16px」にします。この場合、<p>の中に直接記述した語句の上下にレディングは入らず、拡張したインラインボックスの高さは「16px」となります。また、子要素<span>のline-heightプロパティの値も「16px」で処理されますが、文字サイズが「32px」のためレディングがマイナスとなり、拡張したインラインボックスよりもインラインボックスの高さが大きくなります。しかし、行の高さは拡張したインラインボックスの高さで決まりますので、行から文字がはみ出した表示になるというわけです。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/234-D.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p {
+                                    |     font-size: 16px;
+                                    |     line-height: 16px;
+                                    |     border: solid 2px orange;
+                                    |     text-align:center;
+                                    | }
+                                    | span {
+                                    |     font-size: 32px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     font-size 16px
+                                    |     line-height 16px
+                                    |     border solid 2px orange
+                                    |     text-align center
+                                    | 
+                                    | span
+                                    |     font-size 32px
+                                figcaption （Stylus）
+                            hr
+                            h4 SAMPLE E：インラインボックスにパディング、罫線、マージンを表示した場合
+                            p='インラインボックスのパディング、罫線、マージンの大きさは行の高さの算出には影響しません。たとえば、下のサンプルはSAMPLE Cで<p>のline-heightプロパティの値を「64px」にしたものです。<span>の構成するボックスに5pxのパディングを挿入し、20pxの緑色の罫線で囲むと、行の高さには影響せず、行からはみ出す形で表示されることが分かります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/234-E.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;p&gt;Daily &lt;span&gt;Special&lt;/span&gt;&lt;/p&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     | Daily
+                                    |     span Special
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p {
+                                    |     font-size: 16px;
+                                    |     line-height: 64px;
+                                    |     border: solid 2px orange;
+                                    |     text-align:center;
+                                    | }
+                                    | span {
+                                    |     font-size: 32px;
+                                    |     padding: 5px;
+                                    |     border: solid 20px limegreen;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    p
+                                        font-size 16px
+                                        line-height 64px
+                                        border solid 2px orange
+                                        text-align center
 
-									span
-										font-size 32px
-										padding 5px
-										border solid 20px limegreen
-								figcaption （Stylus）
-							hr
-							h4 行からはみ出した部分の表示
-							p='文字を複数行で表示している場合、行からはみ出した部分は前後の行と重ねって表示されます。たとえば、下のサンプルでは<span>でマークアップしたオレンジ色の文字と、周りを囲んだ緑色の罫線からはみ出し、前後の行と重なっていることがわかります。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;p&gt;焼きたて手作りパンで新鮮はハム、トマト、チーズ、レタスを挟んだサンドイッチです。 &lt;span&gt;Daily Special&lt;/span&gt;はマヨネーズソースがおいしくて、お店の近くを通るたびに買いこんでしまいます。&lt;/p&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	| 焼きたて手作りパンで新鮮はハム、トマト、チーズ、レタスを挟んだサンドイッチです。
-									| 	span Daily Special
-									| 	| はマヨネーズソースがおいしくて、お店の近くを通るたびに買いこんでしまいます。
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p {
-									|     font-size: 16px;
-									|     line-height: 64px;
-									|     border: solid 2px orange;
-									|     text-align:center;
-									| }
-									| span {
-									|     font-size: 32px;
-									|     padding: 5px;
-									|     border: solid 20px limegreen;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	font-size 16px
-									| 	line-height 64px
-									| 	border solid 2px orange
-									| 	text-align center
-									| 
-									| span
-									| 	font-size 32px
-									| 	padding 5px
-									| 	border solid 20px limegreen
-								figcaption （Stylus）
-							p='なお、行からはみ出した部分が他の行と重なった場合、後続の行が上に重なって表示されます。たとえば<span>でマークアップした部分は2行目に表示されていますので、1行目の上に、3行目の下に表示されています。'
-							hr
-							h4 SAMPLE F：行内に画像を挿入したときの表示
-							p='下のサンプルはSAMPLE Cで<p>のline-heightプロパティの値を「64px」にして、<p>の中に60x60ピクセルの画像（flower.png）を挿入したものです。'
-							p='このとき、親要素<p>の設定も継承し、<img>のline-heightプロパティの値も「64px」になりますが、<img>などの置換要素ではline-heightプロパティを処理しない決まりとなっています。そのため、文字が構成するインラインボックスのように上下にレディングが挿入されることはなく、次のように画像の高さが行の高さの算出に影響します。なお、画像にはベースラインがありませんので、画像の下辺がベースラインに揃えて表示されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/234-F01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;p&gt;Daily &lt;span&gt;Special&lt;/span&gt;
-									| &lt;img src="flower.png" alt="" width="60" height="60"&gt;
-									| &lt;/p&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	| Daily
-									| 	span Special
-									| 	img(src='flower.png', alt='', width='60', height='60')
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p {
-									|     font-size: 16px;
-									|     line-height: 64px;
-									|     border: solid 2px orange;
-									|     text-align:center;
-									| }
-									| span {
-									|     font-size: 32px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	font-size 16px
-									| 	line-height 64px
-									| 	border solid 2px orange
-									| 	text-align center
-									| 
-									| span
-									| 	font-size 32px
-								figcaption （Stylus）
-							p='また、画像のパディング、罫線、マージンは行の高さの算出に影響します。たとえば、画像のまわりに太さ15ピクセルの緑色の罫線を表示すると、罫線の分だけ行の高さが変わります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/234-F02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| p {
-									|     font-size: 16px;
-									|     line-height: 64px;
-									|     border: solid 2px orange;
-									|     text-align:center;
-									| }
-									| span {
-									|     font-size: 32px;
-									|     border: solid 15px limegreen;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	font-size 16px
-									| 	line-height 64px
-									| 	border solid 2px orange
-									| 	text-align center
-									| 
-									| span
-									| 	font-size 32px
-									| 	border solid 15px limegreen
-								figcaption （Stylus）
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+                                    span
+                                        font-size 32px
+                                        padding 5px
+                                        border solid 20px limegreen
+                                figcaption （Stylus）
+                            hr
+                            h4 行からはみ出した部分の表示
+                            p='文字を複数行で表示している場合、行からはみ出した部分は前後の行と重ねって表示されます。たとえば、下のサンプルでは<span>でマークアップしたオレンジ色の文字と、周りを囲んだ緑色の罫線からはみ出し、前後の行と重なっていることがわかります。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;p&gt;焼きたて手作りパンで新鮮はハム、トマト、チーズ、レタスを挟んだサンドイッチです。 &lt;span&gt;Daily Special&lt;/span&gt;はマヨネーズソースがおいしくて、お店の近くを通るたびに買いこんでしまいます。&lt;/p&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     | 焼きたて手作りパンで新鮮はハム、トマト、チーズ、レタスを挟んだサンドイッチです。
+                                    |     span Daily Special
+                                    |     | はマヨネーズソースがおいしくて、お店の近くを通るたびに買いこんでしまいます。
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p {
+                                    |     font-size: 16px;
+                                    |     line-height: 64px;
+                                    |     border: solid 2px orange;
+                                    |     text-align:center;
+                                    | }
+                                    | span {
+                                    |     font-size: 32px;
+                                    |     padding: 5px;
+                                    |     border: solid 20px limegreen;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     font-size 16px
+                                    |     line-height 64px
+                                    |     border solid 2px orange
+                                    |     text-align center
+                                    | 
+                                    | span
+                                    |     font-size 32px
+                                    |     padding 5px
+                                    |     border solid 20px limegreen
+                                figcaption （Stylus）
+                            p='なお、行からはみ出した部分が他の行と重なった場合、後続の行が上に重なって表示されます。たとえば<span>でマークアップした部分は2行目に表示されていますので、1行目の上に、3行目の下に表示されています。'
+                            hr
+                            h4 SAMPLE F：行内に画像を挿入したときの表示
+                            p='下のサンプルはSAMPLE Cで<p>のline-heightプロパティの値を「64px」にして、<p>の中に60x60ピクセルの画像（flower.png）を挿入したものです。'
+                            p='このとき、親要素<p>の設定も継承し、<img>のline-heightプロパティの値も「64px」になりますが、<img>などの置換要素ではline-heightプロパティを処理しない決まりとなっています。そのため、文字が構成するインラインボックスのように上下にレディングが挿入されることはなく、次のように画像の高さが行の高さの算出に影響します。なお、画像にはベースラインがありませんので、画像の下辺がベースラインに揃えて表示されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/234-F01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;p&gt;Daily &lt;span&gt;Special&lt;/span&gt;
+                                    | &lt;img src="flower.png" alt="" width="60" height="60"&gt;
+                                    | &lt;/p&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     | Daily
+                                    |     span Special
+                                    |     img(src='flower.png', alt='', width='60', height='60')
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p {
+                                    |     font-size: 16px;
+                                    |     line-height: 64px;
+                                    |     border: solid 2px orange;
+                                    |     text-align:center;
+                                    | }
+                                    | span {
+                                    |     font-size: 32px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     font-size 16px
+                                    |     line-height 64px
+                                    |     border solid 2px orange
+                                    |     text-align center
+                                    | 
+                                    | span
+                                    |     font-size 32px
+                                figcaption （Stylus）
+                            p='また、画像のパディング、罫線、マージンは行の高さの算出に影響します。たとえば、画像のまわりに太さ15ピクセルの緑色の罫線を表示すると、罫線の分だけ行の高さが変わります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/234-F02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p {
+                                    |     font-size: 16px;
+                                    |     line-height: 64px;
+                                    |     border: solid 2px orange;
+                                    |     text-align:center;
+                                    | }
+                                    | span {
+                                    |     font-size: 32px;
+                                    |     border: solid 15px limegreen;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     font-size 16px
+                                    |     line-height 64px
+                                    |     border solid 2px orange
+                                    |     text-align center
+                                    | 
+                                    | span
+                                    |     font-size 32px
+                                    |     border solid 15px limegreen
+                                figcaption （Stylus）
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

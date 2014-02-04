@@ -1,153 +1,153 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;エクスクルージョン
-						.panel-body
-							.alert.alert-info エクスクルージョン
-							table.browser-support
-								tr
-									td.not-support
-										img(src='../images/ic-apple.png')
-									td.not-support
-										img(src='../images/ic-android.png')
-									td.not-support
-										img(src='../images/ic-firefox.png')
-									td.not-support
-										img(src='../images/ic-safari.png')
-									td.not-support
-										img(src='../images/ic-chrome.png')
-									td.not-support
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							p IE9以前は未対応。
-							pre
-								| wrap-flow: 回り込みのサイド
-							pre
-								| wrap-margin: 余白サイズ
-							pre
-								| wrap-through: エクスクルージョンボックスに対する処理
-							p
-								| 回り込みのサイド・・・auto ／ both ／ start ／ end ／ maximum ／ clear<br>
-								| 余白のサイズ・・・数値<br>
-								| エクスクルージョンボックスに対する処理・・・wrap ／ none
-							table.table
-								tr
-									td 初期値
-									td
-										| wrap-flow・・・auto<br>
-										| wrap-margin・・・0<br>
-										| wrap-through・・・wrap
-								tr
-									td 継承
-									td なし
-								tr
-									td 適用先
-									td
-										| wrap-flow・・・ブロックレベル要素<br>
-										| wrap-margin・・・エクスクルージョン要素<br>
-										| wrap-through・・・ブロックレベル要素
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td Exclusions and Shapes
-							p='エクスクルージョン（除外）の機能を利用すると、テキストや画像といったインラインレベルのコンテンツがボックスに回り込んだレイアウトを設定することができます。'
-							hr
-							h4 SAMPLE A：回り込みの設定
-							p='たとえば、下のサンプルはpositionプロパティを利用して、<div>で構成した茶色のボックスを文章の上に重ねて表示したものです。'
-							p='<div>のwrap-flowプロパティの値を「both」にすると、<div>の構成するボックスが「エクスクルージョンボックス」として扱われ、ボックスのまわりに文章が回り込んだ表示になります。また、wrap-marginプロパティの値を「20px」にして、ボックスのまわりに20ピクセルの余白を入れてレイアウトしています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/113-A.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     width: 300px;
-									|     position: absolute;
-									|     top: calc(50% - 60px);
-									|     left: calc(50% - 150px);
-									|     -ms-wrap-flow: both;
-									|     -ms-wrap-margin: 20px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	width 300px
-									| 	position absolute
-									| 	top calc(50% - 60px)
-									| 	left calc(50% - 150px)
-									| 	-ms-wrap-flow both
-									| 	-ms-wrap-margin 20px
-								figcaption （Stylus）
-							p='wrap-flowプロパティで指定できる値は以下のようになっており、回り込みのサイドを指定することができます。'
-							table.table
-								tr
-									th wrap-flowの値
-									th 回り込みのサイド
-								tr
-									td auto
-									td エクスクルージョンの機能を利用しない。
-								tr
-									td both
-									td 両サイド。
-								tr
-									td start
-									td 書字方向の開始サイド。
-								tr
-									td end
-									td 書字方向の終了サイド。
-								tr
-									td maximum
-									td レイアウトスペースの大きいサイド。
-								tr
-									td clear
-									td 両サイドの回り込みなし。
-							p='CSS3のEditor\'s Draftでは「minimum」という値が追加され、レイアウトスペースの小さいサイドを指定できるようになっています。'
-							hr
-							h4 SAMPLE B：エクスクルージョンボックスに対する処理
-							p='SAMPLE Aでは、<div>のwrap-flowプロパティの値を「both」にするだけで文章が回り込んだ表示になります。これは、文章をマークアップした<p>のwrap-throughプロパティの値が初期値「wrap」で処理されるためです。'
-							p='<p>のwrap-throughプロパティの値を「none」にすると、エクスクルージョンボックスに対する回り込みを無効にすることができます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/113-B.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| p {
-									|     -ms-wrap-through: none;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	-ms-wrap-through none
-								figcaption （Stylus）
-							table.table
-								tr
-									th wrap-throughの値
-									th エクスクルージョンボックスに対する処理
-								tr
-									td wrap
-									td 回り込みを行う。
-								tr
-									td none
-									td 回り込みを行わない。
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;エクスクルージョン
+                        .panel-body
+                            .alert.alert-info エクスクルージョン
+                            table.browser-support
+                                tr
+                                    td.not-support
+                                        img(src='../images/ic-apple.png')
+                                    td.not-support
+                                        img(src='../images/ic-android.png')
+                                    td.not-support
+                                        img(src='../images/ic-firefox.png')
+                                    td.not-support
+                                        img(src='../images/ic-safari.png')
+                                    td.not-support
+                                        img(src='../images/ic-chrome.png')
+                                    td.not-support
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            p IE9以前は未対応。
+                            pre
+                                | wrap-flow: 回り込みのサイド
+                            pre
+                                | wrap-margin: 余白サイズ
+                            pre
+                                | wrap-through: エクスクルージョンボックスに対する処理
+                            p
+                                | 回り込みのサイド・・・auto ／ both ／ start ／ end ／ maximum ／ clear<br>
+                                | 余白のサイズ・・・数値<br>
+                                | エクスクルージョンボックスに対する処理・・・wrap ／ none
+                            table.table
+                                tr
+                                    td 初期値
+                                    td
+                                        | wrap-flow・・・auto<br>
+                                        | wrap-margin・・・0<br>
+                                        | wrap-through・・・wrap
+                                tr
+                                    td 継承
+                                    td なし
+                                tr
+                                    td 適用先
+                                    td
+                                        | wrap-flow・・・ブロックレベル要素<br>
+                                        | wrap-margin・・・エクスクルージョン要素<br>
+                                        | wrap-through・・・ブロックレベル要素
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td Exclusions and Shapes
+                            p='エクスクルージョン（除外）の機能を利用すると、テキストや画像といったインラインレベルのコンテンツがボックスに回り込んだレイアウトを設定することができます。'
+                            hr
+                            h4 SAMPLE A：回り込みの設定
+                            p='たとえば、下のサンプルはpositionプロパティを利用して、<div>で構成した茶色のボックスを文章の上に重ねて表示したものです。'
+                            p='<div>のwrap-flowプロパティの値を「both」にすると、<div>の構成するボックスが「エクスクルージョンボックス」として扱われ、ボックスのまわりに文章が回り込んだ表示になります。また、wrap-marginプロパティの値を「20px」にして、ボックスのまわりに20ピクセルの余白を入れてレイアウトしています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/113-A.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     width: 300px;
+                                    |     position: absolute;
+                                    |     top: calc(50% - 60px);
+                                    |     left: calc(50% - 150px);
+                                    |     -ms-wrap-flow: both;
+                                    |     -ms-wrap-margin: 20px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     width 300px
+                                    |     position absolute
+                                    |     top calc(50% - 60px)
+                                    |     left calc(50% - 150px)
+                                    |     -ms-wrap-flow both
+                                    |     -ms-wrap-margin 20px
+                                figcaption （Stylus）
+                            p='wrap-flowプロパティで指定できる値は以下のようになっており、回り込みのサイドを指定することができます。'
+                            table.table
+                                tr
+                                    th wrap-flowの値
+                                    th 回り込みのサイド
+                                tr
+                                    td auto
+                                    td エクスクルージョンの機能を利用しない。
+                                tr
+                                    td both
+                                    td 両サイド。
+                                tr
+                                    td start
+                                    td 書字方向の開始サイド。
+                                tr
+                                    td end
+                                    td 書字方向の終了サイド。
+                                tr
+                                    td maximum
+                                    td レイアウトスペースの大きいサイド。
+                                tr
+                                    td clear
+                                    td 両サイドの回り込みなし。
+                            p='CSS3のEditor\'s Draftでは「minimum」という値が追加され、レイアウトスペースの小さいサイドを指定できるようになっています。'
+                            hr
+                            h4 SAMPLE B：エクスクルージョンボックスに対する処理
+                            p='SAMPLE Aでは、<div>のwrap-flowプロパティの値を「both」にするだけで文章が回り込んだ表示になります。これは、文章をマークアップした<p>のwrap-throughプロパティの値が初期値「wrap」で処理されるためです。'
+                            p='<p>のwrap-throughプロパティの値を「none」にすると、エクスクルージョンボックスに対する回り込みを無効にすることができます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/113-B.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p {
+                                    |     -ms-wrap-through: none;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     -ms-wrap-through none
+                                figcaption （Stylus）
+                            table.table
+                                tr
+                                    th wrap-throughの値
+                                    th エクスクルージョンボックスに対する処理
+                                tr
+                                    td wrap
+                                    td 回り込みを行う。
+                                tr
+                                    td none
+                                    td 回り込みを行わない。
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

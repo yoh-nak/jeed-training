@@ -1,157 +1,157 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;マルチカラムレイアウト
-						.panel-body
-							.alert.alert-info マルチカラムレイアウト
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							p IE9以前は未対応。
-							pre
-								| columns: 段の横幅 段の数
-							pre
-								| column-count: 段の数
-							pre
-								| column-width: 段の横幅
-							p
-								| 段の数・・・整数 ／ auto<br>
-								| 段の横幅・・・数値 ／ auto
-							table.table
-								tr
-									td 初期値
-									td auto
-								tr
-									td 継承
-									td なし
-								tr
-									td 適用先
-									td 非置換ブロックレベル要素（テーブル要素を除く） ／ テーブルセル ／ インラインブロック要素
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td Multi-column Layout
-							p='マルチカラムの機能を利用すると、ボックス内のコンテンツを段組みの形でレイアウトすることができます。何段組みで表示するかは、段の数または横幅で指定します。'
-							hr
-							h4 SAMPLE A：段の数を指定する [column-count]
-							p='下のサンプルは見出しとして文章を<div>でマークアップし、widthプロパティで横幅を800ピクセルにしたものです。'
-							p='<div>のcolumn-countプロパティの値を「2」にすると、<div>でマークアップしたコンテンツを2段組みで表示することができます。このような表示なるのは、<div>がマルチカラム要素として扱われ、要素内にカラムボックスを構成するためです。column-countプロパティの値を「2」にした場合、2つのカラムボックスが構成されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/097-A.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div&gt;
-									| &lt;h2&gt;おすすめのサンドイッチ&lt;/h2&gt;
-									| &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト、チーズ、レタス
-									| …略...
-									| &lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	h2 おすすめのサンドイッチ
-									| 	p
-									| 		| 焼きたての手作りパンで新鮮なハム、トマト、チーズ、レタス
-									| 		| …略...
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     width: 800px;
-									|     margin: auto;
-									|     column-count: 2;
-									|     -moz-column-count: 2;
-									|     -webkit-column-count: 2;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	width 800px
-									| 	margin auto
-									| 	column-count 2
-									| 	-moz-column-count 2
-									| 	-webkit-column-count 2
-								figcaption （Stylus）
-							hr
-							h4 SAMPLE B：段の横幅を指定する [column-width]
-							p='何段組みで表示するかは、段の横幅で指定することもできます。たとえば、column-widthプロパティの値を「300px」二した場合、段の間の余白も含めてマルチカラム要素の横幅800ピクセルに2段分収まることから、2段組みの表示になります。ただし、構成されるカラムボックスの横幅は300ピクセルにはならず、800ピクセルから段の間の余白を除いた横幅で決まります。段の間の余白サイズはcolumn-gapプロパティで指定することができます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/097-B.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     width: 800px;
-									|     margin: auto;
-									|     column-count: 300px;
-									|     -moz-column-count: 300px;
-									|     -webkit-column-count: 300px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	width 800px
-									| 	margin auto
-									| 	column-count 300px
-									| 	-moz-column-count 300px
-									| 	-webkit-column-count 300px
-								figcaption （Stylus）
-							hr
-							h4 SAMPLE C：段の指定をまとめる [columns]
-							p='columnsプロパティを利用すると、段の横幅と段の数の両方の値を指定することができます。段の横幅と段の数の値はどちらか一方を省略することも可能です。たとえば「170px auto」と指定すると、段の横幅を170ピクセルい、段の数をautoと指定したことになり、4段組みの表示になります。'
-							pre
-								| columnss: 段の横幅 段の数
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     width: 800px;
-									|     margin: auto;
-									|     columns: 170px auto;
-									|     -webkit-columns: 170px auto;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	width 800px
-									| 	margin auto
-									| 	columns 170px auto
-									| 	-webkit-columns 170px auto
-								figcaption （Stylus）
-							p='columnsプロパティの値を「170px 3」にした場合、主要ブラウザでは「3」の指定が優先され、3段組みの表示になります。 '
-							p='しかし、Operaでは「170px」の指定が優先され、4段組みの表示になります。また、iOS4.xとAndroid2.3.x/3.xでは4段組みの表示になるものの、コンテンツが4段目に表示されないといった問題が発生します。'
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;マルチカラムレイアウト
+                        .panel-body
+                            .alert.alert-info マルチカラムレイアウト
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            p IE9以前は未対応。
+                            pre
+                                | columns: 段の横幅 段の数
+                            pre
+                                | column-count: 段の数
+                            pre
+                                | column-width: 段の横幅
+                            p
+                                | 段の数・・・整数 ／ auto<br>
+                                | 段の横幅・・・数値 ／ auto
+                            table.table
+                                tr
+                                    td 初期値
+                                    td auto
+                                tr
+                                    td 継承
+                                    td なし
+                                tr
+                                    td 適用先
+                                    td 非置換ブロックレベル要素（テーブル要素を除く） ／ テーブルセル ／ インラインブロック要素
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td Multi-column Layout
+                            p='マルチカラムの機能を利用すると、ボックス内のコンテンツを段組みの形でレイアウトすることができます。何段組みで表示するかは、段の数または横幅で指定します。'
+                            hr
+                            h4 SAMPLE A：段の数を指定する [column-count]
+                            p='下のサンプルは見出しとして文章を<div>でマークアップし、widthプロパティで横幅を800ピクセルにしたものです。'
+                            p='<div>のcolumn-countプロパティの値を「2」にすると、<div>でマークアップしたコンテンツを2段組みで表示することができます。このような表示なるのは、<div>がマルチカラム要素として扱われ、要素内にカラムボックスを構成するためです。column-countプロパティの値を「2」にした場合、2つのカラムボックスが構成されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/097-A.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div&gt;
+                                    | &lt;h2&gt;おすすめのサンドイッチ&lt;/h2&gt;
+                                    | &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト、チーズ、レタス
+                                    | …略...
+                                    | &lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     h2 おすすめのサンドイッチ
+                                    |     p
+                                    |         | 焼きたての手作りパンで新鮮なハム、トマト、チーズ、レタス
+                                    |         | …略...
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     width: 800px;
+                                    |     margin: auto;
+                                    |     column-count: 2;
+                                    |     -moz-column-count: 2;
+                                    |     -webkit-column-count: 2;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     width 800px
+                                    |     margin auto
+                                    |     column-count 2
+                                    |     -moz-column-count 2
+                                    |     -webkit-column-count 2
+                                figcaption （Stylus）
+                            hr
+                            h4 SAMPLE B：段の横幅を指定する [column-width]
+                            p='何段組みで表示するかは、段の横幅で指定することもできます。たとえば、column-widthプロパティの値を「300px」二した場合、段の間の余白も含めてマルチカラム要素の横幅800ピクセルに2段分収まることから、2段組みの表示になります。ただし、構成されるカラムボックスの横幅は300ピクセルにはならず、800ピクセルから段の間の余白を除いた横幅で決まります。段の間の余白サイズはcolumn-gapプロパティで指定することができます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/097-B.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     width: 800px;
+                                    |     margin: auto;
+                                    |     column-count: 300px;
+                                    |     -moz-column-count: 300px;
+                                    |     -webkit-column-count: 300px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     width 800px
+                                    |     margin auto
+                                    |     column-count 300px
+                                    |     -moz-column-count 300px
+                                    |     -webkit-column-count 300px
+                                figcaption （Stylus）
+                            hr
+                            h4 SAMPLE C：段の指定をまとめる [columns]
+                            p='columnsプロパティを利用すると、段の横幅と段の数の両方の値を指定することができます。段の横幅と段の数の値はどちらか一方を省略することも可能です。たとえば「170px auto」と指定すると、段の横幅を170ピクセルい、段の数をautoと指定したことになり、4段組みの表示になります。'
+                            pre
+                                | columnss: 段の横幅 段の数
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     width: 800px;
+                                    |     margin: auto;
+                                    |     columns: 170px auto;
+                                    |     -webkit-columns: 170px auto;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     width 800px
+                                    |     margin auto
+                                    |     columns 170px auto
+                                    |     -webkit-columns 170px auto
+                                figcaption （Stylus）
+                            p='columnsプロパティの値を「170px 3」にした場合、主要ブラウザでは「3」の指定が優先され、3段組みの表示になります。 '
+                            p='しかし、Operaでは「170px」の指定が優先され、4段組みの表示になります。また、iOS4.xとAndroid2.3.x/3.xでは4段組みの表示になるものの、コンテンツが4段目に表示されないといった問題が発生します。'
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

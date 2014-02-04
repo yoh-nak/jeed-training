@@ -1,293 +1,293 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;フレキシブルボックスレイアウト
-						.panel-body
-							.alert.alert-info フレキシブルボックスレイアウト
-							table.browser-support
-								tr
-									td.not-support
-										img(src='../images/ic-apple.png')
-									td.not-support
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td.not-support
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td.not-support
-										img(src='../images/ic-ie.png')
-							pre
-								| display: フレックスコンテナボックスの種類
-							p
-								| フレックスコンテナボックスの種類・・・flex ／ inline-flex
-							table.table
-								tr
-									td 初期値
-									td displayを参照
-								tr
-									td 継承
-									td -
-								tr
-									td 適用先
-									td -
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td Flexible Box Layout
-							p='フレキシブルボックスレイアウトの機能を利用すると、段組みのレイアウトを簡単に設定することができます。'
-							p='たとえば、下のように<div id="column01">と<div id="column02">で構成した2つのボックスを2段組みにしたい場合、親要素<div id="container">のdisplayプロパティの値を「flex」または「inline-flex」にします。すると、子要素の2つのボックスが横に並び、高さも揃えて表示されます。'
-							p='このとき、親要素の<div id="container">が構成するボックスは「フレキシブルコンテナボックス」と呼ばれ、displayプロパティの値が「flex」の場合はブロックレベルボックスとして、「inline-flex」の場合はインラインレベルボックスとして扱われます。'
-							p='フレックスコンテナボックスの子要素は「フレックスアイテム」と呼ばれ、横1列に並べて表示されます。ただし以下のプロパティを利用すると、複数行で並べたり、並び順を変更したりすることもできます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/077-01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div id="container"&gt;
-									| &lt;div id="column01"&gt;&lt;img src="sandwiches.jpg"…略...&lt;/div&gt;
-									| &lt;div id="column02"&gt;&lt;p&gt;焼きたての手作りパン…略...&lt;/p&gt;&lt;/div&gt;
-									| &lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container
-									| 	#column01
-									| 		img(src='sandwiches.jpg')
-									| 	#column02
-									| 		p 焼きたての手作りパン…略...
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container {
-									|     border: dotted 2px blue;
-									|     display: -webkit-flex;
-									|     display: -moz-flex;
-									|     display: flex;
-									| }
-									| #column01 {
-									|     background-color: orange;
-									|     width: 200px;
-									| }
-									| 
-									| #column02 {
-									|     background-color: greenyellow;
-									|     width: 400px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container
-									| 	border dotted 2px blue
-									| 	display -webkit-flex
-									| 	display -moz-flex
-									| 	display flex
-									| 
-									| #column01
-									| 	background-color orange
-									| 	width 200px
-									| 
-									| #column02
-									| 	background-color greenyellow
-									| 	width 400px
-								figcaption （Stylus）
-							p!='<mark>Firefoxでフレキシブルボックスレイアウトの機能を利用するためには、about:configで「layout.css.flexbox.enabled」をtrueに設定する必要があります。</mark>'
-							table.table
-								tr
-									th displayの値
-									th 構成するフレックスコンテナボックス
-								tr
-									td box
-									td ブロックレベルのフレックスコンテナボックスを構成
-								tr
-									td inline-box
-									td インラインレベルのフレックスコンテナボックスを構成
-							hr
-							h4 段の追加
-							p='段を増やすには、フレックスコンテナボックスの中にフレックスアイテムを追加します。たとえば、下のように背景をピンク色にした<div id="column03">を3つ目にフレックスアイテムとして追加すると、3段組みのレイアウトになります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/077-02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div id="container"&gt;
-									| &lt;div id="column01"&gt;&lt;img src="sandwiches.jpg"…略...&lt;/div&gt;
-									| &lt;div id="column02"&gt;&lt;p&gt;焼きたての手作りパン…略...&lt;/p&gt;&lt;/div&gt;
-									| &lt;div id="column03"&gt;&lt;ul&gt;&lt;li&gt;ハムチーズ…略…&lt;/p&gt;&lt;/div&gt;
-									| &lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container
-									| 	#column01
-									| 		img(src='sandwiches.jpg')
-									| 	#column02
-									| 		p 焼きたての手作りパン…略...
-									| 	#column03
-									| 		ul
-									| 			li ハムチーズ…略…
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container {
-									|     border: dotted 2px blue;
-									|     display: -webkit-flex;
-									|     display: -moz-flex;
-									|     display: flex;
-									| }
-									| #column01 {
-									|     background-color: orange;
-									|     width: 200px;
-									| }
-									| #column02 {
-									|     background-color: greenyellow;
-									|     width: 400px;
-									| }
-									| #column03 {
-									|     background-color: pink;
-									|     width: 200px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container
-									| 	border dotted 2px blue
-									| 	display -webkit-flex
-									| 	display -moz-flex
-									| 	display flex
-									| 
-									| #column01
-									| 	background-color orange
-									| 	width 200px
-									| 
-									| #column02
-									| 	background-color greenyellow
-									| 	width 400px
-									| 
-									| #column03
-									| 	background-color pink
-									| 	width 200px
-								figcaption （Stylus）
-							p='フレックスアイテムのまわりにマージンを挿入すると、格段の間隔を調節することもできます。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container div {
-									|     margin-right: 20px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container
-									| 	div
-									| 		margin-right 20px
-								figcaption （Stylus）
-							hr
-							h4 主要ブラウザでフレキシブルボックスレイアウトの表示を行う
-							p='フレキシブルボックスレイアウトの仕様は策定家庭で何度も修正が加えられたことから、ブラウザによって異なる時期の仕様に対応した状態となっています。しかし、プロパティ名や値の表記が変わっただけで、機能そのものは大きく変化していません。たとえば、フレックスコンテナボックスを構成する場合、各ブラウザが対応したdisplayプロパティの値は下のようになっています。'
-							table.table
-								tr
-									th 仕様
-									th(colspan='2') プロパティ
-									th iOS
-									th Android
-									th Firefox
-									th Safari
-									th Chrome
-									th Opera
-									th IE10
-								tr
-									td 2009年草案
-									td box
-									td inline-box
-									td ○
-									td ○
-									td ○
-									td ○
-									td ○
-									td ×
-									td ×
-								tr
-									td 2012年草案
-									td flexbox
-									td inline-flexbox
-									td ×
-									td ×
-									td ×
-									td ×
-									td ×
-									td ×
-									td ×
-									td ○
-								tr
-									td 勧告候補
-									td flex
-									td inline-flex
-									td ×
-									td ×
-									td ○
-									td ×
-									td ○
-									td ○
-									td ×
-							p='※ Opera以外はベンダープレフィックスが必要です。'
-							p='※ Firefoxで勧告候補の仕様を利用するには、about:configで「layout.css.flexbox.enabled」をtrueに設定する必要があります。'
-							p='そのため、古い草案に従った設定も記述しておくと、主要ブラウザ（iOS、Android、Firefox、Safari、Chrome、Opera、IE10以上）でフレキシブルボックスレイアウトの表示を行うことができるようになります。'
-							p='なお、FirefoxやChromeは2009年の草案と最新の勧告候補の両方に対応しています。こうしたブラウザでは最新の仕様で表示するため、勧告候補に従った設定は最後に記述するようにします。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/077-02-compatible.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container {
-									|     border: dotted 2px blue;
-									| 
-									|     /* 2009年草案 */
-									|     display: -webkit-box;
-									|     display: -moz-box;
-									| 
-									|     /* 2012年草案 */
-									|     display: -ms-flexbox;
-									|     
-									|     /* 勧告候補 */
-									| 
-									|     display: -webkit-flex;
-									|     display: -moz-flex;
-									|     display: flex;
-									| }
-									| …略...
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container
-									| 	border dotted 2px blue
-									| 	display -webkit-box
-									| 	display -moz-box
-									| 	display -ms-flexbox
-									| 	display -webkit-flex
-									| 	display -moz-flex
-									| 	display flex
-								figcaption （Stylus）
-							p='※ IE11では勧告候補に従った形でフレキシブルボックスレイアウトを利用できるようになるようです。'
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;フレキシブルボックスレイアウト
+                        .panel-body
+                            .alert.alert-info フレキシブルボックスレイアウト
+                            table.browser-support
+                                tr
+                                    td.not-support
+                                        img(src='../images/ic-apple.png')
+                                    td.not-support
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td.not-support
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td.not-support
+                                        img(src='../images/ic-ie.png')
+                            pre
+                                | display: フレックスコンテナボックスの種類
+                            p
+                                | フレックスコンテナボックスの種類・・・flex ／ inline-flex
+                            table.table
+                                tr
+                                    td 初期値
+                                    td displayを参照
+                                tr
+                                    td 継承
+                                    td -
+                                tr
+                                    td 適用先
+                                    td -
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td Flexible Box Layout
+                            p='フレキシブルボックスレイアウトの機能を利用すると、段組みのレイアウトを簡単に設定することができます。'
+                            p='たとえば、下のように<div id="column01">と<div id="column02">で構成した2つのボックスを2段組みにしたい場合、親要素<div id="container">のdisplayプロパティの値を「flex」または「inline-flex」にします。すると、子要素の2つのボックスが横に並び、高さも揃えて表示されます。'
+                            p='このとき、親要素の<div id="container">が構成するボックスは「フレキシブルコンテナボックス」と呼ばれ、displayプロパティの値が「flex」の場合はブロックレベルボックスとして、「inline-flex」の場合はインラインレベルボックスとして扱われます。'
+                            p='フレックスコンテナボックスの子要素は「フレックスアイテム」と呼ばれ、横1列に並べて表示されます。ただし以下のプロパティを利用すると、複数行で並べたり、並び順を変更したりすることもできます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/077-01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div id="container"&gt;
+                                    | &lt;div id="column01"&gt;&lt;img src="sandwiches.jpg"…略...&lt;/div&gt;
+                                    | &lt;div id="column02"&gt;&lt;p&gt;焼きたての手作りパン…略...&lt;/p&gt;&lt;/div&gt;
+                                    | &lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container
+                                    |     #column01
+                                    |         img(src='sandwiches.jpg')
+                                    |     #column02
+                                    |         p 焼きたての手作りパン…略...
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container {
+                                    |     border: dotted 2px blue;
+                                    |     display: -webkit-flex;
+                                    |     display: -moz-flex;
+                                    |     display: flex;
+                                    | }
+                                    | #column01 {
+                                    |     background-color: orange;
+                                    |     width: 200px;
+                                    | }
+                                    | 
+                                    | #column02 {
+                                    |     background-color: greenyellow;
+                                    |     width: 400px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container
+                                    |     border dotted 2px blue
+                                    |     display -webkit-flex
+                                    |     display -moz-flex
+                                    |     display flex
+                                    | 
+                                    | #column01
+                                    |     background-color orange
+                                    |     width 200px
+                                    | 
+                                    | #column02
+                                    |     background-color greenyellow
+                                    |     width 400px
+                                figcaption （Stylus）
+                            p!='<mark>Firefoxでフレキシブルボックスレイアウトの機能を利用するためには、about:configで「layout.css.flexbox.enabled」をtrueに設定する必要があります。</mark>'
+                            table.table
+                                tr
+                                    th displayの値
+                                    th 構成するフレックスコンテナボックス
+                                tr
+                                    td box
+                                    td ブロックレベルのフレックスコンテナボックスを構成
+                                tr
+                                    td inline-box
+                                    td インラインレベルのフレックスコンテナボックスを構成
+                            hr
+                            h4 段の追加
+                            p='段を増やすには、フレックスコンテナボックスの中にフレックスアイテムを追加します。たとえば、下のように背景をピンク色にした<div id="column03">を3つ目にフレックスアイテムとして追加すると、3段組みのレイアウトになります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/077-02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div id="container"&gt;
+                                    | &lt;div id="column01"&gt;&lt;img src="sandwiches.jpg"…略...&lt;/div&gt;
+                                    | &lt;div id="column02"&gt;&lt;p&gt;焼きたての手作りパン…略...&lt;/p&gt;&lt;/div&gt;
+                                    | &lt;div id="column03"&gt;&lt;ul&gt;&lt;li&gt;ハムチーズ…略…&lt;/p&gt;&lt;/div&gt;
+                                    | &lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container
+                                    |     #column01
+                                    |         img(src='sandwiches.jpg')
+                                    |     #column02
+                                    |         p 焼きたての手作りパン…略...
+                                    |     #column03
+                                    |         ul
+                                    |             li ハムチーズ…略…
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container {
+                                    |     border: dotted 2px blue;
+                                    |     display: -webkit-flex;
+                                    |     display: -moz-flex;
+                                    |     display: flex;
+                                    | }
+                                    | #column01 {
+                                    |     background-color: orange;
+                                    |     width: 200px;
+                                    | }
+                                    | #column02 {
+                                    |     background-color: greenyellow;
+                                    |     width: 400px;
+                                    | }
+                                    | #column03 {
+                                    |     background-color: pink;
+                                    |     width: 200px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container
+                                    |     border dotted 2px blue
+                                    |     display -webkit-flex
+                                    |     display -moz-flex
+                                    |     display flex
+                                    | 
+                                    | #column01
+                                    |     background-color orange
+                                    |     width 200px
+                                    | 
+                                    | #column02
+                                    |     background-color greenyellow
+                                    |     width 400px
+                                    | 
+                                    | #column03
+                                    |     background-color pink
+                                    |     width 200px
+                                figcaption （Stylus）
+                            p='フレックスアイテムのまわりにマージンを挿入すると、格段の間隔を調節することもできます。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container div {
+                                    |     margin-right: 20px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container
+                                    |     div
+                                    |         margin-right 20px
+                                figcaption （Stylus）
+                            hr
+                            h4 主要ブラウザでフレキシブルボックスレイアウトの表示を行う
+                            p='フレキシブルボックスレイアウトの仕様は策定家庭で何度も修正が加えられたことから、ブラウザによって異なる時期の仕様に対応した状態となっています。しかし、プロパティ名や値の表記が変わっただけで、機能そのものは大きく変化していません。たとえば、フレックスコンテナボックスを構成する場合、各ブラウザが対応したdisplayプロパティの値は下のようになっています。'
+                            table.table
+                                tr
+                                    th 仕様
+                                    th(colspan='2') プロパティ
+                                    th iOS
+                                    th Android
+                                    th Firefox
+                                    th Safari
+                                    th Chrome
+                                    th Opera
+                                    th IE10
+                                tr
+                                    td 2009年草案
+                                    td box
+                                    td inline-box
+                                    td ○
+                                    td ○
+                                    td ○
+                                    td ○
+                                    td ○
+                                    td ×
+                                    td ×
+                                tr
+                                    td 2012年草案
+                                    td flexbox
+                                    td inline-flexbox
+                                    td ×
+                                    td ×
+                                    td ×
+                                    td ×
+                                    td ×
+                                    td ×
+                                    td ×
+                                    td ○
+                                tr
+                                    td 勧告候補
+                                    td flex
+                                    td inline-flex
+                                    td ×
+                                    td ×
+                                    td ○
+                                    td ×
+                                    td ○
+                                    td ○
+                                    td ×
+                            p='※ Opera以外はベンダープレフィックスが必要です。'
+                            p='※ Firefoxで勧告候補の仕様を利用するには、about:configで「layout.css.flexbox.enabled」をtrueに設定する必要があります。'
+                            p='そのため、古い草案に従った設定も記述しておくと、主要ブラウザ（iOS、Android、Firefox、Safari、Chrome、Opera、IE10以上）でフレキシブルボックスレイアウトの表示を行うことができるようになります。'
+                            p='なお、FirefoxやChromeは2009年の草案と最新の勧告候補の両方に対応しています。こうしたブラウザでは最新の仕様で表示するため、勧告候補に従った設定は最後に記述するようにします。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/077-02-compatible.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container {
+                                    |     border: dotted 2px blue;
+                                    | 
+                                    |     /* 2009年草案 */
+                                    |     display: -webkit-box;
+                                    |     display: -moz-box;
+                                    | 
+                                    |     /* 2012年草案 */
+                                    |     display: -ms-flexbox;
+                                    |     
+                                    |     /* 勧告候補 */
+                                    | 
+                                    |     display: -webkit-flex;
+                                    |     display: -moz-flex;
+                                    |     display: flex;
+                                    | }
+                                    | …略...
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container
+                                    |     border dotted 2px blue
+                                    |     display -webkit-box
+                                    |     display -moz-box
+                                    |     display -ms-flexbox
+                                    |     display -webkit-flex
+                                    |     display -moz-flex
+                                    |     display flex
+                                figcaption （Stylus）
+                            p='※ IE11では勧告候補に従った形でフレキシブルボックスレイアウトを利用できるようになるようです。'
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

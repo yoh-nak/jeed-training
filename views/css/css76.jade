@@ -1,433 +1,433 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp; リストマークのデザイン
-						.panel-body
-							.alert.alert-info  リストマークのデザイン
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png') （※）
-									td
-										img(src='../images/ic-ie.png') （※）
-							p ※ 部分対応。
-							pre
-								| list-style: スタイル 画像 表示位置
-							pre
-								| list-style-type: スタイル
-							pre
-								| list-style-image: 画像
-							pre
-								| list-style-position: 表示位置
-							p
-								| スタイル・・・none ／ disc ／ circle ／ square ／ decimal ／ lower-roman ／ upper-roman ／ lower-alpha ／ upper-alpha ／ decimal-leading-zero ／ lower-greek ／ lower-latin ／ upper-latin ／ armenian ／ georgian ／ hebrew ／ hiragana ／ katakana ／ hiragana-iroha ／ katakana-iroha<br>
-								| 画像・・・url ／ none<br>
-								| 表示位置・・・inside ／ outside
-							table.table
-								tr
-									td 初期値
-									td disc none outside
-								tr
-									td 継承
-									td あり
-								tr
-									td 適用先
-									td displayの値が「list-item」な要素
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td List and Counters / Counter Styles
-							p='list-styleプロパティを利用すると、リストマークのスタイルや画像、表示位置を指定することができます。また、list-style-type、list-style-image、list-style-positionプロパティを利用して個別に指定することも可能です。'
-							hr
-							h4 SAMPLE A：リストマークのスタイルを指定
-							p='下のサンプルはリストアップした項目を<ul>と<li>でマークアップしたものです。各項目の行頭には黒丸のスタイルでリストマークが表示されます。これは、デフォルトスタイルシートによって<ul>のlist-style-typeプロパティの値が「disc」で処理されるためです。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;ul&gt;
-									|     &lt;li&gt;ハム&amp;チーズ&lt;/li&gt;
-									|     &lt;li&gt;卵&amp;サンド&lt;/li&gt;
-									|     &lt;li&gt;日替わりサンド&lt;/li&gt;
-									| &lt;/ul&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| ul
-									| 	li ハム&amp;チーズ
-									| 	li 卵&amp;サンド
-									| 	li 日替わりサンド
-								figcaption （Jade）
-							p='list-style-typeプロパティではさまざまなスタイルを指定することができます。たとえば、値を「circle」にするとリストマークが白丸のスタイルで表示されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/252-A.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| ul {
-									|     list-style-type: circle;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| ul
-									| 	list-style-type circle
-								figcaption （Stylus）
-							p='数字や文字の連番を表示することもできます。たとえば、list-stle-typeプロパティの値を「decimal」にすると、下のように数字の連番が表示されます。また、リストマークを表示したくない場合は値を「none」にします。'
-							p='この他、指定できる値は基本的なスタイルは以下のようになっています。'
-							p='OperaとIEはCSS3で採用された値には未対応です。'
-							h4 数字（Neumeric）
-							table.table
-								tr
-									th 値
-									th リストマークの種類
-								tr
-									td decimal
-									td 数字
-								tr
-									td decimal-leading-zero ※1
-									td 0をつけた数字
-								tr
-									td lower-roman
-									td 小文字のローマ数字
-								tr
-									td upper-roman
-									td 大文字のローマ数字
-								tr
-									td armenian ※1 ※2
-									td アルメニア数字
-								tr
-									td georgian ※1
-									td グルジア数字
-								tr
-									td hebrew
-									td ヘブライ数字
-							p ※1・・・IE7以前は未対応。
-							p ※2・・・Android3.x以前は未対応。
-							p='CSS3では漢数字を表示する「cjk-decimal」という値も提案されていますが、各ブラウザは見た王です。'
-							h4 文字（Alphabetic）
-							table.table
-								tr
-									th 値
-									th リストマークの種類
-								tr
-									td lower-alpha<br>lower-latin ※1
-									td 小文字のアルファベット
-								tr
-									td upper-alpha<br>upper-latin ※1
-									td 大文字のアルファベット
-								tr
-									td lower-greek ※1
-									td 小文字のギリシャ文字
-								tr
-									td hiragana
-									td ひらがな（あいうえお順）
-								tr
-									td hiragana-iroha
-									td ひらがな（いろは順）
-								tr
-									td katakana
-									td カタカナ（あいうえお順）
-								tr
-									td katakana-iroha
-									td カタカナ（いろは順）
-							h4 記号（Symbolic）
-							table.table
-								tr
-									th 値
-									th リストマークの種類
-								tr
-									td disc
-									td 黒丸
-								tr
-									td circle
-									td 白丸
-								tr
-									td square
-									td 四角形
-							p='CSS3ではHTML5の<details>で使用する「disclosure-open」、「disclosure-closed」という値も提案されていますが。それぞれ「▼」や「▶」を表示し、ウィジェットの開閉を示すことになっています。現在のところ、各ブラウザは未対応です。'
-							hr
-							h4 リストマークのスタイルの定義
-							p='CSS3では、list-style-typeプロパティで指定するリストマークのスタイルを@counter-styleで定義することになっています。たとえば、黒丸のスタイルである「disc」は下のように定義されます。'
-							p='@counter-styleを利用し、独自のリストマークを定義することもできます。ただし、現在のところ各ブラウザは未対応です。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| @counter-style disc {
-									|     system: cyclic;
-									|     symbols: \2022;
-									|     /* ・ */
-									|     suffix: '';
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| @counter-style　disc
-									| 	system cyclic
-									| 	symbols \2022
-									| 	suffix ''
-								figcaption （Stylus）
-							hr
-							h4 その他のスタイル
-							p='CSS3では基本的なスタイルに加えて、次のようなスタイルについてもブラウザが@counter-styleで定義しておき、標準で使えるようにすることが提案されています。ここではFirefoxとWebkit系ブラウザが先行実装しているスタイルを取り上げます。'
-							p='なお、Firefoxに対応する場合は値に「-moz-」をつけて記述します。また、使用するフォントによっては表示されないスタイルもあります。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| ul {
-									|     list-style-type: -moz-cjk-earthly-branch;
-									|     list-style-type: cjk-earthly-branch;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									ul
-										list-style-type -moz-cjk-earthly-branch
-										list-style-type cjk-earthly-branch
-								figcaption （Stylus）
-							h4 東アジア言語
-							table.table
-								tr
-									th 値
-									th リストマークの種類
-								tr
-									td japanese-formal
-									td 漢数字（日本語）
-								tr
-									td japanese-informal
-									td 漢数字（日本語）
-								tr
-									td simp-chinese-formal
-									td 漢数字（簡体字の中国語）
-								tr
-									td simp-chinese-informal
-									td 漢数字（簡体字の中国語）
-								tr
-									td trad-chinese-formal
-									td 漢数字（繁体字の中国語）
-								tr
-									td trad-chinese-informal
-									td 漢数字（繁体字の中国語）
-								tr
-									td cjk-ideographic
-									td 漢数字
-							h4 数字
-							table.table
-								tr
-									th 値
-									th リストマークの種類
-								tr
-									td arabic-indic
-									td アラビア・インド数字
-								tr
-									td bengali
-									td ベンガル数字
-								tr
-									td devanagari
-									td デーヴァナーガリー数字
-								tr
-									td gujarati
-									td グジャラーティー数字
-								tr
-									td gurmukhi
-									td グルムキー数字
-								tr
-									td kannada
-									td カンナダ数字
-							hr
-							h4 リストマークを文字列で指定
-							p='CSS3では、list-style-typeプロパティで指定した文字列をリストマークとして表示する機能も提案されています。たとえば、下のように指定すると「★」をリストマークといて表示することができるようになります。現在のところ、各ブラウザは未対応です。'
-							hr
-							h4 SAMPLE B：画像によるリストマークの表示
-							p='list-style-imageプロパティを利用すると、リストマークを画像で表示することができます。たとえば、mark.pngという画像を指定すると、下のように表示されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/252-B.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;ul&gt;
-									|     &lt;li&gt;ハム&amp;チーズ&lt;/li&gt;
-									|     &lt;li&gt;卵&amp;サンド&lt;/li&gt;
-									|     &lt;li&gt;日替わりサンド&lt;/li&gt;
-									| &lt;/ul&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| ul
-									| 	li ハム&amp;チーズ
-									| 	li 卵&amp;サンド
-									| 	li 日替わりサンド
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| li {
-									|     list-style-image: url(mark.png);
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| li
-									| 	list-style-image url(mark.png)
-								figcaption （Stylus）
-							p='なお、list-style-imageプロパティの値を「none」にした場合や画像が読めなかった場合、list-style-typeプロパティの値に従ってリストマークが表示されます。'
-							hr
-							h4 SAMPLE C：リストマークの表示位置を指定する
-							p='リストの項目を複数行で表示すると、リストマークは各項目の外線に表示されていることが分かります。これは、list-style-positionプロパティの値が初期値の「outside」で処理されるためです。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/252-C01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;ul&gt;
-									|     &lt;li&gt;焼きたての手作りパンで新鮮はハム、トマト、チーズ、レタスを挟んだサンドイッチです。&lt;/li&gt;
-									|     &lt;li&gt;マヨネーズソースがおいしくて、お店の近くを通るたびに買いこんでしまいます。&lt;/li&gt;
-									| &lt;/ul&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| ul
-									| 	li 焼きたての手作りパンで新鮮はハム、トマト、チーズ、レタスを挟んだサンドイッチです。
-									| 	li マヨネーズソースがおいしくて、お店の近くを通るたびに買いこんでしまいます。
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| li {
-									|     list-style-image: url(mark.png);
-									|     list-style-position: outside;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| li
-									| 	list-style-image url(mark.png)
-									| 	list-style-position outside
-								figcaption （Stylus）
-							p='list-style-positionプロパティの値を「inside」にすると、リストマークを各項目の内側に表示することができます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/252-C02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| li {
-									|     list-style-image: url(mark.png);
-									|     list-style-position: inside;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| li
-									| 	list-style-image url(mark.png)
-									| 	list-style-position inside
-								figcaption （Stylus）
-							p='なお、list-styleプロパティの値を以下のように指定した場合も同じ処理が行われます。'
-							hr
-							h4 リストマークのデザインの指定
-							p='リストマークの色やまわりの余白サイズなどを調節するためには、CSS3の::marker疑似要素を利用します。::marker疑似要素はリストマークを表示するためのマーカーボックスを構成しますが、各ブラウザは未対応です。'
-							hr
-							h4 ::before疑似要素を利用したリストマークの表示
-							p='::markerの代わりに::before疑似要素を利用して、各項目の前にリストマークを挿入することもできます。挿入する内容はcontentプロパティで指定します。ここでは「★」という文字を挿入し、オレンジ色で表示するように指定しています。ただし、黒丸のリストマークも表示された状態になります。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;ul&gt;
-									|     &lt;li&gt;ハム&amp;チーズ&lt;/li&gt;
-									|     &lt;li&gt;卵&amp;サンド&lt;/li&gt;
-									|     &lt;li&gt;日替わりサンド&lt;/li&gt;
-									| &lt;/ul&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| ul
-									| 	li ハム&amp;チーズ
-									| 	li 卵&amp;サンド
-									| 	li 日替わりサンド
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| li::before {
-									|     content: '★';
-									|     color: orange;
-									|     margin-right: 5px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| li
-									| 	&amp;::before
-									| 		content '★'
-									| 		color orange
-									| 		margin-right 5px
-								figcaption （Stylus）
-							p='黒丸のリストマークを削除するためには、list-style-typeプロパティの値を「none」にします。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| li::before {
-									|     content: '★';
-									|     color: orange;
-									|     margin-right: 5px;
-									| }
-									| li{
-									|     list-style-type: none;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| li
-									| 	list-style-type none
-									| 	&amp;::before
-									| 		content '★'
-									| 		color orange
-									| 		margin-right 5px
-								figcaption （Stylus）
-							p='contentプロパティで「★」の代わりにカウンターを挿入するように指定すると、連番を表示することができます。たとえば、連番を大文字のアルファベットで、「Arial Black」というフォントで表示するように指定すると下のようになります。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| li::before {
-									|     content: counter(marker, upper-alpha) '.';
-									|     font-family: 'Arial Black', sans-serif;
-									|     color: orange;
-									|     margin-right: 5px;
-									| }
-									| li {
-									|     counter-increment: marker;
-									|     list-style-type: none;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| li
-									| 	counter-increment marker
-									| 	list-style-type none
-									| 	&amp;::before
-									| 		content counter(marker, upper-alpha) '.'
-									| 		font-family 'Arial Black', sans-serif
-									| 		color orange
-									| 		margin-right 5px
-								figcaption （Stylus）
-							p='なお、IE7以前のバージョンは未対応で、IE8に対応するためには「::before」を「:before」と記述する必要があります。'
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp; リストマークのデザイン
+                        .panel-body
+                            .alert.alert-info  リストマークのデザイン
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png') （※）
+                                    td
+                                        img(src='../images/ic-ie.png') （※）
+                            p ※ 部分対応。
+                            pre
+                                | list-style: スタイル 画像 表示位置
+                            pre
+                                | list-style-type: スタイル
+                            pre
+                                | list-style-image: 画像
+                            pre
+                                | list-style-position: 表示位置
+                            p
+                                | スタイル・・・none ／ disc ／ circle ／ square ／ decimal ／ lower-roman ／ upper-roman ／ lower-alpha ／ upper-alpha ／ decimal-leading-zero ／ lower-greek ／ lower-latin ／ upper-latin ／ armenian ／ georgian ／ hebrew ／ hiragana ／ katakana ／ hiragana-iroha ／ katakana-iroha<br>
+                                | 画像・・・url ／ none<br>
+                                | 表示位置・・・inside ／ outside
+                            table.table
+                                tr
+                                    td 初期値
+                                    td disc none outside
+                                tr
+                                    td 継承
+                                    td あり
+                                tr
+                                    td 適用先
+                                    td displayの値が「list-item」な要素
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td List and Counters / Counter Styles
+                            p='list-styleプロパティを利用すると、リストマークのスタイルや画像、表示位置を指定することができます。また、list-style-type、list-style-image、list-style-positionプロパティを利用して個別に指定することも可能です。'
+                            hr
+                            h4 SAMPLE A：リストマークのスタイルを指定
+                            p='下のサンプルはリストアップした項目を<ul>と<li>でマークアップしたものです。各項目の行頭には黒丸のスタイルでリストマークが表示されます。これは、デフォルトスタイルシートによって<ul>のlist-style-typeプロパティの値が「disc」で処理されるためです。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;ul&gt;
+                                    |     &lt;li&gt;ハム&amp;チーズ&lt;/li&gt;
+                                    |     &lt;li&gt;卵&amp;サンド&lt;/li&gt;
+                                    |     &lt;li&gt;日替わりサンド&lt;/li&gt;
+                                    | &lt;/ul&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ul
+                                    |     li ハム&amp;チーズ
+                                    |     li 卵&amp;サンド
+                                    |     li 日替わりサンド
+                                figcaption （Jade）
+                            p='list-style-typeプロパティではさまざまなスタイルを指定することができます。たとえば、値を「circle」にするとリストマークが白丸のスタイルで表示されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/252-A.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ul {
+                                    |     list-style-type: circle;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ul
+                                    |     list-style-type circle
+                                figcaption （Stylus）
+                            p='数字や文字の連番を表示することもできます。たとえば、list-stle-typeプロパティの値を「decimal」にすると、下のように数字の連番が表示されます。また、リストマークを表示したくない場合は値を「none」にします。'
+                            p='この他、指定できる値は基本的なスタイルは以下のようになっています。'
+                            p='OperaとIEはCSS3で採用された値には未対応です。'
+                            h4 数字（Neumeric）
+                            table.table
+                                tr
+                                    th 値
+                                    th リストマークの種類
+                                tr
+                                    td decimal
+                                    td 数字
+                                tr
+                                    td decimal-leading-zero ※1
+                                    td 0をつけた数字
+                                tr
+                                    td lower-roman
+                                    td 小文字のローマ数字
+                                tr
+                                    td upper-roman
+                                    td 大文字のローマ数字
+                                tr
+                                    td armenian ※1 ※2
+                                    td アルメニア数字
+                                tr
+                                    td georgian ※1
+                                    td グルジア数字
+                                tr
+                                    td hebrew
+                                    td ヘブライ数字
+                            p ※1・・・IE7以前は未対応。
+                            p ※2・・・Android3.x以前は未対応。
+                            p='CSS3では漢数字を表示する「cjk-decimal」という値も提案されていますが、各ブラウザは見た王です。'
+                            h4 文字（Alphabetic）
+                            table.table
+                                tr
+                                    th 値
+                                    th リストマークの種類
+                                tr
+                                    td lower-alpha<br>lower-latin ※1
+                                    td 小文字のアルファベット
+                                tr
+                                    td upper-alpha<br>upper-latin ※1
+                                    td 大文字のアルファベット
+                                tr
+                                    td lower-greek ※1
+                                    td 小文字のギリシャ文字
+                                tr
+                                    td hiragana
+                                    td ひらがな（あいうえお順）
+                                tr
+                                    td hiragana-iroha
+                                    td ひらがな（いろは順）
+                                tr
+                                    td katakana
+                                    td カタカナ（あいうえお順）
+                                tr
+                                    td katakana-iroha
+                                    td カタカナ（いろは順）
+                            h4 記号（Symbolic）
+                            table.table
+                                tr
+                                    th 値
+                                    th リストマークの種類
+                                tr
+                                    td disc
+                                    td 黒丸
+                                tr
+                                    td circle
+                                    td 白丸
+                                tr
+                                    td square
+                                    td 四角形
+                            p='CSS3ではHTML5の<details>で使用する「disclosure-open」、「disclosure-closed」という値も提案されていますが。それぞれ「▼」や「▶」を表示し、ウィジェットの開閉を示すことになっています。現在のところ、各ブラウザは未対応です。'
+                            hr
+                            h4 リストマークのスタイルの定義
+                            p='CSS3では、list-style-typeプロパティで指定するリストマークのスタイルを@counter-styleで定義することになっています。たとえば、黒丸のスタイルである「disc」は下のように定義されます。'
+                            p='@counter-styleを利用し、独自のリストマークを定義することもできます。ただし、現在のところ各ブラウザは未対応です。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @counter-style disc {
+                                    |     system: cyclic;
+                                    |     symbols: \2022;
+                                    |     /* ・ */
+                                    |     suffix: '';
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @counter-style　disc
+                                    |     system cyclic
+                                    |     symbols \2022
+                                    |     suffix ''
+                                figcaption （Stylus）
+                            hr
+                            h4 その他のスタイル
+                            p='CSS3では基本的なスタイルに加えて、次のようなスタイルについてもブラウザが@counter-styleで定義しておき、標準で使えるようにすることが提案されています。ここではFirefoxとWebkit系ブラウザが先行実装しているスタイルを取り上げます。'
+                            p='なお、Firefoxに対応する場合は値に「-moz-」をつけて記述します。また、使用するフォントによっては表示されないスタイルもあります。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ul {
+                                    |     list-style-type: -moz-cjk-earthly-branch;
+                                    |     list-style-type: cjk-earthly-branch;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    ul
+                                        list-style-type -moz-cjk-earthly-branch
+                                        list-style-type cjk-earthly-branch
+                                figcaption （Stylus）
+                            h4 東アジア言語
+                            table.table
+                                tr
+                                    th 値
+                                    th リストマークの種類
+                                tr
+                                    td japanese-formal
+                                    td 漢数字（日本語）
+                                tr
+                                    td japanese-informal
+                                    td 漢数字（日本語）
+                                tr
+                                    td simp-chinese-formal
+                                    td 漢数字（簡体字の中国語）
+                                tr
+                                    td simp-chinese-informal
+                                    td 漢数字（簡体字の中国語）
+                                tr
+                                    td trad-chinese-formal
+                                    td 漢数字（繁体字の中国語）
+                                tr
+                                    td trad-chinese-informal
+                                    td 漢数字（繁体字の中国語）
+                                tr
+                                    td cjk-ideographic
+                                    td 漢数字
+                            h4 数字
+                            table.table
+                                tr
+                                    th 値
+                                    th リストマークの種類
+                                tr
+                                    td arabic-indic
+                                    td アラビア・インド数字
+                                tr
+                                    td bengali
+                                    td ベンガル数字
+                                tr
+                                    td devanagari
+                                    td デーヴァナーガリー数字
+                                tr
+                                    td gujarati
+                                    td グジャラーティー数字
+                                tr
+                                    td gurmukhi
+                                    td グルムキー数字
+                                tr
+                                    td kannada
+                                    td カンナダ数字
+                            hr
+                            h4 リストマークを文字列で指定
+                            p='CSS3では、list-style-typeプロパティで指定した文字列をリストマークとして表示する機能も提案されています。たとえば、下のように指定すると「★」をリストマークといて表示することができるようになります。現在のところ、各ブラウザは未対応です。'
+                            hr
+                            h4 SAMPLE B：画像によるリストマークの表示
+                            p='list-style-imageプロパティを利用すると、リストマークを画像で表示することができます。たとえば、mark.pngという画像を指定すると、下のように表示されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/252-B.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;ul&gt;
+                                    |     &lt;li&gt;ハム&amp;チーズ&lt;/li&gt;
+                                    |     &lt;li&gt;卵&amp;サンド&lt;/li&gt;
+                                    |     &lt;li&gt;日替わりサンド&lt;/li&gt;
+                                    | &lt;/ul&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ul
+                                    |     li ハム&amp;チーズ
+                                    |     li 卵&amp;サンド
+                                    |     li 日替わりサンド
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | li {
+                                    |     list-style-image: url(mark.png);
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | li
+                                    |     list-style-image url(mark.png)
+                                figcaption （Stylus）
+                            p='なお、list-style-imageプロパティの値を「none」にした場合や画像が読めなかった場合、list-style-typeプロパティの値に従ってリストマークが表示されます。'
+                            hr
+                            h4 SAMPLE C：リストマークの表示位置を指定する
+                            p='リストの項目を複数行で表示すると、リストマークは各項目の外線に表示されていることが分かります。これは、list-style-positionプロパティの値が初期値の「outside」で処理されるためです。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/252-C01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;ul&gt;
+                                    |     &lt;li&gt;焼きたての手作りパンで新鮮はハム、トマト、チーズ、レタスを挟んだサンドイッチです。&lt;/li&gt;
+                                    |     &lt;li&gt;マヨネーズソースがおいしくて、お店の近くを通るたびに買いこんでしまいます。&lt;/li&gt;
+                                    | &lt;/ul&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ul
+                                    |     li 焼きたての手作りパンで新鮮はハム、トマト、チーズ、レタスを挟んだサンドイッチです。
+                                    |     li マヨネーズソースがおいしくて、お店の近くを通るたびに買いこんでしまいます。
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | li {
+                                    |     list-style-image: url(mark.png);
+                                    |     list-style-position: outside;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | li
+                                    |     list-style-image url(mark.png)
+                                    |     list-style-position outside
+                                figcaption （Stylus）
+                            p='list-style-positionプロパティの値を「inside」にすると、リストマークを各項目の内側に表示することができます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/252-C02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | li {
+                                    |     list-style-image: url(mark.png);
+                                    |     list-style-position: inside;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | li
+                                    |     list-style-image url(mark.png)
+                                    |     list-style-position inside
+                                figcaption （Stylus）
+                            p='なお、list-styleプロパティの値を以下のように指定した場合も同じ処理が行われます。'
+                            hr
+                            h4 リストマークのデザインの指定
+                            p='リストマークの色やまわりの余白サイズなどを調節するためには、CSS3の::marker疑似要素を利用します。::marker疑似要素はリストマークを表示するためのマーカーボックスを構成しますが、各ブラウザは未対応です。'
+                            hr
+                            h4 ::before疑似要素を利用したリストマークの表示
+                            p='::markerの代わりに::before疑似要素を利用して、各項目の前にリストマークを挿入することもできます。挿入する内容はcontentプロパティで指定します。ここでは「★」という文字を挿入し、オレンジ色で表示するように指定しています。ただし、黒丸のリストマークも表示された状態になります。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;ul&gt;
+                                    |     &lt;li&gt;ハム&amp;チーズ&lt;/li&gt;
+                                    |     &lt;li&gt;卵&amp;サンド&lt;/li&gt;
+                                    |     &lt;li&gt;日替わりサンド&lt;/li&gt;
+                                    | &lt;/ul&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | ul
+                                    |     li ハム&amp;チーズ
+                                    |     li 卵&amp;サンド
+                                    |     li 日替わりサンド
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | li::before {
+                                    |     content: '★';
+                                    |     color: orange;
+                                    |     margin-right: 5px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | li
+                                    |     &amp;::before
+                                    |         content '★'
+                                    |         color orange
+                                    |         margin-right 5px
+                                figcaption （Stylus）
+                            p='黒丸のリストマークを削除するためには、list-style-typeプロパティの値を「none」にします。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | li::before {
+                                    |     content: '★';
+                                    |     color: orange;
+                                    |     margin-right: 5px;
+                                    | }
+                                    | li{
+                                    |     list-style-type: none;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | li
+                                    |     list-style-type none
+                                    |     &amp;::before
+                                    |         content '★'
+                                    |         color orange
+                                    |         margin-right 5px
+                                figcaption （Stylus）
+                            p='contentプロパティで「★」の代わりにカウンターを挿入するように指定すると、連番を表示することができます。たとえば、連番を大文字のアルファベットで、「Arial Black」というフォントで表示するように指定すると下のようになります。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | li::before {
+                                    |     content: counter(marker, upper-alpha) '.';
+                                    |     font-family: 'Arial Black', sans-serif;
+                                    |     color: orange;
+                                    |     margin-right: 5px;
+                                    | }
+                                    | li {
+                                    |     counter-increment: marker;
+                                    |     list-style-type: none;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | li
+                                    |     counter-increment marker
+                                    |     list-style-type none
+                                    |     &amp;::before
+                                    |         content counter(marker, upper-alpha) '.'
+                                    |         font-family 'Arial Black', sans-serif
+                                    |         color orange
+                                    |         margin-right 5px
+                                figcaption （Stylus）
+                            p='なお、IE7以前のバージョンは未対応で、IE8に対応するためには「::before」を「:before」と記述する必要があります。'
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

@@ -1,222 +1,222 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp; 文字のドロップシャドウ
-						.panel-body
-							.alert.alert-info  文字のドロップシャドウ
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							p ※Android2.3.x以前は部分対応。※IE9以前は部分対応。
-							pre
-								| text-shadow: 横オフセット 縦オフセット ブラー 色
-							p
-								| 横オフセット・・・数値<br>
-								| 縦オフセット・・・数値<br>
-								| ブラー・・・数値<br>
-								| 色・・・色の値
-							table.table
-								tr
-									td 初期値
-									td none
-								tr
-									td 継承
-									td あり
-								tr
-									td 適用先
-									td 全要素
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td Text Decoration
-							p='text-shadowプロパティを利用すると文字に影をつけることができます。下のように影の設定をカンマで区切って指定すると、複数の影を重ねて表示することもできます。'
-							pre
-								| text-shadow: 影の設定, 影の設定, 影の設定, ...
-							hr
-							h4 SAMPLE A：影の表示
-							p='影を表示するには、横方向と縦方向のオフセットと、色の指定が必要です。下のサンプルでは値を「4px 4px #aaa」にして、文字から横方向と縦方向に4ピクセルの位置に薄いグレー（#aaa）の影を表示しています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/228-A.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 HAM SANDWICHES
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     color: crimson;
-									|     text-shdow: 4px 4px #aaa;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	color crimson
-									| 	text-shdow 4px 4px #aaa
-								figcaption （Stylus）
-							p='Android2.3.xでは、SAMPLE Aのようにブラーの値が未指定または「0」の場合、影が表示されなくなります。'
-							hr
-							h4 SAMPLE B：ブラー（ぼかし）の設定
-							p='影の輪郭をぼかす場合はブラーの値を指定します。たとえば、4pxと指定すると下のような表示になります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/228-B.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 HAM SANDWICHES
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     color: crimson;
-									|     text-shdow: 4px 4px 4px #aaa;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	color crimson
-									| 	text-shdow 4px 4px 4px #aaa
-								figcaption （Stylus）
-							hr
-							h4 SAMPLE C：複数の影の表示
-							p='複数の影をつける場合、影の設定をカンマで区切って指定します。このとき、1つ目に指定した影から順に表示されます。ここでは薄い赤色の影を2つ表示し、2つ目の影の方をより薄い色で、ぼけ具合も強くして表示しています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/228-C.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 HAM SANDWICHES
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									| 	color: crimson;
-									| 	text-shdow: 20px 20px 5px #eb7b6c,
-									| 		40px 40px 10px #ffc7c0;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	color crimson
-									| 	text-shdow 20px 20px 5px #eb7b6c,
-									| 		40px 40px 10px #ffc7c0
-								figcaption （Stylus）
-							hr
-							h4 SAMPLE D：文字にグロー効果をつける
-							p='text-shadowプロパティを利用すると、文字にグロー効果（光彩）をつけることもできます。グロー効果は文字の装飾だけでなく、画像に重ねた文字を読みやすくしたい場合などにも活用できます。'
-							p='たとえば、下のサンプルは画像に重ねた赤色の文字に白色のグローをつけて、文字を読みやすくしたものです。ここではオフセットを「0px」にした白色の影を4つ重ねて表示しています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/228-D.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 HAM SANDWICHES
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									| 	color: crimson;
-									| 	text-shdow: 0px 0px 10px #white,
-									| 		0px 0px 10px #white,
-									| 		0px 0px 10px #white,
-									| 		0px 0px 10px #white;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	color crimson
-									| 	text-shdow 0px 0px 10px #white,
-									| 		0px 0px 10px #white,
-									| 		0px 0px 10px #white,
-									| 		0px 0px 10px #white
-								figcaption （Stylus）
-							p='古い仕様ではbox-shadowと同じように影のスプレッドも指定できるようになっていましたが、最新の仕様では指定できなくなっています。'
-							.alert.alert-success Polyfill:
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;!DOCTYPE html&gt;
-									| &lt;html lang="ja"&gt;
-									| &lt;head&gt;
-									| &lt;div&gt;
-									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
-									| &lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| !!!
-									| html(lang='ja')
-									| 	head
-									| 	body
-									| 		div
-									| 			h2 HAM SANDWICHES
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     /* IE8 */
-									| 
-									|     -ms-filter:"progid:DXImageTransform.Microsoft.DropShadow(color=#cccccc,offx=1,offy=1)";
-									|     /* その他 */
-									|     text-shadow: px 1px 3px #cccccc;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	-ms-filter "progid:DXImageTransform.Microsoft.DropShadow(color=#cccccc,offx=1,offy=1)"
-									| 	text-shadow px 1px 3px #cccccc
-								figcaption （HTML）
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp; 文字のドロップシャドウ
+                        .panel-body
+                            .alert.alert-info  文字のドロップシャドウ
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            p ※Android2.3.x以前は部分対応。※IE9以前は部分対応。
+                            pre
+                                | text-shadow: 横オフセット 縦オフセット ブラー 色
+                            p
+                                | 横オフセット・・・数値<br>
+                                | 縦オフセット・・・数値<br>
+                                | ブラー・・・数値<br>
+                                | 色・・・色の値
+                            table.table
+                                tr
+                                    td 初期値
+                                    td none
+                                tr
+                                    td 継承
+                                    td あり
+                                tr
+                                    td 適用先
+                                    td 全要素
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td Text Decoration
+                            p='text-shadowプロパティを利用すると文字に影をつけることができます。下のように影の設定をカンマで区切って指定すると、複数の影を重ねて表示することもできます。'
+                            pre
+                                | text-shadow: 影の設定, 影の設定, 影の設定, ...
+                            hr
+                            h4 SAMPLE A：影の表示
+                            p='影を表示するには、横方向と縦方向のオフセットと、色の指定が必要です。下のサンプルでは値を「4px 4px #aaa」にして、文字から横方向と縦方向に4ピクセルの位置に薄いグレー（#aaa）の影を表示しています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/228-A.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 HAM SANDWICHES
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     color: crimson;
+                                    |     text-shdow: 4px 4px #aaa;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     color crimson
+                                    |     text-shdow 4px 4px #aaa
+                                figcaption （Stylus）
+                            p='Android2.3.xでは、SAMPLE Aのようにブラーの値が未指定または「0」の場合、影が表示されなくなります。'
+                            hr
+                            h4 SAMPLE B：ブラー（ぼかし）の設定
+                            p='影の輪郭をぼかす場合はブラーの値を指定します。たとえば、4pxと指定すると下のような表示になります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/228-B.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 HAM SANDWICHES
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     color: crimson;
+                                    |     text-shdow: 4px 4px 4px #aaa;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     color crimson
+                                    |     text-shdow 4px 4px 4px #aaa
+                                figcaption （Stylus）
+                            hr
+                            h4 SAMPLE C：複数の影の表示
+                            p='複数の影をつける場合、影の設定をカンマで区切って指定します。このとき、1つ目に指定した影から順に表示されます。ここでは薄い赤色の影を2つ表示し、2つ目の影の方をより薄い色で、ぼけ具合も強くして表示しています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/228-C.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 HAM SANDWICHES
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     color: crimson;
+                                    |     text-shdow: 20px 20px 5px #eb7b6c,
+                                    |         40px 40px 10px #ffc7c0;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     color crimson
+                                    |     text-shdow 20px 20px 5px #eb7b6c,
+                                    |         40px 40px 10px #ffc7c0
+                                figcaption （Stylus）
+                            hr
+                            h4 SAMPLE D：文字にグロー効果をつける
+                            p='text-shadowプロパティを利用すると、文字にグロー効果（光彩）をつけることもできます。グロー効果は文字の装飾だけでなく、画像に重ねた文字を読みやすくしたい場合などにも活用できます。'
+                            p='たとえば、下のサンプルは画像に重ねた赤色の文字に白色のグローをつけて、文字を読みやすくしたものです。ここではオフセットを「0px」にした白色の影を4つ重ねて表示しています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/228-D.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 HAM SANDWICHES
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     color: crimson;
+                                    |     text-shdow: 0px 0px 10px #white,
+                                    |         0px 0px 10px #white,
+                                    |         0px 0px 10px #white,
+                                    |         0px 0px 10px #white;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     color crimson
+                                    |     text-shdow 0px 0px 10px #white,
+                                    |         0px 0px 10px #white,
+                                    |         0px 0px 10px #white,
+                                    |         0px 0px 10px #white
+                                figcaption （Stylus）
+                            p='古い仕様ではbox-shadowと同じように影のスプレッドも指定できるようになっていましたが、最新の仕様では指定できなくなっています。'
+                            .alert.alert-success Polyfill:
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;!DOCTYPE html&gt;
+                                    | &lt;html lang="ja"&gt;
+                                    | &lt;head&gt;
+                                    | &lt;div&gt;
+                                    | &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+                                    | &lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | !!!
+                                    | html(lang='ja')
+                                    |     head
+                                    |     body
+                                    |         div
+                                    |             h2 HAM SANDWICHES
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     /* IE8 */
+                                    | 
+                                    |     -ms-filter:"progid:DXImageTransform.Microsoft.DropShadow(color=#cccccc,offx=1,offy=1)";
+                                    |     /* その他 */
+                                    |     text-shadow: px 1px 3px #cccccc;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     -ms-filter "progid:DXImageTransform.Microsoft.DropShadow(color=#cccccc,offx=1,offy=1)"
+                                    |     text-shadow px 1px 3px #cccccc
+                                figcaption （HTML）
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

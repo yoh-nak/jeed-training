@@ -1,232 +1,232 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;下線・上線・取り消し線
-						.panel-body
-							.alert.alert-info 下線・上線・取り消し線
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png') （※）
-									td
-										img(src='../images/ic-android.png') （※）
-									td
-										img(src='../images/ic-firefox.png') （※）
-									td
-										img(src='../images/ic-safari.png') （※）
-									td
-										img(src='../images/ic-chrome.png') （※）
-									td
-										img(src='../images/ic-opera.png') （※）
-									td
-										img(src='../images/ic-ie.png') （※）
-							p ※ 部分対応。
-							pre
-								| text-decoration: 線の種類
-							pre
-								| text-decoration-line: 線の種類
-							pre
-								| text-decoration-style: スタイル
-							pre
-								| text-decoration-color: 色
-							p
-								| 線の種類・・・none ／ underline ／ overline ／ line-through ／ blink<br>
-								| スタイル・・・solid ／ double ／ dotted ／ dashed ／ wavy<br>
-								| 色・・・色の値
-							table.table
-								tr
-									td 初期値
-									td none solid currentColor
-								tr
-									td 継承
-									td なし
-								tr
-									td 適用先
-									td 全要素
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td Text Decoration
-							p='text-decorationプロパティを利用すると、テキストに下線・上線・取り消し線をつけて表示することができます。CSS3では下の形式で線のスタイルと色の値も指定できるようになっていますが、各ブラウザは未対応です。'
-							p='また、線の種類、スタイル、色の値はtext-decoration-line、text-decoration-style、text-decoration-colorプロパティで個別に指定することもできます。これらのプロパティはFirefoxが対応しています。'
-							pre
-								| text-decoration: 線の種類 スタイル 色
-							hr
-							h4 SAMPLE A：下線・上線・取り消し線の表示
-							p='テキストに下線・上線・取り消し線をつけて表示するには、text-decorationプロパティで線の種類を指定します。たとえば、値を「underline」にすると、下のように下線を表示することができます。線のスタイルと色の値はそれぞれ初期値の「solid」と「currentColor」で処理されるため、下線のスタイルは実践。色は文字と同じ黒色になります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/221-A01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;p&gt;焼きたての手作りパンで&lt;span&gt;新鮮なハム、トマト、チーズ、レタス&lt;/span&gt;を挟んだサンドイッチです。&lt;/p&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	| 焼きたての手作りパンで
-									| 	span 新鮮なハム、トマト、チーズ、レタス
-									| 	| を挟んだサンドイッチです。
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| span {
-									|     text-decoration: underline;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| span
-									| 	text-decoration underline
-								figcaption （Stylus）
-							p='指定できる線の種類は下のようになっています。ただし、文字を点滅させる「blink」の指定はアクセシビリティの観点から非推奨とされ、ブラウザが点滅表示を行わなくても問題ないとされています。そのため、点滅表示を行うのはFirefoxとOperaのみとなっています。'
-							table.table
-								tr
-									th 線の種類の値
-									th 線の種類
-								tr
-									td none
-									td なし
-								tr
-									td underline
-									td 下線
-								tr
-									td overline
-									td 上線
-								tr
-									td line-through
-									td 取り消し線
-								tr
-									td blink
-									td 文字を点滅
-							p='線の種類の値はスペースで区切って複数指定することもできます。たとえば、「underline overline」にすると、下線と上線の両方を表示することができます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/221-A02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| span {
-									|     text-decoration: underline overline;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| span
-									| 	text-decoration underline overline
-								figcaption （Stylus）
-							hr
-							h4 SAMPLE B：個別のプロパティで下線・上線・取り消し線を表示する
-							p='個別のプロパティで下線・上線・取り消し線を表示することもできます。たとえば、波線のスタイルで赤色の下線を表示するためには、text-decoration-line、text-decoration-style、text-decoration-colorプロパティの値を「underline（下線）」、「wavy（波線）」、「red（赤色）」にします。指定できるスタイルは下の表のようになっています。'
-							table.table
-								tr
-									th 線のスタイルの値
-									th 線のスタイル
-								tr
-									td solid
-									td 実線
-								tr
-									td double
-									td 二重線
-								tr
-									td dotted
-									td 点線
-								tr
-									td dashed
-									td 破線
-								tr
-									td wavy
-									td 波線
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/221-B.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;p&gt;焼きたての手作りパンで&lt;span&gt;新鮮なハム、トマト、チーズ、レタス&lt;/span&gt;を挟んだサンドイッチです。&lt;/p&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	| 焼きたての手作りパンで
-									| 	span 新鮮なハム、トマト、チーズ、レタス
-									| 	| を挟んだサンドイッチです。
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| span {
-									|     -moz-text-decoration-line: underline;
-									|     -moz-text-decoration-style: wavy;
-									|     -moz-text-decoration-color: red;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| span
-									| 	-moz-text-decoration-line underline
-									| 	-moz-text-decoration-style wavy
-									| 	-moz-text-decoration-color red
-								figcaption （Stylus）
-							p='同じ設定をtext-decorationプロパティで指定する場合、以下のように値を「underline wavy red」と指定します。ただし各ブラウザは未対応です。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| span {
-									|     text-decoration-line: underline wavy red;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| span
-									| 	text-decoration-line underline wavy red
-								figcaption （Stylus）
-							hr
-							h4 SAMPLE C：線を表示しない箇所
-							p='下線・上線・取り消し線は<img>でatomicインラインレベルボックスには表示しない決まりとなっています。そのため、文章に下線を引いても、文章中の画像の下に下線は表示されません。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/221-C.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだ&lt;img src="sand_small.jpg" alt=""&gt;サンドイッチです。&lt;/p&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	| 焼きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだ
-									| 	img(src='sand_small.jpg', alt='')
-									| 	| サンドイッチです。
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p {
-									|     text-decoration: underline;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	text-decoration underline
-								figcaption （Stylus）
-							hr
-							h4 線を表示しない箇所の指定
-							p='線を表示しない箇所は、CSS3のtext-decoration-skipプロパティで指定することができます。初期値が「object」で処理されるため、atomicインラインレベルボックスには線が表示されません。値を「none」にするとすべてのコンテンツに線を引くことができますが、各ブラウザは未対応です。'
-							p='iOS4.x/Android2.3.xでは画像の下にも下線が表示されるという問題が見られます。'
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;下線・上線・取り消し線
+                        .panel-body
+                            .alert.alert-info 下線・上線・取り消し線
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png') （※）
+                                    td
+                                        img(src='../images/ic-android.png') （※）
+                                    td
+                                        img(src='../images/ic-firefox.png') （※）
+                                    td
+                                        img(src='../images/ic-safari.png') （※）
+                                    td
+                                        img(src='../images/ic-chrome.png') （※）
+                                    td
+                                        img(src='../images/ic-opera.png') （※）
+                                    td
+                                        img(src='../images/ic-ie.png') （※）
+                            p ※ 部分対応。
+                            pre
+                                | text-decoration: 線の種類
+                            pre
+                                | text-decoration-line: 線の種類
+                            pre
+                                | text-decoration-style: スタイル
+                            pre
+                                | text-decoration-color: 色
+                            p
+                                | 線の種類・・・none ／ underline ／ overline ／ line-through ／ blink<br>
+                                | スタイル・・・solid ／ double ／ dotted ／ dashed ／ wavy<br>
+                                | 色・・・色の値
+                            table.table
+                                tr
+                                    td 初期値
+                                    td none solid currentColor
+                                tr
+                                    td 継承
+                                    td なし
+                                tr
+                                    td 適用先
+                                    td 全要素
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td Text Decoration
+                            p='text-decorationプロパティを利用すると、テキストに下線・上線・取り消し線をつけて表示することができます。CSS3では下の形式で線のスタイルと色の値も指定できるようになっていますが、各ブラウザは未対応です。'
+                            p='また、線の種類、スタイル、色の値はtext-decoration-line、text-decoration-style、text-decoration-colorプロパティで個別に指定することもできます。これらのプロパティはFirefoxが対応しています。'
+                            pre
+                                | text-decoration: 線の種類 スタイル 色
+                            hr
+                            h4 SAMPLE A：下線・上線・取り消し線の表示
+                            p='テキストに下線・上線・取り消し線をつけて表示するには、text-decorationプロパティで線の種類を指定します。たとえば、値を「underline」にすると、下のように下線を表示することができます。線のスタイルと色の値はそれぞれ初期値の「solid」と「currentColor」で処理されるため、下線のスタイルは実践。色は文字と同じ黒色になります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/221-A01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;p&gt;焼きたての手作りパンで&lt;span&gt;新鮮なハム、トマト、チーズ、レタス&lt;/span&gt;を挟んだサンドイッチです。&lt;/p&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     | 焼きたての手作りパンで
+                                    |     span 新鮮なハム、トマト、チーズ、レタス
+                                    |     | を挟んだサンドイッチです。
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | span {
+                                    |     text-decoration: underline;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | span
+                                    |     text-decoration underline
+                                figcaption （Stylus）
+                            p='指定できる線の種類は下のようになっています。ただし、文字を点滅させる「blink」の指定はアクセシビリティの観点から非推奨とされ、ブラウザが点滅表示を行わなくても問題ないとされています。そのため、点滅表示を行うのはFirefoxとOperaのみとなっています。'
+                            table.table
+                                tr
+                                    th 線の種類の値
+                                    th 線の種類
+                                tr
+                                    td none
+                                    td なし
+                                tr
+                                    td underline
+                                    td 下線
+                                tr
+                                    td overline
+                                    td 上線
+                                tr
+                                    td line-through
+                                    td 取り消し線
+                                tr
+                                    td blink
+                                    td 文字を点滅
+                            p='線の種類の値はスペースで区切って複数指定することもできます。たとえば、「underline overline」にすると、下線と上線の両方を表示することができます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/221-A02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | span {
+                                    |     text-decoration: underline overline;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | span
+                                    |     text-decoration underline overline
+                                figcaption （Stylus）
+                            hr
+                            h4 SAMPLE B：個別のプロパティで下線・上線・取り消し線を表示する
+                            p='個別のプロパティで下線・上線・取り消し線を表示することもできます。たとえば、波線のスタイルで赤色の下線を表示するためには、text-decoration-line、text-decoration-style、text-decoration-colorプロパティの値を「underline（下線）」、「wavy（波線）」、「red（赤色）」にします。指定できるスタイルは下の表のようになっています。'
+                            table.table
+                                tr
+                                    th 線のスタイルの値
+                                    th 線のスタイル
+                                tr
+                                    td solid
+                                    td 実線
+                                tr
+                                    td double
+                                    td 二重線
+                                tr
+                                    td dotted
+                                    td 点線
+                                tr
+                                    td dashed
+                                    td 破線
+                                tr
+                                    td wavy
+                                    td 波線
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/221-B.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;p&gt;焼きたての手作りパンで&lt;span&gt;新鮮なハム、トマト、チーズ、レタス&lt;/span&gt;を挟んだサンドイッチです。&lt;/p&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     | 焼きたての手作りパンで
+                                    |     span 新鮮なハム、トマト、チーズ、レタス
+                                    |     | を挟んだサンドイッチです。
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | span {
+                                    |     -moz-text-decoration-line: underline;
+                                    |     -moz-text-decoration-style: wavy;
+                                    |     -moz-text-decoration-color: red;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | span
+                                    |     -moz-text-decoration-line underline
+                                    |     -moz-text-decoration-style wavy
+                                    |     -moz-text-decoration-color red
+                                figcaption （Stylus）
+                            p='同じ設定をtext-decorationプロパティで指定する場合、以下のように値を「underline wavy red」と指定します。ただし各ブラウザは未対応です。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | span {
+                                    |     text-decoration-line: underline wavy red;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | span
+                                    |     text-decoration-line underline wavy red
+                                figcaption （Stylus）
+                            hr
+                            h4 SAMPLE C：線を表示しない箇所
+                            p='下線・上線・取り消し線は<img>でatomicインラインレベルボックスには表示しない決まりとなっています。そのため、文章に下線を引いても、文章中の画像の下に下線は表示されません。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/221-C.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;p&gt;焼きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだ&lt;img src="sand_small.jpg" alt=""&gt;サンドイッチです。&lt;/p&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     | 焼きたての手作りパンで新鮮なハム、トマト、チーズ、レタスを挟んだ
+                                    |     img(src='sand_small.jpg', alt='')
+                                    |     | サンドイッチです。
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p {
+                                    |     text-decoration: underline;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     text-decoration underline
+                                figcaption （Stylus）
+                            hr
+                            h4 線を表示しない箇所の指定
+                            p='線を表示しない箇所は、CSS3のtext-decoration-skipプロパティで指定することができます。初期値が「object」で処理されるため、atomicインラインレベルボックスには線が表示されません。値を「none」にするとすべてのコンテンツに線を引くことができますが、各ブラウザは未対応です。'
+                            p='iOS4.x/Android2.3.xでは画像の下にも下線が表示されるという問題が見られます。'
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

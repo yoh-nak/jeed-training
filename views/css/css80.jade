@@ -1,117 +1,117 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp; テーブルのキャプションの表示位置
-						.panel-body
-							.alert.alert-info  テーブルのキャプションの表示位置
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							p IE7以前は未対応。
-							pre
-								| caption-side: 表示位置
-							p
-								| 表示位置・・・top ／ bottom
-							table.table
-								tr
-									td 初期値
-									td top
-								tr
-									td 継承
-									td あり
-								tr
-									td 適用先
-									td displayの値が「table-caption」の要素
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td Tables
-							p='caption-sizeプロパティを利用すると、テーブルのキャプションの表示位置を指定することができます。指定できる位置はテーブルの上または下となっています。'
-							table.table
-								tr
-									th 値
-									th 表示位置
-								tr
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp; テーブルのキャプションの表示位置
+                        .panel-body
+                            .alert.alert-info  テーブルのキャプションの表示位置
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            p IE7以前は未対応。
+                            pre
+                                | caption-side: 表示位置
+                            p
+                                | 表示位置・・・top ／ bottom
+                            table.table
+                                tr
+                                    td 初期値
+                                    td top
+                                tr
+                                    td 継承
+                                    td あり
+                                tr
+                                    td 適用先
+                                    td displayの値が「table-caption」の要素
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td Tables
+                            p='caption-sizeプロパティを利用すると、テーブルのキャプションの表示位置を指定することができます。指定できる位置はテーブルの上または下となっています。'
+                            table.table
+                                tr
+                                    th 値
+                                    th 表示位置
+                                tr
 
-									td top
-									td テーブルの上に表示
-								tr
+                                    td top
+                                    td テーブルの上に表示
+                                tr
 
-									td bottom
-									td テーブルの下に表示
-							hr
-							h4 SAMPLE：キャプションの表示位置の指定
-							p='下のサンプルでは「SANDWICHE MENU」という語句を<caption>でマークアップし、テーブルのキャプションとして表示しています。キャプションがテーブルの上に表示されるのは、caption-sizeプロパティの値が初期値の「top」で処理されるためです。'
-							p='caption-sizeプロパティの値を「bottom」にすると、キャプションをテーブルの下に表示することができます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/268.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;table&gt;
-									| &lt;caption&gt;SANDWICH MENU&lt;/caption&gt;
-									| &lt;tr&gt;
-									| &lt;th&gt;ハムサンド&lt;/th&gt;
-									| &lt;td&gt;自家製ハムとゴーダチーズに、新鮮なレタスをはさんだサンドイッチです。トマトまたはマヨネーズソースが選べます。&lt;/td&gt;
-									| &lt;/tr&gt;
-									| &lt;tr&gt;
-									| &lt;th&gt;野菜サンド&lt;/th&gt;
-									| &lt;td&gt;自家製ハムに、トマトやレタス、キュウリ、ブロッコリなど新鮮な野菜をたっぷりはさんだサンドイッチです。さっぱりイタリアンドレッシングソースもあります。&lt;/td&gt;
-									| &lt;/tr&gt;
-									| &lt;/table&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| table
-									| 	caption SANDWICH MENU
-									| 	tr
-									| 		th ハムサンド
-									| 		td 自家製ハムとゴーダチーズに、新鮮なレタスをはさんだサンドイッチです。トマトまたはマヨネーズソースが選べます。
-									| 	tr
-									| 		th 野菜サンド
-									| 		td 自家製ハムに、トマトやレタス、キュウリ、ブロッコリなど新鮮な野菜をたっぷりはさんだサンドイッチです。さっぱりイタリアンドレッシングソースもあります。
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| caption {
-									|     caption-side: bottom;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| caption
-									| 	caption-side bottom
-								figcaption （Stylus）
-							p='<caption>が構成するボックスは<table>が構成するwrapperボックスとinternalボックスの間に挿入されます。また、各ボックスのマージンは以下のように挿入されます。<table>のマージンはwrapperボックスの外側に挿入されますので注意が必要です。'
-							p='また、iOS5.x以前とAndroidでは<caption>の上マージンが下マージンに加算され、上マージンが0になるという問題が見られます。'
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+                                    td bottom
+                                    td テーブルの下に表示
+                            hr
+                            h4 SAMPLE：キャプションの表示位置の指定
+                            p='下のサンプルでは「SANDWICHE MENU」という語句を<caption>でマークアップし、テーブルのキャプションとして表示しています。キャプションがテーブルの上に表示されるのは、caption-sizeプロパティの値が初期値の「top」で処理されるためです。'
+                            p='caption-sizeプロパティの値を「bottom」にすると、キャプションをテーブルの下に表示することができます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/268.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;table&gt;
+                                    | &lt;caption&gt;SANDWICH MENU&lt;/caption&gt;
+                                    | &lt;tr&gt;
+                                    | &lt;th&gt;ハムサンド&lt;/th&gt;
+                                    | &lt;td&gt;自家製ハムとゴーダチーズに、新鮮なレタスをはさんだサンドイッチです。トマトまたはマヨネーズソースが選べます。&lt;/td&gt;
+                                    | &lt;/tr&gt;
+                                    | &lt;tr&gt;
+                                    | &lt;th&gt;野菜サンド&lt;/th&gt;
+                                    | &lt;td&gt;自家製ハムに、トマトやレタス、キュウリ、ブロッコリなど新鮮な野菜をたっぷりはさんだサンドイッチです。さっぱりイタリアンドレッシングソースもあります。&lt;/td&gt;
+                                    | &lt;/tr&gt;
+                                    | &lt;/table&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | table
+                                    |     caption SANDWICH MENU
+                                    |     tr
+                                    |         th ハムサンド
+                                    |         td 自家製ハムとゴーダチーズに、新鮮なレタスをはさんだサンドイッチです。トマトまたはマヨネーズソースが選べます。
+                                    |     tr
+                                    |         th 野菜サンド
+                                    |         td 自家製ハムに、トマトやレタス、キュウリ、ブロッコリなど新鮮な野菜をたっぷりはさんだサンドイッチです。さっぱりイタリアンドレッシングソースもあります。
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | caption {
+                                    |     caption-side: bottom;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | caption
+                                    |     caption-side bottom
+                                figcaption （Stylus）
+                            p='<caption>が構成するボックスは<table>が構成するwrapperボックスとinternalボックスの間に挿入されます。また、各ボックスのマージンは以下のように挿入されます。<table>のマージンはwrapperボックスの外側に挿入されますので注意が必要です。'
+                            p='また、iOS5.x以前とAndroidでは<caption>の上マージンが下マージンに加算され、上マージンが0になるという問題が見られます。'
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

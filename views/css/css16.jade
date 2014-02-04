@@ -1,231 +1,231 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;罫線の表示
-						.panel-body
-							.alert.alert-info 罫線の表示
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							p IE7以前は部分対応。
-							pre
-								| border: スタイル 太さ 色
-							p ※ ショートハンド
-							pre
-								| border-style: スタイル
-							pre
-								| border-width: 太さ
-							pre
-								| border-color: 色
-							p
-								| スタイル・・・none／hidden／dotted／dashed／solid／double／groove／ridge／inset／outset<br>
-								| 太さ・・・数値／比率／thin／medium／thick<br>
-								| 色・・・色の値
-							table.table
-								tr
-									td 初期値
-									td none medium currentColor
-								tr
-									td 継承
-									td なし
-								tr
-									td 適用先
-									td 全要素
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td Backgrounds and Borders
-							p='borderプロパティを利用すると、ボックスに罫線を表示することができます。罫線のデザインはスタイル、太さ、色の値で指定します。これらの値はborder-style、border-width、border-colorプロパティで個別に指定することもかのです。'
-							hr
-							h4 SAMPLE A：罫線の表示
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/140-A.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2  HAM SANDWICHES
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     border: solid 6px orange:
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	border solid 6px orange:
-								figcaption （stylus）
-							p='<h2>の構成するボックスを太さ6ピクセルのオレンジ色の罫線で囲んで表示するためには、borderプロパティの値を「solid 6px orange」にします。border-style、border-width、border-colorプロパティで個別にしていする場合は以下のように指定します。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     border-style: solid;
-									|     border-width: 6px;
-									|     border-color: orange;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	border-style solid
-									| 	border-width 6px
-									| 	border-color orange
-								figcaption （stylus）
-							p='borderやborder-styleプロパティでは、下の値で罫線のスタイルを指定します。'
-							table.table
-								tr
-									th border-styleの値
-									th 罫線のスタイル
-								tr
-									td none
-									td 非表示
-								tr
-									td hidden
-									td 非表示
-								tr
-									td dotted
-									td 点線
-								tr
-									td dashed
-									td 破線
-								tr
-									td solid
-									td 実践
-								tr
-									td double
-									td 二重線
-								tr
-									td groove
-									td 立体枠
-								tr
-									td ridge
-									td 立体枠
-								tr
-									td inset
-									td 立体枠
-								tr
-									td outset
-									td 立体枠
-							p='「none」または「hidden」にした場合、罫線は非表示になります。ただし、テーブルに適用した場合にはそれぞれの処理が変わります。'
-							p='IE7以前は「hidden」の指定に未対応で、「none」と同じ表示になります。'
-							p='borderやborder-widthプロパティでは、数値または下の値で罫線の太さを指定します。太さの目安は示されていませんが、狩猟ブラウザではthinから順に1、3、5ピクセルの太さで表示されます。'
-							table.table
-								tr
-									th border-widthの値
-									th 罫線の太さ
-								tr
-									td thin
-									td 細い罫線
-								tr
-									td medium
-									td 中太の罫線
-								tr
-									td thick
-									td 太い罫線
-							hr
-							h4 SAMPLE B：罫線のデザインを辺ごとに変える
-							p='border-style、border-width、border-colorプロパティでは下の記述形式を利用して、罫線のデザインを辺ごとに指定することができます。'
-							p='border-style、border-width、border-colorの値の記述形式。'
-							pre
-								| 全／上 右 下 左／上 左右 下／上下 左右
-							p='たとえば、下のサンプルではborder-styleとborder-widthプロパティを利用して、上下の辺を太さ10ピクセルの点線（dotted）に左右の辺の太さを40ピクセルの実践（solid）に指定しています。また、border-colorプロパティを利用して、各辺の色は上、右、下、左の順に黄緑色、水色、ピンク色、黄色に指定しています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/140-B.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     border-style: dotted solid;
-									|     border-width: 10px 40px;
-									|     border-color: #b0d673 #8fdff6 #f8b3d2 #fdd035;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	border-style dotted solid
-									| 	border-width 10px 40px
-									| 	border-color #b0d673 #8fdff6 #f8b3d2 #fdd035
-								figcaption （stylus）
-							hr
-							h4 SAMPLE C：特定の辺のみに罫線を表示する
-							p='特定の辺にのみ罫線を表示したい場合には、下の形式で記述したプロパティを利用することができます。'
-							pre
-								| border-*: スタイル 太さ 色
-							p ※ ショートハンド
-							pre
-								| border-*-style: スタイル 
-							pre
-								| border-*-width: 太さ 
-							pre
-								| border-*-color: 色 
-							p *・・・top ／ right ／ bottom ／ left
-							p='たとえば、ボックスの下辺にのみ罫線を表示する場合には、border-bottomプロパティを利用します。ここでは、見出しの下に太さ6ピクセルのオレンジ色の罫線を表示しています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/140-C.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     border-bottom: solid 6px orange;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	border-bottom solid 6px orange
-								figcaption （stylus）
-							p='値を個別に指定する場合は以下のように記述することもできます。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     border-bottom-style: solid;
-									|     border-bottom-width: 6px;
-									|     border-bottom-color: orange;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	border-bottom-style solid
-									| 	border-bottom-width 6px
-									| 	border-bottom-color orange
-								figcaption （stylus）
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;罫線の表示
+                        .panel-body
+                            .alert.alert-info 罫線の表示
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            p IE7以前は部分対応。
+                            pre
+                                | border: スタイル 太さ 色
+                            p ※ ショートハンド
+                            pre
+                                | border-style: スタイル
+                            pre
+                                | border-width: 太さ
+                            pre
+                                | border-color: 色
+                            p
+                                | スタイル・・・none／hidden／dotted／dashed／solid／double／groove／ridge／inset／outset<br>
+                                | 太さ・・・数値／比率／thin／medium／thick<br>
+                                | 色・・・色の値
+                            table.table
+                                tr
+                                    td 初期値
+                                    td none medium currentColor
+                                tr
+                                    td 継承
+                                    td なし
+                                tr
+                                    td 適用先
+                                    td 全要素
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td Backgrounds and Borders
+                            p='borderプロパティを利用すると、ボックスに罫線を表示することができます。罫線のデザインはスタイル、太さ、色の値で指定します。これらの値はborder-style、border-width、border-colorプロパティで個別に指定することもかのです。'
+                            hr
+                            h4 SAMPLE A：罫線の表示
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/140-A.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2  HAM SANDWICHES
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     border: solid 6px orange:
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     border solid 6px orange:
+                                figcaption （stylus）
+                            p='<h2>の構成するボックスを太さ6ピクセルのオレンジ色の罫線で囲んで表示するためには、borderプロパティの値を「solid 6px orange」にします。border-style、border-width、border-colorプロパティで個別にしていする場合は以下のように指定します。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     border-style: solid;
+                                    |     border-width: 6px;
+                                    |     border-color: orange;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     border-style solid
+                                    |     border-width 6px
+                                    |     border-color orange
+                                figcaption （stylus）
+                            p='borderやborder-styleプロパティでは、下の値で罫線のスタイルを指定します。'
+                            table.table
+                                tr
+                                    th border-styleの値
+                                    th 罫線のスタイル
+                                tr
+                                    td none
+                                    td 非表示
+                                tr
+                                    td hidden
+                                    td 非表示
+                                tr
+                                    td dotted
+                                    td 点線
+                                tr
+                                    td dashed
+                                    td 破線
+                                tr
+                                    td solid
+                                    td 実践
+                                tr
+                                    td double
+                                    td 二重線
+                                tr
+                                    td groove
+                                    td 立体枠
+                                tr
+                                    td ridge
+                                    td 立体枠
+                                tr
+                                    td inset
+                                    td 立体枠
+                                tr
+                                    td outset
+                                    td 立体枠
+                            p='「none」または「hidden」にした場合、罫線は非表示になります。ただし、テーブルに適用した場合にはそれぞれの処理が変わります。'
+                            p='IE7以前は「hidden」の指定に未対応で、「none」と同じ表示になります。'
+                            p='borderやborder-widthプロパティでは、数値または下の値で罫線の太さを指定します。太さの目安は示されていませんが、狩猟ブラウザではthinから順に1、3、5ピクセルの太さで表示されます。'
+                            table.table
+                                tr
+                                    th border-widthの値
+                                    th 罫線の太さ
+                                tr
+                                    td thin
+                                    td 細い罫線
+                                tr
+                                    td medium
+                                    td 中太の罫線
+                                tr
+                                    td thick
+                                    td 太い罫線
+                            hr
+                            h4 SAMPLE B：罫線のデザインを辺ごとに変える
+                            p='border-style、border-width、border-colorプロパティでは下の記述形式を利用して、罫線のデザインを辺ごとに指定することができます。'
+                            p='border-style、border-width、border-colorの値の記述形式。'
+                            pre
+                                | 全／上 右 下 左／上 左右 下／上下 左右
+                            p='たとえば、下のサンプルではborder-styleとborder-widthプロパティを利用して、上下の辺を太さ10ピクセルの点線（dotted）に左右の辺の太さを40ピクセルの実践（solid）に指定しています。また、border-colorプロパティを利用して、各辺の色は上、右、下、左の順に黄緑色、水色、ピンク色、黄色に指定しています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/140-B.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     border-style: dotted solid;
+                                    |     border-width: 10px 40px;
+                                    |     border-color: #b0d673 #8fdff6 #f8b3d2 #fdd035;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     border-style dotted solid
+                                    |     border-width 10px 40px
+                                    |     border-color #b0d673 #8fdff6 #f8b3d2 #fdd035
+                                figcaption （stylus）
+                            hr
+                            h4 SAMPLE C：特定の辺のみに罫線を表示する
+                            p='特定の辺にのみ罫線を表示したい場合には、下の形式で記述したプロパティを利用することができます。'
+                            pre
+                                | border-*: スタイル 太さ 色
+                            p ※ ショートハンド
+                            pre
+                                | border-*-style: スタイル 
+                            pre
+                                | border-*-width: 太さ 
+                            pre
+                                | border-*-color: 色 
+                            p *・・・top ／ right ／ bottom ／ left
+                            p='たとえば、ボックスの下辺にのみ罫線を表示する場合には、border-bottomプロパティを利用します。ここでは、見出しの下に太さ6ピクセルのオレンジ色の罫線を表示しています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/140-C.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     border-bottom: solid 6px orange;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     border-bottom solid 6px orange
+                                figcaption （stylus）
+                            p='値を個別に指定する場合は以下のように記述することもできます。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     border-bottom-style: solid;
+                                    |     border-bottom-width: 6px;
+                                    |     border-bottom-color: orange;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     border-bottom-style solid
+                                    |     border-bottom-width 6px
+                                    |     border-bottom-color orange
+                                figcaption （stylus）
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

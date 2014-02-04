@@ -1,114 +1,114 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;ボックスの重なり順
-						.panel-body
-							.alert.alert-info ボックスの重なり順
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							pre
-								| z-index: 重なり順
-							p
-								| 重なり順・・・auto ／ 整数
-							table.table
-								tr
-									td 初期値
-									td auto
-								tr
-									td 継承
-									td なし
-								tr
-									td 適用先
-									td positionで位置指定した要素
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td Positioned Layout
-							p='z-indexプロパティを利用すると、positionプロパティで表示位置を指定したボックスの重なり順を指定することができます。'
-							hr
-							h4 SAMPLE：重なり順の指定
-							p='下のサンプルは<h2>でマークアップした見出しと<img>で挿入した画像をレイアウトしたものです。それぞれのpositionプロパティの値を「absolute」にして、topとleftプロパティで重なるように表示位置を調節いています。このとき画像が上になるのは、z-indexプロパティの値が初期値の「auto」で処理され、HTMLソースに記述した順に重なって表示されるためです。' 
-							p='<h2>の構成するボックスを上に重ねて表示するためには、z-indexプロパティで重なり順を指定します。指定した値の大きい方が上になりますので、ここでは<h2>のz-indexプロパティの値を「2」に、画像のz-indexプロパティの値を「1」にしています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/111.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
-									| &lt;p&gt;&lt;img src="sandwiches.jpg" alt="サンドイッチ"&gt;&lt;/p&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 HAM SANDWICHES
-									| p
-									| 	img(src='sandwiches.jpg', alt='サンドイッチ')
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     background-color: greenyellow;
-									|     width: 200px;
-									|     margin: 0;
-									|     padding: 30px 0;
-									|     position: absolute;
-									|     top: 20px;
-									|     left: 50px;
-									|     z-index: 2;
-									| }
-									| img {
-									|     position: absolute;
-									|     top: 70px;
-									|     left: 200px;
-									|     z-index: 1;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	background-color greenyellow
-									| 	width 200px
-									| 	margin 0
-									| 	padding 30px 0
-									| 	position absolute
-									| 	top 20px
-									| 	left 50px
-									| 	z-index 2
-									| 
-									| img
-									| 	position absolute
-									| 	top 70px
-									| 	left 200px
-									| 	z-index 1
-								figcaption （Stylus）
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;ボックスの重なり順
+                        .panel-body
+                            .alert.alert-info ボックスの重なり順
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            pre
+                                | z-index: 重なり順
+                            p
+                                | 重なり順・・・auto ／ 整数
+                            table.table
+                                tr
+                                    td 初期値
+                                    td auto
+                                tr
+                                    td 継承
+                                    td なし
+                                tr
+                                    td 適用先
+                                    td positionで位置指定した要素
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td Positioned Layout
+                            p='z-indexプロパティを利用すると、positionプロパティで表示位置を指定したボックスの重なり順を指定することができます。'
+                            hr
+                            h4 SAMPLE：重なり順の指定
+                            p='下のサンプルは<h2>でマークアップした見出しと<img>で挿入した画像をレイアウトしたものです。それぞれのpositionプロパティの値を「absolute」にして、topとleftプロパティで重なるように表示位置を調節いています。このとき画像が上になるのは、z-indexプロパティの値が初期値の「auto」で処理され、HTMLソースに記述した順に重なって表示されるためです。' 
+                            p='<h2>の構成するボックスを上に重ねて表示するためには、z-indexプロパティで重なり順を指定します。指定した値の大きい方が上になりますので、ここでは<h2>のz-indexプロパティの値を「2」に、画像のz-indexプロパティの値を「1」にしています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/111.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+                                    | &lt;p&gt;&lt;img src="sandwiches.jpg" alt="サンドイッチ"&gt;&lt;/p&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 HAM SANDWICHES
+                                    | p
+                                    |     img(src='sandwiches.jpg', alt='サンドイッチ')
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     background-color: greenyellow;
+                                    |     width: 200px;
+                                    |     margin: 0;
+                                    |     padding: 30px 0;
+                                    |     position: absolute;
+                                    |     top: 20px;
+                                    |     left: 50px;
+                                    |     z-index: 2;
+                                    | }
+                                    | img {
+                                    |     position: absolute;
+                                    |     top: 70px;
+                                    |     left: 200px;
+                                    |     z-index: 1;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     background-color greenyellow
+                                    |     width 200px
+                                    |     margin 0
+                                    |     padding 30px 0
+                                    |     position absolute
+                                    |     top 20px
+                                    |     left 50px
+                                    |     z-index 2
+                                    | 
+                                    | img
+                                    |     position absolute
+                                    |     top 70px
+                                    |     left 200px
+                                    |     z-index 1
+                                figcaption （Stylus）
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

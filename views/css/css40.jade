@@ -1,989 +1,989 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;Webフォントの利用
-						.panel-body
-							.alert.alert-info Webフォントの利用
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							p ※IE8以前は部分対応
-							pre
-								| @font-face {
-								|     font-family: フォント名
-								|     src: フォントデータ
-								|     font-style: 斜体のスタイル
-								|     font-weight: 太さのスタイル
-								|     font-stretch: 幅のスタイル
-								|     unicode-range: 文字範囲
-								| }
-							p
-								| フォント名・・・任意のフォント名
-								| フォントデータ・・・url()／url() format()／local()
-								| 斜体の指定・・・normal／italic／oblique
-								| 太さの指定・・・normal／bold／100／200／300／400／500／600／700／800／900
-								| 幅の指定・・・ultra-condensed／extra-condensed／condensed／semi-condensed／normal／semi-expanded／expanded／extra-expanded／ultra-expanded
-								| 文字範囲の指定・・・Unicodeのコードポイント
-							table.table
-								tr
-									td 初期値
-									td -
-								tr
-									td 継承
-									td -
-								tr
-									td 適用先
-									td -
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td Fonts
-							p='Webページに使用できるフォントは、CSS2.1までは閲覧環境にインストールされたローカルフォントだけでしたが、CSS3からはサーバーに置いたフォントを読み込んで利用できるようになっています。こうしたフォントはWebフォントと呼ばれ、@font-faceで定義して利用します。なお、利用できるフォントはライセンスによってWebフォントとしての使用が許可されたものに限られます。'
-							p='各ブラウザが対応しているWebフォントのフォーマットは下のようになっています。WOFF（Web Open Font Format）はWebページで使うことを目的に作られたフォーマットで、他のフォーマットに比べてサイズが小さくなると行ったメリットがあります。しかし、AndroidやiOS4.x、IE8以前に対応するためには、WOFF以外のフォーマットも用意する必要があります。'
-							p='Embedded Open Type（EOT）は、IEのみがサポートしているフォーマットです。IEはバージョン4から@font-faceをサポートしており、そのとき対応したフォーマットがEOTでした。IE8以前に対応する場合に使用します。'
-							p='SVG Fontは、ベクタ形式の図形を描画するSVGで定義されたフォントです。iOS4.1以前のバージョンに対応する場合に使用します。'
-							table.table
-								tr
-									th 
-									th WOFF（.woff）
-									th TrueType（.ttf）
-									th OpenType（.otf）
-									th Embedded OpenType（.eot）
-									th SVG Font（.svg）
-								tr
-									th Firefox
-									td ○
-									td ○
-									td ○
-									td -
-									td -
-								tr
-									th Safari
-									td ○
-									td ○
-									td ○
-									td -
-									td ○
-								tr
-									th Chrome
-									td ○
-									td ○
-									td ○
-									td -
-									td ○
-								tr
-									th Opera
-									td ○
-									td ○
-									td ○
-									td -
-									td ○
-								tr
-									th IE
-									td ○ ※1
-									td ○ ※1
-									td ○ ※1
-									td ○
-									td ○
-								tr
-									th iOS
-									td ○ ※2
-									td ○ ※3
-									td ○ ※3
-									td -
-									td ○
-								tr
-									th Android
-									td -
-									td ○ ※4
-									td ○ ※4
-									td -
-									td ○ ※5
-							p
-								| ※1・・・IE9以上が対応。<br>
-								| ※2・・・iOS5.x以上が対応。<br>
-								| ※3・・・iOS4.2以上が対応。<br>
-								| ※4・・・Android2.2以上が対応。<br>
-								| ※5・・・Android3.x以上が対応。
-							p='IE9がWebフォントとして利用できるTrueTypeとOpentTypeのフォントは、フォントデータに含まれている埋め込み許可の制約レベルが「インストール可能」となっているものに限られます。'
-							p
-								| Quicksand_*フォントダウンロード
-								br
-								a(href='http://sourceforge.jp/projects/sfnet_yarska/releases/',target='_blank') http://sourceforge.jp/projects/sfnet_yarska/releases/
-							hr
-							h4 SAMPLE A：基本
-							p='サーバーに置いたフォントデータをWebフォントとして利用するためには、@font-faceのfont-familyディスクリプタでフォント名を、srcディスクリプタでフォントデータを指定してフォントの定義を行います。ここではWOFF形式のQuicksandというフォントを利用するため、font-familyディスクリプタの値を「Quicksand」と指定しています。srcディスクリプタの値は「url(\'\') format(\'WOFF\')」という形で記述し、フォントデータのURLとフォーマットを指定します。'
-							p='@font-faceで定義した「Quicksand」フォントを利用するためには、font-familyプロパティの値を「Quicksand」にします。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/182/182-A01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div&gt;Ham Sandwiches&lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div Ham Sandwiches
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| @font-face {
-									|     font-family: 'Quicksand';
-									|     src: url(Quicksand_Book.woff) format('woff');
-									| }
-									| 
-									| div {
-									|     font-family: Qucksand;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| @font-face
-									| 	font-family 'Quicksand'
-									| 	src url(Quicksand_Book.woff) format('woff')
-									| div
-									| 	font-family Qucksand
-								figcaption （Stylus）
-							tale.table
-								tr
-									th フォーマット
-									th format()の値
-								tr
-									td WOFF
-									td woff
-								tr
-									td TrueType
-									td truetype
-								tr
-									td OpenType
-									td opentype
-								tr
-									td Embedded Open Type
-									td embedded-opentype
-								tr
-									td SVG Font
-									td svg
-							h4 SVG Fontを利用する場合
-							p='SVGフォントを利用する場合、フォントファイルのURLにフォトのIDを「#」でつなげて記述します。フォントのIDはSVGデータの<font id="〜">で指定されたもので、ここでは「qsbook」となっています。'
-							p='なお、iOS4.xとOpera以外ではIDを指定せずにSVG Fontを利用することができます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/182/182-A02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;?xml version="1.0" standalone="no"?&gt;
-									| &lt;!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"&gt;
-									| …略...
-									| &lt;font id="qsbook" horiz-adv-x="880" &gt;
-								figcaption （SVG）
-							figure
-								pre(class='prettyprint linenums:1')
-									| @font-face {
-									|     font-family: 'Quicksand';
-									|     src: url(Quicksand_Book.svg#qsbook) format('svg');
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| @font-face
-									| 	font-family 'Quicksand'
-									| 	src url(Quicksand_Book.svg#qsbook) format('svg')
-								figcaption （Stylus）
-							hr
-							h4 SAMPLE B：主要なブラウザに対応する記述
-							p='@font-faceのsrcディスクリプタでは複数のフォントデータの候補をカンマで区切って指定することができます。ブラウザは指定されたフォントデータの中から利用できるものを使って表示を行います。この場合、最初に記述したデータほど優先順位が高くなります。'
-							p='最新の主要ブラウザに対応するためには、WOFFと、TrueTypeまたはOpenType形式のフォントデータを用意し、カンマで区切って指定します。たとえば、WOFFとTrueType形式のフォントデータを指定すると下のようになります。これでiOS5.x以上、Firefox、Safari、Chrome、Opera、IE9はWOFFで、iOS4.2やAndroidはTrueTypeフォントを表示することができます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/182/182-B.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| @font-face {
-									|     font-family: 'Quicksand';
-									|     src: url(Quicksand_Book.woff) format('woff'), url(Quicksand_Book.ttf) format('truetype');
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| @font-face
-									| 	font-family 'Quicksand'
-									| 	src url(Quicksand_Book.woff) format('woff'), url(Quicksand_Book.ttf) format('truetype')
-								figcaption （Stylus）
-							hr
-							h4 iOS4.1以前への対応
-							p='iOS4.1以前にも対応する場合、SVG形式のフォントデータも用意して、下のように指定を追加します。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| @font-face {
-									|     font-family: 'Quicksand';
-									|     src: url(Quicksand_Book.woff) format('woff'),
-									|           url(Quicksand_Book.ttf) format('truetype'),
-									|           url(Quicksand_Book.svg#qsbook) format('svg');
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| @font-face
-									|   font-family 'Quicksand'
-									|   src url(Quicksand_Book.woff) format('woff'), url(Quicksand_Book.ttf) format('truetype'), url(Quicksand_Book.svg#qsbook) format('svg')
-								figcaption （Stylus）
-							hr
-							h4 IE8以前への対応
-							p='IE8以前にも対応する場合、Embedded OpenType（EOT）形式のフォントデータも用意して設定を追加します。ただし、複数のフォントデータも用意して設定を追加します。ただし、複数のフォントデータをカンマで区切った記述には未対応なため、新しいsrcディスクリプタを追加してEOT形式のデータを指定します。このとき、既存のsrcよりも前に記述します。また、format()の記述には未対応なため、url()のみを記述します。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/182/184.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| @font-face {
-									|     font-family: 'Quicksand';,
-									|     src: url(Quicksand_Book.eot);
-									|     src: local('.'),
-									|           url(Quicksand_Book.woff) format('woff'),
-									|           url(Quicksand_Book.ttf) format('truetype'),
-									|           url(Quicksand_Book.svg#qsbook) format('svg');
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| @font-face
-									| 	font-family 'Quicksand'
-									| 	src url(Quicksand_Book.eot)
-									| 	src local('.'),
-									| 	url(Quicksand_Book.woff) format('woff'),
-									| 		url(Quicksand_Book.ttf) format('truetype'),
-									| 		url(Quicksand_Book.svg#qsbook) format('svg')
-								figcaption （Stylus）
-							p='@font-face内に複数のsrcディスクリプタがある場合、最後に記述したsrcが有効になりますので、IE8以前が2つ目のsrcを認識できないようにします。そこで、IE8が未対応のlocal()の指定を追加します。これにより、1つ目のsrcがIE8以前で、2つ目のsrcが他のブラウザで有効となり、環境ごとに対応したフォーマットのWebフォントを利用できるようになります。ただし、Android2.3.xではlocal()の指定によりWebフォントの指定が無効になるという問題が発生しますので、注意が必要です。'
-							hr
-							h4 SAMPLE C：斜体や太さの異なるフォントの定義 [font-style, font-weight]
-							p='@font-faceでは斜体や太さといった特徴を含めてフォントを定義することもできます。たとえば、SAMPLE Aで使用したQucksandというフォントには、下のように斜体や太字のフォントデータが用意されています。そこで、それぞれのフォントの定義を行い、Webページで利用できるようにします。ただし、同じ「Quicksand」のフォントであることを示すため、@font-faceのfont-familyは共通したフォント名で定義していきます。'
-							p='なお、わかりやすいように、srcディスクリプタではWOFF形式のフォントデータのみを指定しますが、複数のブラウザに対応させる場合はSAMPLE BのようにTrueType形式のフォントデータも指定してください。'
-							table.table
-								tr
-									th フォント名（ファイル名）
-								tr
-									td Qucksand Book（quicksand_book.woff）
-								tr
-									td Quicksand Book Oblique（quicksand_book_oblique.woff）
-								tr
-									td Quicksand_Bold（quicksand_book.woff）
-								tr
-									td Quicksand_Bold_Oblique（quicksand_bold_oblique.woff）
-							hr
-							h4 斜体フォントの定義
-							p='斜体フォントを定義する場合、font-styleディスクリプタを利用します。Quicksandの斜体フォントには「Oblique」と斜体を示す名称が含まれていますので、font-styleディスクリプタの値を「oblique」にします。なお、font-styleディスクリプタを使用しなかった場合、値は初期値の「normal」で処理され、正体のフォントとして定義されます。'
-							table.table
-								tr
-									th font-styleの値
-									th フォント名に含まれる斜体を示す名称
-								tr
-									td normal
-									td なし
-								tr
-									td italic
-									td Italic
-								tr
-									td oblique
-									td Oblique
-							hr
-							h4 太さの異なるフォントの定義
-							p='太さの異なるフォントを定義する場合、font-weightディスクリプタを利用します。フォント名に含まれる太さを示す名称fに対し、font-weightディスクリプタの値は次のように指定するのが目安として提示されています。Quicksandの太字フォントの名称は「Bold」となっていますので、font-weightディスクリプタの値は「Bold」にします。なお、font-weightディスクリプタを指定しなかった場合、値は初期値の「normal」で処理され、通常の太さのフォントとして定義されます。'
-							table.table
-								tr
-									th font-weightの値
-									th フォント名に含まれる太さを示す名称
-								tr
-									td 100
-									td Thin
-								tr
-									td 200
-									td Extra Light (Ultra Light)
-								tr
-									td 300
-									td Light
-								tr
-									td 400またはnormal
-									td Normal (Book, Legular)
-								tr
-									td 500
-									td Medium
-								tr
-									td 600
-									td Semi Bold (Demi Bold)
-								tr
-									td 700またはbold
-									td Bold
-								tr
-									td 800
-									td Extra Bold (Ultra Bold)
-								tr
-									td 900
-									td Black (Heavy)
-							hr
-							h4 定義したフォントの利用
-							p='定義したフォントを利用するには、font-familyプロパティでフォント名を指定します。あとは、font-styleとfont-weightプロパティの指定に応じて、斜体や太字のフォントで表示されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/182/182-C.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div style="font-family: Quicksand"&gt;
-									| &lt;span style="font-style: oblique"&gt;Ham&lt;/span&gt; Sandwiches
-									| &lt;/div&gt;
-									| 
-									| &lt;div style="font-family: Quicksand; font-weight: bold"&gt;
-									| &lt;span style="font-style: oblique"&gt;Ham&lt;/span&gt; Sandwiches
-									| &lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div(style='font-family: Quicksand;')
-									| 	span(style='font-style: oblique;') Ham
-									| 	| Sandwiches
-									| div(style='font-family: Quicksand; font-weight: bold;')
-									| 	span(style='font-style: oblique;') Ham
-									| 	| Sandwiches
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| /* Quicksand Book 正体で標準の太さのフォント */
-									| @font-face {
-									|     font-family: 'Quicksand';
-									|     src: url(Qucksand_Book.woff) format('woff');
-									|     font-style: normal;
-									|     font-weight: normal;
-									| }
-									| 
-									| /* Quicksand Book Oblique斜体で標準の太さのフォント */
-									| @font-face {
-									|     font-family: 'Quicksand';
-									|     src: url(Qucksand_Book_Oblique.woff) format('woff');
-									|     font-style: oblique;
-									|     font-weight: normal;
-									| }
-									| 
-									| /* Quicksand Bold 正体で太いフォント */
-									| @font-face {
-									|     font-family: 'Quicksand';
-									|     src: url(Qucksand_Bold.woff) format('woff');
-									|     font-style: normal;
-									|     font-weight: bold;
-									| }
-									| 
-									| /* Quicksand Bold Oblique斜体で太いフォント */
-									| @font-face {
-									|     font-family: 'Quicksand';
-									|     src: url(Qucksand_Bold_Oblique.woff) format('woff');
-									|     font-style: oblique;
-									|     font-weight: bold;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| @font-face
-									|   font-family 'Quicksand'
-									|   src url(Qucksand_Book.woff) format('woff')
-									|   font-style normal
-									|   font-weight normal
-									| @font-face
-									|   font-family 'Quicksand'
-									|   src url(Qucksand_Book_Oblique.woff) format('woff')
-									|   font-style oblique
-									|   font-weight normal
-									| @font-face
-									|   font-family 'Quicksand'
-									|   src url(Qucksand_Bold.woff) format('woff')
-									|   font-style normal
-									|   font-weight bold
-									| @font-face
-									|   font-family 'Quicksand'
-									|   src url(Qucksand_Bold_Oblique.woff) format('woff')
-									|   font-style oblique
-									|   font-weight bold
-								figcaption （Stylus）
-							hr
-							h4 IE8以前への対応
-							p='IE8以前はfont-styleやfont-weightディスクリプタの指定に未対応です。そのため、斜体や太さの異なるフォントを定義する場合は、それぞれのフォント名を変え、個別のフォントとして定義する必要があります。たとえば、SAMPLE Cと同じフォントを再現するためには、下のような形でEOT形式のフォントを定義します。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div style="font-family: QSBook"&gt;
-									| &lt;span style="font-family: QSOblique"&gt;Ham&lt;/span&gt; Sandwiches
-									| &lt;/div&gt;
-									| &lt;div style="font-family: QSBold"&gt;
-									| &lt;span style="font-family: QSBoldOblique"&gt;Ham&lt;/span&gt; Sandwiches
-									| &lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div(style='font-family: QSBook;')
-									| 	span(style='font-family: QSOblique;') Ham
-									| 	| Sandwiches
-									| div(style='font-family: QSBold;')
-									| 	span(style='font-family: QSBoldOblique;') Ham
-									| 	| Sandwiches
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| @font-face {
-									|     font-family: 'QSBook';
-									|     src: url(Quicksand_Book.eot);
-									| }
-									| 
-									| @font-face {
-									|     font-family: 'QSOblique';
-									|     src: url(Qucksand_Book_Oblique.eot);
-									| }
-									| 
-									| @font-face {
-									|     font-fami;y: 'QSBold';
-									|     src: url(Quicksand_Bold.eot);
-									| }
-									| 
-									| @font-face {
-									|     font-family: 'QSBoldOblique';
-									|     src: url(Quicksand_Bold_Oblique);
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| @font-face
-									| 	font-family 'QSBook'
-									| 	src url(Quicksand_Book.eot)
-									| @font-face
-									| 	font-family 'QSOblique'
-									| 	src url(Qucksand_Book_Oblique.eot)
-									| @font-face
-									| 	font-family 'QSBold'
-									| 	src url(Quicksand_Bold.eot)
-									| @font-face
-									| 	font-family 'QSBoldOblique'
-									| 	src url(Quicksand_Bold_Oblique)
-								figcaption （Stylus）
-							p='こうして定義したフォントを利用する場合、font-familyプロパティでそれぞれのフォント名を指定します。SAMPLE Cのように同じフォント名を指定し、font-styleやfont-weightプロパティの指定でフォントを変更することはできません。'
-							hr
-							h4 SAMPLE D：幅の異なるフォントの定義 [font-stretch]
-							p='@font-faceでは斜体や太さと同じように、幅の特徴を含めてフォントを定義することができます。幅の特徴を指定するには、font-stretchディスクリプタを使用します。'
-							p='たとえば、PT Sansというフォントには、下のように幅を狭くデザインしたフォントデータが用意されていますので、font-stretchディスクリプタを利用してフォントを定義します。ただし、font-stretchディスクリプタの指定に対応しているのはFirefoxとIE9以上となっています。'
-							p PT Sansに用意された幅の異なるフォントデータ。
-							table.table
-								tr
-									th フォント名（ファイル名）
-								tr
-									td PT Sans Reglar（PTS55F.woff）
-								tr
-									td PT Sans Narrow Regular（PTN57F.woff）
-							p='font-stretchディスクリプタで指定できる幅は以下のようになっています。フォント名に含まれる名称との関連は提示されていませんが、normalを中心に、一番狭い幅をultra-condensed、一番広い幅をultra-expandedと指定することになっています。ここでは幅の狭いフォントを定義するため、font-stretchディスクリプタの値を「condensed」にします。また、font-stretchディスクリプタを指定しなかった場合、値は初期値の「normal」で処理されます。'
-							table.table
-								tr
-									th font-stretchの値
-									th 幅の目安
-								tr
-									td ultra-condensed
-									td 幅が狭い
-								tr
-									td extra-condensed
-									td ▲
-								tr
-									td condensed
-									td ▲
-								tr
-									td semi-condensed
-									td ▲
-								tr
-									td normal
-									td 標準の幅
-								tr
-									td semi-expanded
-									td ▼
-								tr
-									td expanded
-									td ▼
-								tr
-									td extra-expanded
-									td ▼
-								tr
-									td ultra-expanded
-									td 幅が広い
-							p='定義したフォントを利用する場合、font-familyプロパティでフォント名を、font-stretchプロパティで幅を指定します。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/182/182-D.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div style="font-family: PTSans"&gt;
-									| Ham Sandwiches
-									| &lt;/div&gt;
-									| 
-									| &lt;div style="font-family: PTSans; font-stretch: condensed"&gt;
-									| Ham Sandwiches
-									| &lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div(style='font-family: PTSans;')
-									| 	| Ham Sandwiches
-									| div(style='font-family: PTSans; font-stretch: condensed;')
-									| 	| Ham Sandwiches
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| /* PT Sans Regular 標準の幅のフォント */
-									| @font-face {
-									|     font-family: 'PTSans';
-									|     src: url(PT55F.woff);
-									|     font-stretch: normal;
-									| }
-									| /* PT Sans Regular 幅が狭いフォント */
-									| @font-face {
-									|     font-family: 'PTSans';
-									|     src: url(PT57F.woff);
-									|     font-stretch: condensed;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| @font-face
-									| 	font-family 'PTSans'
-									| 	src url(PT55F.woff)
-									| 	font-stretch normal
-									| @font-face
-									| 	font-family 'PTSans'
-									| 	src url(PT57F.woff)
-									| 	font-stretch condensed
-								figcaption （Stylus）
-							hr
-							h4 SAMPLE E：ローカルフォントの指定 [local()]
-							p='@font-faceのsrcディスクリプタではlocal()を利用してローカルフォントを指定することができます。たとえば、下のようにlocal()とurl()の指定をカンマで区切って記述すると、閲覧環境に「Quicksand」というローカルフォントがある場合はそのフォントで、ない場合はWebフォントで表示を行うことができます。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| @font-face {
-									|     font-family: 'Quicksand';
-									|     src: local('Quicksand'),
-									|            url(Quicksand_Book.woff) format('woff');
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| @font-face
-									| 	font-family 'Quicksand'
-									| 	src local('Quicksand'), url(Quicksand_Book.woff) format('woff')
-								figcaption （Stylus）
-							p='local()の指定をカンマで区切り、複数のローカルフォントを指定することもできます。たとえば、下のようにWindows環境とMac OS X環境の日本語フォントを指定し、フォント名を「jpfont」と指定しておくと、font-familyプロパティの値を「jpfont」にすることで環境ごとに最適なフォントで表示することができます。'
-							p='なお、local()で指定するフォントを日本語名で記述するとFirefox、IEではきちんと表示できなくなりますので、英語名で指定するようにしています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/182/182-E.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| @font-face {
-									|     font-family: 'jpfont';
-									|     src: local('Meiryo'),
-									|            local('Hiragino Kaku Gothic Pro'),
-									|            local('sans-serif');
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| @font-face
-									| 	font-family 'jpfont'
-									| 	src local('Meiryo'),
-									| 		local('Hiragino Kaku Gothic Pro'),
-									| 		local('sans-serif')
-								figcaption （Stylus）
-							p='srcディスクリプタの1つ目の設定をlocal()にした場合、Android2.3.xでは2つ目以降のWebフォントの指定が無効になるという問題も見られます。また、IE8以前のバージョンはlocal()に未対応です。'
-							hr
-							h4 SAMPLE F：使用する文字範囲の指定 [unicode-range]
-							p='@font-faceのunicode-rangeディスクリプタを利用すると、使用する文字の範囲をUnicodeのコードポイントで指定することができます。たとえば、下のサンプルでは「mix」という名前のフォントを定義し、大文字のアルファベット（U+0041-005A）はWebフォントのTeutonicで、小文字のアルファベット（U+0061-007A）はローカルフォントのTimes New Romanで表示するように指定しています。'
-							p='なお、unicode-rangeディスクリプタに対応しているのはiOS、Android、Safari、Chrome、IE9以上となっています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/182/182-F01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div style="font-family: mix"&gt;Ham Sandwiches&lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div(style='font-family: mix;') Ham Sandwiches
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| @font-face {
-									|     font-family: mix;
-									|     src: url('teutonic3.woff') format('woff'),
-									|            url('teutonic3.ttf') format('truetype');
-									|     unicode-range: U+0041-005A;
-									| }
-									| 
-									| @font-face {
-									|     font-family: mix;
-									|     src: local('Times New Roman');
-									|     unicode-range: U+0061-007A;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| @font-face
-									| 	font-family mix
-									| 	src url('teutonic3.woff') format('woff'),　url('teutonic3.ttf') format('truetype')
-									| 	unicode-range U+0041-005A
-									| @font-face
-									| 	font-family mix
-									| 	src local('Times New Roman')
-									|	unicode-range U+0061-007A
-								figcaption （Stylus）
-							p='unicode-rangeディスクリプタの指定は日本語フォントに対しても有効です。たとえば、下のサンプルは「mix」という名前のフォントを定義し、ゴシック体のフォントで表示するように指定したものです。ただし、ひらがな（U+3040-309F）については、明朝体のフォントで表示するように指定しています。なお、複数の文字の範囲はカンマで区切って指定します。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/182/182-F02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div style="font-family: mix"&gt;今日のお昼はハムサンド&lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div(style='font-family: mix;') 今日のお昼はハムサンド
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| @font-face {
-									|     font-family: mix;
-									|     src: local('Meiryo'),
-									|            local('Hiragino Kaku Gothic Pro'),
-									|            local('HIragino Kaku Gothic ProN'),
-									|            local('sans-serif');
-									| }
-									| 
-									| @font-face {
-									|     font-family: mix;
-									|     src: local('MS PMincho'),
-									|           local('Hiragino Mincho Pro'),
-									|           local('Hiragino Mincho ProN'),
-									|           local('serif');
-									|     unicode-range: U+3040-309F, U+30A0-30FF;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| @font-face
-									| 	font-family mix
-									| 	src local('Meiryo'),
-									| 	local('Hiragino Kaku Gothic Pro'),
-									| 		local('HIragino Kaku Gothic ProN'),
-									| 		local('sans-serif')
-									| 	font-family mix
-									| 	src local('MS PMincho'),
-									| 	local('Hiragino Mincho Pro'),
-									| 		local('Hiragino Mincho ProN'),
-									| 		local('serif')
-									| 	unicode-range U+3040-309F, U+30A0-30FF
-								figcaption （Stylus）
-							p
-								| Uicode Range Generator
-								br
-								a(href='http://zenoplex.jp/tools/unicoderange_generator.html',target='_blank') http://zenoplex.jp/tools/unicoderange_generator.html
-							hr
-							h4 その他のディスクリプタ
-							p='CSS3では@font-faceで指定できるディスクリプタとしてfont-variantとfont-feature-settingsも提案されています。'
-							hr
-							h4 フリーで利用できるWebフォントとフォーマットの変換
-							P='Webフォントとして利用可能なフォントの多くは有料ですが、フリーで利用できるものもあります。たとえば、本書のサンプルではFont Squirrelというサイトで配布されているフォント（Quicksand、PT Sans、Teutonic）を使用しています。Font Squirrelは商用利用可能なフリーフォントを集めたサイトです。Webフォントとして利用できるものは「@font-face Kit」が用意されており、主要フォーマット（WOFF、TrueType、EOT、SVG）のデータをまとめてダウンロードすることができます。'
-							p='また、「@font-face Generator」の機能を利用すると、アップロードしたフォントデータを主要フォーマットに変換することも可能です。'
-							p
-								| Font Squirrel
-								br
-								a(href='http://www.fontsquirrel.com',target='_blank') http://www.fontsquirrel.com
-							p ※ 細かなライセンスはフォントごとに異なりますので、必ず確認するようにします。
-							hr
-							h4 Webフォントサービス
-							p='Webフォントサービスを利用すると、自分でフォントデータを用意しなくても、サービス提供元のサーバーに用意されたフォントデータを利用して文字を表示することができます。多くのWebフォントサービスは有料ですが、「Google Fonts」はフリーで利用することが可能です。'
-							p='Google Fontsの場合、フォントの一覧から使用したいフォントを選択し、外部スタイルシートの形でWebフォントの設定を読み込みます。すると、ブラウザやOSに合わせて最適な@font-faceの設定が読み込まれますので、font-familyプロパティでフォント名を指定すればWebフォントを利用することができます。'
-							p
-								| Google Web Fonts
-								br
-								a(href='http://www.google.com/fonts/',target='_blank') http://www.google.com/fonts/
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/182/184.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div&gt;Ham Sandwiches&lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div Ham Sandwiches
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| @import url(http://fonts.googleapis.com/css?family=Fontdiner+Swanky);
-									| 
-									| div {
-									|     font-family: 'Fotdiner Swanky';
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| @import url(http://fonts.googleapis.com/css?family=Fontdiner+Swanky);
-									| div
-									| 	font-family: 'Fotdiner Swanky';
-								figcaption （Stylus）
-							p='Chromeで表示したときに外部スタイルシートとして読み込まれる@font-faceの設定'
-							figure
-								pre(class='prettyprint linenums:1')
-									| @font-face {
-									|   font-family: 'Fontdiner Swanky';
-									|   font-style: normal;
-									|   font-weight: 400;
-									|   src: local('Fontdiner Swanky'), local('FontdinerSwanky'), url(http://themes.googleusercontent.com/static/fonts/fontdinerswanky/v3/8_GxIO5ixMtn5P6COsF3TmC-qdh9gY3gzw21ltIAGL8.woff) format('woff');
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| @font-face
-									| 	font-family 'Fontdiner Swanky'
-									| 	font-style normal
-									| 	font-weight 400
-									| 	src local('Fontdiner Swanky'), local('FontdinerSwanky'), url(http://themes.googleusercontent.com/static/fonts/fontdinerswanky/v3/8_GxIO5ixMtn5P6COsF3TmC-qdh9gY3gzw21ltIAGL8.woff) format('woff')
-								figcaption （Stylus）
-							h4 ドットインストール
-							p
-								a(href='http://dotinstall.com/lessons/basic_google_web_fonts',target='_blank') Google Web Fonts入門
-							hr
-							h4 その他のWebフォントサービス
-							pre
-								| デコもじ
-								| http://decomoji.jp
-								| 
-								| FONT+
-								| http://webfont.fontplus.jp
-								| 
-								| TypeSquare
-								| http://typesquare.com
-								| 
-								| もじでぱ
-								| http://mojidepa.com/login
-								| 
-								| My Fonts
-								| http://www.myfonts.com
-								| 
-								| typekit
-								| https://typekit.com
-								| 
-								| Font Squirrel
-								| http://www.fontsquirrel.com
-								| 
-								| Adobe Edge Web Fonts
-								| http://html.adobe.com/jp/edge/webfonts/
-								| 
-								| Adobe Edge Fonts Previewer
-								| http://edgefonts.toekneestuck.com/
-								| 
-								| WOFFコンバーター
-								| http://opentype.jp/woffconv.htm
-								| 
-								| @font-face Generator
-								| http://www.fontsquirrel.com/fontface/generator
-								| 
-								| Fontello
-								| http://fontello.com/
-							hr
-							h4 日本語フリーフォント
-							pre
-								| 渦ペン
-								| 渦えんぴつ
-								| うず角
-								| うず丸
-								| 渦筆
-								| http://www.geocities.jp/o030b/ainezunouzu/
-								| 
-								| GLアンチック/
-								| http://gutenberg.sourceforge.jp/
-								| 
-								| ヘタレ字
-								| http://bakafonts.kyakirun.com/
-								| 
-								| MOJもじくみかな
-								| http://www.pot.co.jp/font/
-								| 
-								| 筆ペンxLOVE(BOLD)
-								| http://wednesdaylove.jp/
-								| 
-								| 青柳疎石フォント
-								| 衡山毛筆フォント
-								| 青柳衡山フォント
-								| 衡山毛筆フォント行書
-								| 衡山毛筆フォント草書
-								| http://www7a.biglobe.ne.jp/~kouzan/
-								| 
-								| あずきフォント／あずきフォント（BOLD）
-								| うずらフォント
-								| http://azukifont.com/
-								| 
-								| あんずもじ
-								| あんずもじ始
-								| http://www8.plala.or.jp/p_dolce/
-								| 
-								| M+
-								| http://mplus-fonts.sourceforge.jp/
-								| 
-								| 梅ゴシック
-								| 梅明朝
-								| http://sourceforge.jp/projects/ume-font/wiki/FrontPage
-								| 
-								| 和田研細丸
-								| http://sourceforge.jp/projects/jis2004/wiki/FrontPage
-								| 
-								| たれフォント
-								| http://graphics.tailtame.com/archives/tare-font/
-								| 
-								| 不忘フェルトペン書体
-								| http://fuboh.jp/
-								| 
-								| ほにゃ字
-								| にくきゅう
-								| http://honya.nyanta.jp/
-								| 
-								| ゆたぽんコーディング
-								| ゆたココ
-								| http://net2.system.to/pc/
-								| 
-								| 三丁目フォント
-								| http://www.geocities.jp/bokurano_yume/
-								| 
-								| たぬき油性マジック
-								| http://tanukifont.sblo.jp/
-								| 
-								| 亮月ごちっく
-								| はるかゴシックE
-								| 亮月パッキーB
-								| http://ryougetsu.net/seisaku.html
-								| 
-								| アームド・バナナ
-								| アームド・レモン
-								| http://calligra-tei.oops.jp/
-								| 
-								| きろ字
-								| http://www.ez0.net/distribution/font/kiloji/
-								| 
-								| VLゴシック
-								| http://vlgothic.dicey.org/
-							hr
-							h4 アルファベットフリーフォント
-							pre
-								| Veselka 4F
-								| Logofontik
-								| Serifiqo4F
-								| Tkachenko Sketch 4F
-								| Nowy Geroy 4F
-								| http://www.4thfebruary.com.ua/
-								| 
-								| Zarina
-								| http://www.giuseppedecesare.com/
-								| 
-								| Markermoe 2
-								| BillieBob
-								| HildiniaDonut
-								| FlutSas
-								| JoeHand 1
-								| Crappy Joe
-								| FrucianteHand
-								| Minerva 16
-								| moanHand
-								| vincHand
-								| http://www.joebob.nl/
-								| 
-								| Astron Boy
-								| Beat My Guest
-								| Berylium
-								| Bursttown Dam
-								| Carbon
-								| Delton Stylus
-								| Degrassi
-								| Delta Hey Max Nine
-								| Dirty Baker's Dozen
-								| Dream Orphans
-								| Duality
-								| Earwig Factory
-								| Effloresce
-								| Ennobled Pet
-								| Ethnocentric
-								| Euphorigenic
-								| Expressway
-								| Fenwick Outline
-								| Forgotten Futurist
-								| Good Times
-								| Graffiti Treat
-								| Green Fuz
-								| Gunplay
-								| Heart Sweet Heart
-								| Highway To Heck
-								| Holly Smokes
-								| Home Sweet Home
-								| Jigsaw Trouserdrop
-								| Junegull
-								| Kenyan Coffee
-								| Kimberley
-								| Kredit
-								| Lockergnome
-								| Mango Scribble
-								| Minya Nouvelle
-								| Nasalization
-								| Neuropol X
-								| Neuropolitical
-								| Pakenham
-								| Po Beef
-								| Pop Up Fontio
-								| Pricedown Black
-								| Pubcat
-								| Shlop
-								| Snidely
-								| Sofachrome
-								| Squealer
-								| Steelfish
-								| Stereofidelic
-								| Still Time
-								| Strenuous
-								| Sui Generis
-								| Superheterodyne
-								| http://new.myfonts.com/foundry/Larabie/
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;Webフォントの利用
+                        .panel-body
+                            .alert.alert-info Webフォントの利用
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            p ※IE8以前は部分対応
+                            pre
+                                | @font-face {
+                                |     font-family: フォント名
+                                |     src: フォントデータ
+                                |     font-style: 斜体のスタイル
+                                |     font-weight: 太さのスタイル
+                                |     font-stretch: 幅のスタイル
+                                |     unicode-range: 文字範囲
+                                | }
+                            p
+                                | フォント名・・・任意のフォント名
+                                | フォントデータ・・・url()／url() format()／local()
+                                | 斜体の指定・・・normal／italic／oblique
+                                | 太さの指定・・・normal／bold／100／200／300／400／500／600／700／800／900
+                                | 幅の指定・・・ultra-condensed／extra-condensed／condensed／semi-condensed／normal／semi-expanded／expanded／extra-expanded／ultra-expanded
+                                | 文字範囲の指定・・・Unicodeのコードポイント
+                            table.table
+                                tr
+                                    td 初期値
+                                    td -
+                                tr
+                                    td 継承
+                                    td -
+                                tr
+                                    td 適用先
+                                    td -
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td Fonts
+                            p='Webページに使用できるフォントは、CSS2.1までは閲覧環境にインストールされたローカルフォントだけでしたが、CSS3からはサーバーに置いたフォントを読み込んで利用できるようになっています。こうしたフォントはWebフォントと呼ばれ、@font-faceで定義して利用します。なお、利用できるフォントはライセンスによってWebフォントとしての使用が許可されたものに限られます。'
+                            p='各ブラウザが対応しているWebフォントのフォーマットは下のようになっています。WOFF（Web Open Font Format）はWebページで使うことを目的に作られたフォーマットで、他のフォーマットに比べてサイズが小さくなると行ったメリットがあります。しかし、AndroidやiOS4.x、IE8以前に対応するためには、WOFF以外のフォーマットも用意する必要があります。'
+                            p='Embedded Open Type（EOT）は、IEのみがサポートしているフォーマットです。IEはバージョン4から@font-faceをサポートしており、そのとき対応したフォーマットがEOTでした。IE8以前に対応する場合に使用します。'
+                            p='SVG Fontは、ベクタ形式の図形を描画するSVGで定義されたフォントです。iOS4.1以前のバージョンに対応する場合に使用します。'
+                            table.table
+                                tr
+                                    th 
+                                    th WOFF（.woff）
+                                    th TrueType（.ttf）
+                                    th OpenType（.otf）
+                                    th Embedded OpenType（.eot）
+                                    th SVG Font（.svg）
+                                tr
+                                    th Firefox
+                                    td ○
+                                    td ○
+                                    td ○
+                                    td -
+                                    td -
+                                tr
+                                    th Safari
+                                    td ○
+                                    td ○
+                                    td ○
+                                    td -
+                                    td ○
+                                tr
+                                    th Chrome
+                                    td ○
+                                    td ○
+                                    td ○
+                                    td -
+                                    td ○
+                                tr
+                                    th Opera
+                                    td ○
+                                    td ○
+                                    td ○
+                                    td -
+                                    td ○
+                                tr
+                                    th IE
+                                    td ○ ※1
+                                    td ○ ※1
+                                    td ○ ※1
+                                    td ○
+                                    td ○
+                                tr
+                                    th iOS
+                                    td ○ ※2
+                                    td ○ ※3
+                                    td ○ ※3
+                                    td -
+                                    td ○
+                                tr
+                                    th Android
+                                    td -
+                                    td ○ ※4
+                                    td ○ ※4
+                                    td -
+                                    td ○ ※5
+                            p
+                                | ※1・・・IE9以上が対応。<br>
+                                | ※2・・・iOS5.x以上が対応。<br>
+                                | ※3・・・iOS4.2以上が対応。<br>
+                                | ※4・・・Android2.2以上が対応。<br>
+                                | ※5・・・Android3.x以上が対応。
+                            p='IE9がWebフォントとして利用できるTrueTypeとOpentTypeのフォントは、フォントデータに含まれている埋め込み許可の制約レベルが「インストール可能」となっているものに限られます。'
+                            p
+                                | Quicksand_*フォントダウンロード
+                                br
+                                a(href='http://sourceforge.jp/projects/sfnet_yarska/releases/',target='_blank') http://sourceforge.jp/projects/sfnet_yarska/releases/
+                            hr
+                            h4 SAMPLE A：基本
+                            p='サーバーに置いたフォントデータをWebフォントとして利用するためには、@font-faceのfont-familyディスクリプタでフォント名を、srcディスクリプタでフォントデータを指定してフォントの定義を行います。ここではWOFF形式のQuicksandというフォントを利用するため、font-familyディスクリプタの値を「Quicksand」と指定しています。srcディスクリプタの値は「url(\'\') format(\'WOFF\')」という形で記述し、フォントデータのURLとフォーマットを指定します。'
+                            p='@font-faceで定義した「Quicksand」フォントを利用するためには、font-familyプロパティの値を「Quicksand」にします。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/182/182-A01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div&gt;Ham Sandwiches&lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div Ham Sandwiches
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @font-face {
+                                    |     font-family: 'Quicksand';
+                                    |     src: url(Quicksand_Book.woff) format('woff');
+                                    | }
+                                    | 
+                                    | div {
+                                    |     font-family: Qucksand;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @font-face
+                                    |     font-family 'Quicksand'
+                                    |     src url(Quicksand_Book.woff) format('woff')
+                                    | div
+                                    |     font-family Qucksand
+                                figcaption （Stylus）
+                            tale.table
+                                tr
+                                    th フォーマット
+                                    th format()の値
+                                tr
+                                    td WOFF
+                                    td woff
+                                tr
+                                    td TrueType
+                                    td truetype
+                                tr
+                                    td OpenType
+                                    td opentype
+                                tr
+                                    td Embedded Open Type
+                                    td embedded-opentype
+                                tr
+                                    td SVG Font
+                                    td svg
+                            h4 SVG Fontを利用する場合
+                            p='SVGフォントを利用する場合、フォントファイルのURLにフォトのIDを「#」でつなげて記述します。フォントのIDはSVGデータの<font id="〜">で指定されたもので、ここでは「qsbook」となっています。'
+                            p='なお、iOS4.xとOpera以外ではIDを指定せずにSVG Fontを利用することができます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/182/182-A02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;?xml version="1.0" standalone="no"?&gt;
+                                    | &lt;!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"&gt;
+                                    | …略...
+                                    | &lt;font id="qsbook" horiz-adv-x="880" &gt;
+                                figcaption （SVG）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @font-face {
+                                    |     font-family: 'Quicksand';
+                                    |     src: url(Quicksand_Book.svg#qsbook) format('svg');
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @font-face
+                                    |     font-family 'Quicksand'
+                                    |     src url(Quicksand_Book.svg#qsbook) format('svg')
+                                figcaption （Stylus）
+                            hr
+                            h4 SAMPLE B：主要なブラウザに対応する記述
+                            p='@font-faceのsrcディスクリプタでは複数のフォントデータの候補をカンマで区切って指定することができます。ブラウザは指定されたフォントデータの中から利用できるものを使って表示を行います。この場合、最初に記述したデータほど優先順位が高くなります。'
+                            p='最新の主要ブラウザに対応するためには、WOFFと、TrueTypeまたはOpenType形式のフォントデータを用意し、カンマで区切って指定します。たとえば、WOFFとTrueType形式のフォントデータを指定すると下のようになります。これでiOS5.x以上、Firefox、Safari、Chrome、Opera、IE9はWOFFで、iOS4.2やAndroidはTrueTypeフォントを表示することができます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/182/182-B.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @font-face {
+                                    |     font-family: 'Quicksand';
+                                    |     src: url(Quicksand_Book.woff) format('woff'), url(Quicksand_Book.ttf) format('truetype');
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @font-face
+                                    |     font-family 'Quicksand'
+                                    |     src url(Quicksand_Book.woff) format('woff'), url(Quicksand_Book.ttf) format('truetype')
+                                figcaption （Stylus）
+                            hr
+                            h4 iOS4.1以前への対応
+                            p='iOS4.1以前にも対応する場合、SVG形式のフォントデータも用意して、下のように指定を追加します。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @font-face {
+                                    |     font-family: 'Quicksand';
+                                    |     src: url(Quicksand_Book.woff) format('woff'),
+                                    |           url(Quicksand_Book.ttf) format('truetype'),
+                                    |           url(Quicksand_Book.svg#qsbook) format('svg');
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @font-face
+                                    |   font-family 'Quicksand'
+                                    |   src url(Quicksand_Book.woff) format('woff'), url(Quicksand_Book.ttf) format('truetype'), url(Quicksand_Book.svg#qsbook) format('svg')
+                                figcaption （Stylus）
+                            hr
+                            h4 IE8以前への対応
+                            p='IE8以前にも対応する場合、Embedded OpenType（EOT）形式のフォントデータも用意して設定を追加します。ただし、複数のフォントデータも用意して設定を追加します。ただし、複数のフォントデータをカンマで区切った記述には未対応なため、新しいsrcディスクリプタを追加してEOT形式のデータを指定します。このとき、既存のsrcよりも前に記述します。また、format()の記述には未対応なため、url()のみを記述します。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/182/184.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @font-face {
+                                    |     font-family: 'Quicksand';,
+                                    |     src: url(Quicksand_Book.eot);
+                                    |     src: local('.'),
+                                    |           url(Quicksand_Book.woff) format('woff'),
+                                    |           url(Quicksand_Book.ttf) format('truetype'),
+                                    |           url(Quicksand_Book.svg#qsbook) format('svg');
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @font-face
+                                    |     font-family 'Quicksand'
+                                    |     src url(Quicksand_Book.eot)
+                                    |     src local('.'),
+                                    |     url(Quicksand_Book.woff) format('woff'),
+                                    |         url(Quicksand_Book.ttf) format('truetype'),
+                                    |         url(Quicksand_Book.svg#qsbook) format('svg')
+                                figcaption （Stylus）
+                            p='@font-face内に複数のsrcディスクリプタがある場合、最後に記述したsrcが有効になりますので、IE8以前が2つ目のsrcを認識できないようにします。そこで、IE8が未対応のlocal()の指定を追加します。これにより、1つ目のsrcがIE8以前で、2つ目のsrcが他のブラウザで有効となり、環境ごとに対応したフォーマットのWebフォントを利用できるようになります。ただし、Android2.3.xではlocal()の指定によりWebフォントの指定が無効になるという問題が発生しますので、注意が必要です。'
+                            hr
+                            h4 SAMPLE C：斜体や太さの異なるフォントの定義 [font-style, font-weight]
+                            p='@font-faceでは斜体や太さといった特徴を含めてフォントを定義することもできます。たとえば、SAMPLE Aで使用したQucksandというフォントには、下のように斜体や太字のフォントデータが用意されています。そこで、それぞれのフォントの定義を行い、Webページで利用できるようにします。ただし、同じ「Quicksand」のフォントであることを示すため、@font-faceのfont-familyは共通したフォント名で定義していきます。'
+                            p='なお、わかりやすいように、srcディスクリプタではWOFF形式のフォントデータのみを指定しますが、複数のブラウザに対応させる場合はSAMPLE BのようにTrueType形式のフォントデータも指定してください。'
+                            table.table
+                                tr
+                                    th フォント名（ファイル名）
+                                tr
+                                    td Qucksand Book（quicksand_book.woff）
+                                tr
+                                    td Quicksand Book Oblique（quicksand_book_oblique.woff）
+                                tr
+                                    td Quicksand_Bold（quicksand_book.woff）
+                                tr
+                                    td Quicksand_Bold_Oblique（quicksand_bold_oblique.woff）
+                            hr
+                            h4 斜体フォントの定義
+                            p='斜体フォントを定義する場合、font-styleディスクリプタを利用します。Quicksandの斜体フォントには「Oblique」と斜体を示す名称が含まれていますので、font-styleディスクリプタの値を「oblique」にします。なお、font-styleディスクリプタを使用しなかった場合、値は初期値の「normal」で処理され、正体のフォントとして定義されます。'
+                            table.table
+                                tr
+                                    th font-styleの値
+                                    th フォント名に含まれる斜体を示す名称
+                                tr
+                                    td normal
+                                    td なし
+                                tr
+                                    td italic
+                                    td Italic
+                                tr
+                                    td oblique
+                                    td Oblique
+                            hr
+                            h4 太さの異なるフォントの定義
+                            p='太さの異なるフォントを定義する場合、font-weightディスクリプタを利用します。フォント名に含まれる太さを示す名称fに対し、font-weightディスクリプタの値は次のように指定するのが目安として提示されています。Quicksandの太字フォントの名称は「Bold」となっていますので、font-weightディスクリプタの値は「Bold」にします。なお、font-weightディスクリプタを指定しなかった場合、値は初期値の「normal」で処理され、通常の太さのフォントとして定義されます。'
+                            table.table
+                                tr
+                                    th font-weightの値
+                                    th フォント名に含まれる太さを示す名称
+                                tr
+                                    td 100
+                                    td Thin
+                                tr
+                                    td 200
+                                    td Extra Light (Ultra Light)
+                                tr
+                                    td 300
+                                    td Light
+                                tr
+                                    td 400またはnormal
+                                    td Normal (Book, Legular)
+                                tr
+                                    td 500
+                                    td Medium
+                                tr
+                                    td 600
+                                    td Semi Bold (Demi Bold)
+                                tr
+                                    td 700またはbold
+                                    td Bold
+                                tr
+                                    td 800
+                                    td Extra Bold (Ultra Bold)
+                                tr
+                                    td 900
+                                    td Black (Heavy)
+                            hr
+                            h4 定義したフォントの利用
+                            p='定義したフォントを利用するには、font-familyプロパティでフォント名を指定します。あとは、font-styleとfont-weightプロパティの指定に応じて、斜体や太字のフォントで表示されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/182/182-C.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div style="font-family: Quicksand"&gt;
+                                    | &lt;span style="font-style: oblique"&gt;Ham&lt;/span&gt; Sandwiches
+                                    | &lt;/div&gt;
+                                    | 
+                                    | &lt;div style="font-family: Quicksand; font-weight: bold"&gt;
+                                    | &lt;span style="font-style: oblique"&gt;Ham&lt;/span&gt; Sandwiches
+                                    | &lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div(style='font-family: Quicksand;')
+                                    |     span(style='font-style: oblique;') Ham
+                                    |     | Sandwiches
+                                    | div(style='font-family: Quicksand; font-weight: bold;')
+                                    |     span(style='font-style: oblique;') Ham
+                                    |     | Sandwiches
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | /* Quicksand Book 正体で標準の太さのフォント */
+                                    | @font-face {
+                                    |     font-family: 'Quicksand';
+                                    |     src: url(Qucksand_Book.woff) format('woff');
+                                    |     font-style: normal;
+                                    |     font-weight: normal;
+                                    | }
+                                    | 
+                                    | /* Quicksand Book Oblique斜体で標準の太さのフォント */
+                                    | @font-face {
+                                    |     font-family: 'Quicksand';
+                                    |     src: url(Qucksand_Book_Oblique.woff) format('woff');
+                                    |     font-style: oblique;
+                                    |     font-weight: normal;
+                                    | }
+                                    | 
+                                    | /* Quicksand Bold 正体で太いフォント */
+                                    | @font-face {
+                                    |     font-family: 'Quicksand';
+                                    |     src: url(Qucksand_Bold.woff) format('woff');
+                                    |     font-style: normal;
+                                    |     font-weight: bold;
+                                    | }
+                                    | 
+                                    | /* Quicksand Bold Oblique斜体で太いフォント */
+                                    | @font-face {
+                                    |     font-family: 'Quicksand';
+                                    |     src: url(Qucksand_Bold_Oblique.woff) format('woff');
+                                    |     font-style: oblique;
+                                    |     font-weight: bold;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @font-face
+                                    |   font-family 'Quicksand'
+                                    |   src url(Qucksand_Book.woff) format('woff')
+                                    |   font-style normal
+                                    |   font-weight normal
+                                    | @font-face
+                                    |   font-family 'Quicksand'
+                                    |   src url(Qucksand_Book_Oblique.woff) format('woff')
+                                    |   font-style oblique
+                                    |   font-weight normal
+                                    | @font-face
+                                    |   font-family 'Quicksand'
+                                    |   src url(Qucksand_Bold.woff) format('woff')
+                                    |   font-style normal
+                                    |   font-weight bold
+                                    | @font-face
+                                    |   font-family 'Quicksand'
+                                    |   src url(Qucksand_Bold_Oblique.woff) format('woff')
+                                    |   font-style oblique
+                                    |   font-weight bold
+                                figcaption （Stylus）
+                            hr
+                            h4 IE8以前への対応
+                            p='IE8以前はfont-styleやfont-weightディスクリプタの指定に未対応です。そのため、斜体や太さの異なるフォントを定義する場合は、それぞれのフォント名を変え、個別のフォントとして定義する必要があります。たとえば、SAMPLE Cと同じフォントを再現するためには、下のような形でEOT形式のフォントを定義します。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div style="font-family: QSBook"&gt;
+                                    | &lt;span style="font-family: QSOblique"&gt;Ham&lt;/span&gt; Sandwiches
+                                    | &lt;/div&gt;
+                                    | &lt;div style="font-family: QSBold"&gt;
+                                    | &lt;span style="font-family: QSBoldOblique"&gt;Ham&lt;/span&gt; Sandwiches
+                                    | &lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div(style='font-family: QSBook;')
+                                    |     span(style='font-family: QSOblique;') Ham
+                                    |     | Sandwiches
+                                    | div(style='font-family: QSBold;')
+                                    |     span(style='font-family: QSBoldOblique;') Ham
+                                    |     | Sandwiches
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @font-face {
+                                    |     font-family: 'QSBook';
+                                    |     src: url(Quicksand_Book.eot);
+                                    | }
+                                    | 
+                                    | @font-face {
+                                    |     font-family: 'QSOblique';
+                                    |     src: url(Qucksand_Book_Oblique.eot);
+                                    | }
+                                    | 
+                                    | @font-face {
+                                    |     font-fami;y: 'QSBold';
+                                    |     src: url(Quicksand_Bold.eot);
+                                    | }
+                                    | 
+                                    | @font-face {
+                                    |     font-family: 'QSBoldOblique';
+                                    |     src: url(Quicksand_Bold_Oblique);
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @font-face
+                                    |     font-family 'QSBook'
+                                    |     src url(Quicksand_Book.eot)
+                                    | @font-face
+                                    |     font-family 'QSOblique'
+                                    |     src url(Qucksand_Book_Oblique.eot)
+                                    | @font-face
+                                    |     font-family 'QSBold'
+                                    |     src url(Quicksand_Bold.eot)
+                                    | @font-face
+                                    |     font-family 'QSBoldOblique'
+                                    |     src url(Quicksand_Bold_Oblique)
+                                figcaption （Stylus）
+                            p='こうして定義したフォントを利用する場合、font-familyプロパティでそれぞれのフォント名を指定します。SAMPLE Cのように同じフォント名を指定し、font-styleやfont-weightプロパティの指定でフォントを変更することはできません。'
+                            hr
+                            h4 SAMPLE D：幅の異なるフォントの定義 [font-stretch]
+                            p='@font-faceでは斜体や太さと同じように、幅の特徴を含めてフォントを定義することができます。幅の特徴を指定するには、font-stretchディスクリプタを使用します。'
+                            p='たとえば、PT Sansというフォントには、下のように幅を狭くデザインしたフォントデータが用意されていますので、font-stretchディスクリプタを利用してフォントを定義します。ただし、font-stretchディスクリプタの指定に対応しているのはFirefoxとIE9以上となっています。'
+                            p PT Sansに用意された幅の異なるフォントデータ。
+                            table.table
+                                tr
+                                    th フォント名（ファイル名）
+                                tr
+                                    td PT Sans Reglar（PTS55F.woff）
+                                tr
+                                    td PT Sans Narrow Regular（PTN57F.woff）
+                            p='font-stretchディスクリプタで指定できる幅は以下のようになっています。フォント名に含まれる名称との関連は提示されていませんが、normalを中心に、一番狭い幅をultra-condensed、一番広い幅をultra-expandedと指定することになっています。ここでは幅の狭いフォントを定義するため、font-stretchディスクリプタの値を「condensed」にします。また、font-stretchディスクリプタを指定しなかった場合、値は初期値の「normal」で処理されます。'
+                            table.table
+                                tr
+                                    th font-stretchの値
+                                    th 幅の目安
+                                tr
+                                    td ultra-condensed
+                                    td 幅が狭い
+                                tr
+                                    td extra-condensed
+                                    td ▲
+                                tr
+                                    td condensed
+                                    td ▲
+                                tr
+                                    td semi-condensed
+                                    td ▲
+                                tr
+                                    td normal
+                                    td 標準の幅
+                                tr
+                                    td semi-expanded
+                                    td ▼
+                                tr
+                                    td expanded
+                                    td ▼
+                                tr
+                                    td extra-expanded
+                                    td ▼
+                                tr
+                                    td ultra-expanded
+                                    td 幅が広い
+                            p='定義したフォントを利用する場合、font-familyプロパティでフォント名を、font-stretchプロパティで幅を指定します。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/182/182-D.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div style="font-family: PTSans"&gt;
+                                    | Ham Sandwiches
+                                    | &lt;/div&gt;
+                                    | 
+                                    | &lt;div style="font-family: PTSans; font-stretch: condensed"&gt;
+                                    | Ham Sandwiches
+                                    | &lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div(style='font-family: PTSans;')
+                                    |     | Ham Sandwiches
+                                    | div(style='font-family: PTSans; font-stretch: condensed;')
+                                    |     | Ham Sandwiches
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | /* PT Sans Regular 標準の幅のフォント */
+                                    | @font-face {
+                                    |     font-family: 'PTSans';
+                                    |     src: url(PT55F.woff);
+                                    |     font-stretch: normal;
+                                    | }
+                                    | /* PT Sans Regular 幅が狭いフォント */
+                                    | @font-face {
+                                    |     font-family: 'PTSans';
+                                    |     src: url(PT57F.woff);
+                                    |     font-stretch: condensed;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @font-face
+                                    |     font-family 'PTSans'
+                                    |     src url(PT55F.woff)
+                                    |     font-stretch normal
+                                    | @font-face
+                                    |     font-family 'PTSans'
+                                    |     src url(PT57F.woff)
+                                    |     font-stretch condensed
+                                figcaption （Stylus）
+                            hr
+                            h4 SAMPLE E：ローカルフォントの指定 [local()]
+                            p='@font-faceのsrcディスクリプタではlocal()を利用してローカルフォントを指定することができます。たとえば、下のようにlocal()とurl()の指定をカンマで区切って記述すると、閲覧環境に「Quicksand」というローカルフォントがある場合はそのフォントで、ない場合はWebフォントで表示を行うことができます。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @font-face {
+                                    |     font-family: 'Quicksand';
+                                    |     src: local('Quicksand'),
+                                    |            url(Quicksand_Book.woff) format('woff');
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @font-face
+                                    |     font-family 'Quicksand'
+                                    |     src local('Quicksand'), url(Quicksand_Book.woff) format('woff')
+                                figcaption （Stylus）
+                            p='local()の指定をカンマで区切り、複数のローカルフォントを指定することもできます。たとえば、下のようにWindows環境とMac OS X環境の日本語フォントを指定し、フォント名を「jpfont」と指定しておくと、font-familyプロパティの値を「jpfont」にすることで環境ごとに最適なフォントで表示することができます。'
+                            p='なお、local()で指定するフォントを日本語名で記述するとFirefox、IEではきちんと表示できなくなりますので、英語名で指定するようにしています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/182/182-E.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @font-face {
+                                    |     font-family: 'jpfont';
+                                    |     src: local('Meiryo'),
+                                    |            local('Hiragino Kaku Gothic Pro'),
+                                    |            local('sans-serif');
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @font-face
+                                    |     font-family 'jpfont'
+                                    |     src local('Meiryo'),
+                                    |         local('Hiragino Kaku Gothic Pro'),
+                                    |         local('sans-serif')
+                                figcaption （Stylus）
+                            p='srcディスクリプタの1つ目の設定をlocal()にした場合、Android2.3.xでは2つ目以降のWebフォントの指定が無効になるという問題も見られます。また、IE8以前のバージョンはlocal()に未対応です。'
+                            hr
+                            h4 SAMPLE F：使用する文字範囲の指定 [unicode-range]
+                            p='@font-faceのunicode-rangeディスクリプタを利用すると、使用する文字の範囲をUnicodeのコードポイントで指定することができます。たとえば、下のサンプルでは「mix」という名前のフォントを定義し、大文字のアルファベット（U+0041-005A）はWebフォントのTeutonicで、小文字のアルファベット（U+0061-007A）はローカルフォントのTimes New Romanで表示するように指定しています。'
+                            p='なお、unicode-rangeディスクリプタに対応しているのはiOS、Android、Safari、Chrome、IE9以上となっています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/182/182-F01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div style="font-family: mix"&gt;Ham Sandwiches&lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div(style='font-family: mix;') Ham Sandwiches
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @font-face {
+                                    |     font-family: mix;
+                                    |     src: url('teutonic3.woff') format('woff'),
+                                    |            url('teutonic3.ttf') format('truetype');
+                                    |     unicode-range: U+0041-005A;
+                                    | }
+                                    | 
+                                    | @font-face {
+                                    |     font-family: mix;
+                                    |     src: local('Times New Roman');
+                                    |     unicode-range: U+0061-007A;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @font-face
+                                    |     font-family mix
+                                    |     src url('teutonic3.woff') format('woff'),　url('teutonic3.ttf') format('truetype')
+                                    |     unicode-range U+0041-005A
+                                    | @font-face
+                                    |     font-family mix
+                                    |     src local('Times New Roman')
+                                    |    unicode-range U+0061-007A
+                                figcaption （Stylus）
+                            p='unicode-rangeディスクリプタの指定は日本語フォントに対しても有効です。たとえば、下のサンプルは「mix」という名前のフォントを定義し、ゴシック体のフォントで表示するように指定したものです。ただし、ひらがな（U+3040-309F）については、明朝体のフォントで表示するように指定しています。なお、複数の文字の範囲はカンマで区切って指定します。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/182/182-F02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div style="font-family: mix"&gt;今日のお昼はハムサンド&lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div(style='font-family: mix;') 今日のお昼はハムサンド
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @font-face {
+                                    |     font-family: mix;
+                                    |     src: local('Meiryo'),
+                                    |            local('Hiragino Kaku Gothic Pro'),
+                                    |            local('HIragino Kaku Gothic ProN'),
+                                    |            local('sans-serif');
+                                    | }
+                                    | 
+                                    | @font-face {
+                                    |     font-family: mix;
+                                    |     src: local('MS PMincho'),
+                                    |           local('Hiragino Mincho Pro'),
+                                    |           local('Hiragino Mincho ProN'),
+                                    |           local('serif');
+                                    |     unicode-range: U+3040-309F, U+30A0-30FF;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @font-face
+                                    |     font-family mix
+                                    |     src local('Meiryo'),
+                                    |     local('Hiragino Kaku Gothic Pro'),
+                                    |         local('HIragino Kaku Gothic ProN'),
+                                    |         local('sans-serif')
+                                    |     font-family mix
+                                    |     src local('MS PMincho'),
+                                    |     local('Hiragino Mincho Pro'),
+                                    |         local('Hiragino Mincho ProN'),
+                                    |         local('serif')
+                                    |     unicode-range U+3040-309F, U+30A0-30FF
+                                figcaption （Stylus）
+                            p
+                                | Uicode Range Generator
+                                br
+                                a(href='http://zenoplex.jp/tools/unicoderange_generator.html',target='_blank') http://zenoplex.jp/tools/unicoderange_generator.html
+                            hr
+                            h4 その他のディスクリプタ
+                            p='CSS3では@font-faceで指定できるディスクリプタとしてfont-variantとfont-feature-settingsも提案されています。'
+                            hr
+                            h4 フリーで利用できるWebフォントとフォーマットの変換
+                            P='Webフォントとして利用可能なフォントの多くは有料ですが、フリーで利用できるものもあります。たとえば、本書のサンプルではFont Squirrelというサイトで配布されているフォント（Quicksand、PT Sans、Teutonic）を使用しています。Font Squirrelは商用利用可能なフリーフォントを集めたサイトです。Webフォントとして利用できるものは「@font-face Kit」が用意されており、主要フォーマット（WOFF、TrueType、EOT、SVG）のデータをまとめてダウンロードすることができます。'
+                            p='また、「@font-face Generator」の機能を利用すると、アップロードしたフォントデータを主要フォーマットに変換することも可能です。'
+                            p
+                                | Font Squirrel
+                                br
+                                a(href='http://www.fontsquirrel.com',target='_blank') http://www.fontsquirrel.com
+                            p ※ 細かなライセンスはフォントごとに異なりますので、必ず確認するようにします。
+                            hr
+                            h4 Webフォントサービス
+                            p='Webフォントサービスを利用すると、自分でフォントデータを用意しなくても、サービス提供元のサーバーに用意されたフォントデータを利用して文字を表示することができます。多くのWebフォントサービスは有料ですが、「Google Fonts」はフリーで利用することが可能です。'
+                            p='Google Fontsの場合、フォントの一覧から使用したいフォントを選択し、外部スタイルシートの形でWebフォントの設定を読み込みます。すると、ブラウザやOSに合わせて最適な@font-faceの設定が読み込まれますので、font-familyプロパティでフォント名を指定すればWebフォントを利用することができます。'
+                            p
+                                | Google Web Fonts
+                                br
+                                a(href='http://www.google.com/fonts/',target='_blank') http://www.google.com/fonts/
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/182/184.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div&gt;Ham Sandwiches&lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div Ham Sandwiches
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @import url(http://fonts.googleapis.com/css?family=Fontdiner+Swanky);
+                                    | 
+                                    | div {
+                                    |     font-family: 'Fotdiner Swanky';
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @import url(http://fonts.googleapis.com/css?family=Fontdiner+Swanky);
+                                    | div
+                                    |     font-family: 'Fotdiner Swanky';
+                                figcaption （Stylus）
+                            p='Chromeで表示したときに外部スタイルシートとして読み込まれる@font-faceの設定'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @font-face {
+                                    |   font-family: 'Fontdiner Swanky';
+                                    |   font-style: normal;
+                                    |   font-weight: 400;
+                                    |   src: local('Fontdiner Swanky'), local('FontdinerSwanky'), url(http://themes.googleusercontent.com/static/fonts/fontdinerswanky/v3/8_GxIO5ixMtn5P6COsF3TmC-qdh9gY3gzw21ltIAGL8.woff) format('woff');
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | @font-face
+                                    |     font-family 'Fontdiner Swanky'
+                                    |     font-style normal
+                                    |     font-weight 400
+                                    |     src local('Fontdiner Swanky'), local('FontdinerSwanky'), url(http://themes.googleusercontent.com/static/fonts/fontdinerswanky/v3/8_GxIO5ixMtn5P6COsF3TmC-qdh9gY3gzw21ltIAGL8.woff) format('woff')
+                                figcaption （Stylus）
+                            h4 ドットインストール
+                            p
+                                a(href='http://dotinstall.com/lessons/basic_google_web_fonts',target='_blank') Google Web Fonts入門
+                            hr
+                            h4 その他のWebフォントサービス
+                            pre
+                                | デコもじ
+                                | http://decomoji.jp
+                                | 
+                                | FONT+
+                                | http://webfont.fontplus.jp
+                                | 
+                                | TypeSquare
+                                | http://typesquare.com
+                                | 
+                                | もじでぱ
+                                | http://mojidepa.com/login
+                                | 
+                                | My Fonts
+                                | http://www.myfonts.com
+                                | 
+                                | typekit
+                                | https://typekit.com
+                                | 
+                                | Font Squirrel
+                                | http://www.fontsquirrel.com
+                                | 
+                                | Adobe Edge Web Fonts
+                                | http://html.adobe.com/jp/edge/webfonts/
+                                | 
+                                | Adobe Edge Fonts Previewer
+                                | http://edgefonts.toekneestuck.com/
+                                | 
+                                | WOFFコンバーター
+                                | http://opentype.jp/woffconv.htm
+                                | 
+                                | @font-face Generator
+                                | http://www.fontsquirrel.com/fontface/generator
+                                | 
+                                | Fontello
+                                | http://fontello.com/
+                            hr
+                            h4 日本語フリーフォント
+                            pre
+                                | 渦ペン
+                                | 渦えんぴつ
+                                | うず角
+                                | うず丸
+                                | 渦筆
+                                | http://www.geocities.jp/o030b/ainezunouzu/
+                                | 
+                                | GLアンチック/
+                                | http://gutenberg.sourceforge.jp/
+                                | 
+                                | ヘタレ字
+                                | http://bakafonts.kyakirun.com/
+                                | 
+                                | MOJもじくみかな
+                                | http://www.pot.co.jp/font/
+                                | 
+                                | 筆ペンxLOVE(BOLD)
+                                | http://wednesdaylove.jp/
+                                | 
+                                | 青柳疎石フォント
+                                | 衡山毛筆フォント
+                                | 青柳衡山フォント
+                                | 衡山毛筆フォント行書
+                                | 衡山毛筆フォント草書
+                                | http://www7a.biglobe.ne.jp/~kouzan/
+                                | 
+                                | あずきフォント／あずきフォント（BOLD）
+                                | うずらフォント
+                                | http://azukifont.com/
+                                | 
+                                | あんずもじ
+                                | あんずもじ始
+                                | http://www8.plala.or.jp/p_dolce/
+                                | 
+                                | M+
+                                | http://mplus-fonts.sourceforge.jp/
+                                | 
+                                | 梅ゴシック
+                                | 梅明朝
+                                | http://sourceforge.jp/projects/ume-font/wiki/FrontPage
+                                | 
+                                | 和田研細丸
+                                | http://sourceforge.jp/projects/jis2004/wiki/FrontPage
+                                | 
+                                | たれフォント
+                                | http://graphics.tailtame.com/archives/tare-font/
+                                | 
+                                | 不忘フェルトペン書体
+                                | http://fuboh.jp/
+                                | 
+                                | ほにゃ字
+                                | にくきゅう
+                                | http://honya.nyanta.jp/
+                                | 
+                                | ゆたぽんコーディング
+                                | ゆたココ
+                                | http://net2.system.to/pc/
+                                | 
+                                | 三丁目フォント
+                                | http://www.geocities.jp/bokurano_yume/
+                                | 
+                                | たぬき油性マジック
+                                | http://tanukifont.sblo.jp/
+                                | 
+                                | 亮月ごちっく
+                                | はるかゴシックE
+                                | 亮月パッキーB
+                                | http://ryougetsu.net/seisaku.html
+                                | 
+                                | アームド・バナナ
+                                | アームド・レモン
+                                | http://calligra-tei.oops.jp/
+                                | 
+                                | きろ字
+                                | http://www.ez0.net/distribution/font/kiloji/
+                                | 
+                                | VLゴシック
+                                | http://vlgothic.dicey.org/
+                            hr
+                            h4 アルファベットフリーフォント
+                            pre
+                                | Veselka 4F
+                                | Logofontik
+                                | Serifiqo4F
+                                | Tkachenko Sketch 4F
+                                | Nowy Geroy 4F
+                                | http://www.4thfebruary.com.ua/
+                                | 
+                                | Zarina
+                                | http://www.giuseppedecesare.com/
+                                | 
+                                | Markermoe 2
+                                | BillieBob
+                                | HildiniaDonut
+                                | FlutSas
+                                | JoeHand 1
+                                | Crappy Joe
+                                | FrucianteHand
+                                | Minerva 16
+                                | moanHand
+                                | vincHand
+                                | http://www.joebob.nl/
+                                | 
+                                | Astron Boy
+                                | Beat My Guest
+                                | Berylium
+                                | Bursttown Dam
+                                | Carbon
+                                | Delton Stylus
+                                | Degrassi
+                                | Delta Hey Max Nine
+                                | Dirty Baker's Dozen
+                                | Dream Orphans
+                                | Duality
+                                | Earwig Factory
+                                | Effloresce
+                                | Ennobled Pet
+                                | Ethnocentric
+                                | Euphorigenic
+                                | Expressway
+                                | Fenwick Outline
+                                | Forgotten Futurist
+                                | Good Times
+                                | Graffiti Treat
+                                | Green Fuz
+                                | Gunplay
+                                | Heart Sweet Heart
+                                | Highway To Heck
+                                | Holly Smokes
+                                | Home Sweet Home
+                                | Jigsaw Trouserdrop
+                                | Junegull
+                                | Kenyan Coffee
+                                | Kimberley
+                                | Kredit
+                                | Lockergnome
+                                | Mango Scribble
+                                | Minya Nouvelle
+                                | Nasalization
+                                | Neuropol X
+                                | Neuropolitical
+                                | Pakenham
+                                | Po Beef
+                                | Pop Up Fontio
+                                | Pricedown Black
+                                | Pubcat
+                                | Shlop
+                                | Snidely
+                                | Sofachrome
+                                | Squealer
+                                | Steelfish
+                                | Stereofidelic
+                                | Still Time
+                                | Strenuous
+                                | Sui Generis
+                                | Superheterodyne
+                                | http://new.myfonts.com/foundry/Larabie/
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

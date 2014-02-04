@@ -1,124 +1,124 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;マルチカラムの段にまたがる表示
-						.panel-body
-							.alert.alert-info マルチカラムの段にまたがる表示
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							p IE9以前は未対応。
-							pre
-								| column-span: 段の数
-							p
-								| 段の数・・・1 ／ all
-							table.table
-								tr
-									td 初期値
-									td 1
-								tr
-									td 継承
-									td なし
-								tr
-									td 適用先
-									td ブロックレベル要素（floatで配置指定した要素やpositionで表示位置を指定した要素を除く）
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td Multi-column Layout
-							p='マルチカラムの機能で表示した段組みでは、見出しなどのコンテンツを複数の段にまたがる形で表示することができます。その場合、またいで表示する段の数をcolumn-spanプロパティで指定します。ただし、指定できる段の数は1段またはすべての段（all）のみとなっています。'
-							table.table
-								tr
-									th column-spanの値
-									th 段の数
-								tr
-									td 1
-									td 1段で表示。
-								tr
-									td all
-									td すべての段にまたがる形で表示。
-							hr
-							h4 SAMPLE：見出しの複数の段にまたがる形で表示する
-							p='下のサンプルはマルチカラムの機能を利用して、2段組みにしたものです。コンテンツが段をまたいで表示されないのは、column-spanプロパティの値が初期値の「1」で処理されるためです。'
-							p='column-spanプロパティの値を「all」にした場合、コンテンツはすべての段にまたがって表示されます。たとえば、<h2>のcolumn-spanプロパティを「all」にすると、下のような表示になります。また、複数段にまたがった見出しによって前後の文書が区切られることになり、次のような形でレイアウトされています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/101.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| <div>
-									| <h2>おすすめのサンドイッチ</h2>
-									| <p>焼きたての手作りパンで新鮮なハム、トマト、…略…</p>
-									| <h2>採りたての野菜</h2>
-									| …略...
-									| </div>
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	h2 おすすめのサンドイッチ
-									| 	p 焼きたての手作りパンで新鮮なハム、トマト、…略…
-									| 	h2 採りたての野菜
-									| 		| …略...
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     width; 800px;
-									|     margin: auto;
-									|     column-count: 2;
-									|     -moz-column-count: 2;
-									|     -webkit-column-count: 2;
-									| }
-									| h2 {
-									|     background-color: greenyellow;
-									|     padding: 5px;
-									|     column-span: all;
-									|     -webkit-column-span: all;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	margin auto
-									| 	column-count 2
-									| 	-moz-column-count 2
-									| 	-webkit-column-count 2
-									| 
-									| h2
-									| 	background-color greenyellow
-									| 	padding 5px
-									| 	column-span all
-									| 	-webkit-column-span all
-								figcaption （Stylus）
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;マルチカラムの段にまたがる表示
+                        .panel-body
+                            .alert.alert-info マルチカラムの段にまたがる表示
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            p IE9以前は未対応。
+                            pre
+                                | column-span: 段の数
+                            p
+                                | 段の数・・・1 ／ all
+                            table.table
+                                tr
+                                    td 初期値
+                                    td 1
+                                tr
+                                    td 継承
+                                    td なし
+                                tr
+                                    td 適用先
+                                    td ブロックレベル要素（floatで配置指定した要素やpositionで表示位置を指定した要素を除く）
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td Multi-column Layout
+                            p='マルチカラムの機能で表示した段組みでは、見出しなどのコンテンツを複数の段にまたがる形で表示することができます。その場合、またいで表示する段の数をcolumn-spanプロパティで指定します。ただし、指定できる段の数は1段またはすべての段（all）のみとなっています。'
+                            table.table
+                                tr
+                                    th column-spanの値
+                                    th 段の数
+                                tr
+                                    td 1
+                                    td 1段で表示。
+                                tr
+                                    td all
+                                    td すべての段にまたがる形で表示。
+                            hr
+                            h4 SAMPLE：見出しの複数の段にまたがる形で表示する
+                            p='下のサンプルはマルチカラムの機能を利用して、2段組みにしたものです。コンテンツが段をまたいで表示されないのは、column-spanプロパティの値が初期値の「1」で処理されるためです。'
+                            p='column-spanプロパティの値を「all」にした場合、コンテンツはすべての段にまたがって表示されます。たとえば、<h2>のcolumn-spanプロパティを「all」にすると、下のような表示になります。また、複数段にまたがった見出しによって前後の文書が区切られることになり、次のような形でレイアウトされています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/101.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | <div>
+                                    | <h2>おすすめのサンドイッチ</h2>
+                                    | <p>焼きたての手作りパンで新鮮なハム、トマト、…略…</p>
+                                    | <h2>採りたての野菜</h2>
+                                    | …略...
+                                    | </div>
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     h2 おすすめのサンドイッチ
+                                    |     p 焼きたての手作りパンで新鮮なハム、トマト、…略…
+                                    |     h2 採りたての野菜
+                                    |         | …略...
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     width; 800px;
+                                    |     margin: auto;
+                                    |     column-count: 2;
+                                    |     -moz-column-count: 2;
+                                    |     -webkit-column-count: 2;
+                                    | }
+                                    | h2 {
+                                    |     background-color: greenyellow;
+                                    |     padding: 5px;
+                                    |     column-span: all;
+                                    |     -webkit-column-span: all;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     margin auto
+                                    |     column-count 2
+                                    |     -moz-column-count 2
+                                    |     -webkit-column-count 2
+                                    | 
+                                    | h2
+                                    |     background-color greenyellow
+                                    |     padding 5px
+                                    |     column-span all
+                                    |     -webkit-column-span all
+                                figcaption （Stylus）
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

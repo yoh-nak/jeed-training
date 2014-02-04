@@ -1,319 +1,319 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;2Dトランスフォーム
-						.panel-body
-							.alert.alert-info 2Dトランスフォーム
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							p IE8以前は未対応。IE9は-ms-で対応。
-							pre
-								| transform: 変形処理
-							p
-								| 変形処理・・・translate() ／ translateX() ／ translateY() ／ scale() ／ scaleX() ／ scaleY ／ rotate() ／ skew() ／ skewX() ／ skewY() ／ matrix() ／ none
-							table.table
-								tr
-									td 初期値
-									td none
-								tr
-									td 継承
-									td なし
-								tr
-									td 適用先
-									td ブロックレベル要素 ／ atomicインラインレベル要素 ／ displayプロパティの値がtable-row、table-row-group、table-header-group、table-footer-group、table-cell、table-captionの要素
-								tr
-									td 比率
-									td ボックスの横幅と高さに対する比率
-								tr
-									td モジュール
-									td Transforms
-							p='transformプロパティでは、回転、拡大縮小、移動、スキュー（シアー）の2次元の変形処理を行うことができます。各処理に関する設定はトランスフォーム関数で指定します。トランスフォーム関数をスペースで区切って記述し、複数の変形処理を適用することも可能です。'
-							table.table
-								tr
-									th 2次元のトランスフォーム関数
-									th 指定できる変形処理
-								tr
-									td rotate()
-									td 回転
-								tr
-									td translate() ／ translateX() ／ translateY()
-									td 移動
-								tr
-									td scale() ／ scaleX ／ scaleY()
-									td 拡大縮小
-								tr
-									td skew() ／ skewX() ／ skewY()
-									td スキュ（シアー）
-								tr
-									td matrix()
-									td 変形マトリクス（変換行列）
-								tr
-									td none
-									td 変形処理を行わない
-							hr
-							h4 SAMPLE A：transformプロパティの処理と座標系
-							p='transformプロパティを利用する際にポイントとなるのが座標系です。Webページはブラウザ画面の左上を原点とした座標系を構成し、この中に文章や画像などの要素を配置する仕組みとなっています。この座標系では、x軸は右方向に、y軸は下方向に行くほど値が大きくなります。また、Webページに配置した要素はそれぞれが左上を原点としたローカル座標を構成します。transformプロパティでは、こうして構成されたローカル座標系を回転、拡大縮小、移動、スキューすることができます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/05/278-01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div&gt;HAM SANDWICHES&lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div HAM SANDWICHES
-								figcaption （Jade）
-							hr
-							h4 回転・拡大縮小・移動
-							p='回転・拡大縮小・移動の処理を行い、結果を確認していきます。まず、<div>のtransformプロパティの値を「rotate(10deg)」にすると、回転の処理が行われ、<div>のローカル座標系が時計回りに10度回転されます。このとき、ローカル座標系の原点は<div>が構成するボックスの中央にセットして処理されます。これは、transform-originプロパティの値が初期値の「50% 50%」で処理されるためです。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     -webkit-transform: rotate(10deg);
-									|     -ms-transform: rotate(10deg);
-									|     transform: rotate(10deg);
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	-webkit-transform rotate(10deg)
-									| 	-ms-transform rotate(10deg)
-									| 	transform rotate(10deg)
-								figcaption （Stylus）
-							p='次に、拡大縮小の処理を行います。ここではx軸方向を0.5倍に、y軸方向を2倍に拡大縮小されるため、「scale(0.5, 2)」と指定しています。すると、10度回転したローカル座標系のx軸・y軸の方向に対して拡大縮小が行われます。なお、拡大縮小を行うとローカル座標系の1目盛の大きさが変化しますので注意が必要です。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     -webkit-transform: rotate(10deg) scale(0.5, 2);
-									|     -ms-transform: rotate(10deg) scale(0.5, 2);
-									|     transform: rotate(10deg) scale(0.5, 2);
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	-webkit-transform rotate(10deg) scale(0.5, 2)
-									| 	-ms-transform rotate(10deg) scale(0.5, 2)
-									| 	transform rotate(10deg) scale(0.5, 2)
-								figcaption （Stylus）
-							p='最後に移動の処理を行います。ここでは、「translate(100px, 100px)」と指定し、拡大縮小したローカル座標系の上でx軸方向に100ピクセル、y軸方向に100ピクセルの移動を行っています。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     -webkit-transform: rotate(10deg) scale(0.5, 2) translate(1000px, 100px);
-									|     -ms-transform: rotate(10deg) scale(0.5, 2) translate(1000px, 100px);
-									|     transform: rotate(10deg) scale(0.5, 2) translate(1000px, 100px);
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	-webkit-transform rotate(10deg) scale(0.5, 2) translate(1000px, 100px)
-									| 	-ms-transform rotate(10deg) scale(0.5, 2) translate(1000px, 100px)
-									| 	transform rotate(10deg) scale(0.5, 2) translate(1000px, 100px)
-								figcaption （Stylus）
-							h4 変形処理の実行順
-							p='変形処理によってローカル座標系の1目盛の大きさなどが変わる場合、処理の実行順を変えると処理結果も変わってきます。たとえば、SAMPLE Aの移動の処理を一番最初に行うと、処理結果が変わります。'
-							h4 スキュー
-							p='スキューは座標系をひずませる処理です。たとえば、skeyX(30deg)と指定してx軸方向に30度のスキューをかけると、y軸が反時計回りに30度傾斜した形になります。'
-							p='x軸方向に30度のスキューをかけたときの表示。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/05/278-02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     -webkit-transform: skewX(30deg);
-									|     -ms-transform: skewX(30deg);
-									|     transform: skewX(30deg);
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	-webkit-transform skewX(30deg)
-									| 	-ms-transform skewX(30deg)
-									| 	transform skewX(30deg)
-								figcaption （Stylus）
-							p='また、skeyY(30deg)と指定してy軸方向に30度のスキューをかけた場合、x軸が時計回りに30度傾斜した形になります。'
-							p='skey(30deg)と指定して、x軸とy軸の両方向に30度のスキューをかけると以下のようになります。なお、スキューの結果としてx軸とy軸が重なった場合、平面がなくなり、<div>の構成するボックスは表示されなくなります。'
-							p='x軸とy軸の両方に30度のスキューをかけた時の表示。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     -webkit-transform: skew(30deg);
-									|     -ms-transform: skew(30deg);
-									|     transform: skew(30deg);
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	-webkit-transform skew(30deg)
-									| 	-ms-transform skew(30deg)
-									| 	transform skew(30deg)
-								figcaption （Stylus）
-							p='y軸方向の30度のスキューをかけたときの表示。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/05/278-03.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     -webkit-transform: skew(30deg);
-									|     -ms-transform: skew(30deg);
-									|     transform: skew(30deg);
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	-webkit-transform skew(30deg)
-									| 	-ms-transform skew(30deg)
-									| 	transform skew(30deg)
-								figcaption （Stylus）
-							hr
-							h4 SAMPLE B：トランスフォーム関数で指定できる値
-							p='トランスフォーム関数では下のようあ記述形式で値を指定します。マイナスの値を指定することも可能です。'
-							p='translate()、scale()、skey()ではy軸方向の値を省略することもできます。その場合y軸方向の値は、translate()とskey()では「0」、scale()ではx軸方向と同じ値で処理されます。'
-							table.table
-								tr
-									th 変形処理
-									th トランスフォーム関数
-									th 値
-								tr
-									td(rowspan='3') 移動
-									td translate(Tx, Ty)
-									td(rowspan='3')
-										| Tx・・・x軸方向の移動距離<br>
-										| Tx・・・y軸方向の移動距離
-								tr
-									td translateX(Tx)
-								tr
-									td translateY(Tx)
-								tr
-									td(rowspan='3') 拡大縮小
-									td scale(Sx, Sy)
-									td(rowspan='3')
-										| Sx・・・x軸方向の拡大縮小の倍率<br>
-										| Sy・・・y軸方向の拡大縮小の美率
-								tr
-									td scaleX(Sx)
-								tr
-									td scaleX(Sy
-								tr
-									td 回転
-									td rotate(A)
-									td A・・・回転角度
-								tr
-									td(rowspan='3') スキュー
-									td skew(Ax, Ay)
-									td(rowspan='3')
-										| Ax・・・x軸方向のスキュー角度<br>
-										| Ay・・・y軸方向のスキュー角度
-								tr
-									td skewX(Ax)
-								tr
-									td skewY(Ay)
-							hr
-							h4 SAMPLE C：変換マトリックス（変換行列）
-							p='プログラムで扱いやすいように、移動、拡大縮小、回転、スキューの変形処理は行列の形で指定することもできます。行列の値はトランスフォーム関数のmatrix()で指定します。'
-							p='3x3の変換マトリクス（変換行列）'
-							pre
-								| ┏　　　　　┓
-								| ┃ａ　ｃ　ｅ┃
-								| ┃ｂ　ｄ　ｆ┃
-								| ┃０　０　１┃
-								| ┗　　　　　┛
-							pre
-								| matrix(a, b, c, d, e, f)
-							p a〜f・・・変換マトリクスの値
-							p='各処理の設定は以下のように指定します。たとえば、下のサンプルでは<div>でマークアップした部分を時計回りに10度回転するようにしています。'
-							hr
-							h4 移動
-							pre
-								| matrix(1 , 0, 0, 1, Tx, Ty)
-							p
-								| Tx・・・横方向の移動距離<br>
-								| Ty・・・縦方向の移動距離
-							hr
-							h4 拡大縮小
-							pre
-								| matrix(Sx , 0, 0, Sy, 0, 0)
-							p
-								| Sx・・・横方向の倍率<br>
-								| Sy・・・縦方向の倍率
-							hr
-							h4 回転
-							pre
-								| matrix(cos(A) , sin(A), -sin(A), -cos(A), 0, 0)
-							p
-								| A・・・回転の角度
-							hr
-							h4 スキュー
-							pre
-								| matrix(1 , tan(Ay), tan(Ax), 1, 0, 0)
-							p
-								| Ax・・・x軸方向にy軸を傾斜させる角度<br>
-								| Ay・・・y軸方向にx軸を傾斜させる角度
-							p
-								a.btn.btn-default(href='../demo/css/sample1/05/278-C.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div&gt;HAM SANDWICHES&lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div HAM SANDWICHES
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     -webkit-transform: matrix(0.985, 0.174, -0.174, 0.985, 0, 0);
-									|     -ms-transform: matrix(0.985, 0.174, -0.174, 0.985, 0, 0);
-									|     transform: matrix(0.985, 0.174, -0.174, 0.985, 0, 0);
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	-webkit-transform matrix(0.985, 0.174, -0.174, 0.985, 0, 0)
-									| 	-ms-transform matrix(0.985, 0.174, -0.174, 0.985, 0, 0)
-									| 	transform matrix(0.985, 0.174, -0.174, 0.985, 0, 0)
-								figcaption （Stylus）
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;2Dトランスフォーム
+                        .panel-body
+                            .alert.alert-info 2Dトランスフォーム
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            p IE8以前は未対応。IE9は-ms-で対応。
+                            pre
+                                | transform: 変形処理
+                            p
+                                | 変形処理・・・translate() ／ translateX() ／ translateY() ／ scale() ／ scaleX() ／ scaleY ／ rotate() ／ skew() ／ skewX() ／ skewY() ／ matrix() ／ none
+                            table.table
+                                tr
+                                    td 初期値
+                                    td none
+                                tr
+                                    td 継承
+                                    td なし
+                                tr
+                                    td 適用先
+                                    td ブロックレベル要素 ／ atomicインラインレベル要素 ／ displayプロパティの値がtable-row、table-row-group、table-header-group、table-footer-group、table-cell、table-captionの要素
+                                tr
+                                    td 比率
+                                    td ボックスの横幅と高さに対する比率
+                                tr
+                                    td モジュール
+                                    td Transforms
+                            p='transformプロパティでは、回転、拡大縮小、移動、スキュー（シアー）の2次元の変形処理を行うことができます。各処理に関する設定はトランスフォーム関数で指定します。トランスフォーム関数をスペースで区切って記述し、複数の変形処理を適用することも可能です。'
+                            table.table
+                                tr
+                                    th 2次元のトランスフォーム関数
+                                    th 指定できる変形処理
+                                tr
+                                    td rotate()
+                                    td 回転
+                                tr
+                                    td translate() ／ translateX() ／ translateY()
+                                    td 移動
+                                tr
+                                    td scale() ／ scaleX ／ scaleY()
+                                    td 拡大縮小
+                                tr
+                                    td skew() ／ skewX() ／ skewY()
+                                    td スキュ（シアー）
+                                tr
+                                    td matrix()
+                                    td 変形マトリクス（変換行列）
+                                tr
+                                    td none
+                                    td 変形処理を行わない
+                            hr
+                            h4 SAMPLE A：transformプロパティの処理と座標系
+                            p='transformプロパティを利用する際にポイントとなるのが座標系です。Webページはブラウザ画面の左上を原点とした座標系を構成し、この中に文章や画像などの要素を配置する仕組みとなっています。この座標系では、x軸は右方向に、y軸は下方向に行くほど値が大きくなります。また、Webページに配置した要素はそれぞれが左上を原点としたローカル座標を構成します。transformプロパティでは、こうして構成されたローカル座標系を回転、拡大縮小、移動、スキューすることができます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/05/278-01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div&gt;HAM SANDWICHES&lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div HAM SANDWICHES
+                                figcaption （Jade）
+                            hr
+                            h4 回転・拡大縮小・移動
+                            p='回転・拡大縮小・移動の処理を行い、結果を確認していきます。まず、<div>のtransformプロパティの値を「rotate(10deg)」にすると、回転の処理が行われ、<div>のローカル座標系が時計回りに10度回転されます。このとき、ローカル座標系の原点は<div>が構成するボックスの中央にセットして処理されます。これは、transform-originプロパティの値が初期値の「50% 50%」で処理されるためです。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     -webkit-transform: rotate(10deg);
+                                    |     -ms-transform: rotate(10deg);
+                                    |     transform: rotate(10deg);
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     -webkit-transform rotate(10deg)
+                                    |     -ms-transform rotate(10deg)
+                                    |     transform rotate(10deg)
+                                figcaption （Stylus）
+                            p='次に、拡大縮小の処理を行います。ここではx軸方向を0.5倍に、y軸方向を2倍に拡大縮小されるため、「scale(0.5, 2)」と指定しています。すると、10度回転したローカル座標系のx軸・y軸の方向に対して拡大縮小が行われます。なお、拡大縮小を行うとローカル座標系の1目盛の大きさが変化しますので注意が必要です。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     -webkit-transform: rotate(10deg) scale(0.5, 2);
+                                    |     -ms-transform: rotate(10deg) scale(0.5, 2);
+                                    |     transform: rotate(10deg) scale(0.5, 2);
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     -webkit-transform rotate(10deg) scale(0.5, 2)
+                                    |     -ms-transform rotate(10deg) scale(0.5, 2)
+                                    |     transform rotate(10deg) scale(0.5, 2)
+                                figcaption （Stylus）
+                            p='最後に移動の処理を行います。ここでは、「translate(100px, 100px)」と指定し、拡大縮小したローカル座標系の上でx軸方向に100ピクセル、y軸方向に100ピクセルの移動を行っています。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     -webkit-transform: rotate(10deg) scale(0.5, 2) translate(1000px, 100px);
+                                    |     -ms-transform: rotate(10deg) scale(0.5, 2) translate(1000px, 100px);
+                                    |     transform: rotate(10deg) scale(0.5, 2) translate(1000px, 100px);
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     -webkit-transform rotate(10deg) scale(0.5, 2) translate(1000px, 100px)
+                                    |     -ms-transform rotate(10deg) scale(0.5, 2) translate(1000px, 100px)
+                                    |     transform rotate(10deg) scale(0.5, 2) translate(1000px, 100px)
+                                figcaption （Stylus）
+                            h4 変形処理の実行順
+                            p='変形処理によってローカル座標系の1目盛の大きさなどが変わる場合、処理の実行順を変えると処理結果も変わってきます。たとえば、SAMPLE Aの移動の処理を一番最初に行うと、処理結果が変わります。'
+                            h4 スキュー
+                            p='スキューは座標系をひずませる処理です。たとえば、skeyX(30deg)と指定してx軸方向に30度のスキューをかけると、y軸が反時計回りに30度傾斜した形になります。'
+                            p='x軸方向に30度のスキューをかけたときの表示。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/05/278-02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     -webkit-transform: skewX(30deg);
+                                    |     -ms-transform: skewX(30deg);
+                                    |     transform: skewX(30deg);
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     -webkit-transform skewX(30deg)
+                                    |     -ms-transform skewX(30deg)
+                                    |     transform skewX(30deg)
+                                figcaption （Stylus）
+                            p='また、skeyY(30deg)と指定してy軸方向に30度のスキューをかけた場合、x軸が時計回りに30度傾斜した形になります。'
+                            p='skey(30deg)と指定して、x軸とy軸の両方向に30度のスキューをかけると以下のようになります。なお、スキューの結果としてx軸とy軸が重なった場合、平面がなくなり、<div>の構成するボックスは表示されなくなります。'
+                            p='x軸とy軸の両方に30度のスキューをかけた時の表示。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     -webkit-transform: skew(30deg);
+                                    |     -ms-transform: skew(30deg);
+                                    |     transform: skew(30deg);
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     -webkit-transform skew(30deg)
+                                    |     -ms-transform skew(30deg)
+                                    |     transform skew(30deg)
+                                figcaption （Stylus）
+                            p='y軸方向の30度のスキューをかけたときの表示。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/05/278-03.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     -webkit-transform: skew(30deg);
+                                    |     -ms-transform: skew(30deg);
+                                    |     transform: skew(30deg);
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     -webkit-transform skew(30deg)
+                                    |     -ms-transform skew(30deg)
+                                    |     transform skew(30deg)
+                                figcaption （Stylus）
+                            hr
+                            h4 SAMPLE B：トランスフォーム関数で指定できる値
+                            p='トランスフォーム関数では下のようあ記述形式で値を指定します。マイナスの値を指定することも可能です。'
+                            p='translate()、scale()、skey()ではy軸方向の値を省略することもできます。その場合y軸方向の値は、translate()とskey()では「0」、scale()ではx軸方向と同じ値で処理されます。'
+                            table.table
+                                tr
+                                    th 変形処理
+                                    th トランスフォーム関数
+                                    th 値
+                                tr
+                                    td(rowspan='3') 移動
+                                    td translate(Tx, Ty)
+                                    td(rowspan='3')
+                                        | Tx・・・x軸方向の移動距離<br>
+                                        | Tx・・・y軸方向の移動距離
+                                tr
+                                    td translateX(Tx)
+                                tr
+                                    td translateY(Tx)
+                                tr
+                                    td(rowspan='3') 拡大縮小
+                                    td scale(Sx, Sy)
+                                    td(rowspan='3')
+                                        | Sx・・・x軸方向の拡大縮小の倍率<br>
+                                        | Sy・・・y軸方向の拡大縮小の美率
+                                tr
+                                    td scaleX(Sx)
+                                tr
+                                    td scaleX(Sy
+                                tr
+                                    td 回転
+                                    td rotate(A)
+                                    td A・・・回転角度
+                                tr
+                                    td(rowspan='3') スキュー
+                                    td skew(Ax, Ay)
+                                    td(rowspan='3')
+                                        | Ax・・・x軸方向のスキュー角度<br>
+                                        | Ay・・・y軸方向のスキュー角度
+                                tr
+                                    td skewX(Ax)
+                                tr
+                                    td skewY(Ay)
+                            hr
+                            h4 SAMPLE C：変換マトリックス（変換行列）
+                            p='プログラムで扱いやすいように、移動、拡大縮小、回転、スキューの変形処理は行列の形で指定することもできます。行列の値はトランスフォーム関数のmatrix()で指定します。'
+                            p='3x3の変換マトリクス（変換行列）'
+                            pre
+                                | ┏　　　　　┓
+                                | ┃ａ　ｃ　ｅ┃
+                                | ┃ｂ　ｄ　ｆ┃
+                                | ┃０　０　１┃
+                                | ┗　　　　　┛
+                            pre
+                                | matrix(a, b, c, d, e, f)
+                            p a〜f・・・変換マトリクスの値
+                            p='各処理の設定は以下のように指定します。たとえば、下のサンプルでは<div>でマークアップした部分を時計回りに10度回転するようにしています。'
+                            hr
+                            h4 移動
+                            pre
+                                | matrix(1 , 0, 0, 1, Tx, Ty)
+                            p
+                                | Tx・・・横方向の移動距離<br>
+                                | Ty・・・縦方向の移動距離
+                            hr
+                            h4 拡大縮小
+                            pre
+                                | matrix(Sx , 0, 0, Sy, 0, 0)
+                            p
+                                | Sx・・・横方向の倍率<br>
+                                | Sy・・・縦方向の倍率
+                            hr
+                            h4 回転
+                            pre
+                                | matrix(cos(A) , sin(A), -sin(A), -cos(A), 0, 0)
+                            p
+                                | A・・・回転の角度
+                            hr
+                            h4 スキュー
+                            pre
+                                | matrix(1 , tan(Ay), tan(Ax), 1, 0, 0)
+                            p
+                                | Ax・・・x軸方向にy軸を傾斜させる角度<br>
+                                | Ay・・・y軸方向にx軸を傾斜させる角度
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/05/278-C.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div&gt;HAM SANDWICHES&lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div HAM SANDWICHES
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     -webkit-transform: matrix(0.985, 0.174, -0.174, 0.985, 0, 0);
+                                    |     -ms-transform: matrix(0.985, 0.174, -0.174, 0.985, 0, 0);
+                                    |     transform: matrix(0.985, 0.174, -0.174, 0.985, 0, 0);
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     -webkit-transform matrix(0.985, 0.174, -0.174, 0.985, 0, 0)
+                                    |     -ms-transform matrix(0.985, 0.174, -0.174, 0.985, 0, 0)
+                                    |     transform matrix(0.985, 0.174, -0.174, 0.985, 0, 0)
+                                figcaption （Stylus）
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

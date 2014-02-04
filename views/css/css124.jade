@@ -1,801 +1,801 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;グリッドレイアウト
-						.panel-body
-							.alert.alert-info グリッドレイアウト
-							table.browser-support
-								tr
-									td.not-support
-										img(src='../images/ic-apple.png')
-									td.not-support
-										img(src='../images/ic-android.png')
-									td.not-support
-										img(src='../images/ic-firefox.png')
-									td.not-support
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td.not-support
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							p IE9以前は未対応。
-							pre
-								| display: グリッド要素の種類
-							p
-								| グリッド要素の種類・・・grid ／ inline-grid
-							pre
-								| grid-columns: 各列の横幅
-							p
-								| 各列の横幅・・・auto ／ 数値 ／ 比率（fr）
-							pre
-								| grid-rows: 各行の高さ
-							p
-								| 各行の高さ・・・auto ／ 数値 ／ 比率（fr）
-							pre
-								| grid-column: アイテムを表示する列の番号
-							p
-								| アイテムを表示する列の番号・・・整数
-							pre
-								| grid-row: アイテムを表示する行の番号
-							p
-								| アイテムを表示する行の番号・・・数値
-							pre
-								| grid-column-span: 表示に使用する列の数
-							p
-								| 表示に使用する列の数・・・整数
-							pre
-								| grid-row-span: 表示に使用する行の数
-							p
-								| 表示に使用する行の数・・・整数
-							pre
-								| grid-column-align: 横方向の配置
-							p
-								| 横方向の配置・・・start ／ end ／ center ／ stretch
-							pre
-								| grid-row-align: 縦方向の配置
-							p
-								| 縦方向の配置・・・start ／ end ／ center ／ stretch
-							table.table
-								tr
-									td 初期値
-									td displaを参照
-								tr
-									td 継承
-									td -
-								tr
-									td 適用先
-									td -
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td Grid Layout
-							p='グリッドレイアウトの機能を利用すると、従来のfloatプロパティを利用した方法では難しかった複雑なレイアウトを簡単に設定できるようになります。'
-							p='グリッドレイアウトは、Webページをグリッドラインで格子状に分割し、それによって構成される升目（ますめ）に合わせてコンテンツをレイアウトする方法です。印刷メディアで古くから使われてきた手法で、コンテンツをバランスよく並べ、デザインの統一を図りやすいというメリットがあります。'
-							p='たとえば、下のサンプルではグリッドラインに合わせて、<h1>、<div id="content01">、<div id="content02">、<div id="content03">でマークアップしたコンテンツをレイアウトしています。このようなグリッドレイアウトを行うためには、次にような手順でスタイルシートを設定していきます。'
-							p!='<mark>Chromeで表示を確認するには、chrome://flags/で「試験運用のWebkit機能を有効にする」を有効にする必要があります。また、-webkit-をつけた設定も記述するようにしてください。</mark>'
-							p='なお、Chromeはgrid-column-span、grid-row-span、grid-column-align、grid-row-alignプロパティには未対応です。'
-							hr
-							h4 グリッド要素の指定
-							p='まず、全体をマークアップした<div id="container">のdisplayプロパティの値を「grid」にします。これで、<div id="container">でマークアップした部分が「グリッド要素」として扱われ、グリッドラインの設定ができるようになります。ここでは、<div id="container">の構成するグリッド要素を青色の点線で囲み、横幅を1000ピクセルに指定しています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/088-01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container {
-									|      border: dotted 2px blue;
-									|      width:1000px;
-									|      margin: auto;
-									|      display:-ms-grid;
-									|      -ms-grid-columns: 250px 250px 250px 250px;
-									|      -ms-grid-rows: 80px auto;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container
-									| 	border dotted 2px blue
-									| 	width 1000px
-									| 	margin auto
-									| 	display -ms-grid
-									| 	-ms-grid-columns 250px 250px 250px 250px
-									| 	-ms-grid-rows 80px auto
-								figcaption （Stylus）
-							p='なお、グリッド要素はdisplayプロパティの値が「grid」の場合はブロックレベルボックスとして、「inline-grid」の場合はインラインレベルボックスとして扱われます。'
-							table.table
-								tr
-									th displayの値
-									th 構成するグリッド要素
-								tr
-									td grid
-									td ブロックレベルのグリッド要素を構成
-								tr
-									td inline-grid
-									td インラインレベルのグリッド要素を構成
-							hr
-							h4 グリッドラインの指定
-							p='次に、グリッドラインを挿入してグリッド要素を分割します。グリッドラインの挿入位置は、分割後の各列の横幅と各行の高さで指定します。各列の横幅はgrid-columnsプロパティの、各行の高さはgrid-rowsプロパティで指定します。'
-							p='ここでは1000ピクセルの横幅を4つに分割して各列を250ピクセルの横幅にするため、grid-columnsプロパティの値を「250px 250px 250px 250px」にしています。また、行の高さについては1行目を80ピクセルに、2行目をコンテンツに合わせた高さにするため、grid-rowsプロパティの値を「80px auto」にしています。なお、グリッドラインはブラウザ画面には表示されません。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/088-01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container {
-									|      border: dotted 2px blue;
-									|      width:1000px;
-									|      margin: auto;
-									|      display:-ms-grid;
-									|      -ms-grid-columns: 250px 250px 250px 250px;
-									|      -ms-grid-rows: 80px auto;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container
-									| 	border dotted 2px blue
-									| 	width 1000px
-									| 	margin auto
-									| 	display -ms-grid
-									| 	-ms-grid-columns 250px 250px 250px 250px
-									| 	-ms-grid-rows 80px auto
-								figcaption （Stylus）
-							hr
-							h4 グリッドアイテムを表示するグリッドセルの指定
-							p='グリッドラインによってグリッド要素を分割したら、分割によって構成された升目（グリッドセル）にコンテンツを表示していきます。表示できるコンテンツはグリッド要素<div id="container">の子要素で、「グリッドアイテム」と呼ばれます。ここでは<h1>、<div id="content01">、<div id="content02">、<div id="content03">がグリッドアイテムとなります。'
-							p='グリッドアイテムを表示するグリッドセルは、列の番号をgrid-columnプロパティで、行の番号をgrid-rowプロパティで指定します。たとえば、1列目の2行目に表示するには「grid-column:1; grid-row:2;」と指定します。グリッドアイテムを複数の列や行に渡って表示する場合には、最も左上に位置するグリッドセルを指定します。ここでは、グリッドアイテムを下のようにグリッドセルを指定しています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/088-01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1 {
-									|      background-color: lemonchiffon;
-									|      -ms-grid-column:1;
-									|      -ms-grid-row:1;
-									|      -ms-grid-column-span: 4;
-									| }
-									| #content01 {
-									|      background: orange;
-									|      -ms-grid-column:1;
-									|      -ms-grid-row:2;
-									| }
-									| 
-									| #content02 {
-									|      background: greenyellow;
-									|      -ms-grid-column:2;
-									|      -ms-grid-row:2;
-									|      -ms-grid-column-span: 2;
-									| }
-									| 
-									| #content03 {
-									|      background: pink;
-									|      -ms-grid-column:4;
-									|      -ms-grid-row:2;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1
-									| 	background-color lemonchiffon
-									| 	-ms-grid-column 1
-									| 	-ms-grid-row 1
-									| 	-ms-grid-column-span 4
-									| 
-									| #content01
-									| 	background orange
-									| 	-ms-grid-column 1
-									| 	-ms-grid-row 2
-									| 
-									| #content02
-									| 	background greenyellow
-									| 	-ms-grid-column 2
-									| 	-ms-grid-row 2
-									| 	-ms-grid-column-span 2
-									| 
-									| #content03
-									| 	background pink
-									| 	-ms-grid-column 4
-									| 	-ms-grid-row 2
-								figcaption （Stylus）
-							hr
-							h4 表示に使用する複数の列や行の指定
-							p='グリッドアイテムを複数の列や行に渡って表示する場合、表示に使用する列の数をgrid-column-spanプロパティで、行の数をgrid-row-spanプロパティで指定します。ここでは<h1>を4列で、<div id="content02">を2列で表示するため、下のように指定しています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/088-01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1 {
-									|      background-color: lemonchiffon;
-									|      -ms-grid-column:1;
-									|      -ms-grid-row:1;
-									|      -ms-grid-column-span: 4;
-									| }
-									| 
-									| #content01 {
-									|      background: orange;
-									|      -ms-grid-column:1;
-									|      -ms-grid-row:2;
-									| }
-									| 
-									| #content02 {
-									|      background: greenyellow;
-									|      -ms-grid-column:2;
-									|      -ms-grid-row:2;
-									|      -ms-grid-column-span: 2;
-									| }
-									| 
-									| #content03 {
-									|      background: pink;
-									|      -ms-grid-column:4;
-									|      -ms-grid-row:2;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1
-									| 	background-color lemonchiffon
-									| 	-ms-grid-column 1
-									| 	-ms-grid-row 1
-									| 	-ms-grid-column-span 4
-									| 
-									| #content01
-									| 	background orange
-									| 	-ms-grid-column 1
-									| 	-ms-grid-row 2
-									| 
-									| #content02
-									| 	background greenyellow
-									| 	-ms-grid-column 2
-									| 	-ms-grid-row 2
-									| 	-ms-grid-column-span 2
-									| 
-									| #content03
-									| 	background pink
-									| 	-ms-grid-column 4
-									| 	-ms-grid-row 2
-								figcaption （Stylus）
-							p='grid-column-spanプロパティを指定しなかった場合、<h1>と<div id="column02">のコンテンツはgrid-columnとgrid-rowプロパティで指定したグリッドセルだけに表示されます。また、残りのグリッドセルは空の状態で表示されます。'
-							hr
-							h4 グリッドアイテムを複数行で表示する
-							p='<div id="content03">を複数行で表示する場合は下のように指定します。ここでは、<div id="content03">の表示位置を4列目の1行目のグリッドセルに変更し、2行に渡って表示するようにしています。'
-							p='また、それに合わせて<h1>を3列で表示するようにしています。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1 {
-									|      background-color: lemonchiffon;
-									|      -ms-grid-column:1;
-									|      -ms-grid-row:1;
-									|      -ms-grid-column-span: 3;
-									| }
-									| 
-									| #content01 {
-									|      background: orange;
-									|      -ms-grid-column:1;
-									|      -ms-grid-row:2;
-									| }
-									| 
-									| #content02 {
-									|      background: greenyellow;
-									|      -ms-grid-column:2;
-									|      -ms-grid-row:2;
-									|      -ms-grid-column-span: 2;
-									| }
-									| 
-									| #content03 {
-									|      background: pink;
-									|      -ms-grid-column:4;
-									|      -ms-grid-row:1;
-									|      -ms-grid-row-span: 2;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1
-									| 	background-color lemonchiffon
-									| 	-ms-grid-column 1
-									| 	-ms-grid-row 1
-									| 	-ms-grid-column-span 3
-									| 
-									| #content01
-									| 	background orange
-									| 	-ms-grid-column 1
-									| 	-ms-grid-row 2
-									| 
-									| #content02
-									| 	background greenyellow
-									| 	-ms-grid-column 2
-									| 	-ms-grid-row 2
-									| 	-ms-grid-column-span 2
-									| 
-									| #content03
-									| 	background pink
-									| 	-ms-grid-column 4
-									| 	-ms-grid-row 1
-									| 	-ms-grid-row-span 2
-								figcaption （Stylus）
-							hr
-							h4 グリッドアイテムの表示順の変更
-							p='グリッドレイアウトでは、グリッドアイテムの表示位置を自由に変更することができます。たとえば、<h1>、<div id="content01">、<div id="content03">を左半分のセルに、<div id="content02">を右半分のセルに表示する場合は次のように指定します。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1 {
-									|      background-color: lemonchiffon;
-									|      -ms-grid-column:1;
-									|      -ms-grid-row:1;
-									|      -ms-grid-column-span: 2;
-									| }
-									| 
-									| #content01 {
-									|      background: orange;
-									|      -ms-grid-column:2;
-									|      -ms-grid-row:2;
-									| }
-									| 
-									| #content02 {
-									|      background: greenyellow;
-									|      -ms-grid-column:3;
-									|      -ms-grid-row:1;
-									|      -ms-grid-column-span: 2;
-									|      -ms-grid-row-span: 2;
-									| }
-									| 
-									| #content03 {
-									|      background: pink;
-									|      -ms-grid-column:1;
-									|      -ms-grid-row:2;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h1
-									| 	background-color lemonchiffon
-									| 	-ms-grid-column 1
-									| 	-ms-grid-row 1
-									| 	-ms-grid-column-span 2
-									| 
-									| #content01
-									| 	background orange
-									| 	-ms-grid-column 2
-									| 	-ms-grid-row 2
-									| 
-									| #content02
-									| 	background greenyellow
-									| 	-ms-grid-column 3
-									| 	-ms-grid-row 1
-									| 	-ms-grid-column-span 2
-									| 	-ms-grid-row-span 2
-									| 
-									| #content03
-									| 	background pink
-									| 	-ms-grid-column 1
-									| 	-ms-grid-row 2
-								figcaption （Stylus）
-							hr
-							h4 リキッドレイアウトの設定
-							p='ギリッドレイアウトでは、ブラウザ画面い合わせて横幅が変わるリキッドレイアウトを行うこともできます。まず、<div id="container">の構成するグリッド要素の横幅がブラウザ画面に合わせて変わるようにするため、widthプロパティの値を「auto」にします。すると、<div id="container">は画面の横幅いっぱいに表示されますが、この段階では中身のグリッドアイテムの横幅は変化しません。これは、グリッドラインで分割した各列の横幅を250ピクセルに固定しているためです。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div id="container"&gt;
-									| &lt;div id="column01"&gt;&lt;img src="sandwiches.jpg"…略...&lt;/div&gt;
-									| &lt;div id="column02"&gt;&lt;p&gt;焼きたての手作りパン…略...&lt;/p&gt;&lt;/div&gt;
-									| &lt;div id="column03"&gt;&lt;ul&gt;&lt;li&gt;ハムチーズ…略…&lt;/p&gt;&lt;/div&gt;
-									| &lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container
-									| 	#column01
-									| 		img(src='sandwiches.jpg')
-									| 	#column02
-									| 		p 焼きたての手作りパン…略...
-									| 	#column03
-									| 		ul
-									| 			li ハムチーズ…略…
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container {
-									|      border: dotted 2px blue;
-									|      width:auto;
-									|      margin: auto;
-									|      display:-ms-grid;
-									|      -ms-grid-columns: 250px 250px 250px 250px;
-									|      -ms-grid-rows: 80px auto;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container
-									|	border dotted 2px blue
-									| 	width auto
-									| 	margin auto
-									| 	display -ms-grid
-									| 	-ms-grid-columns 250px 250px 250px 250px
-									| 	-ms-grid-rows 80px auto
-								figcaption （Stylus）
-							p='グリッドアイテムの横幅が変わるようにするためには、列の横幅を「1fr」と指定します。ここでは、<h1>、<div id="content02">、<div id="content03">の横幅が変わるようにするため、grid-columnsプロパティの値を「250px 1fr 1fr 1fr」と指定しています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/088-02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container {
-									|      border: dotted 2px blue;
-									|      width:auto;
-									|      margin: auto;
-									|      display:-ms-grid;
-									|      -ms-grid-columns: 250px 1fr 1fr 1fr;
-									|      -ms-grid-rows: 80px auto;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container
-									| 	border dotted 2px blue
-									| 	width auto
-									| 	margin auto
-									| 	display -ms-grid
-									| 	-ms-grid-columns 250px 1fr 1fr 1fr
-									| 	-ms-grid-rows 80px auto
-								figcaption （Stylus）
-							p='「fr」は比率を示す単位です。ここでは2〜4列目の3つの列の横幅を「1fr」と指定していますので、各列の横幅はレイアウト可能なスペースを3等分したものとなります。たとえば、<div id="container">の横幅が1090ピクセルだった場合、2〜4列目のレイアウトに使用できる横幅は、1090ピクセルから1列目の横幅250ピクセルを引いた840ピクセルとなります。これを3等分し、2〜4列目の各列は280ピクセルの横幅となります。'
-							p='ブラウザ画面の横幅を変えてみると、それに合わせて<h1>、<div id="content02">、<div id="content03">の横幅が変わり、リキッドレイアウトとなっていることがわかります。たとえば、<div id="container">の横幅が805ピクセルになった場合、2〜4列目が使用できるのは555ピクセルで、各列は185ピクセルの横幅となります。'
-							p='<h1>と<div id="content02">の横幅だけがかわるようにする場合は、2列目と3列目の横幅が変わるようにするため、grid-columnsプロパティの値を「250px 1fr 1fr 250px」にします。ブラウザの画面の横幅を変えてみると、<h1>と<div id="content02">の横幅が変わり、<div id="content01">と<div id="content03">の横幅は変化しないことがわかります。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container {
-									|      border: dotted 2px blue;
-									|      width:auto;
-									|      margin: auto;
-									|      display:-ms-grid;
-									|      -ms-grid-columns: 250px 1fr 1fr 250px;
-									|      -ms-grid-rows: 80px auto;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container
-									| 	border dotted 2px blue
-									| 	width auto
-									| 	margin auto
-									| 	display -ms-grid
-									| 	-ms-grid-columns 250px 1fr 1fr 250px
-									| 	-ms-grid-rows 80px auto
-								figcaption （Stylus）
-							hr
-							h4 横幅や高さの最小値・最大値の指定
-							p='行列の横幅や高さを指定するとき、草案では最小値・最大値を指定する方法も提案されています。たとえば、minmax(min-content, 1fr）と指定すると、横幅や高さはレイアウト可能なスペースに応じて変化しますが、中身のコンテンツよりも小さくしないようにすることができます。現在のところ、各ブラウザは未対応です。'
-							hr
-							h4 グリッドアイテムの間隔
-							p='グリッドアイテムの間に余白を入れて間隔を調節するには、グリッドアイテムのまわりにマージンを挿入する方法と、行列を追加する方法があります。'
-							p='たとえば、<div id="content02">の左右に20ピクセルのマージンを挿入すると、下のように余白を入れることができます。このとき、列の横幅には影響しません。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| #content02 {
-									|      background: greenyellow;
-									|      -ms-grid-column:2;
-									|      -ms-grid-row:2;
-									|      -ms-grid-column-span: 2;
-									|      margin-left: 20px;
-									|      margin-right: 20px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #content02
-									| 	background greenyellow
-									| 	-ms-grid-column 2
-									| 	-ms-grid-row 2
-									| 	-ms-grid-column-span 2
-									| 	margin-left 20px
-									| 	margin-right 20px
-								figcaption （Stylus）
-							p='次に、<h1>の下に行を追加して余白を挿入します。ここでは20ピクセルの行を追加するため、grid-rowsプロパティの値を「80px 20px auto」と指定します。これに伴い、<div id="content01">、<div id="content02">、<div id="content03">を3行目に表示するため、grid-rowプロパティの値を「3」に変更し、追加した2行目には何も表示しないようにします。これで、<h1>の下に余白が入ります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/088-03.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container {
-									|      border: dotted 2px blue;
-									|      width:1000px;
-									|      margin: auto;
-									|      display:-ms-grid;
-									|      -ms-grid-columns: 250px 250px 250px 250px;
-									|      -ms-grid-rows: 80px 20px auto;
-									| }
-									| h1 {
-									|      background-color: lemonchiffon;
-									|      -ms-grid-column:1;
-									|      -ms-grid-row:3;
-									|      -ms-grid-column-span: 4;
-									| }
-									| #content01 {
-									|      background: orange;
-									|      -ms-grid-column:1;
-									|      -ms-grid-row:2;
-									| }
-									| 
-									| #content02 {
-									|      background: greenyellow;
-									|      -ms-grid-column:2;
-									|      -ms-grid-row:3;
-									|      -ms-grid-column-span: 2;
-									|      margin-left: 20px;
-									|      margin-right: 20px;
-									| }
-									| 
-									| #content03 {
-									|      background: pink;
-									|      -ms-grid-column:4;
-									|      -ms-grid-row:3;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container
-									| 	border dotted 2px blue
-									| 	width 1000px
-									| 	margin auto
-									| 	display -ms-grid
-									| 	-ms-grid-columns 250px 250px 250px 250px
-									| 	-ms-grid-rows 80px 20px auto
-									| 
-									| h1
-									| 	background-color lemonchiffon
-									| 	-ms-grid-column 1
-									| 	-ms-grid-row 3
-									| 	-ms-grid-column-span 4
-									| 
-									| #content01
-									| 	background orange
-									| 	-ms-grid-column 1
-									| 	-ms-grid-row 2
-									| 
-									| #content02
-									| 	background greenyellow
-									| 	-ms-grid-column 2
-									| 	-ms-grid-row 3
-									| 	-ms-grid-column-span 2
-									| 	margin-left 20px
-									| 	margin-right 20px
-									| 
-									| #content03
-									| 	background pink
-									| 	-ms-grid-column 4
-									| 	-ms-grid-row 3
-								figcaption （Stylus）
-							hr
-							h4 グリッドアイテムの配置
-							p='grid-column-alignとgrid-row-alignプロパティを利用すると、グリッドアイテムのグリッドセル内での配置を指定することができます。'
-							p='たとえば、下のサンプルでは<div id="content01">を2列分のスペースを使用して大きく表示しています。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| #content01 {
-									|      background: orange;
-									|      -ms-grid-column:1;
-									|      -ms-grid-row:2;
-									|      -ms-grid-column-span: 2;
-									| }
-									| 
-									| #content02 {
-									|      background: greenyellow;
-									|      -ms-grid-column:3;
-									|      -ms-grid-row:2;
-									|      -ms-grid-column-span: 2;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #content01
-									| 	background orange
-									| 	-ms-grid-column 1
-									| 	-ms-grid-row 2
-									| 	-ms-grid-column-span 2
-									| 
-									| #content02
-									| 	background greenyellow
-									| 	-ms-grid-column 3
-									| 	-ms-grid-row 2
-									| 	-ms-grid-column-span 2
-								figcaption （Stylus）
-							p='<div id="content01">のgrid-column-alignとgrid-row-alignプロパティの値を「center」にすると、<div id="content01">の構成するボックスが中身のコンテンツに合わせた大きさとなり、グリッドセルの中央に配置されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/02/088-04.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| #content01 {
-									|      background: orange;
-									|      -ms-grid-column:1;
-									|      -ms-grid-row:2;
-									|      -ms-grid-column-span: 2;
-									|      -ms-grid-column-align: center;
-									|      -ms-grid-row-align: center;
-									| }
-									| 
-									| #content02 {
-									|      background: greenyellow;
-									|      -ms-grid-column:3;
-									|      -ms-grid-row:2;
-									|      -ms-grid-column-span: 2;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #content01
-									| 	background orange
-									| 	-ms-grid-column 1
-									| 	-ms-grid-row 2
-									| 	-ms-grid-column-span 2
-									| 	-ms-grid-column-align center
-									| 	-ms-grid-row-align center
-									| 
-									| #content02
-									| 	background greenyellow
-									| 	-ms-grid-column 3
-									| 	-ms-grid-row 2
-									| 	-ms-grid-column-span 2
-								figcaption （Stylus）
-							p='grid-column-alignは横方向の、grid-row-alignは縦方向の配置を指定するプロパティで、指定できる値は下のようになっています。'
-							table.table
-								tr
-									th 値
-									th 配置
-								tr
-									td start
-									td 書字方向の開始位置。
-								tr
-									td end
-									td 書字方向の終了位置。
-								tr
-									td center
-									td 中央。
-								tr
-									td stretch
-									td ストレッチ。
-							hr
-							h4 テンプレートによるグリッドセルの指定
-							p='CSS3で提案されている「テンプレート」という機能を利用すると、より簡単にグリッドレイアウトを利用できるようになります。'
-							p='たとえば、グリッドレイアウトでグリッドアイテムなどのグリッドセルに表示するかは、grid-columnやgrid-column-span、grid-row、grid-row-spanプロパティを利用して、「何列目から何列分、何行目から何行分のセルに表示する」という形で指定しなければなりません。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container {
-									|      display: grid;
-									|      grid-columns: 250px 250px 250px 250px;
-									|      grid-rows: 80px auto;
-									| }
-									| 
-									| h1 {
-									|      grid-column:1;
-									|      grid-row:1;
-									|      grid-column-span: 4;
-									| }
-									| #content01 {
-									|      grid-column:1;
-									|      grid-row:2;
-									| }
-									| 
-									| 
-									| #content02 {
-									|      grid-column:2;
-									|      grid-row:2;
-									|      grid-column-span: 2;
-									| }
-									| 
-									| 
-									| #content03 {
-									|      grid-column:4;
-									|      grid-row:2;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container
-									| 	display grid
-									| 	grid-columns 250px 250px 250px 250px
-									| 	grid-rows 80px auto
-									| 
-									| h1
-									| 	grid-column 1
-									| 	grid-row 1
-									| 	grid-column-span 4
-									| 
-									| #content01
-									| 	grid-column 1
-									| 	grid-row 2
-									| 
-									| #content02
-									| 	grid-column 2
-									| 	grid-row 2
-									| 	grid-column-span 2
-									| 
-									| #content03
-									| 	grid-column 4
-									| 	grid-row 2
-								figcaption （Stylus）
-							p='これに対し、テンプレートの機能を利用すると、grid-templateプロパティでグリッドセルにわかりやすい名称を付けておき、グリッドアイテムの表示先としてgrid-areaプロパティで指定できるようになります。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container {
-									|      display: grid;
-									|      grid-template: "title title title title" "pic main main menu";
-									|      grid-columns: 250px 250px 250px 250px;
-									|      grid-rows: 80px auto;
-									| }
-									| 
-									| h1 {
-									|      grid-area: title;
-									| }
-									| #content01 {
-									|      grid-area: pic;
-									| }
-									| 
-									| 
-									| #content02 {
-									|      grid-area: main;
-									| }
-									| 
-									| 
-									| #content03 {
-									|      grid-area: menu;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| #container
-									| 	display grid
-									| 	grid-template "title title title title" "pic main main menu"
-									| 	grid-columns 250px 250px 250px 250px
-									| 	grid-rows 80px auto
-									| 
-									| h1
-									| 	grid-area title
-									| 
-									| #content01
-									| 	grid-area pic
-									| 
-									| #content02
-									| 	grid-area main
-									| 
-									| #content03
-									| 	grid-area menu
-								figcaption （Stylus）
-							p='なお、現在のところ対応ブラウザはなく、プロパティ名やテンプレートの記述形式などもまだまだ流動的な機能です。テンプレートに関する機能について詳しくは、下の草案を参照してください。'
-							p
-								| CSS Grid Layout
-								br
-								a(href='http://www.w3.org/TR/css3-grid-layout/',target='_blank') http://www.w3.org/TR/css3-grid-layout/
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;グリッドレイアウト
+                        .panel-body
+                            .alert.alert-info グリッドレイアウト
+                            table.browser-support
+                                tr
+                                    td.not-support
+                                        img(src='../images/ic-apple.png')
+                                    td.not-support
+                                        img(src='../images/ic-android.png')
+                                    td.not-support
+                                        img(src='../images/ic-firefox.png')
+                                    td.not-support
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td.not-support
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            p IE9以前は未対応。
+                            pre
+                                | display: グリッド要素の種類
+                            p
+                                | グリッド要素の種類・・・grid ／ inline-grid
+                            pre
+                                | grid-columns: 各列の横幅
+                            p
+                                | 各列の横幅・・・auto ／ 数値 ／ 比率（fr）
+                            pre
+                                | grid-rows: 各行の高さ
+                            p
+                                | 各行の高さ・・・auto ／ 数値 ／ 比率（fr）
+                            pre
+                                | grid-column: アイテムを表示する列の番号
+                            p
+                                | アイテムを表示する列の番号・・・整数
+                            pre
+                                | grid-row: アイテムを表示する行の番号
+                            p
+                                | アイテムを表示する行の番号・・・数値
+                            pre
+                                | grid-column-span: 表示に使用する列の数
+                            p
+                                | 表示に使用する列の数・・・整数
+                            pre
+                                | grid-row-span: 表示に使用する行の数
+                            p
+                                | 表示に使用する行の数・・・整数
+                            pre
+                                | grid-column-align: 横方向の配置
+                            p
+                                | 横方向の配置・・・start ／ end ／ center ／ stretch
+                            pre
+                                | grid-row-align: 縦方向の配置
+                            p
+                                | 縦方向の配置・・・start ／ end ／ center ／ stretch
+                            table.table
+                                tr
+                                    td 初期値
+                                    td displaを参照
+                                tr
+                                    td 継承
+                                    td -
+                                tr
+                                    td 適用先
+                                    td -
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td Grid Layout
+                            p='グリッドレイアウトの機能を利用すると、従来のfloatプロパティを利用した方法では難しかった複雑なレイアウトを簡単に設定できるようになります。'
+                            p='グリッドレイアウトは、Webページをグリッドラインで格子状に分割し、それによって構成される升目（ますめ）に合わせてコンテンツをレイアウトする方法です。印刷メディアで古くから使われてきた手法で、コンテンツをバランスよく並べ、デザインの統一を図りやすいというメリットがあります。'
+                            p='たとえば、下のサンプルではグリッドラインに合わせて、<h1>、<div id="content01">、<div id="content02">、<div id="content03">でマークアップしたコンテンツをレイアウトしています。このようなグリッドレイアウトを行うためには、次にような手順でスタイルシートを設定していきます。'
+                            p!='<mark>Chromeで表示を確認するには、chrome://flags/で「試験運用のWebkit機能を有効にする」を有効にする必要があります。また、-webkit-をつけた設定も記述するようにしてください。</mark>'
+                            p='なお、Chromeはgrid-column-span、grid-row-span、grid-column-align、grid-row-alignプロパティには未対応です。'
+                            hr
+                            h4 グリッド要素の指定
+                            p='まず、全体をマークアップした<div id="container">のdisplayプロパティの値を「grid」にします。これで、<div id="container">でマークアップした部分が「グリッド要素」として扱われ、グリッドラインの設定ができるようになります。ここでは、<div id="container">の構成するグリッド要素を青色の点線で囲み、横幅を1000ピクセルに指定しています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/088-01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container {
+                                    |      border: dotted 2px blue;
+                                    |      width:1000px;
+                                    |      margin: auto;
+                                    |      display:-ms-grid;
+                                    |      -ms-grid-columns: 250px 250px 250px 250px;
+                                    |      -ms-grid-rows: 80px auto;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container
+                                    |     border dotted 2px blue
+                                    |     width 1000px
+                                    |     margin auto
+                                    |     display -ms-grid
+                                    |     -ms-grid-columns 250px 250px 250px 250px
+                                    |     -ms-grid-rows 80px auto
+                                figcaption （Stylus）
+                            p='なお、グリッド要素はdisplayプロパティの値が「grid」の場合はブロックレベルボックスとして、「inline-grid」の場合はインラインレベルボックスとして扱われます。'
+                            table.table
+                                tr
+                                    th displayの値
+                                    th 構成するグリッド要素
+                                tr
+                                    td grid
+                                    td ブロックレベルのグリッド要素を構成
+                                tr
+                                    td inline-grid
+                                    td インラインレベルのグリッド要素を構成
+                            hr
+                            h4 グリッドラインの指定
+                            p='次に、グリッドラインを挿入してグリッド要素を分割します。グリッドラインの挿入位置は、分割後の各列の横幅と各行の高さで指定します。各列の横幅はgrid-columnsプロパティの、各行の高さはgrid-rowsプロパティで指定します。'
+                            p='ここでは1000ピクセルの横幅を4つに分割して各列を250ピクセルの横幅にするため、grid-columnsプロパティの値を「250px 250px 250px 250px」にしています。また、行の高さについては1行目を80ピクセルに、2行目をコンテンツに合わせた高さにするため、grid-rowsプロパティの値を「80px auto」にしています。なお、グリッドラインはブラウザ画面には表示されません。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/088-01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container {
+                                    |      border: dotted 2px blue;
+                                    |      width:1000px;
+                                    |      margin: auto;
+                                    |      display:-ms-grid;
+                                    |      -ms-grid-columns: 250px 250px 250px 250px;
+                                    |      -ms-grid-rows: 80px auto;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container
+                                    |     border dotted 2px blue
+                                    |     width 1000px
+                                    |     margin auto
+                                    |     display -ms-grid
+                                    |     -ms-grid-columns 250px 250px 250px 250px
+                                    |     -ms-grid-rows 80px auto
+                                figcaption （Stylus）
+                            hr
+                            h4 グリッドアイテムを表示するグリッドセルの指定
+                            p='グリッドラインによってグリッド要素を分割したら、分割によって構成された升目（グリッドセル）にコンテンツを表示していきます。表示できるコンテンツはグリッド要素<div id="container">の子要素で、「グリッドアイテム」と呼ばれます。ここでは<h1>、<div id="content01">、<div id="content02">、<div id="content03">がグリッドアイテムとなります。'
+                            p='グリッドアイテムを表示するグリッドセルは、列の番号をgrid-columnプロパティで、行の番号をgrid-rowプロパティで指定します。たとえば、1列目の2行目に表示するには「grid-column:1; grid-row:2;」と指定します。グリッドアイテムを複数の列や行に渡って表示する場合には、最も左上に位置するグリッドセルを指定します。ここでは、グリッドアイテムを下のようにグリッドセルを指定しています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/088-01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1 {
+                                    |      background-color: lemonchiffon;
+                                    |      -ms-grid-column:1;
+                                    |      -ms-grid-row:1;
+                                    |      -ms-grid-column-span: 4;
+                                    | }
+                                    | #content01 {
+                                    |      background: orange;
+                                    |      -ms-grid-column:1;
+                                    |      -ms-grid-row:2;
+                                    | }
+                                    | 
+                                    | #content02 {
+                                    |      background: greenyellow;
+                                    |      -ms-grid-column:2;
+                                    |      -ms-grid-row:2;
+                                    |      -ms-grid-column-span: 2;
+                                    | }
+                                    | 
+                                    | #content03 {
+                                    |      background: pink;
+                                    |      -ms-grid-column:4;
+                                    |      -ms-grid-row:2;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1
+                                    |     background-color lemonchiffon
+                                    |     -ms-grid-column 1
+                                    |     -ms-grid-row 1
+                                    |     -ms-grid-column-span 4
+                                    | 
+                                    | #content01
+                                    |     background orange
+                                    |     -ms-grid-column 1
+                                    |     -ms-grid-row 2
+                                    | 
+                                    | #content02
+                                    |     background greenyellow
+                                    |     -ms-grid-column 2
+                                    |     -ms-grid-row 2
+                                    |     -ms-grid-column-span 2
+                                    | 
+                                    | #content03
+                                    |     background pink
+                                    |     -ms-grid-column 4
+                                    |     -ms-grid-row 2
+                                figcaption （Stylus）
+                            hr
+                            h4 表示に使用する複数の列や行の指定
+                            p='グリッドアイテムを複数の列や行に渡って表示する場合、表示に使用する列の数をgrid-column-spanプロパティで、行の数をgrid-row-spanプロパティで指定します。ここでは<h1>を4列で、<div id="content02">を2列で表示するため、下のように指定しています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/088-01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1 {
+                                    |      background-color: lemonchiffon;
+                                    |      -ms-grid-column:1;
+                                    |      -ms-grid-row:1;
+                                    |      -ms-grid-column-span: 4;
+                                    | }
+                                    | 
+                                    | #content01 {
+                                    |      background: orange;
+                                    |      -ms-grid-column:1;
+                                    |      -ms-grid-row:2;
+                                    | }
+                                    | 
+                                    | #content02 {
+                                    |      background: greenyellow;
+                                    |      -ms-grid-column:2;
+                                    |      -ms-grid-row:2;
+                                    |      -ms-grid-column-span: 2;
+                                    | }
+                                    | 
+                                    | #content03 {
+                                    |      background: pink;
+                                    |      -ms-grid-column:4;
+                                    |      -ms-grid-row:2;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1
+                                    |     background-color lemonchiffon
+                                    |     -ms-grid-column 1
+                                    |     -ms-grid-row 1
+                                    |     -ms-grid-column-span 4
+                                    | 
+                                    | #content01
+                                    |     background orange
+                                    |     -ms-grid-column 1
+                                    |     -ms-grid-row 2
+                                    | 
+                                    | #content02
+                                    |     background greenyellow
+                                    |     -ms-grid-column 2
+                                    |     -ms-grid-row 2
+                                    |     -ms-grid-column-span 2
+                                    | 
+                                    | #content03
+                                    |     background pink
+                                    |     -ms-grid-column 4
+                                    |     -ms-grid-row 2
+                                figcaption （Stylus）
+                            p='grid-column-spanプロパティを指定しなかった場合、<h1>と<div id="column02">のコンテンツはgrid-columnとgrid-rowプロパティで指定したグリッドセルだけに表示されます。また、残りのグリッドセルは空の状態で表示されます。'
+                            hr
+                            h4 グリッドアイテムを複数行で表示する
+                            p='<div id="content03">を複数行で表示する場合は下のように指定します。ここでは、<div id="content03">の表示位置を4列目の1行目のグリッドセルに変更し、2行に渡って表示するようにしています。'
+                            p='また、それに合わせて<h1>を3列で表示するようにしています。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1 {
+                                    |      background-color: lemonchiffon;
+                                    |      -ms-grid-column:1;
+                                    |      -ms-grid-row:1;
+                                    |      -ms-grid-column-span: 3;
+                                    | }
+                                    | 
+                                    | #content01 {
+                                    |      background: orange;
+                                    |      -ms-grid-column:1;
+                                    |      -ms-grid-row:2;
+                                    | }
+                                    | 
+                                    | #content02 {
+                                    |      background: greenyellow;
+                                    |      -ms-grid-column:2;
+                                    |      -ms-grid-row:2;
+                                    |      -ms-grid-column-span: 2;
+                                    | }
+                                    | 
+                                    | #content03 {
+                                    |      background: pink;
+                                    |      -ms-grid-column:4;
+                                    |      -ms-grid-row:1;
+                                    |      -ms-grid-row-span: 2;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1
+                                    |     background-color lemonchiffon
+                                    |     -ms-grid-column 1
+                                    |     -ms-grid-row 1
+                                    |     -ms-grid-column-span 3
+                                    | 
+                                    | #content01
+                                    |     background orange
+                                    |     -ms-grid-column 1
+                                    |     -ms-grid-row 2
+                                    | 
+                                    | #content02
+                                    |     background greenyellow
+                                    |     -ms-grid-column 2
+                                    |     -ms-grid-row 2
+                                    |     -ms-grid-column-span 2
+                                    | 
+                                    | #content03
+                                    |     background pink
+                                    |     -ms-grid-column 4
+                                    |     -ms-grid-row 1
+                                    |     -ms-grid-row-span 2
+                                figcaption （Stylus）
+                            hr
+                            h4 グリッドアイテムの表示順の変更
+                            p='グリッドレイアウトでは、グリッドアイテムの表示位置を自由に変更することができます。たとえば、<h1>、<div id="content01">、<div id="content03">を左半分のセルに、<div id="content02">を右半分のセルに表示する場合は次のように指定します。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1 {
+                                    |      background-color: lemonchiffon;
+                                    |      -ms-grid-column:1;
+                                    |      -ms-grid-row:1;
+                                    |      -ms-grid-column-span: 2;
+                                    | }
+                                    | 
+                                    | #content01 {
+                                    |      background: orange;
+                                    |      -ms-grid-column:2;
+                                    |      -ms-grid-row:2;
+                                    | }
+                                    | 
+                                    | #content02 {
+                                    |      background: greenyellow;
+                                    |      -ms-grid-column:3;
+                                    |      -ms-grid-row:1;
+                                    |      -ms-grid-column-span: 2;
+                                    |      -ms-grid-row-span: 2;
+                                    | }
+                                    | 
+                                    | #content03 {
+                                    |      background: pink;
+                                    |      -ms-grid-column:1;
+                                    |      -ms-grid-row:2;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h1
+                                    |     background-color lemonchiffon
+                                    |     -ms-grid-column 1
+                                    |     -ms-grid-row 1
+                                    |     -ms-grid-column-span 2
+                                    | 
+                                    | #content01
+                                    |     background orange
+                                    |     -ms-grid-column 2
+                                    |     -ms-grid-row 2
+                                    | 
+                                    | #content02
+                                    |     background greenyellow
+                                    |     -ms-grid-column 3
+                                    |     -ms-grid-row 1
+                                    |     -ms-grid-column-span 2
+                                    |     -ms-grid-row-span 2
+                                    | 
+                                    | #content03
+                                    |     background pink
+                                    |     -ms-grid-column 1
+                                    |     -ms-grid-row 2
+                                figcaption （Stylus）
+                            hr
+                            h4 リキッドレイアウトの設定
+                            p='ギリッドレイアウトでは、ブラウザ画面い合わせて横幅が変わるリキッドレイアウトを行うこともできます。まず、<div id="container">の構成するグリッド要素の横幅がブラウザ画面に合わせて変わるようにするため、widthプロパティの値を「auto」にします。すると、<div id="container">は画面の横幅いっぱいに表示されますが、この段階では中身のグリッドアイテムの横幅は変化しません。これは、グリッドラインで分割した各列の横幅を250ピクセルに固定しているためです。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div id="container"&gt;
+                                    | &lt;div id="column01"&gt;&lt;img src="sandwiches.jpg"…略...&lt;/div&gt;
+                                    | &lt;div id="column02"&gt;&lt;p&gt;焼きたての手作りパン…略...&lt;/p&gt;&lt;/div&gt;
+                                    | &lt;div id="column03"&gt;&lt;ul&gt;&lt;li&gt;ハムチーズ…略…&lt;/p&gt;&lt;/div&gt;
+                                    | &lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container
+                                    |     #column01
+                                    |         img(src='sandwiches.jpg')
+                                    |     #column02
+                                    |         p 焼きたての手作りパン…略...
+                                    |     #column03
+                                    |         ul
+                                    |             li ハムチーズ…略…
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container {
+                                    |      border: dotted 2px blue;
+                                    |      width:auto;
+                                    |      margin: auto;
+                                    |      display:-ms-grid;
+                                    |      -ms-grid-columns: 250px 250px 250px 250px;
+                                    |      -ms-grid-rows: 80px auto;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container
+                                    |    border dotted 2px blue
+                                    |     width auto
+                                    |     margin auto
+                                    |     display -ms-grid
+                                    |     -ms-grid-columns 250px 250px 250px 250px
+                                    |     -ms-grid-rows 80px auto
+                                figcaption （Stylus）
+                            p='グリッドアイテムの横幅が変わるようにするためには、列の横幅を「1fr」と指定します。ここでは、<h1>、<div id="content02">、<div id="content03">の横幅が変わるようにするため、grid-columnsプロパティの値を「250px 1fr 1fr 1fr」と指定しています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/088-02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container {
+                                    |      border: dotted 2px blue;
+                                    |      width:auto;
+                                    |      margin: auto;
+                                    |      display:-ms-grid;
+                                    |      -ms-grid-columns: 250px 1fr 1fr 1fr;
+                                    |      -ms-grid-rows: 80px auto;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container
+                                    |     border dotted 2px blue
+                                    |     width auto
+                                    |     margin auto
+                                    |     display -ms-grid
+                                    |     -ms-grid-columns 250px 1fr 1fr 1fr
+                                    |     -ms-grid-rows 80px auto
+                                figcaption （Stylus）
+                            p='「fr」は比率を示す単位です。ここでは2〜4列目の3つの列の横幅を「1fr」と指定していますので、各列の横幅はレイアウト可能なスペースを3等分したものとなります。たとえば、<div id="container">の横幅が1090ピクセルだった場合、2〜4列目のレイアウトに使用できる横幅は、1090ピクセルから1列目の横幅250ピクセルを引いた840ピクセルとなります。これを3等分し、2〜4列目の各列は280ピクセルの横幅となります。'
+                            p='ブラウザ画面の横幅を変えてみると、それに合わせて<h1>、<div id="content02">、<div id="content03">の横幅が変わり、リキッドレイアウトとなっていることがわかります。たとえば、<div id="container">の横幅が805ピクセルになった場合、2〜4列目が使用できるのは555ピクセルで、各列は185ピクセルの横幅となります。'
+                            p='<h1>と<div id="content02">の横幅だけがかわるようにする場合は、2列目と3列目の横幅が変わるようにするため、grid-columnsプロパティの値を「250px 1fr 1fr 250px」にします。ブラウザの画面の横幅を変えてみると、<h1>と<div id="content02">の横幅が変わり、<div id="content01">と<div id="content03">の横幅は変化しないことがわかります。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container {
+                                    |      border: dotted 2px blue;
+                                    |      width:auto;
+                                    |      margin: auto;
+                                    |      display:-ms-grid;
+                                    |      -ms-grid-columns: 250px 1fr 1fr 250px;
+                                    |      -ms-grid-rows: 80px auto;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container
+                                    |     border dotted 2px blue
+                                    |     width auto
+                                    |     margin auto
+                                    |     display -ms-grid
+                                    |     -ms-grid-columns 250px 1fr 1fr 250px
+                                    |     -ms-grid-rows 80px auto
+                                figcaption （Stylus）
+                            hr
+                            h4 横幅や高さの最小値・最大値の指定
+                            p='行列の横幅や高さを指定するとき、草案では最小値・最大値を指定する方法も提案されています。たとえば、minmax(min-content, 1fr）と指定すると、横幅や高さはレイアウト可能なスペースに応じて変化しますが、中身のコンテンツよりも小さくしないようにすることができます。現在のところ、各ブラウザは未対応です。'
+                            hr
+                            h4 グリッドアイテムの間隔
+                            p='グリッドアイテムの間に余白を入れて間隔を調節するには、グリッドアイテムのまわりにマージンを挿入する方法と、行列を追加する方法があります。'
+                            p='たとえば、<div id="content02">の左右に20ピクセルのマージンを挿入すると、下のように余白を入れることができます。このとき、列の横幅には影響しません。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #content02 {
+                                    |      background: greenyellow;
+                                    |      -ms-grid-column:2;
+                                    |      -ms-grid-row:2;
+                                    |      -ms-grid-column-span: 2;
+                                    |      margin-left: 20px;
+                                    |      margin-right: 20px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #content02
+                                    |     background greenyellow
+                                    |     -ms-grid-column 2
+                                    |     -ms-grid-row 2
+                                    |     -ms-grid-column-span 2
+                                    |     margin-left 20px
+                                    |     margin-right 20px
+                                figcaption （Stylus）
+                            p='次に、<h1>の下に行を追加して余白を挿入します。ここでは20ピクセルの行を追加するため、grid-rowsプロパティの値を「80px 20px auto」と指定します。これに伴い、<div id="content01">、<div id="content02">、<div id="content03">を3行目に表示するため、grid-rowプロパティの値を「3」に変更し、追加した2行目には何も表示しないようにします。これで、<h1>の下に余白が入ります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/088-03.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container {
+                                    |      border: dotted 2px blue;
+                                    |      width:1000px;
+                                    |      margin: auto;
+                                    |      display:-ms-grid;
+                                    |      -ms-grid-columns: 250px 250px 250px 250px;
+                                    |      -ms-grid-rows: 80px 20px auto;
+                                    | }
+                                    | h1 {
+                                    |      background-color: lemonchiffon;
+                                    |      -ms-grid-column:1;
+                                    |      -ms-grid-row:3;
+                                    |      -ms-grid-column-span: 4;
+                                    | }
+                                    | #content01 {
+                                    |      background: orange;
+                                    |      -ms-grid-column:1;
+                                    |      -ms-grid-row:2;
+                                    | }
+                                    | 
+                                    | #content02 {
+                                    |      background: greenyellow;
+                                    |      -ms-grid-column:2;
+                                    |      -ms-grid-row:3;
+                                    |      -ms-grid-column-span: 2;
+                                    |      margin-left: 20px;
+                                    |      margin-right: 20px;
+                                    | }
+                                    | 
+                                    | #content03 {
+                                    |      background: pink;
+                                    |      -ms-grid-column:4;
+                                    |      -ms-grid-row:3;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container
+                                    |     border dotted 2px blue
+                                    |     width 1000px
+                                    |     margin auto
+                                    |     display -ms-grid
+                                    |     -ms-grid-columns 250px 250px 250px 250px
+                                    |     -ms-grid-rows 80px 20px auto
+                                    | 
+                                    | h1
+                                    |     background-color lemonchiffon
+                                    |     -ms-grid-column 1
+                                    |     -ms-grid-row 3
+                                    |     -ms-grid-column-span 4
+                                    | 
+                                    | #content01
+                                    |     background orange
+                                    |     -ms-grid-column 1
+                                    |     -ms-grid-row 2
+                                    | 
+                                    | #content02
+                                    |     background greenyellow
+                                    |     -ms-grid-column 2
+                                    |     -ms-grid-row 3
+                                    |     -ms-grid-column-span 2
+                                    |     margin-left 20px
+                                    |     margin-right 20px
+                                    | 
+                                    | #content03
+                                    |     background pink
+                                    |     -ms-grid-column 4
+                                    |     -ms-grid-row 3
+                                figcaption （Stylus）
+                            hr
+                            h4 グリッドアイテムの配置
+                            p='grid-column-alignとgrid-row-alignプロパティを利用すると、グリッドアイテムのグリッドセル内での配置を指定することができます。'
+                            p='たとえば、下のサンプルでは<div id="content01">を2列分のスペースを使用して大きく表示しています。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #content01 {
+                                    |      background: orange;
+                                    |      -ms-grid-column:1;
+                                    |      -ms-grid-row:2;
+                                    |      -ms-grid-column-span: 2;
+                                    | }
+                                    | 
+                                    | #content02 {
+                                    |      background: greenyellow;
+                                    |      -ms-grid-column:3;
+                                    |      -ms-grid-row:2;
+                                    |      -ms-grid-column-span: 2;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #content01
+                                    |     background orange
+                                    |     -ms-grid-column 1
+                                    |     -ms-grid-row 2
+                                    |     -ms-grid-column-span 2
+                                    | 
+                                    | #content02
+                                    |     background greenyellow
+                                    |     -ms-grid-column 3
+                                    |     -ms-grid-row 2
+                                    |     -ms-grid-column-span 2
+                                figcaption （Stylus）
+                            p='<div id="content01">のgrid-column-alignとgrid-row-alignプロパティの値を「center」にすると、<div id="content01">の構成するボックスが中身のコンテンツに合わせた大きさとなり、グリッドセルの中央に配置されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/02/088-04.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #content01 {
+                                    |      background: orange;
+                                    |      -ms-grid-column:1;
+                                    |      -ms-grid-row:2;
+                                    |      -ms-grid-column-span: 2;
+                                    |      -ms-grid-column-align: center;
+                                    |      -ms-grid-row-align: center;
+                                    | }
+                                    | 
+                                    | #content02 {
+                                    |      background: greenyellow;
+                                    |      -ms-grid-column:3;
+                                    |      -ms-grid-row:2;
+                                    |      -ms-grid-column-span: 2;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #content01
+                                    |     background orange
+                                    |     -ms-grid-column 1
+                                    |     -ms-grid-row 2
+                                    |     -ms-grid-column-span 2
+                                    |     -ms-grid-column-align center
+                                    |     -ms-grid-row-align center
+                                    | 
+                                    | #content02
+                                    |     background greenyellow
+                                    |     -ms-grid-column 3
+                                    |     -ms-grid-row 2
+                                    |     -ms-grid-column-span 2
+                                figcaption （Stylus）
+                            p='grid-column-alignは横方向の、grid-row-alignは縦方向の配置を指定するプロパティで、指定できる値は下のようになっています。'
+                            table.table
+                                tr
+                                    th 値
+                                    th 配置
+                                tr
+                                    td start
+                                    td 書字方向の開始位置。
+                                tr
+                                    td end
+                                    td 書字方向の終了位置。
+                                tr
+                                    td center
+                                    td 中央。
+                                tr
+                                    td stretch
+                                    td ストレッチ。
+                            hr
+                            h4 テンプレートによるグリッドセルの指定
+                            p='CSS3で提案されている「テンプレート」という機能を利用すると、より簡単にグリッドレイアウトを利用できるようになります。'
+                            p='たとえば、グリッドレイアウトでグリッドアイテムなどのグリッドセルに表示するかは、grid-columnやgrid-column-span、grid-row、grid-row-spanプロパティを利用して、「何列目から何列分、何行目から何行分のセルに表示する」という形で指定しなければなりません。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container {
+                                    |      display: grid;
+                                    |      grid-columns: 250px 250px 250px 250px;
+                                    |      grid-rows: 80px auto;
+                                    | }
+                                    | 
+                                    | h1 {
+                                    |      grid-column:1;
+                                    |      grid-row:1;
+                                    |      grid-column-span: 4;
+                                    | }
+                                    | #content01 {
+                                    |      grid-column:1;
+                                    |      grid-row:2;
+                                    | }
+                                    | 
+                                    | 
+                                    | #content02 {
+                                    |      grid-column:2;
+                                    |      grid-row:2;
+                                    |      grid-column-span: 2;
+                                    | }
+                                    | 
+                                    | 
+                                    | #content03 {
+                                    |      grid-column:4;
+                                    |      grid-row:2;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container
+                                    |     display grid
+                                    |     grid-columns 250px 250px 250px 250px
+                                    |     grid-rows 80px auto
+                                    | 
+                                    | h1
+                                    |     grid-column 1
+                                    |     grid-row 1
+                                    |     grid-column-span 4
+                                    | 
+                                    | #content01
+                                    |     grid-column 1
+                                    |     grid-row 2
+                                    | 
+                                    | #content02
+                                    |     grid-column 2
+                                    |     grid-row 2
+                                    |     grid-column-span 2
+                                    | 
+                                    | #content03
+                                    |     grid-column 4
+                                    |     grid-row 2
+                                figcaption （Stylus）
+                            p='これに対し、テンプレートの機能を利用すると、grid-templateプロパティでグリッドセルにわかりやすい名称を付けておき、グリッドアイテムの表示先としてgrid-areaプロパティで指定できるようになります。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container {
+                                    |      display: grid;
+                                    |      grid-template: "title title title title" "pic main main menu";
+                                    |      grid-columns: 250px 250px 250px 250px;
+                                    |      grid-rows: 80px auto;
+                                    | }
+                                    | 
+                                    | h1 {
+                                    |      grid-area: title;
+                                    | }
+                                    | #content01 {
+                                    |      grid-area: pic;
+                                    | }
+                                    | 
+                                    | 
+                                    | #content02 {
+                                    |      grid-area: main;
+                                    | }
+                                    | 
+                                    | 
+                                    | #content03 {
+                                    |      grid-area: menu;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | #container
+                                    |     display grid
+                                    |     grid-template "title title title title" "pic main main menu"
+                                    |     grid-columns 250px 250px 250px 250px
+                                    |     grid-rows 80px auto
+                                    | 
+                                    | h1
+                                    |     grid-area title
+                                    | 
+                                    | #content01
+                                    |     grid-area pic
+                                    | 
+                                    | #content02
+                                    |     grid-area main
+                                    | 
+                                    | #content03
+                                    |     grid-area menu
+                                figcaption （Stylus）
+                            p='なお、現在のところ対応ブラウザはなく、プロパティ名やテンプレートの記述形式などもまだまだ流動的な機能です。テンプレートに関する機能について詳しくは、下の草案を参照してください。'
+                            p
+                                | CSS Grid Layout
+                                br
+                                a(href='http://www.w3.org/TR/css3-grid-layout/',target='_blank') http://www.w3.org/TR/css3-grid-layout/
 
-							p
-								| CSS Template Layout Module
-								br
-								a(href='http://www.w3.org/TR/css3-layout/',target='_blank') http://www.w3.org/TR/css3-layout/
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+                            p
+                                | CSS Template Layout Module
+                                br
+                                a(href='http://www.w3.org/TR/css3-layout/',target='_blank') http://www.w3.org/TR/css3-layout/
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

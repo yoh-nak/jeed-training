@@ -1,195 +1,195 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;角丸の表示
-						.panel-body
-							.alert.alert-info 角丸の表示
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							p IE8以前は未対応。
-							pre
-								| border-radius: 角丸の半径
-							p
-								| 角丸の半径・・・数値／比率
-							table.table
-								tr
-									td 初期値
-									td 0
-								tr
-									td 継承
-									td なし
-								tr
-									td 適用先
-									td 全要素（border-collapseで罫線を重ねたテーブルを除く）
-								tr
-									td 比率
-									td ボーダーボックスの横幅と高さに対する比率
-								tr
-									td モジュール
-									td Backgrounds and Borders
-							p='border-radiusプロパティを利用すると、半径をしてしてボックスの角を丸くすることができます。半径を横方向と縦方向に分けて指定すると、角を楕円にすることも可能です。'
-							pre
-								| border-radius: 横方向の半径 / 縦方向の半径
-							h4 SAMPLE A：角を丸くする
-							p='下のサンプルはボックスの太さを8ピクセルのオレンジ色の罫線で囲んだものです。border-radiusプロパティの値を「20px」にすると、4つの角が丸くなります。このとき、20ピクセルの半径になるのは罫線の外側のエッジで、内側のエッジの太さを引いた12ピクセルの半径になります。'
-							p='角の半径と罫線の太さが同じ、もしくは罫線の方が太い場合、内側のエッジは丸くなりません。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/142-A.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 HAM SANDWICHES
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     border: solid 8px orange;
-									|     border-radius: 20px;
-									|     padding: 25px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	border solid 8px orange
-									| 	border-radius 20px
-									| 	padding 25px
-								figcaption （stylus）
-							hr
-							h4 SAMPLE B：楕円の角丸
-							p='横方向と縦方向の半径を個別に指定した場合、角を楕円にすることができます。ここでは横を40ピクセル、縦を20ピクセルに指定しています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/142-B.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     border: solid 8px orange;
-									|     border-radius: 40px / 20px;
-									|     padding: 25px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	border solid 8px orange
-									| 	border-radius 40px / 20px
-									| 	padding 25px
-								figcaption （stylus）
-							hr
-							h4 SAMPLE C：角ごとに丸みを変える
-							p='border-radiusプロパティで角ごとに異なる半径を指定するためには、下の記述形式を利用します。たとえば、border-radiusプロパティの値を「20px 40px 60px 80px」にすると、左上の角から順に時計回りで半径が大きくなります。'
-							p='border-radiusの値の記述形式。'
-							pre
-								| 全 ／ 左上 右上 右下 左下 ／ 左上 右上と左下 右下 ／ 左上と右下 右上と左下
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/142-C.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     border: solid 8px orange;
-									|     border-radius: 20px 40px 60px 80px;
-									|     padding: 25px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	border solid 8px orange
-									| 	border-radius 20px 40px 60px 80px
-									| 	padding 25px
-								figcaption （stylus）
-							p='なお、角ごとの半径は以下の形式のプロパティで指定することもできます。'
-							pre
-								| border-*-radius: 角丸の半径
-							p *・・・top-left ／ top-right ／ bottom-right ／ bottom-left
-							hr
-							h4 SAMPLE D：背景や文字への影響
-							p='border-radiusプロパティでは背景の角も丸くなります。たとえば、下のサンプルはオレンジ色のボックスの角を丸くしたものです。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/142-D.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div&gt;
-									| &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
-									| &lt;p&gt;焼きたての手作りパンで…略…サンドイッチです。&lt;/p&gt;
-									|&lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	h2 HAM SANDWICHES
-									| 		p 焼きたての手作りパンで…略…サンドイッチです。
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     background-color: #ffe58d;
-									|     border-radius: 20px;
-									|     padding: 20px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	background-color #ffe58d
-									| 	border-radius 20px
-									| 	padding 20px
-								figcaption （stylus）
-							p='一方、ボックス内の文字や画像は、丸くした角からはみ出して表示されます。これは、overflowプロパティの値が初期値「visible」で処理されるためです。overflowプロパティの値を「hidden」にすると、はみ出した部分を隠して表示することができます。'
-							hr
-							h4 SAMPLE E：テーブルの角丸
-							p='border-radiusプロパティではテーブルの角も丸くすることができます。たとえば、カレンダーを構成するテーブルの各セルを罫線で囲み、border-radiusプロパティの値を「15px」にすると下のようになります。ただし、border-collapseプロパティでテーブルの罫線を重ねて表示している場合、border-radiusプロパティの指定は無効となり、角は丸くなりません。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| th, td {
-									|     border: solid 1px orange;
-									|     border-radius: 15px;
-									|     ...
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| th, td
-									| 	border solid 1px orange
-									| 	border-radius 15px
-								figcaption （stylus）
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;角丸の表示
+                        .panel-body
+                            .alert.alert-info 角丸の表示
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            p IE8以前は未対応。
+                            pre
+                                | border-radius: 角丸の半径
+                            p
+                                | 角丸の半径・・・数値／比率
+                            table.table
+                                tr
+                                    td 初期値
+                                    td 0
+                                tr
+                                    td 継承
+                                    td なし
+                                tr
+                                    td 適用先
+                                    td 全要素（border-collapseで罫線を重ねたテーブルを除く）
+                                tr
+                                    td 比率
+                                    td ボーダーボックスの横幅と高さに対する比率
+                                tr
+                                    td モジュール
+                                    td Backgrounds and Borders
+                            p='border-radiusプロパティを利用すると、半径をしてしてボックスの角を丸くすることができます。半径を横方向と縦方向に分けて指定すると、角を楕円にすることも可能です。'
+                            pre
+                                | border-radius: 横方向の半径 / 縦方向の半径
+                            h4 SAMPLE A：角を丸くする
+                            p='下のサンプルはボックスの太さを8ピクセルのオレンジ色の罫線で囲んだものです。border-radiusプロパティの値を「20px」にすると、4つの角が丸くなります。このとき、20ピクセルの半径になるのは罫線の外側のエッジで、内側のエッジの太さを引いた12ピクセルの半径になります。'
+                            p='角の半径と罫線の太さが同じ、もしくは罫線の方が太い場合、内側のエッジは丸くなりません。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/142-A.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 HAM SANDWICHES
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     border: solid 8px orange;
+                                    |     border-radius: 20px;
+                                    |     padding: 25px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     border solid 8px orange
+                                    |     border-radius 20px
+                                    |     padding 25px
+                                figcaption （stylus）
+                            hr
+                            h4 SAMPLE B：楕円の角丸
+                            p='横方向と縦方向の半径を個別に指定した場合、角を楕円にすることができます。ここでは横を40ピクセル、縦を20ピクセルに指定しています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/142-B.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     border: solid 8px orange;
+                                    |     border-radius: 40px / 20px;
+                                    |     padding: 25px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     border solid 8px orange
+                                    |     border-radius 40px / 20px
+                                    |     padding 25px
+                                figcaption （stylus）
+                            hr
+                            h4 SAMPLE C：角ごとに丸みを変える
+                            p='border-radiusプロパティで角ごとに異なる半径を指定するためには、下の記述形式を利用します。たとえば、border-radiusプロパティの値を「20px 40px 60px 80px」にすると、左上の角から順に時計回りで半径が大きくなります。'
+                            p='border-radiusの値の記述形式。'
+                            pre
+                                | 全 ／ 左上 右上 右下 左下 ／ 左上 右上と左下 右下 ／ 左上と右下 右上と左下
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/142-C.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     border: solid 8px orange;
+                                    |     border-radius: 20px 40px 60px 80px;
+                                    |     padding: 25px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     border solid 8px orange
+                                    |     border-radius 20px 40px 60px 80px
+                                    |     padding 25px
+                                figcaption （stylus）
+                            p='なお、角ごとの半径は以下の形式のプロパティで指定することもできます。'
+                            pre
+                                | border-*-radius: 角丸の半径
+                            p *・・・top-left ／ top-right ／ bottom-right ／ bottom-left
+                            hr
+                            h4 SAMPLE D：背景や文字への影響
+                            p='border-radiusプロパティでは背景の角も丸くなります。たとえば、下のサンプルはオレンジ色のボックスの角を丸くしたものです。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/142-D.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div&gt;
+                                    | &lt;h2&gt;HAM SANDWICHES&lt;/h2&gt;
+                                    | &lt;p&gt;焼きたての手作りパンで…略…サンドイッチです。&lt;/p&gt;
+                                    |&lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     h2 HAM SANDWICHES
+                                    |         p 焼きたての手作りパンで…略…サンドイッチです。
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     background-color: #ffe58d;
+                                    |     border-radius: 20px;
+                                    |     padding: 20px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     background-color #ffe58d
+                                    |     border-radius 20px
+                                    |     padding 20px
+                                figcaption （stylus）
+                            p='一方、ボックス内の文字や画像は、丸くした角からはみ出して表示されます。これは、overflowプロパティの値が初期値「visible」で処理されるためです。overflowプロパティの値を「hidden」にすると、はみ出した部分を隠して表示することができます。'
+                            hr
+                            h4 SAMPLE E：テーブルの角丸
+                            p='border-radiusプロパティではテーブルの角も丸くすることができます。たとえば、カレンダーを構成するテーブルの各セルを罫線で囲み、border-radiusプロパティの値を「15px」にすると下のようになります。ただし、border-collapseプロパティでテーブルの罫線を重ねて表示している場合、border-radiusプロパティの指定は無効となり、角は丸くなりません。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | th, td {
+                                    |     border: solid 1px orange;
+                                    |     border-radius: 15px;
+                                    |     ...
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | th, td
+                                    |     border solid 1px orange
+                                    |     border-radius 15px
+                                figcaption （stylus）
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

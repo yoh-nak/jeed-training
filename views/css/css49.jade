@@ -1,248 +1,248 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;長い単語の改行ルール
-						.panel-body
-							.alert.alert-info 長い単語の改行ルール
-							table.browser-support
-								tr
-									td.not-support
-										img(src='../images/ic-apple.png')
-									td.not-support
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td.not-support
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td.not-support
-										img(src='../images/ic-opera.png')
-									td.not-support
-										img(src='../images/ic-ie.png')
-							pre
-								| overflow-wrap: ルール
-							p
-								| ルール・・・normal ／ break-word
-							table.table
-								tr
-									td 初期値
-									td normal
-								tr
-									td 継承
-									td あり
-								tr
-									td 適用先
-									td 全要素
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td Text
-							p='overflow-wrapプロパティを利用すると、長い単語の途中の改行を許可することができます。'
-							table.table
-								tr
-									th 値
-									th 改行のルール
-								tr
-									td normal
-									td 単語の途中に改行を入れない。
-								tr
-									td break-word
-									td 単語の途中に改行を入れる。
-							hr
-							h4 SAMPLE：長い単語の改行
-							p='アルファベットで記述した単語の途中に改行が入らないため、1行に収まらない長い単語があるとボックスからはみ出してしまいます。たとえば、スペースの入らないURLの記述は長い単語として扱われるものの1つです。下のサンプルはURLをオレンジ色の罫線で囲んで表示したものですが、overflow-wrapプロパティの値が初期の「normal」で処理されるため、URLの途中には改行が入らず、1つの長い単語として横にはみ出して表示されます。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div&gt;http://www.longname.www/abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz.html&lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div http://www.longname.www/abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz.html
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     border: solid 2px orange;
-									|     padding: 10px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	border solid 2px orange
-									| 	padding 10px
-								figcaption （Stylus）
-							p='長い単語の途中に改行を入れて表示するには、overlfow-wrapプロパティの値を「break-word」にします。これで、URLの途中にも改行が入るようになります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/202-01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     border: solid 2px orange;
-									|     padding: 10px;
-									|     overflow-wrap: break-word;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	border solid 2px orange
-									| 	padding 10px
-									| 	overflow-wrap break-word
-								figcaption （Stylus）
-							p='overflow-wrapプロパティは、古い草案では「word-wrap」というプロパティ名で定義されていました。word-wrapプロパティではoverflow-wrapと同じ値を指定することができ、すべての主要ブラウザが対応しています。そのため、下のようにword-wrapプロパティの設定も記述しておくことにより、overflow-wrapプロパティに未対応なブラウザにも対応することができます。'
-							p='なお、現行の草案では下位互換性を保つため、ブラウザに対してword-wrapプロパティもサポートしておくことが求められています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/202-02-word-wrap.html ',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     border: solid 2px orange;
-									|     padding: 10px;
-									|     overflow-wrap: word-wrap;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	border solid 2px orange
-									| 	padding 10px
-									| 	overflow-wrap word-wrap
-								figcaption （Stylus）
-							hr
-							h4 URLの改行
-							p='over-flowプロパティの値が「normal」の場合でも、ブラウザによってはURLの「/（スラッシュ）」や「-（ハイフン）」の位置に改行が入ります。'
-							table.table
-								tr
-									th URL
-									th Firefox
-									th Webkit系
-									th Opera
-									th IE
-								tr
-									td -（ハイフン）
-									td ○
-									td ○
-									td ○
-									td ○
-								tr
-									td _（アンダースコア）
-									td ×
-									td ×
-									td ×
-									td ×
-								tr
-									td /（スラッシュ）
-									td ○
-									td ×
-									td ○
-									td ×
-								tr
-									td 文字コード
-									td ○
-									td ×
-									td ○
-									td ○
-							p='○・・・改行が入る。　×・・・改行が入らない。'
-							p='「文字コード」は日本語をURLに適したコードに置き換えたもので、Wikipediaの日本語のページのURLなどで使用されています。主要なブラウザでは文字コードの途中に改行が入りますが、Webkit系のブラウザでは入りません。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| &gt;div&gt;http://www.longname.www/abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz.html&gt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div http://www.longname.www/abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz.html
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     border: solid 2px orange;
-									|     padding: 10px;
-									|     overflow-wrap: break-word;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	border solid 2px orange
-									| 	padding 10px
-									| 	overflow-wrap break-word
-								figcaption （Stylus）
-							hr
-							h4 文章中の長い単語の表示
-							p='下のサンプルは、文章中に括弧（）で囲んだURLを記述したものです。この場合、括弧も含めたURLが1つの長い単語として扱われ、前後に改行が入ります。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div&gt;Webページ(http://www.longname.www/abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz.html)にアクセスしてください。&lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div Webページ(http://www.longname.www/abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz.html)にアクセスしてください。
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     border: solid 2px orange;
-									|     padding: 10px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	border solid 2px orange
-									| 	padding 10px
-								figcaption （Stylus）
-							p='overflow-wrapプロパティを「break-word」にすると、長い単語の途中に改行が入ります。ただし、単語の前にも改行が入った形での表示となります。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     border: solid 2px orange;
-									|     padding: 10px;
-									|     overflow-wrap: break-word;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	border solid 2px orange
-									| 	padding 10px
-									| 	overflow-wrap break-word
-								figcaption （Stylus）
-							p='長い単語の前に改行を入れたくない場合は、word-breakプロパティの値を「break-all」にします。ただし、この設定では単語の長さに関係なく、すべての文字の間に改行が入るようになります。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| div {
-									|     border: solid 2px orange;
-									|     padding: 10px;
-									|     overflow-wrap: break-all;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| div
-									| 	border solid 2px orange
-									| 	padding 10px
-									| 	overflow-wrap break-all
-								figcaption （Stylus）
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;長い単語の改行ルール
+                        .panel-body
+                            .alert.alert-info 長い単語の改行ルール
+                            table.browser-support
+                                tr
+                                    td.not-support
+                                        img(src='../images/ic-apple.png')
+                                    td.not-support
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td.not-support
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td.not-support
+                                        img(src='../images/ic-opera.png')
+                                    td.not-support
+                                        img(src='../images/ic-ie.png')
+                            pre
+                                | overflow-wrap: ルール
+                            p
+                                | ルール・・・normal ／ break-word
+                            table.table
+                                tr
+                                    td 初期値
+                                    td normal
+                                tr
+                                    td 継承
+                                    td あり
+                                tr
+                                    td 適用先
+                                    td 全要素
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td Text
+                            p='overflow-wrapプロパティを利用すると、長い単語の途中の改行を許可することができます。'
+                            table.table
+                                tr
+                                    th 値
+                                    th 改行のルール
+                                tr
+                                    td normal
+                                    td 単語の途中に改行を入れない。
+                                tr
+                                    td break-word
+                                    td 単語の途中に改行を入れる。
+                            hr
+                            h4 SAMPLE：長い単語の改行
+                            p='アルファベットで記述した単語の途中に改行が入らないため、1行に収まらない長い単語があるとボックスからはみ出してしまいます。たとえば、スペースの入らないURLの記述は長い単語として扱われるものの1つです。下のサンプルはURLをオレンジ色の罫線で囲んで表示したものですが、overflow-wrapプロパティの値が初期の「normal」で処理されるため、URLの途中には改行が入らず、1つの長い単語として横にはみ出して表示されます。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div&gt;http://www.longname.www/abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz.html&lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div http://www.longname.www/abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz.html
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     border: solid 2px orange;
+                                    |     padding: 10px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     border solid 2px orange
+                                    |     padding 10px
+                                figcaption （Stylus）
+                            p='長い単語の途中に改行を入れて表示するには、overlfow-wrapプロパティの値を「break-word」にします。これで、URLの途中にも改行が入るようになります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/202-01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     border: solid 2px orange;
+                                    |     padding: 10px;
+                                    |     overflow-wrap: break-word;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     border solid 2px orange
+                                    |     padding 10px
+                                    |     overflow-wrap break-word
+                                figcaption （Stylus）
+                            p='overflow-wrapプロパティは、古い草案では「word-wrap」というプロパティ名で定義されていました。word-wrapプロパティではoverflow-wrapと同じ値を指定することができ、すべての主要ブラウザが対応しています。そのため、下のようにword-wrapプロパティの設定も記述しておくことにより、overflow-wrapプロパティに未対応なブラウザにも対応することができます。'
+                            p='なお、現行の草案では下位互換性を保つため、ブラウザに対してword-wrapプロパティもサポートしておくことが求められています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/202-02-word-wrap.html ',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     border: solid 2px orange;
+                                    |     padding: 10px;
+                                    |     overflow-wrap: word-wrap;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     border solid 2px orange
+                                    |     padding 10px
+                                    |     overflow-wrap word-wrap
+                                figcaption （Stylus）
+                            hr
+                            h4 URLの改行
+                            p='over-flowプロパティの値が「normal」の場合でも、ブラウザによってはURLの「/（スラッシュ）」や「-（ハイフン）」の位置に改行が入ります。'
+                            table.table
+                                tr
+                                    th URL
+                                    th Firefox
+                                    th Webkit系
+                                    th Opera
+                                    th IE
+                                tr
+                                    td -（ハイフン）
+                                    td ○
+                                    td ○
+                                    td ○
+                                    td ○
+                                tr
+                                    td _（アンダースコア）
+                                    td ×
+                                    td ×
+                                    td ×
+                                    td ×
+                                tr
+                                    td /（スラッシュ）
+                                    td ○
+                                    td ×
+                                    td ○
+                                    td ×
+                                tr
+                                    td 文字コード
+                                    td ○
+                                    td ×
+                                    td ○
+                                    td ○
+                            p='○・・・改行が入る。　×・・・改行が入らない。'
+                            p='「文字コード」は日本語をURLに適したコードに置き換えたもので、Wikipediaの日本語のページのURLなどで使用されています。主要なブラウザでは文字コードの途中に改行が入りますが、Webkit系のブラウザでは入りません。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &gt;div&gt;http://www.longname.www/abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz.html&gt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div http://www.longname.www/abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz.html
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     border: solid 2px orange;
+                                    |     padding: 10px;
+                                    |     overflow-wrap: break-word;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     border solid 2px orange
+                                    |     padding 10px
+                                    |     overflow-wrap break-word
+                                figcaption （Stylus）
+                            hr
+                            h4 文章中の長い単語の表示
+                            p='下のサンプルは、文章中に括弧（）で囲んだURLを記述したものです。この場合、括弧も含めたURLが1つの長い単語として扱われ、前後に改行が入ります。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div&gt;Webページ(http://www.longname.www/abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz.html)にアクセスしてください。&lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div Webページ(http://www.longname.www/abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz.html)にアクセスしてください。
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     border: solid 2px orange;
+                                    |     padding: 10px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     border solid 2px orange
+                                    |     padding 10px
+                                figcaption （Stylus）
+                            p='overflow-wrapプロパティを「break-word」にすると、長い単語の途中に改行が入ります。ただし、単語の前にも改行が入った形での表示となります。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     border: solid 2px orange;
+                                    |     padding: 10px;
+                                    |     overflow-wrap: break-word;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     border solid 2px orange
+                                    |     padding 10px
+                                    |     overflow-wrap break-word
+                                figcaption （Stylus）
+                            p='長い単語の前に改行を入れたくない場合は、word-breakプロパティの値を「break-all」にします。ただし、この設定では単語の長さに関係なく、すべての文字の間に改行が入るようになります。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div {
+                                    |     border: solid 2px orange;
+                                    |     padding: 10px;
+                                    |     overflow-wrap: break-all;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | div
+                                    |     border solid 2px orange
+                                    |     padding 10px
+                                    |     overflow-wrap break-all
+                                figcaption （Stylus）
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

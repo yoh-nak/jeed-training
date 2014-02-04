@@ -1,223 +1,223 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;背景画像の表示スタイル
-						.panel-body
-							.alert.alert-info 背景画像の表示スタイル
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png') （※）
-									td
-										img(src='../images/ic-android.png') （※）
-									td
-										img(src='../images/ic-firefox.png') （※）
-									td
-										img(src='../images/ic-safari.png') （※）
-									td
-										img(src='../images/ic-chrome.png') （※）
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							p ※ 部分対応。
-							p IE8以前は部分対応。
-							pre
-								| background-repeat: 背景画像の表示スタイル
-							p='背景画像の表示スタイル・・・repeat ／ repeat-x ／ repeat-y ／ no-repeat ／ space ／ round'
-							table.table
-								tr
-									td 初期値
-									td repeat
-								tr
-									td 継承
-									td なし
-								tr
-									td 適用先
-									td 全要素
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td Backgrounds and Borders
-							p='background-repeatプロパティを利用すると背景画像の表示スタイルを指定することができます。指定できる値のうち、「space」と「round」はCSS3で追加されたもので、現在のところOperaとIE9以上が対応しています。'
-							table.table
-								tr
-									th 値
-									th 表示スタイル
-								tr
-									td repeat
-									td 縦横に繰り返す
-								tr
-									td repeat-x
-									td 横方向に繰り返す
-								tr
-									td repeat-y
-									td 縦方向に繰り返す
-								tr
-									td no-repeat
-									td 繰り返しなし
-								tr
-									td space
-									td ボックス内にちょうど収まるように余白を入れて縦横に繰り返す
-								tr
-									td round
-									td ボックス内にちょうど収まるように大きさを調整して縦横に繰り返す
-							p='CSS3では横方向と縦方向のスタイルを半角スペースで区切り、個別に指定することもできます。詳しくはSAMPLE Dを参照してください。'
-							pre
-								| background-repeat: 横方向の表示スタイル 縦方向の表示スタイル
-							p='また、複数の背景画像を表示した場合、各画像の表示スタイルをカンマで区切って指定することができます。なお、IE8以前はCSS3の機能には未対応です。'
-							pre
-								| background-repeat: 1枚目の画像のスタイル, 2枚目の画像のスタイル, ...
-							hr
-							h4 SAMPLE A: 基本
-							p='背景画像を表示すると、background-repeatプロパティの値は初期値の「repeat」で処理されるため、縦横に繰り返して表示されます。ここでは、次の背景画像（flower.png）を表示しています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/124-A01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							p='背景画像を横また縦方向だけに繰り返して表示するには、background-repeatプロパティの値を「repeat-x」または「repeat-y」にします。また、「no-repeat」にすると、繰り返しなしで表示することができます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/124-A02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     padding: 45px 0;
-									|     border: solid 1px orange;
-									|     background-image: url(flower.png);
-									|     background-repeat: repeat-x;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	padding 45px 0
-									| 	border solid 1px orange
-									| 	background-image url(flower.png)
-									| 	background-repeat repeat-x
-								figcaption （stylus）
-							p='なお、背景画像はボックスの左上に揃えて表示されますが、background-positionプロパティを利用すると表示位置を調整することができます。'
-							p='横方向に繰り返して表示した背景画像をボックスの中央に配置したもの。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     padding: 45px 0;
-									|     border: solid 1px orange;
-									|     background-image: url(flower.png);
-									|     background-repeat: repeat-x;
-									|     background-position: center center;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	padding 45px 0
-									| 	border solid 1px orange
-									| 	background-image url(flower.png)
-									| 	background-repeat repeat-x
-									| 	background-position center center
-								figcaption （stylus）
-							p='background-positionプロパティの値を「repeat-y」にしたときの表示。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/124-A03.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							p='background-repeatプロパティの値を「no-repeat」にしたときの表示。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/124-A04.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							hr
-							h4 SAMPLE B：ボックス内に収まるように余白を挿入
-							p='background-repeatプロパティの値を「space」にすると、背景画像が縦横に繰り返して表示されます。ただし、ボックス内にぴったりと収まるように、画像の間の余白サイズが自動的に調節されます。現在のところ、Firefox、Webkit系のブラウザは未対応です。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/124-B.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     padding: 45px 0;
-									|     border: solid 1px orange;
-									|     background-image: url(flower.png);
-									|     background-repeat: space;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	padding 45px 0
-									| 	border solid 1px orange
-									| 	background-image url(flower.png)
-									| 	background-repeat space
-								figcaption （stylus）
-							p='背景画像の大きさがボックスの横幅または高さに対して1枚分しか収まらない場合は下のようになります。また、横幅と高さのどちらか一方でもボックスに収まらない場合には背景画像が表示されなくなります。'
-							p='なお、background-sizeプロパティで背景画像の大きさを変更した場合は、変更後の大きさに対して「background-repeat: space」の処理が行われます。'
-							br
-							h4 SAMPLE C：ボックス内に収まるように大きさを調節
-							p='background-repeatプロパティの値を「round」にした場合も、背景画像が縦横に繰り返して表示されます。ただし、ボックス内にぴったりと収まるように、画像が自動的に調節されます。現在、FirefoxとWebkit系のブラウザは未対応です。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/124-C.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     padding: 45px 0;
-									|     border: solid 1px orange;
-									|     background-image: url(flower.png);
-									|     background-repeat: round;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	padding 45px 0
-									| 	border solid 1px orange
-									| 	background-image url(flower.png)
-									| 	background-repeat round
-								figcaption （stylus）
-							p='なお、画像サイズは縮小して調節されます。また、background-sizeプロパティで背景画像の大きさを変更した場合、変更後の大きさに対して「background-repeat: round」の処理が行われます。'
-							hr
-							h4 SAMPLE D：横方向と縦方向の表示スタイルを個別に指定
-							p='縦方向と、横方向の表示スタイルを個別に指定する場合、それぞれの値を半角スペースで区切って指定します。たとえば、background-repeatプロパティの値を「repeat no-repeat」にすると、横方向を「repeat」、縦方向を「no-repeat」と指定したことになり、下のように表示されます。これは、background-repeatプロパティの値を「repeat-x」にした場合と同じ表示です。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/124-D.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     padding: 45px 0;
-									|     border: solid 1px orange;
-									|     background-image: url(flower.png);
-									|     background-repeat: repeat no-repeat;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	padding 45px 0
-									| 	border solid 1px orange
-									| 	background-image url(flower.png)
-									| 	background-repeat repeat no-repeat
-								figcaption （stylus）
-							p='なお、「repeat-x」と「repeat-y」を横方向または縦方向の値として指定することはできません。'
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;背景画像の表示スタイル
+                        .panel-body
+                            .alert.alert-info 背景画像の表示スタイル
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png') （※）
+                                    td
+                                        img(src='../images/ic-android.png') （※）
+                                    td
+                                        img(src='../images/ic-firefox.png') （※）
+                                    td
+                                        img(src='../images/ic-safari.png') （※）
+                                    td
+                                        img(src='../images/ic-chrome.png') （※）
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            p ※ 部分対応。
+                            p IE8以前は部分対応。
+                            pre
+                                | background-repeat: 背景画像の表示スタイル
+                            p='背景画像の表示スタイル・・・repeat ／ repeat-x ／ repeat-y ／ no-repeat ／ space ／ round'
+                            table.table
+                                tr
+                                    td 初期値
+                                    td repeat
+                                tr
+                                    td 継承
+                                    td なし
+                                tr
+                                    td 適用先
+                                    td 全要素
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td Backgrounds and Borders
+                            p='background-repeatプロパティを利用すると背景画像の表示スタイルを指定することができます。指定できる値のうち、「space」と「round」はCSS3で追加されたもので、現在のところOperaとIE9以上が対応しています。'
+                            table.table
+                                tr
+                                    th 値
+                                    th 表示スタイル
+                                tr
+                                    td repeat
+                                    td 縦横に繰り返す
+                                tr
+                                    td repeat-x
+                                    td 横方向に繰り返す
+                                tr
+                                    td repeat-y
+                                    td 縦方向に繰り返す
+                                tr
+                                    td no-repeat
+                                    td 繰り返しなし
+                                tr
+                                    td space
+                                    td ボックス内にちょうど収まるように余白を入れて縦横に繰り返す
+                                tr
+                                    td round
+                                    td ボックス内にちょうど収まるように大きさを調整して縦横に繰り返す
+                            p='CSS3では横方向と縦方向のスタイルを半角スペースで区切り、個別に指定することもできます。詳しくはSAMPLE Dを参照してください。'
+                            pre
+                                | background-repeat: 横方向の表示スタイル 縦方向の表示スタイル
+                            p='また、複数の背景画像を表示した場合、各画像の表示スタイルをカンマで区切って指定することができます。なお、IE8以前はCSS3の機能には未対応です。'
+                            pre
+                                | background-repeat: 1枚目の画像のスタイル, 2枚目の画像のスタイル, ...
+                            hr
+                            h4 SAMPLE A: 基本
+                            p='背景画像を表示すると、background-repeatプロパティの値は初期値の「repeat」で処理されるため、縦横に繰り返して表示されます。ここでは、次の背景画像（flower.png）を表示しています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/124-A01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            p='背景画像を横また縦方向だけに繰り返して表示するには、background-repeatプロパティの値を「repeat-x」または「repeat-y」にします。また、「no-repeat」にすると、繰り返しなしで表示することができます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/124-A02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     padding: 45px 0;
+                                    |     border: solid 1px orange;
+                                    |     background-image: url(flower.png);
+                                    |     background-repeat: repeat-x;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     padding 45px 0
+                                    |     border solid 1px orange
+                                    |     background-image url(flower.png)
+                                    |     background-repeat repeat-x
+                                figcaption （stylus）
+                            p='なお、背景画像はボックスの左上に揃えて表示されますが、background-positionプロパティを利用すると表示位置を調整することができます。'
+                            p='横方向に繰り返して表示した背景画像をボックスの中央に配置したもの。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     padding: 45px 0;
+                                    |     border: solid 1px orange;
+                                    |     background-image: url(flower.png);
+                                    |     background-repeat: repeat-x;
+                                    |     background-position: center center;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     padding 45px 0
+                                    |     border solid 1px orange
+                                    |     background-image url(flower.png)
+                                    |     background-repeat repeat-x
+                                    |     background-position center center
+                                figcaption （stylus）
+                            p='background-positionプロパティの値を「repeat-y」にしたときの表示。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/124-A03.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            p='background-repeatプロパティの値を「no-repeat」にしたときの表示。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/124-A04.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            hr
+                            h4 SAMPLE B：ボックス内に収まるように余白を挿入
+                            p='background-repeatプロパティの値を「space」にすると、背景画像が縦横に繰り返して表示されます。ただし、ボックス内にぴったりと収まるように、画像の間の余白サイズが自動的に調節されます。現在のところ、Firefox、Webkit系のブラウザは未対応です。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/124-B.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     padding: 45px 0;
+                                    |     border: solid 1px orange;
+                                    |     background-image: url(flower.png);
+                                    |     background-repeat: space;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     padding 45px 0
+                                    |     border solid 1px orange
+                                    |     background-image url(flower.png)
+                                    |     background-repeat space
+                                figcaption （stylus）
+                            p='背景画像の大きさがボックスの横幅または高さに対して1枚分しか収まらない場合は下のようになります。また、横幅と高さのどちらか一方でもボックスに収まらない場合には背景画像が表示されなくなります。'
+                            p='なお、background-sizeプロパティで背景画像の大きさを変更した場合は、変更後の大きさに対して「background-repeat: space」の処理が行われます。'
+                            br
+                            h4 SAMPLE C：ボックス内に収まるように大きさを調節
+                            p='background-repeatプロパティの値を「round」にした場合も、背景画像が縦横に繰り返して表示されます。ただし、ボックス内にぴったりと収まるように、画像が自動的に調節されます。現在、FirefoxとWebkit系のブラウザは未対応です。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/124-C.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     padding: 45px 0;
+                                    |     border: solid 1px orange;
+                                    |     background-image: url(flower.png);
+                                    |     background-repeat: round;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     padding 45px 0
+                                    |     border solid 1px orange
+                                    |     background-image url(flower.png)
+                                    |     background-repeat round
+                                figcaption （stylus）
+                            p='なお、画像サイズは縮小して調節されます。また、background-sizeプロパティで背景画像の大きさを変更した場合、変更後の大きさに対して「background-repeat: round」の処理が行われます。'
+                            hr
+                            h4 SAMPLE D：横方向と縦方向の表示スタイルを個別に指定
+                            p='縦方向と、横方向の表示スタイルを個別に指定する場合、それぞれの値を半角スペースで区切って指定します。たとえば、background-repeatプロパティの値を「repeat no-repeat」にすると、横方向を「repeat」、縦方向を「no-repeat」と指定したことになり、下のように表示されます。これは、background-repeatプロパティの値を「repeat-x」にした場合と同じ表示です。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/124-D.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     padding: 45px 0;
+                                    |     border: solid 1px orange;
+                                    |     background-image: url(flower.png);
+                                    |     background-repeat: repeat no-repeat;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     padding 45px 0
+                                    |     border solid 1px orange
+                                    |     background-image url(flower.png)
+                                    |     background-repeat repeat no-repeat
+                                figcaption （stylus）
+                            p='なお、「repeat-x」と「repeat-y」を横方向または縦方向の値として指定することはできません。'
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

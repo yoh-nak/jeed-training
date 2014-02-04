@@ -1,385 +1,385 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp; 垂直方向の行揃え
-						.panel-body
-							.alert.alert-info  垂直方向の行揃え
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							p='※ IE7以前は部分対応。'
-							pre
-								| vertical-align: 揃える位置
-							p
-								| 揃える位置・・・auto ／ baseline ／ sub ／ super ／ top ／ text-top ／ middle ／ bottom ／ text-bottom
-							table.table
-								tr
-									td 初期値
-									td baseline
-								tr
-									td 継承
-									td あり
-								tr
-									td 適用先
-									td インラインレベル要素／テーブルセル要素 
-								tr
-									td 比率
-									td 要素自信のline-heightに対する比率
-								tr
-									td モジュール
-									td Line Layout
-							p='vertical-alignプロパティを利用すると、行の中におけるインラインレベルボックスの垂直方向の位置揃えを指定することができます。'
-							p='vertical-alignプロパティは横書きの場合は垂直方向の、縦書きの場合は水平方向の位置揃えを指定します。'
-							hr
-							h4 SAMPLE A：垂直方向の位置揃え
-							p='下のサンプルは、親要素<p>の中に子要素となる複数の画像を1行に並べて表示したものです。vertical-alignプロパティの値は初期値「baseline」で処理されるため、子要素のベースラインが親要素のベースラインに揃えて表示されます。子要素が画像の場合、画像の下辺が揃えられます。'
-							p='親要素<p>のベースラインの位置は、<p>の中に文字を記述すると視覚的に確認することができます。また、ベースライン以外にも、親要素<p>のフォントおよび行の上辺と下辺の位置揃えの対象になります。ここでは<p>の文字サイズを100px、行の高さを200pxにしていますので、それぞれの位置は次のようになっています。なお、<p>の中に文字を記述していない場合でも、これらの位置は文字サイズ、行の高さ、フォントの種類によって決まります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/240-A.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;p&gt;&amp;Eacute;ex
-									| &lt;img src="f.png" alt=""&gt;
-									| …略...
-									| &lt;/p&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	| &amp;Eacute;ex
-									| 	img(src='f.png', alt='')
-									| 	| …略...
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p {
-									|     font-size: 100px;
-									|     line-height: 200px;
-									|     font-family: Georgia;
-									|     border: solid 2px orange;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	font-size 100px
-									| 	line-height 200px
-									| 	font-family Georgia
-									| 	border solid 2px orange
-								figcaption （Stylus）
-							p='vertical-alignプロパティを利用して、画像の垂直方向の位置揃えを調節します。指定する値によって位置揃えは次のように変わります。'
-							h4 baseline
-							p='子要素のベースラインを親要素のベースラインに揃えて表示します。このベースラインはCSS3では「alphabeticベースライン」と呼ばれます。'
-							h4 middle
-							p='子要素の中央を親要素のmiddleベースラインに揃えて表示します。middleベースラインは小文字のxの中央の高さに位置するラインです。'
-							h4 text-top/text-bottom
-							p='子要素の上辺と下辺を、親要素のフォントの上辺と下辺に揃えて表示します。子要素がテキストの場合、IEはそのテキストが構成するインラインボックスの上辺と下辺を、IE以外のブラウザはそのテキストが構成する拡張したインラインボックスの上辺と下辺を揃えて表示します。'
-							h4 top/bottom
-							p='子要素の上辺と下辺を、行の上辺と下辺に揃えます。子要素がテキストの場合、そのテキストが構成する拡張したインラインボックスの上辺と下辺を揃えます。IE7以前のバージョンは未対応です。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;p&gt;&amp;Eacute;ex
-									| &lt;img id="baseline" src="green.png" alt=""&gt;
-									| &lt;img id="middle" src="orange.png" alt=""&gt;
-									| &lt;img id="text-top" src="blue.png" alt=""&gt;
-									| &lt;img id="text-bottom" src="blue.png" alt=""&gt;
-									| &lt;img id="top" src="red.png" alt=""&gt;
-									| &lt;img id="bottom" src="red.png" alt=""&gt;
-									| …略...
-									| &lt;/p&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	| &amp;Eacute;ex
-									| 	img#baseline(src='green.png', alt='')
-									| 	img#middle(src='orange.png', alt='')
-									| 	img#text-top(src='blue.png', alt='')
-									| 	img#text-bottom(src='blue.png', alt='')
-									| 	img#top(src='red.png', alt='')
-									| 	img#bottom(src='red.png', alt='')
-									| 	| …略...
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p {
-									|     font-size: 100px;
-									|     line-height: 200px;
-									|     font-family: Georgia;
-									|     border: solid 2px orange;
-									| }
-									| #baseline {
-									|     vertical-align: baseline;
-									| }
-									| #middle {
-									|     vertical-align: middle;
-									| }
-									| #text-top {
-									|     vertical-align: text-top;
-									| }
-									| #text-bottom {
-									|     vertical-align: text-bottom;
-									| }
-									| #top {
-									|     vertical-align: top;
-									| }
-									| #bottom {
-									|     vertical-align: bottom;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	font-size 100px
-									| 	line-height 200px
-									| 	font-family Georgia
-									| 	border solid 2px orange
-									| 
-									| #baseline
-									| 	vertical-align baseline
-									| 
-									| #middle
-									| 	vertical-align middle
-									| 
-									| #text-top
-									| 	vertical-align text-top
-									| 
-									| #text-bottom
-									| 	vertical-align text-bottom
-									| 
-									| #top
-									| 	vertical-align top
-									| 
-									| #bottom
-									| 	vertical-align bottom
-								figcaption （Stylus）
-							hr
-							h4 文字の中央に画像を揃える
-							p='middleベースラインは文字の中央よりも少し下に位置します。そのため、<img>のvertical-alignプロパティの値を「middle」にしても、文字の中央に画像を揃えることはできません。なお、CSS3では文字の中央に位置するcentralベースラインに揃えて表示する「central」という新しい値が提案されています。ただし、各ブラウザは未対応となっています。'
-							hr
-							h4 より細かな位置揃えの指定
-							p='CSS3ではvertical-alignプロパティによる位置揃えを、alignment-baseline、alignment-adjust、baseline-shift、dominant-baselineの4つのプロパティによってより細かく指定する方法が提案されています。これにより、さまざまなベースラインを利用した位置揃えもできるようになります。また、ドロップキャップを指定するdorop-initial-sizeやdrop-initial-valueといったプロパティも提案されていますが、各ブラウザは未対応です。'
-							hr
-							h4 SAMPLE B：ベースラインからの位置を指定
-							p='vertical-alignプロパティでは、数値や比率（%）でベースラインからの位置を指定することもできます。たとえば、下のサンプルでは3つの画像を並べ、順に値を「0」、「50px」、「-50px」にしています。「0」ではベースラインに、「50px」ではベースラインから50ピクセル上に、「-50px」ではベースラインから50ピクセル下に表示されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/240-B.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									&lt;p&gt;&amp;Eacute;ex
-									&lt;img id="t01" src="green.png" alt=""&gt;
-									&lt;img id="t02" src="orange.png" alt=""&gt;
-									&lt;img id="t03" src="blue.png" alt=""&gt;
-									…略...
-									&lt;/p&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	| &amp;Eacute;ex
-									| 	img#t01(src='green.png', alt='')
-									| 	img#t02(src='orange.png', alt='')
-									| 	img#t03(src='blue.png', alt='')
-									| 	| …略...
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p {
-									|     font-size: 100px;
-									|     line-height: 200px;
-									|     font-family: Georgia;
-									|     border: solid 2px orange;
-									| }
-									| #t01 {
-									|     vertical-align: 0;
-									| }
-									| #t02 {
-									|     vertical-align: 50px;
-									| }
-									| #t03 {
-									|     vertical-align: -50px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	font-size 100px
-									| 	line-height 200px
-									| 	font-family Georgia
-									| 	border solid 2px orange
-									| 
-									| #t01
-									| 	vertical-align 0
-									| 
-									| #t02
-									| 	vertical-align 50px
-									| 
-									| #t03
-									| 	vertical-align -50px
-								figcaption （Stylus）
-							p='比率（%）で指定すると、line-heightの値に対する比率として処理されます。サンプルの場合、<img>のline-heightプロパティの値は親要素<p>のline-heightの値が継承され、「200px」となります。そのため、vertical-alignプロパティの値を「25%」にすると「50px」として処理されます。'
-							hr
-							h4 SAMPLE C：上付き・下付きの位置に表示
-							p='vertical-alignプロパティの値を「super」や「sup」にすると、親要素内に直接記述した文字に対して、上付き・下付きの位置に表示することができます。ここでは<span>でマークアップした「2」を下付きの位置に、「※1」を上付きの位置に表示しています。'
-							p='なお、上付き・下付きの位置に表示する文字は、font-sizeプロパティで文字を小さくしています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/240-C.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;p&gt;H&lt;span id="sub"&gt;2&lt;/span&gt;O&lt;span id="super"&gt;※1&lt;/span&gt;
-									| &lt;/p&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	| H
-									| 	span#sub 2
-									| 	| O
-									| 	span#super ※1
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p {
-									|     font-size: 50px;
-									|     border: solid 2px orange;
-									|     text-align: center;
-									| }
-									| #super {
-									|     vertical-align: super;
-									|     color: red;
-									|     font-size: 25px;
-									| }
-									| #sub {
-									|     vertical-align: sub;
-									|     font-size: 40px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| p
-									| 	font-size 50px
-									| 	border solid 2px orange
-									| 	text-align center
-									| 
-									| #super
-									| 	vertical-align super
-									| 	color red
-									| 	font-size 25px
-									| 
-									| #sub
-									| 	vertical-align sub
-									| 	font-size 40px
-								figcaption （Stylus）
-							hr
-							h4 SAMPLE D：テーブルのセル内の位置揃え
-							p='vertical-alignプロパティデは、テーブルのセル内にコンテンツの位置揃えを指定することもできます。テーブルのセルを構成する<th>や<td>のvertical-alignプロパティの値はデフォルトスタイルシートによって「middle」になりますので、セル内のコンテンツは下のように垂直方向の中央に揃えて表示されます。'
-							h4 baseline
-							p='vertical-alignプロパティの値を「baseline」にすると、各セルの1行目のベースラインが揃えて表示されます。このとき、行の高さが最も高いセルのベースラインに揃えられるため、サンプルでは2つ目のセルのベースラインに揃えた表示になります。'
-							h4 top/middle/bottom
-							p='セル内のコンテンツがセルの上辺・中央・下辺に揃えて表示されます。セルの上辺と下辺はセル内に挿入したパディングの内側となります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/240-D.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;table&gt;
-									| …略…
-									| &lt;tr&gt;
-									| &lt;td id="baseline01"&gt;&lt;img src="green.png" alt=""&gt; xyz&lt;br&gt;テーブルのコンテンツを記述。&lt;/td&gt;
-									| &lt;td id="baseline02"&gt;&lt;img src="green.png" alt=""&gt; xyz&lt;/td&gt;
-									| &lt;td id="top"&gt;&lt;img src="orange.png" alt=""&gt;&lt;/td&gt;
-									| &lt;td id="middle"&gt;&lt;img src="blue.png" alt=""&gt;&lt;/td&gt;
-									| &lt;td id="bottom"&gt;&lt;img src="red.png" alt=""&gt;&lt;/td&gt;
-									| &lt;/tr&gt;
-									| &lt;/table&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| table
-									| 	| …略…
-									| 	tr
-									| 		td#baseline01
-									| 			img(src='green.png', alt='')
-									| 			| xyz
-									| 			br
-									| 			| テーブルのコンテンツを記述。
-									| 		td#baseline02
-									| 			img(src='green.png', alt='')
-									| 			| xyz
-									| 		td#top
-									| 			img(src='orange.png', alt='')
-									| 			td#middle
-									| 			img(src='blue.png', alt='')
-									| 		td#bottom
-									| 			img(src='red.png', alt='')
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| td, th {
-									|     padding: 10px;
-									| }
-									| #baseline01, #baselien02 {
-									|     vertical-align: baseline;
-									| }
-									| #top {
-									|     vertical-align: top;
-									| }
-									| #middle {
-									|     vertical-align: middle;
-									| }
-									| #bottom {
-									|     vertical-align: bottom
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| td, th
-									| 	padding 10px
-									| 
-									| #baseline01, #baselien02
-									| 	vertical-align baseline
-									| 
-									| #top
-									| 	vertical-align top
-									| 
-									| #middle
-									| 	vertical-align middle
-									| 
-									| #bottom
-									| 	vertical-align bottom
-								figcaption （Stylus）
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp; 垂直方向の行揃え
+                        .panel-body
+                            .alert.alert-info  垂直方向の行揃え
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            p='※ IE7以前は部分対応。'
+                            pre
+                                | vertical-align: 揃える位置
+                            p
+                                | 揃える位置・・・auto ／ baseline ／ sub ／ super ／ top ／ text-top ／ middle ／ bottom ／ text-bottom
+                            table.table
+                                tr
+                                    td 初期値
+                                    td baseline
+                                tr
+                                    td 継承
+                                    td あり
+                                tr
+                                    td 適用先
+                                    td インラインレベル要素／テーブルセル要素 
+                                tr
+                                    td 比率
+                                    td 要素自信のline-heightに対する比率
+                                tr
+                                    td モジュール
+                                    td Line Layout
+                            p='vertical-alignプロパティを利用すると、行の中におけるインラインレベルボックスの垂直方向の位置揃えを指定することができます。'
+                            p='vertical-alignプロパティは横書きの場合は垂直方向の、縦書きの場合は水平方向の位置揃えを指定します。'
+                            hr
+                            h4 SAMPLE A：垂直方向の位置揃え
+                            p='下のサンプルは、親要素<p>の中に子要素となる複数の画像を1行に並べて表示したものです。vertical-alignプロパティの値は初期値「baseline」で処理されるため、子要素のベースラインが親要素のベースラインに揃えて表示されます。子要素が画像の場合、画像の下辺が揃えられます。'
+                            p='親要素<p>のベースラインの位置は、<p>の中に文字を記述すると視覚的に確認することができます。また、ベースライン以外にも、親要素<p>のフォントおよび行の上辺と下辺の位置揃えの対象になります。ここでは<p>の文字サイズを100px、行の高さを200pxにしていますので、それぞれの位置は次のようになっています。なお、<p>の中に文字を記述していない場合でも、これらの位置は文字サイズ、行の高さ、フォントの種類によって決まります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/240-A.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;p&gt;&amp;Eacute;ex
+                                    | &lt;img src="f.png" alt=""&gt;
+                                    | …略...
+                                    | &lt;/p&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     | &amp;Eacute;ex
+                                    |     img(src='f.png', alt='')
+                                    |     | …略...
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p {
+                                    |     font-size: 100px;
+                                    |     line-height: 200px;
+                                    |     font-family: Georgia;
+                                    |     border: solid 2px orange;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     font-size 100px
+                                    |     line-height 200px
+                                    |     font-family Georgia
+                                    |     border solid 2px orange
+                                figcaption （Stylus）
+                            p='vertical-alignプロパティを利用して、画像の垂直方向の位置揃えを調節します。指定する値によって位置揃えは次のように変わります。'
+                            h4 baseline
+                            p='子要素のベースラインを親要素のベースラインに揃えて表示します。このベースラインはCSS3では「alphabeticベースライン」と呼ばれます。'
+                            h4 middle
+                            p='子要素の中央を親要素のmiddleベースラインに揃えて表示します。middleベースラインは小文字のxの中央の高さに位置するラインです。'
+                            h4 text-top/text-bottom
+                            p='子要素の上辺と下辺を、親要素のフォントの上辺と下辺に揃えて表示します。子要素がテキストの場合、IEはそのテキストが構成するインラインボックスの上辺と下辺を、IE以外のブラウザはそのテキストが構成する拡張したインラインボックスの上辺と下辺を揃えて表示します。'
+                            h4 top/bottom
+                            p='子要素の上辺と下辺を、行の上辺と下辺に揃えます。子要素がテキストの場合、そのテキストが構成する拡張したインラインボックスの上辺と下辺を揃えます。IE7以前のバージョンは未対応です。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;p&gt;&amp;Eacute;ex
+                                    | &lt;img id="baseline" src="green.png" alt=""&gt;
+                                    | &lt;img id="middle" src="orange.png" alt=""&gt;
+                                    | &lt;img id="text-top" src="blue.png" alt=""&gt;
+                                    | &lt;img id="text-bottom" src="blue.png" alt=""&gt;
+                                    | &lt;img id="top" src="red.png" alt=""&gt;
+                                    | &lt;img id="bottom" src="red.png" alt=""&gt;
+                                    | …略...
+                                    | &lt;/p&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     | &amp;Eacute;ex
+                                    |     img#baseline(src='green.png', alt='')
+                                    |     img#middle(src='orange.png', alt='')
+                                    |     img#text-top(src='blue.png', alt='')
+                                    |     img#text-bottom(src='blue.png', alt='')
+                                    |     img#top(src='red.png', alt='')
+                                    |     img#bottom(src='red.png', alt='')
+                                    |     | …略...
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p {
+                                    |     font-size: 100px;
+                                    |     line-height: 200px;
+                                    |     font-family: Georgia;
+                                    |     border: solid 2px orange;
+                                    | }
+                                    | #baseline {
+                                    |     vertical-align: baseline;
+                                    | }
+                                    | #middle {
+                                    |     vertical-align: middle;
+                                    | }
+                                    | #text-top {
+                                    |     vertical-align: text-top;
+                                    | }
+                                    | #text-bottom {
+                                    |     vertical-align: text-bottom;
+                                    | }
+                                    | #top {
+                                    |     vertical-align: top;
+                                    | }
+                                    | #bottom {
+                                    |     vertical-align: bottom;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     font-size 100px
+                                    |     line-height 200px
+                                    |     font-family Georgia
+                                    |     border solid 2px orange
+                                    | 
+                                    | #baseline
+                                    |     vertical-align baseline
+                                    | 
+                                    | #middle
+                                    |     vertical-align middle
+                                    | 
+                                    | #text-top
+                                    |     vertical-align text-top
+                                    | 
+                                    | #text-bottom
+                                    |     vertical-align text-bottom
+                                    | 
+                                    | #top
+                                    |     vertical-align top
+                                    | 
+                                    | #bottom
+                                    |     vertical-align bottom
+                                figcaption （Stylus）
+                            hr
+                            h4 文字の中央に画像を揃える
+                            p='middleベースラインは文字の中央よりも少し下に位置します。そのため、<img>のvertical-alignプロパティの値を「middle」にしても、文字の中央に画像を揃えることはできません。なお、CSS3では文字の中央に位置するcentralベースラインに揃えて表示する「central」という新しい値が提案されています。ただし、各ブラウザは未対応となっています。'
+                            hr
+                            h4 より細かな位置揃えの指定
+                            p='CSS3ではvertical-alignプロパティによる位置揃えを、alignment-baseline、alignment-adjust、baseline-shift、dominant-baselineの4つのプロパティによってより細かく指定する方法が提案されています。これにより、さまざまなベースラインを利用した位置揃えもできるようになります。また、ドロップキャップを指定するdorop-initial-sizeやdrop-initial-valueといったプロパティも提案されていますが、各ブラウザは未対応です。'
+                            hr
+                            h4 SAMPLE B：ベースラインからの位置を指定
+                            p='vertical-alignプロパティでは、数値や比率（%）でベースラインからの位置を指定することもできます。たとえば、下のサンプルでは3つの画像を並べ、順に値を「0」、「50px」、「-50px」にしています。「0」ではベースラインに、「50px」ではベースラインから50ピクセル上に、「-50px」ではベースラインから50ピクセル下に表示されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/240-B.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    &lt;p&gt;&amp;Eacute;ex
+                                    &lt;img id="t01" src="green.png" alt=""&gt;
+                                    &lt;img id="t02" src="orange.png" alt=""&gt;
+                                    &lt;img id="t03" src="blue.png" alt=""&gt;
+                                    …略...
+                                    &lt;/p&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     | &amp;Eacute;ex
+                                    |     img#t01(src='green.png', alt='')
+                                    |     img#t02(src='orange.png', alt='')
+                                    |     img#t03(src='blue.png', alt='')
+                                    |     | …略...
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p {
+                                    |     font-size: 100px;
+                                    |     line-height: 200px;
+                                    |     font-family: Georgia;
+                                    |     border: solid 2px orange;
+                                    | }
+                                    | #t01 {
+                                    |     vertical-align: 0;
+                                    | }
+                                    | #t02 {
+                                    |     vertical-align: 50px;
+                                    | }
+                                    | #t03 {
+                                    |     vertical-align: -50px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     font-size 100px
+                                    |     line-height 200px
+                                    |     font-family Georgia
+                                    |     border solid 2px orange
+                                    | 
+                                    | #t01
+                                    |     vertical-align 0
+                                    | 
+                                    | #t02
+                                    |     vertical-align 50px
+                                    | 
+                                    | #t03
+                                    |     vertical-align -50px
+                                figcaption （Stylus）
+                            p='比率（%）で指定すると、line-heightの値に対する比率として処理されます。サンプルの場合、<img>のline-heightプロパティの値は親要素<p>のline-heightの値が継承され、「200px」となります。そのため、vertical-alignプロパティの値を「25%」にすると「50px」として処理されます。'
+                            hr
+                            h4 SAMPLE C：上付き・下付きの位置に表示
+                            p='vertical-alignプロパティの値を「super」や「sup」にすると、親要素内に直接記述した文字に対して、上付き・下付きの位置に表示することができます。ここでは<span>でマークアップした「2」を下付きの位置に、「※1」を上付きの位置に表示しています。'
+                            p='なお、上付き・下付きの位置に表示する文字は、font-sizeプロパティで文字を小さくしています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/240-C.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;p&gt;H&lt;span id="sub"&gt;2&lt;/span&gt;O&lt;span id="super"&gt;※1&lt;/span&gt;
+                                    | &lt;/p&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     | H
+                                    |     span#sub 2
+                                    |     | O
+                                    |     span#super ※1
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p {
+                                    |     font-size: 50px;
+                                    |     border: solid 2px orange;
+                                    |     text-align: center;
+                                    | }
+                                    | #super {
+                                    |     vertical-align: super;
+                                    |     color: red;
+                                    |     font-size: 25px;
+                                    | }
+                                    | #sub {
+                                    |     vertical-align: sub;
+                                    |     font-size: 40px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | p
+                                    |     font-size 50px
+                                    |     border solid 2px orange
+                                    |     text-align center
+                                    | 
+                                    | #super
+                                    |     vertical-align super
+                                    |     color red
+                                    |     font-size 25px
+                                    | 
+                                    | #sub
+                                    |     vertical-align sub
+                                    |     font-size 40px
+                                figcaption （Stylus）
+                            hr
+                            h4 SAMPLE D：テーブルのセル内の位置揃え
+                            p='vertical-alignプロパティデは、テーブルのセル内にコンテンツの位置揃えを指定することもできます。テーブルのセルを構成する<th>や<td>のvertical-alignプロパティの値はデフォルトスタイルシートによって「middle」になりますので、セル内のコンテンツは下のように垂直方向の中央に揃えて表示されます。'
+                            h4 baseline
+                            p='vertical-alignプロパティの値を「baseline」にすると、各セルの1行目のベースラインが揃えて表示されます。このとき、行の高さが最も高いセルのベースラインに揃えられるため、サンプルでは2つ目のセルのベースラインに揃えた表示になります。'
+                            h4 top/middle/bottom
+                            p='セル内のコンテンツがセルの上辺・中央・下辺に揃えて表示されます。セルの上辺と下辺はセル内に挿入したパディングの内側となります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/240-D.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;table&gt;
+                                    | …略…
+                                    | &lt;tr&gt;
+                                    | &lt;td id="baseline01"&gt;&lt;img src="green.png" alt=""&gt; xyz&lt;br&gt;テーブルのコンテンツを記述。&lt;/td&gt;
+                                    | &lt;td id="baseline02"&gt;&lt;img src="green.png" alt=""&gt; xyz&lt;/td&gt;
+                                    | &lt;td id="top"&gt;&lt;img src="orange.png" alt=""&gt;&lt;/td&gt;
+                                    | &lt;td id="middle"&gt;&lt;img src="blue.png" alt=""&gt;&lt;/td&gt;
+                                    | &lt;td id="bottom"&gt;&lt;img src="red.png" alt=""&gt;&lt;/td&gt;
+                                    | &lt;/tr&gt;
+                                    | &lt;/table&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | table
+                                    |     | …略…
+                                    |     tr
+                                    |         td#baseline01
+                                    |             img(src='green.png', alt='')
+                                    |             | xyz
+                                    |             br
+                                    |             | テーブルのコンテンツを記述。
+                                    |         td#baseline02
+                                    |             img(src='green.png', alt='')
+                                    |             | xyz
+                                    |         td#top
+                                    |             img(src='orange.png', alt='')
+                                    |             td#middle
+                                    |             img(src='blue.png', alt='')
+                                    |         td#bottom
+                                    |             img(src='red.png', alt='')
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | td, th {
+                                    |     padding: 10px;
+                                    | }
+                                    | #baseline01, #baselien02 {
+                                    |     vertical-align: baseline;
+                                    | }
+                                    | #top {
+                                    |     vertical-align: top;
+                                    | }
+                                    | #middle {
+                                    |     vertical-align: middle;
+                                    | }
+                                    | #bottom {
+                                    |     vertical-align: bottom
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | td, th
+                                    |     padding 10px
+                                    | 
+                                    | #baseline01, #baselien02
+                                    |     vertical-align baseline
+                                    | 
+                                    | #top
+                                    |     vertical-align top
+                                    | 
+                                    | #middle
+                                    |     vertical-align middle
+                                    | 
+                                    | #bottom
+                                    |     vertical-align bottom
+                                figcaption （Stylus）
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

@@ -1,240 +1,240 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;2Dトランスフォームの原点
-						.panel-body
-							.alert.alert-info 2Dトランスフォームの原点
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							p IE8以前は未対応。IE9は-ms-で対応。
-							pre
-								| transform-origin: 横方向の位置 縦方向の位置
-							p
-								| 横（左辺からの距離）・・・数値 ／ 比率 ／ left ／ center ／ right<br>
-								| 縦（上辺からの距離）・・・数値 ／ 比率 ／ top ／ center ／ bottom
-							table.table
-								tr
-									td 初期値
-									td 50% 50%
-								tr
-									td 継承
-									td なし
-								tr
-									td 適用先
-									td transformプロパティと同じ
-								tr
-									td 比率
-									td ボックスの横幅と高さに対する比率
-								tr
-									td モジュール
-									td Transforms
-							p='transform-originプロパティを利用すると、transformプロパティで変形処理を行うときのローカル座標系の原点の位置を指定することができます。'
-							p='たとえば、下のサンプルは<span>でマークアップした語句と<img>で挿入した画像を横に並べて表示したものです。<img>のtransformプロパティの値を「rotate(10deg)」にすると10度の回転が行われます。このとき、transform-originプロパティの値は初期値の「50% 50%」で処理されますので、原点の位置は<img>の構成するボックスの左辺から50%、上辺から50%の位置にセットされます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/05/282-01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;span&gt;SANDWICHES&lt;/span&gt;&lt;img src="sandwiches.jpg" alt="サンドイッチ" width="200" height="120"&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| span
-									| 	| SANDWICHES
-									| 	img(src='sandwiches.jpg', alt='サンドイッチ', width='200', height='120')
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| span {
-									|     width: 200px;
-									|     line-height: 120px;
-									|     background-color: greenyellow;
-									|     display: inline-block;
-									| }
-									| img {
-									|     vertical-align: bottom;
-									|     -webkit-transform: rotate(10deg);
-									|     -ms-transform: rotate(10deg);
-									|     transform: rotate(10deg);
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| span
-									| 	width 200px
-									| 	line-height 120px
-									| 	background-color greenyellow
-									| 	display inline-block
-									| 
-									| img
-									| 	vertical-align bottom
-									| 	-webkit-transform rotate(10deg)
-									| 	-ms-transform rotate(10deg)
-									| 	transform rotate(10deg)
-								figcaption （Stylus）
-							p='transform-originプロパティの値「0% 100%」にすると、ボックスの左下が原点になります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/05/282-02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| span {
-									|     width: 200px;
-									|     line-height: 120px;
-									|     background-color: greenyellow;
-									|     display: inline-block;
-									| }
-									| img {
-									|     vertical-align: bottom;
-									|     -webkit-transform: rotate(10deg);
-									|     -ms-transform: rotate(10deg);
-									|     transform: rotate(10deg);
-									| 
-									|     -webkit-transform-origin: 0% 100%;
-									|     -ms-transform-origin: 0% 100%;
-									|     transform-origin: 0% 100%;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| span
-									| 	width 200px
-									| 	line-height 120px
-									| 	background-color greenyellow
-									| 	display inline-block
-									| 
-									| img
-									| 	vertical-align bottom
-									| 	-webkit-transform rotate(10deg)
-									| 	-ms-transform rotate(10deg)
-									| 	transform rotate(10deg)
-									| 	-webkit-transform-origin 0% 100%
-									| 	-ms-transform-origin 0% 100%
-									| 	transform-origin 0% 100%
-								figcaption （Stylus）
-							p='特定の比率の値は以下のキーワードに置き換えて指定することが可能です。'
-							table.table
-								tr
-									th 
-									th 比率
-									th キーワード
-									th 位置
-								tr
-									td(rowspan='3') 左辺からの距離
-									td 0%
-									td left
-									td 左
-								tr
-									td 50%
-									td center
-									td 中央
-								tr
-									td 100%
-									td right
-									td 右
-								tr
-									td(rowspan='3') 0% 
-									td top
-									td 上
-								tr
-									td 50%
-									td center
-									td 中央
-								tr
-									td 100%
-									td bottom
-									td 下
-							p='原点の位置はピクセルで指定することもできます。たとえば、「50px 30px」と指定すると、ボックスの左辺から50ピクセル、上辺から30ピクセルの位置が原点となります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/05/282-03.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| span {
-									|     width: 200px;
-									|     line-height: 120px;
-									|     background-color: greenyellow;
-									|     display: inline-block;
-									| }
-									| img {
-									|     vertical-align: bottom;
-									|     -webkit-transform: rotate(10deg);
-									|     -ms-transform: rotate(10deg);
-									|     transform: rotate(10deg);
-									| 
-									|     -webkit-transform-origin: 50px 30px;
-									|     -ms-transform-origin: 50px 30px;
-									|     transform-origin: 50px 30px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| span
-									| 	width 200px
-									| 	line-height 120px
-									| 	background-color greenyellow
-									| 	display inline-block
-									| 
-									| img
-									| 	vertical-align bottom
-									| 	-webkit-transform rotate(10deg)
-									| 	-ms-transform rotate(10deg)
-									| 	transform rotate(10deg)
-									| 	-webkit-transform-origin 50px 30px
-									| 	-ms-transform-origin 50px 30px
-									| 	transform-origin 50px 30px
-								figcaption （Stylus）
-							p='横方向と縦方向の位置は、比率、キーワード、ピクセル数による値を組み合わせて指定することもできます。たとえば、画像の構成するボックスの大きさは横幅200ピクセル、高さ120ピクセルとなっていますので、「50% 50%」の指定は「100% 50%」や「center 60px」と記述しても同じ処理結果となります。'
-							p='また、縦方向の位置の値は省略することができます。たとえば、「100px」と指定すると、「100px 50%」と指定したものとして処理されます。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| img {
-									|     transform-origin: 50% 50%;
-									| }
-							figure
-								pre(class='prettyprint linenums:1')
-									| img {
-									|     transform-origin: 100px 50%;
-									| }
-							figure
-								pre(class='prettyprint linenums:1')
-									| img {
-									|     transform-origin: center 60px;
-									| }
-							figure
-								pre(class='prettyprint linenums:1')
-									| img {
-									|     transform-origin: 100px;
-									| }
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;2Dトランスフォームの原点
+                        .panel-body
+                            .alert.alert-info 2Dトランスフォームの原点
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            p IE8以前は未対応。IE9は-ms-で対応。
+                            pre
+                                | transform-origin: 横方向の位置 縦方向の位置
+                            p
+                                | 横（左辺からの距離）・・・数値 ／ 比率 ／ left ／ center ／ right<br>
+                                | 縦（上辺からの距離）・・・数値 ／ 比率 ／ top ／ center ／ bottom
+                            table.table
+                                tr
+                                    td 初期値
+                                    td 50% 50%
+                                tr
+                                    td 継承
+                                    td なし
+                                tr
+                                    td 適用先
+                                    td transformプロパティと同じ
+                                tr
+                                    td 比率
+                                    td ボックスの横幅と高さに対する比率
+                                tr
+                                    td モジュール
+                                    td Transforms
+                            p='transform-originプロパティを利用すると、transformプロパティで変形処理を行うときのローカル座標系の原点の位置を指定することができます。'
+                            p='たとえば、下のサンプルは<span>でマークアップした語句と<img>で挿入した画像を横に並べて表示したものです。<img>のtransformプロパティの値を「rotate(10deg)」にすると10度の回転が行われます。このとき、transform-originプロパティの値は初期値の「50% 50%」で処理されますので、原点の位置は<img>の構成するボックスの左辺から50%、上辺から50%の位置にセットされます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/05/282-01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;span&gt;SANDWICHES&lt;/span&gt;&lt;img src="sandwiches.jpg" alt="サンドイッチ" width="200" height="120"&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | span
+                                    |     | SANDWICHES
+                                    |     img(src='sandwiches.jpg', alt='サンドイッチ', width='200', height='120')
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | span {
+                                    |     width: 200px;
+                                    |     line-height: 120px;
+                                    |     background-color: greenyellow;
+                                    |     display: inline-block;
+                                    | }
+                                    | img {
+                                    |     vertical-align: bottom;
+                                    |     -webkit-transform: rotate(10deg);
+                                    |     -ms-transform: rotate(10deg);
+                                    |     transform: rotate(10deg);
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | span
+                                    |     width 200px
+                                    |     line-height 120px
+                                    |     background-color greenyellow
+                                    |     display inline-block
+                                    | 
+                                    | img
+                                    |     vertical-align bottom
+                                    |     -webkit-transform rotate(10deg)
+                                    |     -ms-transform rotate(10deg)
+                                    |     transform rotate(10deg)
+                                figcaption （Stylus）
+                            p='transform-originプロパティの値「0% 100%」にすると、ボックスの左下が原点になります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/05/282-02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | span {
+                                    |     width: 200px;
+                                    |     line-height: 120px;
+                                    |     background-color: greenyellow;
+                                    |     display: inline-block;
+                                    | }
+                                    | img {
+                                    |     vertical-align: bottom;
+                                    |     -webkit-transform: rotate(10deg);
+                                    |     -ms-transform: rotate(10deg);
+                                    |     transform: rotate(10deg);
+                                    | 
+                                    |     -webkit-transform-origin: 0% 100%;
+                                    |     -ms-transform-origin: 0% 100%;
+                                    |     transform-origin: 0% 100%;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | span
+                                    |     width 200px
+                                    |     line-height 120px
+                                    |     background-color greenyellow
+                                    |     display inline-block
+                                    | 
+                                    | img
+                                    |     vertical-align bottom
+                                    |     -webkit-transform rotate(10deg)
+                                    |     -ms-transform rotate(10deg)
+                                    |     transform rotate(10deg)
+                                    |     -webkit-transform-origin 0% 100%
+                                    |     -ms-transform-origin 0% 100%
+                                    |     transform-origin 0% 100%
+                                figcaption （Stylus）
+                            p='特定の比率の値は以下のキーワードに置き換えて指定することが可能です。'
+                            table.table
+                                tr
+                                    th 
+                                    th 比率
+                                    th キーワード
+                                    th 位置
+                                tr
+                                    td(rowspan='3') 左辺からの距離
+                                    td 0%
+                                    td left
+                                    td 左
+                                tr
+                                    td 50%
+                                    td center
+                                    td 中央
+                                tr
+                                    td 100%
+                                    td right
+                                    td 右
+                                tr
+                                    td(rowspan='3') 0% 
+                                    td top
+                                    td 上
+                                tr
+                                    td 50%
+                                    td center
+                                    td 中央
+                                tr
+                                    td 100%
+                                    td bottom
+                                    td 下
+                            p='原点の位置はピクセルで指定することもできます。たとえば、「50px 30px」と指定すると、ボックスの左辺から50ピクセル、上辺から30ピクセルの位置が原点となります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/05/282-03.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | span {
+                                    |     width: 200px;
+                                    |     line-height: 120px;
+                                    |     background-color: greenyellow;
+                                    |     display: inline-block;
+                                    | }
+                                    | img {
+                                    |     vertical-align: bottom;
+                                    |     -webkit-transform: rotate(10deg);
+                                    |     -ms-transform: rotate(10deg);
+                                    |     transform: rotate(10deg);
+                                    | 
+                                    |     -webkit-transform-origin: 50px 30px;
+                                    |     -ms-transform-origin: 50px 30px;
+                                    |     transform-origin: 50px 30px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | span
+                                    |     width 200px
+                                    |     line-height 120px
+                                    |     background-color greenyellow
+                                    |     display inline-block
+                                    | 
+                                    | img
+                                    |     vertical-align bottom
+                                    |     -webkit-transform rotate(10deg)
+                                    |     -ms-transform rotate(10deg)
+                                    |     transform rotate(10deg)
+                                    |     -webkit-transform-origin 50px 30px
+                                    |     -ms-transform-origin 50px 30px
+                                    |     transform-origin 50px 30px
+                                figcaption （Stylus）
+                            p='横方向と縦方向の位置は、比率、キーワード、ピクセル数による値を組み合わせて指定することもできます。たとえば、画像の構成するボックスの大きさは横幅200ピクセル、高さ120ピクセルとなっていますので、「50% 50%」の指定は「100% 50%」や「center 60px」と記述しても同じ処理結果となります。'
+                            p='また、縦方向の位置の値は省略することができます。たとえば、「100px」と指定すると、「100px 50%」と指定したものとして処理されます。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | img {
+                                    |     transform-origin: 50% 50%;
+                                    | }
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | img {
+                                    |     transform-origin: 100px 50%;
+                                    | }
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | img {
+                                    |     transform-origin: center 60px;
+                                    | }
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | img {
+                                    |     transform-origin: 100px;
+                                    | }
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

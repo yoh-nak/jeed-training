@@ -1,335 +1,335 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp; テーブルのレイアウト方法
-						.panel-body
-							.alert.alert-info  テーブルのレイアウト方法
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							pre
-								| table-layout: レイアウト方法
-							p
-								| レイアウト方法・・・auto ／ fixed
-							table.table
-								tr
-									td 初期値
-									td auto
-								tr
-									td 継承
-									td なし
-								tr
-									td 適用先
-									td displayの値が「table」または「inline-table」の要素
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td Tables
-							p='table-layoutプロパティでテーブルのレイアウト方法を指定すると、各列の横幅を算出する方法を変更することができます。自動レイアウトはすべてのセルのデータを読み込み、最も大きなセルに合わせてよ小幅を決定しますが、固定レイアウトでは1行目のセルのデータのみで横幅を決定します。そのため、固定レイアウトを行うと表示を速くする効果があります。'
-							table.table
-								tr
-									th 値
-									th レイアウト方法
-								tr
-									td auto
-									td 自動レイアウト
-								tr
-									td fixed
-									td 固定レイアウト
-							hr
-							h4 SAMPLE A：セルの横幅の決定
-							p='下のサンプルはテーブル全体の横幅を500pxにしたものです。1行・1列の位置のセル（ピンク）は100px、2行・1列の位置のセル（緑）は200pxの横幅に指定しています。'
-							p='このとき、どちらの横幅で表示されるかは、table-layoutプロパティの値によって変わります。'
-							p='まず、table-layoutプロパティの値が初期値の「auto」で処理された場合、自動レイアウトで処理されます。この場合、すべてのセルのデータが読み込まれ、最も大きなセルに合わせて各列の横幅が決まります。そのため、サンプルの1列目の横幅は200pxになります。'
-							p='なお、2列目については横幅を指定していませんので、テーブル全体から1列目の横幅や罫線の太さを引いた横幅で表示させます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/269-A01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;table&gt;
-									| &lt;tr&gt;
-									| &lt;th id="head01"&gt;ハムサンド&lt;/th&gt;
-									| &lt;td&gt;自家製ハムとゴーダチーズに、新鮮なレタスをはさんだサンドイッチです。トマトまたはマヨネーズソースが選べます。&lt;/td&gt;
-									| &lt;/tr&gt;
-									| &lt;tr&gt;
-									| &lt;th id="head02"&gt;野菜サンド
-									| &lt;/th&gt;
-									| &lt;td&gt;自家製ハムに、トマトやレタス、キュウリ、ブロッコリなど新鮮な野菜をたっぷりはさんだサンドイッチです。さっぱりイタリアンドレッシングソースもあります。
-									| &lt;/td&gt;
-									| &lt;/tr&gt;
-									| &lt;/table&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| table
-									| 	tr
-									| 		th#head01 ハムサンド
-									| 		td 自家製ハムとゴーダチーズに、新鮮なレタスをはさんだサンドイッチです。トマトまたはマヨネーズソースが選べます。
-									| 	tr
-									| 		th#head02
-									| 			| 野菜サンド
-									| 		td
-									| 			| 自家製ハムに、トマトやレタス、キュウリ、ブロッコリなど新鮮な野菜をたっぷりはさんだサンドイッチです。さっぱりイタリアンドレッシングソースもあります。
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| table {
-									|     width: 500px;
-									|     table-layout: auto;
-									| }
-									| #head01 {
-									|     width: 100px;
-									|     background-color: pink;
-									| }
-									| #head02 {
-									|     width: 200px;
-									|     background-color: greenyellow;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| table
-									| 	width 500px
-									| 	table-layout auto
-									| 
-									| #head01
-									| 	width 100px
-									| 	background-color pink
-									| 
-									| #head02
-									| 	width 200px
-									| 	background-color greenyellow
-								figcaption （Stylus）
-							p='table-layoutプロパティの値を「fixed」にすると、固定レイアウトで処理することができます。この場合、1列目の横幅は100pxになります。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/269-A02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| table {
-									|     width: 500px;
-									|     table-layout: auto;
-									| }
-									| #head01 {
-									|     width: 100px;
-									|     background-color: pink;
-									| }
-									| #head02 {
-									|     width: 200px;
-									|     background-color: greenyellow;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| table
-									| 	width 500px
-									| 	table-layout auto
-									| 
-									| #head01
-									| 	width 100px
-									| 	background-color pink
-									| 
-									| #head02
-									| 	width 200px
-									| 	background-color greenyellow
-								figcaption （Stylus）
-							p='なお、テーブル全体の横幅が指定されていない場合、table-layoutプロパティの値を「fixed」にしても、「auto」として処理され、自動レイアウトが行われます。'
-							hr
-							h4 SAMPLE B：横幅の大きなコンテンツを表示した場合
-							p='セルの中に大きなコンテンツがある場合も、table-layoutプロパティの値によって表示方法が変わります。たとえば、SAMPLE Aのセルの中に横幅300ピクセルの画像を挿入すると下のようになります。'
-							p='table-layoutプロパティの値が「auto」の場合、画像をセルに収めて表示するため、widthプロパティで指定した横幅は無視されます。'
-							p='table-layoutプロパティの値が「fixed」の場合、画像の横幅と関係なく1列目のセルの横幅は100ピクセルとなり、画像がはみ出して表示されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/269-B.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;table&gt;
-									| &lt;tr&gt;
-									| &lt;th id="head01"&gt;ハムサンド&lt;/th&gt;
-									| &lt;td&gt;自家製ハムとゴーダチーズに、新鮮なレタスをはさんだサンドイッチです。トマトまたはマヨネーズソースが選べます。&lt;/td&gt;
-									| &lt;/tr&gt;
-									| &lt;tr&gt;
-									| &lt;th id="head02"&gt;野菜サンド
-									| &lt;img src="sand.jpg" width="300"&gt;
-									| &lt;/th&gt;
-									| &lt;td&gt;自家製ハムに、トマトやレタス、キュウリ、ブロッコリなど新鮮な野菜をたっぷりはさんだサンドイッチです。さっぱりイタリアンドレッシングソースもあります。
-									| &lt;/td&gt;
-									| &lt;/tr&gt;
-									| &lt;/table&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| table
-									| 	tr
-									| 		th#head01 ハムサンド
-									| 		td 自家製ハムとゴーダチーズに、新鮮なレタスをはさんだサンドイッチです。トマトまたはマヨネーズソースが選べます。
-									| 	tr
-									| 		th#head02
-									| 			| 野菜サンド
-									| 			img(src='sand.jpg', width='300')
-									| 		td
-									| 			| 自家製ハムに、トマトやレタス、キュウリ、ブロッコリなど新鮮な野菜をたっぷりはさんだサンドイッチです。さっぱりイタリアンドレッシングソースもあります。
-								figcaption （Jade）
-							hr
-							h4 SAMPLE C：セルの横幅を指定していない場合
-							p='セルの横幅を指定していない場合、table-layoutプロパティの値が「auto」のときはブラウザがコンテンツに合わせて各列の横幅を決定します。'
-							p='table-layoutプロパティの値が「fixed」のときは各列が同じ横幅になるように表示されます。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/04/269-C.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							hr
-							h4 テーブルの構成するボックス
-							p='displayプロパティを利用すると、以下の値でテーブル関連のボックスを構成することができます。なお、IE7以前はこれらの値に未対応です。'
-							table.table
-								tr
-									th displayの値
-									th 構成するボックス
-									th 要素
-								tr
-									td table
-									td テーブルを構成するブロックレベルボックス
-									td='<table>'
-								tr
-									td inline-table
-									td テーブルを構成するインラインレベルボックス
-									td='<table>'
-								tr
-									td table-row
-									td 行を構成するボックス
-									td='<tr>'
-								tr
-									td table-row-group
-									td 行グループを構成するボックス
-									td='<tbody>'
-								tr
-									td table-heder-group
-									td 行グループを構成するボックス
-									td='<thead>'
-								tr
-									td table-footer-group
-									td 行グループを構成するボックス
-									td='<tfoot>'
-								tr
-									td table-column
-									td 列グループを構成するボックス
-									td='<col>'
-								tr
-									td table-column-group
-									td 列グループを構成するボックス
-									td='<colgroup>'
-								tr
-									td table-cell
-									td セルを構成するボックス
-									td='<td>／<th>'
-								tr
-									td table-caption
-									td キャプションを構成するボックス
-									td='<caption>'
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;div class="table"&gt;
-									|     &lt;div class="tr"&gt;
-									|         &lt;div class"th"&gt;ハムサンド&lt;/div&gt;
-									|         &lt;div class="td"&gt;自家製ハムと…略...&lt;/div&gt;
-									|     &lt;/div&gt;
-									|     &lt;div class="tr"&gt;
-									|         &lt;div class"th"&gt;野菜サンド&lt;/div&gt;
-									|         &lt;div class="td"&gt;自家製ハムに…略...&lt;/div&gt;
-									|     &lt;/div&gt;
-									| &lt;/div&gt;
-								figcaption （HTML）
-							figure
-								pre(class='prettyprint linenums:1')
-									| .table
-									| 	.tr
-									| 		.class(th='th') ハムサンド
-									| 		.td 自家製ハムと…略...
-									| 	.tr
-									| 		.class(th='th') 野菜サンド
-									| 		.td 自家製ハムに…略...
-								figcaption （Jade）
-							figure
-								pre(class='prettyprint linenums:1')
-									| .table {
-									|     display: table;
-									|     width: 500px;
-									|     border-collapse: collapse;
-									| }
-									| .tr {
-									|     display: table-row;
-									| }
-									| .th {
-									|     display: table-cell;
-									|     font-weight: bold;
-									|     text-align: center;
-									|     vertical-align: middle;
-									|     width: 100px;
-									|     background-color: #f4c778;
-									| }
-									| .td {
-									|     display: table-cell;
-									| }
-									| .table, .th, .td {
-									|     border: solid 2px gray;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| .table
-									| 	display table
-									| 	width 500px
-									| 	border-collapse collapse
-									| 
-									| .tr
-									| 	display table-row
-									| 
-									| .th
-									| 	display table-cell
-									| 	font-weight bold
-									| 	text-align center
-									| 	vertical-align middle
-									| 	width 100px
-									| 	background-color #f4c778
-									| 
-									| .td
-									| 	display table-cell
-									| 
-									| .table, .th, .td
-									| 	border solid 2px gray
-								figcaption （Stylus）
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp; テーブルのレイアウト方法
+                        .panel-body
+                            .alert.alert-info  テーブルのレイアウト方法
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            pre
+                                | table-layout: レイアウト方法
+                            p
+                                | レイアウト方法・・・auto ／ fixed
+                            table.table
+                                tr
+                                    td 初期値
+                                    td auto
+                                tr
+                                    td 継承
+                                    td なし
+                                tr
+                                    td 適用先
+                                    td displayの値が「table」または「inline-table」の要素
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td Tables
+                            p='table-layoutプロパティでテーブルのレイアウト方法を指定すると、各列の横幅を算出する方法を変更することができます。自動レイアウトはすべてのセルのデータを読み込み、最も大きなセルに合わせてよ小幅を決定しますが、固定レイアウトでは1行目のセルのデータのみで横幅を決定します。そのため、固定レイアウトを行うと表示を速くする効果があります。'
+                            table.table
+                                tr
+                                    th 値
+                                    th レイアウト方法
+                                tr
+                                    td auto
+                                    td 自動レイアウト
+                                tr
+                                    td fixed
+                                    td 固定レイアウト
+                            hr
+                            h4 SAMPLE A：セルの横幅の決定
+                            p='下のサンプルはテーブル全体の横幅を500pxにしたものです。1行・1列の位置のセル（ピンク）は100px、2行・1列の位置のセル（緑）は200pxの横幅に指定しています。'
+                            p='このとき、どちらの横幅で表示されるかは、table-layoutプロパティの値によって変わります。'
+                            p='まず、table-layoutプロパティの値が初期値の「auto」で処理された場合、自動レイアウトで処理されます。この場合、すべてのセルのデータが読み込まれ、最も大きなセルに合わせて各列の横幅が決まります。そのため、サンプルの1列目の横幅は200pxになります。'
+                            p='なお、2列目については横幅を指定していませんので、テーブル全体から1列目の横幅や罫線の太さを引いた横幅で表示させます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/269-A01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;table&gt;
+                                    | &lt;tr&gt;
+                                    | &lt;th id="head01"&gt;ハムサンド&lt;/th&gt;
+                                    | &lt;td&gt;自家製ハムとゴーダチーズに、新鮮なレタスをはさんだサンドイッチです。トマトまたはマヨネーズソースが選べます。&lt;/td&gt;
+                                    | &lt;/tr&gt;
+                                    | &lt;tr&gt;
+                                    | &lt;th id="head02"&gt;野菜サンド
+                                    | &lt;/th&gt;
+                                    | &lt;td&gt;自家製ハムに、トマトやレタス、キュウリ、ブロッコリなど新鮮な野菜をたっぷりはさんだサンドイッチです。さっぱりイタリアンドレッシングソースもあります。
+                                    | &lt;/td&gt;
+                                    | &lt;/tr&gt;
+                                    | &lt;/table&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | table
+                                    |     tr
+                                    |         th#head01 ハムサンド
+                                    |         td 自家製ハムとゴーダチーズに、新鮮なレタスをはさんだサンドイッチです。トマトまたはマヨネーズソースが選べます。
+                                    |     tr
+                                    |         th#head02
+                                    |             | 野菜サンド
+                                    |         td
+                                    |             | 自家製ハムに、トマトやレタス、キュウリ、ブロッコリなど新鮮な野菜をたっぷりはさんだサンドイッチです。さっぱりイタリアンドレッシングソースもあります。
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | table {
+                                    |     width: 500px;
+                                    |     table-layout: auto;
+                                    | }
+                                    | #head01 {
+                                    |     width: 100px;
+                                    |     background-color: pink;
+                                    | }
+                                    | #head02 {
+                                    |     width: 200px;
+                                    |     background-color: greenyellow;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | table
+                                    |     width 500px
+                                    |     table-layout auto
+                                    | 
+                                    | #head01
+                                    |     width 100px
+                                    |     background-color pink
+                                    | 
+                                    | #head02
+                                    |     width 200px
+                                    |     background-color greenyellow
+                                figcaption （Stylus）
+                            p='table-layoutプロパティの値を「fixed」にすると、固定レイアウトで処理することができます。この場合、1列目の横幅は100pxになります。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/269-A02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | table {
+                                    |     width: 500px;
+                                    |     table-layout: auto;
+                                    | }
+                                    | #head01 {
+                                    |     width: 100px;
+                                    |     background-color: pink;
+                                    | }
+                                    | #head02 {
+                                    |     width: 200px;
+                                    |     background-color: greenyellow;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | table
+                                    |     width 500px
+                                    |     table-layout auto
+                                    | 
+                                    | #head01
+                                    |     width 100px
+                                    |     background-color pink
+                                    | 
+                                    | #head02
+                                    |     width 200px
+                                    |     background-color greenyellow
+                                figcaption （Stylus）
+                            p='なお、テーブル全体の横幅が指定されていない場合、table-layoutプロパティの値を「fixed」にしても、「auto」として処理され、自動レイアウトが行われます。'
+                            hr
+                            h4 SAMPLE B：横幅の大きなコンテンツを表示した場合
+                            p='セルの中に大きなコンテンツがある場合も、table-layoutプロパティの値によって表示方法が変わります。たとえば、SAMPLE Aのセルの中に横幅300ピクセルの画像を挿入すると下のようになります。'
+                            p='table-layoutプロパティの値が「auto」の場合、画像をセルに収めて表示するため、widthプロパティで指定した横幅は無視されます。'
+                            p='table-layoutプロパティの値が「fixed」の場合、画像の横幅と関係なく1列目のセルの横幅は100ピクセルとなり、画像がはみ出して表示されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/269-B.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;table&gt;
+                                    | &lt;tr&gt;
+                                    | &lt;th id="head01"&gt;ハムサンド&lt;/th&gt;
+                                    | &lt;td&gt;自家製ハムとゴーダチーズに、新鮮なレタスをはさんだサンドイッチです。トマトまたはマヨネーズソースが選べます。&lt;/td&gt;
+                                    | &lt;/tr&gt;
+                                    | &lt;tr&gt;
+                                    | &lt;th id="head02"&gt;野菜サンド
+                                    | &lt;img src="sand.jpg" width="300"&gt;
+                                    | &lt;/th&gt;
+                                    | &lt;td&gt;自家製ハムに、トマトやレタス、キュウリ、ブロッコリなど新鮮な野菜をたっぷりはさんだサンドイッチです。さっぱりイタリアンドレッシングソースもあります。
+                                    | &lt;/td&gt;
+                                    | &lt;/tr&gt;
+                                    | &lt;/table&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | table
+                                    |     tr
+                                    |         th#head01 ハムサンド
+                                    |         td 自家製ハムとゴーダチーズに、新鮮なレタスをはさんだサンドイッチです。トマトまたはマヨネーズソースが選べます。
+                                    |     tr
+                                    |         th#head02
+                                    |             | 野菜サンド
+                                    |             img(src='sand.jpg', width='300')
+                                    |         td
+                                    |             | 自家製ハムに、トマトやレタス、キュウリ、ブロッコリなど新鮮な野菜をたっぷりはさんだサンドイッチです。さっぱりイタリアンドレッシングソースもあります。
+                                figcaption （Jade）
+                            hr
+                            h4 SAMPLE C：セルの横幅を指定していない場合
+                            p='セルの横幅を指定していない場合、table-layoutプロパティの値が「auto」のときはブラウザがコンテンツに合わせて各列の横幅を決定します。'
+                            p='table-layoutプロパティの値が「fixed」のときは各列が同じ横幅になるように表示されます。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/04/269-C.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            hr
+                            h4 テーブルの構成するボックス
+                            p='displayプロパティを利用すると、以下の値でテーブル関連のボックスを構成することができます。なお、IE7以前はこれらの値に未対応です。'
+                            table.table
+                                tr
+                                    th displayの値
+                                    th 構成するボックス
+                                    th 要素
+                                tr
+                                    td table
+                                    td テーブルを構成するブロックレベルボックス
+                                    td='<table>'
+                                tr
+                                    td inline-table
+                                    td テーブルを構成するインラインレベルボックス
+                                    td='<table>'
+                                tr
+                                    td table-row
+                                    td 行を構成するボックス
+                                    td='<tr>'
+                                tr
+                                    td table-row-group
+                                    td 行グループを構成するボックス
+                                    td='<tbody>'
+                                tr
+                                    td table-heder-group
+                                    td 行グループを構成するボックス
+                                    td='<thead>'
+                                tr
+                                    td table-footer-group
+                                    td 行グループを構成するボックス
+                                    td='<tfoot>'
+                                tr
+                                    td table-column
+                                    td 列グループを構成するボックス
+                                    td='<col>'
+                                tr
+                                    td table-column-group
+                                    td 列グループを構成するボックス
+                                    td='<colgroup>'
+                                tr
+                                    td table-cell
+                                    td セルを構成するボックス
+                                    td='<td>／<th>'
+                                tr
+                                    td table-caption
+                                    td キャプションを構成するボックス
+                                    td='<caption>'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;div class="table"&gt;
+                                    |     &lt;div class="tr"&gt;
+                                    |         &lt;div class"th"&gt;ハムサンド&lt;/div&gt;
+                                    |         &lt;div class="td"&gt;自家製ハムと…略...&lt;/div&gt;
+                                    |     &lt;/div&gt;
+                                    |     &lt;div class="tr"&gt;
+                                    |         &lt;div class"th"&gt;野菜サンド&lt;/div&gt;
+                                    |         &lt;div class="td"&gt;自家製ハムに…略...&lt;/div&gt;
+                                    |     &lt;/div&gt;
+                                    | &lt;/div&gt;
+                                figcaption （HTML）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | .table
+                                    |     .tr
+                                    |         .class(th='th') ハムサンド
+                                    |         .td 自家製ハムと…略...
+                                    |     .tr
+                                    |         .class(th='th') 野菜サンド
+                                    |         .td 自家製ハムに…略...
+                                figcaption （Jade）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | .table {
+                                    |     display: table;
+                                    |     width: 500px;
+                                    |     border-collapse: collapse;
+                                    | }
+                                    | .tr {
+                                    |     display: table-row;
+                                    | }
+                                    | .th {
+                                    |     display: table-cell;
+                                    |     font-weight: bold;
+                                    |     text-align: center;
+                                    |     vertical-align: middle;
+                                    |     width: 100px;
+                                    |     background-color: #f4c778;
+                                    | }
+                                    | .td {
+                                    |     display: table-cell;
+                                    | }
+                                    | .table, .th, .td {
+                                    |     border: solid 2px gray;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | .table
+                                    |     display table
+                                    |     width 500px
+                                    |     border-collapse collapse
+                                    | 
+                                    | .tr
+                                    |     display table-row
+                                    | 
+                                    | .th
+                                    |     display table-cell
+                                    |     font-weight bold
+                                    |     text-align center
+                                    |     vertical-align middle
+                                    |     width 100px
+                                    |     background-color #f4c778
+                                    | 
+                                    | .td
+                                    |     display table-cell
+                                    | 
+                                    | .table, .th, .td
+                                    |     border solid 2px gray
+                                figcaption （Stylus）
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

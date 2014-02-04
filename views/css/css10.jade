@@ -1,169 +1,169 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;背景画像の表示位置
-						.panel-body
-							.alert.alert-info 背景画像の表示位置
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png') （※）
-									td
-										img(src='../images/ic-android.png') （※）
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png') （※）
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							p ※ 部分対応。
-							p IE8以前は部分対応。
-							pre
-								| background-position: 横方向の表示位置⨆縦方向の表示位置
-							p
-								| 横方向の表示位置・・・数値 ／ 比率 ／ left ／ center ／ right<br>
-								| 縦方向の表示位置・・・数値 ／ 比率 ／ top ／ center ／ bottom
-							table.table
-								tr
-									td 初期値
-									td 0% 0%
-								tr
-									td 継承
-									td なし
-								tr
-									td 適用先
-									td 全要素
-								tr
-									td 比率
-									td background-originで指定したエリアの横幅と高さに対する比率
-								tr
-									td モジュール
-									td Backgrounds and Borders
-							p='background-positionプロパティを利用すると背景画像の表示位置を調節することができます。表示位置はボックスの左辺や上辺からの距離（ピクセル）など、比率（%）、特定の比率を示すキーワード（topなど）で指定します。'
-							p='CSS3からは下の記述形式を利用することにより、右辺や下辺からの距離で表示位置を指定することもできます。現在の、この記述形式にはFirefox、Chrome、Opera、IE9以上が対応しています。詳しくはSAMPLE Cを参照してください。'
-							pre
-								| background-position: 横の辺 横の表示位置 縦の辺 縦の表示位置
-							p
-								| 横の辺・・・left／right<br>
-								| 横の表示位置・・・数値／比率<br>
-								| 縦の辺・・・top／bottom<br>
-								| 縦の表示位置・・・数値／比率
-							p='複数の背景画像を表示する場合は、各画像の表示位置をカンマで区切って指定します。なお、IE8以前はCSS3の機能には未対応です。'
-							pre
-								| background-position: 1枚目の表示位置, 2枚目の表示位置, ...
-							hr
-							h4 SAMPLE A：ピクセルで指定する場合
-							p='背景画像の表示位置をピクセルで指定する場合、ボックスの左辺と右辺からの画像の外辺までの距離を指定します。たとえば「60px 30px」と指定した場合、ボックスの右辺から60ピクセル、上辺から30ピクセルの位置に表示されます。なお、ここではわかりやすいようにボックス内の文字を薄くし、背景画像を繰り返さずに表示しています。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/127-A.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     padding: 45px 0;
-									|     color: rgba(0,0,0,0.1);
-									|     border: solid 1px orange;
-									|     background-image: url(flower.png);
-									|     background-repeat: no-repeat;
-									|     background-position: 60px 30px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	padding 45px 0
-									| 	color rgba(0,0,0,0.1)
-									| 	border solid 1px orange
-									| 	background-image url(flower.png)
-									| 	background-repeat no-repeat
-									| 	background-position 60px 30px
-								figcaption （stylus）
-							hr
-							h4 SAMPLE B：比率で指定する場合
-							p='背景画像の表示を比率（%）で指定した場合、画像側も外辺だけではなく、比率に応じた位置で揃えて表示されます。たとえば、「50% 25%」と指定すると、ボックスと背景画像のそれぞれの横50%、縦25%の位置を揃えて表示します。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/127-B.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							p='特定の比率の指定は以下のキーワードで置き換えることができます。'
-							table.table
-								tr
-									th 
-									th 比率
-									th キーワード
-									th 表示位置
-								tr
-									td(rowspan='3') 横方向
-									td 0%
-									td left
-									td 左
-								tr
-									td 50%
-									td center
-									td 中央
-								tr
-									td 100%
-									td right
-									td 右
-								tr
-									td(rowspan='3') 縦方向
-									td 0%
-									td top
-									td 上
-								tr
-									td 50%
-									td center
-									td 中央
-								tr
-									td 100%
-									td bottom
-									td 下
-							p='また、縦方向の表示位置の指定は省略することができ、省略した場合の値は「50%」として処理されます。そのため「0% 50%」という指定は「0%」と省略することができます。'
-							hr
-							h4 SAMPLE C：ボックスの右辺と下辺からの表示位置を指定
-							p='CSS3で追加された記述形式を利用すると、ボックスの右辺と下辺からの距離で表示位置を指定することもできます。たとえば、ボックスの右辺から60ピクセル、下辺から30ピクセルの位置に表示するためには、background-positionプロパティの値を「high 60px bottom 30px」にします。'
-							p
-								a.btn.btn-default(href='../demo/css/sample1/03/127-C.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2 {
-									|     padding: 45px 0;
-									|     color: rgba(0,0,0,0.1);
-									|     border: solid 1px orange;
-									|     background-image: url(flower.png);
-									|     background-repeat: no-repeat;
-									|     background-position: right 60px bottom 30px;
-									| }
-								figcaption （CSS）
-							figure
-								pre(class='prettyprint linenums:1')
-									| h2
-									| 	padding 45px 0
-									| 	color rgba(0,0,0,0.1)
-									| 	border solid 1px orange
-									| 	background-image url(flower.png)
-									| 	background-repeat no-repeat
-									| 	background-position right 60px bottom 30px
-								figcaption （stylus）
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;背景画像の表示位置
+                        .panel-body
+                            .alert.alert-info 背景画像の表示位置
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png') （※）
+                                    td
+                                        img(src='../images/ic-android.png') （※）
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png') （※）
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            p ※ 部分対応。
+                            p IE8以前は部分対応。
+                            pre
+                                | background-position: 横方向の表示位置⨆縦方向の表示位置
+                            p
+                                | 横方向の表示位置・・・数値 ／ 比率 ／ left ／ center ／ right<br>
+                                | 縦方向の表示位置・・・数値 ／ 比率 ／ top ／ center ／ bottom
+                            table.table
+                                tr
+                                    td 初期値
+                                    td 0% 0%
+                                tr
+                                    td 継承
+                                    td なし
+                                tr
+                                    td 適用先
+                                    td 全要素
+                                tr
+                                    td 比率
+                                    td background-originで指定したエリアの横幅と高さに対する比率
+                                tr
+                                    td モジュール
+                                    td Backgrounds and Borders
+                            p='background-positionプロパティを利用すると背景画像の表示位置を調節することができます。表示位置はボックスの左辺や上辺からの距離（ピクセル）など、比率（%）、特定の比率を示すキーワード（topなど）で指定します。'
+                            p='CSS3からは下の記述形式を利用することにより、右辺や下辺からの距離で表示位置を指定することもできます。現在の、この記述形式にはFirefox、Chrome、Opera、IE9以上が対応しています。詳しくはSAMPLE Cを参照してください。'
+                            pre
+                                | background-position: 横の辺 横の表示位置 縦の辺 縦の表示位置
+                            p
+                                | 横の辺・・・left／right<br>
+                                | 横の表示位置・・・数値／比率<br>
+                                | 縦の辺・・・top／bottom<br>
+                                | 縦の表示位置・・・数値／比率
+                            p='複数の背景画像を表示する場合は、各画像の表示位置をカンマで区切って指定します。なお、IE8以前はCSS3の機能には未対応です。'
+                            pre
+                                | background-position: 1枚目の表示位置, 2枚目の表示位置, ...
+                            hr
+                            h4 SAMPLE A：ピクセルで指定する場合
+                            p='背景画像の表示位置をピクセルで指定する場合、ボックスの左辺と右辺からの画像の外辺までの距離を指定します。たとえば「60px 30px」と指定した場合、ボックスの右辺から60ピクセル、上辺から30ピクセルの位置に表示されます。なお、ここではわかりやすいようにボックス内の文字を薄くし、背景画像を繰り返さずに表示しています。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/127-A.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     padding: 45px 0;
+                                    |     color: rgba(0,0,0,0.1);
+                                    |     border: solid 1px orange;
+                                    |     background-image: url(flower.png);
+                                    |     background-repeat: no-repeat;
+                                    |     background-position: 60px 30px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     padding 45px 0
+                                    |     color rgba(0,0,0,0.1)
+                                    |     border solid 1px orange
+                                    |     background-image url(flower.png)
+                                    |     background-repeat no-repeat
+                                    |     background-position 60px 30px
+                                figcaption （stylus）
+                            hr
+                            h4 SAMPLE B：比率で指定する場合
+                            p='背景画像の表示を比率（%）で指定した場合、画像側も外辺だけではなく、比率に応じた位置で揃えて表示されます。たとえば、「50% 25%」と指定すると、ボックスと背景画像のそれぞれの横50%、縦25%の位置を揃えて表示します。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/127-B.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            p='特定の比率の指定は以下のキーワードで置き換えることができます。'
+                            table.table
+                                tr
+                                    th 
+                                    th 比率
+                                    th キーワード
+                                    th 表示位置
+                                tr
+                                    td(rowspan='3') 横方向
+                                    td 0%
+                                    td left
+                                    td 左
+                                tr
+                                    td 50%
+                                    td center
+                                    td 中央
+                                tr
+                                    td 100%
+                                    td right
+                                    td 右
+                                tr
+                                    td(rowspan='3') 縦方向
+                                    td 0%
+                                    td top
+                                    td 上
+                                tr
+                                    td 50%
+                                    td center
+                                    td 中央
+                                tr
+                                    td 100%
+                                    td bottom
+                                    td 下
+                            p='また、縦方向の表示位置の指定は省略することができ、省略した場合の値は「50%」として処理されます。そのため「0% 50%」という指定は「0%」と省略することができます。'
+                            hr
+                            h4 SAMPLE C：ボックスの右辺と下辺からの表示位置を指定
+                            p='CSS3で追加された記述形式を利用すると、ボックスの右辺と下辺からの距離で表示位置を指定することもできます。たとえば、ボックスの右辺から60ピクセル、下辺から30ピクセルの位置に表示するためには、background-positionプロパティの値を「high 60px bottom 30px」にします。'
+                            p
+                                a.btn.btn-default(href='../demo/css/sample1/03/127-C.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2 {
+                                    |     padding: 45px 0;
+                                    |     color: rgba(0,0,0,0.1);
+                                    |     border: solid 1px orange;
+                                    |     background-image: url(flower.png);
+                                    |     background-repeat: no-repeat;
+                                    |     background-position: right 60px bottom 30px;
+                                    | }
+                                figcaption （CSS）
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | h2
+                                    |     padding 45px 0
+                                    |     color rgba(0,0,0,0.1)
+                                    |     border solid 1px orange
+                                    |     background-image url(flower.png)
+                                    |     background-repeat no-repeat
+                                    |     background-position right 60px bottom 30px
+                                figcaption （stylus）
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

@@ -1,117 +1,117 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;アニメーション
-						.panel-body
-							.alert.alert-info アニメーション
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							p IE9以前は未対応。
-							pre
-								| @keframes キーフレーム名 {〜}
-							pre
-								| animation: キーフレーム名 再生時間 補間方法 ディレイ 繰り返し 方向
-							pre
-								| animation-name: キーフレーム名
-							pre
-								| animation-duration: 再生時間
-							pre
-								| animation-timing-function: 補間方法
-							pre
-								| animation-delay: ディレイ
-							pre
-								| animation-iteration-count: 繰り返し
-							pre
-								| animation-direction: 方向
-							p
-								| キーフレーム名・・・none ／ キーフレーム名<br>
-								| 再生時間・・・時間<br>
-								| 補間方法・・・ease ／ linear ／ ease-in ／ ease-out ／ ease-in-out ／ cubic-bezier()<br>
-								| ディレイ・・・時間<br>
-								| 繰り返し・・・infinite ／ 回数<br>
-								| 方向・・・normal ／ alternate
-							table.table
-								tr
-									td 初期値
-									td animation: none 0s ease 0s 1 normal
-								tr
-									td 継承
-									td なし
-								tr
-									td 適用先
-									td 全要素／::before、::after疑似要素
-								tr
-									td 比率
-									td -
-								tr
-									td モジュール
-									td Animations
-							p='animation-nameなどのプロパティや@keyframesを利用すると、キーフレームを利用したアニメーションを設定することができます。キーフレームはアニメーションで変化させたいプロパティの設定を記述するもので、始点と終点の間に複数設定することができます。'
-							p='たとえば、始点と終点の2つのキーフレームで水色から黄色に変化するように指定したアニメーションでは、途中の色の変化をコントロールすることはできません。しかし、始点と終点の間にキーフレームを追加すると、途中の色の変化もコントロールできるようになります。たとえば、ピンク色にするキーフレームを追加すると、水色からピンク、ピンクから黄色に変化するアニメーションを設定することができます。'
-							p='なお、アニメーション関連の設定はanimationプロパティでまとめて指定することもできます。'
-							hr
-							h4 SAMPLE A：キーフレームの作成と適用
-							p='アニメーションの機能を利用するためにはキーフレームの作成が必要です。たとえば、下のサンプルは<h1>でマークアップした見出しの背景を灰色で表示したものです。アニメーションで見出しの背景色が水色→ピンク→黄色と変化するように設定していきますが、ここで指定した灰色の設定はアニメーションの表示には影響しません。'
-							p='キーフレームは「@keyframes キーフレーム名 {〜}」という形で記述して作成します。ここでは「myanim」というキーフレーム名の設定で作成していきます。'
-							p='@keyframesの中には始点と終点を含むキーフレームの設定を記述します。このとき、始点の設定は0%{〜}に、終点の設定は100%{〜}に記述し、必要に応じて1〜99%のキーフレームを追加します。ここでは50%のキーフレームを追加し、0%、50%、100%の3点における背景色（background-color）をそれぞれ水色、ピンク色、黄色に設定しています。'
-							p='キーフレームの設定を見出しに適用してアニメーションを実行するには、<h1>のanimation-nameプロパティでキーフレーム名を、animation-durationプロパティで再生時間5秒で再生するように指定しています。表示を確認すると、ページを読み込むと同時にアニメーションの再生が始まり、キーフレームで指定したように見出しの背景色が変わります。'
-							p='なお、再生前に灰色の背景色が表示されることはありませんが、終点まで再生するとアニメーションは終了し、灰色の表示になります。これは、animation-fill-modeプロパティの値が初期値の「none」で処理されるためです。'
-							h4 カーソルを重ねたときに再生する
-							p='カーソルを重ねたときにアニメーションを再生することもできます。たとえば、SAMPLE Aの見出しにカーソルを重ねたときに背景色が変化するように設定するには、animation-nameやanimation-durationプロパティの設定をh1:hover{〜}に記述します。なお、カーソルを重ねていないときなどは灰色の背景色で表示されます。'
-							hr
-							h4 SAMPLE B：複数のプロパティの値を変更する
-							p='キーフレームでは複数のプロパティの値を変更するように指定することもできます。たとえば、SAMPLE Aのキーフレームに透明度を指定するopacityプロパティを追加し、見出しがフェードインするように設定すると下のようになります。ここではopacityプロパティの値を始点「0」、終点では「1」と指定して、完全に透明な状態からすこしずつ表示するようにしています。また、background-colorプロパティで指定した背景色も同時に変化していることがわかります。'
-							hr
-							h4 SAMPLE C：補間方法
-							p='animation-timing-functionプロパティでは、始点と終点の間の変化の仕方を調節することができます。この調節を「補間」や「イージング」と呼び、どのように変化させるかは下のベジエ曲線で表します。主要な変化のパターンは以下のキーワードで指定できるようになっており、より細かく調節したい場合にはcubic-bezier()関数でベジエ曲線のP1とP2の座標を指定します。'
-							p='SAMPLE Aの場合、animation-timing-functionプロパティの値は初期値の「ease」で処理され、最初と最後が滑らかに変化します。これを一定の速度で変化させる場合、animation-timing-functionプロパティの値を「linear」にします。'
-							hr
-							h4 SAMPLE D：ディレイ
-							p='animation-delayプロパティを利用すると、指定した時間の分だけアニメーションの再生開始を遅らせることができます。たとえば、SAMPLE Aの再生を10秒遅らせる場合、animation-delayプロパティの値を「10s」と指定します。'
-							p='なお、animationプロパティを利用してアニメーション関連の指定をまとめて指定する場合、各値は順不同で指定することができますが、再生時間とディレイの値については、再生時間の指定を先に記述する必要があります。たとえば、下の設定はanimationプロパティで次のように指定します。'
-							hr
-							h4 SAMPLE E：繰り返し
-							p='SAMPLE Aの再生は1回で終了します。これは、animation-iteration-countプロパティの値が初期値の「1」で処理されるためです。たとえば、3回繰り返して再生を行いたい場合には、animation-iteration-countプロパティの値を「3」と指定します。また、無限に繰り返すループ再生を行いたい場合には、「infinite」と指定します。'
-							p='なお、繰り返しを指定した場合、終点までの再生が終わると、再び始点から再生が始まります。'
-							hr
-							h4 SAMPLE F：再生の方向
-							p='SAMPLE Eの場合、アニメーションは始点から終点に向かって一方向にのみ繰り返し再生されます。これは、animation-directionプロパティの値が初期値の「normal」で処理されるためです。'
-							p='animation-directionプロパティの値を「alternate」にすると、始点から終点への再生と、終点から始点への再生を交互に繰り返すようになります。なお、1回目の再生は始点から終点への方向で再生されますので、「alternate」の効果を確認するためには、アニメーションを2回以上繰り返して再生する必要があります。'
-							hr
-							h4 SAMPLE G：複数のキーフレームの適用
-							p='アニメーション関連のプロパティでは、複数のキーフレームの設定をカンマで区切ってしていすることができます。たとえば、下のサンプルでは@keyframesで背景色を変化させるキーフレーム「myanim」と、文字の透明度を変化させるキーフレーム「mytext」を用意して、それぞれの再生時間や繰り返しの回数を変えて再生するようにしています。'
-							p='まず、「myanim」キーフレームでは背景色が水色、ピンク色、黄色と変化するように指定してあります。これはSAMPLE A〜Fで使用してきたキーフレームでは、黒色の文字が完全に透明な状態から不透明な状態へと変化するように、colorプロパティの始点の値を「rgba(0,0,0,0)」に、終点の値を「rgba(0,0,0,1)」に指定しています。'
-							p='まず、「myanim」キーフレームでは背景色が水色、ピンク色、黄色と変化するように指定してあります。これはSAMPLE A〜Fで使用してきたキーフレームの設定と同じです。一方、「mytext」キーフレームでは、黒色の文字が完全に透明な状態から不透明な状態へと変化するように、colorプロパティの始点を「rgba(0,0,0,0)」に、終点の値を「rgba(0,0,0,1)」に指定しています。'
-							p='次に、用意した2つのキーフレームの設定を<h1>に適用するため、animation-nameプロパティの値を「myanim, mytext」と指定します。あとは、animation-durationプロパティなどを利用して、キーフレームごとに再生に関する設定を行います。'
-							p='ここでは、「myanim」と指定し、5秒単位で繰り返し再生するようにしています。また、「mytext」キーフレームによるアニメーションは再生時間を「10s」、補間方法を「linear」、繰り返しの回数を「1」と指定し、10秒かけて文字を表示したら再生を終了するようにしています。'
-							p='これで、文字がフェードインした後は、背景色のみが繰り返し変化するアニメーションとなります。'
-							p='なお、animationプロパティでも複数の設定をカンマで区切って指定することができます。たとえば、下の設定はいかのようにまとめて記述することができます。'
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;アニメーション
+                        .panel-body
+                            .alert.alert-info アニメーション
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            p IE9以前は未対応。
+                            pre
+                                | @keframes キーフレーム名 {〜}
+                            pre
+                                | animation: キーフレーム名 再生時間 補間方法 ディレイ 繰り返し 方向
+                            pre
+                                | animation-name: キーフレーム名
+                            pre
+                                | animation-duration: 再生時間
+                            pre
+                                | animation-timing-function: 補間方法
+                            pre
+                                | animation-delay: ディレイ
+                            pre
+                                | animation-iteration-count: 繰り返し
+                            pre
+                                | animation-direction: 方向
+                            p
+                                | キーフレーム名・・・none ／ キーフレーム名<br>
+                                | 再生時間・・・時間<br>
+                                | 補間方法・・・ease ／ linear ／ ease-in ／ ease-out ／ ease-in-out ／ cubic-bezier()<br>
+                                | ディレイ・・・時間<br>
+                                | 繰り返し・・・infinite ／ 回数<br>
+                                | 方向・・・normal ／ alternate
+                            table.table
+                                tr
+                                    td 初期値
+                                    td animation: none 0s ease 0s 1 normal
+                                tr
+                                    td 継承
+                                    td なし
+                                tr
+                                    td 適用先
+                                    td 全要素／::before、::after疑似要素
+                                tr
+                                    td 比率
+                                    td -
+                                tr
+                                    td モジュール
+                                    td Animations
+                            p='animation-nameなどのプロパティや@keyframesを利用すると、キーフレームを利用したアニメーションを設定することができます。キーフレームはアニメーションで変化させたいプロパティの設定を記述するもので、始点と終点の間に複数設定することができます。'
+                            p='たとえば、始点と終点の2つのキーフレームで水色から黄色に変化するように指定したアニメーションでは、途中の色の変化をコントロールすることはできません。しかし、始点と終点の間にキーフレームを追加すると、途中の色の変化もコントロールできるようになります。たとえば、ピンク色にするキーフレームを追加すると、水色からピンク、ピンクから黄色に変化するアニメーションを設定することができます。'
+                            p='なお、アニメーション関連の設定はanimationプロパティでまとめて指定することもできます。'
+                            hr
+                            h4 SAMPLE A：キーフレームの作成と適用
+                            p='アニメーションの機能を利用するためにはキーフレームの作成が必要です。たとえば、下のサンプルは<h1>でマークアップした見出しの背景を灰色で表示したものです。アニメーションで見出しの背景色が水色→ピンク→黄色と変化するように設定していきますが、ここで指定した灰色の設定はアニメーションの表示には影響しません。'
+                            p='キーフレームは「@keyframes キーフレーム名 {〜}」という形で記述して作成します。ここでは「myanim」というキーフレーム名の設定で作成していきます。'
+                            p='@keyframesの中には始点と終点を含むキーフレームの設定を記述します。このとき、始点の設定は0%{〜}に、終点の設定は100%{〜}に記述し、必要に応じて1〜99%のキーフレームを追加します。ここでは50%のキーフレームを追加し、0%、50%、100%の3点における背景色（background-color）をそれぞれ水色、ピンク色、黄色に設定しています。'
+                            p='キーフレームの設定を見出しに適用してアニメーションを実行するには、<h1>のanimation-nameプロパティでキーフレーム名を、animation-durationプロパティで再生時間5秒で再生するように指定しています。表示を確認すると、ページを読み込むと同時にアニメーションの再生が始まり、キーフレームで指定したように見出しの背景色が変わります。'
+                            p='なお、再生前に灰色の背景色が表示されることはありませんが、終点まで再生するとアニメーションは終了し、灰色の表示になります。これは、animation-fill-modeプロパティの値が初期値の「none」で処理されるためです。'
+                            h4 カーソルを重ねたときに再生する
+                            p='カーソルを重ねたときにアニメーションを再生することもできます。たとえば、SAMPLE Aの見出しにカーソルを重ねたときに背景色が変化するように設定するには、animation-nameやanimation-durationプロパティの設定をh1:hover{〜}に記述します。なお、カーソルを重ねていないときなどは灰色の背景色で表示されます。'
+                            hr
+                            h4 SAMPLE B：複数のプロパティの値を変更する
+                            p='キーフレームでは複数のプロパティの値を変更するように指定することもできます。たとえば、SAMPLE Aのキーフレームに透明度を指定するopacityプロパティを追加し、見出しがフェードインするように設定すると下のようになります。ここではopacityプロパティの値を始点「0」、終点では「1」と指定して、完全に透明な状態からすこしずつ表示するようにしています。また、background-colorプロパティで指定した背景色も同時に変化していることがわかります。'
+                            hr
+                            h4 SAMPLE C：補間方法
+                            p='animation-timing-functionプロパティでは、始点と終点の間の変化の仕方を調節することができます。この調節を「補間」や「イージング」と呼び、どのように変化させるかは下のベジエ曲線で表します。主要な変化のパターンは以下のキーワードで指定できるようになっており、より細かく調節したい場合にはcubic-bezier()関数でベジエ曲線のP1とP2の座標を指定します。'
+                            p='SAMPLE Aの場合、animation-timing-functionプロパティの値は初期値の「ease」で処理され、最初と最後が滑らかに変化します。これを一定の速度で変化させる場合、animation-timing-functionプロパティの値を「linear」にします。'
+                            hr
+                            h4 SAMPLE D：ディレイ
+                            p='animation-delayプロパティを利用すると、指定した時間の分だけアニメーションの再生開始を遅らせることができます。たとえば、SAMPLE Aの再生を10秒遅らせる場合、animation-delayプロパティの値を「10s」と指定します。'
+                            p='なお、animationプロパティを利用してアニメーション関連の指定をまとめて指定する場合、各値は順不同で指定することができますが、再生時間とディレイの値については、再生時間の指定を先に記述する必要があります。たとえば、下の設定はanimationプロパティで次のように指定します。'
+                            hr
+                            h4 SAMPLE E：繰り返し
+                            p='SAMPLE Aの再生は1回で終了します。これは、animation-iteration-countプロパティの値が初期値の「1」で処理されるためです。たとえば、3回繰り返して再生を行いたい場合には、animation-iteration-countプロパティの値を「3」と指定します。また、無限に繰り返すループ再生を行いたい場合には、「infinite」と指定します。'
+                            p='なお、繰り返しを指定した場合、終点までの再生が終わると、再び始点から再生が始まります。'
+                            hr
+                            h4 SAMPLE F：再生の方向
+                            p='SAMPLE Eの場合、アニメーションは始点から終点に向かって一方向にのみ繰り返し再生されます。これは、animation-directionプロパティの値が初期値の「normal」で処理されるためです。'
+                            p='animation-directionプロパティの値を「alternate」にすると、始点から終点への再生と、終点から始点への再生を交互に繰り返すようになります。なお、1回目の再生は始点から終点への方向で再生されますので、「alternate」の効果を確認するためには、アニメーションを2回以上繰り返して再生する必要があります。'
+                            hr
+                            h4 SAMPLE G：複数のキーフレームの適用
+                            p='アニメーション関連のプロパティでは、複数のキーフレームの設定をカンマで区切ってしていすることができます。たとえば、下のサンプルでは@keyframesで背景色を変化させるキーフレーム「myanim」と、文字の透明度を変化させるキーフレーム「mytext」を用意して、それぞれの再生時間や繰り返しの回数を変えて再生するようにしています。'
+                            p='まず、「myanim」キーフレームでは背景色が水色、ピンク色、黄色と変化するように指定してあります。これはSAMPLE A〜Fで使用してきたキーフレームでは、黒色の文字が完全に透明な状態から不透明な状態へと変化するように、colorプロパティの始点の値を「rgba(0,0,0,0)」に、終点の値を「rgba(0,0,0,1)」に指定しています。'
+                            p='まず、「myanim」キーフレームでは背景色が水色、ピンク色、黄色と変化するように指定してあります。これはSAMPLE A〜Fで使用してきたキーフレームの設定と同じです。一方、「mytext」キーフレームでは、黒色の文字が完全に透明な状態から不透明な状態へと変化するように、colorプロパティの始点を「rgba(0,0,0,0)」に、終点の値を「rgba(0,0,0,1)」に指定しています。'
+                            p='次に、用意した2つのキーフレームの設定を<h1>に適用するため、animation-nameプロパティの値を「myanim, mytext」と指定します。あとは、animation-durationプロパティなどを利用して、キーフレームごとに再生に関する設定を行います。'
+                            p='ここでは、「myanim」と指定し、5秒単位で繰り返し再生するようにしています。また、「mytext」キーフレームによるアニメーションは再生時間を「10s」、補間方法を「linear」、繰り返しの回数を「1」と指定し、10秒かけて文字を表示したら再生を終了するようにしています。'
+                            p='これで、文字がフェードインした後は、背景色のみが繰り返し変化するアニメーションとなります。'
+                            p='なお、animationプロパティでも複数の設定をカンマで区切って指定することができます。たとえば、下の設定はいかのようにまとめて記述することができます。'
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

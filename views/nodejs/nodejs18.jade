@@ -1,0 +1,400 @@
+extends ../layout
+
+block link
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;HerokuでPostgreSQLと連携する
+                    .panel-body
+                        pre
+                            :code
+                                データベースは、Webアプリケーションの作成で非常に重要です。Node.jsでも、データベースを利用するための機能はあります。ただし、標準で用意されているのではなく、アドオンプログラムを追加して利用することになります。
+
+                                この種の開発でデータベースを利用するとき、考えなければならないのは「本番環境はどうなっているか」でしょう。ローカルで動いているだけではつまらないですから。
+
+                                ここでは、「HerokuでWebアプリをデプロイする」ということを目標に説明することにしましょう。そのためには、まず「Herokuのデータベース環境はどうなっているか」を知らなければいけませんね。
+
+                                Herokuの場合、標準でPosgreSQLが対応しています。他のものも使えないことはないのですが、基本はPostgreSQLと考えてください。
+
+                                では、HerokuでNode.jsアプリからPostgreSQLを利用するための準備を整えましょう。これは、Herokuの設定と、Node.js側の設定が必要になります。なお、ここでは、既にNode.jsアプリをHerokuにデプロイできる状態になっているものとして説明を行います。まだの場合は、heroku createでアプリケーションを準備し、一度デプロイして動作確認をしておいてください。
+
+
+                                ●PostgreSQLの用意
+                                当たり前ですが、ローカル環境にPostgreSQLをインストールしておく必要があります。以下のアドレスからプログラムをダウンロードし、インストールしておきましょう。「サーバーで動けばいいからいらないや」と思ってはいけません。ローカル環境にPostgreSQLがインストールされていないと後でHerokuの作業で問題が発生しますので、必ず用意してください。
+
+                                http://www.postgresql.org/download/
+
+
+                                ●環境変数Pathの設定
+                                インストールしたPostgreSQLの「bin」フォルダのパスを、環境変数pathに追加し、「bin」内のコマンドが名前で呼び出せるようにしておいてください。Windowsであれば、PostgreSQL 9.2は標準で以下のパスにインストールされますので、これをPathに追加すればよいでしょう。
+
+                                C:\Program Files\PostgreSQL\9.2\bin
+
+
+                                ●Node.jsの準備
+                                コマンドプロンプト／ターミナルからNode.jsのアプリケーションディレクトリにカレントディレクトリを移動しておきます。そして以下のようにコマンドを実行しておきます。
+                                npm install
+                                これは既におなじみですね。念のため、必要なプログラムをすべてnpmでインストールをしておきましょう。
+                                npm install pg
+                                「pg」が、PostgreSQLをNode.jsで利用するためのアドオンプログラムになります。これでpgと、これに必要なプログラム類がインストールされます。
+                        pre
+                            :code
+                                ■Heroku側の準備
+
+                                 
+                                続いて、Heroku側の準備をしましょう。これもコマンドプロンプト／ターミナルからコマンド操作で行います。Node.jsアプリに移動してから以下の手順で作業していってください。
+                                heroku login
+                                まだログインしていない場合は、まずherokuにログインしてください。実行するとアカウント（登録メールアドレス）とパスワードを尋ねてくるので正しく入力すればログインされます。
+                                heroku addons:add 
+                                      heroku-postgresql:dev
+                                herokuにPostgreSQLのアドオンを追加します。これは、「heroku addons:add heroku-postgresql:プラン」という形で実行します。無料プランの場合は、プラン名は「dev」になりますので、とりあえずこれで実行しましょう。
+                                heroku pg:promote HEROKU_POSTGRESQL_名前_URL
+                                アドオンが追加されると、「attached as HEROKU_POSTGRESQL_XXX_URL」といったデータベースの名前が表示されます。これをアプリのデフォルトデータベースとして使うようにしておくのが「heroku pg:promote」です。これで、先ほど追加したアドオンのプランが使用されるようになります。
+
+
+                                ■Herokuにテーブルを作成する
+
+                                これでデータベースのアドオンは設定できましたが、この状態ではまだデータベースにはテーブルも何もありません。実際にプログラムを作成する前に、テーブルを準備しておくことにしましょう。今回はごく簡単なテーブル「mydata」を用意することにします。これは以下の項目があります。
+
+                                id：自動的に割り振られる整数値。プライマリキーとなるもの。
+                                name：名前を保管する。テキスト値。
+                                mail：メールアドレスを保管する。テキスト値。
+                                memo：メモ書き。テキスト値。
+
+                                では、このテーブルをHerokuに作成しましょう。この作業も引き続きコマンドプロンプト／ターミナルで行います。以下のように実行をしてください。
+                                heroku pg:psql
+                                これで、HerokuのデータベースにSQL文を送信し操作できるようになります。このコマンドは、ローカル環境にPostgreSQLがインストールされており、PostgreSQLのプログラムにアクセスできる（環境変数Pathにパスが登録されている）必要があります。その準備ができてないと実行できないので注意してください。
+
+                                コマンドが無事に通ると、SQL文を入力できる状態になります。では、以下のようにタイプしてテーブル「mydata」を作成しましょう。
+                                 create table mydata (
+                                    id serial primary key,
+                                    name char(50),
+                                    mail char(100),
+                                    memo char(255)
+                                 );
+                                これでHerokuに追加したデータベースプランにmydataテーブルが作成されました。後は、プログラムを作成して、このテーブルを利用するだけです。
+                        pre
+                            :code
+                                ■Node.jsアプリにHeroku用のファイルを追加する
+
+                                 
+                                では、プログラムの作成に入りましょう。今回も、Expressを利用したNode.jsアプリとして作成します。Expressで自動生成されたアプリをベースに説明をしますので、まずは基本的なアプリを用意しておいてください。
+
+                                なお、Expressのアプリ作成については以下に説明してありますのでこちらをお読みください。
+
+                                http://libro.tuyano.com/index3?id=1152003
+
+
+                                では、用意されたNode.jsアプリに、Heroku利用のためのファイルを追加しておきましょう。これらについては既に第1回目に説明をしておきました。
+
+                                http://libro.tuyano.com/index3?id=1116003&page=5
+
+                                なお、ここではアプリケーションのスクリプトを「app.js」というファイル名として作成してあります。ファイル名が違っている場合は、リスト欄の内容から「app.js」の部分を探して、自分のアプリのスクリプトファイル名に書き替えて利用ください。
+
+
+                                ・「package.json」ファイル
+                                アプリケーションのルートにこの名前のファイルを作成してください。そしてパッケージ情報をここに記述します。内容は、下のリスト欄に掲載してありますので、この通りに記述してください。これは、PostgreSQLを利用するアプリの設定になります。
+
+
+                                ・「Procfile」ファイル
+                                これもアプリケーションのルートに配置します。このファイルの内容はたった1行だけです。以下の1分のみ記述してください。
+                                web: node app.js
+                                これで、Herokuのアプリケーション起動時に自動的にnode app.jsが実行され、Node.jsアプリケーションがサーバー内で起動して使えるようになります。
+
+
+
+                                ※package.json の内容
+                                 
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                {
+                                  "name": "application-name",
+                                  "version": "0.0.1",
+                                  "private": true,
+                                  "scripts": {
+                                    "start": "node app.js"
+                                  },
+                                  "dependencies": {
+                                    "express": "latest",
+                                    "pg": "latest",
+                                    "ejs": "*"
+                                  }
+                                }
+                        pre
+                            :code
+                                 
+                                ※Procfile の内容
+                                 
+                                web: node app.js
+                        pre
+                            :code
+                                ■Expressのapp.jsを用意する
+
+                                 
+                                では、スクリプトの作成に入りましょう。まずは、アプリケーションの基本部分となる「app.js」からです。これは、基本的な処理は既に説明してありますので改めて説明する必要はないでしょう。
+
+                                今回は、トップページ（「/」アドレス）の他に、データ作成のフォームページ（「/add」アドレス）と、フォームを送信した時の処理（「/create」アドレス）を用意します。これら３つのアクションのためのルート情報の登録部分だけきちんと押さえておけば、あとはデフォルトで生成されるスクリプトをそのまま利用してありますので難しいものはなにもないでしょう。
+
+
+                                ・「routes」内のファイルのロード
+                                add = require('./routes/add')
+                                create = require('./routes/create')
+                                ここでは、「routes」フォルダ内に「add.js」「create.js」というスクリプトを用意します。既にindexについては用意してありますので、その他にこの２つのスクリプトファイルを新たに追加するわけですね。それらを読み込み、変数に代入しておきます。
+
+
+                                ・ルート設定
+                                app.get('/add', add.add);
+                                app.post('/create', create.create);
+                                add.jsに用意した「add」と、create.jsに用意した「create」を、/addと/createのURIに設定します。これにより、これらのアドレスにアクセスがあれば指定のスクリプトが呼び出されるようになります。
+
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var express = require('express')
+                                  , routes = require('./routes')
+                                  , add = require('./routes/add') // *
+                                  , create = require('./routes/create') // *
+                                  , http = require('http')
+                                  , path = require('path');
+                                 
+                                var app = express();
+                                 
+                                // all environments
+                                app.set('port',  process.env.PORT || 3000);
+                                app.set('views', __dirname + '/views');
+                                app.set('view engine', 'ejs');
+                                app.use(express.favicon());
+                                app.use(express.logger('dev'));
+                                app.use(express.bodyParser());
+                                app.use(express.methodOverride());
+                                app.use(express.cookieParser());
+                                app.use(app.router);
+                                app.use(express.static(path.join(__dirname, 'public')));
+                                 
+                                // development only
+                                if ('development' == app.get('env')) {
+                                  app.use(express.errorHandler());
+                                }
+                                 
+                                app.get('/', routes.index);
+                                app.get('/add', add.add); // *
+                                app.post('/create', create.create); // *
+                                 
+                                http.createServer(app).listen(app.get('port'), function(){
+                                  console.log('Express server listening on port ' + app.get('port'));
+                                });
+                        pre
+                            :code
+                                ■indexでテーブルの一覧を表示する
+
+                                 
+                                では、スクリプトを作成していきましょう。まずはトップページ（「/」アドレス）からです。これは、「routes」フォルダ内の「index.js」ファイルとして処理を用意します。表示用のテンプレートは、「views」フォルダ内に「index.ejs」として作成しておきます。
+
+                                下のリスト欄に、それぞれのファイルのソースコードを掲載しておきました。記述して指定のフォルダ内にファイルを配置しておいてください。
+
+                                では、ソースコードの説明をしましょう。Node.jsのpgを使ってデータベースアクセスを行う基本について順に説明していきます。
+
+
+                                ●データベースに接続する
+                                pg.connect( 接続先 , コールバック関数 );
+                                データベースへの接続は、pg.connectというメソッドを使います。これは第1引数に接続先のアドレスを、第2引数には接続が開始されてから実行されるコールバック関数を指定します。サンプルのスクリプトでは、以下のように記述しています。
+                                var connectionString = process.env.DATABASE_URL
+                                    || "tcp://ユーザー:パスワード@ホスト:ポート番号/データベース";
+                                pg.connect(connectionString, function(err, client) {…接続時の処理…}
+                                Herokuの場合、データベースの接続先は、process.env.DATABASE_URLで取得します。これを引数に指定してconnectします。ただしこのままだとローカル環境ではデータベースのURLが取得できないので、||でこの値が取れなかった場合、ローカル環境のURLを取得するようにしておきます。
+
+                                コールバック関数は、２つの引数を用意します。第1引数にはエラーが発生した時の情報をまとめたオブジェクトが、また第2引数には接続したデータベースへのアクセスを管理するClientというオブジェクトが返されます。
+
+
+                                ●SQLクエリーを実行する
+                                変数 = client.query( クエリー文 );
+                                接続したデータベースを操作するには、Clientの「query」メソッドを使います。これは、SQL文をデータベースに送って実行するためのものです。引数にはSQLのクエリーテキストを指定します。
+
+                                SQL文では、selectのように値を取得する処理もありますが、このqueryメソッドそのもので返値を返すわけではないので注意が必要です。このqueryメソッドは、非同期でアクセスを行います。このため、実行結果となる返値でデータを受け取れるわけではないのです。
+
+                                では、何が返値として返されるのか？　それは、「Query」というオブジェクトです。このQureryには、処理の実行状況に応じて発生するイベントハンドラが用意されており、これを利用して処理を行うのです。
+
+                                サンプルのリストを見てみましょう。まず以下のようにしてselect文を実行し、そのQueryを変数に取得しています。
+                                var query = client.query('select * from mydata;');
+                                このqueryでは、第2引数に実行後の処理をコールバック関数として指定することもできるのですが、ここでは単にクエリーを実行するだけの使い方で説明をします。――このqueryを実行後、返されるQueryオブジェクトのイベントを設定します。このイベントは全部で3種類用意されています。それぞれ以下のようにして設定を行います。
+
+                                ・rowの取得イベント
+                                query.on('row', function(row){……処理……} );
+                                selectなどレコードを取得するクエリーを実行したとき、レコードを取得するごとにこのrowイベントが発生し処理が呼び出されます。引数rowには、取得したレコードをオブジェクトにまとめたものが保管されます。
+
+                                ・終了イベント
+                                query.on('end', function(result){……処理……} );
+                                すべての処理が完了したときに呼び出されます。引数には、クエリー実行に関する各種の情報をまとめたResultオブジェクトが渡されます。
+
+                                ・エラーイベント
+                                query.on('error', function(error){……処理……} );
+                                エラーが発生した際に呼び出されます。ただし、queryメソッドを呼び出す際にコールバック関数を設定してあった場合は、そちらが優先され、このイベントは発生しないので注意ください。
+
+                                この３つのイベントを組み合わせることで、クエリー実行後の処理を構築できます。サンプルのスクリプトでは、rowイベントで、取得されたrowオブジェクトを配列に追加し保存しています。こうすることで、取得されたすべてのrowデータをひとまとめにできます。
+
+                                また、注目して欲しいのは、index.ejsのレンダリングのタイミングです。ここでは、endイベントが発生したところでrenderで表示をレンダリングしていることがわかります（他、error時にも行なっていますが……）。このように、処理が完了したところで表示をレンダリングしないと、うまく結果を取り出して表示することができないので注意しましょう。
+
+
+                                ※index.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                exports.index = function(request, response){
+                                    var pg = require('pg');
+                                    var connectionString = process.env.DATABASE_URL
+                                        || "tcp://ユーザー:パスワード@ホスト:ポート番号/データベース";
+                                    pg.connect(connectionString, function(err, client) {
+                                        var query = client.query('select * from mydata;');
+                                        var rows = [];
+                                        query.on('row', function(row) {
+                                            rows.push(row);
+                                        });
+                                        query.on('end', function(row,err) {
+                                            response.render('index', { 
+                                                title: 'Express',
+                                                data:rows
+                                            });
+                                        });
+                                        query.on('error', function(error) {
+                                            console.log("ERROR!!" + error);
+                                            response.render('index', {
+                                                title: title,
+                                                data: null,
+                                                message: "ERROR is occured!"
+                                            });
+                                        });
+                                    });
+                                };
+                                 
+                        pre
+                            :code
+                                ※index.ejs
+
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                 
+                                <!DOCTYPE html>
+                                <html>
+                                  <head>
+                                    <title><%= title %></title>
+                                    <link rel='stylesheet' href='/stylesheets/style.css' />
+                                  </head>
+                                  <body>
+                                    <h1><%= title %></h1>
+                                    <p>Welcome to <%= title %></p>
+                                    <% if (data != null) { %>
+                                        <table border="1">
+                                        <% for(var i=0; i < data.length; i++){ %>
+                                            <tr>
+                                            <td width="200px"><%= data[i].name %></td>
+                                            <td width="200px"><%= data[i].mail %></td>
+                                            <td width="300px"><%= data[i].memo %></td>
+                                            </tr>
+                                        <% } %>
+                                        </table>
+                                    <% } %>
+                                  </body>
+                                </html>
+                        pre
+                            :code
+                                ■レコードの追加を行う
+
+                                 
+                                続いて、レコードの追加を行う処理です。これは「routes」内に用意する「add.js」でフォームの表示を、「create.js」でフォーム送信後の処理（つまりフォームの内容からレコードを保存する処理）を実装します。また、「views」フォルダ内には、フォームを表示する「add.ejs」テンプレートファイルを用意する必要があるでしょう。
+
+                                下のリスト欄に、３つのファイルの内容をまとめて掲載してあります。これらを参考にそれぞれのスクリプトを完成させてください。フォームに記入して送信すると、それがレコードとしてテーブルに追加されます。作成後、indexにリダイレクトされるので、表示されるレコードを確認できます。
+
+
+                                ●レコードの追加
+                                レコードの追加も、基本的には先程のselectの処理と実は変わりありません。db.connectでデータベースに接続し、そのClientオブジェクトのqueryメソッドでSQLを実行する、という流れですね。単に実行するSQLの内容が変わっただけです。
+                                var query = client.query("insert into mydata (name,mail,memo) values('"
+                                     + name_str + "','" + mail_str + "','" + memo_str + "');");
+                                ここでは、このようにしてinsert文を実行しています。そしてendイベントを使い、実行後にトップページにリダイレクトをしています。この部分ですね。
+                                query.on('end', function(row,err) {
+                                    response.redirect("/");
+                                });
+                                リダイレクトは、Responseオブジェクトの「redirect」を利用します。引数にはリダイレクト先のアドレスを指定するだけです。簡単ですね。
+
+                                実をいえば、データベースアクセスに関する機能は、これだけです。いや、もちろんオブジェクトにあるメソッドとか細々としたものはまだ残ってますが、基本的に「connectしてqueryする。後はイベントハンドラで処理すればおしまい」という流れさえわかれば、基本的なデータベースアクセスはたいてい実装できます。なにしろ、SQLをそのまま送るだけなんですから、「細々したことはSQL側でなんとかして！」ってことでしょう。
+
+
+                                ※add.ejs
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <!DOCTYPE html>
+                                <html>
+                                  <head>
+                                    <title><%= title %></title>
+                                    <link rel='stylesheet' href='/stylesheets/style.css' />
+                                  </head>
+                                  <body>
+                                    <h1><%= title %></h1>
+                                    <p><%= msg %></p>
+                                    <form method="post" action="/create">
+                                    <table>
+                                        <tr><td>NAME:</td><td><input type="text" name="name"></td></tr>
+                                        <tr><td>MAIL:</td><td><input type="text" name="mail"></td></tr>
+                                        <tr><td>MEMO:</td><td><input type="text" name="memo"></td></tr>
+                                        <tr><td></td><td><input type="submit"></tr>
+                                    </table>
+                                    </form>
+                                  </body>
+                                </html>
+                        pre
+                            :code
+                                 
+                                ※add.js
+                                 
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                exports.add = function(request, response){
+                                    response.render('add', 
+                                        {
+                                            title: 'Add Page',
+                                            msg: 'please type data:'
+                                        }
+                                    );
+                                };
+                                 
+                        pre
+                            :code
+                                 
+                                ※create.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                 
+                                exports.create = function(request, response){
+                                    var name_str = request.param("name");
+                                    var mail_str = request.param("mail");
+                                    var memo_str = request.param("memo");
+                                     
+                                    var pg = require('pg');
+                                    var connectionString = process.env.DATABASE_URL
+                                        || "tcp://ユーザー:パスワード@ホスト:ポート番号/データベース";
+                                    pg.connect(connectionString, function(err, client) {
+                                        var query = client.query("insert into mydata (name,mail,memo) values('"
+                                             + name_str + "','" + mail_str + "','" + memo_str + "');");
+                                        query.on('end', function(row,err) {
+                                            response.redirect("/");
+                                        });
+                                        query.on('error', function(error) {
+                                            console.log("ERROR!");
+                                            response.render('index', {
+                                                title: title,
+                                                data: null,
+                                                message: "ERROR is occured!"
+                                            });
+                                        });
+                                    });
+                                };

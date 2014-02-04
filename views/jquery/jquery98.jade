@@ -1,0 +1,137 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;$(':nth-last-child擬似クラス') 課題
+                    .panel-body
+                        p ボタンをクリックして、番号に該当するimg要素を回転させてみましょう。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise97/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | &nbsp;解答例
+                        #demo.collapse.out
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                                link(rel='stylesheet',href='style.css')
+                                            body
+                                                p
+                                                    input(type='button',value='1')
+                                                    input(type='button',value='2')
+                                                    input(type='button',value='3')
+                                                    input(type='button',value='4')
+                                                    input(type='button',value='5')
+                                                p
+                                                    img(src='img/image1.png',alt='')
+                                                    img(src='img/image2.png',alt='')
+                                                    img(src='img/image3.png',alt='')
+                                                    img(src='img/image4.png',alt='')
+                                                    img(src='img/image5.png',alt='')
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                                link(rel='stylesheet',href='style.css')
+                                            body
+                                                p
+                                                    -for(var i = 0; i < 5; i++)
+                                                        input(type='button',value='#{i+1}')
+                                                p
+                                                    -for(var i = 5; i > 0; i--)
+                                                        img(src='img/image#{i}.png',alt='')
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        prefix(prop, val)
+                                            -webkit-{prop} val
+                                            {prop} val
+
+                                        img
+                                            float right
+                                            display inline
+                                            &.remove
+                                                prefix('transform', rotate(0deg))  
+                                                prefix('animation-name', myanim)    
+                                                prefix('animation-duration', 2s)
+                                                prefix('animation-timing-function', linear)
+                                                prefix('animation-play-state', running)
+
+                                        @keyframes myanim
+                                            0%
+                                                prefix('transform', rotate(0deg))
+                                            50%
+                                                prefix('transform', rotate(360deg*5))   
+                                            100%
+                                                prefix('transform', rotate(360deg*10)) 
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $(function() {
+                                            $('input:nth-child(1)').click(function() {
+                                                $('img').removeClass('remove');
+                                                $('img:nth-last-child(1)').addClass('remove');
+                                            });
+                                            $('input:nth-child(2)').click(function() {
+                                                $('img').removeClass('remove');
+                                                $('img:nth-last-child(2)').addClass('remove');
+                                            });
+                                                $('input:nth-child(3)').click(function() {
+                                                $('img').removeClass('remove');
+                                            $('img:nth-last-child(3)').addClass('remove');
+                                            });
+                                            $('input:nth-child(4)').click(function() {
+                                                $('img').removeClass('remove');
+                                                $('img:nth-last-child(4)').addClass('remove');
+                                            });
+                                            $('input:nth-child(5)').click(function() {
+                                                $('img').removeClass('remove');
+                                                $('img:nth-last-child(5)').addClass('remove');
+                                            });
+                                        });
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $ ->
+                                            $('input:nth-child(1)').click ->
+                                                $('img').removeClass 'remove'
+                                                $('img:nth-last-child(1)').addClass 'remove'
+                                                return
+                                            $('input:nth-child(2)').click ->
+                                                $('img').removeClass 'remove'
+                                                $('img:nth-last-child(2)').addClass 'remove'
+                                                return
+                                            $('input:nth-child(3)').click ->
+                                                $('img').removeClass 'remove'
+                                                $('img:nth-last-child(3)').addClass 'remove'
+                                                return
+                                            $('input:nth-child(4)').click ->
+                                                $('img').removeClass 'remove'
+                                                $('img:nth-last-child(4)').addClass 'remove'
+                                                return
+                                            $('input:nth-child(5)').click ->
+                                                $('img').removeClass 'remove'
+                                                $('img:nth-last-child(5)').addClass 'remove'
+                                                return
+                                            return

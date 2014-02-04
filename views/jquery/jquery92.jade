@@ -1,0 +1,116 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;$(':last-of-type擬似クラス') 課題
+                    .panel-body
+                        p ボタンをクリックして、last-of-typeのp要素を回転させてみましょう。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise91/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | &nbsp;解答例
+                        #demo.collapse.out
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                                link(rel='stylesheet',href='style.css')
+                                            body
+                                                p: input(type='button',value='回転')
+                                                article
+                                                    p
+                                                        | テキストテキストテキストテキスト<br>
+                                                        | テキストテキストテキストテキスト<br>
+                                                        | テキストテキストテキストテキスト<br>
+                                                        | テキストテキストテキストテキスト
+                                                    p
+                                                        | テキストテキストテキストテキスト<br>
+                                                        | テキストテキストテキストテキスト<br>
+                                                        | テキストテキストテキストテキスト<br>
+                                                        | テキストテキストテキストテキスト
+                                                    p
+                                                        | テキストテキストテキストテキスト<br>
+                                                        | テキストテキストテキストテキスト<br>
+                                                        | テキストテキストテキストテキスト<br>
+                                                        | テキストテキストテキストテキスト
+                                                    p テキストテキストテキストテキスト
+                                                    footer フッター要素フッター要素フッター要素
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                                link(rel='stylesheet',href='style.css')
+                                            body
+                                                p: input(type='button',value='回転')
+                                                article
+                                                    -for(var i = 0; i < 3; i++)
+                                                        p
+                                                            | テキストテキストテキストテキスト<br>
+                                                            | テキストテキストテキストテキスト<br>
+                                                            | テキストテキストテキストテキスト<br>
+                                                            | テキストテキストテキストテキスト
+                                                    p テキストテキストテキストテキスト
+                                                    footer フッター要素フッター要素フッター要素
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        prefix(prop, val)
+                                            -webkit-{prop} val
+                                            {prop} val
+
+                                        article
+                                            position relative
+                                            width 400px
+
+                                        .turn
+                                            position absolute
+                                            right 0
+                                            bottom 0
+                                            prefix('transform', rotate(0deg))  
+                                            prefix('animation-name', myanim)    
+                                            prefix('animation-duration', 1s)
+                                            prefix('animation-timing-function', linear)
+                                            prefix('animation-iteration-count', infinite)
+
+                                        @keyframes myanim
+                                            0%
+                                                prefix('transform', rotate(0deg))
+                                            100%
+                                                prefix('transform', rotate(360deg))
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $(function() {
+                                            $('input').click(function() {
+                                                $('article p:last-of-type').addClass('turn');
+                                            });
+                                        });
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $ ->
+                                            $('input').click ->
+                                                $('article p:last-of-type').addClass('turn')
+                                                return
+                                            return

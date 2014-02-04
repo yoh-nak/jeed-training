@@ -1,220 +1,220 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;コマンドリスト
-						.panel-body
-							.alert.alert-info コマンドリスト
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-										| （※）
-									td
-										img(src='../images/ic-android.png')
-										| （※）
-									td
-										img(src='../images/ic-firefox.png')
-										| （※）
-									td
-										img(src='../images/ic-safari.png')
-										| （※）
-									td
-										img(src='../images/ic-chrome.png')
-										| （※）
-									td
-										img(src='../images/ic-opera.png')
-										| （※）
-									td
-										img(src='../images/ic-ie.png')
-										| （※）
-							p ※ 一部非対応
-							pre
-								| &lt;menu&gt;…&lt;/menu&gt;
-							table.table
-								tr
-									td カテゴリー
-									td フローコンテンツ／インタラクティブコンテンツ（type属性の値がtoolbarの場合）／パルパブルコンテンツ（type属性の値がtoolbarまたはtype属性を省略した場合）
-								tr
-									td 記述可能な場所
-									td
-										| フローコンテンツが記述できる場所
-								tr
-									td コンテンツモデル
-									td 0個以上の&lt;li&gt;、またはフローコンテンツ
-								tr
-									td 構成するボックス
-									td -（ブロックボックスを構成することが期待される）
-								tr
-									td 属性
-									td type／label／グローバル
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| menu {
-											| 	display: block;
-											| 	margin-top: 1em;
-											| 	margin-bottom: 1em;
-											| 	padding-left: 40em;
-											| 	list-style-type: disc
-											| }
-											| menu[type=context]{
-											| 	display: none;
-											| }
-							pre
-								| &lt;command&gt;
-							table.table
-								tr
-									td カテゴリー
-									td メタデータコンテンツ／フローコンテンツ／フレージングコンテンツ
-								tr
-									td 記述可能な場所
-									td
-										| メタデータコンテンツまたはフレージングコンテンツが記述できる場所
-								tr
-									td コンテンツモデル
-									td 空
-								tr
-									td 構成するボックス
-									td none
-								tr
-									td 属性
-									td type／label／icon／disabled／checked／radiogroup／command／グローバル
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| command {
-											| 	display: none;
-											| }
-							pre(class='prettyprint linenums:1')
-								| &lt;menu&gt;
-								| &lt;li class="voting upvoted" data-role="voting"&gt;
-								| &lt;a class="vote-up upvoted" title="Vote up" data-action="upvote" href="#"&gt;
-								| &lt;span class="updatable count count-1" data-role="links"&gt;1&lt;/span&gt;
-								| ...
-								| &lt;/li&gt;
-								| &lt;li class="bullet" aria-hidden="true"&gt;・&lt;/li&gt;
-								| &lt;li class="edit"&gt;
-								| ...
-								| &lt;/li&gt;
-								| &lt;li class="bullet" aria-hidden="true"&gt;・&lt;/li&gt;
-								| &lt;li class="reply"&gt;
-								| ...
-								| &lt;/li&gt;
-								| &lt;li class="bullet" aria-hidden="true"&gt;・&lt;/li&gt;
-								| &lt;li class="share"&gt;
-								| ...
-								| &lt;/li&gt;
-								| &lt;/menu&gt;
-							p='ユーザーが実行することのできるコマンドをリストアップし、メニューとして表示したい場合、各コマンドを<li>で、全体を<menu>でマークアップし、コマンドリストであることを示します。'
-							p='たとえば、高機能なコメントサービスを提供するDISQUS（http://disqus.com/ ）では、各コメントの評価・編集・返信・シェアのボタンがユーザーの実行できるコマンドとして<menu>と<li>でマークアップされています。'
-							.alert.alert-success DIFFERENCES: 
-							p='HTML4.01やXHTML1.0では<menu>は非推奨とされていましたが、HTML5ではコマンドリストを示すものとして採用されています。'
-							p='<menu>で示したコマンドリストは、標準ではリスト形式での表示となりますが、type属性の指定により、コンテキストメニューやツールバーの形で表示することも可能です。ただし、type属性の指定には各ブラウザともに未対応となっています。'
-							p='また、各コマンドは<command>で示すこともできますが、こちらについても各ブラウザは未対応です。'
-							table.table
-								tr
-									th='<menu>のtype属性の値'
-									th 表示形式
-								tr
-									td context
-									td コンテキストメニュー
-								tr
-									td toolbar
-									td ツールバー
-								tr
-									td なし（type属性を省略）
-									td リスト
-							.alert.alert-warning NOTES: コマンドリスト関連の変更
-							p='WHATWGのHTML Living StandardとW3CのHTML5.1 Nightlyでは<menu>のtype属性で指定できる値が下のように変更されています。また、<command>は<menuitem>に変更されていますので注意が必要です。'
-							table
-								tr
-									th='type属性の値'
-									th 表示形式
-								tr
-									td popup
-									td ポップアップメニュー（コンテキストメニューなど）
-								tr
-									td toolbar
-									td ツールバー
-								tr
-									td なし（type属性を省略）
-									td='ツールバー（※親要素に<menu type="toolbar">がある場合はポップアップメニュー）'
-							.alert.alert-warning='NOTES: <menu>と<menuitem>によるコンテキストメニューの表示'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/10/294.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;img id="photo" contextmenu="mymenu" src="img/tea.jpg" alt="テーブルに紅茶とケーキのセットをサーブしました。ケーキはパウンドケーキにチーズケーキ、チョコレートケーキにアイスクリームを添えて、紅茶は白いティーポットに入れてお出ししています。"&gt;
-								| 
-								| 
-								| &lt;menu type="context" id="mymenu"&gt;
-								|      &lt;menuitem label="水平方向に反転" onclick="fliph()" icon="img/fliph.png"&gt;&lt;/menuitem&gt;
-								|      &lt;menuitem label="垂直方向に反転" onclick="flipv()" icon="img/flipv.png"&gt;&lt;/menuitem&gt;
-								| &lt;/menu&gt;
-								| 
-								| &lt;script&gt;
-								| function fliph() {
-								|      document.querySelector("#photo").classList.toggle("fliph");
-								| }
-								| 
-								| function flipv() {
-								|      document.querySelector("#photo").classList.toggle("flipv");
-								| }
-								| &lt;/script&gt;
-							pre(class='prettyprint linenums:1')
-								| .fliph	{-moz-transform: rotateY(180deg);}
-								| .flipv	{-moz-transform: rotateX(180deg);}
-								| .fliph.flipv	{-moz-transform: rotateY(180deg) rotateX(180deg);}
-								| 
-								| img	{-moz-transition: 0.2s;}
-							p='まず、<menu>で示したコマンドリストを画像に適用するため、<img>にグローバル属性のcontextmenu属性を追加し、<menu>のIDを指定します。ここではIDを「mymenu」と指定しています。'
-							p='次に、コマンドリストをコンテキストメニューの形で表示するため、<menu>のtype属性の値を「context」と指定します。'
-							p='各コマンドは<menuitem>で示します。<menuitem>で指定できる属性は以下のようになっており、サンプルではlabel属性でラベルを、icon属性でアイコン画像を指定しています。また、onclick属性ではコマンドを選択したときに実行する処理をJavaScriptで指定しています。ここではメニューの選択に応じて<img>に「fliph」や「flipv」というクラス名を付加し、CSS3のtansformプロパティで反転処理を適用するようにしています。'
-							table.table
-								tr
-									th='<menuitem>の属性'
-									th 機能
-								tr
-									td type
-									td コマンドの種類<br>（command、checkbox、radio）を指定。
-								tr
-									td label
-									td コマンドラインのラベルを指定。
-								tr
-									td icon
-									td コマンドのアイコンを指定。
-								tr
-									td disabled ※
-									td コマンドの無効化。
-								tr
-									td checked ※
-									td 初期状態をオンにする（type属性の値がcheckboxまたはradioの場合のみ指定可能）。
-								tr
-									td radiogroup
-									td コマンドのグループを指定（type属性のあち阿賀radioの場合のみ指定可能）。
-								tr
-									td command ※
-									td コマンドとして実行する要素のIDを指定。
-								tr
-									td default ※
-									td 標準で実行するコマンドを指定。
-							p ※ ... ブーリアン属性
-							p='なお、<menuitem>はHTML Living StandardやHTML5.1 NightlyではVideo要素として定義されていますので、終了タグ</menuitem>を記述する必要はありません。ただし、Firefoxでは</menuitem>がないと正しく処理が行われないため、サンプルでは記述するようにしています。'
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;コマンドリスト
+                        .panel-body
+                            .alert.alert-info コマンドリスト
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                        | （※）
+                                    td
+                                        img(src='../images/ic-android.png')
+                                        | （※）
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                        | （※）
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                        | （※）
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                        | （※）
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                        | （※）
+                                    td
+                                        img(src='../images/ic-ie.png')
+                                        | （※）
+                            p ※ 一部非対応
+                            pre
+                                | &lt;menu&gt;…&lt;/menu&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td フローコンテンツ／インタラクティブコンテンツ（type属性の値がtoolbarの場合）／パルパブルコンテンツ（type属性の値がtoolbarまたはtype属性を省略した場合）
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | フローコンテンツが記述できる場所
+                                tr
+                                    td コンテンツモデル
+                                    td 0個以上の&lt;li&gt;、またはフローコンテンツ
+                                tr
+                                    td 構成するボックス
+                                    td -（ブロックボックスを構成することが期待される）
+                                tr
+                                    td 属性
+                                    td type／label／グローバル
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        pre
+                                            | menu {
+                                            |     display: block;
+                                            |     margin-top: 1em;
+                                            |     margin-bottom: 1em;
+                                            |     padding-left: 40em;
+                                            |     list-style-type: disc
+                                            | }
+                                            | menu[type=context]{
+                                            |     display: none;
+                                            | }
+                            pre
+                                | &lt;command&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td メタデータコンテンツ／フローコンテンツ／フレージングコンテンツ
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | メタデータコンテンツまたはフレージングコンテンツが記述できる場所
+                                tr
+                                    td コンテンツモデル
+                                    td 空
+                                tr
+                                    td 構成するボックス
+                                    td none
+                                tr
+                                    td 属性
+                                    td type／label／icon／disabled／checked／radiogroup／command／グローバル
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        pre
+                                            | command {
+                                            |     display: none;
+                                            | }
+                            pre(class='prettyprint linenums:1')
+                                | &lt;menu&gt;
+                                | &lt;li class="voting upvoted" data-role="voting"&gt;
+                                | &lt;a class="vote-up upvoted" title="Vote up" data-action="upvote" href="#"&gt;
+                                | &lt;span class="updatable count count-1" data-role="links"&gt;1&lt;/span&gt;
+                                | ...
+                                | &lt;/li&gt;
+                                | &lt;li class="bullet" aria-hidden="true"&gt;・&lt;/li&gt;
+                                | &lt;li class="edit"&gt;
+                                | ...
+                                | &lt;/li&gt;
+                                | &lt;li class="bullet" aria-hidden="true"&gt;・&lt;/li&gt;
+                                | &lt;li class="reply"&gt;
+                                | ...
+                                | &lt;/li&gt;
+                                | &lt;li class="bullet" aria-hidden="true"&gt;・&lt;/li&gt;
+                                | &lt;li class="share"&gt;
+                                | ...
+                                | &lt;/li&gt;
+                                | &lt;/menu&gt;
+                            p='ユーザーが実行することのできるコマンドをリストアップし、メニューとして表示したい場合、各コマンドを<li>で、全体を<menu>でマークアップし、コマンドリストであることを示します。'
+                            p='たとえば、高機能なコメントサービスを提供するDISQUS（http://disqus.com/ ）では、各コメントの評価・編集・返信・シェアのボタンがユーザーの実行できるコマンドとして<menu>と<li>でマークアップされています。'
+                            .alert.alert-success DIFFERENCES: 
+                            p='HTML4.01やXHTML1.0では<menu>は非推奨とされていましたが、HTML5ではコマンドリストを示すものとして採用されています。'
+                            p='<menu>で示したコマンドリストは、標準ではリスト形式での表示となりますが、type属性の指定により、コンテキストメニューやツールバーの形で表示することも可能です。ただし、type属性の指定には各ブラウザともに未対応となっています。'
+                            p='また、各コマンドは<command>で示すこともできますが、こちらについても各ブラウザは未対応です。'
+                            table.table
+                                tr
+                                    th='<menu>のtype属性の値'
+                                    th 表示形式
+                                tr
+                                    td context
+                                    td コンテキストメニュー
+                                tr
+                                    td toolbar
+                                    td ツールバー
+                                tr
+                                    td なし（type属性を省略）
+                                    td リスト
+                            .alert.alert-warning NOTES: コマンドリスト関連の変更
+                            p='WHATWGのHTML Living StandardとW3CのHTML5.1 Nightlyでは<menu>のtype属性で指定できる値が下のように変更されています。また、<command>は<menuitem>に変更されていますので注意が必要です。'
+                            table
+                                tr
+                                    th='type属性の値'
+                                    th 表示形式
+                                tr
+                                    td popup
+                                    td ポップアップメニュー（コンテキストメニューなど）
+                                tr
+                                    td toolbar
+                                    td ツールバー
+                                tr
+                                    td なし（type属性を省略）
+                                    td='ツールバー（※親要素に<menu type="toolbar">がある場合はポップアップメニュー）'
+                            .alert.alert-warning='NOTES: <menu>と<menuitem>によるコンテキストメニューの表示'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/10/294.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;img id="photo" contextmenu="mymenu" src="img/tea.jpg" alt="テーブルに紅茶とケーキのセットをサーブしました。ケーキはパウンドケーキにチーズケーキ、チョコレートケーキにアイスクリームを添えて、紅茶は白いティーポットに入れてお出ししています。"&gt;
+                                | 
+                                | 
+                                | &lt;menu type="context" id="mymenu"&gt;
+                                |      &lt;menuitem label="水平方向に反転" onclick="fliph()" icon="img/fliph.png"&gt;&lt;/menuitem&gt;
+                                |      &lt;menuitem label="垂直方向に反転" onclick="flipv()" icon="img/flipv.png"&gt;&lt;/menuitem&gt;
+                                | &lt;/menu&gt;
+                                | 
+                                | &lt;script&gt;
+                                | function fliph() {
+                                |      document.querySelector("#photo").classList.toggle("fliph");
+                                | }
+                                | 
+                                | function flipv() {
+                                |      document.querySelector("#photo").classList.toggle("flipv");
+                                | }
+                                | &lt;/script&gt;
+                            pre(class='prettyprint linenums:1')
+                                | .fliph    {-moz-transform: rotateY(180deg);}
+                                | .flipv    {-moz-transform: rotateX(180deg);}
+                                | .fliph.flipv    {-moz-transform: rotateY(180deg) rotateX(180deg);}
+                                | 
+                                | img    {-moz-transition: 0.2s;}
+                            p='まず、<menu>で示したコマンドリストを画像に適用するため、<img>にグローバル属性のcontextmenu属性を追加し、<menu>のIDを指定します。ここではIDを「mymenu」と指定しています。'
+                            p='次に、コマンドリストをコンテキストメニューの形で表示するため、<menu>のtype属性の値を「context」と指定します。'
+                            p='各コマンドは<menuitem>で示します。<menuitem>で指定できる属性は以下のようになっており、サンプルではlabel属性でラベルを、icon属性でアイコン画像を指定しています。また、onclick属性ではコマンドを選択したときに実行する処理をJavaScriptで指定しています。ここではメニューの選択に応じて<img>に「fliph」や「flipv」というクラス名を付加し、CSS3のtansformプロパティで反転処理を適用するようにしています。'
+                            table.table
+                                tr
+                                    th='<menuitem>の属性'
+                                    th 機能
+                                tr
+                                    td type
+                                    td コマンドの種類<br>（command、checkbox、radio）を指定。
+                                tr
+                                    td label
+                                    td コマンドラインのラベルを指定。
+                                tr
+                                    td icon
+                                    td コマンドのアイコンを指定。
+                                tr
+                                    td disabled ※
+                                    td コマンドの無効化。
+                                tr
+                                    td checked ※
+                                    td 初期状態をオンにする（type属性の値がcheckboxまたはradioの場合のみ指定可能）。
+                                tr
+                                    td radiogroup
+                                    td コマンドのグループを指定（type属性のあち阿賀radioの場合のみ指定可能）。
+                                tr
+                                    td command ※
+                                    td コマンドとして実行する要素のIDを指定。
+                                tr
+                                    td default ※
+                                    td 標準で実行するコマンドを指定。
+                            p ※ ... ブーリアン属性
+                            p='なお、<menuitem>はHTML Living StandardやHTML5.1 NightlyではVideo要素として定義されていますので、終了タグ</menuitem>を記述する必要はありません。ただし、Firefoxでは</menuitem>がないと正しく処理が行われないため、サンプルでは記述するようにしています。'
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

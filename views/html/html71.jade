@@ -1,102 +1,102 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;計算結果
-						.panel-body
-							.alert.alert-info 計算結果
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td.not-support
-										img(src='../images/ic-ie.png')
-							p ※ iOS4.xとAndroid2.3.xは未対応。
-							pre
-								| &lt;output&gt;...&lt;/output&gt;
-							table.table
-								tr
-									td カテゴリー
-									td
-										| フローコンテンツ／フレージングコンテンツ／リスティッド要素／ラベラブル要素／リセッタブル要素／フォームアソシエイティッド要素／パルパブルコンテンツ
-								tr
-									td 記述可能な場所
-									td
-										| フレージングコンテンツが記述できる場所
-								tr
-									td コンテンツモデル
-									td フレージングコンテンツ
-								tr
-									td 構成するボックス
-									td inline
-								tr
-									td 属性
-									td for／form／name／グローバル
-								tr
-									td 標準的なスタイル
-									td
-										| -
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/284.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;h1&gt;CALCULATOR&lt;/h1&gt;
-								| 
-								| &lt;form oninput="total.value = num01.valueAsNumber + num02.valueAsNumber"&gt;
-								| &lt;input name="num01" type="number" value="0"&gt;
-								|  +
-								| &lt;input name="num02" type="number" value="0"&gt;
-								|  =
-								| &lt;output name="total"&gt;&lt;/output&gt;
-								| &lt;/form&gt;
-							p='<output>は計算結果を示す要素です。他のフォーム関連要素のようにテキストボックスなどの構成は行わず、計算結果のデータも、サーバーには送信されません。'
-							p='たとえば、サンプルでは<input type="number">で数値を入力するためのコントロールを2つ用意し、合計値を<output>で示すようにしています。'
-							.alert.alert-warning NOTES: 
-							p='サンプルでは、HTML5で用意されたJavaScriptの「valueAsNumber」を利用して、<input type="number">に入力された値を数値として扱うようにしています。ただし、「valueAsNumber」にはfirefoxが未対応です。対応する必要がある場合には次のように記述することも可能です。'
-							pre(class='prettyprint linenums:1')='<form oninput=total.value = Number(num01.value) + Number(num02.value)">'
-							p='<output>で指定できる属性は下のようになっています。このうち、for属性を利用すると計算する数値との関連を明示することができます。たとえば、次のように、<input type="number">のID属性をfor属性で指定します。'
-							pre(class='prettyprint linenums:1')
-								| &lt;input id="num01" name="num01" type="number" value="0"&gt;
-								|  +
-								| &lt;input id="num02" name="num02" type="number" value="0"&gt;
-								|  =
-								| &lt;output for="num01 num02" name="total"&gt;&lt;/output&gt;
-								| &lt;/form&gt;
-							table.table
-								tr
-									th='<output>で指定できる属性'
-									th 機能
-								tr
-									td for
-									td 計算する値との関連付け
-								tr
-									td form
-									td='<form>との関連付け'
-								tr
-									td name
-									td コントロール名の指定
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;計算結果
+                        .panel-body
+                            .alert.alert-info 計算結果
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td.not-support
+                                        img(src='../images/ic-ie.png')
+                            p ※ iOS4.xとAndroid2.3.xは未対応。
+                            pre
+                                | &lt;output&gt;...&lt;/output&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td
+                                        | フローコンテンツ／フレージングコンテンツ／リスティッド要素／ラベラブル要素／リセッタブル要素／フォームアソシエイティッド要素／パルパブルコンテンツ
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | フレージングコンテンツが記述できる場所
+                                tr
+                                    td コンテンツモデル
+                                    td フレージングコンテンツ
+                                tr
+                                    td 構成するボックス
+                                    td inline
+                                tr
+                                    td 属性
+                                    td for／form／name／グローバル
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        | -
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/284.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;h1&gt;CALCULATOR&lt;/h1&gt;
+                                | 
+                                | &lt;form oninput="total.value = num01.valueAsNumber + num02.valueAsNumber"&gt;
+                                | &lt;input name="num01" type="number" value="0"&gt;
+                                |  +
+                                | &lt;input name="num02" type="number" value="0"&gt;
+                                |  =
+                                | &lt;output name="total"&gt;&lt;/output&gt;
+                                | &lt;/form&gt;
+                            p='<output>は計算結果を示す要素です。他のフォーム関連要素のようにテキストボックスなどの構成は行わず、計算結果のデータも、サーバーには送信されません。'
+                            p='たとえば、サンプルでは<input type="number">で数値を入力するためのコントロールを2つ用意し、合計値を<output>で示すようにしています。'
+                            .alert.alert-warning NOTES: 
+                            p='サンプルでは、HTML5で用意されたJavaScriptの「valueAsNumber」を利用して、<input type="number">に入力された値を数値として扱うようにしています。ただし、「valueAsNumber」にはfirefoxが未対応です。対応する必要がある場合には次のように記述することも可能です。'
+                            pre(class='prettyprint linenums:1')='<form oninput=total.value = Number(num01.value) + Number(num02.value)">'
+                            p='<output>で指定できる属性は下のようになっています。このうち、for属性を利用すると計算する数値との関連を明示することができます。たとえば、次のように、<input type="number">のID属性をfor属性で指定します。'
+                            pre(class='prettyprint linenums:1')
+                                | &lt;input id="num01" name="num01" type="number" value="0"&gt;
+                                |  +
+                                | &lt;input id="num02" name="num02" type="number" value="0"&gt;
+                                |  =
+                                | &lt;output for="num01 num02" name="total"&gt;&lt;/output&gt;
+                                | &lt;/form&gt;
+                            table.table
+                                tr
+                                    th='<output>で指定できる属性'
+                                    th 機能
+                                tr
+                                    td for
+                                    td 計算する値との関連付け
+                                tr
+                                    td form
+                                    td='<form>との関連付け'
+                                tr
+                                    td name
+                                    td コントロール名の指定
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

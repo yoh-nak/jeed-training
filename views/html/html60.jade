@@ -1,168 +1,168 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;列のグループ
-						.panel-body
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							.alert.alert-info 列のグループ
-							pre
-								| &lt;colgroup&gt;...&lt;/colgroup&gt;
-							table.table
-								tr
-									td カテゴリー
-									td なし
-								tr
-									td 記述可能な場所
-									td
-										| &lt;table&gt;内の子要素として&lt;caption&gt;の後、&lt;thead&gt;、&lt;tbody&gt;、&lt;tfoot&gt;、&lt;tr&gt;の前に記述可能
-								tr
-									td コンテンツモデル
-									td
-										| ・span属性を持つ場合：空
-										| ・span属性を持たない場合：
-										| 	ゼロまたは1つ以上の&lt;col&gt;
-								tr
-									td 構成するボックス
-									td table-column-group
-								tr
-									td 属性
-									td span／グローバル 
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| colgroup {
-											| 	display: table-column-group;
-											| 	unicode-bidi: isolate;
-											| }
-							.alert.alert-info グループに属する列
-							pre
-								| &lt;col&gt;
-							table.table
-								tr
-									td カテゴリー
-									td なし
-								tr
-									td 記述可能な場所
-									td
-										| span属性を持たない&lt;colgroup&gt;内の子要素として記述可能
-								tr
-									td コンテンツモデル
-									td 空
-								tr
-									td 構成するボックス
-									td table-column
-								tr
-									td 属性
-									td span／グローバル 
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| col {
-											| 	display: table-column;
-											| 	unicode-bidi: isolate;
-											| }
-							p
-								a.btn.btn-default(href='../demo/html/sample1/08/229.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
-								| 
-								| &lt;table&gt;
-								| &lt;caption&gt;取扱い茶葉一覧&lt;/caption&gt;
-								| &lt;colgroup&gt;&lt;col&gt;&lt;/colgroup&gt;
-								| &lt;colgroup&gt;&lt;col&gt;&lt;col&gt;&lt;/colgroup&gt;
-								| &lt;tr&gt;
-								|     &lt;th&gt;銘柄&lt;/th&gt;
-								|     &lt;th&gt;産地&lt;/th&gt;
-								|     &lt;th&gt;茶葉100gの価格&lt;/th&gt;
-								| &lt;/tr&gt;
-								| ...
-								| &lt;/table&gt;
-							pre(class='prettyprint linenums:1')
-								| colgroup:nth-of-type(1)	{background: #d2bc8c;}
-								| colgroup:nth-of-type(2)	{background: #f2eeb0;}
-								| ...
-							p='<colgroup>はテーブルの列のグループを示す要素です。キャプションをつけている場合は<caption>の後に記述します。'
-							p='たとえば、上のサンプルでは１列と２列で構成される２つのグループを示しています。また、スタイルシートを適用し、１つ目のグループの背景は茶色で、２つ目のグループの背景は黄色で表示しています。'
-							.alert.alert-warning NOTES: 
-							p='<colgroup>や<col>に適用できるプロパティは、CSS2.1においてborder、background、width、visibilityの4種類と定義されています。なお、CSS3におけるテーブル関連の草案はまだリリースされていません。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/08/230-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
-								| 
-								| &lt;table&gt;
-								| &lt;caption&gt;取扱い茶葉一覧&lt;/caption&gt;
-								| &lt;colgroup&gt;&lt;/colgroup&gt;
-								| &lt;colgroup span="2"&gt;&lt;/colgroup&gt;
-								| &lt;tr&gt;
-								|     &lt;th&gt;銘柄&lt;/th&gt;
-								|     &lt;th&gt;産地&lt;/th&gt;
-								|     &lt;th&gt;茶葉100gの価格&lt;/th&gt;
-								| &lt;/tr&gt;
-								| ...
-								| &lt;/table&gt;
-							pre(class='prettyprint linenums:1')
-								| colgroup:nth-of-type(1)	{background: #d2bc8c;}
-								| colgroup:nth-of-type(2)	{background: #f2eeb0;}
-								| ...
-							p='グループに属する列の数は<col>を使わずに示すこともできます。その場合、列の数は<colgroup>のspan属性で指定します。値が「1」の場合はspan属性を省略することが可能です。なお、span属性を指定した場合、<colgroup>内に<col>を記述することは認められていません。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/08/230-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
-								| 
-								| &lt;table&gt;
-								| &lt;caption&gt;取扱い茶葉一覧&lt;/caption&gt;
-								| &lt;colgroup&gt;&lt;col&gt;&lt;/colgroup&gt;
-								| &lt;colgroup&gt;&lt;col span="2"&gt;&lt;/colgroup&gt;
-								| &lt;tr&gt;
-								|    &lt;th&gt;銘柄&lt;/th&gt;
-								|     &lt;th&gt;産地&lt;/th&gt;
-								|     &lt;th&gt;茶葉100gの価格&lt;/th&gt;
-								| &lt;/tr&gt;
-								| &lt;/table&gt;
-							pre(class='prettyprint linenums:1')
-								| colgroup:nth-of-type(1)	{background: #d2bc8c;}
-								| colgroup:nth-of-type(2)	{background: #f2eeb0;}
-								| ...
-							p='span属性は<col>で利用することも可能です。たとえば、「<col><col>」の代わりに「<col span="2">」と指定しても、２つ目のグループに２つの列が属していることを示すことができます。'
-							.alert.alert-warning NOTES: 
-							p='すべての列がグループに属している必要はありません。ただし、グループは1列目から順に指定する仕組みになっているため、1列目を飛ばして2列目移行をグループ化することはできません。'
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;列のグループ
+                        .panel-body
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            .alert.alert-info 列のグループ
+                            pre
+                                | &lt;colgroup&gt;...&lt;/colgroup&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td なし
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | &lt;table&gt;内の子要素として&lt;caption&gt;の後、&lt;thead&gt;、&lt;tbody&gt;、&lt;tfoot&gt;、&lt;tr&gt;の前に記述可能
+                                tr
+                                    td コンテンツモデル
+                                    td
+                                        | ・span属性を持つ場合：空
+                                        | ・span属性を持たない場合：
+                                        |     ゼロまたは1つ以上の&lt;col&gt;
+                                tr
+                                    td 構成するボックス
+                                    td table-column-group
+                                tr
+                                    td 属性
+                                    td span／グローバル 
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        pre
+                                            | colgroup {
+                                            |     display: table-column-group;
+                                            |     unicode-bidi: isolate;
+                                            | }
+                            .alert.alert-info グループに属する列
+                            pre
+                                | &lt;col&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td なし
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | span属性を持たない&lt;colgroup&gt;内の子要素として記述可能
+                                tr
+                                    td コンテンツモデル
+                                    td 空
+                                tr
+                                    td 構成するボックス
+                                    td table-column
+                                tr
+                                    td 属性
+                                    td span／グローバル 
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        pre
+                                            | col {
+                                            |     display: table-column;
+                                            |     unicode-bidi: isolate;
+                                            | }
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/08/229.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+                                | 
+                                | &lt;table&gt;
+                                | &lt;caption&gt;取扱い茶葉一覧&lt;/caption&gt;
+                                | &lt;colgroup&gt;&lt;col&gt;&lt;/colgroup&gt;
+                                | &lt;colgroup&gt;&lt;col&gt;&lt;col&gt;&lt;/colgroup&gt;
+                                | &lt;tr&gt;
+                                |     &lt;th&gt;銘柄&lt;/th&gt;
+                                |     &lt;th&gt;産地&lt;/th&gt;
+                                |     &lt;th&gt;茶葉100gの価格&lt;/th&gt;
+                                | &lt;/tr&gt;
+                                | ...
+                                | &lt;/table&gt;
+                            pre(class='prettyprint linenums:1')
+                                | colgroup:nth-of-type(1)    {background: #d2bc8c;}
+                                | colgroup:nth-of-type(2)    {background: #f2eeb0;}
+                                | ...
+                            p='<colgroup>はテーブルの列のグループを示す要素です。キャプションをつけている場合は<caption>の後に記述します。'
+                            p='たとえば、上のサンプルでは１列と２列で構成される２つのグループを示しています。また、スタイルシートを適用し、１つ目のグループの背景は茶色で、２つ目のグループの背景は黄色で表示しています。'
+                            .alert.alert-warning NOTES: 
+                            p='<colgroup>や<col>に適用できるプロパティは、CSS2.1においてborder、background、width、visibilityの4種類と定義されています。なお、CSS3におけるテーブル関連の草案はまだリリースされていません。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/08/230-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+                                | 
+                                | &lt;table&gt;
+                                | &lt;caption&gt;取扱い茶葉一覧&lt;/caption&gt;
+                                | &lt;colgroup&gt;&lt;/colgroup&gt;
+                                | &lt;colgroup span="2"&gt;&lt;/colgroup&gt;
+                                | &lt;tr&gt;
+                                |     &lt;th&gt;銘柄&lt;/th&gt;
+                                |     &lt;th&gt;産地&lt;/th&gt;
+                                |     &lt;th&gt;茶葉100gの価格&lt;/th&gt;
+                                | &lt;/tr&gt;
+                                | ...
+                                | &lt;/table&gt;
+                            pre(class='prettyprint linenums:1')
+                                | colgroup:nth-of-type(1)    {background: #d2bc8c;}
+                                | colgroup:nth-of-type(2)    {background: #f2eeb0;}
+                                | ...
+                            p='グループに属する列の数は<col>を使わずに示すこともできます。その場合、列の数は<colgroup>のspan属性で指定します。値が「1」の場合はspan属性を省略することが可能です。なお、span属性を指定した場合、<colgroup>内に<col>を記述することは認められていません。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/08/230-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+                                | 
+                                | &lt;table&gt;
+                                | &lt;caption&gt;取扱い茶葉一覧&lt;/caption&gt;
+                                | &lt;colgroup&gt;&lt;col&gt;&lt;/colgroup&gt;
+                                | &lt;colgroup&gt;&lt;col span="2"&gt;&lt;/colgroup&gt;
+                                | &lt;tr&gt;
+                                |    &lt;th&gt;銘柄&lt;/th&gt;
+                                |     &lt;th&gt;産地&lt;/th&gt;
+                                |     &lt;th&gt;茶葉100gの価格&lt;/th&gt;
+                                | &lt;/tr&gt;
+                                | &lt;/table&gt;
+                            pre(class='prettyprint linenums:1')
+                                | colgroup:nth-of-type(1)    {background: #d2bc8c;}
+                                | colgroup:nth-of-type(2)    {background: #f2eeb0;}
+                                | ...
+                            p='span属性は<col>で利用することも可能です。たとえば、「<col><col>」の代わりに「<col span="2">」と指定しても、２つ目のグループに２つの列が属していることを示すことができます。'
+                            .alert.alert-warning NOTES: 
+                            p='すべての列がグループに属している必要はありません。ただし、グループは1列目から順に指定する仕組みになっているため、1列目を飛ばして2列目移行をグループ化することはできません。'
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

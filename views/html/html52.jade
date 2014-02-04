@@ -1,215 +1,215 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;外部コンテンツ
-						.panel-body
-							.alert.alert-info 外部コンテンツ
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-										| （※）
-									td
-										img(src='../images/ic-android.png')
-										| （※）
-									td
-										img(src='../images/ic-firefox.png')
-										| （※）
-									td
-										img(src='../images/ic-safari.png')
-										| （※）
-									td
-										img(src='../images/ic-chrome.png')
-										| （※）
-									td
-										img(src='../images/ic-opera.png')
-										| （※）
-									td
-										img(src='../images/ic-ie.png')
-										| （※）
-							p ※ 一部非対応
-							pre
-								| &lt;object&gt;...&lt;/object&gt;
-							table.table
-								tr
-									td カテゴリー
-									td フローコンテンツ／フレージングコンテンツ／エンベッディッドコンテンツ／インタラクティブコンテンツ（usemap属性を指定した場合）／リスティッド要素／送信できる要素／フォーム関連の要素／パルパブルコンテンツ
-								tr
-									td 記述可能な場所
-									td
-										| エンベッディッドコンテンツが記述できる場所
-								tr
-									td コンテンツモデル
-									td ゼロまたは1つ以上の&lt;param&gt;とそれに続くトランスペアレント
-								tr
-									td 構成するボックス
-									td - （置換要素として扱われることが期待される）
-								tr
-									td 属性
-									td data／type／typemustmatch／name／usemap／form／width／height／グローバル
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| -
-							pre
-								| &lt;param&gt;
-							table.table
-								tr
-									td カテゴリー
-									td なし
-								tr
-									td 記述可能な場所
-									td
-										| &lt;object&gt;の子要素としてフローコンテンツの前に記述可能
-								tr
-									td コンテンツモデル
-									td 空
-								tr
-									td 構成するボックス
-									td none
-								tr
-									td 属性
-									td name／value／グローバル
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| param {
-											| 	display: none;
-											| }
-							p='<object>は外部コンテンツを示す要素です。指定できる属性は下のようになっており、data属性で外部コンテンツのURLを、type属性でMIME TYPEを指定します。dataまたはtype属性のうちどちらか1つは必ず指定しなければなりません。サンプルのように両方を指定することも可能です。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/05/140.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;article&gt;
-								| &lt;h1&gt;About SUN DIARY&lt;/h1&gt;
-								| 
-								| &lt;object data="sun.swf" type="application/x-shockwave-flash" width="640" height="360"&gt;&lt;/object&gt;
-								| 
-								| &lt;/article&gt;
-							table.table
-								tr
-									th='<object>の属性'
-									th 機能
-								tr
-									td data
-									td コンテンツのURLを指定。
-								tr
-									td type
-									td コンテンツのMIME TYPEを指定。
-								tr
-									td typemustmatch
-									td type属性の値とコンテンツのMIME TYPEが一致した場合にコンテンツを表示するように指定。
-								tr
-									td name
-									td ブラウジング・コンテキスト名を指定。
-								tr
-									td usemap
-									td イメージマップの設定を指定。
-								tr
-									td form
-									td='<form>との関連付け。'
-								tr
-									td width
-									td 横幅を指定。
-								tr
-									td height
-									td 高さを指定。
-							p='外部コンテンツは必要に応じてプラグインを利用して表示されます。サンプルのようにFlashファイル（sun.swf）を指定した場合、Adobe Flash Playerプラグインが利用されます。ただし、画像やWebページを指定した場合、プラグインは利用されず、次のような形で表示されます。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/05/141-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;article&gt;
-								| &lt;hgroup&gt;
-								| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
-								| &lt;h2&gt;ちょっとしたお茶の時間&lt;/h2&gt;
-								| &lt;/hgroup&gt;
-								| 
-								| &lt;object data="img/tea.jpg" width="960" height="490"&gt;&lt;/object&gt;
-								| 
-								| &lt;/article&gt;
-							p='画像ファイルを指定した場合、<img>を使用したときと同じように表示されます。'
-							.alert.alert-success DIFFERENCES: 
-							p='HTML4.01やXHTML1.0で定義されていたarchive、classid、codebase、codetype、declare、standby、align、border、hspace、vspace属性はHTML5では廃止されています。これらの属性の中には利用するプラグインを明示するものもありますが、HTML5ではdataとtype属性によって明示できるものとされています。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/05/141-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;object data="content.html" width="1000" height="500"&gt;&lt;/object&gt; 
-							p='Webページを指定した場合、<iframe>を使用したときと同じようにインラインフレームの形で表示されます。'
-							p='なお、typemustmatch属性を利用すると、data属性で指定したコンテンツのMIME TYPEとtype属性の値が一致した場合にのみコンテンツを表示することになっています。ただし、現在のところ各ブラウザは未対応です。'
-							pre(class='prettyprint linenums:1')
-								| &lt;object data="〜" type="〜" typemustmatch&gt;
-								| &lt;/object&gt;
-							.alert.alert-info プラグインのパラメーター
-							p='<object>でプラグインを利用するコンテンツを表示した場合、プラグインのパラメーターは<param>内に記述し、name属性でパラメーター名を、value属性で値を指定します。'
-							p='たとえば、上のサンプルでは、Flashファイルを表示したサンプルに<param>を追加し、Flash Playerプラグインのbgcolorパラメーターで背景色をオレンジ色（#efb151）に、qualityパラメータで画質を（high）に設定しています。'
-							p='なお、セマンティクスの上では<param>は何も明示しません。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/05/142-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;article&gt;
-								| &lt;h1&gt;About SUN DIARY&lt;/h1&gt;
-								| 
-								| &lt;object data="sun.swf" type="application/x-shockwave-flash" width="640" height="360"&gt;
-								|      &lt;param name="bgcolor" value="#efb151"&gt;
-								|      &lt;param name="quality" value="high"&gt;
-								| &lt;/object&gt;
-								| 
-								| &lt;/article&gt;
-							table.table
-								tr
-									th='<param>の属性'
-									th 機能
-								tr
-									td name
-									td パラメータ名を指定。
-								tr
-									td value
-									td パラメータの値を指定。
-							.alert.alert-success DIFFERENCES: 
-							p='HTML4.01やXHTML1.0で定義されていたvaluetypeとtype属性はHTML5では廃止されています。'
-							.alert.alert-info 下位互換用のコンテンツ
-							p='<object>〜</object>の中には、下位互換用のコンテンツを記述することができます。このコンテンツは<object>に未対応だったり、必要なプラグインがインストールされていないときに表示されます。たとえば、Flash PlayerプラグインがリリースされていないiOSでは下位互換用のコンテンツが表示されます。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/05/142-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;article&gt;
-								| &lt;h1&gt;About SUN DIARY&lt;/h1&gt;
-								| 
-								| &lt;object data="sun.swf" type="application/x-shockwave-flash" width="640" height="360"&gt;
-								|      &lt;param name="bgcolor" value="#efb151"&gt;
-								|      &lt;param name="quality" value="high"&gt;
-								| 
-								|      &lt;img src="img/tea.jpg" alt=""&gt;
-								|      &lt;p&gt;SUN DIARYではおいしいお茶の紹介を行っています。&lt;/p&gt;
-								| &lt;/object&gt;
-								| 
-								| &lt;/article&gt;
-							.alert.alert-warning NOTES: 
-							p='<object>の中に<param>を記述している場合、下位互換用のコンテンツは<param>の後に記述します。'
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;外部コンテンツ
+                        .panel-body
+                            .alert.alert-info 外部コンテンツ
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                        | （※）
+                                    td
+                                        img(src='../images/ic-android.png')
+                                        | （※）
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                        | （※）
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                        | （※）
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                        | （※）
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                        | （※）
+                                    td
+                                        img(src='../images/ic-ie.png')
+                                        | （※）
+                            p ※ 一部非対応
+                            pre
+                                | &lt;object&gt;...&lt;/object&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td フローコンテンツ／フレージングコンテンツ／エンベッディッドコンテンツ／インタラクティブコンテンツ（usemap属性を指定した場合）／リスティッド要素／送信できる要素／フォーム関連の要素／パルパブルコンテンツ
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | エンベッディッドコンテンツが記述できる場所
+                                tr
+                                    td コンテンツモデル
+                                    td ゼロまたは1つ以上の&lt;param&gt;とそれに続くトランスペアレント
+                                tr
+                                    td 構成するボックス
+                                    td - （置換要素として扱われることが期待される）
+                                tr
+                                    td 属性
+                                    td data／type／typemustmatch／name／usemap／form／width／height／グローバル
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        pre
+                                            | -
+                            pre
+                                | &lt;param&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td なし
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | &lt;object&gt;の子要素としてフローコンテンツの前に記述可能
+                                tr
+                                    td コンテンツモデル
+                                    td 空
+                                tr
+                                    td 構成するボックス
+                                    td none
+                                tr
+                                    td 属性
+                                    td name／value／グローバル
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        pre
+                                            | param {
+                                            |     display: none;
+                                            | }
+                            p='<object>は外部コンテンツを示す要素です。指定できる属性は下のようになっており、data属性で外部コンテンツのURLを、type属性でMIME TYPEを指定します。dataまたはtype属性のうちどちらか1つは必ず指定しなければなりません。サンプルのように両方を指定することも可能です。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/05/140.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;article&gt;
+                                | &lt;h1&gt;About SUN DIARY&lt;/h1&gt;
+                                | 
+                                | &lt;object data="sun.swf" type="application/x-shockwave-flash" width="640" height="360"&gt;&lt;/object&gt;
+                                | 
+                                | &lt;/article&gt;
+                            table.table
+                                tr
+                                    th='<object>の属性'
+                                    th 機能
+                                tr
+                                    td data
+                                    td コンテンツのURLを指定。
+                                tr
+                                    td type
+                                    td コンテンツのMIME TYPEを指定。
+                                tr
+                                    td typemustmatch
+                                    td type属性の値とコンテンツのMIME TYPEが一致した場合にコンテンツを表示するように指定。
+                                tr
+                                    td name
+                                    td ブラウジング・コンテキスト名を指定。
+                                tr
+                                    td usemap
+                                    td イメージマップの設定を指定。
+                                tr
+                                    td form
+                                    td='<form>との関連付け。'
+                                tr
+                                    td width
+                                    td 横幅を指定。
+                                tr
+                                    td height
+                                    td 高さを指定。
+                            p='外部コンテンツは必要に応じてプラグインを利用して表示されます。サンプルのようにFlashファイル（sun.swf）を指定した場合、Adobe Flash Playerプラグインが利用されます。ただし、画像やWebページを指定した場合、プラグインは利用されず、次のような形で表示されます。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/05/141-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;article&gt;
+                                | &lt;hgroup&gt;
+                                | &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+                                | &lt;h2&gt;ちょっとしたお茶の時間&lt;/h2&gt;
+                                | &lt;/hgroup&gt;
+                                | 
+                                | &lt;object data="img/tea.jpg" width="960" height="490"&gt;&lt;/object&gt;
+                                | 
+                                | &lt;/article&gt;
+                            p='画像ファイルを指定した場合、<img>を使用したときと同じように表示されます。'
+                            .alert.alert-success DIFFERENCES: 
+                            p='HTML4.01やXHTML1.0で定義されていたarchive、classid、codebase、codetype、declare、standby、align、border、hspace、vspace属性はHTML5では廃止されています。これらの属性の中には利用するプラグインを明示するものもありますが、HTML5ではdataとtype属性によって明示できるものとされています。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/05/141-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;object data="content.html" width="1000" height="500"&gt;&lt;/object&gt; 
+                            p='Webページを指定した場合、<iframe>を使用したときと同じようにインラインフレームの形で表示されます。'
+                            p='なお、typemustmatch属性を利用すると、data属性で指定したコンテンツのMIME TYPEとtype属性の値が一致した場合にのみコンテンツを表示することになっています。ただし、現在のところ各ブラウザは未対応です。'
+                            pre(class='prettyprint linenums:1')
+                                | &lt;object data="〜" type="〜" typemustmatch&gt;
+                                | &lt;/object&gt;
+                            .alert.alert-info プラグインのパラメーター
+                            p='<object>でプラグインを利用するコンテンツを表示した場合、プラグインのパラメーターは<param>内に記述し、name属性でパラメーター名を、value属性で値を指定します。'
+                            p='たとえば、上のサンプルでは、Flashファイルを表示したサンプルに<param>を追加し、Flash Playerプラグインのbgcolorパラメーターで背景色をオレンジ色（#efb151）に、qualityパラメータで画質を（high）に設定しています。'
+                            p='なお、セマンティクスの上では<param>は何も明示しません。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/05/142-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;article&gt;
+                                | &lt;h1&gt;About SUN DIARY&lt;/h1&gt;
+                                | 
+                                | &lt;object data="sun.swf" type="application/x-shockwave-flash" width="640" height="360"&gt;
+                                |      &lt;param name="bgcolor" value="#efb151"&gt;
+                                |      &lt;param name="quality" value="high"&gt;
+                                | &lt;/object&gt;
+                                | 
+                                | &lt;/article&gt;
+                            table.table
+                                tr
+                                    th='<param>の属性'
+                                    th 機能
+                                tr
+                                    td name
+                                    td パラメータ名を指定。
+                                tr
+                                    td value
+                                    td パラメータの値を指定。
+                            .alert.alert-success DIFFERENCES: 
+                            p='HTML4.01やXHTML1.0で定義されていたvaluetypeとtype属性はHTML5では廃止されています。'
+                            .alert.alert-info 下位互換用のコンテンツ
+                            p='<object>〜</object>の中には、下位互換用のコンテンツを記述することができます。このコンテンツは<object>に未対応だったり、必要なプラグインがインストールされていないときに表示されます。たとえば、Flash PlayerプラグインがリリースされていないiOSでは下位互換用のコンテンツが表示されます。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/05/142-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;article&gt;
+                                | &lt;h1&gt;About SUN DIARY&lt;/h1&gt;
+                                | 
+                                | &lt;object data="sun.swf" type="application/x-shockwave-flash" width="640" height="360"&gt;
+                                |      &lt;param name="bgcolor" value="#efb151"&gt;
+                                |      &lt;param name="quality" value="high"&gt;
+                                | 
+                                |      &lt;img src="img/tea.jpg" alt=""&gt;
+                                |      &lt;p&gt;SUN DIARYではおいしいお茶の紹介を行っています。&lt;/p&gt;
+                                | &lt;/object&gt;
+                                | 
+                                | &lt;/article&gt;
+                            .alert.alert-warning NOTES: 
+                            p='<object>の中に<param>を記述している場合、下位互換用のコンテンツは<param>の後に記述します。'
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

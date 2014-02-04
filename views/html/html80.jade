@@ -1,170 +1,170 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;ファイルシステムと絶対パス
-						.panel-body
-							.alert.alert-info ファイルシステム
-							p ハードディスクのどこに何のファイルがあるのか、その情報を記録するのがファイルシステムです。。Windows、Unix系OSとではハードディスク内のデータの管理方法が異なっています。
-							h4 ファイルシステムの種類
-							p
-								| NTFS（NT File System）
-								br
-								| WindowsNT系OSのファイルシステム
-							p
-								| AT（File Allocation Table）／VFAT
-								br
-								| SDカードなどで使われるファイルシステム
-							p
-								| ext3
-								br
-								| ex4の前に使われていたファイルシステム
-							p
-								| ext4
-								br
-								| Linuxの標準的なファイルシステム
-							p
-								| UFS（Unix File System）
-								br
-								| Unix系OSのファイルシステム（Linux 、BSDではUFS互換のFSを実装）
-							p
-								| ZFS（Zettabyte File System）
-								br
-								| Oracle Solarisのファイルシステム
-							p
-								| ISO9600
-								br
-								| CD-ROMに使われるファイルシステム
-							p
-								| UDF
-								br
-								| DVDに使われるファイルシステム
-							.alert.alert-info ファイルシステムのディレクトリ階層（絶対パス）
-							p 絶対パスは装置内の上部から、特定のファイルやフォルダの場所を指し示すルートになります。PCでは「C:・・・\index.htm」のようにドライブからファイルなどを\で区切って場所を指定します。
-							h4 Windows
-							p 
-								| ディレクトリ
-								br
-								| C:\ディレクトリ\ディレクトリ\ディレクトリ\
-								br
-								| ファイル
-								br
-								| C:\ディレクトリ\ディレクトリ\ディレクトリ\ファイル
-							h4 Unix系OS（Linux、OSXを含む）
-							p 
-								| ディレクトリ
-								br
-								| /ディレクトリ/ディレクトリ/ディレクトリ/
-								br
-								| ファイル
-								br
-								| /ディレクトリ/ディレクトリ/ディレクトリ/ファイル
-							.alert.alert-info Windowsのディレクトリ構成
-							p
-								| Windows File System Namespace Usage Guidelines
-								br
-								a(href='http://www.microsoft.com/en-us/download/details.aspx?id=22322',target='_blank') http://www.microsoft.com/en-us/download/details.aspx?id=22322
-							h4 Program Files、ユーザー固有・アプリケーション共有データ
-							p 
-								| C:\Program Files:
-								br
-								| プログラム、ソフトウェアコンポーネント置き場
-								br
-								| 通常ユーザーはこの場所に書き込み権を持たないため、ユーザーデータやアプリケーションデータはここへ置くべきでない。
-							p
-								| C:\ProgramData:
-								br
-								| コンピューター上のすべてのユーザーが共有するアプリケーションデータ置き場
-							p
-								| C:\Users\&lt;ユーザー名&gt;\AppData:
-								br
-								| ユーザー固有のアプリケーションデータ置き場
-								br
-								| AppData以下はさらに階層構造を持つ
-							p
-								| C:\Uses\&lt;ユーザー名&gt;\AppData\Roaming
-								br
-								| コンピュータに依存しないユーザー固有のアプリケーションデータ置き場
-								br
-								| アプリケーションデータのうち、ユーザーカスタマイズ情報などで、ユーザーの操作を伴い変更するもの
-							p
-								| C:\Uses\&lt;ユーザー名&gt;\AppData\Local
-								br
-								| このコンピュータに固有のユーザー固有のアプリケーションデータ置き場
-								br
-								|アプリケーションデータのうち、一時的で破棄されてもアプリケーション動作に支障のないもの（ログ、デバッグ情報など）
-								br
-								| コンピュータに依存しないユーザー固有のアプリケーションデータでも、ユーザーの操作なしに再生成できるデータ（ユーザーが作成するカスタマイズ情報や設定情報は含まない）
-							p
-								| C:\Users\&lt;ユーザー名&gt;\AppData\LocalLow
-								br
-								| ユーザー固有の特権(管理者権限）なしに扱えるアプリケーションデータ
-							h4 ProgramDataおよびAppDataのサブフォルダ生成規約
-							p
-								| ベンダー名＋製品代表名（推奨）
-								br
-								| 例）C:\ProgramData\Microsoft\Office
-								br
-								| 例）AppData\Roaming\Microsoft\Office
-							p
-								| 必要があれば、製品内訳名（オプション）
-								br
-								| 例）C:\ProgramData\Microsoft\Office\Groove
-								br
-								| 例）AppData\Roaming\Microsoft\Office\Groove+ 
-							p
-								| 必要があれば、バージョン＋SKU情報（オプション）
-								br
-								| 例）C:\ProgramData\Microsoft\Office\Groove\2007 Ultimate Edition
-								br
-								| 例）AppData\Roaming\Microsoft\Office\Groove\2007 Ultimate Edition
-							.alert.alert-info Linuxのディレクトリ構成
-							p
-								| ／
-								br
-								| ├─ bin … 一般ユーザーが実行できる基本的なコマンド
-								br
-								| ├─ boot … システムの起動に必要なファイル
-								br
-								| ├─ dev … デバイスファイル
-								br
-								| ├─ etc … システム設定ファイルや起動スクリプト
-								br
-								| ├─ home … ユーザーのホームディレクトリ
-								br
-								| ├─ lib… ライブラリ
-								br
-								| ├─ lost+founc … 破損したファイル
-								br
-								| ├─ media … DVDドライブなどをマウントする場所
-								br
-								| ├─ proc … プロセス情報
-								br
-								| ├─ root … rootユーザー用ホームディレクトリ
-								br
-								| ├─ sbin … rootユーザーが実行できるシステム管理コマンド
-								br
-								| ├─ tmp … 一時的なファイル置き場
-								br
-								| ├─ usr … 各種プログラムやライブラリ、ドキュメントなど
-								br
-								| ├─ var .. ログファイルなどを更新されるファイル類
-							.alert.alert-info Webの絶対パス
-							p 
-								| Webでは「http://ドメイン/フォルダ名/ファイル名」のように、サーバーのURL、サーバー内の格納場所、ファイル名を指定し、そのファイルがネット上のどこに存在しているかを指定しています。
-								br
-								| 例） http://jeed-training.herokuapp.com/demo/html/sample1/03/062.html
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;ファイルシステムと絶対パス
+                        .panel-body
+                            .alert.alert-info ファイルシステム
+                            p ハードディスクのどこに何のファイルがあるのか、その情報を記録するのがファイルシステムです。。Windows、Unix系OSとではハードディスク内のデータの管理方法が異なっています。
+                            h4 ファイルシステムの種類
+                            p
+                                | NTFS（NT File System）
+                                br
+                                | WindowsNT系OSのファイルシステム
+                            p
+                                | AT（File Allocation Table）／VFAT
+                                br
+                                | SDカードなどで使われるファイルシステム
+                            p
+                                | ext3
+                                br
+                                | ex4の前に使われていたファイルシステム
+                            p
+                                | ext4
+                                br
+                                | Linuxの標準的なファイルシステム
+                            p
+                                | UFS（Unix File System）
+                                br
+                                | Unix系OSのファイルシステム（Linux 、BSDではUFS互換のFSを実装）
+                            p
+                                | ZFS（Zettabyte File System）
+                                br
+                                | Oracle Solarisのファイルシステム
+                            p
+                                | ISO9600
+                                br
+                                | CD-ROMに使われるファイルシステム
+                            p
+                                | UDF
+                                br
+                                | DVDに使われるファイルシステム
+                            .alert.alert-info ファイルシステムのディレクトリ階層（絶対パス）
+                            p 絶対パスは装置内の上部から、特定のファイルやフォルダの場所を指し示すルートになります。PCでは「C:・・・\index.htm」のようにドライブからファイルなどを\で区切って場所を指定します。
+                            h4 Windows
+                            p 
+                                | ディレクトリ
+                                br
+                                | C:\ディレクトリ\ディレクトリ\ディレクトリ\
+                                br
+                                | ファイル
+                                br
+                                | C:\ディレクトリ\ディレクトリ\ディレクトリ\ファイル
+                            h4 Unix系OS（Linux、OSXを含む）
+                            p 
+                                | ディレクトリ
+                                br
+                                | /ディレクトリ/ディレクトリ/ディレクトリ/
+                                br
+                                | ファイル
+                                br
+                                | /ディレクトリ/ディレクトリ/ディレクトリ/ファイル
+                            .alert.alert-info Windowsのディレクトリ構成
+                            p
+                                | Windows File System Namespace Usage Guidelines
+                                br
+                                a(href='http://www.microsoft.com/en-us/download/details.aspx?id=22322',target='_blank') http://www.microsoft.com/en-us/download/details.aspx?id=22322
+                            h4 Program Files、ユーザー固有・アプリケーション共有データ
+                            p 
+                                | C:\Program Files:
+                                br
+                                | プログラム、ソフトウェアコンポーネント置き場
+                                br
+                                | 通常ユーザーはこの場所に書き込み権を持たないため、ユーザーデータやアプリケーションデータはここへ置くべきでない。
+                            p
+                                | C:\ProgramData:
+                                br
+                                | コンピューター上のすべてのユーザーが共有するアプリケーションデータ置き場
+                            p
+                                | C:\Users\&lt;ユーザー名&gt;\AppData:
+                                br
+                                | ユーザー固有のアプリケーションデータ置き場
+                                br
+                                | AppData以下はさらに階層構造を持つ
+                            p
+                                | C:\Uses\&lt;ユーザー名&gt;\AppData\Roaming
+                                br
+                                | コンピュータに依存しないユーザー固有のアプリケーションデータ置き場
+                                br
+                                | アプリケーションデータのうち、ユーザーカスタマイズ情報などで、ユーザーの操作を伴い変更するもの
+                            p
+                                | C:\Uses\&lt;ユーザー名&gt;\AppData\Local
+                                br
+                                | このコンピュータに固有のユーザー固有のアプリケーションデータ置き場
+                                br
+                                |アプリケーションデータのうち、一時的で破棄されてもアプリケーション動作に支障のないもの（ログ、デバッグ情報など）
+                                br
+                                | コンピュータに依存しないユーザー固有のアプリケーションデータでも、ユーザーの操作なしに再生成できるデータ（ユーザーが作成するカスタマイズ情報や設定情報は含まない）
+                            p
+                                | C:\Users\&lt;ユーザー名&gt;\AppData\LocalLow
+                                br
+                                | ユーザー固有の特権(管理者権限）なしに扱えるアプリケーションデータ
+                            h4 ProgramDataおよびAppDataのサブフォルダ生成規約
+                            p
+                                | ベンダー名＋製品代表名（推奨）
+                                br
+                                | 例）C:\ProgramData\Microsoft\Office
+                                br
+                                | 例）AppData\Roaming\Microsoft\Office
+                            p
+                                | 必要があれば、製品内訳名（オプション）
+                                br
+                                | 例）C:\ProgramData\Microsoft\Office\Groove
+                                br
+                                | 例）AppData\Roaming\Microsoft\Office\Groove+ 
+                            p
+                                | 必要があれば、バージョン＋SKU情報（オプション）
+                                br
+                                | 例）C:\ProgramData\Microsoft\Office\Groove\2007 Ultimate Edition
+                                br
+                                | 例）AppData\Roaming\Microsoft\Office\Groove\2007 Ultimate Edition
+                            .alert.alert-info Linuxのディレクトリ構成
+                            p
+                                | ／
+                                br
+                                | ├─ bin … 一般ユーザーが実行できる基本的なコマンド
+                                br
+                                | ├─ boot … システムの起動に必要なファイル
+                                br
+                                | ├─ dev … デバイスファイル
+                                br
+                                | ├─ etc … システム設定ファイルや起動スクリプト
+                                br
+                                | ├─ home … ユーザーのホームディレクトリ
+                                br
+                                | ├─ lib… ライブラリ
+                                br
+                                | ├─ lost+founc … 破損したファイル
+                                br
+                                | ├─ media … DVDドライブなどをマウントする場所
+                                br
+                                | ├─ proc … プロセス情報
+                                br
+                                | ├─ root … rootユーザー用ホームディレクトリ
+                                br
+                                | ├─ sbin … rootユーザーが実行できるシステム管理コマンド
+                                br
+                                | ├─ tmp … 一時的なファイル置き場
+                                br
+                                | ├─ usr … 各種プログラムやライブラリ、ドキュメントなど
+                                br
+                                | ├─ var .. ログファイルなどを更新されるファイル類
+                            .alert.alert-info Webの絶対パス
+                            p 
+                                | Webでは「http://ドメイン/フォルダ名/ファイル名」のように、サーバーのURL、サーバー内の格納場所、ファイル名を指定し、そのファイルがネット上のどこに存在しているかを指定しています。
+                                br
+                                | 例） http://jeed-training.herokuapp.com/demo/html/sample1/03/062.html
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

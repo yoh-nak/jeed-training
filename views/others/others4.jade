@@ -1,121 +1,121 @@
 extends ../layout
 
 block link
-	link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
-	link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
-	link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
-	link(href='../css/style.css',rel='stylesheet',media='screen')
-	link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
 
 block content
-	include navbar.jade
-	.container
-		.row
-			.col-sm-3
-				include left.jade
-			.col-sm-9
-				.panel.panel-primary
-					.panel-heading
-						i.glyphicon.glyphicon-book
-						&nbsp;Sublime Textの使い方
-					.panel-body
-						p http://charlie.hateblo.jp/entry/2013/02/13/204225
-						p https://sublime.wbond.net/packages/Hex%20to%20RGB%20Converter
-						h4 公式サイト
-						p
-							a(href='http://www.sublimetext.com/',target='_blank') http://www.sublimetext.com/
-						hr
-						h4 ダウンロード
-						p
-							a(href='http://www.sublimetext.com/3',target='_blank') http://www.sublimetext.com/3
-						hr
-						h4 ドットインストール
-						p
-							a(href='http://dotinstall.com/lessons/basic_sublimetext', target='_blank') Sublime Text 2入門
-						hr
-						h4 文字コードを設定する
-						p Preferences → Settings - User
-						pre
-							| {
-							| 	"default_line_ending": "unix",
-							| 	"default_encoding": "UTF-8"
-							| } 
-						h4 改行コードを設定する
-						p Preferences → Settings - User
-						pre
-							| {
-							| 	"default_line_ending": "unix",
-							| 	"default_encoding": "UTF-8"
-							| } 
-						h4 パッケージコントロール機能を組み込む
-						h5 インストール手順
-						ol(start='1')
-							li まずは、以下のURLにアクセスします。
-						p https://sublime.wbond.net/installation#Manual_Instructions
-						ol(start='2')
-							li SUBLIME TEXT3とSUBLIME TEXT2が並んでいるので、3をクリックします。 
-						ol(start='3')
-							li 出てきたコードをコピーします。
-						p Sublime Text3の場合
-						pre
-							| import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())
-						p （Sublime Text2の場合）
-						pre
-							| import urllib2,os; pf='Package Control.sublime-package'; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler( ))); open( os.path.join( ipp, pf), 'wb' ).write( urllib2.urlopen( 'http://sublime.wbond.net/' +pf.replace( ' ','%20' )).read()); print( 'Please restart Sublime Text to finish installation') 
-						ol(start='4')
-							li Sublime Text 3を開き、Ctrl + ‘（バッククォート） を押し、コンソールを開きます。 
-						ol(start='5')
-							li 先ほどコピーしたコードをペーストし、Enterします。 
-						p これで、インストール完了。 
-						h5 使い方
-						p Ctrl + Shift + P でPackage Controlが開きます。
-						hr
-						h4 メニューを日本語化する（一部）
-						p Ctrl+Shift+P → 「Package Control:Install Package」 → 「Japanize」
-						hr
-						h4 Windows版で日本語のインライン入力に対応する
-						p Ctrl+Shift+P → 「Package Control:Install Package」 → 「IME Suport」
-						hr
-						h4 Markdown記法のプレビュー機能を組み込む
-						p Ctrl+Shift+P → 「Package Control:Install Package」 → 「Markdown Preview」
-						hr
-						h4 Markdown Previewにショートカットキーを割り当てる
-						p <a href="https://github.com/revolunet/sublimetext-markdown-preview"></a>にアクセスします。
-						P Usage : → To preview : → or bind some key in your user key binding, using a line like this one:のコードをコピーします。
-						pre
-							| { "keys": ["alt+m"], "command": "markdown_preview", "args": {"target": "browser", "parser":"markdown"}
-						p Preferences → Key Bindings - User に貼り付けます。
-						pre
-							| [
-							| 	{ "keys": ["alt+m"], "command": "markdown_preview", "args": {"target": "browser", "parser":"markdown"}}
-							| ]
-						hr
-						h4 Emmetの機能を組み込む
-						p Ctrl+Shift+P → 「Package Control:Install Package」 → 「Emmet」
-						hr
-						h4 Jadeのシンタックスハイライトを組み込む
-						p Ctrl+Shift+P → 「Package Control:Install Package」 → 「Jade」
-						hr
-						h4 EJSのシンタックスハイライトを組み込む
-						p Ctrl+Shift+P → 「Package Control:Install Package」 → 「EJS」
-						hr
-						h4 カラーピッカーを組み込む
-						p Ctrl+Shift+P → 「Package Control:Install Package」 → 「ColorPicker」
-						p Preferences → Key Bindings - User に貼り付けます。
-						pre
-							| [
-							| 	{ "keys": ["super+_"], "command": "color_pick" }
-							| ]
-						p command+_でカラーピッカーが表示されます。
-						hr
-						h4 Stylusのシンタックスハイライトを組み込む
-						p Ctrl+Shift+P → 「Package Control:Install Package」 → 「Stylus」
-						hr
-						h4 CoffeeScriptのシンタックスハイライトを組み込む
-						p Ctrl+Shift+P → 「Package Control:Install Package」 → 「Better CoffeeScript」
-						hr
-						h4 jQueryの補完機能を組み込む
-						p Ctrl+Shift+P → 「Package Control:Install Package」 → 「jQuery」
-						hr
-						h4 JSONのValidatorを組み込む
-						p Ctrl+Shift+P → 「Package Control:Install Package」 → 「JSONLint」
+    include navbar.jade
+    .container
+        .row
+            .col-sm-3
+                include left.jade
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        &nbsp;Sublime Textの使い方
+                    .panel-body
+                        p http://charlie.hateblo.jp/entry/2013/02/13/204225
+                        p https://sublime.wbond.net/packages/Hex%20to%20RGB%20Converter
+                        h4 公式サイト
+                        p
+                            a(href='http://www.sublimetext.com/',target='_blank') http://www.sublimetext.com/
+                        hr
+                        h4 ダウンロード
+                        p
+                            a(href='http://www.sublimetext.com/3',target='_blank') http://www.sublimetext.com/3
+                        hr
+                        h4 ドットインストール
+                        p
+                            a(href='http://dotinstall.com/lessons/basic_sublimetext', target='_blank') Sublime Text 2入門
+                        hr
+                        h4 文字コードを設定する
+                        p Preferences → Settings - User
+                        pre
+                            | {
+                            |     "default_line_ending": "unix",
+                            |     "default_encoding": "UTF-8"
+                            | } 
+                        h4 改行コードを設定する
+                        p Preferences → Settings - User
+                        pre
+                            | {
+                            |     "default_line_ending": "unix",
+                            |     "default_encoding": "UTF-8"
+                            | } 
+                        h4 パッケージコントロール機能を組み込む
+                        h5 インストール手順
+                        ol(start='1')
+                            li まずは、以下のURLにアクセスします。
+                        p https://sublime.wbond.net/installation#Manual_Instructions
+                        ol(start='2')
+                            li SUBLIME TEXT3とSUBLIME TEXT2が並んでいるので、3をクリックします。 
+                        ol(start='3')
+                            li 出てきたコードをコピーします。
+                        p Sublime Text3の場合
+                        pre
+                            | import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())
+                        p （Sublime Text2の場合）
+                        pre
+                            | import urllib2,os; pf='Package Control.sublime-package'; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler( ))); open( os.path.join( ipp, pf), 'wb' ).write( urllib2.urlopen( 'http://sublime.wbond.net/' +pf.replace( ' ','%20' )).read()); print( 'Please restart Sublime Text to finish installation') 
+                        ol(start='4')
+                            li Sublime Text 3を開き、Ctrl + ‘（バッククォート） を押し、コンソールを開きます。 
+                        ol(start='5')
+                            li 先ほどコピーしたコードをペーストし、Enterします。 
+                        p これで、インストール完了。 
+                        h5 使い方
+                        p Ctrl + Shift + P でPackage Controlが開きます。
+                        hr
+                        h4 メニューを日本語化する（一部）
+                        p Ctrl+Shift+P → 「Package Control:Install Package」 → 「Japanize」
+                        hr
+                        h4 Windows版で日本語のインライン入力に対応する
+                        p Ctrl+Shift+P → 「Package Control:Install Package」 → 「IME Suport」
+                        hr
+                        h4 Markdown記法のプレビュー機能を組み込む
+                        p Ctrl+Shift+P → 「Package Control:Install Package」 → 「Markdown Preview」
+                        hr
+                        h4 Markdown Previewにショートカットキーを割り当てる
+                        p <a href="https://github.com/revolunet/sublimetext-markdown-preview"></a>にアクセスします。
+                        P Usage : → To preview : → or bind some key in your user key binding, using a line like this one:のコードをコピーします。
+                        pre
+                            | { "keys": ["alt+m"], "command": "markdown_preview", "args": {"target": "browser", "parser":"markdown"}
+                        p Preferences → Key Bindings - User に貼り付けます。
+                        pre
+                            | [
+                            |     { "keys": ["alt+m"], "command": "markdown_preview", "args": {"target": "browser", "parser":"markdown"}}
+                            | ]
+                        hr
+                        h4 Emmetの機能を組み込む
+                        p Ctrl+Shift+P → 「Package Control:Install Package」 → 「Emmet」
+                        hr
+                        h4 Jadeのシンタックスハイライトを組み込む
+                        p Ctrl+Shift+P → 「Package Control:Install Package」 → 「Jade」
+                        hr
+                        h4 EJSのシンタックスハイライトを組み込む
+                        p Ctrl+Shift+P → 「Package Control:Install Package」 → 「EJS」
+                        hr
+                        h4 カラーピッカーを組み込む
+                        p Ctrl+Shift+P → 「Package Control:Install Package」 → 「ColorPicker」
+                        p Preferences → Key Bindings - User に貼り付けます。
+                        pre
+                            | [
+                            |     { "keys": ["super+_"], "command": "color_pick" }
+                            | ]
+                        p command+_でカラーピッカーが表示されます。
+                        hr
+                        h4 Stylusのシンタックスハイライトを組み込む
+                        p Ctrl+Shift+P → 「Package Control:Install Package」 → 「Stylus」
+                        hr
+                        h4 CoffeeScriptのシンタックスハイライトを組み込む
+                        p Ctrl+Shift+P → 「Package Control:Install Package」 → 「Better CoffeeScript」
+                        hr
+                        h4 jQueryの補完機能を組み込む
+                        p Ctrl+Shift+P → 「Package Control:Install Package」 → 「jQuery」
+                        hr
+                        h4 JSONのValidatorを組み込む
+                        p Ctrl+Shift+P → 「Package Control:Install Package」 → 「JSONLint」

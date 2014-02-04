@@ -1,261 +1,261 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;フォーム
-						.panel-body
-							.alert.alert-info フォーム
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-										| （※）
-							p ※ 一部非対応
-							pre
-								| &lt;form&gt;...&lt;/form&gt;
-							table.table
-								tr
-									td カテゴリー
-									td フローコンテンツ／パルパブルコンテンツ
-								tr
-									td 記述可能な場所
-									td
-										| フローコンテンツが記述できる場所
-								tr
-									td コンテンツモデル
-									td
-										| フローコンテンツ（&lt;form&gt;を除く）
-								tr
-									td 構成するボックス
-									td block
-								tr
-									td 属性
-									td accept-charset／action／autocomplete／enctype／method／name／novalidate／target／グローバル 
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| form {
-											| 	display: block;
-											| 	unicode-bide: isolate;
-											| }
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/236.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;h1&gt;CONTACT&lt;/h1&gt;
-								| &lt;p&gt;ご意見、ご感想、お問い合わせなどがありましたら、こちらのフォームより送信してください。&lt;/p&gt;
-								| 
-								| &lt;form action="query.php" method="post"&gt;
-								| 
-								| &lt;p&gt;
-								| &lt;label&gt;名前：
-								| &lt;input type="text" name="name" size="40"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-								| 
-								| &lt;p&gt;
-								| &lt;label&gt;メールアドレス：
-								| &lt;input type="email" name="email" size="40"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-								| 
-								| &lt;p&gt;
-								| &lt;label&gt;コメント：
-								| &lt;textarea name="comment" rows="8"&gt;&lt;/textarea&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-								| 
-								| &lt;p&gt;
-								| &lt;input type="submit" value="送信"&gt;
-								| &lt;/p&gt;
-								| 
-								| &lt;/form&gt;
-							p='<form>で指定できる属性は以下のようになっています。'
-							table.table
-								tr
-									th='<form>の属性'
-									th(colspan='2') 機能
-									th 指定できる値
-								tr
-									td accept-charset
-									td(colspan='2') 送信データのエンコードの種類
-									td 「UTF-8」など
-								tr
-									td action
-									td(colspan='2') 送信先のURL
-									td URL
-								tr
-									td(rowspan='2') autocomplete
-									td(rowspan='2') オートコンプリート
-									td 有効にする
-									td on
-								tr
-									td 無効にする
-									td off
-								tr
-									td(rowspan='3') enctype
-									td(rowspan='3') 送信データの形式
-									td URLエンコード（初期値）
-									td application/x-www-form-urlencoded
-								tr
-									td マルチパートデータ
-									td multipart/form-data
-								tr
-									td プレインテキスト
-									td text/plain
-								tr
-									td(rowspan='2') method
-									td(rowspan='2') 送信方法
-									td HTTP GETメソッドで送信
-									td get
-								tr
-									td HTTP POSTメソッドで送信
-									td post
-								tr
-									td name
-									td(colspan='2') フォーム名
-									td 任意の名称
-								tr
-									td novalidate
-									td(colspan='2') 入力データの検証を無効化
-									td 任意の名称
-								tr
-									td target
-									td(colspan='2') 送信後のページの表示先
-									td _blank, _self, _parent, _top, 名前
-							.alert.alert-success DIFFERENCES: 
-							p='HTML4.01やXHTML1.0で採用されていた<form>のaccept属性はHTML5では廃止され、<input>のaccept属性を利用することが推奨されています。'
-							p='フォームは、テキストの入力フィールドや送信ボタンといった「フォームコントロール」と呼ばれるもので構成されています。このとき、フォームコントロール全体をマークアップし、送信先の指定などを行うのが<form>です。'
-							p='たとえば、サンプルでは<input>と<textarea>を利用して、「名前」と「メールアドレス」、「コメント」の入力フィールドと送信ボタンを用意し、全体を<form>でマークアップしています。'
-							p='<form>では、action属性で入力データの送信先を、method属性で送信方法を指定しています。なお、送信先には入力データの処理を行うスクリプトなどを指定する必要があり、他の属性はスクリプトに合わせて設定します。'
-							.alert.alert-info 送信されるデータ
-							p='データを入力して送信ボタンをクリックすると、<form>のaction属性で指定したURL属性で指定したURLにデータが送信されます。入力データは<input>や<textarea>といったフォームコントロールのname属性で指定したコントロール名とセットで「コントロール名 = 値」という形で送信されます。'
-							p='たとえば、「名前」のフィールドに入力したデータの場合、「name = 花子」というデータが送信されることになります。'
-							.alert.alert-warning NOTES: フォームのデータをPHPで処理する場合
-							p='フォームのデータをPHPで処理する場合、<form>のmethod属性が「post」で送信されたデータは$_POSTに、「get」で送信されたデータは$_GETに代入されます。そのため、下のように「print_r($_POST)」と指定して配列の中身を出力すると、送信された内容を確認することができます。'
-							p='なお、実際の運用ではデータをメールで受け取れるようにしたり、データに含まれるHTMLタグを除外するといった処理を設定していくことになります。'
-							figure
-								pre(class='prettyprint lang-php linenums:1')
-									| &lt;h1&gt;POSTED DATA&lt;/h1&gt;
-									| 
-									| &lt;pre&gt;
-									| &lt;?php print_r($_POST); ?&gt;
-									| &lt;/pre&gt;
-								figcaption サンプルで指定した送信先の設定（query.php）。
-							.alert.alert-info オートコンプリートを無効にする
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/238.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;h1&gt;CONTACT&lt;/h1&gt;
-								| &lt;p&gt;ご意見、ご感想、お問い合わせなどがありましたら、こちらのフォームより送信してください。&lt;/p&gt;
-								| 
-								|&lt;form action="query.php" method="post" autocomplete="off"&gt;
-								| 
-								| &lt;p&gt;
-								| &lt;label&gt;名前：
-								| &lt;input type="text" name="name" size="40"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-								| ...
-								| 
-								| &lt;/form&gt;
-							p='フォームにはオートコンプリートの機能が用意されており、繰り返し入力する情報の場合、一部の文字を入力すると入力候補が表示されるようになっています。'
-							p='フォーム全体でこの機能を無効にしたい場合には、<form>のautocomplete属性を「off」と指定します。また、autocomplete属性はフォームコントロール側に指定することも可能で、<form>の指定よりも優先されます。'
-							.alert.alert-warning NOTES: 
-							p='フォームなどの項目でオートコンプリートが機能するかは、ブラウザに依存します。たとえば、Internet Explorerでは、「インターネットオプション＞コンテンツタブ」の「オートコンプリート＞設定」でオートコンプリートを有効にするフォームコントロールの種類を指定できるようになっています。'
-							.alert.alert-info データの検証を無効にする
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/239-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;form action="query.php" method="post" novalidate&gt;
-								| 
-								| &lt;p&gt;
-								| &lt;label&gt;名前：
-								| &lt;input type="text" name="name" size="40"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-								| 
-								| &lt;p&gt;
-								| &lt;label&gt;メールアドレス：
-								| &lt;input type="email" name="email" size="40"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-								| …
-								| 
-								| &lt;/form&gt;
-							p='フォームでは必要に応じて入力データが正しいのかどうかの検証が行われます。たとえば、<input type="email">で作成したメールアドレスの入力フィールドでは検証が行われ、メールアドレスとして正しくない値を入力するとエラーメッセージが表示されます。'
-							p='この検証機能を無効にしたい場合には、<form>のnovalidate属性を上のように指定します。'
-							.alert.alert-success IE NOTES: 
-							p IE9以前のバージョンは入力データの検証機能に未対応です。
-							.alert.alert-info='<form>の外にフォームコントロールを用意する'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/239-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;h1&gt;CONTACT&lt;/h1&gt;
-								| &lt;p&gt;ご意見、ご感想、お問い合わせなどがありましたら、こちらのフォームより送信してください。&lt;/p&gt;
-								| 
-								| &lt;form action="query.php" method="post" id="contact"&gt;
-								| 
-								| &lt;p&gt;
-								| &lt;label&gt;名前：
-								| &lt;input type="text" name="name" size="40"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-								| ...
-								| 
-								| &lt;/form&gt;
-								| 
-								| 
-								| 
-								| &lt;div id="sidebar"&gt;
-								| 
-								| &lt;aside&gt;
-								| &lt;h1&gt;好きなお茶&lt;/h1&gt;
-								| &lt;ul&gt;
-								| &lt;li&gt;&lt;label&gt;&lt;input type="radio" name="tea" value="紅茶" form="contact"&gt; 紅茶 &lt;/label&gt;&lt;/li&gt;
-								| &lt;li&gt;&lt;label&gt;&lt;input type="radio" name="tea" value="ウーロン茶" form="contact"&gt; ウーロン茶 &lt;/label&gt;&lt;/li&gt;
-								| &lt;li&gt;&lt;label&gt;&lt;input type="radio" name="tea" value="緑茶" form="contact"&gt; 緑茶 &lt;/label&gt;&lt;/li&gt;
-								| &lt;/ul&gt;
-								| &lt;/aside&gt;
-								| ...
-							p='通常、送信ボタンをクリックして送信されるデータは、<form>の中に記述したコントロールのデータです。しかし、<form>の外に記述したコントロールのデータをいっしょに送信するように指定することもできます。'
-							p='たとえば、ここでは<input type="radio">を利用してサイドバー部分に好きなお茶の選択肢を追加しています。しかし、このコントロールは<form>の外に記述していますので、そのままではデータがサーバーに送信されません。'
-							p='そこで、<input type="radio">にform属性を追加し、コンテンツ部分の<form>のIDを指定します。これにより、好きなお茶の情報がコンテンツ部分のフォームデータといっしょに送信されるようになります。ここではIDを「contact」と指定しています。'
-							p='なお、InternetExplorer10はform属性には未対応です。'
-							.alert.alert-warning NOTES: method属性の値「dialog」
-							p='WHATWGのHTML Living Standardでは、送信方法を指定するmethod属性に「dialog」という値が追加されています。アプリケーションのダイアログボックスなどにおける利用を想定しており、送信時にダイアログボックスを閉じるように想定されています。'
-							p='なお、ダイアログボックスは<dialog>という要素で構成することが考えられています。'
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;フォーム
+                        .panel-body
+                            .alert.alert-info フォーム
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                                        | （※）
+                            p ※ 一部非対応
+                            pre
+                                | &lt;form&gt;...&lt;/form&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td フローコンテンツ／パルパブルコンテンツ
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | フローコンテンツが記述できる場所
+                                tr
+                                    td コンテンツモデル
+                                    td
+                                        | フローコンテンツ（&lt;form&gt;を除く）
+                                tr
+                                    td 構成するボックス
+                                    td block
+                                tr
+                                    td 属性
+                                    td accept-charset／action／autocomplete／enctype／method／name／novalidate／target／グローバル 
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        pre
+                                            | form {
+                                            |     display: block;
+                                            |     unicode-bide: isolate;
+                                            | }
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/236.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;h1&gt;CONTACT&lt;/h1&gt;
+                                | &lt;p&gt;ご意見、ご感想、お問い合わせなどがありましたら、こちらのフォームより送信してください。&lt;/p&gt;
+                                | 
+                                | &lt;form action="query.php" method="post"&gt;
+                                | 
+                                | &lt;p&gt;
+                                | &lt;label&gt;名前：
+                                | &lt;input type="text" name="name" size="40"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                                | 
+                                | &lt;p&gt;
+                                | &lt;label&gt;メールアドレス：
+                                | &lt;input type="email" name="email" size="40"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                                | 
+                                | &lt;p&gt;
+                                | &lt;label&gt;コメント：
+                                | &lt;textarea name="comment" rows="8"&gt;&lt;/textarea&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                                | 
+                                | &lt;p&gt;
+                                | &lt;input type="submit" value="送信"&gt;
+                                | &lt;/p&gt;
+                                | 
+                                | &lt;/form&gt;
+                            p='<form>で指定できる属性は以下のようになっています。'
+                            table.table
+                                tr
+                                    th='<form>の属性'
+                                    th(colspan='2') 機能
+                                    th 指定できる値
+                                tr
+                                    td accept-charset
+                                    td(colspan='2') 送信データのエンコードの種類
+                                    td 「UTF-8」など
+                                tr
+                                    td action
+                                    td(colspan='2') 送信先のURL
+                                    td URL
+                                tr
+                                    td(rowspan='2') autocomplete
+                                    td(rowspan='2') オートコンプリート
+                                    td 有効にする
+                                    td on
+                                tr
+                                    td 無効にする
+                                    td off
+                                tr
+                                    td(rowspan='3') enctype
+                                    td(rowspan='3') 送信データの形式
+                                    td URLエンコード（初期値）
+                                    td application/x-www-form-urlencoded
+                                tr
+                                    td マルチパートデータ
+                                    td multipart/form-data
+                                tr
+                                    td プレインテキスト
+                                    td text/plain
+                                tr
+                                    td(rowspan='2') method
+                                    td(rowspan='2') 送信方法
+                                    td HTTP GETメソッドで送信
+                                    td get
+                                tr
+                                    td HTTP POSTメソッドで送信
+                                    td post
+                                tr
+                                    td name
+                                    td(colspan='2') フォーム名
+                                    td 任意の名称
+                                tr
+                                    td novalidate
+                                    td(colspan='2') 入力データの検証を無効化
+                                    td 任意の名称
+                                tr
+                                    td target
+                                    td(colspan='2') 送信後のページの表示先
+                                    td _blank, _self, _parent, _top, 名前
+                            .alert.alert-success DIFFERENCES: 
+                            p='HTML4.01やXHTML1.0で採用されていた<form>のaccept属性はHTML5では廃止され、<input>のaccept属性を利用することが推奨されています。'
+                            p='フォームは、テキストの入力フィールドや送信ボタンといった「フォームコントロール」と呼ばれるもので構成されています。このとき、フォームコントロール全体をマークアップし、送信先の指定などを行うのが<form>です。'
+                            p='たとえば、サンプルでは<input>と<textarea>を利用して、「名前」と「メールアドレス」、「コメント」の入力フィールドと送信ボタンを用意し、全体を<form>でマークアップしています。'
+                            p='<form>では、action属性で入力データの送信先を、method属性で送信方法を指定しています。なお、送信先には入力データの処理を行うスクリプトなどを指定する必要があり、他の属性はスクリプトに合わせて設定します。'
+                            .alert.alert-info 送信されるデータ
+                            p='データを入力して送信ボタンをクリックすると、<form>のaction属性で指定したURL属性で指定したURLにデータが送信されます。入力データは<input>や<textarea>といったフォームコントロールのname属性で指定したコントロール名とセットで「コントロール名 = 値」という形で送信されます。'
+                            p='たとえば、「名前」のフィールドに入力したデータの場合、「name = 花子」というデータが送信されることになります。'
+                            .alert.alert-warning NOTES: フォームのデータをPHPで処理する場合
+                            p='フォームのデータをPHPで処理する場合、<form>のmethod属性が「post」で送信されたデータは$_POSTに、「get」で送信されたデータは$_GETに代入されます。そのため、下のように「print_r($_POST)」と指定して配列の中身を出力すると、送信された内容を確認することができます。'
+                            p='なお、実際の運用ではデータをメールで受け取れるようにしたり、データに含まれるHTMLタグを除外するといった処理を設定していくことになります。'
+                            figure
+                                pre(class='prettyprint lang-php linenums:1')
+                                    | &lt;h1&gt;POSTED DATA&lt;/h1&gt;
+                                    | 
+                                    | &lt;pre&gt;
+                                    | &lt;?php print_r($_POST); ?&gt;
+                                    | &lt;/pre&gt;
+                                figcaption サンプルで指定した送信先の設定（query.php）。
+                            .alert.alert-info オートコンプリートを無効にする
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/238.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;h1&gt;CONTACT&lt;/h1&gt;
+                                | &lt;p&gt;ご意見、ご感想、お問い合わせなどがありましたら、こちらのフォームより送信してください。&lt;/p&gt;
+                                | 
+                                |&lt;form action="query.php" method="post" autocomplete="off"&gt;
+                                | 
+                                | &lt;p&gt;
+                                | &lt;label&gt;名前：
+                                | &lt;input type="text" name="name" size="40"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                                | ...
+                                | 
+                                | &lt;/form&gt;
+                            p='フォームにはオートコンプリートの機能が用意されており、繰り返し入力する情報の場合、一部の文字を入力すると入力候補が表示されるようになっています。'
+                            p='フォーム全体でこの機能を無効にしたい場合には、<form>のautocomplete属性を「off」と指定します。また、autocomplete属性はフォームコントロール側に指定することも可能で、<form>の指定よりも優先されます。'
+                            .alert.alert-warning NOTES: 
+                            p='フォームなどの項目でオートコンプリートが機能するかは、ブラウザに依存します。たとえば、Internet Explorerでは、「インターネットオプション＞コンテンツタブ」の「オートコンプリート＞設定」でオートコンプリートを有効にするフォームコントロールの種類を指定できるようになっています。'
+                            .alert.alert-info データの検証を無効にする
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/239-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;form action="query.php" method="post" novalidate&gt;
+                                | 
+                                | &lt;p&gt;
+                                | &lt;label&gt;名前：
+                                | &lt;input type="text" name="name" size="40"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                                | 
+                                | &lt;p&gt;
+                                | &lt;label&gt;メールアドレス：
+                                | &lt;input type="email" name="email" size="40"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                                | …
+                                | 
+                                | &lt;/form&gt;
+                            p='フォームでは必要に応じて入力データが正しいのかどうかの検証が行われます。たとえば、<input type="email">で作成したメールアドレスの入力フィールドでは検証が行われ、メールアドレスとして正しくない値を入力するとエラーメッセージが表示されます。'
+                            p='この検証機能を無効にしたい場合には、<form>のnovalidate属性を上のように指定します。'
+                            .alert.alert-success IE NOTES: 
+                            p IE9以前のバージョンは入力データの検証機能に未対応です。
+                            .alert.alert-info='<form>の外にフォームコントロールを用意する'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/239-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;h1&gt;CONTACT&lt;/h1&gt;
+                                | &lt;p&gt;ご意見、ご感想、お問い合わせなどがありましたら、こちらのフォームより送信してください。&lt;/p&gt;
+                                | 
+                                | &lt;form action="query.php" method="post" id="contact"&gt;
+                                | 
+                                | &lt;p&gt;
+                                | &lt;label&gt;名前：
+                                | &lt;input type="text" name="name" size="40"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                                | ...
+                                | 
+                                | &lt;/form&gt;
+                                | 
+                                | 
+                                | 
+                                | &lt;div id="sidebar"&gt;
+                                | 
+                                | &lt;aside&gt;
+                                | &lt;h1&gt;好きなお茶&lt;/h1&gt;
+                                | &lt;ul&gt;
+                                | &lt;li&gt;&lt;label&gt;&lt;input type="radio" name="tea" value="紅茶" form="contact"&gt; 紅茶 &lt;/label&gt;&lt;/li&gt;
+                                | &lt;li&gt;&lt;label&gt;&lt;input type="radio" name="tea" value="ウーロン茶" form="contact"&gt; ウーロン茶 &lt;/label&gt;&lt;/li&gt;
+                                | &lt;li&gt;&lt;label&gt;&lt;input type="radio" name="tea" value="緑茶" form="contact"&gt; 緑茶 &lt;/label&gt;&lt;/li&gt;
+                                | &lt;/ul&gt;
+                                | &lt;/aside&gt;
+                                | ...
+                            p='通常、送信ボタンをクリックして送信されるデータは、<form>の中に記述したコントロールのデータです。しかし、<form>の外に記述したコントロールのデータをいっしょに送信するように指定することもできます。'
+                            p='たとえば、ここでは<input type="radio">を利用してサイドバー部分に好きなお茶の選択肢を追加しています。しかし、このコントロールは<form>の外に記述していますので、そのままではデータがサーバーに送信されません。'
+                            p='そこで、<input type="radio">にform属性を追加し、コンテンツ部分の<form>のIDを指定します。これにより、好きなお茶の情報がコンテンツ部分のフォームデータといっしょに送信されるようになります。ここではIDを「contact」と指定しています。'
+                            p='なお、InternetExplorer10はform属性には未対応です。'
+                            .alert.alert-warning NOTES: method属性の値「dialog」
+                            p='WHATWGのHTML Living Standardでは、送信方法を指定するmethod属性に「dialog」という値が追加されています。アプリケーションのダイアログボックスなどにおける利用を想定しており、送信時にダイアログボックスを閉じるように想定されています。'
+                            p='なお、ダイアログボックスは<dialog>という要素で構成することが考えられています。'
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

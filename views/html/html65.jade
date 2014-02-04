@@ -1,1430 +1,1430 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;データの入力・送信
-						.panel-body
-							.alert.alert-info データの入力・送信
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-										| （※）
-									td
-										img(src='../images/ic-android.png')
-										| （※）
-									td
-										img(src='../images/ic-firefox.png')
-										| （※）
-									td
-										img(src='../images/ic-safari.png')
-										| （※）
-									td
-										img(src='../images/ic-chrome.png')
-										| （※）
-									td
-										img(src='../images/ic-opera.png')
-										| （※）
-									td
-										img(src='../images/ic-ie.png')
-										| （※）
-							p ※ 一部非対応
-							pre
-								| &lt;input&gt;
-							table.table
-								tr
-									td(style='width:150px;') カテゴリー
-									td
-										| フローコンテンツ／ フレージングコンテンツ／ リスティッド要素／ サブミッタブル要素／ リセッタブル要素／ フォームアソシエイティッド要素
-										br
-										| 
-										br
-										| type属性の値が「hidden」以外の場合は上記に加えて以下のカテゴリーにも属する：
-										br
-										| インタラクティブコンテンツ／ラベラブル要素／パルパブルコンテンツ
-								tr
-									td 記述可能な場所
-									td
-										| フレージングコンテンツが記述できる場所
-								tr
-									td コンテンツモデル
-									td
-										| 空
-								tr
-									td 構成するボックス
-									td - （インラインブロックボックスを構成することが期待される）
-								tr
-									td 属性
-									td accept／ alt／ autocomplete／ autofocus／ checked／ dirname／ disabled／ form／ formaction／ formenctype／ formmethod／ formnovalidate／ formtarget／ height／ list／ max／ maxlength／ min／ multiple／ name／ pattern／ placeholder／ readonly／ required／ size／ src／ step／ type／ value／ width／ グローバル
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| -
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/244.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;form action="query.php" method="post"&gt;
-								| &lt;p&gt;
-								| &lt;label&gt;メールアドレス：
-								| &lt;input type="email" name="email"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-								| 
-								| &lt;p&gt;&lt;input type="submit" value="送信"&gt;&lt;/p&gt;
-								| &lt;/form&gt;
-							p='<input>はtype属性によってデータの種類を指定し、さまざまなデータの入力や送信を可能にするコントロールを作成します。'
-							p='たとえば、サンプルではメールアドレスを入力するためのテキストフィールドと送信ボタンを作成しています。'
-							.alert.alert-success IE NOTES: 
-							p='IE9以前のバージョンはHTML5で追加されたtype属性の値に未対応で、type="text"と指定したときと同じ形で扱われます。'
-							.row
-								.col-sm-6
-									table.table
-										tr
-											th type属性の値
-											th データの種類
-										tr
-											td text
-											td テキスト
-										tr
-											td search
-											td 検索
-										tr
-											td url
-											td URL
-										tr
-											td tel
-											td 電話番号
-										tr
-											td email
-											td メールアドレス
-										tr
-											td password
-											td パスワード
-										tr
-											td datetime
-											td 日時（UTC）
-										tr
-											td datetime-local
-											td 日時（ローカル）
-										tr
-											td date
-											td 年月日
-										tr
-											td month
-											td 年月
-										tr
-											td week
-											td 週
-										tr
-											td time
-											td 時刻
-								.col-sm-6
-									table.table
-										tr
-											th type属性の値
-											th データの種類
-										tr
-											td number
-											td 数値
-										tr
-											td range
-											td 大まかな数値
-										tr
-											td color
-											td カラーピッカー
-										tr
-											td checkbox
-											td チェックボックス
-										tr
-											td radio
-											td ラジオボタン
-										tr
-											td file
-											td 選択したファイルのリスト
-										tr
-											td hidden
-											td 隠しフィールド
-										tr
-											td submit
-											td 送信ボタン
-										tr
-											td image
-											td 画像ボタン
-										tr
-											td reset
-											td リセットボタン
-										tr
-											td button
-											td ボタン
-							p='<input>にはたくさんの属性が用意されていますが、使用できる属性はtype属性の値によって変わります。ただし、下の属性についてはtype属性の値と関係なく指定することができます。'
-							p='また、type属性が「hidden」以外の場合はautofocus属性を指定することが可能です。'
-							table.table
-								tr
-									th type属性の値と関係なく指定できる属性
-									th 機能
-								tr
-									td disabled
-									td コントロールの無効化
-								tr
-									td form
-									td='<form>との関連付け'
-								tr
-									td name
-									td コントロール名の指定
-								tr
-									td value
-									td 初期値の指定
-							table.table
-								tr
-									th type属性の値が「hidden」以外のときに指定できる属性
-									th 機能
-								tr
-									td autofocus
-									td ページロード時にコントロールを選択
-							h4 コントロールの無効化
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/245-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;
-								| &lt;label&gt;メールアドレス：
-								| &lt;input type="email" name="email" disabled&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-							p='disabled属性を指定すると、コントロールを無効化し、ユーザが入力・編集できないようにすることができます。また、このコントロールのデータはサーバーにも送信されません。なお、<fieldset>のdisalbled属性を利用すると、グループ内のコントロールをまとめて無効にすることができます。'
-							h4 初期値の指定
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/245-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;
-								| &lt;label&gt;メールアドレス：
-								| &lt;input type="email" name="email" value="hanako@web.mail"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-							p='value属性を利用すると、コントロールの初期値を指定することができます。ユーザーが値を変更しなかった場合、サーバーには初期値が送信されます。'
-							h4 オートフォーカス
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/245-3.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;
-								| &lt;label&gt;メールアドレス：
-								| &lt;input type="email" name="email" autofocus&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-							p='autofocus属性を指定すると、ページをロードした段階でコントロールが選択され、すぎにデータを入力できる状態になります。'
-							.alert.alert-success IE NOTES: 
-							p IE9以前のバージョンはautofocus属性に未対応です。
-							
-							//<input type="text">
-							.alert.alert-info テキスト
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/246-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;
-								| &lt;label&gt;名前：
-								| &lt;input type="text" name="name"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-							p='type属性を指定すると、<input>で扱うデータの種類が「改行なしのテキスト」であることを示すことができます。コントロールは1行分のテキストボックスの形で表示され、以下の属性を指定できるようになります。'
-							.row
-								.col-sm-6
-									table.table
-										tr
-											th='<input type="text">で指定できる属性'
-											th 機能
-										tr
-											td autocomplete
-											td オートコンプリート
-										tr
-											td dirname
-											td 書字方向の情報を送信
-										tr
-											td list
-											td 入力候補の指定
-										tr
-											td maxlength
-											td 入力できる文字数の指定
-										tr
-											td pattern
-											td データ形式の指定
-								.col-sm-6
-									table.table
-										tr
-											th='<input type="text">で指定できる属性'
-											th 機能
-										tr
-											td placeholder
-											td プレースホルダの指定
-										tr
-											td readonly
-											td 表示専用にする
-										tr
-											td required
-											td 入力を必須にする
-										tr
-											td size
-											td 表示する文字数の指定
-							h4 書字方向の情報を送信
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/246-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;
-								| &lt;label&gt;名前：
-								| &lt;input type="text" name="name" dirname="namedir"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-							p='dirname属性を指定すると、コントロールに入力されたデータといっしょに書字方向の情報をサーバーに送信することができます。'
-							p='dirname属性では情報を区別するための名前を指定します。たとえば、「namedir」と指定しておくと、「namedir = ltr」というデータが送信されるようになります。「ltr」は書字方向が左から右であることを示す値です。右から左の場合は「rtl」という値が送信されます。'
-							.alert.alert-warning NOTES: 
-							p='iOS5.x以前やAndroid、Firefox、Internet Explorer 10はdirname属性に未対応です。'
-							h4 入力できる文字数の指定
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/247-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;
-								| &lt;label&gt;会員番号（８桁）：
-								| &lt;input type="text" name="name" maxlength="8"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-							p='maxlenght属性では、入力できる文字数を指定します。たとえば、値を「8」と指定すると、8文字までしか入力できなくなります。'
-							h4 データ形式の指定
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/247-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								&lt;p&gt;
-								&lt;label&gt;会員番号：
-								&lt;input type="text" name="name" pattern="[a-z]+" title="すべて小文字のアルファベットで入力してください"&gt;
-								&lt;/label&gt;
-								&lt;/p&gt;
-							p='pattern属性を利用すると、入力を許可するデータの形式をJavaScriptの正規表現で指定することができます。たとえば、ここでは値を「[a-z]+」と指定し、小文字のアルファベットの入力のみを許可しています。'
-							p='送信時には入力データの検証が行われ、誤りがある場合にはエラーメッセージが表示され、送信が停止されます。そのため、謝った内容のままデータが送信されるのを防ぐことができます。'
-							p='また、pattern属性を指定した場合には、入力形式についての説明をtitle属性で記述しておくことが推奨されています。この説明はエラーメッセージといっしょに表示されます。'
-							.alert.alert-warning NOTES: 
-							p='各ブラウザは、入力されたデータが指定形式で正しく記述されているかどうか検証する機能を備えており、誤りがある場合にはエラーメッセージを表示し、送信を停止するようになっています。'
-							p='ただし、iOSやAndroid、Safariの場合、内部的に検証は行いますが、エラーメッセージの表示や送信の停止は行いません。検証結果を表示に反映させるには、JavaScriptのvalidity.validやCSSの:valid、:invalidセレクタを利用して処理を設定します。'
-							.alert.alert-success IE NOTES: 
-							p='IE9以前のバージョンはpattern属性や入力データの検証に未対応です。'
-							h4 プレースホルダーの指定
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/248-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;
-								| &lt;label&gt;会員番号：
-								| &lt;input type="text" name="name" maxlength="8" placeholder="８桁の会員番号"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-							p='placeholder属性を利用すると、入力に関する簡単なヒントを示すことができます。これは「プレースホルダ」と呼ばれ、データが未入力の場合にのみ、上のように薄いグレーの文字で表示されます。'
-							.alert.alert-success IE NOTES: 
-							p='IE9以前のバージョンはplaceholder属性に未対応です。'
-							h4 表示専用にする
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/248-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;
-								| &lt;label&gt;会員番号：
-								| &lt;input type="text" name="name" value="ABCDEFGH" readonly&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-							p='readonly属性を指定すると、コントロールを表示専用にすることができます。過去に入力された変更不可なデータをフォームで扱う必要がある場合等に利用することができます。'
-							p='ここでは、value属性で会員番号を入力済みの状態で表示し、readonly属性で編集できないように設定しています。ただし、入力済みの値を選択し、コピーすることは可能です。また、入力済みの値はサーバーに送信されます。'
-							.alert.alert-warning NOTES: 
-							p='disabled属性で無効化したコントロールの場合、値の編集もコピーもできなくなります。また、サーバへの送信も行われません。'
-							h4 入力を必須にする
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/248-3.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;
-								| &lt;label&gt;会員番号：
-								| &lt;input type="text" name="name" required&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-							p='required属性を指定すると、入力が必須であることを示します。送信時には入力データの検証が行われ、未入力の場合はエラーメッセージが表示されます。'
-							.alert.alert-success IE NOTES: 
-							p='IE9以前のバージョンはrequired属性に未対応です。'
-							h4 表示する文字数の指定
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/249.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;
-								| &lt;label&gt;会員番号：
-								| &lt;input type="text" name="name" size="45"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-							p='size属性ではコントロールの横幅を何文字分表示できる大きさにするかを指定します。ここでは、30文字分を表示するように設定しています。'
-							p='size属性を省略した場合、標準では20文字分の内容が表示されます。'
-							.alert.alert-warning NOTES: 
-							p='コントロールの横幅はスタイルシートのwidthプロパティでも変更することができます。このとき、size属性よりもwidthプロパティの指定が優先されます。'
-							.alert.alert-warning NOTES: inputmode属性による入力モードの指定
-							p='WHATWGのHTML Living StandardとW3CのHTML5.1では、データの入力モードを指定するinputmode属性が提案されており、type属性の値を「text」または「search」と指定したときに利用できることになっています。'
-							p='たとえば、inputmode属性を「katakana」と指定した場合、コントロールを選択したときにキーボードの入力モードが自動的にカタカナに切り替わるようになります。'
-							p='下のような値を指定できることになっていますが、現在のところ各ブラウザは未対応です。'
-							table.table
-								tr
-									th inputmode属性の値
-									th 入力モード
-								tr
-									td latin
-									td アルファベットの入力に最適なモード。
-								tr
-									td latin-name
-									td アルファベットの人名の入力に最適なモード。
-								tr
-									td kana
-									td ひらがなの入力に最適なモード。
-								tr
-									td katakana
-									td カタカナの入力に最適なモード。
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;データの入力・送信
+                        .panel-body
+                            .alert.alert-info データの入力・送信
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                        | （※）
+                                    td
+                                        img(src='../images/ic-android.png')
+                                        | （※）
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                        | （※）
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                        | （※）
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                        | （※）
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                        | （※）
+                                    td
+                                        img(src='../images/ic-ie.png')
+                                        | （※）
+                            p ※ 一部非対応
+                            pre
+                                | &lt;input&gt;
+                            table.table
+                                tr
+                                    td(style='width:150px;') カテゴリー
+                                    td
+                                        | フローコンテンツ／ フレージングコンテンツ／ リスティッド要素／ サブミッタブル要素／ リセッタブル要素／ フォームアソシエイティッド要素
+                                        br
+                                        | 
+                                        br
+                                        | type属性の値が「hidden」以外の場合は上記に加えて以下のカテゴリーにも属する：
+                                        br
+                                        | インタラクティブコンテンツ／ラベラブル要素／パルパブルコンテンツ
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | フレージングコンテンツが記述できる場所
+                                tr
+                                    td コンテンツモデル
+                                    td
+                                        | 空
+                                tr
+                                    td 構成するボックス
+                                    td - （インラインブロックボックスを構成することが期待される）
+                                tr
+                                    td 属性
+                                    td accept／ alt／ autocomplete／ autofocus／ checked／ dirname／ disabled／ form／ formaction／ formenctype／ formmethod／ formnovalidate／ formtarget／ height／ list／ max／ maxlength／ min／ multiple／ name／ pattern／ placeholder／ readonly／ required／ size／ src／ step／ type／ value／ width／ グローバル
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        pre
+                                            | -
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/244.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;form action="query.php" method="post"&gt;
+                                | &lt;p&gt;
+                                | &lt;label&gt;メールアドレス：
+                                | &lt;input type="email" name="email"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                                | 
+                                | &lt;p&gt;&lt;input type="submit" value="送信"&gt;&lt;/p&gt;
+                                | &lt;/form&gt;
+                            p='<input>はtype属性によってデータの種類を指定し、さまざまなデータの入力や送信を可能にするコントロールを作成します。'
+                            p='たとえば、サンプルではメールアドレスを入力するためのテキストフィールドと送信ボタンを作成しています。'
+                            .alert.alert-success IE NOTES: 
+                            p='IE9以前のバージョンはHTML5で追加されたtype属性の値に未対応で、type="text"と指定したときと同じ形で扱われます。'
+                            .row
+                                .col-sm-6
+                                    table.table
+                                        tr
+                                            th type属性の値
+                                            th データの種類
+                                        tr
+                                            td text
+                                            td テキスト
+                                        tr
+                                            td search
+                                            td 検索
+                                        tr
+                                            td url
+                                            td URL
+                                        tr
+                                            td tel
+                                            td 電話番号
+                                        tr
+                                            td email
+                                            td メールアドレス
+                                        tr
+                                            td password
+                                            td パスワード
+                                        tr
+                                            td datetime
+                                            td 日時（UTC）
+                                        tr
+                                            td datetime-local
+                                            td 日時（ローカル）
+                                        tr
+                                            td date
+                                            td 年月日
+                                        tr
+                                            td month
+                                            td 年月
+                                        tr
+                                            td week
+                                            td 週
+                                        tr
+                                            td time
+                                            td 時刻
+                                .col-sm-6
+                                    table.table
+                                        tr
+                                            th type属性の値
+                                            th データの種類
+                                        tr
+                                            td number
+                                            td 数値
+                                        tr
+                                            td range
+                                            td 大まかな数値
+                                        tr
+                                            td color
+                                            td カラーピッカー
+                                        tr
+                                            td checkbox
+                                            td チェックボックス
+                                        tr
+                                            td radio
+                                            td ラジオボタン
+                                        tr
+                                            td file
+                                            td 選択したファイルのリスト
+                                        tr
+                                            td hidden
+                                            td 隠しフィールド
+                                        tr
+                                            td submit
+                                            td 送信ボタン
+                                        tr
+                                            td image
+                                            td 画像ボタン
+                                        tr
+                                            td reset
+                                            td リセットボタン
+                                        tr
+                                            td button
+                                            td ボタン
+                            p='<input>にはたくさんの属性が用意されていますが、使用できる属性はtype属性の値によって変わります。ただし、下の属性についてはtype属性の値と関係なく指定することができます。'
+                            p='また、type属性が「hidden」以外の場合はautofocus属性を指定することが可能です。'
+                            table.table
+                                tr
+                                    th type属性の値と関係なく指定できる属性
+                                    th 機能
+                                tr
+                                    td disabled
+                                    td コントロールの無効化
+                                tr
+                                    td form
+                                    td='<form>との関連付け'
+                                tr
+                                    td name
+                                    td コントロール名の指定
+                                tr
+                                    td value
+                                    td 初期値の指定
+                            table.table
+                                tr
+                                    th type属性の値が「hidden」以外のときに指定できる属性
+                                    th 機能
+                                tr
+                                    td autofocus
+                                    td ページロード時にコントロールを選択
+                            h4 コントロールの無効化
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/245-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;
+                                | &lt;label&gt;メールアドレス：
+                                | &lt;input type="email" name="email" disabled&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='disabled属性を指定すると、コントロールを無効化し、ユーザが入力・編集できないようにすることができます。また、このコントロールのデータはサーバーにも送信されません。なお、<fieldset>のdisalbled属性を利用すると、グループ内のコントロールをまとめて無効にすることができます。'
+                            h4 初期値の指定
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/245-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;
+                                | &lt;label&gt;メールアドレス：
+                                | &lt;input type="email" name="email" value="hanako@web.mail"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='value属性を利用すると、コントロールの初期値を指定することができます。ユーザーが値を変更しなかった場合、サーバーには初期値が送信されます。'
+                            h4 オートフォーカス
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/245-3.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;
+                                | &lt;label&gt;メールアドレス：
+                                | &lt;input type="email" name="email" autofocus&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='autofocus属性を指定すると、ページをロードした段階でコントロールが選択され、すぎにデータを入力できる状態になります。'
+                            .alert.alert-success IE NOTES: 
+                            p IE9以前のバージョンはautofocus属性に未対応です。
+                            
+                            //<input type="text">
+                            .alert.alert-info テキスト
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/246-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;
+                                | &lt;label&gt;名前：
+                                | &lt;input type="text" name="name"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='type属性を指定すると、<input>で扱うデータの種類が「改行なしのテキスト」であることを示すことができます。コントロールは1行分のテキストボックスの形で表示され、以下の属性を指定できるようになります。'
+                            .row
+                                .col-sm-6
+                                    table.table
+                                        tr
+                                            th='<input type="text">で指定できる属性'
+                                            th 機能
+                                        tr
+                                            td autocomplete
+                                            td オートコンプリート
+                                        tr
+                                            td dirname
+                                            td 書字方向の情報を送信
+                                        tr
+                                            td list
+                                            td 入力候補の指定
+                                        tr
+                                            td maxlength
+                                            td 入力できる文字数の指定
+                                        tr
+                                            td pattern
+                                            td データ形式の指定
+                                .col-sm-6
+                                    table.table
+                                        tr
+                                            th='<input type="text">で指定できる属性'
+                                            th 機能
+                                        tr
+                                            td placeholder
+                                            td プレースホルダの指定
+                                        tr
+                                            td readonly
+                                            td 表示専用にする
+                                        tr
+                                            td required
+                                            td 入力を必須にする
+                                        tr
+                                            td size
+                                            td 表示する文字数の指定
+                            h4 書字方向の情報を送信
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/246-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;
+                                | &lt;label&gt;名前：
+                                | &lt;input type="text" name="name" dirname="namedir"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='dirname属性を指定すると、コントロールに入力されたデータといっしょに書字方向の情報をサーバーに送信することができます。'
+                            p='dirname属性では情報を区別するための名前を指定します。たとえば、「namedir」と指定しておくと、「namedir = ltr」というデータが送信されるようになります。「ltr」は書字方向が左から右であることを示す値です。右から左の場合は「rtl」という値が送信されます。'
+                            .alert.alert-warning NOTES: 
+                            p='iOS5.x以前やAndroid、Firefox、Internet Explorer 10はdirname属性に未対応です。'
+                            h4 入力できる文字数の指定
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/247-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;
+                                | &lt;label&gt;会員番号（８桁）：
+                                | &lt;input type="text" name="name" maxlength="8"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='maxlenght属性では、入力できる文字数を指定します。たとえば、値を「8」と指定すると、8文字までしか入力できなくなります。'
+                            h4 データ形式の指定
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/247-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                &lt;p&gt;
+                                &lt;label&gt;会員番号：
+                                &lt;input type="text" name="name" pattern="[a-z]+" title="すべて小文字のアルファベットで入力してください"&gt;
+                                &lt;/label&gt;
+                                &lt;/p&gt;
+                            p='pattern属性を利用すると、入力を許可するデータの形式をJavaScriptの正規表現で指定することができます。たとえば、ここでは値を「[a-z]+」と指定し、小文字のアルファベットの入力のみを許可しています。'
+                            p='送信時には入力データの検証が行われ、誤りがある場合にはエラーメッセージが表示され、送信が停止されます。そのため、謝った内容のままデータが送信されるのを防ぐことができます。'
+                            p='また、pattern属性を指定した場合には、入力形式についての説明をtitle属性で記述しておくことが推奨されています。この説明はエラーメッセージといっしょに表示されます。'
+                            .alert.alert-warning NOTES: 
+                            p='各ブラウザは、入力されたデータが指定形式で正しく記述されているかどうか検証する機能を備えており、誤りがある場合にはエラーメッセージを表示し、送信を停止するようになっています。'
+                            p='ただし、iOSやAndroid、Safariの場合、内部的に検証は行いますが、エラーメッセージの表示や送信の停止は行いません。検証結果を表示に反映させるには、JavaScriptのvalidity.validやCSSの:valid、:invalidセレクタを利用して処理を設定します。'
+                            .alert.alert-success IE NOTES: 
+                            p='IE9以前のバージョンはpattern属性や入力データの検証に未対応です。'
+                            h4 プレースホルダーの指定
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/248-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;
+                                | &lt;label&gt;会員番号：
+                                | &lt;input type="text" name="name" maxlength="8" placeholder="８桁の会員番号"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='placeholder属性を利用すると、入力に関する簡単なヒントを示すことができます。これは「プレースホルダ」と呼ばれ、データが未入力の場合にのみ、上のように薄いグレーの文字で表示されます。'
+                            .alert.alert-success IE NOTES: 
+                            p='IE9以前のバージョンはplaceholder属性に未対応です。'
+                            h4 表示専用にする
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/248-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;
+                                | &lt;label&gt;会員番号：
+                                | &lt;input type="text" name="name" value="ABCDEFGH" readonly&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='readonly属性を指定すると、コントロールを表示専用にすることができます。過去に入力された変更不可なデータをフォームで扱う必要がある場合等に利用することができます。'
+                            p='ここでは、value属性で会員番号を入力済みの状態で表示し、readonly属性で編集できないように設定しています。ただし、入力済みの値を選択し、コピーすることは可能です。また、入力済みの値はサーバーに送信されます。'
+                            .alert.alert-warning NOTES: 
+                            p='disabled属性で無効化したコントロールの場合、値の編集もコピーもできなくなります。また、サーバへの送信も行われません。'
+                            h4 入力を必須にする
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/248-3.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;
+                                | &lt;label&gt;会員番号：
+                                | &lt;input type="text" name="name" required&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='required属性を指定すると、入力が必須であることを示します。送信時には入力データの検証が行われ、未入力の場合はエラーメッセージが表示されます。'
+                            .alert.alert-success IE NOTES: 
+                            p='IE9以前のバージョンはrequired属性に未対応です。'
+                            h4 表示する文字数の指定
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/249.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;
+                                | &lt;label&gt;会員番号：
+                                | &lt;input type="text" name="name" size="45"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='size属性ではコントロールの横幅を何文字分表示できる大きさにするかを指定します。ここでは、30文字分を表示するように設定しています。'
+                            p='size属性を省略した場合、標準では20文字分の内容が表示されます。'
+                            .alert.alert-warning NOTES: 
+                            p='コントロールの横幅はスタイルシートのwidthプロパティでも変更することができます。このとき、size属性よりもwidthプロパティの指定が優先されます。'
+                            .alert.alert-warning NOTES: inputmode属性による入力モードの指定
+                            p='WHATWGのHTML Living StandardとW3CのHTML5.1では、データの入力モードを指定するinputmode属性が提案されており、type属性の値を「text」または「search」と指定したときに利用できることになっています。'
+                            p='たとえば、inputmode属性を「katakana」と指定した場合、コントロールを選択したときにキーボードの入力モードが自動的にカタカナに切り替わるようになります。'
+                            p='下のような値を指定できることになっていますが、現在のところ各ブラウザは未対応です。'
+                            table.table
+                                tr
+                                    th inputmode属性の値
+                                    th 入力モード
+                                tr
+                                    td latin
+                                    td アルファベットの入力に最適なモード。
+                                tr
+                                    td latin-name
+                                    td アルファベットの人名の入力に最適なモード。
+                                tr
+                                    td kana
+                                    td ひらがなの入力に最適なモード。
+                                tr
+                                    td katakana
+                                    td カタカナの入力に最適なモード。
 
-							//<input type="search">
-							.alert.alert-info 検索
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/250-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;
-								| &lt;label&gt;検索：
-								| &lt;input type="search" name="keyword"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-							p='type属性を「search」と指定した場合、<input>で扱うデータの種類は「改行なしのテキスト」となり、セマンティクスの上では<input type="text">と同じ扱いになります。指定できる属性も<input tyoe="text">の場合と同じです。'
-							p='「search」と「text」の違いはコントロールの表示です。検索フィールドを通常のテキストフィールドと視覚的に区別して表示する環境では、「srarch」と指定されたコントロールを検索フィールド用のデザインで表示することが認められています。たとえば、iOSやOS X環境では「search」と指定したコントロールが角の丸いデザインで表示されます。'
-							.alert.alert-warning NOTES: 
-							p='WindowsやAndroidの環境ではどちらも四角いデザインで表示されます。'
+                            //<input type="search">
+                            .alert.alert-info 検索
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/250-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;
+                                | &lt;label&gt;検索：
+                                | &lt;input type="search" name="keyword"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='type属性を「search」と指定した場合、<input>で扱うデータの種類は「改行なしのテキスト」となり、セマンティクスの上では<input type="text">と同じ扱いになります。指定できる属性も<input tyoe="text">の場合と同じです。'
+                            p='「search」と「text」の違いはコントロールの表示です。検索フィールドを通常のテキストフィールドと視覚的に区別して表示する環境では、「srarch」と指定されたコントロールを検索フィールド用のデザインで表示することが認められています。たとえば、iOSやOS X環境では「search」と指定したコントロールが角の丸いデザインで表示されます。'
+                            .alert.alert-warning NOTES: 
+                            p='WindowsやAndroidの環境ではどちらも四角いデザインで表示されます。'
 
-							//<input type="url">
-							.alert.alert-info URL
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/250-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;
-								| &lt;label&gt;URL：
-								| &lt;input type="url" name="homepage"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-							p='type属性の値を「url」と指定すると、<input>え扱うデータの種類がURLであることを示します。送信時には入力データの検証が行われます。'
-							p='指定できる属性は、<input type="text">の属性からdirname属性を除いたものとなっています。'
-							.row
-								.col-sm-6
-									table.table
-										tr
-											th='<input type="url">で指定できる属性'
-											th 機能
-										tr
-											td autocomplete
-											td オートコンプリート
-										tr
-											td list
-											td 入力候補の指定
-										tr
-											td maxlength
-											td 最大文字数の指定
-										tr
-											td pattern
-											td データ形式の指定
-								.col-sm-6
-									table.table
-										tr
-											th='<input type="url">で指定できる属性'
-											th 機能
-										tr
-											td placeholder
-											td プレースホルダの指定
-										tr
-											td readonly
-											td 表示専用にする
-										tr
-											td required
-											td 入力を必須にする
-										tr
-											td size
-											td 表示文字数の指定
-							//<input type="tel">
-							.alert.alert-info 電話番号
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/251-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;
-								| &lt;label&gt;電話番号：
-								| &lt;input type="tel" name="telnum"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-							p='type属性の値を「tel」と指定した場合、<input>で扱うデータの種類が電話番号であることを示します。入力データの検証は行われません。'
-							p='また、<nput type="url">と同じ属性を指定することが可能です。'
-							.alert.alert-warning NOTES: 
-							p='iOSやAndroidで電話番号のコントロールを選択すると、数字の入力キーが表示されるようになります'
+                            //<input type="url">
+                            .alert.alert-info URL
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/250-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;
+                                | &lt;label&gt;URL：
+                                | &lt;input type="url" name="homepage"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='type属性の値を「url」と指定すると、<input>え扱うデータの種類がURLであることを示します。送信時には入力データの検証が行われます。'
+                            p='指定できる属性は、<input type="text">の属性からdirname属性を除いたものとなっています。'
+                            .row
+                                .col-sm-6
+                                    table.table
+                                        tr
+                                            th='<input type="url">で指定できる属性'
+                                            th 機能
+                                        tr
+                                            td autocomplete
+                                            td オートコンプリート
+                                        tr
+                                            td list
+                                            td 入力候補の指定
+                                        tr
+                                            td maxlength
+                                            td 最大文字数の指定
+                                        tr
+                                            td pattern
+                                            td データ形式の指定
+                                .col-sm-6
+                                    table.table
+                                        tr
+                                            th='<input type="url">で指定できる属性'
+                                            th 機能
+                                        tr
+                                            td placeholder
+                                            td プレースホルダの指定
+                                        tr
+                                            td readonly
+                                            td 表示専用にする
+                                        tr
+                                            td required
+                                            td 入力を必須にする
+                                        tr
+                                            td size
+                                            td 表示文字数の指定
+                            //<input type="tel">
+                            .alert.alert-info 電話番号
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/251-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;
+                                | &lt;label&gt;電話番号：
+                                | &lt;input type="tel" name="telnum"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='type属性の値を「tel」と指定した場合、<input>で扱うデータの種類が電話番号であることを示します。入力データの検証は行われません。'
+                            p='また、<nput type="url">と同じ属性を指定することが可能です。'
+                            .alert.alert-warning NOTES: 
+                            p='iOSやAndroidで電話番号のコントロールを選択すると、数字の入力キーが表示されるようになります'
 
-							//<input type="email">
-							.alert.alert-info メールアドレス
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/251-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;
-								| &lt;label&gt;メールアドレス：
-								| &lt;input type="email" name="email"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-							p='<input>で扱うデータの種類がメールアドレスであることを示すためには、type属性の値を「email」と指定します。送信時には入力データの検証が行われます。'
-							p='指定できる属性は、<input type="text">かの属性からdirname属性を除き、multiple属性を加えたものとなっています。'
-							.row
-								.col-sm-6
-									table.table
-										tr
-											th='<input type="email">で指定できる属性'
-											th 機能
-										tr
-											td autocomplete
-											td オートコンプリート機能
-										tr
-											td list
-											td 入力候補の指定
-										tr
-											td maxlength
-											td 最大文字数の指定
-										tr
-											td multiple
-											td 複数の値の指定
-										tr
-											td pattern
-											td データ形式の指定
-								.col-sm-6
-									table.table
-										tr
-											th='<input type="email">で指定できる属性'
-											th 機能
-										tr
-											td placeholder
-											td プレースホルダの指定
-										tr
-											td readonly
-											td 表示専用にする
-										tr
-											td required
-											td 入力を必須にする
-										tr
-											td size
-											td 表示文字数の指定
-							h4 複数のメールアドレスを入力する
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/252-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;
-								| &lt;label&gt;メールアドレス（複数指定可）：
-								| &lt;input type="email" name="email" size="60" multiple&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-							p='multiple属性を指定すると、複数のメールアドレスを「,（カンマ）」で区切って入力できるようになります。'
-							.alert.alert-warning NOTES: 
-							p='multiple属性を指定しなかった場合、入力できるメールアドレスは1つのみとなります。'
+                            //<input type="email">
+                            .alert.alert-info メールアドレス
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/251-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;
+                                | &lt;label&gt;メールアドレス：
+                                | &lt;input type="email" name="email"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='<input>で扱うデータの種類がメールアドレスであることを示すためには、type属性の値を「email」と指定します。送信時には入力データの検証が行われます。'
+                            p='指定できる属性は、<input type="text">かの属性からdirname属性を除き、multiple属性を加えたものとなっています。'
+                            .row
+                                .col-sm-6
+                                    table.table
+                                        tr
+                                            th='<input type="email">で指定できる属性'
+                                            th 機能
+                                        tr
+                                            td autocomplete
+                                            td オートコンプリート機能
+                                        tr
+                                            td list
+                                            td 入力候補の指定
+                                        tr
+                                            td maxlength
+                                            td 最大文字数の指定
+                                        tr
+                                            td multiple
+                                            td 複数の値の指定
+                                        tr
+                                            td pattern
+                                            td データ形式の指定
+                                .col-sm-6
+                                    table.table
+                                        tr
+                                            th='<input type="email">で指定できる属性'
+                                            th 機能
+                                        tr
+                                            td placeholder
+                                            td プレースホルダの指定
+                                        tr
+                                            td readonly
+                                            td 表示専用にする
+                                        tr
+                                            td required
+                                            td 入力を必須にする
+                                        tr
+                                            td size
+                                            td 表示文字数の指定
+                            h4 複数のメールアドレスを入力する
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/252-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;
+                                | &lt;label&gt;メールアドレス（複数指定可）：
+                                | &lt;input type="email" name="email" size="60" multiple&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='multiple属性を指定すると、複数のメールアドレスを「,（カンマ）」で区切って入力できるようになります。'
+                            .alert.alert-warning NOTES: 
+                            p='multiple属性を指定しなかった場合、入力できるメールアドレスは1つのみとなります。'
 
-							//<input type="passowrd">
-							.alert.alert-info パスワード
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/252-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;
-								| &lt;label&gt;パスワード：
-								| &lt;input type="password" name="pw"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-							p='type属性の値を「pasword」と指定すると、<input>で扱うデータの種類がパスワードのようにデリケートな情報であることを示します。このコントロールでは入力した値が伏字で表示されます。'
-							p='指定できる属性は以下の通りです。<input type="text">で指定できるものからdirname属性を除いたものとなっています。'
-							.row
-								.col-sm-6
-									table.table
-										tr
-											th='<input type="password">で指定できる属性'
-											th 機能
-										tr
-											td autocomplete
-											td オートコンプリート
-										tr
-											td maxlength
-											td 最大文字数の指定
-										tr
-											td pattern
-											td データ形式の指定
-										tr
-											td placeholder
-											td プレースホルダの指定
-								.col-sm-6
-									table.table
-										tr
-											th='<input type="password">で指定できる属性'
-											th 機能
-										tr
-											td readonly
-											td 表示専用にする
-										tr
-											td required
-											td 入力を必須にする
-										tr
-											td size
-											td 表示文字数の指定
+                            //<input type="passowrd">
+                            .alert.alert-info パスワード
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/252-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;
+                                | &lt;label&gt;パスワード：
+                                | &lt;input type="password" name="pw"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='type属性の値を「pasword」と指定すると、<input>で扱うデータの種類がパスワードのようにデリケートな情報であることを示します。このコントロールでは入力した値が伏字で表示されます。'
+                            p='指定できる属性は以下の通りです。<input type="text">で指定できるものからdirname属性を除いたものとなっています。'
+                            .row
+                                .col-sm-6
+                                    table.table
+                                        tr
+                                            th='<input type="password">で指定できる属性'
+                                            th 機能
+                                        tr
+                                            td autocomplete
+                                            td オートコンプリート
+                                        tr
+                                            td maxlength
+                                            td 最大文字数の指定
+                                        tr
+                                            td pattern
+                                            td データ形式の指定
+                                        tr
+                                            td placeholder
+                                            td プレースホルダの指定
+                                .col-sm-6
+                                    table.table
+                                        tr
+                                            th='<input type="password">で指定できる属性'
+                                            th 機能
+                                        tr
+                                            td readonly
+                                            td 表示専用にする
+                                        tr
+                                            td required
+                                            td 入力を必須にする
+                                        tr
+                                            td size
+                                            td 表示文字数の指定
 
-							.alert.alert-info 日時
-							p='<iput>で扱うデータが日時の情報であることを示すためには、type属性を下のいずれかの値に設定します。日時の情報は以下の形式で記述することが求められるため、各ブラウザはカレンダーといった簡単に日時を選択できるインターフェースを用意して、内部的に以下の記述に変換してサーバーに送信します。現在のところ、専用のインターフェースが用意されているのは、iOS5以上、Chrome、Operaです。'
-							p='ここではすべての値に対応しているOperaを利用して、インターフェースの表示とサーバーに送信されるデータを確認していきます。'
-							table.table
-								tr
-									th(rowspan='2') type属性の値
-									th(rowspan='2')  データの種類
-									th(rowspan='2')  タイムゾーンの情報
-									th(colspan='3') 専用のインターフェース
-								tr
-									td: img(src='../images/ic-ios.png')
-									td: img(src='../images/ic-chrome.png')
-									td: img(src='../images/ic-opera.png')
-								tr
-									td data
-									td 年月日
-									td なし
-									td ○
-									td ○
-									td ○
-								tr
-									td month
-									td 年月
-									td なし
-									td ○
-									td ☓
-									td ○
-								tr
-									td week
-									td 週
-									td なし
-									td ☓
-									td ☓
-									td ○
-								tr
-									td time
-									td 時刻
-									td なし
-									td ○
-									td ○
-									td ○
-								tr
-									td datetime-local
-									td 日時（ローカル）
-									td なし
-									td ○
-									td ☓
-									td ○
-								tr
-									td datetime
-									td 日時（UTC）
-									td なし
-									td ○
-									td ☓
-									td ○
+                            .alert.alert-info 日時
+                            p='<iput>で扱うデータが日時の情報であることを示すためには、type属性を下のいずれかの値に設定します。日時の情報は以下の形式で記述することが求められるため、各ブラウザはカレンダーといった簡単に日時を選択できるインターフェースを用意して、内部的に以下の記述に変換してサーバーに送信します。現在のところ、専用のインターフェースが用意されているのは、iOS5以上、Chrome、Operaです。'
+                            p='ここではすべての値に対応しているOperaを利用して、インターフェースの表示とサーバーに送信されるデータを確認していきます。'
+                            table.table
+                                tr
+                                    th(rowspan='2') type属性の値
+                                    th(rowspan='2')  データの種類
+                                    th(rowspan='2')  タイムゾーンの情報
+                                    th(colspan='3') 専用のインターフェース
+                                tr
+                                    td: img(src='../images/ic-ios.png')
+                                    td: img(src='../images/ic-chrome.png')
+                                    td: img(src='../images/ic-opera.png')
+                                tr
+                                    td data
+                                    td 年月日
+                                    td なし
+                                    td ○
+                                    td ○
+                                    td ○
+                                tr
+                                    td month
+                                    td 年月
+                                    td なし
+                                    td ○
+                                    td ☓
+                                    td ○
+                                tr
+                                    td week
+                                    td 週
+                                    td なし
+                                    td ☓
+                                    td ☓
+                                    td ○
+                                tr
+                                    td time
+                                    td 時刻
+                                    td なし
+                                    td ○
+                                    td ○
+                                    td ○
+                                tr
+                                    td datetime-local
+                                    td 日時（ローカル）
+                                    td なし
+                                    td ○
+                                    td ☓
+                                    td ○
+                                tr
+                                    td datetime
+                                    td 日時（UTC）
+                                    td なし
+                                    td ○
+                                    td ☓
+                                    td ○
 
-							//<input type="date">
-							h4 年月日の入力
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/253.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;
-								| &lt;label&gt;年月日：
-								| &lt;input type="date" name="date"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-							p='type属性を「date」と指定した場合、年月日をカレンダーで選択できるようになります。'
+                            //<input type="date">
+                            h4 年月日の入力
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/253.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;
+                                | &lt;label&gt;年月日：
+                                | &lt;input type="date" name="date"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='type属性を「date」と指定した場合、年月日をカレンダーで選択できるようになります。'
 
-							//<input type="month">
-							h4 年月の入力
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/254-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;
-								| &lt;label&gt;年月：
-								| &lt;input type="month" name="month"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-							p='type属性を「month」と指定した場合、カレンダーで年月のみを選択することができます。'
+                            //<input type="month">
+                            h4 年月の入力
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/254-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;
+                                | &lt;label&gt;年月：
+                                | &lt;input type="month" name="month"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='type属性を「month」と指定した場合、カレンダーで年月のみを選択することができます。'
 
-							//<input type="week">
-							h4 週の入力
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/254-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;
-								| &lt;label&gt;週：
-								| &lt;input type="week" name="week"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-							p='type属性を「week」と指定した場合、カレンダーで週のみを選択できるようになります。サーバーには年と週の番号が送信されます。'
+                            //<input type="week">
+                            h4 週の入力
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/254-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;
+                                | &lt;label&gt;週：
+                                | &lt;input type="week" name="week"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='type属性を「week」と指定した場合、カレンダーで週のみを選択できるようになります。サーバーには年と週の番号が送信されます。'
 
-							//<input type="time">
-							h4 時刻の入力
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/254-3.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;
-								| &lt;label&gt;時刻：
-								| &lt;input type="time" name="time"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-							p='type属性を「time」と指定した場合、時刻の入力ボックスが表示されます。横のボタンで値を変更するか、値を直接入力することが可能です。'
+                            //<input type="time">
+                            h4 時刻の入力
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/254-3.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;
+                                | &lt;label&gt;時刻：
+                                | &lt;input type="time" name="time"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='type属性を「time」と指定した場合、時刻の入力ボックスが表示されます。横のボタンで値を変更するか、値を直接入力することが可能です。'
 
-							//<input type="datatime-local">
-							h4 日時の入力（タイムゾーンの情報なし）
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/255-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;
-								| &lt;label&gt;日時：
-								| &lt;input type="datetime-local" name="local"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-							p='type属性を「datetime-local」と指定した場合、年月日を指定できるカレンダーと時刻の入力ボックスが表示されます。サーバーには「年月日 T時:分」という形で日時のデータが送信されます。'
+                            //<input type="datatime-local">
+                            h4 日時の入力（タイムゾーンの情報なし）
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/255-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;
+                                | &lt;label&gt;日時：
+                                | &lt;input type="datetime-local" name="local"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='type属性を「datetime-local」と指定した場合、年月日を指定できるカレンダーと時刻の入力ボックスが表示されます。サーバーには「年月日 T時:分」という形で日時のデータが送信されます。'
 
-							//<input type="datetime">
-							h4 日時の入力（タイムゾーンの情報あり）
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/255-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;
-								| &lt;label&gt;日時：
-								| &lt;input type="datetime" name="global"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-							p='type属性を「datetime」と指定した場合、コントロールの横に「UTC」（協定世界時）で入力することを求めるようになります。'
-							p='サーバーに送信されるデータには末尾に「Z」が追加され、タイムゾーンが「UTC」であると明示されます。'
+                            //<input type="datetime">
+                            h4 日時の入力（タイムゾーンの情報あり）
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/255-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;
+                                | &lt;label&gt;日時：
+                                | &lt;input type="datetime" name="global"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='type属性を「datetime」と指定した場合、コントロールの横に「UTC」（協定世界時）で入力することを求めるようになります。'
+                            p='サーバーに送信されるデータには末尾に「Z」が追加され、タイムゾーンが「UTC」であると明示されます。'
 
-							h4 日時関連のコントロールで指定できる属性
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/256.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;
-								| &lt;label&gt;時刻：
-								| &lt;input type="time" name="time" value="10:00" min="10:00" max="18:00" step="1800"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-							p='日付関連のコントロールでは、下の属性を指定することができます。このうちmin、max、step属性を利用すると、入力可能な日時の範囲や間隔を指定できるようになります。'
-							p='たとえば、上のサンプルでは10:00〜18:00までの時刻を30分（1800秒）間隔で指定できるようにしています。'
-							table.table
-								tr
-									th 日時関連のコントロールで指定できる属性
-									th 機能
-								tr
-									td autocomplete
-									td オートコンプリート
-								tr
-									td list
-									td 入力候補の指定
-								tr
-									td max
-									td 最大値の指定
-								tr
-									td min
-									td 最小値の指定
-								tr
-									td readonly
-									td 表示専用にする
-								tr
-									td required
-									td 入力を必須にする
-								tr
-									td step
-									td 値の間隔を指定
-							.alert.alert-warning NOTES: 
-							p='step属性で指定できる値の単位は、type属性の値によって下のように変わります。サンプルの場合、type属性を「time」と指定していますので、step属性の値の単位は「秒」で指定しています。'
-							table.table
-								tr
-									th type属性の値
-									th step属性の単位
-									th step属性の初期値
-								tr
-									td date
-									td 日
-									td 1日
-								tr
-									td month
-									td 月
-									td 1月
-								tr
-									td week
-									td 週
-									td 1週間
-								tr
-									td time
-									td 秒
-									td 60秒
-								tr
-									td datetime-local
-									td 秒
-									td 60秒
-								tr
-									td datetime
-									td 秒
-									td 60秒
+                            h4 日時関連のコントロールで指定できる属性
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/256.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;
+                                | &lt;label&gt;時刻：
+                                | &lt;input type="time" name="time" value="10:00" min="10:00" max="18:00" step="1800"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='日付関連のコントロールでは、下の属性を指定することができます。このうちmin、max、step属性を利用すると、入力可能な日時の範囲や間隔を指定できるようになります。'
+                            p='たとえば、上のサンプルでは10:00〜18:00までの時刻を30分（1800秒）間隔で指定できるようにしています。'
+                            table.table
+                                tr
+                                    th 日時関連のコントロールで指定できる属性
+                                    th 機能
+                                tr
+                                    td autocomplete
+                                    td オートコンプリート
+                                tr
+                                    td list
+                                    td 入力候補の指定
+                                tr
+                                    td max
+                                    td 最大値の指定
+                                tr
+                                    td min
+                                    td 最小値の指定
+                                tr
+                                    td readonly
+                                    td 表示専用にする
+                                tr
+                                    td required
+                                    td 入力を必須にする
+                                tr
+                                    td step
+                                    td 値の間隔を指定
+                            .alert.alert-warning NOTES: 
+                            p='step属性で指定できる値の単位は、type属性の値によって下のように変わります。サンプルの場合、type属性を「time」と指定していますので、step属性の値の単位は「秒」で指定しています。'
+                            table.table
+                                tr
+                                    th type属性の値
+                                    th step属性の単位
+                                    th step属性の初期値
+                                tr
+                                    td date
+                                    td 日
+                                    td 1日
+                                tr
+                                    td month
+                                    td 月
+                                    td 1月
+                                tr
+                                    td week
+                                    td 週
+                                    td 1週間
+                                tr
+                                    td time
+                                    td 秒
+                                    td 60秒
+                                tr
+                                    td datetime-local
+                                    td 秒
+                                    td 60秒
+                                tr
+                                    td datetime
+                                    td 秒
+                                    td 60秒
 
-							//<input type="number">
-							.alert.alert-info 数値
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/257-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;
-								| &lt;label&gt;注文個数（10個まで）：
-								| &lt;input type="number" name="qty" min="0" max="10"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-							p='type属性の値を「number」と指定すると、<input>で扱うデータの種類が「数値」であることをしめします。また、データの検証が行われ、数値以外の値を入れるとエラーになります。'
-							p='サンプルではminやmax属性を指定し、0〜10の数値を入力できるようにしています。そのほか、以下の属性を指定することが可能です。'
-							.row
-								.col-sm-6
-									table.table
-										tr
-											th='<input type="number">で指定できる属性'
-											th 機能
-										tr
-											td autocomplete
-											td オートコンプリート
-										tr
-											td list
-											td 入力候補の指定
-										tr
-											td max
-											td 最大値の指定
-										tr
-											td min
-											td 最小値の指定
-								.col-sm-6
-									table.table
-										tr
-											th='<input type="number">で指定できる属性'
-											th 機能
-										tr
-											td placeholder
-											td プレースホルダの指定
-										tr
-											td readonly
-											td 表示専用にする
-										tr
-											td required
-											td 入力を必須にする
-										tr
-											td step
-											td 値の間隔の指定
-									.alert.alert-warning NOTES: 
-									p='iOSやAndroidでは<input type="number">のコントロールを選択すると数字を入力するキーが表示されます。'
+                            //<input type="number">
+                            .alert.alert-info 数値
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/257-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;
+                                | &lt;label&gt;注文個数（10個まで）：
+                                | &lt;input type="number" name="qty" min="0" max="10"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='type属性の値を「number」と指定すると、<input>で扱うデータの種類が「数値」であることをしめします。また、データの検証が行われ、数値以外の値を入れるとエラーになります。'
+                            p='サンプルではminやmax属性を指定し、0〜10の数値を入力できるようにしています。そのほか、以下の属性を指定することが可能です。'
+                            .row
+                                .col-sm-6
+                                    table.table
+                                        tr
+                                            th='<input type="number">で指定できる属性'
+                                            th 機能
+                                        tr
+                                            td autocomplete
+                                            td オートコンプリート
+                                        tr
+                                            td list
+                                            td 入力候補の指定
+                                        tr
+                                            td max
+                                            td 最大値の指定
+                                        tr
+                                            td min
+                                            td 最小値の指定
+                                .col-sm-6
+                                    table.table
+                                        tr
+                                            th='<input type="number">で指定できる属性'
+                                            th 機能
+                                        tr
+                                            td placeholder
+                                            td プレースホルダの指定
+                                        tr
+                                            td readonly
+                                            td 表示専用にする
+                                        tr
+                                            td required
+                                            td 入力を必須にする
+                                        tr
+                                            td step
+                                            td 値の間隔の指定
+                                    .alert.alert-warning NOTES: 
+                                    p='iOSやAndroidでは<input type="number">のコントロールを選択すると数字を入力するキーが表示されます。'
 
-							//<input type="range">
-							.alert.alert-info 大まかな数値
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/257-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;
-								| &lt;label&gt;嫌い &lt;input type="range" name="value"&gt; 好き
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-							p='データの種類が「大まかな数値」であることを示す場合は、type属性の値を「range」と指定します。この場合、コントロールはスライダーの形で表示されます。標準ではスライダーの左端が「0」、中央が「50」、右端が「100」となります。'
-							p='指定できる属性は、<input type="number">の属性からplaceholder、readonly、required属性を除いたものとなっています。'
-							.alert.alert-warning NOTES: 
-							p='iOS4.xはスライダーの表示に未対応です。また、Android4.0以前ではスライダーの表示が崩れるという問題が見られます。'
+                            //<input type="range">
+                            .alert.alert-info 大まかな数値
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/257-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;
+                                | &lt;label&gt;嫌い &lt;input type="range" name="value"&gt; 好き
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='データの種類が「大まかな数値」であることを示す場合は、type属性の値を「range」と指定します。この場合、コントロールはスライダーの形で表示されます。標準ではスライダーの左端が「0」、中央が「50」、右端が「100」となります。'
+                            p='指定できる属性は、<input type="number">の属性からplaceholder、readonly、required属性を除いたものとなっています。'
+                            .alert.alert-warning NOTES: 
+                            p='iOS4.xはスライダーの表示に未対応です。また、Android4.0以前ではスライダーの表示が崩れるという問題が見られます。'
 
-							//<input type="color">
-							.alert.alert-info カラーピッカー
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/258-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;
-								| &lt;label&gt;カラー：
-								| &lt;input type="color" name="color"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-							p='type属性を「color」と指定した場合、<input>で扱うデータの種類が色の情報であることを示すことができます。コントロールは選択した色が表示され、クリックするとカラーピッカーを開いて色を変更することができます。色の値は16進数のデータで送信されます。'
+                            //<input type="color">
+                            .alert.alert-info カラーピッカー
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/258-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;
+                                | &lt;label&gt;カラー：
+                                | &lt;input type="color" name="color"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='type属性を「color」と指定した場合、<input>で扱うデータの種類が色の情報であることを示すことができます。コントロールは選択した色が表示され、クリックするとカラーピッカーを開いて色を変更することができます。色の値は16進数のデータで送信されます。'
 
-							//<input type="checkbox">
-							.alert.alert-info チェックボックス
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/258-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;好きなお茶を選択してください（複数選択可）：&lt;br&gt;
-								| &lt;label&gt;&lt;input type="checkbox" name="tea" value="紅茶"&gt; 紅茶 &lt;/label&gt;
-								| &lt;label&gt;&lt;input type="checkbox" name="tea" value="ウーロン茶"&gt; ウーロン茶 &lt;/label&gt;
-								| &lt;label&gt;&lt;input type="checkbox" name="tea" value="緑茶"&gt; 緑茶 &lt;/label&gt;
-								| &lt;/p&gt;
-							p='<input>で扱う情報が「オン」と「オフ」のどちらかであることを示す場合、type属性を「checkbox」と指定します。この場合、コントロールはチェックボックスの形で表示され、チェックをつけると「オン」、チェックをはずすと「オフ」として扱われます。'
-							p='サーバーにはチェックをつけたコントロールのデータのみが送信されます。ただし、標準では「on」という値が送信されるため、ここではvalue属性で送信する値を指定しています。'
+                            //<input type="checkbox">
+                            .alert.alert-info チェックボックス
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/258-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;好きなお茶を選択してください（複数選択可）：&lt;br&gt;
+                                | &lt;label&gt;&lt;input type="checkbox" name="tea" value="紅茶"&gt; 紅茶 &lt;/label&gt;
+                                | &lt;label&gt;&lt;input type="checkbox" name="tea" value="ウーロン茶"&gt; ウーロン茶 &lt;/label&gt;
+                                | &lt;label&gt;&lt;input type="checkbox" name="tea" value="緑茶"&gt; 緑茶 &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='<input>で扱う情報が「オン」と「オフ」のどちらかであることを示す場合、type属性を「checkbox」と指定します。この場合、コントロールはチェックボックスの形で表示され、チェックをつけると「オン」、チェックをはずすと「オフ」として扱われます。'
+                            p='サーバーにはチェックをつけたコントロールのデータのみが送信されます。ただし、標準では「on」という値が送信されるため、ここではvalue属性で送信する値を指定しています。'
 
-							h4 初期状態をオンにする
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;好きなお茶を選択してください（複数選択可）：&lt;br&gt;
-								| &lt;label&gt;&lt;input type="checkbox" name="tea" value="紅茶" checked&gt; 紅茶 &lt;/label&gt;
-								| &lt;label&gt;&lt;input type="checkbox" name="tea" value="ウーロン茶"&gt; ウーロン茶 &lt;/label&gt;
-								| &lt;label&gt;&lt;input type="checkbox" name="tea" value="緑茶"&gt; 緑茶 &lt;/label&gt;
-								| &lt;/p&gt;
-							p='チェックボックスは標準ではオフの状態になっていますが、checked属性を指定することにより、初期状態を「オン」の状態にすることができます。'
-							.alert.alert-warning NOTES: チェックボックスのデータをPHPで処理する場合
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/259.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;好きなお茶を選択してください（複数選択可）：&lt;br&gt;
-								| &lt;label&gt;&lt;input type="checkbox" name="tea[]" value="紅茶" checked&gt; 紅茶 &lt;/label&gt;
-								| &lt;label&gt;&lt;input type="checkbox" name="tea[]" value="ウーロン茶"&gt; ウーロン茶 &lt;/label&gt;
-								| &lt;label&gt;&lt;input type="checkbox" name="tea[]" value="緑茶"&gt; 緑茶 &lt;/label&gt;
-								| &lt;/p&gt;
-							p='フォームのデータをPHPで処理している場合、サンプルのように同じ「tea」というコントロール名を持つデータが複数送信されてくると、後から送信された「tea = 緑茶」といの値しか取得することしかできません。'
-							p='この問題を回避するためには、コントロール名を「tea[]」という形で指定します。これにより、PHPで以下のような配列の形でチェックボックスのデータを取得できるようになります。'
-							pre(class='prettyprint linenums:1')
-								| Array
-								| {
-								|      [tea] => Array
-								|           (
-								|                [0] => 紅茶
-								|                [1] => 緑茶
-								|           )
-								| }
+                            h4 初期状態をオンにする
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;好きなお茶を選択してください（複数選択可）：&lt;br&gt;
+                                | &lt;label&gt;&lt;input type="checkbox" name="tea" value="紅茶" checked&gt; 紅茶 &lt;/label&gt;
+                                | &lt;label&gt;&lt;input type="checkbox" name="tea" value="ウーロン茶"&gt; ウーロン茶 &lt;/label&gt;
+                                | &lt;label&gt;&lt;input type="checkbox" name="tea" value="緑茶"&gt; 緑茶 &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='チェックボックスは標準ではオフの状態になっていますが、checked属性を指定することにより、初期状態を「オン」の状態にすることができます。'
+                            .alert.alert-warning NOTES: チェックボックスのデータをPHPで処理する場合
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/259.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;好きなお茶を選択してください（複数選択可）：&lt;br&gt;
+                                | &lt;label&gt;&lt;input type="checkbox" name="tea[]" value="紅茶" checked&gt; 紅茶 &lt;/label&gt;
+                                | &lt;label&gt;&lt;input type="checkbox" name="tea[]" value="ウーロン茶"&gt; ウーロン茶 &lt;/label&gt;
+                                | &lt;label&gt;&lt;input type="checkbox" name="tea[]" value="緑茶"&gt; 緑茶 &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='フォームのデータをPHPで処理している場合、サンプルのように同じ「tea」というコントロール名を持つデータが複数送信されてくると、後から送信された「tea = 緑茶」といの値しか取得することしかできません。'
+                            p='この問題を回避するためには、コントロール名を「tea[]」という形で指定します。これにより、PHPで以下のような配列の形でチェックボックスのデータを取得できるようになります。'
+                            pre(class='prettyprint linenums:1')
+                                | Array
+                                | {
+                                |      [tea] => Array
+                                |           (
+                                |                [0] => 紅茶
+                                |                [1] => 緑茶
+                                |           )
+                                | }
 
-							//<input type="radio">
-							.alert.alert-info ラジオボタン
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/260-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;好きなお茶を１つだけ選択してください：&lt;br&gt;
-								| &lt;label&gt;&lt;input type="radio" name="tea" value="紅茶"&gt; 紅茶 &lt;/label&gt;
-								| 
-								| &lt;label&gt;&lt;input type="radio" name="tea" value="ウーロン茶"&gt; ウーロン茶 &lt;/label&gt;
-								| &lt;label&gt;&lt;input type="radio" name="tea" value="緑茶"&gt; 緑茶 &lt;/label&gt;
-								| &lt;/p&gt;
-							p='type属性を「radio」と指定した場合、<input>で扱う情報が「オン」と「オフ」のどちらかであることを示し、「オン」にした情報は複数の選択肢の中から1つだけ選ばれたものであることを示します。'
-							p='コントロールはラジオボタンの形で表示され、同じname属性の値を持つものがグループとして扱われます。グループに属するコントロールのうち、選択して「オン」にできるのは1つのみとなります。'
-							p='たとえば、サンプルでは3つの選択肢を用意して、name属性の値を「tea」としています。これにより、3つの選択肢のうち1つのみを選択することができるようになります。サーバーには選択したコントロールのデータのみが送信されます。'
-							p='なお、<input type="checkbox">と同じ属性を利用することができます。'
+                            //<input type="radio">
+                            .alert.alert-info ラジオボタン
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/260-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;好きなお茶を１つだけ選択してください：&lt;br&gt;
+                                | &lt;label&gt;&lt;input type="radio" name="tea" value="紅茶"&gt; 紅茶 &lt;/label&gt;
+                                | 
+                                | &lt;label&gt;&lt;input type="radio" name="tea" value="ウーロン茶"&gt; ウーロン茶 &lt;/label&gt;
+                                | &lt;label&gt;&lt;input type="radio" name="tea" value="緑茶"&gt; 緑茶 &lt;/label&gt;
+                                | &lt;/p&gt;
+                            p='type属性を「radio」と指定した場合、<input>で扱う情報が「オン」と「オフ」のどちらかであることを示し、「オン」にした情報は複数の選択肢の中から1つだけ選ばれたものであることを示します。'
+                            p='コントロールはラジオボタンの形で表示され、同じname属性の値を持つものがグループとして扱われます。グループに属するコントロールのうち、選択して「オン」にできるのは1つのみとなります。'
+                            p='たとえば、サンプルでは3つの選択肢を用意して、name属性の値を「tea」としています。これにより、3つの選択肢のうち1つのみを選択することができるようになります。サーバーには選択したコントロールのデータのみが送信されます。'
+                            p='なお、<input type="checkbox">と同じ属性を利用することができます。'
 
-							//<input type="file">
-							.alert.alert-info ファイルの選択とアップロード
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/260-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;form action="file.php" method="post" enctype="multipart/form-data"&gt;
-								| &lt;p&gt;
-								| &lt;label&gt;アップロード：
-								| &lt;input type="file" name="myfile"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-								| 
-								| &lt;p&gt;&lt;input type="submit" value="送信"&gt;&lt;/p&gt;
-								| &lt;/form&gt;
-							p='type属性を「file」と指定した場合、<input>で扱う情報が「選択されたファイルのリスト」であることを示します。コントロールには「ファイルを選択」というボタンが用意され、ファイルを選択することができます。標準では1つだけファイルを選択することが可能です。'
-							p='送信ボタンをクリックすると、選択したファイルはサーバーにアップロードされます。このとき、<form>のenctype属性では送信方法を「multipart/form-data」と指定し、action属性ではファイルの処理に対応したスクリプトを指定しておく必要があります。'
-							p='<input type="file">で指定できる属性は下のようになっています。'
-							table.table
-								tr
-									th='<input type="file">で指定できる属性'
-									th 機能
-								tr
-									td accept
-									td ファイルの種類の指定
-								tr
-									td multiple
-									td 複数ファイルの選択を許可する
-								tr
-									td required
-									td 入力を必須にする
-							.alert.alert-warning NOTES: アップロードファイルをPHPで処理する場合
-							p='PHPでは、アップロードされたファイルに関するデータが$_FILESに代入されます。たとえば、サンプルのように「teacup.jpg」というファイルをアップロードした場合、$_FILESの中身は以下のような配列になります。'
-							p='この中から$_FILES["myfile"]["tmp_name"]で一時的に保存されたファイルのパスを取得することができますので、下のようにmove_uploaded_file()でコピーして利用します。ここでは、file.phpと同じ場所にあるuploadフォルダにコピーし、<mg>でページに表示するようにしています。'
-							p='なお、実際の運用ではエラー処理やファイル名の変更、パーミッションの設定なども必要になります。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| Array
-									| {
-									|     [myfile] =&lt; Array
-									|         {
-									|             [name] =&lt; teacup.jpg
-									|             [type] =&lt; image/jpeg
-									|             [tmp_name] =&lt; /tmp/php0VXp6Q
-									|             [error] =&lt; 0
-									|             [size] =&lt; 25822
-									|         }
-									| }
-								figcapiton='$_FILESの中身。「myfile」は<input>属性え指定したコントロール名です。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;UPLOADED FILE&lt;/h1&gt;
-									| 
-									| &lt;?php move_uploaded_file(
-									|     $_FILES["myfile"]["tmp_name"],
-									|     "upload/" . $_FILES["myfile"]["name"]
-									| ); ?&gt;
-									| 
-									| &lt;p&gt;
-									| &lt;img src="upload/&lt;?php echo $_FILES["myfile"]["name"]; ?&gt;&lt;br&gt;
-									| &lt;?php echo $_FILES["myfile"]["name"]; ?&gt;
-									| をアップロードしました。
-									| &lt;/p&gt;
-								figcaption='サンプルで指定した送信先の設定（file.php）。'
-							h4 ファイルの種類を指定する
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/262.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;form action="file.php" method="post" enctype="multipart/form-data"&gt;
-								| &lt;p&gt;
-								| &lt;label&gt;アップロード：
-								| &lt;input type="file" name="myfile" accept="image/*"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-								| 
-								| &lt;p&gt;&lt;input type="submit" value="送信"&gt;&lt;/p&gt;
-								| &lt;/form&gt;
-							p='accept属性では、選択できるファイルの種類を指定します。たとえば、上のように、「image/*」と指定した場合、選択できるのは画像ファイルのみとなります。'
-							p='このほか、以下のような値でファイルの種類を指定することが可能です。複数の種類は「,（カンマ）」で区切って指定します。'
-							table.table
-								tr
-									th accept属性の値
-									th ファイルの種類
-								tr
-									td audio/*
-									td オーディオファイル
-								tr
-									td video/*
-									td ビデオファイル
-								tr
-									td image/*
-									td 画像ファイル
-								tr
-									td MIMEタイプ
-									td 「application/pdf」など
-								tr
-									td 拡張子
-									td 「.pdf」など
-							.alert.alert-success IE NOTES: 
-							p='IE9以前のバージョンはaccept属性に未対応です。'
-							.alert.alert-warning NOTES: iOSとAndroidにおけるファイルの選択とアップロード
-							p='iOSとAndroidでもファイルを選択し、アップロードすることができます。「ファイルの選択」ボタンをクリクするとメニューが表示されますので、既存のファイルから選択するか、カメラアプリを起動してその場で撮影したファイルをアップロードします。'
-							p='ただし、iOSでファイルの選択とアップロードに対応しているのはバージョン6以降となっており、アップロード可能なファイルの種類も画像とビデオに限定されています。accept属性では「video/*」または「image/*」の指定に対応しています。なお、アップロードした画像は「image.jpg」というファイル名になりますので、上書きを防ぐためにはファイル名を変更する処理が必要になります。'
-							p='Androidの場合、accept属性の「audio/*」、「video/*」、「image/*」のし低に対応しており、指定に応じて選択できるアプリが変わります。'
-							.alert.alert-warning NOTES: capture属性で直接カメラを起動する
-							p='W3Cの草案「HTML Media capture」（http://www.w3.org/TR/html-media-capture/）で提案されているcapture属性を利用すると、ファイルの選択メニューではなく、カメラが直接起動するように設定することができます。'
-							p='現在のところAndroid4.1以上が対応しており、たとえば、accept属性を「image/*」、capture属性を「camera」と指定して「ファイルの選択」ボタンをクリックすると、カメラアプリが直接起動するようになります。'
-							p='capture属性では下のような値が提案されており、ビデオカメラや音声レコーダーを直接起動することも可能です。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;label&gt;アップロード：
-									| &lt;input type="file" name="myfile" accept="image/*"&gt;
-									| &lt;/label&gt;
-								figcaption='capture属性を指定していないときのファイル選択：'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/263-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;label&gt;アップロード：
-									| &lt;input type="file" name="myfile" accept="image/*" capture="camera"&gt;
-									| &lt;/label&gt;
-								figcaption='capture属性を「camera」と指定したときのファイル選択：'
-							table.table
-								tr
-									th='capture属性の値'
-									th 起動するキャプチャコントロール
-								tr
-									td camera
-									td カメラ
-								tr
-									td camcoder
-									td ビデオカメラ
-								tr
-									td microphone
-									td 音声レコーダー
-								tr
-									td filesystem
-									td ファイル選択
-							h4 複数のファイルを選択する
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/263-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;form action="file-multiple.php" method="post" enctype="multipart/form-data"&gt;
-								| &lt;p&gt;
-								| &lt;label&gt;アップロード：
-								| &lt;input type="file" name="myfile[]" multiple&gt;
-							p='multiple属性を指定すると、複数のファイルを選択し、まとめてアップロードができるようになります。'
-							.alert.alert-success IE NOTES: 
-							p='IE9以前のバージョンはmultiple属性にも未対応です。'
-							.alert.alert-warning NOTES: 
-							p='iOSでは既存の写真の中から複数のファイルを選択することができます。Androidは複数のファイルの選択に未対応です。'
-							.alert.alert-warning NOTES: 複数ファイルのデータをPHPで処理する場合
-							p='複数ファイルのデータをPHPで処理するためには、<input>のコントロール名を「myfile[]」という形で指定する必要があります。これにより、$_FILESには以下のような形でデータが代入されますので、ファイルごとコピーなどの処理を実行するように設定します。'
-							pre(class='prettyprint linenums:1')
-								| Array
-								| (
-								|     [myfile] =&gt; Array
-								|         (
-								|             [name] =&gt; Array
-								|                 (
-								|                 [0] =&gt; teacup.jpg
-								|                 [1] =&gt; cake.jpg
-								|                 )
-								| 
-								|             [type] =&gt; Array
-								|                  (
-								|                  [0] =&gt; image/jpeg
-								|                  [1] =&gt; image/jpeg
-								|                  )
-								| 
-								|             [tmp_name] =&gt; Array
-								|                 (
-								|                 [0] =&gt; /tmp/phpBrKgeZ
-								|                 [1] =&gt; /tmp/phpW8n97F
-								|                 )
-								| )
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;UPLOADED FILE&lt;/h1&gt;
-									| 
-									| &lt;?php
-									| $filenum = count($_FILES["myfile"]["tmp_name"]);
-									| for($i = 0; $i &lt; $filenum; $i++): ?&gt;
-									| 
-									| &lt;?php move_upload_file(
-									|     $_FILES["myfile"]["tmp_name"][$i],
-									|     "upload/" . $_FILES["myfile"]["name"][$i]
-									| ): ?&gt;
-									| 
-									| &lt;p&gt;
-									| &lt;img src="upload/&lt;?php echo $_FILES["myfile"]["name"][$i]; ?&gt;"&gt;&lt;br&gt;
-									| &lt;?php echo $_FILES["myfile"]["name"][$i]; ?&gt;
-									| をアップロードしました。
-									| &lt;/p&gt;
-									| 
-									| &lt;?php endfor; ?&gt;
-								figcaption サンプルで指定した送信先の設定（file-multiple.php）
-							
-							//<input type="hidden">
-							.alert.alert-info 隠し情報
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/265-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;h1&gt;MAIL ADDRESS SUBMIT&lt;/h1&gt;
-								| 
-								| &lt;form action="query.php" method="post"&gt;
-								| 
-								| &lt;input type="hidden" name="formtype" value="メール登録フォーム"&gt;
-								| 
-								| &lt;p&gt;
-								| &lt;label&gt;メールアドレス：
-								| &lt;input type="email" name="email"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-								| 
-								| &lt;p&gt;&lt;input type="submit" value="送信"&gt;&lt;/p&gt;
-								| &lt;/form&gt;
-							p='type属性を「hidden」と指定した場合、<input>で扱う情報はユーザーに提示する必要がないことを示します。そのため、コントロールの表示は行われません。'
-							p='指定できる属性は下のようになっており、name属性で指定した名前と、value属性で指定した値がサーバーに送信されます。'
-							table.table
-								tr
-									th='<input type="hidden">で指定できる要素'
-									th 機能
-								tr
-									td disabled
-									td コントロールの無効化
-								tr
-									td form
-									td='<form>との関連付け'
-								tr
-									td name
-									td コントロール名の指定
-								tr
-									td value
-									td 初期値の指定
-							h4 エンコードの種類を送信する
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/265-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;h1&gt;MAIL ADDRESS SUBMIT&lt;/h1&gt;
-								| 
-								| &lt;form action="query.php" method="post"&gt;
-								| 
-								| &lt;input type="hidden" name="_charset_"&gt;
-								| 
-								| &lt;p&gt;
-								| &lt;label&gt;メールアドレス：
-								| &lt;input type="email" name="email"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-								| 
-								| &lt;p&gt;&lt;input type="submit" value="送信"&gt;&lt;/p&gt;
-								| &lt;/form&gt;
-							p='name属性の値を「_charset_」と指定すると、フォームデータのエンコードの種類を送信することができます。この場合、value属性を指定しても無視されます。'
+                            //<input type="file">
+                            .alert.alert-info ファイルの選択とアップロード
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/260-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;form action="file.php" method="post" enctype="multipart/form-data"&gt;
+                                | &lt;p&gt;
+                                | &lt;label&gt;アップロード：
+                                | &lt;input type="file" name="myfile"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                                | 
+                                | &lt;p&gt;&lt;input type="submit" value="送信"&gt;&lt;/p&gt;
+                                | &lt;/form&gt;
+                            p='type属性を「file」と指定した場合、<input>で扱う情報が「選択されたファイルのリスト」であることを示します。コントロールには「ファイルを選択」というボタンが用意され、ファイルを選択することができます。標準では1つだけファイルを選択することが可能です。'
+                            p='送信ボタンをクリックすると、選択したファイルはサーバーにアップロードされます。このとき、<form>のenctype属性では送信方法を「multipart/form-data」と指定し、action属性ではファイルの処理に対応したスクリプトを指定しておく必要があります。'
+                            p='<input type="file">で指定できる属性は下のようになっています。'
+                            table.table
+                                tr
+                                    th='<input type="file">で指定できる属性'
+                                    th 機能
+                                tr
+                                    td accept
+                                    td ファイルの種類の指定
+                                tr
+                                    td multiple
+                                    td 複数ファイルの選択を許可する
+                                tr
+                                    td required
+                                    td 入力を必須にする
+                            .alert.alert-warning NOTES: アップロードファイルをPHPで処理する場合
+                            p='PHPでは、アップロードされたファイルに関するデータが$_FILESに代入されます。たとえば、サンプルのように「teacup.jpg」というファイルをアップロードした場合、$_FILESの中身は以下のような配列になります。'
+                            p='この中から$_FILES["myfile"]["tmp_name"]で一時的に保存されたファイルのパスを取得することができますので、下のようにmove_uploaded_file()でコピーして利用します。ここでは、file.phpと同じ場所にあるuploadフォルダにコピーし、<mg>でページに表示するようにしています。'
+                            p='なお、実際の運用ではエラー処理やファイル名の変更、パーミッションの設定なども必要になります。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | Array
+                                    | {
+                                    |     [myfile] =&lt; Array
+                                    |         {
+                                    |             [name] =&lt; teacup.jpg
+                                    |             [type] =&lt; image/jpeg
+                                    |             [tmp_name] =&lt; /tmp/php0VXp6Q
+                                    |             [error] =&lt; 0
+                                    |             [size] =&lt; 25822
+                                    |         }
+                                    | }
+                                figcapiton='$_FILESの中身。「myfile」は<input>属性え指定したコントロール名です。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;UPLOADED FILE&lt;/h1&gt;
+                                    | 
+                                    | &lt;?php move_uploaded_file(
+                                    |     $_FILES["myfile"]["tmp_name"],
+                                    |     "upload/" . $_FILES["myfile"]["name"]
+                                    | ); ?&gt;
+                                    | 
+                                    | &lt;p&gt;
+                                    | &lt;img src="upload/&lt;?php echo $_FILES["myfile"]["name"]; ?&gt;&lt;br&gt;
+                                    | &lt;?php echo $_FILES["myfile"]["name"]; ?&gt;
+                                    | をアップロードしました。
+                                    | &lt;/p&gt;
+                                figcaption='サンプルで指定した送信先の設定（file.php）。'
+                            h4 ファイルの種類を指定する
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/262.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;form action="file.php" method="post" enctype="multipart/form-data"&gt;
+                                | &lt;p&gt;
+                                | &lt;label&gt;アップロード：
+                                | &lt;input type="file" name="myfile" accept="image/*"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                                | 
+                                | &lt;p&gt;&lt;input type="submit" value="送信"&gt;&lt;/p&gt;
+                                | &lt;/form&gt;
+                            p='accept属性では、選択できるファイルの種類を指定します。たとえば、上のように、「image/*」と指定した場合、選択できるのは画像ファイルのみとなります。'
+                            p='このほか、以下のような値でファイルの種類を指定することが可能です。複数の種類は「,（カンマ）」で区切って指定します。'
+                            table.table
+                                tr
+                                    th accept属性の値
+                                    th ファイルの種類
+                                tr
+                                    td audio/*
+                                    td オーディオファイル
+                                tr
+                                    td video/*
+                                    td ビデオファイル
+                                tr
+                                    td image/*
+                                    td 画像ファイル
+                                tr
+                                    td MIMEタイプ
+                                    td 「application/pdf」など
+                                tr
+                                    td 拡張子
+                                    td 「.pdf」など
+                            .alert.alert-success IE NOTES: 
+                            p='IE9以前のバージョンはaccept属性に未対応です。'
+                            .alert.alert-warning NOTES: iOSとAndroidにおけるファイルの選択とアップロード
+                            p='iOSとAndroidでもファイルを選択し、アップロードすることができます。「ファイルの選択」ボタンをクリクするとメニューが表示されますので、既存のファイルから選択するか、カメラアプリを起動してその場で撮影したファイルをアップロードします。'
+                            p='ただし、iOSでファイルの選択とアップロードに対応しているのはバージョン6以降となっており、アップロード可能なファイルの種類も画像とビデオに限定されています。accept属性では「video/*」または「image/*」の指定に対応しています。なお、アップロードした画像は「image.jpg」というファイル名になりますので、上書きを防ぐためにはファイル名を変更する処理が必要になります。'
+                            p='Androidの場合、accept属性の「audio/*」、「video/*」、「image/*」のし低に対応しており、指定に応じて選択できるアプリが変わります。'
+                            .alert.alert-warning NOTES: capture属性で直接カメラを起動する
+                            p='W3Cの草案「HTML Media capture」（http://www.w3.org/TR/html-media-capture/）で提案されているcapture属性を利用すると、ファイルの選択メニューではなく、カメラが直接起動するように設定することができます。'
+                            p='現在のところAndroid4.1以上が対応しており、たとえば、accept属性を「image/*」、capture属性を「camera」と指定して「ファイルの選択」ボタンをクリックすると、カメラアプリが直接起動するようになります。'
+                            p='capture属性では下のような値が提案されており、ビデオカメラや音声レコーダーを直接起動することも可能です。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;label&gt;アップロード：
+                                    | &lt;input type="file" name="myfile" accept="image/*"&gt;
+                                    | &lt;/label&gt;
+                                figcaption='capture属性を指定していないときのファイル選択：'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/263-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;label&gt;アップロード：
+                                    | &lt;input type="file" name="myfile" accept="image/*" capture="camera"&gt;
+                                    | &lt;/label&gt;
+                                figcaption='capture属性を「camera」と指定したときのファイル選択：'
+                            table.table
+                                tr
+                                    th='capture属性の値'
+                                    th 起動するキャプチャコントロール
+                                tr
+                                    td camera
+                                    td カメラ
+                                tr
+                                    td camcoder
+                                    td ビデオカメラ
+                                tr
+                                    td microphone
+                                    td 音声レコーダー
+                                tr
+                                    td filesystem
+                                    td ファイル選択
+                            h4 複数のファイルを選択する
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/263-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;form action="file-multiple.php" method="post" enctype="multipart/form-data"&gt;
+                                | &lt;p&gt;
+                                | &lt;label&gt;アップロード：
+                                | &lt;input type="file" name="myfile[]" multiple&gt;
+                            p='multiple属性を指定すると、複数のファイルを選択し、まとめてアップロードができるようになります。'
+                            .alert.alert-success IE NOTES: 
+                            p='IE9以前のバージョンはmultiple属性にも未対応です。'
+                            .alert.alert-warning NOTES: 
+                            p='iOSでは既存の写真の中から複数のファイルを選択することができます。Androidは複数のファイルの選択に未対応です。'
+                            .alert.alert-warning NOTES: 複数ファイルのデータをPHPで処理する場合
+                            p='複数ファイルのデータをPHPで処理するためには、<input>のコントロール名を「myfile[]」という形で指定する必要があります。これにより、$_FILESには以下のような形でデータが代入されますので、ファイルごとコピーなどの処理を実行するように設定します。'
+                            pre(class='prettyprint linenums:1')
+                                | Array
+                                | (
+                                |     [myfile] =&gt; Array
+                                |         (
+                                |             [name] =&gt; Array
+                                |                 (
+                                |                 [0] =&gt; teacup.jpg
+                                |                 [1] =&gt; cake.jpg
+                                |                 )
+                                | 
+                                |             [type] =&gt; Array
+                                |                  (
+                                |                  [0] =&gt; image/jpeg
+                                |                  [1] =&gt; image/jpeg
+                                |                  )
+                                | 
+                                |             [tmp_name] =&gt; Array
+                                |                 (
+                                |                 [0] =&gt; /tmp/phpBrKgeZ
+                                |                 [1] =&gt; /tmp/phpW8n97F
+                                |                 )
+                                | )
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;UPLOADED FILE&lt;/h1&gt;
+                                    | 
+                                    | &lt;?php
+                                    | $filenum = count($_FILES["myfile"]["tmp_name"]);
+                                    | for($i = 0; $i &lt; $filenum; $i++): ?&gt;
+                                    | 
+                                    | &lt;?php move_upload_file(
+                                    |     $_FILES["myfile"]["tmp_name"][$i],
+                                    |     "upload/" . $_FILES["myfile"]["name"][$i]
+                                    | ): ?&gt;
+                                    | 
+                                    | &lt;p&gt;
+                                    | &lt;img src="upload/&lt;?php echo $_FILES["myfile"]["name"][$i]; ?&gt;"&gt;&lt;br&gt;
+                                    | &lt;?php echo $_FILES["myfile"]["name"][$i]; ?&gt;
+                                    | をアップロードしました。
+                                    | &lt;/p&gt;
+                                    | 
+                                    | &lt;?php endfor; ?&gt;
+                                figcaption サンプルで指定した送信先の設定（file-multiple.php）
+                            
+                            //<input type="hidden">
+                            .alert.alert-info 隠し情報
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/265-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;h1&gt;MAIL ADDRESS SUBMIT&lt;/h1&gt;
+                                | 
+                                | &lt;form action="query.php" method="post"&gt;
+                                | 
+                                | &lt;input type="hidden" name="formtype" value="メール登録フォーム"&gt;
+                                | 
+                                | &lt;p&gt;
+                                | &lt;label&gt;メールアドレス：
+                                | &lt;input type="email" name="email"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                                | 
+                                | &lt;p&gt;&lt;input type="submit" value="送信"&gt;&lt;/p&gt;
+                                | &lt;/form&gt;
+                            p='type属性を「hidden」と指定した場合、<input>で扱う情報はユーザーに提示する必要がないことを示します。そのため、コントロールの表示は行われません。'
+                            p='指定できる属性は下のようになっており、name属性で指定した名前と、value属性で指定した値がサーバーに送信されます。'
+                            table.table
+                                tr
+                                    th='<input type="hidden">で指定できる要素'
+                                    th 機能
+                                tr
+                                    td disabled
+                                    td コントロールの無効化
+                                tr
+                                    td form
+                                    td='<form>との関連付け'
+                                tr
+                                    td name
+                                    td コントロール名の指定
+                                tr
+                                    td value
+                                    td 初期値の指定
+                            h4 エンコードの種類を送信する
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/265-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;h1&gt;MAIL ADDRESS SUBMIT&lt;/h1&gt;
+                                | 
+                                | &lt;form action="query.php" method="post"&gt;
+                                | 
+                                | &lt;input type="hidden" name="_charset_"&gt;
+                                | 
+                                | &lt;p&gt;
+                                | &lt;label&gt;メールアドレス：
+                                | &lt;input type="email" name="email"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                                | 
+                                | &lt;p&gt;&lt;input type="submit" value="送信"&gt;&lt;/p&gt;
+                                | &lt;/form&gt;
+                            p='name属性の値を「_charset_」と指定すると、フォームデータのエンコードの種類を送信することができます。この場合、value属性を指定しても無視されます。'
 
-							//<input type="submit">
-							.alert.alert-info 送信ボタン
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/266-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;form action="query.php" method="post"&gt;
-								| &lt;p&gt;
-								| &lt;label&gt;名前：
-								| &lt;input type="text" name="name"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-								| 
-								| &lt;p&gt;&lt;input type="submit" value="送信"&gt;&lt;/p&gt;
-								| &lt;/form&gt;
-							p='type属性を「submit」と指定した場合、<input>はフォームデータの送信ボタンを構成します。ボタンに表示するラベルはvalue属性で指定することが可能です。ここでは「送信」と指定しています。'
-							p='なお、<input type="submit">では、以下の属性に加え、以下のようにフォームの設定を変更する属性を利用することが可能です。'
-							.alert.alert-warning NOTES: 
-							p='value属性を指定しなくても、主要ブラウザでは「送信」と表示されます。ただし、Internet Explorerでは「クエリ送信」と表示されますので、ここではvalue属性で「送信」と表示するように指定しています。'
+                            //<input type="submit">
+                            .alert.alert-info 送信ボタン
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/266-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;form action="query.php" method="post"&gt;
+                                | &lt;p&gt;
+                                | &lt;label&gt;名前：
+                                | &lt;input type="text" name="name"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                                | 
+                                | &lt;p&gt;&lt;input type="submit" value="送信"&gt;&lt;/p&gt;
+                                | &lt;/form&gt;
+                            p='type属性を「submit」と指定した場合、<input>はフォームデータの送信ボタンを構成します。ボタンに表示するラベルはvalue属性で指定することが可能です。ここでは「送信」と指定しています。'
+                            p='なお、<input type="submit">では、以下の属性に加え、以下のようにフォームの設定を変更する属性を利用することが可能です。'
+                            .alert.alert-warning NOTES: 
+                            p='value属性を指定しなくても、主要ブラウザでは「送信」と表示されます。ただし、Internet Explorerでは「クエリ送信」と表示されますので、ここではvalue属性で「送信」と表示するように指定しています。'
 
-							h4 フォームの設定を変更する
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/266-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;form action="query.php" method="post"&gt;
-								| &lt;p&gt;
-								| &lt;label&gt;名前：
-								| &lt;input type="text" name="name"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-								| 
-								| &lt;p&gt;&lt;input type="submit" value="送信" formaction="test.php"&gt;&lt;/p&gt;
-								| &lt;/form&gt;
-							p='<input type="submit">のformation属性を利用すると、<form>のaction属性で指定したフォームデータの送信先を変更することができます。たとえば、上のように指定した場合、<form>で指定したquery.phpではなく、<input type="submit">に用意されたtest.phpが送信先となります。'
-							p='同時に、<input type="submit">に用意されたいかの属性を利用すると、それぞれ対になった<form>の設定を変更することが可能です。'
-							table.table
-								tr
-									th='<input type="submit">の属性'
-									th='<form>の属性'
-									th 設定
-								tr
-									td formaction
-									td action
-									td 送信先のURL
-								tr
-									td formenctype
-									td enctype
-									td 送信データの形式
-								tr
-									td formmethod
-									td method
-									td 送信方法
-								tr
-									td formnovalidate
-									td novalidate
-									td 入力データの検証を無効化
-								tr
-									td formtarget
-									td target
-									td 送信後のページの表示先
-							.alert.alert-warning NOTES: 
-							p='iOS4.xとAndroid2.3xは未対応です。'
-							.alert.alert-success IE NOTES: 
-							p='IE9以前のバージョンは未対応です。'
+                            h4 フォームの設定を変更する
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/266-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;form action="query.php" method="post"&gt;
+                                | &lt;p&gt;
+                                | &lt;label&gt;名前：
+                                | &lt;input type="text" name="name"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                                | 
+                                | &lt;p&gt;&lt;input type="submit" value="送信" formaction="test.php"&gt;&lt;/p&gt;
+                                | &lt;/form&gt;
+                            p='<input type="submit">のformation属性を利用すると、<form>のaction属性で指定したフォームデータの送信先を変更することができます。たとえば、上のように指定した場合、<form>で指定したquery.phpではなく、<input type="submit">に用意されたtest.phpが送信先となります。'
+                            p='同時に、<input type="submit">に用意されたいかの属性を利用すると、それぞれ対になった<form>の設定を変更することが可能です。'
+                            table.table
+                                tr
+                                    th='<input type="submit">の属性'
+                                    th='<form>の属性'
+                                    th 設定
+                                tr
+                                    td formaction
+                                    td action
+                                    td 送信先のURL
+                                tr
+                                    td formenctype
+                                    td enctype
+                                    td 送信データの形式
+                                tr
+                                    td formmethod
+                                    td method
+                                    td 送信方法
+                                tr
+                                    td formnovalidate
+                                    td novalidate
+                                    td 入力データの検証を無効化
+                                tr
+                                    td formtarget
+                                    td target
+                                    td 送信後のページの表示先
+                            .alert.alert-warning NOTES: 
+                            p='iOS4.xとAndroid2.3xは未対応です。'
+                            .alert.alert-success IE NOTES: 
+                            p='IE9以前のバージョンは未対応です。'
 
-							//<input type="image">
-							.alert.alert-info 画像ボタン
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/267.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;h1&gt;Click where you like!&lt;/h1&gt;
-								| 
-								| &lt;form action="query.php" method="post"&gt;
-								| &lt;p&gt;
-								| &lt;label&gt;名前：
-								| &lt;input type="text" name="name"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-								| 
-								| &lt;p&gt;
-								| &lt;label&gt;好きなところをクリックしてください：
-								| &lt;input type="image" src="img/tea.jpg" name="click" alt="各種ケーキを盛り付けたお皿と白いティーポット、砂糖、紅茶をいれたティーカップをテーブルに並べています。"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-								| &lt;/form&gt;
-							p='type属性を「image」と指定した場合、<input>は画像ボタンを構成します。画像はsrc属性で指定します。'
-							p='画像ボタンは<input type="submit">と同じように送信ボタンとして機能するため、クリックするとフォームデータがサーバーに送信されます。'
-							p='座標の値は画像の左上を頂点としたもので、単位はピクセルとなっています。サンプルの場合、画像の左上からx軸方向に371ピクセル、y軸方向に196ピクセルの位置をクリックしたことがわかります。'
-							p='また、座標の値には「コントロール名.x」、「コントロール名.y」という名前が付加されます。name属性で指定した値がコントロール名となりますので、サンプルでは「click.x」、「clicky」となっていることがわかります。'
-							p
-								| 送信されるデータ<br>
-								| name = 花子<br>
-								| click.x = 371<br>
-								| click.y = 196<br>
-							.alert.alert-warning NOTES: 
-							p='フォームデータをPHPで処理している場合、「click.x」や「click.y」に含まれるピリオドは、PHPによって「_（アンダーバー）」に変換されます。サンプルの場合、「click_x」、「click_y」となりますので注意が必要です。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| Array
-									| (
-									|      [name] => 花子
-									|      [click_x] => 371
-									|      [click_y] => 196
-									| )
-								figcaption='$_POSTに代入されたフォームデータの中身。'
-							p='<input type="image">では以下の属性を利用することが可能です。また、初期値を指定するvalue属性は省略し、記述しない決まりとなっています。'
-							.row
-								.col-sm-6
-									table.table
-										tr
-											th='<input type="image">で指定できる属性'
-											th 機能
-										tr
-											td formaction
-											td 送信先のURL
-										tr
-											td formenctype
-											td 送信データの形式
-										tr
-											td formmethod
-											td 送信方法
-										tr
-											td formnovalidate
-											td 入力データの検証を無効化
-										tr
-											td formtarget
-											td 送信後のページの表示先
-								.col-sm-6
-									table.table
-										tr
-											th='<input type="image">で指定できる属性'
-											th 機能
-										tr
-											td alt
-											td 代替テキスト
-										tr
-											td src
-											td 画像のURL
-										tr
-											td height
-											td 画像の高さ
-										tr
-											td width
-											td 画像の横幅
+                            //<input type="image">
+                            .alert.alert-info 画像ボタン
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/267.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;h1&gt;Click where you like!&lt;/h1&gt;
+                                | 
+                                | &lt;form action="query.php" method="post"&gt;
+                                | &lt;p&gt;
+                                | &lt;label&gt;名前：
+                                | &lt;input type="text" name="name"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                                | 
+                                | &lt;p&gt;
+                                | &lt;label&gt;好きなところをクリックしてください：
+                                | &lt;input type="image" src="img/tea.jpg" name="click" alt="各種ケーキを盛り付けたお皿と白いティーポット、砂糖、紅茶をいれたティーカップをテーブルに並べています。"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                                | &lt;/form&gt;
+                            p='type属性を「image」と指定した場合、<input>は画像ボタンを構成します。画像はsrc属性で指定します。'
+                            p='画像ボタンは<input type="submit">と同じように送信ボタンとして機能するため、クリックするとフォームデータがサーバーに送信されます。'
+                            p='座標の値は画像の左上を頂点としたもので、単位はピクセルとなっています。サンプルの場合、画像の左上からx軸方向に371ピクセル、y軸方向に196ピクセルの位置をクリックしたことがわかります。'
+                            p='また、座標の値には「コントロール名.x」、「コントロール名.y」という名前が付加されます。name属性で指定した値がコントロール名となりますので、サンプルでは「click.x」、「clicky」となっていることがわかります。'
+                            p
+                                | 送信されるデータ<br>
+                                | name = 花子<br>
+                                | click.x = 371<br>
+                                | click.y = 196<br>
+                            .alert.alert-warning NOTES: 
+                            p='フォームデータをPHPで処理している場合、「click.x」や「click.y」に含まれるピリオドは、PHPによって「_（アンダーバー）」に変換されます。サンプルの場合、「click_x」、「click_y」となりますので注意が必要です。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | Array
+                                    | (
+                                    |      [name] => 花子
+                                    |      [click_x] => 371
+                                    |      [click_y] => 196
+                                    | )
+                                figcaption='$_POSTに代入されたフォームデータの中身。'
+                            p='<input type="image">では以下の属性を利用することが可能です。また、初期値を指定するvalue属性は省略し、記述しない決まりとなっています。'
+                            .row
+                                .col-sm-6
+                                    table.table
+                                        tr
+                                            th='<input type="image">で指定できる属性'
+                                            th 機能
+                                        tr
+                                            td formaction
+                                            td 送信先のURL
+                                        tr
+                                            td formenctype
+                                            td 送信データの形式
+                                        tr
+                                            td formmethod
+                                            td 送信方法
+                                        tr
+                                            td formnovalidate
+                                            td 入力データの検証を無効化
+                                        tr
+                                            td formtarget
+                                            td 送信後のページの表示先
+                                .col-sm-6
+                                    table.table
+                                        tr
+                                            th='<input type="image">で指定できる属性'
+                                            th 機能
+                                        tr
+                                            td alt
+                                            td 代替テキスト
+                                        tr
+                                            td src
+                                            td 画像のURL
+                                        tr
+                                            td height
+                                            td 画像の高さ
+                                        tr
+                                            td width
+                                            td 画像の横幅
 
-							//<input type="reset">
-							.alert.alert-info リセットボタン
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/268.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;form action="query.php" method="post"&gt;
-								| &lt;p&gt;
-								| &lt;label&gt;名前：
-								| &lt;input type="text" name="name"&gt;
-								| &lt;/label&gt;
-								| &lt;/p&gt;
-								| 
-								| &lt;p&gt;
-								| &lt;input type="submit" value="送信"&gt;
-								| &lt;input type="reset"&gt;
-								| &lt;/p&gt;
-								| &lt;/form&gt;
-							p='type属性を「reset」と指定すると、<input>はリセットボタンを構成します。リセットボタンをクリックすると、各コントロールに入力した値が消え、初期値にリセットされます。'
-							.alert.alert-warning NOTES: 
-							p='インターネット黎明期のフォームにおいては、送信ボタンとリセットボタンをセットで提供するのが一般的でした。しかし、誤ってリセットボタンを押し、入力データを消してしまうという問題が指摘され、現在では送信ボタンのみを用意したフォームが主流となっています。'
+                            //<input type="reset">
+                            .alert.alert-info リセットボタン
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/268.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;form action="query.php" method="post"&gt;
+                                | &lt;p&gt;
+                                | &lt;label&gt;名前：
+                                | &lt;input type="text" name="name"&gt;
+                                | &lt;/label&gt;
+                                | &lt;/p&gt;
+                                | 
+                                | &lt;p&gt;
+                                | &lt;input type="submit" value="送信"&gt;
+                                | &lt;input type="reset"&gt;
+                                | &lt;/p&gt;
+                                | &lt;/form&gt;
+                            p='type属性を「reset」と指定すると、<input>はリセットボタンを構成します。リセットボタンをクリックすると、各コントロールに入力した値が消え、初期値にリセットされます。'
+                            .alert.alert-warning NOTES: 
+                            p='インターネット黎明期のフォームにおいては、送信ボタンとリセットボタンをセットで提供するのが一般的でした。しかし、誤ってリセットボタンを押し、入力データを消してしまうという問題が指摘され、現在では送信ボタンのみを用意したフォームが主流となっています。'
 
-							//<input type="button">
-							.alert.alert-info ボタン
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/269.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;h1&gt;Change Page Color&lt;/h1&gt;
-								| 
-								| &lt;p&gt;
-								| &lt;input type="button" value="黒色に変更"
-								| onclick="document.getElementsByTagName('body')[0].style.background='black'"&gt;
-								| 
-								| &lt;input type="button" value="赤色に変更"
-								| onclick="document.getElementsByTagName('body')[0].style.background='red'"&gt;
-								| 
-								| &lt;input type="button" value="黄色に変更"
-								| onclick="document.getElementsByTagName('body')[0].style.background='yellow'"&gt;
-								| &lt;/p&gt;
-							p='type属性を「button」と指定すると、<input>はボタンを構成します。このボタンは標準で特別な機能を持たず、value属性でボタンのラベルを指定する必要があります。'
-							p='ボタンの処理はJavaScriptで指定することができます。たとえば、サンプルではonclick属性を指定して、クリックするとページの背景色が変わるようにしています。'
+                            //<input type="button">
+                            .alert.alert-info ボタン
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/269.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;h1&gt;Change Page Color&lt;/h1&gt;
+                                | 
+                                | &lt;p&gt;
+                                | &lt;input type="button" value="黒色に変更"
+                                | onclick="document.getElementsByTagName('body')[0].style.background='black'"&gt;
+                                | 
+                                | &lt;input type="button" value="赤色に変更"
+                                | onclick="document.getElementsByTagName('body')[0].style.background='red'"&gt;
+                                | 
+                                | &lt;input type="button" value="黄色に変更"
+                                | onclick="document.getElementsByTagName('body')[0].style.background='yellow'"&gt;
+                                | &lt;/p&gt;
+                            p='type属性を「button」と指定すると、<input>はボタンを構成します。このボタンは標準で特別な機能を持たず、value属性でボタンのラベルを指定する必要があります。'
+                            p='ボタンの処理はJavaScriptで指定することができます。たとえば、サンプルではonclick属性を指定して、クリックするとページの背景色が変わるようにしています。'
 
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

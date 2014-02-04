@@ -1,89 +1,89 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;双方向アルゴリズムの隔離
-						.panel-body
-							.alert.alert-info 双方向アルゴリズムの隔離
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td.not-support
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td.not-support
-										img(src='../images/ic-opera.png')
-									td.not-support
-										img(src='../images/ic-ie.png')
-							p ※ iOS4.x／5.xは未対応
-							pre
-								| &lt;bdi&gt;...&lt;/bdi&gt;
-							table.table
-								tr
-									td カテゴリー
-									td フローコンテンツ／フレージングコンテンツ／パルパブルコンテンツ
-								tr
-									td 記述可能な場所
-									td
-										| フレージングコンテンツが記述できる場所
-								tr
-									td コンテンツモデル
-									td フレージングコンテンツ
-								tr
-									td 構成するボックス
-									td inline
-								tr
-									td 属性
-									td グローバル／（特別なセマンティクスを持つ属性：dir）
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| bdi {
-											| 	unicode-bidi: isolate;
-											| }
-							p='<bdi>は双方向アルゴリズムの処理の前後の文字に適用しないようにすることができます。'
-							p='たとえば、以下のように野菜の名前と個数をリストアップした場合、英語では「野菜の名前: 1個」という形で表示されますが、アラビア語では「1: 野菜の名前個」という形になっていることがわかります。これは、アラビア語の双方向アルゴリズムの処理が「: 1」まで適用されているためです。'
-							pre(class='prettyprint linenums:1')
-								| &lt;h1&gt;Ingredients&lt;/h1&gt;
-								| 
-								| &lt;ul&gt;
-								| &lt;li&gt;トマト tomato: 2個&lt;/li&gt;
-								| &lt;li&gt;ナス aubergine: 1個&lt;/li&gt;
-								| &lt;li&gt;たまねぎ بَصَلٌ: 1個&lt;/li&gt;
-								| &lt;/ul&gt;
-							.alert.alert-warning NOTES: 
-							p='<bdi>でマークアップすると、スタイルシートのunicode-bidiプロパティを「isolate」と指定したときと同じ処理が行われることになっています。ただし、<bdi>に対応したブラウザでも、現在のところunicode-bidi: isolateの指定には未対応となっていますので注意が必要です。'
-							p='そこで、野菜の名前を<bdi>でマークアップします。すると、双方向アルゴリズムの処理が前後の文字には適用されなくなり、アラビア語でも「野菜の名前: 1個」という形で表示することができます。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/07/213.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;h1&gt;Ingredients&lt;/h1&gt;
-								| 
-								| &lt;ul&gt;
-								| &lt;li&gt;トマト &lt;bdi&gt;tomato&lt;/bdi&gt;: 2個&lt;/li&gt;
-								| &lt;li&gt;ナス &lt;bdi&gt;aubergine&lt;/bdi&gt;: 1個&lt;/li&gt;
-								| &lt;li&gt;たまねぎ &lt;bdi&gt;بَصَلٌ&lt;/bdi&gt;: 1個&lt;/li&gt;
-								| &lt;/ul&gt;
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;双方向アルゴリズムの隔離
+                        .panel-body
+                            .alert.alert-info 双方向アルゴリズムの隔離
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td.not-support
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td.not-support
+                                        img(src='../images/ic-opera.png')
+                                    td.not-support
+                                        img(src='../images/ic-ie.png')
+                            p ※ iOS4.x／5.xは未対応
+                            pre
+                                | &lt;bdi&gt;...&lt;/bdi&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td フローコンテンツ／フレージングコンテンツ／パルパブルコンテンツ
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | フレージングコンテンツが記述できる場所
+                                tr
+                                    td コンテンツモデル
+                                    td フレージングコンテンツ
+                                tr
+                                    td 構成するボックス
+                                    td inline
+                                tr
+                                    td 属性
+                                    td グローバル／（特別なセマンティクスを持つ属性：dir）
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        pre
+                                            | bdi {
+                                            |     unicode-bidi: isolate;
+                                            | }
+                            p='<bdi>は双方向アルゴリズムの処理の前後の文字に適用しないようにすることができます。'
+                            p='たとえば、以下のように野菜の名前と個数をリストアップした場合、英語では「野菜の名前: 1個」という形で表示されますが、アラビア語では「1: 野菜の名前個」という形になっていることがわかります。これは、アラビア語の双方向アルゴリズムの処理が「: 1」まで適用されているためです。'
+                            pre(class='prettyprint linenums:1')
+                                | &lt;h1&gt;Ingredients&lt;/h1&gt;
+                                | 
+                                | &lt;ul&gt;
+                                | &lt;li&gt;トマト tomato: 2個&lt;/li&gt;
+                                | &lt;li&gt;ナス aubergine: 1個&lt;/li&gt;
+                                | &lt;li&gt;たまねぎ بَصَلٌ: 1個&lt;/li&gt;
+                                | &lt;/ul&gt;
+                            .alert.alert-warning NOTES: 
+                            p='<bdi>でマークアップすると、スタイルシートのunicode-bidiプロパティを「isolate」と指定したときと同じ処理が行われることになっています。ただし、<bdi>に対応したブラウザでも、現在のところunicode-bidi: isolateの指定には未対応となっていますので注意が必要です。'
+                            p='そこで、野菜の名前を<bdi>でマークアップします。すると、双方向アルゴリズムの処理が前後の文字には適用されなくなり、アラビア語でも「野菜の名前: 1個」という形で表示することができます。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/07/213.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;h1&gt;Ingredients&lt;/h1&gt;
+                                | 
+                                | &lt;ul&gt;
+                                | &lt;li&gt;トマト &lt;bdi&gt;tomato&lt;/bdi&gt;: 2個&lt;/li&gt;
+                                | &lt;li&gt;ナス &lt;bdi&gt;aubergine&lt;/bdi&gt;: 1個&lt;/li&gt;
+                                | &lt;li&gt;たまねぎ &lt;bdi&gt;بَصَلٌ&lt;/bdi&gt;: 1個&lt;/li&gt;
+                                | &lt;/ul&gt;
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

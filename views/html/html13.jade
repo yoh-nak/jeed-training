@@ -1,107 +1,107 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;メタデータの設定
-						.panel-body
-							.alert.alert-info メタデータの設定
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							pre
-								| &lt;head&gt;...&lt;/head&gt;
-							table.table
-								tr
-									td カテゴリー
-									td none
-								tr
-									td 記述可能な場所
-									td
-										| &lt;html&gt;内の1つ目の子要素として記述可能
-								tr
-									td コンテンツモデル
-									td
-										| メタデータコンテンツ
-										br
-										| ※ &lt;title&gt;は必須
-										br
-										| （&lt;iframe&gt;のsrcdoc属性に記述する場合や上位プロトコルからタイトルが得られる場合は省略可）
-								tr
-									td 構成するボックス
-									td none
-								tr
-									td 属性
-									td manifest／グローバル
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| html {
-											| 	display: none;
-											| }
-							p &lt;head&gt;は&lt;html&gt;の1つ目の子要素として記述し、ページに関する付加的な情報（メタデータ）を記述していきます。
-							p メタデータは、「メタデータコンテンツ」カテゴリーに属する要素を利用して記述します。たとえば、ページのエンコードの種類とタイトルは、下のように&lt;meta&gt;と&lt;title&gt;を利用して記述することができます。ここでは、エンコードの種類を「UTF-8」、タイトルを「SAMPLE」と明示しています。
-							figure
-								pre
-									| &lt;DOCTYPE html&gt;
-									| &lt;html lang="ja"&gt;
-									| &lt;head&gt;
-									| &lt;meta charset="UTF-8"&gt;
-									| &lt;title&gt;SAMPLE&lt;/title&gt;
-									| &lt;/head&gt;
-									| 
-									| &lt;/html&gt;
-								figcaption &lt;head&gt;を追加し、エンコードの種類とページのタイトルを明示したもの。
-							p &lt;head&gt;にはデフォルトスタイルシートによって「display:none」が適用され、ここに記述した情報は画面に表示されないようになっています。
-							.alert.alert-warning NOTES: &lt;head&gt;内に記述できるメタデータ
-							p &lt;head&gt;内には以下のような要素によるメタデータを記述できるのに加え、必要に応じてmicrodataやRDFaなどを利用したメタデータも記述できるようになっています。詳しくは各要素の解説を参照してください。
-							table.table
-								tr
-									td &lt;title&gt;
-									td ページのタイトル
-								tr
-									td &lt;base&gt;
-									td ベースのURL／ブラウジングコンテキスト
-								tr
-									td &lt;meta&gt;
-									td エンコードの種類、概要、キーワードなど
-								tr
-									td &lt;link&gt;
-									td 著者ページ、代替文書、外部CSSなど
-								tr
-									td &lt;style&gt;
-									td スタイルシートの設定
-								tr
-									td &lt;script&gt;
-									td スクリプトの設定
-							.alert.alert-warning NOTES: &lt;title&gt;を省略できるケース
-							p &lt;title&gt;は&lt:head&gt;内に必ず記述することが求められていますが、HTMLソースを&lt;iframe&gt;のsrcdoc属性で記述した場合や、HTMLペースのメールでタイトルに代わる情報が「件名（Subject）」として得られる場合などには、省略することが可能です。
-							.alert.alert-success DIFFERENCES: &lt;head&gt;のprofile属性
-							p HTML4.01やXHTML1.0では、使用したいメタデータの定義ファイルを作成し、&lt;head&gt;のprofile属性で示すことになっていました。しかし、HTML5では定義ファイルを示す必要はなくなっており、profile属性も廃止されています。
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;メタデータの設定
+                        .panel-body
+                            .alert.alert-info メタデータの設定
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            pre
+                                | &lt;head&gt;...&lt;/head&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td none
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | &lt;html&gt;内の1つ目の子要素として記述可能
+                                tr
+                                    td コンテンツモデル
+                                    td
+                                        | メタデータコンテンツ
+                                        br
+                                        | ※ &lt;title&gt;は必須
+                                        br
+                                        | （&lt;iframe&gt;のsrcdoc属性に記述する場合や上位プロトコルからタイトルが得られる場合は省略可）
+                                tr
+                                    td 構成するボックス
+                                    td none
+                                tr
+                                    td 属性
+                                    td manifest／グローバル
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        pre
+                                            | html {
+                                            |     display: none;
+                                            | }
+                            p &lt;head&gt;は&lt;html&gt;の1つ目の子要素として記述し、ページに関する付加的な情報（メタデータ）を記述していきます。
+                            p メタデータは、「メタデータコンテンツ」カテゴリーに属する要素を利用して記述します。たとえば、ページのエンコードの種類とタイトルは、下のように&lt;meta&gt;と&lt;title&gt;を利用して記述することができます。ここでは、エンコードの種類を「UTF-8」、タイトルを「SAMPLE」と明示しています。
+                            figure
+                                pre
+                                    | &lt;DOCTYPE html&gt;
+                                    | &lt;html lang="ja"&gt;
+                                    | &lt;head&gt;
+                                    | &lt;meta charset="UTF-8"&gt;
+                                    | &lt;title&gt;SAMPLE&lt;/title&gt;
+                                    | &lt;/head&gt;
+                                    | 
+                                    | &lt;/html&gt;
+                                figcaption &lt;head&gt;を追加し、エンコードの種類とページのタイトルを明示したもの。
+                            p &lt;head&gt;にはデフォルトスタイルシートによって「display:none」が適用され、ここに記述した情報は画面に表示されないようになっています。
+                            .alert.alert-warning NOTES: &lt;head&gt;内に記述できるメタデータ
+                            p &lt;head&gt;内には以下のような要素によるメタデータを記述できるのに加え、必要に応じてmicrodataやRDFaなどを利用したメタデータも記述できるようになっています。詳しくは各要素の解説を参照してください。
+                            table.table
+                                tr
+                                    td &lt;title&gt;
+                                    td ページのタイトル
+                                tr
+                                    td &lt;base&gt;
+                                    td ベースのURL／ブラウジングコンテキスト
+                                tr
+                                    td &lt;meta&gt;
+                                    td エンコードの種類、概要、キーワードなど
+                                tr
+                                    td &lt;link&gt;
+                                    td 著者ページ、代替文書、外部CSSなど
+                                tr
+                                    td &lt;style&gt;
+                                    td スタイルシートの設定
+                                tr
+                                    td &lt;script&gt;
+                                    td スクリプトの設定
+                            .alert.alert-warning NOTES: &lt;title&gt;を省略できるケース
+                            p &lt;title&gt;は&lt:head&gt;内に必ず記述することが求められていますが、HTMLソースを&lt;iframe&gt;のsrcdoc属性で記述した場合や、HTMLペースのメールでタイトルに代わる情報が「件名（Subject）」として得られる場合などには、省略することが可能です。
+                            .alert.alert-success DIFFERENCES: &lt;head&gt;のprofile属性
+                            p HTML4.01やXHTML1.0では、使用したいメタデータの定義ファイルを作成し、&lt;head&gt;のprofile属性で示すことになっていました。しかし、HTML5では定義ファイルを示す必要はなくなっており、profile属性も廃止されています。
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

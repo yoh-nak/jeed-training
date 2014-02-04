@@ -1,148 +1,148 @@
 !!!
 html(lang='ja')
-	head
-		meta(name='viewport',content='width=device-width,initial-scale=1.0')
-		link(href='css/bootstrap.min.css',rel='stylesheet',media='screen')
-		link(href='js/dtree/dtree.css', rel='stylesheet', media='screen')
-		link(href='less/common.less',rel='stylesheet',media='screen')
-		link(href='js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
-		title=title
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							&nbsp;イメージの変形
-						.panel-body
-							h4 平行移動
-							p
-								a.btn.btn-default(href='demo/canvas/exercise3/index7.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre.prettyprint.linenums
-								| &lt;!DOCTYPE html&gt;
-								| &lt;html lang="ja"&gt;
-								|   &lt;head&gt;
-								|     &lt;meta charset="utf-8"&gt;
-								|     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-								|     &lt;title&gt;&lt;/title&gt;
-								|   &lt;/head&gt;
-								|   &lt;body&gt;
-								|     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
-								|     &lt;script src="http://code.jquery.com/jquery-1.11.0.min.js"&gt;&lt;/script&gt;
-								|     &lt;script&gt;
-								|       $(function(){
-								|        var canvas = $('#myCanvas');
-								|        var context = canvas.get(0).getContext('2d');
-								|        
-								|        context.translate(100, 100);
-								|        
-								|        var image = new Image();
-								|        image.src = 'example.jpg';
-								|        $(image).load(function(){
-								|         //drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh)
-								|         context.drawImage(image, 0, 0, 500, 500, 50, 50, 300, 300);
-								|        })
-								|       });
-								|     &lt;/script&gt;
-								|   &lt;/body&gt;
-								| &lt;/html&gt;
-							h4 回転
-							p
-								a.btn.btn-default(href='demo/canvas/exercise3/index8.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre.prettyprint.linenums
-								| &lt;!DOCTYPE html&gt;
-								| &lt;html lang="ja"&gt;
-								|   &lt;head&gt;
-								|     &lt;meta charset="utf-8"&gt;
-								|     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-								|     &lt;title&gt;&lt;/title&gt;
-								|   &lt;/head&gt;
-								|   &lt;body&gt;
-								|     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
-								|     &lt;script src="http://code.jquery.com/jquery-1.11.0.min.js"&gt;&lt;/script&gt;
-								|     &lt;script&gt;
-								|       $(function(){
-								|        var canvas = $('#myCanvas');
-								|        var context = canvas.get(0).getContext('2d');
-								|        
-								|        context.translate(250, 250);
-								|        context.rotate(0.7854); //45度回転
-								|        
-								|        var image = new Image();
-								|        image.src = 'example.jpg';
-								|        $(image).load(function(){
-								|         //drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh)
-								|         context.drawImage(image, 0, 0, 500, 500, -150, -150, 300, 300);
-								|        })
-								|       });
-								|     &lt;/script&gt;
-								|   &lt;/body&gt;
-								| &lt;/html&gt;
-							h4 スケーリングと反転
-							p
-								a.btn.btn-default(href='demo/canvas/exercise3/index9.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre.prettyprint.linenums
-								| &lt;!DOCTYPE html&gt;
-								| &lt;html lang="ja"&gt;
-								|   &lt;head&gt;
-								|     &lt;meta charset="utf-8"&gt;
-								|     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-								|     &lt;title&gt;&lt;/title&gt;
-								|   &lt;/head&gt;
-								|   &lt;body&gt;
-								|     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
-								|     &lt;script src="http://code.jquery.com/jquery-1.11.0.min.js"&gt;&lt;/script&gt;
-								|     &lt;script&gt;
-								|       $(function(){
-								|        var canvas = $('#myCanvas');
-								|        var context = canvas.get(0).getContext('2d');
-								|        
-								|        var image = new Image();
-								|        image.src = 'example.jpg';
-								|        $(image).load(function(){
-								|         //左上
-								|         context.translate(50, 50); //平行移動
-								|         context.drawImage(image, 0, 0, 500, 500, 0, 0, 200, 200);
-								|         
-								|         //左下
-								|         context.setTransform(1, 0, 0, 1, 0, 0); //変換行列で変形をリセットする
-								|         context.translate(50, 450); //平行移動
-								|         context.scale(1, -1); //反転
-								|         
-								|         context.drawImage(image, 0, 0, 500, 500, 0, 0, 200, 200);
-								|         
-								|         //右下
-								|         context.setTransform(1, 0, 0, 1, 0, 0); //変換行列で変形をリセットする
-								|         context.translate(450, 450); //平行移動
-								|         context.scale(-1, -1); //反転
-								|         
-								|         context.drawImage(image, 0, 0, 500, 500, 0, 0, 200, 200);
-								|         
-								|         //右上
-								|         context.setTransform(1, 0, 0, 1, 0, 0); //変換行列で変形をリセットする
-								|         context.translate(450, 50); //平行移動
-								|         context.scale(-1, 1); //反転
-								|         
-								|         context.drawImage(image, 0, 0, 500, 500, 0, 0, 200, 200);
-								|        })
-								|       });
-								|     &lt;/script&gt;
-								|   &lt;/body&gt;
-								| &lt;/html&gt;
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='js/bootstrap.min.js')
-		script(src='coffee/list-counter.js')
+    head
+        meta(name='viewport',content='width=device-width,initial-scale=1.0')
+        link(href='css/bootstrap.min.css',rel='stylesheet',media='screen')
+        link(href='js/dtree/dtree.css', rel='stylesheet', media='screen')
+        link(href='less/common.less',rel='stylesheet',media='screen')
+        link(href='js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+        title=title
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            &nbsp;イメージの変形
+                        .panel-body
+                            h4 平行移動
+                            p
+                                a.btn.btn-default(href='demo/canvas/exercise3/index7.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre.prettyprint.linenums
+                                | &lt;!DOCTYPE html&gt;
+                                | &lt;html lang="ja"&gt;
+                                |   &lt;head&gt;
+                                |     &lt;meta charset="utf-8"&gt;
+                                |     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+                                |     &lt;title&gt;&lt;/title&gt;
+                                |   &lt;/head&gt;
+                                |   &lt;body&gt;
+                                |     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
+                                |     &lt;script src="http://code.jquery.com/jquery-1.11.0.min.js"&gt;&lt;/script&gt;
+                                |     &lt;script&gt;
+                                |       $(function(){
+                                |        var canvas = $('#myCanvas');
+                                |        var context = canvas.get(0).getContext('2d');
+                                |        
+                                |        context.translate(100, 100);
+                                |        
+                                |        var image = new Image();
+                                |        image.src = 'example.jpg';
+                                |        $(image).load(function(){
+                                |         //drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh)
+                                |         context.drawImage(image, 0, 0, 500, 500, 50, 50, 300, 300);
+                                |        })
+                                |       });
+                                |     &lt;/script&gt;
+                                |   &lt;/body&gt;
+                                | &lt;/html&gt;
+                            h4 回転
+                            p
+                                a.btn.btn-default(href='demo/canvas/exercise3/index8.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre.prettyprint.linenums
+                                | &lt;!DOCTYPE html&gt;
+                                | &lt;html lang="ja"&gt;
+                                |   &lt;head&gt;
+                                |     &lt;meta charset="utf-8"&gt;
+                                |     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+                                |     &lt;title&gt;&lt;/title&gt;
+                                |   &lt;/head&gt;
+                                |   &lt;body&gt;
+                                |     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
+                                |     &lt;script src="http://code.jquery.com/jquery-1.11.0.min.js"&gt;&lt;/script&gt;
+                                |     &lt;script&gt;
+                                |       $(function(){
+                                |        var canvas = $('#myCanvas');
+                                |        var context = canvas.get(0).getContext('2d');
+                                |        
+                                |        context.translate(250, 250);
+                                |        context.rotate(0.7854); //45度回転
+                                |        
+                                |        var image = new Image();
+                                |        image.src = 'example.jpg';
+                                |        $(image).load(function(){
+                                |         //drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh)
+                                |         context.drawImage(image, 0, 0, 500, 500, -150, -150, 300, 300);
+                                |        })
+                                |       });
+                                |     &lt;/script&gt;
+                                |   &lt;/body&gt;
+                                | &lt;/html&gt;
+                            h4 スケーリングと反転
+                            p
+                                a.btn.btn-default(href='demo/canvas/exercise3/index9.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre.prettyprint.linenums
+                                | &lt;!DOCTYPE html&gt;
+                                | &lt;html lang="ja"&gt;
+                                |   &lt;head&gt;
+                                |     &lt;meta charset="utf-8"&gt;
+                                |     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+                                |     &lt;title&gt;&lt;/title&gt;
+                                |   &lt;/head&gt;
+                                |   &lt;body&gt;
+                                |     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
+                                |     &lt;script src="http://code.jquery.com/jquery-1.11.0.min.js"&gt;&lt;/script&gt;
+                                |     &lt;script&gt;
+                                |       $(function(){
+                                |        var canvas = $('#myCanvas');
+                                |        var context = canvas.get(0).getContext('2d');
+                                |        
+                                |        var image = new Image();
+                                |        image.src = 'example.jpg';
+                                |        $(image).load(function(){
+                                |         //左上
+                                |         context.translate(50, 50); //平行移動
+                                |         context.drawImage(image, 0, 0, 500, 500, 0, 0, 200, 200);
+                                |         
+                                |         //左下
+                                |         context.setTransform(1, 0, 0, 1, 0, 0); //変換行列で変形をリセットする
+                                |         context.translate(50, 450); //平行移動
+                                |         context.scale(1, -1); //反転
+                                |         
+                                |         context.drawImage(image, 0, 0, 500, 500, 0, 0, 200, 200);
+                                |         
+                                |         //右下
+                                |         context.setTransform(1, 0, 0, 1, 0, 0); //変換行列で変形をリセットする
+                                |         context.translate(450, 450); //平行移動
+                                |         context.scale(-1, -1); //反転
+                                |         
+                                |         context.drawImage(image, 0, 0, 500, 500, 0, 0, 200, 200);
+                                |         
+                                |         //右上
+                                |         context.setTransform(1, 0, 0, 1, 0, 0); //変換行列で変形をリセットする
+                                |         context.translate(450, 50); //平行移動
+                                |         context.scale(-1, 1); //反転
+                                |         
+                                |         context.drawImage(image, 0, 0, 500, 500, 0, 0, 200, 200);
+                                |        })
+                                |       });
+                                |     &lt;/script&gt;
+                                |   &lt;/body&gt;
+                                | &lt;/html&gt;
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='js/bootstrap.min.js')
+        script(src='coffee/list-counter.js')

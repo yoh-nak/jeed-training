@@ -1,215 +1,215 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;RDFa
-						.panel-body
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							.alert.alert-info RDFaとは
-							p='RDFaはRDF（Resource Description Framework）をXHTMLで利用するための規格といて策定が進められていましたが、RDFa1.1でHTML5に対応しました。情報の付加にはRDFaで定義された属性を使用しますが、「HTML+RDFa1.1」においてHTML5でも利用できるようにすることが求められており、HTMLのバリデータでも対応が進んでいます。'
-							p
-								| RDFa Core 1.1（勧告）
-								br
-								a(href='http://ww.w3.org/TR/rdfa-syntax/',target='_blank') http://ww.w3.org/TR/rdfa-syntax/
-							p
-								| RDFa Lite 1.1（勧告）
-								br
-								a(href='http://www.w3.org/TR/rdfa-lite/',target='_blank') http://www.w3.org/TR/rdfa-lite/
-							p
-								| HTML+RDFa 1.1（草案）
-								br
-								a(href='http://www.w3.org/TR/rdfa-in-html/	',target='_blank') http://www.w3.org/TR/rdfa-in-html/	
-							.alert.alert-info RDFaで利用できるボキャブラリー
-							p='RDFaの最初の勧告が1999年にリリースされたこともあり、RDFaではさまざまなボキャブラリーを利用することができます。'
-							p='たとえば、ISO15836で国際基準となったDublin Coreや、FOAF（Friend of a Friend）、クリエイティブ・コモンズのccREL（The Creative Commons Rights Expression Language）、FacebookのOGP（Open Graph Protocol）などがあります。microdataで使用したschema.orgのボキャブラリーを使用することも可能です。'
-							p
-								| Dublin Core
-								br
-								a(href='http://dublincore.org/documents/dcmi-terms/',target='_blank') http://dublincore.org/documents/dcmi-terms/
-							p
-								| FOAF
-								br
-								a(href='http://xmlns.com/foaf/spec/',target='_blank') http://xmlns.com/foaf/spec/
-							p
-								| ccRel
-								br
-								a(href='http://www.w3.org/Submission/2008/SUBM-ccREL-20080501/',target='_blank') http://www.w3.org/Submission/2008/SUBM-ccREL-20080501/
-							p
-								| OGP
-								br
-								a(href='http://ogp.me/',target='_blank') http://ogp.me/
-							p
-								| schema.org
-								br
-								a(href='http://schema.org/',target='_blank') http://schema.org/
-							p
-								| RDFaに関する情報がまとめられたW3Cのサイト
-								br
-								a(href='http://ww.w3.rog/RDF/',target='_blank') http://ww.w3.rog/RDF/
-							.alert.alert-info RDFaを利用した情報の付加
-							p='RDFaでは、ボキャブラリーごとにコンテンツの内容を明示するためのプロパティ名が用意されており、property属性を利用してコンテンツに付加していきます。たとえば、サンプルではクリエイティブ・コモンズでページのライセンスを明示するため、作品のタイトルとクレジット、ライセンスを明示しています。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/04/122.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;
-								| &lt;a rel="cc:license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.ja"&gt;
-								| &lt;img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/88x31.png"&gt;
-								| &lt;/a&gt;
-								| &lt;br&gt;
-								| &lt;span property="dc:title"&gt;Short Tea Breaks&lt;/span&gt;
-								|  by
-								| &lt;span property="cc:attributionName"&gt;Hanako&lt;/span&gt;
-								|  is licensed under a
-								| &lt;a rel="cc:license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.ja"&gt;
-								| Creative Commons 表示 - 非営利 - 改変禁止 3.0 非移植 License
-								| &lt;/a&gt;.
-								| &lt;/p&gt;
-							figure
-								table.table
-									tr
-										th 作品のタイトル
-										td Short Tea Breaks
-									tr
-										th 作品のクレジット
-										td Hanako
-									tr
-										th 作品のライセンス
-										td http://creativecommons.org/licenses/by-nc-nd/3.0/deed.ja
-								figcaption RDFaによって明示したコンテンツの内容
-							h4 作品のタイトル
-							p='作品のタイトルは「dc:title」というプロパティ名で明示します。「dc:title」はRDFaにおいてリソースのタイトルを明示するための基本的はプロパティ名で、「dc:」はDublin Coreのボキャブラリーであることを表しています。'
-							h4 作品のクレジット
-							p='作品のクレジットは「cc:attributionName」というプロパティ名で明示します。「cc:attributionName」の「cc:」はクリエイティブ・コモンズのccRELのボキャブラリーであることを表しています。'
-							h4 作品のライセンス
-							p='作品のライセンスはクリエイティブ・コモンズのURLで明示するため、<a>のhref属性でURLを示し、rel属性で「cc:license」というプロパティ名を付加します。このプロパティ名も、cc:attributionNameと同じようにccRELのボキャブラリーとなっています。'
-							.alert.alert-warning NOTES: 利用するボキャブラリーの明示
-							p='RDFaで利用するボキャブラリーは、prefix属性で明示することができます。たとえば、Dublin CoreとccRELの利用を明示する場合は、下のように記述します。'
-							p='ただし、RDFa 1.1では主要ボキャブラリーが標準で定義されており、定義済みのボキャブラリーについてはprefix属性で明示する必要がなくなっています。Dublin CoreとccRELも定義済みとなっていますので、明示しなくても問題ありません。標準で定義されているボキャブラリーについては下のページを参照してください。'
-							pre(class='prettyprint linenums:1')='<html lang="ja" prefix="dc: http://purl.org/dc/terms/ cc: http://creativecommons.org/ns#">'
-							p
-								| RDFa Core Initial Context
-								br
-								a(href='http://www.w3.org/2011/rdfa-context/rdfa-1.1',target='_blank') http://www.w3.org/2011/rdfa-context/rdfa-1.1
-							.alert.alert-success DIFFERENCES: 
-							p='RDFa 1.0以前では、利用するボキャブラリーをxmlns属性で下のように明示する必要がありました。しかし、RDFa 1.1ではxmlns属性は非推奨となっていますので注意が必要です。'
-							pre(class='prettyprint linenums:1')
-								| &lt;html lang="ja" xmlns:dc="http://purl.org/dc/terms/" xmlns:cc="http://creativecommons.org/ns#"&gt;
-								| ...
-							.alert.alert-warning NOTES: ライセンスを示すプロパティ名
-							p='サンプルではライセンスを「cc:license」というプロパティ名で示したましたが、下のように「license」というプロパティ名で示すこともできます。どちらのプロパティ名を利用した場合でもセマンティクスの上では同じ内容を示したことになります。'
-							p='「license」はXHTMLのボキャブラリー（http://www.w3.org/1999/xhtml/vocab/）で定義されたプロパティ名で、「xhv:license」と記述することもできます。また、このボキャブラリーも標準で定義されていますので、prefix属性でボキャブラリーを明示する必要はありません。'
-							p='なお、「license」という値は、HTML5では<a>や<link>のrel属性の値として定義されています。そのため、HTML5でライセンスのURLを明示すると、RDFaを意識していなくても、RDFaによって詳細を明示した形になります。'
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;
-								| &lt;a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.ja"&gt;
-								| &lt;img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/88x31.png"&gt;
-								| &lt;/a&gt;
-								| ...
-								| &lt;a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.ja"&gt;
-								| Creative Commons 表示 - 非営利 - 改変禁止 3.0 非移植 License
-								| &lt;/a&gt;.
-								| &lt;/p&gt;
-							.alert.alert-warning NOTES: RDFaでschema.orgのボキャブラリーを利用する
-							p='schema.orgのボキャブラリーはRDFaで利用することもできます。たとえば、サンプルの内容をRDFaとschema.orgのボキャブラリーで明示すると、下のようになります。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/04/124-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;article vocab="http://schema.org/" typeof="Article"&gt;
-								| &lt;header&gt;
-								| 
-								| &lt;h1 property="name"&gt;Short Tea Breaks&lt;/h1&gt;
-								| &lt;time property="datePublished" datetime="2013-01-15"&gt;January 15, 2013&lt;/time&gt;
-								| &lt;/header&gt;
-								| 
-								| &lt;img property="image" src="img/tea.jpg" alt=""&gt;
-								| 
-								| &lt;p property="description"&gt;世界中にはたくさんのお茶があります。緑茶に紅茶、ウーロン茶など、その製法や味わいもさまざまですが、リラックスしたり、ちょっと休憩したいときなどには欠かすことができません。お茶のお供に、おいしいお菓子もあると幸せな気分になってしまいます。&lt;/p&gt;
-								| ...
-								| &lt;/article&gt;
-							.alert.alert-warning NOTES: FacebookとOGP
-							p='ボキャブラリーとしてOGP（Open Graph Protocol）を利用し、ページのタイトルや画像などを明示しておくと、Facebookからページを参照したときに抽出され、ページの概要として表示されます。また、Google+などでも利用されるようになっています。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/04/124-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;!DOCTYPE html&gt;
-								| &lt;html lang="ja"&gt;
-								| &lt;head&gt;
-								| …
-								| 
-								| &lt;meta property="og:type" content="article"&gt;
-								| &lt;meta property="og:title" content="Short Tea Breaks - ちょっとしたお茶の時間"&gt;
-								| &lt;meta property="og:url" content="http://sun.web/tea.html"&gt;
-								| &lt;meta property="og:image" content="http://sun.web/img/tea-thumb.jpg"&gt;
-								| &lt;meta property="og:site_name" content="SUN DIARY"&gt;
-								| &lt;meta property="og:description" content="緑茶に紅茶、ウーロン茶など、さまざまなお茶のおいしさと楽しみ方について"&gt;
-								| &lt;/head&gt;
-							p='ページのタイトルなどは<meta>のcontent属性で示し、property属性でプロパティ名を付加します。ここでは、OGPで定義された下のプロパティ名を利用しています。'
-							p='なお、OGPは標準で定義されていますので、prefix属性でボキャブラリーを明示する必要はありません。'
-							p='※ FacebookのアプリケーションIDを示す「fg:app_id」といったプロパティを利用する場合、ボキャブラリーが標準では定義されていないため、「prefix="fb: http://ogp.me/ns/fb#"」でボキャブラリーを明示することが求められます。'
-							table.table
-								tr
-									th プロパティ名
-									th 明示する内容
-								tr
-									td og:type
-									td コンテンツの種類
-								tr
-									td og:title
-									td ページのタイトル
-								tr
-									td og:url
-									td ページのURL
-								tr
-									td og:image
-									td ページの画像
-								tr
-									td og:site_name
-									td サイト名
-								tr
-									td og:description
-									td ページの概要
-								tr
-									td og:email
-									td 連絡先メールアドレス
-							p='※ 指定できるすべてのプロパティ名についてはOGPのサイト（http://ogp.me/）やFacebookのテクニカルガイド（https://developers.facebook.com/docs/technical-guides/opengraph/）を参照してください。'
-							.alert.alert-warning NOTES: RDFa 1.1のバリデータ
-							p='RDFa 1.1 Validatorを利用すると、RDFaの記述に問題がないかをチェックすることができます。'
-							p
-								| RDFa 1.1 Validator
-								br
-								a(href='http://www.w3.org/2012/pyRdfa/Validator.html',target='_blank') http://www.w3.org/2012/pyRdfa/Validator.html
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;RDFa
+                        .panel-body
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            .alert.alert-info RDFaとは
+                            p='RDFaはRDF（Resource Description Framework）をXHTMLで利用するための規格といて策定が進められていましたが、RDFa1.1でHTML5に対応しました。情報の付加にはRDFaで定義された属性を使用しますが、「HTML+RDFa1.1」においてHTML5でも利用できるようにすることが求められており、HTMLのバリデータでも対応が進んでいます。'
+                            p
+                                | RDFa Core 1.1（勧告）
+                                br
+                                a(href='http://ww.w3.org/TR/rdfa-syntax/',target='_blank') http://ww.w3.org/TR/rdfa-syntax/
+                            p
+                                | RDFa Lite 1.1（勧告）
+                                br
+                                a(href='http://www.w3.org/TR/rdfa-lite/',target='_blank') http://www.w3.org/TR/rdfa-lite/
+                            p
+                                | HTML+RDFa 1.1（草案）
+                                br
+                                a(href='http://www.w3.org/TR/rdfa-in-html/    ',target='_blank') http://www.w3.org/TR/rdfa-in-html/    
+                            .alert.alert-info RDFaで利用できるボキャブラリー
+                            p='RDFaの最初の勧告が1999年にリリースされたこともあり、RDFaではさまざまなボキャブラリーを利用することができます。'
+                            p='たとえば、ISO15836で国際基準となったDublin Coreや、FOAF（Friend of a Friend）、クリエイティブ・コモンズのccREL（The Creative Commons Rights Expression Language）、FacebookのOGP（Open Graph Protocol）などがあります。microdataで使用したschema.orgのボキャブラリーを使用することも可能です。'
+                            p
+                                | Dublin Core
+                                br
+                                a(href='http://dublincore.org/documents/dcmi-terms/',target='_blank') http://dublincore.org/documents/dcmi-terms/
+                            p
+                                | FOAF
+                                br
+                                a(href='http://xmlns.com/foaf/spec/',target='_blank') http://xmlns.com/foaf/spec/
+                            p
+                                | ccRel
+                                br
+                                a(href='http://www.w3.org/Submission/2008/SUBM-ccREL-20080501/',target='_blank') http://www.w3.org/Submission/2008/SUBM-ccREL-20080501/
+                            p
+                                | OGP
+                                br
+                                a(href='http://ogp.me/',target='_blank') http://ogp.me/
+                            p
+                                | schema.org
+                                br
+                                a(href='http://schema.org/',target='_blank') http://schema.org/
+                            p
+                                | RDFaに関する情報がまとめられたW3Cのサイト
+                                br
+                                a(href='http://ww.w3.rog/RDF/',target='_blank') http://ww.w3.rog/RDF/
+                            .alert.alert-info RDFaを利用した情報の付加
+                            p='RDFaでは、ボキャブラリーごとにコンテンツの内容を明示するためのプロパティ名が用意されており、property属性を利用してコンテンツに付加していきます。たとえば、サンプルではクリエイティブ・コモンズでページのライセンスを明示するため、作品のタイトルとクレジット、ライセンスを明示しています。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/04/122.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;
+                                | &lt;a rel="cc:license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.ja"&gt;
+                                | &lt;img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/88x31.png"&gt;
+                                | &lt;/a&gt;
+                                | &lt;br&gt;
+                                | &lt;span property="dc:title"&gt;Short Tea Breaks&lt;/span&gt;
+                                |  by
+                                | &lt;span property="cc:attributionName"&gt;Hanako&lt;/span&gt;
+                                |  is licensed under a
+                                | &lt;a rel="cc:license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.ja"&gt;
+                                | Creative Commons 表示 - 非営利 - 改変禁止 3.0 非移植 License
+                                | &lt;/a&gt;.
+                                | &lt;/p&gt;
+                            figure
+                                table.table
+                                    tr
+                                        th 作品のタイトル
+                                        td Short Tea Breaks
+                                    tr
+                                        th 作品のクレジット
+                                        td Hanako
+                                    tr
+                                        th 作品のライセンス
+                                        td http://creativecommons.org/licenses/by-nc-nd/3.0/deed.ja
+                                figcaption RDFaによって明示したコンテンツの内容
+                            h4 作品のタイトル
+                            p='作品のタイトルは「dc:title」というプロパティ名で明示します。「dc:title」はRDFaにおいてリソースのタイトルを明示するための基本的はプロパティ名で、「dc:」はDublin Coreのボキャブラリーであることを表しています。'
+                            h4 作品のクレジット
+                            p='作品のクレジットは「cc:attributionName」というプロパティ名で明示します。「cc:attributionName」の「cc:」はクリエイティブ・コモンズのccRELのボキャブラリーであることを表しています。'
+                            h4 作品のライセンス
+                            p='作品のライセンスはクリエイティブ・コモンズのURLで明示するため、<a>のhref属性でURLを示し、rel属性で「cc:license」というプロパティ名を付加します。このプロパティ名も、cc:attributionNameと同じようにccRELのボキャブラリーとなっています。'
+                            .alert.alert-warning NOTES: 利用するボキャブラリーの明示
+                            p='RDFaで利用するボキャブラリーは、prefix属性で明示することができます。たとえば、Dublin CoreとccRELの利用を明示する場合は、下のように記述します。'
+                            p='ただし、RDFa 1.1では主要ボキャブラリーが標準で定義されており、定義済みのボキャブラリーについてはprefix属性で明示する必要がなくなっています。Dublin CoreとccRELも定義済みとなっていますので、明示しなくても問題ありません。標準で定義されているボキャブラリーについては下のページを参照してください。'
+                            pre(class='prettyprint linenums:1')='<html lang="ja" prefix="dc: http://purl.org/dc/terms/ cc: http://creativecommons.org/ns#">'
+                            p
+                                | RDFa Core Initial Context
+                                br
+                                a(href='http://www.w3.org/2011/rdfa-context/rdfa-1.1',target='_blank') http://www.w3.org/2011/rdfa-context/rdfa-1.1
+                            .alert.alert-success DIFFERENCES: 
+                            p='RDFa 1.0以前では、利用するボキャブラリーをxmlns属性で下のように明示する必要がありました。しかし、RDFa 1.1ではxmlns属性は非推奨となっていますので注意が必要です。'
+                            pre(class='prettyprint linenums:1')
+                                | &lt;html lang="ja" xmlns:dc="http://purl.org/dc/terms/" xmlns:cc="http://creativecommons.org/ns#"&gt;
+                                | ...
+                            .alert.alert-warning NOTES: ライセンスを示すプロパティ名
+                            p='サンプルではライセンスを「cc:license」というプロパティ名で示したましたが、下のように「license」というプロパティ名で示すこともできます。どちらのプロパティ名を利用した場合でもセマンティクスの上では同じ内容を示したことになります。'
+                            p='「license」はXHTMLのボキャブラリー（http://www.w3.org/1999/xhtml/vocab/）で定義されたプロパティ名で、「xhv:license」と記述することもできます。また、このボキャブラリーも標準で定義されていますので、prefix属性でボキャブラリーを明示する必要はありません。'
+                            p='なお、「license」という値は、HTML5では<a>や<link>のrel属性の値として定義されています。そのため、HTML5でライセンスのURLを明示すると、RDFaを意識していなくても、RDFaによって詳細を明示した形になります。'
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;
+                                | &lt;a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.ja"&gt;
+                                | &lt;img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/88x31.png"&gt;
+                                | &lt;/a&gt;
+                                | ...
+                                | &lt;a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.ja"&gt;
+                                | Creative Commons 表示 - 非営利 - 改変禁止 3.0 非移植 License
+                                | &lt;/a&gt;.
+                                | &lt;/p&gt;
+                            .alert.alert-warning NOTES: RDFaでschema.orgのボキャブラリーを利用する
+                            p='schema.orgのボキャブラリーはRDFaで利用することもできます。たとえば、サンプルの内容をRDFaとschema.orgのボキャブラリーで明示すると、下のようになります。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/04/124-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;article vocab="http://schema.org/" typeof="Article"&gt;
+                                | &lt;header&gt;
+                                | 
+                                | &lt;h1 property="name"&gt;Short Tea Breaks&lt;/h1&gt;
+                                | &lt;time property="datePublished" datetime="2013-01-15"&gt;January 15, 2013&lt;/time&gt;
+                                | &lt;/header&gt;
+                                | 
+                                | &lt;img property="image" src="img/tea.jpg" alt=""&gt;
+                                | 
+                                | &lt;p property="description"&gt;世界中にはたくさんのお茶があります。緑茶に紅茶、ウーロン茶など、その製法や味わいもさまざまですが、リラックスしたり、ちょっと休憩したいときなどには欠かすことができません。お茶のお供に、おいしいお菓子もあると幸せな気分になってしまいます。&lt;/p&gt;
+                                | ...
+                                | &lt;/article&gt;
+                            .alert.alert-warning NOTES: FacebookとOGP
+                            p='ボキャブラリーとしてOGP（Open Graph Protocol）を利用し、ページのタイトルや画像などを明示しておくと、Facebookからページを参照したときに抽出され、ページの概要として表示されます。また、Google+などでも利用されるようになっています。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/04/124-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;!DOCTYPE html&gt;
+                                | &lt;html lang="ja"&gt;
+                                | &lt;head&gt;
+                                | …
+                                | 
+                                | &lt;meta property="og:type" content="article"&gt;
+                                | &lt;meta property="og:title" content="Short Tea Breaks - ちょっとしたお茶の時間"&gt;
+                                | &lt;meta property="og:url" content="http://sun.web/tea.html"&gt;
+                                | &lt;meta property="og:image" content="http://sun.web/img/tea-thumb.jpg"&gt;
+                                | &lt;meta property="og:site_name" content="SUN DIARY"&gt;
+                                | &lt;meta property="og:description" content="緑茶に紅茶、ウーロン茶など、さまざまなお茶のおいしさと楽しみ方について"&gt;
+                                | &lt;/head&gt;
+                            p='ページのタイトルなどは<meta>のcontent属性で示し、property属性でプロパティ名を付加します。ここでは、OGPで定義された下のプロパティ名を利用しています。'
+                            p='なお、OGPは標準で定義されていますので、prefix属性でボキャブラリーを明示する必要はありません。'
+                            p='※ FacebookのアプリケーションIDを示す「fg:app_id」といったプロパティを利用する場合、ボキャブラリーが標準では定義されていないため、「prefix="fb: http://ogp.me/ns/fb#"」でボキャブラリーを明示することが求められます。'
+                            table.table
+                                tr
+                                    th プロパティ名
+                                    th 明示する内容
+                                tr
+                                    td og:type
+                                    td コンテンツの種類
+                                tr
+                                    td og:title
+                                    td ページのタイトル
+                                tr
+                                    td og:url
+                                    td ページのURL
+                                tr
+                                    td og:image
+                                    td ページの画像
+                                tr
+                                    td og:site_name
+                                    td サイト名
+                                tr
+                                    td og:description
+                                    td ページの概要
+                                tr
+                                    td og:email
+                                    td 連絡先メールアドレス
+                            p='※ 指定できるすべてのプロパティ名についてはOGPのサイト（http://ogp.me/）やFacebookのテクニカルガイド（https://developers.facebook.com/docs/technical-guides/opengraph/）を参照してください。'
+                            .alert.alert-warning NOTES: RDFa 1.1のバリデータ
+                            p='RDFa 1.1 Validatorを利用すると、RDFaの記述に問題がないかをチェックすることができます。'
+                            p
+                                | RDFa 1.1 Validator
+                                br
+                                a(href='http://www.w3.org/2012/pyRdfa/Validator.html',target='_blank') http://www.w3.org/2012/pyRdfa/Validator.html
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

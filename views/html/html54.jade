@@ -1,373 +1,373 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;ビデオ／オーディオ
-						.panel-body
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-										| （※）
-									td
-										img(src='../images/ic-android.png')
-										| （※）
-									td
-										img(src='../images/ic-firefox.png')
-										| （※）
-									td
-										img(src='../images/ic-safari.png')
-										| （※）
-									td
-										img(src='../images/ic-chrome.png')
-										| （※）
-									td
-										img(src='../images/ic-opera.png')
-										| （※）
-									td
-										img(src='../images/ic-ie.png')
-										| （※）
-							p ※ 一部非対応
-							.alert.alert-info ビデオ
-							pre
-								| &lt;video&gt;...&lt;/video&gt;
-							table.table
-								tr
-									td カテゴリー
-									td フローコンテンツ／フレージングコンテンツ／エンベッディッドコンテンツ／インタラクティブコンテンツ（controls属性を指定した場合）／パルパブルコンテンツ
-								tr
-									td 記述可能な場所
-									td
-										| エンベッディッドコンテンツが記述できる場所
-								tr
-									td コンテンツモデル
-									td
-										| ・src属性を指定した場合：
-										br
-										| ゼロまたは1つ以上の&lt;track&gt;とそれに続くトランスペアレント（メディア要素を除く）
-										br
-										| ・src属性を指定していない場合：
-										br
-										| ゼロまたは1つ以上の&lt;source&gt;と、ゼロまたは1つ以上の&lt;track&gt;、それらに続くトランスペアレント（メディア要素を除く）
-								tr
-									td 構成するボックス
-									td - （置換要素として扱われることが期待される）
-								tr
-									td 属性
-									td src／crossorigin／poster／preload／autoplay／mediagroup／loop／muted／controls／width／height／グローバル
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| -
-							.alert.alert-info オーディオ
-							pre
-								| &lt;audio&gt;...&lt;/audio&gt;
-							table.table
-								tr
-									td カテゴリー
-									td フローコンテンツ／フレージングコンテンツ／エンベッディッドコンテンツ／インタラクティブコンテンツ（controls属性を指定した場合）／パルパブルコンテンツ（controls属性を指定した場合）
-								tr
-									td 記述可能な場所
-									td
-										| エンベッディッドコンテンツが記述できる場所
-								tr
-									td コンテンツモデル
-									td
-										| ・src属性を指定した場合：
-										br
-										| ゼロまたは1つ以上の&lt;track&gt;とそれに続くトランスペアレント（メディア要素を除く）
-										br
-										| ・src属性を指定していない場合：
-										br
-										| ゼロまたは1つ以上の&lt;source&gt;と、ゼロまたは1つ以上の&lt;track&gt;
-										br、それらに続くトランスペアレント（メディア要素を除く）
-								tr
-									td 構成するボックス
-									td - （置換要素として扱われることが期待される）
-								tr
-									td 属性
-									td src／crossorigin／poster／preload／autoplay／mediagroup／loop／muted／controls／width／height／グローバル
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| -
-							.alert.alert-info 複数のコンテンツの指定
-							pre
-								| &lt;source&gt;
-							table.table
-								tr
-									td カテゴリー
-									td なし
-								tr
-									td 記述可能な場所
-									td
-										| メディア要素の子要素として、フローコンテンツや&lt;track&gt;の前に記述可能
-								tr
-									td コンテンツモデル
-									td 空
-								tr
-									td 構成するボックス
-									td none
-								tr
-									td 属性
-									td src／type／media／グローバル
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| source {
-											| 	display: none;
-											| }
-							p='<video>と<audio>はメディア要素と呼ばれ、<video>はビデオコンテンツを、<audio>はオーディをコンテンツを示します。'
-							p='たとえば、次のサンプルは<video>を利用してビデオコンテンツを表示したものです。ビデオコンテンツはsrc属性で指定し、conterols属性でコントローラーを表示するようにしています。また、autoplay属性で自動再生を、loop属性でループ再生を行うように指定しています。'
-							p='ただし、サンプルで用意したsun.mp4はH.264というコーデックで作成したもので、このコーデックに未対応なブラウザではビデオが表示されません。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/05/145-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;article&gt;
-								| &lt;h1&gt;About SUN DIARY&lt;/h1&gt;
-								| 
-								| &lt;video src="sun.mp4" controls autoplay loop width="640" height="360"&gt;&lt;/video&gt;
-								| 
-								| &lt;/article&gt;
-							.alert.alert-info 複数のコンテンツの指定
-							p='H.264に未対応なブラウザでもビデオを表示するためには、次のように<source>を利用してビデオコンテンツを表示したものです。ビデオコンテンツはsrc属性で指定し、conterols属性でコントローラーを表示するようにしています。また、autoplay属性で自動再生を、loop属性でループ再生を行うように指定しています。異なるコーデックで作成したビデオも指定するようにします。ここでは、H.264で作成したsun.mp4と、WebMで作成したsun.webmを指定しています。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/05/145-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;article&gt;
-								| &lt;h1&gt;About SUN DIARY&lt;/h1&gt;
-								| 
-								| &lt;video controls autoplay loop width="640" height="360"&gt;
-								| &lt;source src="sun.mp4" type="video/mp4"&gt;
-								| &lt;source src="sun.webm" type="video/webm"&gt;
-								| &lt;/video&gt;
-								| 
-								| &lt;/article&gt;
-							.alert.alert-warning NOTES: ビデオのコーデック
-							p='<video>で使用する標準のコーデックに関しては、H.264を支持するMicrosoft（Internet Explorer）・Apple（Safari）陣営と、WebMを支持するGoogle（Chrome）・Firefox・OPera陣営によって勢力争いが行われてきました。'
-							p='しかし、H.264への対抗として登場してきたWebMが浸透できず、事実上のスタンダードがH.264となっている現状を踏まえ、FirefoxはH.264に対応することを2012年3月に表明しています。また、Chromeは2011年1月にH.264のサポートを打ち切ると表明していましたが、最新バージョンでもH.264の動画ファイルを再生することが可能です。こうしたことから、標準コーデックに関する争いは、H.264で落ち着きそうな流れとなっています。'
-							p='現状では、H.264とWebMで作成したビデオを用意しておけば、主要ブラウザに対応することが可能です。'
-							table.table
-								tr
-									th コーデック
-									td iOS
-									td Android<br>2.3.x
-									td Android<br>3.x
-									td Android<br>4.x
-									td Chrome
-									td Safari
-									td Firefox
-									td Opera
-									td IE
-								tr
-									th H.264
-									td ○
-									td ○
-									td ○
-									td ○
-									td ○
-									td ○
-									td ☓
-									td ☓
-									td ○
-								tr
-									th WebM
-									td ☓
-									td ☓
-									td ☓
-									td ○
-									td ○
-									td ☓
-									td ○
-									td ○
-									td ☓
-								tr
-									th OggTheora
-									td ☓
-									td ☓
-									td ☓
-									td ☓
-									td ○
-									td ☓
-									td ○
-									td ○
-									td ☓
-							.alert.alert-warning NOTES: オーディオコンテンツ
-							p='オーディオコンテンツを扱いたい場合は<audio>を利用します。<video>と同じように、<source>を利用して複数のオーディオコンテンツを指定することも可能です。'
-							p='なお、主要ブラウザが対応したコーデックは下のようになっています。'
-							pre(class='prettyprint linenums:1')
-								| &lt;article&gt;
-								| &lt;h1&gt;About Sun DIARY&lt;/h1&gt;
-								| &lt;audio src="sun.mp3" controls&gt;&lt;/audio&gt;
-								| &lt;/article&gt;
-							table.table
-								tr
-									th コーデック
-									td iOS
-									td Android
-									td Chrome
-									td Safari
-									td Firefox
-									td Opera
-									td IE
-								tr
-									th MP3
-									td ○
-									td ○
-									td ○
-									td ○
-									td ☓
-									td ☓
-									td ○
-								tr
-									th Ogg
-									td ☓
-									td ○
-									td ○
-									td ☓
-									td ○
-									td ○
-									td ☓
-							.alert.alert-warning NOTES: 下位互換用のコンテンツ
-							p='<video>や<audio>の中には下位互換用のコンテンツを記述することができます。下位互換用のコンテンツは<video>や<audio>に未対応なブラウザで表示されます。'
-							pre(class='prettyprint linenums:1')
-								| &lt;video controls autoplay loop width="640" height="360"&gt;
-								| 	&lt;source src="sun.mp4" type="video/mp4"&gt;
-								| 	&lt;source src="sun.webm" type="video/webm"&gt;
-								| 
-								| 	&lt;img src="img/tea.jpg"&gt;
-								| 	&lt;p&gt;SUN DIARYではおいしいお茶の紹介を行っています。&lt;/p&gt;
-								| &lt;/video&gt;
-							.alert.alert-info 指定できる属性
-							p='<video>や<audio>、<source>で指定できる属性は以下のようになっています。'
-							.row
-								.col-sm-6
-									table.table
-										tr
-											th='<video>/<audio>の属性'
-											th 機能
-										tr
-											td src
-											td ビデオやオーディオのURLを指定。
-										tr
-											td crossorigin
-											td CORSに関する設定。
-										tr
-											td poster <span style="color:red;">※</span>
-											td ポスターフレーム画像のURLを指定。
-										tr
-											td preload
-											td プリロードの方法を指定。
-										tr
-											td autoplay ※
-											td 自動再生を指定。
-										tr
-											td mediagroup
-											td メディアグループ名を指定。
-										tr
-											td loop ※
-											td ループ再生を指定。
-										tr
-											td muted ※
-											td ミュート（消音）
-										tr
-											td controls ※
-											td コントローラーの表示を指定。
-										tr
-											td width
-											td 横幅を指定。
-										tr
-											td height
-											td 高さを指定。
-								.col-sm-6
-									table.table
-										tr
-											th='<source>の属性'
-											th 機能
-										tr
-											td src
-											td ビデオやオーディオのURLを指定。
-										tr
-											td type
-											td ビデオやオーディオのMIME TYPEを指定。
-										tr
-											td media
-											td メディアクエリを指定。
-							p!='<span style="color:red;">※</span> ... &lt;video&gt;のみで利用できるもの。'
-							p='※ ... ブーリアン属性。'
-							h4 ポスターフレーム画像のURLを指定
-							p 自動再生を設定しなかった場合、ページをロードしてもビデオは再生されず、最初のフレームが表示されます。このとき、poster属性を利用すると、最初のフレームの代わりに表示するポスターフレーム画像を指定することができます。サンプルでは、ポスタフレーム画像としてposter.pngを表示するように指定しています。
-							p
-								a.btn.btn-default(href='../demo/html/sample1/05/147.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;video poster="poster.png" controls width="640" height="360"&gt;
-								| 	&lt;source src="sun.mp4" type="video/mp4"&gt;
-								| 	&lt;source src="sun.webm" type="video/webm"&gt;
-								| &lt;/video&gt;
-							h4 プリロードの方法を指定
-							p preload属性を利用すると、コンテンツのプリロード（先読み）の方法を指定することができます。ただし、この属性は製作者がユーザーにとってベストと考える方法をソフトウェアに示すもので、ユーザーによる設定や回線速度などに応じて、ソフトウェアには設定を無視することが認められています。
-							table.table
-								tr
-									th preload属性
-									th 機能
-								tr
-									td none
-									td プリロードを行わない。サーバーの負荷を最小限に抑える。
-								tr
-									td metadata
-									td コンテンツのメタデータ（大きさ、トラックリスト、再生時間など）や冒頭部分のデータのみをプリロードする。
-								tr
-									td auto
-									td コンテンツ全体のプリロードを認める。サーバーへの負荷を制限しない。
-							h4 メディアグループの設定
-							p 複数のビデオやオーディオにmediagroup属性で同じグループ名を指定すると、メディアグループが構成され、同期再生することができます。たとえば、下のサンプルでは同じビデオを3つ並べ、グループ名を「myvideo」と指定しています。これにより、1つ目のビデオに表示したコントローラーで再生ボタンをクリックすると、3つのビデオを動機再生することができます。
-							p
-								a.btn.btn-default(href='../demo/html/sample1/05/148.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;video poster="poster.png" mediagroup="myvideo" controls&gt;
-								| &lt;source src="sun.mp4" type="video/mp4"&gt;
-								| &lt;source src="sun.webm" type="video/webm"&gt;
-								| &lt;/video&gt;
-								| 
-								| &lt;video poster="poster.png" mediagroup="myvideo"&gt;
-								| &lt;source src="sun.mp4" type="video/mp4"&gt;
-								| &lt;source src="sun.webm" type="video/webm"&gt;
-								| &lt;/video&gt;
-								| 
-								| &lt;video poster="poster.png" mediagroup="myvideo"&gt;
-								| &lt;source src="sun.mp4" type="video/mp4"&gt;
-								| &lt;source src="sun.webm" type="video/webm"&gt;
-								| &lt;/video&gt;
-							pre(class='prettyprint linenums:1')
-								| video:nth-of-type(1)	{width: 640px;}
-								| 
-								| video:nth-of-type(2), video:nth-of-type(3)
-								| 	{width: 310px;
-								| 	margin: 8px;}
-							.alert.alert-warning NOTES: 
-							p 現在のところ、mediagroup属性には各ブラウザとも未対応で、Chromeのバージョン25（beta版）が対応しています。
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;ビデオ／オーディオ
+                        .panel-body
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                        | （※）
+                                    td
+                                        img(src='../images/ic-android.png')
+                                        | （※）
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                        | （※）
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                        | （※）
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                        | （※）
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                        | （※）
+                                    td
+                                        img(src='../images/ic-ie.png')
+                                        | （※）
+                            p ※ 一部非対応
+                            .alert.alert-info ビデオ
+                            pre
+                                | &lt;video&gt;...&lt;/video&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td フローコンテンツ／フレージングコンテンツ／エンベッディッドコンテンツ／インタラクティブコンテンツ（controls属性を指定した場合）／パルパブルコンテンツ
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | エンベッディッドコンテンツが記述できる場所
+                                tr
+                                    td コンテンツモデル
+                                    td
+                                        | ・src属性を指定した場合：
+                                        br
+                                        | ゼロまたは1つ以上の&lt;track&gt;とそれに続くトランスペアレント（メディア要素を除く）
+                                        br
+                                        | ・src属性を指定していない場合：
+                                        br
+                                        | ゼロまたは1つ以上の&lt;source&gt;と、ゼロまたは1つ以上の&lt;track&gt;、それらに続くトランスペアレント（メディア要素を除く）
+                                tr
+                                    td 構成するボックス
+                                    td - （置換要素として扱われることが期待される）
+                                tr
+                                    td 属性
+                                    td src／crossorigin／poster／preload／autoplay／mediagroup／loop／muted／controls／width／height／グローバル
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        pre
+                                            | -
+                            .alert.alert-info オーディオ
+                            pre
+                                | &lt;audio&gt;...&lt;/audio&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td フローコンテンツ／フレージングコンテンツ／エンベッディッドコンテンツ／インタラクティブコンテンツ（controls属性を指定した場合）／パルパブルコンテンツ（controls属性を指定した場合）
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | エンベッディッドコンテンツが記述できる場所
+                                tr
+                                    td コンテンツモデル
+                                    td
+                                        | ・src属性を指定した場合：
+                                        br
+                                        | ゼロまたは1つ以上の&lt;track&gt;とそれに続くトランスペアレント（メディア要素を除く）
+                                        br
+                                        | ・src属性を指定していない場合：
+                                        br
+                                        | ゼロまたは1つ以上の&lt;source&gt;と、ゼロまたは1つ以上の&lt;track&gt;
+                                        br、それらに続くトランスペアレント（メディア要素を除く）
+                                tr
+                                    td 構成するボックス
+                                    td - （置換要素として扱われることが期待される）
+                                tr
+                                    td 属性
+                                    td src／crossorigin／poster／preload／autoplay／mediagroup／loop／muted／controls／width／height／グローバル
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        pre
+                                            | -
+                            .alert.alert-info 複数のコンテンツの指定
+                            pre
+                                | &lt;source&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td なし
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | メディア要素の子要素として、フローコンテンツや&lt;track&gt;の前に記述可能
+                                tr
+                                    td コンテンツモデル
+                                    td 空
+                                tr
+                                    td 構成するボックス
+                                    td none
+                                tr
+                                    td 属性
+                                    td src／type／media／グローバル
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        pre
+                                            | source {
+                                            |     display: none;
+                                            | }
+                            p='<video>と<audio>はメディア要素と呼ばれ、<video>はビデオコンテンツを、<audio>はオーディをコンテンツを示します。'
+                            p='たとえば、次のサンプルは<video>を利用してビデオコンテンツを表示したものです。ビデオコンテンツはsrc属性で指定し、conterols属性でコントローラーを表示するようにしています。また、autoplay属性で自動再生を、loop属性でループ再生を行うように指定しています。'
+                            p='ただし、サンプルで用意したsun.mp4はH.264というコーデックで作成したもので、このコーデックに未対応なブラウザではビデオが表示されません。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/05/145-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;article&gt;
+                                | &lt;h1&gt;About SUN DIARY&lt;/h1&gt;
+                                | 
+                                | &lt;video src="sun.mp4" controls autoplay loop width="640" height="360"&gt;&lt;/video&gt;
+                                | 
+                                | &lt;/article&gt;
+                            .alert.alert-info 複数のコンテンツの指定
+                            p='H.264に未対応なブラウザでもビデオを表示するためには、次のように<source>を利用してビデオコンテンツを表示したものです。ビデオコンテンツはsrc属性で指定し、conterols属性でコントローラーを表示するようにしています。また、autoplay属性で自動再生を、loop属性でループ再生を行うように指定しています。異なるコーデックで作成したビデオも指定するようにします。ここでは、H.264で作成したsun.mp4と、WebMで作成したsun.webmを指定しています。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/05/145-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;article&gt;
+                                | &lt;h1&gt;About SUN DIARY&lt;/h1&gt;
+                                | 
+                                | &lt;video controls autoplay loop width="640" height="360"&gt;
+                                | &lt;source src="sun.mp4" type="video/mp4"&gt;
+                                | &lt;source src="sun.webm" type="video/webm"&gt;
+                                | &lt;/video&gt;
+                                | 
+                                | &lt;/article&gt;
+                            .alert.alert-warning NOTES: ビデオのコーデック
+                            p='<video>で使用する標準のコーデックに関しては、H.264を支持するMicrosoft（Internet Explorer）・Apple（Safari）陣営と、WebMを支持するGoogle（Chrome）・Firefox・OPera陣営によって勢力争いが行われてきました。'
+                            p='しかし、H.264への対抗として登場してきたWebMが浸透できず、事実上のスタンダードがH.264となっている現状を踏まえ、FirefoxはH.264に対応することを2012年3月に表明しています。また、Chromeは2011年1月にH.264のサポートを打ち切ると表明していましたが、最新バージョンでもH.264の動画ファイルを再生することが可能です。こうしたことから、標準コーデックに関する争いは、H.264で落ち着きそうな流れとなっています。'
+                            p='現状では、H.264とWebMで作成したビデオを用意しておけば、主要ブラウザに対応することが可能です。'
+                            table.table
+                                tr
+                                    th コーデック
+                                    td iOS
+                                    td Android<br>2.3.x
+                                    td Android<br>3.x
+                                    td Android<br>4.x
+                                    td Chrome
+                                    td Safari
+                                    td Firefox
+                                    td Opera
+                                    td IE
+                                tr
+                                    th H.264
+                                    td ○
+                                    td ○
+                                    td ○
+                                    td ○
+                                    td ○
+                                    td ○
+                                    td ☓
+                                    td ☓
+                                    td ○
+                                tr
+                                    th WebM
+                                    td ☓
+                                    td ☓
+                                    td ☓
+                                    td ○
+                                    td ○
+                                    td ☓
+                                    td ○
+                                    td ○
+                                    td ☓
+                                tr
+                                    th OggTheora
+                                    td ☓
+                                    td ☓
+                                    td ☓
+                                    td ☓
+                                    td ○
+                                    td ☓
+                                    td ○
+                                    td ○
+                                    td ☓
+                            .alert.alert-warning NOTES: オーディオコンテンツ
+                            p='オーディオコンテンツを扱いたい場合は<audio>を利用します。<video>と同じように、<source>を利用して複数のオーディオコンテンツを指定することも可能です。'
+                            p='なお、主要ブラウザが対応したコーデックは下のようになっています。'
+                            pre(class='prettyprint linenums:1')
+                                | &lt;article&gt;
+                                | &lt;h1&gt;About Sun DIARY&lt;/h1&gt;
+                                | &lt;audio src="sun.mp3" controls&gt;&lt;/audio&gt;
+                                | &lt;/article&gt;
+                            table.table
+                                tr
+                                    th コーデック
+                                    td iOS
+                                    td Android
+                                    td Chrome
+                                    td Safari
+                                    td Firefox
+                                    td Opera
+                                    td IE
+                                tr
+                                    th MP3
+                                    td ○
+                                    td ○
+                                    td ○
+                                    td ○
+                                    td ☓
+                                    td ☓
+                                    td ○
+                                tr
+                                    th Ogg
+                                    td ☓
+                                    td ○
+                                    td ○
+                                    td ☓
+                                    td ○
+                                    td ○
+                                    td ☓
+                            .alert.alert-warning NOTES: 下位互換用のコンテンツ
+                            p='<video>や<audio>の中には下位互換用のコンテンツを記述することができます。下位互換用のコンテンツは<video>や<audio>に未対応なブラウザで表示されます。'
+                            pre(class='prettyprint linenums:1')
+                                | &lt;video controls autoplay loop width="640" height="360"&gt;
+                                |     &lt;source src="sun.mp4" type="video/mp4"&gt;
+                                |     &lt;source src="sun.webm" type="video/webm"&gt;
+                                | 
+                                |     &lt;img src="img/tea.jpg"&gt;
+                                |     &lt;p&gt;SUN DIARYではおいしいお茶の紹介を行っています。&lt;/p&gt;
+                                | &lt;/video&gt;
+                            .alert.alert-info 指定できる属性
+                            p='<video>や<audio>、<source>で指定できる属性は以下のようになっています。'
+                            .row
+                                .col-sm-6
+                                    table.table
+                                        tr
+                                            th='<video>/<audio>の属性'
+                                            th 機能
+                                        tr
+                                            td src
+                                            td ビデオやオーディオのURLを指定。
+                                        tr
+                                            td crossorigin
+                                            td CORSに関する設定。
+                                        tr
+                                            td poster <span style="color:red;">※</span>
+                                            td ポスターフレーム画像のURLを指定。
+                                        tr
+                                            td preload
+                                            td プリロードの方法を指定。
+                                        tr
+                                            td autoplay ※
+                                            td 自動再生を指定。
+                                        tr
+                                            td mediagroup
+                                            td メディアグループ名を指定。
+                                        tr
+                                            td loop ※
+                                            td ループ再生を指定。
+                                        tr
+                                            td muted ※
+                                            td ミュート（消音）
+                                        tr
+                                            td controls ※
+                                            td コントローラーの表示を指定。
+                                        tr
+                                            td width
+                                            td 横幅を指定。
+                                        tr
+                                            td height
+                                            td 高さを指定。
+                                .col-sm-6
+                                    table.table
+                                        tr
+                                            th='<source>の属性'
+                                            th 機能
+                                        tr
+                                            td src
+                                            td ビデオやオーディオのURLを指定。
+                                        tr
+                                            td type
+                                            td ビデオやオーディオのMIME TYPEを指定。
+                                        tr
+                                            td media
+                                            td メディアクエリを指定。
+                            p!='<span style="color:red;">※</span> ... &lt;video&gt;のみで利用できるもの。'
+                            p='※ ... ブーリアン属性。'
+                            h4 ポスターフレーム画像のURLを指定
+                            p 自動再生を設定しなかった場合、ページをロードしてもビデオは再生されず、最初のフレームが表示されます。このとき、poster属性を利用すると、最初のフレームの代わりに表示するポスターフレーム画像を指定することができます。サンプルでは、ポスタフレーム画像としてposter.pngを表示するように指定しています。
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/05/147.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;video poster="poster.png" controls width="640" height="360"&gt;
+                                |     &lt;source src="sun.mp4" type="video/mp4"&gt;
+                                |     &lt;source src="sun.webm" type="video/webm"&gt;
+                                | &lt;/video&gt;
+                            h4 プリロードの方法を指定
+                            p preload属性を利用すると、コンテンツのプリロード（先読み）の方法を指定することができます。ただし、この属性は製作者がユーザーにとってベストと考える方法をソフトウェアに示すもので、ユーザーによる設定や回線速度などに応じて、ソフトウェアには設定を無視することが認められています。
+                            table.table
+                                tr
+                                    th preload属性
+                                    th 機能
+                                tr
+                                    td none
+                                    td プリロードを行わない。サーバーの負荷を最小限に抑える。
+                                tr
+                                    td metadata
+                                    td コンテンツのメタデータ（大きさ、トラックリスト、再生時間など）や冒頭部分のデータのみをプリロードする。
+                                tr
+                                    td auto
+                                    td コンテンツ全体のプリロードを認める。サーバーへの負荷を制限しない。
+                            h4 メディアグループの設定
+                            p 複数のビデオやオーディオにmediagroup属性で同じグループ名を指定すると、メディアグループが構成され、同期再生することができます。たとえば、下のサンプルでは同じビデオを3つ並べ、グループ名を「myvideo」と指定しています。これにより、1つ目のビデオに表示したコントローラーで再生ボタンをクリックすると、3つのビデオを動機再生することができます。
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/05/148.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;video poster="poster.png" mediagroup="myvideo" controls&gt;
+                                | &lt;source src="sun.mp4" type="video/mp4"&gt;
+                                | &lt;source src="sun.webm" type="video/webm"&gt;
+                                | &lt;/video&gt;
+                                | 
+                                | &lt;video poster="poster.png" mediagroup="myvideo"&gt;
+                                | &lt;source src="sun.mp4" type="video/mp4"&gt;
+                                | &lt;source src="sun.webm" type="video/webm"&gt;
+                                | &lt;/video&gt;
+                                | 
+                                | &lt;video poster="poster.png" mediagroup="myvideo"&gt;
+                                | &lt;source src="sun.mp4" type="video/mp4"&gt;
+                                | &lt;source src="sun.webm" type="video/webm"&gt;
+                                | &lt;/video&gt;
+                            pre(class='prettyprint linenums:1')
+                                | video:nth-of-type(1)    {width: 640px;}
+                                | 
+                                | video:nth-of-type(2), video:nth-of-type(3)
+                                |     {width: 310px;
+                                |     margin: 8px;}
+                            .alert.alert-warning NOTES: 
+                            p 現在のところ、mediagroup属性には各ブラウザとも未対応で、Chromeのバージョン25（beta版）が対応しています。
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

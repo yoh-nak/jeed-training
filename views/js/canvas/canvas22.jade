@@ -1,179 +1,179 @@
 !!!
 html(lang='ja')
-	head
-		meta(name='viewport',content='width=device-width,initial-scale=1.0')
-		link(href='css/bootstrap.min.css',rel='stylesheet',media='screen')
-		link(href='js/dtree/dtree.css', rel='stylesheet', media='screen')
-		link(href='less/common.less',rel='stylesheet',media='screen')
-		link(href='js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
-		title=title
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							&nbsp;ピクセル値にアクセス
-						.panel-body
-							h4 ピクセル値にアクセスする
-							p
-								a.btn.btn-default(href='demo/canvas/exercise3/index10.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre.prettyprint.linenums
-								| &lt;!DOCTYPE html&gt;
-								| &lt;html lang="ja"&gt;
-								|   &lt;head&gt;
-								|     &lt;meta charset="utf-8"&gt;
-								|     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-								|     &lt;title&gt;&lt;/title&gt;
-								|   &lt;/head&gt;
-								|   &lt;body&gt;
-								|     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
-								|     &lt;script src="http://code.jquery.com/jquery-1.11.0.min.js"&gt;&lt;/script&gt;
-								|     &lt;script&gt;
-								|       $(function(){
-								|        var canvas = $('#myCanvas');
-								|        var context = canvas.get(0).getContext('2d');
-								|        
-								|        var image = new Image();
-								|        image.src = 'example.jpg';
-								|        $(image).load(function(){
-								|         context.drawImage(image, 0, 0, 500, 333);
-								|         
-								|         //3x3ピクセルの範囲のピクセルデータを取得
-								|         //getImageData(x, y, width, height)
-								|         var imageData = context.getImageData(0, 0, 3, 3);
-								|         
-								|         //Canvasのピクセルデータを格納した配列
-								|         var pixel = imageData.data;
-								|         //取得したピクセルの最初のピクセルのRGBA値
-								|         var red = pixel[0]; //Redの値（0-255）
-								|         var green = pixel[1]; //Greenの値（0-255）
-								|         var blue = pixel[2]; //Blueの値（0-255）
-								|         var alpha = pixel[3]; //Alphaの値（0-255）
-								|        });
-								|       });
-								|     &lt;/script&gt;
-								|   &lt;/body&gt;
-								| &lt;/html&gt;
-							h4 取得したピクセル範囲から特定のピクセルのインデックスを得る公式
-							p
-								a.btn.btn-default(href='demo/canvas/exercise3/index11.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre.prettyprint.linenums
-								| &lt;!DOCTYPE html&gt;
-								| &lt;html lang="ja"&gt;
-								|   &lt;head&gt;
-								|     &lt;meta charset="utf-8"&gt;
-								|     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-								|     &lt;title&gt;&lt;/title&gt;
-								|   &lt;/head&gt;
-								|   &lt;body&gt;
-								|     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
-								|     &lt;script src="http://code.jquery.com/jquery-1.11.0.min.js"&gt;&lt;/script&gt;
-								|     &lt;script&gt;
-								|       $(function(){
-								|        var canvas = $('#myCanvas');
-								|        var context = canvas.get(0).getContext('2d');
-								|        
-								|        var image = new Image();
-								|        image.src = 'example.jpg';
-								|        $(image).load(function(){
-								|         context.drawImage(image, 0, 0);
-								|         
-								|         //3x3ピクセルの範囲のピクセルデータを取得
-								|         //getImageData(x, y, width, height)
-								|         var imageData = context.drawImage(image, 0, 0, 500, 333) //3x3の領域
-								|         //取得した3x3のピクセルデータの幅
-								|         var width = imageData.width;
-								|         
-								|         //取得した3x3のピクセルデータの配列の中から、x=2, y=2の座標のピクセルのインデックスを取得
-								|         var x = 2; var y = 2;
-								|         
-								|         //公式からインデックスを取得
-								|         var pixelRed = ((y-1)*(width*4))+((x-1)*4); //RGBA値のRed値のインデックス
-								|         var pixelGreen = pixelRed+1; //RGBA値のGreen値のインデックス
-								|         var pixelBlue = pixelRed+2; //RGBA値のBlue値のインデックス
-								|         var pixelAlpha = pixelRed+3; //RGBA値のAlpha値のインデックス
-								|        });
-								|       });
-								|     &lt;/script&gt;
-								|   &lt;/body&gt;
-								| &lt;/html&gt;
-							h4 カラーピッカー
-							p
-								a.btn.btn-default(href='demo/canvas/exercise3/index12.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre.prettyprint.linenums
-								| &lt;!DOCTYPE html&gt;
-								| &lt;html lang="ja"&gt;
-								|   &lt;head&gt;
-								|     &lt;meta charset="utf-8"&gt;
-								|     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-								|     &lt;title&gt;&lt;/title&gt;
-								|   &lt;/head&gt;
-								|   &lt;body&gt;
-								|     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
-								|     &lt;script src="http://code.jquery.com/jquery-1.11.0.min.js"&gt;&lt;/script&gt;
-								|     &lt;script&gt;
-								|       $(function(){
-								|        //キャンバス要素　jQueryオブジェクト
-								|        var canvas = $('#myCanvas');
-								|        
-								|        //2Dレンダリングコンテキスト
-								|        var context = canvas.get(0).getContext('2d');
-								|        
-								|        //イメージオブジェクトのインスタンス
-								|        var image = new Image();
-								|        //イメージオブジェクトのインスタンスに画像をセット
-								|        image.src = 'example.jpg';
-								|        
-								|        //イメージの読み込み
-								|        $(image).load(function(){
-								|         //イメージの描画
-								|         context.drawImage(image, 0, 0, 500, 333);
-								|        });
-								|        
-								|        //Canvas要素のクリックイベント
-								|        canvas.click(function(e){
-								|         //Canvas要素のドキュメントのxy座標を格納
-								|         var canvasOffset = canvas.offset();
-								|         
-								|         //クリックした位置のドキュメントのx座標からCanvas要素右上のドキュメントのx座標を引く
-								|         //=&gt;クリックした位置のCanvas要素右上からのx座標
-								|         var canvasX = Math.floor(e.pageX - canvasOffset.left);
-								|         
-								|         //クリックした位置のドキュメントのy座標からCanvas要素右上のドキュメントのy座標を引く
-								|         //=&gt;クリックした位置のCanvas要素右上からのy座標
-								|         var canvasY = Math.floor(e.pageY - canvasOffset.top);
-								|         
-								|         //Canvas要素上のクリックした位置の1x1のピクセルデータを取得
-								|         var imageData = context.getImageData(canvasX, canvasY, 1, 1);
-								|         
-								|         //取得したピクセルデータを配列に格納
-								|         var pixel = imageData.data;
-								|         
-								|         //取得したピクセルデータからRGBA値を作成
-								|         var pixelColor = 'rgba(' + pixel[0] + ', ' + pixel[1] + ' , ' + pixel[2] + ' , ' + pixel[3] + ')';
-								|         
-								|         //background-colorに取得したRGBA値をセット
-								|         $('body').css('background-color', pixelColor);
-								|        });
-								|       });
-								|     &lt;/script&gt;
-								|   &lt;/body&gt;
-								| &lt;/html&gt;
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='js/bootstrap.min.js')
-		script(src='coffee/list-counter.js')
+    head
+        meta(name='viewport',content='width=device-width,initial-scale=1.0')
+        link(href='css/bootstrap.min.css',rel='stylesheet',media='screen')
+        link(href='js/dtree/dtree.css', rel='stylesheet', media='screen')
+        link(href='less/common.less',rel='stylesheet',media='screen')
+        link(href='js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+        title=title
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            &nbsp;ピクセル値にアクセス
+                        .panel-body
+                            h4 ピクセル値にアクセスする
+                            p
+                                a.btn.btn-default(href='demo/canvas/exercise3/index10.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre.prettyprint.linenums
+                                | &lt;!DOCTYPE html&gt;
+                                | &lt;html lang="ja"&gt;
+                                |   &lt;head&gt;
+                                |     &lt;meta charset="utf-8"&gt;
+                                |     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+                                |     &lt;title&gt;&lt;/title&gt;
+                                |   &lt;/head&gt;
+                                |   &lt;body&gt;
+                                |     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
+                                |     &lt;script src="http://code.jquery.com/jquery-1.11.0.min.js"&gt;&lt;/script&gt;
+                                |     &lt;script&gt;
+                                |       $(function(){
+                                |        var canvas = $('#myCanvas');
+                                |        var context = canvas.get(0).getContext('2d');
+                                |        
+                                |        var image = new Image();
+                                |        image.src = 'example.jpg';
+                                |        $(image).load(function(){
+                                |         context.drawImage(image, 0, 0, 500, 333);
+                                |         
+                                |         //3x3ピクセルの範囲のピクセルデータを取得
+                                |         //getImageData(x, y, width, height)
+                                |         var imageData = context.getImageData(0, 0, 3, 3);
+                                |         
+                                |         //Canvasのピクセルデータを格納した配列
+                                |         var pixel = imageData.data;
+                                |         //取得したピクセルの最初のピクセルのRGBA値
+                                |         var red = pixel[0]; //Redの値（0-255）
+                                |         var green = pixel[1]; //Greenの値（0-255）
+                                |         var blue = pixel[2]; //Blueの値（0-255）
+                                |         var alpha = pixel[3]; //Alphaの値（0-255）
+                                |        });
+                                |       });
+                                |     &lt;/script&gt;
+                                |   &lt;/body&gt;
+                                | &lt;/html&gt;
+                            h4 取得したピクセル範囲から特定のピクセルのインデックスを得る公式
+                            p
+                                a.btn.btn-default(href='demo/canvas/exercise3/index11.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre.prettyprint.linenums
+                                | &lt;!DOCTYPE html&gt;
+                                | &lt;html lang="ja"&gt;
+                                |   &lt;head&gt;
+                                |     &lt;meta charset="utf-8"&gt;
+                                |     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+                                |     &lt;title&gt;&lt;/title&gt;
+                                |   &lt;/head&gt;
+                                |   &lt;body&gt;
+                                |     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
+                                |     &lt;script src="http://code.jquery.com/jquery-1.11.0.min.js"&gt;&lt;/script&gt;
+                                |     &lt;script&gt;
+                                |       $(function(){
+                                |        var canvas = $('#myCanvas');
+                                |        var context = canvas.get(0).getContext('2d');
+                                |        
+                                |        var image = new Image();
+                                |        image.src = 'example.jpg';
+                                |        $(image).load(function(){
+                                |         context.drawImage(image, 0, 0);
+                                |         
+                                |         //3x3ピクセルの範囲のピクセルデータを取得
+                                |         //getImageData(x, y, width, height)
+                                |         var imageData = context.drawImage(image, 0, 0, 500, 333) //3x3の領域
+                                |         //取得した3x3のピクセルデータの幅
+                                |         var width = imageData.width;
+                                |         
+                                |         //取得した3x3のピクセルデータの配列の中から、x=2, y=2の座標のピクセルのインデックスを取得
+                                |         var x = 2; var y = 2;
+                                |         
+                                |         //公式からインデックスを取得
+                                |         var pixelRed = ((y-1)*(width*4))+((x-1)*4); //RGBA値のRed値のインデックス
+                                |         var pixelGreen = pixelRed+1; //RGBA値のGreen値のインデックス
+                                |         var pixelBlue = pixelRed+2; //RGBA値のBlue値のインデックス
+                                |         var pixelAlpha = pixelRed+3; //RGBA値のAlpha値のインデックス
+                                |        });
+                                |       });
+                                |     &lt;/script&gt;
+                                |   &lt;/body&gt;
+                                | &lt;/html&gt;
+                            h4 カラーピッカー
+                            p
+                                a.btn.btn-default(href='demo/canvas/exercise3/index12.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre.prettyprint.linenums
+                                | &lt;!DOCTYPE html&gt;
+                                | &lt;html lang="ja"&gt;
+                                |   &lt;head&gt;
+                                |     &lt;meta charset="utf-8"&gt;
+                                |     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+                                |     &lt;title&gt;&lt;/title&gt;
+                                |   &lt;/head&gt;
+                                |   &lt;body&gt;
+                                |     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
+                                |     &lt;script src="http://code.jquery.com/jquery-1.11.0.min.js"&gt;&lt;/script&gt;
+                                |     &lt;script&gt;
+                                |       $(function(){
+                                |        //キャンバス要素　jQueryオブジェクト
+                                |        var canvas = $('#myCanvas');
+                                |        
+                                |        //2Dレンダリングコンテキスト
+                                |        var context = canvas.get(0).getContext('2d');
+                                |        
+                                |        //イメージオブジェクトのインスタンス
+                                |        var image = new Image();
+                                |        //イメージオブジェクトのインスタンスに画像をセット
+                                |        image.src = 'example.jpg';
+                                |        
+                                |        //イメージの読み込み
+                                |        $(image).load(function(){
+                                |         //イメージの描画
+                                |         context.drawImage(image, 0, 0, 500, 333);
+                                |        });
+                                |        
+                                |        //Canvas要素のクリックイベント
+                                |        canvas.click(function(e){
+                                |         //Canvas要素のドキュメントのxy座標を格納
+                                |         var canvasOffset = canvas.offset();
+                                |         
+                                |         //クリックした位置のドキュメントのx座標からCanvas要素右上のドキュメントのx座標を引く
+                                |         //=&gt;クリックした位置のCanvas要素右上からのx座標
+                                |         var canvasX = Math.floor(e.pageX - canvasOffset.left);
+                                |         
+                                |         //クリックした位置のドキュメントのy座標からCanvas要素右上のドキュメントのy座標を引く
+                                |         //=&gt;クリックした位置のCanvas要素右上からのy座標
+                                |         var canvasY = Math.floor(e.pageY - canvasOffset.top);
+                                |         
+                                |         //Canvas要素上のクリックした位置の1x1のピクセルデータを取得
+                                |         var imageData = context.getImageData(canvasX, canvasY, 1, 1);
+                                |         
+                                |         //取得したピクセルデータを配列に格納
+                                |         var pixel = imageData.data;
+                                |         
+                                |         //取得したピクセルデータからRGBA値を作成
+                                |         var pixelColor = 'rgba(' + pixel[0] + ', ' + pixel[1] + ' , ' + pixel[2] + ' , ' + pixel[3] + ')';
+                                |         
+                                |         //background-colorに取得したRGBA値をセット
+                                |         $('body').css('background-color', pixelColor);
+                                |        });
+                                |       });
+                                |     &lt;/script&gt;
+                                |   &lt;/body&gt;
+                                | &lt;/html&gt;
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='js/bootstrap.min.js')
+        script(src='coffee/list-counter.js')

@@ -1,203 +1,203 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;整形済みテキスト
-						.panel-body
-							.alert.alert-info 整形済みテキスト
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							pre
-								| &lt;pre&gt;...&lt;/pre&gt;
-							table.table
-								tr
-									td カテゴリー
-									td フローコンテンツ／パルパブルコンテンツ
-								tr
-									td 記述可能な場所
-									td
-										| フローコンテンツが記述できる場所
-								tr
-									td コンテンツモデル
-									td フレージングコンテンツ
-								tr
-									td 構成するボックス
-									td block
-								tr
-									td 属性
-									td グローバル 
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| pre {
-											| 	display: block;
-											| 	unicode-bidi: isolate;
-											| 	margin-top: 1em;
-											| 	margin-bottom: 1em;
-											| 	font-family: monospace;
-											| 	white-space: pre;
-											| }
-							p='<pre>は半角スペースやタブ、改行で整形済みのテキストコンテンツを示す要素で、<pre>内に記述した半角スペースなどはそのままブラウザ画面の表示に反映されます。'
-							p='たとえば、メールの文面やコンピュータ・コード、アスキーアートなどのマークアップに利用することができます。サンプルではメールの文面をマークアップし、罫線で囲んで表示しています。'
-							p
-								なお、各ブラウザは&lt;pre&gt;でマークアップしたテキストを等幅フォントで表示します。ただし、Internet Explorerでは半角スペースやアルファベットが欧文フォントで表示され、レイアウトが崩れてしまいます。これを防ぎ、他のブラウザと同じ形で表示するため、サンプルではスタイルシートのfont-family'プロパティで日本語の等幅フォントを指定するようにしています。
-							p
-								a.btn.btn-default(href='../demo/html/sample1/06/166.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;h1&gt;Mail Sample&lt;/h1&gt;
-								| 
-								| &lt;p&gt;ご注文確認メールのサンプルです。&lt;/p&gt;
-								| 
-								| &lt;pre&gt;
-								| 商品をお買い上げいただきまして誠にありがとうございます。
-								| 下記内容でのご注文を受付いたしましたのでご確認ください。
-								|                                                                   1月15日
-								| 
-								| ─────────────────────────────────────
-								| 商品                                          　数量              金額
-								| ─────────────────────────────────────
-								| X005 ティーバッグセット 800円                    １              800円
-								| J010 玄米茶 400円                                １              400円
-								| ─────────────────────────────────────
-								|                                                          合計   1200円
-								| &lt;/pre&gt;
-							pre(class='prettyprint linenums:1')
-								| pre	{font-size: 16px;
-								| 	font-family: 'ＭＳ ゴシック','Osaka-mono',monospace;
-								| 	border: solid 2px #d2bc8c;
-								| 	padding: 20px;
-							.alert.alert-warning NOTES:
-							p='<pre>の直後に挿入した改行は表示に反映されません。'
-							.alert.alert-info コンピュータ・コードの記述
-							p='整形済みテキストとしてコンピュータ・コードを記述する場合、<pre>でマークアップするとともに、<code>でもマークアップします。これにより、セマンティクスの上でもコンピュータ・コードを記述していることを明確に示すことができます。'
-							p='また、<code>ではclass属性の値でコンピュータ・コードの種類を明示する方法が提案されており、「language-〜」という形で指定します。サンプルではHTMLソースを記述していますので、「language-html」と指定しています。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/06/167-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;h1&gt;Tips and Tricks&lt;/h1&gt;
-								| 
-								| &lt;p&gt;サンプルでは次のように設定を行っています。&lt;/p&gt;
-								| 
-								| &lt;pre&gt;&lt;code class="language-html"&gt;&amp;lt;script&amp;gt;
-								| $(function(){
-								|     $('h1').click(function() {
-								| 		$(this).next().slideToggle();
-								| 	}).next().hide();
-								| });
-								| &amp;lt;/script&amp;gt;
-								| …
-								| &amp;lt;!-- コンテンツ --&amp;gt;
-								| &amp;lt;h1&amp;gt;Short Tea Breaks&amp;lt;/h1&amp;gt;
-								| &amp;lt;img src="tea.jpg" alt=""&amp;gt;
-								| &lt;/code&gt;&lt;/pre&gt;
-							.alert.alert-warning NOTES:
-							p='<pre>と異なり、<code>の直後に挿入した改行は表示に反映されますので注意が必要です。'
-							.alert.alert-info コンピュータの入出力の内容
-							p='<pre>を利用してコンピュータの入出力内容を記述することもできます。その場合、<pre>の場合は<dode>ではなく<kbd>や<samp>でマークアップします。'
-							p='たとえば、コマンドラインでの処理を<pre><samp>〜</samp></pre>でマークアップすると、コンピュータからの出力内容であることを明示することができます。このうち、「php-v」は<kbd>でマークアップし、コンピュータへの入力内容であることを示しています。なお、コマンドプロンプトを示す要素は存在しないため、<span class="prompt">でマークアップしています。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/06/167-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								|  &lt;h1&gt;Tips and Tricks&lt;/h1&gt;
-								| 
-								| &lt;p&gt;PHPのバージョンを調べると次のようになります。&lt;/p&gt;
-								| 
-								| &lt;pre&gt;&lt;samp&gt;&lt;span class="prompt"&gt;[hanako@localhost ~]$&lt;/span&gt; &lt;kbd&gt;php -v&lt;/kbd&gt;
-								| PHP 5.3.6 (built: Apr 10 2011 02:09:55)
-								| Copyright (c) 1997-2011 The PHP Group
-								| Zend Engine v2.3.0, Copyright (c) 1998-2011 Zend Technologies
-								| &lt;/samp&gt;&lt;/pre&gt;
-							.alert.alert-success DIFFERENCES:
-							p='HTML4.01やXHTML1.0では、コンピュータ・コードや入出力内容を記述する場合でも<code>などでマークアップすることは求められておらず、<pre>のみでマークアップするのが一般的でした。'
-							.alert.alert-warning NOTES: シンタックスハイライター
-							p='シンタックスハイライターと呼ばれるライブラリを利用すると、<pre>でマークアップしたコンピュータ・コードを色分けしたり、行番号をつけるなどして、わかりやすく表示することができます。たとえば、google-code-pretifyというライブラリを利用すると下のように表示することが可能です。google-code-prettityでは、HTML5に従って<pre><code>でマークアップしたコードもハイライト表示することができます。'
-							p='google-code-prettityを利用するためには、サイトからダウンロードしたライブラリを<link>と<script>で読み込み、<body>に「onload="prettyPrint()"」を、<pre>に「class="prettyprint"」を追加します。さらに、行番号も表示する場合は、<pre>のclassに「linenums」というクラス名を追加しておきます。ただし行番号は標準では5つおきにしか表示されませんので、1から順に表示するためにはスタイルシートでlist-style-typeの設定を適用するようにしておきます。'
-							p
-								| google-code-prittify<br>
-								a(href='http://code.google.com/p/google-code-prettify/') http://code.google.com/p/google-code-prettify/
-							p
-								a.btn.btn-default(href='../demo/html/sample1/06/168.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;head&gt; 
-								| &lt;meta charset="UTF-8"&gt; 
-								| &lt;title&gt;SAMPLE&lt;/title&gt;
-								| &lt;meta name="viewport" content="width=720"&gt;
-								| &lt;link rel="stylesheet" href="img/style.css"&gt;
-								| &lt;style&gt;
-								| pre li {list-style-type:decimal!important}
-								| 
-								| pre	{font-size: 16px;}
-								| 
-								| article	{margin: 20px auto;
-								| 	float: none;}
-								| &lt;/style&gt;
-								| 
-								| &lt;link rel="stylesheet" href="google-code-prettify/prettify.css"&gt;
-								| &lt;script src="google-code-prettify/prettify.js"&gt;&lt;/script&gt;
-								| &lt;/head&gt;
-								| &lt;body onload="prettyPrint()"&gt;
-								| 
-								| &lt;article&gt;
-								| &lt;h1&gt;Tips and Tricks&lt;/h1&gt;
-								| 
-								| &lt;p&gt;サンプルでは次のように設定を行っています。&lt;/p&gt;
-								| 
-								| &lt;pre class="prettyprint linenums"&gt;
-								| &lt;code class="language-html"&gt;&lt;script&gt;
-								| $(function(){
-								|     $('h1').click(function() {
-								| 		$(this).next().slideToggle();
-								| 	}).next().hide();
-								| });
-								| &lt;/script&gt;
-								| …
-								| &lt;!-- コンテンツ --&gt;
-								| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
-								| &lt;img src="tea.jpg" alt=""&gt;
-								| &lt;/code&gt;&lt;/pre&gt;
-								| 
-								| &lt;/article&gt;
-								| 
-								| 
-								| &lt;/body&gt;
-							pre(class='prettyprint linenums:1')
-								| pre li {list-style-type:decimal!important}
-								| 
-								| pre	{font-size: 16px;}
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;整形済みテキスト
+                        .panel-body
+                            .alert.alert-info 整形済みテキスト
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            pre
+                                | &lt;pre&gt;...&lt;/pre&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td フローコンテンツ／パルパブルコンテンツ
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | フローコンテンツが記述できる場所
+                                tr
+                                    td コンテンツモデル
+                                    td フレージングコンテンツ
+                                tr
+                                    td 構成するボックス
+                                    td block
+                                tr
+                                    td 属性
+                                    td グローバル 
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        pre
+                                            | pre {
+                                            |     display: block;
+                                            |     unicode-bidi: isolate;
+                                            |     margin-top: 1em;
+                                            |     margin-bottom: 1em;
+                                            |     font-family: monospace;
+                                            |     white-space: pre;
+                                            | }
+                            p='<pre>は半角スペースやタブ、改行で整形済みのテキストコンテンツを示す要素で、<pre>内に記述した半角スペースなどはそのままブラウザ画面の表示に反映されます。'
+                            p='たとえば、メールの文面やコンピュータ・コード、アスキーアートなどのマークアップに利用することができます。サンプルではメールの文面をマークアップし、罫線で囲んで表示しています。'
+                            p
+                                なお、各ブラウザは&lt;pre&gt;でマークアップしたテキストを等幅フォントで表示します。ただし、Internet Explorerでは半角スペースやアルファベットが欧文フォントで表示され、レイアウトが崩れてしまいます。これを防ぎ、他のブラウザと同じ形で表示するため、サンプルではスタイルシートのfont-family'プロパティで日本語の等幅フォントを指定するようにしています。
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/06/166.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;h1&gt;Mail Sample&lt;/h1&gt;
+                                | 
+                                | &lt;p&gt;ご注文確認メールのサンプルです。&lt;/p&gt;
+                                | 
+                                | &lt;pre&gt;
+                                | 商品をお買い上げいただきまして誠にありがとうございます。
+                                | 下記内容でのご注文を受付いたしましたのでご確認ください。
+                                |                                                                   1月15日
+                                | 
+                                | ─────────────────────────────────────
+                                | 商品                                          　数量              金額
+                                | ─────────────────────────────────────
+                                | X005 ティーバッグセット 800円                    １              800円
+                                | J010 玄米茶 400円                                １              400円
+                                | ─────────────────────────────────────
+                                |                                                          合計   1200円
+                                | &lt;/pre&gt;
+                            pre(class='prettyprint linenums:1')
+                                | pre    {font-size: 16px;
+                                |     font-family: 'ＭＳ ゴシック','Osaka-mono',monospace;
+                                |     border: solid 2px #d2bc8c;
+                                |     padding: 20px;
+                            .alert.alert-warning NOTES:
+                            p='<pre>の直後に挿入した改行は表示に反映されません。'
+                            .alert.alert-info コンピュータ・コードの記述
+                            p='整形済みテキストとしてコンピュータ・コードを記述する場合、<pre>でマークアップするとともに、<code>でもマークアップします。これにより、セマンティクスの上でもコンピュータ・コードを記述していることを明確に示すことができます。'
+                            p='また、<code>ではclass属性の値でコンピュータ・コードの種類を明示する方法が提案されており、「language-〜」という形で指定します。サンプルではHTMLソースを記述していますので、「language-html」と指定しています。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/06/167-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;h1&gt;Tips and Tricks&lt;/h1&gt;
+                                | 
+                                | &lt;p&gt;サンプルでは次のように設定を行っています。&lt;/p&gt;
+                                | 
+                                | &lt;pre&gt;&lt;code class="language-html"&gt;&amp;lt;script&amp;gt;
+                                | $(function(){
+                                |     $('h1').click(function() {
+                                |         $(this).next().slideToggle();
+                                |     }).next().hide();
+                                | });
+                                | &amp;lt;/script&amp;gt;
+                                | …
+                                | &amp;lt;!-- コンテンツ --&amp;gt;
+                                | &amp;lt;h1&amp;gt;Short Tea Breaks&amp;lt;/h1&amp;gt;
+                                | &amp;lt;img src="tea.jpg" alt=""&amp;gt;
+                                | &lt;/code&gt;&lt;/pre&gt;
+                            .alert.alert-warning NOTES:
+                            p='<pre>と異なり、<code>の直後に挿入した改行は表示に反映されますので注意が必要です。'
+                            .alert.alert-info コンピュータの入出力の内容
+                            p='<pre>を利用してコンピュータの入出力内容を記述することもできます。その場合、<pre>の場合は<dode>ではなく<kbd>や<samp>でマークアップします。'
+                            p='たとえば、コマンドラインでの処理を<pre><samp>〜</samp></pre>でマークアップすると、コンピュータからの出力内容であることを明示することができます。このうち、「php-v」は<kbd>でマークアップし、コンピュータへの入力内容であることを示しています。なお、コマンドプロンプトを示す要素は存在しないため、<span class="prompt">でマークアップしています。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/06/167-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                |  &lt;h1&gt;Tips and Tricks&lt;/h1&gt;
+                                | 
+                                | &lt;p&gt;PHPのバージョンを調べると次のようになります。&lt;/p&gt;
+                                | 
+                                | &lt;pre&gt;&lt;samp&gt;&lt;span class="prompt"&gt;[hanako@localhost ~]$&lt;/span&gt; &lt;kbd&gt;php -v&lt;/kbd&gt;
+                                | PHP 5.3.6 (built: Apr 10 2011 02:09:55)
+                                | Copyright (c) 1997-2011 The PHP Group
+                                | Zend Engine v2.3.0, Copyright (c) 1998-2011 Zend Technologies
+                                | &lt;/samp&gt;&lt;/pre&gt;
+                            .alert.alert-success DIFFERENCES:
+                            p='HTML4.01やXHTML1.0では、コンピュータ・コードや入出力内容を記述する場合でも<code>などでマークアップすることは求められておらず、<pre>のみでマークアップするのが一般的でした。'
+                            .alert.alert-warning NOTES: シンタックスハイライター
+                            p='シンタックスハイライターと呼ばれるライブラリを利用すると、<pre>でマークアップしたコンピュータ・コードを色分けしたり、行番号をつけるなどして、わかりやすく表示することができます。たとえば、google-code-pretifyというライブラリを利用すると下のように表示することが可能です。google-code-prettityでは、HTML5に従って<pre><code>でマークアップしたコードもハイライト表示することができます。'
+                            p='google-code-prettityを利用するためには、サイトからダウンロードしたライブラリを<link>と<script>で読み込み、<body>に「onload="prettyPrint()"」を、<pre>に「class="prettyprint"」を追加します。さらに、行番号も表示する場合は、<pre>のclassに「linenums」というクラス名を追加しておきます。ただし行番号は標準では5つおきにしか表示されませんので、1から順に表示するためにはスタイルシートでlist-style-typeの設定を適用するようにしておきます。'
+                            p
+                                | google-code-prittify<br>
+                                a(href='http://code.google.com/p/google-code-prettify/') http://code.google.com/p/google-code-prettify/
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/06/168.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;head&gt; 
+                                | &lt;meta charset="UTF-8"&gt; 
+                                | &lt;title&gt;SAMPLE&lt;/title&gt;
+                                | &lt;meta name="viewport" content="width=720"&gt;
+                                | &lt;link rel="stylesheet" href="img/style.css"&gt;
+                                | &lt;style&gt;
+                                | pre li {list-style-type:decimal!important}
+                                | 
+                                | pre    {font-size: 16px;}
+                                | 
+                                | article    {margin: 20px auto;
+                                |     float: none;}
+                                | &lt;/style&gt;
+                                | 
+                                | &lt;link rel="stylesheet" href="google-code-prettify/prettify.css"&gt;
+                                | &lt;script src="google-code-prettify/prettify.js"&gt;&lt;/script&gt;
+                                | &lt;/head&gt;
+                                | &lt;body onload="prettyPrint()"&gt;
+                                | 
+                                | &lt;article&gt;
+                                | &lt;h1&gt;Tips and Tricks&lt;/h1&gt;
+                                | 
+                                | &lt;p&gt;サンプルでは次のように設定を行っています。&lt;/p&gt;
+                                | 
+                                | &lt;pre class="prettyprint linenums"&gt;
+                                | &lt;code class="language-html"&gt;&lt;script&gt;
+                                | $(function(){
+                                |     $('h1').click(function() {
+                                |         $(this).next().slideToggle();
+                                |     }).next().hide();
+                                | });
+                                | &lt;/script&gt;
+                                | …
+                                | &lt;!-- コンテンツ --&gt;
+                                | &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+                                | &lt;img src="tea.jpg" alt=""&gt;
+                                | &lt;/code&gt;&lt;/pre&gt;
+                                | 
+                                | &lt;/article&gt;
+                                | 
+                                | 
+                                | &lt;/body&gt;
+                            pre(class='prettyprint linenums:1')
+                                | pre li {list-style-type:decimal!important}
+                                | 
+                                | pre    {font-size: 16px;}
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

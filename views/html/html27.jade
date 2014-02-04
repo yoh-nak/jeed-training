@@ -1,193 +1,193 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;関連リスト
-						.panel-body
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							.alert.alert-info 関連リスト
-							pre
-								| &lt;dl&gt;
-								| 	&lt;dt&gt;項目名&lt;/dt&gt;
-								| 	&lt;dd&gt;値&lt;/dd&gt;
-								| &lt;/dl&gt;
-							table.table
-								tr
-									td カテゴリー
-									td フローコンテンツ／パルパブルコンテンツ（子要素に&lt;dt&gt;&lt;dd&gt;を含む場合）
-								tr
-									td 記述可能な場所
-									td
-										| フローコンテンツが記述できる場所
-								tr
-									td コンテンツモデル
-									td ゼロまたは1つ以上の&lt;dt&gt;とそれに続く&lt;dd&gt;
-								tr
-									td 構成するボックス
-									td block
-								tr
-									td 属性
-									td グローバル 
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| dl {
-											| 	display: block;
-											| 	unicode-bidi: isolate;
-											| 	margin-top: 1em;
-											| 	margin-bottom: 1em;
-											| }
-							pre
-								| &lt;dt&gt;項目名&lt;/dt&gt;
-							table.table
-								tr
-									td カテゴリー
-									td なし
-								tr
-									td 記述可能な場所
-									td
-										| &lt;dl &gt;内の&lt;dd &gt;または&lt;dt &gt;の前
-								tr
-									td コンテンツモデル
-									td フローコンテンツ（&lt;header &gt;、&lt;footer &gt;、セクショニングコンテンツ、ヘッディングコンテンツを除く）
-								tr
-									td 構成するボックス
-									td block
-								tr
-									td 属性
-									td グローバル 
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| dt {
-											| 	display: block;
-											| 	unicode-bidi: isolate;
-											| }
-							pre
-								| &lt;dd&gt;値&lt;/dd&gt;
-							table.table
-								tr
-									td カテゴリー
-									td なし
-								tr
-									td 記述可能な場所
-									td
-										| <dl>内の<dd>または<dt>の後
-								tr
-									td コンテンツモデル
-									td フローコンテンツ
-								tr
-									td 構成するボックス
-									td block
-								tr
-									td 属性
-									td グローバル 
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| dd {
-											|     display: block;
-											|     unicode-bidi: isolate;
-											|     margin-start: 40px;
-											| }
-							p='「項目名」と「値」の組み合わせで構成される情報は、項目名を<dt>で、値を<dd>で、全体を<dl>でマークアップすることにより、関連した情報であることを示すことができます。<dl>内では、<dt>とその後に後述した<dd>が項目名と値の1セットとして扱われます。'
-							p='たとえば、サンプルでは「開催日時」と「場所」についての情報を記述し、わかりやすいように項目名を太字で表示しています。'
-							p='なお、<dl>内に記述した情報は、記述順に意味があるものとして扱われることになっています。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/06/172.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;article&gt;
-								| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
-								| &lt;p&gt;お茶会イベント開催のご案内です。&lt;/p&gt;
-								| 
-								| &lt;dl&gt;
-								| 	&lt;dt&gt;開催日時&lt;/dt&gt;
-								| 	&lt;dd&gt;２月10日（日曜日） 午後２時～４時&lt;/dd&gt;
-								| 
-								| 	&lt;dt&gt;場所&lt;/dt&gt;
-								| 	&lt;dd&gt;陽だまりカフェ １Ｆテラス&lt;/dd&gt;
-								| &lt;/dl&gt;
-								| 
-								| &lt;/article&gt;
-							p 複数の「項目名」と「値」を1セットとして記述することも可能です。たとえば、日本語と英語の項目名を併記する場合は下のように記述します。また、「今月のお茶」の項目では、英語の項目名を併記するとともに、3つの値を記述しています。
-							p
-								a.btn.btn-default(href='../demo/html/sample1/06/173-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;dl&gt;
-								| 	&lt;dt lang="ja"&gt;開催日時&lt;/dt&gt;
-								| 	&lt;dt lang="en"&gt;Date and time&lt;/dt&gt;
-								| 	&lt;dd&gt;２月10日（日曜日） 午後２時～４時&lt;/dd&gt;
-								| 
-								| 	&lt;dt lang="ja"&gt;場所&lt;/dt&gt;
-								| 	&lt;dt lang="en"&gt;Place&lt;/dt&gt;
-								| 	&lt;dd&gt;陽だまりカフェ １Ｆテラス&lt;/dd&gt;
-								| 
-								| 	&lt;dt lang="ja"&gt;今月のお茶&lt;/dt&gt;
-								| 	&lt;dt lang="en"&gt;Monthly Selections&lt;/dt&gt;
-								| 	&lt;dd&gt;ダージリン&lt;/dd&gt;
-								| 	&lt;dd&gt;アールグレイ&lt;/dd&gt;
-								| 	&lt;dd&gt;オレンジペコ&lt;/dd&gt;
-								| &lt;/dl&gt;
-							.alert.alert-info 語句の定義を記述する場合
-							p='用語集のように、語句とその定義で構成される情報もマークアップすることができます。このとき、語句を<dt>と<dfn>でマークアップすることにより、語句の定義が<dd>に記述されていることを明確に示すことができます。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/06/173-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;article&gt;
-								| &lt;h1&gt;Tea Glossary&lt;/h1&gt;
-								| 
-								| &lt;dl&gt;
-								| 	&lt;dt&gt;&lt;dfn&gt;紅茶&lt;/dfn&gt;&lt;/dt&gt;
-								| 	&lt;dd&gt;茶の葉を全発酵させて製造したお茶です。&lt;/dd&gt;
-								| 
-								| 	&lt;dt&gt;&lt;dfn&gt;ウーロン茶&lt;/dfn&gt;&lt;/dt&gt;
-								| 	&lt;dd&gt;茶の葉を半発酵させて製造したお茶です。&lt;/dd&gt;
-								| 
-								| 	&lt;dt&gt;&lt;dfn&gt;緑茶&lt;/dfn&gt;&lt;/dt&gt;
-								| 	&lt;dd&gt;茶の葉を発酵させずに製造したお茶です。&lt;/dd&gt;
-								| &lt;/dl&gt;
-								| 
-								| &lt;/article&gt;
-							.alert.alert-success DIFFERENCES:
-							p='HTML4.01やXHTML1.0では、語句を定義する場合でも<dfn>の記述は求められていませんでした。'
-							p='また、会話のマークアップにも使用できることになっていましたが、HTML5では使用不可となっていますので注意が必要です。HTML5で会話をマークアップする場合には、<b>を利用した記述が提案されています。'
-							.alert.alert-success DIFFERENCES:
-							p='HTML4.01やXHTML1.0における<dl>のcompact属性はHTML5では廃止されています。項目名と値を横に並べてコンパクトに表示するための属性で、スタイルシートに置き換えることが可能です。'
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;関連リスト
+                        .panel-body
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            .alert.alert-info 関連リスト
+                            pre
+                                | &lt;dl&gt;
+                                |     &lt;dt&gt;項目名&lt;/dt&gt;
+                                |     &lt;dd&gt;値&lt;/dd&gt;
+                                | &lt;/dl&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td フローコンテンツ／パルパブルコンテンツ（子要素に&lt;dt&gt;&lt;dd&gt;を含む場合）
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | フローコンテンツが記述できる場所
+                                tr
+                                    td コンテンツモデル
+                                    td ゼロまたは1つ以上の&lt;dt&gt;とそれに続く&lt;dd&gt;
+                                tr
+                                    td 構成するボックス
+                                    td block
+                                tr
+                                    td 属性
+                                    td グローバル 
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        pre
+                                            | dl {
+                                            |     display: block;
+                                            |     unicode-bidi: isolate;
+                                            |     margin-top: 1em;
+                                            |     margin-bottom: 1em;
+                                            | }
+                            pre
+                                | &lt;dt&gt;項目名&lt;/dt&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td なし
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | &lt;dl &gt;内の&lt;dd &gt;または&lt;dt &gt;の前
+                                tr
+                                    td コンテンツモデル
+                                    td フローコンテンツ（&lt;header &gt;、&lt;footer &gt;、セクショニングコンテンツ、ヘッディングコンテンツを除く）
+                                tr
+                                    td 構成するボックス
+                                    td block
+                                tr
+                                    td 属性
+                                    td グローバル 
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        pre
+                                            | dt {
+                                            |     display: block;
+                                            |     unicode-bidi: isolate;
+                                            | }
+                            pre
+                                | &lt;dd&gt;値&lt;/dd&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td なし
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | <dl>内の<dd>または<dt>の後
+                                tr
+                                    td コンテンツモデル
+                                    td フローコンテンツ
+                                tr
+                                    td 構成するボックス
+                                    td block
+                                tr
+                                    td 属性
+                                    td グローバル 
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        pre
+                                            | dd {
+                                            |     display: block;
+                                            |     unicode-bidi: isolate;
+                                            |     margin-start: 40px;
+                                            | }
+                            p='「項目名」と「値」の組み合わせで構成される情報は、項目名を<dt>で、値を<dd>で、全体を<dl>でマークアップすることにより、関連した情報であることを示すことができます。<dl>内では、<dt>とその後に後述した<dd>が項目名と値の1セットとして扱われます。'
+                            p='たとえば、サンプルでは「開催日時」と「場所」についての情報を記述し、わかりやすいように項目名を太字で表示しています。'
+                            p='なお、<dl>内に記述した情報は、記述順に意味があるものとして扱われることになっています。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/06/172.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;article&gt;
+                                | &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+                                | &lt;p&gt;お茶会イベント開催のご案内です。&lt;/p&gt;
+                                | 
+                                | &lt;dl&gt;
+                                |     &lt;dt&gt;開催日時&lt;/dt&gt;
+                                |     &lt;dd&gt;２月10日（日曜日） 午後２時～４時&lt;/dd&gt;
+                                | 
+                                |     &lt;dt&gt;場所&lt;/dt&gt;
+                                |     &lt;dd&gt;陽だまりカフェ １Ｆテラス&lt;/dd&gt;
+                                | &lt;/dl&gt;
+                                | 
+                                | &lt;/article&gt;
+                            p 複数の「項目名」と「値」を1セットとして記述することも可能です。たとえば、日本語と英語の項目名を併記する場合は下のように記述します。また、「今月のお茶」の項目では、英語の項目名を併記するとともに、3つの値を記述しています。
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/06/173-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;dl&gt;
+                                |     &lt;dt lang="ja"&gt;開催日時&lt;/dt&gt;
+                                |     &lt;dt lang="en"&gt;Date and time&lt;/dt&gt;
+                                |     &lt;dd&gt;２月10日（日曜日） 午後２時～４時&lt;/dd&gt;
+                                | 
+                                |     &lt;dt lang="ja"&gt;場所&lt;/dt&gt;
+                                |     &lt;dt lang="en"&gt;Place&lt;/dt&gt;
+                                |     &lt;dd&gt;陽だまりカフェ １Ｆテラス&lt;/dd&gt;
+                                | 
+                                |     &lt;dt lang="ja"&gt;今月のお茶&lt;/dt&gt;
+                                |     &lt;dt lang="en"&gt;Monthly Selections&lt;/dt&gt;
+                                |     &lt;dd&gt;ダージリン&lt;/dd&gt;
+                                |     &lt;dd&gt;アールグレイ&lt;/dd&gt;
+                                |     &lt;dd&gt;オレンジペコ&lt;/dd&gt;
+                                | &lt;/dl&gt;
+                            .alert.alert-info 語句の定義を記述する場合
+                            p='用語集のように、語句とその定義で構成される情報もマークアップすることができます。このとき、語句を<dt>と<dfn>でマークアップすることにより、語句の定義が<dd>に記述されていることを明確に示すことができます。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/06/173-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;article&gt;
+                                | &lt;h1&gt;Tea Glossary&lt;/h1&gt;
+                                | 
+                                | &lt;dl&gt;
+                                |     &lt;dt&gt;&lt;dfn&gt;紅茶&lt;/dfn&gt;&lt;/dt&gt;
+                                |     &lt;dd&gt;茶の葉を全発酵させて製造したお茶です。&lt;/dd&gt;
+                                | 
+                                |     &lt;dt&gt;&lt;dfn&gt;ウーロン茶&lt;/dfn&gt;&lt;/dt&gt;
+                                |     &lt;dd&gt;茶の葉を半発酵させて製造したお茶です。&lt;/dd&gt;
+                                | 
+                                |     &lt;dt&gt;&lt;dfn&gt;緑茶&lt;/dfn&gt;&lt;/dt&gt;
+                                |     &lt;dd&gt;茶の葉を発酵させずに製造したお茶です。&lt;/dd&gt;
+                                | &lt;/dl&gt;
+                                | 
+                                | &lt;/article&gt;
+                            .alert.alert-success DIFFERENCES:
+                            p='HTML4.01やXHTML1.0では、語句を定義する場合でも<dfn>の記述は求められていませんでした。'
+                            p='また、会話のマークアップにも使用できることになっていましたが、HTML5では使用不可となっていますので注意が必要です。HTML5で会話をマークアップする場合には、<b>を利用した記述が提案されています。'
+                            .alert.alert-success DIFFERENCES:
+                            p='HTML4.01やXHTML1.0における<dl>のcompact属性はHTML5では廃止されています。項目名と値を横に並べてコンパクトに表示するための属性で、スタイルシートに置き換えることが可能です。'
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

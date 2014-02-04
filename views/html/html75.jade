@@ -1,202 +1,202 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;セクションとアウトライン
-						.panel-body
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							.alert.alert-info セクションの明示
-							p 「セクショニング・コンテンツ」カテゴリーに属する要素を利用すると、セマンティクスの上でのコンテンツのグループ（セクション）を示すことができます。このうち、&lt;section&gt;のみですべてのセクションを示すこともできますが、より詳細に明示したい場合には&lt;article&gt;などを利用することが可能です。
-							p たとえば、本章で作成するサンプルでは、ナビゲーションとして明示したい部分を&lt;nav&gt;で、メインコンテンツとして明示したい部分を&lt;article&gt;で、関連情報であることを明示したい部分を&lt;aside&gt;でマークアプしています。このとき、セクション内に記述した見出しは「セクションの見出し」として扱われます。
-							p また、コンテンツ全体をマークアップした&lt;body&gt;は「セクショニング・ルート」という特別なカテゴリーに属しており、再上位階層（ルート）のセクションを示します。そのため、コンテンツ全体を&lt;section&gt;などでマークアップする必要はありません。
-							table.table
-								tr
-									th 「セクショニング・コンテンツ」カテゴリーに属する要素
-									th 要素が示すセクションの内容
-								tr
-									td &lt;section&gt;
-									td 汎用セクション
-								tr
-									td &lt;article&gt;
-									td 独立したコンテンツ
-								tr
-									td &lt;nav&lt;
-									td ナビゲーション
-								tr
-									td &lt;aside&gt;
-									td 補足・関連情報
-							.alert.alert-warning NOTES: 
-							p セクション内に複数の見出しがある場合、1つ目の見出しが「セクションの見出し」として扱われ、残りの見出しは暗黙のセクションを構成します。
-							.alert.alert-warning NOTES: 
-							p 「セクション内には見出しを書かなければならない」と言われることがありますが、HTML5においては「一般的に見出しを含むケースが多い」とされているだけで、見出しを含めずに記述しても問題ありません。セマンティクスの上でも、見出しを必要としないコンテンツが存在することは十分に考えられます。
-							p
-								a.btn.btn-default(href='../demo/html/sample1/03/062.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;body&gt;
-								| 
-								| &lt;header&gt;
-								| &lt;.id="header_inner"&gt;
-								| &lt;h1&gt;&lt;img src="img/logo.png" alt="SUN DIARY"&gt;&lt;/h1&gt;
-								| &lt;nav&gt;
-								| &lt;ul&gt;
-								| &lt;li&gt;&lt;a href="news.html"&gt;NEWS&lt;/a&gt;&lt;/li&gt;
-								| &lt;li&gt;&lt;a href="column.html"&gt;COLUMN&lt;/a&gt;&lt;/li&gt;
-								| &lt;li&gt;&lt;a href="gift.html"&gt;GIFT&lt;/a&gt;&lt;/li&gt;
-								| &lt;li&gt;&lt;a href="contact.html"&gt;CONTACT&lt;/a&gt;&lt;/li&gt;
-								| &lt;/ul&gt;
-								| &lt;/nav&gt;
-								| &lt;/.gt;
-								| &lt;/header&gt;
-								| 
-								| &lt;.id="main"&gt;
-								| 
-								| &lt;article&gt;
-								| &lt;header&gt;
-								| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
-								| &lt;time datetime="2013-01-15"&gt;January 15, 2013&lt;/time&gt;
-								| &lt;/header&gt;
-								| 
-								| &lt;img src="img/tea.jpg" alt=""&gt;
-								| 
-								| &lt;p&gt;世界中にはたくさんのお茶があります。緑茶に紅茶、ウーロン茶など、その製法や味わいもさまざまですが、リラックスしたり、ちょっと休憩したいときなどには欠かすことができません。お茶のお供に、おいしいお菓子もあると幸せな気分になってしまいます。&lt;/p&gt;
-								| 
-								| &lt;section&gt;
-								| &lt;h1&gt;紅茶&lt;/h1&gt;
-								| &lt;p&gt;紅茶は、茶の葉を全発酵させて製造したお茶です。ダージリンやアッサム、ジャワ、ウバ、ニルギリなど、たくさんの銘柄があります。アールグレイといったフレーバーティーも有名です。&lt;/p&gt;
-								| 
-								| &lt;p&gt;基本的に熱湯で入れ、茶葉に合わせて抽出時間を十分に取ります。そのため、保温性の高いポットや温めた茶器を使って入れるのがポイントとなります。ティーコジーでポットをカバーし、温度が下がるのを防ぐのもおすすめです。&lt;/p&gt;
-								| &lt;/section&gt;
-								| 
-								| &lt;section&gt;
-								| &lt;h1&gt;ウーロン茶&lt;/h1&gt;
-								| &lt;p&gt;ウーロン茶は、茶の葉を半発酵させて製造したお茶です。中国茶では「青茶」に分類されるもので、凍頂烏龍茶、東方美人、鉄観音、武夷岩茶、水仙など、さまざまな銘柄があります。&lt;/p&gt;
-								| &lt;/section&gt;
-								| 
-								| &lt;section&gt;
-								| &lt;h1&gt;緑茶&lt;/h1&gt;
-								| &lt;p&gt;緑茶は、茶の葉を発酵させずに製造したお茶で、不発酵茶とも呼ばれます。煎茶やほうじ茶、玄米茶、玉露、抹茶など、日本茶の多くは緑茶に分類されるお茶となっています。&lt;/p&gt;
-								| &lt;/section&gt;
-								| 
-								| &lt;/article&gt;
-								| 
-								| 
-								| &lt;.id="sidebar"&gt;
-								| 
-								| &lt;aside&gt;
-								| &lt;h1&gt;SUBSCRIBE & FOLLOW&lt;/h1&gt;
-								| &lt;ul id="iconmenu"&gt;
-								| &lt;li&gt;&lt;a href="url"&gt;&lt;img src="img/twitter.png" alt="Twitter"&gt;&lt;/a&gt;&lt;/li&gt;
-								| &lt;li&gt;&lt;a href="url"&gt;&lt;img src="img/facebook.png" alt="Facebook"&gt;&lt;/a&gt;&lt;/li&gt;
-								| &lt;li&gt;&lt;a href="url"&gt;&lt;img src="img/googleplus.png" alt="Google Plus"&gt;&lt;/a&gt;&lt;/li&gt;
-								| &lt;li&gt;&lt;a href="url"&gt;&lt;img src="img/rss.png" alt="RSS Feed"&gt;&lt;/a&gt;&lt;/li&gt;
-								| &lt;/ul&gt;
-								| &lt;/aside&gt;
-								| 
-								| &lt;aside&gt;
-								| &lt;h1&gt;ACCESS RANKING&lt;/h1&gt;
-								| &lt;ol&gt;
-								| &lt;li&gt;&lt;a href="post.html"&gt;映画に出てくるお茶&lt;/a&gt;&lt;/li&gt;
-								| &lt;li&gt;&lt;a href="post.html"&gt;茶道具の秘密&lt;/a&gt;&lt;/li&gt;
-								| &lt;li&gt;&lt;a href="post.html"&gt;こだわりのスプーン&lt;/a&gt;&lt;/li&gt;
-								| &lt;li&gt;&lt;a href="post.html"&gt;ちょっとしたお茶の時間&lt;/a&gt;&lt;/li&gt;
-								| &lt;li&gt;&lt;a href="post.html"&gt;砂糖の種類と味わい方&lt;/a&gt;&lt;/li&gt;
-								| &lt;/ol&gt;
-								| &lt;/aside&gt;
-								| 
-								| &lt;aside&gt;
-								| &lt;h1&gt;RECENT POSTS&lt;/h1&gt;
-								| &lt;ul&gt;
-								| &lt;li&gt;&lt;a href="post.html"&gt;ちょっとしたお茶の時間&lt;/a&gt;&lt;/li&gt;
-								| &lt;li&gt;&lt;a href="post.html"&gt;ほんのり甘い…&lt;/a&gt;&lt;/li&gt;
-								| &lt;li&gt;&lt;a href="post.html"&gt;年越しにぴったりなお菓子&lt;/a&gt;&lt;/li&gt;
-								| &lt;li&gt;&lt;a href="post.html"&gt;茶道具の秘密&lt;/a&gt;&lt;/li&gt;
-								| &lt;li&gt;&lt;a href="post.html"&gt;あったか飲み物&lt;/a&gt;&lt;/li&gt;
-								| &lt;li&gt;&lt;a href="post.html"&gt;こだわりのスプーン&lt;/a&gt;&lt;/li&gt;
-								| &lt;/ul&gt;
-								| &lt;/aside&gt;
-								| 
-								| &lt;/.gt;
-								| 
-								| &lt;/.gt;
-								| 
-								| 
-								| &lt;footer&gt;
-								| &lt;small&gt;Copyright &copy; SUN DIARY, all rights reserved.&lt;/small&gt;
-								| &lt;/footer&gt;
-								| 
-								| &lt;/body&gt;
-							.alert.alert-info アウトラインの作成
-							p セクションの相互関係や親子関係により、ソフトウェアはページの階層構造（アウトライン）を把握できるようになります。アウトラインを作成するアルゴリズムは下のようになっており、サンプルでは以下のようにアウトラインが作成されます。
-							h4 アウトラインを作成するアルゴリズム
-							pre
-								| １ &lt;body&gt;のセクションでルート階層を構成します。
-								| 
-								| ２ HTMLソースの上での記述順に従い、セクションごとに以下の処理を実行します。
-								| 	▶ 前のセクションと同じ階層の場合：
-								| 		アウトラインの同じ階層に追加
-								| 	▶ 前のセクションの子階層の場合：
-								| 		アウトラインの小海藻に追加
-								| 	▶ 前のセクションより上位階層の場合：
-								| 		アウトラインの親階層に追加
-							p ※ 「セクショニング・ルート」カテゴリーに属する&lt;body&gt;以外の要素は、&lt;body&gt;の構成するアウトラインには影響を与えません。
-							p ※ 1つのセクション内に複数の見出しがある場合は暗黙のセクションが構成され、アウトラインに影響します。
-							p なお、アウトラインは各階層を示すのにセクションの見出しが使用されます。セクションの見出しがない場合には、セクションをマークアップした要素の種類に応じて、「ナビゲーション」といった見出しを自動的に付加してアウトラインを作成することが求められています。
-							.alert.alert-warning NOTES: 
-							p アウトラインはHTML5で定義されたセマンティクスの一部であり、他の要素と複合的に利用されることになります。
-							h4 サンプルで作成されるアウトライン
-							pre
-								| 1. SUN DIARY
-								| 	1-1. （ナビゲーション）
-								| 	1-2. Short Tea Breaks
-								| 		1-2-1. 紅茶
-								| 		1-2-2. ウーロン茶
-								| 		1-2-3. 緑茶
-								| 	1-3. SUBSCRIBE & FOLLOW
-								| 	1-4. ACCESS RANKING
-								| 	1-5. RECENT POSTS
-							.alert.alert-warning NOTES: アウトラインの確認
-							p 以下のツールを利用すると、アウトラインを手軽に確認することができます。
-							p
-								| HTML5 OUtliner
-								br
-								a(href='https://chrome.google.com/webstore/detail/html5-outliner/afoibpobokebhgfnknfndkgemglggomo?utm_source=chrome-ntp-icon',target='_blank')
-									| https://chrome.google.com/webstore/detail/html5-outliner/afoibpobokebhgfnknfndkgemglggomo?utm_source=chrome-ntp-icon
-							p Chromeの拡張機能で、アドレスバーのアイコンをクリックすると表示中のページのアウトラインを確認することができます。ただし、セクションの見出しが画像の場合、「No text content inside H1」と表示されます。また、セクションの見出しがない場合、「Untitled NAV」といった形で要素の種類が表示されます。
-							p
-								| HTML5 Outliner
-								br
-								a(href='http://gsnedders.html5.org/outliner/',target='_blank')
-									| http://gsnedders.html5.org/outliner/
-							p オンラインで提供されているサービスです。HTMLファイルのアップロードやURLの指定、HTMLソースの入力によってアウトラインを作成することができます。ただし、日本語を含むページの場合、HTMLソースの入力では文字化けすることがありますので、ファイルのアップロードまたはURLの指定を利用します。
-							p セクションの見出しが画像の場合、alt属性の代替テキストの値が表示されます。また、セクションの見出しがない場合、要素の種類に関わらず「Untitled Section」と表示されます。
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;セクションとアウトライン
+                        .panel-body
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            .alert.alert-info セクションの明示
+                            p 「セクショニング・コンテンツ」カテゴリーに属する要素を利用すると、セマンティクスの上でのコンテンツのグループ（セクション）を示すことができます。このうち、&lt;section&gt;のみですべてのセクションを示すこともできますが、より詳細に明示したい場合には&lt;article&gt;などを利用することが可能です。
+                            p たとえば、本章で作成するサンプルでは、ナビゲーションとして明示したい部分を&lt;nav&gt;で、メインコンテンツとして明示したい部分を&lt;article&gt;で、関連情報であることを明示したい部分を&lt;aside&gt;でマークアプしています。このとき、セクション内に記述した見出しは「セクションの見出し」として扱われます。
+                            p また、コンテンツ全体をマークアップした&lt;body&gt;は「セクショニング・ルート」という特別なカテゴリーに属しており、再上位階層（ルート）のセクションを示します。そのため、コンテンツ全体を&lt;section&gt;などでマークアップする必要はありません。
+                            table.table
+                                tr
+                                    th 「セクショニング・コンテンツ」カテゴリーに属する要素
+                                    th 要素が示すセクションの内容
+                                tr
+                                    td &lt;section&gt;
+                                    td 汎用セクション
+                                tr
+                                    td &lt;article&gt;
+                                    td 独立したコンテンツ
+                                tr
+                                    td &lt;nav&lt;
+                                    td ナビゲーション
+                                tr
+                                    td &lt;aside&gt;
+                                    td 補足・関連情報
+                            .alert.alert-warning NOTES: 
+                            p セクション内に複数の見出しがある場合、1つ目の見出しが「セクションの見出し」として扱われ、残りの見出しは暗黙のセクションを構成します。
+                            .alert.alert-warning NOTES: 
+                            p 「セクション内には見出しを書かなければならない」と言われることがありますが、HTML5においては「一般的に見出しを含むケースが多い」とされているだけで、見出しを含めずに記述しても問題ありません。セマンティクスの上でも、見出しを必要としないコンテンツが存在することは十分に考えられます。
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/03/062.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;body&gt;
+                                | 
+                                | &lt;header&gt;
+                                | &lt;.id="header_inner"&gt;
+                                | &lt;h1&gt;&lt;img src="img/logo.png" alt="SUN DIARY"&gt;&lt;/h1&gt;
+                                | &lt;nav&gt;
+                                | &lt;ul&gt;
+                                | &lt;li&gt;&lt;a href="news.html"&gt;NEWS&lt;/a&gt;&lt;/li&gt;
+                                | &lt;li&gt;&lt;a href="column.html"&gt;COLUMN&lt;/a&gt;&lt;/li&gt;
+                                | &lt;li&gt;&lt;a href="gift.html"&gt;GIFT&lt;/a&gt;&lt;/li&gt;
+                                | &lt;li&gt;&lt;a href="contact.html"&gt;CONTACT&lt;/a&gt;&lt;/li&gt;
+                                | &lt;/ul&gt;
+                                | &lt;/nav&gt;
+                                | &lt;/.gt;
+                                | &lt;/header&gt;
+                                | 
+                                | &lt;.id="main"&gt;
+                                | 
+                                | &lt;article&gt;
+                                | &lt;header&gt;
+                                | &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+                                | &lt;time datetime="2013-01-15"&gt;January 15, 2013&lt;/time&gt;
+                                | &lt;/header&gt;
+                                | 
+                                | &lt;img src="img/tea.jpg" alt=""&gt;
+                                | 
+                                | &lt;p&gt;世界中にはたくさんのお茶があります。緑茶に紅茶、ウーロン茶など、その製法や味わいもさまざまですが、リラックスしたり、ちょっと休憩したいときなどには欠かすことができません。お茶のお供に、おいしいお菓子もあると幸せな気分になってしまいます。&lt;/p&gt;
+                                | 
+                                | &lt;section&gt;
+                                | &lt;h1&gt;紅茶&lt;/h1&gt;
+                                | &lt;p&gt;紅茶は、茶の葉を全発酵させて製造したお茶です。ダージリンやアッサム、ジャワ、ウバ、ニルギリなど、たくさんの銘柄があります。アールグレイといったフレーバーティーも有名です。&lt;/p&gt;
+                                | 
+                                | &lt;p&gt;基本的に熱湯で入れ、茶葉に合わせて抽出時間を十分に取ります。そのため、保温性の高いポットや温めた茶器を使って入れるのがポイントとなります。ティーコジーでポットをカバーし、温度が下がるのを防ぐのもおすすめです。&lt;/p&gt;
+                                | &lt;/section&gt;
+                                | 
+                                | &lt;section&gt;
+                                | &lt;h1&gt;ウーロン茶&lt;/h1&gt;
+                                | &lt;p&gt;ウーロン茶は、茶の葉を半発酵させて製造したお茶です。中国茶では「青茶」に分類されるもので、凍頂烏龍茶、東方美人、鉄観音、武夷岩茶、水仙など、さまざまな銘柄があります。&lt;/p&gt;
+                                | &lt;/section&gt;
+                                | 
+                                | &lt;section&gt;
+                                | &lt;h1&gt;緑茶&lt;/h1&gt;
+                                | &lt;p&gt;緑茶は、茶の葉を発酵させずに製造したお茶で、不発酵茶とも呼ばれます。煎茶やほうじ茶、玄米茶、玉露、抹茶など、日本茶の多くは緑茶に分類されるお茶となっています。&lt;/p&gt;
+                                | &lt;/section&gt;
+                                | 
+                                | &lt;/article&gt;
+                                | 
+                                | 
+                                | &lt;.id="sidebar"&gt;
+                                | 
+                                | &lt;aside&gt;
+                                | &lt;h1&gt;SUBSCRIBE & FOLLOW&lt;/h1&gt;
+                                | &lt;ul id="iconmenu"&gt;
+                                | &lt;li&gt;&lt;a href="url"&gt;&lt;img src="img/twitter.png" alt="Twitter"&gt;&lt;/a&gt;&lt;/li&gt;
+                                | &lt;li&gt;&lt;a href="url"&gt;&lt;img src="img/facebook.png" alt="Facebook"&gt;&lt;/a&gt;&lt;/li&gt;
+                                | &lt;li&gt;&lt;a href="url"&gt;&lt;img src="img/googleplus.png" alt="Google Plus"&gt;&lt;/a&gt;&lt;/li&gt;
+                                | &lt;li&gt;&lt;a href="url"&gt;&lt;img src="img/rss.png" alt="RSS Feed"&gt;&lt;/a&gt;&lt;/li&gt;
+                                | &lt;/ul&gt;
+                                | &lt;/aside&gt;
+                                | 
+                                | &lt;aside&gt;
+                                | &lt;h1&gt;ACCESS RANKING&lt;/h1&gt;
+                                | &lt;ol&gt;
+                                | &lt;li&gt;&lt;a href="post.html"&gt;映画に出てくるお茶&lt;/a&gt;&lt;/li&gt;
+                                | &lt;li&gt;&lt;a href="post.html"&gt;茶道具の秘密&lt;/a&gt;&lt;/li&gt;
+                                | &lt;li&gt;&lt;a href="post.html"&gt;こだわりのスプーン&lt;/a&gt;&lt;/li&gt;
+                                | &lt;li&gt;&lt;a href="post.html"&gt;ちょっとしたお茶の時間&lt;/a&gt;&lt;/li&gt;
+                                | &lt;li&gt;&lt;a href="post.html"&gt;砂糖の種類と味わい方&lt;/a&gt;&lt;/li&gt;
+                                | &lt;/ol&gt;
+                                | &lt;/aside&gt;
+                                | 
+                                | &lt;aside&gt;
+                                | &lt;h1&gt;RECENT POSTS&lt;/h1&gt;
+                                | &lt;ul&gt;
+                                | &lt;li&gt;&lt;a href="post.html"&gt;ちょっとしたお茶の時間&lt;/a&gt;&lt;/li&gt;
+                                | &lt;li&gt;&lt;a href="post.html"&gt;ほんのり甘い…&lt;/a&gt;&lt;/li&gt;
+                                | &lt;li&gt;&lt;a href="post.html"&gt;年越しにぴったりなお菓子&lt;/a&gt;&lt;/li&gt;
+                                | &lt;li&gt;&lt;a href="post.html"&gt;茶道具の秘密&lt;/a&gt;&lt;/li&gt;
+                                | &lt;li&gt;&lt;a href="post.html"&gt;あったか飲み物&lt;/a&gt;&lt;/li&gt;
+                                | &lt;li&gt;&lt;a href="post.html"&gt;こだわりのスプーン&lt;/a&gt;&lt;/li&gt;
+                                | &lt;/ul&gt;
+                                | &lt;/aside&gt;
+                                | 
+                                | &lt;/.gt;
+                                | 
+                                | &lt;/.gt;
+                                | 
+                                | 
+                                | &lt;footer&gt;
+                                | &lt;small&gt;Copyright &copy; SUN DIARY, all rights reserved.&lt;/small&gt;
+                                | &lt;/footer&gt;
+                                | 
+                                | &lt;/body&gt;
+                            .alert.alert-info アウトラインの作成
+                            p セクションの相互関係や親子関係により、ソフトウェアはページの階層構造（アウトライン）を把握できるようになります。アウトラインを作成するアルゴリズムは下のようになっており、サンプルでは以下のようにアウトラインが作成されます。
+                            h4 アウトラインを作成するアルゴリズム
+                            pre
+                                | １ &lt;body&gt;のセクションでルート階層を構成します。
+                                | 
+                                | ２ HTMLソースの上での記述順に従い、セクションごとに以下の処理を実行します。
+                                |     ▶ 前のセクションと同じ階層の場合：
+                                |         アウトラインの同じ階層に追加
+                                |     ▶ 前のセクションの子階層の場合：
+                                |         アウトラインの小海藻に追加
+                                |     ▶ 前のセクションより上位階層の場合：
+                                |         アウトラインの親階層に追加
+                            p ※ 「セクショニング・ルート」カテゴリーに属する&lt;body&gt;以外の要素は、&lt;body&gt;の構成するアウトラインには影響を与えません。
+                            p ※ 1つのセクション内に複数の見出しがある場合は暗黙のセクションが構成され、アウトラインに影響します。
+                            p なお、アウトラインは各階層を示すのにセクションの見出しが使用されます。セクションの見出しがない場合には、セクションをマークアップした要素の種類に応じて、「ナビゲーション」といった見出しを自動的に付加してアウトラインを作成することが求められています。
+                            .alert.alert-warning NOTES: 
+                            p アウトラインはHTML5で定義されたセマンティクスの一部であり、他の要素と複合的に利用されることになります。
+                            h4 サンプルで作成されるアウトライン
+                            pre
+                                | 1. SUN DIARY
+                                |     1-1. （ナビゲーション）
+                                |     1-2. Short Tea Breaks
+                                |         1-2-1. 紅茶
+                                |         1-2-2. ウーロン茶
+                                |         1-2-3. 緑茶
+                                |     1-3. SUBSCRIBE & FOLLOW
+                                |     1-4. ACCESS RANKING
+                                |     1-5. RECENT POSTS
+                            .alert.alert-warning NOTES: アウトラインの確認
+                            p 以下のツールを利用すると、アウトラインを手軽に確認することができます。
+                            p
+                                | HTML5 OUtliner
+                                br
+                                a(href='https://chrome.google.com/webstore/detail/html5-outliner/afoibpobokebhgfnknfndkgemglggomo?utm_source=chrome-ntp-icon',target='_blank')
+                                    | https://chrome.google.com/webstore/detail/html5-outliner/afoibpobokebhgfnknfndkgemglggomo?utm_source=chrome-ntp-icon
+                            p Chromeの拡張機能で、アドレスバーのアイコンをクリックすると表示中のページのアウトラインを確認することができます。ただし、セクションの見出しが画像の場合、「No text content inside H1」と表示されます。また、セクションの見出しがない場合、「Untitled NAV」といった形で要素の種類が表示されます。
+                            p
+                                | HTML5 Outliner
+                                br
+                                a(href='http://gsnedders.html5.org/outliner/',target='_blank')
+                                    | http://gsnedders.html5.org/outliner/
+                            p オンラインで提供されているサービスです。HTMLファイルのアップロードやURLの指定、HTMLソースの入力によってアウトラインを作成することができます。ただし、日本語を含むページの場合、HTMLソースの入力では文字化けすることがありますので、ファイルのアップロードまたはURLの指定を利用します。
+                            p セクションの見出しが画像の場合、alt属性の代替テキストの値が表示されます。また、セクションの見出しがない場合、要素の種類に関わらず「Untitled Section」と表示されます。
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

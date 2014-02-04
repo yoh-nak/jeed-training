@@ -1,347 +1,347 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;関連URL
-						.panel-body
-							.alert.alert-info 関連URL
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							pre
-								| &lt;link&gt;
-							table.table
-								tr
-									td カテゴリー
-									td メタデータコンテンツ／フローコンテンツ（itemprop属性を指定した場合）／フレージングコンテンツ（itemprop属性を指定した場合）
-								tr
-									td 記述可能な場所
-									td
-										| メタデータコンテンツが記述できる場所／フレージングコンテンツが記述できる場所（itemprop属性を指定した場合）
-								tr
-									td コンテンツモデル
-									td 空
-								tr
-									td 構成するボックス
-									td none
-								tr
-									td 属性
-									td href／rel／media／hreflang／type／sizes／グローバル 
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| link {
-											| 	display: none;
-											| }
-							p
-								a.btn.btn-default(href='../demo/html/sample1/04/095.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;!DOCTYPE html&gt;
-								| &lt;html lang="ja"&gt;
-								| &lt;head&gt;
-								| &lt;meta charset="UTF-8"&gt;
-								| &lt;title&gt;ちょっとしたお茶の時間　-　SUN DIARY&lt;/title&gt;
-								| &lt;meta name="viewport" content="width=1024"&gt;
-								| 
-								| &lt;link rel="stylesheet" href="style.css"&gt;
-								| 
-								| 
-								| &lt;link rel="alternate" type="application/rss+xml" title="SUN DIARYのフィード" href="feed.xml"&gt;
-								| 
-								| &lt;link rel="author" href="http://www.web/hanako.html"&gt;
-								| &lt;/head&gt;
-								| &lt;body&gt;
-								| &lt;body&gt;
-								…
-							p='<link>を利用すると、ページと関連した外部リソースのURLを明示することができます。URLはhref属性で指定し、rel属性でリソースの種類（リンクタイプ）を指定します。'
-							p='指定できるリンクタイプは以下のようになっており、サンプルでは外部スタイルシート、フィード、著者情報のURLを明示しています。'
-							.row
-								.col-sm-6
-									table.table
-										tr
-											th rel属性の値
-											th リンクタイプ
-										tr
-											td alternate
-											td フィードまたは代替文書
-										tr
-											td author
-											td 著者銃砲
-										tr
-											td help
-											td ヘルプ情報
-										tr
-											td icon
-											td アイコン
-										tr
-											td license
-											td ライセンス情報
-								.col-sm-6
-									table.table
-										tr
-											th rel属性の値
-											th リンクタイプ
-										tr
-											td next
-											td 次のページ
-										tr
-											td prefetch
-											td 先読みキャッシュ
-										tr
-											td prev
-											td 前のページ
-										tr
-											td search
-											td 検索関連の情報
-										tr
-											td stylesheet
-											td 外部スタイルシート
-							.alert.alert-warning NOTES: 
-							p='<link>は<head>の中に記述します。ただし、microdataのitemprop属性を指定した場合は<body>の中にも記述できるようになります。'
-							.alert.alert-info 代替文書のURL
-							p='rel属性を「alternate」と指定すると、現在のページの代替文書のURLであることを示すことができます。どのような代替文書であるかは、media、hreflang、type属性で示すことが可能です。'
-							table.table
-								tr
-									th='<link>の属性'
-									th 明示できる情報
-									th 指定できる値
-								tr
-									td media
-									td 特定のメディア
-									td メディアクエリ
-								tr
-									td hreflang
-									td 言語の種類
-									td ja、en、fr、deなど
-								tr
-									td type
-									td MIMEタイプ
-									td text/htmlなど
-							p
-								a.btn.btn-default(href='../demo/html/sample1/04/096-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;link rel="alternate" media="print" href="print.html"&gt;
-								| 
-								| &lt;link rel="alternate" hreflang="en" href="tea-en.html"&gt;
-								| 
-								| &lt;link rel="alternate" type="application/pdf" href="tea.pdf"&gt;
-							p='たとえば上のサンプルでは、media属性を「print」と指定して印刷用のページのURLを示しています。また、hreflang属性を「en」と指定して英語版のページのURLを、type属性を「application/pdf」としてPDF版のURLを示しています。'
-							.alert.alert-warning NOTES: 
-							p='Internet Explorerでページを印刷すると、<link rel="alternate" media="print" href="〜">で示したURLのページが印刷されます。'
-							.alert.alert-info フィードのURL
-							p
-								a.btn.btn-default(href='../demo/html/sample1/04/096-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;link rel="alternate" type="application/rss+xml" title="SUN DIARYのフィード" href="feed.xml"&gt;
-								figcaption RSSフィードのURLを指定。
-							p='rel属性を「alternate」、type属性を「application/rss+xml」または「application/atom+xml」と指定した場合、RSSまたはAtomフィードのURLであることを示すことができます。'
-							p='フィードの検出機能を持つブラウザやツールでページにアクセスすると、<link>で指定したフィードを簡単に登録できるようになります。'
-							.alert.alert-info 外部スタイルシート
-							p
-								a.btn.btn-default(href='../demo/html/sample1/04/097-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure						
-								pre(class='prettyprint linenums:1')
-									| &lt;!DOCTYPE html&lt;
-									| &lt;html lang="ja"&lt;
-									| &lt;head&lt;
-									| &lt;meta charset="UTF-8"&lt;
-									| &lt;title&lt;SAMPLE&lt;/title&lt;
-									| &lt;link rel="stylesheet" href="design.css"&lt;
-									| &lt;/head&lt;
-									| ...
-								figcaption 外部スタイルシートファイルとしてdesign.cssを指定したもの。
-							figure						
-								pre(class='prettyprint linenums:1')
-									| @import url(http://fonts.googleapis.com/css?family=Passion+One:400,700);
-									| 
-									| body	{text-align: center;
-									| 	font-family: 'メイリオ', 'Hiragino Kaku Gothic Pro', sans-serif;}
-									| 
-									| h1	{font-family: 'Passion One', Arial, Helvetica, sans-serif;
-									| 	font-size: 56px;
-									| 	margin: 20px auto;}
-									| 
-									| p	{text-align: left;
-									| 	max-width: 720px;
-									| 	margin: 20px auto;
-									| 	background:white;}
-								figcaption design.cssの設定。
-							p='rel属性を「stylesheet」と指定すると、外部スタイルシートファイルのURLであることを示し、スタイルシートの設定をページに適用することができます。'
-							p='スタイルシートの種類はtype属性で示します。ただし、標準では「text/css」として扱われますので、CSS（Cascading Style Sheets）で記述している場合にはtype属性を省略することが可能です。'
-							p='たとえばサンプルではdesign.cssという外部スタイルシートをファイルに適用するようにしています。'
-							h4 メディアクエリの指定
-							p
-								a.btn.btn-default(href='../demo/html/sample1/04/097-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;!DOCTYPE html&gt;
-								| &lt;html lang="ja"&gt;
-								| &lt;head&gt;
-								| &lt;meta charset="UTF-8"&gt;
-								| &lt;title&gt;SAMPLE&lt;/title&gt;
-								| &lt;meta name="viewport" content="width=device-width"&gt;
-								| 
-								| &lt;link rel="stylesheet" href="design.css"&gt;
-								| 
-								| &lt;link rel="stylesheet" href="design-large.css" media="only screen and (min-width:600px)"&gt;
-								| 
-								| &lt;link rel="stylesheet" href="design-small.css" media="only screen and (max-width:599px)"&gt;
-								| &lt;/head&gt;
-								| ...
-							figure
-								pre(class='prettyprint linenums:1')
-									| img	{display: inline;
-									| 	max-width: 100%;
-									| 	height: auto;}
-								figcaption design-large.cssの指定。
-							figure
-								pre(class='prettyprint linenums:1')
-									| img	{display: none;}
-								figcaption design-small.cssの指定。
-							p='media属性でメディアクエリを指定すると、特定の環境でページを表示、出力したときの外部スタイルシートを適用することができます。'
-							p='ここでは、ブラウザ画面の横幅が600ピクセル以上のときにdedign-large.cssを、599ピクセル以下のときにdesign-small.cssを適用するように指定しています。'
-							h4 代替スタイルシートの指定
-							p
-								a.btn.btn-default(href='../demo/html/sample1/04/098.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| body	{background-color: black;
-									| 	color: white;}
-								figcaption design-black.cssの指定。
-							figure
-								pre(class='prettyprint linenums:1')
-									| body	{background-color: #ffe4bc;}
-								figcaption design-sepia.cssの指定。
-							p='外部スタイルシートをユーザーが選択可能な代替スタイルシートとして扱うためには、rel属性を「alternate　stylesheet」と指定し、title属性でスタイルシート名を指定します。たとえば、サンプルではスタイルシート名を「黒色の背景」、「セピア色の背景」と指定した代替スタイルシートを用意しています。'
-							p='代替スタイルシートはページをロードしたときには適用されず、ブラウザのメニューで選択する時に適用されます。'
-							.alert.alert-warning NOTES: 
-							p='FirefoxやOpera、Internet Explorerでは「表示 > スタイル」メニューで代替スタイルシートを選択することができます。ChromeやSafariには代替スタイルシートを選択するメニューは用意されていません。'
-							p='なお<style>で代替スタイルシートを指定した場合とは対応ブラウザが異なりますので注意が必要です。'
-							h4 優先代替スタイルシートの指定
-							p
-								a.btn.btn-default(href='../demo/html/sample1/04/099-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;head&gt;
-									| &lt;meta charset="UTF-8"&gt;
-									| &lt;title&gt;SAMPLE&lt;/title&gt;
-									| &lt;meta name="viewport" content="width=device-width"&gt;
-									| 
-									| &lt;link rel="stylesheet" href="design.css"&gt;
-									| 
-									| &lt;link rel="stylesheet" href="design-black.css" title="黒色の背景"&gt;
-									| 
-									| &lt;link rel="alternate stylesheet" href="design-sepia.css" title="セピア色の背景"&gt;
-									| &lt;/head&gt;
-									| ...
-								figure 「黒色の背景」を優先代替スタイルシートに設定したもの。
-							p='ページをロードした段階で適用したい代替スタイルシートがある場合には、rel属性の値を「stylesheet」に変更し、優先代替スタイルシートとして扱われるように設定します。たとえば、上のサンプルでは「黒色の背景」を優先代替スタイルシートに設定しています。'
-							p='なお、優先代替スタイルシートに設定できるスタイルシートは1つのみで、複数指定した場合は最初の1つが優先代替スタイルシートとして扱われます。'
-							.alert.alert-info アイコン
-							p
-								a.btn.btn-default(href='../demo/html/sample1/04/099-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;link rel="icon" sizes="16x16" href="favicon.ico"&gt;
-								figcaption ファビコン用の画像を指定したもの。
-							p='rel属性を「icon」と指定すると、サイトやページのアイコンを示すことができます。たとえば、ファビコン用の画像を指定すると、ブラウザのタブやアドレスバーなどに表示されます。sizez属性で画像サイズを指定することも可能です。'
-							.alert.alert-success IE NOTES: 
-							p='Internet Explorerでファビコンを表示するためには、rel属性を「shortcut icon」と指定する必要があります。HTML5では未定義ですが、一般的に使用されていることから「shortcut icon」と指定しても文法違反になりません。'
-							p='なお、ほかのブラウザも「shortcut icon」の指定に対応しています。'
-							pre(class='prettyprint linenums:1')
-								| &lt;link rel="shortcut icon" sizes="16x16" href="favicon.ico"&gt;
-							.alert.alert-info 先読みキャッシュ
-							pre(class='prettyprint linenums:1')
-								| &lt;link rel="prefetch" href="img/cake.jpg"&gt;
-							p='rel属性を「prefetch」と指定すると、先読みしてキャッシュしたいファイルを示すことができます。現在のところFirefoxが対応しており、上のように指定すると、ページをロードしたときにcake.jpgが先読みされます。'
-							.alert.alert-info 検索
-							p
-								a.btn.btn-default(href='../demo/html/sample1/04/100.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;link rel="search" type="application/opensearchdescription+xml" href="search.osdx" title="SUN DIARY検索"&gt;
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;?xml version="1.0"?&gt;
-									| &lt;OpenSearchDescription
-									| xmlns="http://a9.com/-/spec/opensearch/1.1/"&gt;
-									| &lt;ShortName&gt;SUN DIARY&lt;/ShortName&gt;
-									| &lt;Description&gt;SUN DIARY&lt;/Description&gt;
-									| &lt;InputEncoding&gt;UTF-8&lt;/InputEncoding&gt;
-									| &lt;Image width="16" height="16"&gt;data:image/jpeg;base64,/9j/4QPDRXhpZgAATUOAKgAAAAg…&lt;/Image&gt;
-									| &lt;Url type="text/html" method="GET" template="http://sun.web/?s={searchTerms}"/&gt;
-									| &lt;/OpenSearchDescription&gt;
-								figcaption search.osdxの設定。
-							p='rel属性を「search」と指定すると、ページ内で利用している検索エンジンやそのWebインターフェースについての情報を記述したファイルを示すことができます。'
-							p='たとえば、サンプルではOpenSearchで規定されたOpenSearch description documents（osdxファイル）を利用して情報を記述し、<link rel="search">で締め四mています。すると、Firefoxでは検索ボックスのプルダウンに「"SUN DIARY 検索"を追加」と表示され、検索エンジンの1つとして追加できるようになります。'
-							.alert.alert-warning NOTES: OpenSearch
-							p
-								| OpenSearchは、Amazonの子会社であるA9.comが提唱している規格で、検索結果の活用や検索エンジンの識別などを可能にしています。
-								br
-								| OpenSearch 1.1 (Draft)
-								br
-								a(href='http://www.opensearch.org/Specifications/OpenSearch/1.1',target='_blank') http://www.opensearch.org/Specifications/OpenSearch/1.1
-							.alert.alert-warning NOTES: WordPressで構築したサイトの検索
-							p='WordPressでサイトを構築している場合、検索は「http://サイトのURL/?s=検索キーワード」というURLで実行されます。この情報をosdxファイルに記述する場合、サンプルのように<Url>のtemplate属性を「http://サイトのURL/?s={searchTerms}」と指定します。'
-							.alert.alert-warning NOTES: その他のリンクタイプ
-							p='rel属性で指定できるリンクタイプの値は、HTML5に採用されているものの他に、「HTML5 link type extensions」で提案されているものもあります。たとえば、Webクリップアイコンを示す「apple-touch-icon」や、優先URLを示す「canonical」などが提案されています。'
-							p
-								| HTML5 link type extensions
-								br
-								a(href='http://microformats.org/wiki/existing-rel-values#HTML5_link_type_extensions',target='_blank') http://microformats.org/wiki/existing-rel-values#HTML5_link_type_extensions
-							h4 Webクリップアイコン
-							pre(class='prettyprint linenums:1')='<link rel="apple-touch-icon" href="apple-touch-icon.png">'
-							p='rel属性を「apple-touch-icon」と指定すると、Webクリップアイコンを示すことができます。Webクリップアイコンは、iOSやAndroidでページのリンクをホーム画面に追加したときに使用されます。なお、大きさの異なるWebクリップアイコンを複数用意する場合、sizes属性で大きさを指定します。'
-							h4 優先URL
-							pre(class='prettyprint linenums:1')='<link rel="canonical" href="http://sun.web/">'
-							p='rel属性を「canonical」と指定すると、優先するURLであることを示すことができます。'
-							p='たとえば、よく似た内容のページが複数あるときに、検索エンジンに優先的に扱ってもらいたいURLを明示したり、同一のページに複数のURLでアクセスできる場合に、正しいURLを明示することが可能です。'
-							.alert.alert-warning NOTES: crossorigin属性
-							p='WHATWGのHTML Living StandardやHTML5.1 Nightlyでは、<script>にcrossorigin属性はCross Origin Resouce Sharing（CORS）に関する設定を行うものです。'
-							.alert.alert-success DIFFERENCES: 
-							p='HTML4.01やXHTML1.0における<link>のcharset属性とrev属性は、HTML5は利用できなくなっています。'
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;関連URL
+                        .panel-body
+                            .alert.alert-info 関連URL
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            pre
+                                | &lt;link&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td メタデータコンテンツ／フローコンテンツ（itemprop属性を指定した場合）／フレージングコンテンツ（itemprop属性を指定した場合）
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | メタデータコンテンツが記述できる場所／フレージングコンテンツが記述できる場所（itemprop属性を指定した場合）
+                                tr
+                                    td コンテンツモデル
+                                    td 空
+                                tr
+                                    td 構成するボックス
+                                    td none
+                                tr
+                                    td 属性
+                                    td href／rel／media／hreflang／type／sizes／グローバル 
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        pre
+                                            | link {
+                                            |     display: none;
+                                            | }
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/04/095.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;!DOCTYPE html&gt;
+                                | &lt;html lang="ja"&gt;
+                                | &lt;head&gt;
+                                | &lt;meta charset="UTF-8"&gt;
+                                | &lt;title&gt;ちょっとしたお茶の時間　-　SUN DIARY&lt;/title&gt;
+                                | &lt;meta name="viewport" content="width=1024"&gt;
+                                | 
+                                | &lt;link rel="stylesheet" href="style.css"&gt;
+                                | 
+                                | 
+                                | &lt;link rel="alternate" type="application/rss+xml" title="SUN DIARYのフィード" href="feed.xml"&gt;
+                                | 
+                                | &lt;link rel="author" href="http://www.web/hanako.html"&gt;
+                                | &lt;/head&gt;
+                                | &lt;body&gt;
+                                | &lt;body&gt;
+                                …
+                            p='<link>を利用すると、ページと関連した外部リソースのURLを明示することができます。URLはhref属性で指定し、rel属性でリソースの種類（リンクタイプ）を指定します。'
+                            p='指定できるリンクタイプは以下のようになっており、サンプルでは外部スタイルシート、フィード、著者情報のURLを明示しています。'
+                            .row
+                                .col-sm-6
+                                    table.table
+                                        tr
+                                            th rel属性の値
+                                            th リンクタイプ
+                                        tr
+                                            td alternate
+                                            td フィードまたは代替文書
+                                        tr
+                                            td author
+                                            td 著者銃砲
+                                        tr
+                                            td help
+                                            td ヘルプ情報
+                                        tr
+                                            td icon
+                                            td アイコン
+                                        tr
+                                            td license
+                                            td ライセンス情報
+                                .col-sm-6
+                                    table.table
+                                        tr
+                                            th rel属性の値
+                                            th リンクタイプ
+                                        tr
+                                            td next
+                                            td 次のページ
+                                        tr
+                                            td prefetch
+                                            td 先読みキャッシュ
+                                        tr
+                                            td prev
+                                            td 前のページ
+                                        tr
+                                            td search
+                                            td 検索関連の情報
+                                        tr
+                                            td stylesheet
+                                            td 外部スタイルシート
+                            .alert.alert-warning NOTES: 
+                            p='<link>は<head>の中に記述します。ただし、microdataのitemprop属性を指定した場合は<body>の中にも記述できるようになります。'
+                            .alert.alert-info 代替文書のURL
+                            p='rel属性を「alternate」と指定すると、現在のページの代替文書のURLであることを示すことができます。どのような代替文書であるかは、media、hreflang、type属性で示すことが可能です。'
+                            table.table
+                                tr
+                                    th='<link>の属性'
+                                    th 明示できる情報
+                                    th 指定できる値
+                                tr
+                                    td media
+                                    td 特定のメディア
+                                    td メディアクエリ
+                                tr
+                                    td hreflang
+                                    td 言語の種類
+                                    td ja、en、fr、deなど
+                                tr
+                                    td type
+                                    td MIMEタイプ
+                                    td text/htmlなど
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/04/096-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;link rel="alternate" media="print" href="print.html"&gt;
+                                | 
+                                | &lt;link rel="alternate" hreflang="en" href="tea-en.html"&gt;
+                                | 
+                                | &lt;link rel="alternate" type="application/pdf" href="tea.pdf"&gt;
+                            p='たとえば上のサンプルでは、media属性を「print」と指定して印刷用のページのURLを示しています。また、hreflang属性を「en」と指定して英語版のページのURLを、type属性を「application/pdf」としてPDF版のURLを示しています。'
+                            .alert.alert-warning NOTES: 
+                            p='Internet Explorerでページを印刷すると、<link rel="alternate" media="print" href="〜">で示したURLのページが印刷されます。'
+                            .alert.alert-info フィードのURL
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/04/096-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;link rel="alternate" type="application/rss+xml" title="SUN DIARYのフィード" href="feed.xml"&gt;
+                                figcaption RSSフィードのURLを指定。
+                            p='rel属性を「alternate」、type属性を「application/rss+xml」または「application/atom+xml」と指定した場合、RSSまたはAtomフィードのURLであることを示すことができます。'
+                            p='フィードの検出機能を持つブラウザやツールでページにアクセスすると、<link>で指定したフィードを簡単に登録できるようになります。'
+                            .alert.alert-info 外部スタイルシート
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/04/097-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure                        
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;!DOCTYPE html&lt;
+                                    | &lt;html lang="ja"&lt;
+                                    | &lt;head&lt;
+                                    | &lt;meta charset="UTF-8"&lt;
+                                    | &lt;title&lt;SAMPLE&lt;/title&lt;
+                                    | &lt;link rel="stylesheet" href="design.css"&lt;
+                                    | &lt;/head&lt;
+                                    | ...
+                                figcaption 外部スタイルシートファイルとしてdesign.cssを指定したもの。
+                            figure                        
+                                pre(class='prettyprint linenums:1')
+                                    | @import url(http://fonts.googleapis.com/css?family=Passion+One:400,700);
+                                    | 
+                                    | body    {text-align: center;
+                                    |     font-family: 'メイリオ', 'Hiragino Kaku Gothic Pro', sans-serif;}
+                                    | 
+                                    | h1    {font-family: 'Passion One', Arial, Helvetica, sans-serif;
+                                    |     font-size: 56px;
+                                    |     margin: 20px auto;}
+                                    | 
+                                    | p    {text-align: left;
+                                    |     max-width: 720px;
+                                    |     margin: 20px auto;
+                                    |     background:white;}
+                                figcaption design.cssの設定。
+                            p='rel属性を「stylesheet」と指定すると、外部スタイルシートファイルのURLであることを示し、スタイルシートの設定をページに適用することができます。'
+                            p='スタイルシートの種類はtype属性で示します。ただし、標準では「text/css」として扱われますので、CSS（Cascading Style Sheets）で記述している場合にはtype属性を省略することが可能です。'
+                            p='たとえばサンプルではdesign.cssという外部スタイルシートをファイルに適用するようにしています。'
+                            h4 メディアクエリの指定
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/04/097-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;!DOCTYPE html&gt;
+                                | &lt;html lang="ja"&gt;
+                                | &lt;head&gt;
+                                | &lt;meta charset="UTF-8"&gt;
+                                | &lt;title&gt;SAMPLE&lt;/title&gt;
+                                | &lt;meta name="viewport" content="width=device-width"&gt;
+                                | 
+                                | &lt;link rel="stylesheet" href="design.css"&gt;
+                                | 
+                                | &lt;link rel="stylesheet" href="design-large.css" media="only screen and (min-width:600px)"&gt;
+                                | 
+                                | &lt;link rel="stylesheet" href="design-small.css" media="only screen and (max-width:599px)"&gt;
+                                | &lt;/head&gt;
+                                | ...
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | img    {display: inline;
+                                    |     max-width: 100%;
+                                    |     height: auto;}
+                                figcaption design-large.cssの指定。
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | img    {display: none;}
+                                figcaption design-small.cssの指定。
+                            p='media属性でメディアクエリを指定すると、特定の環境でページを表示、出力したときの外部スタイルシートを適用することができます。'
+                            p='ここでは、ブラウザ画面の横幅が600ピクセル以上のときにdedign-large.cssを、599ピクセル以下のときにdesign-small.cssを適用するように指定しています。'
+                            h4 代替スタイルシートの指定
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/04/098.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | body    {background-color: black;
+                                    |     color: white;}
+                                figcaption design-black.cssの指定。
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | body    {background-color: #ffe4bc;}
+                                figcaption design-sepia.cssの指定。
+                            p='外部スタイルシートをユーザーが選択可能な代替スタイルシートとして扱うためには、rel属性を「alternate　stylesheet」と指定し、title属性でスタイルシート名を指定します。たとえば、サンプルではスタイルシート名を「黒色の背景」、「セピア色の背景」と指定した代替スタイルシートを用意しています。'
+                            p='代替スタイルシートはページをロードしたときには適用されず、ブラウザのメニューで選択する時に適用されます。'
+                            .alert.alert-warning NOTES: 
+                            p='FirefoxやOpera、Internet Explorerでは「表示 > スタイル」メニューで代替スタイルシートを選択することができます。ChromeやSafariには代替スタイルシートを選択するメニューは用意されていません。'
+                            p='なお<style>で代替スタイルシートを指定した場合とは対応ブラウザが異なりますので注意が必要です。'
+                            h4 優先代替スタイルシートの指定
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/04/099-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;head&gt;
+                                    | &lt;meta charset="UTF-8"&gt;
+                                    | &lt;title&gt;SAMPLE&lt;/title&gt;
+                                    | &lt;meta name="viewport" content="width=device-width"&gt;
+                                    | 
+                                    | &lt;link rel="stylesheet" href="design.css"&gt;
+                                    | 
+                                    | &lt;link rel="stylesheet" href="design-black.css" title="黒色の背景"&gt;
+                                    | 
+                                    | &lt;link rel="alternate stylesheet" href="design-sepia.css" title="セピア色の背景"&gt;
+                                    | &lt;/head&gt;
+                                    | ...
+                                figure 「黒色の背景」を優先代替スタイルシートに設定したもの。
+                            p='ページをロードした段階で適用したい代替スタイルシートがある場合には、rel属性の値を「stylesheet」に変更し、優先代替スタイルシートとして扱われるように設定します。たとえば、上のサンプルでは「黒色の背景」を優先代替スタイルシートに設定しています。'
+                            p='なお、優先代替スタイルシートに設定できるスタイルシートは1つのみで、複数指定した場合は最初の1つが優先代替スタイルシートとして扱われます。'
+                            .alert.alert-info アイコン
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/04/099-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;link rel="icon" sizes="16x16" href="favicon.ico"&gt;
+                                figcaption ファビコン用の画像を指定したもの。
+                            p='rel属性を「icon」と指定すると、サイトやページのアイコンを示すことができます。たとえば、ファビコン用の画像を指定すると、ブラウザのタブやアドレスバーなどに表示されます。sizez属性で画像サイズを指定することも可能です。'
+                            .alert.alert-success IE NOTES: 
+                            p='Internet Explorerでファビコンを表示するためには、rel属性を「shortcut icon」と指定する必要があります。HTML5では未定義ですが、一般的に使用されていることから「shortcut icon」と指定しても文法違反になりません。'
+                            p='なお、ほかのブラウザも「shortcut icon」の指定に対応しています。'
+                            pre(class='prettyprint linenums:1')
+                                | &lt;link rel="shortcut icon" sizes="16x16" href="favicon.ico"&gt;
+                            .alert.alert-info 先読みキャッシュ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;link rel="prefetch" href="img/cake.jpg"&gt;
+                            p='rel属性を「prefetch」と指定すると、先読みしてキャッシュしたいファイルを示すことができます。現在のところFirefoxが対応しており、上のように指定すると、ページをロードしたときにcake.jpgが先読みされます。'
+                            .alert.alert-info 検索
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/04/100.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;link rel="search" type="application/opensearchdescription+xml" href="search.osdx" title="SUN DIARY検索"&gt;
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;?xml version="1.0"?&gt;
+                                    | &lt;OpenSearchDescription
+                                    | xmlns="http://a9.com/-/spec/opensearch/1.1/"&gt;
+                                    | &lt;ShortName&gt;SUN DIARY&lt;/ShortName&gt;
+                                    | &lt;Description&gt;SUN DIARY&lt;/Description&gt;
+                                    | &lt;InputEncoding&gt;UTF-8&lt;/InputEncoding&gt;
+                                    | &lt;Image width="16" height="16"&gt;data:image/jpeg;base64,/9j/4QPDRXhpZgAATUOAKgAAAAg…&lt;/Image&gt;
+                                    | &lt;Url type="text/html" method="GET" template="http://sun.web/?s={searchTerms}"/&gt;
+                                    | &lt;/OpenSearchDescription&gt;
+                                figcaption search.osdxの設定。
+                            p='rel属性を「search」と指定すると、ページ内で利用している検索エンジンやそのWebインターフェースについての情報を記述したファイルを示すことができます。'
+                            p='たとえば、サンプルではOpenSearchで規定されたOpenSearch description documents（osdxファイル）を利用して情報を記述し、<link rel="search">で締め四mています。すると、Firefoxでは検索ボックスのプルダウンに「"SUN DIARY 検索"を追加」と表示され、検索エンジンの1つとして追加できるようになります。'
+                            .alert.alert-warning NOTES: OpenSearch
+                            p
+                                | OpenSearchは、Amazonの子会社であるA9.comが提唱している規格で、検索結果の活用や検索エンジンの識別などを可能にしています。
+                                br
+                                | OpenSearch 1.1 (Draft)
+                                br
+                                a(href='http://www.opensearch.org/Specifications/OpenSearch/1.1',target='_blank') http://www.opensearch.org/Specifications/OpenSearch/1.1
+                            .alert.alert-warning NOTES: WordPressで構築したサイトの検索
+                            p='WordPressでサイトを構築している場合、検索は「http://サイトのURL/?s=検索キーワード」というURLで実行されます。この情報をosdxファイルに記述する場合、サンプルのように<Url>のtemplate属性を「http://サイトのURL/?s={searchTerms}」と指定します。'
+                            .alert.alert-warning NOTES: その他のリンクタイプ
+                            p='rel属性で指定できるリンクタイプの値は、HTML5に採用されているものの他に、「HTML5 link type extensions」で提案されているものもあります。たとえば、Webクリップアイコンを示す「apple-touch-icon」や、優先URLを示す「canonical」などが提案されています。'
+                            p
+                                | HTML5 link type extensions
+                                br
+                                a(href='http://microformats.org/wiki/existing-rel-values#HTML5_link_type_extensions',target='_blank') http://microformats.org/wiki/existing-rel-values#HTML5_link_type_extensions
+                            h4 Webクリップアイコン
+                            pre(class='prettyprint linenums:1')='<link rel="apple-touch-icon" href="apple-touch-icon.png">'
+                            p='rel属性を「apple-touch-icon」と指定すると、Webクリップアイコンを示すことができます。Webクリップアイコンは、iOSやAndroidでページのリンクをホーム画面に追加したときに使用されます。なお、大きさの異なるWebクリップアイコンを複数用意する場合、sizes属性で大きさを指定します。'
+                            h4 優先URL
+                            pre(class='prettyprint linenums:1')='<link rel="canonical" href="http://sun.web/">'
+                            p='rel属性を「canonical」と指定すると、優先するURLであることを示すことができます。'
+                            p='たとえば、よく似た内容のページが複数あるときに、検索エンジンに優先的に扱ってもらいたいURLを明示したり、同一のページに複数のURLでアクセスできる場合に、正しいURLを明示することが可能です。'
+                            .alert.alert-warning NOTES: crossorigin属性
+                            p='WHATWGのHTML Living StandardやHTML5.1 Nightlyでは、<script>にcrossorigin属性はCross Origin Resouce Sharing（CORS）に関する設定を行うものです。'
+                            .alert.alert-success DIFFERENCES: 
+                            p='HTML4.01やXHTML1.0における<link>のcharset属性とrev属性は、HTML5は利用できなくなっています。'
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

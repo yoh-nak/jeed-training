@@ -1,178 +1,178 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;ルート要素
-						.panel-body
-							.alert.alert-info ルート要素
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							pre
-								| &lt;html&gt;...&lt;/html&gt;
-							table.table
-								tr
-									td カテゴリー
-									td none
-								tr
-									td 記述可能な場所
-									td
-										| ドキュメントのルートに記述可能
-										br
-										| ※複合的なドキュメントではルートに限らない
-								tr
-									td コンテンツモデル
-									td
-										| &lt;head&gt;とそれに続く&lt;body&gt;
-								tr
-									td 構成するボックス
-									td block
-								tr
-									td 属性
-									td manifest／グローバル
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| html {
-											| 	display: block;
-											| 	font-style: italic;
-											| }
-							p DOCTYPE宣言に続けて、HTML文書の最上位階層（ルート）を構成する&lt;html&gt;を記述します。
-							pre
-								| &lt;!DOCTYPE html&gt;
-								| &lt;html lang="ja"&gt;
-								| 
-								| &lt;/html&gt;
-							p &lt;html&gt;はすべての要素の親要素となりますので、「日本語」や「英語」といったコンテンツの記述に使用する主要言語をlang属性で明示しておくことが推奨されています。lang属性の情報は音声ツールや翻訳ツールで利用され、コンテンツを正確に扱えるようになることが期待されています。
-							.alert.alert-warning NOTES: 
-							p lang属性はグローバル属性の1つで、すべての要素で利用することができます。コンテンツ内で部分的に異なる言語を使用する場合には、その都度lang属性で使用言語を明示することが可能です。
-							pre
-								| &lt;!DOCTYPE html&gt;
-								| &lt;html lang="ja"&gt;
-								| ...
-								| &lt;p&gt;ヨーロッパにおけるフットボール（&lt;span lang="en"&gt;Football&lt;/span&gt;）はサッカー（&lt;span lang="en"&gt;Soccer&lt;/span&gt;）のことです。&lt;/p&gt;
-								| ...
-								| &lt;/html&gt;
-							.alert.alert-success DIFFERENCES: 
-							p XHTML1.0ではlang属性とxml:lang属性で使用言語を示すことが求められていました。HTML5ではxml:lang属性を記述する必要はなくなっていますが、XHTML1.0からの移行を容易にしたり、XMLパーサでもデータを処理できるようにしておくといった場合には、xml:lang属性を併記することが認められています。
-							figure
-								pre
-									| &lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;
-									| &lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja"&gt;
-									| ...
-								figcaption XHTML1.0における使用言語の記述。
-							.alert.alert-info HTMLの名前空間
-							p HTML5では自動的にすべてのHTML要素がHTML名前空間に属するものとして扱われます。
-							p 「名前空間（ネームスペース）」は異なる規格に従ったソースを混在させるために必要となるものです。たとえば、HTML5ではHTMLソース内にSVGとMathMLのソースを記述することが可能ですが、これは&lt;html&gt;以下の要素がHTML名前空間に、&lt;svg&gt;以下の要素がSVG名前空間に、&lt;math&gt;以下の要素がMathML名前空間に属するものとして処理されることになっているためです。
-							figure
-								pre
-									| &lt;!DOCTYPE html&gt;
-								pre(style='color:red;')
-									| &lt;html&gt;
-									| ...
-									| &lt;body&gt;
-									| &lt;h1&gt;STAR&lt;/h1&gt;
-								pre(style='color:blue;')
-									| &lt;svg&gt;
-									| &lt;polygon fill="#FFDB43" points="..."/&gt;
-									| &lt;/svg&gt;
-								pre(style='color:red;')
-									| &lt;/body&gt;
-									| &lt;/html&gt;
-								figcaption 赤色の要素はHTML名前空間に、青色の要素はSVG名前空間に属するものとして処理されます。
-							.alert.alert-success DIFFERENCES: 
-							p XHTML1.0では&lt;html&gt;要素がHTML名前空間に属していることを示すため、xmlns属性でHTML名前空間を明示しておく必要がありました。また、名前空間を明示しても&lt;svg&gt;や&lt;math&gt;を記述すると文法違反となっていました。
-							figure
-								pre
-									| &lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;
-									| &lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
-									| ...
-								figcaption XHTML1.0における&lt;html&gt;の記述。xmlns属性を省略すると文法違反となります。
-							p HTML5ではxmlns属性を記述する必要はなくなっていますが、XHTML1.0からの移行を容易にしたり、XMLパーサーでもデータを処理できるようにしておくといった場合には、xmlns属性を記述しておくことも可能です。その場合、以下のURIを値として指定します。
-							table.table
-								tr
-									th 名前空間
-									th 名前空間を表すURI
-								tr
-									td HTML名前空間
-									td http://www.w3.org/1999/xhtml
-								tr
-									td SVG名前空間
-									td http://www.w3.org/2000/svg
-								tr
-									td MathML名前空間
-									td http://www.w3.org/1998/MathML
-							.alert.alert-warning NOTES: アプリケーションキャッシュの機能
-							p &lt;html&gt;のmanifest属性はアプリケーションキャッシュの機能で使用します。この機能はWebアプリケーションやドキュメントをオフラインでも利用できるようにするため、表示に必要となるファイルを閲覧環境にキャッシュします。
-							p たとえば、下のWebページ（sample.html）をオフラインでも閲覧できるようにするためには、sample.htmlと、ページに読み込んでいるstyle.css、script.jsをキャッシュする必要があります。そこで、キャッシュしたいファイルの情報を記述したマニフェストファイル（sample.appcache）を用意し、&lt;html&gt;のmanifest属性で指定します。
-							figure
-								pre
-									| &lt;!DOCTYPE html&gt;
-									| &lt;html lang="ja" manifest="sample.appcache"&gt;
-									| &lt;head&gt;
-									| …
-									| &lt;link rel="stylesheet" href="style.css"&gt;
-									| &lt;script src="script.js"&gt;&lt;/script&gt;
-									| &lt;/head&gt;
-									| &lt;body&gt;
-									| …
-									| &lt;/body&gt;
-									| &lt;/html&gt;
-								figcaption sample.htmlの記述。&lt;html&gt;でマニフェストファイルを指定しています。
-							p これで、Webページを読み込むとマニフェストファイルで指定したファイルがキャッシュされ、次からはキャッシュデータを使って表示が行われるようになります。Firefoxの場合、最初にページを読み込んだときに、オフライン作業用のデータの保存を許可するかどうかメッセージが表示されます。
-							p 簡単なマニフェストファイルを作成するには、下のように1行目に「CACHE MANIFEST」と記述し、2行目以降にキャッシュしたいファイルを記述していきます。ファイル名には「〜.appcache」のMIMEタイプ「text/cache-manifest」がサーバー側で設定されている必要があります。
-							figure
-								pre
-									| CACHE MANIFEST
-									| sample.html
-									| style.css
-									| script.js
-									| 
-								figcaption マニフェストファイル（sample.appcache）。
-							p アプリケーションキャッシュの機能やマニフェストファイルについての詳細は、下記のサイトなどを参照してください。
-							p
-								| Offline Web Applications (W3C)
-								br
-								| http://www.w3.org/TR/offline-webapps/
-							p
-								| HTML Living Standard - 6.7 Offline Web applications (WHATWG)
-								br
-								| http://www.whatwg.org/specs/web-apps/current-work/multipage/offline.html
-							p
-								| アプリケーションキャッシュを始めて使う (HTML5 Rocks)
-								br
-								| http://www.html5rocks.com/ja/tutorials/appcache/beginner/
-							p
-								| Node.js/ExpressでHTML5オフライン・キャッシュを使う
-								br
-								| http://qiita.com/weed/items/2318a2c6871c6c5d5fef
-							.alert.alert-success IE NOTES: 
-							p IE9以前のバージョンはアプリケーションキャッシュの機能に未対応です。
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;ルート要素
+                        .panel-body
+                            .alert.alert-info ルート要素
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            pre
+                                | &lt;html&gt;...&lt;/html&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td none
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | ドキュメントのルートに記述可能
+                                        br
+                                        | ※複合的なドキュメントではルートに限らない
+                                tr
+                                    td コンテンツモデル
+                                    td
+                                        | &lt;head&gt;とそれに続く&lt;body&gt;
+                                tr
+                                    td 構成するボックス
+                                    td block
+                                tr
+                                    td 属性
+                                    td manifest／グローバル
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        pre
+                                            | html {
+                                            |     display: block;
+                                            |     font-style: italic;
+                                            | }
+                            p DOCTYPE宣言に続けて、HTML文書の最上位階層（ルート）を構成する&lt;html&gt;を記述します。
+                            pre
+                                | &lt;!DOCTYPE html&gt;
+                                | &lt;html lang="ja"&gt;
+                                | 
+                                | &lt;/html&gt;
+                            p &lt;html&gt;はすべての要素の親要素となりますので、「日本語」や「英語」といったコンテンツの記述に使用する主要言語をlang属性で明示しておくことが推奨されています。lang属性の情報は音声ツールや翻訳ツールで利用され、コンテンツを正確に扱えるようになることが期待されています。
+                            .alert.alert-warning NOTES: 
+                            p lang属性はグローバル属性の1つで、すべての要素で利用することができます。コンテンツ内で部分的に異なる言語を使用する場合には、その都度lang属性で使用言語を明示することが可能です。
+                            pre
+                                | &lt;!DOCTYPE html&gt;
+                                | &lt;html lang="ja"&gt;
+                                | ...
+                                | &lt;p&gt;ヨーロッパにおけるフットボール（&lt;span lang="en"&gt;Football&lt;/span&gt;）はサッカー（&lt;span lang="en"&gt;Soccer&lt;/span&gt;）のことです。&lt;/p&gt;
+                                | ...
+                                | &lt;/html&gt;
+                            .alert.alert-success DIFFERENCES: 
+                            p XHTML1.0ではlang属性とxml:lang属性で使用言語を示すことが求められていました。HTML5ではxml:lang属性を記述する必要はなくなっていますが、XHTML1.0からの移行を容易にしたり、XMLパーサでもデータを処理できるようにしておくといった場合には、xml:lang属性を併記することが認められています。
+                            figure
+                                pre
+                                    | &lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;
+                                    | &lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja"&gt;
+                                    | ...
+                                figcaption XHTML1.0における使用言語の記述。
+                            .alert.alert-info HTMLの名前空間
+                            p HTML5では自動的にすべてのHTML要素がHTML名前空間に属するものとして扱われます。
+                            p 「名前空間（ネームスペース）」は異なる規格に従ったソースを混在させるために必要となるものです。たとえば、HTML5ではHTMLソース内にSVGとMathMLのソースを記述することが可能ですが、これは&lt;html&gt;以下の要素がHTML名前空間に、&lt;svg&gt;以下の要素がSVG名前空間に、&lt;math&gt;以下の要素がMathML名前空間に属するものとして処理されることになっているためです。
+                            figure
+                                pre
+                                    | &lt;!DOCTYPE html&gt;
+                                pre(style='color:red;')
+                                    | &lt;html&gt;
+                                    | ...
+                                    | &lt;body&gt;
+                                    | &lt;h1&gt;STAR&lt;/h1&gt;
+                                pre(style='color:blue;')
+                                    | &lt;svg&gt;
+                                    | &lt;polygon fill="#FFDB43" points="..."/&gt;
+                                    | &lt;/svg&gt;
+                                pre(style='color:red;')
+                                    | &lt;/body&gt;
+                                    | &lt;/html&gt;
+                                figcaption 赤色の要素はHTML名前空間に、青色の要素はSVG名前空間に属するものとして処理されます。
+                            .alert.alert-success DIFFERENCES: 
+                            p XHTML1.0では&lt;html&gt;要素がHTML名前空間に属していることを示すため、xmlns属性でHTML名前空間を明示しておく必要がありました。また、名前空間を明示しても&lt;svg&gt;や&lt;math&gt;を記述すると文法違反となっていました。
+                            figure
+                                pre
+                                    | &lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;
+                                    | &lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+                                    | ...
+                                figcaption XHTML1.0における&lt;html&gt;の記述。xmlns属性を省略すると文法違反となります。
+                            p HTML5ではxmlns属性を記述する必要はなくなっていますが、XHTML1.0からの移行を容易にしたり、XMLパーサーでもデータを処理できるようにしておくといった場合には、xmlns属性を記述しておくことも可能です。その場合、以下のURIを値として指定します。
+                            table.table
+                                tr
+                                    th 名前空間
+                                    th 名前空間を表すURI
+                                tr
+                                    td HTML名前空間
+                                    td http://www.w3.org/1999/xhtml
+                                tr
+                                    td SVG名前空間
+                                    td http://www.w3.org/2000/svg
+                                tr
+                                    td MathML名前空間
+                                    td http://www.w3.org/1998/MathML
+                            .alert.alert-warning NOTES: アプリケーションキャッシュの機能
+                            p &lt;html&gt;のmanifest属性はアプリケーションキャッシュの機能で使用します。この機能はWebアプリケーションやドキュメントをオフラインでも利用できるようにするため、表示に必要となるファイルを閲覧環境にキャッシュします。
+                            p たとえば、下のWebページ（sample.html）をオフラインでも閲覧できるようにするためには、sample.htmlと、ページに読み込んでいるstyle.css、script.jsをキャッシュする必要があります。そこで、キャッシュしたいファイルの情報を記述したマニフェストファイル（sample.appcache）を用意し、&lt;html&gt;のmanifest属性で指定します。
+                            figure
+                                pre
+                                    | &lt;!DOCTYPE html&gt;
+                                    | &lt;html lang="ja" manifest="sample.appcache"&gt;
+                                    | &lt;head&gt;
+                                    | …
+                                    | &lt;link rel="stylesheet" href="style.css"&gt;
+                                    | &lt;script src="script.js"&gt;&lt;/script&gt;
+                                    | &lt;/head&gt;
+                                    | &lt;body&gt;
+                                    | …
+                                    | &lt;/body&gt;
+                                    | &lt;/html&gt;
+                                figcaption sample.htmlの記述。&lt;html&gt;でマニフェストファイルを指定しています。
+                            p これで、Webページを読み込むとマニフェストファイルで指定したファイルがキャッシュされ、次からはキャッシュデータを使って表示が行われるようになります。Firefoxの場合、最初にページを読み込んだときに、オフライン作業用のデータの保存を許可するかどうかメッセージが表示されます。
+                            p 簡単なマニフェストファイルを作成するには、下のように1行目に「CACHE MANIFEST」と記述し、2行目以降にキャッシュしたいファイルを記述していきます。ファイル名には「〜.appcache」のMIMEタイプ「text/cache-manifest」がサーバー側で設定されている必要があります。
+                            figure
+                                pre
+                                    | CACHE MANIFEST
+                                    | sample.html
+                                    | style.css
+                                    | script.js
+                                    | 
+                                figcaption マニフェストファイル（sample.appcache）。
+                            p アプリケーションキャッシュの機能やマニフェストファイルについての詳細は、下記のサイトなどを参照してください。
+                            p
+                                | Offline Web Applications (W3C)
+                                br
+                                | http://www.w3.org/TR/offline-webapps/
+                            p
+                                | HTML Living Standard - 6.7 Offline Web applications (WHATWG)
+                                br
+                                | http://www.whatwg.org/specs/web-apps/current-work/multipage/offline.html
+                            p
+                                | アプリケーションキャッシュを始めて使う (HTML5 Rocks)
+                                br
+                                | http://www.html5rocks.com/ja/tutorials/appcache/beginner/
+                            p
+                                | Node.js/ExpressでHTML5オフライン・キャッシュを使う
+                                br
+                                | http://qiita.com/weed/items/2318a2c6871c6c5d5fef
+                            .alert.alert-success IE NOTES: 
+                            p IE9以前のバージョンはアプリケーションキャッシュの機能に未対応です。
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

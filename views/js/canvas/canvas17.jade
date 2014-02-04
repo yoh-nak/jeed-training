@@ -1,271 +1,271 @@
 !!!
 html(lang='ja')
-	head
-		meta(name='viewport',content='width=device-width,initial-scale=1.0')
-		link(href='css/bootstrap.min.css',rel='stylesheet',media='screen')
-		link(href='js/dtree/dtree.css', rel='stylesheet', media='screen')
-		link(href='less/common.less',rel='stylesheet',media='screen')
-		link(href='js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
-		title=title
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							&nbsp;複数のアニメーション
-						.panel-body
-							h4 間違った方法
-							p
-								a.btn.btn-default(href='demo/canvas/exercise4/index3.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre.prettyprint.linenums
-								| &lt;!DOCTYPE html&gt;
-								| &lt;html lang="ja"&gt;
-								|   &lt;head&gt;
-								|     &lt;meta charset="utf-8"&gt;
-								|     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-								|     &lt;title&gt;&lt;/title&gt;
-								|     &lt;style&gt;
-								|       #myCanvas{
-								|        display:block;
-								|       }
-								|     &lt;/style&gt;
-								|   &lt;/head&gt;
-								|   &lt;body&gt;
-								|     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
-								|     &lt;script src="http://code.jquery.com/jquery-1.11.0.min.js"&gt;&lt;/script&gt;
-								|     &lt;script&gt;
-								|       $(function(){
-								|        //キャンバス要素　jQueryオブジェクト
-								|        var canvas = $('#myCanvas');
-								|        
-								|        //2Dレンダリングコンテキスト
-								|        var context = canvas.get(0).getContext('2d');
-								|        
-								|        var canvasWidth = canvas.width(); //キャンバス要素　幅
-								|        var canvasHeight = canvas.height(); //キャンバス要素　高さ
-								|        
-								|        var playAnimation = true; //アニメーションフラグ　開始
-								|        
-								|        var firstX = 0; //矩形1のx座標初期値
-								|        var secondX = 50; //矩形2のx座標初期値
-								|        var thirdX = 100; //矩形3のx座標初期値
-								|        
-								|        //アニメーションループ
-								|        function animate(){
-								|         //矩形クリア
-								|         context.clearRect(0, 0, canvasWidth, canvasHeight);
-								|         
-								|         firstX++; //矩形1のx座標更新
-								|         secondX++; //矩形2のx座標更新
-								|         thirdX++; //矩形3のx座標更新
-								|         
-								|         context.fillRect(firstX, 50, 10, 10); //矩形1の描画
-								|         context.fillRect(secondX, 100, 10, 10); //矩形2の描画
-								|         context.fillRect(thirdX, 150, 10, 10); //矩形3の描画
-								|         
-								|         //アニメーションフラグが開始のとき
-								|         if(playAnimation){
-								|          setTimeout(animate, 33);
-								|         }
-								|        }
-								|        //アニメーション初回スタート
-								|        animate();
-								|       });
-								|     &lt;/script&gt;
-								|   &lt;/body&gt;
-								| &lt;/html&gt;
-							h4 正しい方法
-							p
-								a.btn.btn-default(href='demo/canvas/exercise4/index4.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre.prettyprint.linenums
-								| &lt;!DOCTYPE html&gt;
-								| &lt;html lang="ja"&gt;
-								|   &lt;head&gt;
-								|     &lt;meta charset="utf-8"&gt;
-								|     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-								|     &lt;title&gt;&lt;/title&gt;
-								|     &lt;style&gt;
-								|       #myCanvas{
-								|        display:block;
-								|       }
-								|     &lt;/style&gt;
-								|   &lt;/head&gt;
-								|   &lt;body&gt;
-								|     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
-								|     &lt;script src="http://code.jquery.com/jquery-1.11.0.min.js"&gt;&lt;/script&gt;
-								|     &lt;script&gt;
-								|       $(function(){
-								|        //キャンバス要素　jQueryオブジェクト
-								|        var canvas = $('#myCanvas');
-								|        
-								|        //2Dレンダリングコンテキスト
-								|        var context = canvas.get(0).getContext('2d');
-								|        
-								|        var canvasWidth = canvas.width(); //キャンバス要素　幅
-								|        var canvasHeight = canvas.height(); //キャンバス要素　高さ
-								|        
-								|        var playAnimation = true; //アニメーションフラグ　開始
-								|        
-								|        //矩形（x座標, y座標）をまとめて管理するクラス
-								|        var Shape = function(x, y){
-								|         this.x = x;
-								|         this.y = y;
-								|        };
-								|        //複数の矩形を格納する配列
-								|        var shapes = new Array();
-								|        
-								|        //矩形の設定を3個準備
-								|        shapes.push(new Shape(50, 50));
-								|        shapes.push(new Shape(100, 100));
-								|        shapes.push(new Shape(150, 150));
-								|        
-								|        //アニメーションループ
-								|        function animate(){
-								|         //矩形クリア
-								|         context.clearRect(0, 0, canvasWidth, canvasHeight);
-								|         
-								|         var shapesLength = shapes.length; //矩形の個数
-								|         
-								|         //矩形の個数だけ描画
-								|         for(var i = 0; i &lt; shapesLength; i++){
-								|          //矩形（x座標, y座標）を管理するクラスのインスタンス
-								|          var tmpShape = shapes[i];
-								|          
-								|          //矩形x座標更新
-								|          tmpShape.x++;
-								|          
-								|          //矩形描画
-								|          context.fillRect(tmpShape.x, tmpShape.y, 10, 10);
-								|         }
-								|         
-								|         //アニメーションフラグが開始のとき
-								|         if(playAnimation){
-								|          setTimeout(animate, 33);
-								|         }
-								|        }
-								|        //アニメーション初回スタート
-								|        animate();
-								|       });
-								|     &lt;/script&gt;
-								|   &lt;/body&gt;
-								| &lt;/html&gt;
-							p
-								a.btn.btn-default(href='demo/canvas/exercise4/index5.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre.prettyprint.linenums
-								| &lt;!DOCTYPE html&gt;
-								| &lt;html lang="ja"&gt;
-								|   &lt;head&gt;
-								|     &lt;meta charset="utf-8"&gt;
-								|     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-								|     &lt;title&gt;&lt;/title&gt;
-								|     &lt;style&gt;
-								|       #myCanvas{
-								|        display:block;
-								|       }
-								|     &lt;/style&gt;
-								|   &lt;/head&gt;
-								|   &lt;body&gt;
-								|     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
-								|     &lt;button id="startAnimation"&gt;Start&lt;/button&gt;
-								|     &lt;button id="stopAnimation"&gt;Stop&lt;/button&gt;
-								|     &lt;script src="http://code.jquery.com/jquery-1.11.0.min.js"&gt;&lt;/script&gt;
-								|     &lt;script&gt;
-								|       $(function(){
-								|        //キャンバス要素　jQueryオブジェクト
-								|        var canvas = $('#myCanvas');
-								|        
-								|        //2Dレンダリングコンテキスト
-								|        var context = canvas.get(0).getContext('2d');
-								|        
-								|        var canvasWidth = canvas.width(); //キャンバス要素　幅
-								|        var canvasHeight = canvas.height(); //キャンバス要素　高さ
-								|        
-								|        var playAnimation = true; //アニメーションフラグ　開始
-								|        
-								|        //スタート／ストップボタン　jQueryオブジェクト
-								|        var startButton = $('#startAnimation');
-								|        var stopButton = $('#stopAnimation');
-								|        
-								|        //スタートボタン初期表示削除
-								|        startButton.hide();
-								|        
-								|        //スタートボタンクリック
-								|        startButton.click(function(){
-								|         $(this).hide(); //スタートボタン非表示
-								|         stopButton.show(); //ストップボタン表示
-								|         
-								|         playAnimation = true; //アニメーションフラグ　開始
-								|         animate(); //アニメーション開始
-								|        });
-								|        
-								|        //ストップボタンクリック
-								|        stopButton.click(function(){
-								|         $(this).hide(); //ストップボタン非表示
-								|         startButton.show(); //スタートボタン表示
-								|         
-								|         playAnimation = false; //アニメーションフラグ　停止
-								|        });
-								|        
-								|        //矩形（x座標, y座標, 幅, 高さ）をまとめて管理するクラス
-								|        var Shape = function(x, y, width, height){
-								|         this.x = x;
-								|         this.y = y;
-								|         this.width = width;
-								|         this.height = height;
-								|        };
-								|        //複数の矩形を格納する配列
-								|        var shapes = new Array();
-								|        
-								|        //矩形の設定を10個準備
-								|        for(var i = 0; i &lt; 10; i++) {
-								|         var x = Math.random()*250; //x座標（0-250）
-								|         var y = Math.random()*250; //y座標（0-250）
-								|         var width = height = Math.random()*30; //矩形幅（0-30）
-								|         //矩形（x座標, y座標, 幅, 高さ）を管理するクラスを矩形ごとに配列に格納
-								|         shapes.push(new Shape(x, y, width, height));
-								|        };
-								|        
-								|        //アニメーションループ
-								|        function animate(){
-								|         //矩形クリア
-								|         context.clearRect(0, 0, canvasWidth, canvasHeight);
-								|         var shapesLength = shapes.length; //矩形の個数
-								|         
-								|         //矩形の個数だけ描画
-								|         for (var i = 0; i &lt; shapesLength; i++) {
-								|          //矩形（x座標, y座標, 幅, 高さ）を管理するクラスのインスタンス
-								|          var tmpShape = shapes[i];
-								|          //矩形x座標更新
-								|          tmpShape.x++;
-								|          //矩形描画
-								|          context.fillRect(tmpShape.x, tmpShape.y, tmpShape.width, tmpShape.height);
-								|         };
-								|         //アニメーションフラグが開始のとき
-								|         if(playAnimation){
-								|          setTimeout(animate, 33);
-								|         };
-								|        }
-								|        //アニメーション初回スタート
-								|        animate();
-								|       });
-								|     &lt;/script&gt;
-								|   &lt;/body&gt;
-								| &lt;/html&gt;
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='js/bootstrap.min.js')
-		script(src='coffee/list-counter.js')
+    head
+        meta(name='viewport',content='width=device-width,initial-scale=1.0')
+        link(href='css/bootstrap.min.css',rel='stylesheet',media='screen')
+        link(href='js/dtree/dtree.css', rel='stylesheet', media='screen')
+        link(href='less/common.less',rel='stylesheet',media='screen')
+        link(href='js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+        title=title
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            &nbsp;複数のアニメーション
+                        .panel-body
+                            h4 間違った方法
+                            p
+                                a.btn.btn-default(href='demo/canvas/exercise4/index3.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre.prettyprint.linenums
+                                | &lt;!DOCTYPE html&gt;
+                                | &lt;html lang="ja"&gt;
+                                |   &lt;head&gt;
+                                |     &lt;meta charset="utf-8"&gt;
+                                |     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+                                |     &lt;title&gt;&lt;/title&gt;
+                                |     &lt;style&gt;
+                                |       #myCanvas{
+                                |        display:block;
+                                |       }
+                                |     &lt;/style&gt;
+                                |   &lt;/head&gt;
+                                |   &lt;body&gt;
+                                |     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
+                                |     &lt;script src="http://code.jquery.com/jquery-1.11.0.min.js"&gt;&lt;/script&gt;
+                                |     &lt;script&gt;
+                                |       $(function(){
+                                |        //キャンバス要素　jQueryオブジェクト
+                                |        var canvas = $('#myCanvas');
+                                |        
+                                |        //2Dレンダリングコンテキスト
+                                |        var context = canvas.get(0).getContext('2d');
+                                |        
+                                |        var canvasWidth = canvas.width(); //キャンバス要素　幅
+                                |        var canvasHeight = canvas.height(); //キャンバス要素　高さ
+                                |        
+                                |        var playAnimation = true; //アニメーションフラグ　開始
+                                |        
+                                |        var firstX = 0; //矩形1のx座標初期値
+                                |        var secondX = 50; //矩形2のx座標初期値
+                                |        var thirdX = 100; //矩形3のx座標初期値
+                                |        
+                                |        //アニメーションループ
+                                |        function animate(){
+                                |         //矩形クリア
+                                |         context.clearRect(0, 0, canvasWidth, canvasHeight);
+                                |         
+                                |         firstX++; //矩形1のx座標更新
+                                |         secondX++; //矩形2のx座標更新
+                                |         thirdX++; //矩形3のx座標更新
+                                |         
+                                |         context.fillRect(firstX, 50, 10, 10); //矩形1の描画
+                                |         context.fillRect(secondX, 100, 10, 10); //矩形2の描画
+                                |         context.fillRect(thirdX, 150, 10, 10); //矩形3の描画
+                                |         
+                                |         //アニメーションフラグが開始のとき
+                                |         if(playAnimation){
+                                |          setTimeout(animate, 33);
+                                |         }
+                                |        }
+                                |        //アニメーション初回スタート
+                                |        animate();
+                                |       });
+                                |     &lt;/script&gt;
+                                |   &lt;/body&gt;
+                                | &lt;/html&gt;
+                            h4 正しい方法
+                            p
+                                a.btn.btn-default(href='demo/canvas/exercise4/index4.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre.prettyprint.linenums
+                                | &lt;!DOCTYPE html&gt;
+                                | &lt;html lang="ja"&gt;
+                                |   &lt;head&gt;
+                                |     &lt;meta charset="utf-8"&gt;
+                                |     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+                                |     &lt;title&gt;&lt;/title&gt;
+                                |     &lt;style&gt;
+                                |       #myCanvas{
+                                |        display:block;
+                                |       }
+                                |     &lt;/style&gt;
+                                |   &lt;/head&gt;
+                                |   &lt;body&gt;
+                                |     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
+                                |     &lt;script src="http://code.jquery.com/jquery-1.11.0.min.js"&gt;&lt;/script&gt;
+                                |     &lt;script&gt;
+                                |       $(function(){
+                                |        //キャンバス要素　jQueryオブジェクト
+                                |        var canvas = $('#myCanvas');
+                                |        
+                                |        //2Dレンダリングコンテキスト
+                                |        var context = canvas.get(0).getContext('2d');
+                                |        
+                                |        var canvasWidth = canvas.width(); //キャンバス要素　幅
+                                |        var canvasHeight = canvas.height(); //キャンバス要素　高さ
+                                |        
+                                |        var playAnimation = true; //アニメーションフラグ　開始
+                                |        
+                                |        //矩形（x座標, y座標）をまとめて管理するクラス
+                                |        var Shape = function(x, y){
+                                |         this.x = x;
+                                |         this.y = y;
+                                |        };
+                                |        //複数の矩形を格納する配列
+                                |        var shapes = new Array();
+                                |        
+                                |        //矩形の設定を3個準備
+                                |        shapes.push(new Shape(50, 50));
+                                |        shapes.push(new Shape(100, 100));
+                                |        shapes.push(new Shape(150, 150));
+                                |        
+                                |        //アニメーションループ
+                                |        function animate(){
+                                |         //矩形クリア
+                                |         context.clearRect(0, 0, canvasWidth, canvasHeight);
+                                |         
+                                |         var shapesLength = shapes.length; //矩形の個数
+                                |         
+                                |         //矩形の個数だけ描画
+                                |         for(var i = 0; i &lt; shapesLength; i++){
+                                |          //矩形（x座標, y座標）を管理するクラスのインスタンス
+                                |          var tmpShape = shapes[i];
+                                |          
+                                |          //矩形x座標更新
+                                |          tmpShape.x++;
+                                |          
+                                |          //矩形描画
+                                |          context.fillRect(tmpShape.x, tmpShape.y, 10, 10);
+                                |         }
+                                |         
+                                |         //アニメーションフラグが開始のとき
+                                |         if(playAnimation){
+                                |          setTimeout(animate, 33);
+                                |         }
+                                |        }
+                                |        //アニメーション初回スタート
+                                |        animate();
+                                |       });
+                                |     &lt;/script&gt;
+                                |   &lt;/body&gt;
+                                | &lt;/html&gt;
+                            p
+                                a.btn.btn-default(href='demo/canvas/exercise4/index5.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre.prettyprint.linenums
+                                | &lt;!DOCTYPE html&gt;
+                                | &lt;html lang="ja"&gt;
+                                |   &lt;head&gt;
+                                |     &lt;meta charset="utf-8"&gt;
+                                |     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+                                |     &lt;title&gt;&lt;/title&gt;
+                                |     &lt;style&gt;
+                                |       #myCanvas{
+                                |        display:block;
+                                |       }
+                                |     &lt;/style&gt;
+                                |   &lt;/head&gt;
+                                |   &lt;body&gt;
+                                |     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
+                                |     &lt;button id="startAnimation"&gt;Start&lt;/button&gt;
+                                |     &lt;button id="stopAnimation"&gt;Stop&lt;/button&gt;
+                                |     &lt;script src="http://code.jquery.com/jquery-1.11.0.min.js"&gt;&lt;/script&gt;
+                                |     &lt;script&gt;
+                                |       $(function(){
+                                |        //キャンバス要素　jQueryオブジェクト
+                                |        var canvas = $('#myCanvas');
+                                |        
+                                |        //2Dレンダリングコンテキスト
+                                |        var context = canvas.get(0).getContext('2d');
+                                |        
+                                |        var canvasWidth = canvas.width(); //キャンバス要素　幅
+                                |        var canvasHeight = canvas.height(); //キャンバス要素　高さ
+                                |        
+                                |        var playAnimation = true; //アニメーションフラグ　開始
+                                |        
+                                |        //スタート／ストップボタン　jQueryオブジェクト
+                                |        var startButton = $('#startAnimation');
+                                |        var stopButton = $('#stopAnimation');
+                                |        
+                                |        //スタートボタン初期表示削除
+                                |        startButton.hide();
+                                |        
+                                |        //スタートボタンクリック
+                                |        startButton.click(function(){
+                                |         $(this).hide(); //スタートボタン非表示
+                                |         stopButton.show(); //ストップボタン表示
+                                |         
+                                |         playAnimation = true; //アニメーションフラグ　開始
+                                |         animate(); //アニメーション開始
+                                |        });
+                                |        
+                                |        //ストップボタンクリック
+                                |        stopButton.click(function(){
+                                |         $(this).hide(); //ストップボタン非表示
+                                |         startButton.show(); //スタートボタン表示
+                                |         
+                                |         playAnimation = false; //アニメーションフラグ　停止
+                                |        });
+                                |        
+                                |        //矩形（x座標, y座標, 幅, 高さ）をまとめて管理するクラス
+                                |        var Shape = function(x, y, width, height){
+                                |         this.x = x;
+                                |         this.y = y;
+                                |         this.width = width;
+                                |         this.height = height;
+                                |        };
+                                |        //複数の矩形を格納する配列
+                                |        var shapes = new Array();
+                                |        
+                                |        //矩形の設定を10個準備
+                                |        for(var i = 0; i &lt; 10; i++) {
+                                |         var x = Math.random()*250; //x座標（0-250）
+                                |         var y = Math.random()*250; //y座標（0-250）
+                                |         var width = height = Math.random()*30; //矩形幅（0-30）
+                                |         //矩形（x座標, y座標, 幅, 高さ）を管理するクラスを矩形ごとに配列に格納
+                                |         shapes.push(new Shape(x, y, width, height));
+                                |        };
+                                |        
+                                |        //アニメーションループ
+                                |        function animate(){
+                                |         //矩形クリア
+                                |         context.clearRect(0, 0, canvasWidth, canvasHeight);
+                                |         var shapesLength = shapes.length; //矩形の個数
+                                |         
+                                |         //矩形の個数だけ描画
+                                |         for (var i = 0; i &lt; shapesLength; i++) {
+                                |          //矩形（x座標, y座標, 幅, 高さ）を管理するクラスのインスタンス
+                                |          var tmpShape = shapes[i];
+                                |          //矩形x座標更新
+                                |          tmpShape.x++;
+                                |          //矩形描画
+                                |          context.fillRect(tmpShape.x, tmpShape.y, tmpShape.width, tmpShape.height);
+                                |         };
+                                |         //アニメーションフラグが開始のとき
+                                |         if(playAnimation){
+                                |          setTimeout(animate, 33);
+                                |         };
+                                |        }
+                                |        //アニメーション初回スタート
+                                |        animate();
+                                |       });
+                                |     &lt;/script&gt;
+                                |   &lt;/body&gt;
+                                | &lt;/html&gt;
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='js/bootstrap.min.js')
+        script(src='coffee/list-counter.js')

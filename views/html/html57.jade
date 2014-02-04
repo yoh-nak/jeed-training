@@ -1,173 +1,173 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;イメージマップ
-						.panel-body
-							.alert.alert-info イメージマップ
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							pre
-								| &lt;map&gt;
-								| &lt;area&gt;
-								| &lt;/map&gt;
-							table.table
-								tr
-									td カテゴリー
-									td フローコンテンツ／フレージングコンテンツ／パルパブルコンテンツ
-								tr
-									td 記述可能な場所
-									td
-										| フレージングコンテンツが記述できる場所
-								tr
-									td コンテンツモデル
-									td トランスペアレント
-								tr
-									td 構成するボックス
-									td -
-								tr
-									td 属性
-									td name／グローバル 
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| -
-							pre
-								| &lt;area&gt;
-							table.table
-								tr
-									td カテゴリー
-									td フローコンテンツ／フレージングコンテンツ
-								tr
-									td 記述可能な場所
-									td
-										| 親要素が&lt;map&gt;でフレージングコンテンツが記述できる場所
-								tr
-									td コンテンツモデル
-									td 空
-								tr
-									td 構成するボックス
-									td none
-								tr
-									td 属性
-									td alt／cords／shape／href／target／rel／media／hreflang／type／グローバル
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| area {
-											| 	display: none;
-											| }
-						p
-							a.btn.btn-default(href='../demo/html/sample1/05/152.html',target='_blank')
-								i.glyphicon.glyphicon-play
-								| デモ
-						pre(class='prettyprint linenums:1')
-							| &lt;img src="img/tea.jpg" alt="テーブルに紅茶とケーキのセットをサーブしました。ケーキはパウンドケーキにチーズケーキ、チョコレートケーキにアイスクリームを添えて、紅茶は白いティーポットに入れてお出ししています。" usemap="#mymap"&gt;
-							| 
-							| &lt;map name="mymap"&gt;
-							| &lt;area shape="rect" coords="390,12,770,237" href="pot.html" alt="ティーポット" title="ティーポット"&gt;
-							| &lt;area shape="circle" coords="781,387,96" href="tea.html" alt="紅茶" title="紅茶"&gt;
-							| &lt;area shape="poly" coords="163,393,179,302,305,208,398,286,483,250,553,426,475,483,336,480,298,448" href="cake.html" alt="ケーキ" title="ケーキ"&gt;
-							| &lt;/map&gt;
-						p='<map>はイメージマップの設定を定義する要素です。イメージマップの設定を画像に適用すると、画像の上に複数のエリアを構成し、各エリアにリンクを設定することができます。'
-						p='たとえば、サンプルでは<map>のname属性でマップ名を「mymap」と指定したイメージマップの設定を用意しています。この設定を画像に適用するためには、<img>のusemap属性でマップ名を「#mymap」と指定します。'
-						P='各エリアの形状やリンク先などは<area>で指定します。まずは、shape属性で形状を、coords属性で座標を指定してエリアを構成します。構成できる形状は四角形、円形、多角形の3種類です。座標は画像の左上を「0, 0」とし、「x, y」の形で以下のように指定します。サンプルでは、ティーポット部分に四角形、紅茶部分に円形、ケーキ部分に多角形のエリアを構成しています。'
-						table.table
-							tr
-								th 形状
-								th shape属性の値
-								th coords属性の値
-							tr
-								td 四角形
-								td rect
-								td 左上の座標、右下の座標
-							tr
-								td 円形
-								td circle
-								td 中心の座標, 半径
-							tr
-								td 多角形
-								td poly
-								td 各角の座標を「,（カンマ）」で区切って指定
-							tr
-								td 標準
-								td default
-								td なし（画像全体がエリアとなります）
-						p='次に、href属性でリンクを先に示し、alt属性で代替テキストを指定します。このほか、<area>には以下のような属性を指定することが可能です。cordsとshape属性以外は、<a>でも指定できるリンク関連の属性となっています。'
-						table.table
-							tr
-								td='<area>の属性'
-								td 機能
-							tr
-								td coords
-								td 座標を指定。
-							tr
-								td shape
-								td 形状を指定。
-							tr
-								td href
-								td リンク先を指定。
-							tr
-								td alt
-								td 代替テキストを指定。
-							tr
-								td target
-								td ブラウジング・コンテキストを指定。
-							tr
-								td rel
-								td リンクタイプを指定。
-							tr
-								td media
-								td 最適なメディアを指定。
-							tr
-								td hreflang
-								td 言語の種類を指定。
-							tr
-								td type
-								td MIME TYPEを指定。
-						.alert.alert-warning NOTES: download属性とping属性
-						p='HTML Living Standardでは、<area>にdownload属性とping属性が追加されています。'
-						.alert.alert-info 選択できないエリアを構成する
-						p='<area>でhref属性を指定しなかった場合、選択できないエリアを構成することができます。たとえば、下のサンプルでは「ティーポット」エリアの右下の部分に選択できないエリアを構成し、シュガーポットの部分にカーソルを重ねてもリンクが機能しないように設定しています。'
-						p='なお、<area>は先に記述した設定が優先されるため、選択できないエリアの設定は「ティーポット」エリアの設定よりも先に記述する必要があります。'
-						p
-							a.btn.btn-default(href='../demo/html/sample1/05/153.html',target='_blank')
-								i.glyphicon.glyphicon-play
-								| デモ
-						pre(class='prettyprint linenums:1')
-							| &lt;map name="mymap"&gt;
-							| &lt;area shape="poly" coords="601,245,661,215,690,167,763,145,786,116,784,246"&gt;
-							| 
-							| &lt;area shape="rect" coords="390,12,770,237" href="pot.html" alt="ティーポット" title="ティーポット"&gt;
-							| ...
-							| &lt;/map&gt;
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;イメージマップ
+                        .panel-body
+                            .alert.alert-info イメージマップ
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            pre
+                                | &lt;map&gt;
+                                | &lt;area&gt;
+                                | &lt;/map&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td フローコンテンツ／フレージングコンテンツ／パルパブルコンテンツ
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | フレージングコンテンツが記述できる場所
+                                tr
+                                    td コンテンツモデル
+                                    td トランスペアレント
+                                tr
+                                    td 構成するボックス
+                                    td -
+                                tr
+                                    td 属性
+                                    td name／グローバル 
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        pre
+                                            | -
+                            pre
+                                | &lt;area&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td フローコンテンツ／フレージングコンテンツ
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | 親要素が&lt;map&gt;でフレージングコンテンツが記述できる場所
+                                tr
+                                    td コンテンツモデル
+                                    td 空
+                                tr
+                                    td 構成するボックス
+                                    td none
+                                tr
+                                    td 属性
+                                    td alt／cords／shape／href／target／rel／media／hreflang／type／グローバル
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        pre
+                                            | area {
+                                            |     display: none;
+                                            | }
+                        p
+                            a.btn.btn-default(href='../demo/html/sample1/05/152.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            | &lt;img src="img/tea.jpg" alt="テーブルに紅茶とケーキのセットをサーブしました。ケーキはパウンドケーキにチーズケーキ、チョコレートケーキにアイスクリームを添えて、紅茶は白いティーポットに入れてお出ししています。" usemap="#mymap"&gt;
+                            | 
+                            | &lt;map name="mymap"&gt;
+                            | &lt;area shape="rect" coords="390,12,770,237" href="pot.html" alt="ティーポット" title="ティーポット"&gt;
+                            | &lt;area shape="circle" coords="781,387,96" href="tea.html" alt="紅茶" title="紅茶"&gt;
+                            | &lt;area shape="poly" coords="163,393,179,302,305,208,398,286,483,250,553,426,475,483,336,480,298,448" href="cake.html" alt="ケーキ" title="ケーキ"&gt;
+                            | &lt;/map&gt;
+                        p='<map>はイメージマップの設定を定義する要素です。イメージマップの設定を画像に適用すると、画像の上に複数のエリアを構成し、各エリアにリンクを設定することができます。'
+                        p='たとえば、サンプルでは<map>のname属性でマップ名を「mymap」と指定したイメージマップの設定を用意しています。この設定を画像に適用するためには、<img>のusemap属性でマップ名を「#mymap」と指定します。'
+                        P='各エリアの形状やリンク先などは<area>で指定します。まずは、shape属性で形状を、coords属性で座標を指定してエリアを構成します。構成できる形状は四角形、円形、多角形の3種類です。座標は画像の左上を「0, 0」とし、「x, y」の形で以下のように指定します。サンプルでは、ティーポット部分に四角形、紅茶部分に円形、ケーキ部分に多角形のエリアを構成しています。'
+                        table.table
+                            tr
+                                th 形状
+                                th shape属性の値
+                                th coords属性の値
+                            tr
+                                td 四角形
+                                td rect
+                                td 左上の座標、右下の座標
+                            tr
+                                td 円形
+                                td circle
+                                td 中心の座標, 半径
+                            tr
+                                td 多角形
+                                td poly
+                                td 各角の座標を「,（カンマ）」で区切って指定
+                            tr
+                                td 標準
+                                td default
+                                td なし（画像全体がエリアとなります）
+                        p='次に、href属性でリンクを先に示し、alt属性で代替テキストを指定します。このほか、<area>には以下のような属性を指定することが可能です。cordsとshape属性以外は、<a>でも指定できるリンク関連の属性となっています。'
+                        table.table
+                            tr
+                                td='<area>の属性'
+                                td 機能
+                            tr
+                                td coords
+                                td 座標を指定。
+                            tr
+                                td shape
+                                td 形状を指定。
+                            tr
+                                td href
+                                td リンク先を指定。
+                            tr
+                                td alt
+                                td 代替テキストを指定。
+                            tr
+                                td target
+                                td ブラウジング・コンテキストを指定。
+                            tr
+                                td rel
+                                td リンクタイプを指定。
+                            tr
+                                td media
+                                td 最適なメディアを指定。
+                            tr
+                                td hreflang
+                                td 言語の種類を指定。
+                            tr
+                                td type
+                                td MIME TYPEを指定。
+                        .alert.alert-warning NOTES: download属性とping属性
+                        p='HTML Living Standardでは、<area>にdownload属性とping属性が追加されています。'
+                        .alert.alert-info 選択できないエリアを構成する
+                        p='<area>でhref属性を指定しなかった場合、選択できないエリアを構成することができます。たとえば、下のサンプルでは「ティーポット」エリアの右下の部分に選択できないエリアを構成し、シュガーポットの部分にカーソルを重ねてもリンクが機能しないように設定しています。'
+                        p='なお、<area>は先に記述した設定が優先されるため、選択できないエリアの設定は「ティーポット」エリアの設定よりも先に記述する必要があります。'
+                        p
+                            a.btn.btn-default(href='../demo/html/sample1/05/153.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            | &lt;map name="mymap"&gt;
+                            | &lt;area shape="poly" coords="601,245,661,215,690,167,763,145,786,116,784,246"&gt;
+                            | 
+                            | &lt;area shape="rect" coords="390,12,770,237" href="pot.html" alt="ティーポット" title="ティーポット"&gt;
+                            | ...
+                            | &lt;/map&gt;
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

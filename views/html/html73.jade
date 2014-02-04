@@ -1,240 +1,240 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;メーター
-						.panel-body
-							.alert.alert-info メーター
-							table.browser-support
-								tr
-									td.not-support
-										img(src='../images/ic-apple.png')
-									td.not-support
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td.not-support
-										img(src='../images/ic-ie.png')
-							pre
-								| &lt;meter&gt;...&lt;/meter&gt;
-							table.table
-								tr
-									td カテゴリー
-									td
-										| フローコンテンツ／フレージングコンテンツ／ラベラブル要素／パルパブルコンテンツ
-								tr
-									td 記述可能な場所
-									td
-										| フレージングコンテンツが記述できる場所
-								tr
-									td コンテンツモデル
-									td フレージングコンテンツ（&lt;meter&gt;を除く））
-								tr
-									td 構成するボックス
-									td - （インラインブロックボックスを構成することが期待される）
-								tr
-									td 属性
-									td value／min／max／low／high／optimum／グローバル
-								tr
-									td 標準的なスタイル
-									td
-										| -
-							pre(class='prettyprint linenums:1')
-								| &lt;h1&gt;USAGE&lt;/h1&gt;
-								| 
-								| &lt;p&gt;
-								| ディスク使用量： 
-								| &lt;meter value="324" max="1000"&gt;&lt;/meter&gt;
-								| &lt;/p&gt;
-							p='<meter>では、最小値、最大値共に値を示すことができます。最小値と最大値はminとmax属性で、値はvalue属性で指定します。minまたはmax属性を省略した場合、最小値は0、最大値は1となります。value属性の省略は認められていません。'
-							p='たとえば、サンプルではディスク使用量1000GBのうち、324GBを使用していることを示しています。単位を明示する属性などは用意されていませんが、下のようにtitle属性で記述する方法が提案されています。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;USAGE&lt;/h1&gt;
-									| 
-									| &lt;p&gt;
-									| ディスク使用量： 
-									| &lt;meter value="324" max="1000" title="gigabytes"&gt;&lt;/meter&gt;
-									| &lt;/p&gt;
-								figcaption title属性で値の単位を示したもの。
-							p='このほか、<meter>で指定できる属性は以下のようになっています。'
-							table.table
-								tr
-									th='<meter>で指定できる属性'
-									th 機能
-								tr
-									td value
-									td 値
-								tr
-									td min
-									td 最小値
-								tr
-									td max
-									td 最大値
-								tr
-									td low
-									td 「低い」と判断する閾値
-								tr
-									td high
-									td 「高い」と判断する閾値
-								tr
-									td optimum
-									td 「最適」と判断する閾値
-							.alert.alert-warning NOTES: 
-							p='<meter>の中には、未対応なブラウザに表示するコンテンツを記述することができます。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/286.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;USAGE&lt;/h1&gt;
-									| 
-									| &lt;p&gt;
-									| ディスク使用量： &lt;meter value="324" max="1000"&gt;324/1000 GB&lt;/meter&gt;
-									| &lt;/p&gt;
-								figcaption='<meter>に未対応なブラウザの表示。'
-							.alert.alert-info 最適な範囲の表示
-							p
-								a.btn.btn-default(href='../demo/html/sample1/09/287.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;p&gt;
-								| ディスク使用量：
-								| &lt;meter value="324" max="1000"
-								|  low="600" high="800" optimum="500"&gt;&lt;/meter&gt;
-								| &lt;/p&gt;
-								| 
-								| &lt;p&gt;
-								| ディスク使用量：
-								| &lt;meter value="700" max="1000"
-								|  low="600" high="800" optimum="500"&gt;&lt;/meter&gt;
-								| &lt;/p&gt;
-								| 
-								| &lt;p&gt;
-								| ディスク使用量：
-								| &lt;meter value="900" max="1000"
-								|  low="600" high="800" optimum="500"&gt;&lt;/meter&gt;
-								| &lt;/p&gt;
-							p='low、high、optimum属性を利用すると、値を「低」「中」「高」の3つの範囲に分類し、どこが最適な範囲であるかを示すことができます。'
-							p='たとえば、サンプルではlowとhigh属性を利用して、0〜1000の値を「600」と「800」で区切り、「低」「中」「高」の3つの範囲に分類しています。さらに、optimum属性の値を「低」の範囲の適当な値に設定することにより、「低」の部分を最適な範囲であると示すことができます。'
-							p='これにより、value属性の値が「低」に属する場合は緑色で、「中」の場合は黄色で、「高」の場合は赤色で表示されるようになります。'
-							p='なお、optimum属性を省略した場合は「中」の範囲が最適であると判別されます。'
-							.alert.alert-warning NOTES: 閾値が含まれる範囲
-							p='lowとhigh属性で指定した閾値がどの範囲に含まれるか葉、最適な範囲をどこに設定したかによって変わります。たとえば、サンプルでは下のようになります。'
-							table.table
-								tr
-									th
-									th 「低」の範囲
-									th 「中」の範囲
-									th 「高」の範囲
-								tr
-									th 最適な範囲が「低」の場合
-									td 0〜600
-									td 601〜800
-									td 801〜1000
-								tr
-									th 最適な範囲が「中」の場合
-									td 0〜599
-									td 600〜800
-									td 801〜1000
-								tr
-									th 最適な範囲が「高」の場合
-									td 0〜599
-									td 600〜799
-									td 800〜1000
-							.alert.alert-warning NOTES: すべての要素で利用できるイベントハンドラ
-							p='<input type="button">のサンプルでは、ボタンをクリックしたときに実行するJavaScriptの処理を指定するため、onclick属性を利用しています。この属性はグローバル属性と同じように、HTML5のすべての要素で利用することが可能です。'
-							p='なお、onclick属性のほかにも、以下の属性がすべての要素で利用できるものとして定義されています。'
-							table.table
-								tr
-									td onabort
-									td ondragleave
-									td onload
-									td onratechange
-								tr
-									td onblur
-									td ondragover
-									td onloadeddata
-									td onreset
-								tr
-									td oncancel
-									td ondragstart
-									td onloadedmetadata
-									td onscroll
-								tr
-									td oncanplay
-									td ondrop
-									td onloadstart
-									td onseeked
-								tr
-									td oncanplaythrough
-									td ondurationchange
-									td onmousedown
-									td onseeking
-								tr
-									td onchange
-									td onemptied
-									td onmousemove
-									td onselect
-								tr
-									td onclick
-									td onended
-									td onmouseout
-									td onshow
-								tr
-									td onclose
-									td onerror
-									td onmouseover
-									td onstalled
-								tr
-									td oncontextmenu
-									td onfocus
-									td onmouseup
-									td onsubmit
-								tr
-									td oncuechange
-									td oninput
-									td onmousewheel
-									td onsuspend
-								tr
-									td ondblclick
-									td oninvalid
-									td onpause
-									td ontimeupdate
-								tr
-									td ondrag
-									td onkeydown
-									td onplay
-									td onvolumechange
-								tr
-									td ondragend
-									td onkeypress
-									td onplaying
-									td onwaiting
-								tr
-									td ondragenter
-									td onkeyup
-									td onprogress
-									td
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;メーター
+                        .panel-body
+                            .alert.alert-info メーター
+                            table.browser-support
+                                tr
+                                    td.not-support
+                                        img(src='../images/ic-apple.png')
+                                    td.not-support
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td.not-support
+                                        img(src='../images/ic-ie.png')
+                            pre
+                                | &lt;meter&gt;...&lt;/meter&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td
+                                        | フローコンテンツ／フレージングコンテンツ／ラベラブル要素／パルパブルコンテンツ
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | フレージングコンテンツが記述できる場所
+                                tr
+                                    td コンテンツモデル
+                                    td フレージングコンテンツ（&lt;meter&gt;を除く））
+                                tr
+                                    td 構成するボックス
+                                    td - （インラインブロックボックスを構成することが期待される）
+                                tr
+                                    td 属性
+                                    td value／min／max／low／high／optimum／グローバル
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        | -
+                            pre(class='prettyprint linenums:1')
+                                | &lt;h1&gt;USAGE&lt;/h1&gt;
+                                | 
+                                | &lt;p&gt;
+                                | ディスク使用量： 
+                                | &lt;meter value="324" max="1000"&gt;&lt;/meter&gt;
+                                | &lt;/p&gt;
+                            p='<meter>では、最小値、最大値共に値を示すことができます。最小値と最大値はminとmax属性で、値はvalue属性で指定します。minまたはmax属性を省略した場合、最小値は0、最大値は1となります。value属性の省略は認められていません。'
+                            p='たとえば、サンプルではディスク使用量1000GBのうち、324GBを使用していることを示しています。単位を明示する属性などは用意されていませんが、下のようにtitle属性で記述する方法が提案されています。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;USAGE&lt;/h1&gt;
+                                    | 
+                                    | &lt;p&gt;
+                                    | ディスク使用量： 
+                                    | &lt;meter value="324" max="1000" title="gigabytes"&gt;&lt;/meter&gt;
+                                    | &lt;/p&gt;
+                                figcaption title属性で値の単位を示したもの。
+                            p='このほか、<meter>で指定できる属性は以下のようになっています。'
+                            table.table
+                                tr
+                                    th='<meter>で指定できる属性'
+                                    th 機能
+                                tr
+                                    td value
+                                    td 値
+                                tr
+                                    td min
+                                    td 最小値
+                                tr
+                                    td max
+                                    td 最大値
+                                tr
+                                    td low
+                                    td 「低い」と判断する閾値
+                                tr
+                                    td high
+                                    td 「高い」と判断する閾値
+                                tr
+                                    td optimum
+                                    td 「最適」と判断する閾値
+                            .alert.alert-warning NOTES: 
+                            p='<meter>の中には、未対応なブラウザに表示するコンテンツを記述することができます。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/286.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;USAGE&lt;/h1&gt;
+                                    | 
+                                    | &lt;p&gt;
+                                    | ディスク使用量： &lt;meter value="324" max="1000"&gt;324/1000 GB&lt;/meter&gt;
+                                    | &lt;/p&gt;
+                                figcaption='<meter>に未対応なブラウザの表示。'
+                            .alert.alert-info 最適な範囲の表示
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/09/287.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;p&gt;
+                                | ディスク使用量：
+                                | &lt;meter value="324" max="1000"
+                                |  low="600" high="800" optimum="500"&gt;&lt;/meter&gt;
+                                | &lt;/p&gt;
+                                | 
+                                | &lt;p&gt;
+                                | ディスク使用量：
+                                | &lt;meter value="700" max="1000"
+                                |  low="600" high="800" optimum="500"&gt;&lt;/meter&gt;
+                                | &lt;/p&gt;
+                                | 
+                                | &lt;p&gt;
+                                | ディスク使用量：
+                                | &lt;meter value="900" max="1000"
+                                |  low="600" high="800" optimum="500"&gt;&lt;/meter&gt;
+                                | &lt;/p&gt;
+                            p='low、high、optimum属性を利用すると、値を「低」「中」「高」の3つの範囲に分類し、どこが最適な範囲であるかを示すことができます。'
+                            p='たとえば、サンプルではlowとhigh属性を利用して、0〜1000の値を「600」と「800」で区切り、「低」「中」「高」の3つの範囲に分類しています。さらに、optimum属性の値を「低」の範囲の適当な値に設定することにより、「低」の部分を最適な範囲であると示すことができます。'
+                            p='これにより、value属性の値が「低」に属する場合は緑色で、「中」の場合は黄色で、「高」の場合は赤色で表示されるようになります。'
+                            p='なお、optimum属性を省略した場合は「中」の範囲が最適であると判別されます。'
+                            .alert.alert-warning NOTES: 閾値が含まれる範囲
+                            p='lowとhigh属性で指定した閾値がどの範囲に含まれるか葉、最適な範囲をどこに設定したかによって変わります。たとえば、サンプルでは下のようになります。'
+                            table.table
+                                tr
+                                    th
+                                    th 「低」の範囲
+                                    th 「中」の範囲
+                                    th 「高」の範囲
+                                tr
+                                    th 最適な範囲が「低」の場合
+                                    td 0〜600
+                                    td 601〜800
+                                    td 801〜1000
+                                tr
+                                    th 最適な範囲が「中」の場合
+                                    td 0〜599
+                                    td 600〜800
+                                    td 801〜1000
+                                tr
+                                    th 最適な範囲が「高」の場合
+                                    td 0〜599
+                                    td 600〜799
+                                    td 800〜1000
+                            .alert.alert-warning NOTES: すべての要素で利用できるイベントハンドラ
+                            p='<input type="button">のサンプルでは、ボタンをクリックしたときに実行するJavaScriptの処理を指定するため、onclick属性を利用しています。この属性はグローバル属性と同じように、HTML5のすべての要素で利用することが可能です。'
+                            p='なお、onclick属性のほかにも、以下の属性がすべての要素で利用できるものとして定義されています。'
+                            table.table
+                                tr
+                                    td onabort
+                                    td ondragleave
+                                    td onload
+                                    td onratechange
+                                tr
+                                    td onblur
+                                    td ondragover
+                                    td onloadeddata
+                                    td onreset
+                                tr
+                                    td oncancel
+                                    td ondragstart
+                                    td onloadedmetadata
+                                    td onscroll
+                                tr
+                                    td oncanplay
+                                    td ondrop
+                                    td onloadstart
+                                    td onseeked
+                                tr
+                                    td oncanplaythrough
+                                    td ondurationchange
+                                    td onmousedown
+                                    td onseeking
+                                tr
+                                    td onchange
+                                    td onemptied
+                                    td onmousemove
+                                    td onselect
+                                tr
+                                    td onclick
+                                    td onended
+                                    td onmouseout
+                                    td onshow
+                                tr
+                                    td onclose
+                                    td onerror
+                                    td onmouseover
+                                    td onstalled
+                                tr
+                                    td oncontextmenu
+                                    td onfocus
+                                    td onmouseup
+                                    td onsubmit
+                                tr
+                                    td oncuechange
+                                    td oninput
+                                    td onmousewheel
+                                    td onsuspend
+                                tr
+                                    td ondblclick
+                                    td oninvalid
+                                    td onpause
+                                    td ontimeupdate
+                                tr
+                                    td ondrag
+                                    td onkeydown
+                                    td onplay
+                                    td onvolumechange
+                                tr
+                                    td ondragend
+                                    td onkeypress
+                                    td onplaying
+                                    td onwaiting
+                                tr
+                                    td ondragenter
+                                    td onkeyup
+                                    td onprogress
+                                    td
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

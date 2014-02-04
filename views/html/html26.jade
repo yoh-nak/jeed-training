@@ -1,209 +1,209 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;図版とキャプション
-						.panel-body
-							.alert.alert-info 図版とキャプション
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							pre
-								| &lt;figure&gt;...&lt;/figure&gt;
-							table.table
-								tr
-									td カテゴリー
-									td フローコンテンツ／セクショニングルート／パルパブルコンテンツ
-								tr
-									td 記述可能な場所
-									td
-										| フローコンテンツが記述できる場所
-								tr
-									td コンテンツモデル
-									td
-										| フローコンテンツのみ
-										br
-										| フローコンテンツとそれに続く1つの&lt;figcaption&gt;
-										br
-										| 1つの&lt;figcaption&gt;とそれに続くフローコンテンツ
-								tr
-									td 構成するボックス
-									td block
-								tr
-									td 属性
-									td グローバル 
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| figure {
-											| 	display: block;
-											| 	unicode-bidi: isolate;
-											| 	margin-top: 1em;
-											| 	margin-bottom: 1em;
-											| 	margin-left: 40px;
-											| 	margin-right: 40px;
-											| }
-							pre
-								| &lt;figcaption&gt;...&lt;/figcaption&gt;
-							table.table
-								tr
-									td カテゴリー
-									td なし
-								tr
-									td 記述可能な場所
-									td
-										| &lt;figure&gt;の最初または最後の子要素
-								tr
-									td コンテンツモデル
-									td フローコンテンツ
-								tr
-									td 構成するボックス
-									td block
-								tr
-									td 属性
-									td グローバル
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| figcaption {
-											| 	display: block;
-											| 	unicode-bidi: isolate;
-											| }
-							p
-								a.btn.btn-default(href='../demo/html/sample1/06/174-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;article&gt;
-								| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
-								| 
-								| &lt;p&gt;世界中にはたくさんのお茶があります。緑茶に紅茶、ウーロン茶など、その製法や味わいもさまざまですが、リラックスしたり、ちょっと休憩したいときなどには欠かすことができません。&lt;/p&gt;
-								| 
-								| &lt;figure&gt;
-								| &lt;figcaption&gt;お茶の時間です！&lt;/figcaption&gt;
-								| &lt;img src="img/tea.jpg" alt="テーブルに紅茶と砂糖とケーキセットをサーブしたところ"&gt;
-								| &lt;/figure&gt;
-								| 
-								| &lt;/article&gt;
-							pre(class='prettyprint linenums:1')
-								| figcaption	{text-align: center;
-								| 	margin: 5px 0;}
-							p
-								a.btn.btn-default(href='../demo/html/sample1/06/174-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;article&gt;
-								| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
-								| 
-								| &lt;p&gt;世界中にはたくさんのお茶があります。緑茶に紅茶、ウーロン茶など、その製法や味わいもさまざまですが、リラックスしたり、ちょっと休憩したいときなどには欠かすことができません。&lt;/p&gt;
-								| 
-								| &lt;figure&gt;
-								| &lt;img src="img/tea.jpg" alt="テーブルに紅茶と砂糖とケーキセットをサーブしたところ"&gt;
-								| &lt;figcaption&gt;お茶の時間です！&lt;/figcaption&gt;
-								| &lt;/figure&gt;
-								| 
-								| &lt;/article&gt;
-							pre(class='prettyprint linenums:1')
-								| figcaption	{text-align: center;
-								| 	margin: 5px 0;}
-							p='<figure>はイラストや写真、グラフ、プログラム・コード、引用文、詩といった、図板として扱いたいフロー・コンテンツを示す要素です。「図板」は自己完結したコンテンツで、一般的にメインコンテンツから参照されるものであると定義されています。また、メインコンテンツ内に挿入した図板の場合、図板のみを取り出し、欄外やAppendix、別ページなどにまとめた場合でも、メインコンテンツのセマンティクスに影響を与えないことが求められています。'
-							p='図板にキャプションをつけたい場合には<figcaption>を利用することができます。<figcaption>は<figure>の最初または最後の子要素として記述することができ、それに応じて図板の上または下にキャプションが表示されます。たとえば、サンプルでは写真を図板としてマークアップし、キャプションをつけて表示するようにしています。'
-							.alert.alert-info 参照している図板を示す場合
-							p='参照している図板を示すためには、<figure>にIDを指定し、IDに対してリンクを設定します。'
-							p='たとえば、下のサンプルではプログラム・コードを図板としてマークアップし、IDを「sample01」と指定しています。これで、<a href="#sample01">とリンクを設定することにより、この図板を参照していることを示すことができます。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/06/175.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;article&gt;
-								| &lt;h1&gt;Tips and Tricks&lt;/h1&gt;
-								| 
-								| &lt;p&gt;&lt;a href="#sample01"&gt;サンプル01&lt;/a&gt;の設定ではjQueryを利用しています。&lt;/p&gt;
-								| 
-								| &lt;figure id="sample01"&gt;
-								| &lt;figcaption&gt;サンプル01：&lt;/figcaption&gt;
-								| &lt;pre class="prettyprint linenums"&gt;
-								| &lt;code class="language-html"&gt;&lt;script&gt;
-								| $(function(){
-								|     $('h1').click(function() {
-								| 		$(this).next().slideToggle();
-								| 	}).next().hide();
-								| });
-								| &lt;/script&gt;
-								| …
-								| &lt;!-- コンテンツ --&gt;
-								| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
-								| &lt;img src="tea.jpg" alt=""&gt;
-								| &lt;/code&gt;&lt;/pre&gt;
-								| &lt;/figure&gt;
-								| 
-								| 
-								| &lt;/article&gt;
-							.alert.alert-success IE NOTES: 
-							p='IE8以前は<figure>と<figcaptionに未対応です。'
-							.alert.alert-warning NOTES:
-							p='<figure>内では、<figcaption>以外のソースが図板のソースとして扱われます。'
-							.alert.alert-info グループキャプションをつける場合
-							p='個別にキャプションをつけた複数の図板のグループに対して、さらにキャプションをつけることもできます。このキャプションは「グループキャプション」と呼ばれ、<figure>を入れ子にして下のように記述します。ここでは、3枚の画像に対して、「今月のお茶会のために用意したもの」というキャプションをつけています。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/06/176.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')	
-								| &lt;article&gt;
-								| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
-								| 
-								| &lt;p&gt;世界中にはたくさんのお茶があります。緑茶に紅茶、ウーロン茶など、その製法や味わいもさまざまですが、リラックスしたり、ちょっと休憩したいときなどには欠かすことができません。&lt;/p&gt;
-								| 
-								| &lt;figure&gt;
-								| 
-								| &lt;figure&gt;
-								| &lt;img src="img/teapot.jpg" alt="白い小さなティーポット"&gt;
-								| &lt;figcaption&gt;ティーポット&lt;/figcaption&gt;
-								| &lt;/figure&gt;
-								| 
-								| &lt;figure&gt;
-								| &lt;img src="img/teacup.jpg" alt="紅茶を入れた白いティーカップ"&gt;
-								| &lt;figcaption&gt;ティーカップ&lt;/figcaption&gt;
-								| &lt;/figure&gt;
-								| 
-								| &lt;figure&gt;
-								| &lt;img src="img/cake.jpg" alt="カットしたパウンドケーキとバニラアイス"&gt;
-								| &lt;figcaption&gt;ケーキ&lt;/figcaption&gt;
-								| &lt;/figure&gt;
-								| 
-								| &lt;figcaption&gt;今月のお茶会のために用意したもの&lt;/figcaption&gt;
-								| &lt;/figure&gt;
-								| 
-								| &lt;/article&gt;
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;図版とキャプション
+                        .panel-body
+                            .alert.alert-info 図版とキャプション
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            pre
+                                | &lt;figure&gt;...&lt;/figure&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td フローコンテンツ／セクショニングルート／パルパブルコンテンツ
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | フローコンテンツが記述できる場所
+                                tr
+                                    td コンテンツモデル
+                                    td
+                                        | フローコンテンツのみ
+                                        br
+                                        | フローコンテンツとそれに続く1つの&lt;figcaption&gt;
+                                        br
+                                        | 1つの&lt;figcaption&gt;とそれに続くフローコンテンツ
+                                tr
+                                    td 構成するボックス
+                                    td block
+                                tr
+                                    td 属性
+                                    td グローバル 
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        pre
+                                            | figure {
+                                            |     display: block;
+                                            |     unicode-bidi: isolate;
+                                            |     margin-top: 1em;
+                                            |     margin-bottom: 1em;
+                                            |     margin-left: 40px;
+                                            |     margin-right: 40px;
+                                            | }
+                            pre
+                                | &lt;figcaption&gt;...&lt;/figcaption&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td なし
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | &lt;figure&gt;の最初または最後の子要素
+                                tr
+                                    td コンテンツモデル
+                                    td フローコンテンツ
+                                tr
+                                    td 構成するボックス
+                                    td block
+                                tr
+                                    td 属性
+                                    td グローバル
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        pre
+                                            | figcaption {
+                                            |     display: block;
+                                            |     unicode-bidi: isolate;
+                                            | }
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/06/174-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;article&gt;
+                                | &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+                                | 
+                                | &lt;p&gt;世界中にはたくさんのお茶があります。緑茶に紅茶、ウーロン茶など、その製法や味わいもさまざまですが、リラックスしたり、ちょっと休憩したいときなどには欠かすことができません。&lt;/p&gt;
+                                | 
+                                | &lt;figure&gt;
+                                | &lt;figcaption&gt;お茶の時間です！&lt;/figcaption&gt;
+                                | &lt;img src="img/tea.jpg" alt="テーブルに紅茶と砂糖とケーキセットをサーブしたところ"&gt;
+                                | &lt;/figure&gt;
+                                | 
+                                | &lt;/article&gt;
+                            pre(class='prettyprint linenums:1')
+                                | figcaption    {text-align: center;
+                                |     margin: 5px 0;}
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/06/174-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;article&gt;
+                                | &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+                                | 
+                                | &lt;p&gt;世界中にはたくさんのお茶があります。緑茶に紅茶、ウーロン茶など、その製法や味わいもさまざまですが、リラックスしたり、ちょっと休憩したいときなどには欠かすことができません。&lt;/p&gt;
+                                | 
+                                | &lt;figure&gt;
+                                | &lt;img src="img/tea.jpg" alt="テーブルに紅茶と砂糖とケーキセットをサーブしたところ"&gt;
+                                | &lt;figcaption&gt;お茶の時間です！&lt;/figcaption&gt;
+                                | &lt;/figure&gt;
+                                | 
+                                | &lt;/article&gt;
+                            pre(class='prettyprint linenums:1')
+                                | figcaption    {text-align: center;
+                                |     margin: 5px 0;}
+                            p='<figure>はイラストや写真、グラフ、プログラム・コード、引用文、詩といった、図板として扱いたいフロー・コンテンツを示す要素です。「図板」は自己完結したコンテンツで、一般的にメインコンテンツから参照されるものであると定義されています。また、メインコンテンツ内に挿入した図板の場合、図板のみを取り出し、欄外やAppendix、別ページなどにまとめた場合でも、メインコンテンツのセマンティクスに影響を与えないことが求められています。'
+                            p='図板にキャプションをつけたい場合には<figcaption>を利用することができます。<figcaption>は<figure>の最初または最後の子要素として記述することができ、それに応じて図板の上または下にキャプションが表示されます。たとえば、サンプルでは写真を図板としてマークアップし、キャプションをつけて表示するようにしています。'
+                            .alert.alert-info 参照している図板を示す場合
+                            p='参照している図板を示すためには、<figure>にIDを指定し、IDに対してリンクを設定します。'
+                            p='たとえば、下のサンプルではプログラム・コードを図板としてマークアップし、IDを「sample01」と指定しています。これで、<a href="#sample01">とリンクを設定することにより、この図板を参照していることを示すことができます。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/06/175.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;article&gt;
+                                | &lt;h1&gt;Tips and Tricks&lt;/h1&gt;
+                                | 
+                                | &lt;p&gt;&lt;a href="#sample01"&gt;サンプル01&lt;/a&gt;の設定ではjQueryを利用しています。&lt;/p&gt;
+                                | 
+                                | &lt;figure id="sample01"&gt;
+                                | &lt;figcaption&gt;サンプル01：&lt;/figcaption&gt;
+                                | &lt;pre class="prettyprint linenums"&gt;
+                                | &lt;code class="language-html"&gt;&lt;script&gt;
+                                | $(function(){
+                                |     $('h1').click(function() {
+                                |         $(this).next().slideToggle();
+                                |     }).next().hide();
+                                | });
+                                | &lt;/script&gt;
+                                | …
+                                | &lt;!-- コンテンツ --&gt;
+                                | &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+                                | &lt;img src="tea.jpg" alt=""&gt;
+                                | &lt;/code&gt;&lt;/pre&gt;
+                                | &lt;/figure&gt;
+                                | 
+                                | 
+                                | &lt;/article&gt;
+                            .alert.alert-success IE NOTES: 
+                            p='IE8以前は<figure>と<figcaptionに未対応です。'
+                            .alert.alert-warning NOTES:
+                            p='<figure>内では、<figcaption>以外のソースが図板のソースとして扱われます。'
+                            .alert.alert-info グループキャプションをつける場合
+                            p='個別にキャプションをつけた複数の図板のグループに対して、さらにキャプションをつけることもできます。このキャプションは「グループキャプション」と呼ばれ、<figure>を入れ子にして下のように記述します。ここでは、3枚の画像に対して、「今月のお茶会のために用意したもの」というキャプションをつけています。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/06/176.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')    
+                                | &lt;article&gt;
+                                | &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+                                | 
+                                | &lt;p&gt;世界中にはたくさんのお茶があります。緑茶に紅茶、ウーロン茶など、その製法や味わいもさまざまですが、リラックスしたり、ちょっと休憩したいときなどには欠かすことができません。&lt;/p&gt;
+                                | 
+                                | &lt;figure&gt;
+                                | 
+                                | &lt;figure&gt;
+                                | &lt;img src="img/teapot.jpg" alt="白い小さなティーポット"&gt;
+                                | &lt;figcaption&gt;ティーポット&lt;/figcaption&gt;
+                                | &lt;/figure&gt;
+                                | 
+                                | &lt;figure&gt;
+                                | &lt;img src="img/teacup.jpg" alt="紅茶を入れた白いティーカップ"&gt;
+                                | &lt;figcaption&gt;ティーカップ&lt;/figcaption&gt;
+                                | &lt;/figure&gt;
+                                | 
+                                | &lt;figure&gt;
+                                | &lt;img src="img/cake.jpg" alt="カットしたパウンドケーキとバニラアイス"&gt;
+                                | &lt;figcaption&gt;ケーキ&lt;/figcaption&gt;
+                                | &lt;/figure&gt;
+                                | 
+                                | &lt;figcaption&gt;今月のお茶会のために用意したもの&lt;/figcaption&gt;
+                                | &lt;/figure&gt;
+                                | 
+                                | &lt;/article&gt;
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

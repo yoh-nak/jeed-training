@@ -1,205 +1,205 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;テーブルのキャプション
-						.panel-body
-							.alert.alert-info テーブルのキャプション
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							pre
-								| &lt;caption&gt;...&lt;/caption&gt;
-							table.table
-								tr
-									td カテゴリー
-									td なし
-								tr
-									td 記述可能な場所
-									td
-										| &lt;table&gt;の1つ目の子要素として記述可能
-								tr
-									td コンテンツモデル
-									td
-										| フローコンテンツ（&lt;table&gt;は除く）
-								tr
-									td 構成するボックス
-									td table
-								tr
-									td 属性
-									td グローバル 
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| caption {
-											| 	display: table-caption;
-											| 	unicode-bidi: isolate;
-											| } 
-							P='<caption>はテーブルのキャプションを示す要素で、<table>タグの中に1つ目の子要素として記述します。テーブルのタイトルや、テーブルについての説明などを記述することが可能です。'
-							p='たとえばサンプルでは「取扱い茶葉一覧」というキャプションをつけて表示しています。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/08/226-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
-								| 
-								| &lt;table&gt;
-								| &lt;caption&gt;取扱い茶葉一覧&lt;/caption&gt;
-								| &lt;tr&gt;
-								|     &lt;th&gt;銘柄&lt;/th&gt;
-								|     &lt;th&gt;産地&lt;/th&gt;
-								|     &lt;th&gt;茶葉100gの価格&lt;/th&gt;
-								| &lt;/tr&gt;
-								| ...
-								| &lt;/table&gt;
-							pre(class='prettyprint linenums:1')
-								| caption	{font-size: larger;
-								| 	margin-bottom: 5px;}
-							.alert.alert-warning NOTES: キャプションをテーブルの下に表示する
-							p='キャプションをテーブルの下に表示したい場合、<caption>の記述位置を変えることは認められていませんので、スタイルシートのcaption-sideプロパティを適用し、値を「bottom」と指定します。'
-							.alert.alert-warning NOTES: テーブルを図版としてマークアップした場合のキャプション
-							p='テーブルを図版として<figure>でマークアップした場合、キャプションは<caption>ではなく、<figcaption>で示すことが推奨されています。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/08/226-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
-								| 
-								| &lt;figure&gt;
-								| &lt;figcaption&gt;取扱い茶葉一覧&lt;/figcaption&gt;
-								| &lt;table&gt;
-								| &lt;tr&gt;
-								|     &lt;th&gt;銘柄&lt;/th&gt;
-								|     &lt;th&gt;産地&lt;/th&gt;
-								|     &lt;th&gt;茶葉100gの価格&lt;/th&gt;
-								| &lt;/tr&gt;
-								| ...
-								| &lt;/table&gt;
-								| &lt;/figure&gt;
-							.alert.alert-warning NOTES: テーブルの前に説明文を記述したもの。後に記述することも可能。
-							p='テーブルが複雑でわかりにくい場合、内容や構造など、テーブルについての説明を記述することが推奨されています。たとえば、次のような形で記述する方法が提案されています。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/08/227-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
-									| 
-									| &lt;p&gt;以下の表では、取扱いのある茶葉について銘柄ごとに産地と価格の情報をリストアップしています。価格は100gパッケージのものとなっています。&lt;/p&gt;
-									| 
-									| &lt;table&gt;
-									| &lt;caption&gt;取扱い茶葉一覧&lt;/caption&gt;
-									| &lt;tr&gt;
-									| ...
-									| &lt;/table&gt;
-								figcaption テーブルの前に説明文を記述したもの。後に記述することも可能です。
-							p
-								a.btn.btn-default(href='../demo/html/sample1/08/227-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
-									| 
-									| &lt;table&gt;
-									| &lt;caption&gt;
-									| &lt;strong&gt;取扱い茶葉一覧&lt;/strong&gt;
-									| &lt;p&gt;この表では、取扱いのある茶葉について銘柄ごとに産地と価格の情報をリストアップしています。価格は100gパッケージのものとなっています。&lt;/p&gt;
-									| &lt;/caption&gt;
-									| &lt;tr&gt;
-									| ...
-									| &lt;/table&gt;
-								figcaption='<caption>の中に説明文を記述したもの。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/08/227-3.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
-									| 
-									| &lt;table&gt;
-									| &lt;caption&gt;
-									| &lt;strong&gt;取扱い茶葉一覧&lt;/strong&gt;
-									|     &lt;details&gt;
-									|     &lt;summary&gt;一覧表について&lt;/summary&gt;
-									|     &lt;p&gt;この表では、取扱いのある茶葉について銘柄ごとに産地と価格の情報をリストアップしています。価格は100gパッケージのものとなっています。&lt;/p&gt;
-									|     &lt;/details&gt;
-									| &lt;/caption&gt;
-									| &lt;tr&gt;
-									| ...
-									| &lt;/table&gt;
-								figcaption='<caption>の中に説明文を記述し、付加的な情報として<details>でマークアップしたもの。折りたたんで表示され、クリックすることで開くことができます。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/08/228-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
-									| 
-									| &lt;figure&gt;
-									| &lt;figcaption&gt;取扱い茶葉一覧&lt;/figcaption&gt;
-									| 
-									| &lt;p&gt;以下の表では、取扱いのある茶葉について銘柄ごとに産地と価格の情報をリストアップしています。価格は100gパッケージのものとなっています。&lt;/p&gt;
-									| 
-									| &lt;table&gt;
-									| &lt;tr&gt;
-									| …
-									| &lt;/table&gt;
-									| 
-									| &lt;/figure&gt;	
-								figcaption='テーブルとその前後に記述した説明文を<figure>でマークアップし、<figcaption>でキャプションをつけたもの。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/08/228-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
-									| 
-									| &lt;figure&gt;
-									| &lt;figcaption&gt;
-									| &lt;strong&gt;取扱い茶葉一覧&lt;/strong&gt;
-									| &lt;p&gt;この表では、取扱いのある茶葉について銘柄ごとに産地と価格の情報をリストアップしています。価格は100gパッケージのものとなっています。&lt;/p&gt;
-									| &lt;/figcaption&gt;
-									| 
-									| &lt;table&gt;
-									| &lt;tr&gt;
-									| …
-									| &lt;/tr&gt;
-									| &lt;/figure&gt;
-								figcaption='<figcaption>の中に説明文を記述したもの。'
-							.alert.alert-success DIFFERENCES: 
-							p='HTML4.01やXHTML1.0では<table>のsummary属性でテーブルについての説明を記述することになっていましたが、HTML5では廃止されています。'
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;テーブルのキャプション
+                        .panel-body
+                            .alert.alert-info テーブルのキャプション
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            pre
+                                | &lt;caption&gt;...&lt;/caption&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td なし
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | &lt;table&gt;の1つ目の子要素として記述可能
+                                tr
+                                    td コンテンツモデル
+                                    td
+                                        | フローコンテンツ（&lt;table&gt;は除く）
+                                tr
+                                    td 構成するボックス
+                                    td table
+                                tr
+                                    td 属性
+                                    td グローバル 
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        pre
+                                            | caption {
+                                            |     display: table-caption;
+                                            |     unicode-bidi: isolate;
+                                            | } 
+                            P='<caption>はテーブルのキャプションを示す要素で、<table>タグの中に1つ目の子要素として記述します。テーブルのタイトルや、テーブルについての説明などを記述することが可能です。'
+                            p='たとえばサンプルでは「取扱い茶葉一覧」というキャプションをつけて表示しています。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/08/226-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+                                | 
+                                | &lt;table&gt;
+                                | &lt;caption&gt;取扱い茶葉一覧&lt;/caption&gt;
+                                | &lt;tr&gt;
+                                |     &lt;th&gt;銘柄&lt;/th&gt;
+                                |     &lt;th&gt;産地&lt;/th&gt;
+                                |     &lt;th&gt;茶葉100gの価格&lt;/th&gt;
+                                | &lt;/tr&gt;
+                                | ...
+                                | &lt;/table&gt;
+                            pre(class='prettyprint linenums:1')
+                                | caption    {font-size: larger;
+                                |     margin-bottom: 5px;}
+                            .alert.alert-warning NOTES: キャプションをテーブルの下に表示する
+                            p='キャプションをテーブルの下に表示したい場合、<caption>の記述位置を変えることは認められていませんので、スタイルシートのcaption-sideプロパティを適用し、値を「bottom」と指定します。'
+                            .alert.alert-warning NOTES: テーブルを図版としてマークアップした場合のキャプション
+                            p='テーブルを図版として<figure>でマークアップした場合、キャプションは<caption>ではなく、<figcaption>で示すことが推奨されています。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/08/226-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+                                | 
+                                | &lt;figure&gt;
+                                | &lt;figcaption&gt;取扱い茶葉一覧&lt;/figcaption&gt;
+                                | &lt;table&gt;
+                                | &lt;tr&gt;
+                                |     &lt;th&gt;銘柄&lt;/th&gt;
+                                |     &lt;th&gt;産地&lt;/th&gt;
+                                |     &lt;th&gt;茶葉100gの価格&lt;/th&gt;
+                                | &lt;/tr&gt;
+                                | ...
+                                | &lt;/table&gt;
+                                | &lt;/figure&gt;
+                            .alert.alert-warning NOTES: テーブルの前に説明文を記述したもの。後に記述することも可能。
+                            p='テーブルが複雑でわかりにくい場合、内容や構造など、テーブルについての説明を記述することが推奨されています。たとえば、次のような形で記述する方法が提案されています。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/08/227-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+                                    | 
+                                    | &lt;p&gt;以下の表では、取扱いのある茶葉について銘柄ごとに産地と価格の情報をリストアップしています。価格は100gパッケージのものとなっています。&lt;/p&gt;
+                                    | 
+                                    | &lt;table&gt;
+                                    | &lt;caption&gt;取扱い茶葉一覧&lt;/caption&gt;
+                                    | &lt;tr&gt;
+                                    | ...
+                                    | &lt;/table&gt;
+                                figcaption テーブルの前に説明文を記述したもの。後に記述することも可能です。
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/08/227-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+                                    | 
+                                    | &lt;table&gt;
+                                    | &lt;caption&gt;
+                                    | &lt;strong&gt;取扱い茶葉一覧&lt;/strong&gt;
+                                    | &lt;p&gt;この表では、取扱いのある茶葉について銘柄ごとに産地と価格の情報をリストアップしています。価格は100gパッケージのものとなっています。&lt;/p&gt;
+                                    | &lt;/caption&gt;
+                                    | &lt;tr&gt;
+                                    | ...
+                                    | &lt;/table&gt;
+                                figcaption='<caption>の中に説明文を記述したもの。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/08/227-3.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+                                    | 
+                                    | &lt;table&gt;
+                                    | &lt;caption&gt;
+                                    | &lt;strong&gt;取扱い茶葉一覧&lt;/strong&gt;
+                                    |     &lt;details&gt;
+                                    |     &lt;summary&gt;一覧表について&lt;/summary&gt;
+                                    |     &lt;p&gt;この表では、取扱いのある茶葉について銘柄ごとに産地と価格の情報をリストアップしています。価格は100gパッケージのものとなっています。&lt;/p&gt;
+                                    |     &lt;/details&gt;
+                                    | &lt;/caption&gt;
+                                    | &lt;tr&gt;
+                                    | ...
+                                    | &lt;/table&gt;
+                                figcaption='<caption>の中に説明文を記述し、付加的な情報として<details>でマークアップしたもの。折りたたんで表示され、クリックすることで開くことができます。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/08/228-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+                                    | 
+                                    | &lt;figure&gt;
+                                    | &lt;figcaption&gt;取扱い茶葉一覧&lt;/figcaption&gt;
+                                    | 
+                                    | &lt;p&gt;以下の表では、取扱いのある茶葉について銘柄ごとに産地と価格の情報をリストアップしています。価格は100gパッケージのものとなっています。&lt;/p&gt;
+                                    | 
+                                    | &lt;table&gt;
+                                    | &lt;tr&gt;
+                                    | …
+                                    | &lt;/table&gt;
+                                    | 
+                                    | &lt;/figure&gt;    
+                                figcaption='テーブルとその前後に記述した説明文を<figure>でマークアップし、<figcaption>でキャプションをつけたもの。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/08/228-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+                                    | 
+                                    | &lt;figure&gt;
+                                    | &lt;figcaption&gt;
+                                    | &lt;strong&gt;取扱い茶葉一覧&lt;/strong&gt;
+                                    | &lt;p&gt;この表では、取扱いのある茶葉について銘柄ごとに産地と価格の情報をリストアップしています。価格は100gパッケージのものとなっています。&lt;/p&gt;
+                                    | &lt;/figcaption&gt;
+                                    | 
+                                    | &lt;table&gt;
+                                    | &lt;tr&gt;
+                                    | …
+                                    | &lt;/tr&gt;
+                                    | &lt;/figure&gt;
+                                figcaption='<figcaption>の中に説明文を記述したもの。'
+                            .alert.alert-success DIFFERENCES: 
+                            p='HTML4.01やXHTML1.0では<table>のsummary属性でテーブルについての説明を記述することになっていましたが、HTML5では廃止されています。'
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

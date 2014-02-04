@@ -1,286 +1,286 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;ルビ（ふりがな）
-						.panel-body
-							.alert.alert-info ルビ（ふりがな）
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td.not-support
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td.not-support
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							pre
-								| &lt;ruby&gt;
-								| ベース
-								| &lt;rt&gt;ルビ&lt;/rt&gt;
-								| &lt;/ruby&gt;
-							pre
-								| &lt;ruby&gt;
-								| ベース
-								| &lt;rp&gt;左括弧&lt;/rp&gt;
-								| &lt;rt&gt;ルビ&lt;/rt&gt;
-								| &lt;rp&gt;右括弧&lt;/rp&gt;
-								| &lt;/ruby&gt;
-							table.table
-								tr
-									td カテゴリー
-									td フローコンテンツ／フレージングコンテンツ／パルパブルコンテンツ
-								tr
-									td 記述可能な場所
-									td
-										| フレージングコンテンツが記述できる場所
-								tr
-									td コンテンツモデル
-									td
-										| ・ルビ関連以外のフレージングコンテンツに続く1つ以上の&lt;rt>または&lt;rp&gt;&lt;rt&gt;&lt;/rp&gt;
-										br
-										| ・&lt;ruby&gt;を子要素に持たない<ruby&gt;
-								tr
-									td 構成するボックス
-									td ruby
-								tr
-									td 属性
-									td グローバル
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| ruby {
-											| 	display: ruby;
-											| }
-							pre
-								| &lt;rt&gt;...&lt;/rt&gt;
-							table.table
-								tr
-									td カテゴリー
-									td なし
-								tr
-									td 記述可能な場所
-									td
-										| &lt;ruby&gt;内
-								tr
-									td コンテンツモデル
-									td フレージングコンテンツ
-								tr
-									td 構成するボックス
-									td ruby-text;
-								tr
-									td 属性
-									td グローバル
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| rt {
-											| 	display: ruby-text;
-											| }
-							pre
-								| &lt;rp&gt;...&lt;/rp&gt;
-							table.table
-								tr
-									td カテゴリー
-									td なし
-								tr
-									td 記述可能な場所
-									td
-										| &lt;ruby&gt;内の&lt;rt&gt;前後
-								tr
-									td コンテンツモデル
-									td フレージングコンテンツ
-								tr
-									td 構成するボックス
-									td inline
-								tr
-									td 属性
-									td グローバル
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| rp {
-											|     display: none;
-											| }
-							P='<ruby>と<rt>を利用すると、文字や語句に対してルビ（ふりがな）をつけることができます。以下のような形で記述することができ、<ruby>ではベース（親文字）となる文字や語句を、<rt>ではルビを示します。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/07/206.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
-									| 
-									| &lt;p&gt;
-									| &lt;ruby&gt;紅&lt;rt&gt;こう&lt;/rt&gt;&lt;/ruby&gt;&lt;ruby&gt;茶&lt;rt&gt;ちゃ&lt;/rt&gt;&lt;/ruby&gt;にはたくさんの&lt;ruby&gt;銘&lt;rt&gt;めい&lt;/rt&gt;&lt;/ruby&gt;&lt;ruby&gt;柄&lt;rt&gt;がら&lt;/rt&gt;&lt;/ruby&gt;があります。
-									| &lt;/p&gt;
-								figcaption ベースとルビを文字単位で指定したもの。
-							.alert.alert-success IE NOTES: 
-							p ルビ関連はもともとInternet Explorerが拡張した機能で、HTML5で採用された機能です。そのため、IE8以前も対応しています。
-							p
-								a.btn.btn-default(href='../demo/html/sample1/07/207-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
-									| 
-									| &lt;p&gt;
-									| &lt;ruby&gt;紅&lt;rt&gt;こう&lt;/rt&gt;茶&lt;rt&gt;ちゃ&lt;/rt&gt;&lt;/ruby&gt;にはたくさんの&lt;ruby&gt;銘&lt;rt&gt;めい&lt;/rt&gt;柄&lt;rt&gt;がら&lt;/rt&gt;&lt;/ruby&gt;があります。
-									| &lt;/p&gt;
-								figcaption ベースを語句単位で指定し、文字ごとにルビをつけたもの。
-							p
-								a.btn.btn-default(href='../demo/html/sample1/07/207-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
-									| 
-									| &lt;p&gt;
-									| &lt;ruby&gt;紅茶&lt;rt&gt;こうちゃ&lt;/rt&gt;&lt;/ruby&gt;にはたくさんの&lt;ruby&gt;銘柄&lt;rt&gt;めいがら&lt;/rt&gt;&lt;/ruby&gt;があります。
-									| &lt;/p&gt;
-								figcaption ベースとルビを語句単位で指定したもの。
-							.alert.alert-warning NOTES: 
-							P='iOS4.xとAndroid2.3.xは<ruby>には対応していますが、ルビの前後に改行が入り、表示位置がずれるという問題が見られます。たとえば、ベースとルビを語句単位で指定したサンプルを表示すると次のようになります。'
-							pre(class='prettyprint linenums:1')
-								| &lt;ruby&gt;紅茶&lt;rt&gt;こうちゃ&lt;/rt&gt;&lt;/ruby&gt;にはたくさんの&lt;ruby&gt;銘柄&lt;rt&gt;めいがら&lt;/rt&gt;&lt;ruby&gt;があります。
-							p='この問題を解決するためには、<ruby>と<rt>に対して下のようにスタイルシートを適用します。iOS4.xとAndroid2.3.xで表示を確認すると、次のように語句の下にルビが表示されるようになったことがわかります。'
-							pre(class='prettyprint linenums:1')
-								| ruby {
-								| 	display: inline-block;
-								| 	vertical-align: top;
-								| }
-								| rt {
-								| 	text-align: left;
-								| }
-							p なお、上記のようにスタイルシートの設定を適用すると、ChromeやSafariでもルビが語句の下に表示されるようになり、Internet Explorerではルビが本文に表示されてしまいます。
-							p これを回避するためには、スタイルシートの設定をiOS4.xやAndroid2.3.xのブラウザで表示した時のみ適用する必要があります。
-							.alert.alert-info 説明用のルビ
-							p ベースとなる語句を別の形で表現したものや、語句についての説明などをルビとしてつけることもできます。ここでは、英語で表記したものをルビとして指定しています。
-							p
-								a.btn.btn-default(href='../demo/html/sample1/07/208.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
-									| 
-									| &lt;p&gt;
-									| &lt;ruby&gt;紅茶&lt;rt lang="en"&gt;tea&lt;/rt&gt;&lt;/ruby&gt;にはたくさんの&lt;ruby&gt;銘柄&lt;rt lang="en"&gt;brand&lt;/rt&gt;&lt;/ruby&gt;があります。
-									| &lt;/p&gt;
-								figcaption 英語表記をルビとして指定したもの。
-							p
-								a.btn.btn-default(href='../demo/html/sample1/07/209-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
-									| 
-									| &lt;p&gt;
-									| &lt;ruby&gt;紅茶&lt;rt&gt;ティー&lt;/rt&gt;&lt;/ruby&gt;にはたくさんの&lt;ruby&gt;銘柄&lt;rt&gt;ブランド&lt;/rt&gt;&lt;/ruby&gt;があります。
-									| &lt;/p&gt;
-								figcaption 英語表記をカタカナにして、ルビとして指定したもの。
-							.alert.alert-info 2つのルビ
-							p='文字や語句に対して、読み方と説明の2つのルビをつけることもできます。その場合、下のように<ruby>を入れ子にして記述します。ここでは、語句に対して1文字ずつ読み仮名をつけた上で、英語表記のルビをつけるようにしています。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/07/209-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
-								| 
-								| &lt;p&gt;
-								| &lt;ruby&gt;&lt;ruby&gt;紅&lt;rt&gt;こう&lt;/rt&gt;茶&lt;rt&gt;ちゃ&lt;/rt&gt;&lt;/ruby&gt;&lt;rt lang="en"&gt;tea&lt;/rt&gt;&lt;/ruby&gt;にはたくさんの&lt;ruby&gt;&lt;ruby&gt;銘&lt;rt&gt;めい&lt;/rt&gt;柄&lt;rt&gt;がら&lt;/rt&gt;&lt;/ruby&gt;&lt;rt lang="en"&gt;brand&lt;/rt&gt;&lt;/ruby&gt;があります。
-								| &lt;/p&gt;
-							.alert.alert-success IE NOTES: 
-							p='Internet Explorerの場合、2つのルビのうち1つだけが文字の上に表示されます。たとえば、IE9以前では、内側の<ruby>で指定したルビは文字の上に、外側の<ruby>で指定したルビは本文中に表示されます。'
-							p='IE10では、外側の<ruby>で指定したルビが文字の上に、内側の<ruby>で指定したルビが本文中に表示されます。このとき、本文中のルビも小さな文字で表示されるようになっています。'
-							.alert.alert-info 未対応ブラウザ用の括弧の記述
-							p='未対応のブラウザではルビが本文中に表示されるため、そのままでは読みづらくなってしまいます。そこで、ルビの前後に挿入する括弧を<rp>で指定します。ここではルビの前後にカギ括弧()を挿入するようにしています。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
-									| 
-									| &lt;p&gt;
-									| &lt;ruby&gt;紅茶&lt;rt&gt;こうちゃ&lt;/rt&gt;&lt;/ruby&gt;にはたくさんの&lt;ruby&gt;銘柄&lt;rt&gt;めいがら&lt;/rt&gt;&lt;/ruby&gt;があります。
-									| &lt;/p&gt;
-								figcaption='Firefoxでの表示。<rp>で括弧を表示していないもの。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/07/210.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
-									| 
-									| &lt;p&gt;
-									| &lt;ruby&gt;紅茶&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;こうちゃ&lt;/rt&gt;&lt;rp&gt;）&lt;/rp&gt;&lt;/ruby&gt;にはたくさんの&lt;ruby&gt;銘柄&lt;rp&gt;（&lt;/rp&gt;&lt;rt&gt;めいがら&lt;/rt&gt;&lt;rp&gt;）&lt;/rp&gt;&lt;/ruby&gt;があります。
-									| &lt;/p&gt;
-								figcaption='Firefoxでの表示。<rp>で括弧を表示したもの。'	
-							p='なお、セマンティクスの上では<rp>は何も示さず、マークアップした中身は存在しないものとして扱うように定義されています。'
-							.alert.alert-warning NOTES: 
-							p='ルビの表示には対応したブラウザでは、<rp>で指定した括弧が表示されることはありません。'
-							.alert.alert-warning NOTES: ベースとなる文字のマークアップ
-							p='HTML5にはベースとなる文字のみを示す要素は用意されていません。そのため、次のように<ruby>に対してスタイルシートを適用すると、ベースの文字だけでなく、<rt>でマークアップしたルビにも設定が適用されてしまいます。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;p&gt;
-									| &lt;ruby&gt;紅茶&lt;rt&gt;こうちゃ&lt;/rt&gt;&lt;/ruby&gt;にはたくさんの&lt;ruby&gt;銘柄&lt;rt&gt;めいがら&lt;/rt&gt;&lt;/ruby&gt;があります。
-									| &lt;/p&gt;
-								pre(class='prettyprint linenums:1')
-									| ruby {
-									| 	color: red;
-									| }
-								figcaption='<ruby>の文字色を赤色に指定したもの。ルビも赤くなります。'
-							p='この問題を回避するため、W3Cの草案「Use Cases & Exploratory Approaches for Ruby Markup」では、ベースとなる文字を<span>でマークアップし、スタイルシートを適用するようにする方法が提案されています。'
-							p
-								| Use Cases & Exploratory Approache for Ruby Markup
-								br
-								a(href='http://www.w3.org/TR/ruby-use-cases/',target='_blank') http://www.w3.org/TR/ruby-use-cases/
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;p&gt;
-									| &lt;ruby&gt;&lt;span&gt;紅茶&lt;/span&gt;&lt;rt&gt;こうちゃ&lt;/rt&gt;&lt;/ruby&gt;にはたくさんの&lt;ruby&gt;&lt;span&gt;銘柄&lt;/span&gt;&lt;rt&gt;めいがら&lt;/rt&gt;&lt;/ruby&gt;があります。
-									| &lt;/p&gt;
-								pre(class='prettyprint linenums:1')
-									| ruby span {
-									| 	color: red;
-									| }
-								figcaption='<span>の文字色を赤色に指定したもの。ルビは赤くなりません。'
-							p='また、この草案ではベースを示す<rb>という要素が提案されています。<rb>を利用すると次のようにベースをマークアップし、デザインをカスタマイズすることができます。'
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;p&gt;
-									| &lt;ruby&gt;&lt;rb&gt;紅茶&lt;/rb&gt;&lt;rt&gt;こうちゃ&lt;/rt&gt;&lt;/ruby&gt;にはたくさんの&lt;ruby&gt;&lt;rb&gt;銘柄&lt;/rb&gt;&lt;rt&gt;めいがら&lt;/rt&gt;&lt;/ruby&gt;があります。
-									| &lt;/p&gt;
-								pre(class='prettyprint linenums:1')
-									| rb {
-									| 	color: red;
-									| }
-								figcaption='<rb>の文字色を赤色にしたもの。ルビは赤くなりません。'
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;ルビ（ふりがな）
+                        .panel-body
+                            .alert.alert-info ルビ（ふりがな）
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td.not-support
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td.not-support
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            pre
+                                | &lt;ruby&gt;
+                                | ベース
+                                | &lt;rt&gt;ルビ&lt;/rt&gt;
+                                | &lt;/ruby&gt;
+                            pre
+                                | &lt;ruby&gt;
+                                | ベース
+                                | &lt;rp&gt;左括弧&lt;/rp&gt;
+                                | &lt;rt&gt;ルビ&lt;/rt&gt;
+                                | &lt;rp&gt;右括弧&lt;/rp&gt;
+                                | &lt;/ruby&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td フローコンテンツ／フレージングコンテンツ／パルパブルコンテンツ
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | フレージングコンテンツが記述できる場所
+                                tr
+                                    td コンテンツモデル
+                                    td
+                                        | ・ルビ関連以外のフレージングコンテンツに続く1つ以上の&lt;rt>または&lt;rp&gt;&lt;rt&gt;&lt;/rp&gt;
+                                        br
+                                        | ・&lt;ruby&gt;を子要素に持たない<ruby&gt;
+                                tr
+                                    td 構成するボックス
+                                    td ruby
+                                tr
+                                    td 属性
+                                    td グローバル
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        pre
+                                            | ruby {
+                                            |     display: ruby;
+                                            | }
+                            pre
+                                | &lt;rt&gt;...&lt;/rt&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td なし
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | &lt;ruby&gt;内
+                                tr
+                                    td コンテンツモデル
+                                    td フレージングコンテンツ
+                                tr
+                                    td 構成するボックス
+                                    td ruby-text;
+                                tr
+                                    td 属性
+                                    td グローバル
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        pre
+                                            | rt {
+                                            |     display: ruby-text;
+                                            | }
+                            pre
+                                | &lt;rp&gt;...&lt;/rp&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td なし
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | &lt;ruby&gt;内の&lt;rt&gt;前後
+                                tr
+                                    td コンテンツモデル
+                                    td フレージングコンテンツ
+                                tr
+                                    td 構成するボックス
+                                    td inline
+                                tr
+                                    td 属性
+                                    td グローバル
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        pre
+                                            | rp {
+                                            |     display: none;
+                                            | }
+                            P='<ruby>と<rt>を利用すると、文字や語句に対してルビ（ふりがな）をつけることができます。以下のような形で記述することができ、<ruby>ではベース（親文字）となる文字や語句を、<rt>ではルビを示します。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/07/206.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+                                    | 
+                                    | &lt;p&gt;
+                                    | &lt;ruby&gt;紅&lt;rt&gt;こう&lt;/rt&gt;&lt;/ruby&gt;&lt;ruby&gt;茶&lt;rt&gt;ちゃ&lt;/rt&gt;&lt;/ruby&gt;にはたくさんの&lt;ruby&gt;銘&lt;rt&gt;めい&lt;/rt&gt;&lt;/ruby&gt;&lt;ruby&gt;柄&lt;rt&gt;がら&lt;/rt&gt;&lt;/ruby&gt;があります。
+                                    | &lt;/p&gt;
+                                figcaption ベースとルビを文字単位で指定したもの。
+                            .alert.alert-success IE NOTES: 
+                            p ルビ関連はもともとInternet Explorerが拡張した機能で、HTML5で採用された機能です。そのため、IE8以前も対応しています。
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/07/207-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+                                    | 
+                                    | &lt;p&gt;
+                                    | &lt;ruby&gt;紅&lt;rt&gt;こう&lt;/rt&gt;茶&lt;rt&gt;ちゃ&lt;/rt&gt;&lt;/ruby&gt;にはたくさんの&lt;ruby&gt;銘&lt;rt&gt;めい&lt;/rt&gt;柄&lt;rt&gt;がら&lt;/rt&gt;&lt;/ruby&gt;があります。
+                                    | &lt;/p&gt;
+                                figcaption ベースを語句単位で指定し、文字ごとにルビをつけたもの。
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/07/207-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+                                    | 
+                                    | &lt;p&gt;
+                                    | &lt;ruby&gt;紅茶&lt;rt&gt;こうちゃ&lt;/rt&gt;&lt;/ruby&gt;にはたくさんの&lt;ruby&gt;銘柄&lt;rt&gt;めいがら&lt;/rt&gt;&lt;/ruby&gt;があります。
+                                    | &lt;/p&gt;
+                                figcaption ベースとルビを語句単位で指定したもの。
+                            .alert.alert-warning NOTES: 
+                            P='iOS4.xとAndroid2.3.xは<ruby>には対応していますが、ルビの前後に改行が入り、表示位置がずれるという問題が見られます。たとえば、ベースとルビを語句単位で指定したサンプルを表示すると次のようになります。'
+                            pre(class='prettyprint linenums:1')
+                                | &lt;ruby&gt;紅茶&lt;rt&gt;こうちゃ&lt;/rt&gt;&lt;/ruby&gt;にはたくさんの&lt;ruby&gt;銘柄&lt;rt&gt;めいがら&lt;/rt&gt;&lt;ruby&gt;があります。
+                            p='この問題を解決するためには、<ruby>と<rt>に対して下のようにスタイルシートを適用します。iOS4.xとAndroid2.3.xで表示を確認すると、次のように語句の下にルビが表示されるようになったことがわかります。'
+                            pre(class='prettyprint linenums:1')
+                                | ruby {
+                                |     display: inline-block;
+                                |     vertical-align: top;
+                                | }
+                                | rt {
+                                |     text-align: left;
+                                | }
+                            p なお、上記のようにスタイルシートの設定を適用すると、ChromeやSafariでもルビが語句の下に表示されるようになり、Internet Explorerではルビが本文に表示されてしまいます。
+                            p これを回避するためには、スタイルシートの設定をiOS4.xやAndroid2.3.xのブラウザで表示した時のみ適用する必要があります。
+                            .alert.alert-info 説明用のルビ
+                            p ベースとなる語句を別の形で表現したものや、語句についての説明などをルビとしてつけることもできます。ここでは、英語で表記したものをルビとして指定しています。
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/07/208.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+                                    | 
+                                    | &lt;p&gt;
+                                    | &lt;ruby&gt;紅茶&lt;rt lang="en"&gt;tea&lt;/rt&gt;&lt;/ruby&gt;にはたくさんの&lt;ruby&gt;銘柄&lt;rt lang="en"&gt;brand&lt;/rt&gt;&lt;/ruby&gt;があります。
+                                    | &lt;/p&gt;
+                                figcaption 英語表記をルビとして指定したもの。
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/07/209-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+                                    | 
+                                    | &lt;p&gt;
+                                    | &lt;ruby&gt;紅茶&lt;rt&gt;ティー&lt;/rt&gt;&lt;/ruby&gt;にはたくさんの&lt;ruby&gt;銘柄&lt;rt&gt;ブランド&lt;/rt&gt;&lt;/ruby&gt;があります。
+                                    | &lt;/p&gt;
+                                figcaption 英語表記をカタカナにして、ルビとして指定したもの。
+                            .alert.alert-info 2つのルビ
+                            p='文字や語句に対して、読み方と説明の2つのルビをつけることもできます。その場合、下のように<ruby>を入れ子にして記述します。ここでは、語句に対して1文字ずつ読み仮名をつけた上で、英語表記のルビをつけるようにしています。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/07/209-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+                                | 
+                                | &lt;p&gt;
+                                | &lt;ruby&gt;&lt;ruby&gt;紅&lt;rt&gt;こう&lt;/rt&gt;茶&lt;rt&gt;ちゃ&lt;/rt&gt;&lt;/ruby&gt;&lt;rt lang="en"&gt;tea&lt;/rt&gt;&lt;/ruby&gt;にはたくさんの&lt;ruby&gt;&lt;ruby&gt;銘&lt;rt&gt;めい&lt;/rt&gt;柄&lt;rt&gt;がら&lt;/rt&gt;&lt;/ruby&gt;&lt;rt lang="en"&gt;brand&lt;/rt&gt;&lt;/ruby&gt;があります。
+                                | &lt;/p&gt;
+                            .alert.alert-success IE NOTES: 
+                            p='Internet Explorerの場合、2つのルビのうち1つだけが文字の上に表示されます。たとえば、IE9以前では、内側の<ruby>で指定したルビは文字の上に、外側の<ruby>で指定したルビは本文中に表示されます。'
+                            p='IE10では、外側の<ruby>で指定したルビが文字の上に、内側の<ruby>で指定したルビが本文中に表示されます。このとき、本文中のルビも小さな文字で表示されるようになっています。'
+                            .alert.alert-info 未対応ブラウザ用の括弧の記述
+                            p='未対応のブラウザではルビが本文中に表示されるため、そのままでは読みづらくなってしまいます。そこで、ルビの前後に挿入する括弧を<rp>で指定します。ここではルビの前後にカギ括弧()を挿入するようにしています。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+                                    | 
+                                    | &lt;p&gt;
+                                    | &lt;ruby&gt;紅茶&lt;rt&gt;こうちゃ&lt;/rt&gt;&lt;/ruby&gt;にはたくさんの&lt;ruby&gt;銘柄&lt;rt&gt;めいがら&lt;/rt&gt;&lt;/ruby&gt;があります。
+                                    | &lt;/p&gt;
+                                figcaption='Firefoxでの表示。<rp>で括弧を表示していないもの。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/07/210.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+                                    | 
+                                    | &lt;p&gt;
+                                    | &lt;ruby&gt;紅茶&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;こうちゃ&lt;/rt&gt;&lt;rp&gt;）&lt;/rp&gt;&lt;/ruby&gt;にはたくさんの&lt;ruby&gt;銘柄&lt;rp&gt;（&lt;/rp&gt;&lt;rt&gt;めいがら&lt;/rt&gt;&lt;rp&gt;）&lt;/rp&gt;&lt;/ruby&gt;があります。
+                                    | &lt;/p&gt;
+                                figcaption='Firefoxでの表示。<rp>で括弧を表示したもの。'    
+                            p='なお、セマンティクスの上では<rp>は何も示さず、マークアップした中身は存在しないものとして扱うように定義されています。'
+                            .alert.alert-warning NOTES: 
+                            p='ルビの表示には対応したブラウザでは、<rp>で指定した括弧が表示されることはありません。'
+                            .alert.alert-warning NOTES: ベースとなる文字のマークアップ
+                            p='HTML5にはベースとなる文字のみを示す要素は用意されていません。そのため、次のように<ruby>に対してスタイルシートを適用すると、ベースの文字だけでなく、<rt>でマークアップしたルビにも設定が適用されてしまいます。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;p&gt;
+                                    | &lt;ruby&gt;紅茶&lt;rt&gt;こうちゃ&lt;/rt&gt;&lt;/ruby&gt;にはたくさんの&lt;ruby&gt;銘柄&lt;rt&gt;めいがら&lt;/rt&gt;&lt;/ruby&gt;があります。
+                                    | &lt;/p&gt;
+                                pre(class='prettyprint linenums:1')
+                                    | ruby {
+                                    |     color: red;
+                                    | }
+                                figcaption='<ruby>の文字色を赤色に指定したもの。ルビも赤くなります。'
+                            p='この問題を回避するため、W3Cの草案「Use Cases & Exploratory Approaches for Ruby Markup」では、ベースとなる文字を<span>でマークアップし、スタイルシートを適用するようにする方法が提案されています。'
+                            p
+                                | Use Cases & Exploratory Approache for Ruby Markup
+                                br
+                                a(href='http://www.w3.org/TR/ruby-use-cases/',target='_blank') http://www.w3.org/TR/ruby-use-cases/
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;p&gt;
+                                    | &lt;ruby&gt;&lt;span&gt;紅茶&lt;/span&gt;&lt;rt&gt;こうちゃ&lt;/rt&gt;&lt;/ruby&gt;にはたくさんの&lt;ruby&gt;&lt;span&gt;銘柄&lt;/span&gt;&lt;rt&gt;めいがら&lt;/rt&gt;&lt;/ruby&gt;があります。
+                                    | &lt;/p&gt;
+                                pre(class='prettyprint linenums:1')
+                                    | ruby span {
+                                    |     color: red;
+                                    | }
+                                figcaption='<span>の文字色を赤色に指定したもの。ルビは赤くなりません。'
+                            p='また、この草案ではベースを示す<rb>という要素が提案されています。<rb>を利用すると次のようにベースをマークアップし、デザインをカスタマイズすることができます。'
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;p&gt;
+                                    | &lt;ruby&gt;&lt;rb&gt;紅茶&lt;/rb&gt;&lt;rt&gt;こうちゃ&lt;/rt&gt;&lt;/ruby&gt;にはたくさんの&lt;ruby&gt;&lt;rb&gt;銘柄&lt;/rb&gt;&lt;rt&gt;めいがら&lt;/rt&gt;&lt;/ruby&gt;があります。
+                                    | &lt;/p&gt;
+                                pre(class='prettyprint linenums:1')
+                                    | rb {
+                                    |     color: red;
+                                    | }
+                                figcaption='<rb>の文字色を赤色にしたもの。ルビは赤くなりません。'
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

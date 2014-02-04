@@ -1,329 +1,329 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;インラインフレーム
-						.panel-body
-							.alert.alert-info インラインフレーム
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-										| （※）
-									td
-										img(src='../images/ic-android.png')
-										| （※）
-									td
-										img(src='../images/ic-firefox.png')
-										| （※）
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-										| （※）
-									td
-										img(src='../images/ic-ie.png')
-										| （※）
-							p ※ 一部非対応
-							pre
-								| &lt;iframe&gt;...&lt;/iframe&gt;
-							table.table
-								tr
-									td カテゴリー
-									td フローコンテンツ／フレージングコンテンツ／エンベッディッドコンテンツ／インタラクティブコンテンツ／パルパブルコンテンツ
-								tr
-									td 記述可能な場所
-									td
-										| エンベッディッドコンテンツが記述できる場所
-								tr
-									td コンテンツモデル
-									td テキスト
-								tr
-									td 構成するボックス
-									td - （置換要素として扱われることが期待される）
-								tr
-									td 属性
-									td src／srcdoc／name／sandbox／seamless／width／height／グローバル 
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| iframe {
-											| 	border: 2px inset;
-											| }
-							p='<iframe>はページ内に組み込んだブラウジング・コンテキストを示す要素です。ブラウザではインラインフレームが構成され、src属性で指定したコンテンツが表示されます。'
-							p='下のサンプルの場合、sample.htmlのページにインラインフレームでsample.htmlのページにインラインフレームでcontent.htmlを表示するようにしています。このとき、インラインフレームの大きさはwidthとheight属性で1000×500ピクセルに設定しています。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/05/134.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;header&gt;
-									| &lt;.id="header_inner"&gt;
-									| &lt;h1&gt;&lt;img src="img/logo.png" alt="SUN DIARY"&gt;&lt;/h1&gt;
-									| ...
-									| &lt;/header&gt;
-									| 
-									| &lt;.id="main"&gt;
-									| 
-									| &lt;iframe src="content.html" width="1000" height="500"&gt;&lt;/iframe&gt;
-									| 
-									| &lt;aside&gt;
-									| FOLLOW & SUBSCRIBE:
-									| &lt;ul id="iconmenu"&gt;
-									| …
-									| &lt;/ul&gt;
-									| &lt;/aside&gt;
-									| 
-									| &lt;/.gt;
-									| 
-									| 
-									| &lt;footer&gt;
-									| &lt;small&gt;Copyright &copy; SUN DIARY, all rights reserved.&lt;/small&gt;
-									| &lt;/footer&gt;
-								figcaption sample.htmlのHTMLソース。
-							p='この他、<iframe>で指定できる属性は下のようになっています。'
-							table.table
-								tr
-									th='<iframe>の属性'
-									th 機能
-								tr
-									td src
-									td コンテンツのURLを指定。
-								tr
-									td srcdoc
-									td コンテンツの内容を記述。
-								tr
-									td name
-									td ブラウジング・コンテキスト名を指定。
-								tr
-									td sandbox
-									td サンドボックス化。
-								tr
-									td seamless
-									td シームレス表示。
-								tr
-									td width
-									td 横幅を指定。
-								tr
-									td height
-									td 高さを指定。
-							.alert.alert-warning NOTES: iOSとAndroidにおける&lt;iframe&gt;の表示
-							p='iOSとAndroidも<iframe>に対応していますが、iOSとAndroid2.3.xではインラインフレームが中身のコンテンツに合わせた大きさで表示されます。'
-							p='Android.3.x以降ではインラインフレームが指定した大きさで表示され、フレーム内をタップしてスクロールできるようになっています。'
-							.alert.alert-info サンドボックス化
-							p='インラインフレーム内のコンテンツには、標準では何の制限もかけられていません。そのため、スクリプトを実行することも可能です。たとえば、上のサンプルではインラインフレーム内のcontent.htmlでスクリプトを実行し、content.htmlの背景を黄色に、親ページのsample.htmlの背景を黒色に変更しています。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/05/135-sandbox/01.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;iframe src="content.html" width="1000" height="500"&gt;&lt;/iframe&gt; 
-								figcaption sample.html
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;script&gt;
-									| window.onload = function() {
-									|      document.getElementsByTagName("body")[0].style.background = "yellow";
-									| 
-									| 
-									|      parent.document.getElementsByTagName("body")[0].style.background = "black";
-									| 
-									| 
-									| }
-									| &lt;/script&gt;
-									| &lt;/head&gt;
-									| &lt;body&gt;
-									| 
-									| &lt;article&gt;
-									| &lt;header&gt;
-									| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
-									| &lt;time datetime="2013-01-15"&gt;January 15, 2013&lt;/time&gt;
-									| &lt;/header&gt;
-									| ...
-								figcaption content.html
-							p='しかし、sandbox属性を指定すると、インラインフレームをサンドボックス化し、フレーム内でのスクリプトの実行などを制限することができます。'
-							p='たとえば、下のようにsandbox属性を指定するとcontent.htmlではスクリプトが実行できなくなり、ページの背景色が変わらなくなります。このほか、content.htmlにおけるフォームデータの送信や、リンク先を新しいウィンドウで開く処理などにも制限がかかります。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/05/135-sandbox/02.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;iframe src="content.html" width="1000" height="500" sandbox&gt;&lt;/iframe&gt; 
-								figcaption sample.html
-							p='なお、sandbox属性にはいくつかの値が用意されており、特定の制限のみを解除することが可能です。たとえば「allow-scrpts」と指定すると特定のスクリプトの実行を許可することができます。ただし、、インラインフレーム内で実行したスクリプトは同一生成元ポリシーで生成元が異なるものとして扱われ、親ページのDOMにはアクセスすることができません。そのため、content.htmlの背景色のみが変わります。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/05/135-sandbox/03.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;iframe src="content.html" width="1000" height="500" sandbox="allow-scripts"&gt;&lt;/iframe&gt; 
-								figcaption='sample.html'
-							p='sandbox属性の値は半角スペースで区切り、複数指定することも可能です。たとえば、allow-scriptsとallow-same-originの両方を指定すると、スクリプトの実行を許可するとともに、同一生成元として扱い、親ページのDOMへのアクセスも許可することができます。この場合、サンプルではcontent.htmlとsample.htmlの背景色が変わります。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/05/135-sandbox/04.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;iframe src="content.html" width="1000" height="500" sandbox="allow-scripts allow-same-origin"&gt;&lt;/iframe&gt; 
-								figcaption sample.html
-							p='なお、sandbox属性では指定できる値は下のようになっています。また、OperaとInternet Explorer9以前はsandbox属性には未対応です。'
-							table.table
-								tr
-									th sandbox属性の値
-									th 機能
-								tr
-									td allow-forms
-									td フォームの送信を許可する
-								tr
-									td allow-pointer-lock
-									td Pointer Lock APIを許可する
-								tr
-									td allow-popups
-									td リンク先のポップアップ表示を許可する
-								tr
-									td allow-same-origin
-									td 同一生成元として扱うことを許可する
-								tr
-									td allow-scripts
-									td スクリプトの実行を許可する
-								tr
-									td allow-top-navigation
-									td トップレベルウィンドウへのリンク先の表示を許可する
-							.alert.alert-info srcdoc属性でコンテンツを記述する
-							p='srcdoc属性を利用すると、インラインフレームに表示するコンテンツ属性値として記述することができます。たとえば、サンプルでは記事に対して投稿されたコメントをsrcdoc属性で指定し、サンドボックス化したインラインフレームで表示するようにしています。これにより、スクリプトなどを含んだコメントが投稿された場合でも、実行される心配はなくなります。'
-							p='現在のところ、srcdoc属性に対応しているのはiOS6、Safari、Chromeとなっています。未対応ブラウザのためには、src属性をいっしょに指定することも可能です。その場合、対応ブラウザではsrcdoc属性の指定が優先されます。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/05/137.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;h1&gt;Comments&lt;/h1&gt;
-								| 
-								| &lt;article id="comment-01"&gt;
-								| &lt;iframe srcdoc="&lt;p&gt;こんにちは。先日のお茶会でいただいたダージリンティ―がとても気に入りました。アイスティーにするのもオススメとのことでしたので、今度試してみたいと思います。&lt;/p&gt;" sandbox&gt;&lt;/iframe&gt;
-								| &lt;footer&gt;
-								| Posted by: 匿名希望 &lt;time datetime="2013-01-16T20:12"&gt;2013年1月16日 20:12&lt;/time&gt;
-								| &lt;/footer&gt;
-								| &lt;/article&gt;
-								| 
-								| &lt;article id="comment-02"&gt;
-								| &lt;iframe srcdoc="&lt;p&gt;次のお茶会も楽しみにしています。&lt;/p&gt;" sandbox&gt;&lt;/iframe&gt;
-								| &lt;footer&gt;
-								| Posted by: にゃん &lt;time datetime="2013-01-20T18:35"&gt;2013年1月20日 18:35&lt;/time&gt;
-								| &lt;/footer&gt;
-								| &lt;/article&gt;
-								| ...
-							pre(class='prettyprint linenums:1')
-								| iframe	{width: 100%;
-								| 	height: 80px;}
-							.alert.alert-warning NOTES: 
-							p='srcdoc属性の値の中では、「*（ダブルクォーテーション）」は「&amp;quot;」と記述します。'
-							pre(class='prettyprint linenums:1')
-								| &lt;iframe srcdoc="&lt;p&gt;&lt;a href=&quot;party.html&quot;&gt;次のお茶会&lt;/a&gt;も楽しみにしています。&lt;/p&gt;"&gt;&lt;/iframe&gt;
-							.alert.alert-info シームレス表示
-							p='seamless属性を指定すると、インラインフレームの枠線を消し、コンテンツをシームレスに表示することができます。なお、seamless属性にはiOS6、Safari、Chromeが対応しています。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/05/138.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;article id="comment-01"&gt;
-								| &lt;iframe srcdoc="&lt;p&gt;こんにちは。先日のお茶会でいただいたダージリンティ―がとても気に入りました。アイスティーにするのもオススメとのことでしたので、今度試してみたいと思います。&lt;/p&gt;" sandbox seamless&gt;&lt;/iframe&gt;
-								| &lt;footer&gt;
-								| Posted by: 匿名希望 &lt;time datetime="2013-01-16T20:12"&gt;2013年1月16日 20:12&lt;/time&gt;
-								| &lt;/footer&gt;
-								| &lt;/article&gt;
-								| 
-								| &lt;article id="comment-02"&gt;
-								| &lt;iframe srcdoc="&lt;p&gt;次のお茶会も楽しみにしています。&lt;/p&gt;" sandbox seamless&gt;&lt;/iframe&gt;
-								| &lt;footer&gt;
-								| Posted by: にゃん &lt;time datetime="2013-01-20T18:35"&gt;2013年1月20日 18:35&lt;/time&gt;
-								| &lt;/footer&gt;
-								| &lt;/article&gt;
-							.alert.alert-warning NOTES: allowfullscreen属性
-							p='<iframe>にallowfullscreen属性を指定すると、インラインフレーム内のコンテンツではFullScreen APIの利用が可能になります。現在のところ、HTML Living StandardとHTML5.1で採用されており、SafariとChrome、Firefoxが対応しています。ただし、「webkit」や「moz」といったベンダープレフィックスをつけて記述する必要があります。'
-							p='サンプルでは、content.htmlにビデオを貼り込み、sample.htmlのインラインフレーム内に表示しています。content.htmlではFullScreen APIのrequestFullScreen()を利用して、「フルスクリーンで表示」ボタンをクリックするとビデオがフルスクリーンで表示されるようにしてあります。'
-							p='しかし、インラインフレーム内に表示した場合、標準ではボタンをクリックしてもフルスクリーン表示が行われません。そこで、<iframe>にallowfullscreen属性を追加します。これにより、FullScreen APIの利用が許可されるため、ボタンをクリックするとビデオがフルスクリーンで表示されるようになります。'
-							p='なお、フルスクリーン表示からescキーで元に戻ることが可能です。また、FullScreen APIについては下記のドキュメントで提案されています。'
-							p
-								| Fullscreen（Living Specification）
-								br
-								a(href='http://dvcs.w3.org/hg/fullscreen/raw-file/tip/Overview.html',target='_blank') http://dvcs.w3.org/hg/fullscreen/raw-file/tip/Overview.html
-							p
-								a.btn.btn-default(href='../demo/html/sample1/05/138-allowfullscreen/138.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;.id="main"&gt;
-									| 
-									| &lt;iframe src="content.html" width="1000" height="500" webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
-									| 
-									| &lt;aside&gt;
-									| FOLLOW & SUBSCRIBE:
-									| &lt;ul id="iconmenu"&gt;
-								figcaption sample.html。
-							p
-								a.btn.btn-default(href='../demo/html/sample1/05/138-allowfullscreen/content.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							figure
-								pre(class='prettyprint linenums:1')
-									| &lt;script&gt;
-									| function myview() {
-									|      var myvideo= document.getElementById("myvideo");
-									|      if (myvideo.webkitRequestFullScreen) {
-									|           myvideo.webkitRequestFullScreen();
-									|      } else if (myvideo.mozRequestFullScreen) {
-									|           myvideo.mozRequestFullScreen();
-									|      } else {
-									|           myvideo.requestFullScreen();
-									|      }
-									| }
-									| &lt;/script&gt;
-									| ...
-									| 
-									| &lt;article&gt;
-									| 
-									| &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
-									| 
-									| &lt;video width="640" height="360" autoplay loop id="myvideo"&gt;
-									| &lt;source src="sun.mp4" type="video/mp4"&gt;
-									| &lt;source src="sun.webm" type="video/webm"&gt;
-									| &lt;/video&gt;
-									| 
-									| &lt;input type="button" value="フルスクリーンで表示" onClick="myview()"&gt;
-									| 
-									| &lt;/article&gt;					
-								figcaption content.html。
-							.alert.alert-success DIFFERENCES: 
-							p='HTML4.01やXHTML1.0で定義されていた<iframe>のalign、longdesc、frameborder、marginwidth、marginheight、scrolling属性は、HTML5では廃止されています。'
-							p='longdesc属性は<a>によるリンクに、その他の属性はスタイルシートによる指定に置き換えることが可能です。'
-							hr
-							p
-								| フォームメーラーを使ってhtmlファイルににフォームを組み込んでみましょう。
-								br
-								a(href='http://www.form-mailer.jp/',target='_blank') http://www.form-mailer.jp/
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;インラインフレーム
+                        .panel-body
+                            .alert.alert-info インラインフレーム
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                        | （※）
+                                    td
+                                        img(src='../images/ic-android.png')
+                                        | （※）
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                        | （※）
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                        | （※）
+                                    td
+                                        img(src='../images/ic-ie.png')
+                                        | （※）
+                            p ※ 一部非対応
+                            pre
+                                | &lt;iframe&gt;...&lt;/iframe&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td フローコンテンツ／フレージングコンテンツ／エンベッディッドコンテンツ／インタラクティブコンテンツ／パルパブルコンテンツ
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | エンベッディッドコンテンツが記述できる場所
+                                tr
+                                    td コンテンツモデル
+                                    td テキスト
+                                tr
+                                    td 構成するボックス
+                                    td - （置換要素として扱われることが期待される）
+                                tr
+                                    td 属性
+                                    td src／srcdoc／name／sandbox／seamless／width／height／グローバル 
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        pre
+                                            | iframe {
+                                            |     border: 2px inset;
+                                            | }
+                            p='<iframe>はページ内に組み込んだブラウジング・コンテキストを示す要素です。ブラウザではインラインフレームが構成され、src属性で指定したコンテンツが表示されます。'
+                            p='下のサンプルの場合、sample.htmlのページにインラインフレームでsample.htmlのページにインラインフレームでcontent.htmlを表示するようにしています。このとき、インラインフレームの大きさはwidthとheight属性で1000×500ピクセルに設定しています。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/05/134.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;header&gt;
+                                    | &lt;.id="header_inner"&gt;
+                                    | &lt;h1&gt;&lt;img src="img/logo.png" alt="SUN DIARY"&gt;&lt;/h1&gt;
+                                    | ...
+                                    | &lt;/header&gt;
+                                    | 
+                                    | &lt;.id="main"&gt;
+                                    | 
+                                    | &lt;iframe src="content.html" width="1000" height="500"&gt;&lt;/iframe&gt;
+                                    | 
+                                    | &lt;aside&gt;
+                                    | FOLLOW & SUBSCRIBE:
+                                    | &lt;ul id="iconmenu"&gt;
+                                    | …
+                                    | &lt;/ul&gt;
+                                    | &lt;/aside&gt;
+                                    | 
+                                    | &lt;/.gt;
+                                    | 
+                                    | 
+                                    | &lt;footer&gt;
+                                    | &lt;small&gt;Copyright &copy; SUN DIARY, all rights reserved.&lt;/small&gt;
+                                    | &lt;/footer&gt;
+                                figcaption sample.htmlのHTMLソース。
+                            p='この他、<iframe>で指定できる属性は下のようになっています。'
+                            table.table
+                                tr
+                                    th='<iframe>の属性'
+                                    th 機能
+                                tr
+                                    td src
+                                    td コンテンツのURLを指定。
+                                tr
+                                    td srcdoc
+                                    td コンテンツの内容を記述。
+                                tr
+                                    td name
+                                    td ブラウジング・コンテキスト名を指定。
+                                tr
+                                    td sandbox
+                                    td サンドボックス化。
+                                tr
+                                    td seamless
+                                    td シームレス表示。
+                                tr
+                                    td width
+                                    td 横幅を指定。
+                                tr
+                                    td height
+                                    td 高さを指定。
+                            .alert.alert-warning NOTES: iOSとAndroidにおける&lt;iframe&gt;の表示
+                            p='iOSとAndroidも<iframe>に対応していますが、iOSとAndroid2.3.xではインラインフレームが中身のコンテンツに合わせた大きさで表示されます。'
+                            p='Android.3.x以降ではインラインフレームが指定した大きさで表示され、フレーム内をタップしてスクロールできるようになっています。'
+                            .alert.alert-info サンドボックス化
+                            p='インラインフレーム内のコンテンツには、標準では何の制限もかけられていません。そのため、スクリプトを実行することも可能です。たとえば、上のサンプルではインラインフレーム内のcontent.htmlでスクリプトを実行し、content.htmlの背景を黄色に、親ページのsample.htmlの背景を黒色に変更しています。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/05/135-sandbox/01.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;iframe src="content.html" width="1000" height="500"&gt;&lt;/iframe&gt; 
+                                figcaption sample.html
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;script&gt;
+                                    | window.onload = function() {
+                                    |      document.getElementsByTagName("body")[0].style.background = "yellow";
+                                    | 
+                                    | 
+                                    |      parent.document.getElementsByTagName("body")[0].style.background = "black";
+                                    | 
+                                    | 
+                                    | }
+                                    | &lt;/script&gt;
+                                    | &lt;/head&gt;
+                                    | &lt;body&gt;
+                                    | 
+                                    | &lt;article&gt;
+                                    | &lt;header&gt;
+                                    | &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+                                    | &lt;time datetime="2013-01-15"&gt;January 15, 2013&lt;/time&gt;
+                                    | &lt;/header&gt;
+                                    | ...
+                                figcaption content.html
+                            p='しかし、sandbox属性を指定すると、インラインフレームをサンドボックス化し、フレーム内でのスクリプトの実行などを制限することができます。'
+                            p='たとえば、下のようにsandbox属性を指定するとcontent.htmlではスクリプトが実行できなくなり、ページの背景色が変わらなくなります。このほか、content.htmlにおけるフォームデータの送信や、リンク先を新しいウィンドウで開く処理などにも制限がかかります。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/05/135-sandbox/02.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;iframe src="content.html" width="1000" height="500" sandbox&gt;&lt;/iframe&gt; 
+                                figcaption sample.html
+                            p='なお、sandbox属性にはいくつかの値が用意されており、特定の制限のみを解除することが可能です。たとえば「allow-scrpts」と指定すると特定のスクリプトの実行を許可することができます。ただし、、インラインフレーム内で実行したスクリプトは同一生成元ポリシーで生成元が異なるものとして扱われ、親ページのDOMにはアクセスすることができません。そのため、content.htmlの背景色のみが変わります。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/05/135-sandbox/03.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;iframe src="content.html" width="1000" height="500" sandbox="allow-scripts"&gt;&lt;/iframe&gt; 
+                                figcaption='sample.html'
+                            p='sandbox属性の値は半角スペースで区切り、複数指定することも可能です。たとえば、allow-scriptsとallow-same-originの両方を指定すると、スクリプトの実行を許可するとともに、同一生成元として扱い、親ページのDOMへのアクセスも許可することができます。この場合、サンプルではcontent.htmlとsample.htmlの背景色が変わります。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/05/135-sandbox/04.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;iframe src="content.html" width="1000" height="500" sandbox="allow-scripts allow-same-origin"&gt;&lt;/iframe&gt; 
+                                figcaption sample.html
+                            p='なお、sandbox属性では指定できる値は下のようになっています。また、OperaとInternet Explorer9以前はsandbox属性には未対応です。'
+                            table.table
+                                tr
+                                    th sandbox属性の値
+                                    th 機能
+                                tr
+                                    td allow-forms
+                                    td フォームの送信を許可する
+                                tr
+                                    td allow-pointer-lock
+                                    td Pointer Lock APIを許可する
+                                tr
+                                    td allow-popups
+                                    td リンク先のポップアップ表示を許可する
+                                tr
+                                    td allow-same-origin
+                                    td 同一生成元として扱うことを許可する
+                                tr
+                                    td allow-scripts
+                                    td スクリプトの実行を許可する
+                                tr
+                                    td allow-top-navigation
+                                    td トップレベルウィンドウへのリンク先の表示を許可する
+                            .alert.alert-info srcdoc属性でコンテンツを記述する
+                            p='srcdoc属性を利用すると、インラインフレームに表示するコンテンツ属性値として記述することができます。たとえば、サンプルでは記事に対して投稿されたコメントをsrcdoc属性で指定し、サンドボックス化したインラインフレームで表示するようにしています。これにより、スクリプトなどを含んだコメントが投稿された場合でも、実行される心配はなくなります。'
+                            p='現在のところ、srcdoc属性に対応しているのはiOS6、Safari、Chromeとなっています。未対応ブラウザのためには、src属性をいっしょに指定することも可能です。その場合、対応ブラウザではsrcdoc属性の指定が優先されます。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/05/137.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;h1&gt;Comments&lt;/h1&gt;
+                                | 
+                                | &lt;article id="comment-01"&gt;
+                                | &lt;iframe srcdoc="&lt;p&gt;こんにちは。先日のお茶会でいただいたダージリンティ―がとても気に入りました。アイスティーにするのもオススメとのことでしたので、今度試してみたいと思います。&lt;/p&gt;" sandbox&gt;&lt;/iframe&gt;
+                                | &lt;footer&gt;
+                                | Posted by: 匿名希望 &lt;time datetime="2013-01-16T20:12"&gt;2013年1月16日 20:12&lt;/time&gt;
+                                | &lt;/footer&gt;
+                                | &lt;/article&gt;
+                                | 
+                                | &lt;article id="comment-02"&gt;
+                                | &lt;iframe srcdoc="&lt;p&gt;次のお茶会も楽しみにしています。&lt;/p&gt;" sandbox&gt;&lt;/iframe&gt;
+                                | &lt;footer&gt;
+                                | Posted by: にゃん &lt;time datetime="2013-01-20T18:35"&gt;2013年1月20日 18:35&lt;/time&gt;
+                                | &lt;/footer&gt;
+                                | &lt;/article&gt;
+                                | ...
+                            pre(class='prettyprint linenums:1')
+                                | iframe    {width: 100%;
+                                |     height: 80px;}
+                            .alert.alert-warning NOTES: 
+                            p='srcdoc属性の値の中では、「*（ダブルクォーテーション）」は「&amp;quot;」と記述します。'
+                            pre(class='prettyprint linenums:1')
+                                | &lt;iframe srcdoc="&lt;p&gt;&lt;a href=&quot;party.html&quot;&gt;次のお茶会&lt;/a&gt;も楽しみにしています。&lt;/p&gt;"&gt;&lt;/iframe&gt;
+                            .alert.alert-info シームレス表示
+                            p='seamless属性を指定すると、インラインフレームの枠線を消し、コンテンツをシームレスに表示することができます。なお、seamless属性にはiOS6、Safari、Chromeが対応しています。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/05/138.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;article id="comment-01"&gt;
+                                | &lt;iframe srcdoc="&lt;p&gt;こんにちは。先日のお茶会でいただいたダージリンティ―がとても気に入りました。アイスティーにするのもオススメとのことでしたので、今度試してみたいと思います。&lt;/p&gt;" sandbox seamless&gt;&lt;/iframe&gt;
+                                | &lt;footer&gt;
+                                | Posted by: 匿名希望 &lt;time datetime="2013-01-16T20:12"&gt;2013年1月16日 20:12&lt;/time&gt;
+                                | &lt;/footer&gt;
+                                | &lt;/article&gt;
+                                | 
+                                | &lt;article id="comment-02"&gt;
+                                | &lt;iframe srcdoc="&lt;p&gt;次のお茶会も楽しみにしています。&lt;/p&gt;" sandbox seamless&gt;&lt;/iframe&gt;
+                                | &lt;footer&gt;
+                                | Posted by: にゃん &lt;time datetime="2013-01-20T18:35"&gt;2013年1月20日 18:35&lt;/time&gt;
+                                | &lt;/footer&gt;
+                                | &lt;/article&gt;
+                            .alert.alert-warning NOTES: allowfullscreen属性
+                            p='<iframe>にallowfullscreen属性を指定すると、インラインフレーム内のコンテンツではFullScreen APIの利用が可能になります。現在のところ、HTML Living StandardとHTML5.1で採用されており、SafariとChrome、Firefoxが対応しています。ただし、「webkit」や「moz」といったベンダープレフィックスをつけて記述する必要があります。'
+                            p='サンプルでは、content.htmlにビデオを貼り込み、sample.htmlのインラインフレーム内に表示しています。content.htmlではFullScreen APIのrequestFullScreen()を利用して、「フルスクリーンで表示」ボタンをクリックするとビデオがフルスクリーンで表示されるようにしてあります。'
+                            p='しかし、インラインフレーム内に表示した場合、標準ではボタンをクリックしてもフルスクリーン表示が行われません。そこで、<iframe>にallowfullscreen属性を追加します。これにより、FullScreen APIの利用が許可されるため、ボタンをクリックするとビデオがフルスクリーンで表示されるようになります。'
+                            p='なお、フルスクリーン表示からescキーで元に戻ることが可能です。また、FullScreen APIについては下記のドキュメントで提案されています。'
+                            p
+                                | Fullscreen（Living Specification）
+                                br
+                                a(href='http://dvcs.w3.org/hg/fullscreen/raw-file/tip/Overview.html',target='_blank') http://dvcs.w3.org/hg/fullscreen/raw-file/tip/Overview.html
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/05/138-allowfullscreen/138.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;.id="main"&gt;
+                                    | 
+                                    | &lt;iframe src="content.html" width="1000" height="500" webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+                                    | 
+                                    | &lt;aside&gt;
+                                    | FOLLOW & SUBSCRIBE:
+                                    | &lt;ul id="iconmenu"&gt;
+                                figcaption sample.html。
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/05/138-allowfullscreen/content.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            figure
+                                pre(class='prettyprint linenums:1')
+                                    | &lt;script&gt;
+                                    | function myview() {
+                                    |      var myvideo= document.getElementById("myvideo");
+                                    |      if (myvideo.webkitRequestFullScreen) {
+                                    |           myvideo.webkitRequestFullScreen();
+                                    |      } else if (myvideo.mozRequestFullScreen) {
+                                    |           myvideo.mozRequestFullScreen();
+                                    |      } else {
+                                    |           myvideo.requestFullScreen();
+                                    |      }
+                                    | }
+                                    | &lt;/script&gt;
+                                    | ...
+                                    | 
+                                    | &lt;article&gt;
+                                    | 
+                                    | &lt;h1&gt;Short Tea Breaks&lt;/h1&gt;
+                                    | 
+                                    | &lt;video width="640" height="360" autoplay loop id="myvideo"&gt;
+                                    | &lt;source src="sun.mp4" type="video/mp4"&gt;
+                                    | &lt;source src="sun.webm" type="video/webm"&gt;
+                                    | &lt;/video&gt;
+                                    | 
+                                    | &lt;input type="button" value="フルスクリーンで表示" onClick="myview()"&gt;
+                                    | 
+                                    | &lt;/article&gt;                    
+                                figcaption content.html。
+                            .alert.alert-success DIFFERENCES: 
+                            p='HTML4.01やXHTML1.0で定義されていた<iframe>のalign、longdesc、frameborder、marginwidth、marginheight、scrolling属性は、HTML5では廃止されています。'
+                            p='longdesc属性は<a>によるリンクに、その他の属性はスタイルシートによる指定に置き換えることが可能です。'
+                            hr
+                            p
+                                | フォームメーラーを使ってhtmlファイルににフォームを組み込んでみましょう。
+                                br
+                                a(href='http://www.form-mailer.jp/',target='_blank') http://www.form-mailer.jp/
 
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

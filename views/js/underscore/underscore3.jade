@@ -1,86 +1,86 @@
 extends ../../layout
 
 block link
-	link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
-	link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
-	link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
-	link(href='../../css/style.css',rel='stylesheet',media='screen')
-	link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
 
 block content
-	include navbar.jade
-	.container
-		.row
-			.col-sm-3
-				include left.jade
-			.col-sm-9
-				.panel.panel-primary
-					.panel-heading
-						i.glyphicon.glyphicon-book
-						| &nbsp;「モジュール」とは
-					.panel-body
-						p 「AngularJS」で「モジュール」は、「Controller」や「Directive」などの処理をひとまとめにしたものです。
-						p 「アプリケーションの処理」を行う「モジュール」や、「拡張機能」のための「モジュール」などがあります。
-						.alert.alert-info 「Hello,World」を表示する
-						p ここでは、「ToDoアプリ」を作っていきます。
-						p まずは、「Hello, World」を表示させてみましょう。
-						p 「AngularJS」では、「html」に設定情報を記入していきます。
-						p
-							a.btn.btn-default(href='../demo/angular/sample1/index1.html',target='_blank')
-								i.glyphicon.glyphicon-play
-								| デモ	
-						figure
-							figcaption htmlテンプレート
-							pre(class='prettyprint linenums:1')
-								:code
-									doctype
-									html(lang='ja')
-										head
-											script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js')
-											script(src='app.js')
-										body(ng-app='Hello')
-											div(ng-controller='HelloCtrl')
-												p {{hello.text}}, World!!
-						figure
-							figcaption app.jsモジュールの作成とコントローラ
-							pre(class='prettyprint linenums:1')
-								:code
-									var app = angular.module('Hello',[]);
-									app.controller('HelloCtrl',function($scope){
-										$scope.hello = {
-											text: 'Hello'
-										}
-									});
-						figure
-							pre(class='prettyprint linenums:1')
-								:code
-									app = angular.module("Hello", [])
-									app.controller "HelloCtrl", ($scope) ->
-										$scope.hello = text: "Hello"
-										return
-						h4 ①「ng-app」の指定
-						p まずは、利用する「アプリケーション・モジュール」を設定します。
-						p ここでは、「ng-app」に「Hello」というモジュールを指定しています。
-						pre
-							:code
-								<body ng-app="Hello">
-						h4 ②「angular-module」の作成
-						p 「ng-app」を設定したエレメントが、適用範囲となっています。
-						p ですので、この場合は、body全体が「アプリケーション・モジュール」の範囲となります。
-						pre
-							:code
-								var app = angular.module('Hello', []);
-						p ②で指定した「アプリケーション・モジュール」は、③のように設定します。
-						p 「angular.module」メソッドの「第1引数」が、「コントローラ名」になります。「第2引数」は、利用したい外部モジュールを配列にて指定します。
-						h4 ③「ng-controller」の指定
-						p 次に、コントローラを指定します
-						pre
-							:code
-								<div ng-controller="HelloCtrl">
-						p 「ng-controller」で「HelloCtrl」を指定しています。
-						p これは、「angular.module」で作ったモジュール内で設定している「controller」を呼び出すことができます。
-						pre
-							:code
-								app.controller('HelloCtrl', function($scope){
-						p 「AngularJS」では、これが基本パターンです。
-						p 「ng-app」と「ng-controller」を設定していきます。
+    include navbar.jade
+    .container
+        .row
+            .col-sm-3
+                include left.jade
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;「モジュール」とは
+                    .panel-body
+                        p 「AngularJS」で「モジュール」は、「Controller」や「Directive」などの処理をひとまとめにしたものです。
+                        p 「アプリケーションの処理」を行う「モジュール」や、「拡張機能」のための「モジュール」などがあります。
+                        .alert.alert-info 「Hello,World」を表示する
+                        p ここでは、「ToDoアプリ」を作っていきます。
+                        p まずは、「Hello, World」を表示させてみましょう。
+                        p 「AngularJS」では、「html」に設定情報を記入していきます。
+                        p
+                            a.btn.btn-default(href='../demo/angular/sample1/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ    
+                        figure
+                            figcaption htmlテンプレート
+                            pre(class='prettyprint linenums:1')
+                                :code
+                                    doctype
+                                    html(lang='ja')
+                                        head
+                                            script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js')
+                                            script(src='app.js')
+                                        body(ng-app='Hello')
+                                            div(ng-controller='HelloCtrl')
+                                                p {{hello.text}}, World!!
+                        figure
+                            figcaption app.jsモジュールの作成とコントローラ
+                            pre(class='prettyprint linenums:1')
+                                :code
+                                    var app = angular.module('Hello',[]);
+                                    app.controller('HelloCtrl',function($scope){
+                                        $scope.hello = {
+                                            text: 'Hello'
+                                        }
+                                    });
+                        figure
+                            pre(class='prettyprint linenums:1')
+                                :code
+                                    app = angular.module("Hello", [])
+                                    app.controller "HelloCtrl", ($scope) ->
+                                        $scope.hello = text: "Hello"
+                                        return
+                        h4 ①「ng-app」の指定
+                        p まずは、利用する「アプリケーション・モジュール」を設定します。
+                        p ここでは、「ng-app」に「Hello」というモジュールを指定しています。
+                        pre
+                            :code
+                                <body ng-app="Hello">
+                        h4 ②「angular-module」の作成
+                        p 「ng-app」を設定したエレメントが、適用範囲となっています。
+                        p ですので、この場合は、body全体が「アプリケーション・モジュール」の範囲となります。
+                        pre
+                            :code
+                                var app = angular.module('Hello', []);
+                        p ②で指定した「アプリケーション・モジュール」は、③のように設定します。
+                        p 「angular.module」メソッドの「第1引数」が、「コントローラ名」になります。「第2引数」は、利用したい外部モジュールを配列にて指定します。
+                        h4 ③「ng-controller」の指定
+                        p 次に、コントローラを指定します
+                        pre
+                            :code
+                                <div ng-controller="HelloCtrl">
+                        p 「ng-controller」で「HelloCtrl」を指定しています。
+                        p これは、「angular.module」で作ったモジュール内で設定している「controller」を呼び出すことができます。
+                        pre
+                            :code
+                                app.controller('HelloCtrl', function($scope){
+                        p 「AngularJS」では、これが基本パターンです。
+                        p 「ng-app」と「ng-controller」を設定していきます。

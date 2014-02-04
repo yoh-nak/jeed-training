@@ -1,127 +1,127 @@
 include ../head2.jade
-	body
-		include navbar.jade
-		.container
-			.row
-				.col-sm-3
-					include left.jade
-				.col-sm-9
-					.panel.panel-primary
-						.panel-heading
-							i.glyphicon.glyphicon-book
-							| &nbsp;ハイライト
-						.panel-body
-							.alert.alert-info ハイライト
-							table.browser-support
-								tr
-									td
-										img(src='../images/ic-apple.png')
-									td
-										img(src='../images/ic-android.png')
-									td
-										img(src='../images/ic-firefox.png')
-									td
-										img(src='../images/ic-safari.png')
-									td
-										img(src='../images/ic-chrome.png')
-									td
-										img(src='../images/ic-opera.png')
-									td
-										img(src='../images/ic-ie.png')
-							p ※ iOS4.x／Android2.3.xは未対応
-							pre
-								| &lt;mark&gt;...&lt;/mark&gt;
-							table.table
-								tr
-									td カテゴリー
-									td フローコンテンツ／フレージングコンテンツ／パルパブルコンテンツ
-								tr
-									td 記述可能な場所
-									td
-										| フレージングコンテンツが記述できる場所
-								tr
-									td コンテンツモデル
-									td フレージングコンテンツ
-								tr
-									td 構成するボックス
-									td inline
-								tr
-									td 属性
-									td グローバル
-								tr
-									td 標準的なスタイル
-									td
-										pre
-											| mark {
-											| 	background: yellow;
-											| 	color: black;
-											| }
-							.alert.alert-info 参照先の注目箇所を示す
-							p='本文から参照している引用文やコンピュータ・コード内の注目箇所は<mark>で明示することができます。<mark>でマークアップした箇所は、デフォルトスタイルシートによって黄色の背景色でハイライト表示されます。'
-							h4 引用文内の注目箇所を示す
-							p='たとえば、、Wikipediaの『茶』の項目から引用した文章のうち、「チャノキの葉や茎を加工して作られる」という部分に注目していることを示す場合、下のように<mark>でマークアップすることができます。'
-							p='また、この<mark>によるハイライトは、引用元のオリジナルコンテンツではなく、このページで付加したものとして扱われます。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/07/204.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;h1&gt;Short Conversation&lt;/h1&gt;
-								| 
-								| &lt;p&gt;リラックスしたり休憩したりするときには、ちょっとしたお茶が欲しくなります。お茶とはいったい何なのでしょうか？ Wikipediaの『&lt;cite&gt;茶&lt;/cite&gt;』の項目では次のように記されており、「&lt;b&gt;チャノキ&lt;/b&gt;」という植物が原料になっていることがわかります：&lt;/p&gt;
-								| 
-								| &lt;blockquote&gt;
-								| &lt;p&gt;茶（ちゃ、英語: tea）とは、&lt;mark&gt;チャノキの葉や茎を加工して作られる&lt;/mark&gt;飲み物である。 また、これに加えて、チャノキ以外の植物の部位（葉、茎、果実、花びら、根等）や真菌類・動物に由来する加工物から作られる飲み物にも「茶」もしくは「○○茶」と称するものが数多くあり、広義ではそれらは全て「茶」に分類される。&lt;/p&gt;
-								| &lt;/blockquote&gt;
-							pre(class='prettyprint linenums:1')
-								| b	{color: red;}
-								| 
-								| blockquote	{border: dotted 2px #d2bc8c;
-								| 	padding: 0 20px;}
-							h4 コンピュータ・コード内の注目箇所を示す
-							p='ここでは、コンピュータ・コード内の「h1」や「<h1>」に注目していることを<mark>で明示しています。'
-							p='また、<mark>で示したハイライトは、オリジナルコンピュータ・コードに含まれているものではなく、このページで付加したものとして扱われます。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/07/205-1.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;h1&gt;Tips and Tricks&lt;/h1&gt;
-								| 
-								| &lt;p&gt;サンプルでは&lt;b&gt;&lt;h1&gt;&lt;/b&gt;でマークアップした箇所をクリックすると、コンテンツの表示・非表示が切り替わるようになっています。&lt;/p&gt;
-								| 
-								| &lt;pre class="prettyprint linenums"&gt;
-								| &lt;code class="language-html"&gt;&lt;script&gt;
-								| $(function(){
-								|     $('&lt;mark&gt;h1&lt;/mark&gt;').click(function() {
-								|           $(this).next().slideToggle();
-								|      }).next().hide();
-								| });
-								| &lt;/script&gt;
-								| …
-								| &lt;!-- コンテンツ --&gt;
-								| &lt;mark&gt;&lt;h1&gt;&lt;/mark&gt;Short Tea Breaks&lt;mark&gt;&lt;/h1&gt;&lt;/mark&gt;
-								| &lt;img src="tea.jpg" alt=""&gt;
-								| &lt;/code&gt;&lt;/pre&gt;	
-							pre(class='prettyprint linenums:1')
-								| b	{color: red;}			
-							.alert.alert-info ユーザーが実行した処理に関連する箇所を示す
-							p='<mark>では、ユーザーが実行した処理に関連する箇所を示すこともできます。たとえば、検索結果を表示する場合、ユーザーが使用した検索キーワードを<mark>でマークアップし、ハイライト表示することが可能です。'
-							p
-								a.btn.btn-default(href='../demo/html/sample1/07/205-2.html',target='_blank')
-									i.glyphicon.glyphicon-play
-									| デモ
-							pre(class='prettyprint linenums:1')
-								| &lt;h1&gt;検索キーワード：『茶』&lt;/h1&gt;
-								| 
-								| &lt;p&gt;紅&lt;mark&gt;茶&lt;/mark&gt;は、&lt;mark&gt;茶&lt;/mark&gt;の葉を全発酵させて製造したお&lt;mark&gt;茶&lt;/mark&gt;です。ダージリンやアッサム、ジャワ、ウバ、ニルギリなど、たくさんの銘柄があります。アールグレイといったフレーバーティーも有名です。&lt;/p&gt;
-								| 
-								| &lt;p&gt;基本的に熱湯で入れ、&lt;mark&gt;茶&lt;/mark&gt;葉に合わせて抽出時間を十分に取ります。そのため、保温性の高いポットや温めた&lt;mark&gt;茶&lt;/mark&gt;器を使って入れるのがポイントとなります。ティーコジーでポットをカバーし、温度が下がるのを防ぐのもおすすめです。&lt;/p&gt;
-								| &lt;/section&gt;
-		.footer=title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src='../js/google-code-prettify/prettify.js')
-		script.
-			prettyPrint();
-		script(src='../js/bootstrap.min.js')
-		script(src='../coffee/list-counter.js')
+    body
+        include navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            | &nbsp;ハイライト
+                        .panel-body
+                            .alert.alert-info ハイライト
+                            table.browser-support
+                                tr
+                                    td
+                                        img(src='../images/ic-apple.png')
+                                    td
+                                        img(src='../images/ic-android.png')
+                                    td
+                                        img(src='../images/ic-firefox.png')
+                                    td
+                                        img(src='../images/ic-safari.png')
+                                    td
+                                        img(src='../images/ic-chrome.png')
+                                    td
+                                        img(src='../images/ic-opera.png')
+                                    td
+                                        img(src='../images/ic-ie.png')
+                            p ※ iOS4.x／Android2.3.xは未対応
+                            pre
+                                | &lt;mark&gt;...&lt;/mark&gt;
+                            table.table
+                                tr
+                                    td カテゴリー
+                                    td フローコンテンツ／フレージングコンテンツ／パルパブルコンテンツ
+                                tr
+                                    td 記述可能な場所
+                                    td
+                                        | フレージングコンテンツが記述できる場所
+                                tr
+                                    td コンテンツモデル
+                                    td フレージングコンテンツ
+                                tr
+                                    td 構成するボックス
+                                    td inline
+                                tr
+                                    td 属性
+                                    td グローバル
+                                tr
+                                    td 標準的なスタイル
+                                    td
+                                        pre
+                                            | mark {
+                                            |     background: yellow;
+                                            |     color: black;
+                                            | }
+                            .alert.alert-info 参照先の注目箇所を示す
+                            p='本文から参照している引用文やコンピュータ・コード内の注目箇所は<mark>で明示することができます。<mark>でマークアップした箇所は、デフォルトスタイルシートによって黄色の背景色でハイライト表示されます。'
+                            h4 引用文内の注目箇所を示す
+                            p='たとえば、、Wikipediaの『茶』の項目から引用した文章のうち、「チャノキの葉や茎を加工して作られる」という部分に注目していることを示す場合、下のように<mark>でマークアップすることができます。'
+                            p='また、この<mark>によるハイライトは、引用元のオリジナルコンテンツではなく、このページで付加したものとして扱われます。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/07/204.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;h1&gt;Short Conversation&lt;/h1&gt;
+                                | 
+                                | &lt;p&gt;リラックスしたり休憩したりするときには、ちょっとしたお茶が欲しくなります。お茶とはいったい何なのでしょうか？ Wikipediaの『&lt;cite&gt;茶&lt;/cite&gt;』の項目では次のように記されており、「&lt;b&gt;チャノキ&lt;/b&gt;」という植物が原料になっていることがわかります：&lt;/p&gt;
+                                | 
+                                | &lt;blockquote&gt;
+                                | &lt;p&gt;茶（ちゃ、英語: tea）とは、&lt;mark&gt;チャノキの葉や茎を加工して作られる&lt;/mark&gt;飲み物である。 また、これに加えて、チャノキ以外の植物の部位（葉、茎、果実、花びら、根等）や真菌類・動物に由来する加工物から作られる飲み物にも「茶」もしくは「○○茶」と称するものが数多くあり、広義ではそれらは全て「茶」に分類される。&lt;/p&gt;
+                                | &lt;/blockquote&gt;
+                            pre(class='prettyprint linenums:1')
+                                | b    {color: red;}
+                                | 
+                                | blockquote    {border: dotted 2px #d2bc8c;
+                                |     padding: 0 20px;}
+                            h4 コンピュータ・コード内の注目箇所を示す
+                            p='ここでは、コンピュータ・コード内の「h1」や「<h1>」に注目していることを<mark>で明示しています。'
+                            p='また、<mark>で示したハイライトは、オリジナルコンピュータ・コードに含まれているものではなく、このページで付加したものとして扱われます。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/07/205-1.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;h1&gt;Tips and Tricks&lt;/h1&gt;
+                                | 
+                                | &lt;p&gt;サンプルでは&lt;b&gt;&lt;h1&gt;&lt;/b&gt;でマークアップした箇所をクリックすると、コンテンツの表示・非表示が切り替わるようになっています。&lt;/p&gt;
+                                | 
+                                | &lt;pre class="prettyprint linenums"&gt;
+                                | &lt;code class="language-html"&gt;&lt;script&gt;
+                                | $(function(){
+                                |     $('&lt;mark&gt;h1&lt;/mark&gt;').click(function() {
+                                |           $(this).next().slideToggle();
+                                |      }).next().hide();
+                                | });
+                                | &lt;/script&gt;
+                                | …
+                                | &lt;!-- コンテンツ --&gt;
+                                | &lt;mark&gt;&lt;h1&gt;&lt;/mark&gt;Short Tea Breaks&lt;mark&gt;&lt;/h1&gt;&lt;/mark&gt;
+                                | &lt;img src="tea.jpg" alt=""&gt;
+                                | &lt;/code&gt;&lt;/pre&gt;    
+                            pre(class='prettyprint linenums:1')
+                                | b    {color: red;}            
+                            .alert.alert-info ユーザーが実行した処理に関連する箇所を示す
+                            p='<mark>では、ユーザーが実行した処理に関連する箇所を示すこともできます。たとえば、検索結果を表示する場合、ユーザーが使用した検索キーワードを<mark>でマークアップし、ハイライト表示することが可能です。'
+                            p
+                                a.btn.btn-default(href='../demo/html/sample1/07/205-2.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                | &lt;h1&gt;検索キーワード：『茶』&lt;/h1&gt;
+                                | 
+                                | &lt;p&gt;紅&lt;mark&gt;茶&lt;/mark&gt;は、&lt;mark&gt;茶&lt;/mark&gt;の葉を全発酵させて製造したお&lt;mark&gt;茶&lt;/mark&gt;です。ダージリンやアッサム、ジャワ、ウバ、ニルギリなど、たくさんの銘柄があります。アールグレイといったフレーバーティーも有名です。&lt;/p&gt;
+                                | 
+                                | &lt;p&gt;基本的に熱湯で入れ、&lt;mark&gt;茶&lt;/mark&gt;葉に合わせて抽出時間を十分に取ります。そのため、保温性の高いポットや温めた&lt;mark&gt;茶&lt;/mark&gt;器を使って入れるのがポイントとなります。ティーコジーでポットをカバーし、温度が下がるのを防ぐのもおすすめです。&lt;/p&gt;
+                                | &lt;/section&gt;
+        .footer=title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='../js/google-code-prettify/prettify.js')
+        script.
+            prettyPrint();
+        script(src='../js/bootstrap.min.js')
+        script(src='../coffee/list-counter.js')

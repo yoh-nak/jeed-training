@@ -1,40 +1,40 @@
 extends ../../layout
 
 block link
-	link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
-	link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
-	link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
-	link(href='../../css/style.css',rel='stylesheet',media='screen')
-	link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
 
 block content
-	include ../library/navbar
-	.container
-		.row
-			.col-sm-3
-				include ../library/left
-			.col-sm-9
-				.panel.panel-primary
-					.panel-heading
-						i.glyphicon.glyphicon-book
-						| &nbsp;json2.jsとは
-					.panel-body
-						p: u: a(href='https://github.com/douglascrockford/JSON-js',target='_blank') ダウンロード
-						p json2.jsはIE6、IE7のようなJSON.parse、JSON.stringifyに対応していないブラウザに、JSON.parse、JSON.stringifyを対応させるライブラリです。通常は
-						pre(class='prettyprint linenums:1')
-							:code
-								<script>
-								var myJSONtext = '["key1":"val1", "key2":"val2", "key3":"val3"]';
-								var myObject = eval('(' + myJSONtext + ')');
-								var data = myObject.key1;
-								</script>
-						p の様にJSON形式のテキストを変換します。eval( ) は JavaScript のコンパイラを起動します。この方法は高速ですが、意図しないテキストを実行してしまうことがあります。ajax 等で動的に取得したJSON形式のテキストを解釈する場合さらに危険性が高くなる可能性があります。純粋にJSON形式のデータを解釈したい場合はjson2.jsを使うことをおすすめします。
-						p json2.jsを使用する場合、以下のように記述できます。
-						pre(class='prettyprint linenums:1')
-							:code
-								<script src="json2.js"></script>
-								<script>
-								var myJSONtext = '["key1":"val1", "key2":"val2", "key3":"val3"]';
-								var myObject = JSON.parse(myJSONtext);
-								var data = myObject.key1;
-								</script>
+    include ../library/navbar
+    .container
+        .row
+            .col-sm-3
+                include ../library/left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;json2.jsとは
+                    .panel-body
+                        p: u: a(href='https://github.com/douglascrockford/JSON-js',target='_blank') ダウンロード
+                        p json2.jsはIE6、IE7のようなJSON.parse、JSON.stringifyに対応していないブラウザに、JSON.parse、JSON.stringifyを対応させるライブラリです。通常は
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <script>
+                                var myJSONtext = '["key1":"val1", "key2":"val2", "key3":"val3"]';
+                                var myObject = eval('(' + myJSONtext + ')');
+                                var data = myObject.key1;
+                                </script>
+                        p の様にJSON形式のテキストを変換します。eval( ) は JavaScript のコンパイラを起動します。この方法は高速ですが、意図しないテキストを実行してしまうことがあります。ajax 等で動的に取得したJSON形式のテキストを解釈する場合さらに危険性が高くなる可能性があります。純粋にJSON形式のデータを解釈したい場合はjson2.jsを使うことをおすすめします。
+                        p json2.jsを使用する場合、以下のように記述できます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <script src="json2.js"></script>
+                                <script>
+                                var myJSONtext = '["key1":"val1", "key2":"val2", "key3":"val3"]';
+                                var myObject = JSON.parse(myJSONtext);
+                                var data = myObject.key1;
+                                </script>

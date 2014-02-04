@@ -1,0 +1,114 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;$(':last-child擬似クラス') 課題
+                    .panel-body
+                        p div要素をクリックして、クリックしたdiv要素の左上にアイコンを表示し、表示したアイコンをクリックしたら、そのアイコンを非表示にしてみましょう。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise89/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | &nbsp;解答例
+                        #demo.collapse.out
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                                link(rel='stylesheet',href='style.css')
+                                            body
+                                                div
+                                                    | div要素 div要素 div要素 div要素<br>
+                                                    | div要素 div要素 div要素 div要素<br>
+                                                    | div要素 div要素 div要素 div要素<br>
+                                                    | div要素 div要素 div要素 div要素
+                                                    span: img(src='img/image1.png',alt='')
+                                                div
+                                                    | div要素 div要素 div要素 div要素<br>
+                                                    | div要素 div要素 div要素 div要素<br>
+                                                    | div要素 div要素 div要素 div要素<br>
+                                                    | div要素 div要素 div要素 div要素
+                                                    span: img(src='img/image2.png',alt='')
+                                                div
+                                                    | div要素 div要素 div要素 div要素<br>
+                                                    | div要素 div要素 div要素 div要素<br>
+                                                    | div要素 div要素 div要素 div要素<br>
+                                                    | div要素 div要素 div要素 div要素
+                                                    span: img(src='img/image3.png',alt='')
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                                link(rel='stylesheet',href='style.css')
+                                            body
+                                                -for(var i = 0; i < 3; i++)
+                                                    div
+                                                        | div要素 div要素 div要素 div要素<br>
+                                                        | div要素 div要素 div要素 div要素<br>
+                                                        | div要素 div要素 div要素 div要素<br>
+                                                        | div要素 div要素 div要素 div要素
+                                                        span: img(src='img/image#{i+1}.png',alt='')
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        size()
+                                            50px
+                                        div
+                                            cursor pointer
+                                            position relative
+                                            margin size()
+                                        span
+                                            cursor pointer
+                                            display none
+                                            width size()
+                                            height @width()
+                                            overflow hidden
+                                            position absolute
+                                            top -(size()*0.5)
+                                            left @top
+                                        img
+                                            margin-left -(size()+size()*0.5)
+                                            margin-top @margin-left
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $(function() {
+                                            $('div').click(function() {
+                                                $('span:last-child', this).css('display', 'block');
+                                                });
+                                                $('span').click(function() {
+                                                $(this).css('display', 'none');
+                                                return false;
+                                            });
+                                        });
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $ ->
+                                            $('div').click ->
+                                                $('span:last-child',this).css 'display', 'block'
+                                                return
+                                            $('span').click ->
+                                                $(this).css 'display', 'none'
+                                                return false
+                                            return

@@ -1,0 +1,143 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;$(':nth-of-type擬似クラス') 課題
+                    .panel-body
+                        p img要素をクリックして、拡大してみましょう。その際、クリックしなかった要素は半透明にして縮小してみましょう。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise95/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | &nbsp;解答例
+                        #demo.collapse.out
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                                link(rel='stylesheet',href='style.css')
+                                            body
+                                                div
+                                                    h2 サムネイル
+                                                    p
+                                                        img(src='img/image1.png',alt='')
+                                                        img(src='img/image2.png',alt='')
+                                                        img(src='img/image3.png',alt='')
+                                                        img(src='img/image4.png',alt='')
+                                                        img(src='img/image5.png',alt='')
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                                link(rel='stylesheet',href='style.css')
+                                            body
+                                                div
+                                                    h2 サムネイル
+                                                    p
+                                                        -for(var i = 0; i < 5; i++)
+                                                            img(src='img/image#{i+1}.png',alt='')
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        prefix(prop, val)
+                                            -webkit-{prop} val
+                                            {prop} val
+
+                                        size()
+                                            100px
+
+                                        img
+                                            width size()
+                                            height @width
+                                            opacity 0.5
+                                            prefix('transition-property', all)  
+                                            prefix('transition-duration', 500ms)
+                                            prefix('transition-timing-function', ease-in-out)
+                                            &.large
+                                                width size()*2
+                                                height @width
+                                                opacity 1.0
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $(function() {
+
+                                        /*
+                                        $('img:nth-of-type(1)').click(function(){
+                                            $('img').removeClass('large');
+                                            $(this).addClass('large');
+                                        });
+
+                                        $('img:nth-of-type(2)').click(function(){
+                                            $('img').removeClass('large');
+                                            $(this).addClass('large');
+                                        });
+                                        $('img:nth-of-type(3)').click(function(){
+                                            $('img').removeClass('large');
+                                            $(this).addClass('large');
+                                        });
+                                        $('img:nth-of-type(4)').click(function(){
+                                            $('img').removeClass('large');
+                                            $(this).addClass('large');
+                                        });
+                                        $('img:nth-of-type(5)').click(function(){
+                                            $('img').removeClass('large');
+                                            $(this).addClass('large');
+                                        });
+                                        */
+
+                                        $('img').click(function() {
+                                            $('img').removeClass('large');
+                                            $(this).addClass('large');
+                                        });
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $ ->
+                                            ###
+                                            $('img:nth-of-type(1)').click ->
+                                                $('img').removeClass('large')
+                                                $(this).addClass('large')
+                                                return
+                                            $('img:nth-of-type(2)').click ->
+                                                $('img').removeClass('large')
+                                                $(this).addClass('large')
+                                                return
+                                            $('img:nth-of-type(3)').click ->
+                                                $('img').removeClass('large')
+                                                $(this).addClass('large')
+                                                return
+                                            $('img:nth-of-type(4)').click ->
+                                                $('img').removeClass('large')
+                                                $(this).addClass('large')
+                                                return
+                                            $('img:nth-of-type(5)').click ->
+                                                $('img').removeClass('large')
+                                                $(this).addClass('large')
+                                                return
+                                            ###
+                                            $('img').click ->
+                                                $('img').removeClass('large')
+                                                $(this).addClass('large')
+                                                return
+                                            return

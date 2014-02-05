@@ -60,11 +60,18 @@ block content
                         .alert.alert-info インストールしたBoxの削除
                         pre
                             :code
+                                vagrant box remove centos32 virtualbox
                                 vagrant box remove centos64 virtualbox
                                 vagrant box remove precise32 virtualbox
                         hr
                         .alert.alert-info 仮想マシン用ディレクトリ作成
                         p ※ 作成するディレクトリ名は任意
+                        h4 CentOS 32bit
+                        pre
+                            :code
+                                cd ~
+                                mkdir myCentos32VM
+                                cd myCentos32VM
                         h4 CentOS 64bit
                         pre
                             :code
@@ -78,7 +85,11 @@ block content
                                 mkdir myPrecise32VM
                                 cd myPrecise32VM
                         hr
-                        .alert.alert-info BOVagrant設定ファイル生成
+                        .alert.alert-info Vagrant設定ファイル生成
+                        h4 ContOS 32bit
+                        pre
+                            :code
+                                vagrant init centos32
                         h4 ContOS 64bit
                         pre
                             :code
@@ -194,8 +205,9 @@ block content
                         .alert.alert-info Vagrantの共有フォルダ
                         pre
                             :code
-                                仮想マシンの/vagrant = Macの~/myCentOS64VM
-                                仮想マシンの/vagrant = Macの~/myPrecise32VM
+                                仮想マシンの/home/vagrant = Macの~/myCentOS32VM
+                                仮想マシンの/home/vagrant = Macの~/myCentOS64VM
+                                仮想マシンの/home/vagrant = Macの~/myPrecise32VM
                         hr
                         .alert.alert-info Webサーバーのドキュメントルートと共有フォルダをリンク
                         pre

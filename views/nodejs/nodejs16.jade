@@ -45,75 +45,100 @@ block content
                                 npm install nodemailer
                         hr
                         h4 サンプルコード
-                    //-
-                        p: u hello.txt
-                        pre
-                            :code
-                                Hello World!
-                        p: u app.js
                         pre(class='prettyprint linenums:1')
                             :code
-                                var http = require('http');
-                                var fs = require('fs');
-                                var Step = require('step');
-
-                                var keyword = '';
-
-                                //順番に実行する
-                                Step(
-                                    function first(){
-                                        //ファイルを読み込む
-                                        fs.readFile('./hello.txt', this);
-                                    },
-                                    function second(err, str){
-                                        if(err) throw err;
-                                        //読み込んだ内容を文字列に置換し、次の関数の第2引数に渡す
-                                        return str.toString();
-                                    },
-                                    function third(err, str){
-                                        if(err) throw err;
-                                        keyword = str;
-                                        //サーバーの起動
-                                        http.createServer(function (req, res) {
-                                            res.writeHead(200, {'Content-Type': 'text/plain'});
-                                            
-                                            //文字列をブラウザに出力
-                                            res.end(keyword + '\n');
-                                            
-                                        }).listen(1337, '127.0.0.1');
-                                    }
-                                );
+                                var mailer = require('nodemailer');
                                  
-                                console.log('Server running at http://127.0.0.1:1337/');
-                        hr
-                        p: u app.coffee
+                                //SMTPの設定
+                                var setting = {
+                                    //SMTPサーバーを使う場合
+                                    host: 'SMTPホスト',
+                                    auth: {
+                                        user: 'ユーザ名',
+                                        pass: 'パスワード',
+                                        port: 'SMTPポート番号'
+                                    }
+
+                                    /*
+                                    //Webサービスを使う場合
+                                    service: 'サービス名', //'Gmail'、'Hotmail'、'Yahoo Mail'など
+                                    auth: {
+                                        user: 'アカンと名',
+                                        pass: 'パスワード',
+                                        port: 'ポート番号' //'25'など
+                                    }
+                                    */
+                                };
+
+                                //メールの内容
+                                var mailOptions = {
+                                    from: '送信者のメールアドレス',
+                                    to: '送信先メールアドレス',
+                                    subject: 'メールの件名',
+                                    html: 'メールの内容' //HTMLタグが使えます
+                                };
+
+                                //SMTPの接続
+                                var smtp = mailer.createTransport('SMTP', setting);
+
+                                //メールの送信
+                                smtp.sendMail(mailOptions, function(err, res){
+                                    //送信に失敗したとき
+                                    if(err){
+                                        console.log(err);
+                                    //送信に成功したとき
+                                    }else{
+                                        console.log('Message sent: ' + res.message);
+                                    }
+                                    //SMTPの切断
+                                    smtp.close();
+                                });
                         pre(class='prettyprint linenums:1')
                             :code
-                                http = require("http")
-                                fs = require("fs")
-                                Step = require("step")
-                                keyword = ""
+                                mailer = require("nodemailer")
 
-                                #順番に実行する
-                                Step (first = ->
-                                    #ファイルを読み込む
-                                    fs.readFile "./hello.txt", this
-                                ), (second = (err, str) ->
-                                    throw err if err
-                                    #読み込んだ内容を文字列に置換し、次の関数の第2引数に渡す
-                                    str.toString()
-                                ), third = (err, str) ->
-                                    throw err if err
-                                    keyword = str
+                                #SMTPの設定
+                                setting =
+                                
+                                    #SMTPサーバーを使う場合
+                                    host: "SMTPホスト"
+                                    auth:
+                                        user: "ユーザ名"
+                                        pass: "パスワード"
+                                        port: "SMTPポート番号"
+
+
+                                    ###
+                                    #Webサービスを使う場合
+                                    service: "サービス名" #'Gmail'、'Hotmail'、'Yahoo Mail'など
+                                        auth:
+                                        user: "アカンと名"
+                                        pass: "パスワード"
+                                        port: "ポート番号" #'25'など
+                                    ###
+
+                                #メールの内容
+                                mailOptions =
+                                    from: "送信者のメールアドレス"
+                                    to: "送信先メールアドレス"
+                                    subject: "メールの件名"
+                                    html: "メールの内容" #HTMLタグが使えます
+
+
+                                #SMTPの接続
+                                smtp = mailer.createTransport("SMTP", setting)
+
+                                #メールの送信
+                                smtp.sendMail mailOptions, (err, res) ->
+                                
+                                    #送信に失敗したとき
+                                    if err
+                                        console.log err
                                     
-                                    #サーバーの起動
-                                    http.createServer((req, res) ->
-                                        res.writeHead 200,
-                                            "Content-Type": "text/plain"
-                                        #文字列をブラウザに出力
-                                        res.end keyword + "\n"
-                                    ).listen 1337, "127.0.0.1"
-
-                                console.log "Server running at http://127.0.0.1:1337/"
-
-                
+                                    #送信に成功したとき
+                                    else
+                                        console.log "Message sent: " + res.message
+                                    
+                                    #SMTPの切断
+                                    smtp.close()
+                                    return

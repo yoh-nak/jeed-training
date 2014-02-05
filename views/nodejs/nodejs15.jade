@@ -56,7 +56,7 @@ block content
                                 Step(
                                     function first(){
                                         //ファイルを読み込む
-                                        fs.readFile('./hello.txt', this);
+                                        fs.readFile(__dirname + '/hello.txt', this);
                                     },
                                     function second(err, str){
                                         if(err) throw err;
@@ -90,7 +90,7 @@ block content
                                 #順番に実行する
                                 Step (first = ->
                                     #ファイルを読み込む
-                                    fs.readFile "./hello.txt", this
+                                    fs.readFile __dirname + "/hello.txt", this
                                 ), (second = (err, str) ->
                                     throw err if err
                                     #読み込んだ内容を文字列に置換し、次の関数の第2引数に渡す

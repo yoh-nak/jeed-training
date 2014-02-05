@@ -202,6 +202,30 @@ block content
                             :code
                                 vagrant ssh
                         hr
+                        .alert.alert-info Webサーバーのインストール
+                        p Node.jsとは関係ないですが、手っ取り早くVagrantが動いているか確認するためにApacheをインストールしてみましょう。
+                        p Webサーバーをインストールします。
+                        pre
+                            :code
+                                sudo yum install -y httpd
+                        p Webサーバーを起動します。
+                        pre
+                            :code
+                                sudo service httpd start
+                        p Webサーバーを次回パソコンを起動したときに自動起動する設定をします。
+                        pre
+                            :code
+                                sudo chkconfig httpd on
+                        p 起動中のファイヤーウォールを停止します。
+                        pre
+                            :code
+                                sudo service iptables stop
+                        p パソコンを再起動したとき、ファイヤーウォールが自動起動しないように、サービスから解除します。
+                        pre
+                            :code
+                                sudo chkconfig iptables off
+                        p ブラウザで「http://192.168.33.10」にアクセスしたときにApacheウェブサーバーの初期画面が表示されたらOKです。
+                        hr
                         .alert.alert-info Vagrantの共有フォルダ
                         pre
                             :code

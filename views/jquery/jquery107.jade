@@ -1,0 +1,56 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;$('属性セレクター[attr]') 課題
+                    .panel-body
+                        p colspan属性のあるtd要素をth要素に置換してみましょう。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise107/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | &nbsp;解答例
+                        #demo.collapse.out
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                            body
+                                                table(border='1')
+                                                    tr
+                                                        td(colspan='4') テキストテキストテキストテキスト
+                                                    each i in new Array(3)
+                                                        tr
+                                                            each i in new Array(4)
+                                                                td テキスト
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $(function() {
+                                            $('[colspan]').replaceWith('<th colspan=' + $('[colspan]').attr('colspan') + '>' + $('[colspan]').text() + '</th>');
+                                        });
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $ ->
+                                            #この場合、thisには「document」が格納されている
+                                            $('[colspan]').replaceWith('<th colspan=' + $('[colspan]').attr('colspan') + '>' + $('[colspan]').text() + '</th>')
+                                            return
+                                                return
+                                            return

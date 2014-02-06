@@ -1,0 +1,69 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;$('属性セレクター[attr*='val']') 課題
+                    .panel-body
+                        p ボタンをクリックして該当するサービスに絞り込んでみましょう。また、全部ボタンをクリックして元に戻しましょう。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise117/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | &nbsp;解答例
+                        #demo.collapse.out
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                            body
+                                                p
+                                                    input(type='button',value='yahoo')
+                                                    input(type='button',value='rakuten')
+                                                    input(type='button',value='全部')
+                                                ul
+                                                    li: a(href='http://shopping.yahoo.co.jp/') Yahooショッピング
+                                                    li: a(href='http://auctions.yahoo.co.jp/') Yahooオークション
+                                                    li: a(href='http://travel.yahoo.co.jp/') Yahooトラベル
+                                                    li: a(href='http://www.rakuten.co.jp/') 楽天ショッピング
+                                                    li: a(href='http://auction.rakuten.co.jp/') 楽天オークション
+                                                    li: a(href='http://travel.rakuten.co.jp/') 楽天トラベル
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $(function() {
+                                            $('[type="button"]').not(':last-child').click(function() {
+                                                $('li').css('display', 'none');
+                                                $('a[href*="' + $(this).attr('value') + '"]').parent().css('display', 'list-item');
+                                            });
+                                            $('[type="button"]:last-child').click(function() {
+                                                $('li').css('display', 'list-item');
+                                            });
+                                        });
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $ ->
+                                            $('[type="button"]').not(':last-child').click ->
+                                                $('li').css 'display', 'none'
+                                                $('a[href*="' + $(this).attr('value') + '"]').parent().css 'display', 'list-item'
+                                                return
+                                            $('[type="button"]:last-child').click ->
+                                                $('li').css 'display', 'list-item'
+                                                return
+                                            return

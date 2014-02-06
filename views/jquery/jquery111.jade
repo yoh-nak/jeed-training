@@ -1,0 +1,90 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;$('属性セレクター[attr='val']') 課題
+                    .panel-body
+                        p ボタンを押して、該当するiframe要素だけ表示してみましょう。また全部のボタンを押してもとに戻しましょう。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise111/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | &nbsp;解答例
+                        #demo.collapse.out
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                                link(rel='stylesheet',href='style.css')
+                                            body
+                                                p
+                                                    input(type='button',value='iframe1',title='img/image1.png')
+                                                    input(type='button',value='iframe2',title='img/image2.png'
+                                                    input(type='button',value='iframe3',title='img/image3.png'
+                                                    input(type='button',value='iframe4',title='img/image4.png'
+                                                    input(type='button',value='iframe5',title='img/image5.png'
+                                                    input(type='button',value='全部')
+                                                p
+                                                    iframe(src='img/image1.png',width="200",height="200",)
+                                                    iframe(src='img/image2.png',width="200",height="200",)
+                                                    iframe(src='img/image3.png',width="200",height="200",)
+                                                    iframe(src='img/image4.png',width="200",height="200",)
+                                                    iframe(src='img/image5.png',width="200",height="200",)
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                                link(rel='stylesheet',href='style.css')
+                                            body
+                                                p
+                                                    -for(var i = 0; i < 5; i++)
+                                                        input(type='button',value='iframe#{i+1}',title='img/image#{i+1}.png')
+                                                    input(type='button',value='全部')
+                                                p
+                                                    -for(var i = 0; i < 5; i++)
+                                                        iframe(src='img/image#{i+1}.png',width="200",height="200",)
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $(function() {
+                                            $('input').click(function() {
+                                                $('iframe[src!="' + $(this).attr('title') + '"]').css('display', 'none');
+                                                $('iframe[src="' + $(this).attr('title') + '"]').css('display', 'inline-block');
+                                            });
+                                            $('input:last-child').click(function() {
+                                                $('iframe').css('display', 'inline-block');
+                                            });
+                                        });
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $ ->
+                                            $('input').click ->
+                                                $('iframe[src!="' + $(this).attr('title') + '"]').css 'display', 'none'
+                                                $('iframe[src="' + $(this).attr('title') + '"]').css 'display', 'inline-block'
+                                                return
+                                            $('input:last-child').click ->
+                                                $('iframe').css 'display', 'inline-block'
+                                                return
+                                            return

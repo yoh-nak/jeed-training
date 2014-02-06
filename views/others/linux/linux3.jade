@@ -1,0 +1,184 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include ../navbar
+    .container
+        .row
+            .col-sm-3
+                include ../left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;Node.jsアプリケーションの永続化
+                    .panel-body
+                        .alert.alert-info foreverとは
+                        p Node.jsのサーバーがクラッシュしたとき自動的にサーバーを再起動します。Windowsは非対応です。
+                        p /etc/rc.localファイルにコマンドを記述すればサーバの起動時にforeverが実行されます。
+                        p
+                            | forever npmパッケージサイト
+                            br
+                            a(href='https://npmjs.org/package/forever',target='_blank')
+                                | https://npmjs.org/package/forever
+                        p
+                            | forever GitHubサイト
+                            br
+                            a(href='https://github.com/nodejitsu/forever',target='_blank')
+                                | https://github.com/nodejitsu/forever
+                        hr
+                        .alert.alert-info foreverのインストール
+                        p: u CentOS
+                        p CentOSの場合、「sudo npm install -g」ができないので、ルートユーザにログインしなおす。
+                        pre
+                            :code
+                                su
+                                password: vagrant
+                        pre
+                            :code
+                                npm install -g forever
+                        pre
+                            :code
+                                su vagrant
+                                password: vagrant
+                        p: u Ubuntu
+                        pre
+                            :code
+                                sudo npm install -g forever
+                        hr
+                        .alert.alert-info foreverの使い方
+                        p 運用において、手動でサーバーを起動することはありませんが、foreverの動きを確認するために、手動で起動する場合、以下のようにnodeコマンドの代わりに、foreverコマンドでサーバーを起動します。
+                        p: u CentOS
+                        pre
+                            :code
+                                su
+                                password: vagrant
+                                cd /home/vagrant/myweb
+                                foever start app.js
+                        p: u Ubuntu
+                        pre
+                            :code
+                                sudo forever start app.js
+                        hr
+                        p 自動起動する場合は/etc/rc.localに、以下のように記述します。
+                        p: u CentOS
+                        pre
+                            :code
+                                su
+                                password: vagrant
+                                vim vim /etc/rc.local
+                        p: u Ubuntu
+                        pre
+                            :code
+                                vim sudo vim /etc/rc.local
+                        p: u CentOS
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                #!/bin/sh
+                                #
+                                # This script will be executed *after* all the other init scripts.
+                                # You can put your own initialization stuff in here if you don't
+                                # want to do the full Sys V style init stuff.
+
+                                touch /var/lock/subsys/local
+
+                                #foreverの起動コマンドを記述します
+                                /usr/local/bin/node /usr/local/bin/forever start /home/vagrant/myweb/app.js　\
+                                -p /var/run/forever \
+                                --pidfile /var/run/node-app.pid \
+                                -l /var/log/node-app.log -a \
+                                -d /home/vagrant/myweb/
+                        p 改行のエスケープがうまくいかない場合はいったん改行を削除してみましょう。
+                        pre
+                            :code
+                                /usr/local/bin/node /usr/local/bin/forever start /home/vagrant/myweb/app.js -p /var/run/forever --pidfile /var/run/node-app.pid -l /var/log/node-app.log -a -d /home/vagrant/myweb/
+                        p: u Ubuntu
+                        p サーバーが80番ポートの場合はsudoが必要です。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                #!/bin/sh
+                                #
+                                # This script will be executed *after* all the other init scripts.
+                                # You can put your own initialization stuff in here if you don't
+                                # want to do the full Sys V style init stuff.
+
+                                #foreverの起動コマンドを記述します
+                                sudo /usr/local/bin/forever start /home/vagrant/myweb/app.js　\
+                                -p /var/run/forever \
+                                --pidfile /var/run/node-app.pid \
+                                -l /var/log/node-app.log -a \
+                                -d /home/vagrant/myweb/
+                        hr
+                        p 起動スクリプトに記述したら、一度以下のコマンドで仮想サーバーから抜けて、仮想サーバーを起動しなおしてから、Node.jsのアプリにアクセスできているか確認してみましょう。
+                        p 仮想サーバーから抜ける
+                        pre
+                            :code
+                                exit
+                        p 仮想サーバーを再起動する
+                        pre
+                            :code
+                                vagrant reload
+                        p 「http://localhost:3000」でアクセスする
+                        hr
+                        .alert.alert-info その他のforeverコマンド
+                        p foeverのコマンドはログインしているユーザごとに実行されています。自動起動した場合はルートユーザでforeverが実行されているので注意しましょう。
+                        h4 実行中スクリプトの表示
+                        pre
+                            :code
+                                forever list
+                        h4 実行中スクリプトの停止
+                        p foreverで実行されたスクリプトはアプリIDで管理されています。停止したいスクリプトのIDをforever listで確認して、実行します。アプリIDは一般的にforeverで実行したスクリプト順に0番から割り当てられます。
+                        pre
+                            :code
+                                forever stop 0
+                        h4 実行中スクリプトをすべて停止
+                        pre
+                            :code
+                                forever stopall
+                        h4 実行中のスクリプトの再起動
+                        pre
+                            :code
+                                forever restart 0
+                        hr
+                        .alert.alert-info winser
+                        pre
+                            :code
+                                node.js用に書かれたプログラムを、Windowsでサービス登録してバックグラウンドで自動実行します。
+
+                                WinSer: node.js applications as windows services
+                                http://joseoncode.com/2012/04/06/winser-node-dot-js-applications-as-windows-services/
+
+                                npmコマンドでインストールできます。
+
+                                npm install winser
+
+                                実際のプログラムをサービス化するにあたって、package.jsonを作成しておく必要があります。package.jsonのnameがそのままサービス名として登録されます。他の項目はどうでもいいです。
+
+                                コマンドプロンプトを管理者権限で実行します。
+
+                                C:\> chcp 437
+
+                                日本語環境の場合、chcpコマンドでコマンドプロンプトを英語モードにしないと、 
+                                You must run this tool as an administrator 
+                                というエラーが出ます。
+
+                                そして、自分の作ったプログラムのディレクトリに移動して、 
+                                C:\path\to\node_modules\.bat\winser.cmd -i 
+                                でサービスに登録されます。
+
+                                cmdファイル経由ではなく、 
+                                node.exe C:\path\to\winser\winser -i 
+                                でもOKです。
+
+                                ちなみに、サービス自体はnssmが登録します。
+
+                                NSSM – the Non-Sucking Service Manager
+                                http://nssm.cc/
+
+                                ファイアウォールを通す場合は、nssmを指定します。

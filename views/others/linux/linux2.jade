@@ -1,0 +1,173 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include ../navbar
+    .container
+        .row
+            .col-sm-3
+                include ../left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;Node.jsデプロイ環境構築
+                    .panel-body
+                        .alert.alert-info OSのアップデート
+                        p: u CentOS
+                        pre
+                            :code
+                                sudo yum -y update
+                        p: u  Ubuntu
+                        pre
+                            :code
+                                sudo apt-get update
+                        hr
+                        .alert.alert-info Node.jsのインストールに必要な依存パッケージのダウンロード
+                        p: u CentOS
+                        pre
+                            :code
+                                sudo yum -y install git-core git scons build-essential scons libpcre++-dev xulrunner-dev libboost-dev libboost-program-options-dev libboost-thread-dev libboost-filesystem-dev
+                        p: u  Ubuntu
+                        pre
+                            :code
+                                sudo apt-get install git-core git scons build-essential scons libpcre++-dev xulrunner-dev libboost-dev libboost-program-options-dev libboost-thread-dev libboost-filesystem-dev
+                        p ついでにインストールされていなかったときのためにvim gcc、g++
+                        p: u CentOS
+                        pre
+                            :code
+                                sudo yum install -y wget vim gcc g++
+                        p: u Ubuntu
+                        pre
+                            :code
+                                sudo apt-get install wget vim gcc g++
+                        hr
+                        .alert.alert-info Node.jsのインストール
+                        p Node.jsのソースのダウンロード
+                        pre
+                            :code
+                                wget http://nodejs.org/dist/v0.10.25/node-v0.10.25.tar.gz
+                        p Node.jsのソースの解凍
+                        pre
+                            :code
+                                tar -zxf node-v0.10.25.tar.gz
+                        p Node.jsのソースのビルド
+                        pre
+                            :code
+                                cd node-v0.10.25
+                                ./configure
+                                make
+                        p Node.jsのインストール
+                        pre
+                            :code
+                                sudo make install
+                        hr
+                        .alert.alert-info 必要なnpmグローバルパッケージのインストール
+                        p foreverとhttp-proxyのインストール
+                        p: u CentOS
+                        p CentOSの場合、「sudo npm install -g」ができないので、ルートユーザにログインしなおす。
+                        pre
+                            :code
+                                su
+                                password: vagrant
+                        pre
+                            :code
+                                npm install -g forever http-proxy
+                        pre
+                            :code
+                                su vagrant
+                                password: vagrant
+                        p: u Ubuntu
+                        pre
+                            :code
+                                sudo npm install -g forever http-proxy
+                        hr
+                        .alert.alert-info ベアリポジトリの作成
+                        p myapp.gitをベアリポジトリ、デプロイ先をmywebとするとして、ディレクトリを作成します。
+                        pre
+                            :code
+                                cd ~
+                                mkdir myapp.git myweb
+                        p ベアリポジトリにcdし、初期化します。
+                        pre
+                            :code
+
+                                cd myapp.git
+                                git init --bare --shared
+                        hr
+                        .alert.alert-info post-receiveにhook
+                        p post-receiveはベアリポジトリにpushされた後に実行されるシェルのことです。
+                        p まず、ベアリポジトリのhookディレクトリにpost-receiveというファイルを作成します。
+                        pre
+                            :code
+                                sudo vim /home/vagrant/myapp.git/hooks/post-receive
+                        p vimなどのテキストエディタを使って、post-receiveに以下のように記述します。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                #!/bin/sh
+                                GIT_WORK_TREE=/home/vagrant/myweb
+                                export GIT_WORK_TREE
+                                git checkout -f
+                        p post-receiveでpackage.jsonにローカルモジュールが追加されていたときのために、npm installを実行できるようにしておくと便利です。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                #!/bin/sh
+                                GIT_WORK_TREE=/home/vagrant/myweb
+                                export GIT_WORK_TREE
+                                git checkout -f
+
+                                /usr/local/bin/npm install ${GIT_WORK_TREE}
+                        p post-receiveを作成したら、パーミッションの変更をしておきましょう。
+                        pre
+                            :code
+                                sudo chmod +x /home/vagrant/myapp.git/hooks/post-receive
+                        hr
+                        .alert.alert-info ローカルリポジトリの作成
+                        p これ以降は、クライアント側の操作になります。まず開発用のローカルPCにgitをインストールしておきましょう。
+                        p まだ、gitの初期設定がされていない場合は、ユーザ名とメールアドレスを設定します。
+                        pre
+                            :code
+                                git config --global user.name "Yohsuke Nakano"
+                                git config --global user.email hoge@sample.com
+                        p アプリケーションを作成するディレクトリを作成します。
+                        pre
+                            :code
+                                mkdir myapp
+                        p アプリケーションのディレクトリにcdし、ローカルリポジトリの初期化をします。
+                        pre
+                            :code
+                                cd myapp
+                                git init
+                        p .gitignoreを作成します。
+                        pre
+                            :code
+                                touch .gitignore
+                        p .gitignoreにコミット時に無視するいファイルを記述します。
+                        pre
+                            :code
+                                .DS_Store
+                                node_modules        
+                        p ソースコードを作成した後、最初のコミットを行います。
+                        pre
+                            :code
+                                git add .
+                                git commit -m "first commit"
+                        hr
+                        .alert.alert-info リモートリポジトリへのプッシュ
+                        p アプリケーションにリモートリポジトリの設定をします。
+                        p デプロイして公開するリポジトリになるため、「origin」ではなく、明示的に「deploy」としておくとよいでしょう。
+                        pre
+                            :code
+                                git remote add deploy vagrant@192.168.33.10:/home/vagrant/myapp.git
+                        p デプロイ先にpushします。
+                        pre
+                            :code
+                                git push -u deploy master
+                                password: vagrant
+                        p サーバーにssh接続し、サーバーを起動したら、http://localhost:3000にアクセスしてみましょう。

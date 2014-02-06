@@ -1,0 +1,53 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;$('属性セレクター[attr^='val']') 課題
+                    .panel-body
+                        p 別タブで開かない外部リンクをクリックして、別タブで開くようにしてみましょう。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise113/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | &nbsp;解答例
+                        #demo.collapse.out
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                                link(rel='stylesheet',href='style.css')
+                                            body
+                                                ul
+                                                    li: a(href='http://www.yahoo.co.jp/') Yahoo!
+                                                    li: a(href='http://www.google.co.jp/') Google
+                                                    li: a(href='http://jp.msn.com/') MSN
+                                                    li: a(href='http://www.goo.ne.jp/') goo
+                                                    li: a(href='http://www.livedoor.com/') Livedoor
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $(function() {
+                                            $('[href^="http://"]').attr('target', '_blank');
+                                        });
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $ ->
+                                            $('[href^="http://"]').attr 'target', '_blank'
+                                            return

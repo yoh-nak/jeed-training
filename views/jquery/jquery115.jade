@@ -1,0 +1,88 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;$('属性セレクター[attr$='val']') 課題
+                    .panel-body
+                        p ボタンをクリックして、該当する形式の画像ファイルに絞り込んでみましょう。また、全部ボタンをクリックして元に戻しましょう。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise115/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | &nbsp;解答例
+                        #demo.collapse.out
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                            body
+                                                p
+                                                    input(type='button',value='jpg')
+                                                    input(type='button',value='gif')
+                                                    input(type='button',value='png')
+                                                    input(type='button',value='全部')
+                                                p
+                                                    img(src='img/jpg.jpg')
+                                                    img(src='img/gif.gif')
+                                                    img(src='img/png.png')
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                        t.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                                link(rel='stylesheet',href='style.css')
+                                            body
+                                                - var file = ['jpg','gif','png']
+                                                p
+                                                    -for(var i = 0; i < file.length; i++)
+                                                        input(type='button',value='#{file[i]}')
+                                                    input(type='button',value='全部')
+                                                p
+                                                    -for(var i = 0; i < 3; i++)
+                                                        img(src='img/#{file[i]}.#{file[i]}')
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                        t.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $(function() {
+                                            $('input').click(function() {
+                                                $('img').css('display', 'none');
+                                            $('[src$="' + $(this).attr('value') + '"]').css('display', 'inline-block');
+                                            });
+                                            $('input:last-child').click(function() {
+                                                $('img').css('display', 'inline-block');
+                                            });
+                                        });
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $ ->
+                                            $('input').click ->
+                                                $('img').css 'display', 'none'
+                                                $('[src$="' + $(this).attr('value') + '"]').css 'display', 'inline-block'
+                                                return
+                                            $('input:last-child').click ->
+                                                $('img').css 'display', 'inline-block'
+                                                return
+                                            return

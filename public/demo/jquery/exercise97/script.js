@@ -2,24 +2,24 @@
 (function() {
   $(function() {
     $('input:nth-child(1)').click(function() {
-      $('img').removeClass('remove');
-      $('img:nth-last-child(1)').addClass('remove');
+      $('img').turnClass('turn');
+      $('img:nth-last-child(1)').addClass('turn');
     });
     $('input:nth-child(2)').click(function() {
-      $('img').removeClass('remove');
-      $('img:nth-last-child(2)').addClass('remove');
+      $('img').turnClass('turn');
+      $('img:nth-last-child(2)').addClass('turn');
     });
     $('input:nth-child(3)').click(function() {
-      $('img').removeClass('remove');
-      $('img:nth-last-child(3)').addClass('remove');
+      $('img').turnClass('turn');
+      $('img:nth-last-child(3)').addClass('turn');
     });
     $('input:nth-child(4)').click(function() {
-      $('img').removeClass('remove');
-      $('img:nth-last-child(4)').addClass('remove');
+      $('img').turnClass('turn');
+      $('img:nth-last-child(4)').addClass('turn');
     });
     $('input:nth-child(5)').click(function() {
-      $('img').removeClass('remove');
-      $('img:nth-last-child(5)').addClass('remove');
+      $('img').turnClass('turn');
+      $('img:nth-last-child(5)').addClass('turn');
     });
   });
 

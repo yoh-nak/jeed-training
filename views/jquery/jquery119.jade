@@ -1,0 +1,88 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;$('属性セレクター[attr1][attr2]') 課題
+                    .panel-body
+                        p imgフォルダと、imagesフォルダにそれぞれ、jpg.jpg、gif.gif、png.pngという画像ファイルが格納されています。ボタンをクリックしてimgフォルダのpng画像以外を削除し、リセットボタンでもとに戻してみましょう。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise119/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | &nbsp;解答例
+                        #demo.collapse.out
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                                link(rel='stylesheet',href='style.css')
+                                            body
+                                                p
+                                                    input(type='button',value='削除')
+                                                    input(type='button',value='リセット')
+                                                p
+                                                    img(src='img/jpg.jpg')
+                                                    img(src='images/jpg.jpg')
+                                                    img(src='img/gif.gif')
+                                                    img(src='images/gif.gif')
+                                                    img(src='img/png.png')
+                                                    img(src='images/png.png')
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                                link(rel='stylesheet',href='style.css')
+                                            body
+                                                - var file = ['jpg','gif','png']
+                                                p
+                                                    input(type='button',value='削除')
+                                                    input(type='button',value='リセット')
+                                                p
+                                                    -for(var i = 0; i < 3; i++)
+                                                        img(src='img/#{file[i]}.#{file[i]}')
+                                                        img(src='images/#{file[i]}.#{file[i]}')
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $(function() {
+                                            $('input:first-of-type').click(function() {
+                                                $('img').css('display', 'none');
+                                                $('img[src^="img/"][src$=".png"]').css('display', 'inine-block');
+                                            });
+                                            $('input:last-of-type').click(function() {
+                                                $('img').css('display', 'inline-block');
+                                            });
+                                        });
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $ ->
+                                            $('input:first-of-type').click ->
+                                                $('img').css 'display', 'none'
+                                                $('img[src^="img/"][src$=".png"]').css 'display', 'inine-block'
+                                                return
+                                            $('input:last-of-type').click ->
+                                                $('img').css 'display', 'inline-block'
+                                                return
+                                            return

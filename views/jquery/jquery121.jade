@@ -1,0 +1,94 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;$(':first/:lastフィルター') 課題
+                    .panel-body
+                        p div要素をクリックして、body要素内に最初に出てきたdiv要素と最後に出てきたdiv要素を画面中央から開いてみましょう。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise121/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | &nbsp;解答例
+                        #demo.collapse.out
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                                link(rel='stylesheet',href='style.css')
+                                            body
+                                                div
+                                                h1 テキストテキストテキストテキスト
+                                                p
+                                                    | テキストテキストテキストテキスト<br>
+                                                    | テキストテキストテキストテキスト<br>
+                                                    | テキストテキストテキストテキスト<br>
+                                                    | テキストテキストテキストテキスト
+                                                div
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        prefix(prop, val)
+                                            -webkit-{prop} val
+                                            {prop} val
+
+                                        html,body
+                                            height 100%
+                                        body
+                                            margin 0
+
+                                        div
+                                            position fixed
+                                            width 100%
+                                            height 50%
+                                            background-color gray
+                                            prefix('transition-property', all)  
+                                            prefix('transition-duration', 5s)
+                                            prefix('transition-timing-function', ease-in-out)
+                                            &.top
+                                                top 0
+                                                left 0
+                                            &.bottom
+                                                top 50%
+                                                left 0
+                                            &.top.after
+                                                top -50%
+                                                left 0
+                                            &.bottom.after
+                                                top 100%
+                                                left 0
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $(function() {
+                                            $('div:first').addClass('top');
+                                            $('div:last').addClass('bottom');
+                                            $('div').click(function() {
+                                                $('div').addClass('after');
+                                            });
+                                        });
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $ ->
+                                            $('div:first').addClass 'top'
+                                            $('div:last').addClass 'bottom'
+                                            $('div').click ->
+                                                $('div').addClass 'after'
+                                                return
+                                            return

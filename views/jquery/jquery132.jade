@@ -26,49 +26,59 @@ block content
                         #demo.collapse.out
                                 pre(class='prettyprint linenums:1')
                                     :code
-                                        doctype
-                                        html(lang='ja-JP')
-                                            head
-                                                meta(charset='UTF-8')
-                                                title
-                                            body
-                                                p
-                                                    input(type='button', value='クリック')
-                                                table(border='1')
-                                                    tr
-                                                        td 11111
-                                                        td
-                                                        td
-                                                        td 77777
-                                                        td
-                                                    tr
-                                                        td
-                                                        td 33333
-                                                        td
-                                                        td
-                                                        td 99999
-                                                    tr
-                                                        td
-                                                        td 44444
-                                                        td 55555
-                                                        td
-                                                        td
-                                                    tr
-                                                        td 22222
-                                                        td
-                                                        td
-                                                        td 88888
-                                                        td
-                                                    tr
-                                                        td
-                                                        td
-                                                        td 66666
-                                                        td
-                                                        td 00000
-                                                ul
+                                        $(function() {
+                                            $("input").click(function() {
+                                                $("table").css("display", "none");
+                                                $("ul").css("display", "block");
+                                                $("ul").html("\
+                                                    <li>" + $("tr td:nth-child(1):parent:eq(0)").html() + "</li>\
+                                                    <li>" + $("tr td:nth-child(1):parent:eq(1)").html() + "</li>\
+                                                    <li>" + $("tr td:nth-child(2):parent:eq(0)").html() + "</li>\
+                                                    <li>" + $("tr td:nth-child(2):parent:eq(1)").html() + "</li>\
+                                                    <li>" + $("tr td:nth-child(3):parent:eq(0)").html() + "</li>\
+                                                    <li>" + $("tr td:nth-child(3):parent:eq(1)").html() + "</li>\
+                                                    <li>" + $("tr td:nth-child(4):parent:eq(0)").html() + "</li>\
+                                                    <li>" + $("tr td:nth-child(4):parent:eq(1)").html() + "</li>\
+                                                    <li>" + $("tr td:nth-child(5):parent:eq(0)").html() + "</li>\
+                                                    <li>" + $("tr td:nth-child(5):parent:eq(1)").html() + "</li>");
 
-                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-                                                script(src='script.js')
+
+                                                /*
+                                                    var html;
+                                                    html = "<li>" + $("tr td:nth-child(1):parent:eq(0)").html() + "</li>";
+                                                    html += "<li>" + $("tr td:nth-child(1):parent:eq(1)").html() + "</li>";
+                                                    html += "<li>" + $("tr td:nth-child(2):parent:eq(0)").html() + "</li>";
+                                                    html += "<li>" + $("tr td:nth-child(2):parent:eq(1)").html() + "</li>";
+                                                    html += "<li>" + $("tr td:nth-child(3):parent:eq(0)").html() + "</li>";
+                                                    html += "<li>" + $("tr td:nth-child(3):parent:eq(1)").html() + "</li>";
+                                                    html += "<li>" + $("tr td:nth-child(4):parent:eq(0)").html() + "</li>";
+                                                    html += "<li>" + $("tr td:nth-child(4):parent:eq(1)").html() + "</li>";
+                                                    html += "<li>" + $("tr td:nth-child(5):parent:eq(0)").html() + "</li>";
+                                                    html += "<li>" + $("tr td:nth-child(5):parent:eq(1)").html() + "</li>";
+                                                    $("ul").html(html);
+
+                                                 */
+
+                                                /*
+                                                    var html, i, j;
+
+                                                    html = "";
+
+                                                    i = 1;
+
+                                                    while (i <= 5) {
+                                                        j = 0;
+                                                        while (j <= 1) {
+                                                            html += "<li>" + $("tr td:nth-child(" + i + "):parent:eq(" + j + ")").html() + "</li>";
+                                                            j++;
+                                                        }
+                                                        i++;
+                                                    }
+
+                                                    $("ul").html(html);
+                                                 */
+                                            });
+                                        });
                                 pre(class='prettyprint linenums:1')
                                     :code
                                         $(function() {
@@ -95,6 +105,20 @@ block content
                                             $("input").click ->
                                                 $("table").css "display", "none"
                                                 $("ul").css "display", "block"
+
+                                                $("ul").html "\
+                                                    <li>" + $("tr td:nth-child(1):parent:eq(0)").html() + "</li>\
+                                                    <li>" + $("tr td:nth-child(1):parent:eq(1)").html() + "</li>\
+                                                    <li>" + $("tr td:nth-child(2):parent:eq(0)").html() + "</li>\
+                                                    <li>" + $("tr td:nth-child(2):parent:eq(1)").html() + "</li>\
+                                                    <li>" + $("tr td:nth-child(3):parent:eq(0)").html() + "</li>\
+                                                    <li>" + $("tr td:nth-child(3):parent:eq(1)").html() + "</li>\
+                                                    <li>" + $("tr td:nth-child(4):parent:eq(0)").html() + "</li>\
+                                                    <li>" + $("tr td:nth-child(4):parent:eq(1)").html() + "</li>\
+                                                    <li>" + $("tr td:nth-child(5):parent:eq(0)").html() + "</li>\
+                                                    <li>" + $("tr td:nth-child(5):parent:eq(1)").html() + "</li>"
+
+                                                ###
                                                 html = "<li>" + $("tr td:nth-child(1):parent:eq(0)").html() + "</li>"
                                                 html += "<li>" + $("tr td:nth-child(1):parent:eq(1)").html() + "</li>"
                                                 html += "<li>" + $("tr td:nth-child(2):parent:eq(0)").html() + "</li>"
@@ -105,7 +129,25 @@ block content
                                                 html += "<li>" + $("tr td:nth-child(4):parent:eq(1)").html() + "</li>"
                                                 html += "<li>" + $("tr td:nth-child(5):parent:eq(0)").html() + "</li>"
                                                 html += "<li>" + $("tr td:nth-child(5):parent:eq(1)").html() + "</li>"
+
                                                 $("ul").html html
+                                                ###
+
+                                                ###
+                                                html = ""
+                                                i = 1
+
+                                                while i <= 5
+                                                    j = 0
+
+                                                    while j <= 1
+                                                        html += "<li>" + $("tr td:nth-child(" + i + "):parent:eq(" + j + ")").html() + "</li>"
+                                                        j++
+                                                    i++
+
+                                                $("ul").html html
+                                                ###
+
                                                 return
 
                                             return

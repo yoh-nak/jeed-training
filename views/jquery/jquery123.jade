@@ -1,0 +1,165 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;$(':even/:oddセレクター') 課題
+                    .panel-body
+                        p tr要素をクリックして、クリックしたtr要素を一番上に移動ましょう。その際、偶数、奇数行の色は交互のままにしましょう。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise123/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | &nbsp;解答例
+                        #demo.collapse.out
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                            body
+                                                table(border='1')
+                                                    tr
+                                                        td テキスト0-0
+                                                        td テキスト0-1
+                                                        td テキスト0-2
+                                                        td テキスト0-3
+                                                        td テキスト0-4
+                                                    tr
+                                                        td テキスト1-0
+                                                        td テキスト1-1
+                                                        td テキスト1-2
+                                                        td テキスト1-3
+                                                        td テキスト1-4
+                                                    tr
+                                                        td テキスト2-0
+                                                        td テキスト2-1
+                                                        td テキスト2-2
+                                                        td テキスト2-3
+                                                        td テキスト2-4
+                                                    tr
+                                                        td テキスト3-0
+                                                        td テキスト3-1
+                                                        td テキスト3-2
+                                                        td テキスト3-3
+                                                        td テキスト3-4
+                                                    tr
+                                                        td テキスト4-0
+                                                        td テキスト4-1
+                                                        td テキスト4-2
+                                                        td テキスト4-3
+                                                        td テキスト4-4
+                                                    tr
+                                                        td テキスト5-0
+                                                        td テキスト5-1
+                                                        td テキスト5-2
+                                                        td テキスト5-3
+                                                        td テキスト5-4
+                                                    tr
+                                                        td テキスト6-0
+                                                        td テキスト6-1
+                                                        td テキスト6-2
+                                                        td テキスト6-3
+                                                        td テキスト6-4
+                                                    tr
+                                                        td テキスト7-0
+                                                        td テキスト7-1
+                                                        td テキスト7-2
+                                                        td テキスト7-3
+                                                        td テキスト7-4
+                                                    tr
+                                                        td テキスト8-0
+                                                        td テキスト8-1
+                                                        td テキスト8-2
+                                                        td テキスト8-3
+                                                        td テキスト8-4
+                                                    tr
+                                                        td テキスト9-0
+                                                        td テキスト9-1
+                                                        td テキスト9-2
+                                                        td テキスト9-3
+                                                        td テキスト9-4
+                                                    script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                    script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                            body
+                                                    table(border='1')
+                                                        - for(var i = 0; i < 10; i++)
+                                                            tr
+                                                                - for(var j = 0; j < 5; j++)
+                                                                    td テキスト\#{i}-\#{j}
+                                                    script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                    script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        prefix(prop, val)
+                                            -webkit-{prop} val
+                                            {prop} val
+
+                                        html,body
+                                            height 100%
+                                        body
+                                            margin 0
+
+                                        div
+                                            position fixed
+                                            width 100%
+                                            height 50%
+                                            background-color gray
+                                            prefix('transition-property', all)  
+                                            prefix('transition-duration', 5s)
+                                            prefix('transition-timing-function', ease-in-out)
+                                            &.top
+                                                top 0
+                                                left 0
+                                            &.bottom
+                                                top 50%
+                                                left 0
+                                            &.top.after
+                                                top -50%
+                                                left 0
+                                            &.bottom.after
+                                                top 100%
+                                                left 0
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $(function() {
+                                            $('tr:even').css('background-color', 'red');
+                                            $('tr:odd').css('background-color', 'blue');
+                                            $('tr').click(function() {
+                                                $(this).prependTo('tbody');
+                                                $('tr:even').css('background-color', 'red');
+                                                $('tr:odd').css('background-color', 'blue');
+                                            });
+                                        });
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $ ->
+                                            $('tr:even').css 'background-color', 'red'
+                                            $('tr:odd').css 'background-color', 'blue'
+                                            $('tr').click ->
+                                                $(this).prependTo('tbody')
+                                                $('tr:even').css 'background-color', 'red'
+                                                $('tr:odd').css 'background-color', 'blue'
+                                                return
+                                            return

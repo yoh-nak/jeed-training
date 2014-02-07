@@ -13,17 +13,21 @@ block content
                 .panel.panel-primary
                     .panel-heading
                         i.glyphicon.glyphicon-book
-                        | &nbsp;$(':even/:oddフィルター')
+                        | &nbsp;$(':even/:oddセレクター')
                     .panel-body。
                         p
                             a.btn.btn-default(href='../demo/jquery/exercise122/index1.html',target='_blank')
                                 i.glyphicon.glyphicon-play
                                 | デモ
                             | 
-                            a.btn.btn-default(href='http://api.jquery.com/jQuery/',target='_blank')
+                            a.btn.btn-default(href='http://api.jquery.com/even-selector/',target='_blank')
                                 i.glyphicon.glyphicon-info-sign
-                                | &nbsp;参考
+                                | &nbsp;参考（:even）
+                            a.btn.btn-default(href='http://api.jquery.com/odd-selector/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考（:odd）
                         pre(class='prettyprint linenums:1')
+                            :code
                             :code
                                 doctype
                                 html(lang='ja-JP')
@@ -37,6 +41,7 @@ block content
                                             li テキストテキストテキストテキスト
                                             li テキストテキストテキストテキスト
                                         script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')query.com/jquery-1.11.0.min.js')
                                         script(src='script.js')
                         pre(class='prettyprint linenums:1')
                             :code
@@ -54,10 +59,12 @@ block content
                         pre(class='prettyprint linenums:1')
                             :code
                                 $(function() {
-                                    $('li:first, li:last').css('color', 'red');
+                                    $('li:even').css('color', 'red');
+                                    $('li:odd').css('color', 'blue');
                                 });
                         pre(class='prettyprint linenums:1')
                             :code
                                 $ ->
-                                    $('li:first, li:last').css 'color', 'red'
+                                    $('li:even').css 'color', 'red'
+                                    $('li:odd').css 'color', 'blue'
                                     return

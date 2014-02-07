@@ -1,0 +1,56 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;$(':contains/:hasセレクター')
+                    .panel-body
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise128/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/contains-selector/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考（:contains）
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/has-selector/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考（:has
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                    body
+                                        ul
+                                            li <b>テキスト</b>テキストテキストテキスト
+                                            li テキストテキストテキストテキスト
+                                            li テキストテキストテキストテキスト
+                                            li ホゲホゲテキストテキストテキスト
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('li:has(b)').css('color', 'red');
+                                    $('li:contains("ホゲホゲ")').css('color', 'blue');
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('li:has(b)').css 'color', 'red'
+                                    $('li:contains("ホゲホゲ")').css 'color', 'blue'
+                                    return

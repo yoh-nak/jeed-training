@@ -13,20 +13,16 @@ block content
                 .panel.panel-primary
                     .panel-heading
                         i.glyphicon.glyphicon-book
-                        | &nbsp;$(':contains/:hasセレクター')
+                        | &nbsp;$(':parentセレクター')
                     .panel-body
                         p
-                            a.btn.btn-default(href='../demo/jquery/exercise128/index1.html',target='_blank')
+                            a.btn.btn-default(href='../demo/jquery/exercise130/index1.html',target='_blank')
                                 i.glyphicon.glyphicon-play
                                 | デモ
                             | 
-                            a.btn.btn-default(href='http://api.jquery.com/contains-selector/',target='_blank')
+                            a.btn.btn-default(href='http://api.jquery.com/parents-selector/',target='_blank')
                                 i.glyphicon.glyphicon-info-sign
-                                | &nbsp;参考（:contains）
-                            | 
-                            a.btn.btn-default(href='http://api.jquery.com/has-selector/',target='_blank')
-                                i.glyphicon.glyphicon-info-sign
-                                | &nbsp;参考（:has）
+                                | &nbsp;参考（:parent）
                         pre(class='prettyprint linenums:1')
                             :code
                                 doctype
@@ -36,21 +32,19 @@ block content
                                         title
                                     body
                                         ul
-                                            li <b>テキスト</b>テキストテキストテキスト
                                             li テキストテキストテキストテキスト
+                                            li 
                                             li テキストテキストテキストテキスト
-                                            li ホゲホゲテキストテキストテキスト
+                                            li 
                                         script(src='http://code.jquery.com/jquery-1.11.0.min.js')
                                         script(src='script.js')
                         pre(class='prettyprint linenums:1')
                             :code
                                 $(function() {
-                                    $('li:has(b)').css('color', 'red');
-                                    $('li:contains("ホゲホゲ")').css('color', 'blue');
+                                    $('li:parent').css('color', 'red');
                                 });
                         pre(class='prettyprint linenums:1')
                             :code
                                 $ ->
-                                    $('li:has(b)').css 'color', 'red'
-                                    $('li:contains("ホゲホゲ")').css 'color', 'blue'
+                                    $('li:parent').css 'color', 'red'
                                     return

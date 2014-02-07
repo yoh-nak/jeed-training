@@ -1,0 +1,73 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;$(':headerセレクター') 課題
+                    .panel-body
+                        p ボタンをクリックして、ヘッディング要素だけを抽出してみましょう。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise127/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | &nbsp;解答例
+                        #demo.collapse.out
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                            body
+                                                p: input(type='button',value='クリック')
+                                                h1 テキストテキストテキストテキスト
+                                                p
+                                                    | テキストテキストテキストテキスト<br>
+                                                    | テキストテキストテキストテキスト<br>
+                                                    | テキストテキストテキストテキスト<br>
+                                                    | テキストテキストテキストテキスト
+                                                section
+                                                    h1 テキストテキストテキストテキスト
+                                                    p
+                                                        | テキストテキストテキストテキスト<br>
+                                                        | テキストテキストテキストテキスト<br>
+                                                        | テキストテキストテキストテキスト<br>
+                                                        | テキストテキストテキストテキスト
+                                                    h2 テキストテキストテキストテキスト
+                                                    p
+                                                        | テキストテキストテキストテキスト<br>
+                                                        | テキストテキストテキストテキスト<br>
+                                                        | テキストテキストテキストテキスト<br>
+                                                        | テキストテキストテキストテキスト
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $(function() {
+                                            $('input').click(function() {
+                                                $(':header').prependTo('body');
+                                                $('body > *').not(':header').css('display', 'none');
+                                            });
+                                        });
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $ ->
+                                            $('input').click ->
+                                                $(':header').prependTo('body')
+                                                $('body > *').not(':header').css 'display', 'none'
+                                                #$('~ *', ':header:last').css 'display', 'none'
+                                                return
+                                            return

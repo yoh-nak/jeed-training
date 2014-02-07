@@ -1,0 +1,77 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;$(':eq/:lt/:gtセレクター') 課題
+                    .panel-body
+                        p クリックしたli要素に色をつけ、同時にクリックしたli要素の兄要素を別の色にし、またクリックしたli要素の弟要素を別の色にしましょう。
+                        p クリックした要素のインデックス番号は以下のようにして取得するものとします。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $('li').click(function() {
+                                    window.alert($('ul li').index(this));
+                                });
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise125/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | &nbsp;解答例
+                        #demo.collapse.out
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                            body
+                                                ul
+                                                    li テキストテキストテキストテキスト
+                                                    li テキストテキストテキストテキスト
+                                                    li テキストテキストテキストテキスト
+                                                    li テキストテキストテキストテキスト
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                            body
+                                                ul
+                                                    for i in new Array(10)
+                                                        li テキストテキストテキストテキスト
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $(function() {
+                                            $('li').click(function() {
+                                                $(this).css('color', '#f00');
+                                                ('li:lt(' + $('ul li').index(this) + ')').css('color', '#0f0');
+                                                $('li:gt(' + $('ul li').index(this) + ')').css('color', '#00f');
+                                            });
+                                        });
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $ ->
+                                            $('li').click ->
+                                                $(this).css 'color', '#f00'
+                                                $('li:lt(' + $('ul li').index(this) + ')').css 'color', '#0f0'
+                                                $('li:gt(' + $('ul li').index(this) + ')').css 'color', '#00f'
+                                            return

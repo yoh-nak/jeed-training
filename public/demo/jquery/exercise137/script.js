@@ -5,12 +5,10 @@
       $('li:not(:animated)').slideDown();
       $('#first:not(:animated)').slideDown();
     });
-    return $('input:nth(1)').click(function() {
+    $('input:nth(1)').click(function() {
       $('li:not(:animated)').slideUp();
       $('#first:not(:animated)').slideUp();
     });
   });
-
-  return;
 
 }).call(this);

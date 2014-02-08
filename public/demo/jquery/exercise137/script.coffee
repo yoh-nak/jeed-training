@@ -7,4 +7,4 @@ $ ->
 		$('li:not(:animated)').slideUp()
 		$('#first:not(:animated)').slideUp()
 		return
-return
+	return

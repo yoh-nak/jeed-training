@@ -1,0 +1,106 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;slideDown()/slideUpメソッド
+                    .panel-body
+                        p slideDown()メソッドは、show()メソッドと使い方は同じですが、スライドするアニメーションで要素が表示されます。
+                        p また、slideUp()メソッドは、hide()メソッドと使い方は同じですが、スライドするアニメーションで要素が非表示になります。
+                        p 速度の調整や、コールバック関数はshow()/hide()メソッドと同じです。
+                        pre
+                            :code
+                                $('セレクター').toggle();
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise137/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/slidedown/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考（slideDown）
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/slideup/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考（slideUp）
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        link(rel='stylesheet',href='style.css')
+                                    body
+                                        p
+                                            input(type='button',value='表示')
+                                            input(type='button',value='非表示')
+                                        p#first
+                                        ul
+                                            li テキストテキストテキストテキスト
+                                            li テキストテキストテキストテキスト
+                                            li テキストテキストテキストテキスト
+                                            li テキストテキストテキストテキスト
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        link(rel='stylesheet',href='style.css')
+                                    body
+                                        p
+                                            input(type='button',value='表示')
+                                            input(type='button',value='非表示')
+                                        p#first
+                                        ul
+                                            for i in new Array(4)
+                                                li テキストテキストテキストテキスト
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                size()
+                                    200px
+
+                                #first
+                                    width size()
+                                    height @width
+                                    background-color #f00
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                    $(function() {
+                                        $('input:nth(0)').click(function() {
+                                            $('li:not(:animated)').slideDown();
+                                            $('#first:not(:animated)').slideDown();
+                                        });
+                                        $('input:nth(1)').click(function() {
+                                            $('li:not(:animated)').slideUp();
+                                            $('#first:not(:animated)').slideUp();
+                                        });
+                                    });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('input:nth(0)').click ->
+                                        $('li:not(:animated)').slideDown()
+                                        $('#first:not(:animated)').slideDown()
+                                        return
+                                    $('input:nth(1)').click ->
+                                        $('li:not(:animated)').slideUp()
+                                        $('#first:not(:animated)').slideUp()
+                                        return
+                                    return

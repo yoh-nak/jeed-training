@@ -1,0 +1,85 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;show()メソッド
+                    .panel-body
+                        p show()メソッドは、CSSで「display:none;」の状態になった要素を表示させます。そのとき、もともとのdisplayプロパティの状態を解析して、もともとblockであるものはblockで表示し、inlineであるものはinlineで表示します。
+                        pre
+                            :code
+                                $('セレクター').show();
+                        p 引数に'slow'か'fase'を指定して、アニメーションをかけることができます。
+                        pre
+                            :code
+                                $('#second').show('slow');
+                        p また数値を指定して、アニメーション速度を調整することができます。数値はミリ秒で表現します。3000の場合は3000ミリ秒なので、3秒でアニメーションを終了させます。
+                        pre
+                            :code
+                                $('#third').show(3000);
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise132/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/show/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        link(rel='stylesheet',href='style.css')
+                                    body
+                                        p: input(type='button',value='表示')
+                                        p#first
+                                        p#second
+                                        p#third
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                size()
+                                    200px
+
+                                p:not(:first-of-type)
+                                    width size()
+                                    height @width
+                                    display none
+                                #first
+                                    background-color #f00
+                                #second
+                                    background-color #0f0
+                                #third
+                                    background-color #00f
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('input').click(function() {
+                                        $('#first').show();
+                                        $('#second').show('slow');
+                                        $('#third').show(3000);
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('input').click ->
+                                        $('#first').show()
+                                        $('#second').show 'slow'
+                                        $('#third').show 3000
+                                        return
+                                    return

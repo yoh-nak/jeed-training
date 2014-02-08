@@ -2,12 +2,12 @@
 (function() {
   $(function() {
     $('input:nth(0)').click(function() {
-      $('#first:not(:animated)').show('slow');
-      $('li:not(:animated)').show('slow');
+      $('li:not(:animated)').fadeIn();
+      $('#first:not(:animated)').fadeIn();
     });
     return $('input:nth(1)').click(function() {
-      $('#first:not(:animated)').hide('slow');
-      $('li:not(:animated)').hide('slow');
+      $('li:not(:animated)').fadeOut();
+      $('#first:not(:animated)').fadeOut();
     });
   });
 

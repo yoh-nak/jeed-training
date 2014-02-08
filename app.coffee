@@ -22,15 +22,15 @@ path = require("path")
 app = express()
 
 require("jade").filters.code = (block) ->
-	block
-		.replace(/&/g, "&amp;")
-		.replace(/</g, "&lt;")
-		.replace(/>/g, "&gt;")
-		.replace(/&lt;mark&gt;/g, "<mark>")
-		.replace(/&lt;\/mark&gt;/g, "</mark>")
-		.replace(/\\&lt;mark\\&gt;/g, "&lt;mark&gt;")
-		.replace(/\\&lt;\/mark\\&gt;/g, "&lt;/mark&gt;")
-		.replace /"/g, "&quot;"
+    block
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/&lt;mark&gt;/g, "<mark>")
+        .replace(/&lt;\/mark&gt;/g, "</mark>")
+        .replace(/\\&lt;mark\\&gt;/g, "&lt;mark&gt;")
+        .replace(/\\&lt;\/mark\\&gt;/g, "&lt;/mark&gt;")
+        .replace /"/g, "&quot;"
 
 
 #ミドルウェア
@@ -46,36 +46,54 @@ app.use express.cookieParser("your secret here")
 app.use express.session()
 RedisStore = require('connect-redis')(express)
 app.use express.session
-	secret: 'himitsu'
-	store: new RedisStore
+    secret: 'himitsu'
+    store: new RedisStore
 
 app.use app.router
+
 compile = (str, path) ->
-	stylus(str).set("filename", path).set("compress", true).use nib()
+    stylus(str).set("filename", path).set("compress", true).use nib()
 app.use stylus.middleware(
-	src: __dirname + "/public"
-	compile: compile
+    src: __dirname + "/public"
+    compile: compile
 )
 app.use express.static(path.join(__dirname, "public"))
 
+app.use (err, req, res, next) ->
+    res.status 403
+    res.send "403"
+    next err
+    return
+
+app.use (err, req, res, next) ->
+    res.status 404
+    res.send "404"
+    next err
+    return
+
+app.use (req, res, next) ->
+    res.status 500
+    res.send "500"
+    return
+
 ###
 app.use require("stylus").middleware(
-	src: __dirname + "/views"
-	dest: __dirname + "/public"
+    src: __dirname + "/views"
+    dest: __dirname + "/public"
 )
 ###
 
 #CoffeeScript動的コンパイル
 ###
 app.use require("connect-coffee-script")(
-	src: __dirname + "/views"
-	dest: __dirname + "/public"
-	bare: true
+    src: __dirname + "/views"
+    dest: __dirname + "/public"
+    bare: true
 )
 ###
 
 #developmentモードのみ
-app.use express.errorHandler()	if "development" is app.get("env")
+app.use express.errorHandler()    if "development" is app.get("env")
 
 #ルーティングGET送信
 app.get "/", routes.index
@@ -120,5 +138,5 @@ app.post "/xml-:id", js.webapiXML
 
 #サーバー起動
 http.createServer(app).listen app.get("port"), ->
-	console.log "Express server listening on port " + app.get("port")
+    console.log "Express server listening on port " + app.get("port")
 

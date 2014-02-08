@@ -88,20 +88,37 @@
 
   app.use(express["static"](path.join(__dirname, "public")));
 
+  app.use(function(err, req, res, next) {
+    res.status(404);
+    res.send("404");
+    next(err);
+  });
+
+  app.use(function(err, req, res, next) {
+    res.status(403);
+    res.send("403");
+    next(err);
+  });
+
+  app.use(function(req, res, next) {
+    res.status(500);
+    res.send("500");
+  });
+
 
   /*
   app.use require("stylus").middleware(
-  	src: __dirname + "/views"
-  	dest: __dirname + "/public"
+      src: __dirname + "/views"
+      dest: __dirname + "/public"
   )
    */
 
 
   /*
   app.use require("connect-coffee-script")(
-  	src: __dirname + "/views"
-  	dest: __dirname + "/public"
-  	bare: true
+      src: __dirname + "/views"
+      dest: __dirname + "/public"
+      bare: true
   )
    */
 

@@ -1,0 +1,90 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;toggle()メソッド
+                    .panel-body
+                        p toggle()メソッドは、表示中の要素を非表示にし、非表示中の表示します。表示の際は、要素のdisplayプロパティが解析されて、blockの要素はblockで表示し、inlineの要素はinlineで表示します。
+                        pre
+                            :code
+                                $('セレクター').toggle();
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise136/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/toggle/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        link(rel='stylesheet',href='style.css')
+                                    body
+                                        p
+                                            input(type='button',value='トグル')
+                                        p#first
+                                        ul
+                                            li テキストテキストテキストテキスト
+                                            li テキストテキストテキストテキスト
+                                            li テキストテキストテキストテキスト
+                                            li テキストテキストテキストテキスト
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        link(rel='stylesheet',href='style.css')
+                                    body
+                                        p
+                                            input(type='button',value='トグル')
+                                        p#first
+                                        ul
+                                            for i in new Array(4)
+                                                li テキストテキストテキストテキスト
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                size()
+                                    200px
+
+                                #first
+                                    width size()
+                                    height @width
+                                    background-color #f00
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('input').click(function() {
+                                        $('li:not(:animated)').toggle('slow');
+                                        $('#first:not(:animated)').toggle('slow');
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('input').click ->
+                                        $('li:not(:animated)').toggle('slow')
+                                        $('#first:not(:animated)').toggle('slow')
+                                        return
+                                    return

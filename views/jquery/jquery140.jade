@@ -13,34 +13,34 @@ block content
                 .panel.panel-primary
                     .panel-heading
                         i.glyphicon.glyphicon-book
-                        | &nbsp;slideDown()/slideUpメソッド
+                        | &nbsp;fadeIn/fadeOut()メソッド
                     .panel-body
-                        p slideDown()メソッドは、show()メソッドと使い方は同じですが、スライドするアニメーションで要素が表示されます。
+                        p fadeIn()メソッドは、show()メソッドと使い方は同じですが、フェードするアニメーションで要素が表示されます。
                         pre
                             :code
-                                $('セレクター').slideDown();
-                        p また、slideUp()メソッドは、hide()メソッドと使い方は同じですが、スライドするアニメーションで要素が非表示になります。
+                                $('セレクター').fadeIn();
+                        p また、fadeOut()メソッドは、hide()メソッドと使い方は同じですが、フェードするアニメーションで要素が非表示になります。
                         pre
                             :code
-                                $('セレクター').slideUp();
+                                $('セレクター').fadeOut();
                         p 速度の調整や、コールバック関数はshow()/hide()メソッドと同じです。
                         pre
                             :code
-                                $('セレクター').slideDown('slow',function(){
+                                $('セレクター').fadeIn('slow',function(){
                                     //コールバック処理
                                 });
                         p
-                            a.btn.btn-default(href='../demo/jquery/exercise137/index1.html',target='_blank')
+                            a.btn.btn-default(href='../demo/jquery/exercise139/index1.html',target='_blank')
                                 i.glyphicon.glyphicon-play
                                 | デモ
                             | 
-                            a.btn.btn-default(href='http://api.jquery.com/slidedown/',target='_blank')
+                            a.btn.btn-default(href='http://api.jquery.com/fadein/',target='_blank')
                                 i.glyphicon.glyphicon-info-sign
-                                | &nbsp;参考（slideDown）
+                                | &nbsp;参考（fadeIn）
                             | 
-                            a.btn.btn-default(href='http://api.jquery.com/slideup/',target='_blank')
+                            a.btn.btn-default(href='http://api.jquery.com/fadeout/',target='_blank')
                                 i.glyphicon.glyphicon-info-sign
-                                | &nbsp;参考（slideUp）
+                                | &nbsp;参考（fadeOut）
                         pre(class='prettyprint linenums:1')
                             :code
                                 doctype
@@ -92,23 +92,23 @@ block content
                             :code
                                     $(function() {
                                         $('input:nth(0)').click(function() {
-                                            $('li:not(:animated)').slideDown();
-                                            $('#first:not(:animated)').slideDown();
+                                            $('li:not(:animated)').fadeIn();
+                                            $('#first:not(:animated)').fadeIn();
                                         });
                                         $('input:nth(1)').click(function() {
-                                            $('li:not(:animated)').slideUp();
-                                            $('#first:not(:animated)').slideUp();
+                                            $('li:not(:animated)').fadeOut();
+                                            $('#first:not(:animated)').fadeOut();
                                         });
                                     });
                         pre(class='prettyprint linenums:1')
                             :code
                                 $ ->
                                     $('input:nth(0)').click ->
-                                        $('li:not(:animated)').slideDown()
-                                        $('#first:not(:animated)').slideDown()
+                                        $('li:not(:animated)').fadeIn()
+                                        $('#first:not(:animated)').fadeIn()
                                         return
                                     $('input:nth(1)').click ->
-                                        $('li:not(:animated)').slideUp()
-                                        $('#first:not(:animated)').slideUp()
+                                        $('li:not(:animated)').fadeOut()
+                                        $('#first:not(:animated)').fadeOut()
                                         return
                                     return

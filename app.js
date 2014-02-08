@@ -153,6 +153,8 @@
 
   app.get("/git/:id", others.git);
 
+  app.get("/linux/:id", others.linux);
+
   app.get("/vagrant/:id", others.vagrant);
 
   app.get("/genymotion/:id", others.genymotion);

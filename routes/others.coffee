@@ -16,6 +16,11 @@ exports.vagrant = (req, res) ->
 		title: define.title
 		instructor: define.instructor
 
+exports.linux = (req, res) ->
+	res.render "others/linux/linux" + req.params.id,
+		title: define.title
+		instructor: define.instructor
+
 exports.genymotion = (req, res) ->
 	res.render "others/genymotion/genymotion" + req.params.id,
 		title: define.title

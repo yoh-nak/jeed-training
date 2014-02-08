@@ -26,6 +26,13 @@
     });
   };
 
+  exports.linux = function(req, res) {
+    return res.render("others/linux/linux" + req.params.id, {
+      title: define.title,
+      instructor: define.instructor
+    });
+  };
+
   exports.genymotion = function(req, res) {
     return res.render("others/genymotion/genymotion" + req.params.id, {
       title: define.title,

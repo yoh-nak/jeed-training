@@ -19,4 +19,258 @@ block content
                         i.glyphicon.glyphicon-book
                         | &nbsp; Unixコマンド
                     .panel-body
-                        
+                        pre
+                            :code
+                                $ 一般ユーザー
+                                # 管理ユーザー
+
+                                ログイン
+                                ssh vagrant@192.168.33.10
+                                ssh ユーザ名@ホスト名/IPアドレス
+
+                                password: vagrant
+
+                                ログアウト
+                                exit
+
+
+                                パスワードの変更
+                                passwd
+                                (current) UNIX password: vagrant
+                                New UNIX password: 入力
+                                Retype new UNIX password: 入力
+
+
+                                現在のディレクトリの表示
+                                pwd
+
+
+                                ディレクトリを移動
+                                cd
+
+                                cd /home
+                                pwd
+
+                                cd /
+                                pwd
+
+                                cd /home/vagrant
+                                cd ~
+                                cd 
+                                pwd
+
+                                自分自身
+                                cd .
+
+                                1つ上の階層に移動
+                                cd ..
+                                cd ../../
+
+                                前のいたディレクトリに移動
+                                cd -
+
+
+                                ディレクトリの中身を見る
+                                ls
+
+                                詳しい情報を表示する
+                                ls -l
+
+                                隠しファイルの表示
+                                ls -a
+
+                                まとめて表示
+                                ls -la
+
+                                ディレクトリの情報
+
+                                drwxr-xr-x 21 root root 4096 12月 7 21:51 var
+                                ↓
+                                d rwx　r-x　r-x 21 root root 4096 12月 7 21:51 var
+
+                                d
+                                ディレクトリ
+
+                                rwx r-x r-x 
+                                所有者 グループ すべての人のパーミッション
+
+                                r: read
+                                w: write
+                                x: execute
+
+
+                                パーミッションを変更する
+                                chmod ???
+
+                                4: r: read
+                                2: w: write
+                                1: x: execute
+
+                                chmod 755 ファイル、ディレクトリ
+
+
+                                ディレクトリの作成
+                                mkdir
+
+                                mkdir test1
+                                ls
+                                mkdir test2
+                                ll
+
+                                ディレクトリの削除
+                                rmdir
+                                
+                                rmdir test1
+                                ll
+
+
+                                ファイルの作成
+                                mkdir test
+                                vim test.txt
+                                ls
+
+                                touch test.txt
+
+                                ファイルのコピー
+                                cp test.txt test2.txt
+                                ls
+
+                                cp test.txt test/test3.txt
+                                cd test
+                                ls
+
+
+                                ファイルの削除
+                                rm test3.txt
+                                rm ../test2.txt
+
+                                ファイルの移動
+                                mv test.txt test/
+                                cd test
+                                ls
+
+                                ファイル名の変更
+                                cd test
+                                mv test.txt test2.txt
+
+                                ファイルの中身を見る
+                                cat
+
+                                cat test.txt
+
+                                less / more
+                                more test.txt
+
+                                spaceで移動
+                                qで終了
+
+                                最初の10行、最後の10行を表示
+
+                                head / tail
+                                head test.txt
+                                tail test.txt
+
+                                最初の100行
+                                head -100 test.txt
+
+
+
+                                ワイルドカード
+                                * 任意の文字
+                                ? 任意の1文字
+
+                                cp test.txt test2.txt
+                                cp test2.txt test3.txt
+                                cp test3.txt test4.txt
+                                cp test4.txt test5.text
+
+                                rm *.txt
+                                rm test5.te?t
+
+
+                                ファイルの検索をする
+                                mkdir test_dir
+                                touch test1 test2 test3 test4 test5 test_a test_b test_c test_dir/test1 test_dir/test2 test_dir/test3 test_dir/test4 test_dir/test5
+
+                                find [] -name "" -type [d|f]
+
+                                find . -name "test_*"
+                                find . -name "test_*" -type f
+                                find . -name "test_*" -type d
+
+
+                                ファイルの文字から検索
+                                grep -[] [] []
+
+                                vim test1
+                                abc
+                                def
+                                111
+                                111
+                                111
+                                222
+                                333
+
+                                現在のディレクトリのうち111を含むものを検索
+                                grep 111 *
+
+                                現在のディレクトリのうち111を含むものを検索してカウント数を表示
+                                grep -c 111 *
+
+                                すべてのディレクトリのうち111を含むものを検索
+                                grep -r 111 *
+
+                                両方表示
+                                grep -rc 111 *
+
+
+
+                                コマンドのその他
+                                cp t
+                                タブ1回
+                                タブ2回
+
+                                矢印キー
+                                過去のコマンド
+
+
+                                hidtory
+                                過去使ったコマンド
+                                
+                                10回前のコマンド
+                                !10
+
+                                直前のコマンド
+                                !!
+
+                                grで始める過去のコマンド
+                                !gr
+
+                                grで始まる過去のコマンドを実行せずに表示
+                                !gr:p
+
+
+
+
+                                便利な小技
+
+
+                                ヘルプを見る
+                                man grep
+
+                                ディレクトリの構造を見る
+                                tree
+
+
+                                時間を調べる
+                                date
+
+                                カレンダーを表示する 
+                                cal
+                                cal 2030
+
+                                行数を見る
+                                wc test1
+                                wc -l test1
+
+

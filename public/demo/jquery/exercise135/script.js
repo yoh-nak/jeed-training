@@ -5,12 +5,10 @@
       $('#first:not(:animated)').show('slow');
       $('li:not(:animated)').show('slow');
     });
-    return $('input:nth(1)').click(function() {
+    $('input:nth(1)').click(function() {
       $('#first:not(:animated)').hide('slow');
       $('li:not(:animated)').hide('slow');
     });
   });
-
-  return;
 
 }).call(this);

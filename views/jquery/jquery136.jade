@@ -1,0 +1,104 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;:animatedセレクター
+                    .panel-body
+                        p :animatedセレクターは、アニメーションがかかった状態の要素を指定するセレクターで、使い方は以下のようになります。
+                        pre
+                            :code
+                                $('セレクター:animated').show();
+                        p ただし、:animatedセレクターは、以下のようにアニメーションが連続的に実行されないようにするため、アニメーションが実行されていない要素にだけアニメーションを実行できるように、:not()否定疑似クラスと一緒に使われることが多いです。
+                        pre
+                            :code
+                                $('セレクター:not(:animated)').show();
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise135/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/animated-selector/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        link(rel='stylesheet',href='style.css')
+                                    body
+                                        p
+                                            input(type='button',value='表示')
+                                            input(type='button',value='非表示')
+                                        p#first
+                                        ul
+                                            li テキストテキストテキストテキスト
+                                            li テキストテキストテキストテキスト
+                                            li テキストテキストテキストテキスト
+                                            li テキストテキストテキストテキスト
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        link(rel='stylesheet',href='style.css')
+                                    body
+                                        p
+                                            input(type='button',value='表示')
+                                            input(type='button',value='非表示')
+                                        p#first
+                                        ul
+                                            for i in new Array(4)
+                                                li テキストテキストテキストテキスト
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                size()
+                                    200px
+
+                                #first
+                                    width size()
+                                    height @width
+                                    background-color #f00
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('input:nth(0)').click(function() {
+                                        $('#first:not(:animated)').show('slow');
+                                        $('li:not(:animated)').show('slow');
+                                    });
+                                    $('input:nth(1)').click(function() {
+                                        $('#first:not(:animated)').hide('slow');
+                                        $('li:not(:animated)').hide('slow');
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('input:nth(0)').click ->
+                                        $('#first:not(:animated)').show('slow')
+                                        $('li:not(:animated)').show('slow')
+                                        return
+                                    $('input:nth(1)').click ->
+                                        $('#first:not(:animated)').hide('slow')
+                                        $('li:not(:animated)').hide('slow')
+                                        return
+                                    return

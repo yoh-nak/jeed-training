@@ -7,4 +7,4 @@ $ ->
 		$('#first:not(:animated)').hide('slow')
 		$('li:not(:animated)').hide('slow')
 		return
-return
+	return

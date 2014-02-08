@@ -13,22 +13,17 @@ block content
                 .panel.panel-primary
                     .panel-heading
                         i.glyphicon.glyphicon-book
-                        | &nbsp;show()メソッド
+                        | &nbsp;コールバック関数
                     .panel-body
-                        p show()メソッドは、CSSで「display:none;」の状態になった要素を表示させます。そのとき、もともとのdisplayプロパティの状態を解析して、もともとblockであるものはblockで表示し、inlineであるものはinlineで表示します。
+                        p showメソッドは第2引数に関数を代入して、show()メソッド終了時に実行される処理を定義することができます。
+                        p このように、1つのメソッドが終了したときに実行される関数のことをコールバック関数といいます。
                         pre
                             :code
-                                $('セレクター').show();
-                        p 引数に'slow'か'fast'を指定して、アニメーションをかけることができます。
-                        pre
-                            :code
-                                $('セレクター').show('slow');
-                        p また数値を指定して、アニメーション速度を調整することができます。数値はミリ秒で表現します。3000の場合は3000ミリ秒なので、3秒でアニメーションを終了させます。
-                        pre
-                            :code
-                                $('セレクター').show(3000);
+                                $('セレクター').show('slow',function(){
+                                    //コールバック処理
+                                });
                         p
-                            a.btn.btn-default(href='../demo/jquery/exercise132/index1.html',target='_blank')
+                            a.btn.btn-default(href='../demo/jquery/exercise133/index1.html',target='_blank')
                                 i.glyphicon.glyphicon-play
                                 | デモ
                             | 
@@ -46,8 +41,6 @@ block content
                                     body
                                         p: input(type='button',value='表示')
                                         p#first
-                                        p#second
-                                        p#third
                                         script(src='http://code.jquery.com/jquery-1.11.0.min.js')
                                         script(src='script.js')
                         pre(class='prettyprint linenums:1')
@@ -55,31 +48,26 @@ block content
                                 size()
                                     200px
 
-                                p:not(:first-of-type)
+                                #first
+                                    display none
                                     width size()
                                     height @width
-                                    display none
-                                #first
                                     background-color #f00
-                                #second
-                                    background-color #0f0
-                                #third
-                                    background-color #00f
                         pre(class='prettyprint linenums:1')
                             :code
                                 $(function() {
                                     $('input').click(function() {
-                                        $('#first').show();
-                                        $('#second').show('slow');
-                                        $('#third').show(3000);
+                                        $('#first').show('slow', <mark>function() {
+                                            $(this).css('background-color', '#00f');
+                                        }</mark>);
                                     });
                                 });
                         pre(class='prettyprint linenums:1')
                             :code
                                 $ ->
                                     $('input').click ->
-                                        $('#first').show()
-                                        $('#second').show 'slow'
-                                        $('#third').show 3000
+                                        $('#first').show 'slow', ->
+                                            $(this).css 'background-color', '#00f'
+                                            return
                                         return
                                     return

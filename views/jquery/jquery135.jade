@@ -1,0 +1,97 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;hide()メソッド
+                    .panel-body
+                        p hide()メソッドは、表示状態の要素を非表示にします。
+                        pre
+                            :code
+                                $('セレクター').hide();
+                        p 引数に'slow'か'fast'を指定して、アニメーションをかけることができます。
+                        pre
+                            :code
+                                $('セレクター').hide('slow');
+                        p また数値を指定して、アニメーション速度を調整することができます。数値はミリ秒で表現します。3000の場合は3000ミリ秒なので、3秒でアニメーションを終了させます。
+                        pre
+                            :code
+                                $('セレクター').hide(3000);
+                        p また、show()メソッド同様hide()メソッドもは第2引数に関数を代入して、hide()メソッド終了時に実行される処理を定義することができます。
+                        pre
+                            :code
+                                $('セレクター').hide('3000',function(){
+                                    //コールバック処理
+                                });
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise134/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/hide/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                    body
+                                        p
+                                            input(type='button',value='表示')
+                                            input(type='button',value='非表示')
+                                        ul
+                                            li テキストテキストテキストテキスト
+                                            li テキストテキストテキストテキスト
+                                            li テキストテキストテキストテキスト
+                                            li テキストテキストテキストテキスト
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                    body
+                                        p
+                                            input(type='button',value='表示')
+                                            input(type='button',value='非表示')
+                                        ul
+                                            for i in new Array(4)
+                                                li テキストテキストテキストテキスト
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('input:nth(0)').click(function() {
+                                        $('li').show('slow');
+                                    });
+                                    $('input:nth(1)').click(function() {
+                                        $('li').hide('slow');
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('input:nth(0)').click ->
+                                        $('li').show('slow')
+                                        return
+                                    $('input:nth(1)').click ->
+                                        $('li').hide('slow')
+                                        return
+                                    return

@@ -5,4 +5,4 @@ $ ->
 	$('input:nth(1)').click ->
 		$('li').hide('slow')
 		return
-return
+	return

@@ -4,11 +4,9 @@
     $('input:nth(0)').click(function() {
       $('li').show('slow');
     });
-    return $('input:nth(1)').click(function() {
+    $('input:nth(1)').click(function() {
       $('li').hide('slow');
     });
   });
-
-  return;
 
 }).call(this);

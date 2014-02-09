@@ -1,0 +1,57 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;dblclickイベント
+                    .panel-body
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise149/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/dblclick/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        link(rel='stylesheet', href='style.css')
+                                    body
+                                        p: input(type='button',value='変更')
+                                        p: img(src='img/before.png',alt='変更前')
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('input').dblclick(function() {
+                                        $('img').attr({
+                                            'src': 'img/after.png',
+                                            'alt': '変更後'
+                                        });
+                                    });
+                                });
+                              pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('input').dblclick ->
+                                        $('img').attr
+                                            'src': 'img/after.png',
+                                            'alt': '変更後'
+                                        return
+                                    return

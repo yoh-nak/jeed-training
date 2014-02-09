@@ -1,0 +1,100 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;jQuery Easing プラグイン
+                    .panel-body
+                        p animate()メソッドのイージング効果を、拡張することができます。
+                        pre
+                            :code
+                                $(セレクター).animate(値を変更したいCSSプロパティ[,スピード]<mark>[,イージング]</mark>[,コールバック関数]);
+                        p イージングに指定できる値は随時追加されるので、公式サイトで確認しましょう。
+                        p jQuery Easingプラグインは公式サイトからダウンロードするほか、bowerでパッケージ管理することができます。
+                        hr
+                        p: u ダウンロード
+                        p
+                            | jQuery Easing 公式サイト<br>
+                            a(href='http://gsgd.co.uk/sandbox/jquery/easing/',target='_blank') http://gsgd.co.uk/sandbox/jquery/easing/
+                        p: u Bower
+                        pre
+                            :code
+                                bower install jquery.easing
+                        hr
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise145/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='http://semooh.jp/jquery/cont/doc/easing/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        link(rel='stylesheet',href='style.css')
+                                    body
+                                        div
+                                            p
+                                                img#image1(src='img/image1.png')
+                                                img#image2(src='img/image2.png')
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='jquery.easing.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                size()
+                                    200px
+                                img
+                                    float left
+                                    cursor pointer
+                                p
+                                    width size()*2
+                                    height size()
+                                    margin 0
+                                div
+                                    width size()
+                                    height @width
+                                    overflow hidden
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('#image1').click(function() {
+                                        $('p:not(:animated)').animate({
+                                            marginLeft: '-200px'
+                                        }, 'slow', 'easeInOutBounce');
+                                    });
+                                    $('#image2').click(function() {
+                                        $('p:not(:animated)').animate({
+                                            marginLeft: '0'
+                                        }, 'slow', 'easeInOutBounce');
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('#image1').click ->
+                                        $('p:not(:animated)').animate
+                                            marginLeft: '-200px'
+                                        , 'slow', 'easeInOutBounce'
+                                        return
+                                    $('#image2').click ->
+                                        $('p:not(:animated)').animate
+                                            marginLeft: '0'
+                                        , 'slow', 'easeInOutBounce'
+                                        return
+                                    return

@@ -1,0 +1,77 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;find()/filter()メソッド 
+                    .panel-body
+                        p filter()メソッドは、find()メソッドに似た動きになりますが、$()メソッドで指定された自分自身の要素もfilter()メソッドの引数に指定されたセレクターにマッチするかどうかの対象になります。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise147/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/filter/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考（filter）
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/find/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考（find）
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                    body
+                                        .first
+                                            h1 first
+                                            .first first
+                                            .second second
+                                        hr
+                                        .second
+                                            h1 second
+                                            .first first
+                                            .second second
+                                        input(type='button', value='filter')
+                                        input(type='button', value='find')
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('input:nth(0)').click(function() {
+                                        $('div').css('background', 'white');
+                                        $('div').filter('.first').css('background', 'red');
+                                    });
+                                    $('input:nth(1)').click(function() {
+                                        $('div').css('background', 'white');
+                                        $('div').find('.first').css('background', 'red');
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('input:nth(0)').click ->
+                                        $('div').css 'background', 'white'
+                                        $('div').filter('.first').css 'background', 'red'
+                                        return
+
+                                    $('input:nth(1)').click ->
+                                        $('div').css 'background', 'white'
+                                        $('div').find('.first').css 'background', 'red'
+                                        return
+
+                                    return

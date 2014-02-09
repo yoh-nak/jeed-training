@@ -1,0 +1,82 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;fadeTo()メソッド
+                    .panel-body
+                        p fadeTo()メソッドは引数に1から0の透明度を指定することで、$()メソッドで指定した要素の透明度を調整できます。
+                        p fadeIn()、fadeOut()、fadeToggle()メソッドはCSSのdisplayプロパティを操作しています。そのため、非表示の状態は「display:none;」の状態であるため、要素がなくなった状態になっています。
+                        p それに対し、fadeTo()メソッドは、fadeIn()、fadeOut()、fadeToggle()メソッドとは異なり、CSSのvisibilityプロパティを操作しているため、透明の状態は、要素がなくなったわけではないことに注意しましょう。
+                        pre
+                            :code
+                                $('セレクター').fadeTo(透明度);
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise141/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/fadeto/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        link(rel='stylesheet',href='style.css')
+                                    body
+                                        p
+                                            input(type='button',value='100%')
+                                            input(type='button',value='50%')
+                                            input(type='button',value='0%')
+                                        p#first
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                size()
+                                    200px
+
+                                #first
+                                    width size()
+                                    height @width
+                                    background-color #f00
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('input:nth(0)').click(function() {
+                                        $('#first:not(:animated)').fadeTo('slow', 1);
+                                    });
+                                    $('input:nth(1)').click(function() {
+                                        $('#first:not(:animated)').fadeTo('slow', 0.5);
+                                    });
+                                    $('input:nth(2)').click(function() {
+                                        $('#first:not(:animated)').fadeTo('slow', 0);
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('input:nth(0)').click ->
+                                        $('#first:not(:animated)').fadeTo('slow', 1)
+                                        return
+                                    $('input:nth(1)').click ->
+                                        $('#first:not(:animated)').fadeTo('slow', 0.5)
+                                        return
+                                    $('input:nth(2)').click ->
+                                        $('#first:not(:animated)').fadeTo('slow', 0)
+                                        return
+                                    return

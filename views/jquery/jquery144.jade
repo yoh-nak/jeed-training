@@ -1,0 +1,85 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;delay()メソッド
+                    .panel-body
+                        p delay()メソッドは、アニメーションメソッドをチェーンするときに、実行するタイミングを遅らせることができます。
+                        pre
+                            :code
+                                $(セレクター).delay(ミリ秒).アニメーション()
+                                $(セレクター).アニメーション().delay(ミリ秒).アニメーション()
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise143/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/delay/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考
+                        p
+                            | $.Deferred<br>
+                            a(href='http://tsmd.hateblo.jp/entry/2013/01/17/214018',target='_blank') http://tsmd.hateblo.jp/entry/2013/01/17/214018
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        link(rel='stylesheet',href='style.css')
+                                    body
+                                        div
+                                            p
+                                                img#image1(src='img/image1.png')
+                                                img#image2(src='img/image2.png')
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                size()
+                                    200px
+                                img
+                                    float left
+                                    cursor pointer
+                                p
+                                    width size()*2
+                                    height size()
+                                    margin 0
+                                div
+                                    width size()
+                                    height @width
+                                    overflow hidden
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $("#image1").click(function() {
+                                        $("p:not(:animated)").animate({
+                                            marginLeft: "-200px"
+                                        }, "500", "swing").delay(1000).animate({
+                                            marginLeft: "0px"
+                                        }, "1500", "swing");
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $("#image1").click ->
+                                        $("p:not(:animated)").animate(
+                                            marginLeft: "-200px"
+                                        , "500", "swing").delay(1000).animate
+                                            marginLeft: "0px"
+                                        , "1500", "swing"
+                                        return
+                                    return

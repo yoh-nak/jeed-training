@@ -1,0 +1,91 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;animate()メソッド
+                    .panel-body
+                        p animateメソッドは、第1引数で指定したCSSプロパティを一定の時間で変化させることによって、アニメーションを行います。
+                        p 第1引数で指定できるCSSプロパティは、数値（px, em, %）であらわせるものとなっています。
+                        p 第2引数でスピートを指定します。指定できる値は、show()メソッドと同じです。
+                        p 第3引数には動きを指定します。指定できる値は、「linear」常に一定の速度、「swing」加速、減速ありとなっています。
+                        p 第4引数ではコールバック関数を指定します。
+                        pre
+                            :code
+                                $(セレクター).animate(値を変更したいCSSプロパティ[,スピード][,動き][,コールバック関数]);
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise142/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/animate/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        link(rel='stylesheet',href='style.css')
+                                    body
+                                        div
+                                            p
+                                                img#image1(src='img/image1.png')
+                                                img#image2(src='img/image2.png')
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                size()
+                                    200px
+                                img
+                                    float left
+                                    cursor pointer
+                                p
+                                    width size()*2
+                                    height size()
+                                    margin 0
+                                div
+                                    width size()
+                                    height @width
+                                    overflow hidden
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('#image1').click(function() {
+                                        $('p:not(:animated)').animate({
+                                            marginLeft: '-200px'
+                                        }, 'slow', 'swing');
+                                    });
+                                    $('#image2').click(function() {
+                                        $('p:not(:animated)').animate({
+                                            marginLeft: '0'
+                                        }, 'slow', 'swing');
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('#image1').click ->
+                                        $('p:not(:animated)').animate
+                                            marginLeft: '-200px'
+                                        , 'slow', 'swing'
+                                        return
+                                    $('#image2').click ->
+                                        $('p:not(:animated)').animate
+                                            marginLeft: '0'
+                                        , 'slow', 'swing'
+                                        return
+                                    return

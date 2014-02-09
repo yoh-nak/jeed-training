@@ -1,0 +1,199 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;jQuery UI
+                    .panel-body
+                        p jQuery UIの機能を追加してアニメーションの動きを追加することができます。
+                        pre
+                            :code
+                                $(セレクター).toggle('アニメーションの種類');
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise144/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='https://jqueryui.com/toggle/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考
+                        hr
+                        p jQuery UIは公式サイトからダウンロードするほか、CDNから読み込んだり、bowerでパッケージ管理することができます。
+                        p: u ダウンロード
+                        p
+                            | jQuery UI<br>
+                            a(href='https://jqueryui.com/',target='_blank') https://jqueryui.com/
+                        p: u CDN
+                        pre
+                            :code
+                                http://code.jquery.com/jquery-1.11.0.min.js
+                        p: u Bower
+                        pre
+                            :code
+                                bower install jquery-ui
+                        hr
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='utf-8')
+                                        title
+                                        link(rel='stylesheet',href='style.css')
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js')
+                                        script(src='script.js')
+                                    body
+                                        input.blind(type='button', value='blind')
+                                        p.blind
+                                        hr
+                                        input.clip(type='button', value='blind')
+                                        p.clip
+                                        hr
+                                        input.drop(type='button', value='drop')
+                                        p.drop
+                                        hr
+                                        input.explode(type='button', value='explode')
+                                        p.explode
+                                        hr
+                                        input.fold(type='button', value='fold')
+                                        p.fold
+                                        hr
+                                        input.puff(type='button', value='puff')
+                                        p.puff
+                                        hr
+                                        input.pulsate(type='button', value='pulsate')
+                                        p.pulsate
+                                        hr
+                                        input.scale(type='button', value='scale')
+                                        p.scale
+                                        hr
+                                        input.slide(type='button', value='slide')
+                                        p.slide
+                                        hr
+                                        input.bounce(type='button', value='bounce')
+                                        p.bounce
+                                        hr
+                                        input.shake(type='button', value='shake')
+                                        p.shake
+                                        hr
+                                        input.highlight(type='button', value='highlight')
+                                        p.highlight
+                                        hr
+                                        input.size(type='button', value='size')
+                                        p.size
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                p
+                                    display none
+                                    width 200px
+                                    height 200px
+                                    background-color #FF0000
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $("input.blind").click(function() {
+                                        $("p.blind").toggle("blind");
+                                    });
+                                    $("input.clip").click(function() {
+                                        $("p.clip").toggle("clip");
+                                    });
+                                    $("input.drop").click(function() {
+                                        $("p.drop").toggle("drop");
+                                    });
+                                    $("input.explode").click(function() {
+                                        $("p.explode").toggle("explode");
+                                    });
+                                    $("input.fold").click(function() {
+                                        $("p.fold").toggle("fold");
+                                    });
+                                    $("input.puff").click(function() {
+                                        $("p.puff").toggle("puff");
+                                    });
+                                    $("input.pulsate").click(function() {
+                                        $("p.pulsate").toggle("pulsate");
+                                    });
+                                    $("input.scale").click(function() {
+                                        $("p.scale").toggle("scale");
+                                    });
+                                    $("input.slide").click(function() {
+                                        $("p.slide").toggle("slide");
+                                    });
+                                    $("input.bounce").click(function() {
+                                        $("p.bounce").toggle("bounce");
+                                    });
+                                    $("input.shake").click(function() {
+                                        $("p.shake").toggle("shake");
+                                    });
+                                    $("input.highlight").click(function() {
+                                        $("p.highlight").toggle("highlight");
+                                    });
+                                    $("input.size").click(function() {
+                                        $("p.size").toggle("size");
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $("input.blind").click ->
+                                        $("p.blind").toggle "blind"
+                                        return
+
+                                    $("input.clip").click ->
+                                        $("p.clip").toggle "clip"
+                                        return
+
+                                    $("input.drop").click ->
+                                        $("p.drop").toggle "drop"
+                                        return
+
+                                    $("input.explode").click ->
+                                        $("p.explode").toggle "explode"
+                                        return
+
+                                    $("input.fold").click ->
+                                        $("p.fold").toggle "fold"
+                                        return
+
+                                    $("input.puff").click ->
+                                        $("p.puff").toggle "puff"
+                                        return
+
+                                    $("input.pulsate").click ->
+                                        $("p.pulsate").toggle "pulsate"
+                                        return
+
+                                    $("input.scale").click ->
+                                        $("p.scale").toggle "scale"
+                                        return
+
+                                    $("input.slide").click ->
+                                        $("p.slide").toggle "slide"
+                                        return
+
+                                    $("input.bounce").click ->
+                                        $("p.bounce").toggle "bounce"
+                                        return
+
+                                    $("input.shake").click ->
+                                        $("p.shake").toggle "shake"
+                                        return
+
+                                    $("input.highlight").click ->
+                                        $("p.highlight").toggle "highlight"
+                                        return
+
+                                    $("input.size").click ->
+                                        $("p.size").toggle "size"
+                                        return
+                                    return

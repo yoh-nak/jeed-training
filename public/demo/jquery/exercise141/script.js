@@ -7,11 +7,9 @@
     $('input:nth(1)').click(function() {
       $('#first:not(:animated)').fadeTo('slow', 0.5);
     });
-    return $('input:nth(2)').click(function() {
+    $('input:nth(2)').click(function() {
       $('#first:not(:animated)').fadeTo('slow', 0);
     });
   });
-
-  return;
 
 }).call(this);

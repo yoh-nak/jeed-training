@@ -8,4 +8,4 @@ $ ->
 	$('input:nth(2)').click ->
 		$('#first:not(:animated)').fadeTo('slow', 0)
 		return
-return
+	return

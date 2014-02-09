@@ -1,0 +1,65 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;a要素のclickイベント
+                    .panel-body
+                        p a要素にclickイベントを使うと、マウスを押して、離したときにhref属性の値に遷移する仕様になっているため、画面が遷移してしまいます。
+                        p 遷移させないためには、href属性を使わないか、href属性にjavascript:void(0)を指定するか、clickイベントの最後にreturn falseを記述します。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise146/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/click/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                    body
+                                        #first
+                                            p: a(href='<mark>javascript:void(0)</mark>') 画像を変更
+                                            p: img(src='img/before.png', alt='変更前')
+                                        #second
+                                            p: a(href='img/after.png') 画像を変更
+                                            p: img(src='img/before.png', alt='変更前')
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $("#first a").click(function() {
+                                        $("#first img").attr("src", "img/after.png").attr("alt", "変更後");
+                                    });
+                                    $("#second a").click(function() {
+                                        $("#second img").attr("src", $(this).attr("href")).attr("alt", "変更後");
+                                        <mark>return false;</mark>
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $("#first a").click ->
+                                        $("#first img").attr("src", "img/after.png").attr "alt", "変更後"
+                                        return
+
+                                    $("#second a").click ->
+                                        $("#second img").attr("src", $(this).attr("href")).attr "alt", "変更後"
+                                        return false
+                                    return

@@ -1,0 +1,66 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;モーダルウィンドウ
+                    .panel-body
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise155/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/dblclick/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                    body
+                                        #first
+                                            p: a(href='javascript:void(0)') 画像を変更
+                                            p: img(src='img/before.png', alt='変更前')
+                                        #second
+                                            p: a(href='img/after.png') 画像を変更
+                                            p: img(src='img/before.png', alt='変更前')
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $("#first a").dblclick(function() {
+                                        $("#first img").attr("src", "img/after.png").attr("alt", "変更後");
+                                    });
+                                    $("#second a").dblclick(function() {
+                                        $("#second img").attr("src", $(this).attr("href")).attr("alt", "変更後");
+                                    }).click(function() {
+                                        return false;
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $("#first a").dblclick ->
+                                        $("#first img").attr("src", "img/after.png").attr "alt", "変更後"
+                                        return
+
+                                    $("#second a").dblclick( ->
+                                        $("#second img").attr("src", $(this).attr("href")).attr "alt", "変更後"
+                                        return
+                                    ).click ->
+                                        return false
+                                    return

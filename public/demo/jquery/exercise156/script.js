@@ -2,8 +2,7 @@
 (function() {
   $(function() {
     $('a').dblclick(function() {
-      $('span').html('<img src="' + $(this).attr('href') + '" alt="">');
-      return $(this).remove();
+      $(this).replaceWith('<img src="' + $(this).attr('href') + '" alt="">');
     }).click(function() {
       return false;
     });

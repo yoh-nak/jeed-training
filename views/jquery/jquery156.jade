@@ -13,16 +13,20 @@ block content
                 .panel.panel-primary
                     .panel-heading
                         i.glyphicon.glyphicon-book
-                        | &nbsp;dblclick()イベント
+                        | &nbsp;mouseover()／mouseout()イベント
                     .panel-body
                         p
-                            a.btn.btn-default(href='../demo/jquery/exercise149/index1.html',target='_blank')
+                            a.btn.btn-default(href='../demo/jquery/exercise159/index1.html',target='_blank')
                                 i.glyphicon.glyphicon-play
                                 | デモ
                             | 
-                            a.btn.btn-default(href='http://api.jquery.com/dblclick/',target='_blank')
+                            a.btn.btn-default(href='http://api.jquery.com/mouseover/',target='_blank')
                                 i.glyphicon.glyphicon-info-sign
-                                | &nbsp;参考
+                                | &nbsp;参考（mouseover）
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/mouseout/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考（mouseout）
                         pre(class='prettyprint linenums:1')
                             :code
                                 doctype
@@ -30,28 +34,26 @@ block content
                                     head
                                         meta(charset='UTF-8')
                                         title
-                                        link(rel='stylesheet', href='style.css')
                                     body
-                                        p: input(type='button',value='変更')
-                                        p: img(src='img/before.png',alt='変更前')
+                                        img(src='img/before.png',alt='変更前')
                                         script(src='http://code.jquery.com/jquery-1.11.0.min.js')
                                         script(src='script.js')
                         pre(class='prettyprint linenums:1')
                             :code
                                 $(function() {
-                                    $('input').dblclick(function() {
-                                        $('img').attr({
-                                            'src': 'img/after.png',
-                                            'alt': '変更後'
-                                        });
+                                    $('img').mouseover(function() {
+                                        $(this).attr('src', 'img/after.png').attr('alt', '変更後');
+                                    }).mouseout(function() {
+                                        $(this).attr('src', 'img/before.png').attr('alt', '変更前');
                                     });
                                 });
                         pre(class='prettyprint linenums:1')
                             :code
                                 $ ->
-                                    $('input').dblclick ->
-                                        $('img').attr
-                                            'src': 'img/after.png',
-                                            'alt': '変更後'
+                                    $('img').mouseover( ->
+                                        $(this).attr('src','img/after.png').attr('alt','変更後')
+                                        return
+                                    ).mouseout ->
+                                        $(this).attr('src','img/before.png').attr('alt','変更前')
                                         return
                                     return

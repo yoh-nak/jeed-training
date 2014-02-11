@@ -1,0 +1,161 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;ロールオーバー (基本)
+                    .panel-body
+                        p ①
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise161/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                head
+                                        meta(charset='UTF-8')
+                                        title
+                                        link(rel='stylesheet', href='css/style1.css')
+                                    body
+                                        ul
+                                            li
+                                                a(href='#')
+                                                    img(src='img/jquery.jpg', alt='jQuery')           
+                                            li
+                                                a(href='#')
+                                                    img(src='img/javascript.jpg', alt='javascript')           
+                                            li
+                                                a(href='#')
+                                                    img(src='img/css.jpg', alt='CSS')           
+                                            li
+                                                a(href='#')
+                                                    img(src='img/html.jpg', alt='HTML')
+                                            script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                            script(src='js/script1.js')
+                        hr
+                        p ②
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise161/index2.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                li
+                                    display inline
+                                img
+                                    border none
+                        hr
+                        p ③
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise161/index3.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('img[src="img/jquery.jpg"]').mouseover(function() {
+                                        $(this).attr('src', 'img/jquery_on.jpg');
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('img[src="img/jquery.jpg"]').mouseover ->
+                                        $(this).attr 'src','img/jquery_on.jpg'
+                                        return
+                                    return
+                        hr
+                        p ④
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise161/index4.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('img[src="img/jquery.jpg"]').mouseover(function() {
+                                        $(this).attr('src', 'img/jquery_on.jpg');
+                                    })<mark>.mouseout(function() {
+                                        $(this).attr('src', 'img/jquery.jpg');
+                                    });</mark>
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('img[src="img/jquery.jpg"]').mouseover( ->
+                                        $(this).attr 'src','img/jquery_on.jpg'
+                                        return
+                                    )<mark>.mouseout ->
+                                        $(this).attr 'src','img/jquery.jpg'
+                                        return</mark>
+                                    return
+                        hr
+                        p ⑤
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise161/index5.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('img[src="img/jquery.jpg"]').mouseover(function() {
+                                        $(this).attr('src', 'img/jquery_on.jpg');
+                                    }).mouseout(function() {
+                                        $(this).attr('src', 'img/jquery.jpg');
+                                    });
+                                    <mark>$('img[src="img/javascript.jpg"]').mouseover(function() {
+                                        $(this).attr('src', 'img/javascript_on.jpg');
+                                    }).mouseout(function() {
+                                        $(this).attr('src', 'img/javascript.jpg');
+                                    });
+                                    $('img[src="img/css.jpg"]').mouseover(function() {
+                                        $(this).attr('src', 'img/css_on.jpg');
+                                    }).mouseout(function() {
+                                        $(this).attr('src', 'img/css.jpg');
+                                    });
+                                    $('img[src="img/html.jpg"]').mouseover(function() {
+                                        $(this).attr('src', 'img/html_on.jpg');
+                                    }).mouseout(function() {
+                                        $(this).attr('src', 'img/html.jpg');
+                                    });</mark>
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('img[src="img/jquery.jpg"]').mouseover( ->
+                                        $(this).attr 'src','img/jquery_on.jpg'
+                                        return
+                                    ).mouseout ->
+                                        $(this).attr 'src','img/jquery.jpg'
+                                        return
+                                    <mark>$('img[src="img/javascript.jpg"]').mouseover( ->
+                                        $(this).attr 'src','img/javascript_on.jpg'
+                                        return
+                                    ).mouseout ->
+                                        $(this).attr 'src','img/javascript.jpg'
+                                        return
+                                    $('img[src="img/css.jpg"]').mouseover( ->
+                                        $(this).attr 'src','img/css_on.jpg'
+                                        return
+                                    ).mouseout ->
+                                        $(this).attr 'src','img/css.jpg'
+                                        return
+                                    $('img[src="img/html.jpg"]').mouseover( ->
+                                        $(this).attr 'src','img/html_on.jpg'
+                                        return
+                                    ).mouseout ->
+                                        $(this).attr 'src','img/html.jpg'
+                                        return</mark>
+                                    return

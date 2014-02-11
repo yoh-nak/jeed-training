@@ -1,0 +1,67 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;mouseover()／mouseout()イベント (プリロード)
+                    .panel-body
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise160/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/mouseover/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考（mouseover）
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/mouseout/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考（mouseout）
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                    body
+                                        img(src='img/before.png',alt='変更前')
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    var img = $('<img src="img/after.png" alt="">');
+
+                                    //var img = $('<img>').attr('src','img/after.png');
+
+                                    $('img').mouseover(function() {
+                                        $(this).attr('src', 'img/after.png').attr('alt', '変更後');
+                                    }).mouseout(function() {
+                                        $(this).attr('src', 'img/before.png').attr('alt', '変更前');
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    img = $('<img src="img/after.png" alt="">')
+
+                                    #img = $('<img>').attr('src','img/after.png')
+
+                                    $('img').mouseover( ->
+                                        $(this).attr('src','img/after.png').attr('alt','変更後')
+                                        return
+                                    ).mouseout ->
+                                        $(this).attr('src','img/before.png').attr('alt','変更前')
+                                        return
+                                    return

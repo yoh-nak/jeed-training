@@ -82,7 +82,38 @@ block content
                                 $ ->
                                     $('img.rollover').mouseover( ->
                                         $(this).attr 'src', $(this).attr('src').replace /^(.+)(\.[a-z]+)$/, '$1_on$2'
+                                        return
                                     )<mark>.mouseout ->
                                         $(this).attr 'src', $(this).attr('src').replace /^(.+)_on(\.[a-z]+)$/, '$1$2'
+                                        return</mark>
+                                    return
+                        hr
+                        p ④
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise162/index4.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('img.rollover').mouseover(function() {
+                                        $(this).attr('src', $(this).attr('src').replace(/^(.+)(\.[a-z]+)$/, '$1_on$2'));
+                                    }).mouseout(function() {
+                                        $(this).attr('src', $(this).attr('src').replace(/^(.+)_on(\.[a-z]+)$/, '$1$2'));
+                                    }).each(function() {
+                                        $('<img src="' + $(this).attr('src') + '" alt="">').replace(/^(.+)(\.[a-z]+)$/, '$1_on$2');
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('img.rollover').mouseover( ->
+                                        $(this).attr 'src', $(this).attr('src').replace /^(.+)(\.[a-z]+)$/, '$1_on$2'
+                                        return
+                                    ).mouseout( ->
+                                        $(this).attr 'src', $(this).attr('src').replace /^(.+)_on(\.[a-z]+)$/, '$1$2'
+                                        return
+                                    )<mark>.each ->
+                                        $('<img src="' + $(this).attr('src') + '" alt="">').replace /^(.+)(\.[a-z]+)$/, '$1_on$2'
                                         return</mark>
                                     return

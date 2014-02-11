@@ -1,0 +1,102 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;ロールオーバー (プラグイン)
+                    .panel-body
+                        p ①
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise163/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        link(rel='stylesheet', href='css/style.css')
+                                    body
+                                        ul
+                                            li
+                                                a(href='#')
+                                                    img.rollover(src='img/jquery.jpg', alt='jQuery')           
+                                            li
+                                                a(href='#')
+                                                    img.rollover(src='img/javascript.jpg', alt='javascript')           
+                                            li
+                                                a(href='#')
+                                                    img.rollover(src='img/css.jpg', alt='CSS')           
+                                            li
+                                                a(href='#')
+                                                    img.rollover(src='img/html.jpg', alt='HTML')
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        <mark>script(src='js/jquery.rollover.js')
+                                        script(src='js/script.js')</mark>
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                li
+                                    display inline
+                                img
+                                    border none
+                        hr
+                        p ②
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise163/index2.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        p jquery.rollover.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $.fn.rollover = function() {
+                                    $(this).mouseover(function() {
+                                        $(this).attr("src", $(this).attr("src").replace(/^(.+)(\.[a-z]+)$/, "$1_on$2"));
+                                    }).mouseout(function() {
+                                        $(this).attr("src", $(this).attr("src").replace(/^(.+)_on(\.[a-z]+)$/, "$1$2"));
+                                    }).each(function() {
+                                        $("<img>").attr("src", $(this).attr("src").replace(/^(.+)(\.[a-z]+)$/, "$1_on$2"));
+                                    });
+                                    return this;
+                                };
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $.fn.rollover = ->
+                                    $(this).mouseover(->
+                                        $(this).attr "src", $(this).attr("src").replace(/^(.+)(\.[a-z]+)$/, "$1_on$2")
+                                        return
+                                    ).mouseout(->
+                                        $(this).attr "src", $(this).attr("src").replace(/^(.+)_on(\.[a-z]+)$/, "$1$2")
+                                        return
+                                    ).each ->
+                                        $("<img>").attr "src", $(this).attr("src").replace(/^(.+)(\.[a-z]+)$/, "$1_on$2")
+                                        return
+
+                                    this
+                        hr
+                        p ③
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise163/index3.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('img.rollover').rollover();
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('img.rollover').rollover()
+                                    return

@@ -1,0 +1,3 @@
+$ ->
+    $('img.rollover').rollover()
+    return

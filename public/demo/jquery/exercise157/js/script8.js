@@ -7,7 +7,7 @@
       $('#overLayer').show().html('<img src="' + $(this).attr('href') + '" alt="">');
       $('#grayLayer').click(function() {
         $(this).hide();
-        return $('#overLayer').hide();
+        $('#overLayer').hide();
       });
       return false;
     });

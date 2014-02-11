@@ -8,5 +8,6 @@ $ ->
         $('#grayLayer').click ->
             $(this).hide()
             $('#overLayer').hide()
+            return
         return false
     return

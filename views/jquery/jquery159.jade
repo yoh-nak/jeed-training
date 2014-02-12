@@ -24,7 +24,7 @@ block content
                             :code
                                 doctype
                                 html(lang='ja-JP')
-                                head
+                                    head
                                         meta(charset='UTF-8')
                                         title
                                         link(rel='stylesheet', href='css/style1.css')
@@ -73,9 +73,11 @@ block content
                         pre(class='prettyprint linenums:1')
                             :code
                                 $(function() {
-                                    $('img[src="img/jquery.jpg"]').mouseover(function() {
-                                        $(this).attr('src', 'img/jquery_on.jpg');
-                                    });
+                                    $('img.rollover').mouseover(function() {
+                                        $(this).attr('src', $(this).attr('src').replace(/^(.+)(\.[a-z]+)$/, '$1_on$2'));
+                                    })<mark>.mouseout(function() {
+                                        $(this).attr('src', $(this).attr('src').replace(/^(.+)_on(\.[a-z]+)$/, '$1$2'));
+                                    });</mark>
                                 });
                         pre(class='prettyprint linenums:1')
                             :code
@@ -100,9 +102,9 @@ block content
                                         $(this).attr('src', $(this).attr('src').replace(/^(.+)(\.[a-z]+)$/, '$1_on$2'));
                                     }).mouseout(function() {
                                         $(this).attr('src', $(this).attr('src').replace(/^(.+)_on(\.[a-z]+)$/, '$1$2'));
-                                    }).each(function() {
-                                        $('<img src="' + $(this).attr('src') + '" alt="">').replace(/^(.+)(\.[a-z]+)$/, '$1_on$2');
-                                    });
+                                    })<mark>.each(function() {
+                                        $('<img src="' + $(this).attr('src').replace(/^(.+)(\.[a-z]+)$/, '$1_on$2') + '" alt="">');
+                                    });</mark>
                                 });
                         pre(class='prettyprint linenums:1')
                             :code
@@ -114,6 +116,6 @@ block content
                                         $(this).attr 'src', $(this).attr('src').replace /^(.+)_on(\.[a-z]+)$/, '$1$2'
                                         return
                                     )<mark>.each ->
-                                        $('<img src="' + $(this).attr('src') + '" alt="">').replace /^(.+)(\.[a-z]+)$/, '$1_on$2'
-                                        return</mark>
-                                    return
+                                        $('<img src="' + $(this).attr('src').replace(/^(.+)(\.[a-z]+)$/, '$1_on$2') + '" alt="">')
+                                        return
+                                    return</mark>

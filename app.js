@@ -87,7 +87,7 @@
   }));
 
   app.use(express["static"](path.join(__dirname, "public")));
-
+  /*
   app.use(function(err, req, res, next) {
     res.status(404);
     res.send("404");
@@ -104,7 +104,7 @@
     res.status(500);
     res.send("500");
   });
-
+  */
 
   /*
   app.use require("stylus").middleware(

@@ -1,0 +1,122 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;mouseover()/mouseenter()／hover()
+                    .panel-body
+                        p 以下のサンプルはそれぞれ、わかりやすくするため子要素をpositionで左右に配置したものです。
+                        p mouseover()イベントは子要素へマウスを移動する場合、一度mouseout()イベントが発生し、再度mouseover()イベントが発生します。
+                        p それに対し、mouseenter()イベントは、子要素にマウスを移動しても、イベントは発生せず、親要素、子要素の両方からマイスが外れたときに、mouseleave()イベントが発生します。
+                        p hover()イベントは、mouseenter()/mouseleave()イベントのエイリアスとなっています。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise166/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/hover/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考（hover）
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/mouseenter/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考（mouseenter）
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/mouseleave/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考（mouseleave）
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        link(rel='stylesheet',href='style.css')
+                                    body
+                                        h1 mouseover()/mouseout()イベント
+                                        #mouseover
+                                            | 親
+                                            div 子
+                                        h1 mouseenter()/mouseleave()イベント
+                                        #mouseenter
+                                            | 親
+                                            div 子
+                                        h1 hover()イベント
+                                        #hover
+                                            | 親
+                                            div 子
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                size = 200px
+
+                                #mouseover,#mouseenter,#hover
+                                    position relative
+                                    width  size
+                                    height @width
+                                    background-color #f00
+                                    line-height @width
+                                    text-align center
+                                    div
+                                        position absolute
+                                        top 0
+                                        left size
+                                        width (size/2)
+                                        height @width
+                                        background-color #f00 + #00f
+                                        cursor pointer
+                                        line-height @width
+                                        text-align center
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('#mouseover').mouseover(function() {
+                                        window.alert('mouseover');
+                                    }).mouseout(function() {
+                                        window.alert('mouseout');
+                                    });
+                                    $('#hover').hover(function() {
+                                        window.alert('mouseenter');
+                                    }, function() {
+                                        window.alert('mouseleave');
+                                    });
+                                    $('#mouseenter').mouseenter(function() {
+                                        window.alert('mouseenter');
+                                    }).mouseleave(function() {
+                                        window.alert('mouseleave');
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('#mouseover').mouseover( ->
+                                        window.alert 'mouseover'
+                                        return
+                                    ).mouseout ->
+                                        window.alert 'mouseout'
+                                        return
+                                    $('#hover').hover ->
+                                        window.alert 'mouseenter'
+                                        return
+                                    , ->
+                                        window.alert 'mouseleave'
+                                        return
+                                    $('#mouseenter').mouseenter( ->
+                                        window.alert 'mouseenter'
+                                        return
+                                    ).mouseleave ->
+                                        window.alert 'mouseleave'
+                                        return
+                                    return

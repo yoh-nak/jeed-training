@@ -1,7 +1,5 @@
 $ ->
-    img = $('<img src="img/after.png" alt="">')
-
-    #img = $('<img>').attr('src','img/after.png')
+    $ '<img src="img/after.png" alt="">'
 
     $('img').mouseover( ->
         $(this).attr('src','img/after.png').attr('alt','変更後')

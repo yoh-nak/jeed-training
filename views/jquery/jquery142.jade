@@ -15,12 +15,13 @@ block content
                         i.glyphicon.glyphicon-book
                         | &nbsp;fadeTo()メソッド
                     .panel-body
-                        p fadeTo()メソッドは引数に1から0の透明度を指定することで、$()メソッドで指定した要素の透明度を調整できます。
+                        p fadeTo()メソッドは、第1引数にアニメーション時間を指定します。指定できる値は'slow'、'hide'、ミリ秒を指定となっています。また、第2引数に透明度を指定します。指定する値は0〜1を指定し、1が不透明、0が透明、その間の少数値が半透明となります。
+                        p 第1引数、第2引数は必須で、第3引数のコールバック関数はオプションです。
                         p fadeIn()、fadeOut()、fadeToggle()メソッドはCSSのdisplayプロパティを操作しています。そのため、非表示の状態は「display:none;」の状態であるため、要素がなくなった状態になっています。
-                        p それに対し、fadeTo()メソッドは、fadeIn()、fadeOut()、fadeToggle()メソッドとは異なり、CSSのvisibilityプロパティを操作しているため、透明の状態は、要素がなくなったわけではないことに注意しましょう。
+                        p それに対し、fadeTo()メソッドは、fadeIn()、fadeOut()、fadeToggle()メソッドとは異なり、CSSのopacityプロパティを操作しているため、透明の状態は、要素がなくなったわけではないことに注意しましょう。
                         pre
                             :code
-                                $('セレクター').fadeTo(透明度);
+                                $('セレクター').fadeTo(アニメーション時間,透明度[,コールバック関数]);
                         p
                             a.btn.btn-default(href='../demo/jquery/exercise141/index1.html',target='_blank')
                                 i.glyphicon.glyphicon-play

@@ -11,6 +11,13 @@
     });
   };
 
+  exports.jsv2 = function(req, res) {
+    return res.render("jsv2/js" + req.params.id, {
+      title: define.title,
+      instructor: define.instructor
+    });
+  };
+
   exports.enchant = function(req, res) {
     return res.render("js/enchant/enchant" + req.params.id, {
       title: define.title,

@@ -5,6 +5,11 @@ exports.js = (req, res) ->
 		title: define.title
 		instructor: define.instructor
 
+exports.jsv2 = (req, res) ->
+	res.render "jsv2/js" + req.params.id ,
+		title: define.title
+		instructor: define.instructor
+
 #enchant.js
 exports.enchant = (req, res) ->
 	res.render "js/enchant/enchant" + req.params.id,

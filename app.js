@@ -87,24 +87,27 @@
   }));
 
   app.use(express["static"](path.join(__dirname, "public")));
+
+
   /*
-  app.use(function(err, req, res, next) {
-    res.status(404);
-    res.send("404");
-    next(err);
-  });
+  app.use (err, req, res, next) ->
+      res.status 403
+      res.send "403"
+      next err
+      return
+  
+  app.use (err, req, res, next) ->
+      res.status 404
+      res.send "404"
+      next err
+      return
+  
+  app.use (req, res, next) ->
+      res.status 500
+      res.send "500"
+      return
+   */
 
-  app.use(function(err, req, res, next) {
-    res.status(403);
-    res.send("403");
-    next(err);
-  });
-
-  app.use(function(req, res, next) {
-    res.status(500);
-    res.send("500");
-  });
-  */
 
   /*
   app.use require("stylus").middleware(
@@ -179,6 +182,8 @@
   app.get("/diary/:id", diary.diary);
 
   app.get("/js-:id:format", js.js);
+
+  app.get("/jsv2/:id", js.jsv2);
 
   app.get("/webapi-:id:format", js.webapi);
 

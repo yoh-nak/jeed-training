@@ -59,6 +59,7 @@ app.use stylus.middleware(
 )
 app.use express.static(path.join(__dirname, "public"))
 
+###
 app.use (err, req, res, next) ->
     res.status 403
     res.send "403"
@@ -75,6 +76,7 @@ app.use (req, res, next) ->
     res.status 500
     res.send "500"
     return
+###
 
 ###
 app.use require("stylus").middleware(
@@ -122,7 +124,8 @@ app.get "/linux/:id", others.linux # Linux
 app.get "/vagrant/:id", others.vagrant # Vagrant
 app.get "/genymotion/:id", others.genymotion # GENYMOTION
 app.get "/diary/:id", diary.diary # 日誌
-app.get "/js-:id:format", js.js # JavaScript基礎
+app.get "/js-:id:format", js.js # JavaScript
+app.get "/jsv2/:id", js.jsv2 # JavaScript
 app.get "/webapi-:id:format", js.webapi # WebAPI
 app.get "/html5api-:id:format", js.html5 # HTML5 API
 app.get "/canvas/:id", js.canvas # Canvas

@@ -1,0 +1,98 @@
+extends ../layout
+
+block link
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar.jade
+    .container
+        .row
+            .col-sm-3
+                include left.jade
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        &nbsp;GruntでBowerを使う
+                    .panel-body
+                        p: u 先にBower、Gruntのグローバルパッケージをインストール
+                        pre
+                            :code
+                                (sudo )npm install -g bower grunt-cli coffee-script
+                        p: u プロジェクトのディレクトリを作成
+                        pre
+                            :code
+                                mkdir myapp
+                                cd myapp
+                        p: u プロジェクトのディレクトリにpackage.jsonを作っておく
+                        p ※ すでにpackage.jsonがある場合は不要
+                        pre
+                            :code
+                                npm init
+                        p: u プロジェクトにGruntのローカルパッケージをインストール
+                        pre
+                            :code
+                                npm install grunt --save-dev
+                        p: u プロジェクトにbower.jsonを作成
+                        pre
+                            :code
+                                bower init
+                        p: u 使いたいライブラリをインストール
+                        p ※ <mark>bower.jsonに記述するためにオプション「--save」でインストール</mark>
+                        pre
+                            :code
+                                bower install jquery underscore --save
+                        hr
+                        p: u プロジェクトにGruntのタスクをインストール
+                        pre
+                            :code
+                                npm install grunt-bower-task grunt-contrib-copy grunt-notify --save-dev
+                        p: u Gruntfile.coffeeに記述
+                        p bower.jsonに記述された依存ライブラリを「bower install」コマンドでインストールし、静的ファイルを格納するディレクトリにコピーするタスクを作成
+                        pre(class='prettyprint lang-js linenums:1')
+                            :code
+                                module.exports = (grunt)->
+                                    grunt.initConfig
+                                        pkg: grunt.file.readJSON("package.json")
+                                 
+                                        #bower installの実行
+                                        bower:
+                                            install:
+                                                options:
+                                                    install: true
+                                                    #cleanTargetDir: false
+                                                    #cleanBowerDir: false
+
+                                        #コピーの実行
+                                        copy:
+                                            init:
+                                                files:[
+                                                    {
+                                                        expand: true
+                                                        cwd: 'bower_components/underscore/'
+                                                        src: 'underscore.js'
+                                                        dest: 'public/javascripts'
+                                                        filter: 'isFile'
+                                                    }
+                                                    {
+                                                        expand: true
+                                                        cwd: 'bower_components/jquery/'
+                                                        src: 'jquery.min.js'
+                                                        dest: 'public/javascripts'
+                                                        filter: 'isFile'
+                                                    }
+                                                ]
+                                 
+                                    grunt.loadNpmTasks "grunt-bower-task"
+                                    grunt.loadNpmTasks "grunt-contrib-copy"
+                                    grunt.loadNpmTasks "grunt-notify"
+                                 
+                                    grunt.registerTask "init", ["bower:install","copy:init"]
+                        p: u タスクの実行
+                        pre
+                            :code
+                                grunt init

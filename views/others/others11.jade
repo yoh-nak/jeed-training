@@ -24,226 +24,270 @@ block content
                             a(href='http://gruntjs.com/',target='_blank') http://gruntjs.com/
                         hr
                         h4 インストール
-                        p
-                            | Windows
                         pre
-                            | npm install -g grunt-cli
-                        p
-                            | Linux / Mac
-                        pre
-                            | sudo npm install -g grunt-cli
+                            :code
+                                (sudo )npm install -g grunt-cli
+                        hr
                         .alert.alert-info 空のタスクを作成
-                        h4 package.jsonの作成
+                        p: u package.jsonの作成
+                        p ※ Expressを使用している場合は自動で生成されています。
                         pre npm init
-                        h4 package.jsonを記述
+                        p: u package.jsonを記述
+                        pre(class='prettyprint lang-js linenums:1')
+                            :code
+                                {
+                                    "name": "grunt-test",
+                                    "version": "0.1.0",
+                                    ...
+                                }
+                                ...
+                        p: u プロジェクトにgruntをインストール
+                        p ※ <mark>開発用にpackage.jsonに記述するためにオプション「--save-dev」でインストール</mark>
                         pre
-                            | {
-                            |     "name": "grunt-test",
-                            |     "version": "0.1.0"
-                            | }
-                        h4 プロジェクトにgruntをインストール
-                        pre npm install grunt --save-dev
-                        h4 Gruntfile.jsにタスクを記述する
+                            :code
+                                npm install grunt --save-dev
+                        p: u Gruntfile.jsにタスクを記述する
+                        pre(class='prettyprint lang-js linenums:1')
+                            :code
+                                module.exports = function(grunt){
+                                    grunt.initConfig({});
+                                    grunt.registerTask('default', []);
+                                };
+                        p: u タスクの実行
                         pre
-                            | module.exports = function(grunt){
-                            |   grunt.initConfig({});
-                            |   grunt.registerTask('default', []);
-                            | };
-                        h4 タスクの実行
-                        pre grunt
+                            :code
+                                grunt
+                        hr
                         .alert.alert-info JavaScriptのミニファイ
                         h4 プラグインのインストール
-                        pre npm install grunt-contrib-uglify --save-dev
-                        h4 タスクの定義
+                        pre
+                            :code
+                                npm install grunt-contrib-uglify --save-dev
+                        p: u タスクの定義
                         pre(class='prettyprint lang-js linenums:1')
-                            | module.exports = function(grunt){
-                            |   grunt.initConfig({
-                            |     //親タスク
-                            |     uglify: {
-                            |       //子タスク
-                            |       dist: {
-                            |         files: {
-                            |           //出力
-                            |           'dest/output.min.js': [
-                            |             //ソース
-                            |             'src/sample01.js',
-                            |             'src/sample02.js'
-                            |           ]
-                            |         }
-                            |       }
-                            |     }
-                            |   });
-                            |   //プラグインからタスクを読み込む
-                            |   grunt.loadNpmTasks('grunt-contrib-uglify');
-                            |   //デフォルトのタスクとしてuglifyを定義
-                            |   grunt.registerTask('default', ['uglify']);
-                            | };
-                        h4 タスクの実行
-                        pre grunt
+                            :code
+                                module.exports = function(grunt){
+                                  grunt.initConfig({
+                                    //親タスク
+                                    uglify: {
+                                      //子タスク
+                                      dist: {
+                                        files: {
+                                          //出力
+                                          'dest/output.min.js': [
+                                            //ソース
+                                            'src/sample01.js',
+                                            'src/sample02.js'
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  });
+                                  //プラグインからタスクを読み込む
+                                  grunt.loadNpmTasks('grunt-contrib-uglify');
+                                  //デフォルトのタスクとしてuglifyを定義
+                                  grunt.registerTask('default', ['uglify']);
+                                };
+                        p: u タスクの実行
+                        pre
+                            :code
+                                grunt
+                        hr
                         .alert.alert-info CoffeeScriptで記述
-                        h4 Gruntfile.coffeeにタスクを記述
+                        p: u Gruntfile.coffeeにタスクを記述
                         pre(class='prettyprint lang-js linenums:1')
-                            | module.exports = (grunt) -&gt;
-                            |   grunt.initConfig
-                            |     uglify:
-                            |       dist:
-                            |         files:
-                            |           'dest/output.min.js':[
-                            |             'src/sample01.js',
-                            |             'src/sample02.js'
-                            |           ]
-                            | 
-                            |   grunt.loadNpmTasks 'grunt-contrib-uglify'
-                            |   grunt.registerTask 'default', ['uglify']
-                        h4 タスクの実行
-                        pre grunt
+                            :code
+                                module.exports = (grunt) ->
+                                  grunt.initConfig
+                                    uglify:
+                                      dist:
+                                        files:
+                                          'dest/output.min.js':[
+                                            'src/sample01.js',
+                                            'src/sample02.js'
+                                          ]
+                                
+                                  grunt.loadNpmTasks 'grunt-contrib-uglify'
+                                  grunt.registerTask 'default', ['uglify']
+                        p: u タスクの実行
+                        pre
+                            :code
+                                grunt
+                        hr
                         .alert.alert-info CoffeeScriptをコンパイルしてJavaScriptをミニファイ
-                        h4 プラグインのインストール
-                        pre npm install grunt-contrib-uglify grunt-contrib-coffee --save-dev
-                        h4 Gruntfile.coffeeにタスクを記述
+                        p: u プラグインのインストール
+                        pre
+                            :code
+                                npm install grunt-contrib-uglify grunt-contrib-coffee --save-dev
+                        p: u Gruntfile.coffeeにタスクを記述
                         pre(class='prettyprint lang-js linenums:1')
-                            | module.exports = (grunt) -&gt;
-                            |   grunt.initConfig
-                            |     coffee:
-                            |       options:
-                            |         join: true
-                            |       dist:
-                            |         files:
-                            |           'dest/sample.js': [
-                            |             'src/sample01.coffee',
-                            |             'src/sample02.coffee'
-                            |           ]
-                            |     uglify:
-                            |       dist:
-                            |         files:
-                            |           'dest/output.min.js':[
-                            |             'dest/sample.js'
-                            |           ]
-                            | 
-                            |   grunt.loadNpmTasks 'grunt-contrib-coffee'
-                            |   grunt.loadNpmTasks 'grunt-contrib-uglify'
-                            |   grunt.registerTask 'default', [
-                            |     'coffee',
-                            |     'uglify'
-                            |   ]
-                        h4 タスクの実行
-                        pre grunt
+                            :code
+                                module.exports = (grunt) ->
+                                  grunt.initConfig
+                                    coffee:
+                                      options:
+                                        join: true
+                                      dist:
+                                        files:
+                                          'dest/sample.js': [
+                                            'src/sample01.coffee',
+                                            'src/sample02.coffee'
+                                          ]
+                                    uglify:
+                                      dist:
+                                        files:
+                                          'dest/output.min.js':[
+                                            'dest/sample.js'
+                                          ]
+                                
+                                  grunt.loadNpmTasks 'grunt-contrib-coffee'
+                                  grunt.loadNpmTasks 'grunt-contrib-uglify'
+                                  grunt.registerTask 'default', [
+                                    'coffee',
+                                    'uglify'
+                                  ]
+                        p: u タスクの実行
+                        pre
+                            :code
+                                grunt
+                        hr
                         .alert.alert-info 親タスクを限定して実行
-                        pre grunt coffee
+                        pre
+                            :code
+                                grunt coffee
+                        hr
                         .alert.alert-info 子タスクを限定して実行
-                        pre grunt coffee:dist
+                        pre
+                            :code
+                                grunt coffee:dist
+                        hr
                         .alert.alert-info ファイルの変更を監視する
-                        h4 プラグインのインストール
-                        pre npm install grunt-contrib-watch --save-dev
-                        h4 Gruntfile.coffeeにタスクを記述
+                        p: u プラグインのインストール
+                        pre
+                            :code
+                                npm install grunt-contrib-watch --save-dev
+                        p: u Gruntfile.coffeeにタスクを記述
                         pre(class='prettyprint lang-js linenums:1')
-                            | module.exports = (grunt) -&gt;
-                            |   grunt.initConfig
-                            |     coffee:
-                            |       options:
-                            |         join: true
-                            |       dist:
-                            |         src: [
-                            |           'src/*.coffee'
-                            |         ]
-                            |         dest: 'dest/sample.js'
-                            |     uglify:
-                            |       dist:
-                            |         src: ['dest/sample.js']
-                            |         dest:'dest/output.min.js'
-                            |     watch:
-                            |       coffee:
-                            |         files: '&lt;%= coffee.dist.src %&gt;'
-                            |         tasks: 'coffee:dist'
-                            |       uglify:
-                            |         files: '&lt;%= uglify.dist.src %&gt;'
-                            |         tasks: 'uglify:dist'
-                            | 
-                            |   grunt.loadNpmTasks 'grunt-contrib-watch'
-                            |   grunt.loadNpmTasks 'grunt-contrib-coffee'
-                            |   grunt.loadNpmTasks 'grunt-contrib-uglify'
-                            |   grunt.registerTask 'default', [
-                            |     'watch'
-                            |   ]
-                        h4 タスクの実行
-                        pre grunt
+                            :code
+                                module.exports = (grunt) ->
+                                  grunt.initConfig
+                                    coffee:
+                                      options:
+                                        join: true
+                                      dist:
+                                        src: [
+                                          'src/*.coffee'
+                                        ]
+                                        dest: 'dest/sample.js'
+                                    uglify:
+                                      dist:
+                                        src: ['dest/sample.js']
+                                        dest:'dest/output.min.js'
+                                    watch:
+                                      coffee:
+                                        files: '<%= coffee.dist.src %>'
+                                        tasks: 'coffee:dist'
+                                      uglify:
+                                        files: '<%= uglify.dist.src %>'
+                                        tasks: 'uglify:dist'
+                                
+                                  grunt.loadNpmTasks 'grunt-contrib-watch'
+                                  grunt.loadNpmTasks 'grunt-contrib-coffee'
+                                  grunt.loadNpmTasks 'grunt-contrib-uglify'
+                                  grunt.registerTask 'default', [
+                                    'watch'
+                                  ]
+                        p: u タスクの実行
+                        pre
+                            :code
+                                grunt
+                        hr
                         .alert.alert-info HTMLとCSSプリプロセッサー
-                        h4 プラグインのインストール
-                        pre npm install grunt-contrib-stylus grunt-contrib-cssmin grunt-contrib-jade grunt-contrib-watch --save-dev
-                        h4 stylusを記述する
+                        p: u プラグインのインストール
+                        pre
+                            :code
+                                npm install grunt-contrib-stylus grunt-contrib-cssmin grunt-contrib-jade grunt-contrib-watch --save-dev
+                        p: u stylusを記述する
                         p sample01.styl
                         pre(class='prettyprint linenums:1')
-                            | blue = #3bbfce
-                            | 
-                            | h1
-                            |     color: blue
-                            | 
-                            | .content-navigation
-                            |     border-color blue
-                            |     color blue - 9%
+                            :code
+                                blue = #3bbfce
+                                
+                                h1
+                                    color: blue
+                                
+                                .content-navigation
+                                    border-color blue
+                                    color blue - 9%
                         p sample02.styl
                         pre(class='prettyprint linenums:1')
-                            | margin = 16px
-                            | 
-                            | .border
-                            |     padding (margin / 2)
-                            |     margin (margin / 2)
-                        h4 jadeを記述する
+                            :code
+                                margin = 16px
+                                
+                                .border
+                                    padding (margin / 2)
+                                    margin (margin / 2)
+                        p: u jadeを記述する
                         p index.jade
                         pre(class='prettyprint linenums:1')
-                            | !!!
-                            | html
-                            |     head
-                            |         title Jade+Stylus Compile
-                            |         link(href='css/styles.min.css',rel='stylesheet')
-                            |     body
-                            |         h1 Hello, Grunt
-                            |         p blah blah
-                            |         p hoge
-                        h4 Gruntfile.coffeeにタスクを記述
+                            :code
+                                doctype
+                                html
+                                    head
+                                        title Jade+Stylus Compile
+                                        link(href='css/styles.min.css',rel='stylesheet')
+                                    body
+                                        h1 Hello, Grunt
+                                        p blah blah
+                                        p hoge
+                        p: u Gruntfile.coffeeにタスクを記述
                         pre(class='prettyprint lang-js linenums:1')
-                            | module.exports = (grunt) -&gt;
-                            |   grunt.initConfig
-                            |     stylus:
-                            |       dist:
-                            |         src: ['src/*.styl']
-                            |         dest: 'dest/sample.css'
-                            |     cssmin: 
-                            |       dist:
-                            |         src: ['dest/sample.css']
-                            |         dest: 'htdocs/css/styles.min.css'
-                            |     jade: 
-                            |       dist:
-                            |         src: ['src/index.jade']
-                            |         dest: 'htdocs/index.html'
-                            |         options:
-                            |           pretty: true
-                            |     watch: 
-                            |       stylus:
-                            |         files: '&lt;%= stylus.dist.src %&gt;'
-                            |         tasks: 'stylus:dist'
-                            |       cssmin:
-                            |         files: '&lt;%= cssmin.dist.src %&gt;'
-                            |         tasks: 'cssmin:dist'
-                            |       jade:
-                            |         files: '&lt;%= jade.dist.src %&gt;'
-                            |         tasks: 'jade:dist'
-                            | 
-                            |   grunt.loadNpmTasks 'grunt-contrib-stylus'
-                            |   grunt.loadNpmTasks 'grunt-contrib-cssmin'
-                            |   grunt.loadNpmTasks 'grunt-contrib-jade'
-                            |   grunt.loadNpmTasks 'grunt-contrib-watch'
-                            |   grunt.registerTask 'default', 'watch'
-                            |   grunt.registerTask 'build', [
-                            |     'stylus',
-                            |     'cssmin',
-                            |     'jade'
-                            |   ]
-                        h4 タスクの実行
-                        pre grunt
+                            :code
+                                module.exports = (grunt) ->
+                                  grunt.initConfig
+                                    stylus:
+                                      dist:
+                                        src: ['src/*.styl']
+                                        dest: 'dest/sample.css'
+                                    cssmin: 
+                                      dist:
+                                        src: ['dest/sample.css']
+                                        dest: 'htdocs/css/styles.min.css'
+                                    jade: 
+                                      dist:
+                                        src: ['src/index.jade']
+                                        dest: 'htdocs/index.html'
+                                        options:
+                                          pretty: true
+                                    watch: 
+                                      stylus:
+                                        files: '<%= stylus.dist.src %>'
+                                        tasks: 'stylus:dist'
+                                      cssmin:
+                                        files: '<%= cssmin.dist.src %>'
+                                        tasks: 'cssmin:dist'
+                                      jade:
+                                        files: '<%= jade.dist.src %>'
+                                        tasks: 'jade:dist'
+                                
+                                  grunt.loadNpmTasks 'grunt-contrib-stylus'
+                                  grunt.loadNpmTasks 'grunt-contrib-cssmin'
+                                  grunt.loadNpmTasks 'grunt-contrib-jade'
+                                  grunt.loadNpmTasks 'grunt-contrib-watch'
+                                  grunt.registerTask 'default', 'watch'
+                                  grunt.registerTask 'build', [
+                                    'stylus',
+                                    'cssmin',
+                                    'jade'
+                                  ]
+                        p: u タスクの実行
+                        pre
+                            :code
+                                grunt
+                        hr
                         .alert.alert-info 画像を最適化する
                         p あらかじめお使いの環境にoptipngとjpegtranをインストールしておく必要があります。
-                        h4 optipngのインストール
+                        p: u optipngのインストール
                         p windows
                         p
                             | 以下のサイトからOptiPNG（安定版）をダウンロードしてインストールします。
@@ -251,12 +295,18 @@ block content
                             a(href='http://optipng.sourceforge.net/',target='_blank') http://optipng.sourceforge.net/
                         p Mac
                         p MacPortsでインストール
-                        pre sudo port install optipng
+                        pre
+                            :code
+                                sudo port install optipng
                         p Homebrewでインストール
-                        pre sudo brew install optipng
+                        pre
+                            :code
+                                sudo brew install optipng
                         p Linux
                         pre
-                        h4 jpegtranのインストール
+                            :code
+
+                        p: u jpegtranのインストール
                         p windows
                         p
                             | 以下のサイトからjpegtran.exeをダウンロードしてインストールします。
@@ -264,26 +314,35 @@ block content
                             a(href='http://jpegclub.org/jpegtran/',target='_blank') http://jpegclub.org/jpegtran/
                         p Mac
                         p MacPortsでインストール
-                        pre sudo port install jpeg
+                        pre
+                            :code
+                                sudo port install jpeg
                         p Homebrewでインストール
-                        pre sudo brew install jpeg
+                        pre
+                            :code
+                                sudo brew install jpeg
                         p Linux
-                        pre yum install libjpeg
-                        h4 プラグインのインストール
-                        pre npm install grunt-img grunt-contrib-watch --save-dev
-                        h4 Gruntfile.coffeeにタスクを記述
+                        pre
+                            :code
+                                yum install libjpeg
+                        p: u プラグインのインストール
+                        pre
+                            :code
+                                npm install grunt-img grunt-contrib-watch --save-dev
+                        p: u Gruntfile.coffeeにタスクを記述
                         pre(class='prettyprint lang-js linenums:1')
-                            | module.exports = (grunt) -&gt;
-                            |     grunt.initConfig
-                            |     img:
-                            |       dist:
-                            |         src: ['src/img/*']
-                            |         dest: 'htdocs/img'
-                            |     watch:
-                            |       img:
-                            |         files: '&lt;%= img.dist.src %&gt;'
-                            |         tasks: 'img:dist'
-                            |   
-                            |   grunt.loadNpmTasks 'grunt-img'
-                            |   grunt.registerTask 'default', 'watch'
-                            |   grunt.loadNpmTasks 'grunt-contrib-watch'
+                            :code
+                                module.exports = (grunt) ->
+                                  grunt.initConfig
+                                    img:
+                                      dist:
+                                        src: ['src/img/*']
+                                        dest: 'htdocs/img'
+                                    watch:
+                                      img:
+                                        files: '<%= img.dist.src %>'
+                                        tasks: 'img:dist'
+                                  
+                                  grunt.loadNpmTasks 'grunt-img'
+                                  grunt.registerTask 'default', 'watch'
+                                  grunt.loadNpmTasks 'grunt-contrib-watch'

@@ -9,7 +9,7 @@
     $("#second a").mousedown(function() {
       $("#second img").attr("src", $(this).attr("href")).attr("alt", "変更後");
     }).mouseup(function() {
-      $("#first img").attr("src", "img/before.png").attr("alt", "変更前");
+      $("#second img").attr("src", "img/before.png").attr("alt", "変更前");
     }).click(function() {
       return false;
     });

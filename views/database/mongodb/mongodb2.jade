@@ -89,3 +89,38 @@ block content
                                 $ sudo service mongod restart
                                 自動起動するように設定する
                                 $ sudo chkconfig mongod on
+                        p: u Ubuntu
+                        pre
+                            :code
+                                1. パッケージ管理システム (APT) の設定
+                                UbuntuはMongoDBのリポジトリへのアドレスを知らないので、それを設定ファイルに書いてやる。
+
+                                まず、リポジトリの公開鍵を手に入れる。以下のコマンドをコンソールで実行する。
+                                
+                                sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
+
+                                続いて、/etc/apt/sources.list.d/10gen.listをエディタで開き（存在しないはずなので新規作成）、以下1行を書き込んで保存。
+                                
+                                deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen
+
+                                次のコマンドを実行して、リポジトリを更新する。
+                                
+                                sudo apt-get update
+
+                                次のコマンドを実行して、MongoDBをインストールする。
+                                
+                                sudo apt-get install mongodb-10gen
+
+                                2. 設定ファイル 設定ファイルは /etc/mongodb.conf に、コントロールスクリプトは /etc/init.d/mongodb に置かれている。
+
+                                3. MongoDBの実行 以下のコマンドを実行して、MongoDBのプロセスを開始する。
+                                
+                                sudo service mongodb start
+
+                                以下のコマンドを実行して、MongoDBのプロセスを停止する。
+                                
+                                sudo service mongodb stop
+
+                                以下のコマンドを実行して、MongoDBのプロセスを再起動する。
+                                
+                                sudo service mongodb restart

@@ -122,6 +122,7 @@ app.get "/others/:id", others.others
 app.get "/git/:id", others.git # Git/GitHub
 app.get "/linux/:id", others.linux # Linux
 app.get "/vagrant/:id", others.vagrant # Vagrant
+app.get "/chef/:id", others.chef # chef
 app.get "/genymotion/:id", others.genymotion # GENYMOTION
 app.get "/diary/:id", diary.diary # 日誌
 app.get "/js-:id:format", js.js # JavaScript

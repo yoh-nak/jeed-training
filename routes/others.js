@@ -26,6 +26,13 @@
     });
   };
 
+  exports.chef = function(req, res) {
+    return res.render("others/chef/chef" + req.params.id, {
+      title: define.title,
+      instructor: define.instructor
+    });
+  };
+
   exports.linux = function(req, res) {
     return res.render("others/linux/linux" + req.params.id, {
       title: define.title,

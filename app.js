@@ -177,6 +177,8 @@
 
   app.get("/vagrant/:id", others.vagrant);
 
+  app.get("/chef/:id", others.chef);
+
   app.get("/genymotion/:id", others.genymotion);
 
   app.get("/diary/:id", diary.diary);

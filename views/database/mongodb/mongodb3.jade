@@ -99,29 +99,33 @@ block content
                         pre
                             :code
                                 db.users.count()
-
-
-
-
-                                >db.users.find();
-                                >db.users.find({username:'jones'});
-                                >db.users.find({_id:ObjectId('518869be37d5684f207935ae')})
-
-
-                                usernameがjonesではないデータを表示（ne = not equal）
-                                >db.users.find({username: {$ne: 'jones'}});
-
-
-                                usersコレクションを更新
-                                >db.users.update({username: 'smith'}, {$set: {country: 'Canada'}})
-
-
-                                usersコレクションのusernameがjonesのものからcountryだけ表示
-                                >db.users.find({username:'jones'}, {country: true});
-
-
-                                usersコレクションのドキュメントを削除
-                                >db.users.update({username: 'smith'},{$unset: {country: 1}}) 
+                        hr
+                        .alert.alert-info usersコレクションの検索
+                        pre
+                            :code
+                                db.users.find();
+                                db.users.find({username:'jones'});
+                                db.users.find({_id:ObjectId('518869be37d5684f207935ae')})
+                        hr
+                        .alert.alert-info uusernameがjonesではないデータを表示（ne = not equal）
+                        pre
+                            :code
+                                db.users.find({username: {$ne: 'jones'}});
+                        hr
+                        .alert.alert-info usersコレクションを更新
+                        pre
+                            :code
+                                db.users.update({username: 'smith'}, {$set: {country: 'Canada'}})
+                        hr
+                        .alert.alert-info usersコレクションのusernameがjonesのものからcountryだけ表示
+                        pre
+                            :code
+                                db.users.find({username:'jones'}, {country: true});
+                        hr
+                        .alert.alert-info usersコレクションのドキュメントを削除
+                        pre
+                            :code
+                                db.users.update({username: 'smith'},{$unset: {country: 1}}) 
 
 
 

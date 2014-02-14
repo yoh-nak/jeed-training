@@ -112,7 +112,12 @@ block content
                             :code
                                 db.users.find({username: {$ne: 'jones'}});
                         hr
-                        .alert.alert-info usersコレクションを更新
+                        .alert.alert-info ドキュメントの更新
+                        pre
+                            :code
+                                db.users.update({username: 'sato'}, {$set: {username: 'saito'}})
+                        hr
+                        .alert.alert-info ドキュメントを追加して更新
                         pre
                             :code
                                 db.users.update({username: 'smith'}, {$set: {country: 'Canada'}})

@@ -1,0 +1,107 @@
+extends ../layout
+
+block link
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;ORマッパーを使う
+                    .panel-body
+                        pre
+                            :code
+                                基本編
+                                http://blog.excale.net/index.php/archives/1173
+
+                                応用編
+                                http://blog.excale.net/index.php/archives/1538
+                        
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var Sequelize = require ('sequelize');
+                                var sequelize = new Sequelize('blogapp', 'postgres', 'root', { host: 'localhost', port: 5433,dialect: 'postgres' });
+
+                                //定義
+                                //データ型参考
+                                //http://sequelizejs.com/docs/latest/models#data-types
+                                var User = sequelize.define('User', {
+                                      name: Sequelize.STRING,
+                                      email: Sequelize.STRING
+                                });
+
+                                //create table
+                                //User.sync();
+
+                                //insert
+                                /*
+                                User.create({ name: 'hoge', email: 'hoge@hoge.com'})
+                                    .error(function(err) {
+                                          //エラー時の処理
+                                          console.log(err);
+                                    })
+                                    .success(function(result) {
+                                          //成功時の処理
+                                          console.log(result);
+                                    });
+                                */
+
+                                //select
+                                User.find({ where: {name: 'hoge'} })
+                                    .error(function(err) {
+                                          //エラー時の処理
+                                          console.log(err);
+                                    })
+                                    .success(function(result) {
+                                          //成功時の処理
+                                          //console.log(result)
+                                          console.log(result.name);
+                                          console.log(result.email);
+                                    });
+
+                                //update
+                                /*
+                                User.update(
+                                    //更新内容
+                                    {
+                                        email: 'foo@foo.com',
+                                        name: 'foo'
+                                    },
+                                    //対象
+                                    { id: '3'}
+                                    )
+                                    .error(function(err) {
+                                          //エラー時の処理
+                                          console.log(err);
+                                    })
+                                    .success(function(result) {
+                                          //成功時の処理
+                                          console.log(result);
+                                    });
+                                */
+
+
+                                //delete
+                                /*
+                                User.destroy({name: 'foo'})
+                                    .error(function(err) {
+                                          //エラー時の処理
+                                          console.log(err);
+                                    })
+                                    .success(function(result) {
+                                          //成功時の処理
+                                          console.log(result);
+                                    });
+                                */
+
+

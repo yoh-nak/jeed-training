@@ -1,0 +1,79 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;one()イベン課題
+                    .panel-body
+                        p li要素をクリックして、ボタンが一度だけ反応するようにしましょう。ボタンが押されたらボタンの番号を表示してみましょう。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise178/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | &nbsp;解答例
+                        #demo.collapse.out
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                                link(rel='stylesheet',href='style.css')
+                                            body
+                                                ul
+                                                    li 1
+                                                    li 2
+                                                    li 3
+                                                    li 4
+                                                    li 5
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        li
+                                            display inline-block
+                                            width 100px
+                                            height  100px
+                                            border 10px outset gray
+                                            line-height 100px
+                                            text-align center
+                                            background-color lightgray
+                                            font-size 48px
+                                            color white
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $(function() {
+                                            $('li').one('click', function() {
+                                                $(this).css({
+                                                    color: 'black',
+                                                    borderStyle: 'inset',
+                                                    backgroundColor: 'darkgray'
+                                                });
+                                                alert($(this).html() + '番完了！');
+                                                return false;
+                                            });
+                                        });
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $ ->
+                                            $('li').one 'click', ->
+                                                $(this).css
+                                                    color: 'black'
+                                                    borderStyle: 'inset'
+                                                    backgroundColor: 'darkgray'
+                                                alert($(this).html() + '番完了！');
+                                                return false
+                                            return

@@ -5,26 +5,23 @@
       $('#floatWindow').fadeIn('fast');
       return false;
     });
-    return $('#floatWindow a.close').click(function() {
+    $('#floatWindow a.close').click(function() {
       $('#floatWindow').fadeOut('fast');
       return false;
     });
-  });
-
-  $('#floatWindow dl dt').mousedown(function(e) {
-    $('#floatWindow').data('clickPointX', e.pageX - $('#floatWindow').offset().left).data('clickPointY', e.pageY - $('#floatWindow').offset().top);
-    return $(document).mousemove(function(e) {
-      $('#floatWindow').css({
-        left: e.pageX - $('#floatWindow').data('clickPointX') + 'px',
-        top: e.pageY - $('#floatWindow').data('clickPointY') + 'px'
+    $('#floatWindow dl dt').mousedown(function(e) {
+      $('#floatWindow').data('clickPointX', e.pageX - $('#floatWindow').offset().left).data('clickPointY', e.pageY - $('#floatWindow').offset().top);
+      $(document).mousemove(function(e) {
+        $('#floatWindow').css({
+          left: e.pageX - $('#floatWindow').data('clickPointX') + 'px',
+          top: e.pageY - $('#floatWindow').data('clickPointY') + 'px'
+        });
+        console.log(e.pageX - $('#floatWindow').data('clickPointX'));
+        console.log(e.pageY - $('#floatWindow').data('clickPointY'));
       });
-      console.log(e.pageX - $('#floatWindow').data('clickPointX'));
-      console.log(e.pageY - $('#floatWindow').data('clickPointY'));
+    }).mouseup(function() {
+      $(document).unbind('mousemove');
     });
-  }).mouseup(function() {
-    $(document).unbind('mousemove');
   });
-
-  return;
 
 }).call(this);

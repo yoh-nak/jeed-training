@@ -3,9 +3,9 @@ $ ->
         $('#floatWindow').fadeIn 'fast'
         return false
     $('#floatWindow a.close').click ->
-    	$('#floatWindow').fadeOut 'fast'
-    	return false
-	$('#floatWindow dl dt').mousedown (e) ->
+        $('#floatWindow').fadeOut 'fast'
+        return false
+    $('#floatWindow dl dt').mousedown (e) ->
         $('#floatWindow')
         #クリックした場所のフロートウィンドウの左上からのX座標
         .data 'clickPointX' , e.pageX - $('#floatWindow').offset().left

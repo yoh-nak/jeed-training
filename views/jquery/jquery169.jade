@@ -1,0 +1,395 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;フローティングウィンドウ
+                    .panel-body
+                        p ①
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise172/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        link(rel='stylesheet',href='css/style1.css')
+                                    body
+                                        a.open(href='#floatWindow') フローティングウィンドウの表示
+                                        #floatWindow
+                                            dl
+                                                dt jQueryによるフローティングウィンドウの作成
+                                                dd 今回はjQueryでフローティングウィンドウを作成する方法を解説します。フローティングウィンドウとはWebページ上にドラッグ可能な別の子ウィンドウを表示するUIのことです。ポップアップなどで表示されるウィンドウとは異なりブラウザのポップアップブロックなどの影響を受けず、また、元のサイトにレイアウトなどに影響を与えずにウィンドウを表示することが可能になっています。
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='js/script1.js')
+                        hr
+                        p ②
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise172/index2.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                #floatWindow
+                                    width 500px
+                                    height 400px
+                                    dl
+                                        width 100%
+                                        height 100%
+                                        background url("../img/floatWindow.png")
+                                        margin 0
+                                        dt
+                                            height 25px
+                                            line-height 25px
+                                            text-indent 1em
+                                            color #FFFFFF
+                                            font-weight bold
+                                        dd
+                                            margin 0
+                                            padding 2em
+                                            line-height 1.5
+                                            text-indent 1em
+                        hr
+                        p ③
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise172/index3.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                #floatWindow
+                                    <mark>display none</mark>
+                                    width 500px
+                                    height 400px
+                                    dl
+                                        width 100%
+                                        height 100%
+                                        background url("../img/floatWindow.png")
+                                        margin 0
+                                        dt
+                                            height 25px
+                                            line-height 25px
+                                            text-indent 1em
+                                            color #FFFFFF
+                                            font-weight bold
+                                        dd
+                                            margin 0
+                                            padding 2em
+                                            line-height 1.5
+                                            text-indent 1em
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('a.open').click(function() {
+                                        $('#floatWindow').fadeIn('fast');
+                                        return false;
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('a.open').click ->
+                                        $('#floatWindow').fadeIn 'fast'
+                                        return false
+                                    return
+                        hr
+                        p ④
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise172/index4.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        link(rel='stylesheet',href='css/style4.css')
+                                    body
+                                        a.open(href='#floatWindow') フローティングウィンドウの表示
+                                        #floatWindow
+                                            <mark>a.close(href='#')
+                                                img(src='img/close2.png',alt='閉じる')</mark>
+                                            dl
+                                                dt jQueryによるフローティングウィンドウの作成
+                                                dd 今回はjQueryでフローティングウィンドウを作成する方法を解説します。フローティングウィンドウとはWebページ上にドラッグ可能な別の子ウィンドウを表示するUIのことです。ポップアップなどで表示されるウィンドウとは異なりブラウザのポップアップブロックなどの影響を受けず、また、元のサイトにレイアウトなどに影響を与えずにウィンドウを表示することが可能になっています。
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='js/script4.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                #floatWindow
+                                    display none
+                                    width 500px
+                                    height 400px
+                                    <mark>a.close img
+                                        border none</mark>
+                                    dl
+                                        width 100%
+                                        height 100%
+                                        background url("../img/floatWindow.png")
+                                        margin 0
+                                        dt
+                                            height 25px
+                                            line-height 25px
+                                            text-indent 1em
+                                            color #FFFFFF
+                                            font-weight bold
+                                        dd
+                                            margin 0
+                                            padding 2em
+                                            line-height 1.5
+                                            text-indent 1em
+
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('a.open').click(function() {
+                                        $('#floatWindow').fadeIn('fast');
+                                        return false;
+                                    });
+                                    <mark>$('#floatWindow a.close').click(function() {
+                                        $('#floatWindow').fadeOut('fast');
+                                        return false;
+                                    });</mark>
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('a.open').click ->
+                                        $('#floatWindow').fadeIn 'fast'
+                                        return false
+                                    <mark>$('#floatWindow a.close').click ->
+                                        $('#floatWindow').fadeOut 'fast'
+                                        return false</mark>
+                                    return
+                        hr
+                        p ⑤
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise172/index5.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                #floatWindow
+                                    display none
+                                    width 500px
+                                    height 400px
+                                    <mark>position absolute
+                                    top 100px
+                                    left 100px</mark>
+                                    <mark>a.close
+                                        position absolute
+                                        right 20px
+                                        top 1px
+                                        img
+                                            border none</mark>
+                                    dl
+                                        width 100%
+                                        height 100%
+                                        background url("../img/floatWindow.png")
+                                        margin 0
+                                        dt
+                                            height 25px
+                                            line-height 25px
+                                            text-indent 1em
+                                            color #FFFFFF
+                                            font-weight bold
+                                            <mark>cursor move</mark>
+                                        dd
+                                            margin 0
+                                            padding 2em
+                                            line-height 1.5
+                                            text-indent 1em
+                        hr
+                        p ⑥
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise172/index6.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('a.open').click(function() {
+                                        $('#floatWindow').fadeIn('fast');
+                                        return false;
+                                    });
+                                    $('#floatWindow a.close').click(function() {
+                                        $('#floatWindow').fadeOut('fast');
+                                        return false;
+                                    });
+                                    <mark>$('#floatWindow dl dt').mousedown(function(e) {
+                                        $('#floatWindow').data('clickPointX', e.pageX - $('#floatWindow').offset().left).data('clickPointY', e.pageY - $('#floatWindow').offset().top);
+                                        console.log(e.pageX - $('#floatWindow').offset().left);
+                                        console.log(e.pageY - $('#floatWindow').offset().top);
+                                    });</mark>
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('a.open').click ->
+                                        $('#floatWindow').fadeIn 'fast'
+                                        return false
+                                    $('#floatWindow a.close').click ->
+                                        $('#floatWindow').fadeOut 'fast'
+                                        return false
+                                    <mark>$('#floatWindow dl dt').mousedown (e) ->
+                                        $('#floatWindow')
+                                        #クリックした場所のフロートウィンドウの左上からのX座標
+                                        .data 'clickPointX' , e.pageX - $('#floatWindow').offset().left
+                                        
+                                        #クリックした場所のフロートウィンドウの左上からのY座標
+                                        .data 'clickPointY' , e.pageY - $('#floatWindow').offset().top
+                                         
+                                        #デバッグ
+                                        console.log e.pageX - $('#floatWindow').offset().left
+                                        console.log  e.pageY - $('#floatWindow').offset().top
+                                        return</mark>
+                                    return
+                        hr
+                        p ⑦
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise172/index7.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('a.open').click(function() {
+                                        $('#floatWindow').fadeIn('fast');
+                                        return false;
+                                    });
+                                    $('#floatWindow a.close').click(function() {
+                                        $('#floatWindow').fadeOut('fast');
+                                        return false;
+                                    });
+                                    $('#floatWindow dl dt').mousedown(function(e) {
+                                        $('#floatWindow').data('clickPointX', e.pageX - $('#floatWindow').offset().left).data('clickPointY', e.pageY - $('#floatWindow').offset().top);
+                                        <mark>$(document).mousemove(function(e) {
+                                            $('#floatWindow').css({
+                                                left: e.pageX - $('#floatWindow').data('clickPointX') + 'px',
+                                                top: e.pageY - $('#floatWindow').data('clickPointY') + 'px'
+                                            });
+                                            console.log(e.pageX - $('#floatWindow').data('clickPointX'));
+                                            console.log(e.pageY - $('#floatWindow').data('clickPointY'));
+                                        });</mark>
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('a.open').click ->
+                                        $('#floatWindow').fadeIn 'fast'
+                                        return false
+                                    $('#floatWindow a.close').click ->
+                                        $('#floatWindow').fadeOut 'fast'
+                                        return false
+                                    $('#floatWindow dl dt').mousedown (e) ->
+                                        $('#floatWindow')
+                                        #クリックした場所のフロートウィンドウの左上からのX座標
+                                        .data 'clickPointX' , e.pageX - $('#floatWindow').offset().left
+                                        
+                                        #クリックした場所のフロートウィンドウの左上からのY座標
+                                        .data 'clickPointY' , e.pageY - $('#floatWindow').offset().top
+                                         
+                                        #デバッグ
+                                        #console.log e.pageX - $('#floatWindow').offset().left
+                                        #console.log  e.pageY - $('#floatWindow').offset().top
+
+                                        #ドラッグした時のフロートウィンドウのブラウザ左上からの座標を計算する
+                                        $(document).mousemove (e) ->
+                                            $('#floatWindow').css
+                                                #マウスの座標から、保存しているフロートウィンドウの左上からのX座標を引く
+                                                left: e.pageX - $('#floatWindow').data('clickPointX')+'px'
+                                                #マウスの座標から、保存しているフロートウィンドウの左上からのY座標を引く
+                                                top: e.pageY  - $('#floatWindow').data('clickPointY')+'px'
+                                             
+                                            #デバッグ
+                                            console.log e.pageX - $('#floatWindow').data('clickPointX')
+                                            console.log e.pageY - $('#floatWindow').data('clickPointY')
+                                            return
+                                        return
+                                    return
+                        hr
+                        p ⑧
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise172/index8.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('a.open').click(function() {
+                                        $('#floatWindow').fadeIn('fast');
+                                        return false;
+                                    });
+                                    $('#floatWindow a.close').click(function() {
+                                        $('#floatWindow').fadeOut('fast');
+                                        return false;
+                                    });
+                                    $('#floatWindow dl dt').mousedown(function(e) {
+                                        $('#floatWindow').data('clickPointX', e.pageX - $('#floatWindow').offset().left).data('clickPointY', e.pageY - $('#floatWindow').offset().top);
+                                        $(document).mousemove(function(e) {
+                                            $('#floatWindow').css({
+                                                left: e.pageX - $('#floatWindow').data('clickPointX') + 'px',
+                                                top: e.pageY - $('#floatWindow').data('clickPointY') + 'px'
+                                            });
+                                            console.log(e.pageX - $('#floatWindow').data('clickPointX'));
+                                            console.log(e.pageY - $('#floatWindow').data('clickPointY'));
+                                        });
+                                    })<mark>.mouseup(function() {
+                                        $(document).unbind('mousemove');
+                                    });</mark>
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('a.open').click ->
+                                        $('#floatWindow').fadeIn 'fast'
+                                        return false
+                                    $('#floatWindow a.close').click ->
+                                        $('#floatWindow').fadeOut 'fast'
+                                        return false
+                                    $('#floatWindow dl dt').mousedown((e) ->
+                                        $('#floatWindow')
+                                        #クリックした場所のフロートウィンドウの左上からのX座標
+                                        .data 'clickPointX' , e.pageX - $('#floatWindow').offset().left
+                                        
+                                        #クリックした場所のフロートウィンドウの左上からのY座標
+                                        .data 'clickPointY' , e.pageY - $('#floatWindow').offset().top
+                                         
+                                        #デバッグ
+                                        #console.log e.pageX - $('#floatWindow').offset().left
+                                        #console.log  e.pageY - $('#floatWindow').offset().top
+
+                                        #ドラッグした時のフロートウィンドウのブラウザ左上からの座標を計算する
+                                        $(document).mousemove (e) ->
+                                            $('#floatWindow').css
+                                                #マウスの座標から、保存しているフロートウィンドウの左上からのX座標を引く
+                                                left: e.pageX - $('#floatWindow').data('clickPointX')+'px'
+                                                #マウスの座標から、保存しているフロートウィンドウの左上からのY座標を引く
+                                                top: e.pageY  - $('#floatWindow').data('clickPointY')+'px'
+                                             
+                                            #デバッグ
+                                            console.log e.pageX - $('#floatWindow').data('clickPointX')
+                                            console.log e.pageY - $('#floatWindow').data('clickPointY')
+                                            return
+                                        return
+                                    )<mark>.mouseup ->
+                                        $(document).unbind 'mousemove'
+                                        return</mark>
+                                    return

@@ -15,12 +15,13 @@ block content
                         i.glyphicon.glyphicon-book
                         | &nbsp;contextmenu()イベント
                     .panel-body
+                        p contextmenuイベントでも動作しますが、APIドキュメントに掲載されていないので、onメソッドでイベントをバインドするのがよいでしょう。
                         p
                             a.btn.btn-default(href='../demo/jquery/exercise183/index1.html',target='_blank')
                                 i.glyphicon.glyphicon-play
                                 | デモ
                             | 
-                            a.btn.btn-default(href='http://api.jquery.com/on/',target='_blank')
+                            a.btn.btn-default(href='http://api.jquery.com/contextmenu/',target='_blank')
                                 i.glyphicon.glyphicon-info-sign
                                 | &nbsp;参考
                         pre(class='prettyprint linenums:1')
@@ -37,15 +38,28 @@ block content
                         pre(class='prettyprint linenums:1')
                             :code
                                 $(function() {
+                                    $('a').contextmenu(function() {
+                                        $(this).text('右クリックされました');
+                                        return false;
+                                    });
+
+                                    /*
                                     $('a').on('contextmenu', function() {
                                         $(this).text('右クリックされました');
                                         return false;
                                     });
+                                    */
                                 });
                         pre(class='prettyprint linenums:1')
                             :code
                                 $ ->
+                                    $('a').contextmenu ->
+                                        $(this).text('右クリックされました')
+                                        return false
+
+                                    ###
                                     $('a').on 'contextmenu', ->
                                         $(this).text('右クリックされました')
                                         return false
+                                    ###
                                     return

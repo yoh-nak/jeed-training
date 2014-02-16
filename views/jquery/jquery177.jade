@@ -1,0 +1,129 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;contextmenu()イベン課題
+                    .panel-body
+                        p 
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise184/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | &nbsp;解答例
+                        #demo.collapse.out
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                                link(rel='stylesheet',href='style.css')
+                                            body
+                                                a(href='#')
+                                                    | 右クリック
+                                                    ul
+                                                        li Yahoo
+                                                        li Google
+                                                        li Goo
+                                                        li msn
+                                                        li Livedoor
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        a
+                                            position relative
+                                            text-decoration none
+                                            ul
+                                                display none
+                                                position absolute
+                                                top -20px
+                                                right -100px
+                                                padding 0
+                                                li
+                                                    width 100px
+                                                    height 30px
+                                                    line-height 30px
+                                                    text-align center
+                                                    list-style-type none
+                                                    border-left 1px solid #000000
+                                                    border-right 1px solid #000000
+                                                    border-bottom 1px solid #000000
+                                                    background-color pink
+                                                    &:hover
+                                                        background-color aqua
+
+                                                    &:first-child
+                                                        list-style-type none
+                                                        border-top 1px solid #000000
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $(function() {
+                                            $('a').contextmenu(function() {
+                                                $('ul', this).css('display', 'block');
+                                                return false;
+                                            });
+                                            $('a ul li:nth-child(1)').click(function() {
+                                                window.open().location.href = 'http://www.yahoo.co.jp/';
+                                            });
+                                            $('a ul li:nth-child(2)').click(function() {
+                                                window.open().location.href = 'http://www.google.co.jp/';
+                                            });
+                                            $('a ul li:nth-child(3)').click(function() {
+                                                window.open().location.href = 'http://www.goo.ne.jp/';
+                                            });
+                                            $('a ul li:nth-child(4)').click(function() {
+                                                window.open().location.href = 'http://jp.msn.com/';
+                                            });
+                                            $('a ul li:nth-child(5)').click(function() {
+                                                window.open().location.href = 'http://www.livedoor.com/';
+                                            });
+                                            $(document).click(function() {
+                                                $('ul', this).css('display', 'none');
+                                            });
+                                        });
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $ ->
+                                            $('a').contextmenu ->
+                                                $('ul',this).css 'display','block'
+                                                return false
+                                            
+                                            $('a ul li:nth-child(1)').click ->
+                                                window.open().location.href = 'http://www.yahoo.co.jp/';
+                                                return
+
+                                            $('a ul li:nth-child(2)').click ->
+                                                window.open().location.href = 'http://www.google.co.jp/';
+                                                return
+
+                                            $('a ul li:nth-child(3)').click ->
+                                                window.open().location.href = 'http://www.goo.ne.jp/';
+                                                return
+
+                                            $('a ul li:nth-child(4)').click ->
+                                                window.open().location.href = 'http://jp.msn.com/';
+                                                return
+
+                                            $('a ul li:nth-child(5)').click ->
+                                                window.open().location.href = 'http://www.livedoor.com/';
+                                                return
+                                             
+                                            $(document).click ->
+                                                $('ul',this).css('display','none');
+                                                return
+                                            return

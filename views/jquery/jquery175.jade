@@ -1,0 +1,65 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;on()イベン課題
+                    .panel-body
+                        p ボタンをクリックして、firstクラス、secondクラスのp要素にimg要素をappendし、firstクラスのみロールオーバーの機能を追加しましょう。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise182/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button',data-toggle='collapse',data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | &nbsp;解答例
+                        #demo.collapse.out
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        doctype
+                                        html(lang='ja-JP')
+                                            head
+                                                meta(charset='UTF-8')
+                                                title
+                                            body
+                                                p: input(type='button',value='追加')
+                                                p.first
+                                                p.second
+                                                script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                                script(src='script.js')
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $(function() {
+                                            $('input').click(function() {
+                                                $('.first,.second').append('<img src="img/before.png",alt="">');
+                                            });
+                                            $('.first').on('mouseover', 'img', function() {
+                                                $(this).attr('src', 'img/after.png');
+                                            }).on('mouseout', 'img', function() {
+                                                $(this).attr('src', 'img/before.png');
+                                            });
+                                        });
+                                pre(class='prettyprint linenums:1')
+                                    :code
+                                        $ ->
+                                            $('input').click ->
+                                                $('.first,.second').append '<img src="img/before.png",alt="">'
+                                                return
+
+                                            $('.first').on('mouseover', 'img', ->
+                                                $(this).attr 'src', 'img/after.png'
+                                                return
+                                            ).on 'mouseout', 'img', ->
+                                                $(this).attr 'src', 'img/before.png'
+                                                return
+                                            return

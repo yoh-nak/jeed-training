@@ -1,0 +1,60 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;on()イベント
+                    .panel-body
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise181/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/on/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                    body
+                                        p: input(type='button',value='追加')
+                                        p.add
+                                        p: img(src='img/before.png',alt='')
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('input').click(function() {
+                                        $('.add').html('<a href="img/after.png">変更</a>');
+                                    });
+                                    $('.add').on('click', 'a', function() {
+                                        $('img').attr('src', $(this).attr('href'));
+                                        return false;
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('input').click ->
+                                        $('.add').html('<a href="img/after.png">変更</a>')
+                                        return
+
+                                    $('.add').on 'click', 'a', ->
+                                        $('img').attr 'src', $(this).attr 'href'
+                                        return false
+                                    return

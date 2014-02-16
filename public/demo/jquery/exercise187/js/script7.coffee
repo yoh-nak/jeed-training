@@ -8,8 +8,7 @@ $ ->
 	).on 'touchstart', ->
 		$('#slide').data 'href',$(this).attr('href')
 		return
-	$('#slide').on('touchstart', (evnet) ->
-		event.preventDefault();
+	$('#slide').on('touchstart', ->
 		return
 	).on('touchmove', ->
 		return

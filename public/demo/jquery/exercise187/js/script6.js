@@ -5,12 +5,8 @@
     $('#slide').css('margin-left', '-320px');
     $('#slide a').click(function() {
       return false;
-    }).on('touchstart', function() {
-      $('#slide').data('href', $(this).attr('href'));
     });
-    $('#slide').on('touchstart', function(evnet) {
-      event.preventDefault();
-    }).on('touchmove', function() {}).on('touchend', function() {});
+    $('#slide').on('touchstart', function() {}).on('touchmove', function() {}).on('touchend', function() {});
   });
 
 }).call(this);

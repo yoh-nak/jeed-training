@@ -1,0 +1,60 @@
+doctype
+html(lang='ja-JP')
+    head
+        meta(charset='UTF-8')
+        title
+        link(rel='stylesheet',href='css/style2.css')
+    body
+        #container
+            h1 当サイトへのお問い合わせ
+            form(action='#', method='POST')
+                dl
+                    dt
+                        | お名前
+                        span ※
+                    dd
+                        input.validate.required(type='text', name='name', size='80')
+                    dt フリガナ
+                    dd
+                        input(type='text', name='furi', size='80')
+                    dt 郵便番号
+                    dd
+                        input.validate.number(type='text', name='zip1', size='4', maxlength='4')
+                        | -
+                        input.validate.number(type='text', name='zip2', size='3', maxlength='3')
+                    dt メールアドレス
+                    dd
+                        input.validate.mail(type='text', value='', size='80', name='mail')
+                    dt メールアドレス(確認)
+                    dd
+                        input.validate.mail.mail_check(type='text', value='', size='80', name='mail_check')
+                    dt
+                        | 性別
+                        span ※
+                    dd
+                        input#man.validate.required(type='radio', value='男性', name='gender')
+                        label(for='man') 男性
+                        input#woman(type='radio', value='女性', name='gender')
+                        label(for='woman') 女性
+                    dt
+                        | どこでこのサイトを知りましたか?
+                        span ※
+                    dd.checkboxRequired
+                        input#search(type='checkbox', name='search', value='検索エンジン')
+                        label(for='search') 検索エンジン
+                        input#freiend(type='checkbox', name='freiend', value='知人の紹介')
+                        label(for='freiend') 知人の紹介
+                        input#mail_magazine(type='checkbox', name='mail_magazine', value='メルマガ')
+                        label(for='mail_magazine') メルマガ
+                        input#etc.validate.add_text(type='checkbox', name='etc', value='その他')
+                        label(for='etc') その他
+                        input(type='text', name='etc_text', value='')
+                    dt
+                        | お問い合わせ内容
+                        span ※
+                    dd
+                        textarea#inquiry.validate.required(name='inquiry', rows='10', cols='60')
+                p
+                    input(type='submit', value='送信')
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='js/script2.js')

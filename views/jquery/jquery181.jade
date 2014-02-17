@@ -22,31 +22,34 @@ block content
                                 | デモ
                         pre(class='prettyprint linenums:1')
                             :code
-                                doctye
-                                html(lang='ja-JP')
+                                doctype
+                                html(lang='ja')
                                     head
                                         meta(charset='UTF-8')
-                                        meta(name='viewport', content='width=device-width,initial-scale=1')
                                         title
-                                        link(rel='stylesheet',href='css/style1.css')
+                                        link(rel='stylesheet',href='css/style.css')
                                     body
                                         #container
                                             #slideGalley
                                                 ul#slide
                                                     li
                                                         a(href='#')
-                                                            img(src='img/photo1.jpg', alt='')
+                                                            img(src='img/photo01.jpg', alt='')
                                                     li
                                                         a(href='#')
-                                                            img(src='img/photo2.jpg', alt='')
+                                                            img(src='img/photo02.jpg', alt='')
                                                     li
                                                         a(href='#')
-                                                            img(src='img/photo3.jpg', alt='')
+                                                            img(src='img/photo03.jpg', alt='')
                                                     li
                                                         a(href='#')
-                                                            img(src='img/photo4.jpg', alt='')
+                                                            img(src='img/photo04.jpg', alt='')
+                                                #nav
+                                                    img.prev(src='img/nav_prev.png')
+                                                    img.next(src='img/nav_next.png')
+                                                ul#paging
                                         script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-                                        script(src='js/script1.js')
+                                        script(src='js/script.js')
                         hr
                         p ②
                         p
@@ -55,25 +58,15 @@ block content
                                 | デモ
                         pre(class='prettyprint linenums:1')
                             :code
-                                ul
-                                     padding-left 0
-                                     margin-top 0
-                                     margin-bottom 0
-                                     list-style-type none
+                               ul
+                                    list-style-type none
+                                    margin-top 0
+                                    margin-bottom 0
+                                    padding-left 0
 
                                 #container
-                                     width 320px
-                                     margin 10px auto
-
-                                #slideGalley
-                                     width 320px
-                                     overflow hidden
-                                     height 240px
-
-                                #slide
-                                     width 10000px
-                                     li
-                                          float left
+                                    width 650px
+                                    margin 100px auto 
                         hr
                         p ③
                         p
@@ -82,17 +75,25 @@ block content
                                 | デモ
                         pre(class='prettyprint linenums:1')
                             :code
-                                $(function() {
-                                    $('#slide a').click(function() {
-                                        return false;
-                                    });
-                                });
-                        pre(class='prettyprint linenums:1')
-                            :code
-                                $ ->
-                                    $('#slide a').click ->
-                                        return false
-                                    return
+                                ul
+                                    list-style-type none
+                                    margin-top 0
+                                    margin-bottom 0
+                                    padding-left 0
+
+                                #container
+                                    width 650px
+                                    margin 100px auto
+
+                                <mark>#slideGalley
+                                    width 650px
+                                    position relative
+                                    overflow hidden
+
+                                #slide
+                                    width 10000px
+                                    li
+                                        float left</mark>
                         hr
                         p ④
                         p
@@ -101,42 +102,94 @@ block content
                                 | デモ
                         pre(class='prettyprint linenums:1')
                             :code
-                                $(function() {
-                                    $('#slide a').click(function() {
-                                        return false;
-                                    });
-                                    <mark>$('#slide').on('touchstart', function() {}).on('touchmove', function() {}).on('touchend', function() {});</mark>
-                                });
+                                ul
+                                    list-style-type none
+                                    margin-top 0
+                                    margin-bottom 0
+                                    padding-left 0
+
+                                #container
+                                    width 650px
+                                    margin 100px auto
+
+                                #slideGalley
+                                    width 650px
+                                    position relative
+                                    overflow hidden
+
+                                #slide
+                                    width 10000px
+                                    li
+                                        float left
+                                        
+                                <mark>#nav
+                                    .prev
+                                        position absolute
+                                        left 10px
+                                        top 50%
+                                        margin-top -50px
+
+                                    .next
+                                        position  absolute
+                                        right 10px
+                                        top 50%
+                                        margin-top -50px</mark>
+                        hr
+                        p ⑤
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise188/index5.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
                         pre(class='prettyprint linenums:1')
                             :code
-                                $ ->
-                                    $('#slide a').click ->
-                                        return false
-                                    <mark>$('#slide').on('touchstart', ->
-                                        return
-                                    ).on('touchmove', ->
-                                        return
-                                    ).on 'touchend', ->
-                                        return</mark>
-                                    return
+                                ul
+                                    list-style-type none
+                                    margin-top 0
+                                    margin-bottom 0
+                                    padding-left 0
+
+                                #container
+                                    width 650px
+                                    margin 100px auto
+
+                                #slideGalley
+                                    width 650px
+                                    position relative
+                                    overflow hidden
+
+                                #slide
+                                    width 10000px
+                                    li
+                                        float left
+
+                                <mark>#paging
+                                    text-align center
+                                    position absolute
+                                    width 100%
+                                    bottom 10px
+                                    li
+                                        display inline-block
+                                        *display inline
+                                        *zoom 1
+                                        width 20px
+                                        height 20px
+                                        background url(../img/page.png)
+                                        &.active
+                                            background url(../img/page_active.png)</mark>
+
+                                #nav
+                                    .prev
+                                        position absolute
+                                        left 10px
+                                        top 50%
+                                        margin-top -50px
+
+                                    .next
+                                        position  absolute
+                                        right 10px
+                                        top 50%
+                                        margin-top -50px
                         hr
-                        //-
-                            p ⑤
-                            p
-                                a.btn.btn-default(href='../demo/jquery/exercise188/index5.html',target='_blank')
-                                    i.glyphicon.glyphicon-play
-                                    | デモ
-                            pre(class='prettyprint linenums:1')
-                                :code
-                                    $(function() {
-                                        $('ul.panel li:not(' + $('ul.tab li a.selected').attr('href') + ')').hide();
-                                    });
-                            pre(class='prettyprint linenums:1')
-                                :code
-                                    $ ->
-                                        $('ul.panel li:not(' + $('ul.tab li a.selected').attr('href') + ')').hide()
-                                        return
-                            hr
                         p ⑥
                         p
                             a.btn.btn-default(href='../demo/jquery/exercise188/index6.html',target='_blank')
@@ -145,27 +198,15 @@ block content
                         pre(class='prettyprint linenums:1')
                             :code
                                 $(function() {
-                                    <mark>$('#slide li:last-child').prependTo('#slide');
-                                    $('#slide').css('margin-left', '-320px');</mark>
-                                    $('#slide a').click(function() {
-                                        return false;
-                                    });
-                                    $('#slide').on('touchstart', function() {}).on('touchmove', function() {}).on('touchend', function() {});
+                                    $('#nav .next').click(function() {});
+                                    $('#nav .prev').click(function() {});
                                 });
                         pre(class='prettyprint linenums:1')
                             :code
                                 $ ->
-
-                                    <mark>$('#slide li:last-child').prependTo '#slide'
-                                    $('#slide').css 'margin-left','-320px'</mark>
-
-                                    $('#slide a').click ->
-                                        return false
-                                    $('#slide').on('touchstart', ->
+                                    $('#nav .next').click ->
                                         return
-                                    ).on('touchmove', ->
-                                        return
-                                    ).on 'touchend', ->
+                                    $('#nav .prev').click ->
                                         return
                                     return
                         hr
@@ -177,32 +218,30 @@ block content
                         pre(class='prettyprint linenums:1')
                             :code
                                 $(function() {
-                                    $('#slide li:last-child').prependTo('#slide');
-                                    $('#slide').css('margin-left', '-320px');
-                                    $('#slide a').click(function() {
-                                        return false;
-                                    }).on('touchstart', function() {
-                                        <mark>$('#slide').data('href', $(this).attr('href'));</mark>
+                                    $('#nav .next').click(function() {
+                                        <mark>$('#slide:not(:animated)').animate({
+                                            marginLeft: -1 * $('#slide li').width()
+                                        });</mark>
                                     });
-                                    $('#slide').on('touchstart', function() {}).on('touchmove', function() {}).on('touchend', function() {});
+                                    $('#nav .prev').click(function() {
+                                        <mark>$('#slide:not(:animated)').css('margin-left', -1 * $('#slide li').width()).prepend($('#slide li:last-child')).animate({
+                                            marginLeft: 0
+                                        });</mark>
+                                    });
                                 });
                         pre(class='prettyprint linenums:1')
                             :code
                                 $ ->
-
-                                    $('#slide li:last-child').prependTo '#slide'
-                                    $('#slide').css 'margin-left','-320px'
-
-                                    $('#slide a').click( ->
-                                        return false
-                                    ).on 'touchstart', ->
-                                        <mark>$('#slide').data 'href',$(this).attr('href')</mark>
+                                    $('#nav .next').click ->
+                                        <mark>$('#slide:not(:animated)').animate
+                                            marginLeft : -1 * $('#slide li').width()</mark>
                                         return
-                                    $('#slide').on('touchstart', ->
-                                        return
-                                    ).on('touchmove', ->
-                                        return
-                                    ).on 'touchend', ->
+                                    $('#nav .prev').click ->
+                                        <mark>$('#slide:not(:animated)')
+                                            .css('margin-left',-1*$('#slide li').width())
+                                            .prepend($('#slide li:last-child'))
+                                            .animate
+                                                marginLeft : 0</mark>
                                         return
                                     return
                         hr
@@ -214,35 +253,37 @@ block content
                         pre(class='prettyprint linenums:1')
                             :code
                                 $(function() {
-                                    $('#slide li:last-child').prependTo('#slide');
-                                    $('#slide').css('margin-left', '-320px');
-                                    $('#slide a').click(function() {
-                                        return false;
-                                    }).on('touchstart', function() {
-                                        $('#slide').data('href', $(this).attr('href'));
+                                    $('#nav .next').click(function() {
+                                        $('#slide:not(:animated)').animate({
+                                            marginLeft: -1 * $('#slide li').width()
+                                        }<mark>, function() {
+                                            $('#slide').css('margin-left', '0').append($('#slide li:first-child'));
+                                        });</mark>
                                     });
-                                    $('#slide').on('touchstart', function(<mark>evnet</mark>) {
-                                        <mark>event.preventDefault();</mark>
-                                    }).on('touchmove', function() {}).on('touchend', function() {});
+                                    $('#nav .prev').click(function() {
+                                        $('#slide:not(:animated)').css('margin-left', -1 * $('#slide li').width()).prepend($('#slide li:last-child')).animate({
+                                            marginLeft: 0
+                                        }<mark>, function() {});</mark>
+                                    });
                                 });
                         pre(class='prettyprint linenums:1')
                             :code
                                 $ ->
-
-                                    $('#slide li:last-child').prependTo '#slide'
-                                    $('#slide').css 'margin-left','-320px'
-
-                                    $('#slide a').click( ->
-                                        return false
-                                    ).on 'touchstart', ->
-                                        $('#slide').data 'href',$(this).attr('href')
+                                    $('#nav .next').click ->
+                                        $('#slide:not(:animated)').animate {
+                                            marginLeft : -1 * $('#slide li').width()
+                                        }<mark>, ->
+                                            $('#slide').css('margin-left','0').append $('#slide li:first-child')
+                                            return</mark>
                                         return
-                                    $('#slide').on('touchstart', <mark>(evnet)</mark> ->
-                                        <mark>event.preventDefault();</mark>
-                                        return
-                                    ).on('touchmove', ->
-                                        return
-                                    ).on 'touchend', ->
+                                    $('#nav .prev').click ->
+                                        $('#slide:not(:animated)')
+                                            .css('margin-left',-1*$('#slide li').width())
+                                            .prepend($('#slide li:last-child'))
+                                            .animate {
+                                                marginLeft : 0
+                                            }<mark>, ->
+                                                return</mark>
                                         return
                                     return
                         hr
@@ -254,47 +295,46 @@ block content
                         pre(class='prettyprint linenums:1')
                             :code
                                 $(function() {
-                                    $('#slide li:last-child').prependTo('#slide');
-                                    $('#slide').css('margin-left', '-320px');
-                                    $('#slide a').click(function() {
-                                        return false;
-                                    }).on('touchstart', function() {
-                                        $('#slide').data('href', $(this).attr('href'));
+                                    $('#nav .next').click(function() {
+                                        $('#slide:not(:animated)').animate({
+                                            marginLeft: -1 * $('#slide li').width()
+                                        }, function() {
+                                            $('#slide').css('margin-left', '0').append($('#slide li:first-child'));
+                                            <mark>$('#paging li.active').removeClass('active');
+                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active');</mark>
+                                        });
                                     });
-                                    $('#slide').on('touchstart', function(evnet) {
-                                        event.preventDefault();
-                                        <mark>$(this).data('startX', event.touches[0].pageX).data('startY', event.touches[0].pageY).data('moveX', 0).data('moveY', 0);</mark>
-                                    }).on('touchmove', function() {
-                                        <mark>$(this).data('moveX', event.touches[0].pageX - $(this).data('startX')).data('moveY', event.touches[0].pageY - $(this).data('startY')).css('margin-left', $(this).data('moveX') - 320 + 'px');</mark>
-                                    }).on('touchend', function() {});
+                                    $('#nav .prev').click(function() {
+                                        $('#slide:not(:animated)').css('margin-left', -1 * $('#slide li').width()).prepend($('#slide li:last-child')).animate({
+                                            marginLeft: 0
+                                        }, function() {
+                                            <mark>$('#paging li.active').removeClass('active');
+                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active');</mark>
+                                        });
+                                    });
                                 });
                         pre(class='prettyprint linenums:1')
                             :code
                                 $ ->
-
-                                    $('#slide li:last-child').prependTo '#slide'
-                                    $('#slide').css 'margin-left','-320px'
-
-                                    $('#slide a').click( ->
-                                        return false
-                                    ).on 'touchstart', ->
-                                        $('#slide').data 'href',$(this).attr('href')
+                                    $('#nav .next').click ->
+                                        $('#slide:not(:animated)').animate {
+                                            marginLeft : -1 * $('#slide li').width()
+                                        }, ->
+                                            $('#slide').css('margin-left','0').append $('#slide li:first-child')
+                                            <mark>$('#paging li.active').removeClass('active');
+                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active');
+                                            return</mark>
                                         return
-                                    $('#slide').on('touchstart', (evnet) ->
-                                        event.preventDefault();
-                                        <mark>$(this)
-                                            .data('startX',event.touches[0].pageX)
-                                            .data('startY',event.touches[0].pageY)
-                                            .data('moveX',0)
-                                            .data('moveY',0)</mark>
-                                        return
-                                    ).on('touchmove', ->
-                                        <mark>$(this)
-                                            .data('moveX',event.touches[0].pageX-$(this).data('startX'))
-                                            .data('moveY',event.touches[0].pageY-$(this).data('startY'))
-                                            .css('margin-left',$(this).data('moveX')-320+'px')</mark>
-                                        return
-                                    ).on 'touchend', ->
+                                    $('#nav .prev').click ->
+                                        $('#slide:not(:animated)')
+                                            .css('margin-left',-1*$('#slide li').width())
+                                            .prepend($('#slide li:last-child'))
+                                            .animate {
+                                                marginLeft : 0
+                                            }, ->
+                                                <mark>$('#paging li.active').removeClass('active');
+                                                $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active')</mark>
+                                                return
                                         return
                                     return
                         hr
@@ -306,65 +346,54 @@ block content
                         pre(class='prettyprint linenums:1')
                             :code
                                 $(function() {
-                                    $('#slide li:last-child').prependTo('#slide');
-                                    $('#slide').css('margin-left', '-320px');
-                                    $('#slide a').click(function() {
-                                        return false;
-                                    }).on('touchstart', function() {
-                                        $('#slide').data('href', $(this).attr('href'));
+                                    <mark>$('#slide li').each(function() {
+                                        return $('#paging').append($('<li></li>').attr('data-img', $('img', this).attr('src')));
                                     });
-                                    $('#slide').on('touchstart', function(evnet) {
-                                        event.preventDefault();
-                                        $(this).data('startX', event.touches[0].pageX).data('startY', event.touches[0].pageY).data('moveX', 0).data('moveY', 0);
-                                    }).on('touchmove', function() {
-                                        $(this).data('moveX', event.touches[0].pageX - $(this).data('startX')).data('moveY', event.touches[0].pageY - $(this).data('startY')).css('margin-left', $(this).data('moveX') - 320 + 'px');
-                                    }).on('touchend', function() {
-                                        <mark>if ($(this).data('moveX') > 10) {
-
-                                        } else if ($(this).data('moveX') < -10) {
-
-                                        } else if ($(this).data('moveY') > -10 && $(this).data('moveY') < 10) {
-
-                                        } else {
-
-                                        }</mark>
+                                    $('#paging li:first-child').addClass('active');</mark>
+                                    $('#nav .next').click(function() {
+                                        $('#slide:not(:animated)').animate({
+                                            marginLeft: -1 * $('#slide li').width()
+                                        }, function() {
+                                            $('#slide').css('margin-left', '0').append($('#slide li:first-child'));
+                                            $('#paging li.active').removeClass('active');
+                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active');
+                                        });
+                                    });
+                                    $('#nav .prev').click(function() {
+                                        $('#slide:not(:animated)').css('margin-left', -1 * $('#slide li').width()).prepend($('#slide li:last-child')).animate({
+                                            marginLeft: 0
+                                        }, function() {
+                                            $('#paging li.active').removeClass('active');
+                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active');
+                                        });
                                     });
                                 });
                         pre(class='prettyprint linenums:1')
                             :code
                                 $ ->
+                                    <mark>$('#slide li').each ->
+                                        $('#paging').append $('<li></li>').attr 'data-img', $('img',this).attr('src')
+                                    $('#paging li:first-child').addClass 'active'</mark>
 
-                                    $('#slide li:last-child').prependTo '#slide'
-                                    $('#slide').css 'margin-left','-320px'
-
-                                    $('#slide a').click( ->
-                                        return false
-                                    ).on 'touchstart', ->
-                                        $('#slide').data 'href',$(this).attr('href')
+                                    $('#nav .next').click ->
+                                        $('#slide:not(:animated)').animate {
+                                            marginLeft : -1 * $('#slide li').width()
+                                        }, ->
+                                            $('#slide').css('margin-left','0').append $('#slide li:first-child')
+                                            $('#paging li.active').removeClass('active');
+                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass 'active'
+                                            return
                                         return
-                                    $('#slide').on('touchstart', (evnet) ->
-                                        event.preventDefault();
-                                        $(this)
-                                            .data('startX',event.touches[0].pageX)
-                                            .data('startY',event.touches[0].pageY)
-                                            .data('moveX',0)
-                                            .data('moveY',0)
-                                        return
-                                    ).on('touchmove', ->
-                                        $(this)
-                                            .data('moveX',event.touches[0].pageX-$(this).data('startX'))
-                                            .data('moveY',event.touches[0].pageY-$(this).data('startY'))
-                                            .css('margin-left',$(this).data('moveX')-320+'px')
-                                        return
-                                    ).on 'touchend', ->
-                                        <mark>if $(this).data('moveX') > 10
-                                            
-                                        else if $(this).data('moveX') < -10
-                                            
-                                        else if $(this).data('moveY') > -10 and $(this).data('moveY') < 10
-                                            
-                                        else</mark>
-                                            
+                                    $('#nav .prev').click ->
+                                        $('#slide:not(:animated)')
+                                            .css('margin-left',-1*$('#slide li').width())
+                                            .prepend($('#slide li:last-child'))
+                                            .animate {
+                                                marginLeft : 0
+                                            }, ->
+                                                $('#paging li.active').removeClass('active');
+                                                $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active')
+                                                return
                                         return
                                     return
                         hr
@@ -376,88 +405,230 @@ block content
                         pre(class='prettyprint linenums:1')
                             :code
                                 $(function() {
-                                    $('#slide li:last-child').prependTo('#slide');
-                                    $('#slide').css('margin-left', '-320px');
-                                    $('#slide a').click(function() {
-                                        return false;
-                                    }).on('touchstart', function() {
-                                        $('#slide').data('href', $(this).attr('href'));
+                                    <mark>var timerId;</mark>
+                                    $('#slide li').each(function() {
+                                        return $('#paging').append($('<li></li>').attr('data-img', $('img', this).attr('src')));
                                     });
-                                    $('#slide').on('touchstart', function(evnet) {
-                                        event.preventDefault();
-                                        $(this).data('startX', event.touches[0].pageX).data('startY', event.touches[0].pageY).data('moveX', 0).data('moveY', 0);
-                                    }).on('touchmove', function() {
-                                        $(this).data('moveX', event.touches[0].pageX - $(this).data('startX')).data('moveY', event.touches[0].pageY - $(this).data('startY')).css('margin-left', $(this).data('moveX') - 320 + 'px');
-                                    }).on('touchend', function() {
-                                        if ($(this).data('moveX') > 10) {
-                                            <mark>$(this).animate({
-                                                'margin-left': 0
-                                            }, function() {
-                                                $(this).css('margin-left', '-320px');
-                                                $('#slide li:last-child').prependTo('#slide');
-                                            });</mark>
-                                        } else if ($(this).data('moveX') < -10) {
-                                            <mark>$(this).animate({
-                                                'margin-left': -640
-                                            }, function() {
-                                                $(this).css('margin-left', '-320px');
-                                                return $('#slide li:first-child').appendTo('#slide');
-                                            });
-                                            return;</mark>
-                                        } else if ($(this).data('moveY') > -10 && $(this).data('moveY') < 10) {
-                                            <mark>location.href = $(this).data('href');</mark>
-                                        } else {
-                                            <mark>$(this).animate({
-                                                'margin-left': -320
-                                            });</mark>
-                                        }
+                                    $('#paging li:first-child').addClass('active');
+                                    <mark>timerId = setInterval(function() {
+                                        $("#nav .next").click();
+                                    }, 5000);</mark>
+                                    $('#nav .next').click(function() {
+                                        $('#slide:not(:animated)').animate({
+                                            marginLeft: -1 * $('#slide li').width()
+                                        }, function() {
+                                            $('#slide').css('margin-left', '0').append($('#slide li:first-child'));
+                                            $('#paging li.active').removeClass('active');
+                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active');
+                                        });
+                                    });
+                                    $('#nav .prev').click(function() {
+                                        $('#slide:not(:animated)').css('margin-left', -1 * $('#slide li').width()).prepend($('#slide li:last-child')).animate({
+                                            marginLeft: 0
+                                        }, function() {
+                                            $('#paging li.active').removeClass('active');
+                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active');
+                                        });
+                                    });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('#slide li').each ->
+                                        $('#paging').append $('<li></li>').attr 'data-img', $('img',this).attr('src')
+                                    $('#paging li:first-child').addClass 'active'
+
+                                    <mark>timerId = setInterval(->
+                                        $("#nav .next").click()
+                                        return
+                                    , 5000)</mark>
+
+                                    $('#nav .next').click ->
+                                        $('#slide:not(:animated)').animate {
+                                            marginLeft : -1 * $('#slide li').width()
+                                        }, ->
+                                            $('#slide').css('margin-left','0').append $('#slide li:first-child')
+                                            $('#paging li.active').removeClass('active');
+                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass 'active'
+                                            return
+                                        return
+                                    $('#nav .prev').click ->
+                                        $('#slide:not(:animated)')
+                                            .css('margin-left',-1*$('#slide li').width())
+                                            .prepend($('#slide li:last-child'))
+                                            .animate {
+                                                marginLeft : 0
+                                            }, ->
+                                                $('#paging li.active').removeClass('active');
+                                                $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active')
+                                                return
+                                        return
+                                    return
+                        hr
+                        p ⑫
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise188/index12.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    var timerId;
+                                    $('#slide li').each(function() {
+                                        return $('#paging').append($('<li></li>').attr('data-img', $('img', this).attr('src')));
+                                    });
+                                    $('#paging li:first-child').addClass('active');
+                                    timerId = setInterval(function() {
+                                        $("#nav .next").click();
+                                    }, 5000);
+                                    <mark>$('#slideGalley').hover(function() {
+                                        $('#nav').show();
+                                    }, function() {
+                                        $('#nav').hide();
+                                    });</mark>
+                                    $('#nav .next').click(function() {
+                                        $('#slide:not(:animated)').animate({
+                                            marginLeft: -1 * $('#slide li').width()
+                                        }, function() {
+                                            $('#slide').css('margin-left', '0').append($('#slide li:first-child'));
+                                            $('#paging li.active').removeClass('active');
+                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active');
+                                        });
+                                    });
+                                    $('#nav .prev').click(function() {
+                                        $('#slide:not(:animated)').css('margin-left', -1 * $('#slide li').width()).prepend($('#slide li:last-child')).animate({
+                                            marginLeft: 0
+                                        }, function() {
+                                            $('#paging li.active').removeClass('active');
+                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active');
+                                        });
                                     });
                                 });
                         pre(class='prettyprint linenums:1')
                             :code
                                 $ ->
+                                    $('#slide li').each ->
+                                        $('#paging').append $('<li></li>').attr 'data-img', $('img',this).attr('src')
+                                    $('#paging li:first-child').addClass 'active'
 
-                                    $('#slide li:last-child').prependTo '#slide'
-                                    $('#slide').css 'margin-left','-320px'
+                                    timerId = setInterval(->
+                                        $("#nav .next").click()
+                                        return
+                                    , 5000)
 
-                                    $('#slide a').click( ->
-                                        return false
-                                    ).on 'touchstart', ->
-                                        $('#slide').data 'href',$(this).attr('href')
+                                    <mark>$('#slideGalley').hover ->
+                                        $('#nav').show()
                                         return
-                                    $('#slide').on('touchstart', (evnet) ->
-                                        event.preventDefault();
-                                        $(this)
-                                            .data('startX',event.touches[0].pageX)
-                                            .data('startY',event.touches[0].pageY)
-                                            .data('moveX',0)
-                                            .data('moveY',0)
-                                        return
-                                    ).on('touchmove', ->
-                                        $(this)
-                                            .data('moveX',event.touches[0].pageX-$(this).data('startX'))
-                                            .data('moveY',event.touches[0].pageY-$(this).data('startY'))
-                                            .css('margin-left',$(this).data('moveX')-320+'px')
-                                        return
-                                    ).on 'touchend', ->
-                                        if $(this).data('moveX') > 10
-                                            <mark>$(this).animate
-                                                'margin-left': 0
-                                            , ->
-                                                $(this).css 'margin-left', '-320px'
-                                                $('#slide li:last-child').prependTo '#slide'
-                                                return</mark>
+                                    , ->
+                                        $('#nav').hide()
+                                        return</mark>
 
-                                        else if $(this).data('moveX') < -10
-                                            <mark>$(this).animate
-                                                'margin-left': -640
-                                            , ->
-                                                    $(this).css 'margin-left', '-320px'
-                                                    $('#slide li:first-child').appendTo '#slide'</mark>
+                                    $('#nav .next').click ->
+                                        $('#slide:not(:animated)').animate {
+                                            marginLeft : -1 * $('#slide li').width()
+                                        }, ->
+                                            $('#slide').css('margin-left','0').append $('#slide li:first-child')
+                                            $('#paging li.active').removeClass('active');
+                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass 'active'
+                                            return
+                                        return
+                                    $('#nav .prev').click ->
+                                        $('#slide:not(:animated)')
+                                            .css('margin-left',-1*$('#slide li').width())
+                                            .prepend($('#slide li:last-child'))
+                                            .animate {
+                                                marginLeft : 0
+                                            }, ->
+                                                $('#paging li.active').removeClass('active');
+                                                $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active')
                                                 return
-                                        else if $(this).data('moveY') > -10 and $(this).data('moveY') < 10
-                                            <mark>location.href = $(this).data('href')</mark>
-                                        else
-                                            <mark>$(this).animate 'margin-left': -320</mark>
+                                        return
+                                    return
+                        hr
+                        p ⑬
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise188/index13.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    var timerId;
+                                    $('#slide li').each(function() {
+                                        return $('#paging').append($('<li></li>').attr('data-img', $('img', this).attr('src')));
+                                    });
+                                    $('#paging li:first-child').addClass('active');
+                                    timerId = setInterval(function() {
+                                        $('#nav .next').click();
+                                    }, 5000);
+                                    $('#slideGalley').hover(function() {
+                                        $('#nav').show();
+                                        <mark>clearInterval(timerId);</mark>
+                                    }, function() {
+                                        $('#nav').hide();
+                                        <mark>timerId = setInterval(function() {
+                                            $('#nav .next').click();
+                                        }, 5000);</mark>
+                                    });
+                                    $('#nav .next').click(function() {
+                                        $('#slide:not(:animated)').animate({
+                                            marginLeft: -1 * $('#slide li').width()
+                                        }, function() {
+                                            $('#slide').css('margin-left', '0').append($('#slide li:first-child'));
+                                            $('#paging li.active').removeClass('active');
+                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active');
+                                        });
+                                    });
+                                    $('#nav .prev').click(function() {
+                                        $('#slide:not(:animated)').css('margin-left', -1 * $('#slide li').width()).prepend($('#slide li:last-child')).animate({
+                                            marginLeft: 0
+                                        }, function() {
+                                            $('#paging li.active').removeClass('active');
+                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active');
+                                        });
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('#slide li').each ->
+                                        $('#paging').append $('<li></li>').attr 'data-img', $('img',this).attr('src')
+                                    $('#paging li:first-child').addClass 'active'
+
+                                    timerId = setInterval(->
+                                        $('#nav .next').click()
+                                        return
+                                    , 5000)
+
+                                    $('#slideGalley').hover ->
+                                        $('#nav').show()
+                                        <mark>clearInterval timerId</mark>
+                                        return
+                                    , ->
+                                        $('#nav').hide()
+                                        <mark>timerId = setInterval(->
+                                            $('#nav .next').click()
+                                            return
+                                        , 5000)</mark>
+                                        return
+
+                                    $('#nav .next').click ->
+                                        $('#slide:not(:animated)').animate {
+                                            marginLeft : -1 * $('#slide li').width()
+                                        }, ->
+                                            $('#slide').css('margin-left','0').append $('#slide li:first-child')
+                                            $('#paging li.active').removeClass('active');
+                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass 'active'
+                                            return
+                                        return
+                                    $('#nav .prev').click ->
+                                        $('#slide:not(:animated)')
+                                            .css('margin-left',-1*$('#slide li').width())
+                                            .prepend($('#slide li:last-child'))
+                                            .animate {
+                                                marginLeft : 0
+                                            }, ->
+                                                $('#paging li.active').removeClass('active');
+                                                $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active')
+                                                return
                                         return
                                     return

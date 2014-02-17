@@ -2,14 +2,14 @@
 (function() {
   $(function() {
     $('a').dblclick(function() {
-      return window.location.href = $(this).attr('href');
+      window.location.href = $(this).attr('href');
     }).click(function() {
       return false;
     }).mouseup(function() {
-      return $('span').show();
+      $('span').show();
     });
     $('span').mousedown(function() {
-      return $(this).css('top', '-50px');
+      $(this).css('top', '-50px');
     }).mouseup(function() {
       $(this).css({
         top: '-40px',

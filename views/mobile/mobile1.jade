@@ -234,4 +234,197 @@ block content
 
                                 Colorpedia
                                 https://itunes.apple.com/jp/app/peppermint-color-express/id340119405?mt=8
+                        pre
+                            :code
+                                ジェスチャー系ライブラリ
 
+                                QUO.js
+                                http://quojs.tapquo.com/
+                        pre
+                            :code
+                                フリック系ライブラリ
+
+                                flickGal
+
+                                flickGal jQueryプラグイン
+                                stakamura
+                                http://stakam.net/jquery/
+
+
+
+                                flipsnap.js
+                                http://pxgrid.github.com/js-flipsnap/
+
+                                touchSlider
+                                http://www.mobilizetoday.com/freebies/touchslider/
+                        pre
+                            :code
+
+                                ショートカットアイコン
+                                ====================
+                                114x114が万能
+                                iOSテカリあり
+                                <link rel="apple-touch-icon" href="images/siteicon.png">
+                                iOSテカリなし
+                                <link rel="apple-touch-icon-precomposed" href="images/siteicon.png">
+
+                                サイズ別
+                                <link rel="apple-touch-icon" href="images/siteicon.png">
+                                <link rel="apple-touch-icon" size="72x72" href="images/siteicon.png">
+                                <link rel="apple-touch-icon" size="114x114" href="images/siteicon.png">
+                                iphone 3G 57x57
+                                iphone 4 114x114
+                                iPad 72x72
+                                iPad Retina 144x144
+
+
+
+
+
+
+
+                                スタートアップイメージ　（iOSのみ）
+                                =============================
+                                320x360が万能
+                                iphone4、5では640x920も可
+
+
+                                <link rel="apple-touch-startup-image" href="images/startup.png">
+
+
+
+
+
+                                スタンドアローンモード（iOSのみ）
+                                ===========================
+                                アプリと同じように起動しアドレスバーが出ない。
+                                ただし、aタグはブラウザが立ち上がるので、リンクはajax処理が必要
+
+
+                                <meta name="apple-mobile-web-app-capable" content="yes">
+
+
+
+
+
+
+                                アドレスバー消し（Safari、Android標準ブラウザ、Opera）
+                                ===========================================
+                                window.onload = function(){
+                                     window.scrollTo(0,1);
+                                };
+
+
+
+
+
+
+
+
+                                ランドスケープモードでのテキストサイズ拡大を防ぐ（iOSのみ）
+                                ================================================
+                                body{
+                                -webkit-text-size-adjust:none;
+                                }
+
+
+                                Android2.3未満、iOS5未満でposition:fixedが効かない
+                                ========================================
+                                iScrollを使う
+                                http://cubiq.org/iscroll
+
+
+
+
+                                Android3未満、iOS5未満でth,tdにposition:relativeが効かない
+                                =================================
+                                th/tdの子要素にdivを用意しdivにposition:relative
+
+
+
+
+                                Androidでfont-weight:boldが効かない
+                                ============================
+                                テキストシャドウを使う
+                                text-shadow:0 0 1px #000
+
+
+
+
+                                Androidで背面要素がタップできてしまう
+                                ==============================
+                                クリックできなくする
+                                $('E').click(function(){
+                                return false;
+                                });
+
+
+
+
+                                iOSで200万px以上の画像が圧縮されてぼける
+                                =================================
+                                画像を2枚に分けて対応
+
+
+
+
+                                一部のAndroid端末でinput要素にフォーカスするとlandscape用のCSSを読み込んでしまう
+                                =================================
+                                JavaSCriptでフォーカスしたときlandscape用のCSSを無効にする
+                                <link rel="stylesheet" media="all and (orientation:portrait)" href="style.css">
+                                <link rel="stylesheet" media="all and (orientation:landscape)" href="style.css">
+
+
+                        pre
+                            :code
+                                アプリの起動スキーマ
+
+                                アプリの起動
+                                ===========
+                                Twitter
+                                twitter://
+                                twitter://timeline
+                                twitter://mention
+                                twitter://messages
+                                twitter://post?message=内容（URLエンコード）
+                                twitter://search?query=検索語句（URLエンコード）
+                                メッセージ
+                                sms:
+                                電話
+                                tel:
+                                メール
+                                mailto:
+                                地図
+                                maps:
+                                App Store
+                                itms-apps://
+                                itunes
+                                http://itunes.apple.com/jp/genre
+                                iBooks
+                                itms-bookss:
+                                Facebook
+                                fb://
+                                Twitter
+                                twitter:
+                                Evernote
+                                Evernote:
+                                GoodReader
+                                ghttp:、ghttps:、grhttp:、ghttps、giwhttps:、gropen:
+                                マップアプリの起動
+                                Android、iOS5以下
+                                <a href="https://maps.google.com/maps?q=東京都港区六本木2-4-5">マップアプリの起動</a>
+                                Android、iOS6以上
+                                <a href="http://maps.apple.com/maps?q=東京都港区六本木2-4-5">マップアプリの起動</a>
+                                スマホサイトへのGoogle Mapの埋め込み
+                                <div class="maparea">
+                                <iframe width="320" height="160" src="マップのURL"></iframe>
+                                </div>
+                                <p><a href="マップのURL">大きな地図で見る</p>
+                                .maparea{
+                                width:100%;
+                                height:160px;
+                                margin:0 0 5px 0;
+                                overflow:hidden;
+
+                                }
+ 

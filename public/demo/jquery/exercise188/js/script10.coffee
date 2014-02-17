@@ -1,35 +1,26 @@
 $ ->
+	$('#slide li').each ->
+		$('#paging').append $('<li></li>').attr 'data-img', $('img',this).attr('src')
+	$('#paging li:first-child').addClass 'active'
 
-	$('#slide li:last-child').prependTo '#slide'
-	$('#slide').css 'margin-left','-320px'
-
-	$('#slide a').click( ->
-		return false
-	).on 'touchstart', ->
-		$('#slide').data 'href',$(this).attr('href')
+	$('#nav .next').click ->
+		$('#slide:not(:animated)').animate {
+			marginLeft : -1 * $('#slide li').width()
+		}, ->
+			$('#slide').css('margin-left','0').append $('#slide li:first-child')
+			$('#paging li.active').removeClass('active');
+			$('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass 'active'
+			return
 		return
-	$('#slide').on('touchstart', (evnet) ->
-		event.preventDefault();
-		$(this)
-			.data('startX',event.touches[0].pageX)
-			.data('startY',event.touches[0].pageY)
-			.data('moveX',0)
-			.data('moveY',0)
-		return
-	).on('touchmove', ->
-		$(this)
-			.data('moveX',event.touches[0].pageX-$(this).data('startX'))
-			.data('moveY',event.touches[0].pageY-$(this).data('startY'))
-			.css('margin-left',$(this).data('moveX')-320+'px')
-		return
-	).on 'touchend', ->
-		if $(this).data('moveX') > 10
-			
-		else if $(this).data('moveX') < -10
-			
-		else if $(this).data('moveY') > -10 and $(this).data('moveY') < 10
-			
-		else
-			
+	$('#nav .prev').click ->
+		$('#slide:not(:animated)')
+			.css('margin-left',-1*$('#slide li').width())
+			.prepend($('#slide li:last-child'))
+			.animate {
+				marginLeft : 0
+			}, ->
+				$('#paging li.active').removeClass('active');
+				$('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active')
+				return
 		return
 	return

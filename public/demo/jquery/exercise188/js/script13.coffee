@@ -4,9 +4,21 @@ $ ->
 	$('#paging li:first-child').addClass 'active'
 
 	timerId = setInterval(->
-		$("#nav .next").click()
+		$('#nav .next').click()
 		return
 	, 5000)
+
+	$('#slideGalley').hover ->
+		$('#nav').show()
+		clearInterval timerId
+		return
+	, ->
+		$('#nav').hide()
+		timerId = setInterval(->
+			$('#nav .next').click()
+			return
+		, 5000)
+		return
 
 	$('#nav .next').click ->
 		$('#slide:not(:animated)').animate {

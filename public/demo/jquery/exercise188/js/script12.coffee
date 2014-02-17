@@ -8,6 +8,13 @@ $ ->
 		return
 	, 5000)
 
+	$('#slideGalley').hover ->
+		$('#nav').show()
+		return
+	, ->
+		$('#nav').hide()
+		return
+
 	$('#nav .next').click ->
 		$('#slide:not(:animated)').animate {
 			marginLeft : -1 * $('#slide li').width()

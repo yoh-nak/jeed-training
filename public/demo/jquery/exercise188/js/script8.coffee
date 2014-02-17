@@ -1,18 +1,18 @@
 $ ->
-
-	$('#slide li:last-child').prependTo '#slide'
-	$('#slide').css 'margin-left','-320px'
-
-	$('#slide a').click( ->
-		return false
-	).on 'touchstart', ->
-		$('#slide').data 'href',$(this).attr('href')
+	$('#nav .next').click ->
+		$('#slide:not(:animated)').animate {
+			marginLeft : -1 * $('#slide li').width()
+		}, ->
+			$('#slide').css('margin-left','0').append $('#slide li:first-child')
+			return
 		return
-	$('#slide').on('touchstart', (evnet) ->
-		event.preventDefault();
-		return
-	).on('touchmove', ->
-		return
-	).on 'touchend', ->
+	$('#nav .prev').click ->
+		$('#slide:not(:animated)')
+			.css('margin-left',-1*$('#slide li').width())
+			.prepend($('#slide li:last-child'))
+			.animate {
+				marginLeft : 0
+			}, ->
+				return
 		return
 	return

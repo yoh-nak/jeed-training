@@ -23,33 +23,65 @@ block content
                         pre(class='prettyprint linenums:1')
                             :code
                                 doctype
-                                html(lang='ja')
+                                html(lang='ja-JP')
                                     head
                                         meta(charset='UTF-8')
                                         title
-                                        link(rel='stylesheet',href='css/style.css')
+                                        link(rel='stylesheet',href='css/style1.css')
                                     body
                                         #container
-                                            #slideGalley
-                                                ul#slide
-                                                    li
-                                                        a(href='#')
-                                                            img(src='img/photo01.jpg', alt='')
-                                                    li
-                                                        a(href='#')
-                                                            img(src='img/photo02.jpg', alt='')
-                                                    li
-                                                        a(href='#')
-                                                            img(src='img/photo03.jpg', alt='')
-                                                    li
-                                                        a(href='#')
-                                                            img(src='img/photo04.jpg', alt='')
-                                                #nav
-                                                    img.prev(src='img/nav_prev.png')
-                                                    img.next(src='img/nav_next.png')
-                                                ul#paging
+                                            h1 当サイトへのお問い合わせ
+                                            form(action='#', method='POST')
+                                                dl
+                                                    dt
+                                                        | お名前
+                                                        span ※
+                                                    dd
+                                                        input.validate.required(type='text', name='name', size='80')
+                                                    dt フリガナ
+                                                    dd
+                                                        input(type='text', name='furi', size='80')
+                                                    dt 郵便番号
+                                                    dd
+                                                        input.validate.number(type='text', name='zip1', size='4', maxlength='4')
+                                                        | -
+                                                        input.validate.number(type='text', name='zip2', size='3', maxlength='3')
+                                                    dt メールアドレス
+                                                    dd
+                                                        input.validate.mail(type='text', value='', size='80', name='mail')
+                                                    dt メールアドレス(確認)
+                                                    dd
+                                                        input.validate.mail.mail_check(type='text', value='', size='80', name='mail_check')
+                                                    dt
+                                                        | 性別
+                                                        span ※
+                                                    dd
+                                                        input#man.validate.required(type='radio', value='男性', name='gender')
+                                                        label(for='man') 男性
+                                                        input#woman(type='radio', value='女性', name='gender')
+                                                        label(for='woman') 女性
+                                                    dt
+                                                        | どこでこのサイトを知りましたか?
+                                                        span ※
+                                                    dd.checkboxRequired
+                                                        input#search(type='checkbox', name='search', value='検索エンジン')
+                                                        label(for='search') 検索エンジン
+                                                        input#freiend(type='checkbox', name='freiend', value='知人の紹介')
+                                                        label(for='freiend') 知人の紹介
+                                                        input#mail_magazine(type='checkbox', name='mail_magazine', value='メルマガ')
+                                                        label(for='mail_magazine') メルマガ
+                                                        input#etc.validate.add_text(type='checkbox', name='etc', value='その他')
+                                                        label(for='etc') その他
+                                                        input(type='text', name='etc_text', value='')
+                                                    dt
+                                                        | お問い合わせ内容
+                                                        span ※
+                                                    dd
+                                                        textarea#inquiry.validate.required(name='inquiry', rows='10', cols='60')
+                                                p
+                                                    input(type='submit', value='送信')
                                         script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-                                        script(src='js/script.js')
+                                        script(src='js/script1.js')
                         hr
                         p ②
                         p
@@ -58,15 +90,31 @@ block content
                                 | デモ
                         pre(class='prettyprint linenums:1')
                             :code
-                               ul
-                                    list-style-type none
-                                    margin-top 0
-                                    margin-bottom 0
-                                    padding-left 0
-
                                 #container
-                                    width 650px
-                                    margin 100px auto 
+                                    width 600px
+                                    margin 0 auto
+                                    padding 20px
+                                    background white
+
+                                h1
+                                    margin-top 20px
+                                    font-size large
+                                    color #7CADB6
+
+                                dl
+                                    dt 
+                                        border-left 5px solid #7CADB6
+                                        border-bottom 1px solid #7CADB6
+                                        font-size small
+                                        margin 0
+                                        padding 5px
+                                        span
+                                            color red
+                                            font-weight bold
+                                    dd
+                                        font-size small
+                                        margin 0
+                                        padding 10px
                         hr
                         p ③
                         p
@@ -75,25 +123,17 @@ block content
                                 | デモ
                         pre(class='prettyprint linenums:1')
                             :code
-                                ul
-                                    list-style-type none
-                                    margin-top 0
-                                    margin-bottom 0
-                                    padding-left 0
-
-                                #container
-                                    width 650px
-                                    margin 100px auto
-
-                                <mark>#slideGalley
-                                    width 650px
-                                    position relative
-                                    overflow hidden
-
-                                #slide
-                                    width 10000px
-                                    li
-                                        float left</mark>
+                                $(function() {
+                                    $('form').submit(function() {
+                                        return false;
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('form').submit ->
+                                        return false
+                                    return
                         hr
                         p ④
                         p
@@ -102,38 +142,46 @@ block content
                                 | デモ
                         pre(class='prettyprint linenums:1')
                             :code
-                                ul
-                                    list-style-type none
-                                    margin-top 0
-                                    margin-bottom 0
-                                    padding-left 0
+                                $(function() {
+                                    $('form').submit(function() {
+                                        <mark>$(':text,textarea').filter('.validate').each(function() {
+                                            console.log('テキストボックス、テキストエリア');
+                                        });
+                                        $(':radio').filter('.validate').each(function() {
+                                            console.log('ラジオボタン');
+                                        });
+                                        $('.checkboxRequired').each(function() {
+                                            console.log('チェックボックス');
+                                        });
+                                        $('.validate.add_text').each(function() {
+                                            console.log('その他の項目');
+                                        });</mark>
+                                        return false;
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('form').submit ->
 
-                                #container
-                                    width 650px
-                                    margin 100px auto
+                                        <mark>$(':text,textarea').filter('.validate').each ->
+                                            console.log 'テキストボックス、テキストエリア'
+                                            return
 
-                                #slideGalley
-                                    width 650px
-                                    position relative
-                                    overflow hidden
+                                        $(':radio').filter('.validate').each ->
+                                            console.log 'ラジオボタン'
+                                            return
 
-                                #slide
-                                    width 10000px
-                                    li
-                                        float left
+                                        $('.checkboxRequired').each ->
+                                            console.log 'チェックボックス'
+                                            return
+
+                                        $('.validate.add_text').each ->
+                                            console.log 'その他の項目'
+                                            return</mark>
+                                        return false
                                         
-                                <mark>#nav
-                                    .prev
-                                        position absolute
-                                        left 10px
-                                        top 50%
-                                        margin-top -50px
-
-                                    .next
-                                        position  absolute
-                                        right 10px
-                                        top 50%
-                                        margin-top -50px</mark>
+                                    return
                         hr
                         p ⑤
                         p
@@ -142,53 +190,74 @@ block content
                                 | デモ
                         pre(class='prettyprint linenums:1')
                             :code
-                                ul
-                                    list-style-type none
-                                    margin-top 0
-                                    margin-bottom 0
-                                    padding-left 0
+                                $(function() {
+                                    $('form').submit(function() {
+                                        $(':text,textarea').filter('.validate').each(function() {
+                                            console.log('テキストボックス、テキストエリア');
+                                            <mark>$(this).filter('.required').each(function() {
+                                                console.log('必須');
+                                            });
+                                            $(this).filter('.number').each(function() {
+                                                console.log('数値');
+                                            });
+                                            $(this).filter('.mail').each(function() {
+                                                console.log('メールアドレス');
+                                            });
+                                            $(this).filter('.mail_check').each(function() {
+                                                console.log('メールアドレス確認');
+                                            });</mark>
+                                        });
+                                        $(':radio').filter('.validate').each(function() {
+                                            console.log('ラジオボタン');
+                                        });
+                                        $('.checkboxRequired').each(function() {
+                                            console.log('チェックボックス');
+                                        });
+                                        $('.validate.add_text').each(function() {
+                                            console.log('その他の項目');
+                                        });
+                                        return false;
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('form').submit ->
 
-                                #container
-                                    width 650px
-                                    margin 100px auto
+                                        $(':text,textarea').filter('.validate').each ->
+                                            console.log 'テキストボックス、テキストエリア'
 
-                                #slideGalley
-                                    width 650px
-                                    position relative
-                                    overflow hidden
+                                            <mark>$(this).filter('.required').each ->
+                                                console.log '必須'
+                                                return
+                                             
+                                            $(this).filter('.number').each ->
+                                                console.log '数値'
+                                                return
+                                             
+                                            $(this).filter('.mail').each ->
+                                                console.log 'メールアドレス'
+                                                return
+                                             
+                                            $(this).filter('.mail_check').each ->
+                                                console.log 'メールアドレス確認'
+                                                return</mark>
+                                            return
 
-                                #slide
-                                    width 10000px
-                                    li
-                                        float left
+                                        $(':radio').filter('.validate').each ->
+                                            console.log 'ラジオボタン'
+                                            return
 
-                                <mark>#paging
-                                    text-align center
-                                    position absolute
-                                    width 100%
-                                    bottom 10px
-                                    li
-                                        display inline-block
-                                        *display inline
-                                        *zoom 1
-                                        width 20px
-                                        height 20px
-                                        background url(../img/page.png)
-                                        &.active
-                                            background url(../img/page_active.png)</mark>
+                                        $('.checkboxRequired').each ->
+                                            console.log 'チェックボックス'
+                                            return
 
-                                #nav
-                                    .prev
-                                        position absolute
-                                        left 10px
-                                        top 50%
-                                        margin-top -50px
-
-                                    .next
-                                        position  absolute
-                                        right 10px
-                                        top 50%
-                                        margin-top -50px
+                                        $('.validate.add_text').each ->
+                                            console.log 'その他の項目'
+                                            return
+                                        return false
+                                        
+                                    return
                         hr
                         p ⑥
                         p
@@ -198,16 +267,77 @@ block content
                         pre(class='prettyprint linenums:1')
                             :code
                                 $(function() {
-                                    $('#nav .next').click(function() {});
-                                    $('#nav .prev').click(function() {});
+                                    $('form').submit(function() {
+                                        $(':text,textarea').filter('.validate').each(function() {
+                                            console.log('テキストボックス、テキストエリア');
+                                            $(this).filter('.required').each(function() {
+                                                console.log('必須');
+                                                <mark>if ($(this).val() === '') {
+                                                    $(this).parent().prepend('<p class="error">必須項目です</p>');
+                                                }</mark>
+                                            });
+                                            $(this).filter('.number').each(function() {
+                                                console.log('数値');
+                                            });
+                                            $(this).filter('.mail').each(function() {
+                                                console.log('メールアドレス');
+                                            });
+                                            $(this).filter('.mail_check').each(function() {
+                                                console.log('メールアドレス確認');
+                                            });
+                                        });
+                                        $(':radio').filter('.validate').each(function() {
+                                            console.log('ラジオボタン');
+                                        });
+                                        $('.checkboxRequired').each(function() {
+                                            console.log('チェックボックス');
+                                        });
+                                        $('.validate.add_text').each(function() {
+                                            console.log('その他の項目');
+                                        });
+                                        return false;
+                                    });
                                 });
                         pre(class='prettyprint linenums:1')
                             :code
                                 $ ->
-                                    $('#nav .next').click ->
-                                        return
-                                    $('#nav .prev').click ->
-                                        return
+                                    $('form').submit ->
+
+                                        $(':text,textarea').filter('.validate').each ->
+                                            console.log 'テキストボックス、テキストエリア'
+
+                                            $(this).filter('.required').each ->
+                                                console.log '必須'
+
+                                                <mark>$(this).parent().prepend '<p class="error">必須項目です</p>' if $(this).val() is ''</mark>
+                                                return
+                                             
+                                            $(this).filter('.number').each ->
+                                                console.log '数値'
+                                                return
+                                             
+                                            $(this).filter('.mail').each ->
+                                                console.log 'メールアドレス'
+                                                return
+                                             
+                                            $(this).filter('.mail_check').each ->
+                                                console.log 'メールアドレス確認'
+                                                return
+                                            return
+
+                                        $(':radio').filter('.validate').each ->
+                                            console.log 'ラジオボタン'
+                                            return
+
+                                        $('.checkboxRequired').each ->
+                                            console.log 'チェックボックス'
+                                            return
+
+                                        $('.validate.add_text').each ->
+                                            console.log 'その他の項目'
+                                            return
+                                        return false
+                                        
                                     return
                         hr
                         p ⑦
@@ -218,31 +348,82 @@ block content
                         pre(class='prettyprint linenums:1')
                             :code
                                 $(function() {
-                                    $('#nav .next').click(function() {
-                                        <mark>$('#slide:not(:animated)').animate({
-                                            marginLeft: -1 * $('#slide li').width()
-                                        });</mark>
-                                    });
-                                    $('#nav .prev').click(function() {
-                                        <mark>$('#slide:not(:animated)').css('margin-left', -1 * $('#slide li').width()).prepend($('#slide li:last-child')).animate({
-                                            marginLeft: 0
-                                        });</mark>
+                                    $('form').submit(function() {
+                                        $(':text,textarea').filter('.validate').each(function() {
+                                            console.log('テキストボックス、テキストエリア');
+                                            $(this).filter('.required').each(function() {
+                                                console.log('必須');
+                                                if ($(this).val() === '') {
+                                                    $(this).parent().prepend('<p class="error">必須項目です</p>');
+                                                }
+                                            });
+                                            $(this).filter('.number').each(function() {
+                                                console.log('数値');
+                                                <mark>if (isNaN($(this).val())) {
+                                                    $(this).parent().prepend('<p class="error">数値のみ入力可能です</p>');
+                                                }</mark>
+                                            });
+                                            $(this).filter('.mail').each(function() {
+                                                console.log('メールアドレス');
+                                            });
+                                            $(this).filter('.mail_check').each(function() {
+                                                console.log('メールアドレス確認');
+                                            });
+                                        });
+                                        $(':radio').filter('.validate').each(function() {
+                                            console.log('ラジオボタン');
+                                        });
+                                        $('.checkboxRequired').each(function() {
+                                            console.log('チェックボックス');
+                                        });
+                                        $('.validate.add_text').each(function() {
+                                            console.log('その他の項目');
+                                        });
+                                        return false;
                                     });
                                 });
                         pre(class='prettyprint linenums:1')
                             :code
                                 $ ->
-                                    $('#nav .next').click ->
-                                        <mark>$('#slide:not(:animated)').animate
-                                            marginLeft : -1 * $('#slide li').width()</mark>
-                                        return
-                                    $('#nav .prev').click ->
-                                        <mark>$('#slide:not(:animated)')
-                                            .css('margin-left',-1*$('#slide li').width())
-                                            .prepend($('#slide li:last-child'))
-                                            .animate
-                                                marginLeft : 0</mark>
-                                        return
+                                    $('form').submit ->
+
+                                        $(':text,textarea').filter('.validate').each ->
+                                            console.log 'テキストボックス、テキストエリア'
+
+                                            $(this).filter('.required').each ->
+                                                console.log '必須'
+
+                                                $(this).parent().prepend '<p class="error">必須項目です</p>' if $(this).val() is ''
+                                                return
+                                             
+                                            $(this).filter('.number').each ->
+                                                console.log '数値'
+
+                                                <mark>$(this).parent().prepend '<p class="error">数値のみ入力可能です</p>' if isNaN $(this).val()</mark>
+                                                return
+                                             
+                                            $(this).filter('.mail').each ->
+                                                console.log 'メールアドレス'
+                                                return
+                                             
+                                            $(this).filter('.mail_check').each ->
+                                                console.log 'メールアドレス確認'
+                                                return
+                                            return
+
+                                        $(':radio').filter('.validate').each ->
+                                            console.log 'ラジオボタン'
+                                            return
+
+                                        $('.checkboxRequired').each ->
+                                            console.log 'チェックボックス'
+                                            return
+
+                                        $('.validate.add_text').each ->
+                                            console.log 'その他の項目'
+                                            return
+                                        return false
+                                        
                                     return
                         hr
                         p ⑧
@@ -253,38 +434,87 @@ block content
                         pre(class='prettyprint linenums:1')
                             :code
                                 $(function() {
-                                    $('#nav .next').click(function() {
-                                        $('#slide:not(:animated)').animate({
-                                            marginLeft: -1 * $('#slide li').width()
-                                        }<mark>, function() {
-                                            $('#slide').css('margin-left', '0').append($('#slide li:first-child'));
-                                        });</mark>
-                                    });
-                                    $('#nav .prev').click(function() {
-                                        $('#slide:not(:animated)').css('margin-left', -1 * $('#slide li').width()).prepend($('#slide li:last-child')).animate({
-                                            marginLeft: 0
-                                        }<mark>, function() {});</mark>
+                                    $('form').submit(function() {
+                                        $(':text,textarea').filter('.validate').each(function() {
+                                            console.log('テキストボックス、テキストエリア');
+                                            $(this).filter('.required').each(function() {
+                                                console.log('必須');
+                                                if ($(this).val() === '') {
+                                                    $(this).parent().prepend('<p class="error">必須項目です</p>');
+                                                }
+                                            });
+                                            $(this).filter('.number').each(function() {
+                                                console.log('数値');
+                                                if (isNaN($(this).val())) {
+                                                    $(this).parent().prepend('<p class="error">数値のみ入力可能です</p>');
+                                                }
+                                            });
+                                            $(this).filter('.mail').each(function() {
+                                                console.log('メールアドレス');
+                                                <mark>if ($(this).val() && !$(this).val().match(/.+@.+\..+/g)) {
+                                                    $(this).parent().prepend('<p class="error">メールアドレスの形式が異なります</p>');
+                                                }</mark>
+                                            });
+                                            $(this).filter('.mail_check').each(function() {
+                                                console.log('メールアドレス確認');
+                                            });
+                                        });
+                                        $(':radio').filter('.validate').each(function() {
+                                            console.log('ラジオボタン');
+                                        });
+                                        $('.checkboxRequired').each(function() {
+                                            console.log('チェックボックス');
+                                        });
+                                        $('.validate.add_text').each(function() {
+                                            console.log('その他の項目');
+                                        });
+                                        return false;
                                     });
                                 });
                         pre(class='prettyprint linenums:1')
                             :code
                                 $ ->
-                                    $('#nav .next').click ->
-                                        $('#slide:not(:animated)').animate {
-                                            marginLeft : -1 * $('#slide li').width()
-                                        }<mark>, ->
-                                            $('#slide').css('margin-left','0').append $('#slide li:first-child')
-                                            return</mark>
-                                        return
-                                    $('#nav .prev').click ->
-                                        $('#slide:not(:animated)')
-                                            .css('margin-left',-1*$('#slide li').width())
-                                            .prepend($('#slide li:last-child'))
-                                            .animate {
-                                                marginLeft : 0
-                                            }<mark>, ->
-                                                return</mark>
-                                        return
+                                    $('form').submit ->
+
+                                        $(':text,textarea').filter('.validate').each ->
+                                            console.log 'テキストボックス、テキストエリア'
+
+                                            $(this).filter('.required').each ->
+                                                console.log '必須'
+
+                                                $(this).parent().prepend '<p class="error">必須項目です</p>' if $(this).val() is ''
+                                                return
+                                             
+                                            $(this).filter('.number').each ->
+                                                console.log '数値'
+
+                                                $(this).parent().prepend '<p class="error">数値のみ入力可能です</p>' if isNaN $(this).val()
+                                                return
+                                             
+                                            $(this).filter('.mail').each ->
+                                                console.log 'メールアドレス'
+
+                                                <mark>$(this).parent().prepend '<p class="error">メールアドレスの形式が異なります</p>' if $(this).val() and not $(this).val().match(/.+@.+\..+/g)</mark>
+                                                return
+                                             
+                                            $(this).filter('.mail_check').each ->
+                                                console.log 'メールアドレス確認'
+                                                return
+                                            return
+
+                                        $(':radio').filter('.validate').each ->
+                                            console.log 'ラジオボタン'
+                                            return
+
+                                        $('.checkboxRequired').each ->
+                                            console.log 'チェックボックス'
+                                            return
+
+                                        $('.validate.add_text').each ->
+                                            console.log 'その他の項目'
+                                            return
+                                        return false
+                                        
                                     return
                         hr
                         p ⑨
@@ -295,47 +525,92 @@ block content
                         pre(class='prettyprint linenums:1')
                             :code
                                 $(function() {
-                                    $('#nav .next').click(function() {
-                                        $('#slide:not(:animated)').animate({
-                                            marginLeft: -1 * $('#slide li').width()
-                                        }, function() {
-                                            $('#slide').css('margin-left', '0').append($('#slide li:first-child'));
-                                            <mark>$('#paging li.active').removeClass('active');
-                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active');</mark>
+                                    $('form').submit(function() {
+                                        $(':text,textarea').filter('.validate').each(function() {
+                                            console.log('テキストボックス、テキストエリア');
+                                            $(this).filter('.required').each(function() {
+                                                console.log('必須');
+                                                if ($(this).val() === '') {
+                                                    $(this).parent().prepend('<p class="error">必須項目です</p>');
+                                                }
+                                            });
+                                            $(this).filter('.number').each(function() {
+                                                console.log('数値');
+                                                if (isNaN($(this).val())) {
+                                                    $(this).parent().prepend('<p class="error">数値のみ入力可能です</p>');
+                                                }
+                                            });
+                                            $(this).filter('.mail').each(function() {
+                                                console.log('メールアドレス');
+                                                if ($(this).val() && !$(this).val().match(/.+@.+\..+/g)) {
+                                                    $(this).parent().prepend('<p class="error">メールアドレスの形式が異なります</p>');
+                                                }
+                                            });
+                                            $(this).filter('.mail_check').each(function() {
+                                                console.log('メールアドレス確認');
+                                                <mark>if ($(this).val() && $(this).val() !== $('input[name="' + $(this).attr('name').replace(/^(.+)_check$/, '$1') + '"]').val()) {
+                                                    $(this).parent().prepend('<p class="error">メールアドレスと内容が異なります</p>');
+                                                }</mark>
+                                            });
                                         });
-                                    });
-                                    $('#nav .prev').click(function() {
-                                        $('#slide:not(:animated)').css('margin-left', -1 * $('#slide li').width()).prepend($('#slide li:last-child')).animate({
-                                            marginLeft: 0
-                                        }, function() {
-                                            <mark>$('#paging li.active').removeClass('active');
-                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active');</mark>
+                                        $(':radio').filter('.validate').each(function() {
+                                            console.log('ラジオボタン');
                                         });
+                                        $('.checkboxRequired').each(function() {
+                                            console.log('チェックボックス');
+                                        });
+                                        $('.validate.add_text').each(function() {
+                                            console.log('その他の項目');
+                                        });
+                                        return false;
                                     });
                                 });
                         pre(class='prettyprint linenums:1')
                             :code
                                 $ ->
-                                    $('#nav .next').click ->
-                                        $('#slide:not(:animated)').animate {
-                                            marginLeft : -1 * $('#slide li').width()
-                                        }, ->
-                                            $('#slide').css('margin-left','0').append $('#slide li:first-child')
-                                            <mark>$('#paging li.active').removeClass('active');
-                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active');
-                                            return</mark>
-                                        return
-                                    $('#nav .prev').click ->
-                                        $('#slide:not(:animated)')
-                                            .css('margin-left',-1*$('#slide li').width())
-                                            .prepend($('#slide li:last-child'))
-                                            .animate {
-                                                marginLeft : 0
-                                            }, ->
-                                                <mark>$('#paging li.active').removeClass('active');
-                                                $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active')</mark>
+                                    $('form').submit ->
+
+                                        $(':text,textarea').filter('.validate').each ->
+                                            console.log 'テキストボックス、テキストエリア'
+
+                                            $(this).filter('.required').each ->
+                                                console.log '必須'
+
+                                                $(this).parent().prepend '<p class="error">必須項目です</p>' if $(this).val() is ''
                                                 return
-                                        return
+                                             
+                                            $(this).filter('.number').each ->
+                                                console.log '数値'
+
+                                                $(this).parent().prepend '<p class="error">数値のみ入力可能です</p>' if isNaN $(this).val()
+                                                return
+                                             
+                                            $(this).filter('.mail').each ->
+                                                console.log 'メールアドレス'
+
+                                                $(this).parent().prepend '<p class="error">メールアドレスの形式が異なります</p>' if $(this).val() and not $(this).val().match(/.+@.+\..+/g)
+                                                return
+                                             
+                                            $(this).filter('.mail_check').each ->
+                                                console.log 'メールアドレス確認'
+
+                                                <mark>$(this).parent().prepend '<p class="error">メールアドレスと内容が異なります</p>' if $(this).val() and $(this).val() isnt $('input[name="' + $(this).attr('name').replace(/^(.+)_check$/, '$1') + '"]').val()</mark>
+                                                return
+                                            return
+
+                                        $(':radio').filter('.validate').each ->
+                                            console.log 'ラジオボタン'
+                                            return
+
+                                        $('.checkboxRequired').each ->
+                                            console.log 'チェックボックス'
+                                            return
+
+                                        $('.validate.add_text').each ->
+                                            console.log 'その他の項目'
+                                            return
+                                        return false
+                                        
                                     return
                         hr
                         p ⑩

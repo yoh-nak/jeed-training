@@ -20,7 +20,7 @@
         console.log(e.pageY - $('#floatWindow').data('clickPointY'));
       });
     }).mouseup(function() {
-      $(document).unbind('mousemove');
+      $(document).off('mousemove');
     });
   });
 

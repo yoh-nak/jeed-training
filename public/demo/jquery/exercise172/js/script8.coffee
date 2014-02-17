@@ -31,6 +31,6 @@ $ ->
             return
         return
     ).mouseup ->
-        $(document).unbind 'mousemove'
+        $(document).off 'mousemove'
         return
     return

@@ -3,13 +3,13 @@ $ ->
     $('#slide').css 'margin-left','-320px'
 
     $('#slide a').click( ->
-        $('#slide').data 'href',$(this).attr 'href'
         return false
     ).on('touchstart', (e) ->
-        e.preventDefault();
+        e.preventDefault()
+        $(this).data 'href',$(this).attr 'href'
         return
-    ).on('touchmove', ->
+    ).on('touchmove', (e) ->
         return
-    ).on 'touchend', ->
+    ).on 'touchend', (e) ->
         return
     return

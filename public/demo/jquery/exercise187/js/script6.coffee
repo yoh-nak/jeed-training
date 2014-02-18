@@ -3,9 +3,9 @@ $ ->
     $('#slide').css 'margin-left','-320px'
 
     $('#slide a').click( ->
-        $('#slide').data 'href',$(this).attr 'href'
         return false
     ).on('touchstart', ->
+        $(this).data 'href',$(this).attr 'href'
         return
     ).on('touchmove', ->
         return

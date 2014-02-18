@@ -4,9 +4,10 @@
     $('#slide li:last-child').prependTo('#slide');
     $('#slide').css('margin-left', '-320px');
     $('#slide a').click(function() {
-      $('#slide').data('href', $(this).attr('href'));
       return false;
-    }).on('touchstart', function() {}).on('touchmove', function() {}).on('touchend', function() {});
+    }).on('touchstart', function() {
+      $(this).data('href', $(this).attr('href'));
+    }).on('touchmove', function() {}).on('touchend', function() {});
   });
 
 }).call(this);

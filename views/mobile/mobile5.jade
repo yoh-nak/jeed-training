@@ -162,9 +162,10 @@ block content
                                     $('#slide li:last-child').prependTo('#slide');
                                     $('#slide').css('margin-left', '-320px');
                                     $('#slide a').click(function() {
-                                        $('#slide').data('href', $(this).attr('href'));
                                         return false;
-                                    }).on('touchstart', function() {}).on('touchmove', function() {}).on('touchend', function() {});
+                                    }).on('touchstart', function() {
+                                        <mark>$(this).data('href', $(this).attr('href'));</mark>
+                                    }).on('touchmove', function() {}).on('touchend', function() {});
                                 });
                         pre(class='prettyprint linenums:1')
                             :code
@@ -173,9 +174,9 @@ block content
                                     $('#slide').css 'margin-left','-320px'
 
                                     $('#slide a').click( ->
-                                        <mark>$('#slide').data 'href',$(this).attr 'href'</mark>
                                         return false
                                     ).on('touchstart', ->
+                                        <mark>$(this).data 'href',$(this).attr 'href'</mark>
                                         return
                                     ).on('touchmove', ->
                                         return
@@ -194,11 +195,11 @@ block content
                                     $('#slide li:last-child').prependTo('#slide');
                                     $('#slide').css('margin-left', '-320px');
                                     $('#slide a').click(function() {
-                                        $('#slide').data('href', $(this).attr('href'));
                                         return false;
-                                    }).on('touchstart', function(e) {
-                                        e.preventDefault();
-                                    }).on('touchmove', function() {}).on('touchend', function() {});
+                                    }).on('touchstart', function(<mark>e</mark>) {
+                                        <mark>e.preventDefault();</mark>
+                                        $(this).data('href', $(this).attr('href'));
+                                    }).on('touchmove', function(<mark>e</mark>) {}).on('touchend', function(<mark>e</mark>) {});
                                 });
                         pre(class='prettyprint linenums:1')
                             :code
@@ -207,14 +208,14 @@ block content
                                     $('#slide').css 'margin-left','-320px'
 
                                     $('#slide a').click( ->
-                                        $('#slide').data 'href',$(this).attr 'href'
                                         return false
-                                    ).on('touchstart', (e) ->
-                                        e.preventDefault()
+                                    ).on('touchstart', <mark>(e)</mark> ->
+                                        <mark>e.preventDefault()</mark>
+                                        $(this).data 'href',$(this).attr 'href'
                                         return
-                                    ).on('touchmove', ->
+                                    ).on('touchmove', <mark>(e)</mark> ->
                                         return
-                                    ).on 'touchend', ->
+                                    ).on 'touchend', <mark>(e)</mark> ->
                                         return
                                     return
                         hr
@@ -229,14 +230,15 @@ block content
                                     $('#slide li:last-child').prependTo('#slide');
                                     $('#slide').css('margin-left', '-320px');
                                     $('#slide a').click(function() {
-                                        $('#slide').data('href', $(this).attr('href'));
                                         return false;
                                     }).on('touchstart', function(e) {
                                         e.preventDefault();
+                                        $(this).data('href', $(this).attr('href'));
                                         <mark>$(this).data('startX', e.originalEvent.touches[0].pageX).data('startY', e.originalEvent.touches[0].pageY).data('moveX', 0).data('moveY', 0);</mark>
                                     }).on('touchmove', function(e) {
-                                        $(this).data('moveX', e.originalEvent.touches[0].pageX - $(this).data('startX')).data('moveY', e.originalEvent.touches[0].pageY - $(this).data('startY')).css('margin-left', $(this).data('moveX') - 320 + 'px');
-                                    }).on('touchend', function() {});
+                                        <mark>$(this).data('moveX', e.originalEvent.touches[0].pageX - $(this).data('startX')).data('moveY', e.originalEvent.touches[0].pageY - $(this).data('startY'));
+                                        $('#slide').css('margin-left', $(this).data('moveX') - 320 + 'px');</mark>
+                                    }).on('touchend', function(e) {});
                                 });
                         pre(class='prettyprint linenums:1')
                             :code
@@ -245,10 +247,10 @@ block content
                                     $('#slide').css 'margin-left','-320px'
 
                                     $('#slide a').click( ->
-                                        $('#slide').data 'href',$(this).attr 'href'
                                         return false
                                     ).on('touchstart', (e) ->
                                         e.preventDefault()
+                                        $(this).data 'href',$(this).attr 'href'
                                         <mark>$(this)
                                             .data('startX',e.originalEvent.touches[0].pageX)
                                             .data('startY',e.originalEvent.touches[0].pageY)
@@ -259,9 +261,9 @@ block content
                                         <mark>$(this)
                                             .data('moveX',e.originalEvent.touches[0].pageX-$(this).data('startX'))
                                             .data('moveY',e.originalEvent.touches[0].pageY-$(this).data('startY'))
-                                            .css('margin-left',$(this).data('moveX')-320+'px')</mark>
+                                        $('#slide').css('margin-left',$(this).data('moveX')-320+'px')</mark>
                                         return
-                                    ).on 'touchend', ->
+                                    ).on 'touchend', (e) ->
                                         return
                                     return
                         hr
@@ -276,15 +278,16 @@ block content
                                     $('#slide li:last-child').prependTo('#slide');
                                     $('#slide').css('margin-left', '-320px');
                                     $('#slide a').click(function() {
-                                        $('#slide').data('href', $(this).attr('href'));
                                         return false;
                                     }).on('touchstart', function(e) {
                                         e.preventDefault();
+                                        $(this).data('href', $(this).attr('href'));
                                         $(this).data('startX', e.originalEvent.touches[0].pageX).data('startY', e.originalEvent.touches[0].pageY).data('moveX', 0).data('moveY', 0);
                                     }).on('touchmove', function(e) {
-                                        $(this).data('moveX', e.originalEvent.touches[0].pageX - $(this).data('startX')).data('moveY', e.originalEvent.touches[0].pageY - $(this).data('startY')).css('margin-left', $(this).data('moveX') - 320 + 'px');
-                                    }).on('touchend', function() {
-                                        if ($(this).data('moveX') > 10) {
+                                        $(this).data('moveX', e.originalEvent.touches[0].pageX - $(this).data('startX')).data('moveY', e.originalEvent.touches[0].pageY - $(this).data('startY'));
+                                        $('#slide').css('margin-left', $(this).data('moveX') - 320 + 'px');
+                                    }).on('touchend', function(e) {
+                                        <mark>if ($(this).data('moveX') > 10) {
 
                                         } else if ($(this).data('moveX') < -10) {
 
@@ -292,7 +295,7 @@ block content
 
                                         } else {
 
-                                        }
+                                        }</mark>
                                     });
                                 });
                         pre(class='prettyprint linenums:1')
@@ -302,10 +305,10 @@ block content
                                     $('#slide').css 'margin-left','-320px'
 
                                     $('#slide a').click( ->
-                                        $('#slide').data 'href',$(this).attr 'href'
                                         return false
                                     ).on('touchstart', (e) ->
                                         e.preventDefault()
+                                        $(this).data 'href',$(this).attr 'href'
                                         $(this)
                                             .data('startX',e.originalEvent.touches[0].pageX)
                                             .data('startY',e.originalEvent.touches[0].pageY)
@@ -316,9 +319,9 @@ block content
                                         $(this)
                                             .data('moveX',e.originalEvent.touches[0].pageX-$(this).data('startX'))
                                             .data('moveY',e.originalEvent.touches[0].pageY-$(this).data('startY'))
-                                            .css('margin-left',$(this).data('moveX')-320+'px')
+                                        $('#slide').css('margin-left',$(this).data('moveX')-320+'px')
                                         return
-                                    ).on 'touchend', ->
+                                    ).on 'touchend', (e) ->
                                         <mark>if $(this).data('moveX') > 10
 
                                         else if $(this).data('moveX') < -10
@@ -340,32 +343,33 @@ block content
                                     $('#slide li:last-child').prependTo('#slide');
                                     $('#slide').css('margin-left', '-320px');
                                     $('#slide a').click(function() {
-                                        $('#slide').data('href', $(this).attr('href'));
                                         return false;
                                     }).on('touchstart', function(e) {
                                         e.preventDefault();
+                                        $(this).data('href', $(this).attr('href'));
                                         $(this).data('startX', e.originalEvent.touches[0].pageX).data('startY', e.originalEvent.touches[0].pageY).data('moveX', 0).data('moveY', 0);
                                     }).on('touchmove', function(e) {
-                                        $(this).data('moveX', e.originalEvent.touches[0].pageX - $(this).data('startX')).data('moveY', e.originalEvent.touches[0].pageY - $(this).data('startY')).css('margin-left', $(this).data('moveX') - 320 + 'px');
-                                    }).on('touchend', function() {
+                                        $(this).data('moveX', e.originalEvent.touches[0].pageX - $(this).data('startX')).data('moveY', e.originalEvent.touches[0].pageY - $(this).data('startY'));
+                                        $('#slide').css('margin-left', $(this).data('moveX') - 320 + 'px');
+                                    }).on('touchend', function(e) {
                                         if ($(this).data('moveX') > 10) {
-                                            $(this).animate({
+                                            $('#slide').animate({
                                                 'margin-left': 0
                                             }, function() {
-                                                $(this).css('margin-left', '-320px');
+                                                $('#slide').css('margin-left', '-320px');
                                                 $('#slide li:last-child').prependTo('#slide');
                                             });
                                         } else if ($(this).data('moveX') < -10) {
-                                            $(this).animate({
+                                            $('#slide').animate({
                                                 'margin-left': -640
                                             }, function() {
-                                                $(this).css('margin-left', '-320px');
+                                                $('#slide').css('margin-left', '-320px');
                                                 $('#slide li:first-child').appendTo('#slide');
                                             });
                                         } else if ($(this).data('moveY') > -10 && $(this).data('moveY') < 10) {
                                             location.href = $(this).data('href');
                                         } else {
-                                            $(this).animate({
+                                            $('#slide').animate({
                                                 'margin-left': -320
                                             });
                                         }
@@ -378,10 +382,10 @@ block content
                                     $('#slide').css 'margin-left','-320px'
 
                                     $('#slide a').click( ->
-                                        $('#slide').data 'href',$(this).attr 'href'
                                         return false
                                     ).on('touchstart', (e) ->
                                         e.preventDefault()
+                                        $(this).data 'href',$(this).attr 'href'
                                         $(this)
                                             .data('startX',e.originalEvent.touches[0].pageX)
                                             .data('startY',e.originalEvent.touches[0].pageY)
@@ -392,27 +396,27 @@ block content
                                         $(this)
                                             .data('moveX',e.originalEvent.touches[0].pageX-$(this).data('startX'))
                                             .data('moveY',e.originalEvent.touches[0].pageY-$(this).data('startY'))
-                                            .css('margin-left',$(this).data('moveX')-320+'px')
+                                        $('#slide').css('margin-left',$(this).data('moveX')-320+'px')
                                         return
-                                    ).on 'touchend', ->
+                                    ).on 'touchend', (e) ->
                                         if $(this).data('moveX') > 10
-                                            $(this).animate
+                                            $('#slide').animate
                                                 'margin-left': 0
                                             , ->
-                                                $(this).css 'margin-left', '-320px'
+                                                $('#slide').css 'margin-left', '-320px'
                                                 $('#slide li:last-child').prependTo '#slide'
                                                 return
 
                                         else if $(this).data('moveX') < -10
-                                            $(this).animate
+                                            $('#slide').animate
                                                 'margin-left': -640
                                             , ->
-                                                $(this).css 'margin-left', '-320px'
+                                                $('#slide').css 'margin-left', '-320px'
                                                 $('#slide li:first-child').appendTo '#slide'
                                                 return
                                         else if $(this).data('moveY') > -10 and $(this).data('moveY') < 10
                                             location.href = $(this).data('href')
                                         else
-                                            $(this).animate 'margin-left': -320
+                                            $('#slide').animate 'margin-left': -320
                                         return
                                     return

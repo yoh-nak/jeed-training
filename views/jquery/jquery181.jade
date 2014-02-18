@@ -191,7 +191,7 @@ block content
                                         top 50%
                                         margin-top -50px
                         hr
-                        p ⑥
+                        p ⑥#slide要素の子要素liをeachで繰り返し、#paging要素にli要素をappendし、最初のli要素に.activeクラスをつけます。そのとき、現在表示中の画像と.activeクラスのついた#paging要素の子要素liとひもづけるために、カスタム属性data-imgにギャラリーで現在表示中の画像をセットします。
                         p
                             a.btn.btn-default(href='../demo/jquery/exercise188/index6.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -199,18 +199,41 @@ block content
                         pre(class='prettyprint linenums:1')
                             :code
                                 $(function() {
-                                    $('#nav .next').click(function() {});
-                                    $('#nav .prev').click(function() {});
+                                    $('#slide li').each(function() {
+                                        $('#paging').append($('<li></li>').attr('data-img', $('img', this).attr('src')));
+                                    });
+                                    $('#paging li:first-child').addClass('active');
                                 });
                         pre(class='prettyprint linenums:1')
                             :code
                                 $ ->
-                                    $('#nav .next').click ->
+                                    $('#slide li').each ->
+                                        $('#paging').append $('<li></li>').attr 'data-img', $('img',this).attr('src')
                                         return
-                                    $('#nav .prev').click ->
-                                        return
+                                    $('#paging li:first-child').addClass 'active'
                                     return
                         hr
+                        //-
+                            p ⑥
+                            p
+                                a.btn.btn-default(href='../demo/jquery/exercise188/index6.html',target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                :code
+                                    $(function() {
+                                        $('#nav .next').click(function() {});
+                                        $('#nav .prev').click(function() {});
+                                    });
+                            pre(class='prettyprint linenums:1')
+                                :code
+                                    $ ->
+                                        $('#nav .next').click ->
+                                            return
+                                        $('#nav .prev').click ->
+                                            return
+                                        return
+                            hr
                         p ⑦
                         p
                             a.btn.btn-default(href='../demo/jquery/exercise188/index7.html',target='_blank')

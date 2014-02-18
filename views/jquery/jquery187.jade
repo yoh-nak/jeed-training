@@ -1,0 +1,60 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;keyDown()イベント／keyUp()イベント
+                    .panel-body
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise189/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/keydown/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考（keyDown）
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/keyup/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考（keyUp）
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                    body
+                                        h1 キーボードを押してください
+                                        p
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $(window).keydown(function(e) {
+                                        $('p').html(e.keyCode + '番のキーが押されました');
+                                    }).keyup(function(e) {
+                                        $('p').html(e.keyCode + '番のキーが離されました');
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $(window).keydown((e) ->
+                                        $('p').html e.keyCode + '番のキーが押されました'
+                                        return
+                                    ).keyup (e) ->
+                                        $('p').html e.keyCode + '番のキーが離されました'
+                                        return
+                                    return

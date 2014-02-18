@@ -15,7 +15,7 @@ block content
                         i.glyphicon.glyphicon-book
                         | &nbsp;スワイプギャラリー
                     .panel-body
-                        p ①
+                        p ①HTMLを用意します。
                         p
                             a.btn.btn-default(href='../demo/jquery/exercise187/index1.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -48,7 +48,7 @@ block content
                                         script(src='http://code.jquery.com/jquery-1.11.0.min.js')
                                         script(src='js/script1.js')
                         hr
-                        p ②
+                        p ②親要素#slideGalleryで、横並びにした子要素#slideのリストをoverflowで隠します。まずli要素をフロートさせます。親要素#slideGalleryのwidthが継承されたままにすると、li要素をフロートしても横に並ばないので、子要素#slideのwidthを十分にとります。li要素のフロートはその親要素#slideでoverflowで解除します。
                         p
                             a.btn.btn-default(href='../demo/jquery/exercise187/index2.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -56,26 +56,27 @@ block content
                         pre(class='prettyprint linenums:1')
                             :code
                                 ul
-                                     padding-left 0
-                                     margin-top 0
-                                     margin-bottom 0
-                                     list-style-type none
+                                    padding-left 0
+                                    margin-top 0
+                                    margin-bottom 0
+                                    list-style-type none
 
                                 #container
-                                     width 320px
-                                     margin 10px auto
+                                    width 320px
+                                    margin 10px auto
 
                                 #slideGalley
-                                     width 320px
-                                     overflow hidden
-                                     height 240px
+                                    width 320px
+                                    overflow hidden
+                                    height 240px
 
                                 #slide
-                                     width 10000px
-                                     li
-                                          float left
+                                    width 10000px
+                                    overflow hidden
+                                    li
+                                        float left
                         hr
-                        p ③
+                        p ③li:last-child要素をli:first-childに移動し、画像1枚分のネガティブマージンをとります。
                         p
                             a.btn.btn-default(href='../demo/jquery/exercise187/index3.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -86,15 +87,17 @@ block content
                                     $('#slide a').click(function() {
                                         return false;
                                     });
+                                    $('#slide li:last-child').prependTo('#slide');
+                                    $('#slide').css('margin-left', '-320px');
                                 });
                         pre(class='prettyprint linenums:1')
                             :code
                                 $ ->
-                                    $('#slide a').click ->
-                                        return false
+                                    $('#slide li:last-child').prependTo '#slide'
+                                    $('#slide').css 'margin-left','-320px'
                                     return
                         hr
-                        p ④
+                        p ④a要素のクリックイベントを解除します。
                         p
                             a.btn.btn-default(href='../demo/jquery/exercise187/index4.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -102,17 +105,45 @@ block content
                         pre(class='prettyprint linenums:1')
                             :code
                                 $(function() {
-                                    $('#slide a').click(function() {
+                                    $('#slide li:last-child').prependTo('#slide');
+                                    $('#slide').css('margin-left', '-320px');
+                                    <mark>$('#slide a').click(function() {
                                         return false;
-                                    });
-                                    <mark>$('#slide').on('touchstart', function() {}).on('touchmove', function() {}).on('touchend', function() {});</mark>
+                                    });</mark>
                                 });
                         pre(class='prettyprint linenums:1')
                             :code
                                 $ ->
-                                    $('#slide a').click ->
+                                    $('#slide li:last-child').prependTo '#slide'
+                                    $('#slide').css 'margin-left','-320px'
+
+                                    <mark>$('#slide a').click ->
+                                        return false</mark>
+                                    return
+                        hr
+                        p ⑤a要素にtouchstart、touchmove、touchendイベントをバインドします。パソコンのブラウザでは実行できないので、タッチイベントのエミュレーションツールを利用しましょう。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise187/index5.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('#slide li:last-child').prependTo('#slide');
+                                    $('#slide').css('margin-left', '-320px');
+                                    $('#slide a').click(function() {
+                                        return false;
+                                    }).on('touchstart', function() {}).on('touchmove', function() {}).on('touchend', function() {});
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('#slide li:last-child').prependTo '#slide'
+                                    $('#slide').css 'margin-left','-320px'
+
+                                    $('#slide a').click( ->
                                         return false
-                                    <mark>$('#slide').on('touchstart', ->
+                                    )<mark>.on('touchstart', ->
                                         return
                                     ).on('touchmove', ->
                                         return
@@ -120,24 +151,7 @@ block content
                                         return</mark>
                                     return
                         hr
-                        //-
-                            p ⑤
-                            p
-                                a.btn.btn-default(href='../demo/jquery/exercise187/index5.html',target='_blank')
-                                    i.glyphicon.glyphicon-play
-                                    | デモ
-                            pre(class='prettyprint linenums:1')
-                                :code
-                                    $(function() {
-                                        $('ul.panel li:not(' + $('ul.tab li a.selected').attr('href') + ')').hide();
-                                    });
-                            pre(class='prettyprint linenums:1')
-                                :code
-                                    $ ->
-                                        $('ul.panel li:not(' + $('ul.tab li a.selected').attr('href') + ')').hide()
-                                        return
-                            hr
-                        p ⑥
+                        p ⑥dataメソッドのキー「href」に値として、タッチしたa要素のリンク先を格納します。
                         p
                             a.btn.btn-default(href='../demo/jquery/exercise187/index6.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -145,23 +159,23 @@ block content
                         pre(class='prettyprint linenums:1')
                             :code
                                 $(function() {
-                                    <mark>$('#slide li:last-child').prependTo('#slide');
-                                    $('#slide').css('margin-left', '-320px');</mark>
+                                    $('#slide li:last-child').prependTo('#slide');
+                                    $('#slide').css('margin-left', '-320px');
                                     $('#slide a').click(function() {
+                                        $('#slide').data('href', $(this).attr('href'));
                                         return false;
-                                    });
-                                    $('#slide').on('touchstart', function() {}).on('touchmove', function() {}).on('touchend', function() {});
+                                    }).on('touchstart', function() {}).on('touchmove', function() {}).on('touchend', function() {});
                                 });
                         pre(class='prettyprint linenums:1')
                             :code
                                 $ ->
+                                    $('#slide li:last-child').prependTo '#slide'
+                                    $('#slide').css 'margin-left','-320px'
 
-                                    <mark>$('#slide li:last-child').prependTo '#slide'
-                                    $('#slide').css 'margin-left','-320px'</mark>
-
-                                    $('#slide a').click ->
+                                    $('#slide a').click( ->
+                                        <mark>$('#slide').data 'href',$(this).attr 'href'</mark>
                                         return false
-                                    $('#slide').on('touchstart', ->
+                                    ).on('touchstart', ->
                                         return
                                     ).on('touchmove', ->
                                         return
@@ -169,7 +183,7 @@ block content
                                         return
                                     return
                         hr
-                        p ⑦
+                        p ⑦タッチイベントが発生したときに、a要素のリンク先に遷移しないようにします。タッチイベントはjQueryのイベントではないので、JavaScriptのイベントオブジェクトによるpreventDefault()メソッドで行います。
                         p
                             a.btn.btn-default(href='../demo/jquery/exercise187/index7.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -180,25 +194,23 @@ block content
                                     $('#slide li:last-child').prependTo('#slide');
                                     $('#slide').css('margin-left', '-320px');
                                     $('#slide a').click(function() {
+                                        $('#slide').data('href', $(this).attr('href'));
                                         return false;
-                                    }).on('touchstart', function() {
-                                        <mark>$('#slide').data('href', $(this).attr('href'));</mark>
-                                    });
-                                    $('#slide').on('touchstart', function() {}).on('touchmove', function() {}).on('touchend', function() {});
+                                    }).on('touchstart', function(e) {
+                                        e.preventDefault();
+                                    }).on('touchmove', function() {}).on('touchend', function() {});
                                 });
                         pre(class='prettyprint linenums:1')
                             :code
                                 $ ->
-
                                     $('#slide li:last-child').prependTo '#slide'
                                     $('#slide').css 'margin-left','-320px'
 
                                     $('#slide a').click( ->
+                                        $('#slide').data 'href',$(this).attr 'href'
                                         return false
-                                    ).on 'touchstart', ->
-                                        <mark>$('#slide').data 'href',$(this).attr('href')</mark>
-                                        return
-                                    $('#slide').on('touchstart', ->
+                                    ).on('touchstart', (e) ->
+                                        e.preventDefault()
                                         return
                                     ).on('touchmove', ->
                                         return
@@ -217,30 +229,37 @@ block content
                                     $('#slide li:last-child').prependTo('#slide');
                                     $('#slide').css('margin-left', '-320px');
                                     $('#slide a').click(function() {
-                                        return false;
-                                    }).on('touchstart', function() {
                                         $('#slide').data('href', $(this).attr('href'));
-                                    });
-                                    $('#slide').on('touchstart', function(<mark>evnet</mark>) {
-                                        <mark>event.preventDefault();</mark>
-                                    }).on('touchmove', function() {}).on('touchend', function() {});
+                                        return false;
+                                    }).on('touchstart', function(e) {
+                                        e.preventDefault();
+                                        <mark>$(this).data('startX', e.originalEvent.touches[0].pageX).data('startY', e.originalEvent.touches[0].pageY).data('moveX', 0).data('moveY', 0);</mark>
+                                    }).on('touchmove', function(e) {
+                                        $(this).data('moveX', e.originalEvent.touches[0].pageX - $(this).data('startX')).data('moveY', e.originalEvent.touches[0].pageY - $(this).data('startY')).css('margin-left', $(this).data('moveX') - 320 + 'px');
+                                    }).on('touchend', function() {});
                                 });
                         pre(class='prettyprint linenums:1')
                             :code
                                 $ ->
-
                                     $('#slide li:last-child').prependTo '#slide'
                                     $('#slide').css 'margin-left','-320px'
 
                                     $('#slide a').click( ->
+                                        $('#slide').data 'href',$(this).attr 'href'
                                         return false
-                                    ).on 'touchstart', ->
-                                        $('#slide').data 'href',$(this).attr('href')
+                                    ).on('touchstart', (e) ->
+                                        e.preventDefault()
+                                        <mark>$(this)
+                                            .data('startX',e.originalEvent.touches[0].pageX)
+                                            .data('startY',e.originalEvent.touches[0].pageY)
+                                            .data('moveX',0)
+                                            .data('moveY',0)</mark>
                                         return
-                                    $('#slide').on('touchstart', <mark>(evnet)</mark> ->
-                                        <mark>event.preventDefault();</mark>
-                                        return
-                                    ).on('touchmove', ->
+                                    ).on('touchmove', (e) ->
+                                        <mark>$(this)
+                                            .data('moveX',e.originalEvent.touches[0].pageX-$(this).data('startX'))
+                                            .data('moveY',e.originalEvent.touches[0].pageY-$(this).data('startY'))
+                                            .css('margin-left',$(this).data('moveX')-320+'px')</mark>
                                         return
                                     ).on 'touchend', ->
                                         return
@@ -257,44 +276,56 @@ block content
                                     $('#slide li:last-child').prependTo('#slide');
                                     $('#slide').css('margin-left', '-320px');
                                     $('#slide a').click(function() {
-                                        return false;
-                                    }).on('touchstart', function() {
                                         $('#slide').data('href', $(this).attr('href'));
+                                        return false;
+                                    }).on('touchstart', function(e) {
+                                        e.preventDefault();
+                                        $(this).data('startX', e.originalEvent.touches[0].pageX).data('startY', e.originalEvent.touches[0].pageY).data('moveX', 0).data('moveY', 0);
+                                    }).on('touchmove', function(e) {
+                                        $(this).data('moveX', e.originalEvent.touches[0].pageX - $(this).data('startX')).data('moveY', e.originalEvent.touches[0].pageY - $(this).data('startY')).css('margin-left', $(this).data('moveX') - 320 + 'px');
+                                    }).on('touchend', function() {
+                                        if ($(this).data('moveX') > 10) {
+
+                                        } else if ($(this).data('moveX') < -10) {
+
+                                        } else if ($(this).data('moveY') > -10 && $(this).data('moveY') < 10) {
+
+                                        } else {
+
+                                        }
                                     });
-                                    $('#slide').on('touchstart', function(evnet) {
-                                        event.preventDefault();
-                                        <mark>$(this).data('startX', event.touches[0].pageX).data('startY', event.touches[0].pageY).data('moveX', 0).data('moveY', 0);</mark>
-                                    }).on('touchmove', function() {
-                                        <mark>$(this).data('moveX', event.touches[0].pageX - $(this).data('startX')).data('moveY', event.touches[0].pageY - $(this).data('startY')).css('margin-left', $(this).data('moveX') - 320 + 'px');</mark>
-                                    }).on('touchend', function() {});
                                 });
                         pre(class='prettyprint linenums:1')
                             :code
                                 $ ->
-
                                     $('#slide li:last-child').prependTo '#slide'
                                     $('#slide').css 'margin-left','-320px'
 
                                     $('#slide a').click( ->
+                                        $('#slide').data 'href',$(this).attr 'href'
                                         return false
-                                    ).on 'touchstart', ->
-                                        $('#slide').data 'href',$(this).attr('href')
-                                        return
-                                    $('#slide').on('touchstart', (evnet) ->
-                                        event.preventDefault();
-                                        <mark>$(this)
-                                            .data('startX',event.touches[0].pageX)
-                                            .data('startY',event.touches[0].pageY)
+                                    ).on('touchstart', (e) ->
+                                        e.preventDefault()
+                                        $(this)
+                                            .data('startX',e.originalEvent.touches[0].pageX)
+                                            .data('startY',e.originalEvent.touches[0].pageY)
                                             .data('moveX',0)
-                                            .data('moveY',0)</mark>
+                                            .data('moveY',0)
                                         return
-                                    ).on('touchmove', ->
-                                        <mark>$(this)
-                                            .data('moveX',event.touches[0].pageX-$(this).data('startX'))
-                                            .data('moveY',event.touches[0].pageY-$(this).data('startY'))
-                                            .css('margin-left',$(this).data('moveX')-320+'px')</mark>
+                                    ).on('touchmove', (e) ->
+                                        $(this)
+                                            .data('moveX',e.originalEvent.touches[0].pageX-$(this).data('startX'))
+                                            .data('moveY',e.originalEvent.touches[0].pageY-$(this).data('startY'))
+                                            .css('margin-left',$(this).data('moveX')-320+'px')
                                         return
                                     ).on 'touchend', ->
+                                        <mark>if $(this).data('moveX') > 10
+
+                                        else if $(this).data('moveX') < -10
+
+                                        else if $(this).data('moveY') > -10 and $(this).data('moveY') < 10
+
+                                        else</mark>
                                         return
                                     return
                         hr
@@ -309,155 +340,79 @@ block content
                                     $('#slide li:last-child').prependTo('#slide');
                                     $('#slide').css('margin-left', '-320px');
                                     $('#slide a').click(function() {
-                                        return false;
-                                    }).on('touchstart', function() {
                                         $('#slide').data('href', $(this).attr('href'));
-                                    });
-                                    $('#slide').on('touchstart', function(evnet) {
-                                        event.preventDefault();
-                                        $(this).data('startX', event.touches[0].pageX).data('startY', event.touches[0].pageY).data('moveX', 0).data('moveY', 0);
-                                    }).on('touchmove', function() {
-                                        $(this).data('moveX', event.touches[0].pageX - $(this).data('startX')).data('moveY', event.touches[0].pageY - $(this).data('startY')).css('margin-left', $(this).data('moveX') - 320 + 'px');
-                                    }).on('touchend', function() {
-                                        <mark>if ($(this).data('moveX') > 10) {
-
-                                        } else if ($(this).data('moveX') < -10) {
-
-                                        } else if ($(this).data('moveY') > -10 && $(this).data('moveY') < 10) {
-
-                                        } else {
-
-                                        }</mark>
-                                    });
-                                });
-                        pre(class='prettyprint linenums:1')
-                            :code
-                                $ ->
-
-                                    $('#slide li:last-child').prependTo '#slide'
-                                    $('#slide').css 'margin-left','-320px'
-
-                                    $('#slide a').click( ->
-                                        return false
-                                    ).on 'touchstart', ->
-                                        $('#slide').data 'href',$(this).attr('href')
-                                        return
-                                    $('#slide').on('touchstart', (evnet) ->
-                                        event.preventDefault();
-                                        $(this)
-                                            .data('startX',event.touches[0].pageX)
-                                            .data('startY',event.touches[0].pageY)
-                                            .data('moveX',0)
-                                            .data('moveY',0)
-                                        return
-                                    ).on('touchmove', ->
-                                        $(this)
-                                            .data('moveX',event.touches[0].pageX-$(this).data('startX'))
-                                            .data('moveY',event.touches[0].pageY-$(this).data('startY'))
-                                            .css('margin-left',$(this).data('moveX')-320+'px')
-                                        return
-                                    ).on 'touchend', ->
-                                        <mark>if $(this).data('moveX') > 10
-                                            
-                                        else if $(this).data('moveX') < -10
-                                            
-                                        else if $(this).data('moveY') > -10 and $(this).data('moveY') < 10
-                                            
-                                        else</mark>
-                                            
-                                        return
-                                    return
-                        hr
-                        p ⑪
-                        p
-                            a.btn.btn-default(href='../demo/jquery/exercise187/index11.html',target='_blank')
-                                i.glyphicon.glyphicon-play
-                                | デモ
-                        pre(class='prettyprint linenums:1')
-                            :code
-                                $(function() {
-                                    $('#slide li:last-child').prependTo('#slide');
-                                    $('#slide').css('margin-left', '-320px');
-                                    $('#slide a').click(function() {
                                         return false;
-                                    }).on('touchstart', function() {
-                                        $('#slide').data('href', $(this).attr('href'));
-                                    });
-                                    $('#slide').on('touchstart', function(evnet) {
-                                        event.preventDefault();
-                                        $(this).data('startX', event.touches[0].pageX).data('startY', event.touches[0].pageY).data('moveX', 0).data('moveY', 0);
-                                    }).on('touchmove', function() {
-                                        $(this).data('moveX', event.touches[0].pageX - $(this).data('startX')).data('moveY', event.touches[0].pageY - $(this).data('startY')).css('margin-left', $(this).data('moveX') - 320 + 'px');
+                                    }).on('touchstart', function(e) {
+                                        e.preventDefault();
+                                        $(this).data('startX', e.originalEvent.touches[0].pageX).data('startY', e.originalEvent.touches[0].pageY).data('moveX', 0).data('moveY', 0);
+                                    }).on('touchmove', function(e) {
+                                        $(this).data('moveX', e.originalEvent.touches[0].pageX - $(this).data('startX')).data('moveY', e.originalEvent.touches[0].pageY - $(this).data('startY')).css('margin-left', $(this).data('moveX') - 320 + 'px');
                                     }).on('touchend', function() {
                                         if ($(this).data('moveX') > 10) {
-                                            <mark>$(this).animate({
+                                            $(this).animate({
                                                 'margin-left': 0
                                             }, function() {
                                                 $(this).css('margin-left', '-320px');
                                                 $('#slide li:last-child').prependTo('#slide');
-                                            });</mark>
+                                            });
                                         } else if ($(this).data('moveX') < -10) {
-                                            <mark>$(this).animate({
+                                            $(this).animate({
                                                 'margin-left': -640
                                             }, function() {
                                                 $(this).css('margin-left', '-320px');
-                                                return $('#slide li:first-child').appendTo('#slide');
+                                                $('#slide li:first-child').appendTo('#slide');
                                             });
-                                            return;</mark>
                                         } else if ($(this).data('moveY') > -10 && $(this).data('moveY') < 10) {
-                                            <mark>location.href = $(this).data('href');</mark>
+                                            location.href = $(this).data('href');
                                         } else {
-                                            <mark>$(this).animate({
+                                            $(this).animate({
                                                 'margin-left': -320
-                                            });</mark>
+                                            });
                                         }
                                     });
                                 });
                         pre(class='prettyprint linenums:1')
                             :code
                                 $ ->
-
                                     $('#slide li:last-child').prependTo '#slide'
                                     $('#slide').css 'margin-left','-320px'
 
                                     $('#slide a').click( ->
+                                        $('#slide').data 'href',$(this).attr 'href'
                                         return false
-                                    ).on 'touchstart', ->
-                                        $('#slide').data 'href',$(this).attr('href')
-                                        return
-                                    $('#slide').on('touchstart', (evnet) ->
-                                        event.preventDefault();
+                                    ).on('touchstart', (e) ->
+                                        e.preventDefault()
                                         $(this)
-                                            .data('startX',event.touches[0].pageX)
-                                            .data('startY',event.touches[0].pageY)
+                                            .data('startX',e.originalEvent.touches[0].pageX)
+                                            .data('startY',e.originalEvent.touches[0].pageY)
                                             .data('moveX',0)
                                             .data('moveY',0)
                                         return
-                                    ).on('touchmove', ->
+                                    ).on('touchmove', (e) ->
                                         $(this)
-                                            .data('moveX',event.touches[0].pageX-$(this).data('startX'))
-                                            .data('moveY',event.touches[0].pageY-$(this).data('startY'))
+                                            .data('moveX',e.originalEvent.touches[0].pageX-$(this).data('startX'))
+                                            .data('moveY',e.originalEvent.touches[0].pageY-$(this).data('startY'))
                                             .css('margin-left',$(this).data('moveX')-320+'px')
                                         return
                                     ).on 'touchend', ->
                                         if $(this).data('moveX') > 10
-                                            <mark>$(this).animate
+                                            $(this).animate
                                                 'margin-left': 0
                                             , ->
                                                 $(this).css 'margin-left', '-320px'
                                                 $('#slide li:last-child').prependTo '#slide'
-                                                return</mark>
+                                                return
 
                                         else if $(this).data('moveX') < -10
-                                            <mark>$(this).animate
+                                            $(this).animate
                                                 'margin-left': -640
                                             , ->
-                                                    $(this).css 'margin-left', '-320px'
-                                                    $('#slide li:first-child').appendTo '#slide'</mark>
+                                                $(this).css 'margin-left', '-320px'
+                                                $('#slide li:first-child').appendTo '#slide'
                                                 return
                                         else if $(this).data('moveY') > -10 and $(this).data('moveY') < 10
-                                            <mark>location.href = $(this).data('href')</mark>
+                                            location.href = $(this).data('href')
                                         else
-                                            <mark>$(this).animate 'margin-left': -320</mark>
+                                            $(this).animate 'margin-left': -320
                                         return
                                     return

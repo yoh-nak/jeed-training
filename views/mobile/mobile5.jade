@@ -332,7 +332,10 @@ block content
                                         return
                                     return
                         hr
-                        p ⑩10ピクセルの範囲内で左右にドラッグした場合は、ほとんどスライドしていないので、dataメソッドでhrefに格納したリンク先に遷移させます。
+                        p ⑩x方向に＋10ピクセル以上ドラッグした場合は、ネガティブマージンを0に戻すアニメーションの後、ネガティブマージンを初期値-320pxに戻してli:last-childをli:first-childに差し替えます。
+                        p x方向に−10ピクセル以下ドラッグした場合は、ネガティブマージンを-640pxスライドするアニメーションの後、ネガティブマージンを初期値-320pxに戻してli:last-childをli:first-childに差し替えます。
+                        p y方向に±10px以内でドラッグした場合はdataメソッドでhrefに格納したリンク先に遷移させます。
+                        p それ以外の場合は、もとに戻します。
                         p
                             a.btn.btn-default(href='../demo/jquery/exercise187/index10.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -400,23 +403,23 @@ block content
                                         return
                                     ).on 'touchend', (e) ->
                                         if $(this).data('moveX') > 10
-                                            $('#slide').animate
+                                            <mark>$('#slide').animate
                                                 'margin-left': 0
                                             , ->
                                                 $('#slide').css 'margin-left', '-320px'
-                                                $('#slide li:last-child').prependTo '#slide'
+                                                $('#slide li:last-child').prependTo '#slide'</mark>
                                                 return
 
                                         else if $(this).data('moveX') < -10
-                                            $('#slide').animate
+                                            <mark>$('#slide').animate
                                                 'margin-left': -640
                                             , ->
                                                 $('#slide').css 'margin-left', '-320px'
-                                                $('#slide li:first-child').appendTo '#slide'
+                                                $('#slide li:first-child').appendTo '#slide'</mark>
                                                 return
                                         else if $(this).data('moveY') > -10 and $(this).data('moveY') < 10
-                                            location.href = $(this).data('href')
+                                            <mark>location.href = $(this).data('href')</mark>
                                         else
-                                            $('#slide').animate 'margin-left': -320
+                                            <mark>$('#slide').animate 'margin-left': -320</mark>
                                         return
                                     return

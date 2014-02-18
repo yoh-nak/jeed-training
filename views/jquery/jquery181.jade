@@ -286,7 +286,12 @@ block content
                                         return</mark>
                                     return
                         hr
-                        p ⑨
+                        p ⑨.next、.prev要素をクリックしたときのanimeteにコールバック関数を用意します。.next要素がクリックされたとき、アニメーション終了時にli:first-childを#slideにappendします。このとき、appendメソッドの引数に$()メソッドでセレクターが指定された場合、要素が挿入されるのではなく、移動になります（APIドキュメント参照）。
+                        blockquote: pre
+                            :code
+                                You can also select an element on the page and insert it into another:
+                                $( ".container" ).append( $( "h2" ) );
+                                If an element selected this way is inserted into a single location elsewhere in the DOM, it will be moved into the target (not cloned):
                         p
                             a.btn.btn-default(href='../demo/jquery/exercise188/index9.html',target='_blank')
                                 i.glyphicon.glyphicon-play

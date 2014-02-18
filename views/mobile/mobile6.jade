@@ -1,0 +1,640 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;スライドギャラリー
+                    .panel-body
+                        p ①HTMLを用意します。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise188/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        link(rel='stylesheet',href='css/style.css')
+                                    body
+                                        #container
+                                            #slideGalley
+                                                ul#slide
+                                                    li
+                                                        a(href='#')
+                                                            img(src='img/photo01.jpg', alt='')
+                                                    li
+                                                        a(href='#')
+                                                            img(src='img/photo02.jpg', alt='')
+                                                    li
+                                                        a(href='#')
+                                                            img(src='img/photo03.jpg', alt='')
+                                                    li
+                                                        a(href='#')
+                                                            img(src='img/photo04.jpg', alt='')
+                                                #nav
+                                                    img.prev(src='img/nav_prev.png')
+                                                    img.next(src='img/nav_next.png')
+                                                ul#paging
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='js/script.js')
+                        hr
+                        p ②中央寄せにして、リストマークをとります。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise188/index2.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                ul
+                                    list-style-type none
+                                    margin-top 0
+                                    margin-bottom 0
+                                    padding-left 0
+
+                                #container
+                                    width 650px
+                                    margin 100px auto 
+                        hr
+                        p ③親要素#slideGalleryで、横並びにした子要素#slideのリストをoverflowで隠します。まずli要素をフロートさせます。親要素#slideGalleryのwidthが継承されたままにすると、li要素をフロートしても横に並ばないので、子要素#slideのwidthを十分にとります。li要素のフロートはその親要素#slideでoverflowで解除します。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise188/index3.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                ul
+                                    list-style-type none
+                                    margin-top 0
+                                    margin-bottom 0
+                                    padding-left 0
+
+                                #container
+                                    width 650px
+                                    margin 100px auto
+
+                                <mark>#slideGalley
+                                    width 650px
+                                    position relative
+                                    overflow hidden
+
+                                #slide
+                                    width 10000px
+                                    overflow hidden
+                                    li
+                                        float left</mark>
+                        hr
+                        p ④#slideGalleryのrelativeに対して、.prev、.next要素をabsoluteで配置します。.prev、.next要素は、内包するimg要素の高さが100pxあるため、top 50%から半分のサイズ50pxをネガティブマージンで上方向に調整します。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise188/index4.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                ul
+                                    list-style-type none
+                                    margin-top 0
+                                    margin-bottom 0
+                                    padding-left 0
+
+                                #container
+                                    width 650px
+                                    margin 100px auto
+
+                                #slideGalley
+                                    width 650px
+                                    position relative
+                                    overflow hidden
+
+                                #slide
+                                    width 10000px
+                                    overflow hidden
+                                    li
+                                        float left
+                                        
+                                <mark>#nav
+                                    .prev
+                                        position absolute
+                                        left 10px
+                                        top 50%
+                                        margin-top -50px
+
+                                    .next
+                                        position  absolute
+                                        right 10px
+                                        top 50%
+                                        margin-top -50px</mark>
+                        hr
+                        p ⑤ページングのデザインを作ります。ページング自体はjQueryでappendするのでまだ表示されません。親要素#slideGalleryのrelativeに対し、#paging要素をabsoluteで下部に表示させます。jQueryの処理で.activeクラスが適用されたときに背景が変わるようにしておきます。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise188/index5.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                ul
+                                    list-style-type none
+                                    margin-top 0
+                                    margin-bottom 0
+                                    padding-left 0
+
+                                #container
+                                    width 650px
+                                    margin 100px auto
+
+                                #slideGalley
+                                    width 650px
+                                    position relative
+                                    overflow hidden
+
+                                #slide
+                                    width 10000px
+                                    overflow hidden
+                                    li
+                                        float left
+
+                                <mark>#paging
+                                    text-align center
+                                    position absolute
+                                    width 100%
+                                    bottom 10px
+                                    li
+                                        display inline-block
+                                        width 20px
+                                        height 20px
+                                        background url(../img/page.png)
+                                        &.active
+                                            background url(../img/page_active.png)</mark>
+
+                                #nav
+                                    .prev
+                                        position absolute
+                                        left 10px
+                                        top 50%
+                                        margin-top -50px
+
+                                    .next
+                                        position  absolute
+                                        right 10px
+                                        top 50%
+                                        margin-top -50px
+                        hr
+                        p ⑥#slide要素の子要素liをeachで繰り返し、#paging要素にli要素をappendし、最初のli要素に.activeクラスをつけます。そのとき、#slide要素の子要素imgと#paging要素の子要素liとひもづけるために、カスタム属性data-imgにギャラリーで現在表示中の画像をセットします。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise188/index6.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('#slide li').each(function() {
+                                        $('#paging').append($('<li></li>').attr('data-img', $('img', this).attr('src')));
+                                    });
+                                    $('#paging li:first-child').addClass('active');
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('#slide li').each ->
+                                        $('#paging').append $('<li></li>').attr 'data-img', $('img',this).attr('src')
+                                        return
+                                    $('#paging li:first-child').addClass 'active'
+                                    return
+                        hr
+                        p ⑦.next、.prev要素にクリックイベントを適用します。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise188/index7.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('#slide li').each(function() {
+                                        $('#paging').append($('<li></li>').attr('data-img', $('img', this).attr('src')));
+                                    });
+                                    $('#paging li:first-child').addClass('active');
+                                    <mark>$('#nav .next').click(function() {});
+                                    $('#nav .prev').click(function() {});</mark>
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('#slide li').each ->
+                                        $('#paging').append $('<li></li>').attr 'data-img', $('img',this).attr('src')
+                                        return
+                                    $('#paging li:first-child').addClass 'active'
+
+                                    <mark>$('#nav .next').click ->
+                                        return
+                                    $('#nav .prev').click ->
+                                        return</mark>
+                                    return
+                        hr
+                        p ⑧.next要素がクリックされたとき、#slide要素の子要素の幅だけanimateでネガティブマージンをスライドさせます。。今のところ、一度だけスライドします。.prev要素がクリックされたとき、先にネタティブマージンをli要素1つ分だけ先にとり、li:last-childをli:first-childに移動した後、animateでスライドさせます。こちらはアニメーションがループします。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise188/index8.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('#slide li').each(function() {
+                                        $('#paging').append($('<li></li>').attr('data-img', $('img', this).attr('src')));
+                                    });
+                                    $('#paging li:first-child').addClass('active');
+                                    <mark>$('#nav .next').click(function() {
+                                        $('#slide:not(:animated)').animate({
+                                            marginLeft: -1 * $('#slide li').width()
+                                        });
+                                    });
+                                    $('#nav .prev').click(function() {
+                                        $('#slide:not(:animated)').css('margin-left', -1 * $('#slide li').width()).prepend($('#slide li:last-child')).animate({
+                                            marginLeft: 0
+                                        });
+                                    });</mark>
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('#slide li').each ->
+                                        $('#paging').append $('<li></li>').attr 'data-img', $('img',this).attr('src')
+                                        return
+                                    $('#paging li:first-child').addClass 'active'
+
+                                    <mark>$('#nav .next').click ->
+                                        $('#slide:not(:animated)').animate
+                                            marginLeft : -1 * $('#slide li').width()
+                                        return
+                                    $('#nav .prev').click ->
+                                        $('#slide:not(:animated)')
+                                            .css('margin-left',-1*$('#slide li').width())
+                                            .prepend($('#slide li:last-child'))
+                                            .animate
+                                                marginLeft : 0
+                                        return</mark>
+                                    return
+                        hr
+                        p ⑨.next、.prev要素をクリックしたときのanimeteにコールバック関数を用意します。.next要素がクリックされたとき、アニメーション終了時にli:first-childを#slideにappendします。このとき、appendメソッドの引数に$()メソッドでセレクターが指定された場合、要素が挿入されるのではなく、移動になります（APIドキュメント参照）。
+                        blockquote: pre
+                            :code
+                                You can also select an element on the page and insert it into another:
+                                $( ".container" ).append( $( "h2" ) );
+                                If an element selected this way is inserted into a single location elsewhere in the DOM, it will be moved into the target (not cloned):
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise188/index9.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('#slide li').each(function() {
+                                        $('#paging').append($('<li></li>').attr('data-img', $('img', this).attr('src')));
+                                    });
+                                    $('#paging li:first-child').addClass('active');
+                                    $('#nav .next').click(function() {
+                                        $('#slide:not(:animated)').animate({
+                                            marginLeft: -1 * $('#slide li').width()
+                                        }<mark>, function() {
+                                            $('#slide').css('margin-left', '0').append($('#slide li:first-child'));
+                                        }</mark>);
+                                    });
+                                    $('#nav .prev').click(function() {
+                                        $('#slide:not(:animated)').css('margin-left', -1 * $('#slide li').width()).prepend($('#slide li:last-child')).animate({
+                                            marginLeft: 0
+                                        }<mark>, function() {}</mark>);
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('#slide li').each ->
+                                        $('#paging').append $('<li></li>').attr 'data-img', $('img',this).attr('src')
+                                        return
+                                    $('#paging li:first-child').addClass 'active'
+
+                                    $('#nav .next').click ->
+                                        $('#slide:not(:animated)').animate {
+                                            marginLeft : -1 * $('#slide li').width()
+                                        }<mark>, ->
+                                            $('#slide').css('margin-left','0').append $('#slide li:first-child')</mark>
+                                            return
+                                        return
+                                    $('#nav .prev').click ->
+                                        $('#slide:not(:animated)')
+                                            .css('margin-left',-1*$('#slide li').width())
+                                            .prepend($('#slide li:last-child'))
+                                            .animate {
+                                                marginLeft : 0
+                                            }<mark>, -></mark>
+                                                return
+                                        return
+                                    return
+                        hr
+                        p ⑩アニメーション終了後、#pageing li要素の.activeクラスをいったん削除し、#gallery li:first-child imgのsrc属性から現在表示中の画像を判断し、#paging liのdata-img属性にマッチするものに.activeクラスをつけます。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise188/index10.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('#slide li').each(function() {
+                                        $('#paging').append($('<li></li>').attr('data-img', $('img', this).attr('src')));
+                                    });
+                                    $('#paging li:first-child').addClass('active');
+                                    $('#nav .next').click(function() {
+                                        $('#slide:not(:animated)').animate({
+                                            marginLeft: -1 * $('#slide li').width()
+                                        }, function() {
+                                            $('#slide').css('margin-left', '0').append($('#slide li:first-child'));
+                                            <mark>$('#paging li.active').removeClass('active');
+                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active');</mark>
+                                        });
+                                    });
+                                    $('#nav .prev').click(function() {
+                                        $('#slide:not(:animated)').css('margin-left', -1 * $('#slide li').width()).prepend($('#slide li:last-child')).animate({
+                                            marginLeft: 0
+                                        }, function() {
+                                            <mark>$('#paging li.active').removeClass('active');
+                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active');</mark>
+                                        });
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('#slide li').each ->
+                                        $('#paging').append $('<li></li>').attr 'data-img', $('img',this).attr('src')
+                                        return
+                                    $('#paging li:first-child').addClass 'active'
+
+                                    $('#nav .next').click ->
+                                        $('#slide:not(:animated)').animate {
+                                            marginLeft : -1 * $('#slide li').width()
+                                        }, ->
+                                            $('#slide').css('margin-left','0').append $('#slide li:first-child')
+                                            <mark>$('#paging li.active').removeClass('active');
+                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active')</mark>
+                                            return
+                                        return
+                                    $('#nav .prev').click ->
+                                        $('#slide:not(:animated)')
+                                            .css('margin-left',-1*$('#slide li').width())
+                                            .prepend($('#slide li:last-child'))
+                                            .animate {
+                                                marginLeft : 0
+                                            }, ->
+                                                <mark>$('#paging li.active').removeClass('active');
+                                                $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active')</mark>
+                                                return
+                                        return
+                                    return
+
+                        hr
+                        p ⑪5秒ごとに.next要素をクリックさせます。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise188/index11.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    <mark>var timerId;</mark>
+                                    $('#slide li').each(function() {
+                                        return $('#paging').append($('<li></li>').attr('data-img', $('img', this).attr('src')));
+                                    });
+                                    $('#paging li:first-child').addClass('active');
+                                    <mark>timerId = setInterval(function() {
+                                        $("#nav .next").click();
+                                    }, 5000);</mark>
+                                    $('#nav .next').click(function() {
+                                        $('#slide:not(:animated)').animate({
+                                            marginLeft: -1 * $('#slide li').width()
+                                        }, function() {
+                                            $('#slide').css('margin-left', '0').append($('#slide li:first-child'));
+                                            $('#paging li.active').removeClass('active');
+                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active');
+                                        });
+                                    });
+                                    $('#nav .prev').click(function() {
+                                        $('#slide:not(:animated)').css('margin-left', -1 * $('#slide li').width()).prepend($('#slide li:last-child')).animate({
+                                            marginLeft: 0
+                                        }, function() {
+                                            $('#paging li.active').removeClass('active');
+                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active');
+                                        });
+                                    });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('#slide li').each ->
+                                        $('#paging').append $('<li></li>').attr 'data-img', $('img',this).attr('src')
+                                    $('#paging li:first-child').addClass 'active'
+
+                                    <mark>timerId = setInterval(->
+                                        $("#nav .next").click()
+                                        return
+                                    , 5000)</mark>
+
+                                    $('#nav .next').click ->
+                                        $('#slide:not(:animated)').animate {
+                                            marginLeft : -1 * $('#slide li').width()
+                                        }, ->
+                                            $('#slide').css('margin-left','0').append $('#slide li:first-child')
+                                            $('#paging li.active').removeClass('active');
+                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass 'active'
+                                            return
+                                        return
+                                    $('#nav .prev').click ->
+                                        $('#slide:not(:animated)')
+                                            .css('margin-left',-1*$('#slide li').width())
+                                            .prepend($('#slide li:last-child'))
+                                            .animate {
+                                                marginLeft : 0
+                                            }, ->
+                                                $('#paging li.active').removeClass('active');
+                                                $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active')
+                                                return
+                                        return
+                                    return
+                        hr
+                        p ⑫#slideGellery要素にホバーしたときだけ、.next、.prev要素がクリックできるようにします。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise188/index12.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    var timerId;
+                                    $('#slide li').each(function() {
+                                        return $('#paging').append($('<li></li>').attr('data-img', $('img', this).attr('src')));
+                                    });
+                                    $('#paging li:first-child').addClass('active');
+                                    timerId = setInterval(function() {
+                                        $("#nav .next").click();
+                                    }, 5000);
+                                    <mark>$('#slideGalley').hover(function() {
+                                        $('#nav').show();
+                                    }, function() {
+                                        $('#nav').hide();
+                                    });</mark>
+                                    $('#nav .next').click(function() {
+                                        $('#slide:not(:animated)').animate({
+                                            marginLeft: -1 * $('#slide li').width()
+                                        }, function() {
+                                            $('#slide').css('margin-left', '0').append($('#slide li:first-child'));
+                                            $('#paging li.active').removeClass('active');
+                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active');
+                                        });
+                                    });
+                                    $('#nav .prev').click(function() {
+                                        $('#slide:not(:animated)').css('margin-left', -1 * $('#slide li').width()).prepend($('#slide li:last-child')).animate({
+                                            marginLeft: 0
+                                        }, function() {
+                                            $('#paging li.active').removeClass('active');
+                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active');
+                                        });
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('#slide li').each ->
+                                        $('#paging').append $('<li></li>').attr 'data-img', $('img',this).attr('src')
+                                    $('#paging li:first-child').addClass 'active'
+
+                                    timerId = setInterval(->
+                                        $("#nav .next").click()
+                                        return
+                                    , 5000)
+
+                                    <mark>$('#slideGalley').hover ->
+                                        $('#nav').show()
+                                        return
+                                    , ->
+                                        $('#nav').hide()
+                                        return</mark>
+
+                                    $('#nav .next').click ->
+                                        $('#slide:not(:animated)').animate {
+                                            marginLeft : -1 * $('#slide li').width()
+                                        }, ->
+                                            $('#slide').css('margin-left','0').append $('#slide li:first-child')
+                                            $('#paging li.active').removeClass('active');
+                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass 'active'
+                                            return
+                                        return
+                                    $('#nav .prev').click ->
+                                        $('#slide:not(:animated)')
+                                            .css('margin-left',-1*$('#slide li').width())
+                                            .prepend($('#slide li:last-child'))
+                                            .animate {
+                                                marginLeft : 0
+                                            }, ->
+                                                $('#paging li.active').removeClass('active');
+                                                $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active')
+                                                return
+                                        return
+                                    return
+                        hr
+                        p ⑬#gallery要素にホバーしたときに、タイマーを解除し、ホバーしたないときにタイマーをセットします。
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise188/index13.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    var timerId;
+                                    $('#slide li').each(function() {
+                                        return $('#paging').append($('<li></li>').attr('data-img', $('img', this).attr('src')));
+                                    });
+                                    $('#paging li:first-child').addClass('active');
+                                    timerId = setInterval(function() {
+                                        $('#nav .next').click();
+                                    }, 5000);
+                                    $('#slideGalley').hover(function() {
+                                        $('#nav').show();
+                                        <mark>clearInterval(timerId);</mark>
+                                    }, function() {
+                                        $('#nav').hide();
+                                        <mark>timerId = setInterval(function() {
+                                            $('#nav .next').click();
+                                        }, 5000);</mark>
+                                    });
+                                    $('#nav .next').click(function() {
+                                        $('#slide:not(:animated)').animate({
+                                            marginLeft: -1 * $('#slide li').width()
+                                        }, function() {
+                                            $('#slide').css('margin-left', '0').append($('#slide li:first-child'));
+                                            $('#paging li.active').removeClass('active');
+                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active');
+                                        });
+                                    });
+                                    $('#nav .prev').click(function() {
+                                        $('#slide:not(:animated)').css('margin-left', -1 * $('#slide li').width()).prepend($('#slide li:last-child')).animate({
+                                            marginLeft: 0
+                                        }, function() {
+                                            $('#paging li.active').removeClass('active');
+                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active');
+                                        });
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('#slide li').each ->
+                                        $('#paging').append $('<li></li>').attr 'data-img', $('img',this).attr('src')
+                                    $('#paging li:first-child').addClass 'active'
+
+                                    timerId = setInterval(->
+                                        $('#nav .next').click()
+                                        return
+                                    , 5000)
+
+                                    $('#slideGalley').hover ->
+                                        $('#nav').show()
+                                        <mark>clearInterval timerId</mark>
+                                        return
+                                    , ->
+                                        $('#nav').hide()
+                                        <mark>timerId = setInterval(->
+                                            $('#nav .next').click()
+                                            return
+                                        , 5000)</mark>
+                                        return
+
+                                    $('#nav .next').click ->
+                                        $('#slide:not(:animated)').animate {
+                                            marginLeft : -1 * $('#slide li').width()
+                                        }, ->
+                                            $('#slide').css('margin-left','0').append $('#slide li:first-child')
+                                            $('#paging li.active').removeClass('active');
+                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass 'active'
+                                            return
+                                        return
+                                    $('#nav .prev').click ->
+                                        $('#slide:not(:animated)')
+                                            .css('margin-left',-1*$('#slide li').width())
+                                            .prepend($('#slide li:last-child'))
+                                            .animate {
+                                                marginLeft : 0
+                                            }, ->
+                                                $('#paging li.active').removeClass('active');
+                                                $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active')
+                                                return
+                                        return
+                                    return

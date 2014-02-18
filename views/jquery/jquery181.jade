@@ -244,7 +244,7 @@ block content
                         hr
                         p ⑧.next要素がクリックされたとき、#slide要素の子要素の幅だけanimateでネガティブマージンをスライドさせます。。今のところ、一度だけスライドします。.prev要素がクリックされたとき、先にネタティブマージンをli要素1つ分だけ先にとり、li:last-childをli:first-childに移動した後、animateでスライドさせます。こちらはアニメーションがループします。
                         p
-                            a.btn.btn-default(href='../demo/jquery/exercise188/index7.html',target='_blank')
+                            a.btn.btn-default(href='../demo/jquery/exercise188/index8.html',target='_blank')
                                 i.glyphicon.glyphicon-play
                                 | デモ
                         pre(class='prettyprint linenums:1')
@@ -286,49 +286,6 @@ block content
                                         return</mark>
                                     return
                         hr
-                        //-
-                            p ⑧
-                            p
-                                a.btn.btn-default(href='../demo/jquery/exercise188/index8.html',target='_blank')
-                                    i.glyphicon.glyphicon-play
-                                    | デモ
-                            pre(class='prettyprint linenums:1')
-                                :code
-                                    $(function() {
-                                        $('#nav .next').click(function() {
-                                            $('#slide:not(:animated)').animate({
-                                                marginLeft: -1 * $('#slide li').width()
-                                            }<mark>, function() {
-                                                $('#slide').css('margin-left', '0').append($('#slide li:first-child'));
-                                            });</mark>
-                                        });
-                                        $('#nav .prev').click(function() {
-                                            $('#slide:not(:animated)').css('margin-left', -1 * $('#slide li').width()).prepend($('#slide li:last-child')).animate({
-                                                marginLeft: 0
-                                            }<mark>, function() {});</mark>
-                                        });
-                                    });
-                            pre(class='prettyprint linenums:1')
-                                :code
-                                    $ ->
-                                        $('#nav .next').click ->
-                                            $('#slide:not(:animated)').animate {
-                                                marginLeft : -1 * $('#slide li').width()
-                                            }<mark>, ->
-                                                $('#slide').css('margin-left','0').append $('#slide li:first-child')
-                                                return</mark>
-                                            return
-                                        $('#nav .prev').click ->
-                                            $('#slide:not(:animated)')
-                                                .css('margin-left',-1*$('#slide li').width())
-                                                .prepend($('#slide li:last-child'))
-                                                .animate {
-                                                    marginLeft : 0
-                                                }<mark>, ->
-                                                    return</mark>
-                                            return
-                                        return
-                            hr
                         p ⑨
                         p
                             a.btn.btn-default(href='../demo/jquery/exercise188/index9.html',target='_blank')
@@ -337,6 +294,61 @@ block content
                         pre(class='prettyprint linenums:1')
                             :code
                                 $(function() {
+                                    $('#slide li').each(function() {
+                                        $('#paging').append($('<li></li>').attr('data-img', $('img', this).attr('src')));
+                                    });
+                                    $('#paging li:first-child').addClass('active');
+                                    $('#nav .next').click(function() {
+                                        $('#slide:not(:animated)').animate({
+                                            marginLeft: -1 * $('#slide li').width()
+                                        }<mark>, function() {
+                                            $('#slide').css('margin-left', '0').append($('#slide li:first-child'));
+                                        }</mark>);
+                                    });
+                                    $('#nav .prev').click(function() {
+                                        $('#slide:not(:animated)').css('margin-left', -1 * $('#slide li').width()).prepend($('#slide li:last-child')).animate({
+                                            marginLeft: 0
+                                        }<mark>, function() {}</mark>);
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('#slide li').each ->
+                                        $('#paging').append $('<li></li>').attr 'data-img', $('img',this).attr('src')
+                                        return
+                                    $('#paging li:first-child').addClass 'active'
+
+                                    $('#nav .next').click ->
+                                        $('#slide:not(:animated)').animate {
+                                            marginLeft : -1 * $('#slide li').width()
+                                        }<mark>, ->
+                                            $('#slide').css('margin-left','0').append $('#slide li:first-child')</mark>
+                                            return
+                                        return
+                                    $('#nav .prev').click ->
+                                        $('#slide:not(:animated)')
+                                            .css('margin-left',-1*$('#slide li').width())
+                                            .prepend($('#slide li:last-child'))
+                                            .animate {
+                                                marginLeft : 0
+                                            }<mark>, -></mark>
+                                                return
+                                        return
+                                    return
+                        hr
+                        p ⑩
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise188/index10.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('#slide li').each(function() {
+                                        $('#paging').append($('<li></li>').attr('data-img', $('img', this).attr('src')));
+                                    });
+                                    $('#paging li:first-child').addClass('active');
                                     $('#nav .next').click(function() {
                                         $('#slide:not(:animated)').animate({
                                             marginLeft: -1 * $('#slide li').width()
@@ -358,14 +370,19 @@ block content
                         pre(class='prettyprint linenums:1')
                             :code
                                 $ ->
+                                    $('#slide li').each ->
+                                        $('#paging').append $('<li></li>').attr 'data-img', $('img',this).attr('src')
+                                        return
+                                    $('#paging li:first-child').addClass 'active'
+
                                     $('#nav .next').click ->
                                         $('#slide:not(:animated)').animate {
                                             marginLeft : -1 * $('#slide li').width()
                                         }, ->
                                             $('#slide').css('margin-left','0').append $('#slide li:first-child')
                                             <mark>$('#paging li.active').removeClass('active');
-                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active');
-                                            return</mark>
+                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active')</mark>
+                                            return
                                         return
                                     $('#nav .prev').click ->
                                         $('#slide:not(:animated)')
@@ -379,65 +396,7 @@ block content
                                                 return
                                         return
                                     return
-                        hr
-                        p ⑩
-                        p
-                            a.btn.btn-default(href='../demo/jquery/exercise188/index10.html',target='_blank')
-                                i.glyphicon.glyphicon-play
-                                | デモ
-                        pre(class='prettyprint linenums:1')
-                            :code
-                                $(function() {
-                                    <mark>$('#slide li').each(function() {
-                                        return $('#paging').append($('<li></li>').attr('data-img', $('img', this).attr('src')));
-                                    });
-                                    $('#paging li:first-child').addClass('active');</mark>
-                                    $('#nav .next').click(function() {
-                                        $('#slide:not(:animated)').animate({
-                                            marginLeft: -1 * $('#slide li').width()
-                                        }, function() {
-                                            $('#slide').css('margin-left', '0').append($('#slide li:first-child'));
-                                            $('#paging li.active').removeClass('active');
-                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active');
-                                        });
-                                    });
-                                    $('#nav .prev').click(function() {
-                                        $('#slide:not(:animated)').css('margin-left', -1 * $('#slide li').width()).prepend($('#slide li:last-child')).animate({
-                                            marginLeft: 0
-                                        }, function() {
-                                            $('#paging li.active').removeClass('active');
-                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active');
-                                        });
-                                    });
-                                });
-                        pre(class='prettyprint linenums:1')
-                            :code
-                                $ ->
-                                    <mark>$('#slide li').each ->
-                                        $('#paging').append $('<li></li>').attr 'data-img', $('img',this).attr('src')
-                                    $('#paging li:first-child').addClass 'active'</mark>
 
-                                    $('#nav .next').click ->
-                                        $('#slide:not(:animated)').animate {
-                                            marginLeft : -1 * $('#slide li').width()
-                                        }, ->
-                                            $('#slide').css('margin-left','0').append $('#slide li:first-child')
-                                            $('#paging li.active').removeClass('active');
-                                            $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass 'active'
-                                            return
-                                        return
-                                    $('#nav .prev').click ->
-                                        $('#slide:not(:animated)')
-                                            .css('margin-left',-1*$('#slide li').width())
-                                            .prepend($('#slide li:last-child'))
-                                            .animate {
-                                                marginLeft : 0
-                                            }, ->
-                                                $('#paging li.active').removeClass('active');
-                                                $('#paging li[data-img="' + $('#slide li:first-child img').attr('src') + '"]').addClass('active')
-                                                return
-                                        return
-                                    return
                         hr
                         p ⑪
                         p

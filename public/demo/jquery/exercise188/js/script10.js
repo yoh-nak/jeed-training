@@ -2,7 +2,7 @@
 (function() {
   $(function() {
     $('#slide li').each(function() {
-      return $('#paging').append($('<li></li>').attr('data-img', $('img', this).attr('src')));
+      $('#paging').append($('<li></li>').attr('data-img', $('img', this).attr('src')));
     });
     $('#paging li:first-child').addClass('active');
     $('#nav .next').click(function() {

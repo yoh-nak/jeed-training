@@ -1,0 +1,57 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;change()イベント
+                    .panel-body
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise195/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/change/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='utf-8')
+                                        title
+                                    body
+                                        p
+                                            | 申し込み者：
+                                            select
+                                                option(value='お名前') 個人
+                                                option(value='会社名') 法人
+                                        p
+                                            span お名前
+                                            input(type='text')
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('select').change(function() {
+                                        $('span').text($(this).val());
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('select').change ->
+                                        $('span').text $(this).val()
+                                        return
+                                    return

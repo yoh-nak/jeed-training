@@ -1,0 +1,55 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;val()メソッド①
+                    .panel-body
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise191/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/val/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='utf-8')
+                                        title
+                                    body
+                                        p
+                                            | メールアドレス：
+                                            input(type='text', name='name')
+                                        p: input(type='button', value='確認')
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('input[type="button"]').one('click', function() {
+                                        $('p:nth(0)').text($('input[type="text"]').val() + 'にメールを送信します。');
+                                        $('input[type="button"]').text('送信');
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('input[type="button"]').one 'click',  ->
+                                        $('p:nth(0)').text $('input[type="text"]').val() + 'にメールを送信します。'
+                                        $('input[type="button"]').text('送信')
+                                        return
+                                    return

@@ -5,20 +5,8 @@
       $('ul', this).css('display', 'block');
       return false;
     });
-    $('a ul li:nth-child(1)').click(function() {
-      window.open().location.href = 'http://www.yahoo.co.jp/';
-    });
-    $('a ul li:nth-child(2)').click(function() {
-      window.open().location.href = 'http://www.google.co.jp/';
-    });
-    $('a ul li:nth-child(3)').click(function() {
-      window.open().location.href = 'http://www.goo.ne.jp/';
-    });
-    $('a ul li:nth-child(4)').click(function() {
-      window.open().location.href = 'http://jp.msn.com/';
-    });
-    $('a ul li:nth-child(5)').click(function() {
-      window.open().location.href = 'http://www.livedoor.com/';
+    $('a ul li').click(function() {
+      window.open().location.href = $(this).attr('data-link');
     });
     $(document).click(function() {
       $('ul', this).css('display', 'none');

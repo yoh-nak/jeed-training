@@ -40,11 +40,11 @@ block content
                                                 a(href='#')
                                                     | 右クリック
                                                     ul
-                                                        li Yahoo
-                                                        li Google
-                                                        li Goo
-                                                        li msn
-                                                        li Livedoor
+                                                        li(data-link='http://www.yahoo.co.jp/') Yahoo
+                                                        li(data-link='http://www.google.co.jp/') Google
+                                                        li(data-link='http://www.goo.ne.jp/') Goo
+                                                        li(data-link='http://jp.msn.com/') msn
+                                                        li(data-link='http://www.livedoor.com/') Livedoor
                                                 script(src='http://code.jquery.com/jquery-1.11.0.min.js')
                                                 script(src='script.js')
                                 pre(class='prettyprint linenums:1')
@@ -81,20 +81,8 @@ block content
                                                 $('ul', this).css('display', 'block');
                                                 return false;
                                             });
-                                            $('a ul li:nth-child(1)').click(function() {
-                                                window.open().location.href = 'http://www.yahoo.co.jp/';
-                                            });
-                                            $('a ul li:nth-child(2)').click(function() {
-                                                window.open().location.href = 'http://www.google.co.jp/';
-                                            });
-                                            $('a ul li:nth-child(3)').click(function() {
-                                                window.open().location.href = 'http://www.goo.ne.jp/';
-                                            });
-                                            $('a ul li:nth-child(4)').click(function() {
-                                                window.open().location.href = 'http://jp.msn.com/';
-                                            });
-                                            $('a ul li:nth-child(5)').click(function() {
-                                                window.open().location.href = 'http://www.livedoor.com/';
+                                            $('a ul li').click(function() {
+                                                window.open().location.href = $(this).attr('data-link');
                                             });
                                             $(document).click(function() {
                                                 $('ul', this).css('display', 'none');
@@ -106,27 +94,11 @@ block content
                                             $('a').contextmenu ->
                                                 $('ul',this).css 'display','block'
                                                 return false
-                                            
-                                            $('a ul li:nth-child(1)').click ->
-                                                window.open().location.href = 'http://www.yahoo.co.jp/';
-                                                return
 
-                                            $('a ul li:nth-child(2)').click ->
-                                                window.open().location.href = 'http://www.google.co.jp/';
+                                            $('a ul li').click ->
+                                                window.open().location.href = $(this).attr 'data-link'
                                                 return
-
-                                            $('a ul li:nth-child(3)').click ->
-                                                window.open().location.href = 'http://www.goo.ne.jp/';
-                                                return
-
-                                            $('a ul li:nth-child(4)').click ->
-                                                window.open().location.href = 'http://jp.msn.com/';
-                                                return
-
-                                            $('a ul li:nth-child(5)').click ->
-                                                window.open().location.href = 'http://www.livedoor.com/';
-                                                return
-                                             
+                                                 
                                             $(document).click ->
                                                 $('ul',this).css('display','none');
                                                 return

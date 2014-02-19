@@ -18,8 +18,7 @@ block content
                     .panel-heading
                         i.glyphicon.glyphicon-book
                         | &nbsp;Vim
-                    .panel-body
-                        .alert.alert-info モード
+                    .panel-body 基本
                         pre
                             :code
                                 vimの起動
@@ -29,17 +28,13 @@ block content
                                 :q
 
                                 vimtutor
-
-                                vimのモード
-
+                        .alert.alert-info ノーマルモード/コマンドモード/入力モード/ビジュアルモード
+                        pre
+                            :code
                                 vim test.html
 
-                                ノーマルモード（コマンドモード）
+                                ノーマルモード
                                 
-                                :コマンド
-
-                                ESCで
-
 
                                 入力モード
                                 i
@@ -49,6 +44,12 @@ block content
 
                                 ビジュアルモード（選択範囲を作る）
                                 v
+
+                                ノーマルモードに戻る
+                                ESC
+
+                                コマンドモード
+                                :
 
                                 ノーマルモードに戻る
                                 ESC
@@ -155,13 +156,58 @@ block content
                                 :%s/検索文字/置換文字/gc
 
                         hr
-                        .alert.alert-info 操作の取り消し
+                        .alert.alert-info アンドゥー/リドゥー
+                        pre
+                            :code
+                                アンドゥー
+                                u
+
+                                リドゥー
+                                Ctrl + r
                         hr
-                        .alert.alert-info 置換
-                        hr
-                        .alert.alert-info ウィンドウ分割
+                        .alert.alert-info ウィンドウスプリット
+                        pre
+                            :code
+                                横方向にスプリット
+                                :sp
+
+                                ウィンドウ間の移動
+                                Ctrl + w -> w
+
+                                別のファイルを開く
+                                :e ファイル名
+
+                                縦方向にスプリット
+                                :vs
+
+                                分割したウィンドウを閉じる
+                                :close
+
                         hr
                         .alert.alert-info タブ
+                        pre
+                            :code
+                                新規タブの表示
+                                :tabnew
+
+                                ファイルを開いて新規タブ
+                                :tabe ファイル名
+
+                                タブの移動
+                                gt
+
+                                タブを閉じる
+                                :tabclose
+
+                                起動するときに複数タブで開く
+                                vim -p ファイル1 ファイル2
+
+                                すべてのファイルで実行
+                                :tabdo コマンド
+
+                                すべてのタブで置換
+                                :tabdo %s/検索文字/置換文字/g
+
                         hr
                         .alert.alert-info 操作の繰り返し
                         hr

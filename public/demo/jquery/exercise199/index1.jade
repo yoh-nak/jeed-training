@@ -1,0 +1,52 @@
+doctype
+html
+    head
+        meta(charset='UTF-8')
+        title
+        link(rel='stylesheet',href='style.css')
+    body
+        form(action='http://www.yahoo.co.jp/', method='POST')
+            dl
+                dt
+                    | お名前
+                    em 10文字以内
+                dd
+                    input.validate.required.limit(type='text', name='name')
+                dt
+                    | 性別
+                    em 必須
+                dd
+                    input.validate.required(type='radio', name='gender', value='男性')
+                    label(for='gender_man') 男性
+                    input(type='radio', name='gender', value='女性')
+                    label(for='gender_woman') 女性
+                dt
+                    | 年齢
+                    em 必須
+                dd
+                    select.validate.required(name='age')
+                        option(value='') 選択してください
+                        option(value='10代') 10代
+                        option(value='20代') 20代
+                        option(value='30代') 30代
+                        option(value='40代以上') 40代以上
+                dt
+                    | スキル
+                    em 1つ以上
+                dd
+                    input.validate(type='checkbox', name='html', value='HTML')
+                    label(for='html') HTML
+                    input.validate(type='checkbox', name='css', value='CSS')
+                    label(for='css') CSS
+                    input.validate(type='checkbox', name='javascript', value='JavaScript')
+                    label(for='javascript') JavaScript
+                    input.validate(type='checkbox', name='php', value='PHP')
+                    label(for='php') PHP
+                dt
+                    | コメント
+                    em 100文字以内
+                dd
+                    textarea.validate.required.limit(name='comment')
+                input(type='submit', value='送信')
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='script.js')

@@ -1,0 +1,70 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;blur()イベント
+                    .panel-body
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise193/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/blur/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='utf-8')
+                                        title
+                                    body
+                                        | お名前：
+                                        input(type='text',value='')
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('input').val('入力してください').css('color', '#CCCCCC').one('focus', function() {
+                                        $(this).val('').css('color', '#000000');
+                                    }).blur(function() {
+                                        if ($(this).val() === '') {
+                                            $(this).val('入力してください').css('color', '#CCCCCC').one('focus', function() {
+                                                $(this).val('').css('color', '#000000');
+                                            });
+                                        }
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('input')
+                                        .val('入力してください')
+                                        .css('color','#CCCCCC')
+                                        .one('focus', ->
+                                            $(this).val('').css 'color','#000000'
+                                            return
+                                        ).blur ->
+                                            if $(this).val() == ''
+                                                $(this)
+                                                    .val('入力してください')
+                                                    .css('color','#CCCCCC')
+                                                    .one 'focus', ->
+                                                        $(this).val ''
+                                                        .css 'color','#000000'
+                                                        return
+                                            return
+                                    return

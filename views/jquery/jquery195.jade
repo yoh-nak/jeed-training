@@ -1,0 +1,94 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;submit()イベント②
+                    .panel-body
+                        p
+                            a.btn.btn-default(href='../demo/jquery/exercise197/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='http://api.jquery.com/submit/',target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | &nbsp;参考
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='utf-8')
+                                        title
+                                    body
+                                        form#slill-check(action='check.html', method='POST')
+                                            dl
+                                                dt
+                                                    | お名前
+                                                    em （必須）
+                                                dd
+                                                    input(type='text', name='name')
+                                                dt 性別
+                                                dd
+                                                    input#gender-man(type='radio', name='gender', value='男性')
+                                                    label(for='gender-man') 男性
+                                                    input#gender-woman(type='radio', name='gender', value='女性')
+                                                    label(for='gender-woman') 女性
+                                                dt 年齢
+                                                dd
+                                                    select(name='age')
+                                                        option 選択してください
+                                                        option(value='10代') 10代
+                                                        option(value='20代') 20代
+                                                        option(value='30代')
+                                                            | 30代
+                                                            option(value='40代以上') 40代以上
+                                                dt スキル
+                                                dd
+                                                    input#html(type='checkbox', name='html', value='HTML')
+                                                    label(for='html') HTML
+                                                    input#css(type='checkbox', name='css', value='CSS')
+                                                    label(for='css') CSS
+                                                    input#javascript(type='checkbox', name='javascript', value='JavaScript')
+                                                    label(for='javascript') JavaScript
+                                                    input#php(type='checkbox', name='php', value='PHP')
+                                                    label(for='php') PHP
+                                                dt コメント
+                                                dd
+                                                    textarea(name='comment')
+                                                input(type='button', value='送信')
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $('input[type="button"]').click(function() {
+                                        if ($('input[name="name"]').val() === '') {
+                                            $('input[name="name"]').css('background-color', ' orange');
+                                            window.alert('お名前を入力してください');
+                                            return false;
+                                        }
+                                        $('#slill-check').submit();
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $('input[type="button"]').click ->
+                                        if $('input[name="name"]').val() is ''
+                                            $('input[name="name"]').css 'background-color',' orange'
+                                            window.alert 'お名前を入力してください'
+                                            return false
+                                        $('#slill-check').submit()
+                                        return
+                                    return

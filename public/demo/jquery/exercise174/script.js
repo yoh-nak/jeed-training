@@ -8,7 +8,7 @@
         clearTimeout(timer);
       }
       timer = setTimeout(function() {
-        return alert('リサイズ終了');
+        alert('リサイズ終了');
       }, 200);
     });
   });

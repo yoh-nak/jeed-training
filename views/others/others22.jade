@@ -1,0 +1,49 @@
+extends ../layout
+
+block link
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar.jade
+    .container
+        .row
+            .col-sm-3
+                include left.jade
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        &nbsp;Unicode
+                    .panel-body
+                        pre.
+                            Unicode公式サイト
+                            http://www.unicode.org/
+
+                            Unicode漢字一覧
+                            http://www.unicode.org/charts/PDF/U4E00.pdf
+
+                            Unicodeひらがな一覧
+                            http://www.unicode.org/charts/PDF/U3040.pdf
+
+                            Unicodeカタカナ一覧
+                            http://www.unicode.org/charts/PDF/U30A0.pdf
+
+
+
+
+                            文字コード変換
+
+                            var str = 'abcdefghijklmnopqrstuvwxyz'
+                            for(var i = 0; i < str.length; i++){
+                                 console.log('0x' + str.charCodeAt(i).toString(16));
+                                 document.write('&#x' + str.charCodeAt(i).toString(16) + ';');
+                            }
+
+
+                            HTML文字参照
+
+                            &#x文字コード番号;

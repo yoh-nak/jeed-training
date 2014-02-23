@@ -11,7 +11,6 @@ others = require("./routes/others")
 jqm = require("./routes/jqm")
 nodejs = require("./routes/nodejs")
 database = require("./routes/database")
-material = require("./routes/material")
 diary = require("./routes/diary")
 http = require("http")
 fs = require("fs")
@@ -134,7 +133,6 @@ app.get "/enchant/:id", js.enchant # enchant.js
 app.get "/library/:id", js.library # ライブラリ
 app.get "/framework/:id", js.framework # フレームワーク
 app.get "/jsrecipe-:id", js.recipe
-app.get "/material:id:format", material.material
 app.get "/cordova/:id", js.cordova
 
 #ルーティングPOST送信

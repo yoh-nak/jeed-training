@@ -33,97 +33,39 @@ block content
                                                 title
                                                 link(rel='stylesheet',href='style.css')
                                             body
-                                                a(href='#')
-                                                    | 右クリック
-                                                    ul
-                                                        li Yahoo
-                                                        li Google
-                                                        li Goo
-                                                        li msn
-                                                        li Livedoor
+                                                img(src='img/image1.png',alt='')
                                                 script(src='http://code.jquery.com/jquery-1.11.0.min.js')
                                                 script(src='script.js')
                                 pre(class='prettyprint linenums:1')
                                     :code
-                                        a
-                                            position relative
-                                            text-decoration none
-                                            ul
-                                                display none
-                                                position absolute
-                                                top -20px
-                                                right -100px
-                                                padding 0
-                                                li
-                                                    width 100px
-                                                    height 30px
-                                                    line-height 30px
-                                                    text-align center
-                                                    list-style-type none
-                                                    border-left 1px solid #000000
-                                                    border-right 1px solid #000000
-                                                    border-bottom 1px solid #000000
-                                                    background-color pink
-                                                    &:hover
-                                                        background-color aqua
-
-                                                    &:first-child
-                                                        list-style-type none
-                                                        border-top 1px solid #000000
+                                        .enlarge
+                                            position fixed
+                                            top 50%
+                                            left 50%
+                                            width 400px
+                                            height 400px
+                                            margin-left -200px
+                                            margin-top -200px
                                 pre(class='prettyprint linenums:1')
                                     :code
                                         $(function() {
-                                            $('a').contextmenu(function() {
-                                                $('ul', this).css('display', 'block');
-                                                return false;
+                                            $('img').click(function() {
+                                                $(this).addClass('enlarge');
                                             });
-                                            $('a ul li:nth-child(1)').click(function() {
-                                                window.open().location.href = 'http://www.yahoo.co.jp/';
-                                            });
-                                            $('a ul li:nth-child(2)').click(function() {
-                                                window.open().location.href = 'http://www.google.co.jp/';
-                                            });
-                                            $('a ul li:nth-child(3)').click(function() {
-                                                window.open().location.href = 'http://www.goo.ne.jp/';
-                                            });
-                                            $('a ul li:nth-child(4)').click(function() {
-                                                window.open().location.href = 'http://jp.msn.com/';
-                                            });
-                                            $('a ul li:nth-child(5)').click(function() {
-                                                window.open().location.href = 'http://www.livedoor.com/';
-                                            });
-                                            $(document).click(function() {
-                                                $('ul', this).css('display', 'none');
+                                            $(window).keydown(function(e) {
+                                                if (e.keyCode === 27) {
+                                                    $('img').removeClass('enlarge');
+                                                }
                                             });
                                         });
                                 pre(class='prettyprint linenums:1')
                                     :code
                                         $ ->
-                                            $('a').contextmenu ->
-                                                $('ul',this).css 'display','block'
-                                                return false
-                                            
-                                            $('a ul li:nth-child(1)').click ->
-                                                window.open().location.href = 'http://www.yahoo.co.jp/';
+                                            $('img').click ->
+                                                $(this).addClass 'enlarge'
                                                 return
-
-                                            $('a ul li:nth-child(2)').click ->
-                                                window.open().location.href = 'http://www.google.co.jp/';
-                                                return
-
-                                            $('a ul li:nth-child(3)').click ->
-                                                window.open().location.href = 'http://www.goo.ne.jp/';
-                                                return
-
-                                            $('a ul li:nth-child(4)').click ->
-                                                window.open().location.href = 'http://jp.msn.com/';
-                                                return
-
-                                            $('a ul li:nth-child(5)').click ->
-                                                window.open().location.href = 'http://www.livedoor.com/';
-                                                return
-                                             
-                                            $(document).click ->
-                                                $('ul',this).css('display','none');
+                                            $(window).keydown (e) ->
+                                                if e.keyCode is 27
+                                                    $('img').removeClass 'enlarge'
                                                 return
                                             return

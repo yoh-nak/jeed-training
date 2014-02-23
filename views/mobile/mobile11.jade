@@ -1,0 +1,181 @@
+extends ../layout
+
+block link
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;画面サイズ
+                    .panel-body
+                        h4 主要機種の画面サイズ
+                        table.table
+                            tr
+                                th OS
+                                th 機種名
+                                th 画面解像度（px）
+                                th dpi
+                                th device-pixel-ratio
+                                th device-width
+                            tr
+                                td(rowspan='6') iOS 
+                                td iPhone5
+                                td 640x1136
+                                td 326
+                                td 2
+                                td 320x568
+                            tr
+                                td iPhone4S
+                                td 640x960
+                                td 326
+                                td 2
+                                td 320x480
+                            tr
+                                td iPhone4
+                                td 640x960
+                                td 326
+                                td 2
+                                td 320x480
+                            tr
+                                td iPhone3G/3GS
+                                td 320x480
+                                td 163
+                                td 1
+                                td 320x480
+                            tr
+                                td iPad（第3世代）
+                                td 1536x2048
+                                td 264
+                                td 2
+                                td 768x1024
+                            tr
+                                td iPad/iPad2
+                                td 768x1024
+                                td 132
+                                td 1
+                                td 768x1024
+                            tr
+                                td(rowspan='15') Android
+                                td GALAXY SⅢ
+                                td 720x1280
+                                td 306
+                                td 2
+                                td 320x480
+                            tr
+                                td GALAXY SⅡ
+                                td 480x800
+                                td 217
+                                td 1.5
+                                td 320x533
+                            tr
+                                td Galaxy S
+                                td 480x800
+                                td 233
+                                td 1.5
+                                td 320x533
+                            tr
+                                td Galaxy NEXUS
+                                td 720x1280
+                                td 312
+                                td 2
+                                td 360x640
+                            tr
+                                td Galaxy Tab 7.0 Plus
+                                td 600x1024
+                                td 170
+                                td 1.5
+                                td 400x682
+                            tr
+                                td Galaxy Note
+                                td 800x1280
+                                td 285
+                                td 2
+                                td 400x640
+                            tr
+                                td Nexus 7
+                                td 800x1280
+                                td 216
+                                td 2
+                                td 400x640
+                            tr
+                                td Nexus One
+                                td 480x720
+                                td 234
+                                td 1.5
+                                td 320x480
+                            tr
+                                td INFOBAR A01
+                                td 540x960
+                                td 298
+                                td 1.5
+                                td 360x640
+                            tr
+                                td Xperia SX
+                                td 540x960
+                                td 298
+                                td 1.5
+                                td 360x640
+                            tr
+                                td Xperia arc
+                                td 480x854
+                                td 233
+                                td 1.5
+                                td 320x570
+                            tr
+                                td ARROWS Z
+                                td 720x1280
+                                td 342
+                                td 2
+                                td 320x480
+                            tr
+                                td ARROWS Me
+                                td 480x800
+                                td 252
+                                td 1.5
+                                td 320x533
+                            tr
+                                td HTC Desire HD
+                                td 480x800
+                                td 217
+                                td 1.5
+                                td 320x533
+                            tr
+                                td HT-03A
+                                td 320x480
+                                td 280
+                                td 1
+                                td 320x480
+                            tr
+                                td Windows Phone
+                                td IS12T
+                                td 480x800
+                                td 252
+                                td 1.5
+                                td 320x533
+                        hr
+                        - year = (new Date()).getFullYear();
+                        - month = (new Date()).getMonth() + 1;
+                        - month = ('0' + month).slice(-2);
+                        h4 Mobile Screen Resolution
+                        pre.
+                            日本
+                            http://gs.statcounter.com/#mobile_resolution-JP-monthly-#{year}#{month}-#{year}#{month}-bar
+                            世界
+                            http://gs.statcounter.com/#mobile_resolution-ww-monthly-#{year}#{month}-#{year}#{month}-bar
+                        h4 Tablet Screen Resolution
+                        pre.
+                            日本
+                            http://gs.statcounter.com/#tablet-resolution-JP-monthly-#{year}#{month}-#{year}#{month}-bar
+                            世界
+                            http://gs.statcounter.com/#tablet-resolution-ww-monthly-#{year}#{month}-#{year}#{month}-bar

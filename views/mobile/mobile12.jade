@@ -1,0 +1,121 @@
+extends ../layout
+
+block link
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;スマートフォンのブラウザ
+                    .panel-body
+                        p iOSとAndroidともにデフォルトではWebkit系ブラウザがアプリとして搭載されています。通常の利用者の多くはこれらのブラウザを使用することになります。（「Google Chrome」や「Opera mini」などのサードパーティ製のブラウザも多くリリースされていますが、本書では上記Webkit系のOSデフォルトブラウザをベースに説明しています）。同じWebkit系とはいえ、iOSとAndroidのブラウザでは仕様が大きく違う点も多く、制作したサイトがどちらかのみで表示されたからといって、もう片方でも正常に表示されるとは限りません。むしろ、正常に表示できないパターンのほうが多いくらいなので、必ず実機検証を行いましょう。
+                        p なお、Androidにいたっては、OSが同じバージョンでも機種ごとによって仕様が微妙に違うケースも多いので、要注意です。
+                        p また、Windows Phoneでは、Microsoft製のInternet Explorer（以下、IE）を搭載しています。日本で入手できるWindows Phone7.5の機種ではIE9 Mobileが搭載されています（デスクトップWindowsのIE9に相当します）。
+                        table.table
+                            tr
+                                th 
+                                th OS
+                                th HTML5
+                                th CSS3
+                                th 3D<br>Transform
+                                th Canvas
+                                th SVG
+                                th Flash
+                                th 大きな特徴
+                            tr
+                                td Mobile<br>Safari
+                                td iOS4
+                                td ○
+                                td ○
+                                td ○
+                                td ○
+                                td ○
+                                td ☓
+                                td 「ページ内検索」が可能に
+                            tr
+                                td Mobile<br>Safari
+                                td iOS5
+                                td ○
+                                td ○
+                                td ○
+                                td ○
+                                td ○
+                                td ☓
+                                td 「Position: fixed」が可能に
+                            tr
+                                td Mobile<br>Safari
+                                td iOS6
+                                td ○
+                                td ○
+                                td ○
+                                td ○
+                                td ○
+                                td ☓
+                                td -webkit-flexboxが使用不可に<br>File API、HTML5 Media Captureへの対応
+                            tr
+                                td ブラウザー
+                                td Android2.2
+                                td ○
+                                td ○
+                                td ☓
+                                td ○
+                                td ☓
+                                td ○
+                                td Adobe Flash 10が使用可
+                            tr
+                                td ブラウザー
+                                td Android2.3
+                                td ○
+                                td ○
+                                td ☓
+                                td ○
+                                td ☓
+                                td ○
+                                td CSS3のレンダリングが強化
+                            tr
+                                td ブラウザー
+                                td Android4.0
+                                td ○
+                                td ○
+                                td ☓
+                                td ○
+                                td ☓
+                                td ○
+                                td SVGが表示可能に
+                            tr
+                                td ブラウザー
+                                td Android4.1
+                                td ○
+                                td ○
+                                td ○
+                                td ○
+                                td ○
+                                td ☓
+                                td Adobe Flashの廃止
+                            tr
+                                td IE9<br>Mobile
+                                td Windows<br>Phone 7.5
+                                td ○
+                                td ○
+                                td ○
+                                td ○
+                                td ○
+                                td ☓
+                                td 「minimum-scale」「maximum-scale」の非サポート
+                        h4 Mobile Browser
+                        pre.
+                            日本
+                            http://gs.statcounter.com/#mobile_browser-JP-monthly-#{year}#{month}-#{year}#{month}-bar
+                            世界
+                            http://gs.statcounter.com/#mobile_browser-ww-monthly-#{year}#{month}-#{year}#{month}-bar

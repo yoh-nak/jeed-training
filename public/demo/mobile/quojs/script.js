@@ -35,6 +35,30 @@
     $$(document).swipeUp(function() {
       alert($$.environment().browser);
     });
+    $$(document).pinch(function() {
+      alert($$.environment().browser);
+    });
+    $$(document).pinching(function() {
+      alert($$.environment().browser);
+    });
+    $$(document).pinchIn(function() {
+      alert($$.environment().browser);
+    });
+    $$(document).pinchOut(function() {
+      alert($$.environment().browser);
+    });
+    $$(document).rotate(function() {
+      alert($$.environment().browser);
+    });
+    $$(document).rotating(function() {
+      alert($$.environment().browser);
+    });
+    $$(document).rotateRight(function() {
+      alert($$.environment().browser);
+    });
+    $$(document).rotateLeft(function() {
+      alert($$.environment().browser);
+    });
   });
 
 

@@ -1,0 +1,103 @@
+extends ../layout
+
+block link
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;CSSスプライト
+                    .panel-body
+                        p CSSスプライトとは、複数の画像を1つの画像にまとめてHTTPリクエストの数やファイルサイズを削減する手法です。その名前の通り、画像の表示はすべてCSSによる記述で操作します。
+                        hr
+                        .alert.alert-info CSSスプライトのメリット
+                        p CSSスプライトのメリットは、複数の画像を1つの画像にまとめることで、サイトの負荷を軽くできる、という点がまず挙げられます。これは先に述べた各ブラウザごとの同時接続可能なHTTPリソースにも関係してきます。例えば同時接続可能な数が5と決まっており、画像を5つ読み込んでしまえば、それ以外のファイルは順番待ちの状態になってしまいます。しかし、それらの画像を1つにまとめてしまえば、他のファイルの通信に空いた4つのリソースを譲ることができます。
+                        p また、ファイルサイズの削減もメリットです。複数の画像1つ1つの合計ファイルサイズに比べて、1つにまとめた画像（CSSスプライト）の方がファイルサイズが軽くなり、結果サイトの軽量化につながります。
+                        hr
+                        .alert.alert-info CSSスプライトのデメリット
+                        p: u 更新時の手間
+                        p サイトの軽量化に大きく貢献するCSSスプライトですが、よい面ばかりではないのみ事実です。後からCSSスプライト用の画像サイズや位置が変更になった際に、場合によってはCSSスプライトを採用している箇所をすべて書き直さなくてはいけなくなってしまう場合があります。もちろん、そうならないような設計をしておくことが大事ですが、そのような問題が発生してしまうこともあるということを念頭に置いておきましょう。
+                        p また、デメリットの1つに、コードの見通しが悪くなるという点もあります。CSSスプライトは通常では各要素に対して、background-positionを指定して実装しますが、それ故にCSSの記述がとても増えるため、コードが分かりにくくなるのです。
+                        p メリットでメリットを踏まえつつ、導入の際はどの画像をCSSスプライトにするか、更新の際はどのように対応するか、しっかり考えて組み込んでいくようにしましょう。
+                        hr
+                        .alert.alert-info CSSスプライトを実装しよう
+                        p: u 基本のHTML
+                        p CSSスプライトを使用する箇所に"sprite"というクラス名を付与するように、HTML側を記述しています。例えばヘッダーのロゴとボタン部分がそれにあたります。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <header id="header">
+                                <a href="#" class="menu_btn"><div class="sprite">MENU</div></a>
+                                <h1 class="logo"><span class="sprite">SMART CAFE</span></h1>
+                                </header>
+                        img(src='../demo/mobile/cafe/images/css_sprite.png',alt='')
+                        p; u 基本のCSS
+                        p CSSスプライトが適用されるすべての箇所に、共通するCSSを記述します。従来の方法ではtext-indentプロパティの値を-9999pxにする手法が主流でしたが、実はこの方法ではブラウザ上に9999px分の領域を確保することになってしまい、現在はパフォーマンス上、バッドノウハウとされています。そこで、必要最低限の領域を確保し、なおかつ非表示にする方法として、text-indentに加えて、white-spaceプロパティ、oveflowプロパティを追記した記述が主流になっているようです。
+                        p: u 従来のCSSスプライトの基本CSS
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                .sprite {
+                                     text-indent: -9999px;
+                                }
+                            ▼
+                        p: u 現在主流とされているCSSスプライトの基本CSS
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                .sprite {
+                                     text-indent: 100%;
+                                     white-space: nowrap;
+                                     overflow: hidden;
+                                }
+                        p 上記を踏まえて、SMART CAFEは以下のようにしています。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                .sprite {
+                                     text-indent: 100%;
+                                     white-space: nowrap;
+                                     overflow: hidden;
+                                     background-image: url(../images/css_sprite.png);・・・①
+                                     background-size: 138px 544px;・・・②
+                                }
+                        p 基本のCSSに加えて、下の2行にはCSSスプライト用画像の読み込みに関する記述をしています。background-imageプロパティでCSSスプライトの画像のパスを指定し①、background-sizeでCSSスプライト用画像サイズを半分の大きさにしています②。これはdevice-pixel-ratioを考慮しているためです。
+                        p 基本的なCSSの記述が完了したら、CSSスプライト使用個所はすべて同じような表示になるはずです。ここから各要素に適した画像を表示するために、背景画像として指定いたCSSスプライト用画像をbackground-positionプロパティで位置を変更し、調整を行っていきます。
+                        p: u 各要素のCSS
+                        p background-positionを指定していない状態ではCSSスプライト用画像の左上が基準となり、表示領域に合わせて表示されます。CSSスプライトはこの基準位置をbackground-positionで移動させることで各要素の表示を調整していきます。
+                        p まず、表示したい画像の基準点からの距離をx軸、y軸共に計測しましょう。device-pixel-ratioを考慮することを忘れずに（ここではRetinaディスプレイを考慮して計測したpxを半分にしています）。       
+                        p 計測した基準点からの距離をbackground-positionプロパティの値として記述します。計測した値を基準点（x:0, y:0）から引き算して入力することでCSSスプライト画像を動かすことができます。
+                        p これを参考にして、SMART CAFEのロゴの部分のCSSスプライトの位置を調整すると、以下のようになります。表示領域の大きさを（width, height）も記述するのを忘れないようにしましょう。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                .logo .sprite {
+                                    width: 138px;
+                                    height: 16px;
+                                    background-position: 0 -371px;
+                                }
+                        hr
+                        pre.
+                            CSS Sprite Generator
+                            http://ja.spritegen.website-performance.org/
+
+                            Sprite Pad
+                            http://wearekiss.com/spritepad
+
+                            Sprite Cow
+                            http://www.spritecow.com
+
+                            SpriteMe
+                            http://spriteme.org/
+
+                            SpriteRight
+                            http://spriterightapp.com/
+
+                            Adobe Fireworks CS6
+                            http://www.adobe.com/jp/devnet/fireworks/articles/css-sprites.html

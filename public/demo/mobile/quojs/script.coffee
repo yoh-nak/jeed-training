@@ -1,108 +1,65 @@
+###
 $$(document).ready ->
-#$$ ->
 	alert($$.environment().browser)
 	alert($$.environment().isMobile)
 	alert($$.environment().screen.width)
 	alert($$.environment().screen.height)
-	#alert($$.environment().os.name)
-	#alert($$.environment().os.version)
-	$$(document).tap ->
-		alert $$.environment().browser
+	alert($$.environment().os.name)
+	alert($$.environment().os.version)
+###
+$$ ->
+	$$('#index').tap ->
+		alert 'tap'
 		return
-	$$(document).hold ->
-		alert $$.environment().browser
+	$$('#index').hold ->
+		alert 'hold'
 		return
-	$$(document).singleTap ->
-		alert $$.environment().browser
+	$$('#index').singleTap ->
+		alert 'singleTap'
 		return
-	$$(document).doubleTap ->
-		alert $$.environment().browser
+	$$('#index').doubleTap ->
+		alert 'doubleTap'
 		return
-	$$(document).swipe ->
-		alert $$.environment().browser
+	$$('#index').swipe ->
+		alert 'swipe'
 		return
-	$$(document).swiping ->
-		alert $$.environment().browser
+	$$('#index').swiping ->
+		alert 'swiping'
 		return
-	$$(document).swipeLeft ->
-		alert $$.environment().browser
+	$$('#index').swipeLeft ->
+		alert 'swipeLeft'
 		return
-	$$(document).swipeRight ->
-		alert $$.environment().browser
+	$$('#index').swipeRight ->
+		alert 'swipeRight'
 		return
-	$$(document).swipeDown ->
-		alert $$.environment().browser
+	$$('#index').swipeDown ->
+		alert 'swipeDown'
 		return
-	$$(document).swipeUp ->
-		alert $$.environment().browser
+	$$('#index').swipeUp ->
+		alert 'swipeUp'
 		return
-	$$(document).pinch ->
-		alert $$.environment().browser
+	$$('#index').pinch ->
+		alert 'pinch'
 		return
-	$$(document).pinching ->
-		alert $$.environment().browser
+	$$('#index').pinching ->
+		alert 'pinching'
 		return
-	$$(document).pinchIn ->
-		alert $$.environment().browser
+	$$('#index').pinchIn ->
+		alert 'pinchIn'
 		return
-	$$(document).pinchOut ->
-		alert $$.environment().browser
+	$$('#index').pinchOut ->
+		alert 'pinchOut'
 		return
-	$$(document).rotate ->
-		alert $$.environment().browser
+	$$('#index').rotate ->
+		alert 'rotate'
 		return
-	$$(document).rotating ->
-		alert $$.environment().browser
+	$$('#index').rotating ->
+		alert 'rotating'
 		return
-	$$(document).rotateRight ->
-		alert $$.environment().browser
+	$$('#index').rotateRight ->
+		alert 'rotateRight'
 		return
-	$$(document).rotateLeft ->
-		alert $$.environment().browser
+	$$('#index').rotateLeft ->
+		alert 'rotateLeft'
 		return
 	return
-
-###
-//Tap event, common event
-.tap(function);
-//Long tap event (650 miliseconds)
-.hold(function);
-//A tap-delay event to combine with others events
-.singleTap(function);
-//If you send two singleTap
-.doubleTap(function);
-
-
-.swipe(function);
-//Detect if is swipping
-.swiping(function);
-//Swipe directions
-.swipeLeft(function);
-.swipeRight(function);
-.swipeDown(function);
-.swipeUp(function);
-
-
-.pinch(function);
-//Detect if is pinching
-.pinching(function);
-//Pinch zoom
-.pinchIn(function);
-.pinchOut(function);
-
-.rotate(function);
-//Detect if is rotating
-.rotating(function);
-//Rotate directions
-.rotateLeft(function);
-.rotateRight(function);
-
-var env = $$.environment();
-
-env.browser     //[STRING] Browser of your mobile device
-env.isMobile    //[BOOLEAN]
-env.os.name     //[STRING] iOS, Android, Blackberry...
-env.os.version  //[STRING] Versión of OS
-env.screen      //[OBJECT] With properties: width & height
-
-###

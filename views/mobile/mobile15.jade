@@ -1,0 +1,87 @@
+extends ../layout
+
+block link
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;Viewport
+                    .panel-body
+                        p スマートフォンのブラウザでは、「Viewport（ビューポート）」というメタ要素をサポートしています。このviewportを指定することにより、ブラウザの表示幅を仮想的に指定したり、ピンチアウト／インによる拡大縮小の倍率を指定したりできます。スマートフォン用のサイトの制作においては、非常に重要なメタ要素です。
+                        p
+                            a.btn.btn-default(href='../html/19',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | 参考（メタデータ）
+                        .alert.alert-info Viewportで指定できること
+                        p HTML内にViewportを設定することで、以下を指定できます。
+                        ul
+                            li ブラウザの仮想幅・仮想高さ
+                            li ページロード時の表示倍率
+                            li ピンチアウト／イン操作による拡大縮小の可否
+                            li ピンチアウト／イン操作による拡大縮小の最大最小倍率
+                        figure
+                            figcaption vierportで指定できるプロパティ一覧
+                            table.table
+                                tr
+                                    th プロパティ
+                                    th 説明
+                                    th デフォルト
+                                    th 範囲
+                                tr
+                                    td width
+                                    td 端末の横幅
+                                    td <mark>980px</mark>
+                                    td 数値指定は、200pxから10,0000pxまで<br><mark>device-width</mark>（端末の横幅に合わせる）
+                                tr
+                                    td height
+                                    td 端末の縦幅
+                                    td auto
+                                    td 数値指定は、223pxから10,000pxまで<br>device-height（端末の縦幅に合わせる）
+                                tr
+                                    td initial-scale
+                                    td ページロード時の拡大率
+                                    td 1
+                                    td 
+                                tr
+                                    td user-scalable
+                                    td ユーザーによる拡大縮小の可否
+                                    td yes
+                                    td yes / no
+                                tr
+                                    td minimum-scale
+                                    td 縮小率の下限
+                                    td 0.25
+                                    td 0から10まで
+                                tr
+                                    td maximum-scale
+                                    td 拡大率の上限
+                                    td 1.6
+                                    td 0から10まで
+                        hr
+                        .alert.alert-info Viewportによるブラウザの幅を指定する
+                        p スマートフォンサイトの制作において最も重要になるのが、このブラウザの幅です。デスクトップPCのブラウザと違い、スマートフォンのブラウザは数値等を指定することで自由に幅を仮想的に指定できます。この場合、スマートフォンの液晶画面が持つ解像度とは関係なく、幅を指定することができます。
+                        p 以下、1マスが160pxの背景画像を敷き詰めて、それぞれの指定方法のサンプルを紹介します。
+                        h4 Viewportを指定しない場合
+                        p Viewportを指定しないHTMLを表示させると、ブラウザはデフォルトとして幅980px相当となります。既存のPCサイトなどを閲覧した場合はこのケースになります。
+                        h4 Viewportにwidthを数値指定する場合
+                        pre
+                            :code
+                                <meta name="viewport" content="width=640"> 
+                        p Viewportのcontent属性の値に、「"width=640"」と数値を指定すると、その数値がブラウザの幅となります。（initial-scaleやuser-scalableなどを一緒に指定すると、この幅の数値は無効となります）。
+                        h4 Viewportにwidth=device-widthと指定する場合
+                        pre
+                            :code
+                                <meta name="viewport" content="width=device-width, initial-scale=1">
+                        p 「device-width」と指定すると、そのスマートフォン端末が本来持っている標準の横幅となります。つまり、機種によってブラウザの横幅が違ってきることになります。また「initial-scale」に「1」を指定することで、ページロード時に等倍で表示させるようにしています。これにより、端末の向きによってもブラウザの幅が変わることになります。

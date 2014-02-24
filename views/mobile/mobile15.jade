@@ -97,3 +97,9 @@ block content
                             a.btn.btn-default(href='../demo/mobile/viewport3/index1.html',target='_blank')
                                 i.glyphicon.glyphicon-play
                                 | デモ
+                        hr
+                        p iOS5までのSafariでは、device-widthを指定した上で「maximum-scale」や「minimum-scale」に「1」以外を指定し、拡大縮小を許可していると、横向き（landscape）にした時にページが上記の「480px」ではなく1.5倍の「720px」で描画されてしまう仕様がありました（iOS6では解消されています）。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1, initial-scale=1, user-scalable=no">
+                        p ただし、利用者による拡大縮小操作が不可能になるため、アクセシビリティにおいてデメリットとなることは留意するようにしましょう。

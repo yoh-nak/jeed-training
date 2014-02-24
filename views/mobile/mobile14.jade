@@ -32,3 +32,42 @@ block content
                                 | デモ
                         pre(class='prettyprint linenums:1')
                             :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        meta(name='viewport',content='width=device-width,initial-scale=1.0')
+                                    body
+                                        #index(data-role='page').
+                                            オリエンテーションを検証します。
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $(window).on('orientationchange resize', function() {
+                                        switch (window.orientation) {
+                                            case 0:
+                                                alert("通常表示");
+                                                break;
+                                            case 90:
+                                                alert("右90度回転");
+                                                break;
+                                            case -90:
+                                                alert("左90度回転");
+                                        }
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $(window).on 'orientationchange resize', ->
+                                        switch window.orientation
+                                            when 0
+                                                alert "通常表示"
+                                            when 90
+                                                alert "右90度回転"
+                                            when -90
+                                                alert "左90度回転"
+                                        return
+                                    return

@@ -1,0 +1,115 @@
+extends ../layout
+
+block link
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;device-pixel-ratio
+                    .panel-body
+                        .alert.alert-info 画面サイズと解像度とピクセル密度について
+                        p スマートフォンの機種によって、画面サイズや解像度はバラバラです。サイト制作において少なからず実機での表示検証は行うことになるので、機種のスペック表を理解する上でも以下の用語は覚えておきましょう。
+                        table.table
+                            tr
+                                td 画面サイズ
+                                td 端末の液晶スクリーンの実寸のことです。3〜5インチが主流です。小さいものと大きいものの差は相当なものなので、同じサイズのフォントなども大きさが違って見えます。
+                            tr
+                                td 解像度
+                                td 上記のスクリーンが、どれだけのピクセル数を持っているかの値です。「640x1136」などと、横と縦のピクセル数で表記されます。
+                            tr
+                                td ピクセル密度
+                                td スクリーンの実寸1インチあたりに含まれるピクセル数を表します。「dpi」または「ppi」という単位で表記され、現行機種ではおおよそ120〜320ppiの間で分布しています。この値が大きいほど、1ピクセルが小さく高精細なものとなります。
+                        table
+                            capiton 主要機種のスペック
+                            tr
+                                th 
+                                th 単位
+                                th iPhone5
+                                th iPhone4S
+                                th iPHone3GS
+                                th GALAXY SⅢ
+                                th Glaxy Nexus
+                                th Xperia SX
+                                th INFOBAR
+                            tr
+                                th 画面サイズ
+                                th インチ
+                                td 4
+                                td 3.5
+                                td 3.5
+                                td 4.8
+                                td 4.7
+                                td 3.7
+                                td 3.7
+                            tr
+                                th 解像度
+                                th px
+                                td 640x1136
+                                td 640x960
+                                td 320x480
+                                td 720x1280
+                                td 720x1280
+                                td 3.7
+                                td 3.7
+                            tr
+                                th ピクセル密度
+                                th ppi
+                                td 326
+                                td 326
+                                td 163
+                                td 306
+                                td 312
+                                td 298
+                                td 298
+                        hr
+                        .alert.alert-info device-pixel-ratioとは
+                        p 「device-pixcel-ratio」とは、端的にいうと「端末におけるピクセル比率」のことです。以下、iPhoneを例に説明します。
+                        p メタ要素「viewport」では、以下のように「width=device-width」を指定すると、ブラウザは端末が標準で持っている規定の横幅となります。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <meta name="viewport" content="width=device-width">
+                        p この指定をすることでiPhoneであれば、新旧機種すべてでブラウザの幅が「320px」となります（Portraitモードの時）。
+                        p しかし、iPhone4以降の機種だと実際の液晶スクリーンの解像度は横幅が「640px」となっています。つまり、スクリーンの1ピクセルとブラウザの1ピクセルは、1:1の等価ではなく、2:1となります（等価である場合は、ピクセル・バイ・ピクセルと言います）。
+                        p これがApple製品で多く採用されている「Retinaディスプレイ」と呼ばれるスクリーンの特徴です。
+                        p このスクリーン解像度の幅とブラウザ上の横幅の比率が「device-pixcel-ratio」の値になります。つまり、iPhone4以降であれば、device-pixcel-ratioの値は「2」となります。
+                        p iPhone3GS以前であれば、device-pixcel-ratioの値は「1」なので、スクリーン解像度の幅とブラウザの幅は等価です。
+                        p ピクセル密度の高い機種ではdevice-pixcel-ratioも比例して高くなっており、現状ではdevice-pixcel-ratioが「2」の機種が最も多くなっています。Android端末では「1.5」の値を持つものも多くありますし、HTC J butterflyのような「3」の値を持つ機種も今後増えそうです。
+                        hr
+                        .alert.alert-info 画像は640pxで用意しよう
+                        p 現行機種のスマートフォンでは、iPhone4以降をはじめ、その多くがdevice-pixel-ratioが「2」となっています。また、多くの機種のブラウザのdevice-widthは320pxです。つまり、ブラウザの横幅いっぱいで使いたい写真は幅640pxで、20px x 20pxで使いたいアイコンは40px x 40pxで、と倍のサイズで用意するわけです。アイコンなど、エッジがはっきりした画像ほど、ぼやけて見えるとその部分が目立ってしまいます。
+                        p Androidではdevice-pixel-ratioが「1.5」のものも多いですが、2倍の画像を使用しても問題ありません。スマートフォン用のWebサイトの場合、OS依存のアプリとは違って、あらゆる端末で表示されることが前提なので、より大きいdevice-pixel-ratio「2」に合わせておきましょう。
+                        p ただし、写真の掲載点数が多いサイトだと、ページ全体の総容量が肥大化してしまうので、使用する画像を極力減らすデザインが求められることになります。
+                        p このあたりは、サイトパフォーマンスと見せたいデザインのバランスで構成を設計してください。
+                        hr
+                        p 各端末のdevice-pixel-ratioをJavaScriptで調べることができます。Chrome、Safari、Operaでは、「window.devicePixelRatio」というプロパティからこの値を取得できます。以下のスクリプトで、その値がアラートで表示されます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                alert(window.devicePixelRaio);
+                        hr
+                        h4 device-pixel-ratioの値でCSSを切り替える
+                        p device-pixel-ratioの値によって、CSSを切り替えたい場合は、メディアクエリを使って、CSSを切り替えられます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                body{
+                                    background: url(small.png) 0 0;
+                                }
+                                @media only screen and (-webkit-min-device-pixel-ratio: 1.5){
+                                    body{
+                                        background: url(large.png) 0 0;
+                                    }
+                                }
+                        p 上記の例では、1行目の背景画像の指定では、通常サイズの画像を指定しています。
+                        p @media{...}の中での指定は、倍のサイズの画像を指定して、bodyの背景画像の指定を上書きしています。
+                        p 「-webkit-min-device-pixel-ratio: 1.5」することで、「devicePixelRatio」の値が「1.5」以上の端末にのみCSSを適用できます。「-min-」で最小値の指定をすることで、今後リリースされる端末にも対応できるものとなります。

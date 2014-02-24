@@ -1,0 +1,75 @@
+extends ../layout
+
+block link
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;Mobile Safariの制限
+                    .panel-body
+                        p デスクトップPC用のWebサイトの閲覧も多く行われるスマートフォンですが、デスクトップPCでの閲覧環境と同様というわけではありません。スマートフォン自体はデスクトップPCに比べてマシンスペックが非力なので、描画による高い負荷を抑えるため、いくつかの制限が設けられています。
+                        h4 Mobile Safariの制限
+                        p Appleから公式に発表されている、iOS Mobile Safariの制限を紹介します。Appleの記述資料「Safari Developer Library」の「Know iOS Resource Limits」という章を参照すると、以下の表のような制限が設けられていることが分かります。
+                        figure
+                            figcaption Mobile Safariのリソースリミット
+                            table.table
+                                tr
+                                    th(rowspan='2') ファイルの種類
+                                    th(colspan='2') 制限
+                                tr
+                                    th RAM 256MB未満の機種<br>（iPhone3GS 以前）
+                                    th RAM 256MB以上の機種<br>（iPhone4 以降）
+                                tr
+                                    td GIF、PNG、TIFF画像
+                                    td 画素数が3メガピクセル<br>（3x1024x1024px）まで
+                                    td 画素数が5メガピクセル<br>（5x1024x1024px）まで
+                                tr
+                                    td JPEG画像
+                                    td 画素数が32メガピクセルまで
+                                    td 
+                                tr
+                                    td アニメーションGIF
+                                    td ファイルサイズが2MBまで
+                                    td 
+                                tr
+                                    td canvas要素
+                                    td 3メガピクセルまで
+                                    td 5メガピクセルまで
+                                tr
+                                    td HTML、CSS、JavaScriptファイルなど
+                                    td ファイルサイズが、それぞれ10MBまで
+                                    td 
+                                tr
+                                    td mpeg、mp3ファイルなど
+                                    td ファイルサイズが、それぞれ10MBまで
+                                    td 
+                                tr
+                                    td JavaScriptの処理
+                                    td 実行時間は10秒未満であること
+                                    td 
+                                tr
+                                    td ポップアップブロック
+                                    td デフォルトではON
+                                    td 
+                            h4 画像ファイルの制限
+                            p PNGやGIFにおいては、iPhone4以降の機種では「画素数が5メガピクセルまで」となっています。例えば、あるPNG画像をサイト上で使うとして、その画像の総ピクセル数width（px） × height（px）が、「5 × 1024 × 1024 = 5242880px」以下である必要があるということになります。正方形のPNG／GIF画像ならば、およそ「2280px × 2280px」の大きさまでがiOSで表示できる限界、という目安になります。
+                            p JPEG画像は1/16の2メガピクセルに縮小され、2メガピクセルを超えたものはサブサンプリング（色情報の削減による再最適化）されるとあります。高精細で綺麗な画像を用意したのにiPhoneで表示させたところに逆に劣化して見える場合は、このサブサンプリングが影響している可能性があります。JPEGの書き出し時から2メガピクセルを超えないように留意しましょう。
+                            h4 その他の制限
+                            p 個々のファイルにおいては、「HTML、CSS、JavaScriptファイル等は10MBまで」とかなりゆるい制限です。1ページの総容量ではなく、個々のファイルサイズでの制限なので、余程のことがない限りこれを超えることはなさそうです。ただし、HTML内にcanvas要素や大量のJavaScript、CSSのコードを含んでいたりする場合は要注意です。
+                            p JavaScriptの処理面では、「10秒未満で処理が完了すること」となっています。<mark>jQuery＋CSS Animationなどを用いたデモムービーのようなものを制作実装する場合は、この点十分に気を付けるようにしてください。</mark>
+                            p
+                                Apple 「Safari Developer Library - Know iOS Resource Limits」<br>
+                                a(href='http://developer.apple.com/library/ios/#documentation/AppleApplications/Reference/SafariWebContent/CreatingContentforSafarioniPhone/CreatingContentforSafarioniPhone.html',target='_blank') http://developer.apple.com/library/ios/#documentation/AppleApplications/Reference/SafariWebContent/CreatingContentforSafarioniPhone/CreatingContentforSafarioniPhone.html
+

@@ -6,6 +6,60 @@ $$(document).ready ->
 	alert($$.environment().screen.height)
 	#alert($$.environment().os.name)
 	#alert($$.environment().os.version)
+	$$(document).tap ->
+		alert $$.environment().browser
+		return
+	$$(document).hold ->
+		alert $$.environment().browser
+		return
+	$$(document).singleTap ->
+		alert $$.environment().browser
+		return
+	$$(document).doubleTap ->
+		alert $$.environment().browser
+		return
+	$$(document).swipe ->
+		alert $$.environment().browser
+		return
+	$$(document).swiping ->
+		alert $$.environment().browser
+		return
+	$$(document).swipeLeft ->
+		alert $$.environment().browser
+		return
+	$$(document).swipeRight ->
+		alert $$.environment().browser
+		return
+	$$(document).swipeDown ->
+		alert $$.environment().browser
+		return
+	$$(document).swipeUp ->
+		alert $$.environment().browser
+		return
+	$$(document).pinch ->
+		alert $$.environment().browser
+		return
+	$$(document).pinching ->
+		alert $$.environment().browser
+		return
+	$$(document).pinchIn ->
+		alert $$.environment().browser
+		return
+	$$(document).pinchOut ->
+		alert $$.environment().browser
+		return
+	$$(document).rotate ->
+		alert $$.environment().browser
+		return
+	$$(document).rotating ->
+		alert $$.environment().browser
+		return
+	$$(document).rotateRight ->
+		alert $$.environment().browser
+		return
+	$$(document).rotateLeft ->
+		alert $$.environment().browser
+		return
 	return
 
 ###

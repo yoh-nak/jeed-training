@@ -5,6 +5,36 @@
     alert($$.environment().isMobile);
     alert($$.environment().screen.width);
     alert($$.environment().screen.height);
+    $$(document).tap(function() {
+      alert($$.environment().browser);
+    });
+    $$(document).hold(function() {
+      alert($$.environment().browser);
+    });
+    $$(document).singleTap(function() {
+      alert($$.environment().browser);
+    });
+    $$(document).doubleTap(function() {
+      alert($$.environment().browser);
+    });
+    $$(document).swipe(function() {
+      alert($$.environment().browser);
+    });
+    $$(document).swiping(function() {
+      alert($$.environment().browser);
+    });
+    $$(document).swipeLeft(function() {
+      alert($$.environment().browser);
+    });
+    $$(document).swipeRight(function() {
+      alert($$.environment().browser);
+    });
+    $$(document).swipeDown(function() {
+      alert($$.environment().browser);
+    });
+    $$(document).swipeUp(function() {
+      alert($$.environment().browser);
+    });
   });
 
 

@@ -1,0 +1,34 @@
+extends ../layout
+
+block link
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;オリエンテーション
+                    .panel-body
+                        h4 Portraitと、Landscape、それぞれのモード
+                        p スマートフォンは、端末の向きによって表示環境を変えることができますが、縦向きの画面表示のことを「Portrait（ポートレイト）モード」、横向きの画面表示のことを「Landscape（ランドスケープ）モード」と呼びます。
+                        p もともとは写真現像や印刷の用語で、Portraitは肖像画や人物画に適した縦向き、Landscapeは風景画に適した横向き、ということでこれらの用語が定着しました、また、スマートフォンの「向き」そのもののことを「Orientation」と呼びます。
+                        hr
+                        h4 JavaScriptによる判別
+                        p スマートフォンのブラウザでは、JavaScriptの「window.orientation」というプロパティによって、げんじょうの端末画面を傾けた角度を取得できます。なお、「端末の向きが変えられた時」にリアルタイムに情報を取得したい場合が多いと思います。こういう場合のために、jQueryでは「orientationchange」というイベントが定義されており、これを使用することで端末の向きが変えられた時に特定の処理を行わせることが可能になります。
+                        p ただし、Androidではorientationchangeの判定タイミングがずれたり、Widows Phone 7.5ではこのイベントが使用できないので、resizeイベントを使用しましょう。
+                        p
+                            a.btn.btn-default(href='../demo/mobile/orientation/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code

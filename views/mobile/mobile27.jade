@@ -1,0 +1,121 @@
+extends ../layout
+
+block link
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;セレクターの最適化
+                    .panel-body
+                        pre
+                            :code
+                                可読性＜軽量化が求められる場合
+
+                                CSSのセレクタは右から左の順に解釈される
+
+                                #header a {
+                                    color: #fff;
+                                }
+
+                                ▼
+
+                                #header .link {
+
+                                }
+
+
+
+                                ユニバーサルセレクタ（*）は使用しない
+
+
+                                #wrapper * {
+
+                                }
+
+
+                                クラス名やid名に要素名を追加しない
+
+                                div#container {
+                                    ...
+                                }
+
+                                ul.list {
+                                    ...
+                                }
+
+                                ol.list {
+                                    ...
+                                }
+
+
+                                ▼
+
+
+                                #container {
+                                    ...
+                                }
+
+                                .unorder-list {
+                                    ...
+                                }
+
+                                .order-list {
+                                    ...
+                                }
+
+
+                                子孫セレクタ・子セレクタの階層は浅くする
+
+
+                                body #wrapper #container #section01 h1 {
+                                    ...
+                                }
+
+
+                                ▼
+
+
+                                .heading_style {
+                                    ...
+                                }
+
+
+
+                                #wrapper > #container > #main_column > #section01 > ul {
+                                    ...
+                                }
+
+
+                                ▼
+
+                                .unorder_list {
+                                    ...
+                                }
+
+
+                                継承を有効利用する
+
+
+                                ul li {
+                                    list-style: disc;
+                                }
+
+
+                                ▼
+
+
+                                ul {
+                                    list-style: disc;
+                                }

@@ -1,0 +1,56 @@
+extends ../layout
+
+block link
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;タッチイベント
+                    .panel-body
+                        p スマートフォンでのクリックイベントは擬似的に発生しています。機種によってタッチイベントしか機能しない可能性もあるため、jQueryのonメソッドで、タッチイベントとクリックイベントをバインドしておくとよいでしょう。
+                        p
+                            a.btn.btn-default(href='../demo/mobile/touch/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            | 
+                            a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/Web/API/TouchEvent',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | 参考（TouchEvent）
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        meta(name='viewport',content='width=device-width,initial-scale=1.0')
+                                    body
+                                        #index(data-role='page').
+                                            タッチイベントの検証をします。
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='script.js')
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {
+                                    $(document).on('touchstart click', function() {
+                                        alert('タッチイベントが発生しました。');
+                                    });
+                                });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ ->
+                                    $(document).on 'touchstart click', ->
+                                        alert 'タッチイベントが発生しました。'
+                                        return
+                                    return

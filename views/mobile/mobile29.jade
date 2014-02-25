@@ -1,0 +1,150 @@
+extends ../layout
+
+block link
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;SNSボタンの最適化
+                    .panel-body
+                        pre
+                            :code
+                                ソーシャルメディアボタンに対応する3つの理由
+
+                                ソーシャルメディアが提供するツイートボタンや「いいね！」ボタンは手軽に設置できますが、配布されているボタン（JavaScriptなどのコード）をそのまま設置すると、ページの表示が非常に遅くなります。
+                                実際、主要なソーシャルメディアであるTwitter／Facebook／Google+のボタンをブラウザーが表示するのに必要なHTTPリクエストの数は19、読み込み容量は200KBもあり、特にスマートフォンにおいてパフォーマンスを大きく損なうことになります。
+
+                                1. ソーシャルメディアボタンを設置しない
+
+                                もっとも単純なのは、思い切ってソーシャルメディアボタンを取り除いてしまうことです。iOSのSafariにはTwitterやFacebookにWebページを共有する機能が搭載されていますし、PC版のブラウザーにソーシャルメディアのアドオンやプラグインを入れているユーザーも多いでしょう。そう考えると、必ずしもWebサイト側にボタンがなくてもよいかもしれません。
+                                レスポンシブWebデザインの大家であるブラッド・フロスト（Brad Frost）氏のWebサイトにはブログも含めて、ソーシャルメディアボタンがありません。そのおかげでパフォーマンスを良い状態に保てています。
+
+                                http://bradfrostweb.com/
+
+
+                                2. シンプルなソーシャルメディアボタンにする
+
+                                ソーシャルメディアが提供するボタンを利用せず、あえてリンクに機能を絞ったシンプルなソーシャルメディアボタンを利用する方法もあります。シェアやツイート数を表示するにはJavaScriptでAPIを呼び出す必要がありますが、ユーザーにシェアしたりツイートしたりしてもらいたいだけであれば、通常のリンクでも十分でしょう。
+                                この場合、以下のようにa要素を記述するだけです。
+
+
+                                <a href="http://www.facebook.com/sharer.php?u=[URL]&t=[タイトル]" class="button facebook">Facebook</a>
+                                <a href="http://twitter.com/home?status=STATUS" title="Click to share this post on Twitter" class="button twitter">Twitter</a>
+                                <a href="https://m.google.com/app/plus/x/?v=compose&content=CONTENT" class="button google"">Google+</a>
+
+
+
+                                それぞれのリンクはCSS3を使って装飾すればボタン風の見栄えにも整えられます。
+
+
+                                .button{
+                                     font-family: Arial;
+                                     color: #ffffff;
+                                     font-size: 15px;
+                                     padding: 5px 10px;
+                                     text-decoraton: none;
+                                     text-shadow: 1px 1px 3px #666666;
+                                }
+                                .twitter{
+                                     background: #0081ec;
+                                }
+                                .facebook{
+                                     background: #2b4170;
+                                }
+                                .google{
+                                     background: #c33219;
+                                }
+
+
+
+                                3. ソーシャルメディアボタンを非同期化する
+
+                                どうしてもソーシャルメディアボタンを表示したい場合、非同期で読み込む方法があります。ページが表示されれるまでの時間を短縮するために、ソーシャルメディアボタンの読み込みをJavaScriptであえて遅延させ、Webページの他の部分が表示された後に読み込む方法です。「Socialite」というJavaScriptライブラリーを利用すると手軽に実装できます。
+
+
+                                Socialiteの使い方
+
+                                SocialiteはTwitter／Facebook／Google+といった主要なソーシャルメディアに対応したライブラリーです。Socialiteを使うと、ユーザーがマウスをホバーしたときや、画像をスクロールしたときなど、任意のタイミングでソーシャルメディアボタンを読み込んで表示できます。
+                                たとえば、マウスオーバーしたときにソーシャルメディアボタンを読み込む場合は、サンプル②のように記述します（Socialite.jsとjQueryが必要です）。
+
+                                サンプル②
+                                <!DOCTYPE html>
+                                <head>
+                                     <meta charset="UTF-8">
+                                     <meta name="viewport" content="width=device-width, initial-scale=1">
+                                     <title>Socialite.js</title>
+                                </head>
+                                <body>
+                                     <div class="text">
+                                          <h1>Socialiteデモ（マウスホバー）</h1>
+                                          <p>ソーシャルメディアへのリンクにマウスホバーするとボタンを読み込みます。</p>
+                                     </div>
+
+                                <div class="socialbutton">
+                                <p><a class="socialite twitter-share" href="http://twitter.com/share" data-url="http://socialitejs.com">
+                                    Twitterでツイート</a>
+                                </p>
+
+
+                                <p><a href="http://www.facebook.com/sharer.php?u=http://www.socialitejs.com&amp;t=Socialite.js" class="socialite facebook-like" data-href="http://socialitejs.com">
+                                    Facebookでシェア</a>
+                                </p>
+
+
+                                <p><a href="https://plus.google.com/share?url=http://socialitejs.com" class="socialite googleplus-one" data-href="http://socialitejs.com"><span class="vhidden">
+                                    Google+でおすすめ</a>
+                                </p>
+
+
+                                </div>
+
+
+
+                                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+                                     <script src="socialite.js"></script>
+                                     <script>
+
+
+                                     // Only use jQuery if the website already makes extensive use of it!
+
+
+                                     $(document).ready(function()
+                                     {
+
+
+                                          $('div.socialbutton').one('mouseenter', function()
+                                          {
+                                               Socialite.load();
+                                          });
+
+
+                                     });
+
+
+                                     </script>
+                                </body>
+                                </html>
+
+
+
+                                Socialiteでソーシャルボタンに置き換える要素は、a要素で記述し、class属性にソーシャルメディアの種類を指定します。
+
+                                ソーシャルメディアclass名Facebooksocialite facebook-likeTwittersocialite twitter-shareGoogle+socialite googleplus-one
+
+                                シェア（ツイート）したいページのURLは、Twitterの場合はdata-url属性で、Facebook／Google+の場合はdata-href属性で記述します。
+                                JavaScriptでは、socialite.jsを読み込み、任意のタイミングでSocialite.load()メソッドを実行します。
+                                サンプル②では、div.socialbutton要素がマウスオーバーされたタイミングでソーシャルメディアボタンを読み込むため、jQueryを使って、mouseenterイベントに対してone()メソッドで一度だけSocialite.load()を実行できるようにセットしています。
+
+                                Socialiteのサイトには、このほかにもスクロールしたときにソーシャルメディアボタンを読み込んだり、ダミーのソーシャルボタンを表示しておいて後で差し替えたりするサンプルもあります。参考にしてください。

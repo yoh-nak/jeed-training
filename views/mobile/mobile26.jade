@@ -1,0 +1,110 @@
+extends ../layout
+
+block link
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;パフォーマンス計測
+                    .panel-body
+                        pre.
+                            Webブラウザーのデバッグツール
+
+                            もっとも基本的なパフォーマンス計測ツールは、各ブラウザーのデベロッパーツールです。主なブラウザーには以下のようなデベロッパーツールが用意されています。
+
+                        table.table
+                            tr
+                                th ブラウザー名
+                                th デベロッパーツール名
+                            tr
+                                td Safari
+                                td Webインスペクタ
+                            tr
+                                td Firefox
+                                td Firebug（アドオン）
+                            tr
+                                td Google Chrome
+                                td デベロッパーツール
+                            tr
+                                td Internet Explorer
+                                td F12開発者ツール
+                            
+                        pre.
+                            どのツールでも、HTTPリクエストやページの読み込みにかかった時間を計測できます。ここではSafariの「Webインスペクター」の場合を紹介しましょう。
+                            Webインスペクターは、Safariの[開発]→[Webインスペクターを表示]で起動します。
+
+                            左上にあるアイコンから機能を切り替えられます。パフォーマンスの計測は、ストップウォッチのアイコン（音源）をクリックします。
+
+                            この状態でページをリロードすると、HTMLやCSS画像などのファイルサイズや、読み込み／レンダリングにかかった時間、JavaScriptの実行状況などをグラフと表で確認し、ボトルネックとなっている要素を特定できます。
+
+                            外部サービスなど、何らかの要因で読み込みに時間がかかっている要素の読み込みを後回しにしたり、思ったよりも容量が大きい画像を差し替えたりできるでしょう。
+
+
+                            ブラウザ拡張機能を使った計測
+
+                            PageSpeed Insights
+
+                            Googleが公開しているページスピード検証ツールが「PageSpeedInsights」（https:/developers.google.com/speed/pagespeed/insights）です。
+
+                            PageSppedInsightsは、URLを入力すると、Webサイトのパフォーマンスを100点満点で評価するとともに、「CSSスプライトを利用する」「画像を最適化する」など具体的な改善点を細かく指摘してくれます。
+
+                            また、デフォルトではPC（デスクトップ）向けのパフォーマンスを分析しますが、レポート画面で「mobile report」というリンクを選択するとモバイル向けに分析したレポートも提供されます。
+
+                            Chromeアプリ
+
+                            https://chrome.google.com/webstore/detail/pagespeed-insights-by-goo/gplegfbjlmmehdoakndmohflojccocli
+
+                            Firefoxアドオン
+
+                            https://developers.google.com/speed/pagespeed/insights_extensions
+
+
+                            YSlow
+
+                            Chromeアプリ
+
+                            https://chrome.google.com/webstore/detail/yslow/ninejjcohidippngpapiilnmkgllmakh
+
+                            Firefoxアドオン
+
+                            https://addons.mozilla.org/ja/firefox/addon/yslow/
+
+
+                            Webサービスを使った計測
+
+
+                            MobiTest
+
+                            http://mobitest.akamai.com/m/index.cgi
+
+                            「Mobitest」（http://mobitest.akamai.com/m/index.cgi）は、モバイルに特化したWebパフォーマンス計測サービスです。世界できなCDN（Content Delivery Network）業者であるアカマイが運営をしています。
+
+                            Mobitestの最大の特徴は、実際のデバイスで計測する点にあります。URLを入力してデバイスと計測拠点を選択すると、アカマイのデータセンターにあるスマートフォンが実際にWebサイトにアクセスし、読み込み・表示にかかった時間を計測してレポートとして表示します。
+
+                            Pingdom Tools
+
+                            http://tools.pingdom.com/
+
+
+                            GTmetrix
+
+                            http://gtmetrix.com
+
+
+
+                            スマートフォン最適化診断サービス
+
+                            GOMO
+                            http://www.howtogomo.com/jp/d/

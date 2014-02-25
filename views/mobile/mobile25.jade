@@ -1,0 +1,218 @@
+extends ../layout
+
+block link
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;画像の最適化
+                    .panel-body
+                        pre.
+                            正確でシンプルなマークアップ
+
+                            HTMLはなるべくシンプルに記述し、不要なdiv要素やcalss属性ｈ記述しないようにしましょう。HTMLが複雑になればなるほど、ブラウザーがHTMLを解釈するのに時間がかかりますし、CSSのセレクターで要素を特定する処理も遅くなります。HTML5のセマンティックな要素や属性を正しく利用することで、div要素やclass属性の乱用を減らせます。
+                            CSSはモバイルファーストの考え方に沿って、小さなスクリーンから大きなスクリーンへとカスケードして書くようにしましょう。ブラウザーの初期設定も上手に利用し、無駄なスタイルシートを記述しないようにします。
+
+
+                            HTTPリクエスト数を減らす
+
+                            Webサイトが遅くなる原因には、ダウンロードにかかるファイルの容量が大きく読み込みに時間がかかる、レイアウトが複雑でブラウザーの処理に時間がかかる、などがありますが、特に影響が大きいのが「HTTPリクエスト」です。
+
+                            HTTPリクエストとはWebブラウザーがWebサーバーに対して出す要求のことです。私たちがWebサイトを閲覧するときに、パソコンやモバイルデバイスのWebブラウザーは、サーバーに対してテキストや動画のコンテンツを要求します。これに対してサーバーは、コンテンツをレスポンス（応答）として返すわけです。
+
+                            一度にやりとりできるテキストファイル（HTML/CSS/JavaScript）や画像ファイルの数はブラウザーによって2〜6本と決まっており、上限に達すると次に空くまで待たされることになります。
+
+                            Webページに読み込むファイルが多ければ多いほどHTTPリクエストの数も多くなるため、HTTPリクエストはできるだけ少なく抑えるのが原則です。
+
+
+                            HTTPリソース同時接続可能数の早見表
+                        
+
+                            1ホストごとの同時最大接続数同時最大接続数Android2.3910Android4617iPhone4430iphone5626Safari5.2617
+
+
+                            HTTPリクエストを削減する具体的な方法としては以下があります。
+
+                            ①アイコンフォント化して画像をまとめる
+
+                            アイコンなどの小さな画像は、フォントとしては1つにまとめることでHTTPリクエストを大幅に削減できます。
+
+                            ②Data URIを使って画像を埋め込む
+
+                            画像を文字列としてHTML内に埋め込むテクニックです。
+
+                            ③CSSやJavaScriptはなるべく1つのファイルにまとめる
+
+                            たとえば、メディアクエリーではHTMLのlink要素を使って複数のCSSファイルを読み込めますが、なるべく1つのファイルにまとめて記述し、@mediaを使って書くべきでしょう。
+
+                            ④ソーシャルメディアボタンの読み込みを改善する
+
+                            TwitterやFacebookなどのソーシャルメディアが提供する共有ボタンをそのまま設置すると、ページの読み込みが大幅に遅くなります。実装方法を見直すことでパフォーマンスを向上できます。
+
+                            ⑤そもそも不要なファイルは読み込まない
+
+                            開発時のテストに使っていたJavaScriptファイルなど、そもそも不要なファイルを誤って読み込んでいないかを確認しましょう。特に、jQueryなどの定番ライブラリーでは標準的なテンプレートとしてHTMLに組み込まれていることがありますが、使用していなければ削除します。
+
+
+                            CSS3の活用
+
+
+                            HTTPリクエストの削減とも関連しますが、ボタンなどのUIパーツはなるべくCSSを利用して作成します。backgroundプロパティのgradient関数や、text-shadow／box-shadow、border-radiusなどのプロパティを活用すれば、多くのUIパーツは画像にする必要はありません。
+                            海外のブログメディアは「Smashing Magazine」の記事「CSS3 vs. CSS:A Speed Benchmark」では、同一のデザインのサイトをなるべくCSS3を使って制作した場合と、CSS 2.1で制作した場合とでパフォーマンスを比較しています。
+                            この結果は以下のようになりました。CSS 2.1で制作した場合と、CSS3で制作した場合では、読み込み速度で約1.4秒の差が出たとのことです。また、CSS 2.1とCSS3とでは、ページサイズは約10%、HTTPリクエストは45%改善されています。
+                            このようにCSS3を使うことで、ページサイズはもちろん、HTTPリクエストを減らすことができ、パフォーマンスを大幅に改善できるのです。
+
+                        table.table
+                            tr
+                                td
+                                td CSS 2.1
+                                td CSS3
+                            tr
+                                td HTTPリクエスト
+                                td 22
+                                td 12
+                            tr
+                                td ページサイズ
+                                td 849.2KB
+                                td 769.9KB
+                            tr
+                                td 読み込み速度
+                                td 4.7秒
+                                td 3.3秒
+                            
+                        pre.
+                            CSS vs. CSS: A SPeed Benchmark
+                            http://coding.smashingmagazine.com/2011/04/21/css3-vs-css-a-speed-benchmark/
+                            
+                            CSSジェネレーター
+
+                            CSS3 Button Generator
+                            http://css3button.net/
+
+
+                            border-image-generator
+                            http://border-image.com/
+
+
+                            CSS3 Generator
+                            http://css3generator.com
+                            Grad3
+                            http://grad3.ecoloniq.jp
+                            http://www.colorschemer.com/online.html
+                            Ultimate CSS Gradient Generator
+                            http://www.colorzilla.com/gradient-editor/
+
+
+                            CSS3 ButtonMaker
+                            http://css-tricks.com/examples/ButtonMaker/
+
+
+                            CSS3 PIE
+                            http://css3pie.com/
+
+
+                            Uicode Range Generator
+                            http://zenoplex.jp/tools/unicoderange_generator.html
+
+
+                            cssarrowplease
+                            http://cssarrowplease.com
+
+
+                            Yellowpipe Internet Services 
+                            http://www.yellowpipe.com/yis/tools/hex-to-rgb/color-converter.php
+
+
+                            border-radius
+                            http://border-radius.com
+
+
+                            tools & resources for web professionals 
+                            http://westciv.com
+
+
+                            SVG Gradient Background Maker 
+                            http://ie.microsoft.com/testdrive/Graphics/SVGGradientBackgroundMaker/Default.html
+
+
+                            デザインの再考
+
+                            レスポンシブWebデザインでは、1つのHTMLを利用するという性質上、PC向けの高解像度画像をスマートフォンでも読み込まなければならない、と考えるかもしれません。
+                            しかしPCのような大きいスクリーンだからといって、必ずしも大きな画像を使う必要はありません。
+
+                            スマートフォンでの画像サイズを生かして、レイアウトを調整するアプローチを検討してはどうでしょうか。これなら、小さな画像をタブレットやPCでも流用でき、パフォーマンスを損なうことがありません。
+
+
+                            画像の最適化
+
+                            写真にはJPEG、ロゴやイラストにはPNGやSVGといった具合に適切なフォーマットを選ぶことはもちろんですが、圧縮ツールを使ったり、「色数を減らす」「ぼかしを加える」といったテクニックを駆使したりしてもファイル容量を削減出来ます。
+
+
+
+                            画像圧縮ツールで容量を減らす
+
+
+                            画像ファイルの容量を削除するもっとも手軽な方法は、画像圧縮ツールを利用することです。画像圧縮ツールは、見た目は大きく損なわずに不要な情報を取り除いてファイルを軽くするツールで、画像によっては10〜50%ほどファイル容量を削減できます。
+
+
+                            GIF／JPEG／PNG8／PNG24／PNG32
+
+
+                            色数が少ない場合
+                            PNG8
+                            ▼
+                            GIF
+                            ▼
+                            色数が多い場合
+                            JPEG（透過できない）
+                            ▼
+                            PNG24
+                            ▼
+                            PNG32
+
+
+                            ※色数が少ない場合、一般的にはPNG8はジャギーがでるが、Fireworksを使ってPNG8で書き出すときれいに容量を押さえることができる
+
+
+                            Windows用画像最適化ツール
+
+                            PNGGauntlet
+                            http://pnggauntlet.com/
+                            対応：PNG（変換元はJPEG/GIF/TIFF/BMP）
+
+
+                            Mac用画像最適化ツール
+
+                            ImageOptim（無償）
+                            http://imageoptim.com/
+                            対応：PNG／JPEG／GIF
+
+                            オンラインツール
+
+                            PunyPNG（一部有償）
+                            http://www.punypng.com/
+                            対応：PNG／JPEG／GIF
+
+
+                            その他ツール
+
+                            JPEGmini（Win／Mac／有料）
+                            JPEGmini Lite（Win／Mac／無料／１日２０ファイル）
+                            http://www.jpegmini.com
+                            対応：JPEG
+
+
+                            ImageAlpha
+                            http://pngmini.com/

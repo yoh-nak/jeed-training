@@ -1,0 +1,113 @@
+extends ../layout
+
+block link
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;Webフォントアイコン
+                    .panel-body
+                        pre.
+                            アイコンフォントの利用
+
+                            HTTPリクエストを減らすもう1つの方法として、画像の代わりにアイコンフォントを利用する方法があります。アイコンフォントとは、アイコンをフォントファイル化してWebフォントとして読み込み、テキストとして表示する方法です。
+                            複数のアイコンをまとめて1つのフォントファイルとして読み込めるので、アイコンを1つずつ読み込むのに比べてHTTPリクエストを削減できます。また、テキストとして表示するので、解像度に依存せず、CSSで簡単にサイズや色を変えたり、陰を付けたり加工できるのもメリットです。
+
+                            IcoMoonを使ってアイコンフォントを作成
+
+
+                            アイコンフォントは、アイコンフォントをWeb上で生成するツール「IcoMoon」を利用すると手軽に導入できます。IcoMoonは、あらかじめ用意されている大量のアイコンから任意のアイコンを選んでフォントファイル化したり、自分で用意したSVG画像からオリジナルのアイコンフォントを生成したりできます。
+
+
+                            IcoMoon
+                            http://icomoon.io/
+
+
+                            IcoMoonには3800個ものアイコンが用意されていますので、まずはこのアイコンの中から必要なアイコンを選んでフォント化してみましょう。
+
+                            「Icon App」にアクセスすると、アイコンの一覧が表示されます。
+
+                            http://icomoon.io/app/
+
+
+                            マウスカーソルのボタンをクリックし、フォント化したいアイコンを選択していきます。選択したアイコンにはオレンジの枠線が表示されます。
+
+                            「カーソル」「ゴミ箱」「鉛筆」のボタンは、それぞれ「選択」「削除」「編集」ボタンです。「削除」を選択すると選択したアイコンが非選択になります。「編集」ボタンを選択するとアコンの大きさや向き、位置などを調整出来ます。
+
+                            利用したいアイコンを選択した状態で、ページ最下部の「Font」を押すとフォントファイルのダウンロード画面へ移動します。
+
+                            「Preference」をクリックすると、生成するフォントファイルの設定を変更できます。
+                            設定画面では、以下のような設定が変更できます。
+
+                            Font Name: フォントのファイル名およびCSSのフォントファミリーで指定する値
+                            Class Prefix: アイコンをCSSのclass名で呼び出すときのプリフィックス
+                            Base64: フォントデータをData URI形式でCSSに埋め込む
+
+                            設定が終わったら「Download」ボタンを押してダウンロードします。
+
+
+                            アイコンフォントの利用方法
+
+                            ダウンロードしたZIPファイルを展開すると、フォントファイルのほかに、アイコンフォントを表示するためのCSS「style.css」やサンプルのHTML「index.html」が入っています。
+                            アイコンフォントを実際に医療するには、「style.css」の記述をコピーして利用したいCSSファイルにペーストし、
+                            「fonts」フォルダを丸ごとコピーします。HTMLでは以下のように書くとアイコンを表示できます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <span data-icon="アイコンの文字実体参照" aria-hidden="true"></span>
+                                <span aria-hidden="true" class="icon-アイコン名"></span>
+                        pre.
+
+                            実体参照の値やアイコン名はindex.htmlにまとまっていますので、コピー&ペーストして使えます。
+
+                            なお、ダウンロード時の設定で「Base64」にチェックしていると、style.cssにWOFF形式のフォントが埋め込まれています。WOFFフォントは主要なモダンブラウザーがサポートしていますが、IE8以下は対応していませんので、IE8以下の場合は同時に生成されるEOTファイルをフォールバックとして読み込みます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                @font-face{
+                                    font-family: 'colabo';
+                                    src:url(<fonts/colabo.eot>);
+                                }
+                        pre.
+                            オリジナルアイコンフォントの生成
+
+                            IcoMoonは、SVG形式のアイコンをアップロードすることで、オリジナルのアイコンフォントも生成できます。SVGファイルはIllustratorなどで簡単に作成出来ます。
+
+                            SVGファイルをアイコンフォントにするには、IcoMoon Appの「Import Icons」からアップロードします。
+
+                            アップロード後は、他のアイコンフォントと同様の手順でフォントファイルを生成してダウンロードできます。
+
+                            Webフォントのサブセット化
+
+                            無料で商用利用できるアイコンフォントが多くのWebサイトで配布されています。しかし、Fontelloのように、必要なアイコンだけのフォントファイルを生成してくれるサービスは多くありません。配布されているフォントの多くは必要ないアイコン等も含まれており、その分ファイルサイズが大きいため読み込みに時間がかかってしまいます。そこで、不必要なアイコンや文字をフォントファイルから削る（サブセット化する）ことが可能なサービスを使って、フォントファイルの軽量化を行いましょう。
+
+                            フォントをサブセット化する際にはライセンスを確認しましょう。パブリックドメインのフォントであれば問題ありませんが、それ以外のフォントはライセンスについての注意書きをよく読み、サブセット化が可能かどうかを確認してから作業を行いましょう。
+
+                            Fontello
+                            http://fontello.com/
+
+
+                            フォントをサブセット化できるサービス
+
+                            @FONT-FACE GENERATOR
+
+                            http://www.fontsquirrel.com/fontface/generator/
+
+                            「Subsetting」の項目の「Custom Subsetting」をチェックします。
+
+
+                            Unicode一覧表
+                            http://ja.wikipedia.org/wiki/Unicode一覧
+
+                            Uicode Range Generator
+                            http://zenoplex.jp/tools/unicoderange_generator.html

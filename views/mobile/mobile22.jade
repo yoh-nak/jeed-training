@@ -1,0 +1,60 @@
+extends ../layout
+
+block link
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;DataURI
+                    .panel-body
+                        p Data URIは、画像などのデータをWebページ内に文字列として埋め込む方法（URIスキーム）です。HTMLの中に記述すれば、外部データを別途読みこむ必要がなくなるので、その分HTTPリクエストを削減できます。ただし、ファイルサイズは元画像に比べて1.3〜1.5倍ほど大きくなり、ブラウザーにキャッシュされないため、多用はできません。
+                        p Data URIは以下のように記述します。
+                        pre.
+                            data:[<mime type>][;base64],<encoded data>
+                        p='<mime type>はデータの形式を表し、以下のような文字列を指定できます。'
+                        pre.
+                            font/opentype
+                            application/x-font-ttf
+                            image/png
+                            image/gif
+                            image/jpeg
+                            image/svg+xml
+
+                        p 画像などのバイナリデータを扱う場合はbase64を指定し、<encoded data>にBase64でエンコードしたデータを記述します。
+                        hr
+                        p img要素（HTML）でdataURIを使用する
+                        pre
+                            :code
+                                <img src="data:image/png;base64,エンコードデータ" alt="代替テキスト">
+                        hr
+                        p CSSでdataURIを使用する
+                        pre
+                            :code
+                                div {
+                                    background-image: url(data:image/png;base64,エンコードデータ);
+                                }
+                        hr
+                        pre.
+                            DataURL.net
+                            http://dataurl.net/#dataurlmaker
+
+                            Duri.me
+                            http://duri.me
+
+                            DataURI Generator
+                            http://bran.name/dump/data-uri-generator/
+
+                            Data URI Snippet Generator
+                            http://havelog.ayumusato.com/tools/data_uri.html

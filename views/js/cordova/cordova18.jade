@@ -1,0 +1,42 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+      .row
+        .col-sm-3
+          include left
+        .col-sm-9
+          .panel.panel-primary
+            .panel-heading Android開発で使うコマンド
+            .panel-body
+                pre.
+                    エミュレーターの起動
+                    emulator -avd エミュレータ名
+
+
+                    アプリのインストール
+                    adb install ファイル名.apk
+
+
+                    アプリのアンインストール
+                    adb uninstall アプリのパッケージ名
+
+
+                    署名の生成
+                    keytool -genkey -v -keyalg ＜鍵生成の暗号化方式＞ -keystore ＜証明書ファイル名＞ -alias ＜証明書別名＞ -validity ＜有効期限の日数＞
+                    keytool -genkey -v -keyalg RSA -keystore d:\tempandroid\techmaru.keystore -alias techkey -validity 10000
+
+                    署名の確認
+                    keytool -list -keystore ＜証明書ファイル名＞
+                    keytool -list -keystore d:\tempandroid\techmaru.keystore
+
+                    アプリに署名を設定する
+                    jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ＜証明書ファイル名＞ -storepass ＜パスワード＞ -keypass ＜パスワード＞ ＜apkファイル名＞ プロジェクト名

@@ -1,0 +1,57 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;ショートカットアイコン
+                    .panel-body
+                        pre
+                            :code
+                                ショートカットアイコン
+                                ====================
+                                114x114が万能
+                                iOSテカリあり
+                                <link rel="apple-touch-icon" href="images/siteicon.png">
+                                iOSテカリなし
+                                <link rel="apple-touch-icon-precomposed" href="images/siteicon.png">
+
+                                サイズ別
+                                <link rel="apple-touch-icon" href="images/siteicon.png">
+                                <link rel="apple-touch-icon" size="72x72" href="images/siteicon.png">
+                                <link rel="apple-touch-icon" size="114x114" href="images/siteicon.png">
+
+                                iphone 3G 57x57
+                                iphone 4 114x114
+                                iPad 72x72
+                                iPad Retina 144x144
+
+                                スタートアップイメージ　（iOSのみ）
+                                =============================
+                                320x360が万能
+                                iphone4、5では640x920も可
+
+                                <link rel="apple-touch-startup-image" href="images/startup.png">
+
+                                スタンドアローンモード（iOSのみ）
+                                ===========================
+                                アプリと同じように起動しアドレスバーが出ない。
+                                ただし、aタグはブラウザが立ち上がるので、リンクはajax処理が必要
+                                
+                                <meta name="apple-mobile-web-app-capable" content="yes">
+
+
+                                アドレスバーを消す（Safari、Android標準ブラウザ、Opera）
+                                ===========================================
+                                window.onload = function(){
+                                     window.scrollTo(0,1);
+                                };

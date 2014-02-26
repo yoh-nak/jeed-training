@@ -1,0 +1,56 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;grunt-datauri
+                    .panel-body
+                        p gruntのインストール
+                        pre.
+                            npm install -g grunt-cli
+                        p プロジェクトの作成
+                        pre.
+                            cd path/to/myapp
+                        p package.jsonの作成
+                        pre.
+                            npm init
+                        p タスクのインストール
+                        pre.
+                            npm install grunt-datauri --save-dev
+                        p Gruntfileの作成
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                module.exports = function(grunt){
+                                    grunt.initConfig( {
+                                        datauri: {
+                                            default: {
+                                                options: {
+                                                    classPrefix: 'data-'
+                                                },
+                                                src: [
+                                                    'assets/image1.png',
+                                                    'assets/image2.png',
+                                                    'assets/image3.png'
+                                                ],
+                                                dest: 'stylesheets/base64.css'
+                                            }
+                                        }
+                                    });
+
+                                    grunt.loadNpmTasks('grunt-datauri');
+
+                                    grunt.registerTask('default', ['datauri']);
+                                };
+                        p タスクの実行
+                        pre.
+                            grunt

@@ -1,0 +1,40 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;メールアドレス・電話番号リンク
+                    .panel-body
+                        p メールアドレスリンクがクリックされると、PCでもスマートフォンでも標準のメーラーアプリが起動します。ただし、メールアドレスリンクはメーラの送信先、件名、内容にあらかじめ入力された状態で起動するだけで、実際に送信するわけではありません。なるべくメール送信フォームを用意するほうがよいでしょう。
+                        p: u メールアドレスリンク
+                        pre
+                            :code
+                                <a href="mailto:contact@example.com?subject=件名;body=内容">メール送信</a>
+                        p 件名と内容はプログラムでURLエンコードをかけておく必要があります。
+                        pre
+                            :code
+                                var subject = '件名';
+                                subject = encodeURI(subject);
+                                console.log(subject);
+                        hr
+                        p: u 電話番号リンク
+                        p スマートフォンでは、電話番号リンクをクリックすることで電話をhref属性に指定した番号に電話をかけることができます。
+                        pre
+                            :code
+                                <a href="tel:0311111111">TEL:03-1111-1111</a>
+                        p iOSでは電話番号らしき文字が表示されていると自動的にリンクがつきますので、OFFにしておいたほうがよいでしょう。
+                        p: u 電話番号自動リンクを無効にする（iOSのみ）
+                        pre
+                            :code
+                                <meta name="format-detection" content="telephone=no"></meta> 
+                        p: u 電話番号自動リンクを有効にする（iOSのみ）

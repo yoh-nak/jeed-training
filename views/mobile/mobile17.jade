@@ -30,6 +30,52 @@ block content
                             li Androis2.2では、「background-size:cover」や「rotate3d」などに対応していない。
                         p 特にAndroid 2系では、上記の他にも多くのバグが発見されているので、デザインする段階から要注意です。iOSとAndroidでは、サイトの見た目が違ってくることを受け入れたり、クライアントからの受注案件等の場合、事前に「Androidではデザインを十分に再現できないバージョンや機種がある」旨を理解してもらえるように説明しておくのも必要なフローとなります。
                         hr
+                        h4 解決方法例
+                        p: u ランドスケープモードでのテキストサイズ拡大を防ぐ（iOSのみ）
+                        pre
+                            :code
+                                body{
+                                    -webkit-text-size-adjust:none;
+                                }
+
+                        p: u Android2.3未満、iOS5未満でposition:fixedが効かない
+                        pre
+                            :code
+                                iScrollを使う
+                                http://cubiq.org/iscroll
+
+                        p: u Android3未満、iOS5未満でth,tdにposition:relativeが効かない
+                        pre
+                            :code
+                                th/tdの子要素にdivを用意しdivにposition:relative
+
+                        p: u Androidでfont-weight:boldが効かない
+                        pre
+                            :code
+                                テキストシャドウを使う
+                                text-shadow:0 0 1px #000
+
+                        p: u Androidで背面要素がタップできてしまう
+                        pre
+                            :code
+                                クリックできなくする
+                                $('E').click(function(){
+                                    return false;
+                                });
+
+                        p: u iOSで200万px以上の画像が圧縮されてぼける
+                        pre
+                            :code
+                                画像を2分割し、img要素を2つ使う
+
+
+                        p: u 一部のAndroid端末でinput要素にフォーカスするとlandscape用のCSSを読み込んでしまう
+                        pre
+                            :code
+                                JavaSCriptでフォーカスしたときlandscape用のCSSを無効にする
+                                <link rel="stylesheet" media="all and (orientation:portrait)" href="style.css">
+                                <link rel="stylesheet" media="all and (orientation:landscape)" href="style.css">
+                        hr
                         pre.
                             AndroidやiPhoneのHTML,CSS,JavaScriptのバグまとめ 
                             http://blog.webcreativepark.net/2012/03/13-093853.html

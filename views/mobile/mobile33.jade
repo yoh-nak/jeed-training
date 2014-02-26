@@ -1,0 +1,63 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;簡易サーバー
+                    .panel-body
+                        p PCで制作したスマートフォンサイトを実機で確認するためには、まずPCに簡易的なWebサーバーを構築しておきます。そして、同一LAN内のIPアドレスで、実機からPCの簡易サーバーにアクセスすることで、実機での動作確認をすることができます。
+                        p Webサーバーを用意したら、以下のコマンドでPCのLAN内でのIPアドレスを確認し、http://ipアドレスでスマートフォンのブラウザからアクセスできます。
+                        p: u Windows
+                        pre.
+                            ipconfig
+                        p: u Mac/Linux
+                        pre.
+                            ifconfig
+                        hr
+                        .alert.alert-info Webサーバーソフト
+                        pre.
+                            Apache
+                            Nginx
+                            XAMPP
+                        hr
+                        .alert.alert-info npmパッケージ
+                        h4 static
+                        p
+                            | static npmパッケージサイト
+                            br
+                            a(href='https://npmjs.org/package/static',target='_blank')
+                                | https://npmjs.org/package/static
+                        p
+                            | static GitHubサイト
+                            br
+                            a(href='https://github.com/walmartlabs/static',target='_blank')
+                                | https://github.com/walmartlabs/static
+                        p 簡易Webサーバーをたてて指定したディレクトリにhttpアクセスできます。
+                        p: u インストール
+                        pre
+                            :code
+                                (sudo )npm install -g static
+                        p: u 使い方
+                        p 「static ディレクトリ」を実行します。
+                        p
+                            :code
+                                static .
+                        p 以下のように出力されるのでブラウザでアクセスします。
+                        pre
+                            :code
+                                serving "." at http://127.0.0.1:8080
+                        p qrcodeと合わせて使うと、スマートフォンサイトに実機でアクセスするときに便利です。
+                        hr
+                        .alert.alert-info Mac OSの機能
+                        p OS XにはOSの機能に、PCをWebサーバー化する機能が標準で搭載されています。Webサーバー機能を使用するには、「システム環境」→「共有」で「Web共有」にチェックを入れましょう。
+                        p チェックを入れるとウィンドウの右側に説明やURLが表示されます。「○○Webサイトフォルダを開く」をクリックすると該当するフォルダが開かれるので、そこにサイトデータを一式置きます。指定されたURLにアクセスするとサイトが確認できるようになります。

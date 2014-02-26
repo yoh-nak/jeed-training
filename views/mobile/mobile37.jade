@@ -1,0 +1,50 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;grunt-spritesmith
+                    .panel-body
+                        p gruntのインストール
+                        pre.
+                            npm install -g grunt-cli
+                        p プロジェクトの作成
+                        pre.
+                            cd path/to/myapp
+                        p package.jsonの作成
+                        pre.
+                            npm init
+                        p タスクのインストール
+                        pre.
+                            npm install grunt-spritesmith --save-dev
+                        p Gruntfileの作成
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                module.exports = function(grunt){
+                                    grunt.initConfig({
+                                        sprite:{
+                                            all: {
+                                                src: 'assets/*.png',
+                                                destImg: 'images/sprite.png',
+                                                destCSS: 'stylesheets/sprites.css'
+                                            }
+                                        }
+                                    });
+
+                                    grunt.loadNpmTasks('grunt-spritesmith');
+
+                                    grunt.registerTask('default', ['sprite']);
+                                };
+                        p タスクの実行
+                        pre.
+                            grunt

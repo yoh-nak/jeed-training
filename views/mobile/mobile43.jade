@@ -1,0 +1,716 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;フロントエンド開発の自動化
+                    .panel-body
+                        .alert.alert-info Gruntの設定
+                        pre.
+                            インストールしていなければ、グローバルパッケージのインストール
+                            (sudo )npm install -g grunt-cli
+
+                            プロジェクトの作成
+                            mkdir myapp
+                            cd myapp
+
+                            bower.jsonの作成
+                            bower init
+
+                            jQueryのダウンロード
+                            bower install jquery --save
+
+                            package.jsonの作成
+                            npm init
+
+                            ローカルパッケージ、タスクのインストール
+                            npm install grunt grunt-contrib-copy grunt-contrib-jade grunt-html grunt-contrib-htmlmin grunt-contrib-stylus grunt-contrib-cssmin grunt-contrib-csslint grunt-contrib-uglify grunt-contrib-jshint grunt-contrib-watch --save-dev
+
+                        pre.
+                            :code
+                                ※ 公式プラグインはgrunt-contribにまとめられています。
+                                npm install grunt-contrib grunt-html
+                                
+                        .alert.alert-info ファイルのコピー　grunt-contrib-copy
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                module.exports = function(grunt) {
+                                //設定
+                                module.exports = function(grunt) {
+                                    //設定
+                                    grunt.initConfig({
+                                        copy: {
+                                            init: {
+                                                files: [
+                                                    {
+                                                        expand: true,
+                                                        cwd: 'bower_components/jquery/dist/',
+                                                        src: 'jquery.min.js',
+                                                        dest: 'public/js',
+                                                        filter: 'isFile'
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    });
+
+                                    //プラグインの読み込み
+                                    grunt.loadNpmTasks('grunt-contrib-copy');
+
+                                    //タスクの実行
+                                    grunt.registerTask('default', 'copy');
+                                };
+
+                        .alert.alert-info jadeの変換　grunt-contrib-jade
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                module.exports = function(grunt) {
+                                    //設定
+                                    grunt.initConfig({
+                                        copy: {
+                                            init: {
+                                                files: [
+                                                    {
+                                                        expand: true,
+                                                        cwd: 'bower_components/jquery/dist/',
+                                                        src: 'jquery.min.js',
+                                                        dest: 'public/js',
+                                                        filter: 'isFile'
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        jade: {
+                                            build: {
+                                                src: ['src/index.jade'],
+                                                dest: 'public/index.html',
+                                                options: {
+                                                    pretty: false
+                                                }
+                                            }
+                                        }
+                                    });
+
+                                    //プラグインの読み込み
+                                    grunt.loadNpmTasks('grunt-contrib-copy');
+                                    grunt.loadNpmTasks('grunt-contrib-jade');
+
+                                    //タスクの実行
+                                    grunt.registerTask('default', 'jade');
+                                    grunt.registerTask('bower', 'copy');
+                                };
+                        pre.
+                            タスクの実行
+                            grunt
+                            grunt bower
+                            
+                        .alert.alert-info htmlの妥当性検証　grunt-html
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                module.exports = function(grunt) {
+                                    //設定
+                                    grunt.initConfig({
+                                        copy: {
+                                            init: {
+                                                files: [
+                                                    {
+                                                        expand: true,
+                                                        cwd: 'bower_components/jquery/dist/',
+                                                        src: 'jquery.min.js',
+                                                        dest: 'public/js',
+                                                        filter: 'isFile'
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        jade: {
+                                            build: {
+                                                src: ['src/index.jade'],
+                                                dest: 'public/index.html',
+                                                options: {
+                                                    pretty: true
+                                                }
+                                            }
+                                        },
+                                        htmllint: {
+                                            all: ['public/**/*.html']
+                                        }
+                                    });
+
+                                    //プラグインの読み込み
+                                    grunt.loadNpmTasks('grunt-contrib-copy');
+                                    grunt.loadNpmTasks('grunt-contrib-jade');
+                                    grunt.loadNpmTasks('grunt-html');
+
+                                    //タスクの実行
+                                    grunt.registerTask('default', ['jade','htmllint']);
+                                    grunt.registerTask('bower', 'copy');
+                                };
+                        pre.
+                            タスクの実行
+                            grunt
+                            grunt bower
+
+                            grunt copy
+                            grunt jade
+                            grunt htmllint
+
+                        .alert.alert-info htmlの圧縮　grunt-contrib-htmlmin
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                module.exports = function(grunt) {
+                                    //設定
+                                    grunt.initConfig({
+                                        copy: {
+                                            init: {
+                                                files: [
+                                                    {
+                                                        expand: true,
+                                                        cwd: 'bower_components/jquery/dist/',
+                                                        src: 'jquery.min.js',
+                                                        dest: 'public/js',
+                                                        filter: 'isFile'
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        jade: {
+                                            build: {
+                                                src: ['src/index.jade'],
+                                                dest: 'public/index.html',
+                                                options: {
+                                                    pretty: true
+                                                }
+                                            }
+                                        },
+                                        htmllint: {
+                                            all: ['public/**/*.html']
+                                        },
+                                        htmlmin: {
+                                            dist: {
+                                                options: {
+                                                    removeComments: false,
+                                                    collapseWhitespace: true
+                                                },
+                                                files: {
+                                                    'public/index.html' : 'public/index.html'
+                                                }
+                                            }
+                                        }
+                                    });
+
+                                    //プラグインの読み込み
+                                    grunt.loadNpmTasks('grunt-contrib-copy');
+                                    grunt.loadNpmTasks('grunt-contrib-jade');
+                                    grunt.loadNpmTasks('grunt-html');
+                                    grunt.loadNpmTasks('grunt-contrib-htmlmin');
+
+                                    //タスクの実行
+                                    grunt.registerTask('default', ['jade','htmllint',htmlmin']);
+                                    grunt.registerTask('bower', 'copy');
+                                };
+
+                        .alert.alert-info stylusの変換　grunt-contrib-stylus
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                module.exports = function(grunt) {
+                                    //設定
+                                    grunt.initConfig({
+                                        copy: {
+                                            init: {
+                                                files: [
+                                                    {
+                                                        expand: true,
+                                                        cwd: 'bower_components/jquery/dist/',
+                                                        src: 'jquery.min.js',
+                                                        dest: 'public/js',
+                                                        filter: 'isFile'
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        jade: {
+                                            build: {
+                                                src: ['src/index.jade'],
+                                                dest: 'public/index.html',
+                                                options: {
+                                                    pretty: true
+                                                }
+                                            }
+                                        },
+                                        htmllint: {
+                                            all: ['public/**/*.html']
+                                        },
+                                        htmlmin: {
+                                            dist: {
+                                                options: {
+                                                    removeComments: false,
+                                                    collapseWhitespace: true
+                                                },
+                                                files: {
+                                                    'public/index.html' : 'public/index.html'
+                                                }
+                                            }
+                                        },
+                                        stylus: {
+                                            compile: {
+                                                options: {
+                                                    compress: false
+                                                },
+                                                files: {
+                                                    'public/css/style.css': ['src/**/*.styl']
+                                                }
+                                            }
+                                        }
+                                    });
+
+                                    //プラグインの読み込み
+                                    grunt.loadNpmTasks('grunt-contrib-copy');
+                                    grunt.loadNpmTasks('grunt-contrib-jade');
+                                    grunt.loadNpmTasks('grunt-html');
+                                    grunt.loadNpmTasks('grunt-contrib-htmlmin');
+                                    grunt.loadNpmTasks('grunt-contrib-stylus');
+
+                                    //タスクの実行
+                                    grunt.registerTask('default', ['jade','htmllint',htmlmin','stylus']);
+                                    grunt.registerTask('bower', 'copy');
+                                };
+
+                        .alert.alert-info CSSの妥当性検証　grunt-contrib-csslint
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                module.exports = function(grunt) {
+                                    //設定
+                                    grunt.initConfig({
+                                        copy: {
+                                            init: {
+                                                files: [
+                                                    {
+                                                        expand: true,
+                                                        cwd: 'bower_components/jquery/dist/',
+                                                        src: 'jquery.min.js',
+                                                        dest: 'public/js',
+                                                        filter: 'isFile'
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        jade: {
+                                            build: {
+                                                src: ['src/index.jade'],
+                                                dest: 'public/index.html',
+                                                options: {
+                                                    pretty: true
+                                                }
+                                            }
+                                        },
+                                        htmllint: {
+                                            all: ['public/**/*.html']
+                                        },
+                                        htmlmin: {
+                                            dist: {
+                                                options: {
+                                                    removeComments: false,
+                                                    collapseWhitespace: true
+                                                },
+                                                files: {
+                                                    'public/index.html' : 'public/index.html'
+                                                }
+                                            }
+                                        },
+                                        stylus: {
+                                            compile: {
+                                                options: {
+                                                    compress: false
+                                                },
+                                                files: {
+                                                    'public/css/style.css': ['src/**/*.styl']
+                                                }
+                                            }
+                                        },
+                                        csslint: {
+                                            check :{
+                                                src: 'public/css/style.css'
+                                            }
+
+                                        }
+                                    });
+
+                                    //プラグインの読み込み
+                                    grunt.loadNpmTasks('grunt-contrib-copy');
+                                    grunt.loadNpmTasks('grunt-contrib-jade');
+                                    grunt.loadNpmTasks('grunt-html');
+                                    grunt.loadNpmTasks('grunt-contrib-htmlmin');
+                                    grunt.loadNpmTasks('grunt-contrib-stylus');
+                                    grunt.loadNpmTasks('grunt-contrib-csslint');
+
+                                    //タスクの実行
+                                    grunt.registerTask('default', ['jade','htmlmin','stylus','csslint']);
+                                    grunt.registerTask('bower', 'copy');
+                                };
+
+                        .alert.alert-info CSSの圧縮　grunt-contrib-cssmin
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                module.exports = function(grunt) {
+                                    //設定
+                                    grunt.initConfig({
+                                        copy: {
+                                            init: {
+                                                files: [
+                                                    {
+                                                        expand: true,
+                                                        cwd: 'bower_components/jquery/dist/',
+                                                        src: 'jquery.min.js',
+                                                        dest: 'public/js',
+                                                        filter: 'isFile'
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        jade: {
+                                            build: {
+                                                src: ['src/index.jade'],
+                                                dest: 'public/index.html',
+                                                options: {
+                                                    pretty: true
+                                                }
+                                            }
+                                        },
+                                        htmllint: {
+                                            all: ['public/**/*.html']
+                                        },
+                                        htmlmin: {
+                                            dist: {
+                                                options: {
+                                                    removeComments: false,
+                                                    collapseWhitespace: true
+                                                },
+                                                files: {
+                                                    'public/index.html' : 'public/index.html'
+                                                }
+                                            }
+                                        },
+                                        stylus: {
+                                            compile: {
+                                                options: {
+                                                    compress: false
+                                                },
+                                                files: {
+                                                    'public/css/style.css': ['src/**/*.styl']
+                                                }
+                                            }
+                                        },
+                                        csslint: {
+                                            check :{
+                                                src: 'public/css/style.css'
+                                            }
+
+                                        },
+                                        cssmin: {
+                                            minify: {
+                                                files: {
+                                                    'public/css/style.min.css': '<%= csslint.check.src %>'
+                                                }
+                                            }
+                                        }
+                                    });
+
+                                    //プラグインの読み込み
+                                    grunt.loadNpmTasks('grunt-contrib-copy');
+                                    grunt.loadNpmTasks('grunt-contrib-jade');
+                                    grunt.loadNpmTasks('grunt-html');
+                                    grunt.loadNpmTasks('grunt-contrib-htmlmin');
+                                    grunt.loadNpmTasks('grunt-contrib-stylus');
+                                    grunt.loadNpmTasks('grunt-contrib-csslint');
+                                    grunt.loadNpmTasks('grunt-contrib-cssmin');
+
+                                    //タスクの実行
+                                    grunt.registerTask('default', ['jade','htmlmin','stylus','csslint','cssmin']);
+                                    grunt.registerTask('bower', 'copy');
+                                };
+
+                        .alert.alert-info JavaScriptの妥当性検証　grunt-contrib-jshint
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                module.exports = function(grunt) {
+                                    //設定
+                                    grunt.initConfig({
+                                        copy: {
+                                            init: {
+                                                files: [
+                                                    {
+                                                        expand: true,
+                                                        cwd: 'bower_components/jquery/dist/',
+                                                        src: 'jquery.min.js',
+                                                        dest: 'public/js',
+                                                        filter: 'isFile'
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        jade: {
+                                            build: {
+                                                src: ['src/index.jade'],
+                                                dest: 'public/index.html',
+                                                options: {
+                                                    pretty: true
+                                                }
+                                            }
+                                        },
+                                        htmllint: {
+                                            all: ['public/**/*.html']
+                                        },
+                                        htmlmin: {
+                                            dist: {
+                                                options: {
+                                                    removeComments: false,
+                                                    collapseWhitespace: true
+                                                },
+                                                files: {
+                                                    'public/index.html' : 'public/index.html'
+                                                }
+                                            }
+                                        },
+                                        stylus: {
+                                            compile: {
+                                                options: {
+                                                    compress: false
+                                                },
+                                                files: {
+                                                    'public/css/style.css': ['src/**/*.styl']
+                                                }
+                                            }
+                                        },
+                                        csslint: {
+                                            check :{
+                                                src: 'public/css/style.css'
+                                            }
+
+                                        },
+                                        cssmin: {
+                                            minify: {
+                                                files: {
+                                                    'public/css/style.min.css': '<%= csslint.check.src %>'
+                                                }
+                                            }
+                                        },
+                                        jshint: {
+                                            all: ['Gruntfile.js', 'public/**/*.js']
+                                        }
+                                    });
+
+                                    //プラグインの読み込み
+                                    grunt.loadNpmTasks('grunt-contrib-copy');
+                                    grunt.loadNpmTasks('grunt-contrib-jade');
+                                    grunt.loadNpmTasks('grunt-html');
+                                    grunt.loadNpmTasks('grunt-contrib-htmlmin');
+                                    grunt.loadNpmTasks('grunt-contrib-stylus');
+                                    grunt.loadNpmTasks('grunt-contrib-csslint');
+                                    grunt.loadNpmTasks('grunt-contrib-cssmin');
+                                    grunt.loadNpmTasks('grunt-contrib-jshint');
+
+                                    //タスクの実行
+                                    grunt.registerTask('default', ['jade','htmlmin','stylus','csslint','cssmin','jshint']);
+                                    grunt.registerTask('bower', 'copy');
+                                };
+                        .alert.alert-info JavaScriptの圧縮　grunt-contrib-uglify
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                module.exports = function(grunt) {
+                                    //設定
+                                    grunt.initConfig({
+                                        copy: {
+                                            init: {
+                                                files: [
+                                                    {
+                                                        expand: true,
+                                                        cwd: 'bower_components/jquery/dist/',
+                                                        src: 'jquery.min.js',
+                                                        dest: 'public/js',
+                                                        filter: 'isFile'
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        jade: {
+                                            build: {
+                                                src: ['src/index.jade'],
+                                                dest: 'public/index.html',
+                                                options: {
+                                                    pretty: true
+                                                }
+                                            }
+                                        },
+                                        htmllint: {
+                                            all: ['public/**/*.html']
+                                        },
+                                        htmlmin: {
+                                            dist: {
+                                                options: {
+                                                    removeComments: false,
+                                                    collapseWhitespace: true
+                                                },
+                                                files: {
+                                                    'public/index.html' : 'public/index.html'
+                                                }
+                                            }
+                                        },
+                                        stylus: {
+                                            compile: {
+                                                options: {
+                                                    compress: false
+                                                },
+                                                files: {
+                                                    'public/css/style.css': ['src/**/*.styl']
+                                                }
+                                            }
+                                        },
+                                        csslint: {
+                                            check :{
+                                                src: 'public/css/style.css'
+                                            }
+
+                                        },
+                                        cssmin: {
+                                            minify: {
+                                                files: {
+                                                    'public/css/style.min.css': '<%= csslint.check.src %>'
+                                                }
+                                            }
+                                        },
+                                        jshint: {
+                                            all: ['Gruntfile.js', 'public/**/*.js']
+                                        },
+                                        uglify: {
+                                            target: {
+                                                files: {
+                                                    'public/js/script.min.js': ['public/**/*.js']
+                                                }
+                                            }
+                                        }
+                                    });
+
+                                    //プラグインの読み込み
+                                    grunt.loadNpmTasks('grunt-contrib-copy');
+                                    grunt.loadNpmTasks('grunt-contrib-jade');
+                                    grunt.loadNpmTasks('grunt-html');
+                                    grunt.loadNpmTasks('grunt-contrib-htmlmin');
+                                    grunt.loadNpmTasks('grunt-contrib-stylus');
+                                    grunt.loadNpmTasks('grunt-contrib-csslint');
+                                    grunt.loadNpmTasks('grunt-contrib-cssmin');
+                                    grunt.loadNpmTasks('grunt-contrib-jshint');
+                                    grunt.loadNpmTasks('grunt-contrib-uglify');
+
+                                    //タスクの実行
+                                    grunt.registerTask('default', ['jade','htmlmin','stylus','csslint','cssmin','jshint','uglify']);
+                                    grunt.registerTask('bower', 'copy');
+                                };
+
+                        .alert.alert-info ファイル変更の監視　grunt-contrib-watch
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                module.exports = function(grunt) {
+                                    //設定
+                                    grunt.initConfig({
+                                        copy: {
+                                            init: {
+                                                files: [
+                                                    {
+                                                        expand: true,
+                                                        cwd: 'bower_components/jquery/dist/',
+                                                        src: 'jquery.min.js',
+                                                        dest: 'public/js',
+                                                        filter: 'isFile'
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        jade: {
+                                            build: {
+                                                src: ['src/index.jade'],
+                                                dest: 'public/index.html',
+                                                options: {
+                                                    pretty: true
+                                                }
+                                            }
+                                        },
+                                        htmllint: {
+                                            all: ['public/**/*.html']
+                                        },
+                                        htmlmin: {
+                                            dist: {
+                                                options: {
+                                                    removeComments: false,
+                                                    collapseWhitespace: true
+                                                },
+                                                files: {
+                                                    'public/index.html' : 'public/index.html'
+                                                }
+                                            }
+                                        },
+                                        stylus: {
+                                            compile: {
+                                                options: {
+                                                    compress: false
+                                                },
+                                                files: {
+                                                    'public/css/style.css': ['src/**/*.styl']
+                                                }
+                                            }
+                                        },
+                                        csslint: {
+                                            check :{
+                                                src: 'public/css/style.css'
+                                            }
+
+                                        },
+                                        cssmin: {
+                                            minify: {
+                                                files: {
+                                                    'public/css/style.min.css': '<%= csslint.check.src %>'
+                                                }
+                                            }
+                                        },
+                                        jshint: {
+                                            all: ['Gruntfile.js', 'public/**/*.js']
+                                        },
+                                        uglify: {
+                                            target: {
+                                                files: {
+                                                    'public/js/script.min.js': ['public/**/*.js']
+                                                }
+                                            }
+                                        },
+                                        watch: {
+                                            files: ['src/**/*.jade','src/**/*.styl'],
+                                            tasks: ['jade','htmlmin','stylus','csslint','cssmin','jshint','uglify']
+                                        }
+                                    });
+
+                                    //プラグインの読み込み
+                                    grunt.loadNpmTasks('grunt-contrib-copy');
+                                    grunt.loadNpmTasks('grunt-contrib-jade');
+                                    grunt.loadNpmTasks('grunt-html');
+                                    grunt.loadNpmTasks('grunt-contrib-htmlmin');
+                                    grunt.loadNpmTasks('grunt-contrib-stylus');
+                                    grunt.loadNpmTasks('grunt-contrib-csslint');
+                                    grunt.loadNpmTasks('grunt-contrib-cssmin');
+                                    grunt.loadNpmTasks('grunt-contrib-jshint');
+                                    grunt.loadNpmTasks('grunt-contrib-uglify');
+                                    grunt.loadNpmTasks('grunt-contrib-watch');
+
+                                    //タスクの実行
+                                    grunt.registerTask('default', ['jade','htmlmin','stylus','csslint','cssmin','jshint','uglify','watch']);
+                                    grunt.registerTask('bower', 'copy');
+                                };

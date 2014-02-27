@@ -33,11 +33,231 @@ block content
                             npm init
 
                             ローカルパッケージ、タスクのインストール
-                            npm install grunt grunt-contrib-jade grunt-html --save-dev
+                            npm install grunt grunt-contrib-copy grunt-contrib-jade grunt-html grunt-contrib-htmlmin grunt-contrib-stylus grunt-contrib-cssmin grunt-contrib-csslint grunt-contrib-uglify grunt-contrib-jshint grunt-notify grunt-contrib-watch --save-dev
 
+                        pre.
+                            ※ 公式プラグインはgrunt-contribにまとめられています。
+                            npm install grunt-contrib grunt-html grunt-notify
+                                
+                        p: u ファイルのコピー　grunt-contrib-copy
+                        pre.
+                            module.exports = function(grunt) {
+                            //設定
+                            module.exports = function(grunt) {
+                                //設定
+                                grunt.initConfig({
+                                    copy: {
+                                        init: {
+                                            files: [
+                                                {
+                                                    expand: true,
+                                                    cwd: 'bower_components/jquery/dist/',
+                                                    src: 'jquery.min.js',
+                                                    dest: 'public/js',
+                                                    filter: 'isFile'
+                                                }
+                                            ]
+                                        }
+                                    }
+                                });
+
+                                //プラグインの読み込み
+                                grunt.loadNpmTasks('grunt-contrib-copy');
+
+                                //タスクの実行
+                                grunt.registerTask('default', 'copy');
+                            };
+
+                        p: u jadeの変換　grunt-contrib-jade
+                        pre.
+                            module.exports = function(grunt) {
+                                //設定
+                                grunt.initConfig({
+                                    copy: {
+                                        init: {
+                                            files: [
+                                                {
+                                                    expand: true,
+                                                    cwd: 'bower_components/jquery/dist/',
+                                                    src: 'jquery.min.js',
+                                                    dest: 'public/js',
+                                                    filter: 'isFile'
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    jade: {
+                                        build: {
+                                            src: ['src/index.jade'],
+                                            dest: 'public/index.html',
+                                            options: {
+                                                pretty: false
+                                            }
+                                        }
+                                    }
+                                });
+
+                                //プラグインの読み込み
+                                grunt.loadNpmTasks('grunt-contrib-copy');
+                                grunt.loadNpmTasks('grunt-contrib-jade');
+
+                                //タスクの実行
+                                grunt.registerTask('default', 'jade');
+                                grunt.registerTask('bower', 'copy');
+                            };
+
+                            タスクの実行
+                            grunt
+                            grunt bower
+                            
+                        p: u htmlの妥当性検証　grunt-html
+                        pre.
+                            module.exports = function(grunt) {
+                                //設定
+                                grunt.initConfig({
+                                    copy: {
+                                        init: {
+                                            files: [
+                                                {
+                                                    expand: true,
+                                                    cwd: 'bower_components/jquery/dist/',
+                                                    src: 'jquery.min.js',
+                                                    dest: 'public/js',
+                                                    filter: 'isFile'
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    jade: {
+                                        build: {
+                                            src: ['src/index.jade'],
+                                            dest: 'public/index.html',
+                                            options: {
+                                                pretty: true
+                                            }
+                                        }
+                                    },
+                                    htmllint: {
+                                        all: ['public/**/*.html']
+                                    }
+                                });
+
+                                //プラグインの読み込み
+                                grunt.loadNpmTasks('grunt-contrib-copy');
+                                grunt.loadNpmTasks('grunt-contrib-jade');
+                                grunt.loadNpmTasks('grunt-html');
+
+                                //タスクの実行
+                                grunt.registerTask('default', ['jade','htmllint']);
+                                grunt.registerTask('bower', 'copy');
+                            };
+
+                            タスクの実行
+                            grunt
+                            grunt bower
+
+                            grunt copy
+                            grunt jade
+                            grunt htmllint
+
+                        p: u htmlの圧縮　grunt-contrib-htmlmin
+                        pre.
+                            module.exports = function(grunt) {
+                                //設定
+                                grunt.initConfig({
+                                    copy: {
+                                        init: {
+                                            files: [
+                                                {
+                                                    expand: true,
+                                                    cwd: 'bower_components/jquery/dist/',
+                                                    src: 'jquery.min.js',
+                                                    dest: 'public/js',
+                                                    filter: 'isFile'
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    jade: {
+                                        build: {
+                                            src: ['src/index.jade'],
+                                            dest: 'public/index.html',
+                                            options: {
+                                                pretty: true
+                                            }
+                                        }
+                                    },
+                                    htmlmin: {
+                                        dist: {
+                                            options: {
+                                                removeComments: false,
+                                                collapseWhitespace: true
+                                            },
+                                            files: {
+                                                'public/index.html' : 'public/index.html'
+                                            }
+                                        }
+                                    }
+                                });
+
+                                //プラグインの読み込み
+                                grunt.loadNpmTasks('grunt-contrib-copy');
+                                grunt.loadNpmTasks('grunt-contrib-jade');
+                                grunt.loadNpmTasks('grunt-contrib-htmlmin');
+
+                                //タスクの実行
+                                grunt.registerTask('default', ['jade','htmlmin']);
+                                grunt.registerTask('bower', 'copy');
+                            };
+
+                        p: u stylusの変換　grunt-contrib-stylus
+
+                        p: u CSSの圧縮　grunt-contrib-cssmin
+
+                        p: u CSSの妥当性検証　grunt-contrib-csslint
+
+                        p: u JavaScriptの圧縮　grunt-contrib-uglify
+
+                        p: u JavaScriptの妥当性検証　grunt-contrib-jshint
+
+                        p: u タスクの失敗を知らせる grunt-notify
+
+                        p: u ファイル変更の監視　grunt-contrib-watch
+
+
+                        pre.
                             タスクの作成
+                            module.exports = function(grunt) {
+                                //タスクの設定
+                                grunt.initConfig({
+                                    jade: {
+                                        build: {
+                                            src: ['src/index.jade'],
+                                            dest: 'public/index.html',
+                                            options: {
+                                                pretty: false
+                                            }
+                                        }
+                                    },
+                                    htmllint: {
+                                        all: ['public/**/*.html']
+                                    },
+                                    watch: {
+                                        files: ['src/**/*.jade'],
+                                        tasks: ['jade','htmllint']
+                                    }
+                                });
 
+                                //タスクの読み込み
+                                grunt.loadNpmTasks('grunt-contrib-jade');
+                                grunt.loadNpmTasks('grunt-html');
+                                grunt.loadNpmTasks('grunt-contrib-watch');
 
+                                //タスクの実行
+                                grunt.registerTask('default', ['jade','htmllint','watch']);
+                            };
+
+                            
                         p ① Doctype宣言の読み込み
                         p
                             a.btn.btn-default(href='../demo/mobile/cafe/index1.html',target='_blank')

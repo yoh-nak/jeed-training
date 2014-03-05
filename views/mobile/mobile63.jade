@@ -66,8 +66,8 @@ block content
                                             },
                                             target3: {
                                                 options: {
-                                                    keepSpecialComments: *,
-                                                    banner: '/* <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */'
+                                                    keepSpecialComments: '*',
+                                                    banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */'
                                                 },
                                                 files: {
                                                     'public/combine.min.css': ['src/css/first.css', 'src/css/second.css']
@@ -86,3 +86,30 @@ block content
                         p ターゲットを指定して実行
                         pre.
                             grunt cssmin:target1
+                        hr
+                        h4 special comment
+                        p special commentとはCSSの1行目に記述するライセンス等のコメントのことです。
+                        P='「/* */」のように記述するとコメントは削除されますが、「/*! */」のように記述すると削除されません。'
+                        P ただし、keepSpecialCommentsのオプションが0にされていると削除されます。
+                        pre
+                            :code
+                                <mark>/*! ライセンス等 */</mark>
+
+                                /* リセット */
+                                *{
+                                    margin: 0; /* 余白の削除 */
+                                }
+
+                                /* レイアウト*/
+                                #container{
+                                    ...
+                                }
+                                ...
+                        hr
+                        h4 pkg: grunt.file.readJSON('package.json')
+                        p pkgというタスクはgruntの標準のタスクで、package.jsonのデータを読み込むことができます。
+                        p 以下の記述でpackage.jsonから、アプリ名、アプリのバージョンを代入することができます。
+                        pre
+                            :code
+                                <%= pkg.name %>
+                                <%= pkg.version %>

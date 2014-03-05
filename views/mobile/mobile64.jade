@@ -1,0 +1,99 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;grunt-contrib-uglify
+                    .panel-body
+                        h4 GitHub
+                        p
+                            a(href='https://github.com/gruntjs/grunt-contrib-uglify',target='_blank') https://github.com/gruntjs/grunt-contrib-uglify
+                        hr
+                        p gruntのインストール
+                        pre.
+                            npm install -g grunt-cli
+                        p プロジェクトの作成
+                        pre.
+                            cd path/to/myapp
+                        p package.jsonの作成
+                        pre.
+                            npm init
+                        p プラグインのインストール
+                        pre.
+                            npm install grunt grunt-contrib-uglify --save-dev
+                        p Gruntfileの作成
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                module.exports = function(grunt){
+                                    grunt.initConfig({
+                                        pkg: grunt.file.readJSON('package.json'),
+                                        uglify: {
+                                            all: {
+                                                options: {
+                                                    mangle: {},
+                                                    compress: {},
+                                                    beautify: false,
+                                                    report: 'min',
+                                                    sourceMap: false,
+                                                    sourceMapName: undefined,
+                                                    sourceMapIn: undefined,
+                                                    sourceMapIncludeSources: false,
+                                                    wrap: undefined,
+                                                    exportAll: false,
+                                                    preserveComments: undefined,
+                                                    banner: '',
+                                                    footer: ''
+                                                },
+                                                cwd: 'src/js',
+                                                expand: true,
+                                                src: ['**/*.js', '**/!*.min.js'],
+                                                dest: 'public/js/',
+                                                ext: '.min.js'
+                                            },
+                                            target1: {
+                                                options: {
+
+                                                },
+                                                files: {
+                                                    'public/js/combine.min.js': ['src/js/**/*.js']
+                                                }
+                                            },
+                                            target2: {
+                                                options: {
+
+                                                },
+                                                files: {
+                                                    'public/js/combine.min.js': ['src/js/first.js', 'src/js/second.js']
+                                                }
+                                            },
+                                            target3: {
+                                                options: {
+                                                    banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */'
+                                                },
+                                                files: {
+                                                    'public/js/combine.min.js': ['src/js/first.js', 'src/js/second.js']
+                                                }
+                                            }
+                                        }
+                                    });
+                                    
+                                    grunt.loadNpmTasks('grunt-contrib-uglify');
+                                    
+                                    grunt.registerTask('default', 'uglify');
+                                };
+                        p すべて実行
+                        pre.
+                            grunt
+                        p ターゲットを指定して実行
+                        pre.
+                            grunt uglify:target1

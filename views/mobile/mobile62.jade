@@ -36,40 +36,38 @@ block content
                             :code
                                 module.exports = function(grunt){
                                     grunt.initConfig({
-                                        sprite:{
+                                        htmlmin: {
                                             all: {
-                                                src: 'src/sprite/**/*.png',
-                                                destImg: 'public/images/sprite.png',
-                                                destCSS: 'public/css/sprite.css',
-                                                padding: 2,
-                                                algorithm: 'left-right',
-                                                cssOpts: {
-                                                    functions: false,
-                                                    'cssClass': function (item) {
-                                                        return '.sprite-' + item.name;
-                                                    }
-                                                }
+                                                options: {
+                                                    removeComments: true,
+                                                    collapseWhitespace: true
+                                                },
+                                                files: [ {
+                                                    //cwd: 'src',
+                                                    src: 'src/**/*.html',
+                                                    dest: 'public',
+                                                } ]/*,
+                                                files: {
+                                                    'dist/index.html': 'src/index.html',
+                                                    'dist/contact.html': 'src/contact.html'
+                                                }*/
                                             },
                                             target1: {
-                                                src: ['src/sprite/image1.png','src/sprite/image2.png','src/sprite/image3.png'],
-                                                destImg: 'public/images/sprite1.png',
-                                                destCSS: 'public/css/sprite1.css'
-                                            },
-                                            target2: {
-                                                src: ['src/sprite/image3.png','src/sprite/image4.png','src/sprite/image5.png'],
-                                                destImg: 'public/images/sprite2.png',
-                                                destCSS: 'public/css/sprite2.css'
+                                                files: {
+                                                    'dist/index.html': 'src/index.html',
+                                                    'dist/contact.html': 'src/contact.html'
+                                                }
                                             }
                                         }
                                     });
                                     
-                                    grunt.loadNpmTasks('grunt-spritesmith');
+                                    grunt.loadNpmTasks('grunt-contrib-htmlmin');
                                     
-                                    grunt.registerTask('default', 'sprite');
+                                    grunt.registerTask('default', 'htmlmin');
                                 };
                         p すべて実行
                         pre.
                             grunt
                         p ターゲットを指定して実行
                         pre.
-                            grunt sprite:target1
+                            grunt htmlmin:target1

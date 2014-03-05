@@ -37,16 +37,23 @@ block content
                                 module.exports = function(grunt){
                                     grunt.initConfig( {
                                         datauri: {
-                                            default: {
+                                            all: {
+                                                options: {
+                                                    classPrefix: 'data-'
+                                                },
+                                                src: ['src/datauri/**/*.png'],
+                                                dest: 'public/css/datauri.css'
+                                            },
+                                            target1: {
                                                 options: {
                                                     classPrefix: 'data-'
                                                 },
                                                 src: [
-                                                    'assets/image1.png',
-                                                    'assets/image2.png',
-                                                    'assets/image3.png'
+                                                    'src/datauri/image1.png',
+                                                    'src/datauri/image2.png',
+                                                    'src/datauri/image3.png'
                                                 ],
-                                                dest: 'stylesheets/base64.css'
+                                                dest: 'public/css/datauri1.css'
                                             }
                                         }
                                     });
@@ -55,6 +62,9 @@ block content
 
                                     grunt.registerTask('default', ['datauri']);
                                 };
-                        p タスクの実行
+                        p すべて実行
                         pre.
                             grunt
+                        p ターゲットを指定して実行
+                        pre.
+                            grunt datauri:target1

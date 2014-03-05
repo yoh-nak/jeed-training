@@ -62,24 +62,23 @@ block content
                             npm init
                         p タスクのインストール
                         pre.
-                            npm install grunt-img --save-dev
+                            npm install grunt grunt-img --save-dev
                         p Gruntfileの作成
                         pre(class='prettyprint lang-js linenums:1')
                             :code
-                                module.exports = (grunt) ->
-                                  grunt.initConfig
-                                    img:
-                                      dist:
-                                        src: ['src/img/*']
-                                        dest: 'htdocs/img'
-                                    watch:
-                                      img:
-                                        files: '<%= img.dist.src %>'
-                                        tasks: 'img:dist'
-                                  
-                                  grunt.loadNpmTasks 'grunt-img'
-                                  grunt.registerTask 'default', 'watch'
-                                  grunt.loadNpmTasks 'grunt-contrib-watch'
+                                module.exports = function(grunt) {
+                                    grunt.initConfig({
+                                        img: {
+                                            dist: {
+                                                src: ['src/images/**/*'],
+                                                dest: 'public/images'
+                                            }
+                                        }
+                                    });
+                                    grunt.loadNpmTasks('grunt-img');
+
+                                    grunt.registerTask('default', 'img');
+                                };
                         p タスクの実行
                         pre.
                             grunt

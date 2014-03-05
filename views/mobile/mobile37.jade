@@ -40,7 +40,15 @@ block content
                                             all: {
                                                 src: 'src/sprite/**/*.png',
                                                 destImg: 'public/images/sprite.png',
-                                                destCSS: 'public/css/sprite.css'
+                                                destCSS: 'public/css/sprite.css',
+                                                padding: 2,
+                                                algorithm: 'left-right',
+                                                cssOpts: {
+                                                    functions: false,
+                                                    'cssClass': function (item) {
+                                                        return '.sprite-' + item.name;
+                                                    }
+                                                }
                                             },
                                             target1: {
                                                 src: ['src/sprite/image1.png','src/sprite/image2.png','src/sprite/image3.png'],
@@ -54,9 +62,9 @@ block content
                                             }
                                         }
                                     });
-
+                                    
                                     grunt.loadNpmTasks('grunt-spritesmith');
-
+                                    
                                     grunt.registerTask('default', 'sprite');
                                 };
                         p すべて実行

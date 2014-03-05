@@ -40,22 +40,38 @@ block content
                                             all: {
                                                 options: {
                                                     removeComments: true,
-                                                    collapseWhitespace: true
+                                                    collapseWhitespace: true,
+                                                    collapseBooleanAttributes: true,
+                                                    removeAttributeQuotes: false,
+                                                    removeRedundantAttributes: true,
+                                                    useShortDoctype: true,
+                                                    removeEmptyAttributes: true,
+                                                    removeOptionalTags: false,
+                                                    removeEmptyElements: false
                                                 },
                                                 files: [ {
-                                                    //cwd: 'src',
-                                                    src: 'src/**/*.html',
+                                                    cwd: 'src',
+                                                    src: '**/*.jade',
                                                     dest: 'public',
-                                                } ]/*,
-                                                files: {
-                                                    'dist/index.html': 'src/index.html',
-                                                    'dist/contact.html': 'src/contact.html'
-                                                }*/
+                                                    expand: true,
+                                                    ext: '.html'
+                                                } ]
                                             },
                                             target1: {
+                                                options: {
+                                                    removeComments: true,
+                                                    collapseWhitespace: true,
+                                                    collapseBooleanAttributes: true,
+                                                    removeAttributeQuotes: true,
+                                                    removeRedundantAttributes: true,
+                                                    useShortDoctype: true,
+                                                    removeEmptyAttributes: true,
+                                                    removeOptionalTags: true,
+                                                    removeEmptyElements: true
+                                                },
                                                 files: {
-                                                    'dist/index.html': 'src/index.html',
-                                                    'dist/contact.html': 'src/contact.html'
+                                                    'public/about.html': 'src/about.html',
+                                                    'public/contact.html': 'src/contact.html'
                                                 }
                                             }
                                         }

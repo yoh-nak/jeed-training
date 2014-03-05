@@ -1,0 +1,75 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;grunt-contrib-htmlmin
+                    .panel-body
+                        h4 GitHub
+                        p
+                            a(href='https://github.com/gruntjs/grunt-contrib-htmlmin',target='_blank') https://github.com/gruntjs/grunt-contrib-htmlmin
+                        hr
+                        p gruntのインストール
+                        pre.
+                            npm install -g grunt-cli
+                        p プロジェクトの作成
+                        pre.
+                            cd path/to/myapp
+                        p package.jsonの作成
+                        pre.
+                            npm init
+                        p タスクのインストール
+                        pre.
+                            npm install grunt grunt-contrib-htmlmin --save-dev
+                        p Gruntfileの作成
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                module.exports = function(grunt){
+                                    grunt.initConfig({
+                                        sprite:{
+                                            all: {
+                                                src: 'src/sprite/**/*.png',
+                                                destImg: 'public/images/sprite.png',
+                                                destCSS: 'public/css/sprite.css',
+                                                padding: 2,
+                                                algorithm: 'left-right',
+                                                cssOpts: {
+                                                    functions: false,
+                                                    'cssClass': function (item) {
+                                                        return '.sprite-' + item.name;
+                                                    }
+                                                }
+                                            },
+                                            target1: {
+                                                src: ['src/sprite/image1.png','src/sprite/image2.png','src/sprite/image3.png'],
+                                                destImg: 'public/images/sprite1.png',
+                                                destCSS: 'public/css/sprite1.css'
+                                            },
+                                            target2: {
+                                                src: ['src/sprite/image3.png','src/sprite/image4.png','src/sprite/image5.png'],
+                                                destImg: 'public/images/sprite2.png',
+                                                destCSS: 'public/css/sprite2.css'
+                                            }
+                                        }
+                                    });
+                                    
+                                    grunt.loadNpmTasks('grunt-spritesmith');
+                                    
+                                    grunt.registerTask('default', 'sprite');
+                                };
+                        p すべて実行
+                        pre.
+                            grunt
+                        p ターゲットを指定して実行
+                        pre.
+                            grunt sprite:target1

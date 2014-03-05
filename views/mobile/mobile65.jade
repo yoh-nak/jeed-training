@@ -1,0 +1,92 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;https://github.com/t32k/grunt-csso
+                    .panel-body
+                        h4 GitHub
+                        p
+                            a(href='https://github.com/t32k/grunt-csso',target='_blank') https://github.com/t32k/grunt-csso
+                        hr
+                        p gruntのインストール
+                        pre.
+                            npm install -g grunt-cli
+                        p プロジェクトの作成
+                        pre.
+                            cd path/to/myapp
+                        p package.jsonの作成
+                        pre.
+                            npm init
+                        p プラグインのインストール
+                        pre.
+                            npm install grunt grunt-csso --save-dev
+                        p Gruntfileの作成
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                module.exports = function(grunt){
+                                    grunt.initConfig({
+                                        pkg: grunt.file.readJSON('package.json'),
+                                        cssmin: {
+                                            all: {
+                                                options: {
+                                                    keepSpecialComments: 1,
+                                                },
+                                                cwd: 'src/css',
+                                                expand: true,
+                                                src: ['**/*.css', '**/!*.min.css'],
+                                                dest: 'public/css/',
+                                                ext: '.min.css'
+                                            },
+                                            target1: {
+                                                options: {
+                                                    keepSpecialComments: 0,
+                                                },
+                                                files: {
+                                                    'public/css/combine.min.css': ['src/css/**/*.css']
+                                                }
+                                            },
+                                            target2: {
+                                                options: {
+                                                    keepSpecialComments: 0,
+                                                },
+                                                files: {
+                                                    'public/css/combine.min.css': ['src/css/first.css', 'src/css/second.css']
+                                                }
+                                            },
+                                            target3: {
+                                                options: {
+                                                    keepSpecialComments: '*',
+                                                    banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */'
+                                                },
+                                                files: {
+                                                    'public/css/combine.min.css': ['src/css/first.css', 'src/css/second.css']
+                                                }
+                                            }
+                                        }
+                                    });
+                                    
+                                    grunt.loadNpmTasks('https://github.com/t32k/grunt-csso');
+                                    
+                                    grunt.registerTask('default', 'csso');
+                                };
+                        p すべて実行
+                        pre.
+                            grunt
+                        p ターゲットを指定して実行
+                        pre.
+                            grunt csso:target1
+                        hr
+                        h4 特徴
+                        p
+                            | https://github.com/css/csso/blob/master/docs/description/description.ja.md

@@ -38,17 +38,30 @@ block content
                                     grunt.initConfig({
                                         sprite:{
                                             all: {
-                                                src: 'assets/*.png',
-                                                destImg: 'images/spritesheet.png',
-                                                destCSS: 'stylesheets/sprites.css'
+                                                src: 'src/sprite/**/*.png',
+                                                destImg: 'public/images/sprite.png',
+                                                destCSS: 'public/css/sprite.css'
+                                            },
+                                            target1: {
+                                                src: ['src/sprite/image1.png','src/sprite/image2.png','src/sprite/image3.png'],
+                                                destImg: 'public/images/spritesheet.png',
+                                                destCSS: 'public/css/sprite1.css'
+                                            },
+                                            target2: {
+                                                src: ['src/sprite/image3.png','src/sprite/image4.png','src/sprite/image5.png'],
+                                                destImg: 'public/images/spritesheet.png',
+                                                destCSS: 'public/css/sprite2.css'
                                             }
                                         }
                                     });
 
                                     grunt.loadNpmTasks('grunt-spritesmith');
 
-                                    grunt.registerTask('default', ['sprite']);
+                                    grunt.registerTask('default', 'sprite');
                                 };
-                        p タスクの実行
+                        p すべて実行
                         pre.
                             grunt
+                        p ターゲットを指定して実行
+                        pre.
+                            grunt sprite:target1

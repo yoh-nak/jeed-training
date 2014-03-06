@@ -45,24 +45,6 @@ app.use cacheManifest(
             dir: __dirname + "/public"
             prefix: "/"
         }
-        {
-            dir: __dirname + "/views/html"
-            prefix: "/html/"
-            replace: (x) ->
-                x.replace /\.jade$/, ".html"
-        }
-        {
-            dir: __dirname + "/views/css"
-            prefix: "/_css/"
-            replace: (x) ->
-                x.replace /\.jade$/, ".html"
-        }
-        {
-            dir: __dirname + "/views/jquery"
-            prefix: "/_css/"
-            replace: (x) ->
-                x.replace /\.jade$/, ".html"
-        }
     ]
     networks: ["*"]
     fallbacks: []

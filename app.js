@@ -62,15 +62,6 @@
       {
         dir: __dirname + "/public",
         prefix: "/"
-      }, {
-        dir: __dirname + "/views",
-        prefix: "/",
-        ignore: function(x) {
-          return /\.bak$/.test(x);
-        },
-        replace: function(x) {
-          return x.replace(/\.jade$/, ".html");
-        }
       }
     ],
     networks: ["*"],

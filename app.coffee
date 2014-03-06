@@ -44,6 +44,35 @@ app.use cacheManifest(
         {
             dir: __dirname + "/public"
             prefix: "/"
+            ignore: (x) ->
+                (/(?:\.swp|~)$/).test x
+        }
+        {
+            dir: __dirname + "/views"
+            prefix: "/"
+            ignore: (x) ->
+                (/(?:\.swp|~)$/).test x
+
+            replace: (x) ->
+                x.replace /\.jade$/, ".html"
+        }
+        {
+            dir: __dirname + "/views"
+            prefix: "/html/"
+            ignore: (x) ->
+                (/(?:\.swp|~)$/).test x
+
+            replace: (x) ->
+                x.replace /\.jade$/, ".html"
+        }
+        {
+            dir: __dirname + "/views"
+            prefix: "/_css/"
+            ignore: (x) ->
+                (/(?:\.swp|~)$/).test x
+
+            replace: (x) ->
+                x.replace /\.jade$/, ".html"
         }
     ]
     networks: ["*"]

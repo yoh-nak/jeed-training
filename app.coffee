@@ -43,7 +43,6 @@ app.use express.bodyParser()
 app.use express.methodOverride()
 app.use express.cookieParser("your secret here")
 app.use express.session()
-RedisStore = require('connect-redis')(express)
 app.use express.session
     secret: 'himitsu'
     store: new RedisStore

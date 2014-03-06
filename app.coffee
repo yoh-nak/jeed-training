@@ -1,5 +1,6 @@
 #モジュール
 express = require("express")
+cacheManifest = require('connect-cache-manifest')
 routes = require("./routes")
 html = require("./routes/html")
 css = require("./routes/css")
@@ -49,7 +50,15 @@ app.use express.session
     store: new RedisStore
 
 app.use app.router
-
+app.use cacheManifest(
+    manifestPath: "/application.manifest"
+    files: [
+        dir: __dirname + "/public"
+        prefix: "/"
+    ]
+    networks: ["*"]
+    fallbacks: []
+)
 compile = (str, path) ->
     stylus(str).set("filename", path).set("compress", true).use nib()
 app.use stylus.middleware(

@@ -63,7 +63,7 @@ app.use cacheManifest(
                 (/(?:\.swp|~)$/).test x
 
             replace: (x) ->
-                x.replace /\.jade$/, ".html"
+                x.replace /\.jade$/, ""
         }
         {
             dir: __dirname + "/views"
@@ -72,7 +72,7 @@ app.use cacheManifest(
                 (/(?:\.swp|~)$/).test x
 
             replace: (x) ->
-                x.replace /\.jade$/, ".html"
+                x.replace /\.jade$/, ""
         }
     ]
     networks: ["*"]

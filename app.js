@@ -61,28 +61,10 @@
     files: [
       {
         dir: __dirname + "/public",
-        prefix: "/",
-        ignore: function(x) {
-          return /(?:\.swp|~)$/.test(x);
-        }
+        prefix: "/"
       }, {
-        dir: __dirname + "/views",
-        prefix: "/html/",
-        ignore: function(x) {
-          return /(?:\.swp|~)$/.test(x);
-        },
-        replace: function(x) {
-          return x.replace(/\.jade$/, ".html");
-        }
-      }, {
-        dir: __dirname + "/views",
-        prefix: "/_css/",
-        ignore: function(x) {
-          return /(?:\.swp|~)$/.test(x);
-        },
-        replace: function(x) {
-          return x.replace(/\.jade$/, ".html");
-        }
+        file: __dirname + '/',
+        path: '/'
       }
     ],
     networks: ["*"],

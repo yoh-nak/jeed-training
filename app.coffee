@@ -1,6 +1,5 @@
 #モジュール
 express = require("express")
-cacheManifest = require('connect-cache-manifest')
 routes = require("./routes")
 html = require("./routes/html")
 css = require("./routes/css")
@@ -38,21 +37,6 @@ app.use express.basicAuth("nakano", "nakano") #ベーシック認証
 app.set "port", process.env.PORT or 3000
 app.set "views", __dirname + "/views"
 app.set "view engine", "jade"
-app.use cacheManifest(
-    manifestPath: "/application.manifest"
-    files: [
-        {
-            dir: __dirname + "/public"
-            prefix: "/"
-        }
-        {
-            file: __dirname + '/',
-            path: '/'
-        }
-    ]
-    networks: ["*"]
-    fallbacks: []
-)
 app.use express.favicon()
 app.use express.logger("dev")
 app.use express.bodyParser()

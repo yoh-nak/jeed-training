@@ -19,27 +19,23 @@ block content
                         i.glyphicon.glyphicon-book
                         | &nbsp;キャッシュの活用
                     .panel-body
+                        h4 ブラウザキャッシュの活用方法
+                        p ブラウザキャッシュは、ブラウザの一時的なファイルの保存領域を利用して、端末側にWebページを構成するファイルなどを保存しておく技術です。保存可能なファイルサイズはデスクトップPC用ブラウザ、スマートフォンはほぼ同じで、4MB以下のファイルであれば保存できます。キャッシュさせておくと2度目以降の訪問でリクエストが減り、高速かにつながります。
+                        p expireヘッダを設定することで、キャッシュするファイルの種類や、キャッシュの保存期限などを設定できます。expireヘッダーを設定する簡単な方法として、.htaccessや、PHPを利用する方法があげられます。
+                        hr
+                        p: u 参考
+                        p meta要素でページをキャッシュさせない
                         pre
                             :code
-                                ブラウザキャッシュの活用方法
-
-                                 ブラウザキャッシュは、ブラウザの一時的なファイルの保存領域を利用して、端末側にWebページを構成するファイルなどを保存しておく技術です。保存可能なファイルサイズはデスクトップPC用ブラウザ、スマートフォンはほぼ同じで、4MB以下のファイルであれば保存できます。キャッシュさせておくと2度目以降の訪問でリクエストが減り、高速かにつながります。
-                                 expireヘッダを設定することで、キャッシュするファイルの種類や、キャッシュの保存期限などを設定できます。expireヘッダーを設定する簡単な方法として、.htaccessや、PHPを利用する方法があげられます。
-
-
-                                参考
-                                meta要素でページをキャッシュさせない
-
                                 <meta http-equiv="Pragma" content="no-cache">
                                 <meta http-equiv="Cache-Control" content="no-cache">
-
-
-                                .htaccessでのexpireヘッダ設定方法
-
-                                .htaccessでのexpireヘッダ設定方法は、まず前提条件として、サーバー（apache）側でmod_expiresが有効になっている必要があります。レンタルサーバーであれば、サービスに問い合わせるか、サーバーの仕様ページを確認しておきましょう。httpd.conf（設定ファイル）を編集できる場合は、mod_expiresが有効になるように編集しておきましょう。
-                                 .mod_expiresが有効であれば、下記のように.htaccessファイルに記述します。
-
-                                .htaccess
+                        hr
+                        h4 .htaccessでのexpireヘッダ設定方法
+                        p .htaccessでのexpireヘッダ設定方法は、まず前提条件として、サーバー（apache）側でmod_expiresが有効になっている必要があります。レンタルサーバーであれば、サービスに問い合わせるか、サーバーの仕様ページを確認しておきましょう。httpd.conf（設定ファイル）を編集できる場合は、mod_expiresが有効になるように編集しておきましょう。
+                        p .mod_expiresが有効であれば、下記のように.htaccessファイルに記述します。
+                        p: u .htaccess
+                        pre
+                            :code
                                 <ifmodule mod_expires.c>
                                     <filesmatch "\.(jpe?g|gif|png)$">・・・①
                                         ExpiresActive on
@@ -47,31 +43,26 @@ block content
                                     </filesmtch>
                                 </ifmodule>
 
-                                <filematch "\.(jpe?g|gif|png)$">の「jpe?g|gif|png」①は、キャッシュの対象となるファイルの拡張子です。上記コードでは画像（jpg、gif、png形式）のみが、アクセスしたときより1年間保存されます。この保存期間は「ExpiresDefault "access plus 1 year"」の部分で設定します②。「1 year（1年間）」を「2 week（2週間）」や「12 hour（12時間）」など、時間の単位や数値を変えて設定することができます。
-
-
-                                PHPでのexpiresヘッダ設定方法
-
-                                PHPを使ったexpriesヘッダの設定はheader()関数を用いて設定します。以下のようにコードをphpファイル内に記述しましょう。
-
-                                index.php
+                        p='<filematch "\.(jpe?g|gif|png)$">の「jpe?g|gif|png」①は、キャッシュの対象となるファイルの拡張子です。上記コードでは画像（jpg、gif、png形式）のみが、アクセスしたときより1年間保存されます。この保存期間は「ExpiresDefault "access plus 1 year"」の部分で設定します②。「1 year（1年間）」を「2 week（2週間）」や「12 hour（12時間）」など、時間の単位や数値を変えて設定することができます。'
+                        hr
+                        h4 PHPでのexpiresヘッダ設定方法
+                        p PHPを使ったexpriesヘッダの設定はheader()関数を用いて設定します。以下のようにコードをphpファイル内に記述しましょう。
+                        p: u index.php
+                        pre
+                            :code
                                 <?php
                                     $expires = 60 * 60 * 24 * 365; //60（秒数） * 60（分数） * 24（時間数） * 365（日数） = 1年間・・・①
                                     header('Expires: ' . $expires);
                                 ?>
-
-                                heder()関数を用いてexpires設定する場合は、期間を秒数で設定するので上記のような式①を使って1年間を表しています。
-
-
-                                アプリケーションキャッシュの利用方法（Apache Webサーバーの場合）
-
-
-                                HTML5のアプリケーションキャッシュは、マニフェストファイルと呼ばれる設定ファイルを記述して、キャッシュ／非キャッシュを切り分けることができます。実際の使用方法を確認していきましょう。
-                                マニフェストファイルは「.manifest」という拡張子で作成するのが一般的です。サイトのルートディレクトリに「sample.manifest」というファイルを作成しましょう。文字コードはUTF-8で作成してください。
-
-
-                                マニフェストファイルの記述サンプル
-
+                        p heder()関数を用いてexpires設定する場合は、期間を秒数で設定するので上記のような式①を使って1年間を表しています。
+                        hr
+                        h4 アプリケーションキャッシュの利用方法（Apache Webサーバーの場合）
+                        p HTML5のアプリケーションキャッシュは、マニフェストファイルと呼ばれる設定ファイルを記述して、キャッシュ／非キャッシュを切り分けることができます。実際の使用方法を確認していきましょう。
+                        p マニフェストファイルは「.manifest」という拡張子で作成するのが一般的です。サイトのルートディレクトリに「sample.manifest」というファイルを作成しましょう。文字コードはUTF-8で作成してください。
+                        hr
+                        h4 マニフェストファイルの記述サンプル
+                        pre
+                            :code
                                 sample.manifest
                                 CACHE MANIFEST・・・①
                                 CACHE:
@@ -85,148 +76,42 @@ block content
                                 FALLBACK:・・・④
                                 #キャッシュファイルが存在しない場合に表示する代替ファイル
                                 / /error.html
-
-
-                                1行目は必ず「CACHE MANIFEST」と記述し①、このファイルがマニフェストファイルであることを宣言します。
-                                「CACHE:」の項目②ではキャッシュするファイルを指定します。複数行にファイル名を記述することで、複数のファイルをキャッシュするように設定できます。
-                                「NETWORK:」の項目③に記述したファイルはキャッシュされずに、アクセスする度にHTTPリクエストが送信されダウンロードされます。
-                                「FALLBACK:」の項目④では、リソースにアクセスできなかった時に表示する代替コンテンツを定義します。ここではサイトルート（/）にアクセスし、失敗した場合エラーページ（/error.html）を表示するよう定義しています。
-
-
-                                MIMEタイプを設定しよう
-
-                                マニフェストファイルはそのままではサーバーで使用することができません。使用するにはMIMEタイプを設定する必要があります。サーバーがapacheの場合は.htaccessに以下のコードを記述することでMIMEタイプを設定することができます。
-
-                                .htaccess
+                        p 1行目は必ず「CACHE MANIFEST」と記述し①、このファイルがマニフェストファイルであることを宣言します。
+                        p 「CACHE:」の項目②ではキャッシュするファイルを指定します。複数行にファイル名を記述することで、複数のファイルをキャッシュするように設定できます。
+                        p 「NETWORK:」の項目③に記述したファイルはキャッシュされずに、アクセスする度にHTTPリクエストが送信されダウンロードされます。
+                        p 「FALLBACK:」の項目④では、リソースにアクセスできなかった時に表示する代替コンテンツを定義します。ここではサイトルート（/）にアクセスし、失敗した場合エラーページ（/error.html）を表示するよう定義しています。
+                        hr
+                        h4 MIMEタイプを設定しよう
+                        p マニフェストファイルはそのままではサーバーで使用することができません。使用するにはMIMEタイプを設定する必要があります。サーバーがapacheの場合は.htaccessに以下のコードを記述することでMIMEタイプを設定することができます。
+                        p: u .htaccess
+                        pre
+                            :code
                                 AddType text/cache-manifest .manifest
-
-
-                                html要素のmanifest属性にマニフェストファイルのパスを指定しよう
-
-                                index.html
+                        p html要素のmanifest属性にマニフェストファイルのパスを指定しよう
+                        pre
+                            :code
                                 <!DOCTYPE html>
                                 <html manifest="sample.manifest">
                                 ...
 
-                                以上の設定で、アプリケーションキャッシュが利用できるようになります。これらキャッシュを使った軽量化に加えて、これまであげたようなHTTPリクエストを削減んする手法をできるだけ取り入れて、表示スピードが速くユーザーにストレスを与えない軽量化されたサイト作りを心がけましょう。
+                        p 以上の設定で、アプリケーションキャッシュが利用できるようになります。これらキャッシュを使った軽量化に加えて、これまであげたようなHTTPリクエストを削減んする手法をできるだけ取り入れて、表示スピードが速くユーザーにストレスを与えない軽量化されたサイト作りを心がけましょう。
+                        hr
+                        p 各ブラウザは、以下のアドレスからアプリケーションキャッシュを削除することができます。
 
-
-
-
-                                アプリケーションキャッシュの利用方法（node.jsの場合）
-
-
-                                マニフェストファイルの記述サンプル
-
-
-                                sample.manifest
-                                CACHE MANIFEST
-                                CACHE:
-                                #以下のファイルがキャッシュされます。
-                                images/css_sprite.png
-                                images/logo.png
-                                images/xx.png
-                                NETWORK:
-                                #以下のファイルはキャッシュされず、毎回オンラインで取得します。
-                                css/style.css
-                                FALLBACK:
-                                #キャッシュファイルが存在しない場合に表示する代替ファイル
-                                / /error.html
-
-                                index.ejs
-                                <!DOCTYPE html>
-                                <html lang="ja-JP" manifest="sample.manifest">
-                                  <head>
-                                    <title><%= title %></title>
-                                    <link rel='stylesheet' href='/stylesheets/style.css' />
-                                  </head>
-                                  <body>
-                                    <h1><%= title %></h1>
-                                    <p>Welcome to <%= title %></p>
-                                  </body>
-                                </html>
-
-
-
-                                Chromeでアプリケーションキャッシュを確認する/削除する
-
-                                chrome://appcache-internals/
+                        p: u Chrome
+                        p
+                            a(href='chrome://appcache-internals/',target='_blank') chrome://appcache-internals/
 
 
                                 Firefoxでアプリケーションキャッシュを確認する/削除する
+                        p
+                            a(href='about:cache',target='_blank') about:cache
+                        hr
+                        pre.
+                            参考
 
-                                about:cache 
+                            HTMLクイックリファレンス
+                            http://www.htmq.com/offline/
 
-
-
-
-                                参考
-
-                                HTMLクイックリファレンス
-
-                                http://www.htmq.com/offline/
-
-
-
-
-
-
-                                appcache-node
-                                https://npmjs.org/package/appcache-node
-
-
-
-
-
-                                app.js
-                                require('appcache-node')({files: [
-                                    'images/css_sprite.png'
-                                    , 'images/logo.png'
-                                    , 'images/xx.png'
-                                ]}, app);
-
-                                require('appcache-node')({path: 'sample.manifest'}, app); 
-
-
-
-
-
-
-
-                                html要素のmanifest属性にマニフェストファイルのパスを指定しよう
-
-
-                                index.html
-                                <!DOCTYPE html>
-                                <html manifest="sample.manifest">
-                                ...
-
-
-
-
-                                キャッシュを一定周期で更新する
-
-
-                                function docache(){
-                                    require('./appcache.js')({files: [
-                                        // no need to include html files that start with <html manifest="app.cache">
-                                        'images/css_sprite.png'
-                                        , 'images/logo.png'
-                                        , 'images/xx.png'
-                                    ]}, app);
-                                }
-
-
-                                docache();
-                                setInterval(docache, 1000*60*60);
-
-
-                                connect-offline
-                                https://github.com/dustMason/connect-offline
-
-                                AppCache
-                                https://npmjs.org/package/appcache
-
-                                connect-cache-manifest 
-                                https://github.com/dai-shi/connect-cache-manifest
-
+                            HTML5 Rocks
+                            http://www.html5rocks.com/ja/tutorials/appcache/beginner/

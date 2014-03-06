@@ -1,0 +1,80 @@
+extends ../layout
+
+block link
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;connect-cache-manifest
+                    .panel-body
+                        h4  npmサイト
+                        p
+                            a(href='https://www.npmjs.org/package/connect-cache-manifest',target='_blank') https://www.npmjs.org/package/connect-cache-manifest
+                        p: u package.json
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                {
+                                    "name": "application-name",
+                                    "version": "0.0.1",
+                                    "private": true,
+                                    "scripts": {
+                                        "start": "node app.js"
+                                    },
+                                    "dependencies": {
+                                        "express": "3.3.5",
+                                        "connect-cache-manifest": "*",
+                                        "jade": "*"
+                                    }
+                                }
+                        pre.
+                            npm install
+                        p: u app.js
+                            :code
+                                ...
+                                var cacheManifest = require('connect-cache-manifest');
+                                ...
+                                // cache-manifest
+                                app.use(cacheManifest({
+                                    manifestPath: '/application.manifest',
+                                    files: [{
+                                        dir: __dirname + '/public',
+                                        prefix: '/'
+                                    }],
+                                    networks: ['*'],
+                                    fallbacks: []
+                                }));
+                                ...
+                        p: u layout.jade
+                            :code
+                                html(manifest='application.manifest')
+                        pre.
+                            参考
+                            http://qiita.com/weed/items/2318a2c6871c6c5d5fef
+                            http://www.axlight.com/mt/sundayhacking/2013/11/nodejshtml5webconnect-cache-manifest.html
+                            http://www.axlight.com/mt/sundayhacking/2013/11/nodejshtml5webconnect-cache-manifest-1.html
+                        hr
+                        h4 その他、node.jsでアプリケーションキャッシュを利用するnpmパッケージ
+                        pre.
+                            appcache-node
+                            https://npmjs.org/package/appcache-node
+
+                            connect-offline
+                            https://github.com/dustMason/connect-offline
+
+                            AppCache
+                            https://npmjs.org/package/appcache
+
+                            connect-cache-manifest 
+                            https://github.com/dai-shi/connect-cache-manifest

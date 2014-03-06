@@ -67,15 +67,6 @@
         }
       }, {
         dir: __dirname + "/views",
-        prefix: "/",
-        ignore: function(x) {
-          return /(?:\.swp|~)$/.test(x);
-        },
-        replace: function(x) {
-          return x.replace(/\.jade$/, ".html");
-        }
-      }, {
-        dir: __dirname + "/views",
         prefix: "/html/",
         ignore: function(x) {
           return /(?:\.swp|~)$/.test(x);

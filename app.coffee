@@ -47,15 +47,15 @@ app.use cacheManifest(
             ignore: (x) ->
                 (/(?:\.swp|~)$/).test x
         }
-        {
-            dir: __dirname + "/views"
-            prefix: "/"
-            ignore: (x) ->
-                (/(?:\.swp|~)$/).test x
+        # {
+        #     dir: __dirname + "/views"
+        #     prefix: "/"
+        #     ignore: (x) ->
+        #         (/(?:\.swp|~)$/).test x
 
-            replace: (x) ->
-                x.replace /\.jade$/, ".html"
-        }
+        #     replace: (x) ->
+        #         x.replace /\.jade$/, ".html"
+        # }
         {
             dir: __dirname + "/views"
             prefix: "/html/"

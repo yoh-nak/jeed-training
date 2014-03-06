@@ -66,11 +66,6 @@
 
   app.use(express.session());
 
-  app.use(express.session({
-    secret: 'himitsu',
-    store: new RedisStore
-  }));
-
   app.use(app.router);
 
   compile = function(str, path) {

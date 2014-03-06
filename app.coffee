@@ -43,10 +43,6 @@ app.use express.bodyParser()
 app.use express.methodOverride()
 app.use express.cookieParser("your secret here")
 app.use express.session()
-app.use express.session
-    secret: 'himitsu'
-    store: new RedisStore
-
 app.use app.router
 compile = (str, path) ->
     stylus(str).set("filename", path).set("compress", true).use nib()

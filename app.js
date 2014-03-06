@@ -44,6 +44,30 @@
 
   app = express();
 
+  app.use(cacheManifest({
+    manifestPath: "/application.manifest",
+    files: [
+      {
+        dir: __dirname + "/public/javascripts",
+        prefix: "/js/"
+      }, {
+        dir: __dirname + "/public/stylesheets",
+        prefix: "/css/"
+      }, {
+        dir: __dirname + "/public/images",
+        prefix: "/images/"
+      }, {
+        dir: __dirname + "/views",
+        prefix: "/html/",
+        replace: function(x) {
+          return x.replace(/\.jade$/, ".html");
+        }
+      }
+    ],
+    networks: ["*"],
+    fallbacks: []
+  }));
+
   require("jade").filters.code = function(block) {
     return block.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/&lt;mark&gt;/g, "<mark>").replace(/&lt;\/mark&gt;/g, "</mark>").replace(/\\&lt;mark\\&gt;/g, "&lt;mark&gt;").replace(/\\&lt;\/mark\\&gt;/g, "&lt;/mark&gt;").replace(/"/g, "&quot;");
   };
@@ -76,18 +100,6 @@
   }));
 
   app.use(app.router);
-
-  app.use(cacheManifest({
-    manifestPath: "/application.manifest",
-    files: [
-      {
-        dir: __dirname + "/public",
-        prefix: "/"
-      }
-    ],
-    networks: ["*"],
-    fallbacks: []
-  }));
 
   compile = function(str, path) {
     return stylus(str).set("filename", path).set("compress", true).use(nib());

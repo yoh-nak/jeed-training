@@ -20,6 +20,31 @@ nib = require("nib")
 coffee = require("coffee-script")
 path = require("path")
 app = express()
+app.use cacheManifest(
+    manifestPath: "/application.manifest"
+    files: [
+        {
+            dir: __dirname + "/public/javascripts"
+            prefix: "/js/"
+        }
+        {
+            dir: __dirname + "/public/stylesheets"
+            prefix: "/css/"
+        }
+        {
+            dir: __dirname + "/public/images"
+            prefix: "/images/"
+        }
+        {
+            dir: __dirname + "/views"
+            prefix: "/html/"
+            replace: (x) ->
+                x.replace /\.jade$/, ".html"
+        }
+    ]
+    networks: ["*"]
+    fallbacks: []
+)
 
 require("jade").filters.code = (block) ->
     block
@@ -50,15 +75,6 @@ app.use express.session
     store: new RedisStore
 
 app.use app.router
-app.use cacheManifest(
-    manifestPath: "/application.manifest"
-    files: [
-        dir: __dirname + "/public"
-        prefix: "/"
-    ]
-    networks: ["*"]
-    fallbacks: []
-)
 compile = (str, path) ->
     stylus(str).set("filename", path).set("compress", true).use nib()
 app.use stylus.middleware(

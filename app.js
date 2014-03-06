@@ -48,23 +48,8 @@
     manifestPath: "/application.manifest",
     files: [
       {
-        dir: __dirname + "/public/js",
-        prefix: "/js/"
-      }, {
-        dir: __dirname + "/public/css",
-        prefix: "/css/"
-      }, {
-        dir: __dirname + "/public/images",
-        prefix: "/images/"
-      }, {
-        dir: __dirname + "/views",
-        prefix: "/html/",
-        ignore: function(x) {
-          return /\.bak$/.test(x);
-        },
-        replace: function(x) {
-          return x.replace(/\.jade$/, ".html");
-        }
+        dir: __dirname + '/public',
+        prefix: '/'
       }
     ],
     networks: ["*"],

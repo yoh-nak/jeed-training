@@ -44,18 +44,6 @@
 
   app = express();
 
-  app.use(cacheManifest({
-    manifestPath: "/application.manifest",
-    files: [
-      {
-        dir: __dirname + '/public',
-        prefix: '/'
-      }
-    ],
-    networks: ["*"],
-    fallbacks: []
-  }));
-
   require("jade").filters.code = function(block) {
     return block.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/&lt;mark&gt;/g, "<mark>").replace(/&lt;\/mark&gt;/g, "</mark>").replace(/\\&lt;mark\\&gt;/g, "&lt;mark&gt;").replace(/\\&lt;\/mark\\&gt;/g, "&lt;/mark&gt;").replace(/"/g, "&quot;");
   };
@@ -67,6 +55,27 @@
   app.set("views", __dirname + "/views");
 
   app.set("view engine", "jade");
+
+  app.use(cacheManifest({
+    manifestPath: "/application.manifest",
+    files: [
+      {
+        dir: __dirname + "/public",
+        prefix: "/"
+      }, {
+        dir: __dirname + "/views",
+        prefix: "/",
+        ignore: function(x) {
+          return /\.bak$/.test(x);
+        },
+        replace: function(x) {
+          return x.replace(/\.jade$/, ".html");
+        }
+      }
+    ],
+    networks: ["*"],
+    fallbacks: []
+  }));
 
   app.use(express.favicon());
 

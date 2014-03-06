@@ -20,17 +20,6 @@ nib = require("nib")
 coffee = require("coffee-script")
 path = require("path")
 app = express()
-app.use cacheManifest(
-    manifestPath: "/application.manifest"
-    files: [
-        {
-            dir: __dirname + '/public'
-            prefix: '/'
-        }
-    ]
-    networks: ["*"]
-    fallbacks: []
-)
 
 require("jade").filters.code = (block) ->
     block
@@ -49,6 +38,25 @@ app.use express.basicAuth("nakano", "nakano") #ベーシック認証
 app.set "port", process.env.PORT or 3000
 app.set "views", __dirname + "/views"
 app.set "view engine", "jade"
+app.use cacheManifest(
+    manifestPath: "/application.manifest"
+    files: [
+        {
+            dir: __dirname + "/public"
+            prefix: "/"
+        }
+        {
+            dir: __dirname + "/views"
+            prefix: "/"
+            ignore: (x) ->
+                /\.bak$/.test x
+            replace: (x) ->
+                x.replace /\.jade$/, ".html"
+        }
+    ]
+    networks: ["*"]
+    fallbacks: []
+)
 app.use express.favicon()
 app.use express.logger("dev")
 app.use express.bodyParser()

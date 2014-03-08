@@ -1,0 +1,386 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include ../navbar
+    .container
+        .row
+            .col-sm-3
+                include ../left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;GitHUb
+                    .panel-body
+                        pre
+                            :code
+                                GitHub
+
+                                GitHubでは、共有リポジトリの公開はもちろんのこと、使い勝手やユーザー同士の連携を向上する様々なサービスが提供されている。
+
+                                サービスは主にWebブラウザ経由で提供される。
+
+                                コードを閲覧して差分を確認したり、リポジトリをダウンロードしたり、プロジェクトのREADMEやWebページを発信することができる
+
+                                Watchボタン、Forkボタン、Pullリクエストボタンによってユーザー同士が手軽につながる環境を提供する
+
+
+                                最新のGitをインストール
+
+                                SSHキーの設定
+
+                                Gitの初期設定
+
+
+                                http://github.com
+
+
+                                「plans, Pricing and Signup」ボタンを押す
+
+                                無料アカウントは「Crate a free account」を押す
+
+                                必須事項を入力して「Create an account」を押す
+
+
+
+                                SSHキーの作成
+
+
+                                cd ~/.ssh
+
+                                ls -A
+
+                                id_rsa id_rsa.pug（.sshディレクトリがないこともある）がなかったらSSHキーを作成
+
+
+
+                                ssh-keygen
+
+                                Generating public/private rsa key pair.
+                                Enter file in which to save the key (/Users/admin/.ssh/id_rsa):
+                                そのままエンター（リターン）
+
+                                Enter passphrase (empty for no passphrase):
+                                パスワードを入力
+
+                                Enter same passphrase again:
+                                同じパスワードを入力
+
+
+
+                                Your identification has been saved in /Users/admin/.ssh/id_rsa.
+                                Your public key has been saved in /Users/admin/.ssh/id_rsa.pub.
+                                The key fingerprint is:
+                                72:df:54:f9:38:71:78:85:28:5b:82:3d:7c:5c:20:38 admin@Nakano-Yohsuke-no-MacBook.local
+                                The key's randomart image is:
+                                +--[ RSA 2048]----+
+                                |         =...+...|
+                                |        E *.= .o.|
+                                |         . B  = o|
+                                |          .  . * |
+                                |      . S   . o .|
+                                |       o . o   . |
+                                |          . .    |
+                                |                 |
+                                |                 |
+                                +-----------------+
+
+
+                                cd ~/.ssh
+
+                                ls -A
+
+                                id_rsa             id_rsa.pub
+                                SSHキーの登録
+
+
+
+                                クリップボードにコピー
+
+                                pbcopy < ~/.ssh/id_rsa.pub
+
+
+
+                                Account Settings > SSH Keys > Keyの欄にペースト（Ctrl + v）
+
+                                GitHubの
+
+                                Add keyボタンを押す
+
+                                GitHubのパスワード
+
+
+
+                                git config --global user.email 'メールアドレス'
+
+                                git config user.email
+
+
+
+                                自分のページにアクセス
+
+                                http://github-com/GitHubのユーザー名
+
+
+
+                                Create  a new Repoボタンを押す
+
+
+
+                                Repository nameを入力
+
+                                Create Repositoryボタンを押す
+
+
+
+                                以下のように表示される
+
+                                Create a new repository on the command line
+
+                                touch README.md
+                                git init
+                                git add README.md
+                                git commit -m "first commit"
+                                git remote add origin https://github.com/yoh-nak/Hello-World.git
+                                git push -u origin master
+                                Push an existing repository from the command line
+
+                                git remote add origin https://github.com/yoh-nak/Hello-World.git
+                                git push -u origin master
+
+
+                                設定の確認
+
+                                git config user.name
+
+                                git config .user.email
+
+
+
+                                設定の変更
+
+                                git config --global user.name "aaaaa"
+
+                                git config --global user.email "aaa@aaaa.aa"
+
+
+
+
+
+
+
+                                cd ~
+
+                                mkdir Hello-World
+
+                                cd Hello-World
+
+                                gti init
+
+
+
+                                touch README
+
+                                git add README
+
+                                git commit -m 'first commit'
+
+                                git remote add origin git@github.com:ユーザー名/Hello-World.git
+
+                                git push -u origin master   = git push --set-upstream
+
+                                ローカルのmasterとGitHubのmasterを関連づける
+
+
+
+                                初回のプッシュはsshキーのパスフレーズが聞かれる
+
+                                sshキーを生成するときにつけたパスフレーズを入力
+
+
+
+                                Identity added: /Users/admin/.ssh/id_rsa (/Users/admin/.ssh/id_rsa)
+                                Counting objects: 3, done.
+                                Writing objects: 100% (3/3), 207 bytes, done.
+                                Total 3 (delta 0), reused 0 (delta 0)
+                                To git@github.com:yoh-nak/Hello-World.git
+                                 * [new branch]      master -> master
+                                Branch master set up to track remote branch master from origin.
+
+
+                                GitHubのHello-WorldリポジトリにRREADMEが追加されている
+
+
+
+                                git config -l
+
+                                remote.origin.url=git@github.com:yoh-nak/Hello-World.git
+                                remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+                                branch.master.remote=origin
+                                branch.master.merge=refs/heads/master
+
+
+                                projectリポジトリを作る
+
+
+
+                                cd ~/project
+
+
+
+                                git remote add origin git@github.com:yoh-nak/project.git
+
+                                リモート名originはHello-Worldで使ったので、使えない
+
+                                git remote add github git@github.com:yoh-nak/project.git
+
+
+
+                                masterブランチをpush
+
+                                git push -u github master
+
+                                nextブランチをpush
+
+                                git push -u github next
+
+
+
+                                すべてのブランチをpush
+
+                                git push -u --all github
+
+
+
+                                リポジトリの削除
+
+                                Delete this repositoryボタンを押す
+
+
+
+                                vim README
+
+                                Hello-World
+                                これはGitHubをはじめて使うユーザーの実験プロジェクトです。
+
+
+                                git commit -a -m "READMEメッセージを追加"
+
+
+
+                                git push
+
+
+
+                                マークダウン記法
+
+                                vim README
+
+                                Hello-World
+                                ===========
+
+                                このプロジェクトについて
+                                ------------------------
+                                * これはGitHubをはじめて使うユーザーの実験プロジェクトです。
+                                * GitHubとローカルのGitリポジトリを同期する練習をしています。
+
+
+                                git mv README README.md
+
+                                git add README.md
+
+                                git commit -m 'Markdownに変更'
+
+                                git push
+
+
+
+                                別のGitHubアカウントでログイン
+
+                                http://github.com/yoh-nak/project
+
+
+
+                                Edit this fileボタンを押す。
+
+                                WebからREADME.mdを編集
+
+
+
+                                Hello-World
+                                ===========
+
+                                このプロジェクトについて
+                                ------------------------
+                                * これはGitHubをはじめて使うユーザーの実験プロジェクトです。
+                                * GitHubとローカルのGitリポジトリを同期する練習をしています。
+
+                                作業環境
+                                --------
+                                * MacBook Mac OS X 10.6.8
+                                * Git 1.7.10.1
+
+
+                                コミットメッセージを入力
+
+
+
+                                Propose File Changeボタンを押す
+
+
+
+                                Pull Requestボタンを押す
+
+
+
+                                元のGitHubアカウントに修正rリクエストのメールアドレスにメールが届く
+
+
+
+                                元のGitHubアカウントにログイン
+
+                                Notificationアイコンに知らせがつく
+
+
+
+                                Noticicationアイコンをクリックすると通知内容を表示
+
+                                コミットメッセージのリンクをクリックするとPull Requestのページに移動
+
+
+
+                                差分を確認できる
+
+
+
+                                Merge pull requestボタンを押すとマージされる
+
+                                合意できない場合はClose Pull Requestボタンを押す
+
+                                Comment pull requestでメッセージの返信ができる
+
+
+
+                                合意せずに返信だけ送る
+
+
+                                別アカウントにメッセージが届く
+
+                                修正して、Comitt Changeボタンを押す
+
+                                メッセージを入れて、Comment on this pull requestボタンを押す
+
+
+
+                                元のアカウントにメッセージが届く
+
+                                コミットメッセージを入力して
+
+                                Confirm Mergeボタンを押す

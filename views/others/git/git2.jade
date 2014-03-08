@@ -1,0 +1,119 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include ../navbar
+    .container
+        .row
+            .col-sm-3
+                include ../left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;msysgitの設定
+                    .panel-body
+                        pre.
+                            lsコマンドの文字化けの解消
+
+                            ステップ１
+
+                            lsコマンドでファイルの一覧を表示したとき、初期設定のフォントが日本語フォントをもたない「Lucida Console」のため、日本語が「□□□□」のように表示され文字化けしますので、日本語フォントを表示できる「MS ゴシック」にします。
+
+                            キーボードのウィンドウズのロゴが描かれた「Windowsキー」+「R」を押して、「ファイル名を指定して実行」を開き、「regedit.exe」と入力して「OK」ボタンを押します。ユーザーアカウントの制御ダイアログが立ち上がったら「はい」ボタンをクリックします。
+
+
+                            regedit.exe
+
+
+
+
+                            レジストリエディターが立ち上がるので、「HKEY_CURRENT_USER/Console/Git Bash」の「FaceName」ダブルクリックします。
+
+
+                            「文字列の編集」ダイアログが立ち上がるので、「Lucida Console」から「MS ゴシック」に変更して「OK」ボタンをクリックします。設定ができたらレジストリエディターは閉じておきましょう。
+
+                            MS ゴシック
+
+
+                            ステップ２
+
+                            ファイル名｢.bashrc｣を作成し以下の内容を記述して保存します。
+
+
+                            vim ~/.bashrc
+
+                            INSERTモードに切り替え
+
+                            i
+
+
+                            以下の内容を.bashrcに記述
+
+                            alias ls='ls --show-control-chars --color'
+                            chcp.com 932
+
+                            コマンドモードに切り替え
+
+                            ESC
+
+
+                            上書き保存
+
+                            :wq
+
+
+                            参考
+
+                            コードページ
+
+                            UTF-8
+                            chcp.com 65001
+
+                            Shift-JIS
+                            chcp.com 932
+
+
+                            確認
+                            cat ~/.bashrc
+
+
+
+
+                            vimエディターの文字化けの解消
+
+
+                            vim ~/.vimrc
+
+                            INSERTモードに切り替え
+
+                            i
+
+                            以下の内容を.vimrcに入力
+
+                            :e ++enc=utf-8
+                            :set fileformat=unix
+
+
+                            コマンドモードに切り替え
+
+                            ESC
+
+
+                            上書き保存
+
+                            :wq
+
+                            確認
+                            cat ~/.vimrc
+
+
+                            ステージ、リポジトリで日本語ファイル名の文字コードが展開される問題の解消
+
+                            git config --global core.quotepath false

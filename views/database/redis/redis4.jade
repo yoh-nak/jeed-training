@@ -182,6 +182,24 @@ block content
                         p 0番目から、最後から1番目まで取得
                         pre.
                             lrange mycolor 0 -1
+                        p 右端を削除
+                        pre.
+                            rpop mycolor
+                            lrange mycolor 0 -1
+                        p 左端を削除
+                        pre.
+                            lpop mycolor
+                            lrange mycolor 0 -1
+                        p 2番目の要素を取得
+                        pre.
+                            lindex mycolor 2
+                        p 要素の数を取得
+                        pre.
+                            llen mycolor
+                        p 要素を0番目から2番目以外を削除
+                        pre.
+                            ltrim mycolor 0 2
+                            lrange mycolor 0 -1
                         hr
                         .alert.alert-info Set型の書き込み
                         hr

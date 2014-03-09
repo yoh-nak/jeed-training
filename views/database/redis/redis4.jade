@@ -16,22 +16,37 @@ block content
                         | &nbsp;RedisのCRUD
                     .panel-body
                         .alert.alert-info サーバの起動
-                        p まずRedisサーバーを起動します。
+                        p Redisサーバーの起動
                         pre
                             :code
                                 redis-server
-                        .alert.alert-info 接続
-                        p 別のターミナルでRedisサーバーに接続します。
+                        p 強制終了（※ データが保存されないことがある）
+                        pre
+                            :code
+                                Ctrl + C
+                        hr
+                        .alert.alert-info クライアントからサーバーに接続
+                        p 別のターミナルでRedisサーバーに接続
                         pre
                             :code
                                 redis-cli
-                        .alert.alert-info 確認
+                        p クライアントの終了
+                        pre
+                            :code
+                                exit
+                        p クライアントからサーバーの終了（※ データが保存される）
+                        pre
+                            :code
+                                shutdown
+                        hr
+                        .alert.alert-info 動作の確認
                         pre
                             :code
                                 redis 127.0.0.1:6379> set key val
                                 OK
                                 redis 127.0.0.1:6379> get key
                                 "val"
+                        hr
                         .alert.alert-info データベースの選択
                         p: mark データベースは番号で管理され、名前をつけることはできません。
                         p デフォルトでは0番のデータベースに接続されていますが、以下のように切り替えることができます。
@@ -45,6 +60,7 @@ block content
                         pre
                             :code
                                 select 0
+                        hr
                         .alert.alert-info データの保存
                         p Redisでは自動的にディスクに保存されますが、明示的にディスクに保存することができます。
                         pre
@@ -146,5 +162,6 @@ block content
                             :code
                                 randomkey
                         hr
-                        
-
+                        .alert.alert-info List型
+                        hr
+                        .alert.alert-info 

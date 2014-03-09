@@ -1,0 +1,77 @@
+extends ../layout
+
+block link
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    body
+        include ../mobile/navbar.jade
+        .container
+            .row
+                .col-sm-3
+                    include left.jade
+                .col-sm-9
+                    .panel.panel-primary
+                        .panel-heading
+                            i.glyphicon.glyphicon-book
+                            &nbsp;bowerで設置
+                        .panel-body
+                            p bower.jsonの生成
+                            pre.
+                                bower init
+                            p jqueryのダウンロード
+                            pre.
+                                bower install jquery --save
+                            p jquery mobileのダウンロード
+                            pre.
+                                bower install jquery-mobile-bower --save
+                            p 必要なファイル
+                            pre.
+                                index.html
+                                css/jquery.mobile-1.4.1.min.js
+                                css/images/icons-png/...
+                                css/images/icons-svg/...
+                                css/images/ajax-loader.gif
+                                js/jquery.min.js
+                                js.jquery.mobile-1.4.1.min.js
+                            pre(class='prettyprint linenums:1')
+                                :code
+                                    <!DOCTYPE html>
+                                    <html>
+                                        <head>
+                                            <meta charset="utf-8">
+                                            <title></title>
+                                            \<mark><link rel="stylesheet" href="css/jquery.mobile-1.4.1.min.css">
+                                            <script src="js/jquery.min.js"></script>
+                                            <script src="js/jquery.mobile-1.4.1.min.js"></script>\</mark>
+                                        </head>
+                                        <body>
+                                        <div data-role="page" id="index">
+                                            <div data-role="header">
+                                                <a href="#about">about</a>
+                                                <h1>header</h1>
+                                            </div>
+                                            <div data-role="content">
+                                                <a href="#about">about</a>
+                                            </div>
+                                            <div data-role="footer" data-position="fixed">
+                                                <h1>footer</h1>
+                                            </div>
+                                        </div>
+                                        <div data-role="page" id="about">
+                                            <div data-role="header">
+                                                <a href="#index">index</a>
+                                                <h1>header</h1>
+                                            </div>
+                                            <div data-role="content">
+                                                <a href="#index">index</a>
+                                            </div>
+                                            <div data-role="footer" data-position="fixed">
+                                                <h1>footer</h1>
+                                            </div>
+                                        </div>
+                                        </body>
+                                    </html>

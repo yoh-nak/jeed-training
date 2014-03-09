@@ -1,0 +1,59 @@
+extends ../layout
+
+block link
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;レスポンシブWebデザインのワークフロー
+                    .panel-body
+                        pre.
+                            従来の一般的なWebサイト制作では、PhotoshopやFireworksなどの画像編集ソフトを使ってデザインカンプを作成し、できあがったカンプをスライスしてHTMLやCSSコーディングしていました。いわば、カンプという静的な「1枚絵」を、HTMLやCSSを使って忠実に再現していく作業がWeb制作の一般的なワークフローだったわけです。
+                            
+                            複数のスクリーンサイズが想定されるレスポンシブWebデザインでは、さまざまなサイズのデザインカンプを作成していては時間と手間がかかりすぎます。そこで、デザインカンプは作成せず、簡単なラフスケッチと配置するコンテンツ（画像や文章）だけを用意して、HTMLとCSSをコーディングしながらブラウザー上で直接デザインします。この方法は「Designing in the Browser：デザイニングインザブラウザー」と呼ばれ、レスポンシブWebデザインによるサイト制作では主流の考え方です。
+
+                        pre.
+                            従来のワークフロー
+
+                            サイト設計
+                            ▼
+                            画面設計
+                            ▼
+                            カンプ作成（photoshop/firefowks）
+                            ▼
+                            画像スライス
+                            ▼
+                            コーディング
+                            ▼
+                            テスト
+                            ▼
+                            公開
+                        pre.
+                            レスポンシブWebデザインのワークフロー
+                            （デザイニングインブラウザー）
+
+                            サイト設計
+                            ▼
+                            画面設計
+                            ▼
+                            画像素材作成
+                            ▼
+                            コーディング
+                            ▼▲
+                            調整
+                            ▼
+                            テスト
+                            ▼
+                            公開

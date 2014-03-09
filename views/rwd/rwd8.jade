@@ -1,0 +1,71 @@
+extends ../layout
+
+block link
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar.jade
+    .container
+        .row
+            .col-sm-3
+                include left.jade
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;rem
+                    .panel-body
+                        pre.
+                            次の新しい単位「rem」
+
+                            emと同じように、基準とするフォントサイズによって実際の大きさが相対的に変わる単位として「rem」（:root em）があります。emは親要素の大きさが基準になるのに対して、remは常に:root要素、つまりhtml要素の大きさが基準になるのに対して、remは常に:root要素、つまりhtml要素の大きさを基準にします。html要素のフォントサイズを変更しない限り、ブラウザーのデフォルトである「1rem=16px」という値は一定です。
+                        pre.
+                            px単位で指定する場合
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                h1{
+                                     font-size:48px;
+                                     margin-bottom:24px;
+                                }
+                        pre.
+                            em単位で指定する場合
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                h1{
+                                     font-size:3em;
+                                     margin-botom:.5em;
+                                }
+                        pre.
+                            html要素のフォントサイズを16pxとすると、h1のfont-sizeは48px÷16pxで3emになる
+                            margin-bottomに指定する値の24pxは1emを48pxとして計算するので、0.5emになる
+
+                        pre.
+                            rem単位で指定する場合
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                h1{
+                                     font-size:3rem;
+                                     margin-bottom:1.5rem;
+                                }
+
+                        pre.
+                            1remはhtml要素のフォントサイズを変えなければ16pxなので、font-sizeの48pxはemと同様に3remになる
+                            margin-bottomの24pxは、基準となるフォントサイズが常に同じなので、24px÷16pxで1.5remになる
+                        pre.
+                            remをサポートしないブラウザへの対応
+
+                            計算が複雑で面倒なemに対して、基準サイズが一定のremはレスポンシブタイプセッティングで使いやすい単位です。ただし、Internet Explorer6〜8はremをサポートしていませんので、フォールバックとして以下のような記述を追加します。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                h1{
+                                     font-size:48px;
+                                     font-size:3rem;
+                                     margin-bottom:24px;
+                                     margin-bottom:1.5rem;
+                                }
+                        pre.
+                            remをサポートしないIE6〜8はメディアクエリーもサポートしていないので、フォールバックはメディアクエリー外に記述する必要があります。

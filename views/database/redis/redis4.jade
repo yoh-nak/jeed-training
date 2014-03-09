@@ -202,6 +202,52 @@ block content
                             lrange mycolor 0 -1
                         hr
                         .alert.alert-info Set型の書き込み
+                        pre.
+                            追加 sadd
+                            削除 srem
+                            一覧 smembers
+                            和集合 sunion
+                            積集合 sinter
+                            差集合 sdiff
+                        p 要素の追加
+                        pre.
+                            sadd myset1 a
+                            sadd myset1 b
+                            sadd myset1 c
+                        p 要素の一覧
+                        pre.
+                            smembers myset1
+                        p 後から要素を追加
+                        pre.
+                            sadd myset1 d
+                        p 要素の一覧（順不同で表示される）
+                        pre.
+                            smembers myset1
+                        p 要素の削除
+                        pre.
+                            srem myset1 d
+                            smembers myset1
+                        p 別のSet型データを作成
+                        pre.
+                            sadd myset2 b
+                            sadd myset2 c
+                            sadd myset2 d
+                            sadd myset2 e
+                            smembers myset1
+                            smembers myset2
+                        p 和集合
+                        pre.
+                            sunion myset1 myset2
+                        p 積集合
+                        pre.
+                            sinter myset1 myset2
+                        p 差集合
+                        pre.
+                            sdiff myset1 myset2
+                        p 和集合から新しいデータを作成
+                        pre.
+                            sunionstore myunion myset1 myset2
+                            smembers myunion
                         hr
                         .alert.alert-info Sorted Set型の書き込み
                         hr

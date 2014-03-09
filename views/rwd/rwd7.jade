@@ -1,0 +1,140 @@
+extends ../layout
+
+block link
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar.jade
+    .container
+        .row
+            .col-sm-3
+                include left.jade
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;フルードグリッド
+                    .panel-body
+                        pre.
+                            フルードグリッドの必要性
+
+                            グリッドデザインによって整然とレイアウトされていても、Webブラウザーの横幅が変わればバランスは崩れてしまいます。そこで考えられたのが「フルードデザイン」です。フルードデザインはWebブラウザーの横幅が変更されても、バランスを一定に保ったままレイアウトを調節する手法で、「リキッドレイアウト（Liquid Layout）」とも呼ばれています。
+
+                            フルードデザインでは、Webページの横幅をブラウザーに合わせて調整するため、要素の幅を%で指定します。%での指定を簡単にするために、グリッドデザインによって要素のサイズや表示領域をpx単位で把握しておく必用があるのです。
+                        pre.
+                            固定幅とフルードデザイン
+
+                            Webページで代表的なレイアウトは3種類あります。width、margin、paddingをすべてpxで指定する「フィックス（固定幅）レイアウト（Fixed Layout）」、すべて%で指定する「フルードデザイン」、すべて相対単位であるemで指定する「エラスティックレイアウト（Elastic Layout）」です。
+                            px単位で指定する固定幅レイアウトのほうが直感的で扱いやすく、フルードデザインは難しいものともいわれています。しかし、レスポンシブWebデザインの3要素のひとつであるフルードグリッドを実現するには、フルードデザインの採用が書かせません。
+                            実際に「固定幅レイアウト」と「フルードデザイン」をブラウザーで表示して違いを比較してみましょう。
+                            サンプル①は、固定幅レイアウトで作った簡単なボックスレイアウトのソースコードです。
+                        p
+                            a.btn.btn-default(href='../demo/rwd/fluidgrid/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ                        
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <!DOCTYPE html>
+                                <html lang="ja">
+                                <head>
+                                     <meta charset="UTF-8">
+                                     <title>フィックス・レイアウトサンプル</title>
+                                     <style type="text/css">
+                                     body{
+                                          width:1000px;
+                                          margin:0 auto;
+                                     }
+                                     header,footer{
+                                          height:200px;
+                                          background:gray;
+                                     }
+                                     footer{
+                                          clear:both;
+                                     }
+                                     #left,#middle,#right{
+                                          height:400px;
+                                          float:left;
+                                     }
+                                     #left{
+                                          width:300px;
+                                          background:red;
+                                     }
+                                     #middle{
+                                          width:400px;
+                                          background:green;
+                                     }
+                                     #right{
+                                          width:300px;
+                                          background:blue;
+                                     }
+                                     </style>
+                                </head>
+                                <body>
+                                     <header></header>
+                                     <div id="contents">
+                                          <div id="left"></div>
+                                          <div id="middle"></div>
+                                          <div id="right"></div>
+                                     </div>
+                                </body>
+                                </html>
+                        pre.
+                            サンプル①をブラウザーで開くと、幅1000pxにコンテンツ幅を指定しているので、ウィンドウ幅が1000pxを下回るとページが横にはみ出てスクロールバーが表示されます。
+
+                            サンプル②は、固定幅レイアウトで作成したサンプル①を、フルードデザインに変換したものです。
+                        p
+                            a.btn.btn-default(href='../demo/rwd/fluidgrid/index1.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ                        
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <!DOCTYPE html>
+                                <html lang="ja">
+                                <head>
+                                     <meta charset="UTF-8">
+                                     <title>フィックス・レイアウトサンプル</title>
+                                     <style type="text/css">
+                                     body{
+                                          width:78.125%;
+                                          margin:0 auto;
+                                     }
+                                     header,footer{
+                                          height:200px;
+                                          background:gray;
+                                     }
+                                     footer{
+                                          clear:both;
+                                     }
+                                     #left,#middle,#right{
+                                          height:400px;
+                                          float:left;
+                                     }
+                                     #left{
+                                          width:30%;
+                                          background:red;
+                                     }
+                                     #middle{
+                                          width:40%;
+                                          background:green;
+                                     }
+                                     #right{
+                                          width:30%;
+                                          background:blue;
+                                     }
+                                     </style>
+                                </head>
+                                <body>
+                                     <header></header>
+                                     <div id="contents">
+                                          <div id="left"></div>
+                                          <div id="middle"></div>
+                                          <div id="right"></div>
+                                     </div>
+                                </body>
+                                </html>
+                        pre.
+                            サンプル②をブラウザーで開くと、ボックスの横幅を%単位で指定しているフルードデザインでは、ページがブラウザーの外にはみ出すことがなく、各ボックスの比率を維持したまま全体が縮小して表示されます。横幅をいくら狭くしても、横スクロールバーは表示されません。

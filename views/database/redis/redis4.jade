@@ -310,5 +310,27 @@ block content
                             hgetall user
                         hr
                         .alert.alert-info sort
+                        p String型を少ない順にソート
+                        pre.
+                            keys *
+                            type myscore
+                            lrange myscore 0 -1
+                            sort myscore
+                        p 多い順にソート
+                        pre.
+                            sort myscore desc
+                        p 0番目から3つ分、多い順にソート
+                        pre.
+                            sort myscore desc limit 0 3
+                        p List型のソート
+                        pre.
+                            keys *
+                            lrange mycolor 0 -1
+                            sort mycolor alpha
+                            sort mycolor slpha desc
+                        p Set型のソート
+                        pre.
+                            smembers myset1
+                            sort myset1 alpha
                         hr
                         .alert.alert-info multi / exec

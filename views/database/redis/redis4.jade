@@ -52,6 +52,7 @@ block content
                                 bgsave
                         p 保存先は、Resisサーバーを起動したディレクトリに、「dump.rdb」のファイル名で保存されています。
                         p: mark Redisを起動するときは、同じディレクトリで起動する必要があります。
+                        hr
                         .alert.alert-info Strig型の書き込み
                         p データの書き込み
                         pre
@@ -85,6 +86,7 @@ block content
                         pre
                             :code
                                 mget name email score
+                        hr
                         .alert.alert-info 数値を増減する
                         p 以下のコマンドでStringに数値が格納された場合に値を増減させることができます。
                         pre
@@ -108,7 +110,41 @@ block content
                             :code
                                 get score
                         hr
+                        .alert.alert-info KEYの操作
                         p 全キー検索
                         pre
                             :code
                                 keys *
+                        p パターン検索
+                        pre
+                            :code
+                                keys *m*
+                        p キーの存在確認
+                        pre
+                            :code
+                                exists score
+                                exists age
+                        p キーの名前を変更
+                        pre
+                            :code
+                                set age 14
+                                rename age nenrei
+                                keys *
+                        p キーの削除
+                        pre
+                            :code
+                                del nenrei
+                                keys *
+                                set age 14
+                        p キーの有効期限(５秒)
+                        pre
+                            :code
+                                expire age 5
+                                get age
+                        p ランダムにキーを返す
+                        pre
+                            :code
+                                randomkey
+                        hr
+                        
+

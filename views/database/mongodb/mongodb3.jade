@@ -343,6 +343,31 @@ block content
                         pre.
                             db.users.update({name:"user-2"},{$rename: {score: "myscore"}});
                             db.users.find({},{_id:0});
+                        hr
+                        .alert.alert-info 複数のドキュメントを更新
+                        p データーを追加する
+                        pre
+                            :code
+                                db.users.drop();
+                                db.createCollection('users');
+
+                                for(var i = 0; i < 6; i++){
+                                    db.users.inseert({
+                                        name: "user-" + i,
+                                        team: "team-" + (i % 3),
+                                        score: Math.floor(Math.random() * 100)
+                                    });
+                                }
+                                db.users.find({},{_id:0});
+                        p team-0が2件あっても1件だけしか10繰り上がらない
+                        pre.
+                            db.users.update({team: "team-0"}, {$inc: {score: 10}});
+                            db.users.find({},{_id:0});
+                        p team-0のキーを全件10繰り上げる
+                        pre.
+                            db.users.update({team: "team-0"}, {$inc: {score: 10}}, {multi: true});
+                            db.users.find({},{_id:0});
+                        hr
                         //-
                             .alert.alert-info ドキュメントを追加して更新
                             pre

@@ -39,100 +39,101 @@ block content
                                 td ドキュメント
                         p MongoDBでは、テーブルのことをコレクションと呼び、レコードのことをドキュメントと呼びます。
                         hr
-                        .alert.alert-info 動作確認
-                        pre
-                            :code
-                                1.MongoDBサーバの起動
-                                c:/mongodb/bin/mongod.exe --dbpath=../data を実行
-                                実行するとデフォルトのポート番号 27017 で接続を待ち受ける
+                        //-
+                            .alert.alert-info 動作確認
+                            pre
+                                :code
+                                    1.MongoDBサーバの起動
+                                    c:/mongodb/bin/mongod.exe --dbpath=../data を実行
+                                    実行するとデフォルトのポート番号 27017 で接続を待ち受ける
 
 
-                                2.コマンドラインクライアントの起動
-                                コマンドプロンプトを開き、c:/mongodb/bin/mongo.exe を実行
+                                    2.コマンドラインクライアントの起動
+                                    コマンドプロンプトを開き、c:/mongodb/bin/mongo.exe を実行
 
-                                MongoDB shell version: 1.6.5
-                                connecting to: test
-                                >
+                                    MongoDB shell version: 1.6.5
+                                    connecting to: test
+                                    >
 
-                                上記の様に表示されていればOK
+                                    上記の様に表示されていればOK
 
-                                MongoDB shell version: 1.6.5
-                                connecting to: test
-                                Tue Dec 14 18:16:17 Error: couldn't connect to server 127.0.0.1 (anon):1154
-                                exception: connect failed
+                                    MongoDB shell version: 1.6.5
+                                    connecting to: test
+                                    Tue Dec 14 18:16:17 Error: couldn't connect to server 127.0.0.1 (anon):1154
+                                    exception: connect failed
 
-                                上記の様に表示された場合はサーバが起動しているか確認
+                                    上記の様に表示された場合はサーバが起動しているか確認
 
-                                3.データを保存してみる
+                                    3.データを保存してみる
 
-                                > db.samples.save({"name": "Hoge", "email": "hoge@exsample.com"});
+                                    > db.samples.save({"name": "Hoge", "email": "hoge@exsample.com"});
 
-                                4.保存したデータを取得してみる
+                                    4.保存したデータを取得してみる
 
-                                > db.samples.find();
-                                { "_id" : ObjectId("4d07367d0205000000003130"), "name" : "Hoge", "email" : "hoge@example.com" }
+                                    > db.samples.find();
+                                    { "_id" : ObjectId("4d07367d0205000000003130"), "name" : "Hoge", "email" : "hoge@example.com" }
 
-                                5.保存したデータを削除してみる
+                                    5.保存したデータを削除してみる
 
-                                > db.samples.remove();
-                                > db.samples.find();
-                                >
+                                    > db.samples.remove();
+                                    > db.samples.find();
+                                    >
 
-                                6.インデックスを削除してみる
+                                    6.インデックスを削除してみる
 
-                                > db.samples.dropIndexes();
-                                {
-                                "nIndexesWas" : 1,
-                                "msg" : "non-_id indexes dropped for collection",
-                                "ok" : 1
-                                }
-                                >
+                                    > db.samples.dropIndexes();
+                                    {
+                                    "nIndexesWas" : 1,
+                                    "msg" : "non-_id indexes dropped for collection",
+                                    "ok" : 1
+                                    }
+                                    >
 
-                                7.コレクションを削除してみる
+                                    7.コレクションを削除してみる
 
-                                > db.samples.drop();
-                                true
-                                >
-                        hr
-                        pre
-                            :code
-                                Windows に MongoDB をインストールする
+                                    > db.samples.drop();
+                                    true
+                                    >
+                            hr
+                            pre
+                                :code
+                                    Windows に MongoDB をインストールする
 
-                                Windows に MongoDB をサービスとしてインストールしてみます。
+                                    Windows に MongoDB をサービスとしてインストールしてみます。
 
-                                MongoDB のサイトにアクセスし、環境にあったファイルをダウンロードして展開します。
-                                http://www.mongodb.org/downloads　（ダウンロード）
-                                ※今回はWindows 64-bit版のバージョン2.0.2をダウンロード
-
-
-                                今回はプログラムもデータも「c:\mongodb」フォルダ以下に配置します。mongodbフォルダを作成し、先ほど展開した中にあるbinフォルダ以下をコピーします。
-                                |
-                                C:\mongodb\dataディレクトリを作成します。
-                                C:\mongodb\logsディレクトリを作成します。
-
-                                サービスとして実行したいので、サービスへ登録します。コマンドプロンプトを管理者として実行し、下記のコマンドを実行します。
-
-                                cd c:\mongodb\bin
-
-                                mongod --install --logpath C:\mongodb\log.txt --dbpath C:\mongodb\db
-                                log.txtを見ると下記のような感じで結果が確認できます。
+                                    MongoDB のサイトにアクセスし、環境にあったファイルをダウンロードして展開します。
+                                    http://www.mongodb.org/downloads　（ダウンロード）
+                                    ※今回はWindows 64-bit版のバージョン2.0.2をダウンロード
 
 
-                                Creating service MongoDB.
+                                    今回はプログラムもデータも「c:\mongodb」フォルダ以下に配置します。mongodbフォルダを作成し、先ほど展開した中にあるbinフォルダ以下をコピーします。
+                                    |
+                                    C:\mongodb\dataディレクトリを作成します。
+                                    C:\mongodb\logsディレクトリを作成します。
 
-                                Service creation successful.
+                                    サービスとして実行したいので、サービスへ登録します。コマンドプロンプトを管理者として実行し、下記のコマンドを実行します。
 
-                                Service can be started from the command line via 'net start "MongoDB"'.
+                                    cd c:\mongodb\bin
 
-                                -- 省略 --
-
-
-                                後は、上記ログに書かれているように下記コマンドでサービスを開始すれば完了です。
-
-                                net start "MongoDB"
+                                    mongod --install --logpath C:\mongodb\log.txt --dbpath C:\mongodb\db
+                                    log.txtを見ると下記のような感じで結果が確認できます。
 
 
-                                念のため、コマンドラインクライアントから接続を確認しておきます。上記の流れだとカレントがc:\mongodb\binになっていますので、そのまま「mongo」と入力して実行すれば接続の確認ができます
+                                    Creating service MongoDB.
+
+                                    Service creation successful.
+
+                                    Service can be started from the command line via 'net start "MongoDB"'.
+
+                                    -- 省略 --
+
+
+                                    後は、上記ログに書かれているように下記コマンドでサービスを開始すれば完了です。
+
+                                    net start "MongoDB"
+
+
+                                    念のため、コマンドラインクライアントから接続を確認しておきます。上記の流れだとカレントがc:\mongodb\binになっていますので、そのまま「mongo」と入力して実行すれば接続の確認ができます
                         .alert.alert-info ドットインストール
                         pre
                             :code

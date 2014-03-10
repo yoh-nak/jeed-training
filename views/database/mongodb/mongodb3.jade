@@ -275,68 +275,71 @@ block content
 
                                 numbersコレクションにemailがないドキュメントを抽出
                                 >db.numbers.find({'email': {$exits: false});
-
-
-                                数値を5繰り上げる（inc = increment）
+                        hr
+                        .alert.alert-info 数値を5繰り上げる（inc = increment）
+                        pre
+                            :code
                                 >db.numbers.update({'num': 100}, {$inc: {'num': 5}})
-
-
-                                数値を20繰り下げる
+                        hr
+                        .alert.alert-info 数値を20繰り下げる
+                        pre
+                            :code
                                 >db.numbers.update({'num': 100}, {$inc: {'num': -20}})
-
-
-                                リネームする
+                        hr
+                        .alert.alert-info リネームする
+                        pre
+                            :code
                                 >db.numbers.update({'num': 100}, {$rename: {'num': 'number'}})
-
-
-
-
-                                データがあったら更新、なかったらインサート（3つ目の引数upsert）
+                        hr
+                        .alert.alert-info データがあったら更新、なかったらインサート（3つ目の引数upsert）
+                        pre
+                            :code
                                 >db.numbers.update({'num': 100}, {$inc: {'num': 5}}, true);
-
-
-                                １件しか更新されない
+                        hr
+                        .alert.alert-info １件しか更新されない
+                        pre
+                            :code
                                 >db.numbers.update({}, {$inc: {'num': 5}});
-
-
-                                全件更新される（4つ目の引数multi）
+                        hr
+                        .alert.alert-info 全件更新される（4つ目の引数multi）
+                        pre
+                            :code
                                 >db.numbers.update({}, {$inc: {'num': 5}}, false, true);
-
-
-
-
-
-
-                                構造の確認
+                        hr
+                        .alert.alert-info 構造の確認
+                        pre
+                            :code
                                 >db.numbers.find({num: {'$gt': 199995}}).explain()
-
-
-                                インデックスをつける（昇順のインデックスをnumキーにつける）
+                        hr
+                        .alert.alert-info インデックスをつける（昇順のインデックスをnumキーにつける）
+                        pre
+                            :code
                                 >db.numbers.ensureIndex({num: 1})
-
-
-                                インデックスをつける（降順のインデックスをnumキーにつける）
+                        hr
+                        .alert.alert-info インデックスをつける（降順のインデックスをnumキーにつける）
+                        pre
+                            :code
                                 >db.numbers.ensureIndex({num: -1})
-
-
-                                インデックスの確認
+                        hr
+                        .alert.alert-info インデックスの確認
+                        pre
+                            :code
                                 >db.numbers.getIndexes() 
-
-
-                                クエリのレスポンスが上がっている
+                        hr
+                        .alert.alert-info クエリのレスポンスが上がっている
+                        pre
+                            :code
                                 >db.numbers.find({num: {'$gt': 199995}}).explain() 
-
-
-                                インデックスの削除
+                        hr
+                        .alert.alert-info インデックスの削除
+                        pre
+                            :code
                                 >db.numbers.dropIndex({num: 1})
-
-
-                                ユニークキーをつける
+                        hr
+                        .alert.alert-info ユニークキーをつける
+                        pre
+                            :code
                                 >db.numbers.ensureIndex({num: 1}, {'uniquie': true})
-
-
-
-
 
 
                                 command.jsで保存
@@ -364,8 +367,6 @@ block content
                         pre
                             :code
                                 mongorestore --drop
-
-
 
                                 >db.stats()
                                 >db.runCommand({dbstats: 1})

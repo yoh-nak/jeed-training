@@ -310,11 +310,18 @@ block content
                             hgetall user
                         hr
                         .alert.alert-info sort
+                        p List型のソート
                         p String型を少ない順にソート
                         pre.
-                            keys *
+                            lpush myscore 22
+                            lpush myscore 50
+                            lpush myscore 80
+                            lpush myscore 21
+                        p データ型の確認
+                        pre.
                             type myscore
                             lrange myscore 0 -1
+                        pre.
                             sort myscore
                         p 多い順にソート
                         pre.
@@ -322,7 +329,7 @@ block content
                         p 0番目から3つ分、多い順にソート
                         pre.
                             sort myscore desc limit 0 3
-                        p List型のソート
+                        p アルファベット順のソート
                         pre.
                             keys *
                             lrange mycolor 0 -1

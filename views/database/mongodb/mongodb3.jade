@@ -307,50 +307,79 @@ block content
                         pre.
                             db.users.ensureIndex({name:1}, {unique:true})
                             db.users.insert({name: "user-0"});
-
-
-                        
-                        .alert.alert-info ドキュメントの更新
-                        pre
-                            :code
-                                db.users.update({username: 'sato'}, {$set: {username: 'saito'}})
                         hr
-                        .alert.alert-info ドキュメントを追加して更新
-                        pre
-                            :code
-                                db.users.update({username: 'smith'}, {$set: {country: 'Canada'}})
+                        .alert.alert-info scoreキーを更新
+                        p user-0のドキュメントのがscoreキーだけに更新されます。
+                        pre.
+                            db.users.update({name:"user-0"},{score: 100});
+                            db.users.find({},{_id:0});
                         hr
-                        .alert.alert-info usersコレクションのusernameがjonesのものからcountryだけ表示
-                        pre
-                            :code
-                                db.users.find({username:'jones'}, {country: true});
+                        .alert.alert-info scoreキーを更新
+                        p user-1のドキュメントのscoreキーの値を更新
+                        pre.
+                            db.users.update({name:"user-1"},{$set: {score: 100}});
+                            db.users.find({},{_id:0});
                         hr
-                        .alert.alert-info usersコレクションのドキュメントを削除
-                        pre
-                            :code
-                                db.users.update({username: 'smith'},{$unset: {country: 1}}) 
+                        .alert.alert-info scoreキーを更新
+                        p user-1のドキュメントのscoreキーを削除
+                        pre.
+                            db.users.update({name:"user-1"},{$unset: {score: ""}});
+                            db.users.find({},{_id:0});
+                        hr
+                        .alert.alert-info scoreキーを更新
+                        p user-2のドキュメントのscoreキーを10繰り上げる
+                        pre.
+                            db.users.update({name:"user-2"},{$inc: {score: 10}});
+                            db.users.find({},{_id:0});
+                        hr
+                        .alert.alert-info scoreキーを更新
+                        p user-2のドキュメントのscoreキーを10繰り下げる
+                        pre.
+                            db.users.update({name:"user-2"},{$inc: {score: -10}});
+                            db.users.find({},{_id:0});
+                        hr
+                        .alert.alert-info scoreキーを更新
+                        p user-2のドキュメントのscoreキーをmyscoreキーにリネーム
+                        pre.
+                            db.users.update({name:"user-2"},{$rename: {score: "myscore"}});
+                            db.users.find({},{_id:0});
+                        //-
+                            .alert.alert-info ドキュメントを追加して更新
+                            pre
+                                :code
+                                    db.users.update({username: 'smith'}, {$set: {country: 'Canada'}})
+                            hr
+                            .alert.alert-info usersコレクションのusernameがjonesのものからcountryだけ表示
+                            pre
+                                :code
+                                    db.users.find({username:'jones'}, {country: true});
+                            hr
+                            .alert.alert-info usersコレクションのドキュメントを削除
+                            pre
+                                :code
+                                    db.users.update({username: 'smith'},{$unset: {country: 1}}) 
 
 
-                                >db.users.update({username: 'smith'},
-                                {$set: {favorites: 
-                                {
-                                cities: ['Chicago', 'Cheyenne'],
-                                movies: ['Casablanca', 'The Sting']
-                                }
-                                }
-                                })
+                                    >db.users.update({username: 'smith'},
+                                    {$set: {favorites: 
+                                    {
+                                    cities: ['Chicago', 'Cheyenne'],
+                                    movies: ['Casablanca', 'The Sting']
+                                    }
+                                    }
+                                    })
 
 
-                                db.users.update({username: 'jones'},
-                                {$set: {favorites:
-                                {
-                                movies: ['Casablanca', 'Rocky']
-                                }
-                                }
-                                })
+                                    db.users.update({username: 'jones'},
+                                    {$set: {favorites:
+                                    {
+                                    movies: ['Casablanca', 'Rocky']
+                                    }
+                                    }
+                                    })
 
 
-                                >db.users.find()
+                                    >db.users.find()
 
                         hr
                         .alert.alert-info 絞り込み検索

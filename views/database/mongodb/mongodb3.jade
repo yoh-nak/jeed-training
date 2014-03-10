@@ -125,16 +125,40 @@ block content
                             db.users.remove();
                             db.users.find();
                         hr
-                        .alert.alert-info usersコレクションの挿入／更新
-                        p _idの指定がなければusersコレクションにinsert
+                        .alert.alert-info JavaScriptで追加
                         pre
                             :code
-                                db.users.save({username: 'jones'})
-                        p _idの指定があればusersコレクションのうち、指定した_idのusernameドキュメントをupdate
-                        pre
-                            :code
-                                db.users.save({_id: ObjectId('52fdd2ebc5976a3f2d4cdab', 'username': 'nakano'})
+                                for(var i = 0; i < 4; i++){
+                                    db.users.insert({
+                                        name: "user-" + i,
+                                        team: "team-" + (i % 3),
+                                        score: Math.floor(Math.random() * 100)
+                                    });
+                                }
+                                db.users.find();
                         hr
+                        .alert.alert-info JavaScriptでスキーマレスに追加
+                        pre
+                            :code
+                                for(var i = 4; i < 6; i++){
+                                    db.users.insert({
+                                        name: "user-" + i,
+                                        team: "team-" + (i % 3)
+                                    });
+                                }
+                                db.users.find();
+                        hr
+                        //-
+                            .alert.alert-info usersコレクションの挿入／更新
+                            p _idの指定がなければusersコレクションにinsert
+                            pre
+                                :code
+                                    db.users.save({username: 'jones'})
+                            p _idの指定があればusersコレクションのうち、指定した_idのusernameドキュメントをupdate
+                            pre
+                                :code
+                                    db.users.save({_id: ObjectId('52fdd2ebc5976a3f2d4cdab', 'username': 'nakano'})
+                            hr
                         .alert.alert-info usersコレクションの全削除
                         pre
                             :code

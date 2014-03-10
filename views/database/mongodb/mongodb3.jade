@@ -24,60 +24,102 @@ block content
                             sudo service mongod status
                         hr
                         .alert.alert-info MongoDBの開始
-                        pre
-                            :code
-                                mongo データベース名
-                        p データベース名を指定しないとtestというデータベースが作成される
-                        pre
-                            :code
-                                mongo
+                        pre.
+                            mongo データベース名
+                        p データベース名を指定しないとtestというデータベースが作成されます。
+                        pre.
+                            mongo
                         hr
                         .alert.alert-info MongoDBの終了
-                        pre
-                            :code
-                                exit
-                        pre
-                            :code
-                                quit()
-                        pre
-                            :code
-                                Ctrl + C
+                        pre.
+                            exit
+                        pre.
+                            quit()
+                        pre.
+                            Ctrl + C
                         hr
-                        .alert.alert-info ヘルプの表示
-                        p 全体のヘルプを表示
-                        pre
-                            :code
-                                help
-                        p dbメソッドのヘルプ
-                        pre
-                            :code
-                                db.help()
-                        p 使用中のデータベースの統計を表示
-                        pre
-                            :code
-                                db.stats()
+                        .alert.alert-info データベースの作成
+                        pre.
+                            mongo mydb
+                        hr
+                        .alert.alert-info 全体のヘルプを表示
+                        pre.
+                            help
+                        hr
+                        .alert.alert-info dbメソッドのヘルプ
+                        pre.
+                            db.help()
+                        hr
+                        .alert.alert-info 使用中のデータベースの統計を表示
+                        pre.
+                            db.stats()
+                        hr
+                        .alert.alert-info データベースの一覧を表示
+                        p コレクションを作成するまでデータベースは一覧表示されません。
+                        pre.
+                            show dbs;
+                            db.createCollection('test');
+                            show dbs;
                         hr
                         .alert.alert-info データベースの切り替え
-                        p 存在する場合は切り替え、存在しない場合は新規作成
-                        pre
-                            :code
-                                use tutorial
+                        p useコマンドで既存のデータベースに切り替えられます。
+                        pre.
+                            use local
                         hr
-                        .alert.alert-info コレクションの作成
-                        pre
-                            :code
-                                db.createCollection('user')；
+                        .alert.alert-info データベースの新規作成
+                        p useコマンドで存在しないデータベースを指定すると、新規作成されます。
+                        pre.
+                            use use mydb2
                         hr
-                        .alert.alert-info コレクションのリネーム
-                        pre
-                            :code
-                                db.user.renameCollection('users');
+                        .alert.alert-info データベースの削除
+                        p 既存のデータベースに切り替えた後、db.dropDatabase()を実行します。
+                        pre.
+                            use mydb
+                            db.dropDatabase();
+                            show dbs;
+                        hr
+                        .alert.alert-info コレクションの新規作成
+                        pre.
+                            show dbs;
+                            use mydb;
+                            db.createCollection('users');
                         hr
                         .alert.alert-info コレクションの一覧表示
-                        pre
-                            :code
-                                show collections
+                        pre.
+                            show collections;
                         hr
+                        .alert.alert-info コレクションのリネーム
+                        pre.
+                            db.users.renameColection('persons');
+                            show collections;
+                        hr
+                        .alert.alert-info コレクションの削除
+                        pre.
+                            db.persons.drop();
+                            show collections;
+                        hr
+                        //-
+                            .alert.alert-info データベースの切り替え
+                            p 存在する場合は切り替え、存在しない場合は新規作成
+                            pre
+                                :code
+                                    use tutorial
+                            hr
+                            .alert.alert-info コレクションの作成
+                            pre
+                                :code
+                                    db.createCollection('user')；
+                            hr
+                            .alert.alert-info コレクションのリネーム
+                            pre
+                                :code
+                                    db.user.renameCollection('users');
+                            hr
+                            .alert.alert-info コレクションの一覧表示
+                            pre
+                                :code
+                                    show collections
+                            hr
                         .alert.alert-info usersコレクションに挿入
                         pre
                             :code
@@ -186,9 +228,8 @@ block content
                                 >db.users.drop()
                         hr
                         .alert.alert-info データベースの一覧表示
-                        pre
-                            :code
-                                >show dbs
+                        pre.
+                            show dbs
                         hr
                         .alert.alert-info コレクションの一覧表示
                         pre

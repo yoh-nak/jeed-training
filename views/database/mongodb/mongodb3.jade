@@ -242,6 +242,49 @@ block content
                                     db.users.find({username:'jones'});
                                     db.users.find({_id:ObjectId('518869be37d5684f207935ae')})
                             hr
+                        .alert.alert-info nameキーだけ表示
+                        pre.
+                            db.users.find({},{name: 1});
+                        hr
+                        .alert.alert-info nameキーだけ非表示
+                        pre.
+                            db.users.find({},{name: 0});
+                        hr
+                        .alert.alert-info nameキーとscoreキーのみ表示
+                        pre.
+                            db.users.find({},{name: 1, score: 1});
+                        hr
+                        .alert.alert-info 1と0はミックスできない
+                        pre.
+                            db.users.find({},{name: 1, score: 0});
+                        hr
+                        .alert.alert-info ただしidだけ0にすることは可
+                        pre.
+                            db.users.find({},{name: 1, score: 0, _id: 0});
+                        hr
+                        .alert.alert-info 1件だけ表示
+                        pre.
+                            db.users.findOne({}, {_id: 0});
+                        hr
+                        .alert.alert-info 3件表示
+                        pre.
+                            db.users.find({}, {_id: 0}).limit(3);
+                        hr
+                        .alert.alert-info 2件をスキップして3件表示
+                        pre.
+                            db.users.find({}, {_id: 0}).slip(2).limit(3);
+                        hr
+                        .alert.alert-info scoreの小さい順にソート
+                        pre.
+                            db.users.find({}, {_id: 0}).sort({score: 1});
+                        hr
+                        .alert.alert-info scoreの大きい順にソート
+                        pre.
+                            db.users.find({}, {_id: 0}).sort({score: -1});
+                        hr
+
+                        
+
                         .alert.alert-info ドキュメントの更新
                         pre
                             :code

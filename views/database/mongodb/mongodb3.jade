@@ -282,9 +282,34 @@ block content
                         pre.
                             db.users.find({}, {_id: 0}).sort({score: -1});
                         hr
+                        .alert.alert-info 索引を確認する
+                        p 索引をつけると、そのキーでの検索が速くなりますが、追加が遅くなります。
+                        pre.
+                            db.users.getIndexes();
+                        hr
+                        .alert.alert-info 索引を昇順で追加する
+                        pre.
+                            db.users.ensureIndex({score: 1});
+                            db.users.getIndexes();
+                        hr
+                        .alert.alert-info 索引を降順で追加する
+                        pre.
+                            db.users.ensureIndex({score: -1});
+                            db.users.getIndexes
+                        hr
+                        .alert.alert-info 索引を削除する
+                        pre.
+                            db.users.dropIndex({score:1})
+                            db.users.getIndexes();
+                        hr
+                        .alert.alert-info ユニークキーを追加する
+                        p 重複するデータを追加するとエラーになります。
+                        pre.
+                            db.users.ensureIndex({name:1}, {unique:true})
+                            db.users.insert({name: "user-0"});
+
 
                         
-
                         .alert.alert-info ドキュメントの更新
                         pre
                             :code

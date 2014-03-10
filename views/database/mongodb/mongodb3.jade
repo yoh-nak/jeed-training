@@ -196,30 +196,52 @@ block content
                         pre.
                             db.users.find({name: {$ne: "user-1"}});
                         hr
-
-                        
-                        .alert.alert-info usersコレクションの全削除
-                        pre
-                            :code
-                                db.users.remove()
+                        .alert.alert-info and検索する
+                        pre.
+                            db.users.find({
+                                team: "team-0",
+                                score: {$lt: 50}
+                            });
                         hr
-                        .alert.alert-info usersコレクションのドキュメント数
-                        pre
-                            :code
-                                db.users.count()
+                        .alert.alert-info and検索する2
+                        pre.
+                            db.users.find({
+                                $and: [
+                                    {team: "team-0"},
+                                    {score: {$lt: 50}}
+                                ]
+                            });
                         hr
-                        .alert.alert-info usersコレクションの検索
-                        pre
-                            :code
-                                db.users.find();
-                                db.users.find({username:'jones'});
-                                db.users.find({_id:ObjectId('518869be37d5684f207935ae')})
+                        .alert.alert-info or検索する
+                        pre.
+                            db.users.find({
+                                $or: [
+                                    {team: "team-0"},
+                                    {score: {$lt: 50}}
+                                ]
+                            });
                         hr
-                        .alert.alert-info uusernameがjonesではないデータを表示（ne = not equal）
-                        pre
-                            :code
-                                db.users.find({username: {$ne: 'jones'}});
+                        .alert.alert-info $in（配列に含まれているか）、$exists（キーが存在するか）で検索
+                        pre.
+                            db.users.find({
+                                $or: [
+                                    {team: {$in: ["team-0", "team-1"]}},
+                                    {score: {$exists: true}}
+                                ]
+                            });
                         hr
+                        .alert.alert-info 重複を削除して検索（teamにどのようなものがあるか）
+                        pre.
+                            db.users.distinct('team');
+                        hr
+                        //-
+                            .alert.alert-info usersコレクションの検索
+                            pre
+                                :code
+                                    db.users.find();
+                                    db.users.find({username:'jones'});
+                                    db.users.find({_id:ObjectId('518869be37d5684f207935ae')})
+                            hr
                         .alert.alert-info ドキュメントの更新
                         pre
                             :code

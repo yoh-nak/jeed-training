@@ -141,10 +141,6 @@ block content
                                 db.users.update({username: 'smith'},{$unset: {country: 1}}) 
 
 
-
-
-
-
                                 >db.users.update({username: 'smith'},
                                 {$set: {favorites: 
                                 {
@@ -164,14 +160,12 @@ block content
                                 })
 
 
-
-
-
-
                                 >db.users.find()
 
-
-                                絞り込み検索
+                        hr
+                        .alert.alert-info 絞り込み検索
+                        pre
+                            :code
                                 >db.users.find({'favorites.movies': 'Casablanca'}) 
 
                                 複数行update（4つ目の引数がtrueで複数行更新）
@@ -180,40 +174,39 @@ block content
                                 false,
                                 true)
 
-
-                                コレクションのドキュメントの削除
+                        hr
+                        .alert.alert-info コレクションのドキュメントの削除
+                        pre
+                            :code
                                 >db.users.remove({'favorites.cities': 'Cheyenne'})
-
-
-                                コレクションの削除
+                        hr
+                        .alert.alert-info コレクションの削除
+                        pre
+                            :code
                                 >db.users.drop()
-
-
-                                データベースの一覧表示
+                        hr
+                        .alert.alert-info データベースの一覧表示
+                        pre
+                            :code
                                 >show dbs
-
-
-                                コレクションの一覧表示
+                        hr
+                        .alert.alert-info コレクションの一覧表示
+                        pre
+                            :code
                                 >show collections
-
-
-                                データベースの削除
+                        hr
+                        .alert.alert-info データベースの削除
+                        pre
+                            :code
                                 >use tutorial
 
                                 >db.dropDatabase()
 
-
-
-
-
-
                                 >use tutorial
-
 
                                 >for(var i=0; i<200000; i++){
                                 db.numbers.save({num: i});
                                 }
-
 
                                 >db.numbers.find()
 
@@ -349,29 +342,28 @@ block content
                                 command.jsで保存
                                 db.numbers.remove({'num': 100);
 
-
-                                外部ファイルを実行
+                        hr
+                        .alert.alert-info 外部ファイルを実行
+                        pre
+                            :code
                                 mongo tutorial command.js
 
-
                                 load('commands.js');
-
-
-
-
-                                バックアップをとる
+                        hr
+                        .alert.alert-info バックアップをとる
+                        pre
+                            :code
                                 mongodump --db tutorial
-
-
-                                バックアップの復元
+                        hr
+                        .alert.alert-info バックアップの復元
+                        pre
+                            :code
                                 mongorestore
-
-
-                                もとのデータベースを削除して復元
+                        hr
+                        .alert.alert-info もとのデータベースを削除して復元
+                        pre
+                            :code
                                 mongorestore --drop
-
-
-
 
 
 

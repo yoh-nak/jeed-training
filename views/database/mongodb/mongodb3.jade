@@ -98,37 +98,32 @@ block content
                             db.persons.drop();
                             show collections;
                         hr
-                        //-
-                            .alert.alert-info データベースの切り替え
-                            p 存在する場合は切り替え、存在しない場合は新規作成
-                            pre
-                                :code
-                                    use tutorial
-                            hr
-                            .alert.alert-info コレクションの作成
-                            pre
-                                :code
-                                    db.createCollection('user')；
-                            hr
-                            .alert.alert-info コレクションのリネーム
-                            pre
-                                :code
-                                    db.user.renameCollection('users');
-                            hr
-                            .alert.alert-info コレクションの一覧表示
-                            pre
-                                :code
-                                    show collections
-                            hr
-                        .alert.alert-info usersコレクションに挿入
-                        pre
-                            :code
-                                db.users.insert({username: 'smith'})
+                        .alert.alert-info ドキュメントの追加
+                        pre.
+                            pre.
+                            show dbs;
+                            use mydb;
+                            show collections;
+                            db.createCollection('users');
+                            db.users.insert({name:"nakano",score: 30});
                         hr
-                        .alert.alert-info usersコレクションの検索
-                        pre
-                            :code
-                                db.users.find()
+                        .alert.alert-info ドキュメントの一覧表示
+                        pre.
+                            db.users.find();
+                        hr
+                        .alert.alert-info ドキュメントをスキーマレスに追加
+                        pre.
+                            db.users.insert({name:"suzuki",tags:["web","mobile"]})
+                            db.users.find();
+                        hr
+                        .alert.alert-info ドキュメントを数える
+                        pre.
+                            db.users.count();
+                        hr
+                        .alert.alert-info ドキュメントを削除
+                        pre.
+                            db.users.remove();
+                            db.users.find();
                         hr
                         .alert.alert-info usersコレクションの挿入／更新
                         p _idの指定がなければusersコレクションにinsert

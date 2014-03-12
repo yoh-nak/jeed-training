@@ -1,0 +1,1575 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include ../mobile/navbar.jade
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;Cafeサイト④
+                    .panel-body
+                        h4 レスポンシブタイプセッティング
+                        p ウィンドウの大きさに合わせて調整する技術
+                        p 小さなウィンドウほど文字サイズが小さくなるようにする必要がある
+                        hr
+                        p: u emによるサイズの指定
+                        p font-size、レイアウトの上下marign、上下paddingをすべて「em」という単位で指定する
+                        p *px：1pxを1とする大きさ、ディスプレイの解像度に依存する
+                        p *em：適用する要素のfont-sizeプロパティの値を1とする大きさ、font-sizeプロパティで使用するときは親要素のfont-sizeの値が1になる
+                        p 基準となるfont-sizeが小さくなると、emで指定された値も小さくなる
+                        hr
+                        pre.
+                            基準となるfont-sizeが16pxのとき
+
+                            1em = 16px
+                            2em = 32px
+                            3em = 48px
+                            0.5em = 8px
+                        pre.
+                            基準となるfont-sizeが12pxのとき
+
+                            1em = 12px
+                            2em = 24px
+                            3em = 36px
+                            0.5em = 6px
+                        pre.
+                            emに変換したいpx値　÷　基準となるfont-sizeのpx値
+                        hr
+                            h4 emを採用する理由
+                            pre.
+                                html{
+                                     font-size:50%;
+                                }
+
+                                p{
+                                     font-size:16px;
+                                     margin-bottom:16px;
+                                }
+                            p html要素のフォントサイズを半分の50%に指定しても、p要素のfont-sizeやmargin-bottomは影響を受けず、16pxで表示される。
+                            pre.
+                                html{
+                                     font-size:50%;
+                                }
+
+                                p{
+                                     font-size:1em;
+                                     margin-bottom:1em;
+                                }
+                            p emで指定した親要素のfont-sizeが基準になるので、html要素の半分の50%、つまりブラウザ標準の16pxの半分の8pxに指定すると、p要素のfont-sizeも8pxになる。margin-bottomのemの基準となるfont-sizeはp要素のfont-sizeなので、margin-bottomも同様に8pxとなる。
+                            p このようにemで指定しておけば、html要素のfont-sizeを変更するだけで、html要素以下のすべての要素の指定値が連動して変更され、さらにmargin-bottomなどで指定した余白も比率を維持したまま一括して変更されるので、文字の設定を効率化できる。
+                        hr
+                        p ㉖
+                        pre.
+                            h1のfont-sizeは16pxが継承されて
+                            48px　÷　16px　=　3em
+                            となる
+
+                            h1のmargin-bottomはh1のfont-sizeが48pxのため
+                            24px　÷　48px　=　0.5em
+                            となる
+                        p
+                            a.btn.btn-default(href='../demo/rwd/cafebean/index26.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                @charset "utf-8";
+
+                                // @group Reset
+                                *
+                                    margin 0
+                                    padding 0
+                                a
+                                    text-decoration none
+                                ul,ol
+                                    list-style none
+                                img
+                                    vertical-align middle
+
+                                // @group Fluid-img
+                                img
+                                     max-width 100%
+
+                                // @group HTML
+                                html
+                                    font-family verdana, sans-serif
+                                    font-size 100%
+                                    line-height 1.5
+
+                                // @group Heading
+                                h1,h2,h3,h4,h5,h6
+                                    margin-bottom <mark>24px</mark>
+                                h1
+                                    font-size <mark>3em</mark>
+                                    line-height 1
+                                    margin-bottom <mark>0.5em</mark>
+                                h2
+                                    font-size 36px
+                                    line-height 1.3333
+                                h3
+                                    font-size 24px
+                                    line-height 1
+                                hgroup h2,h4,h5,h6
+                                    font-size 16px
+                                    line-height 1.5
+
+                                // @group Header
+                                header
+                                    text-align center
+                                    padding-top 24px
+                                    background #211f1f
+                                    h1
+                                        margin-bottom 24px
+                                    h2
+                                        color #fff
+
+                                // @group Nav
+                                nav
+                                    margin-bottom 24px
+                                    background-color #7D4934
+                                    background -moz-linear-gradient(top, rgba(125,73,52,1) 0%, rgba(43,21,18,1) 88%)
+                                    background -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(125,73,52,1)), color-stop(88%,rgba(43,21,18,1)))
+                                    background -webkit-linear-gradient(top, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    background -o-linear-gradient(top, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    background linear-gradient(to bottom, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    ul
+                                        overflow hidden
+                                        li
+                                            width 25%
+                                            float left
+                                            a
+                                                display block
+                                                color #d8c2a4
+                                                padding 12px 0
+                                                &:hover
+                                                    color white
+                                                    background-color #7d4934
+
+                                // @group Contents
+                                #contents
+                                    width 90%
+                                    margin 0 auto
+                                    text-align center
+                                    background url(http://griddle.it/960-12-10?color=pink&background=white&text=black)
+                                    p
+                                        margin-bottom 24px
+                                        text-align left
+                                    img
+                                        margin-bottom 24px
+                                        box-shadow 0 0 5px #2f1f1f
+
+                                // @group Foote
+                                footer
+                                    padding 24px 0
+                                    color white
+                                    text-align center
+                                    background url(../images/footer_bg.png)
+
+                                // 768px
+                                @media screen and (min-width : 768px)
+                                    #contents
+                                        text-align left
+
+                                // 1024px
+                                @media screen and (min-width : 1024px)
+                                    // @group Nav
+                                    nav ul
+                                        width 93.75%
+                                        margin 0 auto
+
+                                    // @group Contents 
+                                    #contents
+                                        overflow hidden
+                                        width 93.75%
+                                        #main
+                                            width 64.5833333%
+                                        #sub
+                                            width 31.25%
+                                    #contents #main,
+                                    #contents #sub
+                                        float left
+                                        margin 0 1.0416667%
+
+                                    // @group Footer
+                                    footer
+                                        width 91.796875%
+                                        margin 0 auto
+                        hr
+                        p ㉗
+                        pre.
+                            h2のfont-sizeは16pxが継承されて
+                            36px　÷　16px　=　2.25em
+                            となる
+
+                            h2のmargin-bottomはh2のfont-sizeが36pxのため
+                            24px　÷　36px　=　0.6667em
+                            となる
+
+                            h2のline-heightはh2のfont-sizeが36pxのため
+                            48px　÷　36px　=　1.3333
+                            line-heightは単位なし
+                        p
+                            a.btn.btn-default(href='../demo/rwd/cafebean/index27.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                @charset "utf-8";
+
+                                // @group Reset
+                                *
+                                    margin 0
+                                    padding 0
+                                a
+                                    text-decoration none
+                                ul,ol
+                                    list-style none
+                                img
+                                    vertical-align middle
+
+                                // @group Fluid-img
+                                img
+                                     max-width 100%
+
+                                // @group HTML
+                                html
+                                    font-family verdana, sans-serif
+                                    font-size 100%
+                                    line-height 1.5
+
+                                // @group Heading
+                                h1,h2,h3,h4,h5,h6
+                                    margin-bottom 24px
+                                h1
+                                    font-size 3em
+                                    line-height 1
+                                    margin-bottom 0.5em
+                                h2
+                                    font-size <mark>2.25em</mark>
+                                    line-height <mark>1.3333</mark>
+                                    margin-bottom <mark>0.6667em</mark>
+                                h3
+                                    font-size 24px
+                                    line-height 1
+                                hgroup h2,h4,h5,h6
+                                    font-size 16px
+                                    line-height 1.5
+
+                                // @group Header
+                                header
+                                    text-align center
+                                    padding-top 24px
+                                    background #211f1f
+                                    h1
+                                        margin-bottom 24px
+                                    h2
+                                        color #fff
+
+                                // @group Nav
+                                nav
+                                    margin-bottom 24px
+                                    background-color #7D4934
+                                    background -moz-linear-gradient(top, rgba(125,73,52,1) 0%, rgba(43,21,18,1) 88%)
+                                    background -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(125,73,52,1)), color-stop(88%,rgba(43,21,18,1)))
+                                    background -webkit-linear-gradient(top, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    background -o-linear-gradient(top, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    background linear-gradient(to bottom, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    ul
+                                        overflow hidden
+                                        li
+                                            width 25%
+                                            float left
+                                            a
+                                                display block
+                                                color #d8c2a4
+                                                padding 12px 0
+                                                &:hover
+                                                    color white
+                                                    background-color #7d4934
+
+                                // @group Contents
+                                #contents
+                                    width 90%
+                                    margin 0 auto
+                                    text-align center
+                                    background url(http://griddle.it/960-12-10?color=pink&background=white&text=black)
+                                    p
+                                        margin-bottom 24px
+                                        text-align left
+                                    img
+                                        margin-bottom 24px
+                                        box-shadow 0 0 5px #2f1f1f
+
+                                // @group Foote
+                                footer
+                                    padding 24px 0
+                                    color white
+                                    text-align center
+                                    background url(../images/footer_bg.png)
+
+                                // 768px
+                                @media screen and (min-width : 768px)
+                                    #contents
+                                        text-align left
+
+                                // 1024px
+                                @media screen and (min-width : 1024px)
+                                    // @group Nav
+                                    nav ul
+                                        width 93.75%
+                                        margin 0 auto
+
+                                    // @group Contents 
+                                    #contents
+                                        overflow hidden
+                                        width 93.75%
+                                        #main
+                                            width 64.5833333%
+                                        #sub
+                                            width 31.25%
+                                    #contents #main,
+                                    #contents #sub
+                                        float left
+                                        margin 0 1.0416667%
+
+                                    // @group Footer
+                                    footer
+                                        width 91.796875%
+                                        margin 0 auto
+                        hr
+                        p ㉘
+                        pre.
+                            h3のfont-sizeは16pxが継承されて
+                            24px　÷　16px　=　1.5em
+                            となる
+
+                            h3のmargin-bottomはh3のfont-sizeが24pxのため
+                            24px　÷　24px　=　1em
+                            となる
+
+                            h3のline-heightはh3のfont-sizeが24pxのため
+                            24px　÷　24px　=　1
+                            line-heightは単位なし
+                        p
+                            a.btn.btn-default(href='../demo/rwd/cafebean/index28.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                @charset "utf-8";
+
+                                // @group Reset
+                                *
+                                    margin 0
+                                    padding 0
+                                a
+                                    text-decoration none
+                                ul,ol
+                                    list-style none
+                                img
+                                    vertical-align middle
+
+                                // @group Fluid-img
+                                img
+                                     max-width 100%
+
+                                // @group HTML
+                                html
+                                    font-family verdana, sans-serif
+                                    font-size 100%
+                                    line-height 1.5
+
+                                // @group Heading
+                                h1,h2,h3,h4,h5,h6
+                                    margin-bottom 24px
+                                h1
+                                    font-size 3em
+                                    line-height 1
+                                    margin-bottom 0.5em
+                                h2
+                                    font-size 2.25em
+                                    line-height 1.3333
+                                    margin-bottom 0.6667em
+                                h3
+                                    font-size <mark>1.5em</mark>
+                                    line-height <mark>1</mark>
+                                    margin-bottom <mark>1em</mark>
+                                hgroup h2,h4,h5,h6
+                                    font-size 16px
+                                    line-height 1.5
+                                    
+                                // @group Header
+                                header
+                                    text-align center
+                                    padding-top 24px
+                                    background #211f1f
+                                    h1
+                                        margin-bottom 24px
+                                    h2
+                                        color #fff
+
+                                // @group Nav
+                                nav
+                                    margin-bottom 24px
+                                    background-color #7D4934
+                                    background -moz-linear-gradient(top, rgba(125,73,52,1) 0%, rgba(43,21,18,1) 88%)
+                                    background -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(125,73,52,1)), color-stop(88%,rgba(43,21,18,1)))
+                                    background -webkit-linear-gradient(top, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    background -o-linear-gradient(top, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    background linear-gradient(to bottom, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    ul
+                                        overflow hidden
+                                        li
+                                            width 25%
+                                            float left
+                                            a
+                                                display block
+                                                color #d8c2a4
+                                                padding 12px 0
+                                                &:hover
+                                                    color white
+                                                    background-color #7d4934
+
+                                // @group Contents
+                                #contents
+                                    width 90%
+                                    margin 0 auto
+                                    text-align center
+                                    background url(http://griddle.it/960-12-10?color=pink&background=white&text=black)
+                                    p
+                                        margin-bottom 24px
+                                        text-align left
+                                    img
+                                        margin-bottom 24px
+                                        box-shadow 0 0 5px #2f1f1f
+
+                                // @group Foote
+                                footer
+                                    padding 24px 0
+                                    color white
+                                    text-align center
+                                    background url(../images/footer_bg.png)
+
+                                // 768px
+                                @media screen and (min-width : 768px)
+                                    #contents
+                                        text-align left
+
+                                // 1024px
+                                @media screen and (min-width : 1024px)
+                                    // @group Nav
+                                    nav ul
+                                        width 93.75%
+                                        margin 0 auto
+
+                                    // @group Contents 
+                                    #contents
+                                        overflow hidden
+                                        width 93.75%
+                                        #main
+                                            width 64.5833333%
+                                        #sub
+                                            width 31.25%
+                                    #contents #main,
+                                    #contents #sub
+                                        float left
+                                        margin 0 1.0416667%
+
+                                    // @group Footer
+                                    footer
+                                        width 91.796875%
+                                        margin 0 auto
+                        hr
+                        p ㉙
+                        pre.
+                            hgroup h2,h4,h5,h6のfont-sizeは16pxが継承されて
+                            16px　÷　16px　=　1em
+                            となる
+
+                            hgroup h2,h4,h5,h6のmargin-bottomはhgroup h2,h4,h5,h6のfont-sizeが16pxのため
+                            24px　÷　16px　=　1.5em
+                            となる
+
+                            hgroup h2,h4,h5,h6のline-heightはhgroup h2,h4,h5,h6のfont-sizeが16pxのため
+                            24px　÷　16px　=　1.5
+                            line-heightは単位なし
+                        p
+                            a.btn.btn-default(href='../demo/rwd/cafebean/index29.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                @charset "utf-8";
+
+                                // @group Reset
+                                *
+                                    margin 0
+                                    padding 0
+                                a
+                                    text-decoration none
+                                ul,ol
+                                    list-style none
+                                img
+                                    vertical-align middle
+
+                                // @group Fluid-img
+                                img
+                                     max-width 100%
+
+                                // @group HTML
+                                html
+                                    font-family verdana, sans-serif
+                                    font-size 100%
+                                    line-height 1.5
+
+                                // @group Heading
+                                h1,h2,h3,h4,h5,h6
+                                    margin-bottom 24px
+                                h1
+                                    font-size 3em
+                                    line-height 1
+                                    margin-bottom 0.5em
+                                h2
+                                    font-size 2.25em
+                                    line-height 1.3333
+                                    margin-bottom 0.6667em
+                                h3
+                                    font-size 1.5em
+                                    line-height 1
+                                    margin-bottom 1em
+                                <mark>hgroup h2,h4,h5,h6
+                                    font-size 1em
+                                    line-height 1.5
+                                    margin-bottom 1.5em</mark>
+                                    
+                                // @group Header
+                                header
+                                    text-align center
+                                    padding-top 24px
+                                    background #211f1f
+                                    h1
+                                        margin-bottom 24px
+                                    h2
+                                        color #fff
+
+                                // @group Nav
+                                nav
+                                    margin-bottom 24px
+                                    background-color #7D4934
+                                    background -moz-linear-gradient(top, rgba(125,73,52,1) 0%, rgba(43,21,18,1) 88%)
+                                    background -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(125,73,52,1)), color-stop(88%,rgba(43,21,18,1)))
+                                    background -webkit-linear-gradient(top, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    background -o-linear-gradient(top, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    background linear-gradient(to bottom, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    ul
+                                        overflow hidden
+                                        li
+                                            width 25%
+                                            float left
+                                            a
+                                                display block
+                                                color #d8c2a4
+                                                padding 12px 0
+                                                &:hover
+                                                    color white
+                                                    background-color #7d4934
+
+                                // @group Contents
+                                #contents
+                                    width 90%
+                                    margin 0 auto
+                                    text-align center
+                                    background url(http://griddle.it/960-12-10?color=pink&background=white&text=black)
+                                    p
+                                        margin-bottom 24px
+                                        text-align left
+                                    img
+                                        margin-bottom 24px
+                                        box-shadow 0 0 5px #2f1f1f
+
+                                // @group Foote
+                                footer
+                                    padding 24px 0
+                                    color white
+                                    text-align center
+                                    background url(../images/footer_bg.png)
+
+                                // 768px
+                                @media screen and (min-width : 768px)
+                                    #contents
+                                        text-align left
+
+                                // 1024px
+                                @media screen and (min-width : 1024px)
+                                    // @group Nav
+                                    nav ul
+                                        width 93.75%
+                                        margin 0 auto
+
+                                    // @group Contents 
+                                    #contents
+                                        overflow hidden
+                                        width 93.75%
+                                        #main
+                                            width 64.5833333%
+                                        #sub
+                                            width 31.25%
+                                    #contents #main,
+                                    #contents #sub
+                                        float left
+                                        margin 0 1.0416667%
+
+                                    // @group Footer
+                                    footer
+                                        width 91.796875%
+                                        margin 0 auto
+                        hr
+                        p ㉚
+                        pre.
+                            headerのpadding-topはheaderのfont-sizeが継承されて16pxのため
+                            24px　÷　16px　=　1.5em
+                            となる
+                        p
+                            a.btn.btn-default(href='../demo/rwd/cafebean/index30.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                @charset "utf-8";
+
+                                // @group Reset
+                                *
+                                    margin 0
+                                    padding 0
+                                a
+                                    text-decoration none
+                                ul,ol
+                                    list-style none
+                                img
+                                    vertical-align middle
+
+                                // @group Fluid-img
+                                img
+                                     max-width 100%
+
+                                // @group HTML
+                                html
+                                    font-family verdana, sans-serif
+                                    font-size 100%
+                                    line-height 1.5
+
+                                <mark>// @group Heading
+                                //h1,h2,h3,h4,h5,h6
+                                //    margin-bottom 24px</mark>
+                                h1
+                                    font-size 3em
+                                    line-height 1
+                                    margin-bottom 0.5em
+                                h2
+                                    font-size 2.25em
+                                    line-height 1.3333
+                                    margin-bottom 0.6667em
+                                h3
+                                    font-size 1.5em
+                                    line-height 1
+                                    margin-bottom 1em
+                                hgroup h2,h4,h5,h6
+                                    font-size 1em
+                                    line-height 1.5
+                                    margin-bottom 1.5em
+                                    
+                                // @group Header
+                                header
+                                    text-align center
+                                    padding-top <mark>1.5em</mark>
+                                    background #211f1f
+                                    h1
+                                        margin-bottom 24px
+                                    h2
+                                        color #fff
+
+                                // @group Nav
+                                nav
+                                    margin-bottom 24px
+                                    background-color #7D4934
+                                    background -moz-linear-gradient(top, rgba(125,73,52,1) 0%, rgba(43,21,18,1) 88%)
+                                    background -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(125,73,52,1)), color-stop(88%,rgba(43,21,18,1)))
+                                    background -webkit-linear-gradient(top, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    background -o-linear-gradient(top, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    background linear-gradient(to bottom, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    ul
+                                        overflow hidden
+                                        li
+                                            width 25%
+                                            float left
+                                            a
+                                                display block
+                                                color #d8c2a4
+                                                padding 12px 0
+                                                &:hover
+                                                    color white
+                                                    background-color #7d4934
+
+                                // @group Contents
+                                #contents
+                                    width 90%
+                                    margin 0 auto
+                                    text-align center
+                                    background url(http://griddle.it/960-12-10?color=pink&background=white&text=black)
+                                    p
+                                        margin-bottom 24px
+                                        text-align left
+                                    img
+                                        margin-bottom 24px
+                                        box-shadow 0 0 5px #2f1f1f
+
+                                // @group Foote
+                                footer
+                                    padding 24px 0
+                                    color white
+                                    text-align center
+                                    background url(../images/footer_bg.png)
+
+                                // 768px
+                                @media screen and (min-width : 768px)
+                                    #contents
+                                        text-align left
+
+                                // 1024px
+                                @media screen and (min-width : 1024px)
+                                    // @group Nav
+                                    nav ul
+                                        width 93.75%
+                                        margin 0 auto
+
+                                    // @group Contents 
+                                    #contents
+                                        overflow hidden
+                                        width 93.75%
+                                        #main
+                                            width 64.5833333%
+                                        #sub
+                                            width 31.25%
+                                    #contents #main,
+                                    #contents #sub
+                                        float left
+                                        margin 0 1.0416667%
+
+                                    // @group Footer
+                                    footer
+                                        width 91.796875%
+                                        margin 0 auto
+                        hr
+                        p ㉛
+                        pre.
+                            header h1のmargin-bottomはheader h1のfont-sizeが継承されて16pxのため
+                            24px　÷　16px　=　1.5em
+                            となる
+                        p
+                            a.btn.btn-default(href='../demo/rwd/cafebean/index31.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                @charset "utf-8";
+
+                                // @group Reset
+                                *
+                                    margin 0
+                                    padding 0
+                                a
+                                    text-decoration none
+                                ul,ol
+                                    list-style none
+                                img
+                                    vertical-align middle
+
+                                // @group Fluid-img
+                                img
+                                     max-width 100%
+
+                                // @group HTML
+                                html
+                                    font-family verdana, sans-serif
+                                    font-size 100%
+                                    line-height 1.5
+
+                                // @group Heading
+                                h1
+                                    font-size 3em
+                                    line-height 1
+                                    margin-bottom 0.5em
+                                h2
+                                    font-size 2.25em
+                                    line-height 1.3333
+                                    margin-bottom 0.6667em
+                                h3
+                                    font-size 1.5em
+                                    line-height 1
+                                    margin-bottom 1em
+                                hgroup h2,h4,h5,h6
+                                    font-size 1em
+                                    line-height 1.5
+                                    margin-bottom 1.5em
+                                    
+                                // @group Header
+                                header
+                                    text-align center
+                                    padding-top 1.5em
+                                    background #211f1f
+                                    h1
+                                        margin-bottom <mark>0.5em</mark>
+                                    h2
+                                        color #fff
+
+                                // @group Nav
+                                nav
+                                    margin-bottom 24px
+                                    background-color #7D4934
+                                    background -moz-linear-gradient(top, rgba(125,73,52,1) 0%, rgba(43,21,18,1) 88%)
+                                    background -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(125,73,52,1)), color-stop(88%,rgba(43,21,18,1)))
+                                    background -webkit-linear-gradient(top, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    background -o-linear-gradient(top, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    background linear-gradient(to bottom, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    ul
+                                        overflow hidden
+                                        li
+                                            width 25%
+                                            float left
+                                            a
+                                                display block
+                                                color #d8c2a4
+                                                padding 12px 0
+                                                &:hover
+                                                    color white
+                                                    background-color #7d4934
+
+                                // @group Contents
+                                #contents
+                                    width 90%
+                                    margin 0 auto
+                                    text-align center
+                                    background url(http://griddle.it/960-12-10?color=pink&background=white&text=black)
+                                    p
+                                        margin-bottom 24px
+                                        text-align left
+                                    img
+                                        margin-bottom 24px
+                                        box-shadow 0 0 5px #2f1f1f
+
+                                // @group Foote
+                                footer
+                                    padding 24px 0
+                                    color white
+                                    text-align center
+                                    background url(../images/footer_bg.png)
+
+                                // 768px
+                                @media screen and (min-width : 768px)
+                                    #contents
+                                        text-align left
+
+                                // 1024px
+                                @media screen and (min-width : 1024px)
+                                    // @group Nav
+                                    nav ul
+                                        width 93.75%
+                                        margin 0 auto
+
+                                    // @group Contents 
+                                    #contents
+                                        overflow hidden
+                                        width 93.75%
+                                        #main
+                                            width 64.5833333%
+                                        #sub
+                                            width 31.25%
+                                    #contents #main,
+                                    #contents #sub
+                                        float left
+                                        margin 0 1.0416667%
+
+                                    // @group Footer
+                                    footer
+                                        width 91.796875%
+                                        margin 0 auto
+                        hr
+                        p ㉜
+                        pre.
+                            navのmargin-bottomはnavのfont-sizeが継承されて16pxのため
+                            24px　÷　16px　=　1.5em
+                            となる
+                        p
+                            a.btn.btn-default(href='../demo/rwd/cafebean/index32.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                @charset "utf-8";
+
+                                // @group Reset
+                                *
+                                    margin 0
+                                    padding 0
+                                a
+                                    text-decoration none
+                                ul,ol
+                                    list-style none
+                                img
+                                    vertical-align middle
+
+                                // @group Fluid-img
+                                img
+                                     max-width 100%
+
+                                // @group HTML
+                                html
+                                    font-family verdana, sans-serif
+                                    font-size 100%
+                                    line-height 1.5
+
+                                // @group Heading
+                                h1
+                                    font-size 3em
+                                    line-height 1
+                                    margin-bottom 0.5em
+                                h2
+                                    font-size 2.25em
+                                    line-height 1.3333
+                                    margin-bottom 0.6667em
+                                h3
+                                    font-size 1.5em
+                                    line-height 1
+                                    margin-bottom 1em
+                                hgroup h2,h4,h5,h6
+                                    font-size 1em
+                                    line-height 1.5
+                                    margin-bottom 1.5em
+                                    
+                                // @group Header
+                                header
+                                    text-align center
+                                    padding-top 1.5em
+                                    background #211f1f
+                                    h1
+                                        margin-bottom 0.5em
+                                    h2
+                                        color #fff
+
+                                // @group Nav
+                                nav
+                                    margin-bottom <mark>1.5em</mark>
+                                    background-color #7D4934
+                                    background -moz-linear-gradient(top, rgba(125,73,52,1) 0%, rgba(43,21,18,1) 88%)
+                                    background -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(125,73,52,1)), color-stop(88%,rgba(43,21,18,1)))
+                                    background -webkit-linear-gradient(top, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    background -o-linear-gradient(top, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    background linear-gradient(to bottom, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    ul
+                                        overflow hidden
+                                        li
+                                            width 25%
+                                            float left
+                                            a
+                                                display block
+                                                color #d8c2a4
+                                                padding 12px 0
+                                                &:hover
+                                                    color white
+                                                    background-color #7d4934
+
+                                // @group Contents
+                                #contents
+                                    width 90%
+                                    margin 0 auto
+                                    text-align center
+                                    background url(http://griddle.it/960-12-10?color=pink&background=white&text=black)
+                                    p
+                                        margin-bottom 24px
+                                        text-align left
+                                    img
+                                        margin-bottom 24px
+                                        box-shadow 0 0 5px #2f1f1f
+
+                                // @group Foote
+                                footer
+                                    padding 24px 0
+                                    color white
+                                    text-align center
+                                    background url(../images/footer_bg.png)
+
+                                // 768px
+                                @media screen and (min-width : 768px)
+                                    #contents
+                                        text-align left
+
+                                // 1024px
+                                @media screen and (min-width : 1024px)
+                                    // @group Nav
+                                    nav ul
+                                        width 93.75%
+                                        margin 0 auto
+
+                                    // @group Contents 
+                                    #contents
+                                        overflow hidden
+                                        width 93.75%
+                                        #main
+                                            width 64.5833333%
+                                        #sub
+                                            width 31.25%
+                                    #contents #main,
+                                    #contents #sub
+                                        float left
+                                        margin 0 1.0416667%
+
+                                    // @group Footer
+                                    footer
+                                        width 91.796875%
+                                        margin 0 auto
+                        hr
+                        p ㉝
+                        pre.
+                            nav ul li aのpaddingはnav ul li aのfont-sizeが継承されて16pxのため
+                            12px　÷　16px　=　0.75em
+                            となる
+                        p
+                            a.btn.btn-default(href='../demo/rwd/cafebean/index33.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                @charset "utf-8";
+
+                                // @group Reset
+                                *
+                                    margin 0
+                                    padding 0
+                                a
+                                    text-decoration none
+                                ul,ol
+                                    list-style none
+                                img
+                                    vertical-align middle
+
+                                // @group Fluid-img
+                                img
+                                     max-width 100%
+
+                                // @group HTML
+                                html
+                                    font-family verdana, sans-serif
+                                    font-size 100%
+                                    line-height 1.5
+
+                                // @group Heading
+                                h1
+                                    font-size 3em
+                                    line-height 1
+                                    margin-bottom 0.5em
+                                h2
+                                    font-size 2.25em
+                                    line-height 1.3333
+                                    margin-bottom 0.6667em
+                                h3
+                                    font-size 1.5em
+                                    line-height 1
+                                    margin-bottom 1em
+                                hgroup h2,h4,h5,h6
+                                    font-size 1em
+                                    line-height 1.5
+                                    margin-bottom 1.5em
+                                    
+                                // @group Header
+                                header
+                                    text-align center
+                                    padding-top 1.5em
+                                    background #211f1f
+                                    h1
+                                        margin-bottom 0.5em
+                                    h2
+                                        color #fff
+
+                                // @group Nav
+                                nav
+                                    margin-bottom 1.5em
+                                    background-color #7D4934
+                                    background -moz-linear-gradient(top, rgba(125,73,52,1) 0%, rgba(43,21,18,1) 88%)
+                                    background -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(125,73,52,1)), color-stop(88%,rgba(43,21,18,1)))
+                                    background -webkit-linear-gradient(top, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    background -o-linear-gradient(top, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    background linear-gradient(to bottom, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    ul
+                                        overflow hidden
+                                        li
+                                            width 25%
+                                            float left
+                                            a
+                                                display block
+                                                color #d8c2a4
+                                                padding <mark>0.75em 0</mark>
+                                                &:hover
+                                                    color white
+                                                    background-color #7d4934
+
+                                // @group Contents
+                                #contents
+                                    width 90%
+                                    margin 0 auto
+                                    text-align center
+                                    background url(http://griddle.it/960-12-10?color=pink&background=white&text=black)
+                                    p
+                                        margin-bottom 24px
+                                        text-align left
+                                    img
+                                        margin-bottom 24px
+                                        box-shadow 0 0 5px #2f1f1f
+
+                                // @group Foote
+                                footer
+                                    padding 24px 0
+                                    color white
+                                    text-align center
+                                    background url(../images/footer_bg.png)
+
+                                // 768px
+                                @media screen and (min-width : 768px)
+                                    #contents
+                                        text-align left
+
+                                // 1024px
+                                @media screen and (min-width : 1024px)
+                                    // @group Nav
+                                    nav ul
+                                        width 93.75%
+                                        margin 0 auto
+
+                                    // @group Contents 
+                                    #contents
+                                        overflow hidden
+                                        width 93.75%
+                                        #main
+                                            width 64.5833333%
+                                        #sub
+                                            width 31.25%
+                                    #contents #main,
+                                    #contents #sub
+                                        float left
+                                        margin 0 1.0416667%
+
+                                    // @group Footer
+                                    footer
+                                        width 91.796875%
+                                        margin 0 auto
+                        hr
+                        p ㉞
+                        pre.
+                            #contents pのmargin-bottomは#contents pのfont-sizeが継承されて16pxのため
+                            24px　÷　16px　=　1.5em
+                            となる
+                        p
+                            a.btn.btn-default(href='../demo/rwd/cafebean/index34.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                @charset "utf-8";
+
+                                // @group Reset
+                                *
+                                    margin 0
+                                    padding 0
+                                a
+                                    text-decoration none
+                                ul,ol
+                                    list-style none
+                                img
+                                    vertical-align middle
+
+                                // @group Fluid-img
+                                img
+                                     max-width 100%
+
+                                // @group HTML
+                                html
+                                    font-family verdana, sans-serif
+                                    font-size 100%
+                                    line-height 1.5
+
+                                // @group Heading
+                                h1
+                                    font-size 3em
+                                    line-height 1
+                                    margin-bottom 0.5em
+                                h2
+                                    font-size 2.25em
+                                    line-height 1.3333
+                                    margin-bottom 0.6667em
+                                h3
+                                    font-size 1.5em
+                                    line-height 1
+                                    margin-bottom 1em
+                                hgroup h2,h4,h5,h6
+                                    font-size 1em
+                                    line-height 1.5
+                                    margin-bottom 1.5em
+                                    
+                                // @group Header
+                                header
+                                    text-align center
+                                    padding-top 1.5em
+                                    background #211f1f
+                                    h1
+                                        margin-bottom 0.5em
+                                    h2
+                                        color #fff
+
+                                // @group Nav
+                                nav
+                                    margin-bottom 1.5em
+                                    background-color #7D4934
+                                    background -moz-linear-gradient(top, rgba(125,73,52,1) 0%, rgba(43,21,18,1) 88%)
+                                    background -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(125,73,52,1)), color-stop(88%,rgba(43,21,18,1)))
+                                    background -webkit-linear-gradient(top, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    background -o-linear-gradient(top, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    background linear-gradient(to bottom, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    ul
+                                        overflow hidden
+                                        li
+                                            width 25%
+                                            float left
+                                            a
+                                                display block
+                                                color #d8c2a4
+                                                padding 0.75em 0
+                                                &:hover
+                                                    color white
+                                                    background-color #7d4934
+
+                                // @group Contents
+                                #contents
+                                    width 90%
+                                    margin 0 auto
+                                    text-align center
+                                    background url(http://griddle.it/960-12-10?color=pink&background=white&text=black)
+                                    p
+                                        margin-bottom <mark>1.5em</mark>
+                                        text-align left
+                                    img
+                                        margin-bottom 24px
+                                        box-shadow 0 0 5px #2f1f1f
+
+                                // @group Foote
+                                footer
+                                    padding 24px 0
+                                    color white
+                                    text-align center
+                                    background url(../images/footer_bg.png)
+
+                                // 768px
+                                @media screen and (min-width : 768px)
+                                    #contents
+                                        text-align left
+
+                                // 1024px
+                                @media screen and (min-width : 1024px)
+                                    // @group Nav
+                                    nav ul
+                                        width 93.75%
+                                        margin 0 auto
+
+                                    // @group Contents 
+                                    #contents
+                                        overflow hidden
+                                        width 93.75%
+                                        #main
+                                            width 64.5833333%
+                                        #sub
+                                            width 31.25%
+                                    #contents #main,
+                                    #contents #sub
+                                        float left
+                                        margin 0 1.0416667%
+
+                                    // @group Footer
+                                    footer
+                                        width 91.796875%
+                                        margin 0 auto
+                        hr
+                        p ㉟
+                        pre.
+                            #contents imgのmargin-bottomは#contents imgのfont-sizeが継承されて16pxのため
+                            24px　÷　16px　=　1.5em
+                            となる
+
+                            #contents imgのbox-shadowは#contents imgのfont-sizeが継承されて16pxのため
+                            5px　÷　16px　=　0.3125em; 
+                        p
+                            a.btn.btn-default(href='../demo/rwd/cafebean/index35.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                @charset "utf-8";
+
+                                // @group Reset
+                                *
+                                    margin 0
+                                    padding 0
+                                a
+                                    text-decoration none
+                                ul,ol
+                                    list-style none
+                                img
+                                    vertical-align middle
+
+                                // @group Fluid-img
+                                img
+                                     max-width 100%
+
+                                // @group HTML
+                                html
+                                    font-family verdana, sans-serif
+                                    font-size 100%
+                                    line-height 1.5
+
+                                // @group Heading
+                                h1
+                                    font-size 3em
+                                    line-height 1
+                                    margin-bottom 0.5em
+                                h2
+                                    font-size 2.25em
+                                    line-height 1.3333
+                                    margin-bottom 0.6667em
+                                h3
+                                    font-size 1.5em
+                                    line-height 1
+                                    margin-bottom 1em
+                                hgroup h2,h4,h5,h6
+                                    font-size 1em
+                                    line-height 1.5
+                                    margin-bottom 1.5em
+                                    
+                                // @group Header
+                                header
+                                    text-align center
+                                    padding-top 1.5em
+                                    background #211f1f
+                                    h1
+                                        margin-bottom 0.5em
+                                    h2
+                                        color #fff
+
+                                // @group Nav
+                                nav
+                                    margin-bottom 1.5em
+                                    background-color #7D4934
+                                    background -moz-linear-gradient(top, rgba(125,73,52,1) 0%, rgba(43,21,18,1) 88%)
+                                    background -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(125,73,52,1)), color-stop(88%,rgba(43,21,18,1)))
+                                    background -webkit-linear-gradient(top, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    background -o-linear-gradient(top, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    background linear-gradient(to bottom, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    ul
+                                        overflow hidden
+                                        li
+                                            width 25%
+                                            float left
+                                            a
+                                                display block
+                                                color #d8c2a4
+                                                padding 0.75em 0
+                                                &:hover
+                                                    color white
+                                                    background-color #7d4934
+
+                                // @group Contents
+                                #contents
+                                    width 90%
+                                    margin 0 auto
+                                    text-align center
+                                    background url(http://griddle.it/960-12-10?color=pink&background=white&text=black)
+                                    p
+                                        margin-bottom 1.5em
+                                        text-align left
+                                    img
+                                        margin-bottom <mark>1.5em</mark>
+                                        box-shadow <mark>0 0 0.3125em #2f1f1f</mark>
+
+                                // @group Foote
+                                footer
+                                    padding 24px 0
+                                    color white
+                                    text-align center
+                                    background url(../images/footer_bg.png)
+
+                                // 768px
+                                @media screen and (min-width : 768px)
+                                    #contents
+                                        text-align left
+
+                                // 1024px
+                                @media screen and (min-width : 1024px)
+                                    // @group Nav
+                                    nav ul
+                                        width 93.75%
+                                        margin 0 auto
+
+                                    // @group Contents 
+                                    #contents
+                                        overflow hidden
+                                        width 93.75%
+                                        #main
+                                            width 64.5833333%
+                                        #sub
+                                            width 31.25%
+                                    #contents #main,
+                                    #contents #sub
+                                        float left
+                                        margin 0 1.0416667%
+
+                                    // @group Footer
+                                    footer
+                                        width 91.796875%
+                                        margin 0 auto
+                        hr
+                        p ㊱
+                        pre.
+                            footerのpadddingはfooterのfont-sizeが継承されて16pxのため
+                            24px　÷　16px　=　1.5em
+                            となる
+                        p
+                            a.btn.btn-default(href='../demo/rwd/cafebean/index36.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                @charset "utf-8";
+
+                                // @group Reset
+                                *
+                                    margin 0
+                                    padding 0
+                                a
+                                    text-decoration none
+                                ul,ol
+                                    list-style none
+                                img
+                                    vertical-align middle
+
+                                // @group Fluid-img
+                                img
+                                     max-width 100%
+
+                                // @group HTML
+                                html
+                                    font-family verdana, sans-serif
+                                    font-size 100%
+                                    line-height 1.5
+
+                                // @group Heading
+                                h1
+                                    font-size 3em
+                                    line-height 1
+                                    margin-bottom 0.5em
+                                h2
+                                    font-size 2.25em
+                                    line-height 1.3333
+                                    margin-bottom 0.6667em
+                                h3
+                                    font-size 1.5em
+                                    line-height 1
+                                    margin-bottom 1em
+                                hgroup h2,h4,h5,h6
+                                    font-size 1em
+                                    line-height 1.5
+                                    margin-bottom 1.5em
+                                    
+                                // @group Header
+                                header
+                                    text-align center
+                                    padding-top 1.5em
+                                    background #211f1f
+                                    h1
+                                        margin-bottom 0.5em
+                                    h2
+                                        color #fff
+
+                                // @group Nav
+                                nav
+                                    margin-bottom 1.5em
+                                    background-color #7D4934
+                                    background -moz-linear-gradient(top, rgba(125,73,52,1) 0%, rgba(43,21,18,1) 88%)
+                                    background -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(125,73,52,1)), color-stop(88%,rgba(43,21,18,1)))
+                                    background -webkit-linear-gradient(top, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    background -o-linear-gradient(top, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    background linear-gradient(to bottom, rgba(125,73,52,1) 0%,rgba(43,21,18,1) 88%)
+                                    ul
+                                        overflow hidden
+                                        li
+                                            width 25%
+                                            float left
+                                            a
+                                                display block
+                                                color #d8c2a4
+                                                padding 0.75em 0
+                                                &:hover
+                                                    color white
+                                                    background-color #7d4934
+
+                                // @group Contents
+                                #contents
+                                    width 90%
+                                    margin 0 auto
+                                    text-align center
+                                    background url(http://griddle.it/960-12-10?color=pink&background=white&text=black)
+                                    p
+                                        margin-bottom 1.5em
+                                        text-align left
+                                    img
+                                        margin-bottom 1.5em
+                                        box-shadow 0 0 0.3125em #2f1f1f
+
+                                // @group Foote
+                                footer
+                                    padding <mark>1.5em 0</mark>
+                                    color white
+                                    text-align center
+                                    background url(../images/footer_bg.png)
+
+                                // 768px
+                                @media screen and (min-width : 768px)
+                                    #contents
+                                        text-align left
+
+                                // 1024px
+                                @media screen and (min-width : 1024px)
+                                    // @group Nav
+                                    nav ul
+                                        width 93.75%
+                                        margin 0 auto
+
+                                    // @group Contents 
+                                    #contents
+                                        overflow hidden
+                                        width 93.75%
+                                        #main
+                                            width 64.5833333%
+                                        #sub
+                                            width 31.25%
+                                    #contents #main,
+                                    #contents #sub
+                                        float left
+                                        margin 0 1.0416667%
+
+                                    // @group Footer
+                                    footer
+                                        width 91.796875%
+                                        margin 0 auto

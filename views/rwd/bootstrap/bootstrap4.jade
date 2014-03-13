@@ -1,0 +1,241 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar.jade
+    .container
+        .row
+            .col-sm-3
+                include left.jade
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;ボタン
+                    .panel-body
+                        h4 ホタンのスタイリング
+                        p
+                            a.btn.btn-default(href='../demo/bootstrap/index10.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ                        
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja')
+                                    head
+                                        meta(charset='utf-8')
+                                        meta(name='viewport',content='width=devie-width,initial-scale=1.0')
+                                        title はじめてのBootstrap
+                                        link(rel='stylesheet',href='css/bootstrap.min.css',media='screen')
+                                    body
+                                        .container
+                                            button 普通のボタン
+                                            |  → 
+                                            button.btn.btn-default Bootstrapのボタン
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='js/bootstrap.min.js')
+                        p
+                            a.btn.btn-default(href='../demo/bootstrap/index11.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ                        
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja')
+                                    head
+                                        meta(charset='utf-8')
+                                        meta(name='viewport',content='width=devie-width,initial-scale=1.0')
+                                        title はじめてのBootstrap
+                                        link(rel='stylesheet',href='css/bootstrap.min.css',media='screen')
+                                    body
+                                        .container
+                                            a.btn.btn-default(href='#') Bootstrapのボタン
+                                            input.btn.btn-default(type='button',value='Bootstrapのボタン')
+                                            input.btn.btn-default(type='submit',value='Bootstrapのボタン')
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='js/bootstrap.min.js')
+                        hr
+                        h4 ボタンの「色」や「大きさ」を変える
+                        p 「btnクラス」とあわせて、「色」や「大きさ」を表すクラスを指定することができます。
+                        p 「色」に関するボタンのクラスは、
+                        ul
+                            li btn-default（白色）
+                            li btn-primary（青色）
+                            li btn-success（緑色）
+                            li btn-info（水色）
+                            li btn-warning（黄色）
+                            li btn-danger（あかいろ）
+                            li btn-link
+                        p です。
+                        p 括弧内は、デフォルトテーマにおける色で、この色は、カスタマイズ可能です。
+                        p 「btn-default」は、指定しない場合と同じです。
+                        p 「btn-link」は、ボタンとしての見栄えを無効化し、テキストリンクと同じ見栄えにします。
+                        p 「ボタンに着けたい色」に従ってクラス名を選ぶよりも、「ボタンの意味」に従ってクラス名を選ぶことをお勧めします。
+                        p たとえば、赤いボタンにしたいから「btn-dangerクラス」を付ける―というのではなく、「削除」など注意を促す必要があるボタンに「btn-danger」クラスを付けましょう。
+                        p もし、「クラスの意味」と「色」が大きく違う場合は、カスタマイズして変更したほうがいいでしょう。
+                        p 「サイズ」に関するクラスは、
+                        ul
+                            li btn-xs
+                            li btn-sm
+                            li btn-lg
+                            li btn-block
+                        p です。
+                        p!='大きさは、「btn-xs < btn-sm < 無指定 < btn-lg」です。'
+                        p 「btn-block」は、ブロックサイズいっぱい（たとえばdivの幅いっぱい）の大きさです。
+                        p 「色に関するクラス」と「サイズに関するクラス」は、同時に指定可能です。
+                        p 以下に、設定例を示します。
+                        p
+                            a.btn.btn-default(href='../demo/bootstrap/index12.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ                        
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja')
+                                    head
+                                        meta(charset='utf-8')
+                                        meta(name='viewport',content='width=devie-width,initial-scale=1.0')
+                                        title はじめてのBootstrap
+                                        link(rel='stylesheet',href='css/bootstrap.min.css',media='screen')
+                                    body
+                                        .container
+                                            div
+                                                h2 btn-xs
+                                                button.btn.btn-default.btn-xs btn-default
+                                                button.btn.btn-primary.btn-xs btn-primary
+                                                button.btn.btn-info.btn-xs btn-info
+                                                button.btn.btn-success.btn-xs btn-success
+                                                button.btn.btn-warning.btn-xs btn-warning
+                                                button.btn.btn-danger.btn-xs btn-danger
+                                                button.btn.btn-link.btn-xs btn-link
+                                            div
+                                                h2 btn-sm
+                                                button.btn.btn-default.btn-sm btn-default
+                                                button.btn.btn-primary.btn-sm btn-primary
+                                                button.btn.btn-info.btn-sm btn-info
+                                                button.btn.btn-success.btn-sm btn-success
+                                                button.btn.btn-warning.btn-sm btn-warning
+                                                button.btn.btn-danger.btn-sm btn-danger
+                                                button.btn.btn-link.btn-sm btn-link
+                                            div
+                                                h2 default size
+                                                button.btn.btn-default btn-default
+                                                button.btn.btn-primary btn-primary
+                                                button.btn.btn-info btn-info
+                                                button.btn.btn-success btn-success
+                                                button.btn.btn-warning btn-warning
+                                                button.btn.btn-danger btn-danger
+                                                button.btn.btn-link btn-link
+                                            div
+                                                h2 btn-lg
+                                                button.btn.btn-default.btn-lg btn-default
+                                                button.btn.btn-primary.btn-lg btn-primary
+                                                button.btn.btn-info.btn-lg btn-info
+                                                button.btn.btn-success.btn-lg btn-success
+                                                button.btn.btn-warning.btn-lg btn-warning
+                                                button.btn.btn-danger.btn-lg btn-danger
+                                                button.btn.btn-link.btn-lg btn-link
+                                            div
+                                                h2 btn-block
+                                                button.btn.btn-default.btn-block btn-default
+                                                button.btn.btn-primary.btn-block btn-primary
+                                                button.btn.btn-info.btn-block btn-info
+                                                button.btn.btn-success.btn-block btn-success
+                                                button.btn.btn-warning.btn-block btn-warning
+                                                button.btn.btn-danger.btn-block btn-danger
+                                                button.btn.btn-link.btn-block btn-link
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='js/bootstrap.min.js')
+                        hr
+                        p なお、「bootstrap-theme.css」を読み込んだ場合は、次のように「ドロップシャドウ」と「グラデーション」が効きます。
+                        p
+                            a.btn.btn-default(href='../demo/bootstrap/index13.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ                        
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja')
+                                    head
+                                        meta(charset='utf-8')
+                                        meta(name='viewport',content='width=devie-width,initial-scale=1.0')
+                                        title はじめてのBootstrap
+                                        link(rel='stylesheet',href='css/bootstrap.min.css',media='screen')
+                                        link(rel='stylesheet',href='css/bootstrap-theme.min.css',media='screen')
+                                    body
+                                        .container
+                                            div
+                                                h2 btn-xs
+                                                button.btn.btn-default.btn-xs btn-default
+                                                button.btn.btn-primary.btn-xs btn-primary
+                                                button.btn.btn-info.btn-xs btn-info
+                                                button.btn.btn-success.btn-xs btn-success
+                                                button.btn.btn-warning.btn-xs btn-warning
+                                                button.btn.btn-danger.btn-xs btn-danger
+                                                button.btn.btn-link.btn-xs btn-link
+                                            div
+                                                h2 btn-sm
+                                                button.btn.btn-default.btn-sm btn-default
+                                                button.btn.btn-primary.btn-sm btn-primary
+                                                button.btn.btn-info.btn-sm btn-info
+                                                button.btn.btn-success.btn-sm btn-success
+                                                button.btn.btn-warning.btn-sm btn-warning
+                                                button.btn.btn-danger.btn-sm btn-danger
+                                                button.btn.btn-link.btn-sm btn-link
+                                            div
+                                                h2 default size
+                                                button.btn.btn-default btn-default
+                                                button.btn.btn-primary btn-primary
+                                                button.btn.btn-info btn-info
+                                                button.btn.btn-success btn-success
+                                                button.btn.btn-warning btn-warning
+                                                button.btn.btn-danger btn-danger
+                                                button.btn.btn-link btn-link
+                                            div
+                                                h2 btn-lg
+                                                button.btn.btn-default.btn-lg btn-default
+                                                button.btn.btn-primary.btn-lg btn-primary
+                                                button.btn.btn-info.btn-lg btn-info
+                                                button.btn.btn-success.btn-lg btn-success
+                                                button.btn.btn-warning.btn-lg btn-warning
+                                                button.btn.btn-danger.btn-lg btn-danger
+                                                button.btn.btn-link.btn-lg btn-link
+                                            div
+                                                h2 btn-block
+                                                button.btn.btn-default.btn-block btn-default
+                                                button.btn.btn-primary.btn-block btn-primary
+                                                button.btn.btn-info.btn-block btn-info
+                                                button.btn.btn-success.btn-block btn-success
+                                                button.btn.btn-warning.btn-block btn-warning
+                                                button.btn.btn-danger.btn-block btn-danger
+                                                button.btn.btn-link.btn-block btn-link
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='js/bootstrap.min.js')
+                        hr
+                        h4 ボタンをクリック不可にする
+                        p 
+                        p
+                            a.btn.btn-default(href='../demo/bootstrap/index14.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ                        
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja')
+                                    head
+                                        meta(charset='utf-8')
+                                        meta(name='viewport',content='width=devie-width,initial-scale=1.0')
+                                        title はじめてのBootstrap
+                                        link(rel='stylesheet',href='css/bootstrap.min.css',media='screen')
+                                    body
+                                        .container
+                                            button.btn.btn-primary クリックできる
+                                            button.btn.btn-primary(disabled='disabled') クリックできない
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='js/bootstrap.min.js')

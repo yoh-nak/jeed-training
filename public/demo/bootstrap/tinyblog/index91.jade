@@ -1,0 +1,104 @@
+doctype
+html(lang='ja')
+    head
+        meta(charset='utf-8')
+        meta(name='viewport',content='width=devie-width,initial-scale=1.0')
+        title Tiny Blog
+        link(rel='stylesheet',href='css/bootstrap.min.css',media='screen')
+        link(rel='stylesheet',href='css/bootstrap-theme.min.css',media='screen')
+        style
+            :stylus
+                body
+                    padding-top 70px
+    body
+        .navbar.navbar-inverse.navbar-fixed-top
+            .container
+                .navbar-header
+                    button.navbar-toggle(type='button',data-toggle='collapse',data-target='.navbar-collapse')
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    a.navbar-brand(href='#') TinyBlog 管理画面
+                .collapse.navbar-collapse
+                    ul.nav.navbar-nav.pull-right
+                        li: a(href='index.html') サイト確認
+                        li: a(href='#config') 設定
+                        li.nav-devider
+                        li.dropdown
+                            a.dropdown-toggle(href='#',data-toggle="dropdown")
+                                span.glyphicon.glyphicon-user
+                                | ユーザーさん
+                                b.caret
+                            ul.dropdown-menu
+                                li
+                                    a(href='#users/update')
+                                        span.glyphicon.glyphicon-edit
+                                        | ユーザー情報変更
+                                li
+                                    a(href='#logout')
+                                        span.glyphicon.glyphicon-off
+                                        | ログアウト
+        .container
+            .row
+                .col.col-sm-3
+                    ul#nav-tab.nav.nav-pills.nav-stacked
+                        li.active
+                            a(href='#dashboard')
+                                span.glyphicon.glyphicon-home
+                                | ダッシュボード
+                        li
+                            a(href='#entries')
+                                span.glyphicon.glyphicon-pencil
+                                | 記事管理
+                        li
+                            a(href='#categories')
+                                span.glyphicon.glyphicon-bookmark
+                                | カテゴリー管理
+                        li
+                            a(href='#users')
+                                span.glyphicon.glyphicon-user
+                                | ユーザー管理
+                        li
+                            a(href='#reports')
+                                span.glyphicon.glyphicon-signal
+                                | レポート
+                .col.col-sm-9
+                    .tab-content
+                        #dashboard.tab-pane.active
+                            .panel.panel-default
+                                .panel-heading
+                                    h3.panel-title ダッシュボード
+                                .panel-body
+                        #entries.tab-pane
+                            .panel.panel-default
+                                .panel-heading
+                                    h3.panel-title 記事管理画面
+                                .panel-body
+                        #categories.tab-pane
+                            .panel.panel-default
+                                .panel-heading
+                                    h3.panel-title カテゴリー管理画面
+                                .panel-body
+                        #users.tab-apane
+                            .panel.panel-default
+                                .panel-heading
+                                    h3.panel-title ユーザー管理画面
+                                .panel-body
+                        #reports.tab-pane
+                            .panel.panel-default
+                                .panel-heading
+                                    h3.panel-title レポート
+                                .panel-body
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='js/bootstrap.min.js')
+        script
+            :js
+                $('#nav-tab a').on('click',function(e){
+                    var $this = $(this);
+                    e.preventDefault();
+                    $this.tab('show');
+                    location.hash = $this.attr('href');
+                });
+                if(location.hash){
+                    $('#nav-tab a[href='+ location.hash +']').tab('show');
+                }

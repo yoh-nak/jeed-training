@@ -50,7 +50,7 @@ block content
                                         script(src='js/bootstrap.min.js')
                         h4 JavaScript APIによるタブの切り替え
                         p
-                            a.btn.btn-default(href='../demo/bootstrap/index94.html',target='_blank')
+                            a.btn.btn-default(href='../demo/bootstrap/index95.html',target='_blank')
                                 i.glyphicon.glyphicon-play
                                 | デモ                        
                         pre(class='prettyprint linenums:1')
@@ -85,3 +85,61 @@ block content
                                                         $(this).tab('show');
                                                     });
                                                 });
+                        p 特定のコンテンツのURLがアドレスバーに入力されたとき、そのコンテンツを開く
+                        p
+                            a.btn.btn-default(href='../demo/bootstrap/index95.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ                        
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja')
+                                    head
+                                        meta(charset='utf-8')
+                                        meta(name='viewport',content='width=devie-width,initial-scale=1.0')
+                                        title はじめてのBootstrap
+                                        link(rel='stylesheet',href='css/bootstrap.min.css',media='screen')
+                                    body
+                                        .container
+                                            ul#myTab.nav.nav-tabs
+                                                li.active: a(href='#tab1') タブ1
+                                                li: a(href='#tab2') タブ2
+                                                li: a(href='#tab3') タブ3
+                                            .tab-content
+                                                #tab1.tab-pane.active
+                                                    p コンテンツ1
+                                                #tab2.tab-pane
+                                                    p コンテンツ2
+                                                #tab3.tab-pane
+                                                    p コンテンツ3
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='js/bootstrap.min.js')
+                                        script
+                                            :js
+                                                $(function(){
+                                                    $('#myTab a').on('click',function(e){
+                                                        var $this = $(this);
+                                                        e.preventDefault();
+                                                        $this.tab('show');
+                                                        location.hash = $this.attr('href');
+                                                    });
+                                                    if(location.hash){
+                                                        $('#myTab a[href=' + location.hash +  ']').tab('show');
+                                                    }
+                                                });
+                        hr
+                        h4 ピル形式のコンテツの切り替え
+                        p
+                            a.btn.btn-default(href='../demo/bootstrap/index96.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ                        
+                        pre(class='prettyprint linenums:1')
+                            :code
+                        hr
+                        h4 タブ切り替えのイベントハンドリング
+                        p
+                            a.btn.btn-default(href='../demo/bootstrap/index97.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ                        
+                        pre(class='prettyprint linenums:1')
+                            :code

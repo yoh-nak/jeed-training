@@ -126,3 +126,50 @@ block content
                                 | デモ                        
                         pre(class='prettyprint linenums:1')
                             :code
+                                doctype
+                                html(lang='ja')
+                                    head
+                                        meta(charset='utf-8')
+                                        meta(name='viewport',content='width=devie-width,initial-scale=1.0')
+                                        title はじめてのBootstrap
+                                        link(rel='stylesheet',href='css/bootstrap.min.css',media='screen')
+                                    body
+                                        .container
+                                            #my-accordion.panel-group
+                                                .panel.panel-default
+                                                    .panel.panel-heading
+                                                        a(data-toggle='collapse',data-parent='#my-accordion',href='#collapse1') ヘッダー1
+                                                        #collapse1.panel-collapse.collapse
+                                                            .panel-body コンテンツ1
+                                                .panel.panel-default
+                                                    .panel.panel-heading
+                                                        a(data-toggle='collapse',data-parent='#my-accordion',href='#collapse2') ヘッダー2
+                                                        #collapse2.panel-collapse.collapse
+                                                            .panel-body コンテンツ2
+                                                .panel.panel-default
+                                                    .panel.panel-heading
+                                                        a(data-toggle='collapse',data-parent='#my-accordion',href='#collapse3') ヘッダー3
+                                                        #collapse3.panel-collapse.collapse
+                                                            .panel-body コンテンツ3
+                                                .panel.panel-default
+                                                    .panel.panel-heading
+                                                        a(data-toggle='collapse',data-parent='#my-accordion',href='#collapse4') ヘッダー4
+                                                        #collapse4.panel-collapse.collapse
+                                                            .panel-body コンテンツ4
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='js/bootstrap.min.js')
+                                        script
+                                            :js
+                                                var collapse = $('#my-accordion');
+                                                collapse.on('show.bs.collapse', function(e){
+                                                    console.log('show', e);
+                                                });
+                                                collapse.on('shown.bs.collapse', function(e){
+                                                    console.log('shown', e);
+                                                });
+                                                collapse.on('hide.bs.collapse', function(e){
+                                                    console.log('hide', e);
+                                                });
+                                                collapse.on('hidden.bs.collapse', function(e){
+                                                    console.log('hidden', e);
+                                                });

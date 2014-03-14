@@ -1,0 +1,41 @@
+doctype
+html(lang='ja')
+    head
+        meta(charset='utf-8')
+        meta(name='viewport',content='width=devie-width,initial-scale=1.0')
+        title はじめてのBootstrap
+        link(rel='stylesheet',href='css/bootstrap.min.css',media='screen')
+        style
+            :stylus
+                .box
+                    padding 30px
+                    margin-bottom 30px
+                    background #eeeeee
+                    border-radius 6px
+                    height 500px
+    body
+        .container
+            .row
+                .col.col-md-3
+                    #nav.affix
+                        ul.nav.nav-pills.nav-stacked
+                            li: a(href='#css') 基本的なCSS
+                            li: a(href='#component') コンポーネント
+                            li: a(href='#js') JavaScript
+                .col.col-md-9
+                    #css.box
+                        h2 基本的なCSS
+                    #component.box
+                        h2 コンポーネント
+                    #js.box
+                        h2 JavaScript
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='js/bootstrap.min.js')
+        script
+            :js
+                $('body').scrollspy({
+                    target: '#nav'
+                });
+                $('body').on('activate.bs.scrollspy',function(e){
+                    console.log(e);
+                });

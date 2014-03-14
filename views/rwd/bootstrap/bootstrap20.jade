@@ -1,0 +1,156 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar.jade
+    .container
+        .row
+            .col-sm-3
+                include left.jade
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | &nbsp;スクロールスパイ
+                    .panel-body
+                        h4 基本的なスクロールスパイ
+                        p
+                            a.btn.btn-default(href='../demo/bootstrap/index90.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ                        
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja')
+                                    head
+                                        meta(charset='utf-8')
+                                        meta(name='viewport',content='width=devie-width,initial-scale=1.0')
+                                        title はじめてのBootstrap
+                                        link(rel='stylesheet',href='css/bootstrap.min.css',media='screen')
+                                        style
+                                            :stylus
+                                                .box
+                                                    padding 30px
+                                                    margin-bottom 30px
+                                                    background #eeeeee
+                                                    border-radius 6px
+                                                    height 500px
+                                    body(data-spy='scroll',data-target='#nav')
+                                        .container
+                                            .row
+                                                .col.col-md-3
+                                                    #nav.affix
+                                                        ul.nav.nav-pills.nav-stacked
+                                                            li: a(href='#css') 基本的なCSS
+                                                            li: a(href='#component') コンポーネント
+                                                            li: a(href='#js') JavaScript
+                                                .col.col-md-9
+                                                    #css.box
+                                                        h2 基本的なCSS
+                                                    #component.box
+                                                        h2 コンポーネント
+                                                    #js.box
+                                                        h2 JavaScript
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='js/bootstrap.min.js')
+                        hr
+                        h4 JavaScript APIによるスクロールスパイ
+                        p
+                            a.btn.btn-default(href='../demo/bootstrap/index91.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ                        
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja')
+                                    head
+                                        meta(charset='utf-8')
+                                        meta(name='viewport',content='width=devie-width,initial-scale=1.0')
+                                        title はじめてのBootstrap
+                                        link(rel='stylesheet',href='css/bootstrap.min.css',media='screen')
+                                        style
+                                            :stylus
+                                                .box
+                                                    padding 30px
+                                                    margin-bottom 30px
+                                                    background #eeeeee
+                                                    border-radius 6px
+                                                    height 500px
+                                    body
+                                        .container
+                                            .row
+                                                .col.col-md-3
+                                                    #nav.affix
+                                                        ul.nav.nav-pills.nav-stacked
+                                                            li: a(href='#css') 基本的なCSS
+                                                            li: a(href='#component') コンポーネント
+                                                            li: a(href='#js') JavaScript
+                                                .col.col-md-9
+                                                    #css.box
+                                                        h2 基本的なCSS
+                                                    #component.box
+                                                        h2 コンポーネント
+                                                    #js.box
+                                                        h2 JavaScript
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='js/bootstrap.min.js')
+                                        script
+                                            :js
+                                                $('body').scrollspy({
+                                                    target: '#nav'
+                                                });
+                        hr
+                        h4 スクロールスパイのイベントハンドリング
+                        p
+                            a.btn.btn-default(href='../demo/bootstrap/index92.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ                        
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja')
+                                    head
+                                        meta(charset='utf-8')
+                                        meta(name='viewport',content='width=devie-width,initial-scale=1.0')
+                                        title はじめてのBootstrap
+                                        link(rel='stylesheet',href='css/bootstrap.min.css',media='screen')
+                                        style
+                                            :stylus
+                                                .box
+                                                    padding 30px
+                                                    margin-bottom 30px
+                                                    background #eeeeee
+                                                    border-radius 6px
+                                                    height 500px
+                                    body
+                                        .container
+                                            .row
+                                                .col.col-md-3
+                                                    #nav.affix
+                                                        ul.nav.nav-pills.nav-stacked
+                                                            li: a(href='#css') 基本的なCSS
+                                                            li: a(href='#component') コンポーネント
+                                                            li: a(href='#js') JavaScript
+                                                .col.col-md-9
+                                                    #css.box
+                                                        h2 基本的なCSS
+                                                    #component.box
+                                                        h2 コンポーネント
+                                                    #js.box
+                                                        h2 JavaScript
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='js/bootstrap.min.js')
+                                        script
+                                            :js
+                                                $('body').scrollspy({
+                                                    target: '#nav'
+                                                });
+                                                $('body').on('activate.bs.scrollspy',function(e){
+                                                    console.log(e);
+                                                });

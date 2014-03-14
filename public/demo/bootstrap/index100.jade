@@ -1,0 +1,26 @@
+doctype
+html(lang='ja')
+    head
+        meta(charset='utf-8')
+        meta(name='viewport',content='width=devie-width,initial-scale=1.0')
+        title はじめてのBootstrap
+        link(rel='stylesheet',href='css/bootstrap.min.css',media='screen')
+        style
+            :stylus
+                #my-paragraph
+                    margin-top 50px
+    body
+        .container
+            p#my-paragraph
+                | マウスオーバーで
+                a(href='#',data-toggle='tooltip',title='ツールチップ') ツールチップ
+                | が表示されます。
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='js/bootstrap.min.js')
+        script
+            :js
+                $(function(){
+                    $('#my-paragraph a[data-toggle=tooltip]').tooltip({
+                        placement: 'bottom'
+                    });
+                });

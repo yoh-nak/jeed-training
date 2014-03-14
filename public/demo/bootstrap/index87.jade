@@ -1,0 +1,30 @@
+doctype
+html(lang='ja')
+    head
+        meta(charset='utf-8')
+        meta(name='viewport',content='width=devie-width,initial-scale=1.0')
+        title はじめてのBootstrap
+        link(rel='stylesheet',href='css/bootstrap.min.css',media='screen')
+    body
+        .container
+            #myModal.modal
+                .modal-dialog
+                    .modal-content
+                        .modal-header
+                            button.close(type='button',data-dismiss='modal',aria-hidden='true') &times;
+                            h4.modal-title ヘッダー
+                        .modal-body
+                            p コンテンツ
+                        .modal-footer
+                            button.btn.btn-default(type='button',data-dismiss='modal') 閉じる
+                            button.btn.btn-primary(type='button') 更新
+            a#click.btn.btn-primary モーダル起動
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='js/bootstrap.min.js')
+        script
+            :js
+                $(function(){
+                    $('#click').click(function(){
+                        $('#myModal').modal();
+                    });
+                });

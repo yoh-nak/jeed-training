@@ -1,0 +1,18 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=devie-width,initial-scale=1.0"><title>はじめてのBootstrap</title><link rel="stylesheet" href="css/bootstrap.min.css" media="screen"></head><body><div class="container"><div id="myModal" class="modal"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button><h4 class="modal-title">ヘッダー</h4></div><div class="modal-body"><p>コンテンツ</p></div><div class="modal-footer"><button type="button" data-dismiss="modal" class="btn btn-default">閉じる</button><button type="button" class="btn btn-primary">更新</button></div></div></div></div><a id="click" class="btn btn-primary">モーダル起動</a></div><script src="http://code.jquery.com/jquery-1.11.0.min.js"></script><script src="js/bootstrap.min.js"></script><script>var modal = $('#myModal');
+$(function(){
+    $('#click').click(function(){
+        modal.modal({backdrop: false});
+    });
+});
+modal.on('show.bs.modal',function(e){
+    console.log('show',e);
+});
+modal.on('shown.bs.modal',function(e){
+    console.log('shown',e);
+});
+modal.on('hide.bs.modal',function(e){
+    console.log('hide',e);
+});
+modal.on('hidden.bs.modal',function(e){
+    console.log('hidden',e);
+});</script></body></html>

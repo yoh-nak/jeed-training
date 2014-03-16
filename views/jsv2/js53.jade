@@ -1,0 +1,77 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | インクリメント／デクリメント
+                    .panel-body
+                        h4 インクリメント演算子／デクリメント演算子
+                        p
+                            | インクリメント演算子は数値型の値に1加算し、デクリメント演算子は数値型の値に1減算します。インクリメント、デクリメント演算子は値の前か、後に置くことで挙動が違います。
+                        table.table
+                            tr
+                                th 演算子
+                                th 概要
+                                th 例
+                            tr
+                                td ++
+                                td 前置加算
+                                td x = 3; a = x++;
+                            tr
+                                td ++
+                                td 後置加算
+                                td x = 3; a = ++x;
+                            tr
+                                td --
+                                td 前置減算
+                                td x = 3; a = --x;
+                            tr
+                                td --
+                                td 後置減算
+                                td x = 3; a = x--;
+                        p コンソールで実行してみましょう。
+                        h4 前置インクリメント演算子
+                        p 先に加算処理してから変数が使われます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var x = 3;
+                                var a = ++x; //= xが繰り上がってから代入されるので、4がaに代入される
+                                a //= 4が出力される
+                                x //= 4が出力される
+
+                        h4 後置インクリメント演算子
+                        p 次に変数を使うときに、加算処理が行われます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var x = 3;
+                                var a = x++; //= xをaに代入してからxを繰り上げるので、3がaに代入される
+                                a //= 3が出力される
+                                x //= 次にxを使用するときは繰り上がっているので、4が出力される
+
+                        h4 前置デクリメント演算子
+                        p 先に減算処理してから変数が使われます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var x = 3;
+                                var a = --x; //= xが繰り下がってから代入されるので、2がaに代入される
+                                a //= 2が出力される
+                                x //= 2が出力される
+
+                        h4 後置デクリメント演算子
+                        p 次に変数を使うときに減算処理が行われます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var x = 3;
+                                var a = x--; //= xをaに代入してからxを繰り下げるので、3がaに代入される
+                                a //= 3が出力される
+                                x //= 次に使用するときは繰り下がっているので、2が出力される

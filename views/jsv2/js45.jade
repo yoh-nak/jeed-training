@@ -1,0 +1,95 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | JavaScriptの基本形
+                    .panel-body
+                        h4 オブジェクトのプロパティ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                //オブジェクト.プロパティ名
+                                document.bgColor = '#ff0000';
+
+                        table.table
+                            tr
+                                td オブジェクト
+                                td document
+                            tr
+                                td プロパティ
+                                td bgColor
+                            tr
+                                td 代入演算子
+                                td='='
+                            tr
+                                td 値
+                                td '#ff0000'
+                            tr
+                                td 行の終わり
+                                td ;
+                        hr
+                        h4 オブジェクトのメソッド
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                //オブジェクト.メソッド名
+                                document.writeln('こんにちは');
+
+                        table.table
+                            tr
+                                td オブジェクト
+                                td document
+                            tr
+                                td メソッド
+                                td writeln
+                            tr
+                                td 引数
+                                td ('こんにちは')
+                            tr
+                                td 行の終わり
+                                td ;
+                        hr
+                        h4 トークン
+                        p トークンとはそれ以上分解できない単位のことです。原則的に1つのトークンは改行できません。
+                        table.table
+                            tr
+                                td 識別子（Identifier）
+                                td 関数名や変数名
+                            tr
+                                td 予約語（ReservedWord）
+                                td 後述
+                            tr
+                                td 識別子、予約語（Token）
+                                td それ以上分割できない単位
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                alert('Hello, World!');
+
+                        table.table
+                            tr
+                                th 字句（Token）
+                                th 種類
+                            tr
+                                td alert
+                                td 識別子（Identifier）
+                            tr
+                                td (
+                                td (区切り子（Punctuator）
+                            tr
+                                td "Hello, World!"
+                                td 文字列リテラル（StringLiteral）
+                            tr
+                                td )
+                                td 区切り子（Punctuator）
+                            tr
+                                td ;
+                                td 区切り子（Punctuator）

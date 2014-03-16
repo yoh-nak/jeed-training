@@ -1,0 +1,61 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-bookmark
+                        | 課題
+                    .panel-body
+                        p jQuery Mobileのボタンをタップして、カウントバブルを繰り上げてみましょう。
+                        p
+                            a.btn.btn-default(href='../demo/js/excercise10/index.html', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button', data-toggle='collapse', data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | 解答例
+                        #demo.collapse.out
+                            pre(class='prettyprint linenums:1')
+                                :code
+                                    <!DOCTYPE html>
+                                    <html lang="ja">
+                                    <head>
+                                    <meta charset="UTF-8">
+                                    <title></title>
+                                    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+                                    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+                                    <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+                                    <script>
+                                    $(document).on('pageshow','#index',function(){
+                                    var cnt = 0;
+                                    $('a').on('vclick',function(){
+                                    $('.ui-li-count').text(++cnt);
+                                    });
+                                    });
+                                    </script>
+                                    </head>
+                                    <body>
+                                    <div data-role="page" id="index">
+                                    <header data-role="header">
+                                    <h1>加算子の練習</h1>
+                                    </header>
+                                    <div data-role="content">
+                                    <ul data-role="listview" data-count-theme="c" data-inset="true">
+                                    <li><a href="#">追加 <span class="ui-li-count">0</span></a></li>
+                                    </ul>
+                                    </div>
+                                    <footer data-role="footer" data-position="fixed">
+                                    <h4>2013 © ナカノヨウスケ</h4>
+                                    </footer>
+                                    </div>
+                                    </body>
+                                    </html>

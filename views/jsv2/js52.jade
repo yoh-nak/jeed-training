@@ -1,0 +1,74 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-bookmark
+                        | 課題
+                    .panel-body
+                        p 円錐の体積を計算してみましょう。公式は以下の通りです。
+                        p
+                            figure
+                                figcaption 円錐の体積の公式
+                                img(src='http://w3e.kanazawa-it.ac.jp/math/cgi-bin/mimetex1/mimetex.cgi?3$%5cdisplaystyle{V=%5cfrac{%5chspace{2}1%5chspace{2}}{%5chspace{2}3%5chspace{2}}{%5cpi}{r}^{2}h}', alt='')
+                        p
+                            | 円錐率は「Math.PI」プロパティ、べき乗は「Math.pow(基数, 指数)」メソッドで取得できます。
+                        p
+                            a.btn.btn-default(href='../demo/js/excercise11/index.html', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button', data-toggle='collapse', data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | 解答例
+                        #demo.collapse.out
+                            pre(class='prettyprint linenums:1')
+                                :code
+                                    <!DOCTYPE html>
+                                    <html lang="ja">
+                                    <head>
+                                    <meta charset="UTF-8">
+                                    <title></title>
+                                    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+                                    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+                                    <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+                                    <script>
+                                    $(document).on('pageshow','#index',function(){
+                                    $('a').on('vclick',function(){
+                                    var r = $('#r').val();
+                                    var h = $('#h').val();
+                                    var result = (Math.PI * Math.pow(r, 2) * h) / 3;
+                                    $('#result').text(result);
+                                    });
+                                    });
+                                    </script>
+                                    </head>
+                                    <body>
+                                    <div data-role="page" id="index">
+                                    <header data-role="header">
+                                    <h1>円錐の体積</h1>
+                                    </header>
+                                    <div data-role="content">
+                                    <label for="text-basic">円の半径r:</label>
+                                    <input type="number" name="text-basic" id="r" value="">
+
+                                    <label for="text-basic">円錐の高さh:</label>
+                                    <input type="number" name="text-basic" id="h" value="">
+
+                                    <a data-role="button">計算</a>
+                                    <p id="result"></p>
+                                    </div>
+                                    <footer data-role="footer" data-position="fixed">
+                                    <h4>2013 © ナカノヨウスケ</h4>
+                                    </footer>
+                                    </div>
+                                    </body>
+                                    </html>

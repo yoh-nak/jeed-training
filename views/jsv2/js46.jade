@@ -1,0 +1,187 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | ブラウザに組み込む
+                    .panel-body
+                        h4 ブラウザに組み込む
+                        p head要素内のscript要素に記述すると、alertメソッドを実行してから、HTMLをレンダリングします。
+                        | index.html
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <!DOCTYPE html>
+                                <html lang="ja">
+                                <head>
+                                <meta charset="UTF-8">
+                                <title></title>
+                                <style>
+                                h1 {
+                                font-size:14pt;
+                                background-color:#ccccff;
+                                padding: 5px;
+                                }
+                                p {
+                                font-size:12pt;
+                                color: #666699;
+                                }
+                                </style>
+
+                                </head>
+                                <body>
+                                <h1>Sample Page</h1>
+                                <p>サンプルのページ</p>
+                                </body>
+                                </html>
+
+                        p
+                        a.btn.btn-default(href='../demo/js/excercise7/index.html', target='_blank')
+                            i.glyphicon.glyphicon-play
+                            | デモ
+                        hr
+                        p body要素の終了タグの直前にscript要素に記述すると、HTMLをレンダリングしてから、alertメソッドを実行します。
+                        | index.html
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <!DOCTYPE html>
+                                <html lang="ja">
+                                <head>
+                                <meta charset="UTF-8">
+                                <title></title>
+                                <style>
+                                h1 {
+                                font-size:14pt;
+                                background-color:#ccccff;
+                                padding: 5px;
+                                }
+                                p {
+                                font-size:12pt;
+                                color: #666699;
+                                }
+                                </style>
+                                </head>
+                                <body>
+                                <h1>Sample Page</h1>
+                                <p>サンプルのページ</p>
+
+                                </body>
+                                </html>
+
+                        p
+                        a.btn.btn-default(href='../demo/js/excercise8/index.html', target='_blank')
+                            i.glyphicon.glyphicon-play
+                            | デモ
+                        hr
+                        h4 外部jsファイルから読み込む
+                        p script要素内のsrc属性で外部jsファイルを読み込めます。実行順はhead要素内に記述した場合と、body要素の終了タグ直前に記述した場合で異なります。
+                        | index.html
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <!DOCTYPE html>
+                                <html lang="ja">
+                                <head>
+                                <meta charset="UTF-8">
+                                <title></title>
+
+                                <style>
+                                h1 {
+                                font-size:14pt;
+                                background-color:#ccccff;
+                                padding: 5px;
+                                }
+                                p {
+                                font-size:12pt;
+                                color: #666699;
+                                }
+                                </style>
+                                </head>
+                                <body>
+                                <h1>Sample Page</h1>
+                                <p>サンプルのページ</p>
+                                </body>
+                                </html>
+                        | script.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                alert('Hello, World!'); 
+                        p
+                        a.btn.btn-default(href='../demo/js/excercise9/index.html', target='_blank')
+                            i.glyphicon.glyphicon-play
+                            | デモ
+                        hr
+                        h4 document.writeメソッド
+                        p document.writeメソッドはhead要素内に記述した場合、body要素の開始タグ直後に文字列が挿入されます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <!DOCTYPE html>
+                                <html lang="ja">
+                                <head>
+                                <meta charset="UTF-8">
+                                <title></title>
+
+                                <style>
+                                h1 {
+                                font-size:14pt;
+                                background-color:#ccccff;
+                                padding: 5px;
+                                }
+                                p {
+                                font-size:12pt;
+                                color: #666699;
+                                }
+                                </style>
+                                </head>
+                                <body>
+                                <h1>Sample Page</h1>
+                                <p>サンプルのページ</p>
+                                </body>
+                                </html>
+
+                        p
+                        a.btn.btn-default(href='../demo/js/excercise3/index.html', target='_blank')
+                            i.glyphicon.glyphicon-play
+                            | デモ
+                        hr
+                        p docuent.writeメソッドはbody要素内に記述した場合、script要素のある位置に文字列が出力されます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <!DOCTYPE html>
+                                <html lang="ja">
+                                <head>
+                                <meta charset="UTF-8">
+                                <title></title>
+                                <style>
+                                h1 {
+                                font-size:14pt;
+                                background-color:#ccccff;
+                                padding: 5px;
+                                }
+                                p {
+                                font-size:12pt;
+                                color: #666699;
+                                }
+                                </style>
+                                </head>
+                                <body>
+                                <h1>Sample Page</h1>
+                                <p>
+                                <script>
+                                document.write('Hello, World!');
+                                </script>
+                                </p>
+                                </body>
+                                </html>
+                        p
+                        a.btn.btn-default(href='../demo/js/excercise4/index.html', target='_blank')
+                            i.glyphicon.glyphicon-play
+                            | デモ

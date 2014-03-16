@@ -1,0 +1,144 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | リテラルとデータ型
+                    .panel-body
+                        h4 JavaScriptのリテラル
+                        p リテラルとは、訳すと変化しない数という意味で、プログラムでは直接書き込んだデータ、数字や文字のことを表します。
+                        p 下の表にあるリテラルをalertメソッドやdocument.writelnメソッドを使って、コンソールで実行してみましょう。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                document.writeln('Hello, World!')
+                                document.writeln(123)
+                                document.writeln(3.14)
+                                document.writeln(3.14e5)
+                                document.writeln(NaN)
+                                document.writeln(['JavaScript','Ajax','ASP.NET'])
+                                document.writeln(function(){alert('hello')})
+
+                        table.table
+                            tr
+                                th 種類
+                                th 書式
+                                th 例
+                            tr
+                                td 10進数リテラル（数値リテラル）
+                                td 整数を指定する
+                                td 100、3、0
+                            tr
+                                td 8進数リテラル（数値リテラル）
+                                td 8進数を指定する
+                                td 0600、0644、0777
+                            tr
+                                td 16進数リテラル（数値リテラル）
+                                td 16進数を指定する
+                                td 0xFFFFFF、0xCC55CC
+                            tr
+                                td 浮動小数点数リテラル（数値リテラル）
+                                td 少数を指定する
+                                td 1.5、3.14e5
+                            tr
+                                td 文字列リテラル
+                                td ダブルクォート（"）か、シングルクォート（'）で囲む
+                                td "Hello, World!"
+                            tr
+                                td 論理値リテラル
+                                td trueまたはfalseを指定する
+                                td true
+                            tr
+                                td nullリテラル
+                                td nullを指定する
+                                td null
+                            tr
+                                td undefinedリテラル
+                                td undefinedを指定する
+                                td undefined
+                            tr
+                                td NaNリテラル
+                                td NaN（Not a Number）を指定する
+                                td NaN
+                            tr
+                                td 正規表現リテラル
+                                td スラッシュ（/）で囲む
+                                td /I love Java.*/
+                            tr
+                                td 配列リテラル
+                                td 大括弧（[]）で配列を指定する
+                                td ['JavaScript','Ajax','ASP.NET']
+                            tr
+                                td オブジェクトリテラル
+                                td 中括弧（{}）でオブジェクトを指定する
+                                td {x:1, y:2, z:3}}
+                            tr
+                                td 関数リテラル
+                                td 関数を指定する
+                                td function(){...}
+                        p
+                            a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Values,_variables,_and_literals#Literals', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | 参考
+                        hr
+                        h4 JavaScriptのデータ型
+                        p データ型とは、プログラミング言語において、数値や文字列などのデータの型、または分類のことです。上記のリテラルのデータ型をコンソールで調べてみましょう。
+                        p JavaScriptではtypeof演算子*で、値のデータ型を取得することができます。
+                        p
+                            a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/typeof', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | 参考：typeof演算子
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                typeof 'Hello, World!'
+                                typeof 123
+                                typeof 3.14
+                                typeof 3.14e5
+                                typeof NaN
+                                typeof ['JavaScript','Ajax','ASP.NET']
+                                typeof function(){alert('hello')}
+
+                        p
+                            | 参考：typeof演算子はnullや配列もobjectで返されます。nullを検証するには「data === null」、配列を検証するには「['a','b','c'] instanceof Array」などのように検証できます。
+                        table.table
+                            tr
+                                th 分類
+                                th データ型
+                                th 概要
+                            tr
+                                td(rowspan='4') 基本型
+                                td 数値型（Number）
+                                td 1.7976931348623157e+308〜5e-324
+                            tr
+                                td 文字列型（String）
+                                td シングル／ダブルクォートで囲まれた0個以上の文字の集合
+                            tr
+                                td 真偽型（Boolean）
+                                td true（真）／false（偽）
+                            tr
+                                td 特殊型（Undefined）
+                                td 値が未定義であることを表す
+                            tr
+                                td(rowspan='3') 参照型
+                                td 配列型（Array） 
+                                td データの集合（各要素にはインデックス番号でアクセス可能）
+                            tr
+                                td オブジェクト型（Object）
+                                td データの集合（各要素には名前でアクセス可能）
+                            tr
+                                td 関数型（Function）
+                                td 一連の処理（手続き）の集合
+                        p 参考：数値型の最大値は、Number.MAX_VALUE、最小値は、Number.MIN_VALUEで取得できます。
+                        p 
+                            a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/Web/JavaScript/Data_structures', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | 参考

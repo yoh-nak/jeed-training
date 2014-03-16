@@ -1,0 +1,109 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | 出力してみる
+                    .panel-body
+                        h4 consoleオブジェクト
+                        p Node.jsのREPL*で実行してみましょう。
+                        p
+                            | REPL：Read Evaluate Print Loopは対話的に JavaScript を実行して結果を確認する手段を提供します。 デバッグやテストやその他の様々なことを試す用途で利用されます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                console.log('Hello, World!'); //=          logメソッド
+
+                        hr
+                        p ブラウザのコンソールに出力してみましょう。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                console.log('Hello, World!');
+
+                        hr
+                        p 個別に情報を出力してみましょう。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                console.debug('Hello, World!'); //=          debugメソッド：デバッグコンソールに出力
+                                console.info('Hello, World!'); //=          infoメソッド：情報コンソールに出力
+                                console.warn('Hello, World!'); //=          warnメソッド：警告コンソールに出力
+                                console.error('Hello, World!'); //=          errorメソッド：エラーコンソールに出力
+
+                        p その他のconsoleオブジェクトのメソッドはMOZILLA DEVELOPER NETWORKを参照してください。
+                        p
+                        a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/Web/API/console', target='_blank')
+                            i.glyphicon.glyphicon-info-sign
+                            | 参考
+                        hr
+                        h4 alertメソッド（windowオブジェクト）
+                        p Node.jsのREPL*に入力してみましょう。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                window.alert('Hello, World');
+
+                        p windowオブジェクトはクライアントサイドJavaScript固有のオブジェクトのため、Node.jsでは実行できません。
+                        p ブラウザのコンソールで実行してみましょう。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                window.alert('Hello, World!');
+
+                        p windowオブジェクトのメソッドは省略して実行できます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                alert('Hello, World!');
+
+                        p 参考：windowsオブジェクトのスコープ内（グローバルスコープ内）ではthisをつけて実行できます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                this.alert('Hello, World');
+
+                        p その他のwindowオブジェクトのメソッドをMOZILLA DEVELOPER NETWORKで確認してみましょう。
+                        p
+                        a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/Web/API/Window', target='_blank')
+                            i.glyphicon.glyphicon-info-sign
+                            | 参考
+                        hr
+                        h4 document.write/document.writelnメソッド
+                        p
+                            | documentオブジェクトはwindowオブジェクトの子オブジェクトのため、window.document.writeのように記述しますが、windowオブジェクトを省略して記述できます。ただしdocumentオブジェクトは省略できません。
+                        p ブラウザのコンソールで実行してみましょう。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                document.write('Hello, World!');
+
+                        p ブラウザに前に表示されていたコンテンツがすべて上書きされてしまいます。
+                        p 複数回実行してみましょう。「Hello, World!」が続けて表示されます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                document.write('Hello, World!');
+                                document.write('Hello, World!');
+
+                        p 参考：<br>タグを追加すると。改行されます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                document.write('Hello, World!<br>');
+                                document.write('Hello, World!');
+
+                        p 参考：ocument.writelnメソッドはdocument.writeメソッドと共同は同じですが、改行コード（\n）が末尾に追加されます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                document.writeln('Hello, World!');
+                                document.writeln('Hello, World!');
+
+                        p document.write/document.writelnメソッドをMOZILLA DEVELOPER NETWORKで確認してみましょう。
+                        p
+                        a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/Web/API/document.write', target='_blank')
+                            i.glyphicon.glyphicon-info-sign
+                            | 参考：document.write
+                        a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/Web/API/document.writeln', target='_blank')
+                            i.glyphicon.glyphicon-info-sign
+                            | 参考：document.writeln

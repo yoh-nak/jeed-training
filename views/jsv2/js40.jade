@@ -1,0 +1,118 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | 定義済みオブジェクト
+                    .panel-body
+                        h4 定義済みオブジェクトの階層
+                        p
+                            | JavaScriptには多くの定義済みオブエジェクトがあり、コアオブジェクトとブラウザオブジェクトに分けられます。ブラウザオブジェクトはwindowオブジェクトを筆頭に、オブジェクトの階層があります。ピリオド（.）で連結されて、最後にオブジェクトの持つプロパティかメソッドが割り当てられます。
+                        figure
+                            img(src='../images/js/object-tree.png', alt='')
+                        h4 ブラウザオブジェクトの例
+                        h5 windowオブジェクト
+                        p windowオブジェクトのプロパティをコンソールで実行してみましょう。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                window.innerHeight
+                                window.innerWidth
+                                window.outerHeight
+                                window.outerWidth
+                                window.scrollX
+                                window.scrollY
+                                window.screenX
+                                window.screenY
+
+                        p windowオブジェクトのメソッドをコンソールで実行してみましょう。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                window.alert('予期せぬエラー');
+                                window.confirm('よろしいですか');
+                                window.close();
+                                window.find('キーワード');
+                        p
+                        a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/Web/API/Window', target='_blank')
+                            i.glyphicon.glyphicon-info-sign
+                            | 参考
+                        hr
+                        h5 documentオブジェクト
+                        p documentオブジェクトのプロパティをコンソールで実行してみましょう。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                window.document.title
+                                window.document.bgColor
+                                window.document.baseURI
+                                window.document.doctype
+                                window.document.domain
+                                window.document.referrer
+                                window.document.width
+                                window.document.height
+                        p windowオブジェクトのメソッドをコンソールで実行してみましょう。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                window.document.write('Hello, World!');
+                                window.document.clear();
+                        p
+                        a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/Web/API/document', target='_blank')
+                            i.glyphicon.glyphicon-info-sign
+                            | 参考
+                        hr
+                        h5 locationオブジェクト
+                        p locationオブジェクトのプロパティをコンソールで実行してみましょう。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                window.location.protocol
+                                window.location.host
+                                window.location.hostname
+                                window.location.port
+                                window.location.pathname
+                                window.location.search
+                                window.location.hash
+                                window.location.href
+
+                        p locationオブジェクトのメソッドをコンソールで実行してみましょう。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                window.location.assign('http://www.yahoo.co.jp');
+                                window.location.reload();
+                                window.location.replace('http://www.yahoo.co.jp');
+                                window.location.toString();
+
+                        p
+                        a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/Web/API/window.location', target='_blank')
+                            i.glyphicon.glyphicon-info-sign
+                            | 参考
+                        hr
+                        h4 コアオブジェクトの例
+                        h5 Mathオブジェクト
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                Math.E
+                                Math.LN2
+                                Math.LN10
+                                Math.LOG2E
+                                Math.LOG10E
+                                Math.PI
+                                Math.SQRT1_2
+                                Math.SQRT2
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                Math.round('3.141516');
+                                Math.random();
+                                Math.PI;
+                                Math.round(3.141592653589793);
+                        p
+                        a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Math', target='_blank')
+                            i.glyphicon.glyphicon-info-sign
+                            | 参考

@@ -26,36 +26,61 @@ block content
                         #demo.collapse.out
                             pre(class='prettyprint linenums:1')
                                 :code
-                                    <!DOCTYPE html>
-                                    <html lang="ja">
-                                    <head>
-                                    <meta charset="UTF-8">
-                                    <title></title>
-                                    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
-                                    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-                                    <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
-                                    <script>
-                                    $(document).on('pageshow','#index',function(){
-                                    var cnt = 0;
-                                    $('a').on('vclick',function(){
-                                    $('.ui-li-count').text(++cnt);
-                                    });
-                                    });
-                                    </script>
-                                    </head>
-                                    <body>
-                                    <div data-role="page" id="index">
-                                    <header data-role="header">
-                                    <h1>加算子の練習</h1>
-                                    </header>
-                                    <div data-role="content">
-                                    <ul data-role="listview" data-count-theme="c" data-inset="true">
-                                    <li><a href="#">追加 <span class="ui-li-count">0</span></a></li>
-                                    </ul>
-                                    </div>
-                                    <footer data-role="footer" data-position="fixed">
-                                    <h4>2013 © ナカノヨウスケ</h4>
-                                    </footer>
-                                    </div>
-                                    </body>
-                                    </html>
+                                    doctype
+                                    html(lang='ja')
+                                        head
+                                            meta(charset='UTF-8')
+                                            title
+                                            link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+                                            script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                            script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+                                            script
+                                                :js
+                                                    $(document).on('pageshow','#index',function(){
+                                                        var cnt = 0;
+                                                            $('a').on('vclick',function(){
+                                                            $('.ui-li-count').text(++cnt);
+                                                        });
+                                                    });
+                                        body
+                                            #index(data-role='page')
+                                                header(data-role='header')
+                                                    h1 加算子の前置、後置
+                                                div(data-role='content')
+                                                    ul(data-role='listview', data-count-theme='c', data-inset='true')
+                                                        li
+                                                            a(href='#')
+                                                                | 追加
+                                                                span.ui-li-count 0
+                                                footer(data-role='footer', data-position='fixed')
+                                                    h1 フッター
+                            pre(class='prettyprint linenums:1')
+                                :code
+                                    doctype
+                                    html(lang='ja')
+                                        head
+                                            meta(charset='UTF-8')
+                                            title
+                                            link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+                                            script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                            script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+                                            script
+                                                :js
+                                                    $(document).on 'pageshow', '#index', ->
+                                                        cnt = 0
+                                                        $('a').on 'vclick', ->
+                                                            $('.ui-li-count').text ++cnt
+                                                            return
+                                                        return
+                                        body
+                                            #index(data-role='page')
+                                                header(data-role='header')
+                                                    h1 加算子の前置、後置
+                                                div(data-role='content')
+                                                    ul(data-role='listview', data-count-theme='c', data-inset='true')
+                                                        li
+                                                            a(href='#')
+                                                                | 追加
+                                                                span.ui-li-count 0
+                                                footer(data-role='footer', data-position='fixed')
+                                                    h1 フッター

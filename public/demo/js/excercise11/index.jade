@@ -1,0 +1,31 @@
+doctype
+html(lang='ja')
+    head
+        meta(charset='UTF-8')
+        title
+        link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+        script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+        script
+            :coffee
+                $(document).on 'pageshow', '#index', ->
+                    $('a').on 'vclick', ->
+                        r = $('#r').val()
+                        h = $('#h').val()
+                        result = (Math.PI * Math.pow(r, 2) * h) / 3
+                        $('#result').text result
+                        return
+                    return
+    body
+        #index(data-role='page')
+            header(data-role='header')
+                h1 円錐の体積
+            div(data-role='content')
+                label(for='text-basic') 円の半径r:
+                input#r(type='number', name='text-basic', value='')
+                label(for='text-basic') 円錐の高さh:
+                input#h(type='number', name='text-basic', value='')
+                a(data-role='button') 計算
+                p#result
+            footer(data-role='footer', data-position='fixed')
+                h1 フッター

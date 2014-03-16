@@ -1,0 +1,109 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-bookmark
+                        | 課題
+                    .panel-body
+                        p: u app.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /**
+                                 * Module dependencies.
+                                 */
+
+                                var express = require('express')
+                                  , routes = require('./routes')
+                                  , user = require('./routes/user')
+                                  , http = require('http')
+                                  , path = require('path');
+
+                                var app = express();
+
+                                // all environments
+                                app.set('port', process.env.PORT || 3000);
+                                app.set('views', __dirname + '/views');
+                                app.set('view engine', 'jade');
+                                app.use(express.favicon());
+                                app.use(express.logger('dev'));
+                                app.use(express.bodyParser());
+                                app.use(express.methodOverride());
+                                app.use(app.router);
+                                app.use(require('stylus').middleware(__dirname + '/public'));
+                                app.use(express.static(path.join(__dirname, 'public')));
+
+                                // development only
+                                if ('development' == app.get('env')) {
+                                  app.use(express.errorHandler());
+                                }
+
+                                app.get('/', routes.index);
+                                <mark>app.post('/', routes.index);</mark>
+                                app.get('/users', user.list);
+
+                                http.createServer(app).listen(app.get('port'), function(){
+                                  console.log('Express server listening on port ' + app.get('port'));
+                                });
+                        hr
+                        p: u libs/calc.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                exports.calc = function(r, h){
+                                    var result = (Math.PI * Math.pow(r, 2) * h) / 3;
+                                    return result;
+                                };
+                        hr
+                        p: u routes/index.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                exports.index = function(req, res){
+                                    if(req.method == 'POST'){
+                                        <mark>var Calc = require('../libs/calc');
+                                        var result = Calc.calc(req.body.r, req.body.h);
+
+                                        res.render('index', {
+                                            result: result
+                                        });</mark>
+                                    }
+                                    else{
+                                        res.render('index');
+                                    }
+                                };
+                        hr
+                        p: u views/index.jade
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+                                        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                        script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+                                    body
+                                        #index(data-role='page')
+                                            header(data-role='header')
+                                                h1 円錐の体積
+                                            div(data-role='content')
+                                                form(action='/',method='POST')
+                                                    fieldset
+                                                        label(for='r') 円の半径r:
+                                                        input#r(type='number', name='r', value='')
+                                                    fieldset
+                                                        label(for='h') 円錐の高さh:
+                                                        input#h(type='number', name='h', value='')
+                                                    input(type='submit',value='計算')
+                                                <mark>p#result= result ? result : ''</mark>
+                                            footer(data-role='footer', data-position='fixed')
+                                                h1 フッター

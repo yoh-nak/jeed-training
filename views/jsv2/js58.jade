@@ -1,0 +1,77 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | ユーザーエージェントの取得
+                    .panel-body
+                        h4 JavaScriptでユーザーエージェントを表示する
+                        p ユーザーエージェントの取得はwindow.navigatorオブジェクトのuserAgentプロパティで取得することができます。
+                        p
+                            a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/Web/API/window.navigator', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | 参考：navigatorオブジェクト
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html
+                                    meta(charset='utf-8')
+                                    head
+                                        title ユーザーエージェントを表示してみる
+                                    body
+                                        script
+                                            :js
+                                                console.log(navigator.userAgent);
+                        hr
+                        h4 ユーザーエージェントに記録された文字列の有無を調べる
+                        p
+                            | 一般的にはモバイル向け端末にはユーザーエージェントに「Mobile」というキーワードが入っていることが多いですが、iPadには「Mobile」の文字列が記録されているため、iPhoneとiPadを区別することはできません。アップル社製品は、iPhoneには「iPhone」、iPodタッチには「iPod」、iPadには「iPad」の文字列がユーザーエージェントに記録されています。
+                        p
+                            | Androidには「Android」の文字列が記録されていますが、スマートフォンとタブレットを識別することはできません。 ただしAndroidのタブレットには、「Mobile」の文字列が記録されていないことが多いです。
+                        p
+                            a.btn.btn-default(href='http://www.openspc2.org/userAgent/', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | 参考：ユーザーエージェント一覧
+                        hr
+                        h4 StringオブジェクトのindexOfメソッド
+                        p StringオブジェクトはJavaScriptのコアオブジェクトの一つで、文字列型のデータに対して、プロパティおよびメソッドを指定することができます。
+                        p
+                            a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/String', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | 参考：Stringオブジェクト
+                        p
+                            | 今回は取得したユーザーエージェントの文字列に、特定の文字列が何個含まれているをカウントするindexOfメソッドを使うことで、「iPhone」などの特定の文字がユーザーエージェントの文字列に含まれているかどうか判定してみます。含まれていなければ「-1」が取得でき、含まれていればユーザーエージェントに含まれる「iPhone」の文字列が、最初に現れた文字が何文字目かを取得できます。含まれている場合は取得できる値が曖昧なため「-1」が取得できるか、できないかで「iPhone」かとうかを判定できます。
+                        p
+                            a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | 参考：indexOfメソッド
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var ua = navigator.userAgent;
+                                var iphone = ua.indexOf('iPhone');
+                                if(iphone != -1){
+                                    console.log('iPhoneです');
+                                }
+                                else{
+                                    console.log('iPhoneではありません');
+                                }
+
+                        p 以下のようにまとめて記述することもできます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                if(navigator.userAgent.indexOf('iPhone') != -1){
+                                    console.log('iPhoneです');
+                                }
+                                else{
+                                    console.log('iPhoneではありません');
+                                }

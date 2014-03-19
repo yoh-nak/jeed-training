@@ -1,0 +1,79 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-bookmark
+                        | 課題
+                    .panel-body
+                        p
+                            | ユーザーエージェントを取得して、PCサイトとスマートフォンサイトを切り替えましょう。ユーザーエージェントに「Android」、「iPhone」、「iPod」が含まれるときをスマートフォンサイトとします。
+                        p
+                            a.btn.btn-default(href='../demo/js/excercise13/pc.html', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button', data-toggle='collapse', data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | 解答例
+                        #demo.collapse.out
+                            | pcサイト
+                            pre(class='prettyprint linenums:1')
+                                :code
+                                    doctype
+                                    html(lang='ja-JP')
+                                        head
+                                            meta(charset='UTF-8')
+                                            script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                            script
+                                                :js
+                                                    //DOMが構築される前
+                                                    //ユーザーエージェントがスマートフォンならスマートフォンサイトを表示
+                                                    if(navigator.userAgent.indexOf('Android') != -1 || navigator.userAgent.indexOf('iPhone') != -1 || navigator.userAgent.indexOf('iPod') != -1){
+                                                        window.location.href='スマホサイトURL';
+                                                    }
+                                                    //DOMが構築された後
+                                                    $(function(){
+                                                        //
+                                                    });
+                                            title PCサイト
+                                        body
+                                            h1 PCサイト
+                            | スマホサイト
+                            pre(class='prettyprint linenums:1')
+                                :code
+                                    doctype
+                                    html(lang='ja-JP')
+                                        head
+                                            meta(charset='UTF-8')
+                                            link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+                                            script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                            script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+                                        script
+                                            :js
+                                                //jQuery Mobileのウィジェットが表示される前
+                                                //ユーザーエージェントがスマートフォンでなければPCサイトを表示
+                                                if(navigator.userAgent.indexOf('Android') == -1 && navigator.userAgent.indexOf('iPhone') == -1 && navigator.userAgent.indexOf('iPod') == -1){
+                                                    window.location.href='PCサイトURL';
+                                                }
+                                                //jQuery Mobileのウィジェットが表示された後
+                                                $(document).on('pageshow','#index',function(){
+                                                    //
+                                                });
+                                        title スマホサイト
+                                        body
+                                            #index(data-role='page')
+                                                div(data-role='header')
+                                                    h1 スマホサイト
+                                                div(data-role='content')
+                                                    h1 スマホサイト
+                                                div(data-role='footer', data-position='fixed')
+                                                    h1 フッター

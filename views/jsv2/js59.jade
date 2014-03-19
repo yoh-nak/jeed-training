@@ -49,8 +49,14 @@ block content
                             :code
                                 var key = "キー";
                                 var pattern = /([^*]+)=([^*]+)/;
+                                 
                                 var cookies = document.cookie.split('; ');
-                                for(var i = 0; i           
+                                for(var i = 0; i < cookies.length; i++){
+                                    var match = cookies[i].match(pattern);
+                                    if(match && key == decodeURIComponent(match[1])){
+                                        console.log(decodeURIComponent(match[2]));
+                                    }
+                                }        
                         h4 Cookieを破棄する
                         pre(class='prettyprint linenums:1')
                             :code
@@ -148,10 +154,9 @@ block content
                                 <script>
                                 var date = new Date();
                                 //3日×24時間×60分×60秒×1000ミリ秒
+                                date.setTime(date.getTime()+(3 * 24 * 60 * 60 * 1000)); //3日×24時間×60分×60秒×1000ミリ秒
                                 $.cookie("キー","値",{expires:date});
                                 </script>
-
-                        p ハイライト部分が保存期間の秒数で指定されているのがわかります。
                         p
                             a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime', target='_blank')
                                 i.glyphicon.glyphicon-info-sign

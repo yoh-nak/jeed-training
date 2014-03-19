@@ -1,0 +1,168 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | ブラウザでCookieを扱う
+                    .panel-body
+                        h4 cookieを確認する
+                        p
+                            | Cookieとは、Webサイトの提供者が、Webブラウザを通じて訪問者のコンピュータに一時的にデータを書き込んで保存させるしくみのこと。Cookieにはユーザに関する情報や最後にサイトを訪れた日時、そのサイトの訪問回数などを記録しておくことができます。
+                        p JavaScrpiptでは「document.cookie」プロパティでWebサイト提供者が残したCookieを確認することができます。
+                        pre
+                            :code
+                                document.cookie;
+                        p
+                            a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/DOM/document.cookie', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | 参考：cookieプロパティ
+                        p 以下の例は「Yahoo! Japan」にアクセスした後に、コンソールで「document.cookie」を実行しCookieに記録されたデータを確認した例です。
+                        pre
+                            :code
+                                B=8vt1li993h6uo&b=3&s=ka; YABW=v=1&b=363&c=1&i4=MYWoUQ--&t4=1379441608&i6=&t6=&e=1380072948"
+
+                        p
+                            | Cookieは「キー=値; キー=値; キー=値; ...」のように、キーと値がセットに成って格納されますが、「; 」のように、1つのセットがセミコロンと半角スペースで区切られているだけで 、データは1つの文字列として記録されています。したがってJavaScriptでCookieを処理するためには「; 」で切り離した後「=」でキーと値をさらに切り離して、データを処理しなければなりません。以下、CookieをJavaScriptの文法でセットする方法と、Cookieからデータを取得する方法を紹介します。
+                        hr
+                        h4 Cookieをセットする
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var key = "キー";
+                                var value = "値";
+                                var date = new Date();
+                                date.setTime(date.getTime() + (3 * 24 * 60 * 60 * 1000));   //3日×24時間×60分×60秒×1000ミリ秒
+                                var expires = 'expires=' + date.toGMTString();
+                                document.cookie = encodeURIComponent(key) + "=" + encodeURIComponent(value) + "; " + expires + "; path=/";
+
+                        h4 Cookieを取得する
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var key = "キー";
+                                var pattern = /([^*]+)=([^*]+)/;
+                                var cookies = document.cookie.split('; ');
+                                for(var i = 0; i           
+                        h4 Cookieを破棄する
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var key = "キー";
+                                document.cookie = encodeURIComponent(key) + "=;" + "expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/";
+
+                        hr
+                        h4 jQueryプラグイン「jquery.cookie.js」を利用する
+                        p
+                            | CookieをJavaScriptで扱う場合、処理が面倒なため、PHPなどのサーバーサイド技術でCookieを処理することが多いのですが、JavaScriptでCookieを扱うには、jQueryプラグインの「jquery.cookie.js」を使うと便利です。
+                        p
+                            a.btn.btn-default(href='https://github.com/carhartl/jquery-cookie', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | 参考：jquery.cookie.js
+                        pre
+                            :code
+                                bower install jquery.coookie --save
+                        hr
+                        h4 日にちでCookieをセットする
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <script src="jquery.cookie.js"></script>
+                                <script>
+                                $.cookie("キー","値",{expires:3}); //3日
+                                </script>
+
+                        h4 時間でCookieをセットする
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <script src="jquery.cookie.js"></script>
+                                <script>
+                                var date = new Date();
+                                date.setTime(date.getTime()+(3 * 24 * 60 * 60 * 1000)); //3日×24時間×60分×60秒×1000ミリ秒
+                                $.cookie("キー","値",{expires:date});
+                                </script>
+
+                        h4 Cookieを取得する
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <script src="jquery.cookie.js"></script>
+                                <script>
+                                $.cookie("キー");
+                                </script>
+
+                        h4 Cookieを破棄する
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <script src="jquery.cookie.js"></script>
+                                <script>
+                                $.cookie("キー","値",{expires:-1});
+                                </script>
+
+                        hr
+                        h4 UNIX標準時とは
+                        p
+                            | UNIX時間（ユニックスじかん）またはUNIX時刻（ユニックスじこく、UNIX time、POSIX time）とはコンピューターシステム上で日時を表す単位。UTCでの1970年1月1日真夜中（0時0分0秒）からの経過秒数（閏秒を加味しない）で表される。UNIX標準時から現在までの秒数をタイムスタンプと呼びます。
+                        table.table
+                            tr
+                                th UNIX時間
+                                th UTC（協定世界時館）
+                                th JST（日本標準時）
+                            tr
+                                td 0
+                                td 1970-01-01T00:00:00
+                                td 1970-01-01T09:00:00
+                            tr
+                                td 100000000
+                                td 1973-03-03T09:46:40
+                                td 1973-03-03T18:46:40
+                            tr
+                                td 1000000000
+                                td 2001-09-09T01:46:40
+                                td 2001-09-09T10:46:40
+                            tr
+                                td 1234567890
+                                td 2009-02-13T23:31:30
+                                td 2009-02-14T08:31:30
+                            tr
+                                td 2147483647
+                                td 2038-01-19T03:14:07
+                                td 2038-01-19T12:14:07
+                        hr
+                        h4 dataオブジェクトのgetTimeメソッド
+                        p
+                            | getTimeメソッドは、現在のタイムスタンプを取得できます。コンソールで実行してみましょう。現在までのUNIX標準時からの秒数が表示されます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var timestamp = new Date();
+                                timestamp.getTime();
+                        p
+                        | Cookieの保存期間はタイムスタンプで格納されるため、getTimeメソッドでCookie保存開始時のタイムスタンプを取得し、その時からの秒数がCookieの保存期間となります。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <script src="jquery.cookie.js"></script>
+                                <script>
+                                var date = new Date();
+                                //3日×24時間×60分×60秒×1000ミリ秒
+                                $.cookie("キー","値",{expires:date});
+                                </script>
+
+                        p ハイライト部分が保存期間の秒数で指定されているのがわかります。
+                        p
+                            a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | 参考：getTimeメソッド
+                        hr
+                        p
+                            | 参考：typeof演算子で、変数timestampを確認するとobject型のデータ型であることが確認できます。しかしながら変数timestampはDateオブジェクトが格納されているかどうか確認することはできません。その場合は、instanceof演算子を使い、「timestamp instanceof Date」の結果、trueが取得されると、Dateオブジェクトが格納されていることが分かります。
+                        p オブジェクト指向言語では、オブジェクトが格納された変数のことをオブジェクトの「インスタンス変数」、または単に「インスタンス」と呼びます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var timestamp = new Date();
+                                timestamp.getTime();
+                                console.log(typeof timestamp) //= "object"
+                                console.log(timestamp inscanceof Date) //= true

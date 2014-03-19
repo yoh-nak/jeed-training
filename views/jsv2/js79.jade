@@ -1,0 +1,110 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | サーバーサイドでCookieを扱う
+                    .panel-body
+                        h4 Cookieを有効にする
+                        p app.jsに以下のコードを追加します。
+                        pre.
+                            app.use(express.cookieParser());
+                        p 暗号化キーを追加するとcookieを暗号化することができます。キーは任意の文字列を入力します。
+                        pre.
+                            app.use(express.cookieParser('your secret here'));
+                        p app.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /**
+                                 * Module dependencies.
+                                 */
+
+                                var express = require('express');
+                                var routes = require('./routes');
+                                var user = require('./routes/user');
+                                var http = require('http');
+                                var path = require('path');
+
+                                var app = express();
+
+                                // all environments
+                                app.set('port', process.env.PORT || 3000);
+                                app.set('views', path.join(__dirname, 'views'));
+                                app.set('view engine', 'jade');
+                                app.use(express.favicon());
+                                app.use(express.logger('dev'));
+                                app.use(express.json());
+                                app.use(express.urlencoded());
+                                app.use(express.methodOverride());
+                                <mark>app.use(express.cookieParser('your secret here'));</mark>
+                                app.use(express.session());
+                                app.use(app.router);
+                                app.use(require('stylus').middleware(path.join(__dirname, 'public')));
+                                app.use(express.static(path.join(__dirname, 'public')));
+
+                                // development only
+                                if ('development' == app.get('env')) {
+                                  app.use(express.errorHandler());
+                                }
+
+                                app.get('/', routes.index);
+                                app.get('/users', user.list);
+
+                                http.createServer(app).listen(app.get('port'), function(){
+                                  console.log('Express server listening on port ' + app.get('port'));
+                                });
+                        p expressのスケルトンコードを生成する際に、オプション「-s」をつけます。セッションを有効
+                        pre.
+                            express myapp -s
+                        p stylusとセットにする場合は以下のようにまとめて指定できます。
+                        pre.
+                            express myapp -cs stylus
+                        p するとapp.jsに自動的に以下のコードが追加されます。
+                        pre.
+                            app.use(express.cookieParser('your secret here'));
+                        hr
+                        h4 Cookieの設定
+                        pre.
+                            res.cookie('キー', '値');
+                        p 有効期限をつける
+                        pre.
+                            res.cookie('キー', '値', { expires: タイムスタンプ});
+                        h4 Cookieの取得
+                        pre.
+                            console.log(req.cookies.キー);
+                        h4 Cookieの削除
+                        pre.
+                            res.clearCookie('キー');
+                        p /routes/index.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /*
+                                 * GET home page.
+                                 */
+
+                                exports.index = function(req, res){
+                                    //有効期限作成
+                                    var date = new Date();
+                                    date.setTime(date.getTime()+(3 * 24 * 60 * 60 * 1000)); //3日×24時間×60分×60秒×1000ミリ秒
+
+                                    //Cookieの設定
+                                    res.cookie('キー', encodeURIComponent('値'), {expires: date});
+
+                                    //Cookieの取得
+                                    console.log(decodeURIComponent(req.cookies.キー));
+
+                                    //Cookieの削除
+                                    //res.clearCookie('キー');
+
+                                    res.render('index', { title: 'Express' });
+                                };

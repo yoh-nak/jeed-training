@@ -1,0 +1,121 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | サーバーサイドでUAを取得してサイトを切り替える
+                    .panel-body
+                        p app.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /**
+                                 * Module dependencies.
+                                 */
+
+                                var express = require('express');
+                                var routes = require('./routes');
+                                <mark>var change = require('./routes/change');</mark>
+                                var user = require('./routes/user');
+                                var http = require('http');
+                                var path = require('path');
+
+                                var app = express();
+
+                                // all environments
+                                app.set('port', process.env.PORT || 3000);
+                                app.set('views', path.join(__dirname, 'views'));
+                                app.set('view engine', 'jade');
+                                app.use(express.favicon());
+                                app.use(express.logger('dev'));
+                                app.use(express.json());
+                                app.use(express.urlencoded());
+                                app.use(express.methodOverride());
+                                app.use(app.router);
+                                app.use(require('stylus').middleware(path.join(__dirname, 'public')));
+                                app.use(express.static(path.join(__dirname, 'public')));
+
+                                // development only
+                                if ('development' == app.get('env')) {
+                                  app.use(express.errorHandler());
+                                }
+
+                                app.get('/', routes.index);
+                                <mark>app.get('/pc', change.pc);
+                                app.get('/mobile', change.mobile);</mark>
+                                app.get('/users', user.list);
+
+                                http.createServer(app).listen(app.get('port'), function(){
+                                  console.log('Express server listening on port ' + app.get('port'));
+                                });
+                        p /views/pc.jade
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        title PCサイト
+                                    body
+                                        h1 PCサイト
+                        p /views/mobile.jade
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        link(rel='stylesheet', href='http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css')
+                                        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                        script(src='http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js')
+                                        title スマホサイト
+                                    body
+                                        #index(data-role='page')
+                                            div(data-role='header')
+                                                h1 ヘッダー
+                                            div(data-role='content')
+                                                h1 スマホサイト
+                                            div(data-role='footer', data-position='fixed')
+                                                h1 フッター
+                        p /routes/change.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /*
+                                 * GET changeover page.
+                                 */
+
+                                var ua;
+
+                                exports.pc = function(req, res){
+
+                                    ua = req.headers['user-agent'].toLowerCase();
+
+                                    if(ua.indexOf('android') != -1 || ua.indexOf('iphone') != -1 || ua.indexOf('ipod') != -1){
+                                        res.redirect('/mobile');
+                                    }
+                                    else{
+                                        res.render('pc');
+                                    }
+                                };
+
+                                exports.mobile = function(req, res){
+
+                                    ua = req.headers['user-agent'].toLowerCase();
+
+                                    if(ua.indexOf('android') == -1 && ua.indexOf('iphone') == -1 && ua.indexOf('ipod') == -1){
+                                        res.redirect('/pc');
+                                    }
+                                    else{
+                                        res.render('mobile');
+                                    }
+                                };

@@ -15,7 +15,7 @@ block content
                         i.glyphicon.glyphicon-book
                         | ユーザーエージェントの取得
                     .panel-body
-                        h4 JavaScriptでユーザーエージェントを表示する
+                        h4 ブラウザでユーザーエージェントを表示する
                         p ユーザーエージェントの取得はwindow.navigatorオブジェクトのuserAgentプロパティで取得することができます。
                         p
                             a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/Web/API/window.navigator', target='_blank')
@@ -75,3 +75,26 @@ block content
                                 else{
                                     console.log('iPhoneではありません');
                                 }
+                        hr
+                        h4 サーバーサイドでユーザーエージェントを表示する
+                        p ※ サーバーはクライアントからのリクエストがないと、アクセスしてきたブラウザのユーザーエージェントはわかりません。
+                        p Expressを使った場合はRequestオブジェクトのheadersプロパティを使って以下のようにして取得できます。
+                        p
+                            a.btn.btn-default(href='http://expressjs.com/api.html#req.params', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | 参考：req.params
+                            a.btn.btn-default(href='http://expressjs.com/guide.html#users-online', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | 参考：Users online count
+                        pre.
+                            req.headers['user-agent'])
+                        pre(class='prettyprint linenums:1')
+                            :code
+                        /*
+                         * GET home page.
+                         */
+
+                        exports.index = function(req, res){
+                            console.log(req.headers['user-agent']);
+                            res.render('index', { title: 'Express' });
+                        };

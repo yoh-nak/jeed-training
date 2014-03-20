@@ -98,3 +98,21 @@ block content
                                     console.log(req.headers['user-agent']);
                                     res.render('index', { title: 'Express' });
                                 };
+                        p Stringオブジェクトはコアオブエクとのため、サーバー側でも実行できます。以下のように、クライアントと同じようにユーザーエージェントを識別できます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /*
+                                * GET home page.
+                                */
+
+                                exports.index = function(req, res){
+                                    var ua = req.headers['user-agent'];
+                                    var iphone = ua.indexOf('iPhone');
+                                    if(iphone != -1){
+                                        console.log('iPhoneです');
+                                    }
+                                    else{
+                                        console.log('iPhoneではありません');
+                                    }
+                                    res.render('index', { title: 'Express' });
+                                };

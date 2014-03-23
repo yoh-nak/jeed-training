@@ -1,0 +1,48 @@
+doctype
+html(lang='ja')
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport', content='width=device-width, user-scalable=no')
+        link(href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css', rel='stylesheet')
+        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+        script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+        title
+            | スマートフォンサイト
+        script
+            :js
+                //jQuery Mobileのウィジェットが生成される前
+                //StorageがないときPCサイトを表示
+                if(!localStorage.access){
+                    //ユーザーエージェントがスマートフォンでなければPCサイトを表示
+                    if(navigator.userAgent.indexOf('Android') == -1 && navigator.userAgent.indexOf('iPhone') == -1 && navigator.userAgent.indexOf('iPod') == -1){
+                        window.location.href = 'pc.html';
+                    }
+                    //それ以外はStorageにmobileを記録
+                    else{
+                        localStorage.access = 'mobile';
+                    }
+                }
+                //StorageがpcのときPCサイトを表示
+                else if(localStorage.access == 'pc'){
+                    window.location.href = 'pc.html';
+                }
+                //jQuery Mobileのウィジェットが生成された後
+                $(document).on('pageshow','#index',function(){
+                    //ボタンが押されたとき
+                    $('a').click(function(){
+                        localStorage.access = 'pc';
+                        window.location.href = 'pc.html';
+                    });
+                });
+    body
+        #index(data-role='page')
+            div(data-role='header')
+                h1
+                    | スマホサイト
+            div(data-role='content')
+                p
+                    a(data-role='button', href='#')
+                        | PCサイトへ
+            div(data-position='fixed', data-role='footer')
+                h4
+                    | フッター

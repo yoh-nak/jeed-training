@@ -1,0 +1,131 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | その他の条件分岐構文
+                    .panel-body
+                        h4 switch文       
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                switch(チェックする値){
+                                    case 値1:
+                                        //実行する処理
+                                        break;
+                                    case 値2:
+                                        //実行する処理
+                                        break;
+                                    //必要な数だけcaseを用意
+                                    default:
+                                        //caseがないときの処理
+                                }
+                        p 以下の例では、変数aに値1がセットされているので、case 1:が処理され、「case1が処理されました」が出力されます。
+                        
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var a = 1;
+
+                                switch(a){
+                                    case 1:
+                                        console.log('case 1が処理されました');
+                                        break;
+                                    case 2:
+                                        console.log('case 2が処理されました');
+                                        break;
+                                    case 3:
+                                        console.log('case 3が処理されました');
+                                        break;
+                                }
+                        p それぞれのcaseの最後に、breakを忘れないようにしましょう。breakを忘れると、case 1の処理が終わったら、次のcase 2の処理も処理されてしまいます。以下の例では「case 1が処理されましたcase 2が処理されました」というように2つのcaseが処理されてしまいます。
+                        
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var a = 1;
+
+                                switch(a){
+                                    case 1:
+                                        console.log('case 1:が処理されました');
+                                    case 2:
+                                        console.log('case 2:が処理されました');
+                                        break;
+                                    case 3:
+                                        console.log('case 3:が処理されました');
+                                        break;
+                                }
+                        p caseの次にくるリテラルに注意しましょう。変数aの値は数値リテラルなので、caseのあとに続く値は数値リテラルでなければなりません。以下のようにcaseのあとに続く値を文字列リテラルにすると、該当するcaseがないのでなにも処理されません。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var a = 1;
+
+                                switch(a){
+                                    case '1':
+                                        console.log('case 1:が処理されました');
+                                        break;
+                                    case '2':
+                                        console.log('case 2:が処理されました');
+                                        break;
+                                    case '3':
+                                        console.log('case 3:が処理されました');
+                                        break;
+                                }
+                        p 当てはまるcaseがない場合の処理は、default:というcaseで処理することができます。case default:ではないので注意しましょう。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var a = 4;
+
+                                switch(a){
+                                    case '1':
+                                        console.log('case 1:が処理されました');
+                                        break;
+                                    case '2':
+                                        console.log('case 2:が処理されました');
+                                        break;
+                                    case '3':
+                                        console.log('case 3:が処理されました');
+                                        break;
+                                    default:
+                                        console.log('該当するケースがありません');
+                                }
+                        p 複数のcaseに共通する処理をしたい場合は、case 値:を並べて記述します。これはbreakがなければ、そのまま次のcaseの処理が実行されることを利用した方法です。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var season = 'autumn';
+
+                                switch(season){
+                                    case 'spring':
+                                    case 'summer':
+                                        console.log('夏服を着ましょう');
+                                        break;
+                                    case 'autumn':
+                                    case 'winter':
+                                        console.log('冬服を着ましょう');
+                                        break;
+                                }
+
+                        hr
+                        h4 三項演算子
+                        
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                条件式 ? 条件式の評価がtrueのとき : 条件式の評価がfalseのとき;
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var a = 8;
+                                a == 10 ? '大きいぞ' : '小さいぞ';
+                                console.log(a);
+                        p 三項演算子の結果を変数に代入することもできます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var a = 8;
+                                var result = (a == 10) ? '大きいぞ' : '小さいぞ';
+                                console.log(result);

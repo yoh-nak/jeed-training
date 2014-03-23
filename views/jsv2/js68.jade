@@ -46,6 +46,16 @@ block content
                                         console.log('case 3が処理されました');
                                         break;
                                 }
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                a = 1
+                                switch a
+                                  when 1
+                                    console.log 'case 1が処理されました'
+                                  when 2
+                                    console.log 'case 2が処理されました'
+                                  when 3
+                                    console.log 'case 3が処理されました'
                         p それぞれのcaseの最後に、breakを忘れないようにしましょう。breakを忘れると、case 1の処理が終わったら、次のcase 2の処理も処理されてしまいます。以下の例では「case 1が処理されましたcase 2が処理されました」というように2つのcaseが処理されてしまいます。
                         
                         pre(class='prettyprint linenums:1')
@@ -62,6 +72,16 @@ block content
                                         console.log('case 3:が処理されました');
                                         break;
                                 }
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                a = 1
+                                switch a
+                                  when 1
+                                    console.log 'case 1:が処理されました'
+                                  when 2
+                                    console.log 'case 2:が処理されました'
+                                  when 3
+                                    console.log 'case 3:が処理されました'
                         p caseの次にくるリテラルに注意しましょう。変数aの値は数値リテラルなので、caseのあとに続く値は数値リテラルでなければなりません。以下のようにcaseのあとに続く値を文字列リテラルにすると、該当するcaseがないのでなにも処理されません。
                         pre(class='prettyprint linenums:1')
                             :code
@@ -78,6 +98,16 @@ block content
                                         console.log('case 3:が処理されました');
                                         break;
                                 }
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                a = 1
+                                switch a
+                                  when '1'
+                                    console.log 'case 1:が処理されました'
+                                  when '2'
+                                    console.log 'case 2:が処理されました'
+                                  when '3'
+                                    console.log 'case 3:が処理されました'
                         p 当てはまるcaseがない場合の処理は、default:というcaseで処理することができます。case default:ではないので注意しましょう。
                         pre(class='prettyprint linenums:1')
                             :code
@@ -96,6 +126,18 @@ block content
                                     default:
                                         console.log('該当するケースがありません');
                                 }
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                a = 4
+                                switch a
+                                  when '1'
+                                    console.log 'case 1:が処理されました'
+                                  when '2'
+                                    console.log 'case 2:が処理されました'
+                                  when '3'
+                                    console.log 'case 3:が処理されました'
+                                  else
+                                    console.log '該当するケースがありません'
                         p 複数のcaseに共通する処理をしたい場合は、case 値:を並べて記述します。これはbreakがなければ、そのまま次のcaseの処理が実行されることを利用した方法です。
                         pre(class='prettyprint linenums:1')
                             :code
@@ -111,7 +153,14 @@ block content
                                         console.log('冬服を着ましょう');
                                         break;
                                 }
-
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                season = 'autumn'
+                                switch season
+                                  when 'spring', 'summer'
+                                    console.log '夏服を着ましょう'
+                                  when 'autumn', 'winter'
+                                    console.log '冬服を着ましょう'
                         hr
                         h4 三項演算子
                         
@@ -123,9 +172,19 @@ block content
                                 var a = 8;
                                 a == 10 ? '大きいぞ' : '小さいぞ';
                                 console.log(a);
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                a = 8
+                                (if a is 10 then '大きいぞ' else '小さいぞ')
+                                console.log a
                         p 三項演算子の結果を変数に代入することもできます。
                         pre(class='prettyprint linenums:1')
                             :code
                                 var a = 8;
                                 var result = (a == 10) ? '大きいぞ' : '小さいぞ';
                                 console.log(result);
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                a = 8
+                                result = (if (a is 10) then '大きいぞ' else '小さいぞ')
+                                console.log result

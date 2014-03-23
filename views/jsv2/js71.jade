@@ -1,0 +1,97 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        |  三項演算子でJadeの出力を切り替える
+                    .panel-body
+                        pre.
+                            express myapp -sc stylus
+                        p /views/layout.jade              
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype html
+                                html
+                                  head
+                                    <mark>title= login?'ログイン':'ログアウト'</mark>
+                                    link(rel='stylesheet', href='/stylesheets/style.css')
+                                  body
+                                    block content
+                        p /views/index.jade 
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                extends layout
+
+                                block content
+                                  <mark>h1 #{title} : #{login?'ログイン':'ログアウト'}</mark>
+                                  <mark>p= login?'いらっしゃいませ':'ありがとうございました'</mark>
+                        p app.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /**
+                                 * Module dependencies.
+                                 */
+
+                                var express = require('express');
+                                var routes = require('./routes');
+                                var user = require('./routes/user');
+                                var http = require('http');
+                                var path = require('path');
+
+                                var app = express();
+
+                                // all environments
+                                app.set('port', process.env.PORT || 3000);
+                                app.set('views', path.join(__dirname, 'views'));
+                                app.set('view engine', 'jade');
+                                app.use(express.favicon());
+                                app.use(express.logger('dev'));
+                                app.use(express.json());
+                                app.use(express.urlencoded());
+                                app.use(express.methodOverride());
+                                <mark>app.use(express.cookieParser('your secret here'));
+                                app.use(express.session({
+                                    expires : new Date(Date.now() + 1000 *  60 * 60) //1時間（1000ms × 60sec × 60min）
+                                }));</mark>
+                                app.use(app.router);
+                                app.use(require('stylus').middleware(path.join(__dirname, 'public')));
+                                app.use(express.static(path.join(__dirname, 'public')));
+
+                                // development only
+                                if ('development' == app.get('env')) {
+                                  app.use(express.errorHandler());
+                                }
+
+                                app.get('/', routes.index);
+                                app.get('/users', user.list);
+
+                                http.createServer(app).listen(app.get('port'), function(){
+                                  console.log('Express server listening on port ' + app.get('port'));
+                                });
+                        p /routes/index.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /*
+                                 * GET home page.
+                                 */
+
+                                exports.index = function(req, res){
+                                    //true: ログイン
+                                    //false: ログアウト
+                                    <mark>req.session.login = true;</mark>
+
+                                    res.render('index', {
+                                        title: 'Express',
+                                        <mark>login: req.session.login</mark>
+                                    });
+                                };

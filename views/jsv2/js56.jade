@@ -13,14 +13,10 @@ block content
                 .panel.panel-primary
                     .panel-heading
                         i.glyphicon.glyphicon-book
-                        | Cookieを使ってサイトを切り替える
+                        | サーバーサイドでCookieを使ってサイトを切り替える
                     .panel-body
-                        h4 Cookieを使ってサイトを切り替える
-                        p
-                            a.btn.btn-default(href='../demo/js/excercise12/pc.html', target='_blank')
-                                i.glyphicon.glyphicon-play
-                                | デモ
-                        p pc.jade
+                        h4 サーバーサイドでCookieを使ってサイトを切り替える
+                        p /views/pc.jade
                         pre(class='prettyprint linenums:1')
                             :code
                                 doctype
@@ -28,76 +24,45 @@ block content
                                     head
                                         meta(charset='UTF-8')
                                         script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-                                        script(src='jquery.cookie.js')
+                                        script(src='/javascripts/jquery.cookie.js')
+                                        title PCサイト
                                         script
                                             :js
-                                                //DOMが構築される前
-                                                //クッキーないとき
-                                                if(!$.cookie("access")){
-                                                    //ユーザーエージェントがスマートフォンならスマートフォンサイトを表示
-                                                    if(navigator.userAgent.indexOf("Android") != -1 || navigator.userAgent.indexOf("iPhone") != -1 || navigator.userAgent.indexOf("iPod") != -1){
-                                                            window.location.href="mobile.html";
-                                                    }
-                                                    //それ以外はクッキーにpcを記録
-                                                    else{
-                                                        $.cookie("access","pc",{expires:30});
-                                                    }
-                                                }
-                                                //クッキーがmobileのときスマートフォンサイトサイトを表示
-                                                else if($.cookie("access") == "mobile"){
-                                                    window.location.href="mobile.html";
-                                                }
                                                 //DOMが構築された後
                                                 $(function(){
                                                     //ボタンが押されたとき
-                                                    $("a").click(function(){
-                                                        $.cookie("access","mobile",{expires:30});
-                                                        window.location.href="mobile.html";
+                                                    $('a').click(function(){
+                                                        $.cookie('access','mobile',{expires:30});
+                                                        window.location.href='/mobile';
                                                     });
                                                 });
-                                        title PCサイト
                                     body
                                         h1 PCサイト
                                         p
                                             a(href='#') スマートフォンサイトへ
-                        p mobile.jade
+                        p /views/mobile.jade
                         pre(class='prettyprint linenums:1')
                             :code
                                 doctype
                                 html(lang='ja-JP')
                                     head
                                         meta(charset='UTF-8')
-                                        link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.3.2.min.css')
+                                        meta(name='viewport',content='width=device-width')
+                                        link(rel='stylesheet', href='http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css')
                                         script(src='http://code.jquery.com/jquery-1.9.1.min.js')
-                                        script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
-                                        script(src='jquery.cookie.js')
+                                        script(src='http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js')
+                                        script(src='javascripts/jquery.cookie.js')
+                                        title スマホサイト
                                         script
                                             :js
-                                                //jQuery Mobileのウィジェットが表示される前
-                                                //クッキーがないときPCサイトを表示
-                                                if(!$.cookie("access")){
-                                                    //ユーザーエージェントがスマートフォンでなければPCサイトを表示
-                                                    if(navigator.userAgent.indexOf("Android") == -1 && navigator.userAgent.indexOf("iPhone") == -1 && navigator.userAgent.indexOf("iPod") == -1){
-                                                        window.location.href="pc.html";
-                                                    }
-                                                    //それ以外はクッキーにmobileを記録
-                                                    else{
-                                                        $.cookie("access","mobile",{expires:30});
-                                                    }
-                                                }
-                                                //クッキーがpcのときPCサイトを表示
-                                                else if($.cookie("access") == "pc"){
-                                                    window.location.href="pc.html";
-                                                }
                                                 //jQuery Mobileのウィジェットが表示された後
                                                 $(document).on('pageshow','#index',function(){
                                                     //ボタンが押されたとき
-                                                    $("a").click(function(){
-                                                        $.cookie("access","pc",{expires:30});
-                                                        window.location.href="pc.html";
+                                                    $('a').click(function(){
+                                                        $.cookie('access','pc',{expires:30});
+                                                        window.location.href='/pc';
                                                     });
                                                 });
-                                        title スマホサイト
                                     body
                                         #index(data-role='page')
                                             div(data-role='header')
@@ -107,3 +72,117 @@ block content
                                                     a(href='#', data-role='button') PCサイトへ
                                             div(data-role='footer', data-position='fixed')
                                                 h1 フッター
+                        p /views/app.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /**
+                                 * Module dependencies.
+                                 */
+
+                                var express = require('express');
+                                var routes = require('./routes');
+                                <mark>var change = require('./routes/change');</mark>
+                                var user = require('./routes/user');
+                                var http = require('http');
+                                var path = require('path');
+
+                                var app = express();
+
+                                // all environments
+                                app.set('port', process.env.PORT || 3000);
+                                app.set('views', path.join(__dirname, 'views'));
+                                app.set('view engine', 'jade');
+                                app.use(express.favicon());
+                                app.use(express.logger('dev'));
+                                app.use(express.json());
+                                app.use(express.urlencoded());
+                                app.use(express.methodOverride());
+                                <mark>app.use(express.cookieParser('your secret here'));</mark>
+                                app.use(express.session());
+                                app.use(app.router);
+                                app.use(require('stylus').middleware(path.join(__dirname, 'public')));
+                                app.use(express.static(path.join(__dirname, 'public')));
+
+                                // development only
+                                if ('development' == app.get('env')) {
+                                  app.use(express.errorHandler());
+                                }
+
+                                app.get('/', routes.index);
+                                <mark>app.get('/pc', change.pc);
+                                app.get('/mobile', change.mobile);</mark>
+                                app.get('/users', user.list);
+
+                                http.createServer(app).listen(app.get('port'), function(){
+                                  console.log('Express server listening on port ' + app.get('port'));
+                                });
+                        p /views/pc.jade
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /*
+                                 * GET changeover page.
+                                 */
+
+                                exports.pc = function(req, res){
+
+                                    var ua, date;
+
+                                    ua = req.headers['user-agent'].toLowerCase();
+
+                                    //クッキーないとき
+                                    if(!req.cookies.access){
+                                        //ユーザーエージェントがスマートフォンならスマホサイトを表示
+                                        if(ua.indexOf('android') != -1 || ua.indexOf('iphone') != -1 || ua.indexOf('ipod') != -1){
+                                                res.redirect('/mobile');
+                                        }
+                                        //それ以外はクッキーにpcを記録
+                                        else{
+                                            //有効期限作成
+                                            date = new Date();
+                                            date.setTime(date.getTime()+(30 * 24 * 60 * 60 * 1000)); //30日×24時間×60分×60秒×1000ミリ秒
+
+                                            res.cookie('access', 'pc', {expires: date});
+                                            res.render('pc');
+                                        }
+                                    }
+                                    //クッキーがmobileのときスマホサイトを表示
+                                    else if(req.cookies.access == 'mobile'){
+                                        res.redirect('/mobile');
+                                    }
+                                    //クッキーがpcのときPCサイトを表示
+                                    else{
+                                        res.render('pc');
+                                    }
+                                };
+
+                                exports.mobile = function(req, res){
+
+                                    var ua, date;
+
+                                    ua = req.headers['user-agent'].toLowerCase();
+
+                                    //クッキーがないとき
+                                    if(!req.cookies.access){
+                                        //ユーザーエージェントがスマートフォンでなければPCサイトを表示
+                                        if(ua.indexOf('android') == -1 && ua.indexOf('iphone') == -1 && ua.indexOf('ipod') == -1){
+                                            res.redirect('/pc');
+                                        }
+                                        //それ以外はクッキーにmobileを記録
+                                        else{
+                                            //有効期限作成
+                                            date = new Date();
+                                            date.setTime(date.getTime()+(30 * 24 * 60 * 60 * 1000)); //30日×24時間×60分×60秒×1000ミリ秒
+
+                                            res.cookie('access', 'mobile', {expires: date});
+                                            res.render('mobile');
+                                        }
+                                    }
+                                    //クッキーがpcのときPCサイトを表示
+                                    else if(req.cookies.access == 'pc'){
+                                        res.redirect('/pc');
+                                    }
+                                    //クッキーがmobileのときスマホサイトを表示
+                                    else{
+                                        res.render('mobile');
+                                    }
+                                };

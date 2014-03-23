@@ -15,6 +15,37 @@ block content
                         i.glyphicon.glyphicon-book
                         | サーバーサイドでUAを取得してサイトを切り替える
                     .panel-body
+                        p /views/pc.jade
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        title PCサイト
+                                    body
+                                        h1 PCサイト
+                        p /views/mobile.jade
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        meta(name='viewport',content='width=device-width')
+                                        link(rel='stylesheet', href='http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css')
+                                        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                        script(src='http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js')
+                                        title スマホサイト
+                                    body
+                                        #index(data-role='page')
+                                            div(data-role='header')
+                                                h1 ヘッダー
+                                            div(data-role='content')
+                                                h1 スマホサイト
+                                            div(data-role='footer', data-position='fixed')
+                                                h1 フッター
                         p app.js
                         pre(class='prettyprint linenums:1')
                             :code
@@ -57,36 +88,6 @@ block content
                                 http.createServer(app).listen(app.get('port'), function(){
                                   console.log('Express server listening on port ' + app.get('port'));
                                 });
-                        p /views/pc.jade
-                        pre(class='prettyprint linenums:1')
-                            :code
-                                doctype
-                                html(lang='ja-JP')
-                                    head
-                                        meta(charset='UTF-8')
-                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-                                        title PCサイト
-                                    body
-                                        h1 PCサイト
-                        p /views/mobile.jade
-                        pre(class='prettyprint linenums:1')
-                            :code
-                                doctype
-                                html(lang='ja-JP')
-                                    head
-                                        meta(charset='UTF-8')
-                                        link(rel='stylesheet', href='http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css')
-                                        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
-                                        script(src='http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js')
-                                        title スマホサイト
-                                    body
-                                        #index(data-role='page')
-                                            div(data-role='header')
-                                                h1 ヘッダー
-                                            div(data-role='content')
-                                                h1 スマホサイト
-                                            div(data-role='footer', data-position='fixed')
-                                                h1 フッター
                         p /routes/change.js
                         pre(class='prettyprint linenums:1')
                             :code

@@ -1,0 +1,95 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        |  Web Storageの使い方
+                    .panel-body
+                        p Webアプリケーションのデータを保存したい場合、今まではCookieを利用したり、サーバー側でセッションを利用したりしましたが、 Web Storageを使うことで、簡単に大容量で安全に情報を保存できるように設計されています。
+                        p Web Storageには2種類のストレージがあり、1つはLocal Storageで、ブラウザ側でデータが保存され、、localStorageオブジェクトの、プロパティやメソッドでアクセスできます。Local Storageは、セキュリティ上の理由によって削除されるか、明示的に削除しない限りデータが保持されるため、ブラウザのウィンドウを閉じても、再度立ち上げるとデータにアクセスすることができます。もう1つはSession Storageで、一連のページのやりとりの間データが保持され、sessionStorageオブジェクトのプロパティやメソッドでアクセスできます。ブラウザを閉じるとSession Storageのデータは破棄されます。
+                        p Local StorageもSession StorageもWebサイトごとに割り当てられるため、同じサイト内ではデータを共有できますが、他のサイトからデータを参照することはできません。
+                        p
+                            a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/DOM/Storage', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | 参考
+                        h3 Local Storage
+                        p コンソールからLocal Storageを扱ってみましょう。データはChrome Developer ToolsのResourcesタブのLocal Storageから確認できます。
+                        h4 Local Storageに格納する
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                //メソッドで格納する
+                                localStorage.setItem('MYDATA','hoge');
+
+                                //オブジェクトに代入する
+                                localStorage.MYDATA = 'hoge';
+                                localStorage['MYDATA'] = 'hoge';
+
+                        h4 Local Storageからデータをを取得する
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                //メソッドで取得する
+                                var data = localStorage.getItem('MYDATA');
+
+                                //オブジェクトで取得する
+                                var data = localStorage.MYDATA;
+                                var data = localStorage['MYDATA'];
+
+                        h4 Local Storageからデータを削除する
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                //メソッドで削除する
+                                localStorage.removeItem('MYDATA');
+
+                                //delete演算子で削除する
+                                delete localStorage.MYDATA;
+                                delete localStorage['MYDATA'];
+
+                        h4 Local Storageに格納されたデータ数を取得する
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                localStorage.length
+
+                        h4 Local Storageに保存されているデータをすべて削除する
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                localStorage.clear();
+                        hr
+                        h3 Session Storage
+                        p コンソールからSession Storageを扱ってみましょう。データはChrome Developer ToolsのResourcesタブのSession Storageから確認できます。
+                        h4 Session Storageに格納する
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                //メソッドで格納する
+                                sessionStorage.setItem('MYDATA','hoge');
+
+                                //オブジェクトに格納する
+                                sessionStorage.MYDATA = 'hoge';
+                                sessionStorage['MYDATA'] = 'hoge';
+                        h4 Session Storageからデータをを取得する
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                //メソッドで取得する
+                                var data = sessionStorage.getItem('MYDATA');
+
+                                //オブジェクトで取得する
+                                var data = sessionStorage.MYDATA;
+                                var data = sessionStorage['MYDATA'];
+
+                        h4 Session Storageに格納されたデータ数を取得する
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                sessionStorage.length
+                        h4 Session Storageに保存されているデータをすべて削除する
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                sessionStorage.clear();

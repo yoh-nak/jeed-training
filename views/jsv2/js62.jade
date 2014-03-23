@@ -13,15 +13,24 @@ block content
                 .panel.panel-primary
                     .panel-heading
                         i.glyphicon.glyphicon-book
-                        | サーバーサイドでCookieを扱う
+                        |  Node.jsを使ってテンプレートを切り替える
                     .panel-body
-                        h4 Cookieを有効にする
-                        p app.jsに以下のコードを追加します。
-                        pre.
-                            app.use(express.cookieParser());
-                        p 暗号化キーを追加するとcookieを暗号化することができます。キーは任意の文字列を入力します。
-                        pre.
-                            app.use(express.cookieParser('your secret here'));
+                        p /views/pc.jade
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                extends layout
+
+                                block content
+                                  h1= title
+                                  p Welcome to #{title}
+                        p /views/mobile.jade
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                extends layout
+
+                                block content
+                                  h1= title
+                                  p Welcome to #{title}
                         p app.js
                         pre(class='prettyprint linenums:1')
                             :code
@@ -46,8 +55,6 @@ block content
                                 app.use(express.json());
                                 app.use(express.urlencoded());
                                 app.use(express.methodOverride());
-                                <mark>app.use(express.cookieParser('your secret here'));</mark>
-                                app.use(express.session());
                                 app.use(app.router);
                                 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
                                 app.use(express.static(path.join(__dirname, 'public')));
@@ -63,28 +70,6 @@ block content
                                 http.createServer(app).listen(app.get('port'), function(){
                                   console.log('Express server listening on port ' + app.get('port'));
                                 });
-                        p expressのスケルトンコードを生成する際に、オプション「-s」をつけます。セッションを有効
-                        pre.
-                            express myapp -s
-                        p stylusとセットにする場合は以下のようにまとめて指定できます。
-                        pre.
-                            express myapp -cs stylus
-                        p するとapp.jsに自動的に以下のコードが追加されます。
-                        pre.
-                            app.use(express.cookieParser('your secret here'));
-                        hr
-                        h4 Cookieの設定
-                        pre.
-                            res.cookie('キー', '値');
-                        p 有効期限をつける
-                        pre.
-                            res.cookie('キー', '値', { expires: タイムスタンプ});
-                        h4 Cookieの取得
-                        pre.
-                            console.log(req.cookies.キー);
-                        h4 Cookieの削除
-                        pre.
-                            res.clearCookie('キー');
                         p /routes/index.js
                         pre(class='prettyprint linenums:1')
                             :code
@@ -93,18 +78,17 @@ block content
                                  */
 
                                 exports.index = function(req, res){
-                                    //有効期限作成
-                                    var date = new Date();
-                                    date.setTime(date.getTime()+(3 * 24 * 60 * 60 * 1000)); //3日×24時間×60分×60秒×1000ミリ秒
 
-                                    //Cookieの設定
-                                    res.cookie('キー', encodeURIComponent('値'), {expires: date});
+                                    //ユーザーエージェント取得
+                                    var ua = req.headers['user-agent'].toLowerCase();
 
-                                    //Cookieの取得
-                                    console.log(decodeURIComponent(req.cookies.キー));
-
-                                    //Cookieの削除
-                                    //res.clearCookie('キー');
-
-                                    res.render('index', { title: 'Express' });
+                                    //テンプレート切り替え
+                                    if(ua.indexOf('android') != -1 || ua.indexOf('iphone') != -1 || ua.indexOf('ipod') != -1){
+                                        //スマホサイト用テンプレート
+                                        res.render('mobile', { title: 'スマホサイト' });
+                                    }
+                                    else{
+                                        //PC用テンプレート
+                                        res.render('pc', { title: 'PCサイト' });
+                                    }
                                 };

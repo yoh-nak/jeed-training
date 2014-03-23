@@ -16,15 +16,32 @@ block content
                         |  Web Storageの使い方
                     .panel-body
                         p Webアプリケーションのデータを保存したい場合、今まではCookieを利用したり、サーバー側でセッションを利用したりしましたが、 Web Storageを使うことで、簡単に大容量で安全に情報を保存できるように設計されています。
-                        p Web Storageには2種類のストレージがあり、1つはLocal Storageで、ブラウザ側でデータが保存され、、localStorageオブジェクトの、プロパティやメソッドでアクセスできます。Local Storageは、セキュリティ上の理由によって削除されるか、明示的に削除しない限りデータが保持されるため、ブラウザのウィンドウを閉じても、再度立ち上げるとデータにアクセスすることができます。もう1つはSession Storageで、一連のページのやりとりの間データが保持され、sessionStorageオブジェクトのプロパティやメソッドでアクセスできます。ブラウザを閉じるとSession Storageのデータは破棄されます。
-                        p Local StorageもSession StorageもWebサイトごとに割り当てられるため、同じサイト内ではデータを共有できますが、他のサイトからデータを参照することはできません。
+                        p Web Storageには2種類のストレージがあり、1つはLocal Storageで、ブラウザにデータが保存され、localStorageオブジェクトの、プロパティやメソッドでアクセスできます。Local Storageは、セキュリティ上の理由によって削除されるか、明示的に削除しない限りデータが保持されるため、ブラウザのウィンドウを閉じても、再度立ち上げるとデータにアクセスすることができます。
+                        p また、同一オリジンであれば、ブラウザの別タブでデータを共有することができます。
+                        p もう1つはSession Storageで、一連のページのやりとりの間データが保持され、sessionStorageオブジェクトのプロパティやメソッドでアクセスできます。タブを閉じるとSession Storageのデータは破棄されます。
+                        p また、同一オリジンであっても、ブラウザの別タブでデータを共有することはできません。
                         p
                             a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/DOM/Storage', target='_blank')
                                 i.glyphicon.glyphicon-info-sign
-                                | 参考
-                        h3 Local Storage
+                                | 参考：MDN
+                        hr
+                        h4 Web Storageの対応状況を調べる
+                        p
+                            a.btn.btn-default(href='http://caniuse.com/#search=web%20storage', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | 参考：Can I use...
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                if(typeof(Storage) === 'undefined'){
+                                    console.log('Web Storageに対応していません')
+                                }
+                                else{
+                                    console.log('Web Storageに対応しています')
+                                }
+                        hr
+                        h4 Local Storage
                         p コンソールからLocal Storageを扱ってみましょう。データはChrome Developer ToolsのResourcesタブのLocal Storageから確認できます。
-                        h4 Local Storageに格納する
+                        p: u Local Storageに格納する
                         pre(class='prettyprint linenums:1')
                             :code
                                 //メソッドで格納する
@@ -34,7 +51,7 @@ block content
                                 localStorage.MYDATA = 'hoge';
                                 localStorage['MYDATA'] = 'hoge';
 
-                        h4 Local Storageからデータをを取得する
+                        p: u Local Storageからデータをを取得する
                         pre(class='prettyprint linenums:1')
                             :code
                                 //メソッドで取得する
@@ -44,7 +61,7 @@ block content
                                 var data = localStorage.MYDATA;
                                 var data = localStorage['MYDATA'];
 
-                        h4 Local Storageからデータを削除する
+                        p: u Local Storageからデータを削除する
                         pre(class='prettyprint linenums:1')
                             :code
                                 //メソッドで削除する
@@ -54,19 +71,55 @@ block content
                                 delete localStorage.MYDATA;
                                 delete localStorage['MYDATA'];
 
-                        h4 Local Storageに格納されたデータ数を取得する
+                        p: u Local Storageに格納されたデータ数を取得する
                         pre(class='prettyprint linenums:1')
                             :code
                                 localStorage.length
 
-                        h4 Local Storageに保存されているデータをすべて削除する
+                        p: u Local Storageに保存されているデータをすべて削除する
                         pre(class='prettyprint linenums:1')
                             :code
                                 localStorage.clear();
+                        p: u Local Storageに格納したデータをすべて取得する
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                for(var i = 0; i < localStorage.length; i++){
+                                    console.log(localStorage.key(i) + ': ' + localStorage.getItem(localStorage.key(i)));
+                                }
+                        p: u Local Storageの変更をイベントで取得する
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                window.addEventListener('storage',function(e){
+                                    //変更があったデータのキーを取得
+                                    console.log(e.key);
+                                    //変更があったキーの変更前の値を取得
+                                    console.log(e.oldValue);
+                                    //変更があったキーの変更後の値を取得
+                                    console.log(e.newValue);
+                                    //変更があったキーのデータをオブジェクトで取得
+                                    console.log(e.storageArea);
+                                    //変更があったオリジンを取得
+                                    console.log(e.url);
+                                });
+                        p jQueryを使う場合はイベントオブジェクトの子オブジェクトにoriginalEventが必要です。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(window).on('storage',function(e){
+                                    //変更があったデータのキーを取得
+                                    console.log(e.<mark>originalEvent</mark>.key);
+                                    //変更があったキーの変更前の値を取得
+                                    console.log(e.<mark>originalEvent</mark>.oldValue);
+                                    //変更があったキーの変更後の値を取得
+                                    console.log(e.<mark>originalEvent</mark>.newValue);
+                                    //変更があったキーのデータをオブジェクトで取得
+                                    console.log(e.<mark>originalEvent</mark>.storageArea);
+                                    //変更があったオリジンを取得
+                                    console.log(e.<mark>originalEvent</mark>.url);
+                                });
                         hr
-                        h3 Session Storage
+                        h4 Session Storage
                         p コンソールからSession Storageを扱ってみましょう。データはChrome Developer ToolsのResourcesタブのSession Storageから確認できます。
-                        h4 Session Storageに格納する
+                        p: u Session Storageに格納する
                         pre(class='prettyprint linenums:1')
                             :code
                                 //メソッドで格納する
@@ -75,7 +128,7 @@ block content
                                 //オブジェクトに格納する
                                 sessionStorage.MYDATA = 'hoge';
                                 sessionStorage['MYDATA'] = 'hoge';
-                        h4 Session Storageからデータをを取得する
+                        p: u Session Storageからデータをを取得する
                         pre(class='prettyprint linenums:1')
                             :code
                                 //メソッドで取得する
@@ -85,11 +138,17 @@ block content
                                 var data = sessionStorage.MYDATA;
                                 var data = sessionStorage['MYDATA'];
 
-                        h4 Session Storageに格納されたデータ数を取得する
+                        p: u Session Storageに格納されたデータ数を取得する
                         pre(class='prettyprint linenums:1')
                             :code
                                 sessionStorage.length
-                        h4 Session Storageに保存されているデータをすべて削除する
+                        p: u Session Storageに保存されているデータをすべて削除する
                         pre(class='prettyprint linenums:1')
                             :code
                                 sessionStorage.clear();
+                        p: u Session Storageに格納したデータをすべて取得する
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                for(var i = 0; i < sessionStorage.length; i++){
+                                    console.log(sessionStorage.key(i) + ': ' + sessionStorage.getItem(sessionStorage.key(i)));
+                                }

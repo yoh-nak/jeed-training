@@ -1,0 +1,63 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | テンプレートでlistviewを繰り返す
+                    .panel-body
+                        p index.jade
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja')
+                                    head
+                                        meta(charset='UTF-8')
+                                        meta(content='width=device-width, user-scalable=no', name='viewport')
+                                        link(href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css', rel='stylesheet')
+                                        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                        script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+                                        title 繰り返し構文
+                                    body
+                                        #index(data-role='page')
+                                            div(data-role='header')
+                                                h1 繰り返し構文
+                                            div(data-role='content')
+                                                ul(data-inset='true', data-role='listview')
+                                                    <mark>- for(var i = 0; i < 10; i++){
+                                                    li: a ボタン
+                                                        span.ui-li-count= i
+                                                    - }</mark>
+                                            div(data-position='fixed', data-role='footer')
+                                                h1 フッター
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja')
+                                    head
+                                        meta(charset='UTF-8')
+                                        meta(content='width=device-width, user-scalable=no', name='viewport')
+                                        link(href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css', rel='stylesheet')
+                                        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                        script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+                                        title 繰り返し構文
+                                    body
+                                        #index(data-role='page')
+                                            div(data-role='header')
+                                                h1 繰り返し構文
+                                            div(data-role='content')
+                                                ul(data-inset='true', data-role='listview')
+                                                    <mark>-for(var i = 0; i < 10; i++)
+                                                        li: a ボタン
+                                                            span.ui-li-count= i</mark>
+                                            div(data-position='fixed', data-role='footer')
+                                                h1 フッター

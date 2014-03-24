@@ -1,0 +1,133 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | サーバーサイドで信号
+                    .panel-body
+                        p app.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /**
+                                 * Module dependencies.
+                                 */
+
+                                var express = require('express');
+                                var routes = require('./routes');
+                                var user = require('./routes/user');
+                                var http = require('http');
+                                var path = require('path');
+
+                                var app = express();
+
+                                // all environments
+                                app.set('port', process.env.PORT || 3000);
+                                app.set('views', path.join(__dirname, 'views'));
+                                app.set('view engine', 'jade');
+                                app.use(express.favicon());
+                                app.use(express.logger('dev'));
+                                app.use(express.json());
+                                app.use(express.urlencoded());
+                                app.use(express.methodOverride());
+                                app.use(app.router);
+                                app.use(require('stylus').middleware(path.join(__dirname, 'public')));
+                                app.use(express.static(path.join(__dirname, 'public')));
+
+                                // development only
+                                if ('development' == app.get('env')) {
+                                  app.use(express.errorHandler());
+                                }
+
+                                app.get('/', routes.index);
+                                <mark>app.post('/red', routes.index);
+                                app.get('/red', routes.index);
+                                app.post('/yellow', routes.index);
+                                app.get('/yellow', routes.index);
+                                app.post('/blue', routes.index);
+                                app.get('/blue', routes.index);</mark>
+                                app.get('/users', user.list);
+
+                                http.createServer(app).listen(app.get('port'), function(){
+                                  console.log('Express server listening on port ' + app.get('port'));
+                                });
+
+                        p libs/signal.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                exports.fSignal = function(<mark>arg</mark>){
+
+                                    switch(<mark>arg</mark>){
+                                        case '赤':
+                                            return '止まれ';
+                                            break;
+                                        case '黃':
+                                            return '注意';
+                                            break;
+                                        case '青':
+                                            return '進め';
+                                            break;
+                                        default:
+                                            return 'エラー';
+                                    }
+
+                                };
+                        p routes/index.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /*
+                                 * GET home page.
+                                 */
+
+                                exports.index = function(req, res){
+
+                                    var signal = require('../libs/signal');
+
+                                    var result = signal.fSignal(<mark>req.body.signal</mark>);
+
+                                    if(req.method == 'POST'){
+                                        res.render('index', {
+                                            result: result
+                                        });
+                                    }
+                                    else{
+                                        res.render('index', {
+                                            result: 'ボタンを押してください'
+                                        });
+                                    }
+                                };
+                        p views/index.jade
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja')
+                                    head
+                                        meta(charset='UTF-8')
+                                        meta(content='width=device-width, user-scalable=no', name='viewport')
+                                        link(href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css', rel='stylesheet')
+                                        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                        script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+                                        title switch文
+                                    body
+                                        #index(data-role='page')
+                                            div(data-role='header')
+                                                h1 switch文
+                                            div(data-role='content')
+                                                form(method='POST')
+                                                    fieldset(data-role='controlgroup', data-type='horizontal')
+                                                        legend 信号：
+                                                        <mark>input(name='signal', type='submit', value='赤', formaction='/red')</mark>
+                                                        <mark>input(name='signal', type='submit', value='黃', formaction='/yellow')</mark>
+                                                        <mark>input(name='signal', type='submit', value='青', formaction='/blue')</mark>
+                                                p= result ? result : ''
+                                            div(data-position='fixed', data-role='footer')
+                                                h1 フッター

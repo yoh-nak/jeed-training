@@ -1,0 +1,86 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-bookmark
+                        | 課題
+                    .panel-body
+                        p 繰り返し構文を使って、listviewのリストを10個表示し、カウントバブルを連番にしてみましょう。
+                        p
+                            a.btn.btn-default(href='../demo/js/excercise15/index.html', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            button.btn.btn-danger(type='button', data-toggle='collapse', data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | 解答例
+                        #demo.collapse.out
+                            pre(class='prettyprint linenums:1')
+                                :code
+                                    doctype
+                                    html(lang='ja')
+                                        head
+                                            meta(charset='UTF-8')
+                                            meta(content='width=device-width, user-scalable=no', name='viewport')
+                                            link(href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css', rel='stylesheet')
+                                            script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                            script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+                                            title 繰り返し構文
+                                            script
+                                                :js
+                                                    $(document).on('pagebeforecreate','#index',function(){
+                                                        for(var i = 0; i < 10; i++){
+                                                            var html = '<li><a>ボタン <span class="ui-li-count">' + i + '</span></a></li>'
+                                                            $('[data-role="listview"]').append(html);
+                                                        }
+                                                    });
+                                        body
+                                            #index(data-role='page')
+                                                div(data-role='header')
+                                                    h1 繰り返し構文
+                                                div(data-role='content')
+                                                    ul(data-inset='true', data-role='listview')
+                                                div(data-position='fixed', data-role='footer')
+                                                    h1 フッター
+                            p jQuery Mobileのページイベントにpageshowを使った場合は、listviewを指定したul要素に対して、listview('refresh')メソッドでウィジェットを更新する必要があります。
+                            p
+                                a.btn.btn-default(href='demo/js/excercise16/index.html', target='_blank')
+                                    i.glyphicon.glyphicon-play
+                                    | デモ
+                            pre(class='prettyprint linenums:1')
+                                :code
+                                    doctype
+                                    html(lang='ja')
+                                        head
+                                            meta(charset='UTF-8')
+                                            meta(content='width=device-width, user-scalable=no', name='viewport')
+                                            link(href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css', rel='stylesheet')
+                                            script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                            script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+                                            title 繰り返し構文
+                                            script
+                                                :js
+                                                    $(document).on('pageshow','#index',function(){
+                                                        for(var i = 0; i < 10; i++){
+                                                            var html = '<li><a>ボタン <span class="ui-li-count">' + i + '</span></a></li>'
+                                                            $('[data-role="listview"]').append(html);
+                                                        }
+                                                        <mark>$('[data-role="listview"]').listview('refresh');</mark>
+                                                    });
+                                        body
+                                            #index(data-role='page')
+                                                div(data-role='header')
+                                                    h1 繰り返し構文
+                                                div(data-role='content')
+                                                    ul(data-inset='true', data-role='listview')
+                                                div(data-position='fixed', data-role='footer')
+                                                    h1 フッター

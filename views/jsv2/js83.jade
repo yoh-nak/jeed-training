@@ -13,7 +13,7 @@ block content
                 .panel.panel-primary
                     .panel-heading
                         i.glyphicon.glyphicon-book
-                        | サーバーサイドで外部jsファイルを読み込む
+                        | サーバーサイドで外部jsonファイルを読み込む
                     .panel-body
                         p app.js
                         pre(class='prettyprint linenums:1')
@@ -54,18 +54,22 @@ block content
                                 http.createServer(app).listen(app.get('port'), function(){
                                   console.log('Express server listening on port ' + app.get('port'));
                                 });
-                        p <mark>※ JavaScriptのオブジェクトリテラルは値に処理を格納することができます。</mark>
-                        p libs/config.js
+                        p <mark>※ JSONは値にJavaScriptの処理を格納することはできません。</mark>
+                        p <mark>※ JSONはキー、値にダブルクオートを使う必要があり、シングルクオートを使うことはできません。</mark>
+                        p <mark>※ JSONは、値に数値を指定する場合のみ、ダブルクオートは不要です。</mark>
+                        p libs/config.json
                         pre(class='prettyprint linenums:1')
                             :code
-                                exports.title = 'WEB・スマホ・アプリ開発科'
-                                exports.copyright = 'なかのようすけ'
-                                exports.date = (new Date).getFullYear();
-
-                                exports.obj = {
-                                    title: 'WEB・スマホ・アプリ開発科',
-                                    copyright: 'なかのようすけ',
-                                    date: (new Date).getFullYear()
+                                {
+                                    "title": "WEB・スマホ・アプリ開発科",
+                                    "copyright": "なかのようすけ",
+                                    "date": 2014,
+                                    
+                                    "obj": {
+                                        "title": "WEB・スマホ・アプリ開発科",
+                                        "copyright": "なかのようすけ",
+                                        "date": 2014
+                                    }
                                 }
                         p routes/index.js
                         pre(class='prettyprint linenums:1')

@@ -1,0 +1,114 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | サーバーサイドで外部jsファイルを読み込む
+                    .panel-body
+                        p app.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /**
+                                 * Module dependencies.
+                                 */
+
+                                var express = require('express');
+                                var routes = require('./routes');
+                                var user = require('./routes/user');
+                                var http = require('http');
+                                var path = require('path');
+
+                                var app = express();
+
+                                // all environments
+                                app.set('port', process.env.PORT || 3000);
+                                app.set('views', path.join(__dirname, 'views'));
+                                app.set('view engine', 'jade');
+                                app.use(express.favicon());
+                                app.use(express.logger('dev'));
+                                app.use(express.json());
+                                app.use(express.urlencoded());
+                                app.use(express.methodOverride());
+                                app.use(app.router);
+                                app.use(require('stylus').middleware(path.join(__dirname, 'public')));
+                                app.use(express.static(path.join(__dirname, 'public')));
+
+                                // development only
+                                if ('development' == app.get('env')) {
+                                  app.use(express.errorHandler());
+                                }
+
+                                app.get('/', routes.index);
+                                app.get('/users', user.list);
+
+                                http.createServer(app).listen(app.get('port'), function(){
+                                  console.log('Express server listening on port ' + app.get('port'));
+                                });
+                        p routes/config.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                exports.title = 'WEB・スマホ・アプリ開発科'
+                                exports.copyright = 'なかのようすけ'
+                                exports.date = (new Date).getFullYear();
+
+                                exports.obj = {
+                                    title: 'WEB・スマホ・アプリ開発科',
+                                    copyright: 'なかのようすけ',
+                                    date: (new Date).getFullYear()
+                                }
+                        p routes/config.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /*
+                                 * GET home page.
+                                 */
+
+                                exports.index = function(req, res){
+
+                                    <mark>var config = require('../libs/config');</mark>
+                                    
+                                    var title = <mark>config</mark>.title;
+                                    var copyright = <mark>config</mark>.copyright;
+                                    var date = <mark>config</mark>.date;
+                                    
+                                    // var title = config.obj.title;
+                                    // var copyright = config.obj.copyright;
+                                    // var date = config.obj.date;
+
+                                    res.render('index', {
+                                        title: title,
+                                        copyright: copyright,
+                                        date: date
+                                    });
+                                };
+                        p views/index.jade
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja-JP')
+                                    head
+                                        meta(charset='UTF-8')
+                                        meta(name='viewport',content='width=device-width')
+                                        link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+                                        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                        script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+                                    script
+                                    <mark>title= title</mark>
+                                    body
+                                        #index(data-role='page')
+                                            div(data-role='header')
+                                                <mark>h1= title</mark>
+                                            div(data-role='content')
+                                                <mark>h1 西暦： #{date}年</mark>
+                                            div(data-role='footer', data-position='fixed')
+                                                <mark>h1 copyright &copy; #{copyright}</mark>

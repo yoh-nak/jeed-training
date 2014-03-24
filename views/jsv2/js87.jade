@@ -1,0 +1,92 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | テンプレートで9×9一覧表
+                    .panel-body
+                        p index.jade
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja')
+                                    head
+                                        meta(charset='UTF-8')
+                                        meta(content='width=device-width, user-scalable=no', name='viewport')
+                                        link(href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css', rel='stylesheet')
+                                        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                        script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+                                        title 9×9一覧表
+                                        style
+                                            :stylus
+                                                [data-role="content"] table
+                                                    border-collapse collapse
+                                                [data-role="content"] table td
+                                                    padding 5px
+                                                    box-sizing border-box
+                                                    width 40px
+                                                    height 40px
+                                                    text-align center
+                                                    border 1px solid black
+                                    body
+                                        #index(data-role='page')
+                                            div(data-role='header')
+                                                h1 9×9一覧表
+                                            div(data-role='content')
+                                                - var html = '';
+                                                - for(var i = 1; i <= 9; i++){
+                                                -     html += '<tr>';
+                                                -     for(var j = 1; j <= 9; j++){
+                                                -         html += '<td>' + (i * j) + '</td>'
+                                                -     }
+                                                -     html += '</tr>';
+                                                - }
+                                                table!= html
+                                            div(data-position='fixed', data-role='footer')
+                                                h1 フッター
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja')
+                                    head
+                                        meta(charset='UTF-8')
+                                        meta(content='width=device-width, user-scalable=no', name='viewport')
+                                        link(href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css', rel='stylesheet')
+                                        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                        script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+                                        title 9×9一覧表
+                                        style
+                                            :stylus
+                                                [data-role="content"] table
+                                                    border-collapse collapse
+                                                [data-role="content"] table td
+                                                    padding 5px
+                                                    box-sizing border-box
+                                                    width 40px
+                                                    height 40px
+                                                    text-align center
+                                                    border 1px solid black
+                                    body
+                                        #index(data-role='page')
+                                            div(data-role='header')
+                                                h1 9×9一覧表
+                                            div(data-role='content')
+                                                - var html = '';
+                                                - for(var i = 1; i <= 9; i++)
+                                                    - html += '<tr>';
+                                                    - for(var j = 1; j <= 9; j++)
+                                                        - html += '<td>' + (i * j) + '</td>'
+                                                    - html += '</tr>';
+                                                table!= html
+                                            div(data-position='fixed', data-role='footer')
+                                                h1 フッター

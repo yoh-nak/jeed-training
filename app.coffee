@@ -25,6 +25,7 @@ require("jade").filters.code = (block) ->
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
+        .replace(/#/g, "&#35;")
         .replace(/&lt;mark&gt;/g, "<mark>")
         .replace(/&lt;\/mark&gt;/g, "</mark>")
         .replace(/\\&lt;mark\\&gt;/g, "&lt;mark&gt;")

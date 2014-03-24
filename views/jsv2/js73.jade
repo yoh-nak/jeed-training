@@ -1,0 +1,168 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | 繰り返し構文
+                    .panel-body
+                        h4 while文
+                        p 小括弧内の条件式「(条件式)」を評価した結果がtrueである限り、繰り返し処理を実行し続けます。while文中の処理で、条件式の評価がfalseになるようにしなければ、無限ループが発生し、ブラウザもしくはパソコンがフリーズするので注意しましょう。
+                        pre.
+                            while(繰り返し条件の式){
+                                繰り返す処理
+                            }
+                        p 以下の処理は、変数aが10より小さい限り処理を続けることになります。while文中の繰り返し処理で変数aを加算し続け、変数aの値が10以上になると、while文を抜けます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var a = 3;
+                                while(a < 10){
+                                     a = a + 3;
+                                }
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                a = 3
+                                a = a + 3  while a < 10
+                        hr
+                        h4 do while文
+                        pre.
+                            do{
+                                繰り返す処理
+                            }while(繰り返し条件の式);
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var a = 10;
+                                do{
+                                     a = a + 3;
+                                }while(a < 10);
+                                console.log(a);
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                a = 10
+                                loop
+                                  a = a + 3
+                                  break unless a < 10
+                                console.log a
+                        hr
+                        h4 for文
+                        pre.
+                            for(初期化の式;繰り返し条件の式;加算の式){
+                                繰り返す処理
+                            }
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var a = 0;
+                                var i = 1;
+
+                                for(i; i <= 10; i++ ){
+                                     a = a + i;
+                                }
+                                console.log(a);
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                a = 0
+                                i = 1
+                                while i <= 10
+                                  a = a + i
+                                  i++
+                                console.log a
+                        p 繰り返し構文で使われる、カウントするための変数は、一般的には「i」が使われることが多いです。for文が入れ子になった場合、変数iを再度使ってしまうと、誤作動してしまうので、iからアルファベット順にi, j, k, ...という変数名が使われることが多いです。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var a = 0;
+                                for(var i = 1; i <= 10; i++){
+                                     a = a + i;
+                                }
+                                console.log(a);
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                a = 0
+                                i = 1
+
+                                while i <= 10
+                                  a = a + i
+                                  i++
+                                console.log a
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                for(var i = 0; i < 3; i++){
+                                  for(var j = 0; j < 3; j++){
+                                    console.log(1 + j);
+                                  }
+                                }
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                i = 0
+
+                                while i < 3
+                                  j = 0
+
+                                  while j < 3
+                                    console.log 1 + j
+                                    j++
+                                  i++
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                for(var i = 1, j = 2; i < 3; i++, j=j+2){
+                                  console.log(i + j);
+                                }
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                i = 1
+                                j = 2
+
+                                while i < 3
+                                  console.log i + j
+                                  i++
+                                  j = j + 2
+                        hr
+                        h4 break
+                        p 繰り返し構文の中でbreakを実行すると、無理やり繰り返し処理を抜けることができます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var a = 0;
+                                for(var i = 0; i < 20; i++){
+                                     if(i > 10) break;
+                                     a = a + i;
+                                }
+                                console.log(a);
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                a = 0
+                                i = 0
+
+                                while i < 20
+                                  break  if i > 10
+                                  a = a + i
+                                  i++
+                                console.log a
+                        hr
+                        h4 continue
+                        p 繰り返し構文の中でcontinueを実行すると、繰り返し処理内のcontinue以下の処理をせず、次の繰り返し処理に進みます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var a = 0;
+                                for(var i = 0; i < 10; i++){
+                                     if(i % 2 == 0) continue;
+                                     a = a + i;
+                                }
+                                console.log(a);
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                a = 0
+                                i = 0
+
+                                while i < 10
+                                  continue  if i % 2 is 0
+                                  a = a + i
+                                  i++
+                                console.log a

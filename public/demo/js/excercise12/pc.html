@@ -1,44 +1,20 @@
-<!DOCTYPE HTML>
-<html lang="ja-JP">
-<head>
-<meta charset="UTF-8">
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="jquery.cookie.js"></script>
-<script>
-//DOMが構築される前
-
-//クッキーないとき
-if(!$.cookie("access")){
-
-    //ユーザーエージェントがスマートフォンならスマートフォンサイトを表示
-    if(navigator.userAgent.indexOf("Android") != -1 || navigator.userAgent.indexOf("iPhone") != -1 || navigator.userAgent.indexOf("iPod") != -1){
-        window.location.href="mobile.html";
+<!DOCTYPE html><html lang="ja-JP"><head><meta charset="UTF-8"><script src="http://code.jquery.com/jquery-1.11.0.min.js"></script><script src="jquery.cookie.js"></script><title>PCサイト</title><script>if(!$.cookie('access')){
+    if(navigator.userAgent.indexOf('Android') != -1 || navigator.userAgent.indexOf('iPhone') != -1 || navigator.userAgent.indexOf('iPod') != -1){
+        window.location.href='mobile.html';
     }
-    //それ以外はクッキーにpcを記録
     else{
-        $.cookie("access","pc",{expires:30});
+        $.cookie('access','pc',{expires:30});
     }
 }
- 
-//クッキーがmobileのときスマートフォンサイトサイトを表示
-else if($.cookie("access") == "mobile"){
-    window.location.href="mobile.html";
+else if($.cookie('access') == 'mobile'){
+    window.location.href='mobile.html';
 }
 
-//DOMが構築された後
 $(function(){
-    //ボタンが押されたとき
-    $("a").click(function(){
-        $.cookie("access","mobile",{expires:30});
-        window.location.href="mobile.html";
+    $('a').click(function(){
+        //alert();
+        $.cookie('access','mobile',{expires:30});
+        location.href = 'mobile.html';
+        return false;
     });
-});
-</script>
-<title>PCサイト</title>
-</head>
-<body>
-<h1>PCサイト</h1>
-<p><a href="#">スマートフォンサイトへ</a></p>
-</div>
-</body>
-</html>
+});</script></head><body><h1>PCサイト</h1><p><a href="#">スマートフォンサイトへ</a></p></body></html>

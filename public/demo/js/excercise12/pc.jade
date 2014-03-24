@@ -1,0 +1,33 @@
+doctype
+html(lang='ja-JP')
+    head
+        meta(charset='UTF-8')
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src='jquery.cookie.js')
+        title PCサイト
+        script
+            :js
+                if(!$.cookie('access')){
+                    if(navigator.userAgent.indexOf('Android') != -1 || navigator.userAgent.indexOf('iPhone') != -1 || navigator.userAgent.indexOf('iPod') != -1){
+                        window.location.href='mobile.html';
+                    }
+                    else{
+                        $.cookie('access','pc',{expires:30});
+                    }
+                }
+                else if($.cookie('access') == 'mobile'){
+                    window.location.href='mobile.html';
+                }
+
+                $(function(){
+                    $('a').click(function(){
+                        //alert();
+                        $.cookie('access','mobile',{expires:30});
+                        location.href = 'mobile.html';
+                        return false;
+                    });
+                });
+    body
+        h1 PCサイト
+        p
+            a(href='#') スマートフォンサイトへ

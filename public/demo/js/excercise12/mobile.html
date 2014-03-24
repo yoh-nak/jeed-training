@@ -1,56 +1,20 @@
-<!DOCTYPE HTML>
-<html lang="ja-JP">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
-<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
-<script src="jquery.cookie.js"></script>
-<script>
-//jQuery Mobileのウィジェットが表示される前
-
-//クッキーがないときPCサイトを表示
-if(!$.cookie("access")){
-
-    //ユーザーエージェントがスマートフォンでなければPCサイトを表示
-    if(navigator.userAgent.indexOf("Android") == -1 && navigator.userAgent.indexOf("iPhone") == -1 && navigator.userAgent.indexOf("iPod") == -1){
-        window.location.href="pc.html";
+<!DOCTYPE html><html lang="ja-JP"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css"><script src="http://code.jquery.com/jquery-1.9.1.min.js"></script><script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script><script src="jquery.cookie.js"></script><title>スマホサイト</title><script>if(!$.cookie('access')){
+    if(navigator.userAgent.indexOf('Android') == -1 && navigator.userAgent.indexOf('iPhone') == -1 && navigator.userAgent.indexOf('iPod') == -1){
+        window.location.href='pc.html';
     }
-    //それ以外はクッキーにmobileを記録
     else{
-        $.cookie("access","mobile",{expires:30});
+        $.cookie('access','mobile',{expires:30});
     }
 }
- 
-//クッキーがpcのときPCサイトを表示
-else if($.cookie("access") == "pc"){
-    window.location.href="pc.html";
+else if($.cookie('access') == 'pc'){
+    window.location.href='pc.html';
 }
 
-//jQuery Mobileのウィジェットが表示された後
 $(document).on('pageshow','#index',function(){
-    //ボタンが押されたとき
-    $("a").click(function(){
-        $.cookie("access","pc",{expires:30});
-        window.location.href="pc.html";
+    $('a').on('vclick',function(){
+        //alert();
+        $.cookie('access','pc',{expires:30});
+        location.href = 'pc.html';
+        return false;
     });
- 
-});
-</script>
-<title>スマートフォンサイト</title>
-</head>
-<body>
-    <div data-role="page" id="index">
-    <div data-role="header">
-    <h1>スマートフォンサイト</h1>
-    </div>
-    <div data-role="content">
-    <p><a data-role="button" href="#">PCサイトへ</a></p>
-    </div>
-    <div data-role="footer" data-position="fixed">
-        <h1>フッター</h1>
-    </div>
-    </div>
-</body>
-</html>
+});</script></head><body><div id="index" data-role="page"><div data-role="header"><h1>スマホサイト</h1></div><div data-role="content"><p><a href="#" data-role="button">PCサイトへ</a></p></div><div data-role="footer" data-position="fixed"><h1>フッター</h1></div></div></body></html>

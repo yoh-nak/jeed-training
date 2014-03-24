@@ -1,0 +1,41 @@
+doctype
+html(lang='ja-JP')
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport',content='width=device-width')
+        link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+        script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+        script(src='jquery.cookie.js')
+        title スマホサイト
+        script
+            :js
+                if(!$.cookie('access')){
+                    if(navigator.userAgent.indexOf('Android') == -1 && navigator.userAgent.indexOf('iPhone') == -1 && navigator.userAgent.indexOf('iPod') == -1){
+                        window.location.href='pc.html';
+                    }
+                    else{
+                        $.cookie('access','mobile',{expires:30});
+                    }
+                }
+                else if($.cookie('access') == 'pc'){
+                    window.location.href='pc.html';
+                }
+
+                $(document).on('pageshow','#index',function(){
+                    $('a').on('vclick',function(){
+                        //alert();
+                        $.cookie('access','pc',{expires:30});
+                        location.href = 'pc.html';
+                        return false;
+                    });
+                });
+    body
+        #index(data-role='page')
+            div(data-role='header')
+                h1 スマホサイト
+            div(data-role='content')
+                p
+                    a(href='#', data-role='button') PCサイトへ
+            div(data-role='footer', data-position='fixed')
+                h1 フッター

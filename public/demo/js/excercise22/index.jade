@@ -1,0 +1,43 @@
+doctype
+html(lang='ja')
+    head
+        meta(charset='UTF-8')
+        meta(content='width=device-width, user-scalable=no', name='viewport')
+        link(href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css', rel='stylesheet')
+        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+        script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+        title おみくじ
+        script
+            :js
+                $(document).on('pageshow','#index',function(){
+                    $('a').on('vclick',function(){
+                        switch(Math.floor(Math.random()*7)){
+                            case 0:
+                                $('p').text('大吉');
+                                break;
+                            case 1:
+                            case 2:
+                                $('p').text('中吉');
+                                break;
+                            case 3:
+                            case 4:
+                            case 5:
+                                $('p').text('吉');
+                                break;
+                            case 6:
+                                $('p').text('凶');
+                                break;
+                            default:
+                                $('p').text('エラー');
+                        }
+                    });
+                });
+    body
+        #index(data-role='page')
+            div(data-role='header')
+                h1 おみくじ
+            div(data-role='content')
+                a(data-role='button', href='#') おみくじをふる
+                p
+            div(data-position='fixed', data-role='footer')
+                h1 フッター

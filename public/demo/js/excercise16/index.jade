@@ -9,11 +9,12 @@ html(lang='ja')
         title 繰り返し構文
         script
             :js
-                $(document).on('pagebeforecreate','#index',function(){
+                $(document).on('pageshow','#index',function(){
                     for(var i = 0; i < 10; i++){
                         var html = '<li><a>ボタン <span class="ui-li-count">' + i + '</span></a></li>'
                         $('[data-role="listview"]').append(html);
                     }
+                    $('[data-role="listview"]').listview('refresh');
                 });
     body
         #index(data-role='page')

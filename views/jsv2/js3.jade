@@ -1,0 +1,225 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | オブジェクト
+                    .panel-body
+                        h4 空の連想配列（オブジェクト）の作成
+                        pre.
+                            var 変数 = {}; //= オブジェクトリテラル
+                            var 変数  = new Object(); //= オブジェクト
+                            var 変数 = new Object(要素の数); //= オブジェクト
+
+                        h4 連想配列（オブジェクト）に初期値を設定
+                        pre.
+                            var 変数 = {キー1: 値1, キー2: 値2, キー3: 値3, …};
+
+                            var 変数 = {
+                                キー1: 値1,
+                                キー2: 値2,
+                                キー3: 値3,
+                                …
+                            };
+
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var a = {"dragon":"りゅう", "sword":"つるぎ", "egg":"たまご"}
+
+                                var a = {
+                                    "dragon":"りゅう",
+                                    "sword":"つるぎ",
+                                    "egg":"たまご"
+                                }
+
+                        hr
+                        h4 連想配列（オブジェクト）の値を取得
+                        pre.
+                            変数 = 配列[キー];
+                            変数 = 配列.キー;
+
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var a = {"dragon":"りゅう", "sword":"つるぎ", "egg":"たまご"}
+                                console.log(a["dragon"]);
+                                console.log(a["sword"]);
+                                console.log(a["egg"]);
+
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var a = {"dragon":"りゅう", "sword":"つるぎ", "egg":"たまご"}
+                                console.log(a.dragon);
+                                console.log(a.sword);
+                                console.log(a.egg);
+
+                        h4 for in文
+                        pre.
+                            for(var 変数 in 配列／オブジェクト){
+                                オブジェクト[変数]で値を取り出す
+                            }
+
+                        p オブエクとをfor in文で取得すると以下のようになります。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var obj = {'国語': 98, '算数': 82, '理科': 70, '社会': 86, '英語': 53};
+                                var total = 0;
+                                var msg = '';
+
+                                //オブジェクトのデータを順番に取得します。
+                                for(var key in obj){
+                                    //keyにはobjオブジェクトのキーが入ります。
+                                    //obj[key]にはオブジェクトのキーに対する値が取得されます。
+                                    msg += key + ': ' + obj[key] + '\n';
+                                    total += obj[key];
+                                }
+                                msg += '合計: ' + total + '\n';
+                                msg += '平均: ' + (total/5);
+                                console.log(msg);
+
+                        p for in文はオブジェクトとキーをピリオド（.）で連結して表現できないので注意しましょう。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                for(var key in obj){
+                                  msg += key + obj.key + '\n';
+                                  total += obj.key;
+                                }
+
+                        p 配列はfor文で取得することができますが、for in文を使うと以下のようになります。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var test = [98, 82, 70, 86, 53];
+                                var subject = ['国語', '算数', '理科', '社会', '英語'];
+                                var total = 0;
+                                var msg = '';
+                                for(var i in test){
+                                    msg += subject[i] +  ': ' + test[i] + '\n';
+                                    total += test[i];
+                                }
+                                msg += '合計: ' + total + '\n';
+                                msg += '平均: ' + (total/5);
+                                console.log(msg);
+                        hr
+                        h4 オブジェクトに値を代入
+                        pre.
+                            配列[キー] = 値;
+                            配列.キー = 値;
+
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var obj = {'kokugo': 98, 'sansu': 82, 'rika': 70};
+                                obj.syakai = 86;
+                                obj.eigo = 53;
+                                console.log(obj);
+
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var a = new Object();
+                                a["dragon"] = "りゅう";
+                                a["sword"] = "つるぎ";
+                                a["egg"] = "たまご";
+                                console.log(a["dragon"]);
+                                console.log(a["sword"]);
+                                console.log(a["egg"]);
+
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var a = new Object();
+                                a.dragon = "りゅう";
+                                a.sword = "つるぎ";
+                                a.egg = "たまご";
+                                console.log(a.dragon);
+                                console.log(a.sword);
+                                console.log(a.egg);
+                        hr
+                        h4 日本語のキー
+                        p 以下のように日本語のキーをドット（.）で連結できますが、バグの温床となりますので、日本語でキーを扱う場合は大カッコ（[]）でキーを表現するか、日本語のキーは使わないほうがよいでしょう。
+                        pre.
+                            var obj = {};
+                            obj.国語 = 98;
+
+                        pre.
+                            var obj = {};
+                            obj['国語'] = 98;
+
+                        hr
+                        h4 オブジェクトのネスト（二次元オブジェクト）
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var grade = {
+                                    '数学': {
+                                        '数学Ⅰ': 'B',
+                                        '数学Ⅱ': 'A',
+                                        '数学Ⅲ': 'C'
+                                    },
+                                    '物理': {
+                                        '物理ⅠB': 'A',
+                                        '物理Ⅱ': 'B'
+                                    }
+                                }
+
+                        p 外側のオブジェクトと内側のオブジェクトをすべて取得する
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var grade = {
+                                    '数学': {
+                                        '数学Ⅰ': 'B',
+                                        '数学Ⅱ': 'A',
+                                        '数学Ⅲ': 'C'
+                                    },
+                                    '物理': {
+                                        '物理ⅠB': 'A',
+                                        '物理Ⅱ': 'B'
+                                    }
+                                }
+
+                                for(var a in grade){
+                                    console.log(a); //外側のキーを取得
+                                    console.log(grade[a]); //外側の値を取得
+                                    for(var b in grade[a]){
+                                        console.log(b); //内側のキーを取得
+                                        console.log(grade[a][b]); //内側の値を取得
+                                    }
+                                }
+                        p 内側のオブジェクトを限定して取得する
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var grade = {
+                                    '数学': {
+                                        '数学Ⅰ': 'B',
+                                        '数学Ⅱ': 'A',
+                                        '数学Ⅲ': 'C'
+                                    },
+                                    '物理': {
+                                        '物理ⅠB': 'A',
+                                        '物理Ⅱ': 'B'
+                                    }
+                                }
+
+                                for(var key in grade['数学']){
+                                    console.log(key); //キーのみ取得
+                                    console.log(grade['数学'][key]); //値のみ取得
+                                }
+                        p 以下のように配列と、オブジェクトを入れ子にすることもできます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var grade = [
+                                    {
+                                        '数学Ⅰ': 'B',
+                                        '数学Ⅱ': 'A',
+                                        '数学Ⅲ': 'C'
+                                    },
+                                    {
+                                        '物理ⅠB': 'A',
+                                        '物理Ⅱ': 'B'
+                                    }
+                                ];

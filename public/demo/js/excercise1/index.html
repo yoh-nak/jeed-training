@@ -1,80 +1,49 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
-<title></title>
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
-<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
-<script>
-$(document).on('pageshow','#index',function(){
-	var com, you = undefined;
-	var te = ['グー','チョキ','パー'];
-
-	$('#0,#1,#2').on('vclick',function(){
-		//コンピュータとあなたの手を格納
-		com = Math.floor(Math.random()*3); //乱数0〜2
-		you = parseInt($(this).attr('id')); //idの取得
-
-		//コンピューターの手を出力
-		$('#com').text(te[com]);
-
-		//結果の出力
-		if(com == you){
-			$('#result').text('あいこだよ');
-		}
-		else{
-			switch(com){
-				case 0:
-					if(you == 1){
-						$('#result').text('まけちゃった');
-					}
-					else if(you == 2){
-						$('#result').text('かった');
-					}
-					break;
-				case 1:
-					if(you == 0){
-						$('#result').text('かった');
-					}
-					else if(you == 2){
-						$('#result').text('まけちゃった');
-					}
-					break;
-				case 2:
-					if(you == 0){
-						$('#result').text('まけちゃった');
-					}
-					else if(you == 1){
-						$('#result').text('かった');
-					}
-					break;
-				default:
-					$('#result').text('なぜだろう');
-					break;
-			}
-		}
-	});
-});
-</script>
-</head>
-<body>
-	<div data-role="page" id="index">
-		<header data-role="header">
-			<h1>じゃんけんゲーム</h1>
-		</header>
-		<div data-role="content">
-			<a data-role="button" data-inline="true" id="0">グー</a>
-			<a data-role="button" data-inline="true" id="1">チョキ</a>
-			<a data-role="button" data-inline="true" id="2">パー</a>
-			<p id="com">
-			</p>
-			<p id="result">
-			</p>
-		</div>
-		<footer data-role="footer" data-position="fixed">
-			<h4>2013 &copy; ナカノヨウスケ</h4>
-		</footer>
-	</div>
-</body>
-</html>
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><title></title><link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css"><script src="http://code.jquery.com/jquery-1.9.1.min.js"></script><script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script><script>$(document).on('pageshow','#index',function(){
+    var com = undefined; var you = undefined;
+    var te = ['グー','チョキ','パー'];
+    
+    $('#0,#1,#2').on('vclick',function(){
+    
+        //コンピュータとあなたの手を格納
+        com = Math.floor(Math.random()*3); //乱数0〜2
+        you = parseInt($(this).attr('id')); //idの取得
+        
+        //コンピューターの手を出力
+        $('#com').text(te[com]);
+        
+        //結果の出力
+        if(com == you){
+            $('#result').text('あいこだよ');
+        }
+        else{
+            switch(com){
+                case 0:
+                    if(you == 1){
+                        $('#result').text('まけちゃった');
+                    }
+                    else if(you == 2){
+                        $('#result').text('かった');
+                    }
+                    break;
+                case 1:
+                    if(you == 0){
+                        $('#result').text('かった');
+                    }
+                    else if(you == 2){
+                        $('#result').text('まけちゃった');
+                    }
+                    break;
+                case 2:
+                    if(you == 0){
+                        $('#result').text('まけちゃった');
+                    }
+                    else if(you == 1){
+                        $('#result').text('かった');
+                    }
+                    break;
+                default:
+                    $('#result').text('なぜだろう');
+            }
+        }
+    });
+});</script></head><body><div id="index" data-role="page"><header data-role="header"><h1>じゃんけんゲーム</h1></header><div data-role="content"><a id="0" data-role="button" data-inline="true">グー</a><a id="1" data-role="button" data-inline="true">チョキ</a><a id="2" data-role="button" data-inline="true">パー</a><p id="com"></p><p id="result"></p></div><footer data-role="footer" data-position="fixed"><h1>フッター</h1></footer></div></body></html>

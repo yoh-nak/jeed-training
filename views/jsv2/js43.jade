@@ -1,0 +1,100 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-bookmark
+                        | 課題
+                    .panel-body
+                        p じゃんけんゲームを作ってみましょう。
+                        p
+                            a.btn.btn-default(href='../demo/js/excercise1/index.html', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            |  
+                            button.btn.btn-danger(type='button', data-toggle='collapse', data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | 解答例
+                        #demo.collapse.out
+                            pre(class='prettyprint linenums:1')
+                                :code
+                                    doctype
+                                    html(lang='ja')
+                                        head
+                                            meta(charset='UTF-8')
+                                            title
+                                            link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+                                            script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                            script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+                                            script
+                                                :js
+                                                    $(document).on('pageshow','#index',function(){
+                                                        var com = undefined; var you = undefined;
+                                                        var te = ['グー','チョキ','パー'];
+
+                                                        $('#0,#1,#2').on('vclick',function(){
+
+                                                            //コンピュータとあなたの手を格納
+                                                            com = Math.floor(Math.random()*3); //乱数0〜2
+                                                            you = parseInt($(this).attr('id')); //idの取得
+
+                                                            //コンピューターの手を出力
+                                                            $('#com').text(te[com]);
+
+                                                            //結果の出力
+                                                            if(com == you){
+                                                                $('#result').text('あいこだよ');
+                                                            }
+                                                            else{
+                                                                switch(com){
+                                                                    case 0:
+                                                                        if(you == 1){
+                                                                            $('#result').text('まけちゃった');
+                                                                        }
+                                                                        else if(you == 2){
+                                                                            $('#result').text('かった');
+                                                                        }
+                                                                        break;
+                                                                    case 1:
+                                                                        if(you == 0){
+                                                                            $('#result').text('かった');
+                                                                        }
+                                                                        else if(you == 2){
+                                                                            $('#result').text('まけちゃった');
+                                                                        }
+                                                                        break;
+                                                                    case 2:
+                                                                        if(you == 0){
+                                                                            $('#result').text('まけちゃった');
+                                                                        }
+                                                                        else if(you == 1){
+                                                                            $('#result').text('かった');
+                                                                        }
+                                                                        break;
+                                                                    default:
+                                                                        $('#result').text('なぜだろう');
+                                                                }
+                                                            }
+                                                        });
+                                                    });
+                                        body
+                                            #index(data-role='page')
+                                                header(data-role='header')
+                                                    h1 じゃんけんゲーム
+                                                div(data-role='content')
+                                                    a#0(data-role='button', data-inline='true') グー
+                                                    a#1(data-role='button', data-inline='true') チョキ
+                                                    a#2(data-role='button', data-inline='true') パー
+                                                    p#com
+                                                    p#result
+                                                footer(data-role='footer', data-position='fixed')
+                                                    h1 フッター

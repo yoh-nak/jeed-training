@@ -1,0 +1,66 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-bookmark
+                        | 課題
+                    .panel-body
+                        p 国語、算数、理科、社会、英語の点数を配列に格納し、グリッドに表示してみましょう。また、5課目の平均を最後の行に表示してみましょう。
+                        p
+                            a.btn.btn-default(href='../demo/js/excercise19/index.html', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            |  
+                            button.btn.btn-danger(type='button', data-toggle='collapse', data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | 解答例
+                        #demo.collapse.out
+                            pre(class='prettyprint linenums:1')
+                                :code
+                                    doctype
+                                    html(lang='ja')
+                                        head
+                                            meta(charset='UTF-8')
+                                            meta(content='width=device-width, user-scalable=no', name='viewport')
+                                            link(href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css', rel='stylesheet')
+                                            script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                            script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+                                            title 配列の取得
+                                            script
+                                                :js
+                                                    var test, subject;
+                                                    test = [90,80,70,60,50];
+                                                    subject = ['国語','算数','理科','社会','英語'];
+
+                                                    $(document).on('pagebeforecreate','#index',function(){
+                                                        var sum, average;
+
+                                                        sum = 0;
+                                                        for(var i = 0; i < test.length; i++){
+                                                            $('.ui-grid-a').append('<div class="ui-block-a"><div class="ui-bar ui-bar-a">' + subject[i] + '</div></div>');
+                                                            $('.ui-grid-a').append('<div class="ui-block-b"><div class="ui-bar ui-bar-a">' + test[i] + '点</div></div>');
+                                                            sum += test[i];
+                                                        }
+                                                        average = sum / test.length;
+                                                        $('.ui-grid-a').append('<div class="ui-block-a"><div class="ui-bar ui-bar-b">平均</div></div>');
+                                                        $('.ui-grid-a').append('<div class="ui-block-b"><div class="ui-bar ui-bar-b">' + average + '点</div></div>');
+                                                    });
+                                        body
+                                            #index(data-role='page')
+                                                div(data-role='header')
+                                                    h1 配列の取得
+                                                div(data-role='content')
+                                                    h1 テスト結果
+                                                    .ui-grid-a
+                                                div(data-position='fixed', data-role='footer')
+                                                    h1 フッター

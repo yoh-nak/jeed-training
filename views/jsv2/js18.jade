@@ -1,0 +1,35 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        |  Imageオブジェクト
+                    .panel-body
+                        h4 Imageオブジェクト
+                        p
+                            a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/Web/API/HTMLImageElement', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | 参考: HTMLImageElement
+                        p Imageオブジェクトは、先にブラウザにキャッシュしておき、配列「document.images[]」にキャッシュしておいた画像を割り当てることでブラウザに表示させることができます。
+                        pre.
+                            //ブラウザに画像をキャッシュする
+                            var img = new Image();
+                            img.src = '画像ファイルのパス';
+
+                            //キャッシュした画像を使えるようにする
+                            document.images[インデックス] = img.src;
+
+                        p 配列「document.images[]」に割り当てた画像は、DOMスクリプティングか、jQueryを利用するなど、ブラウザのDOMツリー上に出力する必要があります。
+                        pre.
+                            //jQueryでappendした例
+                            $('body').append('&lt;img src="' + document.images[0] + '" alt=""&gt;');

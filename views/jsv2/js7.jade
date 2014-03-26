@@ -1,0 +1,67 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        |  jQueryで配列/オブジェクトを扱う
+                    .panel-body
+                        p jQueryでも配列やオブジェクトを取得できます。JSFiddleで確認してみましょう。
+                        p
+                            a.btn.btn-default(href='http://api.jquery.com/jQuery.each/', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | 参考: jQuery.each()
+                            a.btn.btn-default(href='http://jsfiddle.net/', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | JSFiddle
+                        hr
+                        h4 jQueryで配列を取得する
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var ary = [98, 82, 70, 86, 53];
+                                var total = 0;
+                                $.each(ary, function(i) {
+                                    total += ary[i];
+                                });
+                                alert('合計: ' + total);
+                        hr
+                        h4 jQueryで二次元配列を取得する
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var ary = [
+                                    [98, 82, 70, 86, 53],
+                                    [59, 58, 54, 80, 85],
+                                    [73, 59, 58, 74, 95]
+                                ];
+
+                                var total = 0;
+                                $.each(ary, function(i) {
+                                    //console.log(ary[i]); //配列が出力される
+                                    $.each(ary[i], function(j) {
+                                        total += ary[i][j];
+                                    });
+                                });
+                                alert('合計: ' + total);
+
+                        hr
+                        h4 jQueryでオブジェクトを取得する
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var obj = {'国語': 98, '算数': 82, '理科': 70, '社会': 86, '英語': 53};
+                                var total = 0;
+                                var msg = '';
+                                $.each(obj, function(key, value){
+                                    msg += key + ': ' + value + '\n';
+                                    total += value;
+                                });
+                                msg += '合計: ' + total;
+                                alert(msg);

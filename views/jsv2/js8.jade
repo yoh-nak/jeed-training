@@ -1,0 +1,146 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        |  タイマーを扱うメソッド
+                    .panel-body
+                        h4 setIntervalメソッド
+                        p setIntervalメソッドは、第1引数で指定した関数内の処理を、第2引数で指定したミリ秒ごとに実行します。
+                        p
+                            a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/Web/API/window.setInterval', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | 参考: setInterval
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                window.setInterval(function(){
+                                    var date = new Date();
+                                    console.log(date.getTime());
+                                },1000);
+
+                        h4 clearIntervalメソッド
+                        p clearIntervalメソッドは、setIntervalメソッドの戻り値を格納した変数を引数にとり、setIntervalメソッドを中断することができます。
+                        p
+                            a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/Web/API/window.clearInterval', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | 参考: setInterval
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var counter = 0
+                                var timer = window.setInterval(function(){
+                                    counter++;
+                                    var date = new Date();
+                                    console.log(date.getTime());
+
+                                    if(counter >= 10){
+                                      clearInterval(timer);
+                                    }
+                                },1000);
+
+                        h4 setTimeoutメソッド
+                        p setTimeoutメソッドは第1引数で指定した関数の処理を、第2引数で指定したミリ秒後に実行します。ただし、setIntervalメソッドと異なり、そのままでは一定時間後に1度実行されるだけになります。
+                        p
+                            a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/Web/API/window.setTimeout', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | 参考: setTimeout
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                window.setTimeout(function(){
+                                    var date = new Date();
+                                    console.log(date.getTime());
+                                },1000);
+
+                        h4 setTimeoutメソッドをループする
+                        p setIntervalメソッドは負荷がかかるため、一般的にはsetTimeoutメソッドをループして使うことが多いです。以下のように、関数内でsetIntervalメソッドを処理して、初回の関数を実行すると、setTimeoutメソッドがループします。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                //初回の実行
+                                getTimestamp();
+
+                                function getTimestamp(){
+                                    var date = new Date();
+                                    console.log(date.getTime());
+
+                                    //2回目以降の実行
+                                    window.setTimeout(function(){
+                                        getTimestamp();
+                                    },1000);
+                                }
+
+                        h4 即時関数でsetTimeoutメソッドを初回実行する
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                //初回の実行
+                                (function getTimestamp(){
+                                  var date = new Date();
+                                  console.log(date.getTime());
+
+                                  //2回目以降の実行
+                                  window.setTimeout(function(){
+                                      getTimestamp();
+                                  },1000);
+                                })();
+
+                        h4 clearTimeoutメソッド
+                        p
+                            a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/Web/API/window.clearTimeout', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | 参考: setTimeout
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var counter = 0
+
+                                //初回の実行
+                                getTimestamp();
+
+                                function getTimestamp(){
+                                    counter++;
+
+                                    var date = new Date();
+                                    console.log(date.getTime());
+
+                                    //2回目以降の実行
+                                    var timer = window.setTimeout(function(){
+                                        getTimestamp();
+                                    },1000);
+
+                                    if(counter >= 10){
+                                      clearInterval(timer);
+                                    }
+                                }
+
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var counter = 0;
+
+                                //初回の実行
+                                (function getTimestamp(){
+                                  counter++;
+
+                                  var date = new Date();
+                                  console.log(date.getTime());
+
+                                  //2回目以降の実行
+                                  var timer = window.setTimeout(function(){
+                                      getTimestamp();
+                                  },1000);
+
+                                  if(counter >= 10){
+                                      clearInterval(timer);
+                                  }
+                                })();
+                        p 参考：タイマー系メソッドは、windowオブジェクトのメソッドとして定義されているため、Node.jsのメソッドではありません。ただし、Node.jsは、独自のTimers APIでタイマー系メソッドを実装しています。
+                        p
+                            a.btn.btn-default(href='http://nodejs.org/api/timers.html', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | 参考: Timers

@@ -1,0 +1,315 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        |  プロトタイプ
+                    .panel-body
+                        h4 オブジェクトの改変
+                        p JavaScriptではオブジェクトを作成後に、インスタンスごとにオブジェクトに不足した機能を追加して実行することができます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                function SeisekiClass(name){
+                                    this.name = name;
+
+                                    this.setTensu = function(a, b, c, d, e){
+                                        this.kokugo = a;
+                                        this.sansu = b;
+                                        this.rika = c;
+                                        this.syakai = d;
+                                        this.eigo = e;
+                                    };
+
+                                    this.showMsg = function(){
+                                        alert(this.name + 'さんの成績オブジェクトです。');
+                                    };
+                                }
+
+                                var taro = new SeisekiClass('太郎');
+                                taro.setTensu(75, 58, 69, 81, 47);
+                                var hanako = new SeisekiClass('花子');
+                                hanako.setTensu(98, 79, 81, 93, 85);
+
+                                taro.showMsg();
+                                hanako.showMsg();
+
+                                taro.goukei = function(){
+                                    var total = 0;
+                                    total += this.kokugo;
+                                    total += this.sansu;
+                                    total += this.rika;
+                                    total += this.syakai;
+                                    total += this.eigo;
+                                    return total;
+                                };
+
+                                taro.showMsg = function(){
+                                    var msg = this.name + 'さんの成績合計: ' + this.goukei();
+                                    alert(msg);
+                                };
+
+                                hanako.heikin = function(){
+                                    var total = 0;
+                                    total += this.kokugo;
+                                    total += this.sansu;
+                                    total += this.rika;
+                                    total += this.syakai;
+                                    total += this.eigo;
+                                    return total/5;
+                                };
+
+                                hanko.showMsg = function(){
+                                    var msg = this.name + 'さんの成績平均: ' + this.heikin();
+                                    alert(msg);
+                                };
+
+                                taro.showMsg();
+                                hanako.showMsg();
+                        hr
+                        h4 プロトタイプ
+                        p オブエクトを作成した後に変更することは容易に出来ましたが、作ったオブジェクトの内容がバラバラになってしまっては使いやすいとはいえません。すべてのオブジェクトで同じように機能が変わるほうが重要性が高いでしょう。一つのオブジェクトから作成した複数のインスタンスに対して、後から機能が追加されると、全てのインスタンスが共通して機能が追加される方が便利です。またメモリの節約にもつながります。
+                        p 一般的なオブジェクト指向言語では、スーパークラスを継承して新たなサブクラスを生成して利用するしかありません。後から機能追加して利用するということはできませんが、JavaScriptではプロトタイプを使用して実現できます。
+                        p JavaScriptではfunctionオブジェクトは全て、prototypeオブジェクトを持っており、functionオブジェクトから生成されたインスタンスは全て、そのprototypeオブジェクトを参照できます。そのため、functionオブジェクトが持つprototypeオブジェクトの持つメソッドとして、後から追加したメソッドは、functionオブジェクトのインスタンスから参照できるようになります。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                function SeisekiClass(name){
+                                    this.name = name;
+
+                                    this.setTensu = function(a, b, c, d, e){
+                                        this.kokugo = a;
+                                        this.sansu = b;
+                                        this.rika = c;
+                                        this.syakai = d;
+                                        this.eigo = e;
+                                    };
+                                }
+
+                                var taro = new SeisekiClass('太郎');
+                                taro.setTensu(75, 58, 69, 81, 47);
+
+                                var hanako = new SeisekiClass('花子');
+                                hanako.setTensu(98, 79, 81, 93, 85);
+
+                                SeisekiClass.prototype.getDataToStr = function(){
+                                    var data = this.name + 'さんの点数\n' + '国語: ' + this.kokugo + ' 算数: ' + this.sansu + ' 理科: ' + this.rika + ' 社会: ' + this.syakai + ' 英語: ' + this.eigo;
+                                    return data;
+                                };
+
+                                alert(taro.getDataToStr());
+                                alert(hanako.getDataToStr());
+
+                        hr
+                        h4 プロトタイプでのプロパティ
+                        p では以下の例はどうでしょう。prototypeオブジェクトのプロパティとして、mem2インスタンスがsexプロパティを上書きしています。mem1インスタンスのsexプロパティも上書きされそうですが、結果は上書きされません。これはmem2インスタンスののsexプロパティとして新たに定義されたことになり、prototypeオブジェクトのsexプロパティは影響を受けません。この状態を、インスタンスのsexプロパティがprototypeのsexプロパティを隠蔽しているといいます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var MemberClass = function(){};
+                                MemberClass.prototype.sex = '男';
+
+                                var mem1 = new MemberClass();
+                                var mem2 = new MemberClass();
+                                document.writeln(mem1.sex + ' | ' + mem2.sex); //=> 男 | 男
+                                mem2.sex = '女';
+                                document.writeln(mem1.sex + ' | ' + mem2.sex); //=> 男 | 女
+                        p 以下のようにまとめられます。
+                        pre
+                            :code
+                                プロパティの宣言 => コンストラクタで
+                                メソッドの宣言 => プロトタイプで
+
+                        hr
+                        h4 静的（static）プロパティ／静的（static）メソッド
+                        p プロパティやメソッドによっては、インスタンスを生成せずに利用できるものがあります。このようなプロパティ／メソッドは、静的プロパティ／静的メソッド、またはスタティックプロパティ、スタティックメソッドと呼ばれます。静的メソッド／静的プロパティの呼び出しは以下のようになります。
+                        pre
+                            :code
+                                オブジェクト名.プロパティ名 [= 設定値];
+                                オブジェクト名.メソッド名([引数 [, ...]]);
+
+                        hr
+                        h4 静的プロパティ／静的メソッドのの定義
+                        pre.
+                            var オブジェクト名 = function(){};
+
+                            オブジェクト名.プロパティ名 = 値;
+
+                            オブジェクト名.メソッド名 = function(){
+                                メソッドの定義
+                            };
+
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var AreaClass = function(){};
+
+                                AreaClass.version = 1.0;
+
+                                AreaClass.triangle = function(base, height){
+                                  return base * height / 2;
+                                }
+
+                                AreaClass.diamond = function(width, height){
+                                  return width * height / 2;
+                                }
+
+                                //静的プロパティの利用
+                                document.writeln('Areaクラスのバージョン: ' + AreaClass.version);
+                                //静的メソッドの利用
+                                document.writeln(' 三角形の面積: ' + AreaClass.triangle(5, 3));
+
+                                //インスタンス化
+                                var a = new AreaClass();
+                                document.writeln(' 菱型の面積: ' + a.diamond(10, 2)); //=> 静的メソッドをインスタンス化して利用するとエラー
+
+                        hr
+                        h4 プロパティの削除
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var MemberClass = function(){};
+
+                                MemberClass.prototype.sex = '男';
+
+                                var mem1 = new MemberClass();
+                                var mem2 = new MemberClass();
+
+                                document.writeln(mem1.sex + ' | ' + mem2.sex); //=> 男 | 男
+
+                                mwm2.sex = ' 女';
+                                document.writeln(mem1.sex + ' | ' + mem2.sex); //=> 男 | 女
+
+                                //インスタンスmem1のsexプロパティを削除しようとしていますが、mem1はsexプロパティを持っていないのでなにもおきません
+                                delete mem1.sex;
+
+                                //mem2が自分自身のsexプロパティを持つので、delete演算子はmem2のsexプロパティを削除します。
+                                dleete mem2.sex;
+
+                                //mem1は暗黙の参照をたどってプロトタイプオブジェクトのsexを返します。mem2は、独自のプロパティsexが削除されたので、暗黙の参照をたどって、プロトタイプオブジェクトのプロパティを返します。
+                                document.writeln(mem1.sex + ' | ' + mem2.sex); //=> 男 | 男
+
+                        p プロトタイプオブジェクトのメンバを削除するには、以下のようにします。ただし、このプロトタイプオブジェクトを参照しているすべてのインスタンスに影響がでるので注意しましょう。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                delete MemberClass.prototype.sex;
+                        p プロトタイプで定義されたメンバをインスタンス単位で削除するにはundefinedを使います。ただし、この場合、値を未定義にしているだけでメンバを削除しているわけではないので、for...inループで列挙するとsexプロパティは存在しているものとして表示されます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var MemberClass = function(){};
+
+                                MemberClass.prototype.sex = '男';
+
+                                var mem1 = new MemberClass();
+                                var mem2 = new MemberClass();
+                                document.writeln(mem1.sex ' | ' + mem2.sex); //=> 男 | 男
+                                mem2.sex = undefined;
+                                document.writeln(mem1.sex ' | ' + mem2.sex); //=> 男 | undefined
+                        hr
+                        h4 オブジェクトリテラルでプロトタイプの定義
+                        p プロトタイプでメソッドを定義するとき、定義が独立した文で読みにくく、オブジェクト名に変更があった場合、コードをすべて修正する必要があります。
+                        pre.
+                            var MemberClass = function(){ ... };
+                            MemberClass.prototype.xxxx = function(){ ... } 〜 ;
+                            MemberClass.prototype.yyyy = function(){ ... } 〜 ;
+                            MemberClass.prototype.zzzz = function(){ ... } 〜 ;
+
+                        p このような場合、以下のようにオブジェクトリテラルでまとめて定義するとコードが読みやすくなります。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var MemberClass = function(firstName, lastName){
+                                    this.firstName = firstName;
+                                    this.lastName = lastName;
+                                };
+
+                                MemberClass.prototype.getName = function(){
+                                    return this.lastName + ' ' + this.firstName;
+                                };
+
+                                MemberClass.prototype.toString = function(){
+                                    return this.lastName + this.firstName;
+                                };
+                        p このような場合、以下のようにオブジェクトリテラルでまとめて定義するとコードが読みやすくなります。
+                        pre.
+                            var MemberClass = function(){ ... };
+                            MemberClass.prototype = {
+                                xxxx: function() { .... },
+                                yyyy: function() { .... },
+                                zzzz: function() { .... }
+                            };
+
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var MemberClass = function(firstName, lastName){
+                                    this.firstName = firstName;
+                                    this.lastName = lastName;
+                                };
+
+                                MemberClass.prototype = {
+                                    getName: function(){
+                                        return this.lastName + ' ' + this.firstName;
+                                    },
+                                    toString: function(){
+                                        return this.lastName + this.firstName;
+                                    }
+                                };
+
+                        hr
+                        h4 プロトタイプ継承（プロトタイプチェーン）
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var AnimalClass = function(){};
+
+                                AnimalClass.prototype = {
+                                    walk: function(){
+                                        .writeln('トコトコ...');
+                                    }
+                                };
+
+                                var DogClass = function(){};
+
+                                DogClass.prototype = new AnimalClass();
+
+                                Dog.prototype.bark = function(){
+                                    document.writeln('ワンワン！');
+                                };
+
+                                var d = new DogClass();
+                                d.walk(); //=> トコトコ...
+                                d.bark(); //=> ワンワン！
+
+                        p JavaScriptのプロトタイプチェーンはインスタンスが生成された時点で固定され、その後の変更に関わらず固定されるので注意しましょう。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var AnimalClass = function(){};
+
+                                AnimalClass.prototype = {
+                                    walk: function(){
+                                        document.writeln('トコトコ...');
+                                    }
+                                };
+
+                                var SuperAnimalClass = function(){};
+
+                                SuperAnimalClass.prototype = {
+                                    walk: function(){
+                                        document.writeln('ダダダダダ！');
+                                    }
+                                }
+
+                                var DogClass = function(){};
+
+                                DogClass.prototype = new AnimalClass();
+                                var d1 = new DogClass();
+                                d1.walk(); //=> トコトコ
+
+                                DogClass.prototype = new SuperAnimalClass();
+                                var d2= new SuperAnimalClass();
+                                d2.walk(); //=> ダダダダダ！;
+
+                                d1.walk(); //=> トコトコ

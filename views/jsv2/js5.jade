@@ -1,0 +1,185 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        |  コンストラクタとインスタンス
+                    .panel-body
+                        h4 コンストラクタ
+                        p 一般的に、クラスベースのオブジェクト指向言語ではクラスと呼ばれる、プロパティ、メソッドのグループがオブジェクトの単位になっていますが、JavaScriptではクラスという概念は存在しません。その代わりに、関数がオブジェクトの単位になっています。
+                        p オブジェクトリテラル（{...}）は、Objectオブジェクトのプロパティ、メソッドを生成するリテラルとして存在します。その場で作成するには便利ですが、プログラムが大規模になってくると、管理が大変です。
+                        p JavaScriptでは、独自のオブジェクト（クラス）を生成するのに関数を使用します。自作関数の定義しているようですが、実は自作関数そのものがJavaScriptではオブジェクト（クラス）の単位として動作します。
+                        p 関数の中に変数を用意することがオブジェクトのプロパティとなり、関数の中に関数を定義することがオブジェクトのメソッドとなります。thisは自分自身のオブジェクトを指します。
+                        pre.
+                            function オブジェクトの名前(引数){
+                                this.プロパティ = 値;
+                                this.メソッド = function(){ ... }
+                                ...以下略...
+                            }
+
+                        pre.
+                            var 変数  = function(引数){
+                                this.プロパティ = 値;
+                                this.メソッド = function(){ ... }
+                                ...以下略...
+                            }
+
+                        p 実際にオブジェクトを定義すると、以下のようになります。JavaScriptでは慣例的に関数名は、「myFunction」のように小文字で始めますが、オブジェクトとして関数を定義する場合は、「MyClass」のように大文字で始めます。
+                        p 自作のオブジェクトには引数を渡すことができます。その場合、そのオブジェクトを使用（インスタンス化）するときに、「new オブジェクト名(引数)」のように記述できます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                function SeisekiClass(name){
+                                    this.name = name; // SeisekiClassのnameプロパティ
+
+                                    // SeisekiClassのsetTensuメソッド
+                                    this.setTensu = function(a, b, c, d, e){
+                                        this.kokugo = a;
+                                        this.sansu = b;
+                                        this.rika = c;
+                                        this.syakai = d;
+                                        this.eigo = e;
+                                    }
+
+                                    // SeisekiClassのgoukeiメソッド
+                                    this.goukei = function(){
+                                        var total = 0;
+                                        total += this.kokugo;
+                                        total += this.sansu;
+                                        total += this.rika;
+                                        total += this.syakai;
+                                        total += this.eigo;
+                                        return total;
+                                    }
+
+                                    // SeisekiClassのheikinメソッド
+                                    this.heikin = function(){
+                                        var total = this.goukei();
+                                        return total / 5;
+                                    }
+
+                                    // SeisekiClassのshowMsgメソッド
+                                    this.showMsg = function(){
+                                        var msg = this.name + 'さんの成績\n';
+                                        msg += '合計：' + this.goukei() + '\n';
+                                        msg += '平均：' + this.heikin();
+                                        alert(msg);
+                                    }
+                                }
+                        h4 インスタンス化
+                        p オブジェクトを作成した後は、既存のオブジェクトと同様に使用することができます。「new SeisekiClass('引数')」のことをコンストラクタと呼びます。コンストラクタを変数に格納することを、オブジェクトのインスタンス（実体）化と呼びます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var taro = new SeisekiClass('太郎'); //=> インスタンス化
+                                taro.setTensu(75, 58, 69, 81, 47);
+                                taro.showMsg();
+
+                                var hanako = new SeisekiClass('花子'); //=> インスタンス化
+                                hanako.setTensu(98, 79, 81, 93, 85);
+                                hanako.showMsg();
+
+                        p 関数内の「this.変数」はオブジェクトのキーにあたります。オブジェクトリテラルで定義されたプロパティやメソッドは、Objectオブジェクトのプロパティ、メソッドとなりますが、関数オブジェクトによって定義されたプロパティやメソッドは自作オブジェクトとしてインスタンス化できます。
+                        pre.
+                            var オブジェクト名 = {
+                                キー: プロパティ,
+                                キー: プロパティ,
+                                ...
+                                キー: メソッド,
+                                キー: メソッド
+                            }
+
+                            function オブジェクト名(){
+                                this.変数 = プロパティ;
+                                this.変数 = プロパティ;
+                                ...
+                                this.変数 = メソッド;
+                                this.変数 = メソッド;
+                                ...
+                            }
+
+                            var オブジェクト名 =  function(){
+                                this.変数 = プロパティ;
+                                this.変数 = プロパティ;
+                                ...
+                                this.変数 = メソッド;
+                                this.変数 = メソッド;
+                                ...
+                            }
+                        h4 プライベートとパブリック
+                        p 以下のようなソースの場合、太郎さんの成績を表示するつもりがイチローさんの成績が表示されてしまいます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var taro = new SeisekiClass('太郎');
+                                taro.setTensu(75, 58, 69, 81, 47);
+                                taro.name = 'イチロー';
+                                taro.showMsg();
+                        p このような場合、オブジェクトの中だけで使える値にしなければ、外部からプロパティを取得して変更できてしまいます。このような場合、varを付けてオブジェクト内で使える変数として定義することで、外部から取り出すことができなくなります。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                function SeisekiClass(name){
+                                    var name = name; // SeisekiClassの中で使用する変数
+
+                                    // SeisekiClassのsetTensuメソッド
+                                    this.setTensu = function(a, b, c, d, e){
+                                        this.kokugo = a;
+                                        this.sansu = b;
+                                        this.rika = c;
+                                        this.syakai = d;
+                                        this.eigo = e;
+                                    }
+
+                                    // SeisekiClassのgoukeiメソッド
+                                    this.goukei = function(){
+                                        var total = 0;
+                                        total += this.kokugo;
+                                        total += this.sansu;
+                                        total += this.rika;
+                                        total += this.syakai;
+                                        total += this.eigo;
+                                        return total;
+                                    }
+
+                                    // SeisekiClassのheikinメソッド
+                                    this.heikin = function(){
+                                        var total = this.goukei();
+                                        return total / 5;
+                                    }
+
+                                    // SeisekiClassのshowMsgメソッド
+                                    this.showMsg = function(){
+                                        var msg = name + 'さんの成績\n';
+                                        msg += '合計：' + this.goukei() + '\n';
+                                        msg += '平均：' + this.heikin();
+                                        alert(msg);
+                                    }
+                                }
+
+                        h4 オブジェクトと参照
+                        p 以下のように、1つ目の変数にSeisekiClassオブジェクトをインスタンス化し、2つ目の変数に1つ目のインスタンスを代入します。それぞれsetTensuメソッドに引数を指定して実行すると、2つとも同じ結果が表示されます。これは2つ目のインスタンスが、1つ目のインスタンスが格納された場所と同じ場所（メモリー上のアドレス）を参照しているためです。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var taro1 = new SeisekiClass('太郎');
+                                var taro2 = taro1;
+                                taro1.setTensu(75, 58, 69, 81, 47);
+                                taro2.setTensu(88, 71, 80, 59, 63);
+                                taro1.showMsg();
+                                taro2.showMsg();
+
+                        p これを、別々の成績を設定しようと思ったら、以下のように両方ともインスタンス化する必要があります。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var taro1 = new SeisekiClass('太郎');
+                                var taro2 = new SeisekiClass('太郎');
+                                taro1.setTensu(75, 58, 69, 81, 47);
+                                taro2.setTensu(88, 71, 80, 59, 63);
+                                taro1.showMsg();
+                                taro2.showMsg();

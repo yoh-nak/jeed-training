@@ -1,0 +1,208 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        |  イベントハンドラ
+                    .panel-body
+                        h4 イベントハンドラ
+                        p
+                            a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/Web/API/GlobalEventHandlers', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                |  参考: GlobalEventHandlers
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <!DOCTYPE html>
+                                <html>
+                                <head>
+                                <meta charset="UTF-8">
+                                <title></title>
+                                </head>
+                                <body>
+                                <p>
+                                <input type="button" id="disp1" value="表示" onclick="alert('テスト1');return true;">
+                                </p>
+                                </body>
+                                </html>
+
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <!DOCTYPE html>
+                                <html>
+                                <head>
+                                <meta charset="UTF-8">
+                                <title></title>
+                                </head>
+                                <body>
+                                <p>
+                                <input type="button" id="disp2" value="表示2">
+                                <script>
+                                    document.getElementById('disp2').onclick = function(){
+                                        alert('テスト2');
+                                        return true;  
+                                    };
+                                </script>
+                                </p>
+                                </body>
+                                </html>
+                        hr
+                        h4 イベントリスナ
+                        p
+                            a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/Web/API/EventTarget.addEventListener', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | 参考: EventTarget.addEventListener
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <!DOCTYPE html>
+                                <html>
+                                <head>
+                                <meta charset="UTF-8">
+                                <title></title>
+                                </head>
+                                <body>
+                                <p>
+                                <input type="button" id="disp3" value="表示2">
+                                <script>
+                                    document.getElementById('disp3').addEventListener('click',function(){
+                                        alert('テスト3');
+                                        return true;
+                                    },false);
+                                </script>
+                                </p>
+                                </body>
+                                </html>
+
+                        p IE8以前は、addEventListenerに対応していないため、IE独自拡張のattachEventメソッドで別処理します。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <!DOCTYPE html>
+                                <html>
+                                <head>
+                                <meta charset="UTF-8">
+                                <title></title>
+                                </head>
+                                <body>
+                                <p>
+                                <input type="button" id="disp3" value="表示3">
+                                <script>
+                                    document.getElementById('disp3').attachEvent('onclick',function(){
+                                        alert('テスト3');
+                                        return true;
+                                    });
+                                </script>
+                                </p>
+                                </body>
+                                </html>
+
+                        p attachEventが認識できるかどうかで別処理する。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <!DOCTYPE html>
+                                <html>
+                                <head>
+                                <meta charset="UTF-8">
+                                <title></title>
+                                </head>
+                                <body>
+                                <p>
+                                <input type="button" id="disp3" value="表示3">
+                                <script>
+                                    var disp3 = document.getElementById('disp3');
+                                    if(disp3.attachEvent){
+                                        disp3.attachEvent('onclick',function(){
+                                            alert('テスト3');
+                                            return true;
+                                        });
+                                    }
+                                    else{
+                                        disp3.addEventListener('click',function(){
+                                            alert('テスト3');
+                                            return true;
+                                        },false);
+                                    }
+                                </script>
+                                </p>
+                                </body>
+                                </html>
+
+                        hr
+                        h4 イベントを擬似的に発生させる
+                        p
+                            a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/Web/API/EventTarget.dispatchEvent', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                | 参考: EventTarget.dispatchEvent
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <!DOCTYPE html>
+                                <html>
+                                <head>
+                                <meta charset="UTF-8">
+                                <title></title>
+                                </head>
+                                <body>
+                                <p>
+                                <input type="button" id="disp1" value="表示" onclick="alert('テスト1');return true;">
+                                <script>
+                                    var e = document.createEvent('MouseEvents');
+                                    e.initEvent('click',false,true);
+                                    document.getElementById('disp1').dispatchEvent(e);
+                                </script>
+                                </p>
+                                </body>
+                                </html>
+
+                        p IE8以前は、dispatchEventに対応していないため、IE独自拡張のfireEventメソッドで別処理します。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <!DOCTYPE html>
+                                <html>
+                                <head>
+                                <meta charset="UTF-8">
+                                <title></title>
+                                </head>
+                                <body>
+                                <p>
+                                <input type="button" id="disp1" value="表示" onclick="alert('テスト1');return true;">
+                                <script>
+                                    document.getElementById('disp1').fireEvent('onclick');
+                                </script>
+                                </p>
+                                </body>
+                                </html>
+
+                        p fireEventが認識できるかどうかで別処理する。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <!DOCTYPE html>
+                                <html>
+                                <head>
+                                <meta charset="UTF-8">
+                                <title></title>
+                                </head>
+                                <body>
+                                <p>
+                                <input type="button" id="disp1" value="表示" onclick="alert('テスト1');return true;">
+                                <script>
+                                    var disp1 = document.getElementById('disp1');
+                                    if(disp1.fireEvent){
+                                        disp1.fireEvent('onclick');
+                                    }
+                                    else{
+                                        var e = document.createEvent('MouseEvents');
+                                        e.initEvent('click',false,true);
+                                        disp1.dispatchEvent(e);
+                                    }
+                                </script>
+                                </p>
+                                </body>
+                                </html>

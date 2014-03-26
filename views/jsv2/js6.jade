@@ -1,0 +1,201 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        | 関数
+                    .panel-body
+                        h4 関数の基本形
+                        pre.
+                        \nfunction 関数名(){
+                        ...実行する処理...
+                        }
+
+                        関数名();
+
+                        pre.prettyprint.
+                        \nfunction sayHello(){
+                        alert('Hello');
+                        }
+
+                        sayHello();
+                        sayHello();
+                        sayHello();
+
+                        p JavaScriptでは関数の定義を実行処理の後に記述しても実行できます。
+                        pre.prettyprint.
+                        \nsayHello();
+                        sayHello();
+                        sayHello();
+
+                        function sayHello(){
+                        alert('Hello');
+                        }
+
+                        hr
+                        h4 引数のある関数
+                        pre.
+                        \nfunction 関数名(引数の指定){
+                        ...実行する処理...
+                        }
+
+                        関数名(引数)
+
+                        pre.prettyprint.
+                        \nfunction sayHello(name){
+                        alert('Hello, ' + name + '. How are you?');
+                        }
+
+                        sayHello('Taro');
+                        sayHello('Hanako');
+
+                        p 引数は何個でも指定できます。
+                        pre.prettyprint.
+                        \nfunction triangle(base, height){
+                        var area = base * height / 2;
+                        alert(area);
+                        }
+
+                        triangle(5, 10);
+
+                        hr
+                        h4 戻り値のある関数
+                        pre.prettyprint.
+                        \nfunction taxPrice(val){
+                        return val * 0.05;
+                        }
+
+                        var price = 15000;
+                        var tax = taxPrice(price);
+                        alert('金額：' + price + '　税額：' + tax);
+
+                        p 戻り値を使うと、関数内で出力せず、関数の処理結果を関数外で利用することができます。
+                        pre.prettyprint.
+                        \nfunction triangle(base, height){
+                        var area = base * height / 2;
+                        return area;
+                        }
+
+                        var area = triangle(5, 10);
+                        alert('三角形の面積は' + area);
+
+                        hr
+                        h4 関数を値として使う
+                        p 関数リテラルを変数に代入することで、変数を関数として実行できます。
+                        pre.
+                        \nvar 変数 = function(引数){ ... }
+
+                        pre.prettyprint.
+                        \nvar getTax = function(val){
+                        return val * 0.05;
+                        }
+
+                        var price = 15000;
+                        var tax = getTax(price);
+                        alert('金額：' + price + '　税額：' + tax);
+
+                        pre.
+                        \nvar 変数 = 関数;
+
+                        function 関数(){
+                        ...処理...
+                        }
+
+                        pre.prettyprint.
+                        \nvar doGetTax = getTax;
+                        doGetTax(0.05);
+
+                        function getTax(val){
+                        var price = 15000;
+                        var tax = val * 0.05;
+                        alert('金額：' + price + '　税額：' + tax);
+                        }
+
+                        p ただし、変数に関数を代入する場合、関数の定義が後にくるとエラーになるので注しましょう。
+                        pre.prettyprint.
+                        \nvar price = 15000;
+                        var tax =           ; //=           関数getTaxはundefinedとなりエラーとなります
+                        alert('金額：' + price + '　税額：' + tax);
+
+                        var            = function(val){
+                        return val * 0.05;
+                        }
+
+                        hr
+                        h4 変数のスコープ
+                        pre.prettyprint.
+                        \nvar getTax = function(val){
+                        = 0.05; //=           関数内でのみ利用できる変数
+                        return val * ritsu;
+                        }
+
+                        var price = 15000;
+                        = 0.1; //=           関数内で宣言されたritsuを上書きできない
+                        var tax = getTax(price);
+                        alert('金額：' + price + '　税額：' + tax);
+
+                        pre.prettyprint.
+                        \n           = 0.05; //=           関数外で宣言された変数
+
+                        var getTax = function(val){
+
+                        return val *           ; //=           関数外で宣言された変数retsuを利用
+                        }
+
+                        var price = 15000;
+                        ritsu = 0.1;
+                        var tax = getTax(price);
+                        alert('金額：' + price + '　税額：' + tax);
+
+                        hr
+                        h4 無名（匿名）関数 = 関数リテラル
+                        pre.
+                        \n
+                        var getTax =           
+
+                        var price = 15000;
+                        var tax = getTax(price);
+                        alert('金額：' + price + '　税額：' + tax);
+
+                        hr
+                        h4 即時関数
+                        p (無名関数)(引数の指定)
+                        pre.prettyprint.
+                        \n(function(val){
+                        var price = val;
+                        var tax = val * 0.05;
+                        alert('金額：' + price + '　税額：' + tax);
+                        })(15000);
+
+                        p
+                        | JavaScriptでは関数内で定義された変数がローカルスコープとなりますが、関数外で定義した変数はすべて、windowオブジェクトのスコープ内での変数となり、他のjsファイルやライブラリーなどと、変数名が競合することがあります。そのため、script要素内の処理は以下のように、すべて即時関数内で実行するとよいでしょう。
+                        pre.prettyprint.
+                        \n          
+                        var getTax = function(val){
+                        return val * 0.05;
+                        }
+
+                        var price = 15000;
+                        var tax = getTax(price);
+                        alert('金額：' + price + '　税額：' + tax);
+
+
+                        hr
+                        p 参考：(コンストラクタ).プロパティ、(コンストラクタ).メソッド
+                        pre.prettyprint.
+                        \nvar date = new Date();
+                        date.getTime();
+
+                        pre.
+                        \n(new Date()).getTime();
+

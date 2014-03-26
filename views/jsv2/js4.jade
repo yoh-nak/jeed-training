@@ -1,0 +1,128 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        |  無名（匿名）オブジェクト
+                    .panel-body
+                        p オブジェクトには、以下のように関数リテラルを格納し、実行することができます。実行する際は、オブジェクトのキーに引数を指定する小括弧「()」が続くので注意しましょう。
+                        p thisは自分自身のオブジェクを指し、ここではobjオブジェクトのことを指します。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var obj = {'国語':98, '算数':82, '理科':70, '社会':86, '英語':53,
+                                  '合計':function(){
+                                  var total = 0;
+                                  total += this['国語']; //=> obj['国語']、obj.国語、this.国語
+                                  total += this['算数']; //=> obj['算数']、obj.算数、this.算数
+                                  total += this['理科']; //=> obj['理科']、obj.理科、this.理科
+                                  total += this['社会']; //=> obj['社会']、obj.社会、this.社会
+                                  total += this['英語']; //=> obj['英語']、obj.英語、this.英語
+                                  return total; 
+                                  },
+                                  '平均':function(){
+                                  var total = this['合計']() + '\n';
+                                  return total/5; 
+                                  }
+                                };
+
+                                var total = 0;
+                                var msg = '合計' + obj['合計']() + '\n';
+                                msg += '平均' + obj['平均']();
+                                console.log(msg);
+
+                        p オブジェクに格納する関数は、後から追加することもできます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var obj = {'国語':98, '算数':82, '理科':70, '社会':86, '英語':53};
+
+                                obj['合計'] = function(){
+                                  var total = 0;
+                                  total += this['国語'];
+                                  total += this['算数'];
+                                  total += this['理科'];
+                                  total += this['社会'];
+                                  total += this['英語'];
+                                  return total;
+                                };
+
+                                obj['平均'] = function(){
+                                  var total = this['合計']() + '\n';
+                                  return total/5;
+                                };
+
+                                var total = 0;
+                                var msg = '合計' + obj['合計']() + '\n';
+                                msg += '平均' + obj['平均']();
+                                console.log(msg);
+
+                        p オブジェクトと関数をドット「.」で連結すると読みやすくなります。また、オブジェクトで定義される関数のことをメソッドと呼びます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var obj = {'国語':98, '算数':82, '理科':70, '社会':86, '英語':53};
+
+                                obj.goukei = function(){
+                                  var total = 0;
+                                  total += this['国語'];
+                                  total += this['算数'];
+                                  total += this['理科'];
+                                  total += this['社会'];
+                                  total += this['英語'];
+                                  return total;
+                                };
+
+                                obj.heikin = function(){
+                                  var total = this.goukei() + '\n';
+                                  return total/5;
+                                };
+
+                                var total = 0;
+                                var msg = '合計' + obj.goukei() + '\n';
+                                msg += '平均' + obj.heikin();
+                                console.log(msg);
+
+                        h4 無名（匿名）オブジェクト
+                        p 「new オブジェクト名()」この構文のことをコンストラクタ（後述）と呼びますが、コンストラクタを使用すると、よりオブジェクト指向の構文に近い記述になってきます。変数objにObjectオブジェクトを格納し、後からキーに対する値を設定することができます。
+                        p JavaScriptのオブジェクト指向では、オブジェクトに指定されたキーに関数以外の値が格納されている場合、そのキーのことをプロパティと呼び、キーに関数が格納されている場合、そのキーのことをメソッドと呼びます。
+                        p ただしこの場合、JavaScriptの既存のObjectオブジェクトを拡張したことになり、独自のオブジェクトを作成したことにはなりません。このように独自のオブジェクト名をもたないオブジェクトのことを無名（匿名）オブジェクトと呼びます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var obj = new Object();
+
+                                obj.kokugo = 98; //=> Objectオブジェクトのkokugoプロパティ
+                                obj.sansu = 82; //=> Objectオブジェクトのsansuプロパティ
+                                obj.rika = 70; //=> Objectオブジェクトのrikaプロパティ
+                                obj.syakai = 86; //=> Objectオブジェクトのsyakaiプロパティ
+                                obj.eigo = 53; //=> Objectオブジェクトのeigoプロパティ
+
+                                obj.goukei = function(){ //=> Objectオブジェクトのgoukeiメソッド
+                                  var total = 0;
+                                  total += this.kokugo;
+                                  total += this.sansu;
+                                  total += this.rika;
+                                  total += this.syakai;
+                                  total += this.eigo;
+                                  return total;
+                                };
+
+                                obj.heikin = function(){ //=> Objectオブジェクトのheikinメソッド
+                                  var total = this.goukei();
+                                  return total/5;
+                                };
+
+                                var msg = '合計：' + obj.goukei() + '\n';
+                                msg += '平均：' + obj.heikin();
+                                console.log(msg);
+                        p 以下のようにオブジェクトリテラルでオブジェクトを生成することは無名オブジェクトを定義しているといえます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var obj = {a:'abc', b:123, c:true, c:function(){...}}

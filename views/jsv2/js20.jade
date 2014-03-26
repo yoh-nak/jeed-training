@@ -1,0 +1,52 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        |  例外処理
+                    .panel-body
+                        h4 例外が発生するかもしれない処理
+                        pre.
+                            try {
+                                例外が発生するかもしれない命令（群）
+                            } catch(例外情報を受け取る変数) {
+                                例外が発生した時の命令（群）
+                            } finally {
+                                例外の有無にかかわらず、最終的に実行される命令（群】
+                            };
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var i = 1;
+                                try {
+                                    i = i * j;
+                                } catch(e) {
+                                    console.log('e.message');
+                                } finally {
+                                    console.log('処理は完了しました。');
+                                }
+
+                        h4 例外を意図的に発生させる
+                        pre.
+                            throw new Error(エラーメッセージ)
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var x = 1;
+                                var y = 0;
+                                try{
+                                    if(y == 0){
+                                        throw new Error('0で除算しようとしました。');
+                                    }
+                                    var z = x / y;
+                                }catch(e){
+                                    console.log(e.message);
+                                }

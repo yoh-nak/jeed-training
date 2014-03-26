@@ -118,9 +118,9 @@ block content
 
                                 var mem1 = new MemberClass();
                                 var mem2 = new MemberClass();
-                                document.writeln(mem1.sex + ' | ' + mem2.sex); //=> 男 | 男
+                                console.log(mem1.sex + ' | ' + mem2.sex); //=> 男 | 男
                                 mem2.sex = '女';
-                                document.writeln(mem1.sex + ' | ' + mem2.sex); //=> 男 | 女
+                                console.log(mem1.sex + ' | ' + mem2.sex); //=> 男 | 女
                         p 以下のようにまとめられます。
                         pre
                             :code
@@ -161,13 +161,13 @@ block content
                                 }
 
                                 //静的プロパティの利用
-                                document.writeln('Areaクラスのバージョン: ' + AreaClass.version);
+                                console.log('Areaクラスのバージョン: ' + AreaClass.version);
                                 //静的メソッドの利用
-                                document.writeln(' 三角形の面積: ' + AreaClass.triangle(5, 3));
+                                console.log(' 三角形の面積: ' + AreaClass.triangle(5, 3));
 
                                 //インスタンス化
                                 var a = new AreaClass();
-                                document.writeln(' 菱型の面積: ' + a.diamond(10, 2)); //=> 静的メソッドをインスタンス化して利用するとエラー
+                                console.log(' 菱型の面積: ' + a.diamond(10, 2)); //=> 静的メソッドをインスタンス化して利用するとエラー
 
                         hr
                         h4 プロパティの削除
@@ -180,10 +180,10 @@ block content
                                 var mem1 = new MemberClass();
                                 var mem2 = new MemberClass();
 
-                                document.writeln(mem1.sex + ' | ' + mem2.sex); //=> 男 | 男
+                                console.log(mem1.sex + ' | ' + mem2.sex); //=> 男 | 男
 
                                 mwm2.sex = ' 女';
-                                document.writeln(mem1.sex + ' | ' + mem2.sex); //=> 男 | 女
+                                console.log(mem1.sex + ' | ' + mem2.sex); //=> 男 | 女
 
                                 //インスタンスmem1のsexプロパティを削除しようとしていますが、mem1はsexプロパティを持っていないのでなにもおきません
                                 delete mem1.sex;
@@ -192,7 +192,7 @@ block content
                                 dleete mem2.sex;
 
                                 //mem1は暗黙の参照をたどってプロトタイプオブジェクトのsexを返します。mem2は、独自のプロパティsexが削除されたので、暗黙の参照をたどって、プロトタイプオブジェクトのプロパティを返します。
-                                document.writeln(mem1.sex + ' | ' + mem2.sex); //=> 男 | 男
+                                console.log(mem1.sex + ' | ' + mem2.sex); //=> 男 | 男
 
                         p プロトタイプオブジェクトのメンバを削除するには、以下のようにします。ただし、このプロトタイプオブジェクトを参照しているすべてのインスタンスに影響がでるので注意しましょう。
                         pre(class='prettyprint linenums:1')
@@ -207,9 +207,9 @@ block content
 
                                 var mem1 = new MemberClass();
                                 var mem2 = new MemberClass();
-                                document.writeln(mem1.sex ' | ' + mem2.sex); //=> 男 | 男
+                                console.log(mem1.sex ' | ' + mem2.sex); //=> 男 | 男
                                 mem2.sex = undefined;
-                                document.writeln(mem1.sex ' | ' + mem2.sex); //=> 男 | undefined
+                                console.log(mem1.sex ' | ' + mem2.sex); //=> 男 | undefined
                         hr
                         h4 オブジェクトリテラルでプロトタイプの定義
                         p プロトタイプでメソッドを定義するとき、定義が独立した文で読みにくく、オブジェクト名に変更があった場合、コードをすべて修正する必要があります。
@@ -276,7 +276,7 @@ block content
                                 DogClass.prototype = new AnimalClass();
 
                                 Dog.prototype.bark = function(){
-                                    document.writeln('ワンワン！');
+                                    console.log('ワンワン！');
                                 };
 
                                 var d = new DogClass();
@@ -290,16 +290,16 @@ block content
 
                                 AnimalClass.prototype = {
                                     walk: function(){
-                                        document.writeln('トコトコ...');
+                                        console.log('トコトコ...');
                                     }
                                 };
 
                                 var SuperAnimalClass = function(){};
 
                                 SuperAnimalClass.prototype = {
-                                    walk: function(){
-                                        document.writeln('ダダダダダ！');
-                                    }
+                                walk: function(){
+                                    console.log('ダダダダダ！');
+                                }
                                 }
 
                                 var DogClass = function(){};

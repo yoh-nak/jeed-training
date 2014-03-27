@@ -1,0 +1,167 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        |  サーバーサイドでじゃんけんゲーム
+                    .panel-body
+                        p app.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /**
+                                 * Module dependencies.
+                                 */
+
+                                var express = require('express');
+                                var routes = require('./routes');
+                                var user = require('./routes/user');
+                                var http = require('http');
+                                var path = require('path');
+
+                                var app = express();
+
+                                // all environments
+                                app.set('port', process.env.PORT || 3000);
+                                app.set('views', path.join(__dirname, 'views'));
+                                app.set('view engine', 'jade');
+                                app.use(express.favicon());
+                                app.use(express.logger('dev'));
+                                app.use(express.json());
+                                app.use(express.urlencoded());
+                                app.use(express.methodOverride());
+                                app.use(app.router);
+                                app.use(require('stylus').middleware(path.join(__dirname, 'public')));
+                                app.use(express.static(path.join(__dirname, 'public')));
+
+                                // development only
+                                if ('development' == app.get('env')) {
+                                  app.use(express.errorHandler());
+                                }
+
+                                app.get('/', routes.index);
+                                <mark>app.post('/', routes.index);</mark>
+                                app.get('/users', user.list);
+
+                                http.createServer(app).listen(app.get('port'), function(){
+                                  console.log('Express server listening on port ' + app.get('port'));
+                                });
+                        p /routes/index.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /*
+                                 * GET home page.
+                                 */
+
+                                exports.index = function(req, res){
+
+                                    var janken = require('../libs/janken');
+
+                                    var obj = janken.fJanken(req.body.you);
+
+                                    if(req.method == 'POST'){
+                                        res.render('index', {
+                                            com: obj.com,
+                                            result: obj.result
+                                        });
+                                    }
+                                    else{
+                                        res.render('index', {
+                                            com: '',
+                                            result: ''
+                                        });
+                                    }
+                                    
+                                };
+                        p /views/index.jade
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja')
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+                                        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                        script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+                                    body
+                                        #index(data-role='page')
+                                            header(data-role='header')
+                                                h1 じゃんけんゲーム
+                                            div(data-role='content')
+                                                form(method='POST',action='/')
+                                                    fieldset(data-role='controlgroup', data-type='horizontal')
+                                                        input(type='submit',name='you',value='グー',data-inline='true')
+                                                        input(type='submit',name='you',value='チョキ',data-inline='true')
+                                                        input(type='submit',name='you',value='パー',data-inline='true')
+                                                p= com ? com : ''
+                                                p= result ? result : ''
+                                            footer(data-role='footer', data-position='fixed')
+                                                h1 フッター
+                        p /libs/janken.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                exports.fJanken = function(arg){
+                                    var com, you, result, te;
+
+                                    //手の文言定義
+                                    te = ['グー','チョキ','パー'];
+
+                                    //コンピューターの手
+                                    com = Math.floor(Math.random()*3);
+                                    
+                                    //自分の手を数値に置換
+                                    for(var i = 0; i < te.length; i++){
+                                        if(arg == te[i]) you = i;
+                                    }
+                                    
+                                    //コンピュータの手と自分の手を数値で比較して結果を出す
+                                    if(com == you){
+                                        result = 'あいこだよ'
+                                    }
+                                    else{
+                                        switch(com){
+                                            case 0:
+                                                if(you == 1){
+                                                    result = 'まけちゃった';
+                                                }
+                                                else if(you == 2){
+                                                    result = 'かった';
+                                                }
+                                                break;
+                                            case 1:
+                                                if(you == 0){
+                                                    result = 'かった';
+                                                }
+                                                else if(you == 2){
+                                                    result = 'まけちゃった';
+                                                }
+                                                break;
+                                            case 2:
+                                                if(you == 0){
+                                                    result = 'まけちゃった';
+                                                }
+                                                else if(you == 1){
+                                                    result = 'かった';
+                                                }
+                                                break;
+                                            default:
+                                                result = 'なぜだろう';
+                                        }
+                                    }
+                                    
+                                    //コンピュータの手の文言と結果の文言をまとめて返す
+                                    return {
+                                        com: te[com],
+                                        result: result
+                                    }
+                                }

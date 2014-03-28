@@ -1,0 +1,57 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        |  二次元配列
+                    .panel-body
+                        p 配列として宣言されたデータに、さらに配列を格納すると、二次元配列になります。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var ary = [];
+                                ary[0] = ['a', 'b', 'c'];
+                                ary[1] = [true, true, false];
+                                ary[2] = ['10', 'a', {'a': true}];
+
+                        p 以下のように配列にあらかじめ値が格納されていた場合、ary[0]には10が格納されていますが、その値「10」を上書きするように、配列「['a', 'b', 'c']」が格納されるので注意しましょう。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var ary = [10, 20, 30];
+                                ary[0] = ['a', 'b', 'c'];
+                                ary[1] = [true, true, false];
+                                ary[2] = ['10', 'a', {'a': true}];
+
+                        p 配列に、Arrayオブジェクトのコンストラクタを格納しても同様に、二次元配列になります。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var ary = new Array();
+                                ary[0] = new Array('b','b','c');
+                                ary[1] = new Array(true, true, false);
+                                ary[2] = new Array('10', 'a', {'a': true});
+
+                        p Arrayオブジェクトのpushメソッドで配列に格納することもできます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var ary = [];
+                                ary.push(['a', 'b', 'c']);
+                                ary.push([true, true, false]);
+                                ary.push(['10', 'a', {'a': true}]);
+
+                        p 二次元配列の初期値がわかっている場合は、以下のように記述すると可読性が高まります。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var ary = [
+                                  ['a', 'b', 'c'],
+                                  [true, true, false],
+                                  ['10', 'a', {'a': true}] 
+                                ];

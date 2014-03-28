@@ -2,7 +2,7 @@
 test = [90,80,70,60,50];
 subject = ['国語','算数','理科','社会','英語'];
 
-$(document).on('pagebeforecreate','#index',function(){
+$(document).on('pageshow','#index',function(){
     var sum, average;
     
     sum = 0;
@@ -12,6 +12,6 @@ $(document).on('pagebeforecreate','#index',function(){
         sum += test[i];
     }
     average = sum / test.length;
-    $('.ui-grid-a').append('<div class="ui-block-a"><div class="ui-bar ui-bar-b">平均</div></div>');
-    $('.ui-grid-a').append('<div class="ui-block-b"><div class="ui-bar ui-bar-b">' + average + '点</div></div>');
+    
+    $('.ui-grid-a').append('<div class="ui-block-a"><div class="ui-bar ui-bar-b">平均</div></div>').append('<div class="ui-block-b"><div class="ui-bar ui-bar-b">' + average + '点</div></div>');
 });</script></head><body><div id="index" data-role="page"><div data-role="header"><h1>配列の取得</h1></div><div data-role="content"><h1>テスト結果</h1><div class="ui-grid-a"></div></div><div data-position="fixed" data-role="footer"><h1>フッター</h1></div></div></body></html>

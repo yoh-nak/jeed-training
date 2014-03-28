@@ -3,34 +3,46 @@ html(lang='ja')
     head
         meta(charset='UTF-8')
         meta(content='width=device-width, user-scalable=no', name='viewport')
-        link(href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css', rel='stylesheet')
+        link(href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css',
+rel='stylesheet')
         script(src='http://code.jquery.com/jquery-1.9.1.min.js')
         script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
         title カラーテーブル
+        style
+            :stylus
+                table
+                    border-collapse collapse
+                td
+                    border 1px solid black
+                    width 35px
+                    height 35px
+                    text-align center
+                    vertical-align center
         script
             :js
-                var color = ['0', '3', '6', '9', 'C', 'F'];
-                $(document).on('pagebeforecreate','#index',function(){
-                    var table = undefined;
-                    for(var i = 0; i < color.length; i++){
-                        for(var j = 0; j < color.length; j++ ){
+                var table = '';
+                var color = '';
+                var colors = ['0', '3', '6', '9', 'C', 'F'];
+
+                $(document).on('pageshow','#index',function(){
+
+                    for(var i = 0; i < colors.length; i++){
+                        for(var j = 0; j < colors.length; j++){
                             table += '<tr>';
-                            for(var k = 0; k < color.length; k++ ){
-                                var bgc = color[i] + color[j] + color[k];
-                                table += '<td style="background-color:#' + bgc + '">';
-                                table += '#' + bgc
+
+                            for(var k = 0; k < colors.length; k++){
+                                color = '#' + colors[i] + colors[j] + colors[k];
+                                table += '<td style="background-color:' + color + ';">';
+                                table += color;
                                 table += '</td>';
                             }
+
                             table += '</tr>';
                         }
                     }
-                    $('table').html(table);
+
+                    $('table').append(table);
                 });
-        style
-            :stylus
-                td
-                    width 20px
-                    height 20px
     body
         #index(data-role='page')
             div(data-role='header')

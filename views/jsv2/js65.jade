@@ -1,0 +1,201 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-bookmark
+                        |  課題
+                    .panel-body
+                        p 必要なデータを記録したオブジェクトの構造を考えて、繰り返し処理でサムネイル付きのlistviewを表示してみましょう。
+                        p
+                            a.btn.btn-default(href='../demo/js/excercise18/index.html', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                |  デモ①
+                            |  
+                            a.btn.btn-default(href='../demo/js/excercise27/index.html', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                |  デモ②
+                            |  
+                            a.btn.btn-default(href='../demo/js/excercise35/index.html', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                |  デモ③
+                            |  
+                            button.btn.btn-danger(type='button', data-toggle='collapse', data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                |  解答例
+                        #demo.collapse.out
+                            | デモ①
+                            pre(class='prettyprint linenums:1')
+                                :code
+                                    doctype
+                                    html(lang='ja')
+                                        head
+                                            meta(charset='UTF-8')
+                                            meta(content='width=device-width, user-scalable=no', name='viewport')
+                                            link(href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css', rel='stylesheet')
+                                            script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                            script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+                                            script
+                                                :js
+                                                    $(document).on('pageshow','#index',function(){
+                                                        var planet = {
+                                                            planeId0: {
+                                                                en : "sun", ja: "太陽", img: "sun.png"
+                                                            },
+                                                            planeId1: {
+                                                                en : "mercury", ja: "水星", img: "mercury.png"
+                                                            },
+                                                            planeId2: {
+                                                                en : "venus", ja: "金星", img: "venus.png"
+                                                            },
+                                                            planeId3: {
+                                                                en : "earth", ja: "地球", img: "earth.png"
+                                                            },
+                                                            planeId4: {
+                                                                en : "moon", ja: "月", img: "moon.png"
+                                                            },
+                                                            planeId5: {
+                                                                en : "mars", ja: "火星", img: "mars.png"
+                                                            },
+                                                            planeId6: {
+                                                                en : "jupiter", ja: "木星", img: "jupiter.png"
+                                                            },
+                                                            planeId7: {
+                                                                en : "saturn", ja: "土星", img: "saturn.png"
+                                                            },
+                                                            planeId8: {
+                                                                en : "uranus", ja: "天王星", img: "uranus.png"
+                                                            },
+                                                            planeId9: {
+                                                                en : "neptune", ja: "海王星", img: "neptune.png"
+                                                            },
+                                                            planeId10: {
+                                                                en : "pluto", ja: "冥王星", img: "pluto.png"
+                                                            },
+                                                            planeId11: {
+                                                                en : "eris", ja: "エリス", img: "eris.png"
+                                                            }
+                                                        };
+                                                        var html = '';
+                                                        for(var key in planet){
+                                                            html += '<li><a href="#">\
+                                                            <img src="' + planet[key].img + '"><h2>\
+                                                            ' + planet[key].ja + '</h2>\
+                                                            <p>' + planet[key].en + '</p></a></li>';
+                                                        }
+                                                        $('[data-role="listview"]').append(html).listview('refresh');
+                                                    });
+                                            title オブジェクトの取得
+                                        body
+                                            #index(data-role='page')
+                                                div(data-role='header')
+                                                    h1 オブジェクトの取得
+                                                div(data-role='content')
+                                                    ul(data-inset='true', data-role='listview')
+                                                div(data-position='fixed', data-role='footer')
+                                                    h1 フッター
+                            hr
+                            |  デモ②
+                            pre(class='prettyprint linenums:1')
+                                :code
+                                    doctype
+                                    html(lang='ja')
+                                        head
+                                            meta(charset='UTF-8')
+                                            meta(content='width=device-width, user-scalable=no', name='viewport')
+                                            link(href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css', rel='stylesheet')
+                                            script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                            script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+                                            title オブジェクトの取得
+                                            script
+                                                :js
+                                                    $(document).on('pageshow','#index',function(){
+                                                        var obj = {
+                                                            planet: [
+                                                            { en : "sun", ja: "太陽", img: "sun.png" },
+                                                            { en : "mercury", ja: "水星", img: "mercury.png" },
+                                                            { en : "venus", ja: "金星", img: "venus.png" },
+                                                            { en : "earth", ja: "地球", img: "earth.png" },
+                                                            { en : "moon", ja: "月", img: "moon.png" },
+                                                            { en : "mars", ja: "火星", img: "mars.png" },
+                                                            { en : "jupiter", ja: "木星", img: "jupiter.png" },
+                                                            { en : "saturn", ja: "土星", img: "saturn.png" },
+                                                            { en : "uranus", ja: "天王星", img: "uranus.png" },
+                                                            { en : "neptune", ja: "海王星", img: "neptune.png" },
+                                                            { en : "pluto", ja: "冥王星", img: "pluto.png" },
+                                                            { en : "eris", ja: "エリス", img: "eris.png"}
+                                                            ]
+                                                        };
+                                                        var html = '';
+                                                        for(var i = 0; i < obj.planet.length; i++){
+                                                            html += '<li><a href="#">\
+                                                            <img src="' + obj.planet[i].img + '"><h2>\
+                                                            ' + obj.planet[i].ja + '</h2>\
+                                                            <p>' + obj.planet[i].en + '</p></a></li>';
+                                                        }
+                                                        $('[data-role="listview"]').append(html).listview('refresh');
+                                                    });
+                                        body
+                                            #index(data-role='page')
+                                                div(data-role='header')
+                                                    h1 オブジェクトの取得
+                                                div(data-role='content')
+                                                    ul(data-inset='true', data-role='listview')
+                                                div(data-position='fixed', data-role='footer')
+                                                    h1 フッター
+                            hr
+                            | デモ③
+                            pre(class='prettyprint linenums:1')
+                                :code
+                                    doctype
+                                    html(lang='ja')
+                                        head
+                                            meta(charset='UTF-8')
+                                            meta(content='width=device-width, user-scalable=no', name='viewport')
+                                            link(href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css', rel='stylesheet')
+                                            script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                            script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+                                            title オブジェクトの取得
+                                            script
+                                                :js
+                                                    $(document).on('pageshow','#index',function(){
+                                                        var ary = [
+                                                            { en : "sun", ja: "太陽", img: "sun.png" },
+                                                            { en : "mercury", ja: "水星", img: "mercury.png" },
+                                                            { en : "venus", ja: "金星", img: "venus.png" },
+                                                            { en : "earth", ja: "地球", img: "earth.png" },
+                                                            { en : "moon", ja: "月", img: "moon.png" },
+                                                            { en : "mars", ja: "火星", img: "mars.png" },
+                                                            { en : "jupiter", ja: "木星", img: "jupiter.png" },
+                                                            { en : "saturn", ja: "土星", img: "saturn.png" },
+                                                            { en : "uranus", ja: "天王星", img: "uranus.png" },
+                                                            { en : "neptune", ja: "海王星", img: "neptune.png" },
+                                                            { en : "pluto", ja: "冥王星", img: "pluto.png" },
+                                                            { en : "eris", ja: "エリス", img: "eris.png"}
+                                                        ];
+                                                        var html = '';
+                                                        for(var i = 0; i < ary.length; i++){
+                                                            html += '<li><a href="#">\
+                                                            <img src="' + ary[i].img + '"><h2>\
+                                                            ' + ary[i].ja + '</h2>\
+                                                            <p>' + ary[i].en + '</p></a></li>';
+                                                        }
+                                                        $('[data-role="listview"]').append(html).listview('refresh');
+                                                    });
+                                        body
+                                            #index(data-role='page')
+                                                div(data-role='header')
+                                                    h1 オブジェクトの取得
+                                                div(data-role='content')
+                                                    ul(data-inset='true', data-role='listview')
+                                                div(data-position='fixed', data-role='footer')
+                                                    h1 フッター

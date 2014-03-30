@@ -20,9 +20,14 @@ block content
                             a.btn.btn-default(href='http://api.jquery.com/jQuery.each/', target='_blank')
                                 i.glyphicon.glyphicon-info-sign
                                 | 参考: jQuery.each()
+                            |  
                             a.btn.btn-default(href='http://jsfiddle.net/', target='_blank')
                                 i.glyphicon.glyphicon-play
                                 | JSFiddle
+                        p また、Underscore.jsを使って配列やオブジェクトの処理を簡単に記述できます。
+                        p 
+                            | ドットインストール<br>
+                            a(href='http://dotinstall.com/lessons/basic_underscorejs',target='_blank') Underscore.js入門
                         hr
                         h4 jQueryで配列を取得する
                         pre(class='prettyprint linenums:1')
@@ -32,7 +37,22 @@ block content
                                 $.each(ary, function(i) {
                                     total += ary[i];
                                 });
-                                alert('合計: ' + total);
+                                console.log('合計: ' + total);
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                ary = [
+                                  98
+                                  82
+                                  70
+                                  86
+                                  53
+                                ]
+                                total = 0
+                                $.each ary, (i) ->
+                                  total += ary[i]
+                                  return
+
+                                console.log "合計: " + total
                         hr
                         h4 jQueryで二次元配列を取得する
                         pre(class='prettyprint linenums:1')
@@ -50,8 +70,43 @@ block content
                                         total += ary[i][j];
                                     });
                                 });
-                                alert('合計: ' + total);
+                                console.log('合計: ' + total);
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                ary = [
+                                  [
+                                    98
+                                    82
+                                    70
+                                    86
+                                    53
+                                  ]
+                                  [
+                                    59
+                                    58
+                                    54
+                                    80
+                                    85
+                                  ]
+                                  [
+                                    73
+                                    59
+                                    58
+                                    74
+                                    95
+                                  ]
+                                ]
+                                total = 0
+                                $.each ary, (i) ->
+                                  
+                                  #console.log(ary[i]); //配列が出力される
+                                  $.each ary[i], (j) ->
+                                    total += ary[i][j]
+                                    return
 
+                                  return
+
+                                console.log "合計: " + total
                         hr
                         h4 jQueryでオブジェクトを取得する
                         pre(class='prettyprint linenums:1')
@@ -64,4 +119,22 @@ block content
                                     total += value;
                                 });
                                 msg += '合計: ' + total;
-                                alert(msg);
+                                console.log(msg);
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                obj =
+                                  "国語": 98
+                                  "算数": 82
+                                  "理科": 70
+                                  "社会": 86
+                                  "英語": 53
+
+                                total = 0
+                                msg = ""
+                                $.each obj, (key, value) ->
+                                  msg += key + ": " + value + "\n"
+                                  total += value
+                                  return
+
+                                msg += "合計: " + total
+                                console.log msg

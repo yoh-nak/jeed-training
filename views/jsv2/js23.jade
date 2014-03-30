@@ -1,0 +1,111 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        |  テンプレートにオブジェクトを渡す
+                    .panel-body
+                        p app.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /**
+                                 * Module dependencies.
+                                 */
+
+                                var express = require('express');
+                                var routes = require('./routes');
+                                var user = require('./routes/user');
+                                var http = require('http');
+                                var path = require('path');
+
+                                var app = express();
+
+                                // all environments
+                                app.set('port', process.env.PORT || 3000);
+                                app.set('views', path.join(__dirname, 'views'));
+                                app.set('view engine', 'jade');
+                                app.use(express.favicon());
+                                app.use(express.logger('dev'));
+                                app.use(express.json());
+                                app.use(express.urlencoded());
+                                app.use(express.methodOverride());
+                                app.use(app.router);
+                                app.use(require('stylus').middleware(path.join(__dirname, 'public')));
+                                app.use(express.static(path.join(__dirname, 'public')));
+
+                                // development only
+                                if ('development' == app.get('env')) {
+                                  app.use(express.errorHandler());
+                                }
+
+                                app.get('/', routes.index);
+                                app.get('/users', user.list);
+
+                                http.createServer(app).listen(app.get('port'), function(){
+                                  console.log('Express server listening on port ' + app.get('port'));
+                                });
+
+                        p /routes/index.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /*
+                                 * GET home page.
+                                 */
+
+                                exports.index = function(req, res){
+
+                                    var test = {
+                                        '国語': 90,
+                                        '算数': 80,
+                                        '理科': 70,
+                                        '社会': 60,
+                                        '英語': 50
+                                    }
+                                    res.render('index', {
+                                        test: test
+                                    });
+                                };
+                        p /views/index.jade
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja')
+                                    head
+                                        meta(charset='UTF-8')
+                                        meta(content='width=device-width, user-scalable=no', name='viewport')
+                                        link(href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css', rel='stylesheet')
+                                        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                        script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+                                        title オブジェクトの取得
+                                    body
+                                        #index(data-role='page')
+                                            div(data-role='header')
+                                                h1 オブジェクトの取得
+                                            div(data-role='content')
+                                                h1 テスト結果
+                                                .ui-grid-a
+                                                    -var sum = 0;
+                                                    -var cnt = 0;
+                                                    -for(var key in test)
+                                                        .ui-block-a
+                                                            .ui-bar.ui-bar-a= key
+                                                        .ui-block-b
+                                                            .ui-bar.ui-bar-a #{test[key]}点
+                                                        - sum += test[key];
+                                                        - cnt++;
+                                                    .ui-block-a
+                                                        .ui-bar.ui-bar-b 平均
+                                                    .ui-block-b
+                                                        .ui-bar.ui-bar-b #{sum / cnt}点
+                                            div(data-position='fixed', data-role='footer')
+                                                h1 フッター

@@ -1,0 +1,121 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        |  テンプレートでオセロ
+                    .panel-body
+                        p app.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /**
+                                 * Module dependencies.
+                                 */
+
+                                var express = require('express');
+                                var routes = require('./routes');
+                                var user = require('./routes/user');
+                                var http = require('http');
+                                var path = require('path');
+
+                                var app = express();
+
+                                // all environments
+                                app.set('port', process.env.PORT || 3000);
+                                app.set('views', path.join(__dirname, 'views'));
+                                app.set('view engine', 'jade');
+                                app.use(express.favicon());
+                                app.use(express.logger('dev'));
+                                app.use(express.json());
+                                app.use(express.urlencoded());
+                                app.use(express.methodOverride());
+                                app.use(app.router);
+                                app.use(require('stylus').middleware(path.join(__dirname, 'public')));
+                                app.use(express.static(path.join(__dirname, 'public')));
+
+                                // development only
+                                if ('development' == app.get('env')) {
+                                  app.use(express.errorHandler());
+                                }
+
+                                app.get('/', routes.index);
+                                app.post('/', routes.index);
+                                app.get('/users', user.list);
+
+                                http.createServer(app).listen(app.get('port'), function(){
+                                  console.log('Express server listening on port ' + app.get('port'));
+                                });
+
+                        p /routes/index.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /*
+                                 * GET home page.
+                                 */
+
+                                exports.index = function(req, res){
+
+                                    var othello    = [
+                                        [-1,-1,-1,-1,-1,-1,-1,-1],
+                                        [-1,-1,-1,-1,-1,-1,-1,-1],
+                                        [-1,-1,-1,-1,-1,-1,-1,-1],
+                                        [-1,-1,-1, 0, 1,-1,-1,-1],
+                                        [-1,-1,-1, 1, 0,-1,-1,-1],
+                                        [-1,-1,-1,-1,-1,-1,-1,-1],
+                                        [-1,-1,-1,-1,-1,-1,-1,-1],
+                                        [-1,-1,-1,-1,-1,-1,-1,-1]
+                                    ];
+
+                                    res.render('index', {
+                                        othello: othello
+                                    });
+                                };
+                        p /views/index.jade
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja')
+                                    head
+                                        meta(charset='UTF-8')
+                                        meta(content='width=device-width, user-scalable=no', name='viewport')
+                                        link(href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css', rel='stylesheet')
+                                        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                        script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+                                        title オセロの盤
+                                        style
+                                            :stylus
+                                                table td
+                                                    padding 5px
+                                                    box-sizing border-box
+                                                    width 50px
+                                                    height 50px
+                                                    background-color yellowgreen
+                                                    text-align center
+                                    body
+                                        #index(data-role='page')
+                                            div(data-role='header')
+                                                h1 オセロ
+                                            div(data-role='content')
+                                                table
+                                                    -for(var i = 0; i < othello.length; i++)
+                                                        tr
+                                                        -for(var j = 0; j < othello[i].length; j++)
+                                                            case othello[i][j]
+                                                                when -1
+                                                                    td= othello[i][j]
+                                                                when 0
+                                                                    td(style='background-color:white;')= othello[i][j]
+                                                                when 1
+                                                                    td(style='background-color:black;')= othello[i][j]
+                                            div(data-position='fixed', data-role='footer')
+                                                h1 フッター

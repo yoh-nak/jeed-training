@@ -190,7 +190,7 @@
 
   app.get("/framework/:id", js.framework);
 
-  app.get("/jsrecipe-:id", js.recipe);
+  app.get("/recipe/:id", js.recipe);
 
   app.get("/cordova/:id", js.cordova);
 

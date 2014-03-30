@@ -105,7 +105,7 @@ exports.framework = (req, res) ->
 
 #JavaScriptレシピ
 exports.recipe = (req, res) ->
-	res.render "js/recipe/recipe1-" + req.params.id,
+	res.render "js/recipe/recipe" + req.params.id,
 		title: define.title
 		instructor: define.instructor
-
+		pretty: true

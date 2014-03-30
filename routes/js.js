@@ -125,9 +125,10 @@
   };
 
   exports.recipe = function(req, res) {
-    return res.render("js/recipe/recipe1-" + req.params.id, {
+    return res.render("js/recipe/recipe" + req.params.id, {
       title: define.title,
-      instructor: define.instructor
+      instructor: define.instructor,
+      pretty: true
     });
   };
 

@@ -127,7 +127,7 @@ app.get "/canvas/:id", js.canvas # Canvas
 app.get "/enchant/:id", js.enchant # enchant.js
 app.get "/library/:id", js.library # ライブラリ
 app.get "/framework/:id", js.framework # フレームワーク
-app.get "/jsrecipe-:id", js.recipe
+app.get "/recipe/:id", js.recipe
 app.get "/cordova/:id", js.cordova
 
 #ルーティングPOST送信

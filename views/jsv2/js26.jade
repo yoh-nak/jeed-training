@@ -1,0 +1,121 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        |  サーバーにブラウザの幅を送信
+                    .panel-body
+                        p app.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /**
+                                 * Module dependencies.
+                                 */
+
+                                var express = require('express');
+                                var routes = require('./routes');
+                                var user = require('./routes/user');
+                                var http = require('http');
+                                var path = require('path');
+
+                                var app = express();
+
+                                // all environments
+                                app.set('port', process.env.PORT || 3000);
+                                app.set('views', path.join(__dirname, 'views'));
+                                app.set('view engine', 'jade');
+                                app.use(express.favicon());
+                                app.use(express.logger('dev'));
+                                app.use(express.json());
+                                app.use(express.urlencoded());
+                                app.use(express.methodOverride());
+                                app.use(app.router);
+                                app.use(require('stylus').middleware(path.join(__dirname, 'public')));
+                                app.use(express.static(path.join(__dirname, 'public')));
+
+                                // development only
+                                if ('development' == app.get('env')) {
+                                  app.use(express.errorHandler());
+                                }
+
+                                app.get('/', routes.index);
+                                <mark>app.post('/', routes.index);</mark>
+                                app.get('/users', user.list);
+
+                                http.createServer(app).listen(app.get('port'), function(){
+                                  console.log('Express server listening on port ' + app.get('port'));
+                                });
+
+                        p /routes/index.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /*
+                                 * GET home page.
+                                 */
+
+                                exports.index = function(req, res){
+                                    res.render('index', {
+                                        method: req.method,
+                                        //innerWidthを取得してテンプレートに適用
+                                        innerWidth: <mark>req.body.innerWidth</mark>
+                                    });
+                                };
+                        p /views/index.jade
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja')
+                                    head
+                                        meta(charset='UTF-8')
+                                        meta(content='width=device-width, user-scalable=no', name='viewport')
+                                        link(href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css', rel='stylesheet')
+                                        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                        script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+                                        title ランダムイメージ
+                                        style
+                                            :stylus
+                                                [data-role="content"]
+                                                    position relative
+                                                    height 480px
+                                                [data-role="content"]
+                                                    img
+                                                        width 64px
+                                                        height 64px
+                                                        position absolute
+                                        script
+                                            :js
+                                                $(document).on('pageshow','#index',function(){
+                                                    $('input').on('vclick',function(){
+                                                        //ブラウザの幅を取得してhiddenで送信
+                                                        <mark>$('[name=innerWidth]').val(window.innerWidth);</mark>
+                                                        $('form').submit();
+                                                    });
+                                                });
+                                    body
+                                        #index(data-role='page')
+                                            div(data-role='header')
+                                                h1 ランダムイメージ
+                                            div(data-role='content')
+                                                if(method=='GET')
+                                                    form(method='POST',action='/')
+                                                        //hiddenでinnerWidthを送信
+                                                        input(type='hidden',name='<mark>innerWidth</mark>')
+                                                        input(type='button',value='スタート')
+                                                else
+                                                    -for(var i = 0; i < 20; i++)
+                                                        -var top = Math.floor(Math.random() * (480-64));
+                                                        //サーバーからinnerWidthを受け取る
+                                                        -var left = Math.floor(Math.random() * (<mark>innerWidth</mark>-64));
+                                                        img(src='images/kumamon.gif',alt='',style='top:#{top}px;left:#{left}px;')
+                                            div(data-position='fixed', data-role='footer')
+                                                h1 フッター

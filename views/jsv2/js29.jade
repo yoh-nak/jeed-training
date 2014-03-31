@@ -13,7 +13,7 @@ block content
                 .panel.panel-primary
                     .panel-heading
                         i.glyphicon.glyphicon-book
-                        |  サーバーにリアルタイムに送信
+                        |  サーバーからリアルタイムに受信
                     .panel-body
                         pre.
                             npm install socket.io --save
@@ -50,31 +50,26 @@ block content
                                   app.use(express.errorHandler());
                                 }
 
-                                app.get('/', routes.index);
-                                app.post('/', routes.index);
-                                app.get('/users', user.list);
-
-
-                                <mark>var server = </mark>http.createServer(app).listen(app.get('port'), function(){
+                                var server = http.createServer(app).listen(app.get('port'), function(){
                                     console.log('Express server listening on port ' + app.get('port'));
                                 });
 
-                                <mark>//Socket.IO
+                                //Socket.IO
                                 var buff = 0;
-                                //Socket.IO読み込み
-                                var io = require('socket.io').listen(server);
-                                //ログレベル
-                                io.set('log level', 1);
-                                //Socket接続
+                                <mark>var io = require('socket.io').listen(server);
+                                io.set('log level', 1);</mark>
                                 io.sockets.on('connection', function(socket){
-                                    //イベント受信
                                     socket.on('emit_del_img',function(data){
                                         if(buff != data){
                                             buff = data;
                                             console.log(buff);
                                         }   
                                     });
-                                });</mark>
+                                });
+
+                                <mark>app.get('/', routes.index(io));
+                                app.post('/', routes.index(io));</mark>
+                                app.get('/users', user.list);
                         p /routes/index.js
                         pre(class='prettyprint linenums:1')
                             :code
@@ -82,13 +77,45 @@ block content
                                  * GET home page.
                                  */
 
-                                exports.index = function(req, res){
-                                    res.render('index', {
-                                        method: req.method,
-                                        innerWidth: req.body.innerWidth,
-                                        level: req.body.level
-                                    });
-                                };
+                                <mark>exports.index = function(io){
+                                    return function(req, res){</mark>
+
+                                        if(req.method == 'POST'){
+                                            //ゲームスタート
+                                            (function(){
+                                                var time, timerId;
+                                                
+                                                time = 12;
+                                                //タイマースタート
+                                                countDown();
+                                                function countDown(){
+                                                    time--;
+                                                    timerId = setTimeout(function(){
+                                                        <mark>//クライアントにタイマー送信
+                                                        io.sockets.emit('emit_timer',time);</mark>
+
+                                                        //タイマー解除
+                                                        if(time <= 0){
+                                                            clearInterval(timerId);
+                                                            console.log('clear');
+                                                        }
+                                                        else{
+                                                            //タイマー再実行
+                                                            countDown();
+                                                        }
+                                                    },1000);
+
+                                                }
+                                            })();
+                                        }
+                                        
+                                        res.render('index', {
+                                            method: req.method,
+                                            innerWidth: req.body.innerWidth,
+                                            level: req.body.level
+                                        });
+                                    <mark>};
+                                };</mark>
                         p /views/index.jade
                         pre(class='prettyprint linenums:1')
                             :code
@@ -100,7 +127,7 @@ block content
                                         link(href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css', rel='stylesheet')
                                         script(src='http://code.jquery.com/jquery-1.9.1.min.js')
                                         script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
-                                        <mark>script(src='/socket.io/socket.io.js')</mark>
+                                        script(src='/socket.io/socket.io.js')
                                         //script(src='http://localhost:3000/socket.io/socket.io.js')
                                         title ランダムイメージ
                                         style
@@ -108,38 +135,53 @@ block content
                                                 [data-role="content"]
                                                     position relative
                                                     height 480px
-                                                [data-role="content"]
                                                     img
                                                         width 64px
                                                         height 64px
                                                         position absolute
+                                                    <mark>#timer
+                                                        position absolute
+                                                        top 20px
+                                                        left 20px
+                                                        font-weight bold
+                                                        font-size 32px
+                                                        display none</mark>
                                         script
                                             :js
+                                                var socket = io.connect();
+
                                                 $(document).on('pageshow','#index',function(){
 
-                                                    <mark>var point = 0;
-                                                    //Socket接続
-                                                    var socket = io.connect();</mark>
+                                                    var point = 0;
 
-                                                    $('input[type=button]').on('vclick',function(){
+                                                    $('input[type=button]').on('vclick',function(e){
+                                                        e.preventDefault();
                                                         $('[name=innerWidth]').val(window.innerWidth);
                                                         $('form').submit();
                                                     });
 
                                                     //画像削除
                                                     $(document).on('vclick','#index img',function(){
-                                                        <mark>point++;
-                                                        //イベント送信
-                                                        socket.emit('emit_del_img',point);</mark>
+                                                        point++;
+                                                        //Socket送信
+                                                        socket.emit('emit_del_img',point);
                                                         $(this).remove();
                                                     });
                                                     
+                                                    <mark>//Soeket受信
+                                                    socket.on('emit_timer',function(data){
+                                                        $('.ui-content #timer').show().text(data);
+                                                        if(data < 10){
+                                                            $('.ui-content #timer').css('color','red');
+                                                        }
+                                                    });</mark>
                                                 });
                                     body
                                         #index(data-role='page')
                                             div(data-role='header')
                                                 h1 ランダムイメージ
                                             div(data-role='content')
+                                                <mark>#timer 0</mark>
                                                 if(method=='GET')
                                                     form(method='POST',action='/')
                                                         fieldset(data-role='controlgroup')

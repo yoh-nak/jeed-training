@@ -32,56 +32,64 @@ block content
                                         head
                                             meta(charset='UTF-8')
                                             title
-                                            link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+                                            link(rel='stylesheet',
+                                    href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
                                             script(src='http://code.jquery.com/jquery-1.9.1.min.js')
                                             script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
                                             script
                                                 :js
                                                     $(document).on('pageshow','#index',function(){
-                                                        var com = undefined; var you = undefined;
+
+                                                        var com, me;
                                                         var te = ['グー','チョキ','パー'];
 
-                                                        $('#0,#1,#2').on('vclick',function(){
+                                                        $('a').on('vclick',function(){
+                                                            //コンピュータの手
+                                                            com = Math.floor(Math.random()*3);
+                                                            //自分の手
+                                                            me = parseInt($(this).attr('data-me'));
 
-                                                            //コンピュータとあなたの手を格納
-                                                            com = Math.floor(Math.random()*3); //乱数0〜2
-                                                            you = parseInt($(this).attr('id')); //idの取得
+                                                            $('#com').text('コンピューターは'+te[com]+'を出しました。');
 
-                                                            //コンピューターの手を出力
-                                                            $('#com').text(te[com]);
-
-                                                            //結果の出力
-                                                            if(com == you){
+                                                            //あいこのとき
+                                                            if(com == me){
                                                                 $('#result').text('あいこだよ');
                                                             }
+                                                            //勝敗がつくとき
                                                             else{
                                                                 switch(com){
                                                                     case 0:
-                                                                        if(you == 1){
-                                                                            $('#result').text('まけちゃった');
-                                                                        }
-                                                                        else if(you == 2){
-                                                                            $('#result').text('かった');
+                                                                        switch(me){
+                                                                            case 1:
+                                                                                $('#result').text('負けちゃった');
+                                                                                break;
+                                                                            case 2:
+                                                                                $('#result').text('勝った！');
+                                                                                break;
                                                                         }
                                                                         break;
                                                                     case 1:
-                                                                        if(you == 0){
-                                                                            $('#result').text('かった');
-                                                                        }
-                                                                        else if(you == 2){
-                                                                            $('#result').text('まけちゃった');
+                                                                        switch(me){
+                                                                            case 0:
+                                                                                $('#result').text('勝った！');
+                                                                                break;
+                                                                            case 2:
+                                                                                $('#result').text('負けちゃった');
+                                                                                break;
                                                                         }
                                                                         break;
                                                                     case 2:
-                                                                        if(you == 0){
-                                                                            $('#result').text('まけちゃった');
-                                                                        }
-                                                                        else if(you == 1){
-                                                                            $('#result').text('かった');
+                                                                        switch(me){
+                                                                            case 0:
+                                                                                $('#result').text('負けちゃった');
+                                                                                break;
+                                                                            case 1:
+                                                                                $('#result').text('勝った！');
+                                                                                break;
                                                                         }
                                                                         break;
                                                                     default:
-                                                                        $('#result').text('なぜだろう');
+                                                                        $('#result').text('エラー');
                                                                 }
                                                             }
                                                         });
@@ -91,9 +99,9 @@ block content
                                                 header(data-role='header')
                                                     h1 じゃんけんゲーム
                                                 div(data-role='content')
-                                                    a#0(data-role='button', data-inline='true') グー
-                                                    a#1(data-role='button', data-inline='true') チョキ
-                                                    a#2(data-role='button', data-inline='true') パー
+                                                    a(data-role='button', data-inline='true', data-me='0') グー
+                                                    a(data-role='button', data-inline='true', data-me='1') チョキ
+                                                    a(data-role='button', data-inline='true', data-me='2') パー
                                                     p#com
                                                     p#result
                                                 footer(data-role='footer', data-position='fixed')

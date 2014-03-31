@@ -13,7 +13,7 @@ block content
                 .panel.panel-primary
                     .panel-heading
                         i.glyphicon.glyphicon-bookmark
-                        | 課題
+                        |  課題
                     .panel-body
                         p クリア、ゲームオーバーしたときに元の画面に戻るれるようにしてみましょう。早く終わったらPhonegapでアプリに変換してみましょう。
                         p
@@ -73,11 +73,16 @@ block content
                                                                     clearInterval(timerId);
 
                                                                     alert('クリア');
-                                                                    
+
+                                                                    /*
+                                                                    //deprecate
                                                                     $.mobile.changePage('#index',{
                                                                         reloadPage:true,
                                                                         transition:'slideup'
                                                                     });
+                                                                    */
+                                                                    //1.4の仕様変更により一時的にこれで対応
+                                                                    window.location.reload();
                                                                     
                                                                 }
                                                             });
@@ -120,9 +125,21 @@ block content
                                                                         $('#index').removeClass('ui-body-c').addClass('ui-body-a');
                                                                         alert('ゲームオーバー');
 
+                                                                        /*
+                                                                        //deprecate
                                                                         $.mobile.changePage('#index',{
                                                                             reloadPage:true,
                                                                             transition:'slideup'
+                                                                        });
+                                                                        */
+                                                                        //1.4の仕様変更により一時的にこれで対応
+                                                                        window.location.reload();
+
+                                                                        $(':mobile-pagecontainer').pagecontainer('change', '#index', {
+                                                                            transition: 'slideup',
+                                                                            changeHash: false,
+                                                                            reverse: false,
+                                                                            showLoadMsg: true
                                                                         });
                                                                     }
                                                                 })();

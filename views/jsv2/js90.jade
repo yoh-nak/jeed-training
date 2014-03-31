@@ -100,9 +100,9 @@ block content
                                             div(data-role='content')
                                                 form(method='POST',action='/')
                                                     fieldset(data-role='controlgroup', data-type='horizontal')
-                                                        input(type='submit',name='you',value='グー',data-inline='true')
-                                                        input(type='submit',name='you',value='チョキ',data-inline='true')
-                                                        input(type='submit',name='you',value='パー',data-inline='true')
+                                                        input(type='submit',name='me',value='グー',data-inline='true')
+                                                        input(type='submit',name='me',value='チョキ',data-inline='true')
+                                                        input(type='submit',name='me',value='パー',data-inline='true')
                                                 p= com ? com : ''
                                                 p= result ? result : ''
                                             footer(data-role='footer', data-position='fixed')
@@ -111,57 +111,62 @@ block content
                         pre(class='prettyprint linenums:1')
                             :code
                                 exports.fJanken = function(arg){
-                                    var com, you, result, te;
-
-                                    //手の文言定義
+                                    var com, me, result, te;
                                     te = ['グー','チョキ','パー'];
 
-                                    //コンピューターの手
+                                    //コンピュータの手
                                     com = Math.floor(Math.random()*3);
-                                    
+
                                     //自分の手を数値に置換
                                     for(var i = 0; i < te.length; i++){
-                                        if(arg == te[i]) you = i;
+                                        //自分の手
+                                        if(te[i] == arg) me = i;
                                     }
-                                    
-                                    //コンピュータの手と自分の手を数値で比較して結果を出す
-                                    if(com == you){
-                                        result = 'あいこだよ'
+
+                                    //あいこのとき
+                                    if(com == me){
+                                        result = 'あいこだよ';
                                     }
+                                    //勝敗がつくとき
                                     else{
                                         switch(com){
                                             case 0:
-                                                if(you == 1){
-                                                    result = 'まけちゃった';
-                                                }
-                                                else if(you == 2){
-                                                    result = 'かった';
+                                                switch(me){
+                                                    case 1:
+                                                        result = '負けちゃった';
+                                                        break;
+                                                    case 2:
+                                                        result = '勝った！';
+                                                        break;
                                                 }
                                                 break;
                                             case 1:
-                                                if(you == 0){
-                                                    result = 'かった';
-                                                }
-                                                else if(you == 2){
-                                                    result = 'まけちゃった';
+                                                switch(me){
+                                                    case 0:
+                                                        result = '勝った！';
+                                                        break;
+                                                    case 2:
+                                                        result = '負けちゃった';
+                                                        break;
                                                 }
                                                 break;
                                             case 2:
-                                                if(you == 0){
-                                                    result = 'まけちゃった';
-                                                }
-                                                else if(you == 1){
-                                                    result = 'かった';
+                                                switch(me){
+                                                    case 0:
+                                                        result = '負けちゃった';
+                                                        break;
+                                                    case 1:
+                                                        result = '勝った！';
+                                                        break;
                                                 }
                                                 break;
                                             default:
-                                                result = 'なぜだろう';
+                                                result = 'エラー';
                                         }
                                     }
-                                    
-                                    //コンピュータの手の文言と結果の文言をまとめて返す
+
                                     return {
-                                        com: te[com],
+                                        com: 'コンピューターは'+te[com]+'を出しました。',
                                         result: result
                                     }
                                 }

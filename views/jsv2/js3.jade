@@ -54,8 +54,8 @@ block content
                         hr
                         h4 連想配列（オブジェクト）の値を取得
                         pre.
-                            変数 = 配列[キー];
-                            変数 = 配列.キー;
+                            変数 = オブジェクト[キー];
+                            変数 = オブジェクト.キー;
 
                         pre(class='prettyprint linenums:1')
                             :code
@@ -187,8 +187,8 @@ block content
                         hr
                         h4 オブジェクトに値を代入
                         pre.
-                            配列[キー] = 値;
-                            配列.キー = 値;
+                            オブジェクト[キー] = 値;
+                            オブジェクト.キー = 値;
 
                         pre(class='prettyprint linenums:1')
                             :code
@@ -381,3 +381,15 @@ block content
                                     "物理Ⅱ": "B"
                                   }
                                 ]
+                        hr
+                        h4 Webストレージでオブジェクトを扱う
+                        p: u ストレージにオブジェクトを格納する
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var obj = var obj = {'国語': 98, '算数': 82, '理科': 70, '社会': 86, '英語': 53};
+                                localStorage.ls = <mark>JSON.stringify</mark>(obj);
+                        p: u ストレージからオブジェクトを取得する
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var obj = <mark>JSON.parse</mark>(localStorage.ls);
+                                console.log(obj);

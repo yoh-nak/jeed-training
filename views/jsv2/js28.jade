@@ -60,13 +60,13 @@ block content
                                 });
 
                                 <mark>//Socket.IO
-                                var buff = 0;
                                 //Socket.IO読み込み
                                 var io = require('socket.io').listen(server);
                                 //ログレベル
                                 io.set('log level', 1);
                                 //Socket接続
                                 io.sockets.on('connection', function(socket){
+                                    var buff = 0;
                                     //イベント受信
                                     socket.on('emit_del_img',function(data){
                                         if(buff != data){
@@ -116,9 +116,8 @@ block content
                                         script
                                             :js
                                                 $(document).on('pageshow','#index',function(){
-
-                                                    <mark>var point = 0;
-                                                    //Socket接続
+                                                    
+                                                    <mark>//Socket接続
                                                     var socket = io.connect();</mark>
 
                                                     $('input[type=button]').on('vclick',function(){
@@ -128,9 +127,8 @@ block content
 
                                                     //画像削除
                                                     $(document).on('vclick','#index img',function(){
-                                                        <mark>point++;
-                                                        //イベント送信
-                                                        socket.emit('emit_del_img',point);</mark>
+                                                        <mark>//イベント送信
+                                                        socket.emit('emit_del_img',$('img').length);</mark>
                                                         $(this).remove();
                                                     });
                                                     

@@ -13,7 +13,7 @@ block content
                 .panel.panel-primary
                     .panel-heading
                         i.glyphicon.glyphicon-book
-                        |  サーバーからリアルタイムに受信
+                        |  リアルタイムに双方向通信
                     .panel-body
                         pre.
                             npm install socket.io --save
@@ -55,20 +55,11 @@ block content
                                 });
 
                                 //Socket.IO
-                                var buff = 0;
-                                <mark>var io = require('socket.io').listen(server);
-                                io.set('log level', 1);</mark>
-                                io.sockets.on('connection', function(socket){
-                                    socket.on('emit_del_img',function(data){
-                                        if(buff != data){
-                                            buff = data;
-                                            console.log(buff);
-                                        }   
-                                    });
-                                });
+                                var io = require('socket.io').listen(server);
+                                io.set('log level', 1);
 
-                                <mark>app.get('/', routes.index(io));
-                                app.post('/', routes.index(io));</mark>
+                                app.get('/', routes.index(io));
+                                app.post('/', routes.index(io));
                                 app.get('/users', user.list);
                         p /routes/index.js
                         pre(class='prettyprint linenums:1')
@@ -77,45 +68,74 @@ block content
                                  * GET home page.
                                  */
 
-                                <mark>exports.index = function(io){
-                                    return function(req, res){</mark>
+                                var gameclearFlg = false;
+                                var gameoverFlg = false;
+                                var time = 60;
+                                var timerId;
+
+                                exports.index = function(io){
+
+                                    return function(req, res){
 
                                         if(req.method == 'POST'){
+
+                                            gameclearFlg = false;
+                                            time = 60;
+
                                             //ゲームスタート
                                             (function(){
-                                                var time, timerId;
-                                                
-                                                time = 60;
                                                 //タイマースタート
                                                 countDown();
                                                 function countDown(){
                                                     time--;
                                                     timerId = setTimeout(function(){
-                                                        <mark>//クライアントにタイマー送信
-                                                        io.sockets.emit('emit_timer',time);</mark>
+
+                                                        //console.log(gameclearFlg);
 
                                                         //タイマー解除
-                                                        if(time <= 0){
+                                                        if(gameclearFlg == true){
                                                             clearInterval(timerId);
-                                                            console.log('clear');
+                                                        }
+                                                        else if(time <= 0){
+                                                            gameoverFlg = true;
+                                                            clearInterval(timerId);
+                                                            //クライアントにゲームオーバー送信
+                                                            io.sockets.emit('emit_game_over','1');
                                                         }
                                                         else{
                                                             //タイマー再実行
                                                             countDown();
+                                                            //クライアントにタイマー送信
+                                                            io.sockets.emit('emit_timer',time);
                                                         }
                                                     },1000);
 
                                                 }
                                             })();
                                         }
+
+                                        io.sockets.on('connection', function(socket){
+                                            var buff = 0;
+                                            
+                                            socket.on('emit_del_img',function(data){
+                                                if(buff != data){
+                                                    buff = data;
+                                                    if(buff == 0){
+                                                        gameclearFlg = true;
+                                                        //クライアントにクリア送信
+                                                        io.sockets.emit('emit_game_clear','1');
+                                                    }
+                                                }   
+                                            });
+                                        });
                                         
                                         res.render('index', {
                                             method: req.method,
                                             innerWidth: req.body.innerWidth,
                                             level: req.body.level
                                         });
-                                    <mark>};
-                                };</mark>
+                                    };
+                                };
                         p /views/index.jade
                         pre(class='prettyprint linenums:1')
                             :code
@@ -139,20 +159,21 @@ block content
                                                         width 64px
                                                         height 64px
                                                         position absolute
-                                                    <mark>#timer
+                                                    #timer
                                                         position absolute
                                                         top 20px
                                                         left 20px
                                                         font-weight bold
                                                         font-size 32px
-                                                        display none</mark>
+                                                        display none
                                         script
                                             :js
                                                 var socket = io.connect();
 
-                                                $(document).on('pageshow','#index',function(){
+                                                var gameclearFlg = false;
+                                                var gameoverFlg = false;
 
-                                                    var point = 0;
+                                                $(document).on('pageshow','#index',function(){
 
                                                     $('input[type=button]').on('vclick',function(e){
                                                         e.preventDefault();
@@ -162,26 +183,41 @@ block content
 
                                                     //画像削除
                                                     $(document).on('vclick','#index img',function(){
-                                                        point++;
                                                         //Socket送信
-                                                        socket.emit('emit_del_img',point);
+                                                        socket.emit('emit_del_img',$('img').length);
                                                         $(this).remove();
                                                     });
                                                     
-                                                    <mark>//Soeket受信
+                                                    //Soeket受信
                                                     socket.on('emit_timer',function(data){
                                                         $('.ui-content #timer').show().text(data);
                                                         if(data < 10){
                                                             $('.ui-content #timer').css('color','red');
                                                         }
-                                                    });</mark>
+                                                    });
+
+                                                    socket.on('emit_game_clear',function(data){
+                                                        if(data == '1' && gameclearFlg == false){
+                                                            gameclearFlg = true;
+                                                            alert('ゲームクリア');
+                                                            window.location.reload();
+                                                        }
+                                                    });
+
+                                                    socket.on('emit_game_over',function(data){
+                                                        if(data == '1' && gameoverFlg == false){
+                                                            gameoverFlg = true;
+                                                            alert('ゲームオーバー');
+                                                            window.location.reload();
+                                                        }
+                                                    });
                                                 });
                                     body
                                         #index(data-role='page')
                                             div(data-role='header')
                                                 h1 ランダムイメージ
                                             div(data-role='content')
-                                                <mark>#timer 0</mark>
+                                                #timer 0
                                                 if(method=='GET')
                                                     form(method='POST',action='/')
                                                         fieldset(data-role='controlgroup')

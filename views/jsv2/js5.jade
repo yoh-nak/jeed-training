@@ -75,6 +75,47 @@ block content
                                         alert(msg);
                                     }
                                 }
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                SeisekiClass = (name) ->
+                                  @name = name # SeisekiClassのnameプロパティ
+                                  
+                                  # SeisekiClassのsetTensuメソッド
+                                  @setTensu = (a, b, c, d, e) ->
+                                    @kokugo = a
+                                    @sansu = b
+                                    @rika = c
+                                    @syakai = d
+                                    @eigo = e
+                                    return
+
+                                  
+                                  # SeisekiClassのgoukeiメソッド
+                                  @goukei = ->
+                                    total = 0
+                                    total += @kokugo
+                                    total += @sansu
+                                    total += @rika
+                                    total += @syakai
+                                    total += @eigo
+                                    total
+
+                                  
+                                  # SeisekiClassのheikinメソッド
+                                  @heikin = ->
+                                    total = @goukei()
+                                    total / 5
+
+                                  
+                                  # SeisekiClassのshowMsgメソッド
+                                  @showMsg = ->
+                                    msg = @name + "さんの成績\n"
+                                    msg += "合計：" + @goukei() + "\n"
+                                    msg += "平均：" + @heikin()
+                                    alert msg
+                                    return
+
+                                  return
                         h4 インスタンス化
                         p オブジェクトを作成した後は、既存のオブジェクトと同様に使用することができます。「new SeisekiClass('引数')」のことをコンストラクタと呼びます。コンストラクタを変数に格納することを、オブジェクトのインスタンス（実体）化と呼びます。
                         pre(class='prettyprint linenums:1')
@@ -86,7 +127,14 @@ block content
                                 var hanako = new SeisekiClass('花子'); //=> インスタンス化
                                 hanako.setTensu(98, 79, 81, 93, 85);
                                 hanako.showMsg();
-
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                taro = new SeisekiClass("太郎") #=> インスタンス化
+                                taro.setTensu 75, 58, 69, 81, 47
+                                taro.showMsg()
+                                hanako = new SeisekiClass("花子") #=> インスタンス化
+                                hanako.setTensu 98, 79, 81, 93, 85
+                                hanako.showMsg()
                         p 関数内の「this.変数」はオブジェクトのキーにあたります。オブジェクトリテラルで定義されたプロパティやメソッドは、Objectオブジェクトのプロパティ、メソッドとなりますが、関数オブジェクトによって定義されたプロパティやメソッドは自作オブジェクトとしてインスタンス化できます。
                         pre.
                             var オブジェクト名 = {
@@ -122,6 +170,12 @@ block content
                                 taro.setTensu(75, 58, 69, 81, 47);
                                 taro.name = 'イチロー';
                                 taro.showMsg();
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                taro = new SeisekiClass("太郎")
+                                taro.setTensu 75, 58, 69, 81, 47
+                                taro.name = "イチロー"
+                                taro.showMsg()
                         p このような場合、オブジェクトの中だけで使える値にしなければ、外部からプロパティを取得して変更できてしまいます。このような場合、varを付けてオブジェクト内で使える変数として定義することで、外部から取り出すことができなくなります。
                         pre(class='prettyprint linenums:1')
                             :code
@@ -162,7 +216,47 @@ block content
                                         alert(msg);
                                     }
                                 }
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                SeisekiClass = (name) ->
+                                  name = name # SeisekiClassの中で使用する変数
+                                  
+                                  # SeisekiClassのsetTensuメソッド
+                                  @setTensu = (a, b, c, d, e) ->
+                                    @kokugo = a
+                                    @sansu = b
+                                    @rika = c
+                                    @syakai = d
+                                    @eigo = e
+                                    return
 
+                                  
+                                  # SeisekiClassのgoukeiメソッド
+                                  @goukei = ->
+                                    total = 0
+                                    total += @kokugo
+                                    total += @sansu
+                                    total += @rika
+                                    total += @syakai
+                                    total += @eigo
+                                    total
+
+                                  
+                                  # SeisekiClassのheikinメソッド
+                                  @heikin = ->
+                                    total = @goukei()
+                                    total / 5
+
+                                  
+                                  # SeisekiClassのshowMsgメソッド
+                                  @showMsg = ->
+                                    msg = name + "さんの成績\n"
+                                    msg += "合計：" + @goukei() + "\n"
+                                    msg += "平均：" + @heikin()
+                                    alert msg
+                                    return
+
+                                  return
                         h4 オブジェクトと参照
                         p 以下のように、1つ目の変数にSeisekiClassオブジェクトをインスタンス化し、2つ目の変数に1つ目のインスタンスを代入します。それぞれsetTensuメソッドに引数を指定して実行すると、2つとも同じ結果が表示されます。これは2つ目のインスタンスが、1つ目のインスタンスが格納された場所と同じ場所（メモリー上のアドレス）を参照しているためです。
                         pre(class='prettyprint linenums:1')
@@ -173,7 +267,14 @@ block content
                                 taro2.setTensu(88, 71, 80, 59, 63);
                                 taro1.showMsg();
                                 taro2.showMsg();
-
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                taro1 = new SeisekiClass("太郎")
+                                taro2 = taro1
+                                taro1.setTensu 75, 58, 69, 81, 47
+                                taro2.setTensu 88, 71, 80, 59, 63
+                                taro1.showMsg()
+                                taro2.showMsg()
                         p これを、別々の成績を設定しようと思ったら、以下のように両方ともインスタンス化する必要があります。
                         pre(class='prettyprint linenums:1')
                             :code
@@ -183,3 +284,11 @@ block content
                                 taro2.setTensu(88, 71, 80, 59, 63);
                                 taro1.showMsg();
                                 taro2.showMsg();
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                taro1 = new SeisekiClass("太郎")
+                                taro2 = new SeisekiClass("太郎")
+                                taro1.setTensu 75, 58, 69, 81, 47
+                                taro2.setTensu 88, 71, 80, 59, 63
+                                taro1.showMsg()
+                                taro2.showMsg()

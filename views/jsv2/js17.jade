@@ -30,6 +30,18 @@ block content
                                 };
 
                                 document.writeln(mem.getName());
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                MemberClass = (firstName, lastName) ->
+                                  @firstName = firstName
+                                  @lastName = lastName
+                                  return
+
+                                mem = new MemberClass("ようすけ", "なかの")
+                                mem.getName = ->
+                                  @lastName + " " + @firstName
+
+                                document.writeln mem.getName()
                         p しかしながら、memインスタンスに対してメソッドが追加されていることに注意しましょう。以下の例ではmem2に対してはgetNameメソッドは追加されていないのでエラーになります。プロトタイプベースのオブジェクト指向言語では同じオブジェクト（クラス）をインスタンス化しても常に同じメンバを持つとは限りません。
                         pre(class='prettyprint linenums:1')
                             :code
@@ -47,6 +59,20 @@ block content
 
                                 var mem2 = new MemberClass('はるか','あやせ');
                                 document.writeln(mem2.getName());
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                MemberClass = (firstName, lastName) ->
+                                  @firstName = firstName
+                                  @lastName = lastName
+                                  return
+
+                                mem = new MemberClass("ようすけ", "なかの")
+                                mem.getName = ->
+                                  @lastName + " " + @firstName
+
+                                document.writeln mem.getName()
+                                mem2 = new MemberClass("はるか", "あやせ")
+                                document.writeln mem2.getName()
                         hr
                         h4 別のオブジェクトのメソッドを利用する
                         p メソッドはオブジェクト固有のものですが、callメソッドやapplyメソッドを使ってメソッドの貸し借りができます。
@@ -70,6 +96,16 @@ block content
                                 };
 
                                 obj.greet.call(obj2); //=> obj2がobjのgreetメソッド借りて実行しています。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                obj1 =
+                                  name: "よしお"
+                                  greet: ->
+                                    console.log @name + "です、はじめまして"
+                                    return
+
+                                obj2 = name: "ユリ子"
+                                obj.greet.call obj2 #=> obj2がobjのgreetメソッド借りて実行しています。
                         p 借りたメソッドに引数がある場合は、callメソッドの2つ目移行の引数に順番に指定します。
                         pre(class='prettyprint linenums:1')
                             :code
@@ -87,6 +123,18 @@ block content
                                 };
 
                                 obj1.greet.call(obj2, 6, 'アメリカ');
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                obj1 =
+                                  name: "よしお"
+                                  greet: (age, from) ->
+                                    console.log @name + "です、はじめまして"
+                                    console.log "年齢は" + age + "です"
+                                    console.log "出身地は" + from + "です"
+                                    return
+
+                                obj2 = name: "ユリ子"
+                                obj1.greet.call obj2, 6, "アメリカ"
                         h4 apllyメソッド
                         p applyメソッドはcallメソッドと使い方はほとんど同じですが、借りたメソッドに引数がある場合、引数を配列にまとめて渡します。
                         p
@@ -110,6 +158,22 @@ block content
 
                                 var param = [6, 'アメリカ'];
                                 obj1.greet.apply(obj2, param);
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                obj1 =
+                                  name: "よしお"
+                                  greet: (age, from) ->
+                                    console.log @name + "です、はじめまして"
+                                    console.log "年齢は" + age + "です"
+                                    console.log "出身地は" + from + "です"
+                                    return
+
+                                obj2 = name: "ユリ子"
+                                param = [
+                                  6
+                                  "アメリカ"
+                                ]
+                                obj1.greet.apply obj2, param
                         hr
                         h4 callメソッドで継承
                         p JavaScriptではクラスベースのオブジェクト指向言語の継承の仕組みはありませんが、callメソッドを使って継承に近い働きをさせることができます。これは継承元のオブジェクト（スーパークラス）の機能をそのままコピーしているわけではなく、prototypeという仕組みによって実現されてます。
@@ -175,6 +239,60 @@ block content
                                 var taro = new PowerSeisekiClass('太郎');
                                 taro.setTensu(75, 58, 69, 81, 47);
                                 taro.showMsg();
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                #スーパークラス
+                                SeisekiClass = (name) ->
+                                  @name = name
+                                  @setTensu = (a, b, c, d, e) ->
+                                    @kokugo = a
+                                    @sansu = b
+                                    @rika = c
+                                    @syakai = d
+                                    @eigo = e
+                                    return
+
+                                  @goukei = ->
+                                    total = 0
+                                    total += @kokugo
+                                    total += @sansu
+                                    total += @rika
+                                    total += @syakai
+                                    total += @eigo
+                                    total
+
+                                  @heikin = ->
+                                    total = @goukei()
+                                    total / 5
+
+                                  @showMsg = ->
+                                    msg = @name + "さんの成績\n"
+                                    msg += "合計：" + @goukei() + "\n"
+                                    msg += "平均：" + @heikin()
+                                    alert msg
+                                    return
+
+                                  return
+
+                                #サブクラス
+                                PowerSeisekiClass = (name) ->
+                                  SeisekiClass.call this, name
+                                  @showMsg = ->
+                                    msg = name + "さんの成績\n"
+                                    msg += "国語: " + @kokugo + "\n"
+                                    msg += "算数: " + @sansu + "\n"
+                                    msg += "理科: " + @rika + "\n"
+                                    msg += "社会: " + @syakai + "\n"
+                                    msg += "英語: " + @eigo + "\n"
+                                    msg += "合計: " + @goukei() + "\n"
+                                    msg += "平均: " + @heikin() + "\n"
+                                    alert msg
+                                    return
+
+                                  return
+                                taro = new PowerSeisekiClass("太郎")
+                                taro.setTensu 75, 58, 69, 81, 47
+                                taro.showMsg()
                         hr
                         h4 オーバーライド
                         p JavaScriptでは、callメソッドを使うことで、オブエジェクト指向言語でいうオーバーライドに似た働きをすることができます。継承元のオブジェクト（スーパークラス）に含まれるメソッドと全く同じメソッドを、利用するオブジェクト（サブクラス）でも定義すると、新たに定義したメソッドに上書きされます。
@@ -235,7 +353,60 @@ block content
                                 var taro = new PowerSeisekiClass('太郎');
                                 taro.setTensu(75, 58, 69, 81, 47);
                                 taro.showMsg();
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                #スーパークラス
+                                SeisekiClass = (name) ->
+                                  @name = name
+                                  @setTensu = (a, b, c, d, e) ->
+                                    @kokugo = a
+                                    @sansu = b
+                                    @rika = c
+                                    @syakai = d
+                                    @eigo = e
+                                    return
 
+                                  @goukei = ->
+                                    total = 0
+                                    total += @kokugo
+                                    total += @sansu
+                                    total += @rika
+                                    total += @syakai
+                                    total += @eigo
+                                    total
+
+                                  @heikin = ->
+                                    total = @goukei()
+                                    total / 5
+
+                                  @showMsg = ->
+                                    msg = @name + "さんの成績\n"
+                                    msg += "合計：" + @goukei() + "\n"
+                                    msg += "平均：" + @heikin()
+                                    alert msg
+                                    return
+
+                                  return
+
+                                #サブクラス
+                                PowerSeisekiClass = (name) ->
+                                  SeisekiClass.call this, name
+                                  @showMsg = ->
+                                    msg = name + "さんの成績\n"
+                                    msg += "国語: " + @kokugo + "\n"
+                                    msg += "算数: " + @sansu + "\n"
+                                    msg += "理科: " + @rika + "\n"
+                                    msg += "社会: " + @syakai + "\n"
+                                    msg += "英語: " + @eigo + "\n"
+                                    msg += "合計: " + @goukei() + "\n"
+                                    msg += "平均: " + @heikin() + "\n"
+                                    alert msg
+                                    return
+
+                                  return
+                                taro = new PowerSeisekiClass("太郎")
+                                taro.setTensu 75, 58, 69, 81, 47
+                                taro.showMsg()
                         p 以下のようにshowMsgメソッドを定義した後でcallメソッドを記述すると、再度スーパークラスのshowMsgメソッドに上書きされるので意味がありません。
                         pre(class='prettyprint linenums:1')
                             :code
@@ -260,3 +431,24 @@ block content
                                 var taro = new PowerSeisekiClass('太郎');
                                 taro.setTensu(75, 58, 69, 81, 47);
                                 taro.showMsg();
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                #サブクラス
+                                PowerSeisekiClass = (name) ->
+                                  @showMsg = ->
+                                    msg = name + "さんの成績\n"
+                                    msg += "国語: " + @kokugo + "\n"
+                                    msg += "算数: " + @sansu + "\n"
+                                    msg += "理科: " + @rika + "\n"
+                                    msg += "社会: " + @syakai + "\n"
+                                    msg += "英語: " + @eigo + "\n"
+                                    msg += "合計: " + @goukei() + "\n"
+                                    msg += "平均: " + @heikin() + "\n"
+                                    alert msg
+                                    return
+
+                                  SeisekiClass.call this, name
+                                  return
+                                taro = new PowerSeisekiClass("太郎")
+                                taro.setTensu 75, 58, 69, 81, 47
+                                taro.showMsg()

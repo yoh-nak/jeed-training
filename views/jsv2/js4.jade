@@ -39,7 +39,31 @@ block content
                                 var msg = '合計' + obj['合計']() + '\n';
                                 msg += '平均' + obj['平均']();
                                 console.log(msg);
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                obj =
+                                  "国語": 98
+                                  "算数": 82
+                                  "理科": 70
+                                  "社会": 86
+                                  "英語": 53
+                                  "合計": ->
+                                    total = 0
+                                    total += this["国語"] #=> obj['国語']、obj.国語、this.国語
+                                    total += this["算数"] #=> obj['算数']、obj.算数、this.算数
+                                    total += this["理科"] #=> obj['理科']、obj.理科、this.理科
+                                    total += this["社会"] #=> obj['社会']、obj.社会、this.社会
+                                    total += this["英語"] #=> obj['英語']、obj.英語、this.英語
+                                    total
 
+                                  "平均": ->
+                                    total = this["合計"]() + "\n"
+                                    total / 5
+
+                                total = 0
+                                msg = "合計" + obj["合計"]() + "\n"
+                                msg += "平均" + obj["平均"]()
+                                console.log msg
                         p オブジェクに格納する関数は、後から追加することもできます。
                         pre(class='prettyprint linenums:1')
                             :code
@@ -64,7 +88,32 @@ block content
                                 var msg = '合計' + obj['合計']() + '\n';
                                 msg += '平均' + obj['平均']();
                                 console.log(msg);
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                obj =
+                                  "国語": 98
+                                  "算数": 82
+                                  "理科": 70
+                                  "社会": 86
+                                  "英語": 53
 
+                                obj["合計"] = ->
+                                  total = 0
+                                  total += this["国語"]
+                                  total += this["算数"]
+                                  total += this["理科"]
+                                  total += this["社会"]
+                                  total += this["英語"]
+                                  total
+
+                                obj["平均"] = ->
+                                  total = this["合計"]() + "\n"
+                                  total / 5
+
+                                total = 0
+                                msg = "合計" + obj["合計"]() + "\n"
+                                msg += "平均" + obj["平均"]()
+                                console.log msg
                         p オブジェクトと関数をドット「.」で連結すると読みやすくなります。また、オブジェクトで定義される関数のことをメソッドと呼びます。
                         pre(class='prettyprint linenums:1')
                             :code
@@ -89,7 +138,32 @@ block content
                                 var msg = '合計' + obj.goukei() + '\n';
                                 msg += '平均' + obj.heikin();
                                 console.log(msg);
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                obj =
+                                  "国語": 98
+                                  "算数": 82
+                                  "理科": 70
+                                  "社会": 86
+                                  "英語": 53
 
+                                obj.goukei = ->
+                                  total = 0
+                                  total += this["国語"]
+                                  total += this["算数"]
+                                  total += this["理科"]
+                                  total += this["社会"]
+                                  total += this["英語"]
+                                  total
+
+                                obj.heikin = ->
+                                  total = @goukei() + "\n"
+                                  total / 5
+
+                                total = 0
+                                msg = "合計" + obj.goukei() + "\n"
+                                msg += "平均" + obj.heikin()
+                                console.log msg
                         h4 無名（匿名）オブジェクト
                         p 「new オブジェクト名()」この構文のことをコンストラクタ（後述）と呼びますが、コンストラクタを使用すると、よりオブジェクト指向の構文に近い記述になってきます。変数objにObjectオブジェクトを格納し、後からキーに対する値を設定することができます。
                         p JavaScriptのオブジェクト指向では、オブジェクトに指定されたキーに関数以外の値が格納されている場合、そのキーのことをプロパティと呼び、キーに関数が格納されている場合、そのキーのことをメソッドと呼びます。
@@ -122,7 +196,38 @@ block content
                                 var msg = '合計：' + obj.goukei() + '\n';
                                 msg += '平均：' + obj.heikin();
                                 console.log(msg);
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                obj = new Object()
+                                obj.kokugo = 98 #=> Objectオブジェクトのkokugoプロパティ
+                                obj.sansu = 82 #=> Objectオブジェクトのsansuプロパティ
+                                obj.rika = 70 #=> Objectオブジェクトのrikaプロパティ
+                                obj.syakai = 86 #=> Objectオブジェクトのsyakaiプロパティ
+                                obj.eigo = 53 #=> Objectオブジェクトのeigoプロパティ
+                                obj.goukei = -> #=> Objectオブジェクトのgoukeiメソッド
+                                  total = 0
+                                  total += @kokugo
+                                  total += @sansu
+                                  total += @rika
+                                  total += @syakai
+                                  total += @eigo
+                                  total
+
+                                obj.heikin = -> #=> Objectオブジェクトのheikinメソッド
+                                  total = @goukei()
+                                  total / 5
+
+                                msg = "合計：" + obj.goukei() + "\n"
+                                msg += "平均：" + obj.heikin()
+                                console.log msg
                         p 以下のようにオブジェクトリテラルでオブジェクトを生成することは無名オブジェクトを定義しているといえます。
                         pre(class='prettyprint linenums:1')
                             :code
                                 var obj = {a:'abc', b:123, c:true, c:function(){...}}
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                obj =
+                                  a: "abc"
+                                  b: 123
+                                  c: true
+                                  c: ->

@@ -1,0 +1,333 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        |  サーバーサイドのオブジェクト化
+                    .panel-body
+                        pre.
+                            npm install socket.io --save
+                        p app.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /**
+                                 * Module dependencies.
+                                 */
+
+                                var express = require('express');
+                                var routes = require('./routes');
+                                var user = require('./routes/user');
+                                var http = require('http');
+                                var path = require('path');
+
+                                var app = express();
+
+                                // all environments
+                                app.set('port', process.env.PORT || 3000);
+                                app.set('views', path.join(__dirname, 'views'));
+                                app.set('view engine', 'jade');
+                                app.use(express.favicon());
+                                app.use(express.logger('dev'));
+                                app.use(express.json());
+                                app.use(express.urlencoded());
+                                app.use(express.methodOverride());
+                                app.use(app.router);
+                                app.use(require('stylus').middleware(path.join(__dirname, 'public')));
+                                app.use(express.static(path.join(__dirname, 'public')));
+
+                                // development only
+                                if ('development' == app.get('env')) {
+                                  app.use(express.errorHandler());
+                                }
+
+                                var server = http.createServer(app).listen(app.get('port'), function(){
+                                    console.log('Express server listening on port ' + app.get('port'));
+                                });
+
+                                //Socket.IO
+                                var io = require('socket.io').listen(server);
+                                io.set('log level', 1);
+
+                                app.get('/', routes.index(io));
+                                app.post('/', routes.index(io));
+                                app.get('/users', user.list);
+                        p /routes/index.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /*
+                                 * GET home page.
+                                 */
+
+                                /*
+                                var gameclearFlg = false;
+                                var gameoverFlg = false;
+                                var time = 60;
+                                var timerId;
+                                */
+
+                                var cGame = require('../libs/game');
+                                var game = new cGame();
+                                //var gameclearFlg = game.gameclearFlg;
+                                //var gameoverFlg = game.gameoverFlg;
+                                //var time = game.time
+                                //var timerId = game.timerId;
+
+                                exports.index = function(io){
+
+                                    return function(req, res){
+
+                                        if(req.method == 'POST'){
+                                            game.fPost(io, req, res);
+                                        }
+
+                                        game.fOnSocket(io);
+
+                                        /*
+                                        if(req.method == 'POST'){
+
+                                            gameclearFlg = false;
+                                            time = 60;
+
+                                            //ゲームスタート
+                                            (function(){
+                                                //タイマースタート
+                                                countDown();
+                                                function countDown(){
+                                                    time--;
+                                                    timerId = setTimeout(function(){
+
+                                                        //console.log(gameclearFlg);
+
+                                                        //タイマー解除
+                                                        if(gameclearFlg == true){
+                                                            //console.log('clear');
+                                                            clearInterval(timerId);
+                                                        }
+                                                        else if(time <= 0){
+                                                            gameoverFlg = true;
+                                                            clearInterval(timerId);
+                                                            //クライアントにゲームオーバー送信
+                                                            io.sockets.emit('emit_game_over','1');
+                                                        }
+                                                        else{
+                                                            //タイマー再実行
+                                                            countDown();
+                                                            //クライアントにタイマー送信
+                                                            io.sockets.emit('emit_timer',time);
+                                                        }
+                                                    },1000);
+
+                                                }
+                                            })();
+                                        }
+                                        
+                                        io.sockets.on('connection', function(socket){
+                                            var buff = 0;
+                                            
+                                            console.log(gameclearFlg);
+
+                                            socket.on('emit_del_img',function(data){
+                                                if(buff != data){
+                                                    buff = data;
+                                                    //console.log(buff);
+                                                    if(buff == 0){
+                                                        gameclearFlg = true;
+                                                        //clearInterval(timerId);
+                                                        //クライアントにクリア送信
+                                                        io.sockets.emit('emit_game_clear','1');
+                                                    }
+                                                }   
+                                            });
+                                        });
+                                        */
+                                        
+                                        res.render('index', {
+                                            method: req.method,
+                                            innerWidth: req.body.innerWidth,
+                                            level: req.body.level
+                                        });
+                                    };
+                                };
+                        p /libs/game.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                //cGameクラス
+                                var cGame = function(){
+                                    this.gameclearFlg = false;
+                                    this.gameoverFlg = false;
+                                    this.time = 60;
+                                    this.timerId;
+                                };
+
+                                cGame.prototype = {
+                                    //mPostメソッド
+                                    fPost: function(io, req, res){
+
+                                            this.gameclearFlg = false;
+                                            this.time = 60;
+
+                                            this.fCountDown(io);
+                                    },
+                                    //fCountDownメソッド
+                                    fCountDown: function(io){
+
+                                        this.time--;
+
+                                        this.timerId = setTimeout(function(){
+                                            
+                                            //タイマー解除
+                                            if(this.gameclearFlg == true){
+                                                clearInterval(this.timerId);
+                                            }
+                                            else if(this.time <= 0){
+                                                this.gameoverFlg = true;
+                                                clearInterval(this.timerId);
+                                                //クライアントにゲームオーバー送信
+                                                io.sockets.emit('emit_game_over','1');
+                                            }
+                                            else{
+                                                //タイマー再実行
+                                                this.fCountDown(io);
+                                                //クライアントにタイマー送信
+                                                io.sockets.emit('emit_timer',this.time);
+                                            }
+                                        }.bind(this),1000);
+                                    },
+                                    //mOnSocketメソッド
+                                    fOnSocket: function(io){
+                                        io.sockets.on('connection', function(socket){
+                                            var buff = 0;
+                                            
+                                            socket.on('emit_del_img',function(data){
+                                                if(buff != data){
+                                                    buff = data;
+                                                    if(buff == 0){
+                                                        //gameclearFlgセッター
+                                                        this.fSetClear();
+
+                                                        //クライアントにクリア送信
+                                                        io.sockets.emit('emit_game_clear','1');
+                                                    }
+                                                }   
+                                            }.bind(this));
+                                        }.bind(this));
+                                    },
+                                    //gameclearFlgセッター
+                                    fSetClear: function(){
+                                        this.gameclearFlg = true;
+                                    }
+                                };
+
+                                module.exports = cGame;
+                        p /views/index.jade
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja')
+                                    head
+                                        meta(charset='UTF-8')
+                                        meta(content='width=device-width, user-scalable=no', name='viewport')
+                                        link(href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css', rel='stylesheet')
+                                        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                        script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+                                        script(src='/socket.io/socket.io.js')
+                                        //script(src='http://localhost:3000/socket.io/socket.io.js')
+                                        title ランダムイメージ
+                                        style
+                                            :stylus
+                                                [data-role="content"]
+                                                    position relative
+                                                    height 480px
+                                                    img
+                                                        width 64px
+                                                        height 64px
+                                                        position absolute
+                                                    #timer
+                                                        position absolute
+                                                        top 20px
+                                                        left 20px
+                                                        font-weight bold
+                                                        font-size 32px
+                                                        display none
+                                        script
+                                            :js
+                                                var socket = io.connect();
+
+                                                var gameclearFlg = false;
+                                                var gameoverFlg = false;
+
+                                                $(document).on('pageshow','#index',function(){
+
+                                                    $('input[type=button]').on('vclick',function(e){
+                                                        e.preventDefault();
+                                                        $('[name=innerWidth]').val(window.innerWidth);
+                                                        $('form').submit();
+                                                    });
+
+                                                    //画像削除
+                                                    $(document).on('vclick','#index img',function(){
+                                                        //Socket送信
+                                                        socket.emit('emit_del_img',$('img').length);
+                                                        $(this).remove();
+                                                    });
+                                                    
+                                                    //Soeket受信
+                                                    socket.on('emit_timer',function(data){
+                                                        $('.ui-content #timer').show().text(data);
+                                                        if(data < 10){
+                                                            $('.ui-content #timer').css('color','red');
+                                                        }
+                                                    });
+
+                                                    socket.on('emit_game_clear',function(data){
+                                                        if(data == '1' && gameclearFlg == false){
+                                                            gameclearFlg = true;
+                                                            alert('ゲームクリア');
+                                                            window.location.reload();
+                                                        }
+                                                    });
+
+                                                    socket.on('emit_game_over',function(data){
+                                                        if(data == '1' && gameoverFlg == false){
+                                                            gameoverFlg = true;
+                                                            alert('ゲームオーバー');
+                                                            window.location.reload();
+                                                        }
+                                                    });
+                                                });
+                                    body
+                                        #index(data-role='page')
+                                            div(data-role='header')
+                                                h1 ランダムイメージ
+                                            div(data-role='content')
+                                                #timer 0
+                                                if(method=='GET')
+                                                    form(method='POST',action='/')
+                                                        fieldset(data-role='controlgroup')
+                                                            legend レベル:
+                                                            input#l1(checked='checked', name='level', type='radio', value='10')
+                                                            label(for='l1') 10体
+                                                            input#l2(name='level', type='radio', value='20')
+                                                            label(for='l2') 20体
+                                                            input#l3(name='level', type='radio', value='30')
+                                                            label(for='l3') 30体
+                                                        fieldset(data-role='controlgroup')
+                                                            input(type='hidden',name='innerWidth')
+                                                            input(type='button',value='スタート')
+                                                else
+                                                    -for(var i = 0; i < parseInt(level); i++)
+                                                        -var top = Math.floor(Math.random() * (480-64));
+                                                        -var left = Math.floor(Math.random() * (innerWidth-64));
+                                                        img(src='images/kumamon.gif',alt='',style='top:#{top}px;left:#{left}px;')
+                                            div(data-position='fixed', data-role='footer')
+                                                h1 フッター

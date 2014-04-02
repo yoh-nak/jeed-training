@@ -67,20 +67,9 @@ block content
                                 /*
                                  * GET home page.
                                  */
-
-                                /*
-                                var gameclearFlg = false;
-                                var gameoverFlg = false;
-                                var time = 60;
-                                var timerId;
-                                */
-
+                                
                                 var cGame = require('../libs/game');
                                 var game = new cGame();
-                                //var gameclearFlg = game.gameclearFlg;
-                                //var gameoverFlg = game.gameoverFlg;
-                                //var time = game.time
-                                //var timerId = game.timerId;
 
                                 exports.index = function(io){
 
@@ -91,65 +80,6 @@ block content
                                         }
 
                                         game.fOnSocket(io);
-
-                                        /*
-                                        if(req.method == 'POST'){
-
-                                            gameclearFlg = false;
-                                            time = 60;
-
-                                            //ゲームスタート
-                                            (function(){
-                                                //タイマースタート
-                                                countDown();
-                                                function countDown(){
-                                                    time--;
-                                                    timerId = setTimeout(function(){
-
-                                                        //console.log(gameclearFlg);
-
-                                                        //タイマー解除
-                                                        if(gameclearFlg == true){
-                                                            //console.log('clear');
-                                                            clearInterval(timerId);
-                                                        }
-                                                        else if(time <= 0){
-                                                            gameoverFlg = true;
-                                                            clearInterval(timerId);
-                                                            //クライアントにゲームオーバー送信
-                                                            io.sockets.emit('emit_game_over','1');
-                                                        }
-                                                        else{
-                                                            //タイマー再実行
-                                                            countDown();
-                                                            //クライアントにタイマー送信
-                                                            io.sockets.emit('emit_timer',time);
-                                                        }
-                                                    },1000);
-
-                                                }
-                                            })();
-                                        }
-                                        
-                                        io.sockets.on('connection', function(socket){
-                                            var buff = 0;
-                                            
-                                            console.log(gameclearFlg);
-
-                                            socket.on('emit_del_img',function(data){
-                                                if(buff != data){
-                                                    buff = data;
-                                                    //console.log(buff);
-                                                    if(buff == 0){
-                                                        gameclearFlg = true;
-                                                        //clearInterval(timerId);
-                                                        //クライアントにクリア送信
-                                                        io.sockets.emit('emit_game_clear','1');
-                                                    }
-                                                }   
-                                            });
-                                        });
-                                        */
                                         
                                         res.render('index', {
                                             method: req.method,

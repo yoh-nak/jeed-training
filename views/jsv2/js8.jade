@@ -27,7 +27,13 @@ block content
                                     var date = new Date();
                                     console.log(date.getTime());
                                 },1000);
-
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                window.setInterval (->
+                                  date = new Date()
+                                  console.log date.getTime()
+                                  return
+                                ), 1000
                         h4 clearIntervalメソッド
                         p clearIntervalメソッドは、setIntervalメソッドの戻り値を格納した変数を引数にとり、setIntervalメソッドを中断することができます。
                         p
@@ -46,7 +52,16 @@ block content
                                       clearInterval(timer);
                                     }
                                 },1000);
-
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                counter = 0
+                                timer = window.setInterval(->
+                                  counter++
+                                  date = new Date()
+                                  console.log date.getTime()
+                                  clearInterval timer  if counter >= 10
+                                  return
+                                , 1000)
                         h4 setTimeoutメソッド
                         p setTimeoutメソッドは第1引数で指定した関数の処理を、第2引数で指定したミリ秒後に実行します。ただし、setIntervalメソッドと異なり、そのままでは一定時間後に1度実行されるだけになります。
                         p
@@ -59,7 +74,13 @@ block content
                                     var date = new Date();
                                     console.log(date.getTime());
                                 },1000);
-
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                window.setTimeout (->
+                                  date = new Date()
+                                  console.log date.getTime()
+                                  return
+                                ), 1000
                         h4 setTimeoutメソッドをループする
                         p setIntervalメソッドは負荷がかかるため、一般的にはsetTimeoutメソッドをループして使うことが多いです。以下のように、関数内でsetIntervalメソッドを処理して、初回の関数を実行すると、setTimeoutメソッドがループします。
                         pre(class='prettyprint linenums:1')
@@ -76,7 +97,20 @@ block content
                                         getTimestamp();
                                     },1000);
                                 }
-
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                #初回の実行
+                                getTimestamp = ->
+                                  date = new Date()
+                                  console.log date.getTime()
+                                  
+                                  #2回目以降の実行
+                                  window.setTimeout (->
+                                    getTimestamp()
+                                    return
+                                  ), 1000
+                                  return
+                                getTimestamp()
                         h4 即時関数でsetTimeoutメソッドを初回実行する
                         pre(class='prettyprint linenums:1')
                             :code
@@ -90,7 +124,20 @@ block content
                                       getTimestamp();
                                   },1000);
                                 })();
-
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                #初回の実行
+                                (getTimestamp = ->
+                                  date = new Date()
+                                  console.log date.getTime()
+                                  
+                                  #2回目以降の実行
+                                  window.setTimeout (->
+                                    getTimestamp()
+                                    return
+                                  ), 1000
+                                  return
+                                )()
                         h4 clearTimeoutメソッド
                         p
                             a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/Web/API/window.clearTimeout', target='_blank')
@@ -118,7 +165,23 @@ block content
                                       clearTimeout(timer);
                                     }
                                 }
-
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                #初回の実行
+                                getTimestamp = ->
+                                  counter++
+                                  date = new Date()
+                                  console.log date.getTime()
+                                  
+                                  #2回目以降の実行
+                                  timer = window.setTimeout(->
+                                    getTimestamp()
+                                    return
+                                  , 1000)
+                                  clearTimeout timer  if counter >= 10
+                                  return
+                                counter = 0
+                                getTimestamp()
                         pre(class='prettyprint linenums:1')
                             :code
                                 var counter = 0;
@@ -139,6 +202,24 @@ block content
                                       clearTimeout(timer);
                                   }
                                 })();
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                counter = 0
+
+                                #初回の実行
+                                (getTimestamp = ->
+                                  counter++
+                                  date = new Date()
+                                  console.log date.getTime()
+                                  
+                                  #2回目以降の実行
+                                  timer = window.setTimeout(->
+                                    getTimestamp()
+                                    return
+                                  , 1000)
+                                  clearTimeout timer  if counter >= 10
+                                  return
+                                )()
                         p 参考：タイマー系メソッドは、windowオブジェクトのメソッドとして定義されているため、Node.jsのメソッドではありません。ただし、Node.jsは、独自のTimers APIでタイマー系メソッドを実装しています。
                         p
                             a.btn.btn-default(href='http://nodejs.org/api/timers.html', target='_blank')

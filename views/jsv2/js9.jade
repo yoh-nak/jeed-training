@@ -75,6 +75,59 @@ block content
 
                                 taro.showMsg();
                                 hanako.showMsg();
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                SeisekiClass = (name) ->
+                                  @name = name
+                                  @setTensu = (a, b, c, d, e) ->
+                                    @kokugo = a
+                                    @sansu = b
+                                    @rika = c
+                                    @syakai = d
+                                    @eigo = e
+                                    return
+
+                                  @showMsg = ->
+                                    alert @name + "さんの成績オブジェクトです。"
+                                    return
+
+                                  return
+                                taro = new SeisekiClass("太郎")
+                                taro.setTensu 75, 58, 69, 81, 47
+                                hanako = new SeisekiClass("花子")
+                                hanako.setTensu 98, 79, 81, 93, 85
+                                taro.showMsg()
+                                hanako.showMsg()
+                                taro.goukei = ->
+                                  total = 0
+                                  total += @kokugo
+                                  total += @sansu
+                                  total += @rika
+                                  total += @syakai
+                                  total += @eigo
+                                  total
+
+                                taro.showMsg = ->
+                                  msg = @name + "さんの成績合計: " + @goukei()
+                                  alert msg
+                                  return
+
+                                hanako.heikin = ->
+                                  total = 0
+                                  total += @kokugo
+                                  total += @sansu
+                                  total += @rika
+                                  total += @syakai
+                                  total += @eigo
+                                  total / 5
+
+                                hanko.showMsg = ->
+                                  msg = @name + "さんの成績平均: " + @heikin()
+                                  alert msg
+                                  return
+
+                                taro.showMsg()
+                                hanako.showMsg()
                         hr
                         h4 プロトタイプ
                         p オブエクトを作成した後に変更することは容易に出来ましたが、作ったオブジェクトの内容がバラバラになってしまっては使いやすいとはいえません。すべてのオブジェクトで同じように機能が変わるほうが重要性が高いでしょう。一つのオブジェクトから作成した複数のインスタンスに対して、後から機能が追加されると、全てのインスタンスが共通して機能が追加される方が便利です。またメモリの節約にもつながります。
@@ -107,6 +160,29 @@ block content
 
                                 alert(taro.getDataToStr());
                                 alert(hanako.getDataToStr());
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                SeisekiClass = (name) ->
+                                  @name = name
+                                  @setTensu = (a, b, c, d, e) ->
+                                    @kokugo = a
+                                    @sansu = b
+                                    @rika = c
+                                    @syakai = d
+                                    @eigo = e
+                                    return
+
+                                  return
+                                taro = new SeisekiClass("太郎")
+                                taro.setTensu 75, 58, 69, 81, 47
+                                hanako = new SeisekiClass("花子")
+                                hanako.setTensu 98, 79, 81, 93, 85
+                                SeisekiClass::getDataToStr = ->
+                                  data = @name + "さんの点数\n" + "国語: " + @kokugo + " 算数: " + @sansu + " 理科: " + @rika + " 社会: " + @syakai + " 英語: " + @eigo
+                                  data
+
+                                alert taro.getDataToStr()
+                                alert hanako.getDataToStr()
 
                         hr
                         h4 プロトタイプでのプロパティ
@@ -121,6 +197,16 @@ block content
                                 console.log(mem1.sex + ' | ' + mem2.sex); //=> 男 | 男
                                 mem2.sex = '女';
                                 console.log(mem1.sex + ' | ' + mem2.sex); //=> 男 | 女
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                MemberClass = ->
+
+                                MemberClass::sex = "男"
+                                mem1 = new MemberClass()
+                                mem2 = new MemberClass()
+                                console.log mem1.sex + " | " + mem2.sex #=> 男 | 男
+                                mem2.sex = "女"
+                                console.log mem1.sex + " | " + mem2.sex #=> 男 | 女
                         p 以下のようにまとめられます。
                         pre
                             :code
@@ -168,7 +254,27 @@ block content
                                 //インスタンス化
                                 var a = new AreaClass();
                                 console.log(' 菱型の面積: ' + a.diamond(10, 2)); //=> 静的メソッドをインスタンス化して利用するとエラー
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                AreaClass = ->
 
+                                AreaClass.version = 1.0
+                                AreaClass.triangle = (base, height) ->
+                                  base * height / 2
+
+                                AreaClass.diamond = (width, height) ->
+                                  width * height / 2
+
+
+                                #静的プロパティの利用
+                                console.log "Areaクラスのバージョン: " + AreaClass.version
+
+                                #静的メソッドの利用
+                                console.log " 三角形の面積: " + AreaClass.triangle(5, 3)
+
+                                #インスタンス化
+                                a = new AreaClass()
+                                console.log " 菱型の面積: " + a.diamond(10, 2) #=> 静的メソッドをインスタンス化して利用するとエラー
                         hr
                         h4 プロパティの削除
                         pre(class='prettyprint linenums:1')

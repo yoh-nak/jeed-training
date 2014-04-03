@@ -295,11 +295,31 @@ block content
                                 delete mem1.sex;
 
                                 //mem2が自分自身のsexプロパティを持つので、delete演算子はmem2のsexプロパティを削除します。
-                                dleete mem2.sex;
+                                delete mem2.sex;
 
                                 //mem1は暗黙の参照をたどってプロトタイプオブジェクトのsexを返します。mem2は、独自のプロパティsexが削除されたので、暗黙の参照をたどって、プロトタイプオブジェクトのプロパティを返します。
                                 console.log(mem1.sex + ' | ' + mem2.sex); //=> 男 | 男
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                MemberClass = ->
 
+                                MemberClass::sex = "男"
+                                mem1 = new MemberClass()
+                                mem2 = new MemberClass()
+                                console.log mem1.sex + " | " + mem2.sex #=> 男 | 男
+                                mwm2.sex = " 女"
+                                console.log mem1.sex + " | " + mem2.sex #=> 男 | 女
+
+                                #インスタンスmem1のsexプロパティを削除しようとしていますが、mem1はsexプロパティを持っていないのでなにもおきません
+                                delete mem1.sex
+
+
+                                #mem2が自分自身のsexプロパティを持つので、delete演算子はmem2のsexプロパティを削除します。
+                                delete mem2.sex
+
+
+                                #mem1は暗黙の参照をたどってプロトタイプオブジェクトのsexを返します。mem2は、独自のプロパティsexが削除されたので、暗黙の参照をたどって、プロトタイプオブジェクトのプロパティを返します。
+                                console.log mem1.sex + " | " + mem2.sex #=> 男 | 男
                         p プロトタイプオブジェクトのメンバを削除するには、以下のようにします。ただし、このプロトタイプオブジェクトを参照しているすべてのインスタンスに影響がでるので注意しましょう。
                         pre(class='prettyprint linenums:1')
                             :code
@@ -313,9 +333,19 @@ block content
 
                                 var mem1 = new MemberClass();
                                 var mem2 = new MemberClass();
-                                console.log(mem1.sex ' | ' + mem2.sex); //=> 男 | 男
+                                console.log(mem1.sex '+  | ' + mem2.sex); //=> 男 | 男
                                 mem2.sex = undefined;
-                                console.log(mem1.sex ' | ' + mem2.sex); //=> 男 | undefined
+                                console.log(mem1.sex ' + | ' + mem2.sex); //=> 男 | undefined
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                MemberClass = ->
+
+                                MemberClass::sex = "男"
+                                mem1 = new MemberClass()
+                                mem2 = new MemberClass()
+                                console.log mem1.sex + " | " + mem2.sex #=> 男 | 男
+                                mem2.sex = `undefined`
+                                console.log mem1.sex + " | " + mem2.sex #=> 男 | undefined
                         hr
                         h4 オブジェクトリテラルでプロトタイプの定義
                         p プロトタイプでメソッドを定義するとき、定義が独立した文で読みにくく、オブジェクト名に変更があった場合、コードをすべて修正する必要があります。
@@ -340,6 +370,18 @@ block content
                                 MemberClass.prototype.toString = function(){
                                     return this.lastName + this.firstName;
                                 };
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                MemberClass = (firstName, lastName) ->
+                                  @firstName = firstName
+                                  @lastName = lastName
+                                  return
+
+                                MemberClass::getName = ->
+                                  @lastName + " " + @firstName
+
+                                MemberClass::toString = ->
+                                  @lastName + @firstName
                         p このような場合、以下のようにオブジェクトリテラルでまとめて定義するとコードが読みやすくなります。
                         pre.
                             var MemberClass = function(){ ... };
@@ -364,7 +406,19 @@ block content
                                         return this.lastName + this.firstName;
                                     }
                                 };
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                MemberClass = (firstName, lastName) ->
+                                  @firstName = firstName
+                                  @lastName = lastName
+                                  return
 
+                                MemberClass:: =
+                                  getName: ->
+                                    @lastName + " " + @firstName
+
+                                  toString: ->
+                                    @lastName + @firstName
                         hr
                         h4 プロトタイプ継承（プロトタイプチェーン）
                         pre(class='prettyprint linenums:1')
@@ -373,7 +427,7 @@ block content
 
                                 AnimalClass.prototype = {
                                     walk: function(){
-                                        .writeln('トコトコ...');
+                                        console.log('トコトコ...');
                                     }
                                 };
 
@@ -388,7 +442,24 @@ block content
                                 var d = new DogClass();
                                 d.walk(); //=> トコトコ...
                                 d.bark(); //=> ワンワン！
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                AnimalClass = ->
 
+                                AnimalClass:: = walk: ->
+                                  console.log "トコトコ..."
+                                  return
+
+                                DogClass = ->
+
+                                DogClass:: = new AnimalClass()
+                                Dog::bark = ->
+                                  console.log "ワンワン！"
+                                  return
+
+                                d = new DogClass()
+                                d.walk() #=> トコトコ...
+                                d.bark() #=> ワンワン！
                         p JavaScriptのプロトタイプチェーンはインスタンスが生成された時点で固定され、その後の変更に関わらず固定されるので注意しましょう。
                         pre(class='prettyprint linenums:1')
                             :code
@@ -419,3 +490,26 @@ block content
                                 d2.walk(); //=> ダダダダダ！;
 
                                 d1.walk(); //=> トコトコ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                AnimalClass = ->
+
+                                AnimalClass:: = walk: ->
+                                  console.log "トコトコ..."
+                                  return
+
+                                SuperAnimalClass = ->
+
+                                SuperAnimalClass:: = walk: ->
+                                  console.log "ダダダダダ！"
+                                  return
+
+                                DogClass = ->
+
+                                DogClass:: = new AnimalClass()
+                                d1 = new DogClass()
+                                d1.walk() #=> トコトコ
+                                DogClass:: = new SuperAnimalClass()
+                                d2 = new SuperAnimalClass()
+                                d2.walk() #=> ダダダダダ！;
+                                d1.walk() #=> トコトコ

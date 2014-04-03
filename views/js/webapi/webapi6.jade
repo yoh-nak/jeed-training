@@ -1,0 +1,103 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading HTTP通信の概要
+                    .panel-body
+                        h4 Webシステムの通信
+                        p.
+                            Webページを閲覧する際に、WebサーバーとクライアントであるWebブラウザの間でかわされる通信は、HTTP（Hyper Text Transfer Protocol）というルールに基づいて行われています。URLの先頭の「http://」という部分は、「httpを使って通信を行う」ということを示しています。
+
+                        h4 HTTP通信の仕組み
+                        p.
+                            HTTP通信では、まずWebブラウザからWebサーバーにTCP（Transmission Control Protocol）というプロトコルを用いて接続を行います。接続が確立すると、WebブラウザはWebページなどのデータ提供の要求（リクエスト）を送ります。Webサーバーはリクエストに該当するデータを検索し、応答（レスポンス）として返します。このように、HTTP通信の基本的な仕組みは、リクエストとレスポンスが常に一対一で対応するシンプルな通信方式です。
+                        h4 エンコード
+                        p.
+                            HTTPリクエストのGETメソッドは、Webサーバー上のファイルなどのリソースを要求する場合だけでなく、データベースなどにキーワードを送って検索結果を受け取る場合に利用されます。このとき、キーワードはURLの一部として送信されます。
+
+                            たとえば、CGIプログラムを使って、「keyword」という項目名の値が「Ajax」であるデータを検索するには、以下のようなリクエストを送信します。
+                        pre
+                            :code
+                                GET cgi-bin/search.cgi?keyword=Ajax HTTP/1.1
+                        p
+                            ='検索対象とする項目が複数ある場合には、次のように&でつなぎます。'
+                        pre
+                            :code
+                                GET cgi-bin/search.cgi?keywordAjax&update=2011 HTTP/1.1
+                        p.
+                            なお、検索可能なURLの長さはサーバーによって異なります。このため、長いデータを送信する場合には、GETメソッドではなくPOSTメソッドを利用したほうがよいでしょう。
+
+                        h4 URLエンコード
+                        p
+                            !='GETメソッドで送信するキーワードには、プログラムが処理する上で特殊な意味を持つ&や「"」などのメタ文字や、日本語などのマルチバイト文字が含まれることがあります。しかし、これらの文字をそのままURLに使用すると、サーバーによってはHTTPリクエストが正しく理解されないこともあり得ます。'
+                        p.
+                            そこで、URLにメタ文字やマルチバイト文字が含まれる場合には、Webサーバーなどが正しく理解できる文字列に置き換えるURLエンコードという処理が必要になります。URLエンコードでは基本的に、半角英数文字や記号などで構成されるASCII文字以外の文字は、すべて「%xx」という文字列に変換されます。「xx」の部分には2桁の16進数で、使用する文字コードに準拠します。
+                        p.
+                            JavaScriptには、URLエンコードを行うための組み込み関数が３種類用意されています。それぞれ、エンコードの方法やエンコードの対象とする文字列が異なり、Webブラウザによって対応状況も異なるため、利用の際には注意が必要です。
+
+                        p.
+                            また、URLエンコードを行った文字列は、同様に組込み関数を利用して通常の文字列に再変換することができます。この元の文字列を戻す処理はURLデコードと呼ばれ、こちらも3種類用意されています。
+
+                        table.table
+                            tr
+                                th エンコードを行う関数
+                                th デコードを行う関数
+                                th 特徴
+                            tr
+                                td escape()
+                                td unescape()
+                                td
+                                    ul
+                                        li 「*+./@_」をエンコードしない
+                                        li マルチバイト文字はUSC-2準拠でエンコードする（*）
+                            tr
+                                td encodeURI()
+                                td decodeURI
+                                td
+                                    ul
+                                        li 「!#$'+,-./:;~?@_~」をエンコードしない
+                                        li マルチバイト文字はUTF-8準拠でエンコードする
+                            tr
+                                td encodeURIComponent()
+                                td decodeURIComponent
+                                td
+                                    ul
+                                        li 「!'()-._~」をエンコードしない
+                                        li マルチバイト文字はUTF-8準拠でエンコードする
+                                        | *ブラウザごとに動作が異なる場合があるため非推奨
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html(lang='ja')
+                                     head
+                                          meta(charset='UTF-8')
+                                          title
+                                     body
+                                          p
+                                               script
+                                                    :js
+                                                    (function(){
+                                                        var str = 'かんたんJavaScript';
+                                                        var e1 = escape(str);
+                                                        document.write(e1 + '<br>');
+                                                        var e2 = encodeURI(str);
+                                                        document.write(e2 + '<br>');
+                                                        var e3 = encodeURIComponent(str);
+                                                        document.write(e3 + '<br>');
+                                                    })();
+                        h4 文字コードによる違い
+                        p.
+                            前述の文字コードとは、コンピュータ上で文字を扱うために各文字に割り当てた番号、またはその対抗関係のことです。文字の種類や番号の割り当て方によって、複数の文字コードが有ります。たとえば、「ASCII（アスキー）」はラテン文字や数字、英語でよく利用される記号などの文字に対して、7桁の2進数によるコード番号を割り当てた文字コードです。URLエンコードの結果は、どの文字コードに従ってエンコードを行うかによって変化します。

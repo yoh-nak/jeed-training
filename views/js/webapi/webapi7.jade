@@ -1,0 +1,173 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading jQueryのAjax関数
+                    .panel-body
+                        h4 jQueryのAjax関数
+                        p: u HTMLコンテンツを受信する
+                        pre.
+                            $.load(URL[,データ][,コールバック関数])
+                        p
+                            a.btn.btn-default(href='http://api.jquery.com/load/', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                |  参考：$.load
+                        p: u GETメソッドでデータを受信する
+                        pre.
+                            $.get(URL[,データ][,コールバック関数][,データタイプ])
+                        p
+                            a.btn.btn-default(href='http://api.jquery.com/jQuery.get/', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                |  参考：$.get
+                        p: u JSON形式のデータをGETメソッドで受信する
+                        pre.
+                            $.getJSON(URL[,データ][,コールバック関数])
+                        p
+                            a.btn.btn-default(href='http://api.jquery.com/jQuery.getJSON/', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                |  参考：$.getJSON
+                        p: u スクリプトをGETメソッドで受信する
+                        pre.
+                            $.getScript(URL[,データ][,コールバック関数])
+                        p: u POSTメソッドでデータを送受信する
+                        pre.
+                            $.post(URL[,データ][,コールバック関数][,データタイプ])
+                        p: u サーバとデータを送受信する
+                        pre.
+                            $.ajax([{オプション1:値1,...}])
+                        p
+                            a.btn.btn-default(href='http://api.jquery.com/jQuery.ajax/', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                |  参考：$.ajax
+                        p: u デフォルトのオプションを変更する
+                        pre.
+                            $.ajaxSetup([{オプション1:値1,...}])
+                        p: u フィールドのデータを配列として取得
+                        pre.
+                            $(セレクタ).serializeArray()
+                        p: u フィールドのデータをURLパラメータ形式で取得
+                        pre.
+                            $(セレクタ).serialize()
+                        hr
+                        h4 $.ajaxSetup()および$.ajax()で記述可能なオプション
+                        table.table
+                            tr
+                                th オプション
+                                th 意味
+                                th デフォルト値
+                            tr
+                                td url
+                                td アクセス先URL
+                                td
+                            tr
+                                td data
+                                td 送信するパラメータ。文字列もしくはオブジェクト
+                                td
+                            tr
+                                td type
+                                td GET/POSTなどのHTTPメソッド
+                                td GET
+                            tr
+                                td dataType
+                                td
+                                    | サーバからのレスポンスのデータ形式
+                                    br
+                                    | ※'html'、'xml'、'text'、'jsonp'、'json'、'script'を指定可能
+                                td
+                            tr
+                                td cache
+                                td 受信した内容をキャッシュするか
+                                td ※dataTypeが'script'のとき、デフォルトでfalse
+                            tr
+                                td timeout
+                                td データ送信後、応答がなければ通信を終了する制限時間（ミリ秒）
+                                td 0（制限時間なし）
+                            tr
+                                td username
+                                td URLへのアクセスに必要なユーザ名
+                                td
+                            tr
+                                td password
+                                td URLへのアクセスに必要なパスワード
+                                td
+                            tr
+                                td jsonp
+                                td JSONPでコールバック関数を示すパラメータの名称
+                                td
+                            tr
+                                td ifModified
+                                td 前回アクセス以降に更新した時のみ受信する
+                                td
+                            tr
+                                td beforeSend
+                                td サーバにデータを送信する前に実行される内容（コールバック関数）
+                                td
+                            tr
+                                td success
+                                td サーバからの正常にデータを受信できたときに実行される内容（コールバック関数）
+                                td
+                            tr
+                                td error
+                                td エラーが発生したときに実行される内容（コールバック関数）
+                                td
+                            tr
+                                td complete
+                                td サーバからデータを受信したあとに実行される内容（コールバック関数）
+                                td
+                            tr
+                                td async
+                                td サーバーと非同期で通信する
+                                td true
+                            tr
+                                td global
+                                td イベント処理を下記の方法でも行う
+                                td true
+                            tr
+                                td accepts
+                                td dataTypeに対応したMIMEタイプの一覧
+                                td */*
+                            tr
+                                td processData
+                                td dataが文字列でないとき、送信するデータをURLパラメータ形式にする
+                                td true
+                            tr
+                                td contentType
+                                td 送信するデータのMIMEタイプ
+                                td application/x-www-form-urlencoded
+                            tr
+                                td scriptCharset
+                                td スクリプトの文字コード
+                                td
+                        hr
+                        h4 イベント処理 (global:trueの場合のみ有効)
+                        p: u 初めてサーバとの通信を開始する直前
+                        pre.
+                            $(セレクタ).ajaxStart(コールバック関数);
+                        p: u サーバにデータの送信を開始する直前
+                        pre.
+                            $(セレクタ).ajaxSend(コールバック関数);
+                        p: u サーバからデータを受信した直後
+                        pre.
+                            $(セレクタ).ajaxSuccess(コールバック関数);
+                        p: u サーバとの通信でエラーが起きた直後
+                        pre.
+                            $(セレクタ).ajaxError(コールバック関数);
+                        p: u サーバとの一連の通信処理が完了した直後
+                        pre.
+                            $(セレクタ).ajaxComplete(コールバック関数);
+                        p: u サーバとのすべての通信が終了した直後
+                        pre.
+                            $(セレクタ).ajaxStop(コールバック関数);

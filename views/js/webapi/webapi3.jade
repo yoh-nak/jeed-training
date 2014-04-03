@@ -1,0 +1,107 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading XMLHttpRequestとは
+                    .panel-body
+                        h4 XMLHttpRequestとは
+                        p.
+                            Ajaxの特徴は、非同期通信を利用してWebページの動的な更新を行うことにあります。これを可能にしているのは、XMLHttpRequest（XHR）というJavaScriptの組み込みオブジェクト（API）です。
+                        p.
+                            XMLHttpRequestオブジェクトは、元々はMicrosoft社によってActiveXオブジェクトとして開発され、Internet Explorer 5に実装された独自拡張です。その後、他のブラウザでもXMLHttpRequestオブジェクトが実装されるようになり、Internet Explorer 7で改めてMozillaの実装に合わせた再実装が行われました。こうしてXMLHttpRequestオブジェクトは事実上の標準機能となったため、W3Cでも正式に標準化が進められています。
+                        p.
+                            XMLHttpRequestオブジェクトを利用すると、すでに読み込んだWebページからさらにHTTPリクエストを送信して、ページ遷移を行うことなくコンテンツを更新できます。
+                        p.
+                            XMLHttpRequestという名称ではあるものの、XML以外のデータ形式にも対応しており、またHTTP以外のプロトコルで利用することもできます。
+
+                        hr
+                        h4 XMLHttpRequestオブジェクトの生成
+                        pre.
+                            var req = new XMLHttpRequest();
+
+                        p: u Internet Explorer 6の場合
+                        pre.
+                            var req = new ActiveXObject('Msxml12.XMLHTTP');
+
+                        p: u Internet Explorer 5/5.5の場合
+                        pre.
+                            var req = new ActiveXObject('Microsoft.XMLHTTP');
+
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var req;
+
+                                if(XMLHttpRequest){
+                                    req = new XMLHttpRequest();
+                                }
+                                else{
+                                    try{
+                                        req = new ActiveXObject('Msxml12.XMLHTTP');
+                                    }
+                                    catch(e){
+                                        try{
+                                            req = new ActiveXObject('Microsoft.XMLHTTP');
+                                        }
+                                        catch(e){
+                                            alert('ActiveXを有効にしてください');
+                                        }
+                                    }
+                                }
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                req = undefined
+                                if XMLHttpRequest
+                                  req = new XMLHttpRequest()
+                                else
+                                  try
+                                    req = new ActiveXObject("Msxml12.XMLHTTP")
+                                  catch e
+                                    try
+                                      req = new ActiveXObject("Microsoft.XMLHTTP")
+                                    catch e
+                                      alert "ActiveXを有効にしてください"
+                        hr
+                        h4 XMLHttpRequestオブジェクトのプロパティとメソッド
+                        p
+                            a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/Web/API/XMLHttpRequest', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                |  参考
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var req = new XMLHttpRequest();
+
+                                req.open('GET', 'cgi-bin/search.cgi?keyword=Ajax', true);
+
+                                req.setRequestHeader('If-Modified-Since', 'Sat, 1 Oct 2011 00:00:00 GMT');
+                                req.send(null);
+
+                                req.onreadystatechange = function(){
+                                    if(req.readyState == 4 && req.status == 200){
+                                        var str = req.responseText;
+                                        alert(str);
+                                    }
+                                };
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                req = new XMLHttpRequest()
+                                req.open "GET", "cgi-bin/search.cgi?keyword=Ajax", true
+                                req.setRequestHeader "If-Modified-Since", "Sat, 1 Oct 2011 00:00:00 GMT"
+                                req.send null
+                                req.onreadystatechange = ->
+                                  if req.readyState is 4 and req.status is 200
+                                    str = req.responseText
+                                    alert str
+                                  return

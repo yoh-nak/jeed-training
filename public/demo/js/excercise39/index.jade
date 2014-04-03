@@ -1,0 +1,39 @@
+doctype
+html(lang='ja')
+    head
+        meta(charset='utf-8')
+        meta(name='viewport',content='width=device-width,initial-scale=1.0')
+        link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+        script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+        title Imageオブジェクト
+        script
+            :js
+                var images = [
+                    'kumamon0.gif',
+                    'kumamon1.gif',
+                    'kumamon2.gif',
+                    'kumamon3.gif',
+                    'kumamon4.gif'
+                ];
+
+                var teki = [];
+                for(var i = 0; i < images.length; i++){
+                    teki[i] = new Image();
+                    teki[i].src = images[i];
+                }
+                
+                $(document).on('pageshow','#index',function(){
+                    for(var i = 0; i < images.length; i++){
+                        $('#canvas').append(teki[i]);
+                    }
+                });
+
+    body
+        div(data-role='page', id='index')
+            div(data-role='header')
+                h1 ランダムイメージ
+            div(data-role='content')
+                #canvas
+            div(data-role='footer', data-position='fixed')
+                h1 フッター

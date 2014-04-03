@@ -1,0 +1,28 @@
+doctype
+html
+    head
+        meta(charset='UTF-8')
+        title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script
+            :js
+                $(function(){
+                    $('input').click(function(){
+                        $.get('sample.txt',function(data){
+                            $('p').text(data);
+                        });
+                    });
+                });
+        //-
+            script
+                :coffee
+                    $ ->
+                        $("input").click ->
+                            $.get "sample.txt", (data) ->
+                                $("p").text data
+                                return
+                            return
+                        return
+    body
+        input(type='button', value='変更')
+        p 変更前

@@ -112,61 +112,72 @@ block content
                         hr
                         h4 $.load
                             p
-                                a.btn.btn-default(href='demo/webapi/exercise1/index.html', target='_blank')
+                                a.btn.btn-default(href='../demo/webapi/exercise1/index1.html', target='_blank')
                                     i.glyphicon.glyphicon-play
                                     |  デモ
                         pre(class='prettyprint linenums:1')
                             :code
-                                <!DOCTYPE html>
-                                <html>
-                                <head>
-                                <meta charset="UTF-8">
-                                <title></title>
-                                <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-                                <script>
-                                $(function(){
-                                $("input").click(function(){
-                                $("p").load("sample.txt");
-                                });
-                                });
-                                </script>
-                                </head>
-                                <body>
-                                <input type="button" value="変更" />
-                                <p>変更前</p>
-                                </body>
-                                </html>
+                                doctype
+                                html
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script
+                                            :js
+                                                $(function(){
+                                                    $('input').click(function(){
+                                                        $('p').load('sample.txt');
+                                                    });
+                                                });
+                                        //-
+                                            script
+                                                :coffee
+                                                    $ ->
+                                                        $("input").click ->
+                                                            $("p").load "sample.txt"
+                                                            return
 
+                                                        return
+                                    body
+                                        input(type='button', value='変更')
+                                        p 変更前
                         hr
                         h4 $.get
                         p
-                            a.btn.btn-default(href='demo/webapi/exercise1/index2.html', target='_blank')
+                            a.btn.btn-default(href='../demo/webapi/exercise1/index2.html', target='_blank')
                                 i.glyphicon.glyphicon-play
                                 |  デモ
                         pre(class='prettyprint linenums:1')
                             :code
-                                <!DOCTYPE html>
-                                <html>
-                                <head>
-                                <meta charset="UTF-8">
-                                <title></title>
-                                <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-                                <script>
-                                $(function(){
-                                $("input").click(function(){
-                                $.get("sample.txt",function(data){
-                                $("p").text(data);
-                                });
-                                });
-                                });
-                                </script>
-                                </head>
-                                <body>
-                                <input type="button" value="変更">
-                                <p>変更前</p>
-                                </body>
-                                </html>
-
+                                doctype
+                                html
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script
+                                            :js
+                                                $(function(){
+                                                    $('input').click(function(){
+                                                        $.get('sample.txt',function(data){
+                                                            $('p').text(data);
+                                                        });
+                                                    });
+                                                });
+                                        //-
+                                            script
+                                                :coffee
+                                                    $ ->
+                                                        $("input").click ->
+                                                            $.get "sample.txt", (data) ->
+                                                                $("p").text data
+                                                                return
+                                                            return
+                                                        return
+                                    body
+                                        input(type='button', value='変更')
+                                        p 変更前
                         hr
                         h4 $.post
                         p
@@ -175,27 +186,45 @@ block content
                                 |  デモ
                         pre(class='prettyprint linenums:1')
                             :code
-                                <!DOCTYPE html>
-                                <html>
-                                <head>
-                                <meta charset="UTF-8">
-                                <title></title>
-                                <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-                                <script>
-                                $(function(){
-                                $("input").click(function(){
-                                $.post("sample.txt",function(data){
-                                $("p").text(data);
+                                doctype
+                                html
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script
+                                            :js
+                                                $(function(){
+                                                    $('input').click(function(){
+                                                        $.post('./sample.txt',function(data){
+                                                            $('p').text(data);
+                                                        });
+                                                    });
+                                                });
+                                        //-
+                                            script
+                                                :coffee
+                                                    $ ->
+                                                        $("input").click ->
+                                                            $.post "sample.txt", (data) ->
+                                                                $("p").text data
+                                                                return
+                                                            return
+                                                        return
+                                    body
+                                        input(type='button', value='変更')
+                                        p 変更前
+                        p <mark>* Expressでpostを受信するための設定が必要です。</mark>
+                        p: u app.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                app.post('URL', function(req, res) {
+                                    var data, filePath;
+                                    filePath = __dirname + 'Webアプリのルートからの相対パス';
+                                    data = fs.readFileSync(filePath).toString();
+                                    res.contentType('text/plain');
+                                    res.send(data);
                                 });
-                                });
-                                });
-                                </script>
-                                </head>
-                                <body>
-                                <input type="button" value="変更">
-                                <p>変更前</p>
-                                </body>
-                                </html>
                         hr
                         h4 $.ajax
                         p
@@ -204,28 +233,38 @@ block content
                                 |  デモ
                         pre(class='prettyprint linenums:1')
                             :code
-                                <!DOCTYPE html>
-                                <html>
-                                <head>
-                                <meta charset="UTF-8">
-                                <title></title>
-                                <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-                                <script>
-                                $(function(){
-                                $("input").click(function(){
-                                $.ajax({
-                                type:"GET",
-                                url:"sample.txt",
-                                success:function(data){
-                                $("p").text(data);
-                                }
-                                });
-                                });
-                                });
-                                </script>
-                                </head>
-                                <body>
-                                <input type="button" value="変更">
-                                <p>変更前</p>
-                                </body>
-                                </html>
+                                doctype
+                                html
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script
+                                            :js
+                                                $(function(){
+                                                    $('input').click(function(){
+                                                        $.ajax({
+                                                            type:'GET',
+                                                            url:'sample.txt',
+                                                            success:function(data){
+                                                                $('p').text(data);
+                                                            }
+                                                        });
+                                                    });
+                                                });
+                                        //-
+                                            script
+                                                :coffee
+                                                    $ ->
+                                                        $("input").click ->
+                                                            $.ajax
+                                                                type: "GET"
+                                                                url: "sample.txt"
+                                                                success: (data) ->
+                                                                    $("p").text data
+                                                                    return
+                                                            return
+                                    return
+                                    body
+                                        input(type='button', value='変更')
+                                        p 変更前

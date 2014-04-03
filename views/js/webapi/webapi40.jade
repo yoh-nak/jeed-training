@@ -1,0 +1,52 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include googlemap
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading Google Mapのひな形
+                    .panel-body
+                        p
+                            a.btn.btn-default(href='../demo/webapi/googlemap-6/index.html', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                |  デモ
+                            |  
+                            a.btn.btn-default(href='https://developers.google.com/maps/documentation/javascript/tutorial?hl=ja', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                |  参考：Google Maps JavaScript API v3
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <!DOCTYPE html>
+                                <html lang="ja">
+                                <head>
+                                <meta charset="utf-8">
+                                <title></title>
+                                <script src="http://maps.google.com/maps/api/js?sensor=true&language=ja"></script>
+                                <style>
+                                html,body{
+                                width:100%;
+                                height:100%;
+                                margin:0;
+                                }
+                                #map
+                                width 100%
+                                height 100%
+                                </style>
+                                </head>
+                                <body>
+                                <div id="map"></div>
+                                <script></script>
+                                </body>
+                                </html>
+

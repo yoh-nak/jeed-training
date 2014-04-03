@@ -34,7 +34,15 @@ block content
                                 } finally {
                                     console.log('処理は完了しました。');
                                 }
-
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                i = 1
+                                try
+                                  i = i * j
+                                catch e
+                                  console.log "e.message"
+                                finally
+                                  console.log "処理は完了しました。"
                         h4 例外を意図的に発生させる
                         pre.
                             throw new Error(エラーメッセージ)
@@ -50,3 +58,12 @@ block content
                                 }catch(e){
                                     console.log(e.message);
                                 }
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                x = 1
+                                y = 0
+                                try
+                                  throw new Error("0で除算しようとしました。")  if y is 0
+                                  z = x / y
+                                catch e
+                                  console.log e.message

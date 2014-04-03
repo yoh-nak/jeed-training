@@ -27,7 +27,17 @@ block content
                                     return args.base * args.height / 2;
                                 }
 
-                                document.writeln(triangle(<mark>{base:5, height:4}));
+                                console.log(triangle(<mark>{base:5, height:4}</mark>));
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                triangle = (args) ->
+                                  args.base = 1  if args.base is `undefined`
+                                  args.height = 1  if args.height is `undefined`
+                                  args.base * args.height / 2
+                                console.log triangle(
+                                  base: 5
+                                  height: 4
+                                )
                         hr
                         h4 高階関数
                         p JavaScriptの関数はデータ型の一種であり、数値型や文字列型の値と同様、関数の引数として渡したり、戻り値として返したりすることができます。関数を引数、戻り値として扱う関数のことを高階関数と呼びます。
@@ -40,11 +50,28 @@ block content
                                 }
 
                                 function showElement(key, value){
-                                    document.writeln(key + ': ' + value);
+                                    console.log(key + ': ' + value);
                                 }
 
                                 var ary = [1, 2, 4, 8, 16];
                                 arrayWalk(ary, showElement);
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                arrayWalk = (data, f) ->
+                                  for key of data
+                                    f key, data[key]
+                                  return
+                                showElement = (key, value) ->
+                                  console.log key + ": " + value
+                                  return
+                                ary = [
+                                  1
+                                  2
+                                  4
+                                  8
+                                  16
+                                ]
+                                arrayWalk ary, showElement
                         p 無名関数でシンプルに記述すると以下のようになります。
                         pre(class='prettyprint linenums:1')
                             :code
@@ -56,8 +83,24 @@ block content
 
                                 var ary = [1, 2, 4, 8, 16];
                                 arrayWalk(ary, function(key, value){
-                                    document.writeln('key + ': ' + value);
+                                    console.log(key + ': ' + value);
                                 });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                arrayWalk = (data, f) ->
+                                  for key of data
+                                    f key, data[key]
+                                  return
+                                ary = [
+                                  1
+                                  2
+                                  4
+                                  8
+                                  16
+                                ]
+                                arrayWalk ary, (key, value) ->
+                                  console.log key + ": " + value
+                                  return
                         hr
                         h4 クロージャー
                         p クロージャーとは関数内のローカル変数を参照している関数内の関数のことです。関数の中で使われたローカル変数は、関数が終了した時点で破棄されるはずですが、closure関数から返された無名関数がローカル変数counterを参照し続けているので、closure関数終了後もローカル変数counterの値が保持され続けます。
@@ -72,9 +115,19 @@ block content
                                 }
 
                                 var myClosure = closure(1);
-                                document.writeln(myClosure()); //=> 2
-                                document.writeln(myClosure()); //=> 3
-                                document.writeln(myClosure()); //=> 4
+                                console.log(myClosure()); //=> 2
+                                console.log(myClosure()); //=> 3
+                                console.log(myClosure()); //=> 4
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                closure = (init) ->
+                                  counter = init
+                                  ->
+                                    ++counter
+                                myClosure = closure(1)
+                                console.log myClosure() #=> 2
+                                console.log myClosure() #=> 3
+                                console.log myClosure() #=> 4
                         pre(class='prettyprint linenums:1')
                             :code
                                 function closure(init){
@@ -87,10 +140,22 @@ block content
 
                                 var myClosure1 = closure(1);
                                 var myClosure2 = closure(100);
-                                document.writeln(myClosure1()); //=> 2
-                                document.writeln(myClosure2()); //=> 101
-                                document.writeln(myClosure1()); //=> 3
-                                document.writeln(myClosure2()); //=> 102
+                                console.log(myClosure1()); //=> 2
+                                console.log(myClosure2()); //=> 101
+                                console.log(myClosure1()); //=> 3
+                                console.log(myClosure2()); //=> 102
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                closure = (init) ->
+                                  counter = init
+                                  ->
+                                    ++counter
+                                myClosure1 = closure(1)
+                                myClosure2 = closure(100)
+                                console.log myClosure1() #=> 2
+                                console.log myClosure2() #=> 101
+                                console.log myClosure1() #=> 3
+                                console.log myClosure2() #=> 102
                         p クロージャーは処理を1つしかもたないシンプルなオブジェクトのように動作します。簡単な処理であれば、オブジェクトよりもクロージャーのほうがシンプルに記述できるため、変数に伴う処理がひとつしかない場合はクロージャーが便利です。それに対して、複数の処理を必要とする場合はオブジェクトを使うとよいでしょう。
                         pre.
                             function クロージャー関数(引数[, 引数, ...]){

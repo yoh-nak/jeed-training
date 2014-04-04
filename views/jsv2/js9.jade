@@ -68,7 +68,7 @@ block content
                                     return total/5;
                                 };
 
-                                hanko.showMsg = function(){
+                                hanako.showMsg = function(){
                                     var msg = this.name + 'さんの成績平均: ' + this.heikin();
                                     alert(msg);
                                 };
@@ -212,69 +212,6 @@ block content
                             :code
                                 プロパティの宣言 => コンストラクタで
                                 メソッドの宣言 => プロトタイプで
-
-                        hr
-                        h4 静的（static）プロパティ／静的（static）メソッド
-                        p プロパティやメソッドによっては、インスタンスを生成せずに利用できるものがあります。このようなプロパティ／メソッドは、静的プロパティ／静的メソッド、またはスタティックプロパティ、スタティックメソッドと呼ばれます。静的メソッド／静的プロパティの呼び出しは以下のようになります。
-                        pre
-                            :code
-                                オブジェクト名.プロパティ名 [= 設定値];
-                                オブジェクト名.メソッド名([引数 [, ...]]);
-
-                        hr
-                        h4 静的プロパティ／静的メソッドのの定義
-                        pre.
-                            var オブジェクト名 = function(){};
-
-                            オブジェクト名.プロパティ名 = 値;
-
-                            オブジェクト名.メソッド名 = function(){
-                                メソッドの定義
-                            };
-
-                        pre(class='prettyprint linenums:1')
-                            :code
-                                var AreaClass = function(){};
-
-                                AreaClass.version = 1.0;
-
-                                AreaClass.triangle = function(base, height){
-                                  return base * height / 2;
-                                }
-
-                                AreaClass.diamond = function(width, height){
-                                  return width * height / 2;
-                                }
-
-                                //静的プロパティの利用
-                                console.log('Areaクラスのバージョン: ' + AreaClass.version);
-                                //静的メソッドの利用
-                                console.log(' 三角形の面積: ' + AreaClass.triangle(5, 3));
-
-                                //インスタンス化
-                                var a = new AreaClass();
-                                console.log(' 菱型の面積: ' + a.diamond(10, 2)); //=> 静的メソッドをインスタンス化して利用するとエラー
-                        pre(class='prettyprint linenums:1')
-                            :code
-                                AreaClass = ->
-
-                                AreaClass.version = 1.0
-                                AreaClass.triangle = (base, height) ->
-                                  base * height / 2
-
-                                AreaClass.diamond = (width, height) ->
-                                  width * height / 2
-
-
-                                #静的プロパティの利用
-                                console.log "Areaクラスのバージョン: " + AreaClass.version
-
-                                #静的メソッドの利用
-                                console.log " 三角形の面積: " + AreaClass.triangle(5, 3)
-
-                                #インスタンス化
-                                a = new AreaClass()
-                                console.log " 菱型の面積: " + a.diamond(10, 2) #=> 静的メソッドをインスタンス化して利用するとエラー
                         hr
                         h4 プロパティの削除
                         pre(class='prettyprint linenums:1')
@@ -435,7 +372,7 @@ block content
 
                                 DogClass.prototype = new AnimalClass();
 
-                                Dog.prototype.bark = function(){
+                                DogClass.prototype.bark = function(){
                                     console.log('ワンワン！');
                                 };
 
@@ -513,3 +450,65 @@ block content
                                 d2 = new SuperAnimalClass()
                                 d2.walk() #=> ダダダダダ！;
                                 d1.walk() #=> トコトコ
+                        hr
+                        h4 静的（static）プロパティ／静的（static）メソッド
+                        p プロパティやメソッドによっては、インスタンスを生成せずに利用できるものがあります。このようなプロパティ／メソッドは、静的プロパティ／静的メソッド、またはスタティックプロパティ、スタティックメソッドと呼ばれます。静的メソッド／静的プロパティの呼び出しは以下のようになります。
+                        pre
+                            :code
+                                オブジェクト名.プロパティ名 [= 設定値];
+                                オブジェクト名.メソッド名([引数 [, ...]]);
+
+                        hr
+                        h4 静的プロパティ／静的メソッドのの定義
+                        pre.
+                            var オブジェクト名 = function(){};
+
+                            オブジェクト名.プロパティ名 = 値;
+
+                            オブジェクト名.メソッド名 = function(){
+                                メソッドの定義
+                            };
+
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var AreaClass = function(){};
+
+                                AreaClass.version = 1.0;
+
+                                AreaClass.triangle = function(base, height){
+                                  return base * height / 2;
+                                }
+
+                                AreaClass.diamond = function(width, height){
+                                  return width * height / 2;
+                                }
+
+                                //静的プロパティの利用
+                                console.log('Areaクラスのバージョン: ' + AreaClass.version);
+                                //静的メソッドの利用
+                                console.log(' 三角形の面積: ' + AreaClass.triangle(5, 3));
+
+                                //インスタンス化
+                                var a = new AreaClass();
+                                console.log(' 菱型の面積: ' + a.diamond(10, 2)); //=> 静的メソッドをインスタンス化して利用するとエラー
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                AreaClass = ->
+
+                                AreaClass.version = 1.0
+                                AreaClass.triangle = (base, height) ->
+                                  base * height / 2
+
+                                AreaClass.diamond = (width, height) ->
+                                  width * height / 2
+
+
+                                #静的プロパティの利用
+                                console.log "Areaクラスのバージョン: " + AreaClass.version
+
+                                #静的メソッドの利用
+                                console.log " 三角形の面積: " + AreaClass.triangle(5, 3)
+
+                                #インスタンス化
+                                a = new AreaClass()
+                                console.log " 菱型の面積: " + a.diamond(10, 2) #=> 静的メソッドをインスタンス化して利用するとエラー

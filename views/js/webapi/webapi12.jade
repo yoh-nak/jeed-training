@@ -1,0 +1,150 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading XMLの属性値の取得
+                    .panel-body
+                        h4 $.get
+                        p
+                            a.btn.btn-default(href='../demo/webapi/exercise5/index1.html', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                |  デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script
+                                            :js
+                                                (function(){
+                                                    $(function(){
+                                                        $('input').click(function(){
+                                                            $.get('./sample.xml',function(data){
+                                                                $('div').html('<ul></ul>');
+                                                                $(data).find('sort[type="1"]').each(function(){
+                                                                    $('div ul')
+                                                                        .append('<li>' + $('text1',this).attr('data') + '</li>')
+                                                                        .append('<li>' + $('text2',this).attr('data') + '</li>')
+                                                                        .append('<li>' + $('text3',this).attr('data') + '</li>');
+                                                                });
+                                                            },'xml');
+                                                        });
+                                                    });
+                                                })()
+                                    body
+                                        input(type='button', value='変更')
+                                        div
+                                            | 変更前
+                        hr
+                        h4 $.post
+                        p
+                            a.btn.btn-default(href='../demo/webapi/exercise5/index2.html', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                |  デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script
+                                            :js
+                                                (function(){
+                                                    $(function(){
+                                                        $('input').click(function(){
+                                                            $.post('./sample.xml',function(data){
+                                                                $('div').html('<ul></ul>');
+                                                                $(data).find('sort[type="1"]').each(function(){
+                                                                    $('div ul')
+                                                                        .append('<li>' + $('text1',this).attr('data') + '</li>')
+                                                                        .append('<li>' + $('text2',this).attr('data') + '</li>')
+                                                                        .append('<li>' + $('text3',this).attr('data') + '</li>');
+                                                                });
+                                                            },'xml');
+                                                        });
+                                                    });
+                                                })()
+                                    body
+                                        input(type='button', value='変更')
+                                        div
+                                            | 変更前
+                        hr
+                        h4 $.ajax
+                        p
+                            a.btn.btn-default(href='../demo/webapi/exercise5/index3.html', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                |  デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script
+                                            :js
+                                                (function(){
+                                                    $(function(){
+                                                        $('input').click(function(){
+                                                            $.ajax({
+                                                                url: 'sample.xml',
+                                                                type: 'GET',
+                                                                data: '',
+                                                                success: function(data){
+                                                                    $('div').html('<ul></ul>');
+                                                                    $(data).find('sort[type="1"]').each(function(){
+                                                                        $('div ul')
+                                                                            .append('<li>' + $('text1',this).attr('data') + '</li>')
+                                                                            .append('<li>' + $('text2',this).attr('data') + '</li>')
+                                                                            .append('<li>' + $('text3',this).attr('data') + '</li>');
+                                                                    });
+                                                                }
+                                                            });
+                                                        });
+                                                    });
+                                                })()
+                                    body
+                                        input(type='button', value='変更')
+                                        div
+                                            | 変更前
+                        hr
+                        | sample.xml
+                        p 以下のようにコンパイル
+                        pre
+                            :code
+                                jade <sample.jade> sample.xml
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype xml
+                                root
+                                    sort(type='1')
+                                        text1(data='データ1') テキスト1
+                                        text2(data='データ2') テキスト2
+                                        text3(data='データ3') テキスト3
+                                    sort(type='2')
+                                        text1(data='データ1') テキスト1
+                                        text2(data='データ2') テキスト2
+                                        text3(data='データ3') テキスト3
+                                    sort(type='3')
+                                        text1(data='データ1') テキスト1
+                                        text2(data='データ2') テキスト2
+                                        text3(data='データ3') テキスト3

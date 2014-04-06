@@ -53,7 +53,6 @@ app.use stylus.middleware(
 )
 app.use express.static(path.join(__dirname, 'public'))
 
-###
 app.use (err, req, res, next) ->
     res.status 403
     res.send '403'
@@ -70,14 +69,6 @@ app.use (req, res, next) ->
     res.status 500
     res.send '500'
     return
-###
-
-###
-app.use require('stylus').middleware(
-    src: __dirname + '/views'
-    dest: __dirname + '/public'
-)
-###
 
 #CoffeeScript動的コンパイル
 ###
@@ -147,6 +138,13 @@ app.post '/demo/webapi/exercise2/sample.html', (req, res) ->
 app.post '/demo/webapi/exercise4/sample.xml', (req, res) ->
     body = ''
     filePath = __dirname + '/public/demo/webapi/exercise4/sample.xml'
+    data = fs.readFileSync(filePath).toString()
+    res.contentType 'text/xml'
+    res.send data
+    return
+app.post '/demo/webapi/exercise5/sample.xml', (req, res) ->
+    body = ''
+    filePath = __dirname + '/public/demo/webapi/exercise5/sample.xml'
     data = fs.readFileSync(filePath).toString()
     res.contentType 'text/xml'
     res.send data

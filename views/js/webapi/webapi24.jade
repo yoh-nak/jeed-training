@@ -1,0 +1,93 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-bookmark
+                        |  課題
+                    .panel-body
+                        p XMLデータを作成てAjaxで取得し、CSSの背景色を変更してみましょう。
+                        p
+                            a.btn.btn-default(href='../demo/webapi/exercise8/index.html', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                |  デモ
+                            |  
+                            button.btn.btn-danger(type='button', data-toggle='collapse', data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | 解答例
+                        #demo.collapse.out
+                            pre(class='prettyprint linenums:1')
+                                :code
+                                    doctype
+                                    html
+                                        head
+                                            meta(charset='UTF-8')
+                                            title
+                                            script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                            style
+                                                :stylus
+                                                    div
+                                                        width 200px
+                                                        height 200px
+                                                        background-color #808080
+                                                        text-align center
+                                                        line-height 200px
+                                                        margin 10px
+                                            script
+                                                :js
+                                                    (function(){
+                                                        $(function(){
+                                                            $('input').click(function(){
+                                                                $.ajax({
+                                                                    url: './color.xml',
+                                                                    type: 'GET',
+                                                                    dataType: 'xml',
+                                                                    success: function(data){
+                                                                        $('colors > color',data).each(function(i){
+                                                                            $('div:eq(' + i + ')')
+                                                                                .text($('colorname',this).text())
+                                                                                .css('background-color',$('colorcode',this).text());
+                                                                            i++;
+                                                                            //alert(i);
+                                                                        });
+                                                                    }
+                                                                });
+                                                            });
+                                                        });
+                                                    })()
+                                        body
+                                            input(type='button', value='click')
+                                            div grey
+                                            div grey
+                                            div grey
+                            hr
+                            | color.xml
+                            pre(class='prettyprint linenums:1')
+                                :code
+                                    doctype xml
+                                    colors
+                                        color
+                                            name 赤色
+                                            colorname red
+                                            colorcode #ff0000
+                                        color
+                                            name 青色
+                                            colorname blue
+                                            colorcode #0000FF
+                                        color
+                                            name 緑色
+                                            colorname green
+                                            colorcode #008000

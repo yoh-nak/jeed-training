@@ -1,0 +1,42 @@
+doctype
+html
+    head
+        meta(charset='UTF-8')
+        title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        style
+            :stylus
+                div
+                    width 200px
+                    height 200px
+                    background-color #808080
+                    text-align center
+                    line-height 200px
+                    margin 10px
+        script
+            :js
+                (function(){
+                    $(function(){
+                        $('input').click(function(){
+                            $.ajax({
+                                url: './color.xml',
+                                type: 'GET',
+                                dataType: 'xml',
+                                success: function(data){
+                                    $('colors > color',data).each(function(i){
+                                        $('div:eq(' + i + ')')
+                                            .text($('colorname',this).text())
+                                            .css('background-color',$('colorcode',this).text());
+                                        i++;
+                                        //alert(i);
+                                    });
+                                }
+                            });
+                        });
+                    });
+                })()
+    body
+        input(type='button', value='click')
+        div grey
+        div grey
+        div grey

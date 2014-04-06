@@ -1,0 +1,46 @@
+doctype
+html
+    head
+        meta(charset='UTF-8')
+        title
+        link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+        script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+        script
+            :js
+                (function(){
+                    $(document).on('pageshow','#index',function(){
+                        $.ajax({
+                            url: 'rss.xml',
+                            dataType: 'xml',
+                            success: function(data){
+                                var html = '';
+                                $("item",data).each(function(){
+                                    html += '<li>';
+                                    html += '<a href="' + $("link",this).text() + '">';
+                                    html += '<img src="#" alt="">';
+                                    html += '<h2>' + $("title",this).text() + '</h2>';
+                                    html += '<p>' + $("description",this).text() + '</p>';
+                                    html += '</a>';
+                                    html += '</li>';
+                                });
+                                //listviewリフレッシュ
+                                $('[data-role="listview"]').append(html).listview('refresh');
+                                //本文の画像をサムネイルの画像に置換
+                                $('.ui-li-has-thumb').each(function(){
+                                    $('img',this).attr('src',$('.mr10',this).attr('src'));
+                                });
+                                //本文の画像除去
+                                $('.mr10').remove();
+                            }
+                        });
+                    });
+                })()
+    body
+        #index(data-role='page')
+            div(data-role='header')
+                h1 RSSの取得
+            div(data-role='content')
+                ul(data-role='listview', data-inset='true')
+            div(data-role='footer')
+                h1 フッター

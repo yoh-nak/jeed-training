@@ -1,43 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title></title>
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script>
-$(function(){
-    $("input").click(function(){
-        $.ajax({
-            url: 'color.xml',
-            dataType: 'xml',
-            success: function(data){
-                var i = 0;
-                $("colors > color",data).each(function(){
-                    $("div:eq(" + i + ")")
-                        .text($("colorName",this).text())
-                        .css("background-color",$("colorCode",this).text())
-                    i++
-                });
-            }
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title></title><script src="http://code.jquery.com/jquery-1.11.0.min.js"></script><style>div {
+  width: 200px;
+  height: 200px;
+  background-color: #808080;
+  text-align: center;
+  line-height: 200px;
+  margin: 10px;
+}
+</style><script>(function(){
+    $(function(){
+        $('input').click(function(){
+            $.ajax({
+                url: './color.xml',
+                type: 'GET',
+                dataType: 'xml',
+                success: function(data){
+                    $('colors > color',data).each(function(i){
+                        $('div:eq(' + i + ')')
+                            .text($('colorname',this).text())
+                            .css('background-color',$('colorcode',this).text());
+                        i++;
+                        //alert(i);
+                    });
+                }
+            });
         });
     });
-});
-</script>
-<style>
-div{
-    width:200px;
-    height:200px;
-    background-color:#808080;
-    text-align:center;
-    line-height:200px;
-    margin:10px;
-}
-</style>
-</head>
-<body>
-<input type="button" value="click">
-<div>grey</div>
-<div>grey</div>
-<div>grey</div>
-</body>
-</html>
+})()</script></head><body><input type="button" value="click"><div>grey</div><div>grey</div><div>grey</div></body></html>

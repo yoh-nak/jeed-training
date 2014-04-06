@@ -1,0 +1,120 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-bookmark
+                        |  課題
+                    .panel-body
+                        p 数値のデータがあります。Aは100、Bは50、Cは120、Dは80、Eは150とします。XMLデータを作成てAjaxで取得し、色分けしての全体の配分を表示してみましょう。
+                        p
+                            a.btn.btn-default(href='../demo/webapi/exercise10/index.html', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                |  デモ
+                            |  
+                            button.btn.btn-danger(type='button', data-toggle='collapse', data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                |  解答例
+                        #demo.collapse.out
+                            pre(class='prettyprint linenums:1')
+                                :code
+                                    doctype
+                                    html
+                                        head
+                                            meta(charset='UTF-8')
+                                            title
+                                            script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                            style
+                                                :stylus
+                                                    div
+                                                        float left
+                                                        width 40px
+                                                        height 25px
+                                                        background-color #808080
+                                                        text-align center
+                                                        line-height 25px
+                                            script
+                                                :js
+                                                    (function(){
+                                                        $(function(){
+                                                            $('input').click(function(){
+                                                                $.ajax({
+                                                                    url: 'data.xml',
+                                                                    dataType: 'xml',
+                                                                    success: function(data){
+                                                                        //全体の合計を格納
+                                                                        var total = 0;
+                                                                        //個別の値を格納
+                                                                        var kobetsu = [];
+                                                                        var label = [];
+                                                                        var color = [];
+                                                                        $('dataset',data).each(function(){
+                                                                            label.push($('data_label',this).text());
+                                                                            kobetsu.push($('data_value',this).text());
+                                                                            color.push($('data_color',this).text());
+                                                                            total += parseInt($('data_value',this).text());
+                                                                        });
+                                                                        //個別の割合
+                                                                        var rate = [];
+                                                                        for(var i = 0; i < kobetsu.length; i++){
+                                                                            rate.push( Math.floor((kobetsu[i] / total) * 100));
+                                                                            $('div:nth(' + i + ')').css({
+                                                                                backgroundColor: color[i],
+                                                                                width: rate[i]*2
+                                                                            }).text(label[i]);
+                                                                        }
+                                                                    },
+                                                                    error:function(e){
+                                                                        console.log(e.message);
+                                                                    }
+                                                                });
+                                                            });
+                                                        });
+                                                    })()
+                                        body
+                                            input(type='button', value='click')
+                                            div
+                                            div
+                                            div
+                                            div
+                                            div
+
+                            hr
+                            | data.jade
+                            pre(class='prettyprint linenums:1')
+                                :code
+                                    doctype xml
+                                    datalist
+                                        dataset
+                                            data_label A
+                                            data_value 100
+                                            data_color red
+                                        dataset
+                                            data_label B
+                                            data_value 50
+                                            data_color blue
+                                        dataset
+                                            data_label C
+                                            data_value 120
+                                            data_color yellow
+                                        dataset
+                                            data_label D
+                                            data_value 80
+                                            data_color green
+                                        dataset
+                                            data_label E
+                                            data_value 150
+                                            data_color orange

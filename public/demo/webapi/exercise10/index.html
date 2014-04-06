@@ -1,66 +1,44 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title></title>
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script>
-$(function(){
-    $('input').click(function(){
-        $.ajax({
-            url: 'data.xml',
-            dataType: 'xml',
-            success: function(data){
-                //全体の合計を格納
-                var total = 0;
-                //個別の値を格納
-                var kobetsu = [];
-                var label = [];
-                var color = [];
-
-                $("dataset",data).each(function(){
-                    label.push($('data_label',this).text());
-                    kobetsu.push($('data_value',this).text());
-                    color.push($('data_color',this).text());
-
-                    total += parseInt($(this).text());
-                });
-
-                //個別の割合
-                var rate = [];
-                for(var i = 0; i < kobetsu.length; i++){
-                    rate.push( Math.floor((kobetsu[i] / total) * 100));
-
-                    $('div:nth(' + i + ')').css({
-                        backgroundColor: color[i],
-                        width: rate[i]*2
-                    }).text(label[i]);
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title></title><script src="http://code.jquery.com/jquery-1.11.0.min.js"></script><style>div {
+  float: left;
+  width: 40px;
+  height: 25px;
+  background-color: #808080;
+  text-align: center;
+  line-height: 25px;
+}
+</style><script>(function(){
+    $(function(){
+        $('input').click(function(){
+            $.ajax({
+                url: 'data.xml',
+                dataType: 'xml',
+                success: function(data){
+                    //全体の合計を格納
+                    var total = 0;
+                    //個別の値を格納
+                    var kobetsu = [];
+                    var label = [];
+                    var color = [];
+                    $('dataset',data).each(function(){
+                        label.push($('data_label',this).text());
+                        kobetsu.push($('data_value',this).text());
+                        color.push($('data_color',this).text());
+                        total += parseInt($('data_value',this).text());
+                    });
+                    //個別の割合
+                    var rate = [];
+                    for(var i = 0; i < kobetsu.length; i++){
+                        rate.push( Math.floor((kobetsu[i] / total) * 100));
+                        $('div:nth(' + i + ')').css({
+                            backgroundColor: color[i],
+                            width: rate[i]*2
+                        }).text(label[i]);
+                    }
+                },
+                error:function(e){
+                    console.log(e.message);
                 }
-            },
-            error:function(e){
-                console.log(e.message);
-            }
+            });
         });
     });
-});
-</script>
-<style type="text/css">
-div{
-    float:left;
-    width:40px;
-    height:25px;
-    background-color:#808080;
-    text-align:center;
-    line-height:25px;
-}
-</style>
-</head>
-<body>
-<input type="button" value="click">
-<div></div>
-<div></div>
-<div></div>
-<div></div>
-<div></div>
-</body>
-</html>
+})()</script></head><body><input type="button" value="click"><div></div><div></div><div></div><div></div><div></div></body></html>

@@ -1,0 +1,245 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-bookmark
+                        |  課題
+                    .panel-body
+                        p RSSのデータを読み込み、Listviewに表示してみましょう。
+                        p <mark>* RSSのXMLデータはSame Origin（Cross Domain）ポリシーが影響するため、本来はサーバーサイド技術で取得する必要があります。</mark>
+                        p
+                            a.btn.btn-default(href='../demo/webapi/exercise9/index.html', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                |  デモ
+                            |  
+                            a.btn.btn-default(href='https://developer.mozilla.org/ja/docs/HTTP_access_control', target='_blank')
+                                i.glyphicon.glyphicon-info-sign
+                                |  参考: HTTP access control （CORS）
+                            |  
+                            button.btn.btn-danger(type='button', data-toggle='collapse', data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                |  解答例
+                        #demo.collapse.out
+                            pre(class='prettyprint linenums:1')
+                                :code
+                                    doctype
+                                    html
+                                        head
+                                            meta(charset='UTF-8')
+                                            title
+                                            link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+                                            script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                            script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+                                            script
+                                                :js
+                                                    (function(){
+                                                        $(document).on('pageshow','#index',function(){
+                                                            $.ajax({
+                                                                url: 'rss.xml',
+                                                                dataType: 'xml',
+                                                                success: function(data){
+                                                                    var html = '';
+                                                                    $("item",data).each(function(){
+                                                                        html += '<li>';
+                                                                        html += '<a href="' + $("link",this).text() + '">';
+                                                                        html += '<img src="#" alt="">';
+                                                                        html += '<h2>' + $("title",this).text() + '</h2>';
+                                                                        html += '<p>' + $("description",this).text() + '</p>';
+                                                                        html += '</a>';
+                                                                        html += '</li>';
+                                                                    });
+                                                                    //listviewリフレッシュ
+                                                                    $('[data-role="listview"]').append(html).listview('refresh');
+                                                                    //本文の画像をサムネイルの画像に置換
+                                                                    $('.ui-li-has-thumb').each(function(){
+                                                                        $('img',this).attr('src',$('.mr10',this).attr('src'));
+                                                                    });
+                                                                    //本文の画像除去
+                                                                    $('.mr10').remove();
+                                                                }
+                                                            });
+                                                        });
+                                                    })()
+                                        body
+                                            #index(data-role='page')
+                                                div(data-role='header')
+                                                    h1 RSSの取得
+                                                div(data-role='content')
+                                                    ul(data-role='listview', data-inset='true')
+                                                div(data-role='footer')
+                                                    h1 フッター
+                            p
+                            | rss.xml
+                            pre(class='prettyprint linenums:1')
+                                :code
+                                    <?xml version="1.0" encoding="UTF-8" ?> 
+                                    <rss version="2.0">
+                                    <channel>
+                                    <title>All About [パソコン本体・周辺機器]</title> 
+                                    <link>http://allabout.co.jp/computer/?FM=rss_computer</link> 
+                                    <language>ja-jp</language> 
+                                    <copyright>Copyright(c) All About, Inc. All rights reserved.</copyright> 
+                                    <pubDate>Tue, 11 Jan 2011 18:07:59 +0900</pubDate> 
+                                    <image>
+                                    <url>http://img.allabout.co.jp/pts/logo/2005/allabout_logo_03.gif</url> 
+                                    <link>http://allabout.co.jp/?FM=rss_computer</link> 
+                                    <title>All About [パソコン本体・周辺機器]</title> 
+                                    </image>
+                                    <item>
+                                    <title>iPadの価格と購入時の注意 [iPad]</title> 
+                                    <link>http://allabout.co.jp/gm/gc/178964/?FM=rss_computer</link> 
+                                    <description>
+                                    <![CDATA[ 
+                                    <div class="list-l"><a href="http://allabout.co.jp/gm/gc/178964/?FM=rss_computer"><img src="http://img.allabout.co.jp/gm/article/178964/topimg.jpg" width="120" height="90" border="0" align="left" class="mr10"></a></div>
+                                    <div class="list-r">
+                                    <p class="vari22">iPadは大きく分けてWi-Fi版と3G版の2種類がある。3G回線で接続するには、当然のことながら通信料を支払わなくてはいけない。ソフトバンクモバイルでは2つの料金プランを用意している。どのプランがあなたにぴったりなのか、解説しよう。</p>
+                                    </div>
+                                    ]]> 
+                                    </description>
+                                    <category>iPad</category> 
+                                    <pubDate>Wed, 05 Jan 2011 00:00:00 +0900</pubDate> 
+                                    </item>
+                                    <item>
+                                    <title>はがきの宛名印刷・住所録管理用無料ソフト [フリーソフト・シェアウェア]</title> 
+                                    <link>http://allabout.co.jp/gm/gc/374264/?FM=rss_computer</link> 
+                                    <description>
+                                    <![CDATA[ 
+                                    <div class="list-l"><a href="http://allabout.co.jp/gm/gc/374264/?FM=rss_computer"><img src="http://img.allabout.co.jp/gm/article/374264/topimg.jpg" width="120" height="90" border="0" align="left" class="mr10"></a></div>
+                                    <div class="list-r">
+                                    <p class="vari22">はがきの宛名面印刷はパソコンを使う大きな理由の一つ。ここではフリーソフトで使いやすい物をピックアップして紹介するとともに、有料ソフトとの違いについても説明します。</p>
+                                    </div>
+                                    ]]> 
+                                    </description>
+                                    <category>フリーソフト・シェアウェア</category> 
+                                    <pubDate>Mon, 27 Dec 2010 00:00:00 +0900</pubDate> 
+                                    </item>
+                                    <item>
+                                    <title>富士通 FMV ESPRIMO FH900/5BM [デスクトップパソコン]</title> 
+                                    <link>http://allabout.co.jp/gm/review/373166/?FM=rss_computer</link> 
+                                    <description>
+                                    <![CDATA[ 
+                                    <div class="list-l"><a href="http://allabout.co.jp/gm/review/373166/?FM=rss_computer"><img src="http://img.allabout.co.jp/gm/article/373166/topimg.jpg" width="120" height="90" border="0" align="left" class="mr10"></a></div>
+                                    <div class="list-r">
+                                    <p class="vari22">富士通FMV ESPRIMOの一体型、FHシリーズの3D機能がアップしました。3D放送の視聴・録画・再生に対応したほか、画面も、以前のモデルより見やすくなっています。</p>
+                                    </div>
+                                    ]]> 
+                                    </description>
+                                    <category>デスクトップパソコン</category> 
+                                    <pubDate>Thu, 09 Dec 2010 00:00:00 +0900</pubDate> 
+                                    </item>
+                                    <item>
+                                    <title>ソニー VAIO Jシリーズ（VPCJ128FJ） [デスクトップパソコン]</title> 
+                                    <link>http://allabout.co.jp/gm/review/373145/?FM=rss_computer</link> 
+                                    <description>
+                                    <![CDATA[ 
+                                    <div class="list-l"><a href="http://allabout.co.jp/gm/review/373145/?FM=rss_computer"><img src="http://img.allabout.co.jp/gm/article/373145/topimg.jpg" width="120" height="90" border="0" align="left" class="mr10"></a></div>
+                                    <div class="list-r">
+                                    <p class="vari22">スタイリッシュな一体型ボディで人気がある、ソニーのVAIO Jシリーズから、VPCJ128FJをレビューする。コストパフォーマンスを求める、パーソナルユーザー向けの製品だ。</p>
+                                    </div>
+                                    ]]> 
+                                    </description>
+                                    <category>デスクトップパソコン</category> 
+                                    <pubDate>Thu, 09 Dec 2010 00:00:00 +0900</pubDate> 
+                                    </item>
+                                    <item>
+                                    <title>エプソン カラリオ EP-903A [プリンタ・スキャナ]</title> 
+                                    <link>http://allabout.co.jp/gm/review/372862/?FM=rss_computer</link> 
+                                    <description>
+                                    <![CDATA[ 
+                                    <div class="list-l"><a href="http://allabout.co.jp/gm/review/372862/?FM=rss_computer"><img src="http://img.allabout.co.jp/gm/article/372862/topimg.jpg" width="120" height="90" border="0" align="left" class="mr10"></a></div>
+                                    <div class="list-r">
+                                    <p class="vari22">エプソン「カラリオ EP-903A」は、AV機器のようなスタイリッシュデザインと、前面2段給紙による設置のしやすさが魅力のA4インクジェット複合機。染料系6色独立インクを採用し、写真画質には定評がある。ADF（自動給紙装置）やCD/DVDトレイ内蔵など、使い勝手の良さが魅力のモデルだ。</p>
+                                    </div>
+                                    ]]> 
+                                    </description>
+                                    <category>プリンタ・スキャナ</category> 
+                                    <pubDate>Thu, 09 Dec 2010 00:00:00 +0900</pubDate> 
+                                    </item>
+                                    <item>
+                                    <title>キヤノンPIXUS MG8130 [プリンタ・スキャナ]</title> 
+                                    <link>http://allabout.co.jp/gm/review/312814/?FM=rss_computer</link> 
+                                    <description>
+                                    <![CDATA[ 
+                                    <div class="list-l"><a href="http://allabout.co.jp/gm/review/312814/?FM=rss_computer"><img src="http://img.allabout.co.jp/gm/article/312814/topimg.jpg" width="120" height="90" border="0" align="left" class="mr10"></a></div>
+                                    <div class="list-r">
+                                    <p class="vari22">キヤノンのA4インクジェット複合機「PIXUS」シリーズの新機種が登場した。写真印刷も文書印刷も強い“W黒”6色独立インクを継承しながら、光で操作をナビする「インテリジェントタッチシステム」を採用し、使い勝手を大幅に向上した。CCDスキャナを搭載しており、業界随一の高画質モデルだ。</p>
+                                    </div>
+                                    ]]> 
+                                    </description>
+                                    <category>プリンタ・スキャナ</category> 
+                                    <pubDate>Thu, 09 Dec 2010 00:00:00 +0900</pubDate> 
+                                    </item>
+                                    <item>
+                                    <title>MacBook Air 11インチ [Mac]</title> 
+                                    <link>http://allabout.co.jp/gm/review/371558/?FM=rss_computer</link> 
+                                    <description>
+                                    <![CDATA[ 
+                                    <div class="list-l"><a href="http://allabout.co.jp/gm/review/371558/?FM=rss_computer"><img src="http://img.allabout.co.jp/gm/article/371558/topimg.jpg" width="120" height="90" border="0" align="left" class="mr10"></a></div>
+                                    <div class="list-r">
+                                    <p class="vari22">MacBook Airはただ薄いだけではなく、素速い起動とスリープ復帰を始め、スペック以上の体感速度はハードとOSを一社で作り上げているからこそ実現できたもので、使いやすさで定評のあるMac OS Xは初めての人でも安心して利用できます。</p>
+                                    </div>
+                                    ]]> 
+                                    </description>
+                                    <category>Mac</category> 
+                                    <pubDate>Thu, 09 Dec 2010 00:00:00 +0900</pubDate> 
+                                    </item>
+                                    <item>
+                                    <title>バッファロー WZR-HP-AG300H [LAN・無線LAN]</title> 
+                                    <link>http://allabout.co.jp/gm/review/324385/?FM=rss_computer</link> 
+                                    <description>
+                                    <![CDATA[ 
+                                    <div class="list-l"><a href="http://allabout.co.jp/gm/review/324385/?FM=rss_computer"><img src="http://img.allabout.co.jp/gm/article/324385/topimg.jpg" width="120" height="90" border="0" align="left" class="mr10"></a></div>
+                                    <div class="list-r">
+                                    <p class="vari22">バッファローの無線LANルータ「WZR-AG300H」の性能や使い勝手をチェックしてみました。バッファローでも実力派ということもあって、速度も速く、機能も充実していて、おすすめの製品です。</p>
+                                    </div>
+                                    ]]> 
+                                    </description>
+                                    <category>LAN・無線LAN</category> 
+                                    <pubDate>Tue, 30 Nov 2010 00:00:00 +0900</pubDate> 
+                                    </item>
+                                    <item>
+                                    <title>ソニーのデスクトップパソコン：VAIO [デスクトップパソコン]</title> 
+                                    <link>http://allabout.co.jp/gm/gc/4561/?FM=rss_computer</link> 
+                                    <description>
+                                    <![CDATA[ 
+                                    <div class="list-l"><a href="http://allabout.co.jp/gm/gc/4561/?FM=rss_computer"><img src="http://img.allabout.co.jp/gm/article/4561/topimg.jpg" width="120" height="90" border="0" align="left" class="mr10"></a></div>
+                                    <div class="list-r">
+                                    <p class="vari22">ソニーの最新トレンドとおすすめ機種をご紹介します。すべてが一体型で、ソニーらしいスタイリッシュなデザインになっています。ソフトウェアはソニー独自のものが多数付属し、手軽に映像やデジカメ画像の編集が楽しめます。</p>
+                                    </div>
+                                    ]]> 
+                                    </description>
+                                    <category>デスクトップパソコン</category> 
+                                    <pubDate>Sat, 06 Nov 2010 00:00:00 +0900</pubDate> 
+                                    </item>
+                                    <item>
+                                    <title>A4インクジェット複合機・プリンタのメーカー別情報 [プリンタ・スキャナ]</title> 
+                                    <link>http://allabout.co.jp/gm/gc/19886/?FM=rss_computer</link> 
+                                    <description>
+                                    <![CDATA[ 
+                                    <div class="list-l"><a href="http://allabout.co.jp/gm/gc/19886/?FM=rss_computer"><img src="http://img.allabout.co.jp/gm/article/19886/topimg.jpg" width="120" height="90" border="0" align="left" class="mr10"></a></div>
+                                    <div class="list-r">
+                                    <p class="vari22">A4インクジェット複合機・プリンタの2010年末モデルは、多くのメーカーがネットワーク機能をより充実させた。各メーカーの特徴やラインアップを紹介していこう。</p>
+                                    </div>
+                                    ]]> 
+                                    </description>
+                                    <category>プリンタ・スキャナ</category> 
+                                    <pubDate>Sun, 31 Oct 2010 00:00:00 +0900</pubDate> 
+                                    </item>
+
+                                    </channel>
+                                    </rss>
+

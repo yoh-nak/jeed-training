@@ -1,0 +1,113 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include paging
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading Ajaxでページング⑧
+                    .panel-body
+                        p
+                            a.btn.btn-default(href='../demo/webapi/exercise7/index7.html', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                |  デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        style
+                                            :stylus
+                                                #container
+                                                    width 500px
+                                                    margin 20px auto
+                                                p.loading
+                                                    text-align center
+                                                    margin 10px
+                                                ul.pager
+                                                    text-align center
+                                                    padding 10px
+                                                    li
+                                                        display inline
+                                                        a
+                                                            border 1px solid #009AFF
+                                                            color #009AFF
+                                                            font-weight bold
+                                                            margin 2px
+                                                            padding 5px
+                                                            text-decoration none
+                                                .colmun
+                                                    width 500px
+                                                    border-bottom 1px solid #CCC
+                                                    &:after
+                                                        content "."
+                                                        display block
+                                                        clear both
+                                                        visibility hidden
+                                                        height 0
+                                                    .img
+                                                        float left
+                                                        width 60px
+                                                        border 1px solid #ccc
+                                                        padding 5px
+                                                        margin 5px
+                                                        display inline
+                                                        img
+                                                            border 0
+                                                    .info
+                                                        float left
+                                                        padding 5px
+                                                        width 400px
+                                                        h2
+                                                            margin 0
+                                                            color #009AFF
+                                                            font-size small
+                                                        ul
+                                                            margin 0
+                                                            padding 15px 0 0 15px
+                                                        li
+                                                            margin 0
+                                                            font-size small
+                                                ul.pager li a.selected
+                                                    background #73C7FF
+                                        script
+                                            :js
+                                                (function(){
+                                                    $(function(){
+                                                        $('#content').load($('ul.pager li a:first').attr('href') + ' #content');
+                                                        $('ul.pager li a:first').addClass('selected');
+                                                        $('ul.pager li a').click(function(){
+                                                            $('#content').html('<p class="loading"><img src="images/loading.gif" alt="" /></p>');
+                                                            <mark>$('ul.pager li a').removeClass('selected');
+                                                            $(this).addClass('selected');</mark>
+                                                            return false;
+                                                        });
+                                                    });
+                                                })()
+                                    body
+                                        #container
+                                            h1
+                                                img(src='images/header.jpg', alt='新着書籍')
+                                            #content
+                                                p.loading
+                                                    img(src='images/loading.gif', alt='')
+                                            ul.pager
+                                                li
+                                                    a(href='data1.html') 1
+                                                li
+                                                    a(href='data2.html') 2
+                                                li
+                                                    a(href='data3.html') 3

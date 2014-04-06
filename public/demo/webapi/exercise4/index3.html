@@ -1,36 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title></title>
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script>
-$(function(){
-    $("input").click(function(){
-        $.ajax({
-            url: 'sample.xml',
-            type: 'GET',
-            data: '',
-            dataType: 'xml',
-            success: function(data){
-                $("div").html("<ul></ul>");
-                $(data).find("data1").each(function(){
-                    $("div ul")
-                        .append("<li>" + $("text1",this).text() + "</li>")
-                        .append("<li>" + $("text2",this).text() + "</li>")
-                        .append("<li>" + $("text3",this).text() + "</li>");
-                });
-                 
-            }
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title></title><script src="http://code.jquery.com/jquery-1.11.0.min.js"></script><script>(function(){
+    $(function(){
+        $('input').click(function(){
+            $.ajax({
+                url: 'sample.xml',
+                type: 'GET',
+                data: '',
+                dataType: 'xml',
+                success: function(data){
+                    $('div').html('<ul></ul>');
+                    $(data).find('data1').each(function(){
+                        $('div ul')
+                            .append('<li>' + $('text1',this).text() + '</li>')
+                            .append('<li>' + $('text2',this).text() + '</li>')
+                            .append('<li>' + $('text3',this).text() + '</li>');
+                    });
+                }
+            });
         });
     });
-});
-</script>
-</head>
-<body>
-<input type="button" value="変更">
-<div>
-変更前
-</div>
-</body>
-</html>
+})()</script></head><body><input type="button" value="変更"><div>変更前</div></body></html>

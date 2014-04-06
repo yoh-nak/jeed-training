@@ -1,0 +1,47 @@
+doctype
+html
+    head
+        meta(charset='UTF-8')
+        title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        style
+            :stylus
+                #container
+                    width 500px
+                    margin 20px auto
+                p.loading
+                    text-align center
+                    margin 10px
+                ul.pager
+                    text-align center
+                    padding 10px
+                    li
+                        display inline
+                        a
+                            border 1px solid #009AFF
+                            color #009AFF
+                            font-weight bold
+                            margin 2px
+                            padding 5px
+                            text-decoration none
+        script
+            :js
+                (function(){
+                    $(function(){
+                        $('#content').load($('ul.pager li a:first').attr('href') + ' #content');
+                    });
+                })()
+    body
+        #container
+            h1
+                img(src='images/header.jpg', alt='新着書籍')
+            #content
+                p.loading
+                    img(src='images/loading.gif', alt='')
+            ul.pager
+                li
+                    a(href='data1.html') 1
+                li
+                    a(href='data2.html') 2
+                li
+                    a(href='data3.html') 3

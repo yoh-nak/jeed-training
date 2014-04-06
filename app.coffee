@@ -137,6 +137,13 @@ app.post '/demo/webapi/exercise1/sample.txt', (req, res) ->
     res.contentType 'text/plain'
     res.send data
     return
+app.post '/demo/webapi/exercise2/sample.html', (req, res) ->
+    body = ''
+    filePath = __dirname + '/public/demo/webapi/exercise2/sample.html'
+    data = fs.readFileSync(filePath).toString()
+    res.contentType 'text/plain'
+    res.send data
+    return
 
 app.post '/xml-:id', js.webapiXML
 

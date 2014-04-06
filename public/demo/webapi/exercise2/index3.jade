@@ -1,0 +1,33 @@
+doctype
+html
+    head
+        meta(charset='UTF-8')
+        title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script
+            :js
+                (function(){
+                    $(function(){
+                        $('input').click(function(){
+                            $.post('sample.html',function(data){
+                                $('p').html(data);
+                            });
+                        });
+                    });
+                })()
+        //-
+            script
+                :coffee
+                    (->
+                        $ ->
+                            $("input").click ->
+                                $.post "sample.html", (data) ->
+                                    $("p").html data
+                                    return
+                                return
+                            return
+                        return
+                    )()
+    body
+        input(type='button', value='変更')
+        p 変更前

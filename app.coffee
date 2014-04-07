@@ -53,6 +53,7 @@ app.use stylus.middleware(
 )
 app.use express.static(path.join(__dirname, 'public'))
 
+###
 app.use (err, req, res, next) ->
     res.status 403
     res.send '403'
@@ -69,6 +70,7 @@ app.use (req, res, next) ->
     res.status 500
     res.send '500'
     return
+###
 
 #CoffeeScript動的コンパイル
 ###

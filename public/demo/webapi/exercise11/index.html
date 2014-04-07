@@ -1,50 +1,30 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title></title>
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script>
-$(function(){
-
-  var colors = [];
-  var strs = [];
-
-   $.getJSON('color.json',
-        function(data){
-          var i = 0;
-          $.each(data.colors, function(key,val){
-            $("select").append('<option value="' + i + '">' + val.jp + '</option>');
-              colors.push(val.code);
-              strs.push(val.en);
-              i++;
-          });
-        }
-    );
-
-    $('form').on('change','select',function(){
-      $('div')
-        .text(strs[parseInt($(this).val())])
-        .css('background-color', colors[parseInt($(this).val())]);
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title></title><script src="http://code.jquery.com/jquery-1.11.0.min.js"></script><script>(function(){
+    $(function(){
+        var colors = [];
+        var strs = [];
+        $.getJSON('color.json',
+            function(data){
+                var i = 0;
+                $.each(data.colors, function(key,val){
+                    $('select').append('<option value="' + i + '">' + val.jp + '</option>');
+                    colors.push(val.code);
+                    strs.push(val.en);
+                    i++;
+                });
+            }
+        );
+        $('form').on('change','select',function(){
+            $('div')
+                .text(strs[parseInt($(this).val())])
+                .css('background-color', colors[parseInt($(this).val())]);
+        });
     });
-});
-</script>
-<style>
-div{
-    width:200px;
-    height:200px;
-    background-color:#808080;
-    text-align:center;
-    line-height:200px;
-    margin:10px;
+})()</script><style>div {
+  width: 200px;
+  height: 200px;
+  background-color: #808080;
+  text-align: center;
+  line-height: 200px;
+  margin: 10px;
 }
-</style>
-</head>
-<body>
-    <form>
-        <select>
-            <option value="">---</option>
-        </select>
-    </form>
-    <div>grey</div>
-</body>
+</style></head><body><form><select><option value="">---</option></select></form><div>grey</div></body></html>

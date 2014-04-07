@@ -1,0 +1,100 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-bookmark
+                        |  課題
+                    .panel-body
+                        p JSONのデータを作成し、プルダウンの一覧に読み込んで、プルダウンが動作するようにしてみましょう。
+                        p
+                            a.btn.btn-default(href='../demo/webapi/exercise11/index.html', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                |  デモ
+                            |  
+                            button.btn.btn-danger(type='button', data-toggle='collapse', data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                |  解答例
+                        #demo.collapse.out
+                            pre(class='prettyprint linenums:1')
+                                :code
+                                    doctype
+                                    html
+                                        head
+                                            meta(charset='UTF-8')
+                                            title
+                                            script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                            script
+                                                :js
+                                                    (function(){
+                                                        $(function(){
+                                                            var colors = [];
+                                                            var strs = [];
+                                                            $.getJSON('color.json',
+                                                                function(data){
+                                                                    var i = 0;
+                                                                    $.each(data.colors, function(key,val){
+                                                                        $('select').append('<option value="' + i + '">' + val.jp + '</option>');
+                                                                        colors.push(val.code);
+                                                                        strs.push(val.en);
+                                                                        i++;
+                                                                    });
+                                                                }
+                                                            );
+                                                            $('form').on('change','select',function(){
+                                                                $('div')
+                                                                    .text(strs[parseInt($(this).val())])
+                                                                    .css('background-color', colors[parseInt($(this).val())]);
+                                                            });
+                                                        });
+                                                    })()
+                                            style
+                                                :stylus
+                                                    div
+                                                        width 200px
+                                                        height 200px
+                                                        background-color #808080
+                                                        text-align center
+                                                        line-height 200px
+                                                        margin 10px
+                                        body
+                                            form
+                                                select
+                                                    option(value='') ---
+                                            div grey
+                            hr
+                            | color.json
+                            pre(class='prettyprint linenums:1')
+                                :code
+                                    {
+                                        "colors": {
+                                            "data1": {
+                                                "jp": "赤",
+                                                "en": "red",
+                                                "code": "#FF0000"
+                                            },
+                                            "data2": {
+                                                "jp": "青",
+                                                "en": "blue",
+                                                "code": "#0000FF"
+                                            },
+                                            "data3": {
+                                                "jp": "緑",
+                                                "en": "green",
+                                                "code": "#00FF00"
+                                            }
+                                        }
+                                    }

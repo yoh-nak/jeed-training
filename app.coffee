@@ -30,7 +30,7 @@ require('jade').filters.code = (block) ->
         .replace(/&lt;\/mark&gt;/g, '</mark>')
         .replace(/\\&lt;mark\\&gt;/g, '&lt;mark&gt;')
         .replace(/\\&lt;\/mark\\&gt;/g, '&lt;/mark&gt;')
-        .replace /'/g, '&quot;'
+        .replace /'/g, '&#39;'
 
 
 #ミドルウェア

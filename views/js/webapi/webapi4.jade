@@ -1,0 +1,100 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading JSONPの概要
+                    .panel-body
+                        h4 JSONP（JSON with padding）の仕組み
+                        p JavaScriptでは、sript要素にsrc属性を指定して外部ファイルを読み込みますが、このsrc属性には、別のドメインのURLを指定できます。つまり、script要素のsrc属性として外部のドメインのURLを指定できます。script要素のsrc属性として外部ドメインのWebサーバーと通信を行えば、クロスドメインの制約を受けずにデータ受信が可能です。
+                        p そこで、JSON形式のデータを引数として受け取ることができる関数を定義しておき、src属性に指定するURLに「callback」パラメーターを追加して受け取る関数を定義しておき、値としてこの関数名を指定します。たとえば、関数名を「foo」とすると次のような記述になります。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <script src="http://sample-api.com/api.php?id=xxx&<mark>callback=foo</mark>"></script>
+
+                        p このリクエストに対して、Webサーバーからは、JSON形式に関数名「foo」を追加したデータが返されます。データ受信と同時にfoo関数に引数が渡されて処理が行われます。ここでは、foo関数に引数として連想配列が渡されてます。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                //実行する関数を受信することで定義済みの関数が実行される
+                                <mark>foo</mark>({"category":"history", "code":200});
+
+                        p XMLHttpRequestで同様の機能を実現するには、JavaScriptによって動的に、上記のようなscriptタグを作成できるようにすればよいことになります。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <script>
+                                //データを受信したいときに実行する関数
+                                function getJSONP(){
+                                    //script要素のキャシュを生成
+                                    var elem = document.createElement('script');
+                                    //script要素にsrc属性を付加
+                                    elem.src = 'http://sample-api.com/api.json?id=xxx&<mark>callback=foo</mark>';
+                                    //script要素にtype属性を付加
+                                    elem.type = 'text/javascript';
+
+                                    //head要素内にscript要素を適用する
+                                    document.getElementByTagName('head')[0].appendChild(elem);
+                                }
+
+                                //jsonpデータを受信したときに実行される関数の定義
+                                <mark>function foo</mark>(json){
+                                    //JSON形式を利用した処理
+                                    ...
+                                }
+                                </script>
+
+                        p Webサービスによっては最初からjsonpでデータを受信できる仕組みを持ったサービスがあります。jsonpでデータを受信できるサービスは、サーバーサイド技術を使うことなく、クライアントJavaScriptで受信したJSONデータを処理できることになります。
+                        p JSONPの仕組みが分かりにくければ以下のようなソースを見てみましょう。1つ目のscript要素内で定義されたcallback関数が、2つ目のscript要素ないで実行されています。2つ目のscript要素の処理を外部jsファイルで読み込む行為がJSONP（JSON with padding）というわけです。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <!DOCTYPE html>
+                                <html lang="ja">
+                                <head>
+                                <meta charset="UTF-8">
+                                <title></title>
+                                <script>
+                                //関数の定義
+                                function <mark>callback</mark>(data){
+                                    console.log(data.category);
+                                    console.log(data.code);
+                                }
+                                </script>
+                                <script>
+                                //関数の実行
+                                <mark>callback</mark>({"category":"history", "code":200})
+                                </script>
+                                </head>
+                                <body>
+                                </body>
+                                </html>
+                        hr
+                        h4 JSONPの問題点
+                        p XMLHttpRequestと違い、JSONPではPOSTメソッドを利用できません。このため、クライアントから外部ドメインのサーバーにデータを送信するには、別の方法を使う必要があります。
+                        p また、JSONPはクロスドメインをあえて回避する手法であり、セキュリティに脆弱性があります。悪用されると、ユーザーが知らない間に悪意のあるWebサイトと通信が行われる可能性があります。また、Webサーバーのデータを別のドメインから勝手に利用される危険もあるため、機密情報などのデータを扱うには適していません。あくまでも外部サービスから利用されても構わない一般公開目的のデータに限定して活用する仕組みと言えます。
+                        hr
+                        h4 jQueryでJSONPを取得
+                        p jQueryでJSONPを取得するには、$.getJSONや$.ajaxメソッドを使ことができます。<mark>callback関数名は「?」と指定することにより、$.getJSONや$.ajaxのコールバック関数で取得したデータの処理を記述することができます。</mark>
+                        p APIに指定するGETのクエリ文字列に日本語を使う場合はエンコードする必要があります。
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function(){
+                                    //日本語をエンコード
+                                    var q = encodeURIComponent('キーワード');
+                                    $.getJSON('http://sample-api.com/api.json?<mark>callback=?</mark>&query=' + q),
+                                        <mark>function(data){
+                                            //取得したJSONPデータをJSON形式で表示
+                                            console.log(data);
+                                        }</mark>
+                                    );
+                                });

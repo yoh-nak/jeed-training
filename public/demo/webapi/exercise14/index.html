@@ -1,39 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title></title>
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
-<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
-<script>
-$(document).on('pageshow','#index',function(){
-
-    var qr = {
-        size: 250,
-        title: 'Yahoo!',
-        url: 'http://www.yahoo.co.jp/',
-        api:function(){
-            return 'http://chart.apis.google.com/chart?chs=' + this.size + 'x' + this.size + '&cht=qr&chl=' + this.url
-        }
-    };
-         
-    $("<img>")
-        .attr({src: qr.api(), title: qr.url})
-        .appendTo('[data-role="content"]');
-
-});
-</script>
-</head>
-<body>
-<div data-role="page" id="index">
-    <div data-role="header">
-        <h1>QRコード生成</h1>
-    </div>
-    <div data-role="content">
-    </div>
-    <div data-role="footer" data-position="fixed">
-        <h4>Copyright &copy; ナカノヨウスケ</h4>
-    </div>
-</div>
-</body>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title></title><link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css"><script src="http://code.jquery.com/jquery-1.9.1.min.js"></script><script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script><script>(function(){
+    $(document).on('pageshow','#index',function(){
+        var qr = {
+            size: 250,
+            title: 'Yahoo!',
+            url: 'http://www.yahoo.co.jp/',
+            api:function(){
+                return 'http://chart.apis.google.com/chart?chs=' + this.size + 'x' + this.size + '&cht=qr&chl=' + this.url
+            }
+        };
+        $('<img>')
+            .attr({src: qr.api(), title: qr.url})
+            .appendTo('[data-role="content"]');
+    });
+})()</script></head><body><div id="index" data-role="page"><div data-role="header"><h1>QRコード生成</h1></div><div data-role="content"></div><div data-role="footer" data-position="fixed"><h1>フッター</h1></div></div></body></html>

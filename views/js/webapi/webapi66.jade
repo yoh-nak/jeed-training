@@ -19,6 +19,9 @@ block content
                         i.glyphicon.glyphicon-book
                         |  RSSをサーバーで読み込む
                     .panel-body
+                        pre
+                            :code
+                                npm install xml2js --save
                         p app.js
                         pre(class='prettyprint linenums:1')
                             :code
@@ -53,13 +56,11 @@ block content
                                 }
 
                                 app.get('/', routes.index);
-                                <mark>app.get('/rss', routes.rss);</mark>
                                 app.get('/users', user.list);
 
                                 http.createServer(app).listen(app.get('port'), function(){
                                   console.log('Express server listening on port ' + app.get('port'));
                                 });
-
                         p /routes/index.js
                         pre(class='prettyprint linenums:1')
                             :code
@@ -69,14 +70,8 @@ block content
 
                                 exports.index = function(req, res){
 
-                                    res.render('index')
-
-                                };
-
-                                exports.rss = function(req, res){
-
                                     var mRss = require('../libs/rss');
-                                    var rss = mRss.fParseRss(req, res);
+                                    var rss = mRss.fParseRss(req, res, 'index');
 
                                 };
                         p /libs/rss.js
@@ -84,22 +79,43 @@ block content
                             :code
                                 //モジュール読み込み
                                 var http = require('http');
+                                var xml2js = require('xml2js');
+                                var parser = new xml2js.Parser();
 
                                 //メソッド定義
-                                exports.fParseRss = function(req, res){
+                                exports.fParseRss = function(req, res, template){
 
                                     var xml = '';
-
+                                    //var template = template;
                                     http.get('http://rss.allabout.co.jp/aa/latest/ch/computer/', function(httpRes) {
 
                                         httpRes.setEncoding('utf8');
                                         httpRes.on('data', function(str) {
                                             xml += str;
                                         });
+                                                
                                         httpRes.on('end',function(){
-                                            res.contentType('text/xml');
-                                            res.send(xml);
+
+                                            parser.parseString(xml, function (err, result) {
+
+                                                var html = '';
+                                                for(var i = 0; i < result.rss.channel[0].item.length; i++){
+                                                    html += '<li>';
+                                                    html += '<a href=' + result.rss.channel[0].item[i].link[0] + '>';
+                                                    html += '<img src="#" alt="">';
+                                                    html += '<h2>' + result.rss.channel[0].item[i].title[0] + '</h2>';
+                                                    html += '<p>' + result.rss.channel[0].item[i].description[0] + '</p>';
+                                                    html += '</a>';
+                                                    html += '</li>';
+                                                }
+
+                                                res.render(template,{
+                                                    rss: html
+                                                });
+                                                
+                                            });
                                         });
+                                        
                                     }).on('error', function(e){
                                         console.log(e.message);
                                     }); 
@@ -117,39 +133,19 @@ block content
                                         script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
                                         script
                                             :js
-                                                (function(){
-                                                    $(document).on('pageshow','#index',function(){
-                                                        $.ajax({
-                                                            url: './rss',
-                                                            dataType: 'xml',
-                                                            success: function(data){
-                                                                var html = '';
-                                                                $('item',data).each(function(){
-                                                                    html += '<li>';
-                                                                    html += '<a href=' + $('link',this).text() + '>';
-                                                                    html += '<img src="#" alt="">';
-                                                                    html += '<h2>' + $('title',this).text() + '</h2>';
-                                                                    html += '<p>' + $('description',this).text() + '</p>';
-                                                                    html += '</a>';
-                                                                    html += '</li>';
-                                                                });
-                                                                //listviewリフレッシュ
-                                                                $('[data-role="listview"]').append(html).listview('refresh');
-                                                                //本文の画像をサムネイルの画像に置換
-                                                                $('.ui-li-has-thumb').each(function(){
-                                                                    $('img',this).attr('src',$('.mr10',this).attr('src'));
-                                                                });
-                                                                //本文の画像除去
-                                                                $('.mr10').remove();
-                                                            }
-                                                        });
+                                                $(document).on('pageshow','#index',function(){
+                                                    //本文の画像をサムネイルの画像に置換
+                                                    $('.ui-li-has-thumb').each(function(){
+                                                        $('img',this).attr('src',$('.mr10',this).attr('src'));
                                                     });
-                                                })()
+                                                    //本文の画像除去
+                                                    $('.mr10').remove();
+                                                });
                                     body
                                         #index(data-role='page')
                                             div(data-role='header')
                                                 h1 RSSの取得
                                             div(data-role='content')
-                                                ul(data-role='listview', data-inset='true')
+                                                ul(data-role='listview', data-inset='true')!= rss
                                             div(data-role='footer')
                                                 h1 フッター

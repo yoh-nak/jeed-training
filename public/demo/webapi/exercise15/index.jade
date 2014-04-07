@@ -1,0 +1,52 @@
+doctype
+html
+    head
+        meta(charset='UTF-8')
+        title
+        link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+        script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+        script(src='https://www.google.com/jsapi')
+        script
+            :js
+                (function(){
+                    google.load('visualization', '1.0', {'packages':['corechart']});
+                    $(document).on('pageshow','#index',function(){
+                        google.setOnLoadCallback(drawChart);
+                        function drawChart() {
+                            // 円グラフ
+                            // データを用意する
+                            // 列        列
+                            // label n
+                            // label n
+                            // label n
+                            var data = new google.visualization.DataTable();
+                            data.addColumn('string', '活動');
+                            data.addColumn('number', '時間');
+                            data.addRows([
+                                ['睡眠', 8],
+                                ['仕事', 12],
+                                ['ネット', 4]
+                            ]);
+                            // グラフのオプションを指定する
+                            var options = {
+                                title: '1日の内訳',
+                                width: 500,
+                                height: 500,
+                                pieSliceText: 'label',
+                                is3D: true
+                            }
+                            // 描画する
+                            var chart = new google.visualization.PieChart(document.getElementById('chart'));
+                            chart.draw(data, options);
+                        }
+                    });
+                })()
+    body
+        #index(data-role='page')
+            div(data-role='header')
+                h1 円グラフ
+            div(data-role='content')
+                #chart
+            div(data-role='footer', data-position='fixed')
+                h1 フッター

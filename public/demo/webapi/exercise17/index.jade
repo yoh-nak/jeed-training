@@ -1,0 +1,53 @@
+doctype
+html
+    head
+        meta(charset='UTF-8')
+        title
+        link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+        script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+        script(src='https://www.google.com/jsapi')
+        script
+            :js
+                (function(){
+                    google.load('visualization', '1.0', {'packages':['corechart']});
+                    $(document).on('pageshow','#index',function(){
+                        google.setOnLoadCallback(drawChart);
+                        function drawChart() {
+                            // 棒グラフ
+                            // データを用意する
+                            // 列        列    列
+                            // label n     n
+                            // label n     n
+                            // label n     n
+                            var data = new google.visualization.DataTable();
+                            data.addColumn('string', '年');
+                            data.addColumn('number', '売上');
+                            data.addColumn('number', '利益');
+                            data.addRows([
+                                ['2000', 500, 300],
+                                ['2001', 600, 320],
+                                ['2002', 800, 200],
+                                ['2003', 400, 200],
+                                ['2004', 200, 100]
+                            ]);
+                            // グラフのオプションを指定する
+                            var options = {
+                                title: '業績推移',
+                                width: 500,
+                                height: 500
+                            }
+                            // 描画する
+                            var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
+                            chart.draw(data, options);
+                        }
+                    });
+                })()
+    body
+        #index(data-role='page')
+            div(data-role='header')
+                h1 縦棒グラフ
+            div(data-role='content')
+                #chart
+            div(data-role='footer', data-position='fixed')
+                h1 フッター

@@ -1,0 +1,98 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-bookmark
+                        |  課題
+                    .panel-body
+                        p Google Chart Toolsを利用して、ramen.jsonのデータを地域ごとに集計してみましょう。
+                        p
+                            a.btn.btn-default(href='../demo/webapi/exercise19/index.html', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                |  デモ
+                            |  
+                            button.btn.btn-danger(type='button', data-toggle='collapse', data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                |  解答例
+                        #demo.collapse.out
+                            pre(class='prettyprint linenums:1')
+                                :code
+                                    doctype
+                                    html(lang='ja')
+                                        head
+                                            meta(charset='UTF-8')
+                                            title
+                                            link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+                                            script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                            script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+                                            script(src='https://www.google.com/jsapi')
+                                            style
+                                                :stylus
+                                                    #chart
+                                                        height 500px
+                                            script
+                                                :js
+                                                    (function(){
+                                                        $(document).on('pageshow','#index',function(){
+                                                            var innerAry = [];
+                                                            innerAry.push(['地域', '件数']);
+                                                            //データ取得
+                                                            $.getJSON('ramen.json',
+                                                                function(data){
+                                                                    $.each(data['ラーメン']['地域'], function(key,val){
+                                                                        var i = 0;
+                                                                        $.each(val,function(key,val){
+                                                                            i++;
+                                                                        });
+                                                                        var buff = [];
+                                                                        buff.push(key); //地域
+                                                                        buff.push(i);     //件数
+                                                                        //[地域,件数]のセットを格納
+                                                                        innerAry.push(buff);
+                                                                    });
+                                                                    google.load("visualization", "1", {"packages":["corechart"],"callback":drawChart});
+                                                                }
+                                                            );
+                                                            //グラフの描画
+                                                            function drawChart(){
+                                                                var outerAry = [];
+                                                                for(var i = 0; i < innerAry.length; i++){
+                                                                    outerAry.push(innerAry[i]);
+                                                                }
+                                                                var data = google.visualization.arrayToDataTable(outerAry);
+                                                                var options = {
+                                                                    title:'ラーメン屋件数',
+                                                                    vAxis:{title:'地域',titleTextStyle:{color:'#0000FF'}},
+                                                                    chartArea:{height:"80%"}
+                                                                };
+                                                                var chart = new google.visualization.BarChart(document.getElementById('chart'));
+                                                                chart.draw(data, options);
+                                                            }
+                                                            //ウィンドウサイズ変更でグラフの再描画
+                                                            $(window).on('resize',function(){
+                                                                google.load('visualization', '1', {'packages':['corechart'],'callback':drawChart});
+                                                            });
+                                                        });
+                                                    })()
+                                        body
+                                            #index(data-role='page')
+                                                div(data-role='header')
+                                                    h1 ラーメン屋件数
+                                                div(data-role='content')
+                                                    #chart
+                                                div(data-role='footer', data-position='fixed')
+                                                    h1 フッター

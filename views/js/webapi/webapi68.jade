@@ -17,11 +17,11 @@ block content
                 .panel.panel-primary
                     .panel-heading
                         i.glyphicon.glyphicon-book
-                        |  RSSをサーバーで読み込む（サーバーでパース）
+                        |  RSSをJSONに置換（サーバーでパース）
                     .panel-body
                         pre
                             :code
-                                npm install xml2js --save
+                                npm install xml2json --save
                         p app.js
                         pre(class='prettyprint linenums:1')
                             :code
@@ -61,6 +61,7 @@ block content
                                 http.createServer(app).listen(app.get('port'), function(){
                                   console.log('Express server listening on port ' + app.get('port'));
                                 });
+
                         p /routes/index.js
                         pre(class='prettyprint linenums:1')
                             :code
@@ -69,24 +70,20 @@ block content
                                  */
 
                                 exports.index = function(req, res){
-
-                                    var mRss = require('../libs/rss');
-                                    var rss = mRss.fParseRss(req, res, 'index');
-
+                                    var rss = require('../libs/rss');
+                                    rss.fParseRss(req, res, 'index');
                                 };
                         p /libs/rss.js
                         pre(class='prettyprint linenums:1')
                             :code
                                 //モジュール読み込み
                                 var http = require('http');
-                                var xml2js = require('xml2js');
-                                var parser = new xml2js.Parser();
+                                var xml2json = require('xml2json');
 
                                 //メソッド定義
                                 exports.fParseRss = function(req, res, template){
 
                                     var xml = '';
-                                    //var template = template;
                                     http.get('http://rss.allabout.co.jp/aa/latest/ch/computer/', function(httpRes) {
 
                                         httpRes.setEncoding('utf8');
@@ -96,24 +93,33 @@ block content
                                                 
                                         httpRes.on('end',function(){
 
-                                            parser.parseString(xml, function (err, result) {
+                                            var options = {
+                                                object: false,
+                                                reversible: false,
+                                                coerce: false,
+                                                sanitize: false,
+                                                trim: false,
+                                                arrayNotation: false
+                                            };
+                                            
+                                            var json = xml2json.toJson(xml, options);
+                                            var parse = JSON.parse(json);
 
-                                                var html = '';
-                                                for(var i = 0; i < result.rss.channel[0].item.length; i++){
-                                                    html += '<li>';
-                                                    html += '<a href=' + result.rss.channel[0].item[i].link[0] + '>';
-                                                    html += '<img src="#" alt="">';
-                                                    html += '<h2>' + result.rss.channel[0].item[i].title[0] + '</h2>';
-                                                    html += '<p>' + result.rss.channel[0].item[i].description[0] + '</p>';
-                                                    html += '</a>';
-                                                    html += '</li>';
-                                                }
-
-                                                res.render(template,{
-                                                    rss: html
-                                                });
-                                                
+                                            var html = '';
+                                            for(var i = 0; i < parse.rss.channel.item.length; i++){
+                                                html += '<li>';
+                                                html += '<a href="' + parse.rss.channel.item[i].link + '">';
+                                                html += '<img src="#" alt="">';
+                                                html += '<h2>' + parse.rss.channel.item[i].title + '</h2>';
+                                                html += '<p>' + parse.rss.channel.item[i].description + '</p>';
+                                                html += '</a>';
+                                                html += '</li>';
+                                            }
+                                            
+                                            res.render(template, {
+                                                rss: html
                                             });
+                                            
                                         });
                                         
                                     }).on('error', function(e){

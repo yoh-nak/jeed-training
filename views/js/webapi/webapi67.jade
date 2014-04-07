@@ -17,11 +17,11 @@ block content
                 .panel.panel-primary
                     .panel-heading
                         i.glyphicon.glyphicon-book
-                        |  RSSをサーバーで読み込む（サーバーでパース）
+                        |  RSSをJSONに置換（クライアントでパース）
                     .panel-body
                         pre
                             :code
-                                npm install xml2js --save
+                                npm install xml2json --save
                         p app.js
                         pre(class='prettyprint linenums:1')
                             :code
@@ -56,6 +56,7 @@ block content
                                 }
 
                                 app.get('/', routes.index);
+                                <mark>app.get('/rss', routes.rss);</mark>
                                 app.get('/users', user.list);
 
                                 http.createServer(app).listen(app.get('port'), function(){
@@ -69,24 +70,24 @@ block content
                                  */
 
                                 exports.index = function(req, res){
+                                    res.render('index', { title: 'Express' });
+                                };
 
-                                    var mRss = require('../libs/rss');
-                                    var rss = mRss.fParseRss(req, res, 'index');
-
+                                exports.rss = function(req, res){
+                                    var rss = require('../libs/rss');
+                                    rss.fParseRss(req, res);
                                 };
                         p /libs/rss.js
                         pre(class='prettyprint linenums:1')
                             :code
                                 //モジュール読み込み
                                 var http = require('http');
-                                var xml2js = require('xml2js');
-                                var parser = new xml2js.Parser();
+                                var xml2json = require('xml2json');
 
                                 //メソッド定義
-                                exports.fParseRss = function(req, res, template){
+                                exports.fParseRss = function(req, res){
 
                                     var xml = '';
-                                    //var template = template;
                                     http.get('http://rss.allabout.co.jp/aa/latest/ch/computer/', function(httpRes) {
 
                                         httpRes.setEncoding('utf8');
@@ -96,24 +97,18 @@ block content
                                                 
                                         httpRes.on('end',function(){
 
-                                            parser.parseString(xml, function (err, result) {
-
-                                                var html = '';
-                                                for(var i = 0; i < result.rss.channel[0].item.length; i++){
-                                                    html += '<li>';
-                                                    html += '<a href=' + result.rss.channel[0].item[i].link[0] + '>';
-                                                    html += '<img src="#" alt="">';
-                                                    html += '<h2>' + result.rss.channel[0].item[i].title[0] + '</h2>';
-                                                    html += '<p>' + result.rss.channel[0].item[i].description[0] + '</p>';
-                                                    html += '</a>';
-                                                    html += '</li>';
-                                                }
-
-                                                res.render(template,{
-                                                    rss: html
-                                                });
-                                                
-                                            });
+                                            var options = {
+                                                object: false,
+                                                reversible: false,
+                                                coerce: false,
+                                                sanitize: false,
+                                                trim: false,
+                                                arrayNotation: false
+                                            };
+                                            
+                                            var json = xml2json.toJson(xml, options);
+                                            res.contentType('application/json');
+                                            res.send(json);
                                         });
                                         
                                     }).on('error', function(e){
@@ -133,19 +128,44 @@ block content
                                         script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
                                         script
                                             :js
-                                                $(document).on('pageshow','#index',function(){
-                                                    //本文の画像をサムネイルの画像に置換
-                                                    $('.ui-li-has-thumb').each(function(){
-                                                        $('img',this).attr('src',$('.mr10',this).attr('src'));
+                                                (function(){
+                                                    $(document).on('pageshow','#index',function(){
+                                                        $.getJSON('./rss',
+                                                            function(data){
+                                                                console.log(data);
+                                                                var html = '';
+                                                                $.each(data['rss']['channel']['item'],function(key,val){
+
+                                                                    html += '<li>';
+                                                                    html += '<a href="' + val.link + '">';
+                                                                    html += '<img src="#" alt="">';
+                                                                    html += '<h2>' + val.title + '</h2>';
+                                                                    html += '<p>' + val.description + '</p>';
+                                                                    html += '</a>';
+                                                                    html += '</li>';
+
+                                                                });
+
+                                                                //listviewリフレッシュ
+                                                                $('[data-role="listview"]').append(html).listview('refresh');
+
+                                                                //本文の画像をサムネイルの画像に置換
+                                                                $('.ui-li-has-thumb').each(function(){
+                                                                    //alert();
+                                                                    $('img',this).attr('src',$('.mr10',this).attr('src'));
+                                                                });
+
+                                                                //本文の画像除去
+                                                                $('.mr10').remove();
+                                                            }
+                                                        );
                                                     });
-                                                    //本文の画像除去
-                                                    $('.mr10').remove();
-                                                });
+                                                })()
                                     body
                                         #index(data-role='page')
                                             div(data-role='header')
                                                 h1 RSSの取得
                                             div(data-role='content')
-                                                ul(data-role='listview', data-inset='true')!= rss
+                                                ul(data-role='listview', data-inset='true')
                                             div(data-role='footer')
                                                 h1 フッター

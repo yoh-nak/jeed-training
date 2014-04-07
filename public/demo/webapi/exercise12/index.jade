@@ -1,0 +1,74 @@
+doctype
+html
+    head
+        meta(charset='UTF-8')
+        title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script
+            :js
+                (function(){
+                    $(function(){
+                        
+                        var ramen = new RamenClass();
+
+                        //ラジオボタンの生成
+                        ramen.init();
+                        //東淀川区で初期表示
+                        ramen.show('東淀川区');
+                         
+                        $('form').on('change','input:radio',function(){
+                            ramen.show($(this).val());
+                        });
+                    });
+
+                    var RamenClass = function(){};
+
+                    RamenClass.prototype = {
+                        init: function(){
+                            $.getJSON('ramen.json',
+                                function(data){
+                                    $.each(data['ラーメン']['地域'], function(key,val){
+                                        $('fieldset:first').append('<input type="radio" name="ramen" value="' + key + '">' + key);
+                                    });
+                            });
+                        },
+                        show: function(area){
+                        $.getJSON('ramen.json',
+                            function(data){
+                                var html = '';
+                                 
+                                $.each(data['ラーメン']['地域'][area],function(key,val){
+                                    html += '<tr>';
+                                    html += '<td>店名</td>';
+                                    html += '<td>' + key + '</td>';
+                                    html += '</tr>';
+                                    html += '<tr>';
+                                    html += '<td>住所</td>';
+                                    html += '<td>' + val['住所'] + '</td>';
+                                    html += '</tr>';
+                                    html += '<tr>';
+                                    html += '<td>電話番号</td>';
+                                    html += '<td>' + val['電話'] + '</td>';
+                                    html += '</tr>';
+                                    html += '<tr>';
+                                    html += '<td>画像</td>';
+                                    html += '<td><img src="' + val['画像'] + '"></td>';
+                                    html += '</tr>';
+                                });
+                                $('tbody').html(html);
+                            });
+                        }
+                    };
+                })()
+        style
+            :stylus
+                form
+                    width 600px
+                table
+                    width 100%
+    body
+        form
+            fieldset
+            fieldset
+                table(border='1')
+                    tbody

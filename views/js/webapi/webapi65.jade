@@ -1,0 +1,152 @@
+extends ../layout
+
+block link
+    include ../link1
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        |  RSSをサーバーで読み込む
+                    .panel-body
+                        p app.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /**
+                                 * Module dependencies.
+                                 */
+
+                                var express = require('express');
+                                var routes = require('./routes');
+                                var user = require('./routes/user');
+                                var http = require('http');
+                                var path = require('path');
+
+                                var app = express();
+
+                                // all environments
+                                app.set('port', process.env.PORT || 3000);
+                                app.set('views', path.join(__dirname, 'views'));
+                                app.set('view engine', 'jade');
+                                app.use(express.favicon());
+                                app.use(express.logger('dev'));
+                                app.use(express.json());
+                                app.use(express.urlencoded());
+                                app.use(express.methodOverride());
+                                app.use(app.router);
+                                app.use(require('stylus').middleware(path.join(__dirname, 'public')));
+                                app.use(express.static(path.join(__dirname, 'public')));
+
+                                // development only
+                                if ('development' == app.get('env')) {
+                                  app.use(express.errorHandler());
+                                }
+
+                                app.get('/', routes.index);
+                                <mark>app.get('/rss', routes.rss);</mark>
+                                app.get('/users', user.list);
+
+                                http.createServer(app).listen(app.get('port'), function(){
+                                  console.log('Express server listening on port ' + app.get('port'));
+                                });
+
+                        p /routes/index.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /*
+                                 * GET home page.
+                                 */
+
+                                exports.index = function(req, res){
+
+                                    res.render('index')
+
+                                };
+
+                                exports.rss = function(req, res){
+
+                                    var mRss = require('../libs/rss');
+                                    var rss = mRss.fParseRss(req, res);
+
+                                };
+                        p /libs/rss.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                //モジュール読み込み
+                                var http = require('http');
+
+                                //メソッド定義
+                                exports.fParseRss = function(req, res){
+
+                                    var xml = '';
+
+                                    http.get('http://rss.allabout.co.jp/aa/latest/ch/computer/', function(httpRes) {
+
+                                        httpRes.setEncoding('utf8');
+                                        httpRes.on('data', function(str) {
+                                            xml += str;
+                                        });
+                                        httpRes.on('end',function(){
+                                            res.contentType('text/xml');
+                                            res.send(xml);
+                                        });
+                                    }).on('error', function(e){
+                                        console.log(e.message);
+                                    }); 
+                                }
+                        p /views/index.jade
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype
+                                html
+                                    head
+                                        meta(charset='UTF-8')
+                                        title
+                                        link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+                                        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                        script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+                                        script
+                                            :js
+                                                (function(){
+                                                    $(document).on('pageshow','#index',function(){
+                                                        $.ajax({
+                                                            url: './rss',
+                                                            dataType: 'xml',
+                                                            success: function(data){
+                                                                var html = '';
+                                                                $('item',data).each(function(){
+                                                                    alert();
+                                                                    html += '<li>';
+                                                                    html += '<a href=' + $('link',this).text() + '>';
+                                                                    html += '<img src="#" alt="">';
+                                                                    html += '<h2>' + $('title',this).text() + '</h2>';
+                                                                    html += '<p>' + $('description',this).text() + '</p>';
+                                                                    html += '</a>';
+                                                                    html += '</li>';
+                                                                });
+                                                                //listviewリフレッシュ
+                                                                $('[data-role="listview"]').append(html).listview('refresh');
+                                                                //本文の画像をサムネイルの画像に置換
+                                                                $('.ui-li-has-thumb').each(function(){
+                                                                    $('img',this).attr('src',$('.mr10',this).attr('src'));
+                                                                });
+                                                                //本文の画像除去
+                                                                $('.mr10').remove();
+                                                            }
+                                                        });
+                                                    });
+                                                })()
+                                    body
+                                        #index(data-role='page')
+                                            div(data-role='header')
+                                                h1 RSSの取得
+                                            div(data-role='content')
+                                                ul(data-role='listview', data-inset='true')
+                                            div(data-role='footer')
+                                                h1 フッター

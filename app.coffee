@@ -151,6 +151,13 @@ app.post '/demo/webapi/exercise5/sample.xml', (req, res) ->
     res.contentType 'text/xml'
     res.send data
     return
+app.post '/demo/webapi/exercise6/sample.json', (req, res) ->
+    body = ''
+    filePath = __dirname + '/public/demo/webapi/exercise6/sample.json'
+    data = fs.readFileSync(filePath).toString()
+    res.contentType 'application/json'
+    res.send data
+    return
 
 #サーバー起動
 http.createServer(app).listen app.get('port'), ->

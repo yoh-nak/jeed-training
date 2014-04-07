@@ -1,32 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title></title>
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script>
-$(function(){
-    $("input").click(function(){
-        $.ajax({
-            url: 'sample.json',
-            dataType: 'json',
-            type: 'GET',
-            data: '',
-            success:function(data){
-                $("div").html("<ul></ul>");
-                $.each(data.root.type1, function(key,val){
-                    $("div ul").append("<li>" + val + "</li>")
-                });
-            }
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title></title><script src="http://code.jquery.com/jquery-1.11.0.min.js"></script><script>(function(){
+    $(function(){
+        $('input').click(function(){
+            $.ajax({
+                url: 'sample.json',
+                dataType: 'json',
+                type: 'GET',
+                data: '',
+                success:function(data){
+                    $('div').html('<ul></ul>');
+                    $.each(data.root.type1, function(key,val){
+                        $('div ul').append('<li>' + val + '</li>')
+                    });
+                }
+            });
         });
     });
-});
-</script>
-</head>
-<body>
-<input type="button" value="変更">
-<div>
-変更前
-</div>
-</body>
-</html>
+})()</script></head><body><input type="button" value="変更"><div>変更前</div></body></html>

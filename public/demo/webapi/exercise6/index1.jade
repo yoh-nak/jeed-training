@@ -1,0 +1,24 @@
+doctype
+html
+    head
+        meta(charset='UTF-8')
+        title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script
+            :js
+                (function(){
+                    $(function(){
+                        $('input').click(function(){
+                            var con = $.getJSON('sample.json',
+                                function(data){
+                                $('div').html('<ul></ul>');
+                                $.each(data.root.type1, function(key,val){
+                                    $('div ul').append('<li>' + val + '</li>')
+                                });
+                            });
+                        });
+                    });
+                })()
+    body
+        input(type='button', value='変更')
+        div 変更前

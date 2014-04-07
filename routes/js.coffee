@@ -30,8 +30,14 @@ exports.webapiXML = (req, res) ->
     res.render "js/webapi/xml-" + req.params.id, {}
 
 #HTML5 API
+###
 exports.html5 = (req, res) ->
     res.render "js/html5/html5-" + req.params.id + req.params.format,
+        title: define.title
+        instructor: define.instructor
+###
+exports.html5 = (req, res) ->
+    res.render "js/html5/html5" + req.params.id,
         title: define.title
         instructor: define.instructor
 

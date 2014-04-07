@@ -114,7 +114,7 @@ app.get '/genymotion/:id', others.genymotion # GENYMOTION
 app.get '/diary/:id', diary.diary # 日誌
 app.get '/jsv2/:id', js.jsv2 # JavaScript
 app.get '/webapi/:id', js.webapi # WebAPI
-app.get '/html5api-:id:format', js.html5 # HTML5 API
+app.get '/html5/:id', js.html5 # HTML5 API
 app.get '/canvas/:id', js.canvas # Canvas
 app.get '/enchant/:id', js.enchant # enchant.js
 app.get '/library/:id', js.library # ライブラリ

@@ -15,10 +15,10 @@ block content
                 include googlemap
             .col-sm-9
                 .panel.panel-primary
-                    .panel-heading 現在の位置情報を表示
+                    .panel-heading 位置情報の取得に失敗したとき
                     .panel-body
                         p
-                            a.btn.btn-default(href='../demo/webapi/googlemap-21/index.html', target='_blank')
+                            a.btn.btn-default(href='../demo/webapi/googlemap-22/index.html', target='_blank')
                                 i.glyphicon.glyphicon-play
                                 |  デモ
                         pre(class='prettyprint linenums:1')
@@ -48,8 +48,23 @@ block content
                                                                 $('[data-role="listview"] li:nth(6)').text("速度：" + position.coords.speed);
                                                             },
                                                             //位置情報の取得に失敗した時の処理
-                                                            function(){
-                                                                alert('エラーが発生しました');
+                                                            function(error){
+                                                                switch(error.code){
+                                                                    case error.TIMEOUT:
+                                                                        alert('タイムアウトが発生しました');
+                                                                        break;
+                                                                    case error.POSITION_UNAVAILABLE:
+                                                                        alert('位置情報が利用できませんでした');
+                                                                        break;
+                                                                    case error.PERMISSION_DENIED:
+                                                                        alert('Geolocation APIの利用権限がありません');
+                                                                        break;
+                                                                    case error.UNKNOWN_ERROR:
+                                                                        alert('UNKNOWN_ERROR:' + error.message);
+                                                                        break;
+                                                                    default:
+                                                                        alert('エラーが発生しました');
+                                                                }
                                                             },
                                                             //オプション
                                                             {
@@ -62,7 +77,7 @@ block content
                                     body
                                         #index(data-role='page')
                                             div(data-role='header')
-                                                h1 現在の位置情報を表示
+                                                h1 位置情報の取得に失敗したとき
                                             div(data-role="content")
                                                 ul(data-role='listview')
                                                     - for (var i = 0; i < 7; i++)

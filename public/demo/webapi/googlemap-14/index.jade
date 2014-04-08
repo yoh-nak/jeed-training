@@ -1,45 +1,47 @@
-!!!
+doctype
 html(lang='ja')
-	head
-		meta(charset='utf-8')
-		title
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script(src!='http://maps.google.com/maps/api/js?sensor=true&language=ja')
-		script.
-			$(function(){
-				var latlng = new google.maps.LatLng(34.701912,135.494961);
-				var options = {
-					zoom: 15,
-					center: latlng,
-					mapTypeId: google.maps.MapTypeId.ROADMAP
-				};
-				var map = new google.maps.Map(document.getElementById('map'), options);
-				
-				var infoWindow = new google.maps.InfoWindow({
-					content: '<strong style="color:red">くまモン</strong><br>頻出エリア！<br><img src="kumamon.gif">',
-				});
+    head
+        meta(charset='utf-8')
+        title
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script(src!='http://maps.google.com/maps/api/js?sensor=true&language=ja')
+        style
+            :stylus
+                html,body
+                    width 100%
+                    height 100%
+                    margin 0
+                #map
+                    width 100%
+                    height 100%
+        script
+            :js
+                (function(){
+                    $(function(){
+                        var latlng = new google.maps.LatLng(34.701912,135.494961);
+                        var options = {
+                            zoom: 15,
+                            center: latlng,
+                            mapTypeId: google.maps.MapTypeId.ROADMAP
+                        };
+                        var map = new google.maps.Map($('#map').get(0), options);
+                        
+                        var infoWindow = new google.maps.InfoWindow({
+                            content: '<strong style="color:red">くまモン</strong><br>頻出エリア！<br><img src="kumamon.gif">',
+                        });
 
-				//マーカーの表示
-				var marker = new google.maps.Marker({
-					//position: map.getCenter(), //地図中心にマーカー
-					position: new google.maps.LatLng(34.705546,135.498287), //緯度経度を指定
-					map: map
-				});
+                        //マーカーの表示
+                        var marker = new google.maps.Marker({
+                            //position: map.getCenter(), //地図中心にマーカー
+                            position: new google.maps.LatLng(34.705546,135.498287), //緯度経度を指定
+                            map: map
+                        });
 
-				//マーカークリック
-				google.maps.event.addListener(marker, 'click', function() {
-					infoWindow.open(map, marker); //情報ウィンドウオープン
-				})
-			})
-		style.
-			html,body{
-				width:100%;
-				height:100%;
-				margin:0;
-			}
-			#map{
-				width:100%;
-				height:100%;
-			}
-	body
-		div#map
+                        //マーカークリック
+                        google.maps.event.addListener(marker, 'click', function() {
+                            infoWindow.open(map, marker); //情報ウィンドウオープン
+                        })
+                    })
+                })()
+    body
+        #map

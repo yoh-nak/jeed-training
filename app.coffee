@@ -125,28 +125,21 @@ app.get '/recipe/:id', auth, js.recipe
 app.get '/cordova/:id', auth, js.cordova
 
 #ルーティングPOST送信
-fAjaxPost = (req, res, mimetype) ->
-    body = ''
-    filePath = __dirname + '/public/' + req.originalUrl
-    data = fs.readFileSync(filePath).toString()
-    res.contentType mimetype
-    res.send data
-    return
-    
+mAjaxPost = require('./libs/AjaxPost')
 app.post '/demo/webapi/exercise1/sample.txt', auth, (req, res) ->
-    fAjaxPost(req, res, 'text/plain')
+    mAjaxPost.fAjaxPost(req, res, 'text/plain')
     return
 app.post '/demo/webapi/exercise2/sample.html', auth, (req, res) ->
-    fAjaxPost(req, res, 'text/plain')
+    mAjaxPost.fAjaxPost(req, res, 'text/plain')
     return
 app.post '/demo/webapi/exercise4/sample.xml', auth, (req, res) ->
-    fAjaxPost(req, res, 'text/xml')
+    mAjaxPost.fAjaxPost(req, res, 'text/xml')
     return
 app.post '/demo/webapi/exercise5/sample.xml', auth, (req, res) ->
-    fAjaxPost(req, res, 'text/xml')
+    mAjaxPost.fAjaxPost(req, res, 'text/xml')
     return
 app.post '/demo/webapi/exercise6/sample.json', auth, (req, res) ->
-    fAjaxPost(req, res, 'application/json')
+    mAjaxPost.fAjaxPost(req, res, 'application/json')
     return
 
 #サーバー起動

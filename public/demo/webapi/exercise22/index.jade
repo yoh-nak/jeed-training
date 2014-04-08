@@ -1,0 +1,95 @@
+doctype html
+html(lang='ja')
+    head
+        meta(charset='UTF-8')
+        title
+        link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+        script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+        script(src='http://oauth.googlecode.com/svn/code/javascript/oauth.js')
+        script(src='http://oauth.googlecode.com/svn/code/javascript/sha1.js')
+        style
+            :stylus
+                .ui-li-thumb
+                    width 100px
+                    height auto
+        script
+            :js
+                //Twitterクラス定義
+                function Twitter() {}
+                //プロパティ
+                Twitter.prototype = {
+                        consumerKey:    'UpTXY5eoXBMqdh2hkPYscg',
+                        consumerSecret: 'X3F83WWzR2j05TKpqsV7zR3Ut9jlZgI5mt0szMVNijU',
+                        accessToken:    '164538873-oY7G7JazQXMO0D8UEizKdZTBY9znwggkbRje8Q0c',
+                        tokenSecret:    '5j0TRWUl3QqgCo9mEBCNXHSwpaFrUE8n7jaAQhpQ'
+                };
+                //メソッド
+                Twitter.prototype.get = function(api, content) {
+                    var accessor = {
+                        consumerSecret: this.consumerSecret,
+                        tokenSecret: this.tokenSecret
+                    };
+                 
+                    var message = {
+                        method: 'GET',
+                        action: api,
+                        parameters: {
+                            oauth_version: '1.0',
+                            oauth_signature_method: 'HMAC-SHA1',
+                            oauth_consumer_key: this.consumerKey,
+                            oauth_token: this.accessToken
+                        }
+                    };
+                    for (var key in content) {
+                        message.parameters[key] = content[key];
+                    }
+                    OAuth.setTimestampAndNonce(message);
+                    OAuth.SignatureMethod.sign(message, accessor);
+                    var target = OAuth.addToURL(message.action, message.parameters);
+                 
+                    var options = {
+                        type: message.method,
+                        url: target,
+                        dataType: 'jsonp',  //ここでjsonpを指定する
+                        jsonp: false,       //jQueryによるcallback関数名の埋め込みはしない
+                        cache: true         //リクエストパラメータに時刻を埋め込まない
+                    };
+                    $.ajax(options);
+                }
+                 
+                //Twiterクラスインスタンス化
+                var twitter = new Twitter();
+                 
+                //コールバック関数
+                function update(data){
+                    console.log(data);
+                    for( var i = 0; i < data.length; i++ ) {
+
+                        var str = data[i].text.replace(/(http:\/\/[\x21-\x7e]+)/gi, '<a href="$1" target="_blank">$1</a>');
+
+                        $('[data-role="listview"]').append(
+                            '<li><img src="' + data[i].user.profile_image_url + '">\
+                            <h2>' + data[i].user.name + '</h2>\
+                            <p>' + str + '</p></li>'
+                        ).listview('refresh');
+                    }
+                }
+
+                $(document).on('pageshow','#index',function(){
+                    //オプションとコールバック関数の指定
+                    var content = {
+                        count: '50',        //表示件数
+                        callback: 'update'  //コールバック関数
+                    };
+                    //Twitter APIの呼び出し
+                    twitter.get('https://api.twitter.com/1.1/statuses/home_timeline.json', content);
+                });
+    body
+        #index(data-role='page')
+            div(data-role='header')
+                h1 Twitter API（home_timeline）
+            div(data-role='content')
+                ul(data-role='listview', data-inset='true')
+            div(data-role='footer', data-position='fixed')
+                h1 フッター

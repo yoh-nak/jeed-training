@@ -127,35 +127,35 @@ app.get '/cordova/:id', auth, js.cordova
 #ルーティングPOST送信
 app.post '/demo/webapi/exercise1/sample.txt', auth, (req, res) ->
     body = ''
-    filePath = __dirname + '/public/demo/webapi/exercise1/sample.txt'
+    filePath = __dirname + '/public/' + req.originalUrl
     data = fs.readFileSync(filePath).toString()
     res.contentType 'text/plain'
     res.send data
     return
 app.post '/demo/webapi/exercise2/sample.html', auth, (req, res) ->
     body = ''
-    filePath = __dirname + '/public/demo/webapi/exercise2/sample.html'
+    filePath = __dirname + '/public/' + req.originalUrl
     data = fs.readFileSync(filePath).toString()
     res.contentType 'text/plain'
     res.send data
     return
 app.post '/demo/webapi/exercise4/sample.xml', auth, (req, res) ->
     body = ''
-    filePath = __dirname + '/public/demo/webapi/exercise4/sample.xml'
+    filePath = __dirname + '/public/' + req.originalUrl
     data = fs.readFileSync(filePath).toString()
     res.contentType 'text/xml'
     res.send data
     return
 app.post '/demo/webapi/exercise5/sample.xml', auth, (req, res) ->
     body = ''
-    filePath = __dirname + '/public/demo/webapi/exercise5/sample.xml'
+    filePath = __dirname + '/public/' + req.originalUrl
     data = fs.readFileSync(filePath).toString()
     res.contentType 'text/xml'
     res.send data
     return
 app.post '/demo/webapi/exercise6/sample.json', auth, (req, res) ->
     body = ''
-    filePath = __dirname + '/public/demo/webapi/exercise6/sample.json'
+    filePath = __dirname + '/public/' + req.originalUrl
     data = fs.readFileSync(filePath).toString()
     res.contentType 'application/json'
     res.send data

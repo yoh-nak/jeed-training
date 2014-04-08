@@ -88,72 +88,72 @@ app.use express.errorHandler()    if 'development' is app.get('env')
 
 #ルーティングGET送信
 app.get '/', auth, routes.index
-app.get '/html/:id', html.html # HTML
-app.get '/_css/:id', css.css # CSS
-app.get '/rwd/:id', rwd.rwd # レスポンシブWEBデザイン
-app.get '/bootstrap/:id', rwd.bootstrap # Bootstrap
-app.get '/jquery/:id', jquery.jquery # jQuery
-app.get '/jqueryui/:id', jquery.jqueryui # jQuery UI
-app.get '/jqm/:id', jqm.jqm # jQuery Mobile
-app.get '/mobile/:id', mobile.mobile # スマホサイト
-app.get '/nodejs/:id', nodejs.nodejs # Node.js
-app.get '/mysql/:id', database.mysql # MySQL
-app.get '/postgres/:id', database.postgres # PostgreSQL
-app.get '/mongodb/:id', database.mongodb # MongoDB
-app.get '/redis/:id', database.redis # Redis
-app.get '/angular/:id', js.angular # AngularJS
-app.get '/requirejs/:id', js.requirejs # RequireJS
-app.get '/underscore/:id', js.underscore # Underscore.js
-app.get '/jasmine/:id', js.jasmine # Jasmine
-app.get '/jsdoc/:id', js.jsdoc # JSDoc
-app.get '/json2js/:id', js.json2js # json2.js
-app.get '/others/:id', others.others
-app.get '/git/:id', others.git # Git/GitHub
-app.get '/linux/:id', others.linux # Linux
-app.get '/vagrant/:id', others.vagrant # Vagrant
-app.get '/chef/:id', others.chef # chef
-app.get '/genymotion/:id', others.genymotion # GENYMOTION
-app.get '/diary/:id', diary.diary # 日誌
-app.get '/jsv2/:id', js.jsv2 # JavaScript
-app.get '/webapi/:id', js.webapi # WebAPI
-app.get '/html5/:id', js.html5 # HTML5 API
-app.get '/canvas/:id', js.canvas # Canvas
-app.get '/enchant/:id', js.enchant # enchant.js
-app.get '/library/:id', js.library # ライブラリ
-app.get '/framework/:id', js.framework # フレームワーク
-app.get '/recipe/:id', js.recipe
-app.get '/cordova/:id', js.cordova
+app.get '/html/:id', auth, html.html # HTML
+app.get '/_css/:id', auth, css.css # CSS
+app.get '/rwd/:id', auth, rwd.rwd # レスポンシブWEBデザイン
+app.get '/bootstrap/:id', auth, rwd.bootstrap # Bootstrap
+app.get '/jquery/:id', auth, jquery.jquery # jQuery
+app.get '/jqueryui/:id', auth, jquery.jqueryui # jQuery UI
+app.get '/jqm/:id', auth, jqm.jqm # jQuery Mobile
+app.get '/mobile/:id', auth, mobile.mobile # スマホサイト
+app.get '/nodejs/:id', auth, nodejs.nodejs # Node.js
+app.get '/mysql/:id', auth, database.mysql # MySQL
+app.get '/postgres/:id', auth, database.postgres # PostgreSQL
+app.get '/mongodb/:id', auth, database.mongodb # MongoDB
+app.get '/redis/:id', auth, database.redis # Redis
+app.get '/angular/:id', auth, js.angular # AngularJS
+app.get '/requirejs/:id', auth, js.requirejs # RequireJS
+app.get '/underscore/:id', auth, js.underscore # Underscore.js
+app.get '/jasmine/:id', auth, js.jasmine # Jasmine
+app.get '/jsdoc/:id', auth, js.jsdoc # JSDoc
+app.get '/json2js/:id', auth, js.json2js # json2.js
+app.get '/others/:id', auth, others.others
+app.get '/git/:id', auth, others.git # Git/GitHub
+app.get '/linux/:id', auth, others.linux # Linux
+app.get '/vagrant/:id', auth, others.vagrant # Vagrant
+app.get '/chef/:id', auth, others.chef # chef
+app.get '/genymotion/:id', auth, others.genymotion # GENYMOTION
+app.get '/diary/:id', auth, diary.diary # 日誌
+app.get '/jsv2/:id', auth, js.jsv2 # JavaScript
+app.get '/webapi/:id', auth, js.webapi # WebAPI
+app.get '/html5/:id', auth, js.html5 # HTML5 API
+app.get '/canvas/:id', auth, js.canvas # Canvas
+app.get '/enchant/:id', auth, js.enchant # enchant.js
+app.get '/library/:id', auth, js.library # ライブラリ
+app.get '/framework/:id', auth, js.framework # フレームワーク
+app.get '/recipe/:id', auth, js.recipe
+app.get '/cordova/:id', auth, js.cordova
 
 #ルーティングPOST送信
-app.post '/demo/webapi/exercise1/sample.txt', (req, res) ->
+app.post '/demo/webapi/exercise1/sample.txt', auth, (req, res) ->
     body = ''
     filePath = __dirname + '/public/demo/webapi/exercise1/sample.txt'
     data = fs.readFileSync(filePath).toString()
     res.contentType 'text/plain'
     res.send data
     return
-app.post '/demo/webapi/exercise2/sample.html', (req, res) ->
+app.post '/demo/webapi/exercise2/sample.html', auth, (req, res) ->
     body = ''
     filePath = __dirname + '/public/demo/webapi/exercise2/sample.html'
     data = fs.readFileSync(filePath).toString()
     res.contentType 'text/plain'
     res.send data
     return
-app.post '/demo/webapi/exercise4/sample.xml', (req, res) ->
+app.post '/demo/webapi/exercise4/sample.xml', auth, (req, res) ->
     body = ''
     filePath = __dirname + '/public/demo/webapi/exercise4/sample.xml'
     data = fs.readFileSync(filePath).toString()
     res.contentType 'text/xml'
     res.send data
     return
-app.post '/demo/webapi/exercise5/sample.xml', (req, res) ->
+app.post '/demo/webapi/exercise5/sample.xml', auth, (req, res) ->
     body = ''
     filePath = __dirname + '/public/demo/webapi/exercise5/sample.xml'
     data = fs.readFileSync(filePath).toString()
     res.contentType 'text/xml'
     res.send data
     return
-app.post '/demo/webapi/exercise6/sample.json', (req, res) ->
+app.post '/demo/webapi/exercise6/sample.json', auth, (req, res) ->
     body = ''
     filePath = __dirname + '/public/demo/webapi/exercise6/sample.json'
     data = fs.readFileSync(filePath).toString()

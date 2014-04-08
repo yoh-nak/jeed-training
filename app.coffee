@@ -34,7 +34,9 @@ require('jade').filters.code = (block) ->
 
 
 #ミドルウェア
-app.use express.basicAuth('nakano', 'nakano') #ベーシック認証
+#app.use express.basicAuth('nakano', 'nakano') #ベーシック認証
+auth = express.basicAuth('nakano', 'nakano');
+
 app.set 'port', process.env.PORT or 3000
 app.set 'views', __dirname + '/views'
 app.set 'view engine', 'jade'
@@ -85,7 +87,7 @@ app.use require('connect-coffee-script')(
 app.use express.errorHandler()    if 'development' is app.get('env')
 
 #ルーティングGET送信
-app.get '/', routes.index
+app.get '/', auth, routes.index
 app.get '/html/:id', html.html # HTML
 app.get '/_css/:id', css.css # CSS
 app.get '/rwd/:id', rwd.rwd # レスポンシブWEBデザイン

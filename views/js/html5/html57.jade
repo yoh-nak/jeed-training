@@ -1,0 +1,69 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading 指定したURLのオーディオを再生
+                    .panel-body
+                        p
+                            a.btn.btn-default(href='../demo/html5api/audio-7/index.html', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                |  デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <!DOCTYPE html>
+                                <html lang="ja">
+                                <head>
+                                <meta charset="utf-8">
+                                <title></title>
+                                <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+                                <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+                                <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+                                <script>
+                                //指定したURLのオーディオを演奏する
+                                $(document).on('pageshow','#index',function(){
+                                var audioObj = document.getElementById("myAudio");
+                                $('#loadData').on('vclick',function(){
+                                var srcURL = document.getElementById("url").value;
+                                audioObj = new Audio(srcURL);
+                                audioObj.play();
+                                });
+                                });
+                                </script>
+                                </head>
+                                <body>
+                                <div id="index" data-role="page">
+                                <div data-role="header">
+                                <h1>指定したURLのオーディオを演奏する</h1>
+                                </div>
+                                <div data-role="content">
+                                <audio id="myAudio" width="192" height="48" controls>
+                                <source src="../audio-1/sample.mp3">
+                                <source src="../audio-1/sample.ogg">
+                                <p>お使いのブラウザではオーディオを再生できません。</p>
+                                </audio>
+                                <form>
+                                URL : <input type="text" id="url" value="../audio-1/bgm.mp3"><br>
+                                <input type="button" id="loadData" value="データ読み込み">
+                                </form>
+                                </div>
+                                <div data-role="footer" data-position="fixed">
+                                <h4>Copyright © ナカノヨウスケ</h4>
+                                </div>
+                                </div>
+                                </body>
+                                </html>
+
+

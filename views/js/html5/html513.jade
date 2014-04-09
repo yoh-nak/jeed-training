@@ -1,0 +1,78 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading HTML5 Videoが使えるか調べる
+                    .panel-body
+                        p
+                            a.btn.btn-default(href='../demo/html5api/video-1/sample.3gp', download='sample.3gp')
+                                i.glyphicon.glyphicon-cloud-download
+                                |  sample.3gp
+                            |  
+                            a.btn.btn-default(href='../demo/html5api/video-1/sample.mov', download='sample.mov')
+                                i.glyphicon.glyphicon-cloud-download
+                                |  sample.mov
+                            |  
+                            a.btn.btn-default(href='../demo/html5api/video-1/sample.ogv', download='sample.ogv')
+                                i.glyphicon.glyphicon-cloud-download
+                                |  sample.ogv
+                            |  
+                            a.btn.btn-default(href='../demo/html5api/video-1/sample.webm', download='sample.webm')
+                                i.glyphicon.glyphicon-cloud-download
+                                |  sample.webm
+                        p
+                            a.btn.btn-default(href='../demo/html5api/video-1/index.html', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                |  デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <!DOCTYPE html>
+                                <html lang="ja">
+                                <head>
+                                <meta charset="utf-8">
+                                <title></title>
+                                <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+                                <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+                                <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+                                <title>HTML5 Videoが使えるかどうか調べる</title>
+                                <script>
+                                //HTML5 Videoが使えるか調べる
+                                $(document).on('pageshow','#index',function(){
+                                var ele = document.getElementById("result");
+                                if(window.HTMLVideoElement){
+                                $('#result').html('HTML5 Videoは使用できます');
+                                }else{
+                                $('#result').html('HTML5 Videoは使用できません');
+                                }
+                                });
+                                </script>
+                                </head>
+                                <body>
+                                <div id="index" data-role="page">
+                                <div data-role="header">
+                                <h1>HTML5 Videoが使えるかどうか調べる</h1>
+                                </div>
+                                <div data-role="content">
+                                <div id="result"></div>
+                                </div>
+                                <div data-role="footer" data-position="fixed">
+                                <h4>Copyright © ナカノヨウスケ</h4>
+                                </div>
+                                </div>
+                                </body>
+                                </html>
+
+

@@ -1,0 +1,59 @@
+doctype html
+html(lang='ja')
+    head
+        meta(charset='UTF-8')
+        title
+        link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+        script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+        style
+            :stylus
+                .ui-li-thumb
+                    width 300px
+                    height 300px
+        script
+            :js
+                (function(){
+                    $(document).on('pageshow','#index',function(){
+                        show('阪神タイガース');
+                        //検索ボックス
+                        $('#index').on('keypress','#search',function(e){
+                            //エンターキー押下時
+                            if(e.keyCode == $.mobile.keyCode.ENTER){
+                                show($('#search').val());
+                            }
+                        });
+                    });
+
+                    function show(keyword){
+                        $.ajax({
+                            url: 'https://www.googleapis.com/youtube/v3/search',
+                            dataType: 'jsonp',
+                            type: 'GET',
+                            data: 'part=snippet&maxResults=50&q=' + keyword + '&max-result=50&key=AIzaSyCLpk_z1gbA423gb9CtUVAW3NmXO65Si2Q',
+                            success:function(data){
+                                console.log(data);
+                                var html = '';
+                                for(var i = 0; i < data.items.length; i++){
+                                    console.log(data.items[i].id.videoId);
+                                    html += '<li><a href="http://www.youtube.com/watch?v=' + data.items[i].id.videoId    + '" target="_blank">\
+                                    <img src="' + data.items[i].snippet.thumbnails.high.url + '">\
+                                    <h2>' + data.items[i].snippet.title + '</h2>\
+                                    <p>' + data.items[i].snippet.description + '</p>\
+                                    <p class="ui-li-aside">' + data.items[i].snippet.publishedAt + '</p>\
+                                    </a></li>'
+                                }
+                                $('[data-role="listview"]').html(html).listview('refresh');
+                            }
+                        });
+                    }
+                })()
+    body
+        #index(data-role='page')
+            div(data-role='header')
+                h1 Youtube Data API v3
+            div(data-role='content')
+                input#search(type='search')
+                ul(data-role='listview', data-inset='true')
+            div(data-role='footer', data-position='fixed')
+                h1 フッター

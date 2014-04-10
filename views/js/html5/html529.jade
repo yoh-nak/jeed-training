@@ -1,0 +1,90 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading ワーカーとのデータのやりとりを行う
+                    .panel-body
+                        p
+                            a.btn.btn-default(href='../demo/html5api/worker-5/index.html', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                |  デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <!DOCTYPE html>
+                                <html lang="ja">
+                                <head>
+                                <meta charset="utf-8">
+                                <title></title>
+                                <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+                                <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+                                <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+                                <script>
+                                // ワーカーとのデータのやりとりを行う
+                                $(document).on('pageshow','#index',function(){
+                                var myWorker;
+                                $('#checkButton').on('vclick',function(){
+                                var checkValue = document.getElementById('pNumber').value;
+                                myWorker = new Worker('primenumber.js');
+                                myWorker.addEventListener('message', function(event){
+                                var txt = '素数ではありません';
+                                if (event.data){
+                                txt = '素数です';
+                                }
+                                $('#stat').html(checkValue + 'は' + txt);
+                                }, true);
+                                myWorker.postMessage(checkValue); // ワーカーの処理を開始
+                                });
+                                });
+                                </script>
+                                </head>
+                                <body>
+                                <div id="index" data-role="page">
+                                <div data-role="header">
+                                <h1>ワーカーとのデータのやりとりを行う</h1>
+                                </div>
+                                <div data-role="content">
+                                <form>
+                                <input type="text" value="4" id="pNumber">
+                                <input type="button" value="素数かどうか調べる" id="checkButton">
+                                </form>
+                                <div id="stat"></div>
+                                </div>
+                                <div data-role="footer" data-position="fixed">
+                                <h4>Copyright © ナカノヨウスケ</h4>
+                                </div>
+                                </div>
+                                </body>
+                                </html>
+
+                        | primenumber.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                // Workerを使って素数かどうか調べる
+                                addEventListener('message', function(event){
+                                  var checkNumber = event.data;
+                                  if (checkNumber &lt; 4){
+                                    postMessage(true);
+                                    return;
+                                  }
+                                  var flag = true;
+                                  for(var i=2; i<checkNumber; i++){ // 都合により高コストで処理
+                                    if ((checkNumber % i) == 0){
+                                      flag = false;
+                                      break;
+                                    }
+                                  }
+                                  postMessage(flag);
+                                }, false);

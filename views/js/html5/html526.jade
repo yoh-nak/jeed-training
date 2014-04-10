@@ -1,0 +1,74 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading ワーカーを作成／処理を終了する
+                    .panel-body
+                        p
+                            a.btn.btn-default(href='../demo/html5api/worker-2/index.html', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                |  デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <!DOCTYPE html>
+                                <html lang="ja">
+                                <head>
+                                <meta charset="utf-8">
+                                <title></title>
+                                <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+                                <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+                                <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+                                <script>
+                                // ワーカーを作成／処理を終了する
+                                $(document).on('pageshow','#index',function(){
+                                var myWorker;
+                                $('#createButton').on('vclick',function(){
+                                var time = (new Date()).getTime();
+                                myWorker = new Worker("calc.js?t="+time);
+                                myWorker.addEventListener('message', function(event){
+                                $('#workerStatus').html(event.data+' msec');
+                                }, true);
+                                $('#stat').html('ワーカーを作成しました：' + myWorker.toString());
+                                myWorker.postMessage(null); // ワーカーの処理を開始
+                                });
+                                $('#terminateButton').on('vclick',function(){
+                                myWorker.terminate();
+                                $('#stat').html('ワーカーの処理を強制終了しました：' + myWorker.toString());
+                                });
+                                });
+                                </script>
+                                </head>
+                                <body>
+                                <div id="index" data-role="page">
+                                <div data-role="header">
+                                <h1>ワーカーを作成／処理を終了する</h1>
+                                </div>
+                                <div data-role="content">
+                                <form>
+                                <input type="button" value="ワーカーを作成" id="createButton">
+                                <input type="button" value="ワーカーの処理を終了" id="terminateButton">
+                                </form>
+                                <div id="stat"></div>
+                                <div id="workerStatus"></div>
+                                </div>
+                                <div data-role="footer" data-position="fixed">
+                                <h4>Copyright © ナカノヨウスケ</h4>
+                                </div>
+                                </div>
+                                </body>
+                                </html>
+
+

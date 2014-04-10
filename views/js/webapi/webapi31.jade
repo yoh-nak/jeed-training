@@ -36,7 +36,8 @@ block content
                                         head
                                             meta(charset='UTF-8')
                                             title
-                                            link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+                                            link(rel='stylesheet',
+                                    href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
                                             script(src='http://code.jquery.com/jquery-1.9.1.min.js')
                                             script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
                                             script(src='https://www.google.com/jsapi')
@@ -47,44 +48,50 @@ block content
                                             script
                                                 :js
                                                     (function(){
+
                                                         $(document).on('pageshow','#index',function(){
-                                                            var innerAry = [];
-                                                            innerAry.push(['地域', '件数']);
-                                                            //データ取得
-                                                            $.getJSON('ramen.json',
-                                                                function(data){
-                                                                    $.each(data['ラーメン']['地域'], function(key,val){
-                                                                        var i = 0;
-                                                                        $.each(val,function(key,val){
-                                                                            i++;
-                                                                        });
-                                                                        var buff = [];
-                                                                        buff.push(key); //地域
-                                                                        buff.push(i);     //件数
-                                                                        //[地域,件数]のセットを格納
-                                                                        innerAry.push(buff);
+
+                                                            var outerAry = [];
+
+                                                            $.getJSON('ramen.json',function(data){
+
+                                                                outerAry.push(['地域', '件数']);
+
+                                                                $.each(data['ラーメン']['地域'], function(key, val){
+                                                                    var innerAry = [];
+                                                                    innerAry.push(key)
+                                                                    var sum = 0;
+                                                                    $.each(val,function(key, val){
+                                                                        sum++;
                                                                     });
-                                                                    google.load("visualization", "1", {"packages":["corechart"],"callback":drawChart});
+                                                                    innerAry.push(sum);
+                                                                    outerAry.push(innerAry);
+                                                                });
+
+                                                                google.load('visualization', '1',
+                                    {packages:['corechart'], 'callback': drawChart});
+
+                                                                function drawChart() {
+                                                                    var data =
+                                    google.visualization.arrayToDataTable(outerAry);
+
+                                                                    var options = {
+                                                                      title: 'ラーメン屋件数',
+                                                                      vAxis: {title: '地域',
+                                    titleTextStyle: {color: '#3366cc'}}
+                                                                    };
+
+                                                                    var chart = new
+                                    google.visualization.BarChart(document.getElementById('chart'));
+                                                                    chart.draw(data, options);
                                                                 }
-                                                            );
-                                                            //グラフの描画
-                                                            function drawChart(){
-                                                                var outerAry = [];
-                                                                for(var i = 0; i < innerAry.length; i++){
-                                                                    outerAry.push(innerAry[i]);
-                                                                }
-                                                                var data = google.visualization.arrayToDataTable(outerAry);
-                                                                var options = {
-                                                                    title:'ラーメン屋件数',
-                                                                    vAxis:{title:'地域',titleTextStyle:{color:'#0000FF'}},
-                                                                    chartArea:{height:"80%"}
-                                                                };
-                                                                var chart = new google.visualization.BarChart(document.getElementById('chart'));
-                                                                chart.draw(data, options);
-                                                            }
-                                                            //ウィンドウサイズ変更でグラフの再描画
-                                                            $(window).on('resize',function(){
-                                                                google.load('visualization', '1', {'packages':['corechart'],'callback':drawChart});
+
+                                                                //ウィンドウサイズ変更でグラフの再描画
+                                                                $(window).on('resize',function(){
+                                                                    google.load('visualization', '1',
+                                    {'packages':['corechart'],'callback':drawChart});
+                                                                });
+
                                                             });
                                                         });
                                                     })()

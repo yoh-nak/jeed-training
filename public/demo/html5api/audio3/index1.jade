@@ -1,0 +1,46 @@
+doctype html
+html(lang='ja')
+    head
+        meta(charset='utf-8')
+        title
+        link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+        script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+        script
+            :js
+                (function(){
+                    //ボタンクリックでオーディオを停止する
+                    $(document).on('pageshow','#index',function(){
+                        var audioObj = $('#myAudio').get(0);
+                        $('#aPlay').on('vclick',function(){
+                            audioObj.play();
+                        });
+                        $('#aStop').on('vclick',function(){
+                            audioObj.pause();
+                        });
+                        $('#aRewind').on('vclick',function(){
+                            audioObj.currentTime = 0;
+                            audioObj.pause();
+                        });
+                        $('#aLast2').on('vclick',function(){
+                            audioObj.currentTime = audioObj.duration - 2;
+                            audioObj.play();
+                        });
+                    });
+                })()
+    body
+        #index(data-role='page')
+            div(data-role='header')
+                h1 オーディオを再生
+            div(data-role='content')
+                audio#myAudio(width='192', height='48', controls='controls')
+                    source(src='../audio1/sample.mp3')
+                    source(src='../audio1/sample.ogg')
+                    p お使いのブラウザではオーディオを再生できません。
+                form
+                    input#aPlay(type='button', value='再生')
+                    input#aStop(type='button', value='停止')
+                    input#aRewind(type='button', value='巻き戻し')
+                    input#aLast2(type='button', value='終わりの2秒前から再生')
+            div(data-role='footer', data-position='fixed')
+                h1 フッター

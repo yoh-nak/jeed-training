@@ -1,0 +1,72 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading 1つのキーに保存してある複数のデータを読み出す
+                    .panel-body
+                        p
+                            a.btn.btn-default(href='../demo/html5api/storage5/index.html', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                |  デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <!DOCTYPE html>
+                                <html lang="ja">
+                                <meta charset="utf-8">
+                                <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"> 
+                                <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+                                <title>1つのキーに保存してある複数のデータを読み出す</title>
+                                <link rel="stylesheet" href="css/main.css" type="text/css" media="all">
+                                <script type="text/javascript" src="js/sample.js"></script>
+                                </head>
+                                <body>
+                                <div id="index" data-role="page">
+                                <div data-role="header">
+                                <h1>1つのキーに保存してある複数のデータを読み出す</h1>
+                                </div>
+                                <div data-role="content">
+                                <form>
+                                <input type="text" name="userName" id="userName" value=""><br>
+                                <textarea cols="20" rows="5" id="userComment"></textarea><br>
+                                <input type="button" value="読み出し" id="loadButton">
+                                </form>
+                                </div>
+                                <div data-role="footer" data-position="fixed">
+                                <h4>Copyright © ナカノヨウスケ</h4>
+                                </div>
+                                </div>
+                                <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+                                <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+                                <script>
+                                // 1つのキーに保存してある複数のデータをローカルストレージから読み出す
+                                $(document).on('pageshow','#index',function(){
+                                $('#loadButton').on('vclick',function(){
+                                var data = window.localStorage.getItem('textData2');
+                                if (!data){
+                                alert('データは保存されていません');
+                                return;
+                                }
+                                data = JSON.parse(data);
+                                var name = data.user;
+                                var txt = data.comment;
+                                $('#userName').val(name);
+                                $('#userComment').val(txt);
+                                });
+                                });
+                                </script>
+                                </body>
+                                </html>
+

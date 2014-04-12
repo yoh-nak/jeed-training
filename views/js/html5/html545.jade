@@ -1,0 +1,68 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading セッションストレージを利用し異なるウィンドウでデータをやりとりする
+                    .panel-body
+                        p
+                            a.btn.btn-default(href='../demo/html5api/storage7/index.html', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                |  デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <!DOCTYPE html>
+                                <html lang="ja">
+                                <meta charset="utf-8">
+                                <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"> 
+                                <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+                                </head>
+                                <body>
+                                <div id="index" data-role="page">
+                                <div data-role="header">
+                                <h1>セッションストレージを利用し異なるウィンドウでデータをやりとりする</h1>
+                                </div>
+                                <div data-role="content">
+                                <form>
+                                <textarea cols="20" rows="5" id="userComment">感想をお願いします</textarea><br>
+                                <input type="button" value="保存" id="saveButton"><br>
+                                <input type="button" value="読み出し" id="readButton"><br>
+                                <input type="button" value="新規にウィンドウを開く" id="openButton"><br>
+                                </form>
+                                </div>
+                                <div data-role="footer" data-position="fixed">
+                                <h4>Copyright © ナカノヨウスケ</h4>
+                                </div>
+                                </div>
+                                <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+                                <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+                                <script>
+                                // セッションストレージを利用し異なるウィンドウでデータをやりとりする
+                                $(document).on('pageshow','#index',function(){
+                                $('#saveButton').on('vclick',function(){
+                                var txt = $('#userComment').val();
+                                window.sessionStorage.setItem('textData', txt);
+                                });
+                                $('#readButton').on('vclick',function(){
+                                var txt = window.sessionStorage.getItem('textData');
+                                $('#userComment').val(txt);
+                                });
+                                $('#openButton').on('vclick',function(){
+                                window.open('index.html', 'Storage');
+                                });
+                                });
+                                </script>
+                                </body>
+

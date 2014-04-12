@@ -1,0 +1,38 @@
+doctype html
+html(lang='ja')
+    head
+        meta(charset='utf-8')
+        title
+        link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+        script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+        script
+            :js
+                (function(){
+                    //音量を調整する
+                    $(document).on('pageshow','#index',function(){
+                        var audioObj = $('#myAudio').get(0);
+                        $('#setVolume').on('click',function(){
+                            var n = parseFloat($('#vol').val());
+                            audioObj.volume = n;
+                        });
+                        $('#setMute').on('click',function(){
+                            audioObj.muted = !audioObj.muted;
+                        });
+                    });
+                })()
+    body
+        #index(data-role='page')
+            div(data-role='header')
+                h1 音量を調整する
+            div(data-role='content')
+                audio#myAudio(width='192', height='48', controls='controls')
+                    source(src='../audio1/sample.mp3')
+                    source(src='../audio1/sample.ogg')
+                    p お使いのブラウザではオーディオを再生できません。
+                form
+                    input#vol(type='text', value='0.5')
+                    input#setVolume(type='button', value='音量を設定')
+                    input#setMute(type='button', value='ミュート')
+            div(data-role='footer', data-position='fixed')
+                h1 フッター

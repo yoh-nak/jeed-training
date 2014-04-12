@@ -1,0 +1,40 @@
+doctype html
+html(lang='ja')
+    head
+        meta(charset='utf-8')
+        title
+        link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+        script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+        script
+            :js
+                (function(){
+                    //オーディオの情報（種類や長さ）を取得する
+                    $(document).on('pageshow','#index',function(){
+                        var audioObj = $('#myAudio').get(0);
+                        $('#getInfo').on('vclick',function(){
+                            var txt = '<li>映像ソース：'+audioObj.currentSrc+'</li>';
+                            txt += '<li>映像の長さ：'+audioObj.duration+'秒</li>';
+                            txt += '<li>再生速度：'+audioObj.playbackRate+'倍</li>';
+                            txt += '<li>一時停止中：'+audioObj.paused+'</li>';
+                            txt += '<li>通信状態：'+audioObj.networkState+'</li>';
+                            txt += '<li>シーク状態：'+audioObj.seeking+'</li>';
+                            $('#result').html(txt).listview('refresh');
+                        });
+                    });
+                })()
+    body
+        #index(data-role='page')
+            div(data-role='header')
+                h1 オーディオの情報（種類や長さ）を取得する
+            div(data-role='content')
+                audio#myAudio(width='192', height='48', controls='controls')
+                    source(src='../audio1/sample.mp3')
+                    source(src='../audio1/sample.ogg')
+                    p お使いのブラウザではオーディオを再生できません。
+                form
+                    input#getInfo(type='button', value='情報を取得')
+                br
+                ul#result(data-role='listview')
+            div(data-role='footer', data-position='fixed')
+                h1 フッター

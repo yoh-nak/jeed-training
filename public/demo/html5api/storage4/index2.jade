@@ -1,0 +1,28 @@
+doctype html
+html(lang='ja')
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1.0,user-scalable=no')
+    title
+    link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+    script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+    script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+    script
+        :js
+            (function(){
+                // 全てのデータとキーをローカルストレージから読み出す
+                $(document).on('pageshow','#index',function(){
+                    for(var i = 0; i < window.localStorage.length; i++){
+                        var aKey = window.localStorage.key(i);
+                        var data = window.localStorage.getItem(aKey);
+                        $('#result').append(aKey + ' = ' + data + '<br>');
+                    }
+                });
+            })()
+    body
+        #index(data-role='page')
+            div(data-role='header')
+                h1 全てのデータをローカルストレージから読み出す
+            div(data-role='content')
+                #result
+            div(data-role='footer', data-position='fixed')
+                h1 フッター

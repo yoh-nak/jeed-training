@@ -1,0 +1,40 @@
+doctype html
+html(lang='ja')
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1.0,user-scalable=no')
+    title 1つのキーに保存してある複数のデータを読み出す
+    link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+    script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+    script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+    script
+        :js
+            (function(){
+                // 1つのキーに保存してある複数のデータをローカルストレージから読み出す
+                $(document).on('pageshow','#index',function(){
+                    $('#loadButton').on('vclick',function(){
+                        var data = window.localStorage.getItem('textData2');
+                        if (!data){
+                            alert('データは保存されていません');
+                            return;
+                        }
+                        data = JSON.parse(data);
+                        var name = data.user;
+                        var txt = data.comment;
+                        $('#userName').val(name);
+                        $('#userComment').val(txt);
+                    });
+                });
+            })()
+    body
+        #index(data-role='page')
+            div(data-role='header')
+                h1 1つのキーに保存してある複数のデータを読み出す
+            div(data-role='content')
+                form
+                    input#userName(type='text', name='userName', value='')
+                    br
+                    textarea#userComment(cols='20', rows='5')
+                    br
+                    input#loadButton(type='button', value='読み出し')
+            div(data-role='footer', data-position='fixed')
+                h1 フッター

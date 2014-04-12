@@ -1,0 +1,30 @@
+doctype html
+html(lang='ja')
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1.0,user-scalable=no')
+    title
+    link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+    script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+    script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+    script
+        :js
+            (function(){
+                // テキストエリアの内容をローカルストレージに保存する
+                $(document).on('pageshow','#index',function(){
+                    $('#saveButton').on('vclick',function(){
+                    var txt = $('#userComment').val();
+                    window.localStorage.setItem('textData', txt);
+                    });
+                });
+            })()
+    body
+        #index(data-role='page')
+            div(data-role='header')
+                h1 テキストエリアの内容をローカルストレージに保存
+            div(data-role='content')
+                form
+                    textarea#userComment(cols='20', rows='5') 感想をお願いします
+                    br
+                    input#saveButton(type='button', value='保存')
+            div(data-role='footer', data-position='fixed')
+                h1 フッター

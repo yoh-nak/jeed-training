@@ -23,50 +23,43 @@ block content
                                 |  デモ
                         pre(class='prettyprint linenums:1')
                             :code
-                                <!DOCTYPE html>
-                                <html lang="ja">
-                                <meta charset="utf-8">
-                                <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"> 
-                                <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
-                                <title>1つのキーに保存してある複数のデータを読み出す</title>
-                                <link rel="stylesheet" href="css/main.css" type="text/css" media="all">
-                                <script type="text/javascript" src="js/sample.js"></script>
-                                </head>
-                                <body>
-                                <div id="index" data-role="page">
-                                <div data-role="header">
-                                <h1>1つのキーに保存してある複数のデータを読み出す</h1>
-                                </div>
-                                <div data-role="content">
-                                <form>
-                                <input type="text" name="userName" id="userName" value=""><br>
-                                <textarea cols="20" rows="5" id="userComment"></textarea><br>
-                                <input type="button" value="読み出し" id="loadButton">
-                                </form>
-                                </div>
-                                <div data-role="footer" data-position="fixed">
-                                <h4>Copyright © ナカノヨウスケ</h4>
-                                </div>
-                                </div>
-                                <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-                                <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
-                                <script>
-                                // 1つのキーに保存してある複数のデータをローカルストレージから読み出す
-                                $(document).on('pageshow','#index',function(){
-                                $('#loadButton').on('vclick',function(){
-                                var data = window.localStorage.getItem('textData2');
-                                if (!data){
-                                alert('データは保存されていません');
-                                return;
-                                }
-                                data = JSON.parse(data);
-                                var name = data.user;
-                                var txt = data.comment;
-                                $('#userName').val(name);
-                                $('#userComment').val(txt);
-                                });
-                                });
-                                </script>
-                                </body>
-                                </html>
-
+                                doctype html
+                                html(lang='ja')
+                                    meta(charset='utf-8')
+                                    meta(name='viewport', content='width=device-width,initial-scale=1.0,user-scalable=no')
+                                    title 1つのキーに保存してある複数のデータを読み出す
+                                    link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+                                    script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                    script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+                                    script
+                                        :js
+                                            (function(){
+                                                // 1つのキーに保存してある複数のデータをローカルストレージから読み出す
+                                                $(document).on('pageshow','#index',function(){
+                                                    $('#loadButton').on('vclick',function(){
+                                                        var data = window.localStorage.getItem('textData2');
+                                                        if (!data){
+                                                            alert('データは保存されていません');
+                                                            return;
+                                                        }
+                                                        data = JSON.parse(data);
+                                                        var name = data.user;
+                                                        var txt = data.comment;
+                                                        $('#userName').val(name);
+                                                        $('#userComment').val(txt);
+                                                    });
+                                                });
+                                            })()
+                                    body
+                                        #index(data-role='page')
+                                            div(data-role='header')
+                                                h1 1つのキーに保存してある複数のデータを読み出す
+                                            div(data-role='content')
+                                                form
+                                                    input#userName(type='text', name='userName', value='')
+                                                    br
+                                                    textarea#userComment(cols='20', rows='5')
+                                                    br
+                                                    input#loadButton(type='button', value='読み出し')
+                                            div(data-role='footer', data-position='fixed')
+                                                h1 フッター

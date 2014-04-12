@@ -1,0 +1,83 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading ドラッグ可能にする
+                    .panel-body
+                        p
+                            a.btn.btn-default(href='../demo/html5api/dragdrop1/index.html', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                |  デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <!DOCTYPE html>
+                                <html lang="ja">
+                                <meta charset="utf-8">
+                                <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"> 
+                                <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+                                <style>
+                                #myArea{
+                                width: 320px;
+                                font-size: 10pt;
+                                background-color: yellow;
+                                }
+                                </style>
+                                </head>
+                                <body>
+                                <div id="index" data-role="page">
+                                <div data-role="header">
+                                <h1>ドラッグ可能にする</h1>
+                                </div>
+                                <div data-role="content">
+                                <img src="sample1.jpg" id="myImage" draggable>
+                                <img src="sample2.jpg" id="myImage2"><br>
+                                <div id="myArea" draggable="true">ここもドラッグすることができます。</div>
+                                <div id="stat"></div>
+                                </div>
+                                <div data-role="footer" data-position="fixed">
+                                <h4>Copyright © ナカノヨウスケ</h4>
+                                </div>
+                                </div>
+                                <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+                                <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+                                <script>
+                                // ドラッグ可能にする
+                                $(document).on('pageshow','#index',function(){
+                                //var ele = document.getElementById("stat");
+                                // 画像をドラッグ
+                                var dragImage = document.getElementById('myImage');
+                                dragImage.addEventListener('dragstart', function(e){
+                                e.stopPropagation();
+                                $('#stat').html('Drag Start');
+                                }, true);
+                                dragImage.addEventListener('dragend', function(e){
+                                $('#stat').html('Drag End');
+                                }, true);
+                                // div要素をドラッグ
+                                var yellowBox = document.getElementById('myArea');
+                                yellowBox.addEventListener('dragstart', function(e){
+                                e.stopPropagation();
+                                $('#stat').html('Drag Start (div)');
+                                }, true);
+                                yellowBox.addEventListener('dragend', function(e){
+                                e.stopPropagation();
+                                $('#stat').html('Drag End (div)');
+                                }, true);
+                                });
+                                </script>
+                                </body>
+                                </html>
+

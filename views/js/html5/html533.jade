@@ -1,0 +1,73 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading バイナリファイルの内容を読み出す
+                    .panel-body
+                        p
+                            a.btn.btn-default(href='../demo/html5api/file-4/index.html', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                |  デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <!DOCTYPE html>
+                                <html lang="ja">
+                                <head>
+                                <meta charset="utf-8">
+                                <title></title>
+                                <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+                                <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+                                <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+                                <script>
+                                // バイナリファイルの内容を読み出す
+                                $(document).on('pageshow','#index',function(){
+                                $('#readButton').on('vclick',function(){
+                                var fileList = document.getElementById('selectFiles').files;
+                                for(var i = 0; i < fileList.length; i++){
+                                var reader = new FileReader();
+                                reader.onload = function(evt){
+                                var binaryData = [];
+                                for(var n = 0; n < 8; n++){ // read 8 bytes
+                                binaryData.push(evt.target.result.charCodeAt(n));
+                                }
+                                $('#result').append(binaryData.toString() + '<hr>');
+                                }
+                                reader.readAsBinaryString(fileList[i]);
+                                }
+                                });
+                                });
+                                </script>
+                                </head>
+                                <body>
+                                <div id="index" data-role="page">
+                                <div data-role="header">
+                                <h1>バイナリファイルの内容を読み出す</h1>
+                                </div>
+                                <div data-role="content">
+                                <form>
+                                <input type="file" id="selectFiles" multiple>
+                                <input type="button" value="バイナリファイルの内容を読み出す" id="readButton">
+                                </form>
+                                <div id="result"></div>
+                                </div>
+                                <div data-role="footer" data-position="fixed">
+                                <h4>Copyright © ナカノヨウスケ</h4>
+                                </div>
+                                </div>
+                                </body>
+                                </html>
+
+

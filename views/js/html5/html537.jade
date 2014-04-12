@@ -1,0 +1,95 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading ドロップ処理を行う
+                    .panel-body
+                        p
+                            a.btn.btn-default(href='../demo/html5api/dragdrop2/index.html', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                |  デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                <!DOCTYPE html>
+                                <html lang="ja">
+                                <meta charset="utf-8">
+                                <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"> 
+                                <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+                                <style>
+                                #dropBox {
+                                width: 480px; 
+                                height: 200px;
+                                background-color: #fea;
+                                word-wrap: break-word;
+                                }
+                                </style>
+                                </head>
+                                <body>
+                                <div id="index" data-role="page">
+                                <div data-role="header">
+                                <h1>ドロップ処理を行う</h1>
+                                </div>
+                                <div data-role="content">
+                                <img src="sample1.jpg" class="dragImage" draggable>
+                                <img src="sample2.jpg" class="dragImage" draggable>
+                                <img src="sample3.jpg" class="dragImage" draggable>
+                                <div id="dropBox">ここに画像をドロップしてください</div>
+                                <div id="stat"></div>
+                                </div>
+                                <div data-role="footer" data-position="fixed">
+                                <h4>Copyright © ナカノヨウスケ</h4>
+                                </div>
+                                </div>
+                                <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+                                <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+                                <script>
+                                // ドロップ処理を行う
+                                $(document).on('pageshow','#index',function(){
+                                //var ele = document.getElementById('stat');
+                                var dropArea = document.getElementById('dropBox');
+                                var dragItemList = document.querySelectorAll('.dragImage');
+                                for(var i = 0; i < dragItemList.length; i++){
+                                dragItemList[i].addEventListener('dragstart', function(e){
+                                // ドラッグする画像のtitle属性をドロップ側に渡す
+                                e.dataTransfer.setData('url', e.target.src);
+                                e.stopPropagation();
+                                $('#stat').html('Drag Start');
+                                }, true);
+                                dragItemList[i].addEventListener('dragend', function(e){
+                                $('#stat').html('Drag End');
+                                }, true);
+                                }
+                                // ドロップ領域に入った場合の処理
+                                dropArea.addEventListener('dragover', function(e){
+                                e.preventDefault();
+                                $('#stat').html('ドロップ領域に入っています');
+                                }, true);
+                                // ドロップ領域から離れた場合の処理
+                                dropArea.addEventListener('dragleave', function(e){
+                                e.preventDefault();
+                                $('#stat').html('ドロップ領域から外れました');
+                                }, true);
+                                // ドロップされた場合の処理
+                                dropArea.addEventListener('drop', function(e){
+                                e.preventDefault();
+                                $('#stat').html('ドロップしました');
+                                $('#dropBox').html(e.dataTransfer.getData('url'));
+                                }, true);
+                                });
+                                </script>
+                                </body>
+                                </html>
+

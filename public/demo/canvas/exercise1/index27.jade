@@ -1,32 +1,32 @@
-!!!
+doctype html
 html(lang='ja')
-	head
-		meta(charset='utf-8')
-		meta(name='viewport',content='width=device-width, initial-scale=1.0')
-		title
-		style.
-			*{
-				margin:0;
-				padding:0;
-			}
-			html,body{
-				height:100%;
-				width:100%;
-			}
-			canvas{
-				display:block;
-			}
-	body
-		canvas#myCanvas(width='500',height='500')
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script.
-			$(function(){
-				var canvas = $('#myCanvas');
-				var context = canvas.get(0).getContext('2d');
+    head
+        meta(charset='utf-8')
+        meta(name='viewport',content='width=device-width, initial-scale=1.0')
+        title
+        style
+            :stylus
+                *
+                    margin 0
+                    padding 0
+                html,body
+                    height 100%
+                    width 100%
+                canvas
+                    display block
+    body
+        canvas#myCanvas(width='500',height='500')
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script
+            :js
+                (function(){
+                    $(function(){
+                        var canvas = $('#myCanvas');
+                        var context = canvas.get(0).getContext('2d');
 
-				canvas.attr('width', $(window).get(0).innerWidth);
-				canvas.attr('height', $(window).get(0).innerHeight);
+                        canvas.attr('width', $(window).get(0).innerWidth);
+                        canvas.attr('height', $(window).get(0).innerHeight);
 
-				context.fillRect(0, 0, canvas.width(), canvas.height());
-			});
-
+                        context.fillRect(0, 0, canvas.width(), canvas.height());
+                    });
+                })()

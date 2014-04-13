@@ -1,0 +1,63 @@
+doctype html
+html(lang='ja')
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1.0,user-scalable=no')
+    link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+    script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+    script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+    script(src='sound.js')
+    //SoundClassの読み込み
+    script(src='main.js')
+    //jQueryMobileの処理
+    head
+    body
+        #index(data-role='page')
+            div(data-role='header')
+                h1 SCENE 1
+                a.ui-btn-right(href='#second', data-transition='slide') NEXT
+            div(data-role='content')
+                .ui-grid-a
+                    .ui-block-a(style='width: 70%;')
+                        form
+                            div(data-role='controlgroup', data-type='horizontal', style='margin-top: 0; margin-bottom: 0;')
+                                legend SE:
+                                input.se.se1(type='button', value='SE ①')
+                                input.se.se2(type='button', value='SE ②')
+                                input.se.se3(type='button', value='SE ③')
+                    .ui-block-b(style='width: 30%;')
+                        form
+                            label(for='bgm1') BGM:
+                            select#bgm1(name='bgm1', data-role='slider')
+                                option(value='off') Off
+                                option(value='on', selected='selected') On
+                p
+                    form
+                        label(for='volume1') Volume:
+                        input#volume1.volume(type='range', name='volume1', data-highlight='true', min='0.0', max='1.0', value='0.5', step='0.1')
+            div(data-role='footer', data-position='fixed')
+                h1 フッター
+        #second(data-role='page')
+            div(data-role='header')
+                a(href='#index', data-transition='slide', data-direction='reverse') BACK
+                h1 SCENE 2
+            div(data-role='content')
+                .ui-grid-a
+                    .ui-block-a(style='width: 70%;')
+                        form
+                            div(data-role='controlgroup', data-type='horizontal', style='margin-top: 0; margin-bottom: 0;')
+                                legend SE:
+                                input.se.se1(type='button', value='SE ①')
+                                input.se.se2(type='button', value='SE ②')
+                                input.se.se3(type='button', value='SE ③')
+                    .ui-block-b(style='width: 30%;')
+                        form
+                            label(for='bgm2') BGM:
+                            select#bgm2(name='bgm2', data-role='slider')
+                                option(value='off') Off
+                                option(value='on', selected='selected') On
+                p
+                    form
+                        label(for='volume2') Volume:
+                        input#volume2.volume(type='range', name='volume2', data-highlight='true', min='0.0', max='1.0', value='0.5', step='0.1')
+            div(data-role='footer', data-position='fixed')
+                h1 フッター

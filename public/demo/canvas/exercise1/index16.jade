@@ -1,27 +1,29 @@
-!!!
+doctype html
 html(lang='ja')
-	head
-		meta(charset='utf-8')
-		meta(name='viewport',content='width=device-width, initial-scale=1.0')
-		title
-	body
-		canvas#myCanvas(width='500',height='500')
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script.
-			$(function(){
-				var canvas = $('#myCanvas');
-				var context = canvas.get(0).getContext('2d');
+    head
+        meta(charset='utf-8')
+        meta(name='viewport',content='width=device-width, initial-scale=1.0')
+        title
+    body
+        canvas#myCanvas(width='500',height='500')
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script
+            :js
+                (function(){
+                    $(function(){
+                        var canvas = $('#myCanvas').get(0);
+                        var context = canvas.getContext('2d');
 
-				context.lineWidth = 5; //線を太くする
+                        context.lineWidth = 5; //線を太くする
 
-				context.strokeStyle = 'rgb(255, 0, 0)';
-				//context.strokeRect(x, y, width, height);
-				context.strokeRect(40, 40, 100, 100); //赤い正方形
-				context.strokeRect(180, 40, 100, 100); //赤い正方形
+                        context.strokeStyle = 'rgb(255, 0, 0)';
+                        //context.strokeRect(x, y, width, height);
+                        context.strokeRect(40, 40, 100, 100); //赤い正方形
+                        context.strokeRect(180, 40, 100, 100); //赤い正方形
 
-				context.lineWidth = 20; //線を太くする
+                        context.lineWidth = 20; //線を太くする
 
-				context.strokeStyle = 'rgb(0, 0, 0)';
-				context.strokeRect(320, 40, 100, 100); //黒い正方形
-			});
-
+                        context.strokeStyle = 'rgb(0, 0, 0)';
+                        context.strokeRect(320, 40, 100, 100); //黒い正方形
+                    });
+                })()

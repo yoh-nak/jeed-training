@@ -1,0 +1,39 @@
+doctype html
+html(lang='ja')
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1.0,user-scalable=no')
+    title
+    link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+    script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+    script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+    script
+        :js
+            (function(){
+                // ローカルストレージ内のデータを削除する
+                $(document).on('pageshow','#index',function(){
+                    $('#deleteButton').on('vclick',function(){
+                        var delKeyName = $('#keyName').val();
+                        var data = window.localStorage.removeItem(delKeyName);
+                        $('#stat').html('削除しました');
+                    });
+                    $('#deleteAllButton').on('vclick',function(){
+                        window.localStorage.clear();
+                        $('#stat').html('全て削除しました');
+                    });
+                });
+            })()
+    body
+        #index(data-role='page')
+            div(data-role='header')
+                h1 ローカルストレージのデータを削除
+            div(data-role='content')
+                form
+                    | 削除キー名：
+                    input#keyName(type='text', value='commentData')
+                    input#deleteButton(type='button', value='削除')
+                    br
+                    input#deleteAllButton(type='button', value='全て削除')
+                    br
+                #stat
+            div(data-role='footer', data-position='fixed')
+                h1 フッター

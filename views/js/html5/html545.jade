@@ -15,54 +15,54 @@ block content
                 include left
             .col-sm-9
                 .panel.panel-primary
-                    .panel-heading セッションストレージを利用し異なるウィンドウでデータをやりとりする
+                    .panel-heading ローカルストレージを利用し異なるウィンドウでデータをやりとりする
                     .panel-body
+                        p <mark>※ セッションストレージは別ウィンドウから読み出せなくなりました。</mark>
                         p
                             a.btn.btn-default(href='../demo/html5api/storage7/index.html', target='_blank')
                                 i.glyphicon.glyphicon-play
                                 |  デモ
                         pre(class='prettyprint linenums:1')
                             :code
-                                <!DOCTYPE html>
-                                <html lang="ja">
-                                <meta charset="utf-8">
-                                <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"> 
-                                <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
-                                </head>
-                                <body>
-                                <div id="index" data-role="page">
-                                <div data-role="header">
-                                <h1>セッションストレージを利用し異なるウィンドウでデータをやりとりする</h1>
-                                </div>
-                                <div data-role="content">
-                                <form>
-                                <textarea cols="20" rows="5" id="userComment">感想をお願いします</textarea><br>
-                                <input type="button" value="保存" id="saveButton"><br>
-                                <input type="button" value="読み出し" id="readButton"><br>
-                                <input type="button" value="新規にウィンドウを開く" id="openButton"><br>
-                                </form>
-                                </div>
-                                <div data-role="footer" data-position="fixed">
-                                <h4>Copyright © ナカノヨウスケ</h4>
-                                </div>
-                                </div>
-                                <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-                                <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
-                                <script>
-                                // セッションストレージを利用し異なるウィンドウでデータをやりとりする
-                                $(document).on('pageshow','#index',function(){
-                                $('#saveButton').on('vclick',function(){
-                                var txt = $('#userComment').val();
-                                window.sessionStorage.setItem('textData', txt);
-                                });
-                                $('#readButton').on('vclick',function(){
-                                var txt = window.sessionStorage.getItem('textData');
-                                $('#userComment').val(txt);
-                                });
-                                $('#openButton').on('vclick',function(){
-                                window.open('index.html', 'Storage');
-                                });
-                                });
-                                </script>
-                                </body>
-
+                                doctype html
+                                html(lang='ja')
+                                    meta(charset='utf-8')
+                                    meta(name='viewport', content='width=device-width,initial-scale=1.0,user-scalable=no')
+                                    title
+                                    link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+                                    script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                    script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+                                    script
+                                        :js
+                                            (function(){
+                                                //ローカルストレージを利用し異なるウィンドウでデータをやりとりする
+                                                $(document).on('pageshow','#index',function(){
+                                                    $('#saveButton').on('vclick',function(){
+                                                        var txt = $('#userComment').val();
+                                                        window.localStorage.setItem('textData', txt);
+                                                    });
+                                                    $('#readButton').on('vclick',function(){
+                                                        var txt = window.localStorage.getItem('textData');
+                                                        $('#userComment').val(txt);
+                                                    });
+                                                    $('#openButton').on('vclick',function(){
+                                                        window.open('index.html', 'Storage');
+                                                    });
+                                                });
+                                            })()
+                                    body
+                                        #index(data-role='page')
+                                            div(data-role='header')
+                                                h1 ローカルストレージを利用し異なるウィンドウでデータをやりとりする
+                                            div(data-role='content')
+                                                form
+                                                    textarea#userComment(cols='20', rows='5') 感想をお願いします
+                                                    br
+                                                    input#saveButton(type='button', value='保存')
+                                                    br
+                                                    input#readButton(type='button', value='読み出し')
+                                                    br
+                                                    input#openButton(type='button', value='新規にウィンドウを開く')
+                                                    br
+                                            div(data-role='footer', data-position='fixed')
+                                                h1 フッター

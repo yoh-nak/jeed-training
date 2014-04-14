@@ -1,73 +1,74 @@
-include ../../head.jade
-    body
-        include navbar.jade
-        .container
-            .row
-                .col-sm-3
-                  include bowling.jade
-                .col-sm-9
-                    .panel.panel-primary
-                        .panel-heading コア機能を準備する
-                        .panel-body
-                            h4 ゲームの概要
-                            p スペースボーリングゲームは、丸いフィールド（訳注：コードのなかではplatformと呼ばれています）に静止状態で配置された一連のアステロイドから構成されます。プレイヤーは、この大きなアステロイドをほかの小さなアステロイド群に向かって投げ、できるだけ多くのアステロイドをフィールドから弾き出します。すべてのアステロイドをフィールドから弾き出せばゲームに勝つことができます。スコアは、ゲームに勝つまでに何回ボールを投げたかによって決まります。昔から親しまれているボウリングやビー玉遊びがベースになっているからだと思いますが、ばかばかしく単純なわりには病みつきになります。
-                            p
-                                a.btn.btn-default(href='../demo/canvas/exercise6/index.html',target='_blank')
-                                    i.glyphicon.glyphicon-play
-                                    | デモ
-                            h4 要件
-                            p このゲームを作るためには、この本全体で学んできたさまざまなスキルが必要です。JavaScript、キャンバスへの描画、アニメーション、物理について学んだすべてのことが使われます。また、ユーザーインターフェースの構築とかキャンバスに描かれるオブジェクトのマウス入力による制御といった、まだ詳しく説明していないテクニックも必要になります。今までに学んだすべてのことを組み合わせたときに得られる結果がいかに強力なものかが、明らかになるはずです。
-                            p 早く作ってみたくてうずうずしているでしょう。早速始めます。
-                            h4 コア機能を準備する
-                            p 面白い部分を作るためには、しっかりとした基礎を作っておく必要があります。スペースボウリングゲームの場合、基礎とはみなさんがあとで高度な機能を支える基本的なHTML、CSS、JavaScriptのコードのことです。
-                            h4 HTMLをマークアップする
-                            p ブラウザで動くゲームがいいのは、ウェブサイト構築のために一般的に使われているテクノロジーを使えるところです。ゲームのユーザーインタフェースは、HTMLでつくることができます。スタイルを指定するCSSがまだないので見栄えはぱっとしませんが、今大事なのはコンテンツの構造自体です。
-                            p ゲームのために新しいディレクトリを作り、index.htmlという名前のフィールドに次のコードを入力しましょう。
-                            p
-                                a.btn.btn-default(href='../demo/canvas/exercise6/index0.html',target='_blank')
-                                    i.glyphicon.glyphicon-play
-                                    | デモ
-                            pre.prettyprint.linenums
-                              | &lt;!DOCTYPE html&gt;
-                              | &lt;html&gt;
-                              | &lt;head&gt;
-                              | &lt;title&gt;Space Bowling&lt;/title&gt;
-                              | &lt;meta charset="utf-8"&gt;
-                              | &lt;link rel="stylesheet" href="#"&gt;
-                              | &lt;/head&gt;
-                              | &lt;body&gt;
-                              |   &lt;div id="game"&gt;
-                              |     &lt;div id="gameUI"&gt;
-                              |       &lt;div id="gameIntro"&gt;
-                              |         &lt;h1&gt;Space bowling&lt;/h1&gt;
-                              |         &lt;p&gt;This is an awesome game.&lt;/p&gt;
-                              |         &lt;p&gt;&lt;a id="gamePlay" class="button" href=""&gt;Play&lt;/a&gt;&lt;/p&gt;
-                              |       &lt;/div&gt;
-                              |       &lt;div id="gameStats"&gt;
-                              |         &lt;p&gt;Asteroids: &lt;span id="gameRemaining"&gt;&lt;/span&gt;&lt;/p&gt;
-                              |         &lt;p&gt;Clicks: &lt;span class="gameScore"&gt;&lt;/span&gt;&lt;/p&gt;
-                              |         &lt;p&gt;&lt;a class="gameReset" href=""&gt;Reset&lt;/a&gt;&lt;/p&gt;
-                              |       &lt;/div&gt;
-                              |       &lt;div id="gameComplete"&gt;
-                              |         &lt;h1&gt;You win!&lt;/h1&gt;
-                              |         &lt;p&gt;Congratulations, you completed the game in &lt;span class="gameScore"&gt;&lt;/span&gt; clicks.&lt;/p&gt;
-                              |         &lt;p&gt;&lt;a class="gameReset button" href=""&gt;Play again&lt;/a&gt;&lt;/p&gt;
-                              |       &lt;/div&gt;
-                              |     &lt;/div&gt;
-                              |     &lt;canvas id="gameCanvas" width="350" height="600"&gt;&lt;/canvas&gt;
-                              |   &lt;/div&gt;
-                              |   &lt;script src="http://code.jquery.com/jquery-1.11.0.min.js"&gt;&lt;/script&gt;
-                              |   &lt;script src="index1.js"&gt;&lt;/script&gt;
-                              | &lt;/body&gt;
-                              | &lt;/html&gt;
-                            p このページは比較的単純なHTMLなので、コードを説明するためにあまり時間を使うつもりはありませんが、ここはゲームをマークアップするために必要なすべての内容が含まれています。
-                            p head要素のなかには、CSSとJavaScriptをインポートするためのコードが含まれています。そして、body要素には、ゲームのUIとキャンバスを記述するためのすべてのコードが含まれています。
-                            p ゲームのUIは、JavaScriptを使った操作や表示／非表示の切り替えがしやすくなるように、別個の要素に分割されています。たとえば、UIには、導入画面、ゲーム画面（訳注：コードの中ではgameStats、すなわちゲーム統計画面となっていますが、ゲーム中に表示される画面なので、ゲーム画面と呼ぶことにします）、完了画面の3つのメイン領域があります。完成したゲームでは、これらのなかのどれか1つだけしか同時に表示されません。最初に導入画面、プレイ中はゲームの画面、ゲーム終了時に完了画面が表示されます。
-                            p 現状のゲームは、まったくぱっとしません。現時点で表示されているものは、あとで美しいボタンに変える予定のリンクやプレイ中のゲームについての統計情報を表示するスペースを確保するためのテキストなどを含む、裸のUIコンテンツだけです。ページ上にはcanvas要素が確かにありますが、現状では一見したところわかりません。しかし、よく見ると右側にスクロールバーが表示されていることがわかります。canvas要素が実際にあることは、ここでわかります。
-        .footer=title
-        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-        script(src='js/google-code-prettify/prettify.js')
-        script.
-            prettyPrint();
-        script(src='js/bootstrap.min.js')
-        script(src='coffee/list-counter.js')
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading コア機能を準備する
+                    .panel-body
+                        h4 ゲームの概要
+                        p スペースボーリングゲームは、丸いフィールド（訳注：コードのなかではplatformと呼ばれています）に静止状態で配置された一連のアステロイドから構成されます。プレイヤーは、この大きなアステロイドをほかの小さなアステロイド群に向かって投げ、できるだけ多くのアステロイドをフィールドから弾き出します。すべてのアステロイドをフィールドから弾き出せばゲームに勝つことができます。スコアは、ゲームに勝つまでに何回ボールを投げたかによって決まります。昔から親しまれているボウリングやビー玉遊びがベースになっているからだと思いますが、ばかばかしく単純なわりには病みつきになります。
+                        p
+                            a.btn.btn-default(href='../demo/canvas/exercise6/index.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        h4 要件
+                        p このゲームを作るためには、この本全体で学んできたさまざまなスキルが必要です。JavaScript、キャンバスへの描画、アニメーション、物理について学んだすべてのことが使われます。また、ユーザーインターフェースの構築とかキャンバスに描かれるオブジェクトのマウス入力による制御といった、まだ詳しく説明していないテクニックも必要になります。今までに学んだすべてのことを組み合わせたときに得られる結果がいかに強力なものかが、明らかになるはずです。
+                        p 早く作ってみたくてうずうずしているでしょう。早速始めます。
+                        h4 コア機能を準備する
+                        p 面白い部分を作るためには、しっかりとした基礎を作っておく必要があります。スペースボウリングゲームの場合、基礎とはみなさんがあとで高度な機能を支える基本的なHTML、CSS、JavaScriptのコードのことです。
+                        h4 HTMLをマークアップする
+                        p ブラウザで動くゲームがいいのは、ウェブサイト構築のために一般的に使われているテクノロジーを使えるところです。ゲームのユーザーインタフェースは、HTMLでつくることができます。スタイルを指定するCSSがまだないので見栄えはぱっとしませんが、今大事なのはコンテンツの構造自体です。
+                        p ゲームのために新しいディレクトリを作り、index.htmlという名前のフィールドに次のコードを入力しましょう。
+                        p
+                            a.btn.btn-default(href='../demo/canvas/exercise6/index0.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre.prettyprint.linenums
+                          | &lt;!DOCTYPE html&gt;
+                          | &lt;html&gt;
+                          | &lt;head&gt;
+                          | &lt;title&gt;Space Bowling&lt;/title&gt;
+                          | &lt;meta charset="utf-8"&gt;
+                          | &lt;link rel="stylesheet" href="#"&gt;
+                          | &lt;/head&gt;
+                          | &lt;body&gt;
+                          |   &lt;div id="game"&gt;
+                          |     &lt;div id="gameUI"&gt;
+                          |       &lt;div id="gameIntro"&gt;
+                          |         &lt;h1&gt;Space bowling&lt;/h1&gt;
+                          |         &lt;p&gt;This is an awesome game.&lt;/p&gt;
+                          |         &lt;p&gt;&lt;a id="gamePlay" class="button" href=""&gt;Play&lt;/a&gt;&lt;/p&gt;
+                          |       &lt;/div&gt;
+                          |       &lt;div id="gameStats"&gt;
+                          |         &lt;p&gt;Asteroids: &lt;span id="gameRemaining"&gt;&lt;/span&gt;&lt;/p&gt;
+                          |         &lt;p&gt;Clicks: &lt;span class="gameScore"&gt;&lt;/span&gt;&lt;/p&gt;
+                          |         &lt;p&gt;&lt;a class="gameReset" href=""&gt;Reset&lt;/a&gt;&lt;/p&gt;
+                          |       &lt;/div&gt;
+                          |       &lt;div id="gameComplete"&gt;
+                          |         &lt;h1&gt;You win!&lt;/h1&gt;
+                          |         &lt;p&gt;Congratulations, you completed the game in &lt;span class="gameScore"&gt;&lt;/span&gt; clicks.&lt;/p&gt;
+                          |         &lt;p&gt;&lt;a class="gameReset button" href=""&gt;Play again&lt;/a&gt;&lt;/p&gt;
+                          |       &lt;/div&gt;
+                          |     &lt;/div&gt;
+                          |     &lt;canvas id="gameCanvas" width="350" height="600"&gt;&lt;/canvas&gt;
+                          |   &lt;/div&gt;
+                          |   &lt;script src="http://code.jquery.com/jquery-1.11.0.min.js"&gt;&lt;/script&gt;
+                          |   &lt;script src="index1.js"&gt;&lt;/script&gt;
+                          | &lt;/body&gt;
+                          | &lt;/html&gt;
+                        p このページは比較的単純なHTMLなので、コードを説明するためにあまり時間を使うつもりはありませんが、ここはゲームをマークアップするために必要なすべての内容が含まれています。
+                        p head要素のなかには、CSSとJavaScriptをインポートするためのコードが含まれています。そして、body要素には、ゲームのUIとキャンバスを記述するためのすべてのコードが含まれています。
+                        p ゲームのUIは、JavaScriptを使った操作や表示／非表示の切り替えがしやすくなるように、別個の要素に分割されています。たとえば、UIには、導入画面、ゲーム画面（訳注：コードの中ではgameStats、すなわちゲーム統計画面となっていますが、ゲーム中に表示される画面なので、ゲーム画面と呼ぶことにします）、完了画面の3つのメイン領域があります。完成したゲームでは、これらのなかのどれか1つだけしか同時に表示されません。最初に導入画面、プレイ中はゲームの画面、ゲーム終了時に完了画面が表示されます。
+                        p 現状のゲームは、まったくぱっとしません。現時点で表示されているものは、あとで美しいボタンに変える予定のリンクやプレイ中のゲームについての統計情報を表示するスペースを確保するためのテキストなどを含む、裸のUIコンテンツだけです。ページ上にはcanvas要素が確かにありますが、現状では一見したところわかりません。しかし、よく見ると右側にスクロールバーが表示されていることがわかります。canvas要素が実際にあることは、ここでわかります。

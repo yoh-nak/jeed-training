@@ -1,67 +1,68 @@
-include ../../head.jade
-    body
-        include navbar.jade
-        .container
-            .row
-                .col-sm-3
-                    include bowling.jade
-                .col-sm-9
-                    .panel.panel-primary
-                        .panel-heading JavaScriptの準備をする
-                        .panel-body
-                            h4 JavaScriptの準備をする
-                            p ゲームの論理を考える前に、JavaScriptのコア機能の準備をする必要があります。
-                            p game.jsという新しいドキュメントを作り、HTML、CSSファイルと同じディレクトリに格納します。そして、次のコードを書き込みます。
-                            p
-                                a.btn.btn-default(href='../demo/canvas/exercise6/index2.html',target='_blank')
-                                    i.glyphicon.glyphicon-play
-                                    | デモ
-                            pre.prettyprint.linenums
-                                | $(function() {
-                                |   
-                                |   var canvas = $('#gameCanvas');
-                                |   var context = canvas.get(0).getContext('2d');
-                                |   
-                                |   //キャンバスのサイズ
-                                |   var canvasWidth = canvas.width();
-                                |   var canvasHeight = canvas.height();
-                                |   
-                                |   //ゲームの設定
-                                |   var playGame;
-                                |   
-                                |   //ゲームをリセット、開始する
-                                |   function startGame() {
-                                |       //ゲームの初期設定をする
-                                |       playGame = false;
-                                |               
-                                |       //アニメーションループを開始する
-                                |       animate();
-                                |   }
-                                |   
-                                |   //ゲームの初期化をする
-                                |   function init() {
-                                | 
-                                |   }
-                                |   
-                                |   //アニメーションループ
-                                |   function animate() {        
-                                |       //クリア
-                                |       context.clearRect(0, 0, canvasWidth, canvasHeight);
-                                |       
-                                |       if (playGame) {
-                                |           //33ミリ秒後に再びアニメーションを実行する
-                                |           setTimeout(animate, 33);
-                                |       }
-                                |   }
-                                |   init();
-                                | });
-                            p いくつか新しい関数を使っていることを除き、コードのなかに目新しいものは一切ないはずです。最初の4つの変数は、ゲームのcanvas要素、2次元レンダリングコンテキストへのアクセス、2個のキャンバスサイズを格納します。第5の変数、playGameは宣言されていますが、実際に値が代入されるのはずっとあとです。この変数は、アニメーションループのコードを実行すべきかどうかを決めるために使われます。
-                            p playGame関数は、プレイヤーがUIの「Play」、「Reset」、「Play Again」リンクをクリックしたときに、ゲームのリセット、開始のために使われるプレースホルダーです。現状では、startGame関数はplayGame変数をfalseにしてアニメーションが動かないようにしています。この関数はanimate関数も呼び出しています。animate関数は非常に基本的な30fpsのタイマーを実行していますが、まだそれ以外に何もしていません。最後の関数はinitで、ゲームが初めてロードされたときにゲームの初期設定をすべて行います。現在のinit関数は空ですが、準備中のJavaScriptの末尾部分で呼びだされます。
-                            p これでコア機能は準備ができたので、もっと面白い部分に移りましょう。
-        .footer=title
-        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-        script(src='js/google-code-prettify/prettify.js')
-        script.
-            prettyPrint();
-        script(src='js/bootstrap.min.js')
-        script(src='coffee/list-counter.js')
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading JavaScriptの準備をする
+                    .panel-body
+                        h4 JavaScriptの準備をする
+                        p ゲームの論理を考える前に、JavaScriptのコア機能の準備をする必要があります。
+                        p game.jsという新しいドキュメントを作り、HTML、CSSファイルと同じディレクトリに格納します。そして、次のコードを書き込みます。
+                        p
+                            a.btn.btn-default(href='../demo/canvas/exercise6/index2.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre.prettyprint.linenums
+                            | $(function() {
+                            |   
+                            |   var canvas = $('#gameCanvas');
+                            |   var context = canvas.get(0).getContext('2d');
+                            |   
+                            |   //キャンバスのサイズ
+                            |   var canvasWidth = canvas.width();
+                            |   var canvasHeight = canvas.height();
+                            |   
+                            |   //ゲームの設定
+                            |   var playGame;
+                            |   
+                            |   //ゲームをリセット、開始する
+                            |   function startGame() {
+                            |       //ゲームの初期設定をする
+                            |       playGame = false;
+                            |               
+                            |       //アニメーションループを開始する
+                            |       animate();
+                            |   }
+                            |   
+                            |   //ゲームの初期化をする
+                            |   function init() {
+                            | 
+                            |   }
+                            |   
+                            |   //アニメーションループ
+                            |   function animate() {        
+                            |       //クリア
+                            |       context.clearRect(0, 0, canvasWidth, canvasHeight);
+                            |       
+                            |       if (playGame) {
+                            |           //33ミリ秒後に再びアニメーションを実行する
+                            |           setTimeout(animate, 33);
+                            |       }
+                            |   }
+                            |   init();
+                            | });
+                        p いくつか新しい関数を使っていることを除き、コードのなかに目新しいものは一切ないはずです。最初の4つの変数は、ゲームのcanvas要素、2次元レンダリングコンテキストへのアクセス、2個のキャンバスサイズを格納します。第5の変数、playGameは宣言されていますが、実際に値が代入されるのはずっとあとです。この変数は、アニメーションループのコードを実行すべきかどうかを決めるために使われます。
+                        p playGame関数は、プレイヤーがUIの「Play」、「Reset」、「Play Again」リンクをクリックしたときに、ゲームのリセット、開始のために使われるプレースホルダーです。現状では、startGame関数はplayGame変数をfalseにしてアニメーションが動かないようにしています。この関数はanimate関数も呼び出しています。animate関数は非常に基本的な30fpsのタイマーを実行していますが、まだそれ以外に何もしていません。最後の関数はinitで、ゲームが初めてロードされたときにゲームの初期設定をすべて行います。現在のinit関数は空ですが、準備中のJavaScriptの末尾部分で呼びだされます。
+                        p これでコア機能は準備ができたので、もっと面白い部分に移りましょう。

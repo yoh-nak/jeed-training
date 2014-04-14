@@ -1,127 +1,128 @@
-include ../../head.jade
-    body
-        include navbar.jade
-        .container
-            .row
-                .col-sm-3
-                    include bowling.jade
-                .col-sm-9
-                    .panel.panel-primary
-                        .panel-heading フィールドを作る
-                        .panel-body
-                            h4 ゲームオブジェクトを作る
-                            p 多くのゲームは、テトリスのブロック、チェスのコマ、スーパーマリオのマリオなど、ゲームに目的を与えるオブジェクトが中心となります。何らかのオブジェクトを持たないコンピュータゲームは、あまり多くありません。このスペースボーリングゲームの場合、メインのオブジェクトは2つあります。アステロイド（プレイヤー用の大きいものを含む）とアステロイドが載せられているフィールドです。コアオブジェクトやコンポーネントに分解していくと、ゲームというものがいかに単純か驚かされます。
-                            p 特にゲーム内に複数のオブジェクトがあるときにはそうですが、それらのオブジェクトをJavaScriptクラスとして定義するとよいでしょう。こうすると、すべてのオブジェクトが同じコードを基礎とするようになり、同じプロパティとメソッドを持つことを前提として話を進められるようになります。スペースボーリングの場合、アステロイドのためにはクラスを作りますが、フィールドのためには作りません。フィールドは完全にユニークなオブジェクトで、ゲーム内では1度登場するだけなので、複数のフィールドを作れるようにするクラスを使う必要がないのです。
-                            h4 フィールドを作る
-                            p アステロイドを作れるようにする前に、アステロイドを並べる丸いフィールドをセットアップする必要があります。フィールドは円で、少数の専用変数によって定義されます。これらの変数は、プログラム冒頭のplayGame変数の下で宣言します。
-                            pre(class='prettyprint linenums:11')
-                                | var platformX;
-                                | var platformY;
-                                | var platformOuterRadius;
-                                | var platformInnerRadius;
-                            p これらの変数は、フィールのd原点(x, y)座標、外径（全体としてのフィールドの領域）、内径（アステロイドの実際の置き場所となる領域）を格納します。この段階では、これらの変数は値を持たないので、startGame関数のplayGame変数設定の下に、次のコードを追加します。
-                            pre(class='prettyprint linenums:34')
-                                | platformX = canvasWidth/2;
-                                | platformY = 150;
-                                | platformOuterRadius = 100;
-                                | platformInnerRadius = 75;
-                            p このコードは、フィールドの原点のx座標をキャンバスの中央、y座標をキャンバスの上辺から150ピクセルの位置に置きます。外径は100ピクセル（この値は円の半径だということを忘れないでください）、内径はそれよりも少しだけ小さくして、フィールドの境界線とアステロイドが置かれる場所の間に隙間を作っておきます。
-                            p 最後に、キャンバスにフィールドを描きます。animate関数のclearRect呼び出しの下に次のコードを追加してください。
-                            pre(class='prettyprint linenums:67')
-                                | context.fillStyle = 'rgb(100, 100, 100)';
-                                | context.beginPath();
-                                | context.arc(platformX, platformY, platformOuterRadius, 0, Math.PI*2, true);
-                                | context.closePath();
-                                | context.fill();
-                            p ゲームUIのplayボタンをクリックすると、フィールドが表示されます。このような画面を見るとわくわくしてきます。
-                            p
-                                a.btn.btn-default(href='../demo/canvas/exercise6/index4.html',target='_blank')
-                                    i.glyphicon.glyphicon-play
-                                    | デモ
-                            pre(class='prettyprint linenums:1')
-                                | $(function() {
-                                |   var canvas = $('#gameCanvas');
-                                |   var context = canvas.get(0).getContext('2d');
-                                |   
-                                |   //キャンバスのサイズ
-                                |   var canvasWidth = canvas.width();
-                                |   var canvasHeight = canvas.height();
-                                |   
-                                |   //ゲームの設定
-                                |   var playGame;
-                                |   var platformX;
-                                |   var platformY;
-                                |   var platformOuterRadius;
-                                |   var platformInnerRadius;
-                                | 
-                                |   //ゲームのUI
-                                |   var ui = $('#gameUI');
-                                |   var uiIntro = $('#gameIntro');
-                                |   var uiStats = $('#gameStats');
-                                |   var uiComplete = $('#gameComplete');
-                                |   var uiPlay = $('#gamePlay');
-                                |   var uiReset = $('.gameReset');
-                                |   var uiRemaining = $('#gameRemaining');
-                                |   var uiScore = $('.gameScore');
-                                |   
-                                |   //ゲームをリセット、開始する
-                                |   function startGame() {
-                                |       //ゲームのリセット
-                                |       uiScore.html('0');
-                                |       uiStats.show();
-                                | 
-                                |       //ゲームの初期設定をする
-                                |       playGame = false;
-                                |       platformX = canvasWidth/2;
-                                |       platformY = 150;
-                                |       platformOuterRadius = 100;
-                                |       platformInnerRadius = 75;
-                                |               
-                                |       //アニメーションループを開始する
-                                |       animate();
-                                |   }
-                                |   
-                                |   //ゲームの初期化をする
-                                |   function init(){
-                                |       uiStats.hide();
-                                |       uiComplete.hide();
-                                |       
-                                |       uiPlay.click(function(e) {
-                                |           e.preventDefault();
-                                |           uiIntro.hide();
-                                |           startGame();
-                                |       });
-                                |       
-                                |       uiReset.click(function(e) {
-                                |           e.preventDefault();
-                                |           uiComplete.hide();
-                                |           startGame();
-                                |       });
-                                |   };
-                                |   
-                                |   //アニメーションループ
-                                |   function animate() {        
-                                |       //クリア
-                                |       context.clearRect(0, 0, canvasWidth, canvasHeight);
-                                | 
-                                |       //フィールドの描画
-                                |       context.fillStyle = 'rgb(100, 100, 100)';
-                                |       context.beginPath();
-                                |       context.arc(platformX, platformY, platformOuterRadius, 0, Math.PI*2, true);
-                                |       context.closePath();
-                                |       context.fill();
-                                |       
-                                |       if (playGame) {
-                                |           //33ミリ秒後に再びアニメーションを実行する
-                                |           setTimeout(animate, 33);
-                                |       }
-                                |   }
-                                |   init();
-                                | });
-        .footer=title
-        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-        script(src='js/google-code-prettify/prettify.js')
-        script.
-            prettyPrint();
-        script(src='js/bootstrap.min.js')
-        script(src='coffee/list-counter.js')
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading フィールドを作る
+                    .panel-body
+                        h4 ゲームオブジェクトを作る
+                        p 多くのゲームは、テトリスのブロック、チェスのコマ、スーパーマリオのマリオなど、ゲームに目的を与えるオブジェクトが中心となります。何らかのオブジェクトを持たないコンピュータゲームは、あまり多くありません。このスペースボーリングゲームの場合、メインのオブジェクトは2つあります。アステロイド（プレイヤー用の大きいものを含む）とアステロイドが載せられているフィールドです。コアオブジェクトやコンポーネントに分解していくと、ゲームというものがいかに単純か驚かされます。
+                        p 特にゲーム内に複数のオブジェクトがあるときにはそうですが、それらのオブジェクトをJavaScriptクラスとして定義するとよいでしょう。こうすると、すべてのオブジェクトが同じコードを基礎とするようになり、同じプロパティとメソッドを持つことを前提として話を進められるようになります。スペースボーリングの場合、アステロイドのためにはクラスを作りますが、フィールドのためには作りません。フィールドは完全にユニークなオブジェクトで、ゲーム内では1度登場するだけなので、複数のフィールドを作れるようにするクラスを使う必要がないのです。
+                        h4 フィールドを作る
+                        p アステロイドを作れるようにする前に、アステロイドを並べる丸いフィールドをセットアップする必要があります。フィールドは円で、少数の専用変数によって定義されます。これらの変数は、プログラム冒頭のplayGame変数の下で宣言します。
+                        pre(class='prettyprint linenums:11')
+                            | var platformX;
+                            | var platformY;
+                            | var platformOuterRadius;
+                            | var platformInnerRadius;
+                        p これらの変数は、フィールのd原点(x, y)座標、外径（全体としてのフィールドの領域）、内径（アステロイドの実際の置き場所となる領域）を格納します。この段階では、これらの変数は値を持たないので、startGame関数のplayGame変数設定の下に、次のコードを追加します。
+                        pre(class='prettyprint linenums:34')
+                            | platformX = canvasWidth/2;
+                            | platformY = 150;
+                            | platformOuterRadius = 100;
+                            | platformInnerRadius = 75;
+                        p このコードは、フィールドの原点のx座標をキャンバスの中央、y座標をキャンバスの上辺から150ピクセルの位置に置きます。外径は100ピクセル（この値は円の半径だということを忘れないでください）、内径はそれよりも少しだけ小さくして、フィールドの境界線とアステロイドが置かれる場所の間に隙間を作っておきます。
+                        p 最後に、キャンバスにフィールドを描きます。animate関数のclearRect呼び出しの下に次のコードを追加してください。
+                        pre(class='prettyprint linenums:67')
+                            | context.fillStyle = 'rgb(100, 100, 100)';
+                            | context.beginPath();
+                            | context.arc(platformX, platformY, platformOuterRadius, 0, Math.PI*2, true);
+                            | context.closePath();
+                            | context.fill();
+                        p ゲームUIのplayボタンをクリックすると、フィールドが表示されます。このような画面を見るとわくわくしてきます。
+                        p
+                            a.btn.btn-default(href='../demo/canvas/exercise6/index4.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            | $(function() {
+                            |   var canvas = $('#gameCanvas');
+                            |   var context = canvas.get(0).getContext('2d');
+                            |   
+                            |   //キャンバスのサイズ
+                            |   var canvasWidth = canvas.width();
+                            |   var canvasHeight = canvas.height();
+                            |   
+                            |   //ゲームの設定
+                            |   var playGame;
+                            |   var platformX;
+                            |   var platformY;
+                            |   var platformOuterRadius;
+                            |   var platformInnerRadius;
+                            | 
+                            |   //ゲームのUI
+                            |   var ui = $('#gameUI');
+                            |   var uiIntro = $('#gameIntro');
+                            |   var uiStats = $('#gameStats');
+                            |   var uiComplete = $('#gameComplete');
+                            |   var uiPlay = $('#gamePlay');
+                            |   var uiReset = $('.gameReset');
+                            |   var uiRemaining = $('#gameRemaining');
+                            |   var uiScore = $('.gameScore');
+                            |   
+                            |   //ゲームをリセット、開始する
+                            |   function startGame() {
+                            |       //ゲームのリセット
+                            |       uiScore.html('0');
+                            |       uiStats.show();
+                            | 
+                            |       //ゲームの初期設定をする
+                            |       playGame = false;
+                            |       platformX = canvasWidth/2;
+                            |       platformY = 150;
+                            |       platformOuterRadius = 100;
+                            |       platformInnerRadius = 75;
+                            |               
+                            |       //アニメーションループを開始する
+                            |       animate();
+                            |   }
+                            |   
+                            |   //ゲームの初期化をする
+                            |   function init(){
+                            |       uiStats.hide();
+                            |       uiComplete.hide();
+                            |       
+                            |       uiPlay.click(function(e) {
+                            |           e.preventDefault();
+                            |           uiIntro.hide();
+                            |           startGame();
+                            |       });
+                            |       
+                            |       uiReset.click(function(e) {
+                            |           e.preventDefault();
+                            |           uiComplete.hide();
+                            |           startGame();
+                            |       });
+                            |   };
+                            |   
+                            |   //アニメーションループ
+                            |   function animate() {        
+                            |       //クリア
+                            |       context.clearRect(0, 0, canvasWidth, canvasHeight);
+                            | 
+                            |       //フィールドの描画
+                            |       context.fillStyle = 'rgb(100, 100, 100)';
+                            |       context.beginPath();
+                            |       context.arc(platformX, platformY, platformOuterRadius, 0, Math.PI*2, true);
+                            |       context.closePath();
+                            |       context.fill();
+                            |       
+                            |       if (playGame) {
+                            |           //33ミリ秒後に再びアニメーションを実行する
+                            |           setTimeout(animate, 33);
+                            |       }
+                            |   }
+                            |   init();
+                            | });

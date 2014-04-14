@@ -1,0 +1,15 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"><title></title><link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css"><script src="http://code.jquery.com/jquery-1.9.1.min.js"></script><script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script><script>(function(){
+    // Web Storageが使えるか調べる
+    $(document).on('pageshow','#index',function(){
+        if(window.localStorage){
+            $('#result').append('Local Storageは使用できます<br>');
+        }else{
+            $('#result').append('Local Storageは使用できません<br>');
+        }
+        if(window.sessionStorage){
+            $('#result').append('Session Storageは使用できます');
+        }else{
+            $('#result').append('Session Storageは使用できません');
+        }
+    });
+})()</script></head><body><div id="index" data-role="page"><div data-role="header"><h1>Web Storageが使えるかどうか調べる</h1></div><div data-role="content"><div id="result"></div></div><div data-role="footer" data-position="fixed"><h1>フッター</h1></div></div></body></html>

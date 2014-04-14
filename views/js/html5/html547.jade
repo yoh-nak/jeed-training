@@ -15,9 +15,21 @@ block content
                 include left
             .col-sm-9
                 .panel.panel-primary
-                    .panel-heading todoアプリ
+                    .panel-heading サウンド機能の受け渡し
                     .panel-body
-                        p 1日分のtodoアプリを作ってみましょう。
+                        p ページを移動する際に音量、ミュートなどのデータを受け渡せるようにしましょう。
+                        pre.
+                            npm install -g download
+                            download http://jeed-training.herokuapp.com/demo/html5api/audio13/bgm1.mp3 .
+                            download http://jeed-training.herokuapp.com/demo/html5api/audio13/bgm1.ogg .
+                            download http://jeed-training.herokuapp.com/demo/html5api/audio13/bgm2.mp3 .
+                            download http://jeed-training.herokuapp.com/demo/html5api/audio13/bgm2.ogg .
+                            download http://jeed-training.herokuapp.com/demo/html5api/audio13/se1.mp3 .
+                            download http://jeed-training.herokuapp.com/demo/html5api/audio13/se1.ogg .
+                            download http://jeed-training.herokuapp.com/demo/html5api/audio13/se2.mp3 .
+                            download http://jeed-training.herokuapp.com/demo/html5api/audio13/se2.ogg .
+                            download http://jeed-training.herokuapp.com/demo/html5api/audio13/se3.mp3 .
+                            download http://jeed-training.herokuapp.com/demo/html5api/audio13/se3.ogg .
                         p
                             a.btn.btn-default(href='../demo/html5api/audio13/index.html', target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -33,104 +45,172 @@ block content
                                     html(lang='ja')
                                         meta(charset='utf-8')
                                         meta(name='viewport', content='width=device-width,initial-scale=1.0,user-scalable=no')
-                                        title
                                         link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
-                                        style
-                                            :stylus
-                                                .ui-icon-search,.ui-icon-searchfield:after
-                                                    //アイコンのスプライト画像を鉛筆にずらす
-                                                    background-position -824px -1px
                                         script(src='http://code.jquery.com/jquery-1.9.1.min.js')
                                         script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
-                                        script
-                                            :js
-                                                (function(){
-                                                    /*ページにアクセスした時のみ行われる処理*/
-
-                                                    //ストレージにデータがないとき、空オブジェクトで宣言
-                                                    if(!localStorage.todo){
-                                                        var todo = {}
-                                                    }
-                                                    //ストレージにデータがあるとき、ストレージから取り出して変数に代入
-                                                    else{
-                                                        var todo = JSON.parse(localStorage.todo);
-                                                    }
-                                                    /*ページにアクセスしたとき時と、リロードした時に毎回行われる処理*/
-
-                                                    //ページショー
-                                                    $(document).on('pageshow','#index',function(){
-                                                        //オブジェクトの連番キーの最大値に+1して、オブジェクトに追加するキーを作成
-                                                        var max = ++Object.keys(todo).length;
-                                                        //リストビューの構築
-                                                        var html = '';
-                                                        //オブジェクトの連番キーがあるだけリピート
-                                                        $.each(todo,function(key,val){
-                                                            //カスタム属性data-todoにキーを格納
-                                                            var html = '\
-                                                            <li><a href="#">\
-                                                            <h2>' + val + '</h2>\
-                                                            </a>\
-                                                            <a href="#" data-icon="delete" data-todo="' + key + '">削除</a>\
-                                                            </li>';
-                                                            //リストビューにアペンド
-                                                            $('[data-role="listview"]').append(html);
-                                                        });
-
-                                                        //オブジェクトが空ではないとき
-                                                        if(Object.keys(todo).length > 0){
-                                                            //リストビューをリフレッシュ
-                                                            $('[data-role="listview"]').listview('refresh');
-                                                        }
-                                                        //入力フォームでキーボードが押されたとき
-                                                        $('[data-role="page"]').on('keypress','#todo',function(e){
-                                                            //エンターキーが押されたとき
-                                                            if(e.keyCode == $.mobile.keyCode.ENTER){
-                                                                //オブジェクトに格納
-                                                                todo[max] = $(this).val();
-                                                                //オブジェクトのデータをストレージに格納
-                                                                localStorage.todo = JSON.stringify(todo);
-                                                                //リロード
-                                                                $.mobile.pageContainer.pagecontainer('change', '#index', {
-                                                                    reloadPage:true
-                                                                });
-                                                            }
-                                                        });
-
-                                                        //リストビュー個別の削除ボタンが押されたとき（カスタム属性data-todoにキーを隠している）
-                                                        $('[data-role="page"]').on('vclick','[data-todo]',function(){
-                                                            //todoオブジェクトから選択した項目を削除
-                                                            delete todo[$(this).attr('data-todo')];
-                                                            //ストレージに再格納
-                                                            localStorage.todo = JSON.stringify(todo);
-                                                            //リロード
-                                                            $.mobile.pageContainer.pagecontainer('change', '#index', {
-                                                                reloadPage:true
-                                                            });
-                                                        });
-                                                        $('[data-role="page"]').on('vclick','#remove',function(){
-                                                            //ストレージ全削除
-                                                            localStorage.clear();
-                                                            
-                                                            //todoオブジェクトをリセット
-                                                            todo = {};
-                                                            
-                                                            //リストビュー削除
-                                                            $('[data-role="listview"] > *').remove().listview('refresh');
-                                                            
-                                                            //リロード
-                                                            $.mobile.pageContainer.pagecontainer('change', '#index', {
-                                                                reloadPage:true
-                                                            });
-                                                        });
-                                                    });
-                                                })()
+                                        script(src='sound.js')
+                                        //SoundClassの読み込み
+                                        script(src='main.js')
+                                        //jQueryMobileの処理
+                                        head
                                         body
                                             #index(data-role='page')
                                                 div(data-role='header')
-                                                    h1 ToDo
+                                                    h1 SCENE 1
+                                                    a.ui-btn-right(href='#second', data-transition='slide') NEXT
                                                 div(data-role='content')
-                                                    input#todo(type='search', placeholder='本日のToDo')
-                                                    ul(data-role='listview', data-split-icon='gear', data-split-theme='d', data-inset='true')
-                                                    input#remove(type='button', value='すべて削除')
+                                                    .ui-grid-a
+                                                        .ui-block-a(style='width: 70%;')
+                                                            form
+                                                                div(data-role='controlgroup', data-type='horizontal', style='margin-top: 0; margin-bottom: 0;')
+                                                                    legend SE:
+                                                                    input.se.se1(type='button', value='SE ①')
+                                                                    input.se.se2(type='button', value='SE ②')
+                                                                    input.se.se3(type='button', value='SE ③')
+                                                        .ui-block-b(style='width: 30%;')
+                                                            form
+                                                                label(for='bgm1') BGM:
+                                                                select#bgm1(name='bgm1', data-role='slider')
+                                                                    option(value='off') Off
+                                                                    option(value='on', selected='selected') On
+                                                    p
+                                                        form
+                                                            label(for='volume1') Volume:
+                                                            input#volume1.volume(type='range', name='volume1', data-highlight='true', min='0.0', max='1.0', value='0.5', step='0.1')
                                                 div(data-role='footer', data-position='fixed')
                                                     h1 フッター
+                                            #second(data-role='page')
+                                                div(data-role='header')
+                                                    a(href='#index', data-transition='slide', data-direction='reverse') BACK
+                                                    h1 SCENE 2
+                                                div(data-role='content')
+                                                    .ui-grid-a
+                                                        .ui-block-a(style='width: 70%;')
+                                                            form
+                                                                div(data-role='controlgroup', data-type='horizontal', style='margin-top: 0; margin-bottom: 0;')
+                                                                    legend SE:
+                                                                    input.se.se1(type='button', value='SE ①')
+                                                                    input.se.se2(type='button', value='SE ②')
+                                                                    input.se.se3(type='button', value='SE ③')
+                                                        .ui-block-b(style='width: 30%;')
+                                                            form
+                                                                label(for='bgm2') BGM:
+                                                                select#bgm2(name='bgm2', data-role='slider')
+                                                                    option(value='off') Off
+                                                                    option(value='on', selected='selected') On
+                                                    p
+                                                        form
+                                                            label(for='volume2') Volume:
+                                                            input#volume2.volume(type='range', name='volume2', data-highlight='true', min='0.0', max='1.0', value='0.5', step='0.1')
+                                                div(data-role='footer', data-position='fixed')
+                                                    h1 フッター
+                            p main.js
+                            pre(class='prettyprint linenums:1')
+                                :code
+                                    //***********************************************//
+                                    //初期設定
+                                    //***********************************************//
+
+                                    //オーディオのパスを配列に用意
+                                    var bgms = ['bgm1.mp3','bgm1.ogg','bgm2.mp3','bgm2.ogg'];
+                                    var ses = ['se1.mp3','se1.ogg','se2.mp3','se2.ogg','se3.mp3','se3.ogg'];
+
+                                    //SoundClassのインスタンス化
+                                    var sound = new SoundClass(bgms, ses);
+                                    sound.preload();
+
+                                    //BGMセット
+                                    bgmArray = sound.setBgm();
+
+                                    //BGMのON/OFF切り替え
+                                    sound.bgmFlg = true;
+
+                                    //ボリューム初期設定
+                                    sound.volumeFlg = 0.8;
+
+                                    //***********************************************//
+                                    //jQuery MObileページ遷移イベント
+                                    //***********************************************//
+
+                                    //ページ表示
+                                    $(document).on('pageshow','#index',function(){
+                                        //BGMセット
+                                        if(sound.bgmFlg == true){
+                                            //sound.playBgm(sound.bgmObjs[0]);
+                                            sound.playBgm(bgmArray[0]);
+                                            $('#bgm1').val('on').slider('refresh');
+                                        }
+                                        else{
+                                            $('#bgm1').val('off').slider('refresh');
+                                        }
+
+                                        //ボリュームセット
+                                        sound.setVolume(sound.volumeFlg);
+                                        $('#volume1').val(sound.volumeFlg).slider('refresh');
+
+                                        $('.volume').on('change',function(){
+                                            sound.setVolume($(this).val());
+                                            sound.volumeFlg = parseFloat($(this).val());
+                                        });
+
+                                        $('.se').on('vclick',function(){
+                                            sound.playSe($(this).attr('class'));
+                                        });
+
+                                        $('#bgm1').on('change',function(){
+                                            if($('#bgm1').val() == 'on'){
+                                                //sound.playBgm(sound.bgmObjs[0]);
+                                                sound.playBgm(bgmArray[0]);
+                                                sound.bgmFlg = true;
+                                            }
+                                            else{
+                                                sound.bgmObjs[0].pause();
+                                                sound.bgmFlg = false;
+                                            }
+                                        });
+                                    });
+                                    $(document).on('pageshow','#second',function(){
+                                        if(sound.bgmFlg == true){
+                                            //sound.playBgm(sound.bgmObjs[2]);
+                                            sound.playBgm(bgmArray[1]);
+                                            $('#bgm2').val('on').slider('refresh');
+                                        }
+                                        else{
+                                            $('#bgm2').val('off').slider('refresh');
+                                        }
+
+                                        //ボリュームセット
+                                        sound.setVolume(sound.volumeFlg);
+                                        $('#volume2').val(sound.volumeFlg).slider('refresh');
+
+                                        $('.volume').on('change',function(){
+                                            sound.setVolume($(this).val());
+                                            sound.volumeFlg = parseFloat($(this).val());
+                                        });
+
+                                        $('.se').on('vclick',function(){
+                                            sound.playSe($(this).attr('class'));
+                                        });
+
+                                        $('#bgm2').on('change',function(){
+                                            if($('#bgm2').val() == 'on'){
+                                                //sound.playBgm(sound.bgmObjs[2]);
+                                                sound.playBgm(bgmArray[1]);
+                                                sound.bgmFlg = true;
+                                            }
+                                            else{
+                                                sound.bgmObjs[2].pause();
+                                                sound.bgmFlg = false;
+                                            }
+                                        });
+                                    });
+
+                                    //ページ非表示
+                                    $(document).on('pagebeforehide','#index',function(){
+                                        sound.bgmObjs[0].pause();
+                                        sound.bgmObjs[0].currentTime = 0;
+                                    });
+                                    $(document).on('pagebeforehide','#second',function(){
+                                        sound.bgmObjs[2].pause();
+                                        sound.bgmObjs[2].currentTime = 0;
+                                    });

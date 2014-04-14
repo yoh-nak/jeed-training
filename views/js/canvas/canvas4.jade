@@ -19,6 +19,7 @@ block content
                         i.glyphicon.glyphicon-book
                         &nbsp;キャンバスの削除／リセット
                     .panel-body
+                        h4 キャンバス範囲の描画を削除
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise1/index21.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -41,16 +42,26 @@ block content
                                                         var canvas = $('#myCanvas').get(0);
                                                         var context = canvas.getContext('2d');
 
+                                                        //矩形の描画
                                                         context.fillRect(40, 40, 100, 100);
 
+                                                        //パスの開始
                                                         context.beginPath();
+
+                                                        //弧の描画
                                                         context.arc(230, 90, 50, 0, Math.PI*2, false);
+
+                                                        //パスを閉じる
                                                         context.closePath();
+
+                                                        //パスを塗りつぶす
                                                         context.fill();
 
+                                                        //座標(0, 0)から500x500pxの矩形の範囲を削除
                                                         context.clearRect(0, 0, 500, 500);
                                                     });
                                                 })()
+                        h4 jQueryを活かしてキャンバス範囲の描画を削除
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise1/index22.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -70,19 +81,29 @@ block content
                                             :js
                                                 (function(){
                                                     $(function(){
-                                                        var canvas = $('#myCanvas').get(0);
+                                                        <mark>var canvas = $('#myCanvas').get(0);</mark>
                                                         var context = canvas.getContext('2d');
 
+                                                        //矩形の描画
                                                         context.fillRect(40, 40, 100, 100);
 
+                                                        //パスの開始
                                                         context.beginPath();
+
+                                                        //弧の描画
                                                         context.arc(230, 90, 50, 0, Math.PI*2, false);
+
+                                                        //パスを閉じる
                                                         context.closePath();
+
+                                                        //パスを塗りつぶす
                                                         context.fill();
 
-                                                        context.clearRect(0, 0, canvas.width(), canvas.height());
+                                                        //座標(0, 0)からキャンバスサイズ分の範囲を削除
+                                                        context.clearRect(0, 0, <mark>canvas</mark>.width(), <mark>canvas</mark>.height());
                                                     });
                                                 })()
+                        h4 矩形のみ削除
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise1/index23.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -105,16 +126,20 @@ block content
                                                         var canvas = $('#myCanvas').get(0);
                                                         var context = canvas.getContext('2d');
 
-                                                        context.fillRect(40, 40, 100, 100);
+                                                        //矩形の描画
+                                                        <mark>context.fillRect(40, 40, 100, 100);</mark>
 
+                                                        //円の描画
                                                         context.beginPath();
                                                         context.arc(230, 90, 50, 0, Math.PI*2, false);
                                                         context.closePath();
                                                         context.fill();
 
-                                                        context.clearRect(40, 40, 100, 100);
+                                                        //矩形の削除
+                                                        <mark>context.clearRect(40, 40, 100, 100);</mark>
                                                     });
                                                 })()
+                        h4 円のみ削除
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise1/index24.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -137,16 +162,20 @@ block content
                                                         var canvas = $('#myCanvas').get(0);
                                                         var context = canvas.getContext('2d');
 
+                                                        //矩形の描画
                                                         context.fillRect(40, 40, 100, 100);
 
+                                                        //円の描画
                                                         context.beginPath();
-                                                        context.arc(230, 90, 50, 0, Math.PI*2, false);
+                                                        <mark>context.arc(230, 90, 50, 0, Math.PI*2, false);</mark>
                                                         context.closePath();
                                                         context.fill();
 
-                                                        context.clearRect(180, 40, 100, 100);
+                                                        //矩形の範囲で円を削除
+                                                        <mark>context.clearRect(180, 40, 100, 100);</mark>
                                                     });
                                                 })()
+                        h4 円の一部を削除
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise1/index25.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -169,16 +198,20 @@ block content
                                                         var canvas = $('#myCanvas').get(0);
                                                         var context = canvas.getContext('2d');
 
+                                                        //矩形の描画
                                                         context.fillRect(40, 40, 100, 100);
 
+                                                        //円の描画
                                                         context.beginPath();
-                                                        context.arc(230, 90, 50, 0, Math.PI*2, false);
+                                                        <mark>context.arc(230, 90, 50, 0, Math.PI*2, false);</mark>
                                                         context.closePath();
                                                         context.fill();
 
-                                                        context.clearRect(230, 90, 50, 50);
+                                                        //句形の範囲で円の一部を削除
+                                                        <mark>context.clearRect(230, 90, 50, 50);</mark>
                                                     });
                                                 })()
+                        h4 キャンバスサイズを再定義してキャンバスをリセット
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise1/index26.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -198,21 +231,26 @@ block content
                                             :js
                                                 (function(){
                                                     $(function(){
-                                                        var canvas = $('#myCanvas').get(0);
-                                                        var context = canvas.getContext('2d');
+                                                        var canvas = $('#myCanvas');
+                                                        var context = canvas.get(0).getContext('2d');
 
+                                                        //塗りつぶし色の指定
                                                         context.fillStyle = 'rgb(255, 0, 0)';
 
+                                                        //赤い矩形
                                                         context.fillRect(40, 40, 100, 100);
 
+                                                        //赤い円
                                                         context.beginPath();
                                                         context.arc(230, 90, 50, 0, Math.PI*2, false);
                                                         context.closePath();
                                                         context.fill();
 
-                                                        canvas.attr('width', canvas.width());
-                                                        canvas.attr('height', canvas.height());
+                                                        //キャンバスサイズを再定義してキャンバスをリセット
+                                                        <mark>canvas.attr('width', canvas.width());
+                                                        canvas.attr('height', canvas.height());</mark>
 
+                                                        //黒い矩形
                                                         context.fillRect(40, 40, 100, 100);
                                                     });
                                                 })()

@@ -19,6 +19,7 @@ block content
                         i.glyphicon.glyphicon-book
                         &nbsp;フルスクリーン
                     .panel-body
+                        h4 windowサイズを取得してcanvasサイズに割り当てる
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise1/index27.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -51,12 +52,14 @@ block content
                                                         var canvas = $('#myCanvas');
                                                         var context = canvas.get(0).getContext('2d');
 
-                                                        canvas.attr('width', $(window).get(0).innerWidth);
-                                                        canvas.attr('height', $(window).get(0).innerHeight);
+                                                        <mark>canvas.attr('width', $(window).get(0).innerWidth);
+                                                        canvas.attr('height', $(window).get(0).innerHeight);</mark>
 
+                                                        //黒い矩形
                                                         context.fillRect(0, 0, canvas.width(), canvas.height());
                                                     });
                                                 })()
+                        h4 リサイズ時にキャンバス幅を再定義
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise1/index28.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -89,10 +92,13 @@ block content
                                                         var canvas = $('#myCanvas');
                                                         var context = canvas.get(0).getContext('2d');
 
-                                                        $(window).resize(resizeCanvas);
+                                                        //リサイズ時にキャンバス幅をサイドwindowサイズに合わせる
+                                                        <mark>$(window).resize(resizeCanvas);</mark>
                                                         function resizeCanvas(){
-                                                            canvas.attr('width', $(window).get(0).innerWidth);
-                                                            canvas.attr('height', $(window).get(0).innerHeight);
+                                                            <mark>canvas.attr('width', $(window).get(0).innerWidth);
+                                                            canvas.attr('height', $(window).get(0).innerHeight);</mark>
+
+                                                            //黒い矩形
                                                             context.fillRect(0, 0, canvas.width(), canvas.height());
                                                         }
                                                         resizeCanvas();

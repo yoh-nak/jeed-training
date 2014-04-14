@@ -1,175 +1,168 @@
-!!!
-html(lang='ja')
-    head
-        meta(name='viewport',content='width=device-width,initial-scale=1.0')
-        link(href='css/bootstrap.min.css',rel='stylesheet',media='screen')
-        link(href='js/dtree/dtree.css', rel='stylesheet', media='screen')
-        link(href='less/common.less',rel='stylesheet',media='screen')
-        link(href='js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
-        title=title
-    body
-        include navbar.jade
-        .container
-            .row
-                .col-sm-3
-                    include left.jade
-                .col-sm-9
-                    .panel.panel-primary
-                        .panel-heading
-                            i.glyphicon.glyphicon-book
-                            &nbsp;キャンバスの境界でオブジェクトを弾ませる
-                        .panel-body
-                            h4 キャンバスの境界でオブジェクトを弾ませる
-                            p
-                                a.btn.btn-default(href='../demo/canvas/exercise4/index10.html',target='_blank')
-                                    i.glyphicon.glyphicon-play
-                                    | デモ
-                            pre.prettyprint.linenums
-                                | &lt;!DOCTYPE html&gt;
-                                | &lt;html lang="ja"&gt;
-                                |   &lt;head&gt;
-                                |     &lt;meta charset="utf-8"&gt;
-                                |     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-                                |     &lt;title&gt;&lt;/title&gt;
-                                |     &lt;style&gt;
-                                |       #myCanvas{
-                                |        display:block;
-                                |       }
-                                |     &lt;/style&gt;
-                                |   &lt;/head&gt;
-                                |   &lt;body&gt;
-                                |     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
-                                |     &lt;button id="startAnimation"&gt;Start&lt;/button&gt;
-                                |     &lt;button id="stopAnimation"&gt;Stop&lt;/button&gt;
-                                |     &lt;script src="http://code.jquery.com/jquery-1.11.0.min.js"&gt;&lt;/script&gt;
-                                |     &lt;script&gt;
-                                |       $(function(){    
-                                |        //キャンバス要素　jQueryオブジェクト
-                                |        var canvas = $('#myCanvas');
-                                |        
-                                |        //2Dレンダリングコンテキスト
-                                |        var context = canvas.get(0).getContext('2d');
-                                |        
-                                |        var canvasWidth = canvas.width(); //キャンバス要素　幅
-                                |        var canvasHeight = canvas.height(); //キャンバス要素　高さ
-                                |        
-                                |        var playAnimation = true; //アニメーションフラグ　開始
-                                |        
-                                |        //スタート／ストップボタン　jQueryオブジェクト
-                                |        var startButton = $('#startAnimation');
-                                |        var stopButton = $('#stopAnimation');
-                                |        //スタートボタン初期表示削除
-                                |        startButton.hide();
-                                |        
-                                |        //スタートボタンクリック
-                                |        startButton.click(function(){
-                                |         $(this).hide(); //スタートボタン非表示
-                                |         stopButton.show(); //ストップボタン表示
-                                |         
-                                |         playAnimation = true; //アニメーションフラグ　開始
-                                |         animate(); //アニメーション開始
-                                |        });
-                                |        
-                                |        //ストップボタンクリック
-                                |        stopButton.click(function(){
-                                |         $(this).hide(); //ストップボタン非表示
-                                |         startButton.show(); //スタートボタン表示
-                                |         
-                                |         playAnimation = false; //アニメーションフラグ　停止
-                                |        });
-                                |        
-                                |        //矩形（x座標, y座標, 幅, 高さ, x軸反転, y軸反転）をまとめて管理するクラス
-                                |        var Shape = function(x, y, width, height) {
-                                |         this.x = x;
-                                |         this.y = y;
-                                |         this.width = width;
-                                |         this.height = height;
-                                |         
-                                |         this.reverseX = true;
-                                |         this.reverseY = false;
-                                |        };
-                                |        
-                                |        //複数の矩形を格納する配列
-                                |        var shapes = new Array();
-                                |        
-                                |        //矩形の設定を10個準備
-                                |        for (var i = 0; i &lt; 10; i++) {
-                                |         var x = Math.random()*250;
-                                |         var y = Math.random()*250;
-                                |         var width = height = Math.random()*30;
-                                |         //矩形（x座標, y座標, 幅, 高さ）を管理するクラスを矩形ごとに配列に格納
-                                |         shapes.push(new Shape(x, y, width, height));
-                                |        };
-                                |        
-                                |        //アニメーションループ
-                                |        function animate(){
-                                |         //矩形クリア
-                                |         context.clearRect(0, 0, canvasWidth, canvasHeight);
-                                |         
-                                |         var shapesLength = shapes.length; //矩形の個数
-                                |         
-                                |         for(var i = 0; i &lt; shapesLength; i++){
-                                |          var tmpShape = shapes[i];
-                                |          
-                                |          //reverseXがfalseのとき右方向へ
-                                |          if(!tmpShape.reverseX){
-                                |           tmpShape.x += 2;
-                                |          }
-                                |          //reverseXがtrueのとき左方向へ
-                                |          else{
-                                |           tmpShape.x -= 2;
-                                |          };
-                                |          
-                                |          //reverseYがfalseのとき下方向へ
-                                |          if(!tmpShape.reverseY){
-                                |           tmpShape.y += 2;
-                                |          }
-                                |          //reverseYがtrueのとき上方向へ
-                                |          else{
-                                |           tmpShape.y -= 2;
-                                |          };
-                                |          
-                                |          //矩形描画
-                                |          context.fillRect(tmpShape.x, tmpShape.y, tmpShape.width, tmpShape.height);
-                                |          
-                                |          //矩形のx座標が0より小さいとき
-                                |          if (tmpShape.x &lt; 0) {
-                                |           //reverseXにfalseを代入
-                                |           tmpShape.reverseX = false;
-                                |          }
-                                |          //矩形のx座標がCanvasの幅より大きいとき
-                                |          else if(tmpShape.x + tmpShape.width &gt; canvasWidth){
-                                |           //reverseXにtrueを代入
-                                |           tmpShape.reverseX = true;
-                                |          }
-                                |          
-                                |          //矩形のy座標が0より小さいとき
-                                |          if(tmpShape.y &lt; 0){
-                                |           //reverseYにfalseを代入
-                                |           tmpShape.reverseY = false;
-                                |          }
-                                |          //矩形のy座標がCanvasの高さより大きいとき
-                                |          else if(tmpShape.y + tmpShape.height &gt; canvasHeight){
-                                |           //reverseYにtrueを代入
-                                |           tmpShape.reverseY = true;
-                                |          }
-                                |         }
-                                |         
-                                |         //アニメーションフラグが開始のとき
-                                |         if(playAnimation){
-                                |          setTimeout(animate, 33);
-                                |         }
-                                |        };
-                                |        //アニメーション初回スタート
-                                |        animate();
-                                |       });
-                                |     &lt;/script&gt;
-                                |   &lt;/body&gt;
-                                | &lt;/html&gt;
-        .footer=title
-        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-        script(src='js/google-code-prettify/prettify.js')
-        script.
-            prettyPrint();
-        script(src='js/bootstrap.min.js')
-        script(src='coffee/list-counter.js')
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        &nbsp;キャンバスの境界でオブジェクトを弾ませる
+                    .panel-body
+                        h4 キャンバスの境界でオブジェクトを弾ませる
+                        p
+                            a.btn.btn-default(href='../demo/canvas/exercise4/index10.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre.prettyprint.linenums
+                            | &lt;!DOCTYPE html&gt;
+                            | &lt;html lang="ja"&gt;
+                            |   &lt;head&gt;
+                            |     &lt;meta charset="utf-8"&gt;
+                            |     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+                            |     &lt;title&gt;&lt;/title&gt;
+                            |     &lt;style&gt;
+                            |       #myCanvas{
+                            |        display:block;
+                            |       }
+                            |     &lt;/style&gt;
+                            |   &lt;/head&gt;
+                            |   &lt;body&gt;
+                            |     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
+                            |     &lt;button id="startAnimation"&gt;Start&lt;/button&gt;
+                            |     &lt;button id="stopAnimation"&gt;Stop&lt;/button&gt;
+                            |     &lt;script src="http://code.jquery.com/jquery-1.11.0.min.js"&gt;&lt;/script&gt;
+                            |     &lt;script&gt;
+                            |       $(function(){    
+                            |        //キャンバス要素　jQueryオブジェクト
+                            |        var canvas = $('#myCanvas');
+                            |        
+                            |        //2Dレンダリングコンテキスト
+                            |        var context = canvas.get(0).getContext('2d');
+                            |        
+                            |        var canvasWidth = canvas.width(); //キャンバス要素　幅
+                            |        var canvasHeight = canvas.height(); //キャンバス要素　高さ
+                            |        
+                            |        var playAnimation = true; //アニメーションフラグ　開始
+                            |        
+                            |        //スタート／ストップボタン　jQueryオブジェクト
+                            |        var startButton = $('#startAnimation');
+                            |        var stopButton = $('#stopAnimation');
+                            |        //スタートボタン初期表示削除
+                            |        startButton.hide();
+                            |        
+                            |        //スタートボタンクリック
+                            |        startButton.click(function(){
+                            |         $(this).hide(); //スタートボタン非表示
+                            |         stopButton.show(); //ストップボタン表示
+                            |         
+                            |         playAnimation = true; //アニメーションフラグ　開始
+                            |         animate(); //アニメーション開始
+                            |        });
+                            |        
+                            |        //ストップボタンクリック
+                            |        stopButton.click(function(){
+                            |         $(this).hide(); //ストップボタン非表示
+                            |         startButton.show(); //スタートボタン表示
+                            |         
+                            |         playAnimation = false; //アニメーションフラグ　停止
+                            |        });
+                            |        
+                            |        //矩形（x座標, y座標, 幅, 高さ, x軸反転, y軸反転）をまとめて管理するクラス
+                            |        var Shape = function(x, y, width, height) {
+                            |         this.x = x;
+                            |         this.y = y;
+                            |         this.width = width;
+                            |         this.height = height;
+                            |         
+                            |         this.reverseX = true;
+                            |         this.reverseY = false;
+                            |        };
+                            |        
+                            |        //複数の矩形を格納する配列
+                            |        var shapes = new Array();
+                            |        
+                            |        //矩形の設定を10個準備
+                            |        for (var i = 0; i &lt; 10; i++) {
+                            |         var x = Math.random()*250;
+                            |         var y = Math.random()*250;
+                            |         var width = height = Math.random()*30;
+                            |         //矩形（x座標, y座標, 幅, 高さ）を管理するクラスを矩形ごとに配列に格納
+                            |         shapes.push(new Shape(x, y, width, height));
+                            |        };
+                            |        
+                            |        //アニメーションループ
+                            |        function animate(){
+                            |         //矩形クリア
+                            |         context.clearRect(0, 0, canvasWidth, canvasHeight);
+                            |         
+                            |         var shapesLength = shapes.length; //矩形の個数
+                            |         
+                            |         for(var i = 0; i &lt; shapesLength; i++){
+                            |          var tmpShape = shapes[i];
+                            |          
+                            |          //reverseXがfalseのとき右方向へ
+                            |          if(!tmpShape.reverseX){
+                            |           tmpShape.x += 2;
+                            |          }
+                            |          //reverseXがtrueのとき左方向へ
+                            |          else{
+                            |           tmpShape.x -= 2;
+                            |          };
+                            |          
+                            |          //reverseYがfalseのとき下方向へ
+                            |          if(!tmpShape.reverseY){
+                            |           tmpShape.y += 2;
+                            |          }
+                            |          //reverseYがtrueのとき上方向へ
+                            |          else{
+                            |           tmpShape.y -= 2;
+                            |          };
+                            |          
+                            |          //矩形描画
+                            |          context.fillRect(tmpShape.x, tmpShape.y, tmpShape.width, tmpShape.height);
+                            |          
+                            |          //矩形のx座標が0より小さいとき
+                            |          if (tmpShape.x &lt; 0) {
+                            |           //reverseXにfalseを代入
+                            |           tmpShape.reverseX = false;
+                            |          }
+                            |          //矩形のx座標がCanvasの幅より大きいとき
+                            |          else if(tmpShape.x + tmpShape.width &gt; canvasWidth){
+                            |           //reverseXにtrueを代入
+                            |           tmpShape.reverseX = true;
+                            |          }
+                            |          
+                            |          //矩形のy座標が0より小さいとき
+                            |          if(tmpShape.y &lt; 0){
+                            |           //reverseYにfalseを代入
+                            |           tmpShape.reverseY = false;
+                            |          }
+                            |          //矩形のy座標がCanvasの高さより大きいとき
+                            |          else if(tmpShape.y + tmpShape.height &gt; canvasHeight){
+                            |           //reverseYにtrueを代入
+                            |           tmpShape.reverseY = true;
+                            |          }
+                            |         }
+                            |         
+                            |         //アニメーションフラグが開始のとき
+                            |         if(playAnimation){
+                            |          setTimeout(animate, 33);
+                            |         }
+                            |        };
+                            |        //アニメーション初回スタート
+                            |        animate();
+                            |       });
+                            |     &lt;/script&gt;
+                            |   &lt;/body&gt;
+                            | &lt;/html&gt;

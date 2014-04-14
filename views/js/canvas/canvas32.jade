@@ -1,238 +1,239 @@
-include ../../head.jade
-    body
-        include navbar.jade
-        .container
-            .row
-                .col-sm-3
-                    .list-group
-                        a.list-group-item(href='canvas27.jade')
-                              i.badge.badge-info
-                              | 準備
-                        a.list-group-item(href='canvas28.jade')
-                              i.badge.badge-info
-                              | 速度
-                        a.list-group-item(href='canvas29.jade')
-                              i.badge.badge-info
-                              | 境界
-                        a.list-group-item(href='canvas30.jade')
-                              i.badge.badge-info
-                              | 加速度
-                        a.list-group-item(href='canvas31.jade')
-                              i.badge.badge-info
-                              | 摩擦
-                        a.list-group-item(href='canvas32.jade')
-                              i.badge.badge-info
-                              | 衝突
-                        a.list-group-item(href='canvas33.jade')
-                              i.badge.badge-info
-                              | 跳ね返り
-                        a.list-group-item(href='canvas34.jade')
-                              i.badge.badge-info
-                              | 運動量保存
-                .col-sm-9
-                    .panel.panel-primary
-                        .panel-heading 衝突
-                        .panel-body
-                            h4 衝突検出
-                            p 今までは、運動理論を応用して、宇宙空間に一連のアステロイドを浮遊させてきました。しかし、このアステロイドたちは、ぶつかって跳ね返るのではなく、相手のなかをすり抜けていってしまうのが気持ちの悪いところです。幸い、この問題はすぐに解決に掛かれます。これは衝突検出と呼ばれているものであり、とてもリアルな動きを導入するためのすばらしい方法です。
-                            p 衝突検出のために必要な主要なステップは2つありますが、ここでは両方を説明します。最初のステップは、2つのオブジェクト（この場合はアステロイド）が重なり合っている（衝突している）かどうかを判定することで、第2のステップは、そのときに2つのオブジェクトをリアルに引き離すための方法を考えることです。この2つが揃って初めて、ビリヤード台で2つのボールがぶつかったときの動きに似た効果を生み出すことができるのです。
-                            p 作業を始める前に、まず最後のサンプルから摩擦のコードを取り除き、新しいアステロイドの加速度を0に設定します。アステロイドは、摩擦のない宇宙空間にいるはずなので、これらの効果が残っていると、サンプルがリアルでなくなってしまいます。摩擦コードを完全に取り除いてしまうのがいやであれば、コメントアウトしてください。
-                            h4 衝突を検出する
-                            p
-                                a.btn.btn-default(href='../demo/canvas/exercise5/index6.html',target='_blank')
-                                    i.glyphicon.glyphicon-play
-                                    | デモ
-                            p 2つのオブジェクトが重なりあっていれば、それは衝突しているということですから、理屈としては簡単なことです。重なり合っているのは1ピクセルであっても、もっと多くてもかまいません。どちらであっても、衝突ということになります。本当にわかりやすい話です。矩形になっているオブジェクト同士の検出をするのは比較的簡単で、JavaScriptでは次のようなコードで実現できます。
-                            pre.prettyprint.linenums
-                              | if(!(rectB.x+rectB.width &lt; rectA.x) &&
-                              | !(rectA.x+rectA.width &lt; rectB.x) &&
-                              | !(rectB.y+rectB.height &lt; rectA.y) &&
-                              | !(rectA.y+rectA.height &lt; rectB.y)){
-                              |   // 2つのオブジェクトは重なり合っている
-                              | }
-                            p 最初の2つのチェックは、矩形A、Bの左辺と右辺の間に隙間があるかどうかをチェックしています。あとの2つのチェックは、矩形A、Bの上辺と下辺の間に隙間があるかどうかをチェックしています。これらのチェックが真なら、2つの矩形の間には隙間があるはずなので、重なりあっていません。この場合、重なり合いがあるかどうかチェックしたいわけですから、すべてのルールが偽になっているかどうかをチェックします。これは結局同じ意味になります。
-                            canvas#fig1(width='400',height='300')
-                            canvas#fig2(width='400',height='300')
-                            p アステロイドのサンプルでは円を使っているので、矩形をチェックしたのではうまくいきません。偽陽性、つまり重なりあっていないのに重なり合っているという答えが返される場合が出てきます。図3を見ると、矩形は重なりあっていますが、円は重なりあっていません。ですから、別のアプローチが必要です。
-                            canvas#fig3(width='400',height='300')
-                            p 円が重なり合っているかどうかは、それぞれの円の中心距離を計算すればわかります。つまり、2つの円の半径の合計よりも2つの円の中心距離が小さいかどうかをチェックします。2つの円の半径を加えると、それらの円が互いに触れ合わずにいられる最短の距離がわかります。円の中心同士の距離がそれよりも短ければ、2つの円は重なり合っているはずです。これは比較的簡単なチェックであり、コードでも簡単に実現できます。しかし、いかに単純とは言え、使っている数字の性質上、矩形のチェックよりも計算資源的に割高になっていることは把握しておかなければなりません。
-                            canvas#fig4(width='400',height='300')
-                            p チェックしようとしている円は、どこにあってもかまわないので、2つの円の距離を計算するのは、単にx、y座標の差を計算するのと比べると難しい仕事になります。しかし、ここでも三角関数が助けてくれます。直角三角形の2辺の長さからもう1つの辺の長さを計算できるピタゴラスの定理を使います。これは非常にすばらしいものです。方程式の詳細には踏み込みませんが、衝突検出をしっかりと学びたい読者には、この定理をよく理解する必要があります。
-                            p 2つの円の距離を計算するときに必要になるのは、直角三角形の斜辺の距離です。そして、斜辺の距離を計算するには、2つの円のx、y座標の差を計算しておく必要があります。
-                            canvas#fig5(width='400',height='300')
-                            p この2つの距離は、直角三角形の斜辺を除く2つの辺の長さに対応しています。つまり、この2つがわかれば、斜辺の長さを計算するために必要な情報は揃うのです。この2つをピタゴラスの定理の方程式に当てはめます。
-                            canvas#fig6(width='400',height='300')
-                            p このあたりで、これをJavaScriptで表現する方法を考えてみましょう。以前のアステロイドコードを開き、アニメーションループのところを見てください。tmpAsteroid変数の宣言の下に、以下のコードを追記します。
-                            pre.prettyprint.linenums
-                              | for(var j = i+1; j &lt; asteroidsLength; j++){
-                              |   var tmpAsteroidB = asteroids[j];
-                              |   
-                              |   var dX = tmpAsteroidB.x - tmpAsteroid.x;
-                              |   var dY = tmpAsteroidB.y - tmpAsteroid.y;
-                              |   var distance = Math.sqrt((dX*dX)+(dY*dY));
-                              | }
-                            p この第2のループは、すべてのアステロイドがほかのすべてのアステロイドとの間で重なりあいのチェックをするために必要なものです。ループ内のj変数がi+1と初期設定されていることに注意してください。これはループの実行回数を減らすためのちょっとした工夫です。jの初期を0にすると、以前のループですでにチェックしたアステロイドの組み合わせを再びチェックすることになってしまい、少し整理されていない雑な処理になってしまいます。
-                            p 距離の計算は、dX、dY変数のなかで行われ、これらをピタゴラスの方程式に当てはめてdistance変数の中心間の距離を代入しています。方程式の平方根の部分は、Math.sqrtメソッドで実行していることに注意してください。distance変数に代入された値は、2つのアステロイドの中心と中心の間の本当の距離（単位ピクセル）です。
-                            p 中心間の距離が得られれば、アステロイドが触れ合っているかどうかを調べるのは簡単なことです。2つのアステロイドの半径を足し合わせ、距離がその値よりも小さいかどうかをチェックします。第2のループのdistance変数の宣言の後ろに次のコードを追加します。
-                            pre.prettyprint.linenums
-                              | if(distance &lt; tmpAsteroid.radius + tmpAsteroidB.radius){ 
-                              |   
-                              | }
-                            p 2つの円が重なり合っているかどうかのチェックは、この程度に複雑な処理です。そして、面白いのは、2つの円が触れ合っているときに円をどのように動かすかです。次項では、この問題に取り組みます。
-                            pre.prettyprint.linenums
-                              | $(function(){ 
-                              |   var canvas = $('#myCanvas');
-                              |   var context = canvas.get(0).getContext('2d');
-                              |   
-                              |   var canvasWidth = canvas.width();
-                              |   var canvasHeight = canvas.height();
-                              |   
-                              |   $(window).resize(resizeCanvas);
-                              |   
-                              |   function resizeCanvas(){
-                              |     canvas.attr('width', $(window).get(0).innerWidth);
-                              |     canvas.attr('height', $(window).get(0).innerHeight);
-                              |     
-                              |     canvasWidth = canvas.width();
-                              |     canvasHeight = canvas.height();
-                              |   }
-                              |   
-                              |   resizeCanvas();
-                              |   
-                              |   var playAnimation = true;
-                              |   
-                              |   var startButton = $('#startAnimation');
-                              |   var stopButton = $('#stopAnimation');
-                              |   
-                              |   startButton.hide();
-                              |   startButton.click(function(){
-                              |     $(this).hide();
-                              |     stopButton.show();
-                              |     
-                              |     playAnimation = true;
-                              |     animate();
-                              |   });
-                              |   
-                              |   stopButton.click(function(){
-                              |     $(this).hide();
-                              |     startButton.show();
-                              |     
-                              |     playAnimation = false;
-                              |   });
-                              |   
-                              |   var Asteroid = function(x, y, radius, vX, vY, ax, ay){
-                              |     this.x = x;
-                              |     this.y = y;
-                              |     this.radius = radius;
-                              | 
-                              |     this.vX = vX;
-                              |     this.vY = vY;
-                              |     this.aX = aX;
-                              |     this.aY = aY;
-                              |   };
-                              |   
-                              |   var asteroids = new Array();
-                              |   
-                              |   for(var i = 0; i &lt; 10; i++){
-                              |     var x = 20+(Math.random()*(canvasWidth-40));
-                              |     var y = 20+(Math.random()*(canvasHeight-40));
-                              |     
-                              |     var radius = 5+Math.random()*10;
-                              | 
-                              |     var vX = Math.random()*4-2;
-                              |     var vY = Math.random()*4-2;
-                              | 
-                              |     var aX = Math.random()*0.2-0.1;
-                              |     var aY = Math.random()*0.2-0.1;
-                              |     
-                              |     asteroids.push(new Asteroid(x, y, radius, vX, vY, aX, aY));
-                              |   }
-                              | 
-                              |   function animate(){     
-                              | 
-                              |     context.clearRect(0, 0, canvasWidth, canvasHeight);
-                              |     
-                              |     context.fillStyle = 'rgb(255, 255, 255)';
-                              |     
-                              |     var asteroidsLength = asteroids.length;
-                              |     for(var i = 0; i &lt; asteroidsLength; i++){
-                              |       var tmpAsteroid = asteroids[i];
-                              | 
-                              |       for(var j = i+1; j &lt; asteroidsLength; j++){
-                              |         var tmpAsteroidB = asteroids[j];
-                              |         
-                              |         var dX = tmpAsteroidB.x - tmpAsteroid.x;
-                              |         var dY = tmpAsteroidB.y - tmpAsteroid.y;
-                              |         var distance = Math.sqrt((dX*dX)+(dY*dY));
-                              |         
-                              |         
-                              |         if(distance &lt; tmpAsteroid.radius + tmpAsteroidB.radius){ 
-                              |           
-                              |         }
-                              |       }
-                              | 
-                              |       tmpAsteroid.x += tmpAsteroid.vX;
-                              |       tmpAsteroid.y += tmpAsteroid.vY;
-                              | 
-                              |       if(Math.abs(tmpAsteroid.vX) &lt; 10){
-                              |         tmpAsteroid.vX += tmpAsteroid.aX;
-                              |       }
-                              |       
-                              |       if(Math.abs(tmpAsteroid.vY) &lt; 10){
-                              |         tmpAsteroid.vY += tmpAsteroid.aY;
-                              |       }
-                              | 
-                              |       if(tmpAsteroid.x-tmpAsteroid.radius &lt; 0){
-                              |         tmpAsteroid.x = tmpAsteroid.radius;
-                              |         tmpAsteroid.vX *= -1;
-                              |         tmpAsteroid.aX *= -1;
-                              |       }
-                              |       else if(tmpAsteroid.x+tmpAsteroid.radius &gt; canvasWidth){
-                              |         tmpAsteroid.x = canvasWidth-tmpAsteroid.radius;
-                              |         tmpAsteroid.vX *= -1;
-                              |         tmpAsteroid.aX *= -1;
-                              |       }
-                              |       
-                              |       if(tmpAsteroid.y-tmpAsteroid.radius &lt; 0){
-                              |         tmpAsteroid.y = tmpAsteroid.radius;
-                              |         tmpAsteroid.vY *= -1;
-                              |         tmpAsteroid.aY *= -1;
-                              |       } else if (tmpAsteroid.y+tmpAsteroid.radius &gt; canvasHeight) {
-                              |         tmpAsteroid.y = canvasHeight-tmpAsteroid.radius;
-                              |         tmpAsteroid.vY *= -1;
-                              |         tmpAsteroid.aY *= -1;
-                              |       }
-                              | 
-                              |       /*
-                              |       if (Math.abs(tmpAsteroid.vX) &gt; 0.1) {
-                              |         tmpAsteroid.vX *= 0.9;
-                              |       } else {
-                              |         tmpAsteroid.vX = 0;
-                              |       };
-                              |       
-                              |       if (Math.abs(tmpAsteroid.vY) &gt; 0.1) {
-                              |         tmpAsteroid.vY *= 0.9;
-                              |       } else {
-                              |         tmpAsteroid.vY = 0;
-                              |       };
-                              |       */
-                              |       
-                              |       context.beginPath();
-                              |       context.arc(tmpAsteroid.x, tmpAsteroid.y, tmpAsteroid.radius, 0, Math.PI*2);
-                              |       context.closePath();
-                              |       context.fill();
-                              |     }
-                              |     
-                              |     if(playAnimation){
-                              |       setTimeout(animate, 33);
-                              |     }
-                              |   }
-                              |   animate();
-                              | });
-        .footer=title
-        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-        script(src='js/google-code-prettify/prettify.js')
-        script.
-            prettyPrint();
-        script(src='js/bootstrap.min.js')
-        script(src='coffee/list-counter.js')
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                .list-group
+                    a.list-group-item(href='../canvas/27')
+                          i.badge.badge-info
+                          | 準備
+                    a.list-group-item(href='../canvas/28')
+                          i.badge.badge-info
+                          | 速度
+                    a.list-group-item(href='../canvas/29')
+                          i.badge.badge-info
+                          | 境界
+                    a.list-group-item(href='../canvas/30')
+                          i.badge.badge-info
+                          | 加速度
+                    a.list-group-item(href='../canvas/31')
+                          i.badge.badge-info
+                          | 摩擦
+                    a.list-group-item(href='../canvas/32')
+                          i.badge.badge-info
+                          | 衝突
+                    a.list-group-item(href='../canvas/33')
+                          i.badge.badge-info
+                          | 跳ね返り
+                    a.list-group-item(href='../canvas/34')
+                          i.badge.badge-info
+                          | 運動量保存
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading 衝突
+                    .panel-body
+                        h4 衝突検出
+                        p 今までは、運動理論を応用して、宇宙空間に一連のアステロイドを浮遊させてきました。しかし、このアステロイドたちは、ぶつかって跳ね返るのではなく、相手のなかをすり抜けていってしまうのが気持ちの悪いところです。幸い、この問題はすぐに解決に掛かれます。これは衝突検出と呼ばれているものであり、とてもリアルな動きを導入するためのすばらしい方法です。
+                        p 衝突検出のために必要な主要なステップは2つありますが、ここでは両方を説明します。最初のステップは、2つのオブジェクト（この場合はアステロイド）が重なり合っている（衝突している）かどうかを判定することで、第2のステップは、そのときに2つのオブジェクトをリアルに引き離すための方法を考えることです。この2つが揃って初めて、ビリヤード台で2つのボールがぶつかったときの動きに似た効果を生み出すことができるのです。
+                        p 作業を始める前に、まず最後のサンプルから摩擦のコードを取り除き、新しいアステロイドの加速度を0に設定します。アステロイドは、摩擦のない宇宙空間にいるはずなので、これらの効果が残っていると、サンプルがリアルでなくなってしまいます。摩擦コードを完全に取り除いてしまうのがいやであれば、コメントアウトしてください。
+                        h4 衝突を検出する
+                        p
+                            a.btn.btn-default(href='../demo/canvas/exercise5/index6.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        p 2つのオブジェクトが重なりあっていれば、それは衝突しているということですから、理屈としては簡単なことです。重なり合っているのは1ピクセルであっても、もっと多くてもかまいません。どちらであっても、衝突ということになります。本当にわかりやすい話です。矩形になっているオブジェクト同士の検出をするのは比較的簡単で、JavaScriptでは次のようなコードで実現できます。
+                        pre.prettyprint.linenums
+                          | if(!(rectB.x+rectB.width &lt; rectA.x) &&
+                          | !(rectA.x+rectA.width &lt; rectB.x) &&
+                          | !(rectB.y+rectB.height &lt; rectA.y) &&
+                          | !(rectA.y+rectA.height &lt; rectB.y)){
+                          |   // 2つのオブジェクトは重なり合っている
+                          | }
+                        p 最初の2つのチェックは、矩形A、Bの左辺と右辺の間に隙間があるかどうかをチェックしています。あとの2つのチェックは、矩形A、Bの上辺と下辺の間に隙間があるかどうかをチェックしています。これらのチェックが真なら、2つの矩形の間には隙間があるはずなので、重なりあっていません。この場合、重なり合いがあるかどうかチェックしたいわけですから、すべてのルールが偽になっているかどうかをチェックします。これは結局同じ意味になります。
+                        canvas#fig1(width='400',height='300')
+                        canvas#fig2(width='400',height='300')
+                        p アステロイドのサンプルでは円を使っているので、矩形をチェックしたのではうまくいきません。偽陽性、つまり重なりあっていないのに重なり合っているという答えが返される場合が出てきます。図3を見ると、矩形は重なりあっていますが、円は重なりあっていません。ですから、別のアプローチが必要です。
+                        canvas#fig3(width='400',height='300')
+                        p 円が重なり合っているかどうかは、それぞれの円の中心距離を計算すればわかります。つまり、2つの円の半径の合計よりも2つの円の中心距離が小さいかどうかをチェックします。2つの円の半径を加えると、それらの円が互いに触れ合わずにいられる最短の距離がわかります。円の中心同士の距離がそれよりも短ければ、2つの円は重なり合っているはずです。これは比較的簡単なチェックであり、コードでも簡単に実現できます。しかし、いかに単純とは言え、使っている数字の性質上、矩形のチェックよりも計算資源的に割高になっていることは把握しておかなければなりません。
+                        canvas#fig4(width='400',height='300')
+                        p チェックしようとしている円は、どこにあってもかまわないので、2つの円の距離を計算するのは、単にx、y座標の差を計算するのと比べると難しい仕事になります。しかし、ここでも三角関数が助けてくれます。直角三角形の2辺の長さからもう1つの辺の長さを計算できるピタゴラスの定理を使います。これは非常にすばらしいものです。方程式の詳細には踏み込みませんが、衝突検出をしっかりと学びたい読者には、この定理をよく理解する必要があります。
+                        p 2つの円の距離を計算するときに必要になるのは、直角三角形の斜辺の距離です。そして、斜辺の距離を計算するには、2つの円のx、y座標の差を計算しておく必要があります。
+                        canvas#fig5(width='400',height='300')
+                        p この2つの距離は、直角三角形の斜辺を除く2つの辺の長さに対応しています。つまり、この2つがわかれば、斜辺の長さを計算するために必要な情報は揃うのです。この2つをピタゴラスの定理の方程式に当てはめます。
+                        canvas#fig6(width='400',height='300')
+                        p このあたりで、これをJavaScriptで表現する方法を考えてみましょう。以前のアステロイドコードを開き、アニメーションループのところを見てください。tmpAsteroid変数の宣言の下に、以下のコードを追記します。
+                        pre.prettyprint.linenums
+                          | for(var j = i+1; j &lt; asteroidsLength; j++){
+                          |   var tmpAsteroidB = asteroids[j];
+                          |   
+                          |   var dX = tmpAsteroidB.x - tmpAsteroid.x;
+                          |   var dY = tmpAsteroidB.y - tmpAsteroid.y;
+                          |   var distance = Math.sqrt((dX*dX)+(dY*dY));
+                          | }
+                        p この第2のループは、すべてのアステロイドがほかのすべてのアステロイドとの間で重なりあいのチェックをするために必要なものです。ループ内のj変数がi+1と初期設定されていることに注意してください。これはループの実行回数を減らすためのちょっとした工夫です。jの初期を0にすると、以前のループですでにチェックしたアステロイドの組み合わせを再びチェックすることになってしまい、少し整理されていない雑な処理になってしまいます。
+                        p 距離の計算は、dX、dY変数のなかで行われ、これらをピタゴラスの方程式に当てはめてdistance変数の中心間の距離を代入しています。方程式の平方根の部分は、Math.sqrtメソッドで実行していることに注意してください。distance変数に代入された値は、2つのアステロイドの中心と中心の間の本当の距離（単位ピクセル）です。
+                        p 中心間の距離が得られれば、アステロイドが触れ合っているかどうかを調べるのは簡単なことです。2つのアステロイドの半径を足し合わせ、距離がその値よりも小さいかどうかをチェックします。第2のループのdistance変数の宣言の後ろに次のコードを追加します。
+                        pre.prettyprint.linenums
+                          | if(distance &lt; tmpAsteroid.radius + tmpAsteroidB.radius){ 
+                          |   
+                          | }
+                        p 2つの円が重なり合っているかどうかのチェックは、この程度に複雑な処理です。そして、面白いのは、2つの円が触れ合っているときに円をどのように動かすかです。次項では、この問題に取り組みます。
+                        pre.prettyprint.linenums
+                          | $(function(){ 
+                          |   var canvas = $('#myCanvas');
+                          |   var context = canvas.get(0).getContext('2d');
+                          |   
+                          |   var canvasWidth = canvas.width();
+                          |   var canvasHeight = canvas.height();
+                          |   
+                          |   $(window).resize(resizeCanvas);
+                          |   
+                          |   function resizeCanvas(){
+                          |     canvas.attr('width', $(window).get(0).innerWidth);
+                          |     canvas.attr('height', $(window).get(0).innerHeight);
+                          |     
+                          |     canvasWidth = canvas.width();
+                          |     canvasHeight = canvas.height();
+                          |   }
+                          |   
+                          |   resizeCanvas();
+                          |   
+                          |   var playAnimation = true;
+                          |   
+                          |   var startButton = $('#startAnimation');
+                          |   var stopButton = $('#stopAnimation');
+                          |   
+                          |   startButton.hide();
+                          |   startButton.click(function(){
+                          |     $(this).hide();
+                          |     stopButton.show();
+                          |     
+                          |     playAnimation = true;
+                          |     animate();
+                          |   });
+                          |   
+                          |   stopButton.click(function(){
+                          |     $(this).hide();
+                          |     startButton.show();
+                          |     
+                          |     playAnimation = false;
+                          |   });
+                          |   
+                          |   var Asteroid = function(x, y, radius, vX, vY, ax, ay){
+                          |     this.x = x;
+                          |     this.y = y;
+                          |     this.radius = radius;
+                          | 
+                          |     this.vX = vX;
+                          |     this.vY = vY;
+                          |     this.aX = aX;
+                          |     this.aY = aY;
+                          |   };
+                          |   
+                          |   var asteroids = new Array();
+                          |   
+                          |   for(var i = 0; i &lt; 10; i++){
+                          |     var x = 20+(Math.random()*(canvasWidth-40));
+                          |     var y = 20+(Math.random()*(canvasHeight-40));
+                          |     
+                          |     var radius = 5+Math.random()*10;
+                          | 
+                          |     var vX = Math.random()*4-2;
+                          |     var vY = Math.random()*4-2;
+                          | 
+                          |     var aX = Math.random()*0.2-0.1;
+                          |     var aY = Math.random()*0.2-0.1;
+                          |     
+                          |     asteroids.push(new Asteroid(x, y, radius, vX, vY, aX, aY));
+                          |   }
+                          | 
+                          |   function animate(){     
+                          | 
+                          |     context.clearRect(0, 0, canvasWidth, canvasHeight);
+                          |     
+                          |     context.fillStyle = 'rgb(255, 255, 255)';
+                          |     
+                          |     var asteroidsLength = asteroids.length;
+                          |     for(var i = 0; i &lt; asteroidsLength; i++){
+                          |       var tmpAsteroid = asteroids[i];
+                          | 
+                          |       for(var j = i+1; j &lt; asteroidsLength; j++){
+                          |         var tmpAsteroidB = asteroids[j];
+                          |         
+                          |         var dX = tmpAsteroidB.x - tmpAsteroid.x;
+                          |         var dY = tmpAsteroidB.y - tmpAsteroid.y;
+                          |         var distance = Math.sqrt((dX*dX)+(dY*dY));
+                          |         
+                          |         
+                          |         if(distance &lt; tmpAsteroid.radius + tmpAsteroidB.radius){ 
+                          |           
+                          |         }
+                          |       }
+                          | 
+                          |       tmpAsteroid.x += tmpAsteroid.vX;
+                          |       tmpAsteroid.y += tmpAsteroid.vY;
+                          | 
+                          |       if(Math.abs(tmpAsteroid.vX) &lt; 10){
+                          |         tmpAsteroid.vX += tmpAsteroid.aX;
+                          |       }
+                          |       
+                          |       if(Math.abs(tmpAsteroid.vY) &lt; 10){
+                          |         tmpAsteroid.vY += tmpAsteroid.aY;
+                          |       }
+                          | 
+                          |       if(tmpAsteroid.x-tmpAsteroid.radius &lt; 0){
+                          |         tmpAsteroid.x = tmpAsteroid.radius;
+                          |         tmpAsteroid.vX *= -1;
+                          |         tmpAsteroid.aX *= -1;
+                          |       }
+                          |       else if(tmpAsteroid.x+tmpAsteroid.radius &gt; canvasWidth){
+                          |         tmpAsteroid.x = canvasWidth-tmpAsteroid.radius;
+                          |         tmpAsteroid.vX *= -1;
+                          |         tmpAsteroid.aX *= -1;
+                          |       }
+                          |       
+                          |       if(tmpAsteroid.y-tmpAsteroid.radius &lt; 0){
+                          |         tmpAsteroid.y = tmpAsteroid.radius;
+                          |         tmpAsteroid.vY *= -1;
+                          |         tmpAsteroid.aY *= -1;
+                          |       } else if (tmpAsteroid.y+tmpAsteroid.radius &gt; canvasHeight) {
+                          |         tmpAsteroid.y = canvasHeight-tmpAsteroid.radius;
+                          |         tmpAsteroid.vY *= -1;
+                          |         tmpAsteroid.aY *= -1;
+                          |       }
+                          | 
+                          |       /*
+                          |       if (Math.abs(tmpAsteroid.vX) &gt; 0.1) {
+                          |         tmpAsteroid.vX *= 0.9;
+                          |       } else {
+                          |         tmpAsteroid.vX = 0;
+                          |       };
+                          |       
+                          |       if (Math.abs(tmpAsteroid.vY) &gt; 0.1) {
+                          |         tmpAsteroid.vY *= 0.9;
+                          |       } else {
+                          |         tmpAsteroid.vY = 0;
+                          |       };
+                          |       */
+                          |       
+                          |       context.beginPath();
+                          |       context.arc(tmpAsteroid.x, tmpAsteroid.y, tmpAsteroid.radius, 0, Math.PI*2);
+                          |       context.closePath();
+                          |       context.fill();
+                          |     }
+                          |     
+                          |     if(playAnimation){
+                          |       setTimeout(animate, 33);
+                          |     }
+                          |   }
+                          |   animate();
+                          | });

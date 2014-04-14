@@ -1,162 +1,163 @@
-include ../../head.jade
-    body
-        include navbar.jade
-        .container
-            .row
-                .col-sm-3
-                    .list-group
-                        a.list-group-item(href='canvas27.jade')
-                              i.badge.badge-info
-                              | 準備
-                        a.list-group-item(href='canvas28.jade')
-                              i.badge.badge-info
-                              | 速度
-                        a.list-group-item(href='canvas29.jade')
-                              i.badge.badge-info
-                              | 境界
-                        a.list-group-item(href='canvas30.jade')
-                              i.badge.badge-info
-                              | 加速度
-                        a.list-group-item(href='canvas31.jade')
-                              i.badge.badge-info
-                              | 摩擦
-                        a.list-group-item(href='canvas32.jade')
-                              i.badge.badge-info
-                              | 衝突
-                        a.list-group-item(href='canvas33.jade')
-                              i.badge.badge-info
-                              | 跳ね返り
-                        a.list-group-item(href='canvas34.jade')
-                              i.badge.badge-info
-                              | 運動量保存
-                .col-sm-9
-                    .panel.panel-primary
-                        .panel-heading 速度
-                        .panel-body
-                            h4 速度
-                            p
-                                a.btn.btn-default(href='../demo/canvas/exercise5/index2.html',target='_blank')
-                                    i.glyphicon.glyphicon-play
-                                    | デモ
-                            p 第6章では、x、y座標を増減させて図形を動かしていました。単純なやり方ですが、個々の図形に実質的に速度を与えていたわけで、うまくできていました。速度は、速さと向きだということを思い出してください。速さは、移動するピクセルの数、向きは左右（x）と上下（y）です。ですから、物理のことを知らないうちから、物理をすでに使っていたのです。
-                            p しかし、前章の速度は、完全にランダムか、どの図形でもまったく同じになっていたところが欠点でした。そこで、両極端から離れて個々のアステロイドに独自の速度を与えるようにしてみましょう（この章では、図形ではなくアステロイドと呼ぶことになっていることを思い出してください）。そのためには、Asteroidクラスに次のように2つの新プロパティを定義する必要があります。
-                            pre.prettyprint.linenums
-                                | var Asteroid = function(x, y, radius, vX, vY){
-                                |   this.x = x;
-                                |   this.y = y;
-                                |   this.radius = radius;
-                                | 
-                                |   this.vX = vX;
-                                |   this.vY = vY;
-                                | }
-                            p vX、vYプロパティを追加したため、個々のアステロイドに独自の速度を与えられるようになりました。クラス関数にvXとvYのための引数が追加されていることに注意してください。そのため、新しいアステロイドを作るときに速度を設定することができます。次のステップは、アステロイドの作成時に速度を設定することです。具体的には、あイメーションループを1度実行するたびに、アステロイドを何ピクセルずつ動かすか定義します。
-                            p すべてのアステロイドを作成するループのなかで、radius設定行の下に次のコードを挿入してください。
-                            pre.prettyprint.linenums
-                                | var Vx = Math.random()*4-2;
-                                | var Vy = Math.random()*4-2;
-                            p そして、Asteroidクラスに引数として新しい速度を渡すために、その後ろの行を次のコードに置き換えます。
-                            pre.prettyprint.linenums
-                                | asteroids.push(new Asteroid(x, y, radius, xV, vY));
-                            p このサンプルでは、x、y両方向について-2から2までの乱数として速度を設定しています。すでに学んだように、Math.random自体は0から1までの10進少数を返してくるので、-2から2までの値を得るには、2つのことをしなければなりません。まず、乱数を4倍してから0から4までの乱数が得られるようにします。次に、得られた数値から2を引き、-2（0-2）から（4-2）までの乱数が得られるようにします。この方法を使えば、任意の範囲の乱数を計算することができます。
-                            p この状態のままでは、何も起きません。何かを起こすためには、新しい速度プロパティを使って個々のアステロイドのx、y座標を更新する必要があります。アニメーションループのtmpAsteroid変数の宣言の下に、次のコードを追加してください。
-                            pre.prettyprint.linenums
-                                | tmpAsteroid.x += tmpAsteroid.vX;
-                                | tmpAsteroid.y += tmpAsteroid.vY;
-                            p これは、基本的に前章で行っていたことと同じです。アステロイドの現在の位置に定義済みのピクセル数を加えていくということです。違いは、アステロイドごとに異なる速度を使うようになったことです。そのため、アステロイデドは、それぞれ異なる方向に異る速さ（ループあたりのピクセル数）で動くようになります。このように動きを抽象化することが、アニメーションをランダムで自然な感じに見せるための秘訣です。
-                            p HTMLファイルをリフレッシュするか、新たにロードすると、アステロイド風のオブジェクトがキャンバスを動きまわるのが見られるはずです。ページを何度かリフレッシュすると、アステロイドが異なる位置に現れ、異なる速度で動くことがわかります。これはなかなかのものです。しかし、今はまだ境界の概念がないので、すべてのアステロイドが画面の端から消えてしまう前にstopボタンを押さなければなりません。
-                            pre.prettyprint.linenums
-                                | $(function(){   
-                                |   var canvas = $('#myCanvas');
-                                |   var context = canvas.get(0).getContext('2d');
-                                |   
-                                |   var canvasWidth = canvas.width();
-                                |   var canvasHeight = canvas.height();
-                                |   
-                                |   $(window).resize(resizeCanvas);
-                                |   
-                                |   function resizeCanvas(){
-                                |       canvas.attr('width', $(window).get(0).innerWidth);
-                                |       canvas.attr('height', $(window).get(0).innerHeight);
-                                |       
-                                |       canvasWidth = canvas.width();
-                                |       canvasHeight = canvas.height();
-                                |   }
-                                |   
-                                |   resizeCanvas();
-                                |   
-                                |   var playAnimation = true;
-                                |   
-                                |   var startButton = $('#startAnimation');
-                                |   var stopButton = $('#stopAnimation');
-                                |   
-                                |   startButton.hide();
-                                |   startButton.click(function() {
-                                |       $(this).hide();
-                                |       stopButton.show();
-                                |       
-                                |       playAnimation = true;
-                                |       animate();
-                                |   });
-                                |   
-                                |   stopButton.click(function() {
-                                |       $(this).hide();
-                                |       startButton.show();
-                                |       
-                                |       playAnimation = false;
-                                |   });
-                                |   
-                                |   var Asteroid = function(x, y, radius, vX, vY){
-                                |       this.x = x;
-                                |       this.y = y;
-                                |       this.radius = radius;
-                                | 
-                                |       this.vX = vX;
-                                |       this.vY = vY;
-                                |   };
-                                |   
-                                |   var asteroids = new Array();
-                                |   
-                                |   for(var i = 0; i &lt; 10; i++){
-                                |       var x = 20+(Math.random()*(canvasWidth-40));
-                                |       var y = 20+(Math.random()*(canvasHeight-40));
-                                |       
-                                |       var radius = 5+Math.random()*10;
-                                | 
-                                |       var vX = Math.random()*4-2;
-                                |       var vY = Math.random()*4-2;
-                                |       
-                                |       asteroids.push(new Asteroid(x, y, radius, vX, vY));
-                                |   }
-                                | 
-                                |   function animate(){                 
-                                | 
-                                |       context.clearRect(0, 0, canvasWidth, canvasHeight);
-                                |       
-                                |       context.fillStyle = 'rgb(255, 255, 255)';
-                                |       
-                                |       var asteroidsLength = asteroids.length;
-                                |       for(var i = 0; i &lt; asteroidsLength; i++){
-                                |           var tmpAsteroid = asteroids[i];
-                                | 
-                                |           tmpAsteroid.x += tmpAsteroid.vX;
-                                |           tmpAsteroid.y += tmpAsteroid.vY;
-                                |           
-                                |           context.beginPath();
-                                |           context.arc(tmpAsteroid.x, tmpAsteroid.y, tmpAsteroid.radius, 0, Math.PI*2);
-                                |           context.closePath();
-                                |           context.fill();
-                                |       }
-                                |       
-                                |       if(playAnimation){
-                                |           setTimeout(animate, 33);
-                                |       }
-                                |   }
-                                |   animate();
-                                | });
-        .footer=title
-        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-        script(src='js/google-code-prettify/prettify.js')
-        script.
-            prettyPrint();
-        script(src='js/bootstrap.min.js')
-        script(src='coffee/list-counter.js')
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                .list-group
+                    a.list-group-item(href='../canvas/27')
+                          i.badge.badge-info
+                          | 準備
+                    a.list-group-item(href='../canvas/28')
+                          i.badge.badge-info
+                          | 速度
+                    a.list-group-item(href='../canvas/29')
+                          i.badge.badge-info
+                          | 境界
+                    a.list-group-item(href='../canvas/30')
+                          i.badge.badge-info
+                          | 加速度
+                    a.list-group-item(href='../canvas/31')
+                          i.badge.badge-info
+                          | 摩擦
+                    a.list-group-item(href='../canvas/32')
+                          i.badge.badge-info
+                          | 衝突
+                    a.list-group-item(href='../canvas/33')
+                          i.badge.badge-info
+                          | 跳ね返り
+                    a.list-group-item(href='../canvas/34')
+                          i.badge.badge-info
+                          | 運動量保存
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading 速度
+                    .panel-body
+                        h4 速度
+                        p
+                            a.btn.btn-default(href='../demo/canvas/exercise5/index2.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        p 第6章では、x、y座標を増減させて図形を動かしていました。単純なやり方ですが、個々の図形に実質的に速度を与えていたわけで、うまくできていました。速度は、速さと向きだということを思い出してください。速さは、移動するピクセルの数、向きは左右（x）と上下（y）です。ですから、物理のことを知らないうちから、物理をすでに使っていたのです。
+                        p しかし、前章の速度は、完全にランダムか、どの図形でもまったく同じになっていたところが欠点でした。そこで、両極端から離れて個々のアステロイドに独自の速度を与えるようにしてみましょう（この章では、図形ではなくアステロイドと呼ぶことになっていることを思い出してください）。そのためには、Asteroidクラスに次のように2つの新プロパティを定義する必要があります。
+                        pre.prettyprint.linenums
+                            | var Asteroid = function(x, y, radius, vX, vY){
+                            |   this.x = x;
+                            |   this.y = y;
+                            |   this.radius = radius;
+                            | 
+                            |   this.vX = vX;
+                            |   this.vY = vY;
+                            | }
+                        p vX、vYプロパティを追加したため、個々のアステロイドに独自の速度を与えられるようになりました。クラス関数にvXとvYのための引数が追加されていることに注意してください。そのため、新しいアステロイドを作るときに速度を設定することができます。次のステップは、アステロイドの作成時に速度を設定することです。具体的には、あイメーションループを1度実行するたびに、アステロイドを何ピクセルずつ動かすか定義します。
+                        p すべてのアステロイドを作成するループのなかで、radius設定行の下に次のコードを挿入してください。
+                        pre.prettyprint.linenums
+                            | var Vx = Math.random()*4-2;
+                            | var Vy = Math.random()*4-2;
+                        p そして、Asteroidクラスに引数として新しい速度を渡すために、その後ろの行を次のコードに置き換えます。
+                        pre.prettyprint.linenums
+                            | asteroids.push(new Asteroid(x, y, radius, xV, vY));
+                        p このサンプルでは、x、y両方向について-2から2までの乱数として速度を設定しています。すでに学んだように、Math.random自体は0から1までの10進少数を返してくるので、-2から2までの値を得るには、2つのことをしなければなりません。まず、乱数を4倍してから0から4までの乱数が得られるようにします。次に、得られた数値から2を引き、-2（0-2）から（4-2）までの乱数が得られるようにします。この方法を使えば、任意の範囲の乱数を計算することができます。
+                        p この状態のままでは、何も起きません。何かを起こすためには、新しい速度プロパティを使って個々のアステロイドのx、y座標を更新する必要があります。アニメーションループのtmpAsteroid変数の宣言の下に、次のコードを追加してください。
+                        pre.prettyprint.linenums
+                            | tmpAsteroid.x += tmpAsteroid.vX;
+                            | tmpAsteroid.y += tmpAsteroid.vY;
+                        p これは、基本的に前章で行っていたことと同じです。アステロイドの現在の位置に定義済みのピクセル数を加えていくということです。違いは、アステロイドごとに異なる速度を使うようになったことです。そのため、アステロイデドは、それぞれ異なる方向に異る速さ（ループあたりのピクセル数）で動くようになります。このように動きを抽象化することが、アニメーションをランダムで自然な感じに見せるための秘訣です。
+                        p HTMLファイルをリフレッシュするか、新たにロードすると、アステロイド風のオブジェクトがキャンバスを動きまわるのが見られるはずです。ページを何度かリフレッシュすると、アステロイドが異なる位置に現れ、異なる速度で動くことがわかります。これはなかなかのものです。しかし、今はまだ境界の概念がないので、すべてのアステロイドが画面の端から消えてしまう前にstopボタンを押さなければなりません。
+                        pre.prettyprint.linenums
+                            | $(function(){   
+                            |   var canvas = $('#myCanvas');
+                            |   var context = canvas.get(0).getContext('2d');
+                            |   
+                            |   var canvasWidth = canvas.width();
+                            |   var canvasHeight = canvas.height();
+                            |   
+                            |   $(window).resize(resizeCanvas);
+                            |   
+                            |   function resizeCanvas(){
+                            |       canvas.attr('width', $(window).get(0).innerWidth);
+                            |       canvas.attr('height', $(window).get(0).innerHeight);
+                            |       
+                            |       canvasWidth = canvas.width();
+                            |       canvasHeight = canvas.height();
+                            |   }
+                            |   
+                            |   resizeCanvas();
+                            |   
+                            |   var playAnimation = true;
+                            |   
+                            |   var startButton = $('#startAnimation');
+                            |   var stopButton = $('#stopAnimation');
+                            |   
+                            |   startButton.hide();
+                            |   startButton.click(function() {
+                            |       $(this).hide();
+                            |       stopButton.show();
+                            |       
+                            |       playAnimation = true;
+                            |       animate();
+                            |   });
+                            |   
+                            |   stopButton.click(function() {
+                            |       $(this).hide();
+                            |       startButton.show();
+                            |       
+                            |       playAnimation = false;
+                            |   });
+                            |   
+                            |   var Asteroid = function(x, y, radius, vX, vY){
+                            |       this.x = x;
+                            |       this.y = y;
+                            |       this.radius = radius;
+                            | 
+                            |       this.vX = vX;
+                            |       this.vY = vY;
+                            |   };
+                            |   
+                            |   var asteroids = new Array();
+                            |   
+                            |   for(var i = 0; i &lt; 10; i++){
+                            |       var x = 20+(Math.random()*(canvasWidth-40));
+                            |       var y = 20+(Math.random()*(canvasHeight-40));
+                            |       
+                            |       var radius = 5+Math.random()*10;
+                            | 
+                            |       var vX = Math.random()*4-2;
+                            |       var vY = Math.random()*4-2;
+                            |       
+                            |       asteroids.push(new Asteroid(x, y, radius, vX, vY));
+                            |   }
+                            | 
+                            |   function animate(){                 
+                            | 
+                            |       context.clearRect(0, 0, canvasWidth, canvasHeight);
+                            |       
+                            |       context.fillStyle = 'rgb(255, 255, 255)';
+                            |       
+                            |       var asteroidsLength = asteroids.length;
+                            |       for(var i = 0; i &lt; asteroidsLength; i++){
+                            |           var tmpAsteroid = asteroids[i];
+                            | 
+                            |           tmpAsteroid.x += tmpAsteroid.vX;
+                            |           tmpAsteroid.y += tmpAsteroid.vY;
+                            |           
+                            |           context.beginPath();
+                            |           context.arc(tmpAsteroid.x, tmpAsteroid.y, tmpAsteroid.radius, 0, Math.PI*2);
+                            |           context.closePath();
+                            |           context.fill();
+                            |       }
+                            |       
+                            |       if(playAnimation){
+                            |           setTimeout(animate, 33);
+                            |       }
+                            |   }
+                            |   animate();
+                            | });

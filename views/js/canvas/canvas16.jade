@@ -1,404 +1,399 @@
-!!!
-html(lang='ja')
-    head
-        meta(name='viewport',content='width=device-width,initial-scale=1.0')
-        link(href='css/bootstrap.min.css',rel='stylesheet',media='screen')
-        link(href='js/dtree/dtree.css', rel='stylesheet', media='screen')
-        link(href='less/common.less',rel='stylesheet',media='screen')
-        link(href='js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
-        title=title
-    body
-        include navbar.jade
-        .container
-            .row
-                .col-sm-3
-                    include left.jade
-                .col-sm-9
-                    .panel.panel-primary
-                        .panel-heading
-                            i.glyphicon.glyphicon-book
-                            &nbsp;三角関数について
-                        .panel-body
-                            .alert.alert-info 三角関数
-                            p 図形を直線上で動かさなければならないという理由はありません。地球が太陽のまわりを回るように、オブジェクトを円周に沿ってアニメーとしたいときにどうしたらよいのでしょうか。このような動きはまったく可能であり、コードもそれほど多くなりませんが、三角関数を使うため、理解するために少し時間がかかるかもしれません。
-                            canvas#fig1(width='400',height='300')
-                            p 考え方は単純です。図形を円周上に配置すればよいのです。円周上のどの位置からスタートしてもかまいませんが、話を単純にするために、円周上の角度0ラジアンの位置、つまり円周の右端に図形を置くことにしましょう（図1参照）。そして、アニメーションループを実行するたびに、円周上の角度を少しずつ増やした位置に図形を置きます。すると、図形は円周上をぐるぐる回るように動きます。このように書くと簡単な感じがします。では、コードでこれをどのように書いたらよいかを調べましょう。
-                            p ここで考えている問題は、円周上のある位置に図形を置いたときの(x, y)座標をどのように計算するかということです（図2参照）。難しそうに思えるかもしれませんが、実際にはごく簡単な問題です。ただし、問題を正しい見方で見なければ、簡単だと感じることはできないでしょう。
-                            canvas#fig2(width='400',height='300')
-                            p 問題を解くためには、まず円の大きさがどのくらいかわかっていないなければなりません。サイズは自由に選べます。これはあなたのサンプルなので、実際のサイズはいくつにしてもかまいませんが、大切なのは、円の大きさが半径（中心から円周までの距離）で表せることです。図形をアニメートしようとしている円周上で、図形を動かそうとしている位置まで半径を描いてみると、何か面白いことに気づくはずです（図3参照）。
-                            canvas#fig3(width='400',height='300')
-                            p わかりますか?目を思い切り細めて頭を少し傾けて、さらに運がよければ、直角三角形の斜辺が見えてくるでしょう。見えなくても気にしないでください。これを初めて学ぶ人は、想像力をかなり駆使しなければなりません。図4には、私が言っている三角形が描かれています。
-                            canvas#fig4(width='400',height='300')
-                            p そういうわけで、円のなかには直角三角形が含まれています。すばらしい。でも、それがどのように役立つというのでしょうか?この三角形は、円周上の新しい位置の(x, y)座標を計算するために必要なすべての情報を与えてくれるのです。おおよその答えを先に言っておくと、三角形があり、2つの角度（直角と、円周上の頂点のところの角度）がわかっているので、基本的な三角関数を適用すれば、求めている値はわかるのです。数学が役に立つのは、まさにこういうことからも明らかです。しかし、結果に飛びついてしまう前に、ここで三角関数が出てくる理由を簡単に説明させてください。
-                            p 三角関数の基礎を要約すると、三角形の1つの角が直角で、他の2つのうちどちらかの角度がわかっていれば、三角形の辺の比を計算できるということです。この比を使えば、好みの単位（この場合はピクセル）で辺の長さを計算できます。計算のためには、三角形のどの辺の長さを計算しなければならないかをはっきりさせておかなければなりません。どの辺かによって計算に使う三角関数が異なります。3つの辺には斜辺（もっとも長い辺：hypotenuse）、隣辺（90度以外のわかっている角度で斜辺と交わっている辺：adjacent）、対辺（わかっている角度に向かい合っている辺：opposite）という名前があります。図5で確かめてください。
-                            canvas#fig5(width='400',height='300')
-                            p 辺と辺の比率は、正弦（sin）、余弦（cos）、正接（tan）の3種類の三角関数のどれかを使って表します。正弦は斜辺の長さに対する対辺の長さ、余弦は斜辺の長さに対する隣辺の長さ、正接は隣辺の長さに対する対辺の長さを表します（図6参照）。これらの関数は、SOH（sine-opposite-hypotenuse）、CAH（cosine-adjacent-hypotenuse）、TOA（tangent-opposite-adjacent）とも呼ばれています（続けてソウカトウアと発音します）。正しい関数にわかっている角度を与えれば、座標を計算するために必要な比率が得られます。
-                            canvas#fig6(width='400',height='300')
-                            p 今の例では、三角関数の隣辺（x座標）と対辺（y座標）を知りたいと思っているわけです（図7参照）。これらの長さを計算するには、まずわかっている角度を対応する三角関数に渡して比率を求めます。JavaScriptでは、Mathオブジェクトを使えばこれらの比率を知ることができます。
-                            pre.prettyprint.linenums
-                                | var angle = 45;
-                                | var adjRatio = Math.cos(angle*(Math.PI/180));
-                                | var oppRatio = Math.sin(angle*(Math.PI/180));
-                            p このコードでは、Mathオブジェクトのcos、sinメソッドを呼び出す前にちょっとした計算をしています。この計算は、度数法の角度をラジアンの角度に変換しています。JavaScriptの三角関数はラジアンを使っているのです。最初からラジアンを使っていれば、変換は不要です。
-                            canvas#fig7(width='400',height='300')
-                            p 比率がわかっても、話はまだ半分しか終わっていません。残り半分、つまり最終的な答えを得るためには、次のように斜辺の長さ（半径のことなので、長さはすでにわかっています）とこれらの比率を掛け合わせる必要があります（図8参照）。
-                            pre.prettyprint.linenums
-                                | var radius = 50;
-                                | var x = radius * adjRatio;
-                                | var y = radius * oppRatio;
-                            canvas#fig8(width='400',height='300')
-        .footer=title
-        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-        script(src='js/google-code-prettify/prettify.js')
-        script.
-            prettyPrint();
-        script.
-            /*** 図1 ***/
-
-            var canvas = $('#fig1');
-            var context = canvas.get(0).getContext("2d");
-
-            context.font = 'bold 12px serif';
-            context.fillStyle = 'rgb(0, 0, 0)';
-            context.fillText('図1：円軌道に沿って図形をアニメートする', 0, 10);
-
-            context.lineWidth = 2;
-            context.strokeStyle = 'rgba(0, 0, 0, 0.5)';
-            context.arc(150, 150, 100, 0, Math.PI*2, false);
-            context.stroke();
-
-            context.lineWidth = 4;
-            context.strokeStyle = 'rgba(0, 0, 255, 1)';
-            context.beginPath();
-            context.arc(150, 150, 25, 0, 7*Math.PI/4, false);
-            context.lineTo(7*Math.PI/4+150, 7*Math.PI/4+111);
-            context.stroke()
-
-            context.beginPath();
-            context.arc(150, 150, 25, 0, 7*Math.PI/4, false);
-            context.lineTo(7*Math.PI/4+148, 7*Math.PI/4+129);
-            context.stroke()
-
-            context.font = 'bold 12px sans-serif';
-
-            context.fillStyle = 'rgba(255, 0, 0, 0.3)';
-            context.fillRect(150+100*Math.cos(Math.PI*0)-10, 150+100*Math.sin(Math.PI*0)-10, 20, 20); //0PI
-
-            context.fillStyle = 'rgb(0, 0, 0)';
-            context.fillText('0 & 360度', 150+70*Math.cos(Math.PI*0)-40, 150+70*Math.sin(Math.PI*0));
-            context.fillText('0 & 2PI', 150+120*Math.cos(Math.PI*0)-10, 150+120*Math.sin(Math.PI*0));
-
-            context.fillStyle = 'rgba(255, 0, 0, 0.4)';
-            context.fillRect(150+100*Math.cos(Math.PI/4)-10, 150+100*Math.sin(Math.PI/4)-10, 20, 20); //1/4PI
-
-            context.fillStyle = 'rgba(255, 0, 0, 0.5)';
-            context.fillRect(150+100*Math.cos(Math.PI/2)-10, 150+100*Math.sin(Math.PI/2)-10, 20, 20); //1/2PI
-
-            context.fillStyle = 'rgb(0, 0, 0)';
-            context.fillText('90度', 150+70*Math.cos(Math.PI/2)-10, 150+70*Math.sin(Math.PI/2));
-            context.fillText('1/2PI', 150+130*Math.cos(Math.PI/2)-10, 150+130*Math.sin(Math.PI/2));
-
-            context.fillStyle = 'rgba(255, 0, 0, 0.6)';
-            context.fillRect(150+100*Math.cos(3*Math.PI/4)-10, 150+100*Math.sin(3*Math.PI/4)-10, 20, 20); //3/4PI
-
-            context.fillStyle = 'rgba(255, 0, 0, 0.7)';
-            context.fillRect(150+100*Math.cos(Math.PI)-10, 150+100*Math.sin(Math.PI)-10, 20, 20); //1PI
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        &nbsp;三角関数について
+                    .panel-body
+                        .alert.alert-info 三角関数
+                        p 図形を直線上で動かさなければならないという理由はありません。地球が太陽のまわりを回るように、オブジェクトを円周に沿ってアニメーとしたいときにどうしたらよいのでしょうか。このような動きはまったく可能であり、コードもそれほど多くなりませんが、三角関数を使うため、理解するために少し時間がかかるかもしれません。
+                        canvas#fig1(width='400',height='300')
+                        p 考え方は単純です。図形を円周上に配置すればよいのです。円周上のどの位置からスタートしてもかまいませんが、話を単純にするために、円周上の角度0ラジアンの位置、つまり円周の右端に図形を置くことにしましょう（図1参照）。そして、アニメーションループを実行するたびに、円周上の角度を少しずつ増やした位置に図形を置きます。すると、図形は円周上をぐるぐる回るように動きます。このように書くと簡単な感じがします。では、コードでこれをどのように書いたらよいかを調べましょう。
+                        p ここで考えている問題は、円周上のある位置に図形を置いたときの(x, y)座標をどのように計算するかということです（図2参照）。難しそうに思えるかもしれませんが、実際にはごく簡単な問題です。ただし、問題を正しい見方で見なければ、簡単だと感じることはできないでしょう。
+                        canvas#fig2(width='400',height='300')
+                        p 問題を解くためには、まず円の大きさがどのくらいかわかっていないなければなりません。サイズは自由に選べます。これはあなたのサンプルなので、実際のサイズはいくつにしてもかまいませんが、大切なのは、円の大きさが半径（中心から円周までの距離）で表せることです。図形をアニメートしようとしている円周上で、図形を動かそうとしている位置まで半径を描いてみると、何か面白いことに気づくはずです（図3参照）。
+                        canvas#fig3(width='400',height='300')
+                        p わかりますか?目を思い切り細めて頭を少し傾けて、さらに運がよければ、直角三角形の斜辺が見えてくるでしょう。見えなくても気にしないでください。これを初めて学ぶ人は、想像力をかなり駆使しなければなりません。図4には、私が言っている三角形が描かれています。
+                        canvas#fig4(width='400',height='300')
+                        p そういうわけで、円のなかには直角三角形が含まれています。すばらしい。でも、それがどのように役立つというのでしょうか?この三角形は、円周上の新しい位置の(x, y)座標を計算するために必要なすべての情報を与えてくれるのです。おおよその答えを先に言っておくと、三角形があり、2つの角度（直角と、円周上の頂点のところの角度）がわかっているので、基本的な三角関数を適用すれば、求めている値はわかるのです。数学が役に立つのは、まさにこういうことからも明らかです。しかし、結果に飛びついてしまう前に、ここで三角関数が出てくる理由を簡単に説明させてください。
+                        p 三角関数の基礎を要約すると、三角形の1つの角が直角で、他の2つのうちどちらかの角度がわかっていれば、三角形の辺の比を計算できるということです。この比を使えば、好みの単位（この場合はピクセル）で辺の長さを計算できます。計算のためには、三角形のどの辺の長さを計算しなければならないかをはっきりさせておかなければなりません。どの辺かによって計算に使う三角関数が異なります。3つの辺には斜辺（もっとも長い辺：hypotenuse）、隣辺（90度以外のわかっている角度で斜辺と交わっている辺：adjacent）、対辺（わかっている角度に向かい合っている辺：opposite）という名前があります。図5で確かめてください。
+                        canvas#fig5(width='400',height='300')
+                        p 辺と辺の比率は、正弦（sin）、余弦（cos）、正接（tan）の3種類の三角関数のどれかを使って表します。正弦は斜辺の長さに対する対辺の長さ、余弦は斜辺の長さに対する隣辺の長さ、正接は隣辺の長さに対する対辺の長さを表します（図6参照）。これらの関数は、SOH（sine-opposite-hypotenuse）、CAH（cosine-adjacent-hypotenuse）、TOA（tangent-opposite-adjacent）とも呼ばれています（続けてソウカトウアと発音します）。正しい関数にわかっている角度を与えれば、座標を計算するために必要な比率が得られます。
+                        canvas#fig6(width='400',height='300')
+                        p 今の例では、三角関数の隣辺（x座標）と対辺（y座標）を知りたいと思っているわけです（図7参照）。これらの長さを計算するには、まずわかっている角度を対応する三角関数に渡して比率を求めます。JavaScriptでは、Mathオブジェクトを使えばこれらの比率を知ることができます。
+                        pre.prettyprint.linenums
+                            | var angle = 45;
+                            | var adjRatio = Math.cos(angle*(Math.PI/180));
+                            | var oppRatio = Math.sin(angle*(Math.PI/180));
+                        p このコードでは、Mathオブジェクトのcos、sinメソッドを呼び出す前にちょっとした計算をしています。この計算は、度数法の角度をラジアンの角度に変換しています。JavaScriptの三角関数はラジアンを使っているのです。最初からラジアンを使っていれば、変換は不要です。
+                        canvas#fig7(width='400',height='300')
+                        p 比率がわかっても、話はまだ半分しか終わっていません。残り半分、つまり最終的な答えを得るためには、次のように斜辺の長さ（半径のことなので、長さはすでにわかっています）とこれらの比率を掛け合わせる必要があります（図8参照）。
+                        pre.prettyprint.linenums
+                            | var radius = 50;
+                            | var x = radius * adjRatio;
+                            | var y = radius * oppRatio;
+                        canvas#fig8(width='400',height='300')
+                            
+block script
+    script.
+        /*** 図1 ***/
+
+        var canvas = $('#fig1');
+        var context = canvas.get(0).getContext("2d");
+
+        context.font = 'bold 12px serif';
+        context.fillStyle = 'rgb(0, 0, 0)';
+        context.fillText('図1：円軌道に沿って図形をアニメートする', 0, 10);
+
+        context.lineWidth = 2;
+        context.strokeStyle = 'rgba(0, 0, 0, 0.5)';
+        context.arc(150, 150, 100, 0, Math.PI*2, false);
+        context.stroke();
+
+        context.lineWidth = 4;
+        context.strokeStyle = 'rgba(0, 0, 255, 1)';
+        context.beginPath();
+        context.arc(150, 150, 25, 0, 7*Math.PI/4, false);
+        context.lineTo(7*Math.PI/4+150, 7*Math.PI/4+111);
+        context.stroke()
+
+        context.beginPath();
+        context.arc(150, 150, 25, 0, 7*Math.PI/4, false);
+        context.lineTo(7*Math.PI/4+148, 7*Math.PI/4+129);
+        context.stroke()
+
+        context.font = 'bold 12px sans-serif';
+
+        context.fillStyle = 'rgba(255, 0, 0, 0.3)';
+        context.fillRect(150+100*Math.cos(Math.PI*0)-10, 150+100*Math.sin(Math.PI*0)-10, 20, 20); //0PI
+
+        context.fillStyle = 'rgb(0, 0, 0)';
+        context.fillText('0 & 360度', 150+70*Math.cos(Math.PI*0)-40, 150+70*Math.sin(Math.PI*0));
+        context.fillText('0 & 2PI', 150+120*Math.cos(Math.PI*0)-10, 150+120*Math.sin(Math.PI*0));
+
+        context.fillStyle = 'rgba(255, 0, 0, 0.4)';
+        context.fillRect(150+100*Math.cos(Math.PI/4)-10, 150+100*Math.sin(Math.PI/4)-10, 20, 20); //1/4PI
+
+        context.fillStyle = 'rgba(255, 0, 0, 0.5)';
+        context.fillRect(150+100*Math.cos(Math.PI/2)-10, 150+100*Math.sin(Math.PI/2)-10, 20, 20); //1/2PI
+
+        context.fillStyle = 'rgb(0, 0, 0)';
+        context.fillText('90度', 150+70*Math.cos(Math.PI/2)-10, 150+70*Math.sin(Math.PI/2));
+        context.fillText('1/2PI', 150+130*Math.cos(Math.PI/2)-10, 150+130*Math.sin(Math.PI/2));
+
+        context.fillStyle = 'rgba(255, 0, 0, 0.6)';
+        context.fillRect(150+100*Math.cos(3*Math.PI/4)-10, 150+100*Math.sin(3*Math.PI/4)-10, 20, 20); //3/4PI
+
+        context.fillStyle = 'rgba(255, 0, 0, 0.7)';
+        context.fillRect(150+100*Math.cos(Math.PI)-10, 150+100*Math.sin(Math.PI)-10, 20, 20); //1PI
 
-            context.fillStyle = 'rgb(0, 0, 0)';
-            context.fillText('180度', 150+70*Math.cos(Math.PI)-10, 150+70*Math.sin(Math.PI));
-            context.fillText('PI', 150+130*Math.cos(Math.PI)-10, 150+130*Math.sin(Math.PI));
+        context.fillStyle = 'rgb(0, 0, 0)';
+        context.fillText('180度', 150+70*Math.cos(Math.PI)-10, 150+70*Math.sin(Math.PI));
+        context.fillText('PI', 150+130*Math.cos(Math.PI)-10, 150+130*Math.sin(Math.PI));
 
-            context.fillStyle = 'rgba(255, 0, 0, 0.8)';
-            context.fillRect(150+100*Math.cos(5*Math.PI/4)-10, 150+100*Math.sin(5*Math.PI/4)-10, 20, 20); //5/4PI
+        context.fillStyle = 'rgba(255, 0, 0, 0.8)';
+        context.fillRect(150+100*Math.cos(5*Math.PI/4)-10, 150+100*Math.sin(5*Math.PI/4)-10, 20, 20); //5/4PI
 
-            context.fillStyle = 'rgba(255, 0, 0, 0.9)';
-            context.fillRect(150+100*Math.cos(3*Math.PI/2)-10, 150+100*Math.sin(3*Math.PI/2)-10, 20, 20); //3/2PI
+        context.fillStyle = 'rgba(255, 0, 0, 0.9)';
+        context.fillRect(150+100*Math.cos(3*Math.PI/2)-10, 150+100*Math.sin(3*Math.PI/2)-10, 20, 20); //3/2PI
 
-            context.fillStyle = 'rgb(0, 0, 0)';
-            context.fillText('270度', 150+70*Math.cos(3*Math.PI/2)-10, 150+70*Math.sin(3*Math.PI/2));
-            context.fillText('3/2PI', 150+130*Math.cos(3*Math.PI/2)-10, 150+130*Math.sin(3*Math.PI/2)+10);
+        context.fillStyle = 'rgb(0, 0, 0)';
+        context.fillText('270度', 150+70*Math.cos(3*Math.PI/2)-10, 150+70*Math.sin(3*Math.PI/2));
+        context.fillText('3/2PI', 150+130*Math.cos(3*Math.PI/2)-10, 150+130*Math.sin(3*Math.PI/2)+10);
 
-            context.fillStyle = 'rgba(255, 0, 0, 1.0)';
-            context.fillRect(150+100*Math.cos(7*Math.PI/4)-10, 150+100*Math.sin(7*Math.PI/4)-10, 20, 20); //7/4PI
+        context.fillStyle = 'rgba(255, 0, 0, 1.0)';
+        context.fillRect(150+100*Math.cos(7*Math.PI/4)-10, 150+100*Math.sin(7*Math.PI/4)-10, 20, 20); //7/4PI
 
 
-            /*** 図2 ***/
-
-            var canvas = $('#fig2');
-            var context = canvas.get(0).getContext("2d");
-
-            context.font = 'bold 12px serif';
-            context.fillStyle = 'rgb(0, 0, 0)';
-            context.fillText('図2：円周上の位置の座標を調べる', 0, 10);
-
-            context.beginPath();
-            context.arc(150, 150, 5, 0, Math.PI*2, false);
-            context.fill();
-
-            context.lineWidth = 2;
-            context.strokeStyle = 'rgba(0, 0, 0, 0.5)';
-            context.beginPath();
-            context.arc(150, 150, 100, 7*Math.PI/4, 3*Math.PI/4, false);
-            context.stroke();
-            
-            context.fillStyle = 'rgba(255, 0, 0, 0.6)';
-            context.fillRect(150+100*Math.cos(Math.PI*0)-10, 150+100*Math.sin(Math.PI*0)-10, 20, 20); //0PI
-
-            context.fillStyle = 'rgb(0, 0, 0)';
-
-            context.fillStyle = 'rgba(255, 0, 0, 1.0)';
-            context.fillRect(150+100*Math.cos(Math.PI/4)-10, 150+100*Math.sin(Math.PI/4)-10, 20, 20); //1/4PI
-
-            context.lineWidth = 4;
-            context.strokeStyle = 'rgba(0, 0, 255, 1.0)';
-            context.beginPath();
-            context.arc(150, 150, 100, 0, Math.PI/4, false);
-            context.lineTo(150+100*(Math.PI/4)-10, 150+100*(Math.PI/4)-20);
-            context.stroke();
-
-            /*** 図3 ***/
-
-            var canvas = $('#fig3');
-            var context = canvas.get(0).getContext("2d");
-
-            context.font = 'bold 12px serif';
-            context.fillStyle = 'rgb(0, 0, 0)';
-            context.fillText('図3：半径を実際に描いてみると、面白いパターンがはっきりしてくる', 0, 10);
-
-            context.font = 'bold 14px sans-serif';
-            context.fillStyle = 'rgb(0, 0, 0)';
-            context.fillText('r', 190, 170);
-
-            context.beginPath();
-            context.arc(150, 150, 5, 0, Math.PI*2, false);
-            context.fill();
-
-            context.lineWidth = 2;
-            context.strokeStyle = 'rgba(0, 0, 0, 0.5)';
-            context.beginPath();
-            context.arc(150, 150, 100, 7*Math.PI/4, 3*Math.PI/4, false);
-            context.stroke();
-            
-            context.fillStyle = 'rgba(255, 0, 0, 0.6)';
-            context.fillRect(150+100*Math.cos(Math.PI*0)-10, 150+100*Math.sin(Math.PI*0)-10, 20, 20); //0PI
-
-            context.fillStyle = 'rgb(0, 0, 0)';
-
-            context.fillStyle = 'rgba(255, 0, 0, 1.0)';
-            context.fillRect(150+100*Math.cos(Math.PI/4)-10, 150+100*Math.sin(Math.PI/4)-10, 20, 20); //1/4PI
-
-            context.lineWidth = 4;
-            context.strokeStyle = 'rgba(0, 0, 255, 1.0)';
-            context.beginPath();
-            context.arc(150, 150, 100, 0, Math.PI/4, false);
-            context.lineTo(150+100*(Math.PI/4)-10, 150+100*(Math.PI/4)-20);
-            context.stroke();
-
-            context.lineWidth = 2;
-            context.strokeStyle = 'rgba(0, 0, 0, 1.0)';
-            context.beginPath();
-            context.moveTo(150, 150);
-            context.lineTo(150+100*(Math.PI/4)-10, 150+100*(Math.PI/4)-20);
-            context.stroke();
-
-            /*** 図4 ***/
-
-            var canvas = $('#fig4');
-            var context = canvas.get(0).getContext("2d");
-
-            context.font = 'bold 12px serif';
-            context.fillStyle = 'rgb(0, 0, 0)';
-            context.fillText('図4：半径は、円にすっぽりと入る直角三角形の斜辺である', 0, 10);
-
-            context.font = 'bold 14px sans-serif';
-            context.fillStyle = 'rgb(0, 0, 0)';
-            context.fillText('r', 175, 200);
-            context.fillText('a', 164, 162);
-            context.fillText('(?, ?)', 230, 230);
-
-            context.beginPath();
-            context.arc(150, 150, 5, 0, Math.PI*2, false);
-            context.fill();
-
-            context.lineWidth = 2;
-            context.strokeStyle = 'rgba(0, 0, 0, 0.5)';
-            context.beginPath();
-            context.arc(150, 150, 100, 7*Math.PI/4, 3*Math.PI/4, false);
-            context.stroke();
-            
-            context.fillStyle = 'rgba(255, 0, 0, 0.6)';
-            context.fillRect(150+100*Math.cos(Math.PI*0)-10, 150+100*Math.sin(Math.PI*0)-10, 20, 20); //0PI
-
-            context.fillStyle = 'rgb(0, 0, 0)';
-
-            context.fillStyle = 'rgba(255, 0, 0, 1.0)';
-            context.fillRect(150+100*Math.cos(Math.PI/4)-10, 150+100*Math.sin(Math.PI/4)-10, 20, 20); //1/4PI
-
-            context.lineWidth = 4;
-            context.strokeStyle = 'rgba(0, 0, 255, 1.0)';
-            context.beginPath();
-            context.arc(150, 150, 100, 0, Math.PI/4, false);
-            context.lineTo(150+100*(Math.PI/4)-10, 150+100*(Math.PI/4)-20);
-            context.stroke();
-
-            context.lineWidth = 2;
-            context.strokeStyle = 'rgba(0, 0, 0, 1.0)';
-            context.beginPath();
-            context.moveTo(150, 150);
-            context.lineTo(150+100*(Math.PI/4)-10, 150+100*(Math.PI/4)-20);
-            context.lineTo(150+100*(Math.PI/4)-10, 150);
-            context.closePath();
-            context.stroke();
-
-            context.strokeRect(208, 150, 10, 10);
-
-            context.lineWidth = 2;
-            context.strokeStyle = 'rgba(0, 0, 0, 1.0)';
-            context.beginPath();
-            context.arc(150, 150, 30, 0, Math.PI/4, false);
-            context.lineTo(150+20*(Math.PI/4)+16, 150+20*(Math.PI/4)+4);
-            context.stroke();
-
-            /*** 図5 ***/
-
-            var canvas = $('#fig5');
-            var context = canvas.get(0).getContext("2d");
-
-            context.font = 'bold 12px serif';
-            context.fillStyle = 'rgb(0, 0, 0)';
-            context.fillText('図5：直角三角形の3つの辺の名前', 0, 10);
-
-            context.font = 'bold 14px sans-serif';
-            context.fillStyle = 'rgb(0, 0, 0)';
-            context.fillText('隣辺（adj）', 140, 70);
-            context.fillText('斜辺（hyp）', 65, 160);
-            context.fillText('対辺（opp）', 280, 160);
-            context.fillText('a', 110, 100);
-
-            context.lineWidth = 2;
-            context.strokeStyle = 'rgba(0, 0, 0, 1.0)';
-            context.beginPath();
-            context.moveTo(80, 80);
-            context.lineTo(80+250*(Math.PI/4)-10, 80+250*(Math.PI/4)-20);
-            context.lineTo(80+250*(Math.PI/4)-10, 80);
-            context.closePath();
-            context.stroke();
-
-            context.strokeRect(80+250*(Math.PI/4)-30, 80, 20, 20);
-
-            context.lineWidth = 4;
-            context.strokeStyle = 'rgba(0, 0, 255, 1.0)';
-            context.beginPath();
-            context.arc(80, 80, 60, 0, Math.PI/4, false);
-            context.lineTo(80+100*(Math.PI/4)-20, 80+100*(Math.PI/4)-35);
-            context.stroke();
-
-            /*** 図6 ***/
-
-            var canvas = $('#fig6');
-            var context = canvas.get(0).getContext("2d");
-
-            context.font = 'bold 12px serif';
-            context.fillStyle = 'rgb(0, 0, 0)';
-            context.fillText('図6：SOH-CAH-TOAの公式', 0, 10);
-
-            context.font = 'bold 14px sans-serif';
-            context.fillStyle = 'rgb(0, 0, 0)';
-            context.fillText('sin(a)', 20, 20);
-            context.fillText('opp', 20, 40);
-            context.fillText('hyp', 20, 60);
-            context.fillText('cos(a)', 20, 80);
-            context.fillText('adj', 20, 100);
-            context.fillText('hyp', 20, 120);
-            context.fillText('tan(a)', 20, 140);
-            context.fillText('opp', 20, 160);
-            context.fillText('adj', 20, 180);
-
-
-            /*** 図7 ***/
-
-            var canvas = $('#fig7');
-            var context = canvas.get(0).getContext("2d");
-
-            context.font = 'bold 12px serif';
-            context.fillStyle = 'rgb(0, 0, 0)';
-            context.fillText('図7：三角関数を使って三角形の各辺の長さの比率を知る', 0, 10);
-
-            context.beginPath();
-            context.arc(150, 150, 5, 0, Math.PI*2, false);
-            context.fill();
-
-            context.lineWidth = 2;
-            context.strokeStyle = 'rgba(0, 0, 0, 0.5)';
-            context.beginPath();
-            context.arc(150, 150, 100, 7*Math.PI/4, 3*Math.PI/4, false);
-            context.stroke();
-            
-            context.fillStyle = 'rgba(255, 0, 0, 0.6)';
-            context.fillRect(150+100*Math.cos(Math.PI*0)-10, 150+100*Math.sin(Math.PI*0)-10, 20, 20); //0PI
-
-            context.fillStyle = 'rgb(0, 0, 0)';
-
-            context.fillStyle = 'rgba(255, 0, 0, 1.0)';
-            context.fillRect(150+100*Math.cos(Math.PI/4)-10, 150+100*Math.sin(Math.PI/4)-10, 20, 20); //1/4PI
-
-            context.lineWidth = 4;
-            context.strokeStyle = 'rgba(0, 0, 255, 1.0)';
-            context.beginPath();
-            context.arc(150, 150, 100, 0, Math.PI/4, false);
-            context.lineTo(150+100*(Math.PI/4)-10, 150+100*(Math.PI/4)-20);
-            context.stroke();
-
-            context.lineWidth = 2;
-            context.strokeStyle = 'rgba(0, 0, 0, 1.0)';
-            context.beginPath();
-            context.moveTo(150, 150);
-            context.lineTo(150+100*(Math.PI/4)-10, 150+100*(Math.PI/4)-20);
-            context.lineTo(150+100*(Math.PI/4)-10, 150);
-            context.closePath();
-            context.stroke();
-
-            /*** 図8 ***/
-
-            var canvas = $('#fig8');
-            var context = canvas.get(0).getContext("2d");
-
-            context.font = 'bold 12px serif';
-            context.fillStyle = 'rgb(0, 0, 0)';
-            context.fillText('図8：辺と辺の比を使って値を計算する', 0, 10);
-
-            context.beginPath();
-            context.arc(150, 150, 5, 0, Math.PI*2, false);
-            context.fill();
-
-            context.lineWidth = 2;
-            context.strokeStyle = 'rgba(0, 0, 0, 0.5)';
-            context.beginPath();
-            context.arc(150, 150, 100, 7*Math.PI/4, 3*Math.PI/4, false);
-            context.stroke();
-            
-            context.fillStyle = 'rgba(255, 0, 0, 0.6)';
-            context.fillRect(150+100*Math.cos(Math.PI*0)-10, 150+100*Math.sin(Math.PI*0)-10, 20, 20); //0PI
-
-            context.fillStyle = 'rgb(0, 0, 0)';
-
-            context.fillStyle = 'rgba(255, 0, 0, 1.0)';
-            context.fillRect(150+100*Math.cos(Math.PI/4)-10, 150+100*Math.sin(Math.PI/4)-10, 20, 20); //1/4PI
-
-            context.lineWidth = 4;
-            context.strokeStyle = 'rgba(0, 0, 255, 1.0)';
-            context.beginPath();
-            context.arc(150, 150, 100, 0, Math.PI/4, false);
-            context.lineTo(150+100*(Math.PI/4)-10, 150+100*(Math.PI/4)-20);
-            context.stroke();
-
-            context.lineWidth = 2;
-            context.strokeStyle = 'rgba(0, 0, 0, 1.0)';
-            context.beginPath();
-            context.moveTo(150, 150);
-            context.lineTo(150+100*(Math.PI/4)-10, 150+100*(Math.PI/4)-20);
-            context.lineTo(150+100*(Math.PI/4)-10, 150);
-            context.closePath();
-            context.stroke();
-        script(src='js/bootstrap.min.js')
-        script(src='coffee/list-counter.js')
+        /*** 図2 ***/
+
+        var canvas = $('#fig2');
+        var context = canvas.get(0).getContext("2d");
+
+        context.font = 'bold 12px serif';
+        context.fillStyle = 'rgb(0, 0, 0)';
+        context.fillText('図2：円周上の位置の座標を調べる', 0, 10);
+
+        context.beginPath();
+        context.arc(150, 150, 5, 0, Math.PI*2, false);
+        context.fill();
+
+        context.lineWidth = 2;
+        context.strokeStyle = 'rgba(0, 0, 0, 0.5)';
+        context.beginPath();
+        context.arc(150, 150, 100, 7*Math.PI/4, 3*Math.PI/4, false);
+        context.stroke();
+        
+        context.fillStyle = 'rgba(255, 0, 0, 0.6)';
+        context.fillRect(150+100*Math.cos(Math.PI*0)-10, 150+100*Math.sin(Math.PI*0)-10, 20, 20); //0PI
+
+        context.fillStyle = 'rgb(0, 0, 0)';
+
+        context.fillStyle = 'rgba(255, 0, 0, 1.0)';
+        context.fillRect(150+100*Math.cos(Math.PI/4)-10, 150+100*Math.sin(Math.PI/4)-10, 20, 20); //1/4PI
+
+        context.lineWidth = 4;
+        context.strokeStyle = 'rgba(0, 0, 255, 1.0)';
+        context.beginPath();
+        context.arc(150, 150, 100, 0, Math.PI/4, false);
+        context.lineTo(150+100*(Math.PI/4)-10, 150+100*(Math.PI/4)-20);
+        context.stroke();
+
+        /*** 図3 ***/
+
+        var canvas = $('#fig3');
+        var context = canvas.get(0).getContext("2d");
+
+        context.font = 'bold 12px serif';
+        context.fillStyle = 'rgb(0, 0, 0)';
+        context.fillText('図3：半径を実際に描いてみると、面白いパターンがはっきりしてくる', 0, 10);
+
+        context.font = 'bold 14px sans-serif';
+        context.fillStyle = 'rgb(0, 0, 0)';
+        context.fillText('r', 190, 170);
+
+        context.beginPath();
+        context.arc(150, 150, 5, 0, Math.PI*2, false);
+        context.fill();
+
+        context.lineWidth = 2;
+        context.strokeStyle = 'rgba(0, 0, 0, 0.5)';
+        context.beginPath();
+        context.arc(150, 150, 100, 7*Math.PI/4, 3*Math.PI/4, false);
+        context.stroke();
+        
+        context.fillStyle = 'rgba(255, 0, 0, 0.6)';
+        context.fillRect(150+100*Math.cos(Math.PI*0)-10, 150+100*Math.sin(Math.PI*0)-10, 20, 20); //0PI
+
+        context.fillStyle = 'rgb(0, 0, 0)';
+
+        context.fillStyle = 'rgba(255, 0, 0, 1.0)';
+        context.fillRect(150+100*Math.cos(Math.PI/4)-10, 150+100*Math.sin(Math.PI/4)-10, 20, 20); //1/4PI
+
+        context.lineWidth = 4;
+        context.strokeStyle = 'rgba(0, 0, 255, 1.0)';
+        context.beginPath();
+        context.arc(150, 150, 100, 0, Math.PI/4, false);
+        context.lineTo(150+100*(Math.PI/4)-10, 150+100*(Math.PI/4)-20);
+        context.stroke();
+
+        context.lineWidth = 2;
+        context.strokeStyle = 'rgba(0, 0, 0, 1.0)';
+        context.beginPath();
+        context.moveTo(150, 150);
+        context.lineTo(150+100*(Math.PI/4)-10, 150+100*(Math.PI/4)-20);
+        context.stroke();
+
+        /*** 図4 ***/
+
+        var canvas = $('#fig4');
+        var context = canvas.get(0).getContext("2d");
+
+        context.font = 'bold 12px serif';
+        context.fillStyle = 'rgb(0, 0, 0)';
+        context.fillText('図4：半径は、円にすっぽりと入る直角三角形の斜辺である', 0, 10);
+
+        context.font = 'bold 14px sans-serif';
+        context.fillStyle = 'rgb(0, 0, 0)';
+        context.fillText('r', 175, 200);
+        context.fillText('a', 164, 162);
+        context.fillText('(?, ?)', 230, 230);
+
+        context.beginPath();
+        context.arc(150, 150, 5, 0, Math.PI*2, false);
+        context.fill();
+
+        context.lineWidth = 2;
+        context.strokeStyle = 'rgba(0, 0, 0, 0.5)';
+        context.beginPath();
+        context.arc(150, 150, 100, 7*Math.PI/4, 3*Math.PI/4, false);
+        context.stroke();
+        
+        context.fillStyle = 'rgba(255, 0, 0, 0.6)';
+        context.fillRect(150+100*Math.cos(Math.PI*0)-10, 150+100*Math.sin(Math.PI*0)-10, 20, 20); //0PI
+
+        context.fillStyle = 'rgb(0, 0, 0)';
+
+        context.fillStyle = 'rgba(255, 0, 0, 1.0)';
+        context.fillRect(150+100*Math.cos(Math.PI/4)-10, 150+100*Math.sin(Math.PI/4)-10, 20, 20); //1/4PI
+
+        context.lineWidth = 4;
+        context.strokeStyle = 'rgba(0, 0, 255, 1.0)';
+        context.beginPath();
+        context.arc(150, 150, 100, 0, Math.PI/4, false);
+        context.lineTo(150+100*(Math.PI/4)-10, 150+100*(Math.PI/4)-20);
+        context.stroke();
+
+        context.lineWidth = 2;
+        context.strokeStyle = 'rgba(0, 0, 0, 1.0)';
+        context.beginPath();
+        context.moveTo(150, 150);
+        context.lineTo(150+100*(Math.PI/4)-10, 150+100*(Math.PI/4)-20);
+        context.lineTo(150+100*(Math.PI/4)-10, 150);
+        context.closePath();
+        context.stroke();
+
+        context.strokeRect(208, 150, 10, 10);
+
+        context.lineWidth = 2;
+        context.strokeStyle = 'rgba(0, 0, 0, 1.0)';
+        context.beginPath();
+        context.arc(150, 150, 30, 0, Math.PI/4, false);
+        context.lineTo(150+20*(Math.PI/4)+16, 150+20*(Math.PI/4)+4);
+        context.stroke();
+
+        /*** 図5 ***/
+
+        var canvas = $('#fig5');
+        var context = canvas.get(0).getContext("2d");
+
+        context.font = 'bold 12px serif';
+        context.fillStyle = 'rgb(0, 0, 0)';
+        context.fillText('図5：直角三角形の3つの辺の名前', 0, 10);
+
+        context.font = 'bold 14px sans-serif';
+        context.fillStyle = 'rgb(0, 0, 0)';
+        context.fillText('隣辺（adj）', 140, 70);
+        context.fillText('斜辺（hyp）', 65, 160);
+        context.fillText('対辺（opp）', 280, 160);
+        context.fillText('a', 110, 100);
+
+        context.lineWidth = 2;
+        context.strokeStyle = 'rgba(0, 0, 0, 1.0)';
+        context.beginPath();
+        context.moveTo(80, 80);
+        context.lineTo(80+250*(Math.PI/4)-10, 80+250*(Math.PI/4)-20);
+        context.lineTo(80+250*(Math.PI/4)-10, 80);
+        context.closePath();
+        context.stroke();
+
+        context.strokeRect(80+250*(Math.PI/4)-30, 80, 20, 20);
+
+        context.lineWidth = 4;
+        context.strokeStyle = 'rgba(0, 0, 255, 1.0)';
+        context.beginPath();
+        context.arc(80, 80, 60, 0, Math.PI/4, false);
+        context.lineTo(80+100*(Math.PI/4)-20, 80+100*(Math.PI/4)-35);
+        context.stroke();
+
+        /*** 図6 ***/
+
+        var canvas = $('#fig6');
+        var context = canvas.get(0).getContext("2d");
+
+        context.font = 'bold 12px serif';
+        context.fillStyle = 'rgb(0, 0, 0)';
+        context.fillText('図6：SOH-CAH-TOAの公式', 0, 10);
+
+        context.font = 'bold 14px sans-serif';
+        context.fillStyle = 'rgb(0, 0, 0)';
+        context.fillText('sin(a)', 20, 20);
+        context.fillText('opp', 20, 40);
+        context.fillText('hyp', 20, 60);
+        context.fillText('cos(a)', 20, 80);
+        context.fillText('adj', 20, 100);
+        context.fillText('hyp', 20, 120);
+        context.fillText('tan(a)', 20, 140);
+        context.fillText('opp', 20, 160);
+        context.fillText('adj', 20, 180);
+
+
+        /*** 図7 ***/
+
+        var canvas = $('#fig7');
+        var context = canvas.get(0).getContext("2d");
+
+        context.font = 'bold 12px serif';
+        context.fillStyle = 'rgb(0, 0, 0)';
+        context.fillText('図7：三角関数を使って三角形の各辺の長さの比率を知る', 0, 10);
+
+        context.beginPath();
+        context.arc(150, 150, 5, 0, Math.PI*2, false);
+        context.fill();
+
+        context.lineWidth = 2;
+        context.strokeStyle = 'rgba(0, 0, 0, 0.5)';
+        context.beginPath();
+        context.arc(150, 150, 100, 7*Math.PI/4, 3*Math.PI/4, false);
+        context.stroke();
+        
+        context.fillStyle = 'rgba(255, 0, 0, 0.6)';
+        context.fillRect(150+100*Math.cos(Math.PI*0)-10, 150+100*Math.sin(Math.PI*0)-10, 20, 20); //0PI
+
+        context.fillStyle = 'rgb(0, 0, 0)';
+
+        context.fillStyle = 'rgba(255, 0, 0, 1.0)';
+        context.fillRect(150+100*Math.cos(Math.PI/4)-10, 150+100*Math.sin(Math.PI/4)-10, 20, 20); //1/4PI
+
+        context.lineWidth = 4;
+        context.strokeStyle = 'rgba(0, 0, 255, 1.0)';
+        context.beginPath();
+        context.arc(150, 150, 100, 0, Math.PI/4, false);
+        context.lineTo(150+100*(Math.PI/4)-10, 150+100*(Math.PI/4)-20);
+        context.stroke();
+
+        context.lineWidth = 2;
+        context.strokeStyle = 'rgba(0, 0, 0, 1.0)';
+        context.beginPath();
+        context.moveTo(150, 150);
+        context.lineTo(150+100*(Math.PI/4)-10, 150+100*(Math.PI/4)-20);
+        context.lineTo(150+100*(Math.PI/4)-10, 150);
+        context.closePath();
+        context.stroke();
+
+        /*** 図8 ***/
+
+        var canvas = $('#fig8');
+        var context = canvas.get(0).getContext("2d");
+
+        context.font = 'bold 12px serif';
+        context.fillStyle = 'rgb(0, 0, 0)';
+        context.fillText('図8：辺と辺の比を使って値を計算する', 0, 10);
+
+        context.beginPath();
+        context.arc(150, 150, 5, 0, Math.PI*2, false);
+        context.fill();
+
+        context.lineWidth = 2;
+        context.strokeStyle = 'rgba(0, 0, 0, 0.5)';
+        context.beginPath();
+        context.arc(150, 150, 100, 7*Math.PI/4, 3*Math.PI/4, false);
+        context.stroke();
+        
+        context.fillStyle = 'rgba(255, 0, 0, 0.6)';
+        context.fillRect(150+100*Math.cos(Math.PI*0)-10, 150+100*Math.sin(Math.PI*0)-10, 20, 20); //0PI
+
+        context.fillStyle = 'rgb(0, 0, 0)';
+
+        context.fillStyle = 'rgba(255, 0, 0, 1.0)';
+        context.fillRect(150+100*Math.cos(Math.PI/4)-10, 150+100*Math.sin(Math.PI/4)-10, 20, 20); //1/4PI
+
+        context.lineWidth = 4;
+        context.strokeStyle = 'rgba(0, 0, 255, 1.0)';
+        context.beginPath();
+        context.arc(150, 150, 100, 0, Math.PI/4, false);
+        context.lineTo(150+100*(Math.PI/4)-10, 150+100*(Math.PI/4)-20);
+        context.stroke();
+
+        context.lineWidth = 2;
+        context.strokeStyle = 'rgba(0, 0, 0, 1.0)';
+        context.beginPath();
+        context.moveTo(150, 150);
+        context.lineTo(150+100*(Math.PI/4)-10, 150+100*(Math.PI/4)-20);
+        context.lineTo(150+100*(Math.PI/4)-10, 150);
+        context.closePath();
+        context.stroke();

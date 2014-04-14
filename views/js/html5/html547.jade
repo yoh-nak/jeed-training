@@ -1,0 +1,136 @@
+extends ../../layout
+
+block link
+    link(href='../../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../../css/style.css',rel='stylesheet',media='screen')
+    link(href='../../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading todoアプリ
+                    .panel-body
+                        p 1日分のtodoアプリを作ってみましょう。
+                        p
+                            a.btn.btn-default(href='../demo/html5api/audio13/index.html', target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                            |  
+                            button.btn.btn-danger(type='button', data-toggle='collapse', data-target='#demo')
+                                i.glyphicon.glyphicon-question-sign
+                                | 解答例
+                        #demo.collapse.out
+                            pre(class='prettyprint linenums:1')
+                                :code
+                                    doctype html
+                                    html(lang='ja')
+                                        meta(charset='utf-8')
+                                        meta(name='viewport', content='width=device-width,initial-scale=1.0,user-scalable=no')
+                                        title
+                                        link(rel='stylesheet', href='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css')
+                                        style
+                                            :stylus
+                                                .ui-icon-search,.ui-icon-searchfield:after
+                                                    //アイコンのスプライト画像を鉛筆にずらす
+                                                    background-position -824px -1px
+                                        script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+                                        script(src='http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js')
+                                        script
+                                            :js
+                                                (function(){
+                                                    /*ページにアクセスした時のみ行われる処理*/
+
+                                                    //ストレージにデータがないとき、空オブジェクトで宣言
+                                                    if(!localStorage.todo){
+                                                        var todo = {}
+                                                    }
+                                                    //ストレージにデータがあるとき、ストレージから取り出して変数に代入
+                                                    else{
+                                                        var todo = JSON.parse(localStorage.todo);
+                                                    }
+                                                    /*ページにアクセスしたとき時と、リロードした時に毎回行われる処理*/
+
+                                                    //ページショー
+                                                    $(document).on('pageshow','#index',function(){
+                                                        //オブジェクトの連番キーの最大値に+1して、オブジェクトに追加するキーを作成
+                                                        var max = ++Object.keys(todo).length;
+                                                        //リストビューの構築
+                                                        var html = '';
+                                                        //オブジェクトの連番キーがあるだけリピート
+                                                        $.each(todo,function(key,val){
+                                                            //カスタム属性data-todoにキーを格納
+                                                            var html = '\
+                                                            <li><a href="#">\
+                                                            <h2>' + val + '</h2>\
+                                                            </a>\
+                                                            <a href="#" data-icon="delete" data-todo="' + key + '">削除</a>\
+                                                            </li>';
+                                                            //リストビューにアペンド
+                                                            $('[data-role="listview"]').append(html);
+                                                        });
+
+                                                        //オブジェクトが空ではないとき
+                                                        if(Object.keys(todo).length > 0){
+                                                            //リストビューをリフレッシュ
+                                                            $('[data-role="listview"]').listview('refresh');
+                                                        }
+                                                        //入力フォームでキーボードが押されたとき
+                                                        $('[data-role="page"]').on('keypress','#todo',function(e){
+                                                            //エンターキーが押されたとき
+                                                            if(e.keyCode == $.mobile.keyCode.ENTER){
+                                                                //オブジェクトに格納
+                                                                todo[max] = $(this).val();
+                                                                //オブジェクトのデータをストレージに格納
+                                                                localStorage.todo = JSON.stringify(todo);
+                                                                //リロード
+                                                                $.mobile.pageContainer.pagecontainer('change', '#index', {
+                                                                    reloadPage:true
+                                                                });
+                                                            }
+                                                        });
+
+                                                        //リストビュー個別の削除ボタンが押されたとき（カスタム属性data-todoにキーを隠している）
+                                                        $('[data-role="page"]').on('vclick','[data-todo]',function(){
+                                                            //todoオブジェクトから選択した項目を削除
+                                                            delete todo[$(this).attr('data-todo')];
+                                                            //ストレージに再格納
+                                                            localStorage.todo = JSON.stringify(todo);
+                                                            //リロード
+                                                            $.mobile.pageContainer.pagecontainer('change', '#index', {
+                                                                reloadPage:true
+                                                            });
+                                                        });
+                                                        $('[data-role="page"]').on('vclick','#remove',function(){
+                                                            //ストレージ全削除
+                                                            localStorage.clear();
+                                                            
+                                                            //todoオブジェクトをリセット
+                                                            todo = {};
+                                                            
+                                                            //リストビュー削除
+                                                            $('[data-role="listview"] > *').remove().listview('refresh');
+                                                            
+                                                            //リロード
+                                                            $.mobile.pageContainer.pagecontainer('change', '#index', {
+                                                                reloadPage:true
+                                                            });
+                                                        });
+                                                    });
+                                                })()
+                                        body
+                                            #index(data-role='page')
+                                                div(data-role='header')
+                                                    h1 ToDo
+                                                div(data-role='content')
+                                                    input#todo(type='search', placeholder='本日のToDo')
+                                                    ul(data-role='listview', data-split-icon='gear', data-split-theme='d', data-inset='true')
+                                                    input#remove(type='button', value='すべて削除')
+                                                div(data-role='footer', data-position='fixed')
+                                                    h1 フッター

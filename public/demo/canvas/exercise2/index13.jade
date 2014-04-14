@@ -1,17 +1,20 @@
-!!!
+doctype html
 html(lang='ja')
-	head
-		meta(charset='utf-8')
-		meta(name='viewport',content='width=device-width, initial-scale=1.0')
-		title
-	body
-		canvas#myCanvas(width='500',height='500')
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script.
-			$(function(){
-				var canvas = $('#myCanvas');
-				var context = canvas.get(0).getContext('2d');
+    head
+        meta(charset='utf-8')
+        meta(name='viewport',content='width=device-width, initial-scale=1.0')
+        title
+    body
+        canvas#myCanvas(width='500',height='500')
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script
+            :js
+                (function(){
+                    $(function(){
+                        var canvas = $('#myCanvas');
+                        var context = canvas.get(0).getContext('2d');
 
-				context.transform(2, 0, 0, 2, 150, 150);
-				context.fillRect(0, 0, 150, 150);
-			});
+                        context.transform(2, 0, 0, 2, 150, 150);
+                        context.fillRect(0, 0, 150, 150);
+                    });
+                })()

@@ -1,36 +1,39 @@
-!!!
+doctype html
 html(lang='ja')
-	head
-		meta(charset='utf-8')
-		meta(name='viewport',content='width=device-width, initial-scale=1.0')
-		title
-	body
-		canvas#myCanvas(width='500',height='500')
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script.
-			$(function(){
-				var canvas = $('#myCanvas');
-				var context = canvas.get(0).getContext('2d');
+    head
+        meta(charset='utf-8')
+        meta(name='viewport',content='width=device-width, initial-scale=1.0')
+        title
+    body
+        canvas#myCanvas(width='500',height='500')
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script
+            :js
+                (function(){
+                    $(function(){
+                        var canvas = $('#myCanvas');
+                        var context = canvas.get(0).getContext('2d');
 
-				var image = new Image();
-				image.src = 'example.jpg';
-				$(image).load(function(){
-					context.drawImage(image, 0, 0, 500, 333);
+                        var image = new Image();
+                        image.src = 'example.jpg';
+                        $(image).load(function(){
+                            context.drawImage(image, 0, 0, 500, 333);
 
-					//3x3ピクセルの範囲のピクセルデータを取得
-					//getImageData(x, y, width, height)
-					var imageData = context.getImageData(0, 0, 3, 3); //3x3の領域
-					
-					//取得した3x3のピクセルデータの幅
-					var width = imageData.width;
+                            //3x3ピクセルの範囲のピクセルデータを取得
+                            //getImageData(x, y, width, height)
+                            var imageData = context.getImageData(0, 0, 3, 3); //3x3の領域
+                            
+                            //取得した3x3のピクセルデータの幅
+                            var width = imageData.width;
 
-					//取得した3x3のピクセルデータの配列の中から、x=2, y=2の座標のピクセルのインデックスを取得
-					var x = 2; var y = 2;
+                            //取得した3x3のピクセルデータの配列の中から、x=2, y=2の座標のピクセルのインデックスを取得
+                            var x = 2; var y = 2;
 
-					//公式からインデックスを取得
-					var pixelRed = ((y-1)*(width*4))+((x-1)*4); //RGBA値のRed値のインデックス
-					var pixelGreen = pixelRed+1; //RGBA値のGreen値のインデックス
-					var pixelBlue = pixelRed+2; //RGBA値のBlue値のインデックス
-					var pixelAlpha = pixelRed+3; //RGBA値のAlpha値のインデックス
-				});
-			});
+                            //公式からインデックスを取得
+                            var pixelRed = ((y-1)*(width*4))+((x-1)*4); //RGBA値のRed値のインデックス
+                            var pixelGreen = pixelRed+1; //RGBA値のGreen値のインデックス
+                            var pixelBlue = pixelRed+2; //RGBA値のBlue値のインデックス
+                            var pixelAlpha = pixelRed+3; //RGBA値のAlpha値のインデックス
+                        });
+                    });
+                })()

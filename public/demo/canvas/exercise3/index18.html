@@ -1,70 +1,58 @@
-<!DOCTYPE html>
-<html lang="ja">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-  </head>
-  <body>
-    <canvas id="myCanvas" width="500" height="500"></canvas>
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script>
-      $(function(){
-       var canvas = $('#myCanvas');
-       var context = canvas.get(0).getContext('2d');
-       
-       var image = new Image();
-       image.src = 'example.jpg';
-       $(image).load(function(){
-        //読み込んだイメージの描画
-        context.drawImage(image, 0, 0, 1024, 683, 0, 0, 500, 500);
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title></title></head><body><canvas id="myCanvas" width="500" height="500"></canvas><script src="http://code.jquery.com/jquery-1.11.0.min.js"></script><script>(function(){
+    $(function(){
+        var canvas = $('#myCanvas');
+        var context = canvas.get(0).getContext('2d');
         
-        //Canvasに描画されているピクセルデータを取得
-        var imageData = context.getImageData(0, 0, canvas.width(), canvas.height());
-        
-        //取得したピクセルデータを配列に格納
-        var pixels = imageData.data;
-        
-        //Canvasをクリア
-        context.clearRect(0, 0, canvas.width(), canvas.height());
-        
-        var numTileRows = 20; //タイル一行20個
-        var numTileCols = 20; //タイル一列20個
-        
-        //1つのタイルの幅
-        //=>Canvas要素の幅をx方向のタイルの数で割る
-        var tileWidth = imageData.width/numTileCols;
-        
-        //1つのタイルの高さ
-        //=>Canvas要素の高さをy方向のタイルの数で割る
-        var tileHeight = imageData.height/numTileRows;
-        
-        //行方向にタイルの数だけループ
-        for(var r = 0; r < numTileRows; r++){
-         //列方向にタイルの数だけループ
-         for(var c = 0; c < numTileCols; c++){
-          //それぞれのタイルの中央のx座標取得
-          var x = (c*tileWidth)+(tileWidth/2);
-          //それぞれのタイルの中央のy座標取得
-          var y = (r*tileHeight)+(tileHeight/2);
-          
-          //タイルのx座標、y座標のピクセルデータのインデックスを取得
-          var pos = (Math.floor(y)*(imageData.width*4))+(Math.floor(x)*4);
-          
-          //取得したインデクスのピクセルデータのRGB値を格納
-          var red = pixels[pos];
-          var green = pixels[pos+1];
-          var blue = pixels[pos+2];
-          
-          //RGB値をスタイルにセット
-          context.fillStyle = 'rgb(' + red + ', ' + green + ', ' + blue + ')';
-          
-          //それぞれのタイルとなる矩形を描画
-          context.fillRect(x-(tileWidth/2), y-(tileHeight/2), tileWidth, tileHeight);
-         }
-        }
-       });
-      });
-    </script>
-  </body>
-</html>
+        var image = new Image();
+        image.src = 'example.jpg';
+        $(image).load(function(){
+            //読み込んだイメージの描画
+            context.drawImage(image, 0, 0, 1024, 683, 0, 0, 500, 500);
+            
+            //Canvasに描画されているピクセルデータを取得
+            var imageData = context.getImageData(0, 0, canvas.width(), canvas.height());
+            
+            //取得したピクセルデータを配列に格納
+            var pixels = imageData.data;
+            
+            //Canvasをクリア
+            context.clearRect(0, 0, canvas.width(), canvas.height());
+            
+            var numTileRows = 20; //タイル一行20個
+            var numTileCols = 20; //タイル一列20個
+            
+            //1つのタイルの幅
+            //=>Canvas要素の幅をx方向のタイルの数で割る
+            var tileWidth = imageData.width/numTileCols;
+            
+            //1つのタイルの高さ
+            //=>Canvas要素の高さをy方向のタイルの数で割る
+            var tileHeight = imageData.height/numTileRows;
+            
+            //行方向にタイルの数だけループ
+            for(var r = 0; r < numTileRows; r++){
+                //列方向にタイルの数だけループ
+                for(var c = 0; c < numTileCols; c++){
+                    //それぞれのタイルの中央のx座標取得
+                    var x = (c*tileWidth)+(tileWidth/2);
+                    //それぞれのタイルの中央のy座標取得
+                    var y = (r*tileHeight)+(tileHeight/2);
+                    
+                    //タイルのx座標、y座標のピクセルデータのインデックスを取得
+                    var pos = (Math.floor(y)*(imageData.width*4))+(Math.floor(x)*4);
+                    
+                    //取得したインデクスのピクセルデータのRGB値を格納
+                    var red = pixels[pos];
+                    var green = pixels[pos+1];
+                    var blue = pixels[pos+2];
+                    
+                    //RGB値をスタイルにセット
+                    context.fillStyle = 'rgb(' + red + ', ' + green + ', ' + blue + ')';
+                    
+                    //それぞれのタイルとなる矩形を描画
+                    context.fillRect(x-(tileWidth/2), y-(tileHeight/2), tileWidth, tileHeight);
+                }
+            }
+        });
+    });
+})()</script></body></html>

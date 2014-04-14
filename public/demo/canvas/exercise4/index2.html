@@ -1,76 +1,63 @@
-<!DOCTYPE html>
-<html lang="ja">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <style>
-      #myCanvas{
-       display:block;
-      }
-    </style>
-  </head>
-  <body>
-    <canvas id="myCanvas" width="500" height="500"></canvas>
-    <button id="startAnimation">Start</button>
-    <button id="stopAnimation">Stop</button>
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script>
-      $(function(){
-       //キャンバス要素　jQueryオブジェクト
-       var canvas = $('#myCanvas');
-       
-       //2Dレンダリングコンテキスト
-       var context = canvas.get(0).getContext('2d');
-       
-       var canvasWidth = canvas.width(); //キャンバス要素　幅
-       var canvasHeight = canvas.height(); //キャンバス要素　高さ
-       var playAnimation = true; //アニメーションフラグ　開始
-       
-       //矩形x座標
-       var x = 0;
-       
-       //スタート／ストップボタン　jQueryオブジェクト
-       var startButton = $('#startAnimation');
-       var stopButton = $('#stopAnimation');
-       
-       //スタートボタン初期表示削除
-       startButton.hide();
-       
-       //スタートボタンクリック
-       startButton.click(function(){
-        $(this).hide(); //スタートボタン非表示
-        stopButton.show(); //ストップボタン表示
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title></title><style>#myCanvas {
+  display: block;
+}
+</style></head><body><canvas id="myCanvas" width="500" height="500"></canvas><button id="startAnimation">Start</button><button id="stopAnimation">Stop</button><script src="http://code.jquery.com/jquery-1.11.0.min.js"></script><script>(function(){
+    $(function(){
+        //キャンバス要素　jQueryオブジェクト
+        var canvas = $('#myCanvas');
         
-        playAnimation = true; //アニメーションフラグ　開始
-        animate(); //アニメーション開始
-       });
-       
-       //ストップボタンクリック
-       stopButton.click(function(){
-        $(this).hide(); //ストップボタン非表示
-        startButton.show(); //スタートボタン表示
+        //2Dレンダリングコンテキスト
+        var context = canvas.get(0).getContext('2d');
         
-        playAnimation = false; //アニメーションフラグ　停止
-       });
-       //アニメーションループ
-       function animate(){
+        var canvasWidth = canvas.width(); //キャンバス要素　幅
+        var canvasHeight = canvas.height(); //キャンバス要素　高さ
+        
+        var playAnimation = true; //アニメーションフラグ　開始
+        
         //矩形x座標
-        x++;
+        var x = 0;
         
-        //矩形クリア
-        context.clearRect(0, 0, canvasWidth, canvasHeight);
-        //矩形描画
-        context.fillRect(x, 250, 10, 10);
+        //スタート／ストップボタン　jQueryオブジェクト
+        var startButton = $('#startAnimation');
+        var stopButton = $('#stopAnimation');
         
-        //アニメーションフラグが開始のとき
-        if(playAnimation){
-         setTimeout(animate, 33);
+        //スタートボタン初期表示削除
+        startButton.hide();
+        
+        //スタートボタンクリック
+        startButton.click(function(){
+            $(this).hide(); //スタートボタン非表示
+            stopButton.show(); //ストップボタン表示
+            
+            playAnimation = true; //アニメーションフラグ　開始
+            animate(); //アニメーション開始
+        });
+        
+        //ストップボタンクリック
+        stopButton.click(function(){
+            $(this).hide(); //ストップボタン非表示
+            startButton.show(); //スタートボタン表示
+            
+            playAnimation = false; //アニメーションフラグ　停止
+        });
+        
+        //アニメーションループ
+        function animate(){
+            //矩形x座標
+            x++;
+            
+            //矩形クリア
+            context.clearRect(0, 0, canvasWidth, canvasHeight);
+            
+            //矩形描画
+            context.fillRect(x, 250, 10, 10);
+            
+            //アニメーションフラグが開始のとき
+            if(playAnimation){
+                setTimeout(animate, 33);
+            }
         }
-       }
-       //アニメーション初回スタート
-       animate();
-      });
-    </script>
-  </body>
-</html>
+        //アニメーション初回スタート
+        animate();
+    });
+})()</script></body></html>

@@ -1,51 +1,54 @@
-!!!
+doctype html
 html(lang='ja')
-	head
-		meta(charset='utf-8')
-		meta(name='viewport',content='width=device-width, initial-scale=1.0')
-		title
-		style.
-			#myCanvas{
-				display:block;
-			}
-	body
-		canvas#myCanvas(width='500',height='500')
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script.
-			$(function(){
-				//キャンバス要素　jQueryオブジェクト
-				var canvas = $('#myCanvas');
+    head
+        meta(charset='utf-8')
+        meta(name='viewport',content='width=device-width, initial-scale=1.0')
+        title
+        style
+            :stylus
+                #myCanvas
+                    display block
+    body
+        canvas#myCanvas(width='500',height='500')
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script
+            :js
+                (function(){
+                    $(function(){
+                        //キャンバス要素　jQueryオブジェクト
+                        var canvas = $('#myCanvas');
 
-				//2Dレンダリングコンテキスト
-				var context = canvas.get(0).getContext('2d');
+                        //2Dレンダリングコンテキスト
+                        var context = canvas.get(0).getContext('2d');
 
-				var canvasWidth = canvas.width(); //キャンバス要素　幅
-				var canvasHeight = canvas.height(); //キャンバス要素　高さ
+                        var canvasWidth = canvas.width(); //キャンバス要素　幅
+                        var canvasHeight = canvas.height(); //キャンバス要素　高さ
 
-				var playAnimation = true; //アニメーションフラグ　開始
+                        var playAnimation = true; //アニメーションフラグ　開始
 
-				var firstX = 0; //矩形1のx座標初期値
-				var secondX = 50; //矩形2のx座標初期値
-				var thirdX = 100; //矩形3のx座標初期値
+                        var firstX = 0; //矩形1のx座標初期値
+                        var secondX = 50; //矩形2のx座標初期値
+                        var thirdX = 100; //矩形3のx座標初期値
 
-				//アニメーションループ
-				function animate(){
-					//矩形クリア
-					context.clearRect(0, 0, canvasWidth, canvasHeight);
+                        //アニメーションループ
+                        function animate(){
+                            //矩形クリア
+                            context.clearRect(0, 0, canvasWidth, canvasHeight);
 
-					firstX++; //矩形1のx座標更新
-					secondX++; //矩形2のx座標更新
-					thirdX++; //矩形3のx座標更新
+                            firstX++; //矩形1のx座標更新
+                            secondX++; //矩形2のx座標更新
+                            thirdX++; //矩形3のx座標更新
 
-					context.fillRect(firstX, 50, 10, 10); //矩形1の描画
-					context.fillRect(secondX, 100, 10, 10); //矩形2の描画
-					context.fillRect(thirdX, 150, 10, 10); //矩形3の描画
+                            context.fillRect(firstX, 50, 10, 10); //矩形1の描画
+                            context.fillRect(secondX, 100, 10, 10); //矩形2の描画
+                            context.fillRect(thirdX, 150, 10, 10); //矩形3の描画
 
-					//アニメーションフラグが開始のとき
-					if(playAnimation){
-						setTimeout(animate, 33);
-					}
-				}
-				//アニメーション初回スタート
-				animate();
-			});
+                            //アニメーションフラグが開始のとき
+                            if(playAnimation){
+                                setTimeout(animate, 33);
+                            }
+                        }
+                        //アニメーション初回スタート
+                        animate();
+                    });
+                })()

@@ -1,33 +1,36 @@
-!!!
+doctype html
 html(lang='ja')
-	head
-		meta(charset='utf-8')
-		meta(name='viewport',content='width=device-width, initial-scale=1.0')
-		title
-	body
-		canvas#myCanvas(width='500',height='500')
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script.
-			$(function(){
-				var canvas = $('#myCanvas');
-				var context = canvas.get(0).getContext('2d');
+    head
+        meta(charset='utf-8')
+        meta(name='viewport',content='width=device-width, initial-scale=1.0')
+        title
+    body
+        canvas#myCanvas(width='500',height='500')
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script
+            :js
+                (function(){
+                    $(function(){
+                        var canvas = $('#myCanvas');
+                        var context = canvas.get(0).getContext('2d');
 
-				var image = new Image();
-				image.src = 'example.jpg';
-				$(image).load(function(){
-					context.drawImage(image, 0, 0, 500, 333);
+                        var image = new Image();
+                        image.src = 'example.jpg';
+                        $(image).load(function(){
+                            context.drawImage(image, 0, 0, 500, 333);
 
-					//3x3ピクセルの範囲のピクセルデータを取得
-					//getImageData(x, y, width, height)
-					var imageData = context.getImageData(0, 0, 3, 3);
+                            //3x3ピクセルの範囲のピクセルデータを取得
+                            //getImageData(x, y, width, height)
+                            var imageData = context.getImageData(0, 0, 3, 3);
 
-					//Canvasのピクセルデータを格納した配列
-					var pixel = imageData.data;
-					
-					//取得したピクセルの最初のピクセルのRGBA値
-					var red = pixel[0]; //Redの値（0-255）
-					var green = pixel[1]; //Greenの値（0-255）
-					var blue = pixel[2]; //Blueの値（0-255）
-					var alpha = pixel[3]; //Alphaの値（0-255）
-				});
-			});
+                            //Canvasのピクセルデータを格納した配列
+                            var pixel = imageData.data;
+                            
+                            //取得したピクセルの最初のピクセルのRGBA値
+                            var red = pixel[0]; //Redの値（0-255）
+                            var green = pixel[1]; //Greenの値（0-255）
+                            var blue = pixel[2]; //Blueの値（0-255）
+                            var alpha = pixel[3]; //Alphaの値（0-255）
+                        });
+                    });
+                })()

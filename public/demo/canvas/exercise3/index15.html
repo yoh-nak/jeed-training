@@ -1,78 +1,66 @@
-<!DOCTYPE html>
-<html lang="ja">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-  </head>
-  <body>
-    <canvas id="myCanvas" width="500" height="500"></canvas>
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script>
-      $(function(){
-       var canvas = $('#myCanvas');
-       var context = canvas.get(0).getContext('2d');
-       
-       //ピクセルを生成する
-       //createImageData(width, height);
-       var imageData = context.createImageData(500, 500);
-       
-       var pixels = imageData.data;
-       
-       //モザイク模様のタイルの数
-       var numTileRows = 4;
-       var numTileCols = 4;
-       
-       //個々のタイルのサイズ
-       //タイルの幅=>ピクセルデータ全体の幅から一列のタイルの数で割る
-       var tileWidth = imageData.width/numTileCols;
-       //タイルの高さ=>ピクセルデータ全体の高さから一行のタイルの数で割る
-       var tileHeight = imageData.height/numTileRows;
-       
-       //1つ1つのタイルの色の指定
-       //行方向のタイルの数だけループ
-       for(var r = 0; r < numTileRows; r++){
-        //列方向のタイル数だけのループ
-        for(var c = 0; c < numTileCols; c++){
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title></title></head><body><canvas id="myCanvas" width="500" height="500"></canvas><script src="http://code.jquery.com/jquery-1.11.0.min.js"></script><script>(function(){
+    $(function(){
+        var canvas = $('#myCanvas');
+        var context = canvas.get(0).getContext('2d');
         
-         //各タイルのピクセル値を設定
-         var red = Math.floor(Math.random()*255);
-         var green = Math.floor(Math.random()*255);
-         var blue = Math.floor(Math.random()*255);
-         
-         //1つ1つのタイルの塗りつぶし
-         //タイルの高さ分のピクセル数だけループ
-         for(var tr = 0; tr < tileHeight; tr++){
-          //タイルの幅の分のピクセル数だけループ
-          for(var tc = 0; tc < tileWidth; tc++){
-          
-           //Canvasのx座標を取得
-           //(c*tileWidth) //=>タイルの幅 x n個目のタイル
-           //tc　//=>タイル内のx方向のピクセル
-           var trueX = (c*tileWidth)+tc;
-           
-           //Canvas要素のy座標を取得
-           //(c*tileHeight) //=>タイルの高さ x n個目のタイル
-           //tr　//=>タイル内のy方向のピクセル
-           var trueY = (r*tileHeight)+tr;
-           
-           //タイル内のピクセルの配列のインデックスを取得（公式）
-           var pos = (trueY*(imageData.width*4))+(trueX*4);
-           
-           //ピクセルごとの色の指定
-           pixels[pos] = red; //Red値の指定
-           pixels[pos+1] = green; //Green値の指定
-           pixels[pos+2] = blue; //Blue値の指定
-           pixels[pos+3] = 255; //Alpha値の指定
-          }
-         }
+        //ピクセルを生成する
+        //createImageData(width, height);
+        var imageData = context.createImageData(500, 500);
+        
+        var pixels = imageData.data;
+        
+        //モザイク模様のタイルの数
+        var numTileRows = 4;
+        var numTileCols = 4;
+        
+        //個々のタイルのサイズ
+        //タイルの幅=>ピクセルデータ全体の幅から一列のタイルの数で割る
+        var tileWidth = imageData.width/numTileCols;
+        //タイルの高さ=>ピクセルデータ全体の高さから一行のタイルの数で割る
+        var tileHeight = imageData.height/numTileRows;
+        
+        //1つ1つのタイルの色の指定
+        //行方向のタイルの数だけループ
+        for(var r = 0; r < numTileRows; r++){
+            //列方向のタイル数だけのループ
+            for(var c = 0; c < numTileCols; c++){
+            
+                //各タイルのピクセル値を設定
+                var red = Math.floor(Math.random()*255);
+                var green = Math.floor(Math.random()*255);
+                var blue = Math.floor(Math.random()*255);
+                
+                //1つ1つのタイルの塗りつぶし
+                //タイルの高さ分のピクセル数だけループ
+                for(var tr = 0; tr < tileHeight; tr++){
+                    //タイルの幅の分のピクセル数だけループ
+                    for(var tc = 0; tc < tileWidth; tc++){
+                    
+                        //Canvasのx座標を取得
+                        //(c*tileWidth) //=>タイルの幅 x n個目のタイル
+                        //tc　//=>タイル内のx方向のピクセル
+                        var trueX = (c*tileWidth)+tc;
+                        
+                        //Canvas要素のy座標を取得
+                        //(c*tileHeight) //=>タイルの高さ x n個目のタイル
+                        //tr　//=>タイル内のy方向のピクセル
+                        var trueY = (r*tileHeight)+tr;
+                        
+                        //タイル内のピクセルの配列のインデックスを取得（公式）
+                        var pos = (trueY*(imageData.width*4))+(trueX*4);
+                        
+                        //ピクセルごとの色の指定
+                        pixels[pos] = red; //Red値の指定
+                        pixels[pos+1] = green; //Green値の指定
+                        pixels[pos+2] = blue; //Blue値の指定
+                        pixels[pos+3] = 255; //Alpha値の指定
+                    }
+                }
+            }
         }
-       }
-       
-       //ピクセルを描画する
-       //putImageData(image, x, y);
-       context.putImageData(imageData, 0, 0);
-      });
-    </script>
-  </body>
-</html>
+        
+        //ピクセルを描画する
+        //putImageData(image, x, y);
+        context.putImageData(imageData, 0, 0);
+    });
+})()</script></body></html>

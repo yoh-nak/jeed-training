@@ -1,111 +1,114 @@
-!!!
+doctype html
 html(lang='ja')
-	head
-		meta(charset='utf-8')
-		meta(name='viewport',content='width=device-width, initial-scale=1.0')
-		title
-		style.
-			#myCanvas{
-				display:block;
-			}
-	body
-		canvas#myCanvas(width='500',height='500')
-		button#startAnimation Start
-		button#stopAnimation Stop
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script.
-			$(function(){
-				//キャンバス要素　jQueryオブジェクト
-				var canvas = $('#myCanvas');
+    head
+        meta(charset='utf-8')
+        meta(name='viewport',content='width=device-width, initial-scale=1.0')
+        title
+        style
+            :stylus
+                #myCanvas
+                    display block
+    body
+        canvas#myCanvas(width='500',height='500')
+        button#startAnimation Start
+        button#stopAnimation Stop
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script
+            :js
+                (function(){
+                    $(function(){
+                        //キャンバス要素　jQueryオブジェクト
+                        var canvas = $('#myCanvas');
 
-				//2Dレンダリングコンテキスト
-				var context = canvas.get(0).getContext('2d');
+                        //2Dレンダリングコンテキスト
+                        var context = canvas.get(0).getContext('2d');
 
-				var canvasWidth = canvas.width(); //キャンバス要素　幅
-				var canvasHeight = canvas.height(); //キャンバス要素　高さ
+                        var canvasWidth = canvas.width(); //キャンバス要素　幅
+                        var canvasHeight = canvas.height(); //キャンバス要素　高さ
 
-				var playAnimation = true; //アニメーションフラグ　開始
+                        var playAnimation = true; //アニメーションフラグ　開始
 
-				//スタート／ストップボタン　jQueryオブジェクト
-				var startButton = $('#startAnimation');
-				var stopButton = $('#stopAnimation');
-				
-				//スタートボタン初期表示削除
-				startButton.hide();
+                        //スタート／ストップボタン　jQueryオブジェクト
+                        var startButton = $('#startAnimation');
+                        var stopButton = $('#stopAnimation');
+                        
+                        //スタートボタン初期表示削除
+                        startButton.hide();
 
-				//スタートボタンクリック
-				startButton.click(function(){
-					$(this).hide(); //スタートボタン非表示
-					stopButton.show(); //ストップボタン表示
+                        //スタートボタンクリック
+                        startButton.click(function(){
+                            $(this).hide(); //スタートボタン非表示
+                            stopButton.show(); //ストップボタン表示
 
-					playAnimation = true; //アニメーションフラグ　開始
-					animate(); //アニメーション開始
-				});
+                            playAnimation = true; //アニメーションフラグ　開始
+                            animate(); //アニメーション開始
+                        });
 
-				//ストップボタンクリック
-				stopButton.click(function(){
-					$(this).hide(); //ストップボタン非表示
-					startButton.show(); //スタートボタン表示
+                        //ストップボタンクリック
+                        stopButton.click(function(){
+                            $(this).hide(); //ストップボタン非表示
+                            startButton.show(); //スタートボタン表示
 
-					playAnimation = false; //アニメーションフラグ　停止
-				});
-				
-				//矩形（x座標, y座標, 幅, 高さ, 回転時の半径, 回転時の角度）をまとめて管理するクラス
-				var Shape = function(x, y, width, height) {
-					this.x = x;
-					this.y = y;
-					this.width = width;
-					this.height = height;
-					
-					this.radius = Math.random()*30; //半径0-30の乱数
-					this.angle = 0;
-				};
-				
-				//複数の矩形を格納する配列
-				var shapes = new Array();
-				
-				//矩形の設定を10個準備
-				for (var i = 0; i < 10; i++) {
-					var x = Math.random()*250;
-					var y = Math.random()*250;
-					var width = height = Math.random()*30;
-					//矩形（x座標, y座標, 幅, 高さ）を管理するクラスを矩形ごとに配列に格納
-					shapes.push(new Shape(x, y, width, height));
-				};
-				
-				//アニメーションループ
-				function animate() {
-					//矩形クリア
-					context.clearRect(0, 0, canvasWidth, canvasHeight);
-					
-					var shapesLength = shapes.length; //矩形の個数
+                            playAnimation = false; //アニメーションフラグ　停止
+                        });
+                        
+                        //矩形（x座標, y座標, 幅, 高さ, 回転時の半径, 回転時の角度）をまとめて管理するクラス
+                        var Shape = function(x, y, width, height) {
+                            this.x = x;
+                            this.y = y;
+                            this.width = width;
+                            this.height = height;
+                            
+                            this.radius = Math.random()*30; //半径0-30の乱数
+                            this.angle = 0;
+                        };
+                        
+                        //複数の矩形を格納する配列
+                        var shapes = new Array();
+                        
+                        //矩形の設定を10個準備
+                        for (var i = 0; i < 10; i++) {
+                            var x = Math.random()*250;
+                            var y = Math.random()*250;
+                            var width = height = Math.random()*30;
+                            //矩形（x座標, y座標, 幅, 高さ）を管理するクラスを矩形ごとに配列に格納
+                            shapes.push(new Shape(x, y, width, height));
+                        };
+                        
+                        //アニメーションループ
+                        function animate() {
+                            //矩形クリア
+                            context.clearRect(0, 0, canvasWidth, canvasHeight);
+                            
+                            var shapesLength = shapes.length; //矩形の個数
 
-					//矩形の個数だけ描画
-					for(var i = 0; i < shapesLength; i++) {
-						var tmpShape = shapes[i];
-						
-						//それぞれの矩形のx座標を算出
-						var x = tmpShape.x+(tmpShape.radius*Math.cos(tmpShape.angle*(Math.PI/180)));
-						//それぞれの矩形のy座標を算出
-						var y = tmpShape.y+(tmpShape.radius*Math.sin(tmpShape.angle*(Math.PI/180)));
-						
-						//角度を5度ずつ増加
-						tmpShape.angle += 5;
+                            //矩形の個数だけ描画
+                            for(var i = 0; i < shapesLength; i++) {
+                                var tmpShape = shapes[i];
+                                
+                                //それぞれの矩形のx座標を算出
+                                var x = tmpShape.x+(tmpShape.radius*Math.cos(tmpShape.angle*(Math.PI/180)));
+                                //それぞれの矩形のy座標を算出
+                                var y = tmpShape.y+(tmpShape.radius*Math.sin(tmpShape.angle*(Math.PI/180)));
+                                
+                                //角度を5度ずつ増加
+                                tmpShape.angle += 5;
 
-						//角度が360度を超えたら0度に戻す
-						if (tmpShape.angle > 360) {
-							tmpShape.angle = 0;	
-						};					
-						
-						//矩形描画
-						context.fillRect(x, y, tmpShape.width, tmpShape.height);
-					};
-					
-					//アニメーションフラグが開始のとき
-					if(playAnimation) {
-						setTimeout(animate, 33);
-					};
-				};
-				//アニメーション初回スタート
-				animate();
-			});
+                                //角度が360度を超えたら0度に戻す
+                                if (tmpShape.angle > 360) {
+                                    tmpShape.angle = 0;    
+                                };                    
+                                
+                                //矩形描画
+                                context.fillRect(x, y, tmpShape.width, tmpShape.height);
+                            };
+                            
+                            //アニメーションフラグが開始のとき
+                            if(playAnimation) {
+                                setTimeout(animate, 33);
+                            };
+                        };
+                        //アニメーション初回スタート
+                        animate();
+                    });
+                })()

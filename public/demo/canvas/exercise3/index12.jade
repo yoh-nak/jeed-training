@@ -1,54 +1,57 @@
-!!!
+doctype html
 html(lang='ja')
-	head
-		meta(charset='utf-8')
-		meta(name='viewport',content='width=device-width, initial-scale=1.0')
-		title
-	body
-		canvas#myCanvas(width='500',height='500')
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script.
-			$(function(){
-				//キャンバス要素　jQueryオブジェクト
-				var canvas = $('#myCanvas');
+    head
+        meta(charset='utf-8')
+        meta(name='viewport',content='width=device-width, initial-scale=1.0')
+        title
+    body
+        canvas#myCanvas(width='500',height='500')
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script
+            :js
+                (function(){
+                    $(function(){
+                        //キャンバス要素　jQueryオブジェクト
+                        var canvas = $('#myCanvas');
 
-				//2Dレンダリングコンテキスト
-				var context = canvas.get(0).getContext('2d');
+                        //2Dレンダリングコンテキスト
+                        var context = canvas.get(0).getContext('2d');
 
-				//イメージオブジェクトのインスタンス
-				var image = new Image();
-				//イメージオブジェクトのインスタンスに画像をセット
-				image.src = 'example.jpg';
+                        //イメージオブジェクトのインスタンス
+                        var image = new Image();
+                        //イメージオブジェクトのインスタンスに画像をセット
+                        image.src = 'example.jpg';
 
-				//イメージの読み込み
-				$(image).load(function(){
-					//イメージの描画
-					context.drawImage(image, 0, 0, 500, 333);
-				});
+                        //イメージの読み込み
+                        $(image).load(function(){
+                            //イメージの描画
+                            context.drawImage(image, 0, 0, 500, 333);
+                        });
 
-				//Canvas要素のクリックイベント
-				canvas.click(function(e){
-					//Canvas要素のドキュメントのxy座標を格納
-					var canvasOffset = canvas.offset();
+                        //Canvas要素のクリックイベント
+                        canvas.click(function(e){
+                            //Canvas要素のドキュメントのxy座標を格納
+                            var canvasOffset = canvas.offset();
 
-					//クリックした位置のドキュメントのx座標からCanvas要素右上のドキュメントのx座標を引く
-					//=>クリックした位置のCanvas要素右上からのx座標
-					var canvasX = Math.floor(e.pageX - canvasOffset.left);
+                            //クリックした位置のドキュメントのx座標からCanvas要素右上のドキュメントのx座標を引く
+                            //=>クリックした位置のCanvas要素右上からのx座標
+                            var canvasX = Math.floor(e.pageX - canvasOffset.left);
 
-					//クリックした位置のドキュメントのy座標からCanvas要素右上のドキュメントのy座標を引く
-					//=>クリックした位置のCanvas要素右上からのy座標
-					var canvasY = Math.floor(e.pageY - canvasOffset.top);
+                            //クリックした位置のドキュメントのy座標からCanvas要素右上のドキュメントのy座標を引く
+                            //=>クリックした位置のCanvas要素右上からのy座標
+                            var canvasY = Math.floor(e.pageY - canvasOffset.top);
 
-					//Canvas要素上のクリックした位置の1x1のピクセルデータを取得
-					var imageData = context.getImageData(canvasX, canvasY, 1, 1);
+                            //Canvas要素上のクリックした位置の1x1のピクセルデータを取得
+                            var imageData = context.getImageData(canvasX, canvasY, 1, 1);
 
-					//取得したピクセルデータを配列に格納
-					var pixel = imageData.data;
+                            //取得したピクセルデータを配列に格納
+                            var pixel = imageData.data;
 
-					//取得したピクセルデータからRGBA値を作成
-					var pixelColor = 'rgba(' + pixel[0] + ', ' + pixel[1] + ' , ' + pixel[2] + ' , ' + pixel[3] + ')';
+                            //取得したピクセルデータからRGBA値を作成
+                            var pixelColor = 'rgba(' + pixel[0] + ', ' + pixel[1] + ' , ' + pixel[2] + ' , ' + pixel[3] + ')';
 
-					//background-colorに取得したRGBA値をセット
-					$('body').css('background-color', pixelColor);
-				});
-			});
+                            //background-colorに取得したRGBA値をセット
+                            $('body').css('background-color', pixelColor);
+                        });
+                    });
+                })()

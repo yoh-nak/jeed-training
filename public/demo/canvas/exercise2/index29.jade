@@ -1,23 +1,26 @@
-!!!
+doctype html
 html(lang='ja')
-	head
-		meta(charset='utf-8')
-		meta(name='viewport',content='width=device-width, initial-scale=1.0')
-		title
-	body
-		canvas#myCanvas(width='500',height='500')
-		script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-		script.
-			$(function(){
-				var canvas = $('#myCanvas');
-				var context = canvas.get(0).getContext('2d');
+    head
+        meta(charset='utf-8')
+        meta(name='viewport',content='width=device-width, initial-scale=1.0')
+        title
+    body
+        canvas#myCanvas(width='500',height='500')
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script
+            :js
+                (function(){
+                    $(function(){
+                        var canvas = $('#myCanvas');
+                        var context = canvas.get(0).getContext('2d');
 
-				context.shadowColor = 'rgb(255, 0, 0)';
-				context.shadowBlur = 50;
-				context.shadowOffsetX = 0;
-				context.shadowOffsetY = 0;
-				context.beginPath();
-				context.arc(400, 100, 50, 0, Math.PI*2, false);
-				context.closePath();
-				context.fill();
-			});
+                        context.shadowColor = 'rgb(255, 0, 0)';
+                        context.shadowBlur = 50;
+                        context.shadowOffsetX = 0;
+                        context.shadowOffsetY = 0;
+                        context.beginPath();
+                        context.arc(400, 100, 50, 0, Math.PI*2, false);
+                        context.closePath();
+                        context.fill();
+                    });
+                })()

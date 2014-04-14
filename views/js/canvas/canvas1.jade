@@ -24,6 +24,8 @@ block content
                             a(href='http://dotinstall.com/lessons/basic_canvas', target='_blank') HTML5 Canvas入門 
                         p
                             a(href='http://dotinstall.com/lessons/doodle_canvas', target='_blank') Canvasでお絵かきアプリ
+                        p
+                            a(href='http://dotinstall.com/lessons/pong_js', target='_blank') HTML5で作るピンポンゲーム
                         hr
                         h4 Canvasのひな形
                         p
@@ -60,8 +62,9 @@ block content
                                             :js
                                                 (function(){
                                                     var canvas = document.getElementById('myCanvas');
+                                                    //canvas要素内を2Dレンダリングコンテキストに指定
                                                     var context = canvas.getContext('2d');
-                                                    //context.fillRect(x, y, width, height);
+                                                    //context.fillRect(x座標, y座標, 幅, 高さ);
                                                     context.fillRect(40, 40, 100, 100);
                                                 })()
                         h4 jQueryを使って矩形を描画する
@@ -84,9 +87,13 @@ block content
                                             :js
                                                 (function(){
                                                     $(function(){
+                                                        //document.getElementById('mycanvas')と同等
                                                         var canvas = $('#myCanvas').get(0);
+                                                        //canvas要素内を2Dレンダリングコンテキストに指定
                                                         var context = canvas.getContext('2d');
-                                                        //context.fillRect(x, y, width, height);
+                                                        
+                                                        //矩形の描画
+                                                        //context.fillRect(x座標, y座標, 幅, 高さ);
                                                         context.fillRect(40, 40, 100, 100);
                                                     });
                                                 })()
@@ -112,8 +119,8 @@ block content
                                                     $(function(){
                                                         var canvas = $('#myCanvas').get(0);
                                                         var context = canvas.getContext('2d');
-                                                        //context.fillRect(x, y, width, height);
-                                                        context.fillRect(40, 40, 200, 100);
+                                                        
+                                                        context.fillRect(40, 40, <mark>200</mark>, <mark>100</mark>);
                                                     });
                                                 })()
                         h4 矩形を移動する
@@ -138,11 +145,11 @@ block content
                                                     $(function(){
                                                         var canvas = $('#myCanvas').get(0);
                                                         var context = canvas.getContext('2d');
-                                                        //context.fillRect(x, y, width, height);
-                                                        context.fillRect(200, 300, 200, 100);
+
+                                                        context.fillRect(<mark>200</mark>, <mark>300</mark>, 200, 100);
                                                     });
                                                 })()
-                        h4 矩形の線を描画する
+                        h4 矩形の輪郭（ストローク）を描画する
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise1/index6.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -164,11 +171,13 @@ block content
                                                     $(function(){
                                                         var canvas = $('#myCanvas').get(0);
                                                         var context = canvas.getContext('2d');
-                                                        //context.strokeRect(x, y, width, height);
+                                                        
+                                                        //矩形の線の描画
+                                                        //context.strokeRect(x座標, y座標, 幅, 高さ);
                                                         context.strokeRect(200, 300, 200, 100);
                                                     });
                                                 })()
-                        h4 線を描画する
+                        h4 線（パス）を描画する
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise1/index7.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -190,11 +199,21 @@ block content
                                                     $(function(){
                                                         var canvas = $('#myCanvas').get(0);
                                                         var context = canvas.getContext('2d');
-                                                        context.beginPath(); //パスの操作を開始する
-                                                        context.moveTo(40, 40); //パスの起点を設定する
-                                                        context.lineTo(340, 40); //パスの終点を設定する
-                                                        context.closePath(); //パスの操作を終了する
-                                                        context.stroke(); //パスの輪郭を描く
+                                                        
+                                                        //パスの操作を開始する
+                                                        context.beginPath();
+
+                                                        //パスの起点を設定する
+                                                        context.moveTo(40, 40);
+
+                                                        //パスの終点を設定する
+                                                        context.lineTo(340, 40);
+
+                                                        //パスの操作を終了する
+                                                        context.closePath();
+
+                                                        //パスの輪郭を描く
+                                                        context.stroke();
                                                     });
                                                 })()
                         h4 斜めに線を描画する
@@ -219,11 +238,21 @@ block content
                                                     $(function(){
                                                         var canvas = $('#myCanvas').get(0);
                                                         var context = canvas.getContext('2d');
-                                                        context.beginPath(); //パスの操作を開始する
-                                                        context.moveTo(40, 40); //パスの起点を設定する
-                                                        context.lineTo(340, 340); //パスの終点を設定する
-                                                        context.closePath(); //パスの操作を終了する
-                                                        context.stroke(); //パスの輪郭を描く
+                                                        
+                                                        //パスの操作を開始する
+                                                        context.beginPath();
+
+                                                        //パスの起点を設定する
+                                                        context.moveTo(40, 40);
+
+                                                        //パスの終点を設定する
+                                                        context.lineTo(340, 340);
+
+                                                        //パスの操作を終了する
+                                                        context.closePath();
+
+                                                        //パスの輪郭を描く
+                                                        context.stroke();
                                                     });
                                                 })()
                         h4 円を描画する
@@ -248,16 +277,24 @@ block content
                                                     $(function(){
                                                         var canvas = $('#myCanvas').get(0);
                                                         var context = canvas.getContext('2d');
-                                                        context.beginPath(); //パスの操作を開始する
-                                                        //context.arc(x, y, radius, startAngle, endAngle, anticlockwise)
-                                                        context.arc(230, 90, 50, 0, Math.PI*2, false); //円を描く
-                                                        context.closePath(); //パスの操作を終了する
-                                                        context.fill(); //パスの中を塗りつぶす
+
+                                                        //パスの操作を開始する
+                                                        context.beginPath();
+
+                                                        //弧を描画する（角度はラジアン）
+                                                        //context.arc(中心x座標, 中心y座標, 半径, 開始角度, 終了角度, 反時計回りかどうか)
+                                                        context.arc(230, 90, 50, 0, Math.PI*2, false);
+
+                                                        //パスの操作を終了する
+                                                        context.closePath();
+
+                                                        //パスの中を塗りつぶす
+                                                        context.fill();
                                                     });
                                                 })()
                         h4 半円を描画する
                         p
-                            a.btn.btn-default(href='../demo/canvas/exercise1/index10.html',target='_blank')
+                            a.btn.btn-default(href='../demo/canvas/exercise1/index29.html',target='_blank')
                                 i.glyphicon.glyphicon-play
                                 | デモ
                         pre(class='prettyprint linenums:1')
@@ -277,11 +314,57 @@ block content
                                                     $(function(){
                                                         var canvas = $('#myCanvas').get(0);
                                                         var context = canvas.getContext('2d');
-                                                        context.beginPath(); //パスの操作を開始する
-                                                        //context.arc(x, y, radius, startAngle, endAngle, anticlockwise)
-                                                        context.arc(230, 90, 50, 0, Math.PI, false); //円を描く
-                                                        context.closePath(); //パスの操作を終了する
-                                                        context.fill(); //パスの中を塗りつぶす
+
+                                                        //パスの操作を開始する
+                                                        context.beginPath();
+                                                        
+                                                        //弧を描く
+                                                        context.arc(230, 90, 50, 0, Math.PI, false);
+
+                                                        //パスの操作を終了する
+                                                        context.closePath();
+
+                                                        //パスの中を塗りつぶす
+                                                        context.fill();
+                                                    });
+                                                })()
+                        h4 扇型を描画する
+                        p
+                            a.btn.btn-default(href='../demo/canvas/exercise1/index29.html',target='_blank')
+                                i.glyphicon.glyphicon-play
+                                | デモ
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype html
+                                html(lang='ja')
+                                    head
+                                        meta(charset='utf-8')
+                                        meta(name='viewport',content='width=device-width, initial-scale=1.0')
+                                        title
+                                    body
+                                        canvas#myCanvas(width='500',height='500')
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script
+                                            :js
+                                                (function(){
+                                                    $(function(){
+                                                        var canvas = $('#myCanvas').get(0);
+                                                        var context = canvas.getContext('2d');
+
+                                                        //パスの操作を開始する
+                                                        context.beginPath();
+
+                                                        //弧を描く
+                                                        context.arc(230, 90, 50, 0, Math.PI/2, false);
+
+                                                        //中心座標に移動
+                                                        context.lineTo(230, 90);
+
+                                                        //パスの操作を終了する
+                                                        context.closePath();
+
+                                                        //パスの中を塗りつぶす
+                                                        context.fill();
                                                     });
                                                 })()
                         h4 角度からラジアンへの変換

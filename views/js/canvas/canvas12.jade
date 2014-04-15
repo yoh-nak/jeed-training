@@ -19,6 +19,7 @@ block content
                         i.glyphicon.glyphicon-book
                         &nbsp;画像に変換
                     .panel-body
+                        h4 キャンバスを画像に変換
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise2/index36.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -41,19 +42,29 @@ block content
                                                         var canvas = $('#myCanvas');
                                                         var context = canvas.get(0).getContext('2d');
 
+                                                        //初期状態を保存
                                                         context.save();
+
+                                                        //黒い矩形
                                                         context.fillRect(50, 50, 100, 100);
 
+                                                        //赤をセット
                                                         context.fillStyle = 'rgb(255, 0, 0)';
+
+                                                        //赤い矩形
                                                         context.fillRect(100, 100, 100, 100);
 
+                                                        //初期状態を復元
                                                         context.restore();
+
+                                                        //黒い矩形
                                                         context.fillRect(150, 150, 100, 100);
 
-                                                        var dataURL = canvas.get(0).toDataURL();
+                                                        //画像に変換
+                                                        var dataURL = canvas.get(0).<mark>toDataURL()</mark>;
                                                     });
                                                 })()
-
+                        h4 キャンバスを画像に変換して利用
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise2/index37.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -76,19 +87,34 @@ block content
                                                         var canvas = $('#myCanvas');
                                                         var context = canvas.get(0).getContext('2d');
 
+                                                        //初期状態を保存
                                                         context.save();
+
+                                                        //黒い矩形
                                                         context.fillRect(50, 50, 100, 100);
 
+                                                        //赤をセット
                                                         context.fillStyle = 'rgb(255, 0, 0)';
+                                                        
+                                                        //赤い矩形
                                                         context.fillRect(100, 100, 100, 100);
 
+                                                        //初期状態を復元
                                                         context.restore();
+                                                        
+                                                        //黒い矩形
                                                         context.fillRect(150, 150, 100, 100);
 
+                                                        //画像に変換
                                                         var dataURL = canvas.get(0).toDataURL();
+                                                        
+                                                        //img要素の生成
                                                         var img = $('<img>');
+
+                                                        //src属性に変換した画像をセット
                                                         img.attr('src', dataURL);
 
+                                                        //canvas要素をimg要素に置換
                                                         canvas.replaceWith(img);
                                                     });
                                                 })()

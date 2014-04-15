@@ -45,7 +45,7 @@ block content
                                                         //パスの開始
                                                         context.beginPath();
 
-                                                        //描画開始位置の移動
+                                                        //パスの開始位置を移動
                                                         context.moveTo(100, 50);
 
                                                         //(100, 50)から(150, 150)に直線を引く
@@ -64,7 +64,7 @@ block content
                                                         context.fill();
                                                     });
                                                 })()
-                        h4 
+                        h4 2次ベジェ曲線を使ったパス
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise2/index34.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -87,13 +87,24 @@ block content
                                                         var canvas = $('#myCanvas');
                                                         var context = canvas.get(0).getContext('2d');
 
+                                                        //線の太さを指定
                                                         context.lineWidth = 5;
+
+                                                        //パスの開始
                                                         context.beginPath();
+
+                                                        //パスの開始位置を移動
                                                         context.moveTo(50, 250);
+
+                                                        //2次ベジェ曲線をつかったパス
+                                                        //context.quadraticCurveTo(制御点のx座標, 制御点のy座標, 終了位置のx座標, 終了位置のy座標);
                                                         context.quadraticCurveTo(250, 100, 450, 250);
+
+                                                        //パスに沿って線を描画
                                                         context.stroke();
                                                     });
                                                 })()
+                        h4 3次ベジェ曲線を使ったパス
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise2/index35.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -116,45 +127,20 @@ block content
                                                         var canvas = $('#myCanvas');
                                                         var context = canvas.get(0).getContext('2d');
 
+                                                        //線の太さを指定
                                                         context.lineWidth = 5;
+
+                                                        //パスの開始
                                                         context.beginPath();
+
+                                                        //パスの開始位置を移動
                                                         context.moveTo(50, 250);
+
+                                                        //3次ベジェ曲線を使ったパス
+                                                        //context.bezierCurveTo(制御点1のx座標, 制御点1のy座標, 制御点2のx座標, 制御点2のy座標, 終了位置のx座標, 終了位置のy座標);
                                                         context.bezierCurveTo(150, 50, 350, 450, 450, 250);
+
+                                                        //パスにそって線を描画
                                                         context.stroke();
                                                     });
                                                 })()
-                        //-
-                            p
-                                a.btn.btn-default(href='../demo/canvas/exercise2/index36.html',target='_blank')
-                                    i.glyphicon.glyphicon-play
-                                    | デモ
-                            pre(class='prettyprint linenums:1')
-                                :code
-                                    doctype html
-                                    html(lang='ja')
-                                        head
-                                            meta(charset='utf-8')
-                                            meta(name='viewport',content='width=device-width, initial-scale=1.0')
-                                            title
-                                        body
-                                            canvas#myCanvas(width='500',height='500')
-                                            script(src='http://code.jquery.com/jquery-1.11.0.min.js')
-                                            script
-                                                :js
-                                                    (function(){
-                                                        $(function(){
-                                                            var canvas = $('#myCanvas');
-                                                            var context = canvas.get(0).getContext('2d');
-
-                                                            context.save();
-                                                            context.fillRect(50, 50, 100, 100);
-
-                                                            context.fillStyle = 'rgb(255, 0, 0)';
-                                                            context.fillRect(100, 100, 100, 100);
-
-                                                            context.restore();
-                                                            context.fillRect(150, 150, 100, 100);
-
-                                                            var dataURL = canvas.get(0).toDataURL();
-                                                        });
-                                                    })()

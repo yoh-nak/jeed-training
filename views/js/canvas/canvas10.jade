@@ -83,16 +83,22 @@ block content
                                                         var context = canvas.get(0).getContext('2d');
 
                                                         //円形グラデーションの宣言
-                                                        //createRadialGradient()
-                                                        //createRadialGradient(x0, y0, r0, x1, y1, r0)
+                                                        //createRadialGradient(円1中心x座標, 円1中心y座標, 円1半径, 円2中心x座標, 円2中心y座標, 円2半径)
                                                         var gradient = context.createRadialGradient(300, 300, 10, 100, 100, 50);
+
+                                                        //カラーストップ0%
                                                         gradient.addColorStop(0, 'rgb(0, 0, 0)');
+
+                                                        //カラーストップ100%
                                                         gradient.addColorStop(1, 'rgb(150, 150, 150)');
 
+                                                        //グラデーションの適用
                                                         context.fillStyle = gradient;
+
                                                         context.fillRect(0, 0, canvas.width(), canvas.height());
                                                     });
                                                 })()
+                        h4 キャンバスの中心から円形グラデーション
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise2/index32.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -115,14 +121,23 @@ block content
                                                         var canvas = $('#myCanvas');
                                                         var context = canvas.get(0).getContext('2d');
 
+                                                        //キャンバス中心x座標
                                                         var canvasCenterX = canvas.width()/2;
+                                                        //キャンバス中心y座標
                                                         var canvasCenterY = canvas.height()/2;
 
+                                                        //円形グラデーションの宣言
                                                         var gradient = context.createRadialGradient(canvasCenterX, canvasCenterY, 0, canvasCenterX, canvasCenterY, 250);
+
+                                                        //カラーストップ0%
                                                         gradient.addColorStop(0, 'rgb(0, 0, 0)');
+
+                                                        //カラーストップ100%
                                                         gradient.addColorStop(1, 'rgb(150, 150, 150)');
 
+                                                        //グラデーションの適用
                                                         context.fillStyle = gradient;
+                                                        
                                                         context.fillRect(0, 0, canvas.width(), canvas.height());
                                                     });
                                                 })()

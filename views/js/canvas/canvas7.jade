@@ -19,6 +19,7 @@ block content
                         i.glyphicon.glyphicon-book
                         &nbsp;図形の変換
                     .panel-body
+                        h4 描画の開始座標を移動
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise2/index6.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -41,14 +42,21 @@ block content
                                                         var canvas = $('#myCanvas');
                                                         var context = canvas.get(0).getContext('2d');
 
-                                                        context.fillRect(150, 150, 100, 100);
+                                                        //黒い矩形
+                                                        context.fillRect(<mark>150, 150</mark>, 100, 100);
 
-                                                        context.translate(150, 150);
+                                                        //描画開始位置の移動
+                                                        //context.translate(x座標の移動量, y座標の移動量);
+                                                        context.translate(<mark>150, 150</mark>);
 
                                                         context.fillStyle = 'rgb(255, 0, 0)'
-                                                        context.fillRect(150, 150, 100, 100);
+
+                                                        //赤い矩形
+                                                        //(150, 150)の開始位置から(150, 150)の位置に描画
+                                                        context.fillRect(<mark>150, 150</mark>, 100, 100);
                                                     });
                                                 })()
+                        h4 描画開始位置を移動して図形を上書き
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise2/index7.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -71,14 +79,19 @@ block content
                                                         var canvas = $('#myCanvas');
                                                         var context = canvas.get(0).getContext('2d');
 
-                                                        context.fillRect(150, 150, 100, 100);
+                                                        //黒い矩形
+                                                        context.fillRect(<mark>150, 150</mark>, 100, 100);
 
-                                                        context.translate(150, 150);
+                                                        //描画開始位置の移動
+                                                        context.translate(<mark>150, 150</mark>);
 
                                                         context.fillStyle = 'rgb(255, 0, 0)';
-                                                        context.fillRect(0, 0, 100, 100);
+
+                                                        //赤い矩形
+                                                        context.fillRect(<mark>0, 0</mark>, 100, 100);
                                                     });
                                                 })()
+                        h4 図形を拡大して描画
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise2/index8.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -101,10 +114,13 @@ block content
                                                         var canvas = $('#myCanvas');
                                                         var context = canvas.get(0).getContext('2d');
 
+                                                        //context.scale(x方向の拡大率, y方向の拡大率);
                                                         context.scale(2, 2);
+
                                                         context.fillRect(150, 150, 100, 100);
                                                     });
                                                 })()
+                        h4 描画開始位置を移動して拡大
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise2/index9.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -127,12 +143,20 @@ block content
                                                         var canvas = $('#myCanvas');
                                                         var context = canvas.get(0).getContext('2d');
 
+                                                        //初期状態の保存
                                                         context.save();
+
+                                                        //描画開始位置を移動
                                                         context.translate(150, 150);
+
+                                                        //拡大して描画
                                                         context.scale(2, 2);
+
+                                                        //移動、拡大した黒い矩形
                                                         context.fillRect(0, 0, 100, 100);
                                                     });
                                                 })()
+                        h4 移動、拡大のリセット
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise2/index10.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -155,15 +179,26 @@ block content
                                                         var canvas = $('#myCanvas');
                                                         var context = canvas.get(0).getContext('2d');
 
+                                                        //初期状態の保存
                                                         context.save();
+
+                                                        //描画開始位置を移動
                                                         context.translate(150, 150);
+
+                                                        //拡大して描画
                                                         context.scale(2, 2);
+
+                                                        //移動、拡大した黒い矩形
                                                         context.fillRect(0, 0, 100, 100);
 
+                                                        //初期状態の復元
                                                         context.restore();
+
+                                                        //通常の黒い矩形
                                                         context.fillRect(0, 0, 100, 100);
                                                     });
                                                 })()
+                        h4 図形の回転
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise2/index11.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -186,10 +221,14 @@ block content
                                                         var canvas = $('#myCanvas');
                                                         var context = canvas.get(0).getContext('2d');
 
-                                                        context.rotate(0.7854); //45度（Math.PI/4）回転
+                                                        //45度（Math.PI/4）回転
+                                                        context.rotate(0.7854);
+
+                                                        //回転した黒い矩形
                                                         context.fillRect(150, 150, 100, 100);
                                                     });
                                                 })()
+                        h4 移動して回転
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise2/index12.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -212,12 +251,17 @@ block content
                                                         var canvas = $('#myCanvas');
                                                         var context = canvas.get(0).getContext('2d');
 
-                                                        context.translate(200, 200); //正方形の中心に平行移動
-                                                        context.rotate(0.7854); //45度（Math.PI/4）回転
-                                                        context.fillRect(-50, -50, 100, 100); //回転の中心を中心とする正方形を描画
+                                                        //(200, 200)平行移動
+                                                        context.translate(200, 200);
+
+                                                        //45度（Math.PI/4）回転
+                                                        context.rotate(0.7854);
+
+                                                        //矩形の中心で回転させる
+                                                        context.fillRect(<mark>-50, -50, 100, 100</mark>);
                                                     });
                                                 })()
-                        h4 変換行列を使って変形する
+                        h4 変換行列で拡大する
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise2/index13.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -244,7 +288,7 @@ block content
                                                         context.fillRect(0, 0, 150, 150);
                                                     });
                                                 })()
-                        h4 rotateメソッドを使わずに変換行列で回転する
+                        h4 変換行列で回転する
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise2/index14.html',target='_blank')
                                 i.glyphicon.glyphicon-play

@@ -17,7 +17,7 @@ block content
                 .panel.panel-primary
                     .panel-heading
                         i.glyphicon.glyphicon-book
-                        &nbsp;イメージのロード
+                        &nbsp;画像の読み込み
                     .panel-body
                         h4 キャンバスに画像を読み込む
                         p
@@ -53,7 +53,7 @@ block content
                                                         })
                                                     });
                                                 })()
-                        h4 イメージのサイズを変え、イメージを切り取る
+                        h4 画像を切り取る
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise3/index2.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -76,15 +76,18 @@ block content
                                                         var canvas = $('#myCanvas');
                                                         var context = canvas.get(0).getContext('2d');
 
+                                                        //イメージオブジェクトの生成
                                                         var image = new Image();
                                                         image.src = 'example.jpg';
+
+                                                        //画像の読み込み後の処理
                                                         $(image).load(function(){
-                                                            //context.drawImage(image, x, y, width, height);
+                                                            //drawImage(イメージオブジェクト, x座標, y座標, 使用する幅 , 使用する高さ)
                                                             context.drawImage(image, 0, 0, 500, 333);
                                                         })
                                                     });
                                                 })()
-                        h4 クロッピングする
+                        h4 画像をくり抜く
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise3/index3.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -107,15 +110,18 @@ block content
                                                         var canvas = $('#myCanvas');
                                                         var context = canvas.get(0).getContext('2d');
 
+                                                        //イメージオブジェクトの生成
                                                         var image = new Image();
                                                         image.src = 'example.jpg';
+
+                                                        //画像の読み込み後の処理
                                                         $(image).load(function(){
-                                                            //context.drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh);
+                                                            //drawImage(イメージオブジェクト, くり抜く画像のx座標, くり抜く画像のy座標, 使用する幅 , 使用する高さ, 貼り付けるx座標 , 貼り付けるy座標, 貼り付ける幅, 貼り付ける高さ)
                                                             context.drawImage(image, 0, 0, 250, 250, 0, 0, 250, 250);
                                                         })
                                                     });
                                                 })()
-                        h4 サイズを変えてクロッピング
+                        h4 くり抜いてサイズを変える
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise3/index4.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -138,11 +144,14 @@ block content
                                                         var canvas = $('#myCanvas');
                                                         var context = canvas.get(0).getContext('2d');
 
+                                                        //イメージオブジェクトの生成
                                                         var image = new Image();
                                                         image.src = 'example.jpg';
+
+                                                        //画像の読み込み後の処理
                                                         $(image).load(function(){
-                                                            //context.drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh);
-                                                            context.drawImage(image, 0, 0, 250, 250, 0, 0, 500, 500);
+                                                            //drawImage(イメージオブジェクト, くり抜く画像のx座標, くり抜く画像のy座標, 使用する幅 , 使用する高さ, 貼り付けるx座標 , 貼り付けるy座標, 貼り付ける幅, 貼り付ける高さ)
+                                                            context.drawImage(image, 0, 0, 250, 250, 0, 0, <mark>500, 500</mark>);
                                                         })
                                                     });
                                                 })()

@@ -29,3 +29,41 @@ block content
                         #demo.collapse.out
                             pre(class='prettyprint linenums:1')
                                 :code
+                                    doctype html
+                                    html(lang='ja')
+                                        head
+                                            meta(charset='UTF-8')
+                                            title
+                                        body
+                                            canvas#canvas(width='500', height='500')
+                                                //fallback
+                                            script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                            script
+                                                :js
+                                                    (function(){
+                                                        $(function(){
+                                                            var canvas = $('#canvas');
+                                                            var context = canvas.get(0).getContext('2d');
+                                                            for(var i = 0; i < 100; i++){
+                                                                context.save();
+                                                                context.translate(randomGen(500),randomGen(500));
+                                                                var r = randomGen(255);
+                                                                var g = randomGen(255);
+                                                                var b = randomGen(255);
+                                                                context.fillStyle = 'rgba(' + r + ', ' + g + ', ' + b + ', 0.5)';
+                                                                context.strokeStyle = 'rgba(0, 0, 0, 0.2)';
+                                                                context.lineWidth = 3;
+                                                                context.beginPath();
+                                                                context.arc(0, 0, randomGen(150), 0, Math.PI*2, false);
+                                                                context.closePath();
+                                                                context.fill();
+                                                                context.stroke();
+                                                                context.restore();
+                                                            }
+                                                            //乱数生成
+                                                            function randomGen(num){
+                                                                var randomNum = Math.floor(Math.random() * num);
+                                                                return randomNum;
+                                                            }
+                                                        });
+                                                    })()

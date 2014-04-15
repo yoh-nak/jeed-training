@@ -284,6 +284,19 @@ block content
                                                         var canvas = $('#myCanvas');
                                                         var context = canvas.get(0).getContext('2d');
 
+                                                        // context.transform(a, b, c, d, e, f)
+                                                        // a
+                                                        // x方向の伸縮倍数（変形しない場合は1）
+                                                        // b
+                                                        // y方向の傾斜率（変形しない場合は0）
+                                                        // c
+                                                        // x方向の傾斜率（変形しない場合は0）
+                                                        // d
+                                                        // y方向の伸縮倍数（変形しない場合は1）
+                                                        // e
+                                                        // x方向の移動距離（変形しない場合は0）
+                                                        // f
+                                                        // y方向の移動距離（変形しない場合は0）
                                                         context.transform(2, 0, 0, 2, 150, 150);
                                                         context.fillRect(0, 0, 150, 150);
                                                     });
@@ -311,14 +324,20 @@ block content
                                                         var canvas = $('#myCanvas');
                                                         var context = canvas.get(0).getContext('2d');
 
-                                                        context.setTransform(1, 0, 0, 1, 0, 0); //単位行列
-                                                        var xScale = Math.cos(0.7854);
-                                                        var ySkew = -Math.sin(0.7854);
-                                                        var xSkew = Math.sin(0.7854);
-                                                        var yScale = Math.cos(0.7854);
+                                                        //単位行列（変換マトリックスを初期化）
+                                                        context.setTransform(1, 0, 0, 1, 0, 0);
+
+                                                        var xScale = Math.cos(0.7854); // Math.PI/4
+                                                        var ySkew = -Math.sin(0.7854); // Math.PI/4
+                                                        var xSkew = Math.sin(0.7854); // Math.PI/4
+                                                        var yScale = Math.cos(0.7854); // Math.PI/4
                                                         var xTrans = 200;
                                                         var yTrans = 200;
+
+                                                        //回転
                                                         context.transform(xScale, ySkew, xSkew, yScale, xTrans, yTrans);
+
+                                                        //黒い矩形
                                                         context.fillRect(-50, -50, 100, 100);
                                                     });
                                                 })()

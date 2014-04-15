@@ -19,7 +19,7 @@ block content
                         i.glyphicon.glyphicon-book
                         &nbsp;イメージのロード
                     .panel-body
-                        h4 キャンバスにイメージをロードする
+                        h4 キャンバスに画像を読み込む
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise3/index1.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -42,10 +42,13 @@ block content
                                                         var canvas = $('#myCanvas');
                                                         var context = canvas.get(0).getContext('2d');
 
+                                                        //イメージオブジェクトの生成
                                                         var image = new Image();
                                                         image.src = 'example.jpg';
+
+                                                        //画像の読み込み後の処理
                                                         $(image).load(function(){
-                                                            //drawImage(image, x, y)
+                                                            //drawImage(イメージオブジェクト, x座標, y座標)
                                                             context.drawImage(image, 0, 0);
                                                         })
                                                     });

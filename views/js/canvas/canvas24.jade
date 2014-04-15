@@ -17,7 +17,7 @@ block content
                 .panel.panel-primary
                     .panel-heading
                         i.glyphicon.glyphicon-book
-                        &nbsp;イメージにエフェクト
+                        |  イメージにエフェクト
                     .panel-body
                         h4 色を反転させる
                         p
@@ -44,27 +44,37 @@ block content
 
                                                         var image = new Image();
                                                         image.src = 'example.jpg';
+
                                                         $(image).load(function(){
+                                                            //画像を描画
                                                             context.drawImage(image, 0, 0, 1024, 683, 0, 0, 500, 500);
 
+                                                            //画像のピクセル値を取得
                                                             var imageData = context.getImageData(0, 0, canvas.width(), canvas.height());
+
+                                                            //ピクセル値を配列に格納
                                                             var pixels = imageData.data;
+
+                                                            //配列の要素数を取得
                                                             var numPixels = pixels.length;
 
+                                                            //描画した画像を削除
                                                             context.clearRect(0, 0, canvas.width(), canvas.height());
 
+                                                            //ピクセル値を255から引く
                                                             for(var i = 0; i < numPixels; i++){
                                                                 pixels[i*4] = 255-pixels[i*4];
                                                                 pixels[i*4+1] = 255-pixels[i*4+1];
                                                                 pixels[i*4+2] = 255-pixels[i*4+2];
                                                             }
 
+                                                            //反転させたピクセル値で描画
                                                             context.putImageData(imageData, 0, 0);
                                                         });
                                                     });
                                                 })()
-
-                        h4 グレイスケール
+                        hr
+                        h4 グレースケール
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise3/index17.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -109,8 +119,8 @@ block content
                                                         });
                                                     });
                                                 })()
-
-                        h4 ピクセル化
+                        hr
+                        h4 読み込んだ画像にモザイク
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise3/index18.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -186,7 +196,8 @@ block content
                                                         });
                                                     });
                                                 })()
-
+                        hr
+                        h4 モザイクを円形にする
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise3/index19.html',target='_blank')
                                 i.glyphicon.glyphicon-play

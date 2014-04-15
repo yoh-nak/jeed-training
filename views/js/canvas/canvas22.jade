@@ -44,24 +44,40 @@ block content
 
                                                         var image = new Image();
                                                         image.src = 'example.jpg';
+
                                                         $(image).load(function(){
                                                             context.drawImage(image, 0, 0, 500, 333);
 
-                                                            //3x3ピクセルの範囲のピクセルデータを取得
-                                                            //getImageData(x, y, width, height)
+                                                            //(0, 0)から3x3ピクセルの範囲のピクセルデータを取得
+                                                            //getImageData(取得開始x座標, 取得開始y座標, 取得する幅, 取得する高さ)
                                                             var imageData = context.getImageData(0, 0, 3, 3);
 
-                                                            //Canvasのピクセルデータを格納した配列
+                                                            //取得したピクセルデータを格納した配列
                                                             var pixel = imageData.data;
                                                             
-                                                            //取得したピクセルの最初のピクセルのRGBA値
-                                                            var red = pixel[0]; //Redの値（0-255）
-                                                            var green = pixel[1]; //Greenの値（0-255）
-                                                            var blue = pixel[2]; //Blueの値（0-255）
-                                                            var alpha = pixel[3]; //Alphaの値（0-255）
+                                                            /* 取得したピクセル値のうち(0, 0)のrgga値を取得 */
+
+                                                            //Redの値（0〜255）
+                                                            var red = pixel[0];
+                                                            //Greenの値（0〜255）
+                                                            var green = pixel[1];
+                                                            //Blueの値（0〜255）
+                                                            var blue = pixel[2];
+                                                            //Alphaの値（0〜255）
+                                                            var alpha = pixel[3];
+
+                                                            console.log('(0, 0)のピクセルデータ: , 'red, green, blue, alpha);
+
+                                                            console.log('取得した全ピクセルデータ: ', pixel)
                                                         });
                                                     });
                                                 })()
+                        p: u 出力結果
+                        pre.
+                            (0, 0)のピクセルデータ:  0 194 134 255
+                        pre.
+                            取得した全ピクセルデータ:  [0, 194, 134, 255, 0, 200, 136, 255, 0, 201, 140, 255, 0, 197, 141, 255, 0, 200, 139, 255, 0, 201, 142, 255, 0, 202, 145, 255, 0, 199, 141, 255, 0, 197, 141, 255]
+                        hr
                         h4 取得したピクセル範囲から特定のピクセルのインデックスを得る公式
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise3/index11.html',target='_blank')
@@ -87,29 +103,51 @@ block content
 
                                                         var image = new Image();
                                                         image.src = 'example.jpg';
+
                                                         $(image).load(function(){
                                                             context.drawImage(image, 0, 0, 500, 333);
 
-                                                            //3x3ピクセルの範囲のピクセルデータを取得
-                                                            //getImageData(x, y, width, height)
+                                                            //(0, 0)から3x3ピクセルの範囲のピクセルデータを取得
                                                             var imageData = context.getImageData(0, 0, 3, 3); //3x3の領域
                                                             
-                                                            //取得した3x3のピクセルデータの幅
+                                                            //取得した3x3のピクセルデータの幅を取得
                                                             var width = imageData.width;
 
-                                                            //取得した3x3のピクセルデータの配列の中から、x=2, y=2の座標のピクセルのインデックスを取得
+                                                            console.log('imageData.width: ', width)
+
+
+                                                            /***
+                                                            取得した3x3のピクセルデータの中から、
+                                                            (2, 2)の座標に含まれるピクセルデータが格納された
+                                                            配列のインデックス番号を取得する公式
+                                                            */
+
                                                             var x = 2; var y = 2;
 
-                                                            //公式からインデックスを取得
-                                                            var pixelRed = ((y-1)*(width*4))+((x-1)*4); //RGBA値のRed値のインデックス
-                                                            var pixelGreen = pixelRed+1; //RGBA値のGreen値のインデックス
-                                                            var pixelBlue = pixelRed+2; //RGBA値のBlue値のインデックス
-                                                            var pixelAlpha = pixelRed+3; //RGBA値のAlpha値のインデックス
+                                                            //RGBA値のRed値のインデックス
+                                                            var pixelRed = ( (y - 1) * ( width * 4 ) ) + ( ( x - 1 ) * 4 );
+
+                                                            //RGBA値のGreen値のインデックス
+                                                            var pixelGreen = pixelRed + 1;
+
+                                                            //RGBA値のBlue値のインデックス
+                                                            var pixelBlue = pixelRed + 2;
+
+                                                            //RGBA値のAlpha値のインデックス
+                                                            var pixelAlpha = pixelRed + 3;
+
+                                                            console.log('RGBA: ', pixelRed, pixelGreen, pixelBlue, pixelAlpha);
                                                         });
                                                     });
                                                 })()
-
+                        p: u 出力結果
+                        pre.
+                            imageData.width:  3
+                        pre.
+                            RGBA:  16 17 18 19 
+                        hr
                         h4 カラーピッカー
+                        p 画像のクリックした位置のRGBA値を取得し、bodyの背景色にセット
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise3/index12.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -129,44 +167,48 @@ block content
                                             :js
                                                 (function(){
                                                     $(function(){
-                                                        //キャンバス要素　jQueryオブジェクト
-                                                        var canvas = $('#myCanvas');
 
-                                                        //2Dレンダリングコンテキスト
+                                                        var canvas = $('#myCanvas');
                                                         var context = canvas.get(0).getContext('2d');
 
-                                                        //イメージオブジェクトのインスタンス
                                                         var image = new Image();
-                                                        //イメージオブジェクトのインスタンスに画像をセット
                                                         image.src = 'example.jpg';
 
-                                                        //イメージの読み込み
                                                         $(image).load(function(){
-                                                            //イメージの描画
                                                             context.drawImage(image, 0, 0, 500, 333);
                                                         });
 
-                                                        //Canvas要素のクリックイベント
                                                         canvas.click(function(e){
-                                                            //Canvas要素のドキュメントのxy座標を格納
+
+                                                            //Canvas要素のドキュメント内のxy座標を格納
                                                             var canvasOffset = canvas.offset();
 
-                                                            //クリックした位置のドキュメントのx座標からCanvas要素右上のドキュメントのx座標を引く
-                                                            //=>クリックした位置のCanvas要素右上からのx座標
-                                                            var canvasX = Math.floor(e.pageX - canvasOffset.left);
 
-                                                            //クリックした位置のドキュメントのy座標からCanvas要素右上のドキュメントのy座標を引く
-                                                            //=>クリックした位置のCanvas要素右上からのy座標
-                                                            var canvasY = Math.floor(e.pageY - canvasOffset.top);
+                                                            //クリックした位置のCanvas要素右上からのx座標
+                                                            /***
+                                                            クリックした位置のドキュメントのx座標からCanvas要素右上のドキュメントのx座標を引く
+                                                            */
+                                                            <mark>var canvasX = Math.floor(e.pageX - canvasOffset.left);</mark>
+
+
+                                                            //クリックした位置のCanvas要素右上からのy座標
+                                                            /***
+                                                            クリックした位置のドキュメントのy座標からCanvas要素右上のドキュメントのy座標を引く
+                                                            */
+                                                            <mark>var canvasY = Math.floor(e.pageY - canvasOffset.top);</mark>
+
 
                                                             //Canvas要素上のクリックした位置の1x1のピクセルデータを取得
-                                                            var imageData = context.getImageData(canvasX, canvasY, 1, 1);
+                                                            var imageData = context.getImageData(<mark>canvasX</mark>, <mark>canvasY</mark>, 1, 1);
+
 
                                                             //取得したピクセルデータを配列に格納
                                                             var pixel = imageData.data;
 
+
                                                             //取得したピクセルデータからRGBA値を作成
                                                             var pixelColor = 'rgba(' + pixel[0] + ', ' + pixel[1] + ' , ' + pixel[2] + ' , ' + pixel[3] + ')';
+
 
                                                             //background-colorに取得したRGBA値をセット
                                                             $('body').css('background-color', pixelColor);

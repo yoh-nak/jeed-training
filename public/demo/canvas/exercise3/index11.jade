@@ -13,27 +13,43 @@ html(lang='ja')
                     $(function(){
                         var canvas = $('#myCanvas');
                         var context = canvas.get(0).getContext('2d');
-
+                        
                         var image = new Image();
                         image.src = 'example.jpg';
+                        
                         $(image).load(function(){
                             context.drawImage(image, 0, 0, 500, 333);
-
-                            //3x3ピクセルの範囲のピクセルデータを取得
-                            //getImageData(x, y, width, height)
+                            
+                            //(0, 0)から3x3ピクセルの範囲のピクセルデータを取得
                             var imageData = context.getImageData(0, 0, 3, 3); //3x3の領域
                             
-                            //取得した3x3のピクセルデータの幅
+                            //取得した3x3のピクセルデータの幅を取得
                             var width = imageData.width;
-
-                            //取得した3x3のピクセルデータの配列の中から、x=2, y=2の座標のピクセルのインデックスを取得
+                            
+                            console.log('imageData.width: ', width)
+                            
+                            
+                            /***
+                            取得した3x3のピクセルデータの中から、
+                            (2, 2)の座標に含まれるピクセルデータが格納された
+                            配列のインデックス番号を取得する公式
+                            */
+                            
                             var x = 2; var y = 2;
-
-                            //公式からインデックスを取得
-                            var pixelRed = ((y-1)*(width*4))+((x-1)*4); //RGBA値のRed値のインデックス
-                            var pixelGreen = pixelRed+1; //RGBA値のGreen値のインデックス
-                            var pixelBlue = pixelRed+2; //RGBA値のBlue値のインデックス
-                            var pixelAlpha = pixelRed+3; //RGBA値のAlpha値のインデックス
+                            
+                            //RGBA値のRed値のインデックス
+                            var pixelRed = ( (y - 1) * ( width * 4 ) ) + ( ( x - 1 ) * 4 );
+                            
+                            //RGBA値のGreen値のインデックス
+                            var pixelGreen = pixelRed + 1;
+                            
+                            //RGBA値のBlue値のインデックス
+                            var pixelBlue = pixelRed + 2;
+                            
+                            //RGBA値のAlpha値のインデックス
+                            var pixelAlpha = pixelRed + 3;
+                            
+                            console.log('RGBA: ', pixelRed, pixelGreen, pixelBlue, pixelAlpha);
                         });
                     });
                 })()

@@ -17,9 +17,9 @@ block content
                 .panel.panel-primary
                     .panel-heading
                         i.glyphicon.glyphicon-book
-                        &nbsp;イメージを作る
+                        |  画像を作る
                     .panel-body
-                        h4 ゼロからイメージを作る
+                        h4 ゼロから画像を作る
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise3/index13.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -43,29 +43,33 @@ block content
                                                         var context = canvas.get(0).getContext('2d');
 
                                                         //ピクセルを生成する
-                                                        //createImageData(width, height);
+                                                        //createImageData(幅, 高さ);
                                                         var imageData = context.createImageData(200, 200);
+
                                                         //ピクセルデータを取得して配列に格納
                                                         var pixels = imageData.data;
 
-                                                        //生成したピクセルの幅×高さで全てのピクセル数を取得
+                                                        //全てのピクセル数を取得
+                                                        /***
+                                                        生成したピクセルの幅、高さを取得し、幅*高さで全てのピクセル数を取得
+                                                        */
                                                         var numPixels = imageData.width * imageData.height;
 
                                                         //全てのピクセルに対して赤を指定
                                                         for(var i = 0; i < numPixels; i++){
-                                                            pixels[i*4] = 255; //赤
-                                                            pixels[i*4+1] = 0; //緑
-                                                            pixels[i*4+2] = 0; //青
-                                                            pixels[i*4+3] = 255; //アルファ
+                                                            pixels[i*4] = 255; //赤 ... 0を含む4の倍数
+                                                            pixels[i*4+1] = 0; //緑 ... 4の倍数+1
+                                                            pixels[i*4+2] = 0; //青 ... 4の倍数+2
+                                                            pixels[i*4+3] = 255; //アルファ ... 4の倍数+3
                                                         }
 
-                                                        //ピクセルを描画する
-                                                        //putImageData(image, x, y);
+                                                        //生成したピクセルデータを描画する
+                                                        //putImageData(ピクセルデータ, x座標, y座標);
                                                         context.putImageData(imageData, 0, 0);
                                                     });
                                                 })()
-
-                        h4 ピクセルをランダマイズする
+                        hr
+                        h4 RGBA値のランダマイズ
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise3/index14.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -89,15 +93,15 @@ block content
                                                         var context = canvas.get(0).getContext('2d');
 
                                                         //ピクセルを生成する
-                                                        //createImageData(width, height);
                                                         var imageData = context.createImageData(200, 200);
+
                                                         //ピクセルデータを取得して配列に格納
                                                         var pixels = imageData.data;
 
-                                                        //生成したピクセルの幅×高さで全てのピクセル数を取得
+                                                        //全てのピクセル数を取得
                                                         var numPixels = imageData.width * imageData.height;
 
-                                                        //全てのピクセルに対して乱数を指定（半透明度のみ固定）
+                                                        //全てのピクセルのRGBA値に乱数を指定（半透明度のみ固定）
                                                         for(var i = 0; i < numPixels; i++){
                                                             pixels[i*4] = Math.floor(Math.random()*255); //赤
                                                             pixels[i*4+1] = Math.floor(Math.random()*255); //緑
@@ -106,11 +110,10 @@ block content
                                                         }
                                                         
                                                         //ピクセルを描画する
-                                                        //putImageData(image, x, y);
                                                         context.putImageData(imageData, 0, 0);
                                                     });
                                                 })()
-
+                        hr
                         h4 モザイク模様を作る
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise3/index15.html',target='_blank')
@@ -135,49 +138,69 @@ block content
                                                         var context = canvas.get(0).getContext('2d');
 
                                                         //ピクセルを生成する
-                                                        //createImageData(width, height);
                                                         var imageData = context.createImageData(500, 500);
 
+                                                        //ピクセルデータを取得して配列に格納
                                                         var pixels = imageData.data;
 
-                                                        //モザイク模様のタイルの数
-                                                        var numTileRows = 4;
-                                                        var numTileCols = 4;
+                                                        //モザイク模様のタイルの数を決める
+                                                        var numTileRows = 4; //縦方向
+                                                        var numTileCols = 4; //横方向
+
 
                                                         //個々のタイルのサイズ
-                                                        //タイルの幅=>ピクセルデータ全体の幅から一列のタイルの数で割る
-                                                        var tileWidth = imageData.width/numTileCols;
-                                                        //タイルの高さ=>ピクセルデータ全体の高さから一行のタイルの数で割る
+                                                        
+                                                        /***
+                                                        //1つのタイルの幅を計算
+                                                        ピクセルデータ全体の幅から一列のタイルの数で割る
+                                                        */
+                                                        var tileWidth = imageData.width / numTileCols;
+
+                                                        /***
+                                                        //タイルの高さを計算
+                                                        ピクセルデータ全体の高さから一行のタイルの数で割る
+                                                        */
                                                         var tileHeight = imageData.height/numTileRows;
 
+
                                                         //1つ1つのタイルの色の指定
-                                                        //行方向のタイルの数だけループ
+
+                                                        /* 行方向のタイルの数だけループ */
                                                         for(var r = 0; r < numTileRows; r++){
-                                                            //列方向のタイル数だけのループ
+
+                                                            /* 列方向のタイル数だけのループ */
                                                             for(var c = 0; c < numTileCols; c++){
 
                                                                 //各タイルのピクセル値を設定
-                                                                var red = Math.floor(Math.random()*255);
-                                                                var green = Math.floor(Math.random()*255);
-                                                                var blue = Math.floor(Math.random()*255);
+                                                                var red = Math.floor(Math.random() * 255);
+                                                                var green = Math.floor(Math.random() * 255);
+                                                                var blue = Math.floor(Math.random() * 255);
+
 
                                                                 //1つ1つのタイルの塗りつぶし
-                                                                //タイルの高さ分のピクセル数だけループ
+
+                                                                /* タイルの高さ分のピクセル数だけループ */
                                                                 for(var tr = 0; tr < tileHeight; tr++){
-                                                                    //タイルの幅の分のピクセル数だけループ
+
+                                                                    /* タイルの幅の分のピクセル数だけループ */
                                                                     for(var tc = 0; tc < tileWidth; tc++){
 
                                                                         //Canvasのx座標を取得
-                                                                        //(c*tileWidth) //=>タイルの幅 x n個目のタイル
-                                                                        //tc　//=>タイル内のx方向のピクセル
-                                                                        var trueX = (c*tileWidth)+tc;
+                                                                        /***
+                                                                        (c*tileWidth) => 何個目のタイルか * 1つのタイルの幅
+                                                                        tc => 該当するタイルのx方向のピクセル
+                                                                        */
+                                                                        var trueX = (c*tileWidth) + tc;
 
                                                                         //Canvas要素のy座標を取得
-                                                                        //(c*tileHeight) //=>タイルの高さ x n個目のタイル
-                                                                        //tr　//=>タイル内のy方向のピクセル
+                                                                        /*
+                                                                        (c*tileHeight) //=> 何個目のタイルか * 1つのタイルの高さ
+                                                                        tr => 該当するタイルのy方向のピクセル
+                                                                        */
                                                                         var trueY = (r*tileHeight)+tr;
 
-                                                                        //タイル内のピクセルの配列のインデックスを取得（公式）
+
+                                                                        //タイル内のピクセル配列のインデックスを取得（公式）
                                                                         var pos = (trueY*(imageData.width*4))+(trueX*4);
 
                                                                         //ピクセルごとの色の指定
@@ -191,7 +214,6 @@ block content
                                                         }
 
                                                         //ピクセルを描画する
-                                                        //putImageData(image, x, y);
                                                         context.putImageData(imageData, 0, 0);
                                                     });
                                                 })()

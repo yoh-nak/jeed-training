@@ -1,3 +1,4 @@
+
 extends ../../layout
 
 block link
@@ -78,7 +79,7 @@ block content
                                                         video.get(0).pause();
                                                     });
                                                 })()
-                        h4 キャンバスをセットアップする
+                        h4 読み込んだビデオにモザイク
                         p
                             a.btn.btn-default(href='../demo/canvas/exercise3/index22.html',target='_blank')
                                 i.glyphicon.glyphicon-play
@@ -117,25 +118,42 @@ block content
                                                         var canvas = $('#myCanvas');
                                                         var context = canvas.get(0).getContext('2d');
 
+                                                        //ビデオ再生開始時に1度、ビデオのピクセル値からモザイクを生成
                                                         video.bind('play', function() {
-                                                            drawCanvas();
+                                                            <mark>drawCanvas()</mark>;
                                                         });
 
-                                                        function drawCanvas() {
+                                                        //ビデオのピクセル値からモザイクを生成する関数
+                                                        function <mark>drawCanvas()</mark> {
                                                             if (video.get(0).paused || video.get(0).ended)
                                                                 return false;
 
+                                                            //読み込んだビデオの描画
                                                             context.drawImage(video.get(0), 0, 0, 500, 281);
 
+                                                            ///ビデオのピクセル値を取得
                                                             var imageData = context.getImageData(0, 0, canvas.width(), canvas.height());
+
+                                                            //ピクセル値を配列に格納
                                                             var pixels = imageData.data;
 
+                                                            //描画したビデオを削除
                                                             context.clearRect(0, 0, canvas.width(), canvas.height());
 
-                                                            var numTileRows = 36;
-                                                            var numTileCols = 64;
+                                                            //モザイク模様のタイルの数を決める
+                                                            var numTileRows = 36; //縦方向
+                                                            var numTileCols = 64; //横方向
 
+                                                            //個々のタイルのサイズ
+                                                            //1つのタイルの幅を計算
+                                                            /***
+                                                            ピクセルデータ全体の幅から一列のタイルの数で割る
+                                                            */
                                                             var tileWidth = imageData.width/numTileCols;
+                                                            //タイルの高さを計算
+                                                            /***
+                                                            ピクセルデータ全体の高さから一行のタイルの数で割る
+                                                            */
                                                             var tileHeight = imageData.height/numTileRows;
 
                                                             for (var r = 0; r < numTileRows; r++) {
@@ -155,7 +173,8 @@ block content
                                                                 }
                                                             }
 
-                                                            setTimeout(drawCanvas, 30);
+                                                            //ビデオの1フレーム毎にモザイクを再描画1000ms / 30fps
+                                                            setTimeout(<mark>drawCanvas</mark>, 33);
                                                         }
                                                     });
                                                 })()

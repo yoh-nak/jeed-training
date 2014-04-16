@@ -179,26 +179,40 @@ block content
 
 
                                                             //個々のタイルのサイズ
-                                                        
-                                                            /***
+                                                            
                                                             //1つのタイルの幅を計算
+                                                            /***
                                                             ピクセルデータ全体の幅から一列のタイルの数で割る
                                                             */
                                                             var tileWidth = imageData.width/numTileCols;
 
-                                                            /***
                                                             //タイルの高さを計算
+                                                            /***
                                                             ピクセルデータ全体の高さから一行のタイルの数で割る
                                                             */
                                                             var tileHeight = imageData.height/numTileRows;
 
-                                                            //行方向にタイルの数だけループ
+
+                                                            //1つ1つのタイルの色の指定
+
+                                                            /* 行方向のタイルの数だけループ */
                                                             for(var r = 0; r < numTileRows; r++){
-                                                                //列方向にタイルの数だけループ
+
+                                                                /* 列方向のタイル数だけのループ */
                                                                 for(var c = 0; c < numTileCols; c++){
+
                                                                     //それぞれのタイルの中央のx座標取得
+                                                                    /***
+                                                                    (c*tileWidth) ... 横方向何個目のタイルか
+                                                                    tileWidth/2 ... タイルの幅の中心
+                                                                    */
                                                                     var x = (c*tileWidth)+(tileWidth/2);
+
                                                                     //それぞれのタイルの中央のy座標取得
+                                                                    /***
+                                                                    (r*tileWidth) ... 縦方向何個目のタイルか
+                                                                    tileHeight/2 ... タイルの高さの中心
+                                                                    */
                                                                     var y = (r*tileHeight)+(tileHeight/2);
 
                                                                     //タイルのx座標、y座標のピクセルデータのインデックスを取得

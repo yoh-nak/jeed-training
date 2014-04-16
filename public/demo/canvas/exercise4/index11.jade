@@ -1,0 +1,77 @@
+doctype html
+html(lang='ja')
+    head
+        meta(charset='utf-8')
+        meta(name='viewport',content='width=device-width, initial-scale=1.0')
+        title
+        style
+            :stylus
+                #myCanvas
+                    display block
+    body
+        canvas#myCanvas(width='500',height='500')
+        //button#startAnimation Start
+        //button#stopAnimation Stop
+        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+        script
+            :js
+                (function(){
+                    $(function(){
+                        //キャンバス要素
+                        var canvas = $('#myCanvas');
+
+                        //2Dレンダリングコンテキスト
+                        var context = canvas.get(0).getContext('2d');
+
+                        var canvasWidth = canvas.width(); //キャンバス要素　幅
+                        var canvasHeight = canvas.height(); //キャンバス要素　高さ
+
+                        //矩形（x座標, y座標, 幅, 高さ, 回転時の半径, 回転時の角度）をまとめて管理するクラス
+                        var Shape = function(x, y, width, height) {
+                            this.x = x;
+                            this.y = y;
+                            this.width = width;
+                            this.height = height;
+                            this.radius = 50;
+                            this.angle = 0;
+                        };
+                        
+                        //複数の矩形を格納する配列
+                        var shape = new Shape(250, 250, 50, 50);
+                        
+                        //アニメーションループ
+                        function animate() {
+                            //矩形クリア
+                            context.clearRect(0, 0, canvasWidth, canvasHeight);
+                            
+                            //5°ずつ加算
+                            shape.angle += 5;
+
+                            //角度が360度を超えたら0度に戻す
+                            if (shape.angle > 360) {
+                                shape.angle = 0;    
+                            };  
+                            var y = shape.y+(shape.radius*Math.sin(shape.angle*(Math.PI/180)));
+                            
+                            //シャドウ
+                            context.shadowColor = 'rgb(' + Math.floor(Math.random()*255)  + ', ' + Math.floor(Math.random()*255) + ', ' + Math.floor(Math.random()*255) + ')';
+                            
+                            //ぼかし
+                            context.shadowBlur = 50;
+
+                            //色
+                            context.fillStyle = 'rgb(' + Math.floor(Math.random()*255)  + ', ' + Math.floor(Math.random()*255) + ', ' + Math.floor(Math.random()*255) + ')';
+
+                            //円の描画
+                            context.beginPath();
+                            context.arc(250, y, 50, 0, Math.PI*2, false);
+                            context.closePath();
+                            context.fill();
+
+                            //アニメーションフラグが開始のとき
+                            setTimeout(animate, 1000/30);
+                        };
+                        //アニメーション初回スタート
+                        animate();
+                    });
+                })()

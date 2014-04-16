@@ -159,28 +159,37 @@ block content
 
                                                         var image = new Image();
                                                         image.src = 'example.jpg';
+                                                        
                                                         $(image).load(function(){
-                                                            //読み込んだイメージの描画
+                                                            //画像を描画
                                                             context.drawImage(image, 0, 0, 1024, 683, 0, 0, 500, 500);
 
-                                                            //Canvasに描画されているピクセルデータを取得
+                                                            //画像のピクセル値を取得
                                                             var imageData = context.getImageData(0, 0, canvas.width(), canvas.height());
 
-                                                            //取得したピクセルデータを配列に格納
+                                                            //ピクセル値を配列に格納
                                                             var pixels = imageData.data;
 
-                                                            //Canvasをクリア
+                                                            //描画した画像を削除
                                                             context.clearRect(0, 0, canvas.width(), canvas.height());
 
+                                                            //タイルの数を決める
                                                             var numTileRows = 20; //タイル一行20個
                                                             var numTileCols = 20; //タイル一列20個
 
-                                                            //1つのタイルの幅
-                                                            //=>Canvas要素の幅をx方向のタイルの数で割る
+
+                                                            //個々のタイルのサイズ
+                                                        
+                                                            /***
+                                                            //1つのタイルの幅を計算
+                                                            ピクセルデータ全体の幅から一列のタイルの数で割る
+                                                            */
                                                             var tileWidth = imageData.width/numTileCols;
 
-                                                            //1つのタイルの高さ
-                                                            //=>Canvas要素の高さをy方向のタイルの数で割る
+                                                            /***
+                                                            //タイルの高さを計算
+                                                            ピクセルデータ全体の高さから一行のタイルの数で割る
+                                                            */
                                                             var tileHeight = imageData.height/numTileRows;
 
                                                             //行方向にタイルの数だけループ

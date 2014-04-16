@@ -23,122 +23,120 @@ block content
                             a.btn.btn-default(href='../demo/canvas/exercise5/index1.html',target='_blank')
                                 i.glyphicon.glyphicon-play
                                 | デモ
-                        pre.prettyprint.linenums
-                            | $(function() {  
-                            |   var canvas = $('#myCanvas');
-                            |   var context = canvas.get(0).getContext('2d');
-                            |   
-                            |   var canvasWidth = canvas.width();
-                            |   var canvasHeight = canvas.height();
-                            |   
-                            |   $(window).resize(resizeCanvas);
-                            |   
-                            |   function resizeCanvas(){
-                            |       canvas.attr('width', $(window).get(0).innerWidth);
-                            |       canvas.attr('height', $(window).get(0).innerHeight);
-                            |       
-                            |       canvasWidth = canvas.width();
-                            |       canvasHeight = canvas.height();
-                            |   }
-                            |   
-                            |   resizeCanvas();
-                            |   
-                            |   var playAnimation = true;
-                            |   
-                            |   var startButton = $('#startAnimation');
-                            |   var stopButton = $('#stopAnimation');
-                            |   
-                            |   startButton.hide();
-                            |   startButton.click(function() {
-                            |       $(this).hide();
-                            |       stopButton.show();
-                            |       
-                            |       playAnimation = true;
-                            |       animate();
-                            |   });
-                            |   
-                            |   stopButton.click(function() {
-                            |       $(this).hide();
-                            |       startButton.show();
-                            |       
-                            |       playAnimation = false;
-                            |   });
-                            |   
-                            |   var Asteroid = function(x, y, radius) {
-                            |       this.x = x;
-                            |       this.y = y;
-                            |       this.radius = radius;
-                            |   };
-                            |   
-                            |   var asteroids = new Array();
-                            |   
-                            |   for (var i = 0; i &lt; 10; i++){
-                            |       var x = 20+(Math.random()*(canvasWidth-40));
-                            |       var y = 20+(Math.random()*(canvasHeight-40));
-                            |       
-                            |       var radius = 5+Math.random()*10;
-                            |       
-                            |       asteroids.push(new Asteroid(x, y, radius));
-                            |   }
-                            | 
-                            |   function animate(){                 
-                            | 
-                            |       context.clearRect(0, 0, canvasWidth, canvasHeight);
-                            |       
-                            |       context.fillStyle = 'rgb(255, 255, 255)';
-                            |       
-                            |       var asteroidsLength = asteroids.length;
-                            |       for(var i = 0; i &lt; asteroidsLength; i++){
-                            |           var tmpAsteroid = asteroids[i];
-                            |           
-                            |           context.beginPath();
-                            |           context.arc(tmpAsteroid.x, tmpAsteroid.y, tmpAsteroid.radius, 0, Math.PI*2);
-                            |           context.closePath();
-                            |           context.fill();
-                            |       }
-                            |       
-                            |       if(playAnimation){
-                            |           setTimeout(animate, 33);
-                            |       }
-                            |   }
-                            |   animate();
-                            | });
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $(function() {  
+                                  var canvas = $('#myCanvas');
+                                  var context = canvas.get(0).getContext('2d');
+                                  
+                                  var canvasWidth = canvas.width();
+                                  var canvasHeight = canvas.height();
+                                  
+                                  $(window).resize(resizeCanvas);
+                                  
+                                  function resizeCanvas(){
+                                      canvas.attr('width', $(window).get(0).innerWidth);
+                                      canvas.attr('height', $(window).get(0).innerHeight);
+                                      
+                                      canvasWidth = canvas.width();
+                                      canvasHeight = canvas.height();
+                                  }
+                                  
+                                  resizeCanvas();
+                                  
+                                  var playAnimation = true;
+                                  
+                                  var startButton = $('#startAnimation');
+                                  var stopButton = $('#stopAnimation');
+                                  
+                                  startButton.hide();
+                                  startButton.click(function() {
+                                      $(this).hide();
+                                      stopButton.show();
+                                      
+                                      playAnimation = true;
+                                      animate();
+                                  });
+                                  
+                                  stopButton.click(function() {
+                                      $(this).hide();
+                                      startButton.show();
+                                      
+                                      playAnimation = false;
+                                  });
+                                  
+                                  var Asteroid = function(x, y, radius) {
+                                      this.x = x;
+                                      this.y = y;
+                                      this.radius = radius;
+                                  };
+                                  
+                                  var asteroids = new Array();
+                                  
+                                  for (var i = 0; i &lt; 10; i++){
+                                      var x = 20+(Math.random()*(canvasWidth-40));
+                                      var y = 20+(Math.random()*(canvasHeight-40));
+                                      
+                                      var radius = 5+Math.random()*10;
+                                      
+                                      asteroids.push(new Asteroid(x, y, radius));
+                                  }
+                                
+                                  function animate(){                 
+                                
+                                      context.clearRect(0, 0, canvasWidth, canvasHeight);
+                                      
+                                      context.fillStyle = 'rgb(255, 255, 255)';
+                                      
+                                      var asteroidsLength = asteroids.length;
+                                      for(var i = 0; i &lt; asteroidsLength; i++){
+                                          var tmpAsteroid = asteroids[i];
+                                          
+                                          context.beginPath();
+                                          context.arc(tmpAsteroid.x, tmpAsteroid.y, tmpAsteroid.radius, 0, Math.PI*2);
+                                          context.closePath();
+                                          context.fill();
+                                      }
+                                      
+                                      if(playAnimation){
+                                          setTimeout(animate, 33);
+                                      }
+                                  }
+                                  animate();
+                                });
                         p 次はCSSファイルです。CSSファイルは、キャンバスがブラウザウィンドウ全体を使えるようにするための準備をします。また、start、stopボタンの移動にもCSSを使います。キャンバスがウィンドウ全体を覆ってしまいますので、移動しなければこれらのボタンはブラウザの外に飛び出してしまいます。
                         p JavaScriptファイルと同じディレクトリに次の内容で外部CSSファイルを作り、canvas.cssなどの意味のある名前を付けてください。
-                        pre.prettyprint.linenums
-                            | html,
-                            | body {
-                            |   height: 100%;
-                            |   width: 100%;
-                            |   margin: 0;
-                            | }
-                            | #myCanvas {
-                            |   display: block;
-                            | }
-                            | #myButtons {
-                            |   bottom: 20px;
-                            |   left: 20px;
-                            |   position: absolute;
-                            | }
-                            | #myButtons button {
-                            |   padding: 5px;
-                            | }
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                html,body
+                                    height 100%
+                                    width 100%
+                                    margin 0
+                                canvas
+                                    display block
+                                #myCanvas
+                                    background-color #001022
+                                #myButtons
+                                    bottom 20px
+                                    left 20px
+                                    position absolute
+                                #myButtons button
+                                    padding 5px
                         p 最後にすべてのものを結びつけるHTMLファイルが必要です。これは前章のHTMLファイルとまったく同じですが、JavaScriptを外部ファイルに出した分、小さくなっています。JavaScriptファイルを呼び出しているscript要素が追加されていることに注意してください。asteroid.js以外のファイル名を選んだ場合には、ファイル名の部分を書き換える必要があります。
                         p ほかのファイルと同じディレクトリに次の内容のHTMLファイルを作り、index.htmlという名前を付けてください。
-                        pre.prettyprint.linenums
-                            &lt;!DOCTYPE html&gt;
-                            | &lt;html lang="ja"&gt;
-                            |   &lt;head&gt;
-                            |     &lt;meta charset="utf-8"&gt;
-                            |     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-                            |     &lt;title&gt;&lt;/title&gt;
-                            |     &lt;link rel="stylesheet" href="canvas.css"&gt;
-                            |   &lt;/head&gt;
-                            |   &lt;body&gt;
-                            |     &lt;canvas id="myCanvas" width="500" height="500"&gt;&lt;/canvas&gt;
-                            |     &lt;div id="startAnimation"&gt;Start&lt;/div&gt;
-                            |     &lt;div id="stopAnimation"&gt;Stop&lt;/div&gt;
-                            |     &lt;script src="http://code.jquery.com/jquery-1.11.0.min.js"&gt;&lt;/script&gt;
-                            |     &lt;script src="asteroid1.js"&gt;&lt;/script&gt;
-                            |   &lt;/body&gt;
-                            | &lt;/html&gt;
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                doctype html
+                                html(lang='ja')
+                                    head
+                                        meta(charset='utf-8')
+                                        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+                                        title
+                                        link(rel='stylesheet', href='style.css')
+                                    body
+                                        canvas#myCanvas(width='500', height='500')
+                                        #myButtons
+                                            button#startAnimation Start
+                                            button#stopAnimation Stop
+                                        script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+                                        script(src='asteroid1.js')

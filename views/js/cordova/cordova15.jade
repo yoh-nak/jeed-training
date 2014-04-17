@@ -1,3 +1,5 @@
+
+
 extends ../../layout
 
 block link
@@ -33,4 +35,7 @@ block content
                   td cordova prepareを呼び出してから、cordova compileを実行する
               p cordova prepareコマンドは、プロジェクトの設定やwwwディレクトリ、mergesディレクトリの内容から各プラットフォーム向けのコードや設定ファイルなどが含まれたプロジェクトファイルを生成します。
               p Androidアプリの場合、アプリの設定ファイルはAndroidManifest.xmlを必要とします。アプリのビルドにはantというビルドツールを利用します。また、アプリで利用するリソースには、resディレクトリやassetsディレクトリ以下にファイルを収めます。cordova prepareコマンドでAndroid向けのファイルを生成する場合には、wwwディレクトリ以下の内容からantのビルド用の設定ファイル、AndroidManifest.xmlファイル、assets、resディレクトリ、その他のネイティブコードを生成します。
-              p 
+              p iOSアプリの場合は、Xcodeを用いてビルドしなければいけません。アプリの設定は、Info.plistというXMLファイルに記述します。cordova prepareコマンドでiOS向けのファイルを生成する場合には、このXcode用のプロジェクトファイルが生成されます。
+              p 一度プラットフォーム用に生成されたプロジェクトは、次にcordova prepareコマンドが実行されたときに、部分的に更新されるようになります。これにより開発者は、プラットフォーム特有のプロジェクトファイルを直接編集できます。
+              p 前述したcordova buildコマンドは、cordova prepareコマンド+cordova compileコマンドと同じ動作です。
+              p cordova runコマンドは、cordova buildと同じ動作をした上で、ビルドしたアプリを実機やエミュレータにインストールして実行します。

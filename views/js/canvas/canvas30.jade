@@ -145,8 +145,8 @@ block content
                                 
                                       this.vX = vX;
                                       this.vY = vY;
-                                      this.aX = aX;
-                                      this.aY = aY;
+                                      <mark>this.aX = aX;
+                                      this.aY = aY;</mark>
                                   }
                                   
                                   var asteroids = new Array();
@@ -160,10 +160,10 @@ block content
                                       var vX = Math.random()*4-2;
                                       var vY = Math.random()*4-2;
                                 
-                                      var aX = Math.random()*0.2-0.1;
-                                      var aY = Math.random()*0.2-0.1;
+                                      <mark>var aX = Math.random()*0.2-0.1;
+                                      var aY = Math.random()*0.2-0.1;</mark>
                                       
-                                      asteroids.push(new Asteroid(x, y, radius, vX, vY, aX, aY));
+                                      asteroids.push(new Asteroid(x, y, radius, vX, vY, <mark>aX, aY</mark>));
                                   }
                                 
                                   function animate(){                 
@@ -179,15 +179,15 @@ block content
                                           tmpAsteroid.x += tmpAsteroid.vX;
                                           tmpAsteroid.y += tmpAsteroid.vY;
                                 
-                                          if (Math.abs(tmpAsteroid.vX) < 10) {
+                                          <mark>if (Math.abs(tmpAsteroid.vX) < 10) {
                                               tmpAsteroid.vX += tmpAsteroid.aX;
                                           }
                                           
                                           if (Math.abs(tmpAsteroid.vY) < 10) {
                                               tmpAsteroid.vY += tmpAsteroid.aY;
-                                          }
+                                          }</mark>
                                 
-                                          if (tmpAsteroid.x-tmpAsteroid.radius < 0) {
+                                          <mark>if (tmpAsteroid.x-tmpAsteroid.radius < 0) {
                                               tmpAsteroid.x = tmpAsteroid.radius;
                                               tmpAsteroid.vX *= -1;
                                               tmpAsteroid.aX *= -1;
@@ -207,7 +207,7 @@ block content
                                               tmpAsteroid.y = canvasHeight-tmpAsteroid.radius;
                                               tmpAsteroid.vY *= -1;
                                               tmpAsteroid.aY *= -1;
-                                          }
+                                          }</mark>
                                           
                                           context.beginPath();
                                           context.arc(tmpAsteroid.x, tmpAsteroid.y, tmpAsteroid.radius, 0, Math.PI*2);

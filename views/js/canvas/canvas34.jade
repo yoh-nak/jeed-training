@@ -113,11 +113,11 @@ block content
                                     playAnimation = false;
                                   });
                                 
-                                  var Asteroid = function(x, y, radius, mass, vX, vY, aX, aY) {
+                                  var Asteroid = function(x, y, radius, <mark>mass</mark>, vX, vY, aX, aY) {
                                     this.x = x;
                                     this.y = y;
                                     this.radius = radius;
-                                    this.mass = mass;
+                                    <mark>this.mass = mass;</mark>
                                 
                                     this.vX = vX;
                                     this.vY = vY;
@@ -132,7 +132,7 @@ block content
                                     var y = 20+(Math.random()*(canvasHeight-40));
                                 
                                     var radius = 5+Math.random()*10;
-                                    var mass = radius/2;
+                                    <mark>var mass = radius/2;</mark>
                                 
                                     var vX = Math.random()*4-2;
                                     var vY = Math.random()*4-2;
@@ -177,11 +177,11 @@ block content
                                           var vXb = tmpAsteroidB.vX * cosine + tmpAsteroidB.vY * sine;
                                           var vYb = tmpAsteroidB.vY * cosine - tmpAsteroidB.vX * sine;
                                 
-                                          //vX *= -1;
+                                          <mark>//vX *= -1;
                                           //vXb *= -1;
                                           var vTotal = vX - vXb;
                                           vX = ((tmpAsteroid.mass - tmpAsteroidB.mass) * vX + 2 * tmpAsteroidB.mass * vXb) / (tmpAsteroid.mass + tmpAsteroidB.mass);
-                                          vXb = vTotal + vX;
+                                          vXb = vTotal + vX;</mark>
                                 
                                           xB = x + (tmpAsteroid.radius + tmpAsteroidB.radius);
                                 

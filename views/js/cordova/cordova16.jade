@@ -36,14 +36,137 @@ block content
                     li Cordovaフレームワークをプロジェクトに追加する
                     li Cordova用の設定ファイルをwwwディレクトリに配置する
                     li Cordovaを呼び出すコードを記述する
-                h4 Cordovaフレームワークをビルドする
-                h4 Cordovaフレームワークをプロジェクトに追加する
-                h4 Cordova用の設定ファイルをwwwディレクトリに配置する
-                h4 Cordovaを呼び出すコードを記述する
-                h4 設定を動的に置き換える
+                .alert.alert-info Cordovaフレームワークをビルドする
+                p Androidでは、Cordovaフレームワークをjarファイルにビルドしてから、プロジェクトに導入します。
+                p Cordovaのトップページからパッケージをダウンロードして展開すると、各プラットフォームのフレームワークのソースコードの圧縮ファイルがありますので、cordova-android.zipを展開します。
+                p 展開されたcordova-androidディレクトリには、通常のCordovaフレームワーク用のAndroidのプロジェクトとそれに関連するシェルスクリプトが納められています。
+                p フレームワークをビルドするには、以下のようにframeworkディレクトリに移動して、ant jarコマンドを実行してください。
+                pre.
+                    $ cd cordova-android/framework
+
+                    $ ant jar
+                p 無事にビルドが完了すると、同じディレクトリにcordova.3.0.0.jarができます。
+                .alert.alert-info Cordovaフレームワークをプロジェクトに追加する
+                p cordova.3.0.0.jarを、Androidプロジェクトのlibsディレクトリ以下に配置してください。libs以下にjarファイルを配置すると、antでビルドできるプロジェクトでも、Android SDKに付属しているEclipseでも、自動的にプロジェクトのライブラリとして追加されます。
+                p Cordovaは音声や動画を扱うためにCommons Codecというライブラリに依存しているので、必要とするバージョンをダウンロードして下さい。
+                p Cordova.3.0.0.jarが必要としているCommons Codecのバージョンは、1.6です。以下のWebページから、Commons-codec-1.6-bin.zipをダウンロードして下さい。
+                ul
+                    li
+                        | URL Commons Codecのダウンロードページ<br>
+                        a(href='http://archive.apache.org/dist/commons/codec/binaries/') http://archive.apache.org/dist/commons/codec/binaries/
+                p ダウンロードした圧縮ファイルを展開すると、中にはcommons-codecs1.6.jarファイルがあります。このファイルを、cordova.jarと同様にAndroidプロジェクトのlibsディレクトリに置いてください。
+                .alert.alert-info Cordova用の設定ファイルをwwwディレクトリに配置する
+                p AndroidのCordovaフレームワークが参照する設定ファイルを配置します。cordova.xmlはres/xml/config.xmlにコピーしてください。次に、Androidプロジェクトのassetsディレクトリにwwwディレクトリを作成して、そこにcordova.jsをコピーします。
+                p Cordovaが読み込むindex.htmlもwwwディレクトリに配置します。
+                p config.xml、wwwディレクトリに配置するcordova.js、その他の関連ファイルは、cordovaコマンドで適当なプロジェクトを作ってからそこからコピーしてください。
+                .alert.alert-info Cordovaを呼び出すコードを記述する
+                p Android用のCordovaフレームワークでは、CordovaActivityアクティビティを用います。そうすると、特定の画面をCordovaアプリケーションとして実行することができます。
+                pre
+                    :code
+                        package com.example.hello;
+
+                        import android.os.Bundle;
+                        import org.apache.ordova.*;
+
+                        public class MainActivity extends CordovaAtcivity
+                        {
+                            @Override
+                            public void onCreate(Bundle savedInstanceState)
+                            {
+                                super.onCreate(savedInstancesState);
+                                super.loadUrl(Config.getStartUrl());
+                            }
+                        }
+                p このMainActivityをAndroidから起動して、assets/www/index.htmlを読み込んだ画面が表示されれば成功です。
+                .alert.alert-info 設定を動的に置き換える
+                p AndroidのCordovaフレームワークでは、config.xmlに記述するような設定項目をネイティブコードで動的に設定することができます。DroidGapアクティビティを継承して、onCreateメソッド内でsetStringPropertyメソッド、setIntegerPropertyメソッドを使って設定します。
+                pre
+                    :code
+                        package com.example.hello;
+
+                        import android.os.Bundle;
+                        import org.apache.cordova.*;
+
+                        public class MainActivity extends CordovaActivity
+                        {
+                            @Override
+                            public void onCreate(Bundle savedInstanceState)
+                            {
+                                super.onCreate(savedInstancesState);
+
+                                super.setStringProperty("loadingDialog", "Title,Message");
+                                super.setStringProperty("errorUrl",
+                                    "file:///android_asset/www/eror.html");
+                                super.setIntegerProperty("splashscreen", R.drawable.splash);
+
+                                super.loadUrl(Config.getStartUrl());
+                            }
+                        }
+                p AndroidのCordovaフレームワークで利用できる設定項目をJava側から動的に設定できます。
+                p また、config.xmlに記述した内容はアプリ全体に適用されますが、この方法を用いればアクティビティごとに設定を変更することができます。
                 .alert.alert-info 画面の一部でCordovaを用いる
+                p 既存アプリの場合、Cordovaを画面の一部に用いても、ツールバーやタブバーなどのUIについてはOSネイティブのものを使いたいという場合があります。
+                p 前述したCordovaActivityでは、画面全体がCordovaのWebViewで表示されるので、画面の一部にOSネイティブのUIを用いることができません。
                 .alert.alert-info iOSのプロジェクトにCordovaフレームワークを導入する
-                h4 画面にCordovaを用いる
-                h4 wwwディレクトリに配置する
-                h4 Cordovaフレームワークを呼び出すコードを記述する
-                
+                p 画面の一部でのみCordovaを利用したい場合には、CordovaWebViewとCordovaInterfaceを用います。Androidのアクティビティの中でこれらCordovaWebViewとCordovaInterfaceを実装したクラスを用いると、そららを呼び出すことができます。
+                p 詳細は、以下のページを参照してください。
+                ul
+                    li
+                        | URL Android WebViews<br>
+                        a(href='http://docs.phonegap.com/ja/edge/guide_platforms_android_webview.md.html#Android%20WebViews') http://docs.phonegap.com/ja/edge/
+                        guide_platforms_android_webview.md.html#Android%20WebViews
+                .alert.alert-info iOSのプロジェクトにCordovaフレームワークを導入する
+                p Androidの場合と同様に、ここでもiOSのプロジェクトはすでに作成しているものとして話を進めます。
+                p iOSのプロジェクトにCordovaフレームワークを導入するには、以下の作業を行います。
+                ol
+                    li CordovaLibプロジェクトをアプリのサブプロジェクト化する
+                    li wwwディレクトリに以下にHTMLなどのファイルを配置する
+                    li Cordovaフレームワークを呼び出すコードを記述する
+                p CordovaLibとは、iOSでのCordovaフレームワークをビルドするXcodeプロジェクトです。この中には、iOSのCordovaフレームワークのソースコードが含まれています。
+                p Xcodeには、プロジェクトをあるプロジェクトの下にサブプロジェクトとして置くことができます。iOSのCordovaフレームワークを記述するために、この仕組を用いてアプリのXcodeプロジェクトにCordovaフレームワークを組み込みます。
+                .alert.alert-info 画面にCordovaを用いる
+                p 以下の手順に従って、CordovaLibプロジェクトをアプリのサブプロジェクトとして組み込みます。
+                ol
+                    li 起動しているXcodeがある場合は、終了する
+                    li
+                    li
+                    li
+                    li
+                    li
+                    li
+                    li
+                    li
+                    li
+                    li
+                    li
+                    li
+                    li
+                    li
+                    li
+                    li
+                    li
+                    li
+                pre
+                    :code
+                        "(TARGET_BUILD_DIR)/usr/local/lib/include"
+                        "(OBJROOT)/UninstalledProducts/include"
+                        "(BUILT_PRODUCTS_DIR)"
+                .alert.alert-info wwwディレクトリに配置する
+                ol
+                    li アプリプロジェクトがあるディレクトリにwwwディレクトリを作成する
+                    li wwwディレクトリ以下には、index.htmlなどのHTMLやcordova.jsなどを追加する
+                    li Xcodeのプロジェクトナビゲータにwwwディレクトリをドラッグアンドドロップする
+                    li [Create folder references for any added folders]にチェックを入れる
+                .alert.alert-info Cordovaフレームワークを呼び出すコードを記述する
+                p Cordovaフレームワークを用います。
+                p Cordovaを利用するコードで、Cordovaのヘッダファイルをインポートします。
+                pre
+                    :code
+                        #import <Cordova/CDViewController.h>
+                p CDViewControllerをインスタンス化して、そのビューを利用します。
+                pre
+                    :code
+                        CDViewController* cordovaViewController = [CDViewController new];
+                        cordovaViewController.view.frame = CGRectMake(0, 0, 320, 480);
+
+                        [myView addSubView:viewController.view];

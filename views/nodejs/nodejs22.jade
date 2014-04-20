@@ -1,0 +1,128 @@
+extends ../layout
+
+block link
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        |  PostgreSQLと連携する⑦
+                    .panel-body
+                        .alert.alert-info 1行ずつ処理する
+                        p views/index.jade
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                extends layout
+
+                                block content
+                                    h1= title
+                                    p Welcome to #{title}
+                                    p#msg #{msg}
+                                    <mark>p!= result</mark>
+                        p routes/index.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /*
+                                 * GET home page.
+                                 */
+
+                                exports.index = function(req, res){
+
+                                    var pg = require('pg');
+
+                                    var conf = 'tcp://postgres:admin@localhost:5433/mydb';
+                                    <mark>var result = '<ol>';</mark>
+
+                                    pg.connect(conf,function(err, client){
+                                        if(err){
+                                            //例外処理
+                                            console.log(err);
+                                        }
+                                        else{
+                                            //データの受信が終わったとき
+                                            client.on('drain',function(){
+                                                client.end.bind(client);
+                                                <mark>result += '</ol><hr><p>end...</p>';
+
+                                                res.render('index',{
+                                                    title: 'Express',
+                                                    msg: 'rowサンプル',
+                                                    result: result
+                                                });</mark>
+                                            });
+
+                                            //SQLクエリ発行
+                                            var query = client.query('SELECT * from mydata', function(err, result){
+                                                //
+                                            });
+
+                                            //1行ずつ実行される
+                                            <mark>query.on('row',function(row){
+                                                console.log(row);
+                                                result += '<li>' + row.name + '</li>';
+                                            });</mark>
+                                        }
+                                    });
+                                };
+                        .alert.alert-info トランザクションを使う
+                        p routes/create.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var pg = require('pg');
+
+                                <mark>var rollback = function(client){
+                                    client.query('rollback', function(){
+                                        console.log('query');
+                                        client.end();
+                                    });
+                                };</mark>
+
+                                exports.create = function(req, res){
+                                    var conf = 'tcp://postgres:admin@localhost:5433/mydb';
+                                    var result = null;
+
+                                    pg.connect(conf, function(err, client){
+                                        if(err){
+                                            console.log(err);
+                                            res.redirect('/');
+                                        }
+                                        else{
+                                            <mark>client.query('begin', function(err, result){</mark>
+                                                if(err){
+                                                    console.log('begin: ' + err);
+                                                    res.redirect('/');
+                                                    return;
+                                                }
+                                                else{
+                                                    var sql = "INSERT INTO mydata (name, mail, tel) values('";
+                                                    sql += req.body.name + "','" + req.body.mail + "','" + req.body.tel + "')";
+                                                    console.log(sql);
+
+                                                    client.query(sql, function(err, result){
+                                                        <mark>if(err){
+                                                            console.log('query: ' + err);
+                                                            rollback(client);
+                                                        }
+                                                        else{
+                                                            client.query('commit', function(err){
+                                                                client.end.bind(client);
+                                                            })
+                                                        }</mark>
+                                                        res.redirect('/');
+                                                    });
+                                                }
+                                            <mark>});</mark>
+                                        }
+                                    });
+                                };

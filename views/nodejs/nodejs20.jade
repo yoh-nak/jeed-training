@@ -185,3 +185,128 @@ block content
                                 http.createServer(app).listen(app.get('port'), function(){
                                   console.log('Express server listening on port ' + app.get('port'));
                                 });
+                        .alert.alert-info レコードの削除ページを作成
+                        p views/find.jade
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                extends layout
+
+                                block content
+                                    h1= title
+                                    p Welcome to #{title}
+                                    p#msg #{msg}
+                                    form(method='post',action='/find_post')
+                                        p FIND:
+                                            input(type='text',name='find',value='#{find}')
+                                            input(type='submit',value='検索')
+                                    table(border='1')
+                                        tr
+                                            th id
+                                            th name
+                                            th mail
+                                            th tel
+                                        - each data in datas
+                                            tr
+                                                td= data.id
+                                                td= data.name
+                                                td= data.mail
+                                                td= data.tel
+                        p routes/find.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var pg = require('pg');
+
+                                exports.find = function(req, res){
+                                    res.render('find', {
+                                        title: 'Express',
+                                        msg: '検索文字を入力してください',
+                                        find: '',
+                                        datas: []
+                                    });
+                                };
+
+                                exports.find_post = function(req, res){
+
+                                    var conf = 'tcp://postgres:admin@localhost:5433/mydb';
+
+                                    pg.connect(conf, function(err, client){
+                                        if(err){
+                                            console.log(err);
+                                            res.redirect('/find');
+                                        }
+                                        else{
+                                            var sql = "SELECT * FROM mydata WHERE name like '%" + req.body.find + "%'";
+
+                                            console.log(sql);
+
+                                            client.query(sql, function(err, result){
+                                                if(err){
+                                                    console.log(err);
+                                                    res.redirect('/find');
+                                                }
+                                                else{
+                                                    res.render('find',{
+                                                        title: 'Express',
+                                                        msg: '[' + req.body.find + ']の検索結果',
+                                                        find: req.body.find,
+                                                        datas: result.rows
+                                                    })
+                                                }
+                                            });
+                                        }
+                                    });
+                                };
+                        p app.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /**
+                                 * Module dependencies.
+                                 */
+
+                                var express = require('express');
+                                var routes = require('./routes');
+                                var user = require('./routes/user');
+                                var http = require('http');
+                                var path = require('path');
+                                var add = require('./routes/add');
+                                var create = require('./routes/create');
+                                var edit = require('./routes/edit');
+                                var update = require('./routes/update');
+                                var del = require('./routes/delete');
+                                var remove = require('./routes/remove');
+                                <mark>var find = require('./routes/find');</mark>
+
+                                var app = express();
+
+                                // all environments
+                                app.set('port', process.env.PORT || 3000);
+                                app.set('views', path.join(__dirname, 'views'));
+                                app.set('view engine', 'jade');
+                                app.use(express.favicon());
+                                app.use(express.logger('dev'));
+                                app.use(express.json());
+                                app.use(express.urlencoded());
+                                app.use(express.methodOverride());
+                                app.use(app.router);
+                                app.use(require('stylus').middleware(path.join(__dirname, 'public')));
+                                app.use(express.static(path.join(__dirname, 'public')));
+
+                                // development only
+                                if ('development' == app.get('env')) {
+                                  app.use(express.errorHandler());
+                                }
+
+                                app.get('/', routes.index);
+                                app.get('/add', add.add);
+                                app.post('/create', create.create);
+                                app.get('/edit/:id', edit.edit);
+                                app.post('/update', update.update);
+                                app.get('/delete/:id', del.del);
+                                app.post('/remove', remove.remove);
+                                <mark>app.get('/find', find.find);
+                                app.post('/find_post', find.find_post);</mark>
+                                app.get('/users', user.list);
+
+                                http.createServer(app).listen(app.get('port'), function(){
+                                  console.log('Express server listening on port ' + app.get('port'));
+                                });

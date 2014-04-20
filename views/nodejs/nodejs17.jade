@@ -19,7 +19,7 @@ block content
                         i.glyphicon.glyphicon-book
                         |  PostgreSQLと連携する③
                     .panel-body
-                        .alert.alert-info 要領よく記述
+                        .alert.alert-info レコードの更新ページの作成
                         p views/index.jade
                         pre(class='prettyprint linenums:1')
                             :code
@@ -28,20 +28,25 @@ block content
                                 block content
                                     h1= title
                                     p Welcome to #{title}
-                                    p#msg #{msg}
-                                    table(border='1')
-                                        tr
-                                            th id
-                                            th name
-                                            th mail
-                                            th tel
-                                        - each data in datas
+                                    form(method='post',action='/update')
+                                        input(type='hidden',name='id',value='#{data.id}')
+                                        table
+                                            tr
+                                                td Name
+                                                td
+                                                    input(type='text',name='name',value='#{data.name}')
+                                            tr
+                                                td Mail
+                                                td
+                                                    input(type='text',name='mail',value='#{data.mail}')
+                                            tr
+                                                td Tel
+                                                td
+                                                    input(type='text',name='tel',value='#{data.tel}')
                                             tr
                                                 td
-                                                    <mark>a(href='/edit/#{data.id}') #{data.id}</mark>
-                                                td= data.name
-                                                td= data.mail
-                                                td= data.tel
+                                                td
+                                                    input(type='submit',value='送信')
                         p routes/edit.js
                         pre(class='prettyprint linenums:1')
                             :code
@@ -49,7 +54,7 @@ block content
 
                                 exports.edit = function(req, res){
 
-                                    <mark>var id = req.params.id;</mark>
+                                    var id = req.query.id;
 
                                     var conf = 'tcp://postgres:admin@localhost:5433/mydb';
 
@@ -78,33 +83,6 @@ block content
                                         }
                                     });
                                 };
-                        p routes/update.js
-                        pre(class='prettyprint linenums:1')
-                            :code
-                                var pg = require('pg');
-
-                                exports.update = function(req, res){
-                                    var conf = 'tcp://postgres:admin@localhost:5433/mydb';
-
-                                    console.log(req.body);
-
-                                    pg.connect(conf, function(err, client){
-                                        if(err){
-                                            console.log(err);
-                                            res.redirect('/');
-                                        }
-                                        else{
-                                            <mark>var sql = "UPDATE mydata SET name = $1, mail = $2, tel = $3 WHERE id = $4";</mark>
-
-                                            console.log(sql);
-
-                                            <mark>client.query(sql, [req.body.name, req.body.name, req.body.tel, req.body.id], function(err, result)</mark>{
-                                                console.log(err);
-                                                res.redirect('/');
-                                            })
-                                        }
-                                    });
-                                };
                         p app.js
                         pre(class='prettyprint linenums:1')
                             :code
@@ -119,8 +97,7 @@ block content
                                 var path = require('path');
                                 var add = require('./routes/add');
                                 var create = require('./routes/create');
-                                var edit = require('./routes/edit');
-                                var update = require('./routes/update');
+                                <mark>var edit = require('./routes/edit');</mark>
 
                                 var app = express();
 
@@ -145,10 +122,120 @@ block content
                                 app.get('/', routes.index);
                                 app.get('/add', add.add);
                                 app.post('/create', create.create);
-                                <mark>app.get('/edit/:id', edit.edit);</mark>
-                                app.post('/update', update.update);
+                                <mark>app.get('/edit', edit.edit);</mark>
                                 app.get('/users', user.list);
 
                                 http.createServer(app).listen(app.get('port'), function(){
                                   console.log('Express server listening on port ' + app.get('port'));
                                 });
+                        p 今のところ更新ページは以下のようにgetのパラメータ付きでアクセスすることで表示できます。
+                        pre.
+                            http://localhost:3000/edit?id=1
+                        .alert.alert-info レコードを更新する
+                        p routes/update.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var pg = require('pg');
+
+                                exports.update = function(req, res){
+                                    var conf = 'tcp://postgres:admin@localhost:5433/mydb';
+
+                                    console.log(req.body);
+
+                                    pg.connect(conf, function(err, client){
+                                        if(err){
+                                            console.log(err);
+                                            res.redirect('/');
+                                        }
+                                        else{
+                                            var sql = "UPDATE mydata SET name = '" + req.body.name;
+                                            sql += "', mail = '";
+                                            sql += req.body.mail;
+                                            sql += "', tel = '";
+                                            sql += req.body.tel;
+                                            sql += "' WHERE id = ";
+                                            sql += req.body.id;
+
+                                            console.log(sql);
+
+                                            client.query(sql, function(err, result){
+                                                console.log(err);
+                                                res.redirect('/');
+                                            })
+                                        }
+                                    });
+                                };
+                        p app.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /**
+                                 * Module dependencies.
+                                 */
+
+                                var express = require('express');
+                                var routes = require('./routes');
+                                var user = require('./routes/user');
+                                var http = require('http');
+                                var path = require('path');
+                                var add = require('./routes/add');
+                                var create = require('./routes/create');
+                                var edit = require('./routes/edit');
+                                <mark>var update = require('./routes/update');</mark>
+
+                                var app = express();
+
+                                // all environments
+                                app.set('port', process.env.PORT || 3000);
+                                app.set('views', path.join(__dirname, 'views'));
+                                app.set('view engine', 'jade');
+                                app.use(express.favicon());
+                                app.use(express.logger('dev'));
+                                app.use(express.json());
+                                app.use(express.urlencoded());
+                                app.use(express.methodOverride());
+                                app.use(app.router);
+                                app.use(require('stylus').middleware(path.join(__dirname, 'public')));
+                                app.use(express.static(path.join(__dirname, 'public')));
+
+                                // development only
+                                if ('development' == app.get('env')) {
+                                  app.use(express.errorHandler());
+                                }
+
+                                app.get('/', routes.index);
+                                app.get('/add', add.add);
+                                app.post('/create', create.create);
+                                app.get('/edit', edit.edit);
+                                <mark>app.post('/update', update.update);</mark>
+                                app.get('/users', user.list);
+
+                                http.createServer(app).listen(app.get('port'), function(){
+                                  console.log('Express server listening on port ' + app.get('port'));
+                                });
+
+                        p 今のところ以下のようにアクセスして、更新ページにアクセスしてからレコードを更新できます。
+                        pre.
+                            http://localhost:3000/edit?id=1
+                        .alert.alert-info トップページからレコードを更新できるようにする
+                        p views/index.jade
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                extends layout
+
+                                block content
+                                    h1= title
+                                    p Welcome to #{title}
+                                    p#msg #{msg}
+                                    table(border='1')
+                                        tr
+                                            th id
+                                            th name
+                                            th mail
+                                            th tel
+                                        - each data in datas
+                                            tr
+                                                <mark>td
+                                                    a(href='/edit/?id=#{data.id}') #{data.id}</mark>
+                                                td= data.name
+                                                td= data.mail
+                                                td= data.tel

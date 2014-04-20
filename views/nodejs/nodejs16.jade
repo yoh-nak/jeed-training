@@ -1,0 +1,219 @@
+extends ../layout
+
+block link
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        |  PostgreSQLと連携する②
+                    .panel-body
+                        .alert.alert-info データを表示する
+                        p views/index.jade
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                extends layout
+
+                                block content
+                                    h1= title
+                                    p Welcome to #{title}
+                                    p#msg #{msg}
+                                    table(border='1')
+                                        tr
+                                            th id
+                                            th name
+                                            th mail
+                                            th tel
+                                        - each data in datas
+                                            tr
+                                                td= data.id
+                                                td= data.name
+                                                td= data.mail
+                                                td= data.tel
+                        p routes/index.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /*
+                                 * GET home page.
+                                 */
+
+                                exports.index = function(req, res){
+
+                                    var pg = require('pg');
+
+                                    var conf = 'tcp://postgres:admin@localhost:5433/mydb';
+
+                                    pg.connect(conf,function(err, client){
+                                        if(err){
+                                            //例外処理
+                                            console.log(err);
+                                        }
+                                        else{
+                                            //データベースアクセスの処理
+                                            client.query('SELECT * from mydata', function(err, result){
+                                                res.render('index',{
+                                                    title: 'Express',
+                                                    msg: 'MyDataの一覧リスト',
+                                                    datas: result.rows
+                                                });
+                                            });
+                                        }
+                                    });
+                                };
+                        .alert.alert-info レコードの追加ページ
+                        p views/add.jade
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                extends layout
+
+                                block content
+                                    h1= title
+                                    p Welcome to #{title}
+                                    form(method='post',action='/create')
+                                        table
+                                            tr
+                                                td Name
+                                                td
+                                                    input(type='text',name='name')
+                                            tr
+                                                td Mail
+                                                td
+                                                    input(type='text',name='mail')
+                                            tr
+                                                td Tel
+                                                td
+                                                    input(type='text',name='tel')
+                                            tr
+                                                td
+                                                td
+                                                    input(type='submit',value='送信')
+                        p routes/add.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                exports.add = function(req, res){
+                                    res.render('add',{
+                                        title: 'Express',
+                                        msg: '送信してください'
+                                    });
+                                };
+                        p app.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /**
+                                 * Module dependencies.
+                                 */
+
+                                var express = require('express');
+                                var routes = require('./routes');
+                                var user = require('./routes/user');
+                                var http = require('http');
+                                var path = require('path');
+                                <mark>var add = require('./routes/add');</mark>
+
+                                var app = express();
+
+                                // all environments
+                                app.set('port', process.env.PORT || 3000);
+                                app.set('views', path.join(__dirname, 'views'));
+                                app.set('view engine', 'jade');
+                                app.use(express.favicon());
+                                app.use(express.logger('dev'));
+                                app.use(express.json());
+                                app.use(express.urlencoded());
+                                app.use(express.methodOverride());
+                                app.use(app.router);
+                                app.use(require('stylus').middleware(path.join(__dirname, 'public')));
+                                app.use(express.static(path.join(__dirname, 'public')));
+
+                                // development only
+                                if ('development' == app.get('env')) {
+                                  app.use(express.errorHandler());
+                                }
+
+                                app.get('/', routes.index);
+                                <mark>app.get('/add', add.add);</mark>
+                                app.get('/users', user.list);
+
+                                http.createServer(app).listen(app.get('port'), function(){
+                                  console.log('Express server listening on port ' + app.get('port'));
+                                });
+                        .alert.alert-info レコードが追加できるようにする
+                        p routes/create.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var pg = require('pg');
+
+                                exports.create = function(req, res){
+                                    var conf = 'tcp://postgres:admin@localhost:5433/mydb';
+
+                                    pg.connect(conf, function(err, client){
+                                        if(err){
+                                            console.log(err);
+                                            res.redirect('/');
+                                        }
+                                        else{
+                                            var sql = "INSERT INTO mydata (name, mail, tel) values('";
+                                            sql += req.body.name + "','" + req.body.mail + "','" + req.body.tel + "')";
+                                            console.log(sql);
+
+                                            client.query(sql, function(err, result){
+                                                console.log(err);
+                                                res.redirect('/');
+                                            });
+                                        }
+                                    });
+                                };
+                        p app.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /**
+                                 * Module dependencies.
+                                 */
+
+                                var express = require('express');
+                                var routes = require('./routes');
+                                var user = require('./routes/user');
+                                var http = require('http');
+                                var path = require('path');
+                                var add = require('./routes/add');
+                                <mark>var create = require('./routes/create');</mark>
+
+                                var app = express();
+
+                                // all environments
+                                app.set('port', process.env.PORT || 3000);
+                                app.set('views', path.join(__dirname, 'views'));
+                                app.set('view engine', 'jade');
+                                app.use(express.favicon());
+                                app.use(express.logger('dev'));
+                                app.use(express.json());
+                                app.use(express.urlencoded());
+                                app.use(express.methodOverride());
+                                app.use(app.router);
+                                app.use(require('stylus').middleware(path.join(__dirname, 'public')));
+                                app.use(express.static(path.join(__dirname, 'public')));
+
+                                // development only
+                                if ('development' == app.get('env')) {
+                                  app.use(express.errorHandler());
+                                }
+
+                                app.get('/', routes.index);
+                                app.get('/add', add.add);
+                                <mark>app.post('/create', create.create);</mark>
+                                app.get('/users', user.list);
+
+                                http.createServer(app).listen(app.get('port'), function(){
+                                  console.log('Express server listening on port ' + app.get('port'));
+                                });

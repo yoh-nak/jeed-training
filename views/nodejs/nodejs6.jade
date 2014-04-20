@@ -1,0 +1,97 @@
+extends ../layout
+
+block link
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        |  PostgreSQLと連携する①
+                    .panel-body
+                        .alert.alert-info PostgreSQLにログイン
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                psql -U postgres -p 5432
+                        .alert.alert-info データベースを作成する
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                postgres=# create database mydb;
+                        .alert.alert-info データベースを切り替える
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                postgres=# \c mydb;
+                        .alert.alert-info テーブルを作成する
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                create table mydata(
+                                    id serial primary key,
+                                    name varchar(50),
+                                    mail varchar(100),
+                                    tel varchar(20)
+                                );
+                        .alert.alert-info テーブルの確認
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                mydb=# \dt
+                        .alert.alert-info テーブルの構造の確認
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                mydb=# \d mydata
+                        .alert.alert-info データの挿入
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                insert into mydata (name, mail, tel) values
+                                ('taro', 'taro@yamada', '090-9999-9999'),
+                                ('hanako', 'hanako@flower', '080-8888-8888'),
+                                ('sachiko', 'sachiko@happy', '070-7777-7777');
+                        .alert.alert-info データの確認
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                mydb=# select * from mydata;
+                        .alert.alert-info Webからデータベースに接続
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ express myapp -c stylus
+                                $ cd myapp
+                                $ npm install
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                $ npm install pg --save
+                        p routes/index.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /*
+                                 * GET home page.
+                                 */
+
+                                exports.index = function(req, res){
+
+                                    var pg = require('pg');
+
+                                    //var conf = "tcp://ユーザ名:パスワード@ホスト名:ポート番号/データベース名";
+                                    var conf = "tcp://postgres:admin@localhost:5433/mydb";
+
+                                    pg.connect(conf,function(err, client){
+                                        if(err){
+                                            //例外処理
+                                            console.log(err);
+                                        }
+                                        else{
+                                            //データベースアクセスの処理
+                                            console.log('データベースに接続しました');
+                                        }
+                                    });
+                                    
+                                    res.render('index', { title: 'Express' });
+                                };

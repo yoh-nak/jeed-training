@@ -1,0 +1,253 @@
+extends ../layout
+
+block link
+    link(href='../css/bootstrap.min.css',rel='stylesheet',media='screen')
+    link(href='../css/bootstrap-theme.min.css',rel='stylesheet',media='screen')
+    link(href='../js/dtree/dtree.css', rel='stylesheet', media='screen')
+    link(href='../css/style.css',rel='stylesheet',media='screen')
+    link(href='../js/google-code-prettify/prettify.css',rel='stylesheet',media='screen')
+
+block content
+    include navbar
+    .container
+        .row
+            .col-sm-3
+                include left
+            .col-sm-9
+                .panel.panel-primary
+                    .panel-heading
+                        i.glyphicon.glyphicon-book
+                        |  MongoDBと連携する③
+                    .panel-body
+                        .alert.alert-info データを削除する
+                        p views/delete.jade
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                extends layout
+
+                                block content
+                                    h1= title
+                                    p Welcome to #{title}
+                                    p#msg #{msg}
+
+                                    p= 'name:' + data.name
+                                    form(method='post',action='/remove')
+                                        input(type='hidden',name='id',value='#{data._id}')
+                                        input(type='submit',value='削除する')
+                        p views/index.jade
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                extends layout
+
+                                block content
+                                    h1= title
+                                    p Welcome to #{title}
+                                    p#msg #{msg}
+
+                                    form(action='/',method='post')
+                                        input(type='text',name='name')
+                                        br
+                                        input(type='text',name='mail')
+                                        br
+                                        input(type='text',name='memo')
+                                        br
+                                        input(type='submit',value='send')
+                                    hr
+                                    table(border='1')
+                                        tr
+                                            th Name
+                                            th Mail
+                                            th memo
+                                            <mark>th </mark>
+                                        -each data in datas
+                                            tr
+                                                td
+                                                    a(href='/edit/#{data._id}')= data.name
+                                                td= data.mail
+                                                td= data.memo
+                                                <mark>td
+                                                    a(href='/delete/#{data._id}')= '削除'</mark>
+                        p routes/index.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                var mongoose = require('mongoose');
+
+                                //MongoDBにはスキーマはないが、mongooseの使用でスキーマを定義
+                                var Schema = mongoose.Schema;
+                                var mydataSchema = new Schema({
+                                    'name' : String,
+                                    'mail' : String,
+                                    'memo' : String
+                                });
+
+                                //mongooseの使用で、コレクションmydataに先ほど定義したスキーマをセット
+                                var MyData = mongoose.model('mydata', mydataSchema);
+
+                                //データベースmydbに接続
+                                var db = mongoose.connect('mongodb://localhost/mydb');
+
+                                exports.index = function(req, res) {
+                                    //コレクションmydataからドキュメントを検索
+                                    MyData.find(function(err, docs) {
+                                        if (err){
+                                            console.log(err);
+                                        }
+                                        res.render('index', {
+                                            title : 'Express',
+                                            msg : 'データの一覧リスト',
+                                            datas : docs
+                                        });
+                                    });
+                                };
+
+                                exports.index_post = function(req, res){
+                                    var name = req.body.name;
+                                    var mail = req.body.mail;
+                                    var memo = req.body.memo;
+
+                                    var data = new MyData({
+                                        'name': name,
+                                        'mail': mail,
+                                        'memo': memo
+                                    });
+                                    data.save(function(err){
+                                        if(err){
+                                            console.log(err);
+                                        }
+                                        else{
+                                            if(err){
+                                                console.log(err);
+                                            }
+                                            res.redirect('/');
+                                        }
+                                    });
+                                };
+
+                                exports.edit = function(req, res){
+                                    var id = req.params.id;
+                                    MyData.findOne({
+                                        '_id': id
+                                    }, function(err, doc){
+                                        if(err){
+                                            console.log(err);
+                                        }
+                                        res.render('edit', {
+                                            title: 'Express',
+                                            msg: 'データの更新',
+                                            data: doc
+                                        });
+                                    });
+                                };
+
+                                exports.update = function(req, res){
+                                    var id = req.body.id;
+                                    var name = req.body.name;
+                                    var mail = req.body.mail;
+                                    var memo = req.body.memo;
+                                    MyData.findOne({
+                                        '_id': id
+                                    }, function(err, doc){
+                                        if(err){
+                                            console.log(err);
+                                        }
+                                        doc.name = name;
+                                        doc.mail = mail;
+                                        doc.memo = memo;
+                                        doc.save(function(err){
+                                            if(err){
+                                                console.log(err);
+                                            }
+                                            res.redirect('/');
+                                        });
+                                    });
+                                };
+
+                                exports.del = function(req, res){
+                                    var id = req.params.id;
+                                    MyData.findOne({
+                                        '_id': id
+                                    }, function(err, doc){
+                                        if(err){
+                                            console.log(err);
+                                        }
+                                        res.render('delete', {
+                                            title: 'Express',
+                                            msg: 'データの削除',
+                                            data: doc
+                                        });
+                                    });
+                                };
+
+                                exports.remove = function(req, res) {
+                                    var id = req.body.id;
+
+                                    
+                                    MyData.findOne({
+                                        '_id' : id
+                                    }, function(err, doc) {
+                                        if (err) {
+                                            console.log(err);
+                                        }
+
+                                        doc.remove(function(err) {
+                                            if (err) {
+                                                console.log(err);
+                                            }
+                                            res.redirect('/');
+                                        });
+                                    });
+
+                                    //以下のソースでも可
+                                    /*
+                                    MyData.remove({ '_id': id }, function (err) {
+                                        if(err){
+                                            console.log(err);
+                                        }
+                                        res.redirect('/');
+                                    });
+                                    */
+                                };
+                        p app.js
+                        pre(class='prettyprint linenums:1')
+                            :code
+                                /**
+                                 * Module dependencies.
+                                 */
+
+                                var express = require('express');
+                                var routes = require('./routes');
+                                var user = require('./routes/user');
+                                var http = require('http');
+                                var path = require('path');
+
+                                var app = express();
+
+                                // all environments
+                                app.set('port', process.env.PORT || 3000);
+                                app.set('views', path.join(__dirname, 'views'));
+                                app.set('view engine', 'jade');
+                                app.use(express.favicon());
+                                app.use(express.logger('dev'));
+                                app.use(express.json());
+                                app.use(express.urlencoded());
+                                app.use(express.methodOverride());
+                                app.use(app.router);
+                                app.use(require('stylus').middleware(path.join(__dirname, 'public')));
+                                app.use(express.static(path.join(__dirname, 'public')));
+
+                                // development only
+                                if ('development' == app.get('env')) {
+                                  app.use(express.errorHandler());
+                                }
+
+                                app.get('/', routes.index);
+                                app.post('/', routes.index_post);
+                                app.get('/edit/:id', routes.edit);
+                                app.post('/update', routes.update);
+                                <mark>app.get('/delete/:id', routes.del);
+                                app.post('/remove', routes.remove);</mark>
+                                app.get('/users', user.list);
+
+                                http.createServer(app).listen(app.get('port'), function(){
+                                  console.log('Express server listening on port ' + app.get('port'));
+                                });

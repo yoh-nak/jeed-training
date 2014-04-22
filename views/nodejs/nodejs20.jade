@@ -220,7 +220,7 @@ block content
                                     h1= title
                                     p Welcome to #{title}
                                     p#msg #{msg}
-                                    form(method='post',action='/find_post')
+                                    form(method='post',action='/find')
                                         p FIND:
                                             input(type='text',name='find',value='#{find}')
                                             input(type='submit',value='検索')
@@ -329,7 +329,7 @@ block content
                                 app.get('/delete/:id', del.del);
                                 app.post('/remove', remove.remove);
                                 <mark>app.get('/find', find.find);
-                                app.post('/find_post', find.find_post);</mark>
+                                app.post('/find', find.find_post);</mark>
                                 app.get('/users', user.list);
 
                                 http.createServer(app).listen(app.get('port'), function(){
